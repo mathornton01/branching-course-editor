@@ -8,6 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <style>
         .node {
+            position: absolute;
             transition: all 0.2s ease;
             cursor: grab;
             user-select: none;
@@ -76,6 +77,7 @@
             border-radius: 8px;
             border: 2px dashed #e2e8f0;
             transition: all 0.2s ease;
+            min-height: 400px;
         }
         .canvas-container.dragover {
             background-color: #eff6ff;
@@ -346,12 +348,8 @@
             const node = nodes.find(n => n.id === nodeElement.dataset.nodeId);
             if (!node) return;
             
-            // Calculate offset relative to canvas container
-            const canvas = document.getElementById('courseCanvas');
-            const canvasRect = canvas.getBoundingClientRect();
-            
-            dragStartX = e.clientX - node.position.x - canvasRect.left;
-            dragStartY = e.clientY - node.position.y - canvasRect.top;
+            dragStartX = e.clientX - node.position.x;
+            dragStartY = e.clientY - node.position.y;
             
             nodeElement.classList.add('dragging');
             // Visual feedback
@@ -368,25 +366,9 @@
             const node = nodes.find(n => n.id === nodeElement.dataset.nodeId);
             if (!node) return;
             
-            // Calculate new position relative to the canvas container
-            const canvas = document.getElementById('courseCanvas');
-            const canvasRect = canvas.getBoundingClientRect();
-            
-            let newX = e.clientX - dragStartX - canvasRect.left;
-            let newY = e.clientY - dragStartY - canvasRect.top;
-            
-            // Apply minimal boundary checking to prevent nodes from going too far off-screen
-            const nodeWidth = 48;
-            const nodeHeight = 48;
-            
-            // Allow some negative offset for better UX, but prevent extreme values
-            const minX = -20;
-            const minY = -20;
-            const maxX = canvasRect.width - nodeWidth + 20;
-            const maxY = canvasRect.height - nodeHeight + 20;
-            
-            newX = Math.max(minX, Math.min(newX, maxX));
-            newY = Math.max(minY, Math.min(newY, maxY));
+            // Calculate new position - simple approach
+            let newX = e.clientX - dragStartX;
+            let newY = e.clientY - dragStartY;
             
             // Update node position
             node.position.x = newX;
