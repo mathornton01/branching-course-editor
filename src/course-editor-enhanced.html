@@ -9,10 +9,17 @@
     <style>
         .node {
             transition: all 0.2s ease;
+            cursor: grab;
+            user-select: none;
         }
         .node.dragging {
-            opacity: 0.5;
+            opacity: 0.8;
+            cursor: grabbing;
             transform: scale(0.95);
+        }
+        .node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .node:hover {
             transform: translateY(-2px);
@@ -197,6 +204,9 @@
             canvas.addEventListener('mousedown', startDrag);
             document.addEventListener('mousemove', drag);
             document.addEventListener('mouseup', endDrag);
+            
+            // Prevent text selection during drag
+            canvas.addEventListener('selectstart', (e) => e.preventDefault());
 
             // Connection point listeners (for creating connections)
             document.getElementById('nodesContainer').addEventListener('mousedown', function(e) {
@@ -340,6 +350,8 @@
             dragStartY = e.clientY - node.position.y;
             
             nodeElement.classList.add('dragging');
+            // Visual feedback
+            nodeElement.style.border = '2px solid #3b82f6';
             e.preventDefault();
         }
 
@@ -352,17 +364,24 @@
             const node = nodes.find(n => n.id === nodeElement.dataset.nodeId);
             if (!node) return;
             
-            // Calculate new position with canvas boundaries
-            const canvas = document.getElementById('courseCanvas');
-            const canvasRect = canvas.getBoundingClientRect();
+            // Calculate new position
             let newX = e.clientX - dragStartX;
             let newY = e.clientY - dragStartY;
             
-            // Constrain to canvas boundaries (accounting for node size)
+            // Apply minimal boundary checking to prevent nodes from going too far off-screen
+            const canvas = document.getElementById('courseCanvas');
+            const canvasRect = canvas.getBoundingClientRect();
             const nodeWidth = 48;
             const nodeHeight = 48;
-            newX = Math.max(0, Math.min(newX, canvasRect.width - nodeWidth));
-            newY = Math.max(0, Math.min(newY, canvasRect.height - nodeHeight));
+            
+            // Allow some negative offset for better UX, but prevent extreme values
+            const minX = -20;
+            const minY = -20;
+            const maxX = canvasRect.width - nodeWidth + 20;
+            const maxY = canvasRect.height - nodeHeight + 20;
+            
+            newX = Math.max(minX, Math.min(newX, maxX));
+            newY = Math.max(minY, Math.min(newY, maxY));
             
             // Update node position
             node.position.x = newX;
@@ -383,6 +402,8 @@
             const nodeElement = document.querySelector(`.node.dragging`);
             if (nodeElement) {
                 nodeElement.classList.remove('dragging');
+                // Remove visual feedback
+                nodeElement.style.border = '';
             }
         }
 
@@ -472,8 +493,8 @@
                 title: 'New Node',
                 type: 'content',
                 position: {
-                    x: 100,
-                    y: 100
+                    x: 100 + (nodes.length * 30),
+                    y: 100 + (nodes.length * 30)
                 }
             };
             

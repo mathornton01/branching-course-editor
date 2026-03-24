@@ -39,7 +39,7 @@
 
 ### Week 3 Tasks
 - [x] Build visual branching interface:
-  - [x] Drag-and-drop node placement
+  - [✅] Drag-and-drop node placement (enhanced with visual feedback)
   - [x] Connection drawing between nodes
   - [x] Node editing interface (content, type, settings)
   - [x] Connection editing (conditions, labels)
