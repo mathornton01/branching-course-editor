@@ -57,4 +57,15 @@ Please tell me what color sequence you see when:
 - Clicking the **dot** (connection point)
 - Clicking the **node** itself (title/body area)
 
-This will confirm if our fix resolved the issue where clicking nodes didn't work!
+### 🎨 **NEW VISUAL FEEDBACK:**
+After our enhancement, you should now see:
+- 🟠 **Orange connection point** = This indicates the system has "remembered" your first click and is waiting for you to click a second point to complete the connection
+
+This visual feedback directly addresses your request: "It needs to remember the first one has been clicked."
+
+When you click a first point (dot or node):
+1. You'll see the color sequence (green → red → yellow → blue violet → yellow)
+2. The connection point you clicked will turn **orange** to indicate it's stored as the start point
+3. When you click a second point, it will create the connection and reset the orange point
+
+This will confirm if our fix resolved the issue where clicking nodes didn't work AND provide the visual memory feedback you requested!

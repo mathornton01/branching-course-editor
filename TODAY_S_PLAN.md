@@ -8,6 +8,7 @@ From our debugging session, we identified and fixed the issue where clicking nod
 1. **Reliable Connection Point Lookup**: Changed from class-based query to node-ID-based lookup
 2. **Enhanced Debugging Visualization**: Added color-coded feedback for every step of connection process
 3. **Improved Connection Point UI**: Made connection points more visible and responsive
+4. **Visual Memory Feedback**: Added orange start-point indicator to show when system "remembers" first click
 
 ## 📋 **Immediate Action Required**
 Please test the fix using these steps:

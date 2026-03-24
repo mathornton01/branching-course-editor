@@ -37,7 +37,7 @@ if (isConnecting && nodeElement && !connectionPoint) {
 }
 ```
 
-## 🎨 **Enhanced Debugging Added**
+## 🎨 **Enhanced Debugging & Visual Feedback Added**
 Added color-coded feedback for every step:
 - 🟢 Green border = Global mousedown detected
 - 🔴 Red background = nodesContainer mousedown detected
@@ -45,6 +45,9 @@ Added color-coded feedback for every step:
 - 🟣 Blue violet = Listeners attached (the "purple" they saw)
 - 🟡 Yellow flash = startConnection reached
 - etc.
+
+**NEW VISUAL FEEDBACK:**
+- 🟠 Orange connection point = Start point memory indicator (addresses "remember first click" request)
 
 ## 📋 **Test Procedure**
 1. Go to: http://localhost:8080/course-editor-enhanced.html

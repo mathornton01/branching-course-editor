@@ -58,6 +58,12 @@
             border-color: #10b981;
             animation: pulse 1.5s infinite;
         }
+        .connection-point.start-point {
+            background-color: #f59e0b !important;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+            border-color: #f59e0b;
+            transform: scale(1.2);
+        }
         
         @keyframes pulse {
             0% {
@@ -481,6 +487,9 @@
                 pointType: connectionPoint.dataset.pointType || 'output'
             };
             
+            // Visually indicate this is the selected start point
+            connectionPoint.classList.add('start-point');
+            
             // Create temporary connection line
             const svg = document.getElementById('connectionsSVG');
             if (!svg) {
@@ -585,6 +594,10 @@
             // If we didn't end on a connection point, or we ended on the same point (click to cancel)
             if (!targetPoint) {
                 // Clicked on empty space - cancel connection attempt
+                // Remove start point highlighting
+                if (connectionStartPoint && connectionStartPoint.element) {
+                    connectionStartPoint.element.classList.remove('start-point');
+                }
                 resetConnectionModeUI();
                 return;
             }
@@ -596,6 +609,10 @@
             
             // Don't connect to self - this means user clicked same point twice to cancel
             if (targetNodeId === connectionStartPoint.nodeId) {
+                // Remove start point highlighting
+                if (connectionStartPoint && connectionStartPoint.element) {
+                    connectionStartPoint.element.classList.remove('start-point');
+                }
                 resetConnectionModeUI();
                 return;
             }
@@ -621,6 +638,11 @@
             // Brief debug flash to confirm connection was added
             console.log(`Connection created: ${newConnection.from} → ${newConnection.to}`);
             
+            // Remove start point highlighting
+            if (connectionStartPoint && connectionStartPoint.element) {
+                connectionStartPoint.element.classList.remove('start-point');
+            }
+            
             // Reset connection mode UI
             resetConnectionModeUI();
         }
@@ -633,6 +655,7 @@
             document.getElementById('addConnectionBtn').classList.add('bg-indigo-600');
             document.querySelectorAll('.connection-point').forEach(point => {
                 point.classList.remove('connection-point-active');
+                point.classList.remove('start-point');
             });
             // Clear debug indicator
             const debugIndicator = document.getElementById('debug-indicator');
