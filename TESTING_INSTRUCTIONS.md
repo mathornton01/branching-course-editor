@@ -81,3 +81,43 @@
 - Editor Web Server: http://localhost:8080 (serve-editor.py)
 
 To stop the editor web server, find the process and kill it, or press Ctrl+C in the terminal where it's running.
+
+## 🔧 **Connection Fix Testing Procedure** (Today's Focus)
+
+### 🐛 **Original Issue:**
+- Clicking the **dot** (connection point) → Purple flash (works)
+- Clicking the **node** itself (title/text/body) → No flash at all (broken)
+
+### 🧪 **Test Procedure:**
+1. **Load Sample Course**: Go to http://localhost:8080/course-editor-enhanced.html and load "Sample Branching Course"
+2. **Enter Connection Mode**: Click the "Add Connection" button (should turn blue when active)
+3. **Test Dot Click**: Click on any connection point (small circle) → Should see:
+   - 🟢 Green border (global mousedown)  
+   - 🔴 Red background (nodesContainer mousedown)
+   - 🟣 Blue violet flash (listeners attached) ← This is the "purple" they saw
+   - 🟡 Yellow flash (startConnection reached)
+   - etc.
+4. **Test Node Click**: Click anywhere on a NODE itself (title, text, or body area) → Should now see:
+   - 🟢 Green border (global mousedown)  
+   - 🔴 Red background (nodesContainer mousedown) 
+   - 🟡 **Yellow background** (got connection point from node) ← **THIS IS THE FIX**
+   - 🟣 Blue violet flash (listeners attached)
+   - 🟡 Yellow flash (startConnection reached)
+   - etc.
+
+### 📊 **Success Criteria:**
+- **Before Fix**: Node clicks showed ONLY green border (global mousedown works) but NO red background (nodesContainer mousedown not bubbling up)  
+- **After Fix**: Node clicks show green → red → yellow → blue violet → yellow sequence (full connection flow works)
+
+### 🎨 **Color Meanings:**
+- 🟢 Green border = Any mousedown on page detected
+- 🔴 Red background = Mousedown on nodesContainer detected  
+- 🟡 Yellow background = Successfully got connection point from node (our fix!)
+- 🟣 Blue violet = Mousemove/mouseup listeners attached
+- 🟡 Yellow flash = startConnection function reached
+- 🔵 Cyan flash = Temporary connection line created
+- 🟢 Light green = Mouse up detected
+- 🟣 Magenta = Temporary line removed
+- 🟢 Permanent green = Connection successfully created
+
+Report what color sequence you see when clicking nodes vs dots in connection mode!
