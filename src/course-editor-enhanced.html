@@ -346,8 +346,12 @@
             const node = nodes.find(n => n.id === nodeElement.dataset.nodeId);
             if (!node) return;
             
-            dragStartX = e.clientX - node.position.x;
-            dragStartY = e.clientY - node.position.y;
+            // Calculate offset relative to canvas container
+            const canvas = document.getElementById('courseCanvas');
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            dragStartX = e.clientX - node.position.x - canvasRect.left;
+            dragStartY = e.clientY - node.position.y - canvasRect.top;
             
             nodeElement.classList.add('dragging');
             // Visual feedback
@@ -364,13 +368,14 @@
             const node = nodes.find(n => n.id === nodeElement.dataset.nodeId);
             if (!node) return;
             
-            // Calculate new position
-            let newX = e.clientX - dragStartX;
-            let newY = e.clientY - dragStartY;
-            
-            // Apply minimal boundary checking to prevent nodes from going too far off-screen
+            // Calculate new position relative to the canvas container
             const canvas = document.getElementById('courseCanvas');
             const canvasRect = canvas.getBoundingClientRect();
+            
+            let newX = e.clientX - dragStartX - canvasRect.left;
+            let newY = e.clientY - dragStartY - canvasRect.top;
+            
+            // Apply minimal boundary checking to prevent nodes from going too far off-screen
             const nodeWidth = 48;
             const nodeHeight = 48;
             
