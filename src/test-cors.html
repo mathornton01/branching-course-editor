@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test CORS Workaround</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-4">
+    <h1 class="text-2xl font-bold mb-4">Testing CORS Workarounds</h1>
+    <div id="result" class="mb-4 p-4 bg-gray-50 rounded"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const resultDiv = document.getElementById('result');
+            
+            // Test 1: Normal fetch (should fail with CORS)
+            resultDiv.innerHTML += '<div class="mb-2"><strong>Test 1: Normal fetch</strong></div>';
+            try {
+                const response = await fetch('http://localhost:8001/api/courses');
+                const data = await response.json();
+                resultDiv.innerHTML += `<div class="bg-green-100 p-2 rounded">✅ Success: ${data.length} courses</div>`;
+            } catch (error) {
+                resultDiv.innerHTML += `<div class="bg-red-100 p-2 rounded">❌ Failed: ${error.message}</div>`;
+            }
+            
+            // Test 2: Fetch with no-cors (will limit response access)
+            resultDiv.innerHTML += '<div class="mb-2"><strong>Test 2: Fetch with no-cors</strong></div>';
+            try {
+                const response = await fetch('http://localhost:8001/api/courses', { mode: 'no-cors' });
+                resultDiv.innerHTML += `<div class="bg-blue-100 p-2 rounded">✅ Request sent (no-cors): ${response.type}</div>`;
+                // With no-cors, we can't access the response body, but we know the request didn't fail
+            } catch (error) {
+                resultDiv.innerHTML += `<div class="bg-red-100 p-2 rounded">❌ Failed: ${error.message}</div>`;
+            }
+            
+            // Test 3: Try to fetch from same origin (if we had a proxy)
+            resultDiv.innerHTML += '<div class="mb-2"><strong>Test 3: Same origin test</strong></div>';
+            try {
+                const response = await fetch('/api/courses'); // This would work if we had a proxy
+                const data = await response.json();
+                resultDiv.innerHTML += `<div class="bg-green-100 p-2 rounded">✅ Same origin success: ${data.length} courses</div>`;
+            } catch (error) {
+                resultDiv.innerHTML += `<div class="bg-red-100 p-2 rounded">❌ Same origin failed: ${error.message}</div>`;
+            }
+        });
+    </script>
+</body>
+</html>

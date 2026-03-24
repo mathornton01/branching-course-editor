@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Final Test - Course Loading</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <h1 class="text-2xl font-bold mb-4">Testing Course Loading in Editor</h1>
+    <div id="status" class="mb-4 p-2 bg-gray-100 rounded">Initializing...</div>
+    <div id="courseInfo" class="mt-4 p-4 bg-white rounded"></div>
+    
+    <script>
+        // Test the EXACT same code as the fixed editor
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('status').textContent = 'Loading courses from API...';
+            document.getElementById('status').className = 'mb-4 p-2 bg-blue-100 rounded';
+            
+            // EXACT COPY OF EDITOR'S API CALL
+            fetch('http://localhost:8001/api/courses')
+                .then(response => response.json())
+                .then(courses => {
+                    document.getElementById('status').textContent = `✅ Successfully loaded ${courses.length} course(s)`;
+                    document.getElementById('status').className = 'mb-4 p-2 bg-green-100 rounded';
+                    
+                    // Create a select like the editor does
+                    const courseSelect = document.createElement('select');
+                    courseSelect.className = 'w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2';
+                    courseSelect.innerHTML = '<option value="">Select a course...</option>';
+                    
+                    courses.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.title;
+                        courseSelect.appendChild(option);
+                    });
+                    
+                    document.getElementById('courseInfo').appendChild(courseSelect);
+                    
+                    // Show course details
+                    courses.forEach((course, index) => {
+                        const courseDiv = document.createElement('div');
+                        courseDiv.className = 'mt-4 p-3 bg-gray-50 rounded';
+                        courseDiv.innerHTML = `
+                            <strong>Course ${index + 1}:</strong><br>
+                            <span class="font-semibold">Title:</span> ${course.title}<br>
+                            <span class="text-sm text-gray-600">ID:</span> ${course.id}<br>
+                            <span class="text-sm text-gray-600">Nodes:</span> ${course.node_count}<br>
+                            <span class="text-sm text-gray-600">Connections:</span> ${course.connection_count}
+                        `;
+                        document.getElementById('courseInfo').appendChild(courseDiv);
+                    });
+                    
+                })
+                .catch(error => {
+                    document.getElementById('status').textContent = `❌ Error loading courses: ${error.message}`;
+                    document.getElementById('status').className = 'mb-4 p-2 bg-red-100 rounded';
+                    document.getElementById('courseInfo').innerHTML = `<pre>${error}</pre>`;
+                });
+        });
+    </script>
+</body>
+</html>

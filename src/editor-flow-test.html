@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editor Flow Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <h2 class="text-xl font-bold mb-4">Editor Course Loading Flow Test</h2>
+    <div id="courseSelectContainer" class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Course Selection:</label>
+        <select id="courseSelect" class="w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">Testing...</option>
+        </select>
+    </div>
+    <div id="result" class="mt-4 p-4 bg-gray-50 rounded"></div>
+    
+    <script>
+        // This is the EXACT same code as in the fixed editor
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load available courses - EXACT COPY FROM EDITOR
+            fetch('http://localhost:8001/api/courses')
+                .then(response => response.json())
+                .then(courses => {
+                    const courseSelect = document.getElementById('courseSelect');
+                    courseSelect.innerHTML = '<option value="">Select a course...</option>';
+                    courses.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.title;
+                        courseSelect.appendChild(option);
+                    });
+                    document.getElementById('result').innerHTML = '<div class="bg-green-100 p-2 rounded"><strong>✅ SUCCESS:</strong> Courses loaded into dropdown!</div>';
+                })
+                .catch(error => {
+                    console.error('Error loading courses:', error);
+                    document.getElementById('courseSelect').innerHTML = '<option value="">Error loading courses</option>';
+                    document.getElementById('result').innerHTML = `<div class="bg-red-100 p-2 rounded"><strong>❌ ERROR:</strong> ${error.message}</div>`;
+                });
+        });
+    </script>
+</body>
+</html>

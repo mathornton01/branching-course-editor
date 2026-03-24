@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Editor Initialization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="test-result">Testing...</div>
+    
+    <script>
+        // Simulate the initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('test-result').innerHTML = 'DOM loaded, testing API...';
+            
+            // Test the exact loadCourses function
+            fetch('http://localhost:8001/api/courses')
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(courses => {
+                    document.getElementById('test-result').innerHTML += 
+                        '<br>API Success! Found ' + courses.length + ' courses:<br>' +
+                        '<pre>' + JSON.stringify(courses, null, 2) + '</pre>';
+                    
+                    // Simulate populating the select
+                    const select = document.createElement('select');
+                    select.innerHTML = '<option value="">Select a course...</option>';
+                    courses.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.title;
+                        select.appendChild(option);
+                    });
+                    
+                    document.getElementById('test-result').innerHTML += '<br>Select element would be populated with:';
+                    document.getElementById('test-result').appendChild(select);
+                })
+                .catch(error => {
+                    document.getElementById('test-result').innerHTML += 
+                        '<br>API Error: ' + error.message;
+                });
+        });
+    </script>
+</body>
+</html>

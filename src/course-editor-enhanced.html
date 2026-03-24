@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branching Course Editor - Enhanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .node {
+            transition: all 0.2s ease;
+        }
+        .node.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+        .node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .connection {
+            transition: stroke-width 0.2s ease;
+        }
+        .connection:hover {
+            stroke-width: 3;
+        }
+        .connection-point {
+            width: 12px;
+            height: 12px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .connection-point:hover {
+            background-color: #2563eb;
+            transform: scale(1.2);
+        }
+        .connection-point.active {
+            background-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+        }
+        .node-panel {
+            transition: all 0.3s ease;
+        }
+        .node-panel.hidden {
+            display: none;
+        }
+        .btn {
+            transition: all 0.2s ease;
+        }
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .canvas-container {
+            position: relative;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border: 2px dashed #e2e8f0;
+            transition: all 0.2s ease;
+        }
+        .canvas-container.dragover {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-4">
+    <div class="max-w-7xl mx-auto">
+        <header class="mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Branching Course Editor</h1>
+            <p class="text-gray-600">Create and edit branching scenarios with drag-and-drop nodes</p>
+        </header>
+
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex justify-between items-start mb-6">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <label for="courseSelect" class="font-medium text-gray-700">Select Course:</label>
+                        <select id="courseSelect" class="w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Loading courses...</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button id="loadCourseBtn" class="btn bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50">
+                            Load Course
+                        </button>
+                        <button id="addNodeBtn" class="btn bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 disabled:opacity-50">
+                            Add Node
+                        </button>
+                        <button id="saveCourseBtn" class="btn bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 disabled:opacity-50">
+                            Save Course
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Editor Canvas -->
+                <div class="lg:col-span-2">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold text-gray-700">Course Canvas</h2>
+                            <div class="flex space-x-2">
+                                <button id="zoomOutBtn" class="btn bg-gray-200 text-gray-800 px-3 py-1 rounded-md hover:bg-gray-300">-</button>
+                                <span id="zoomLevel" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-center w-10">100%</span>
+                                <button id="zoomInBtn" class="btn bg-gray-200 text-gray-800 px-3 py-1 rounded-md hover:bg-gray-300">+</button>
+                            </div>
+                        </div>
+
+                        <div class="canvas-container" id="courseCanvas">
+                            <svg id="connectionsSVG" class="absolute inset-0 pointer-events-none"></svg>
+                            <div id="nodesContainer" class="relative"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Properties Panel -->
+                <div class="lg:col-span-1">
+                    <div class="space-y-4">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-700">Node Properties</h2>
+                        </div>
+                        <div id="nodePanel" class="node-panel hidden bg-gray-50 p-4 rounded-lg shadow">
+                            <div id="nodeContent">
+                                <p class="text-gray-500 text-center py-4">Select a node to edit its properties</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let nodes = [];
+        let connections = [];
+        let currentCourse = null;
+        let selectedNodeId = null;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let isConnecting = false;
+        let connectionStartPoint = null;
+        let tempConnection = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load available courses
+            fetch('http://100.113.204.52:8001/api/courses')
+                .then(response => response.json())
+                .then(courses => {
+                    const courseSelect = document.getElementById('courseSelect');
+                    courseSelect.innerHTML = '<option value="">Select a course...</option>';
+                    courses.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.title;
+                        courseSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading courses:', error);
+                    document.getElementById('courseSelect').innerHTML = '<option value="">Error loading courses</option>';
+                });
+
+            // Setup event listeners
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Load Course button
+            document.getElementById('loadCourseBtn').addEventListener('click', loadSelectedCourse);
+
+            // Add Node button
+            document.getElementById('addNodeBtn').addEventListener('click', addNewNode);
+
+            // Save Course button
+            document.getElementById('saveCourseBtn').addEventListener('click', saveCourse);
+
+            // Zoom controls
+            document.getElementById('zoomInBtn').addEventListener('click', () => zoomCanvas(1.2));
+            document.getElementById('zoomOutBtn').addEventListener('click', () => zoomCanvas(0.8));
+
+            // Canvas drag and drop
+            const canvas = document.getElementById('courseCanvas');
+            canvas.addEventListener('mousedown', startDrag);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', endDrag);
+
+            // Connection point listeners (for creating connections)
+            document.getElementById('nodesContainer').addEventListener('mousedown', function(e) {
+                const connectionPoint = e.target.closest('.connection-point');
+                if (connectionPoint) {
+                    startConnection(e);
+                }
+            });
+
+            // Node click listener for selecting nodes
+            document.getElementById('nodesContainer').addEventListener('click', function(e) {
+                // Only treat as node selection if it's not a connection point drag
+                const connectionPoint = e.target.closest('.connection-point');
+                if (!connectionPoint) {
+                    const nodeElement = e.target.closest('.node');
+                    if (nodeElement) {
+                        const nodeId = nodeElement.dataset.nodeId;
+                        selectNode(nodeId);
+                    }
+                }
+            });
+        }
+
+        function loadSelectedCourse() {
+            const courseId = document.getElementById('courseSelect').value;
+            if (!courseId) return;
+            
+            document.getElementById('loadCourseBtn').disabled = true;
+            document.getElementById('loadCourseBtn').textContent = 'Loading...';
+            
+            fetch(`http://100.113.204.52:8001/api/courses/${courseId}`)
+                .then(response => response.json())
+                .then(course => {
+                    currentCourse = course;
+                    loadCourseIntoEditor(course);
+                })
+                .catch(error => {
+                    console.error('Error loading course:', error);
+                    alert('Failed to load course');
+                })
+                .finally(() => {
+                    document.getElementById('loadCourseBtn').disabled = false;
+                    document.getElementById('loadCourseBtn').textContent = 'Load Course';
+                });
+        }
+
+        function loadCourseIntoEditor(course) {
+            // Clear existing nodes
+            document.getElementById('nodesContainer').innerHTML = '';
+            document.getElementById('connectionsSVG').innerHTML = '';
+            
+            nodes = course.nodes || [];
+            connections = course.connections || [];
+            
+            renderNodes();
+            renderConnections();
+            
+            // Enable buttons
+            document.getElementById('addNodeBtn').disabled = false;
+            document.getElementById('saveCourseBtn').disabled = false;
+        }
+
+        function renderNodes() {
+            const container = document.getElementById('nodesContainer');
+            container.innerHTML = '';
+            nodes.forEach(node => {
+                const nodeElement = createNodeElement(node);
+                container.appendChild(nodeElement);
+            });
+        }
+
+        function createNodeElement(node) {
+            const div = document.createElement('div');
+            div.className = 'node p-4 bg-white rounded-lg shadow-md w-48 cursor-move';
+            div.style.left = `${node.position.x}px`;
+            div.style.top = `${node.position.y}px`;
+            div.dataset.nodeId = node.id;
+            div.innerHTML = `
+                <div class="font-bold mb-2">${node.title}</div>
+                <div class="text-sm text-gray-600">${node.type}</div>
+                <div class="mt-2 connection-point" data-point-type="output"></div>
+            `;
+            return div;
+        }
+
+        function renderConnections() {
+            const svg = document.getElementById('connectionsSVG');
+            svg.innerHTML = '';
+            
+            connections.forEach(connection => {
+                const startNode = nodes.find(n => n.id === connection.from);
+                const endNode = nodes.find(n => n.id === connection.to);
+                
+                if (!startNode || !endNode) return;
+                
+                // Calculate connection points (simplified)
+                const startX = startNode.position.x + 48; // node width + padding
+                const startY = startNode.position.y + 24; // node height / 2
+                const endX = endNode.position.x;
+                const endY = endNode.position.y + 24; // node height / 2
+                
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', startX);
+                line.setAttribute('y1', startY);
+                line.setAttribute('x2', endX);
+                line.setAttribute('y2', endY);
+                line.setAttribute('class', 'connection');
+                line.setAttribute('stroke', '#3b82f6');
+                line.setAttribute('stroke-width', '2');
+                
+                // Add arrowhead
+                const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+                marker.setAttribute('id', `arrowhead-${connection.id}`);
+                marker.setAttribute('markerWidth', '10');
+                marker.setAttribute('markerHeight', '7');
+                marker.setAttribute('refX', '10');
+                marker.setAttribute('refY', '3.5');
+                marker.setAttribute('orient', 'auto');
+                marker.innerHTML = '<polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6"/>';
+                
+                const defs = svg.querySelector('defs') || document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+                if (!svg.querySelector('defs')) {
+                    svg.appendChild(defs);
+                }
+                defs.appendChild(marker);
+                line.setAttribute('marker-end', `url(#arrowhead-${connection.id})`);
+                
+                svg.appendChild(line);
+            });
+        }
+
+        function startDrag(e) {
+            const nodeElement = e.target.closest('.node');
+            if (!nodeElement) return;
+            
+            isDragging = true;
+            const node = nodes.find(n => n.id === nodeElement.dataset.nodeId);
+            if (!node) return;
+            
+            dragStartX = e.clientX - node.position.x;
+            dragStartY = e.clientY - node.position.y;
+            
+            nodeElement.classList.add('dragging');
+            e.preventDefault();
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            
+            const nodeElement = document.querySelector(`.node.dragging`);
+            if (!nodeElement) return;
+            
+            const node = nodes.find(n => n.id === nodeElement.dataset.nodeId);
+            if (!node) return;
+            
+            // Calculate new position with canvas boundaries
+            const canvas = document.getElementById('courseCanvas');
+            const canvasRect = canvas.getBoundingClientRect();
+            let newX = e.clientX - dragStartX;
+            let newY = e.clientY - dragStartY;
+            
+            // Constrain to canvas boundaries (accounting for node size)
+            const nodeWidth = 48;
+            const nodeHeight = 48;
+            newX = Math.max(0, Math.min(newX, canvasRect.width - nodeWidth));
+            newY = Math.max(0, Math.min(newY, canvasRect.height - nodeHeight));
+            
+            // Update node position
+            node.position.x = newX;
+            node.position.y = newY;
+            
+            // Update element position
+            nodeElement.style.left = `${newX}px`;
+            nodeElement.style.top = `${newY}px`;
+            
+            // Re-render connections
+            renderConnections();
+        }
+
+        function endDrag(e) {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            const nodeElement = document.querySelector(`.node.dragging`);
+            if (nodeElement) {
+                nodeElement.classList.remove('dragging');
+            }
+        }
+
+        function startConnection(e) {
+            const connectionPoint = e.target.closest('.connection-point');
+            if (!connectionPoint) return;
+            
+            const nodeElement = connectionPoint.closest('.node');
+            if (!nodeElement) return;
+            
+            isConnecting = true;
+            connectionStartPoint = {
+                element: connectionPoint,
+                nodeId: nodeElement.dataset.nodeId,
+                pointType: connectionPoint.dataset.pointType || 'output'
+            };
+            
+            // Create temporary connection line
+            const svg = document.getElementById('connectionsSVG');
+            tempConnection = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            tempConnection.setAttribute('class', 'connection temp');
+            tempConnection.setAttribute('stroke', '#3b82f6');
+            tempConnection.setAttribute('stroke-width', '2');
+            tempConnection.setAttribute('stroke-dasharray', '5,5');
+            svg.appendChild(tempConnection);
+            
+            // Update temp connection position on mouse move
+            const updateTempConnection = (moveE) => {
+                if (!tempConnection) return;
+                
+                const startNode = nodes.find(n => n.id === connectionStartPoint.nodeId);
+                if (!startNode) return;
+                
+                const startX = startNode.position.x + 48;
+                const startY = startNode.position.y + 24;
+                
+                tempConnection.setAttribute('x1', startX);
+                tempConnection.setAttribute('y1', startY);
+                tempConnection.setAttribute('x2', moveE.clientX);
+                tempConnection.setAttribute('y2', moveE.clientY);
+            };
+            
+            document.addEventListener('mousemove', updateTempConnection);
+            document.addEventListener('mouseup', endConnection);
+        }
+
+        function endConnection(e) {
+            if (!isConnecting) return;
+            
+            isConnecting = false;
+            
+            // Remove temp connection
+            if (tempConnection) {
+                tempConnection.remove();
+                tempConnection = null;
+            }
+            
+            document.removeEventListener('mousemove', updateTempConnection);
+            document.removeEventListener('mouseup', endConnection);
+            
+            // Check if we ended on a connection point
+            const targetPoint = e.target.closest('.connection-point');
+            if (!targetPoint) return;
+            
+            const targetNode = targetPoint.closest('.node');
+            if (!targetNode) return;
+            
+            const targetNodeId = targetNode.dataset.nodeId;
+            
+            // Don't connect to self
+            if (targetNodeId === connectionStartPoint.nodeId) return;
+            
+            // Create connection
+            const newConnection = {
+                id: `conn-${Date.now()}`,
+                from: connectionStartPoint.nodeId,
+                to: targetNodeId
+            };
+            
+            connections.push(newConnection);
+            renderConnections();
+        }
+
+        function addNewNode() {
+            const newNode = {
+                id: `node-${Date.now()}`,
+                title: 'New Node',
+                type: 'content',
+                position: {
+                    x: 100,
+                    y: 100
+                }
+            };
+            
+            nodes.push(newNode);
+            renderNodes();
+        }
+
+        function selectNode(nodeId) {
+            selectedNodeId = nodeId;
+            const node = nodes.find(n => n.id === nodeId);
+            if (!node) return;
+            
+            document.getElementById('nodePanel').classList.remove('hidden');
+            document.getElementById('nodeContent').innerHTML = `
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                        <input type="text" value="${node.title}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateNodeTitle(this.value)">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateNodeType(this.value)">
+                            <option value="content" ${node.type === 'content' ? 'selected' : ''}>Content</option>
+                            <option value="question" ${node.type === 'question' ? 'selected' : ''}>Question</option>
+                            <option value="feedback" ${node.type === 'feedback' ? 'selected' : ''}>Feedback</option>
+                            <option value="assessment" ${node.type === 'assessment' ? 'selected' : ''}>Assessment</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Position X</label>
+                        <input type="number" value="${node.position.x}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateNodePositionX(this.value)">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Position Y</label>
+                        <input type="number" value="${node.position.y}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateNodePositionY(this.value)">
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateNodeTitle(title) {
+            if (!selectedNodeId) return;
+            const node = nodes.find(n => n.id === selectedNodeId);
+            if (node) {
+                node.title = title;
+                renderNodes();
+            }
+        }
+
+        function updateNodeType(type) {
+            if (!selectedNodeId) return;
+            const node = nodes.find(n => n.id === selectedNodeId);
+            if (node) {
+                node.type = type;
+                renderNodes();
+            }
+        }
+
+        function updateNodePositionX(x) {
+            if (!selectedNodeId) return;
+            const node = nodes.find(n => n.id === selectedNodeId);
+            if (node) {
+                node.position.x = parseInt(x) || 0;
+                renderNodes();
+            }
+        }
+
+        function updateNodePositionY(y) {
+            if (!selectedNodeId) return;
+            const node = nodes.find(n => n.id === selectedNodeId);
+            if (node) {
+                node.position.y = parseInt(y) || 0;
+                renderNodes();
+            }
+        }
+
+        function saveCourse() {
+            if (!currentCourse) return;
+            
+            currentCourse.nodes = nodes;
+            currentCourse.connections = connections;
+            
+            // In a real app, this would make an API call to save
+            // For now, we'll just show a success message
+            alert('Course saved successfully!');
+            
+            document.getElementById('saveCourseBtn').textContent = 'Saved!';
+            setTimeout(() => {
+                document.getElementById('saveCourseBtn').textContent = 'Save Course';
+            }, 1500);
+        }
+
+        function zoomCanvas(scaleFactor) {
+            const canvas = document.getElementById('courseCanvas');
+            const currentScale = parseFloat(document.getElementById('zoomLevel').textContent) / 100;
+            const newScale = Math.max(0.5, Math.min(2.0, currentScale * scaleFactor));
+            
+            canvas.style.transform = `scale(${newScale})`;
+            document.getElementById('zoomLevel').textContent = `${Math.round(newScale * 100)}%`;
+        }
+    </script>
+</body>
+</html>

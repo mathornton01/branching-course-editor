@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Editor API Call</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <select id="courseSelect" class="mt-4 p-2 border w-64">
+        <option value="">Testing...</option>
+    </select>
+    <div id="result" class="mt-4 p-2"></div>
+
+    <script>
+        // Exact replica of the editor's API call
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, starting API call...');
+            
+            fetch('http://localhost:8001/api/courses')
+                .then(response => {
+                    console.log('API response:', response.status, response.statusText);
+                    return response.json();
+                })
+                .then(courses => {
+                    console.log('Courses received:', courses);
+                    const courseSelect = document.getElementById('courseSelect');
+                    courseSelect.innerHTML = '<option value="">Select a course...</option>';
+                    courses.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.title;
+                        courseSelect.appendChild(option);
+                    });
+                    document.getElementById('result').textContent = 'SUCCESS: Courses loaded!';
+                    document.getElementById('result').className = 'bg-green-100 p-2';
+                })
+                .catch(error => {
+                    console.error('API Error:', error);
+                    document.getElementById('courseSelect').innerHTML = '<option value="">Error loading courses</option>';
+                    document.getElementById('result').textContent = 'ERROR: ' + error.message;
+                    document.getElementById('result').className = 'bg-red-100 p-2';
+                });
+        });
+    </script>
+</body>
+</html>

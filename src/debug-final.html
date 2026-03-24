@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Final Debug Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <h2 class="text-xl font-bold mb-4">Final Verification Test</h2>
+    <div id="log" class="mb-4 p-4 bg-gray-50 rounded h-96 overflow-y-auto"></div>
+    
+    <script>
+        function log(msg) {
+            const logDiv = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.textContent = new Date().toLocaleTimeString() + ': ' + msg;
+            entry.className = 'mb-1 p-1 bg-white rounded';
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(msg);
+        }
+        
+        log('🧪 Starting final verification test');
+        log('📍 Testing editor\'s exact course loading flow');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            log('✅ DOMContentLoaded fired');
+            
+            log('🌐 About to make fetch request to: http://localhost:8001/api/courses');
+            
+            // EXACT COPY OF EDITOR'S CODE
+            fetch('http://localhost:8001/api/courses')
+                .then(response => {
+                    log(`📡 API responded: ${response.status} ${response.statusText}`);
+                    log(`📋 Response headers: ${JSON.stringify(Object.fromEntries(response.headers.entries()))}`);
+                    return response.json();
+                })
+                .then(courses => {
+                    log(`📚 Successfully parsed ${courses.length} course(s)`);
+                    log(`📋 First course: ${JSON.stringify(courses[0])}`);
+                    
+                    // Simulate what editor does
+                    const courseSelect = document.createElement('select');
+                    courseSelect.innerHTML = '<option value="">Select a course...</option>';
+                    courses.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.title;
+                        courseSelect.appendChild(option);
+                    });
+                    
+                    log(`✅ Dropdown would be populated with ${courses.length} options`);
+                    log(`🎉 COURSE LOADING TEST: SUCCESS!`);
+                    
+                    document.getElementById('log').innerHTML += '<div class="bg-green-100 p-2 rounded mt-2"><strong>🎉 TEST RESULT: COURSE LOADING WORKING CORRECTLY!</strong></div>';
+                })
+                .catch(error => {
+                    log(`❌ FETCH FAILED: ${error.message}`);
+                    log(`🔍 Error type: ${error.constructor.name}`);
+                    document.getElementById('log').innerHTML += `<div class="bg-red-100 p-2 rounded mt-2"><strong>❌ TEST RESULT: COURSE LOADING FAILED</strong><br/>${error.message}</div>`;
+                });
+        });
+        
+        log('🏁 Test setup complete - waiting for DOMContentLoaded');
+    </script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branching Course Editor - Debug</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .node {
+            transition: all 0.2s ease;
+        }
+        .node.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+        .node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .connection {
+            transition: stroke-width 0.2s ease;
+        }
+        .connection:hover {
+            stroke-width: 3;
+        }
+        .connection-point {
+            width: 12px;
+            height: 12px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .connection-point:hover {
+            background-color: #2563eb;
+            transform: scale(1.2);
+        }
+        .connection-point.active {
+            background-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+        }
+        .node-panel {
+            transition: all 0.3s ease;
+        }
+        .node-panel.hidden {
+            display: none;
+        }
+        .btn {
+            transition: all 0.2s ease;
+        }
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .canvas-container {
+            position: relative;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border: 2px dashed #e2e8f0;
+            transition: all 0.2s ease;
+        }
+        .canvas-container.dragover {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+        }
+        .debug-log {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 4px;
+            padding: 8px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-4">
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div id="debugArea" class="mb-4"></div>
+            
+            <div class="flex justify-between items-start mb-6">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <label for="courseSelect" class="font-medium text-gray-700">Select Course:</label>
+                        <select id="courseSelect" class="w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Loading courses...</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button id="loadCourseBtn" class="btn bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50">
+                            Load Course
+                        </button>
+                        <button id="addNodeBtn" class="btn bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 disabled:opacity-50">
+                            Add Node
+                        </button>
+                        <button id="saveCourseBtn" class="btn bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 disabled:opacity-50">
+                            Save Course
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Editor Canvas -->
+                <div class="lg:col-span-2">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold text-gray-700">Course Canvas</h2>
+                            <div class="flex space-x-2">
+                                <button id="zoomOutBtn" class="btn bg-gray-200 text-gray-800 px-3 py-1 rounded-md hover:bg-gray-300">-</button>
+                                <span id="zoomLevel" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-center w-10">100%</span>
+                                <button id="zoomInBtn" class="btn bg-gray-200 text-gray-800 px-3 py-1 rounded-md hover:bg-gray-300">+</button>
+                            </div>
+                        </div>
+
+                        <div class="canvas-container" id="courseCanvas">
+                            <svg id="connectionsSVG" class="absolute inset-0 pointer-events-none"></svg>
+                            <div id="nodesContainer" class="relative"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Properties Panel -->
+                <div class="lg:col-span-1">
+                    <div class="space-y-4">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-700">Node Properties</h2>
+                        </div>
+                        <div id="nodePanel" class="node-panel hidden bg-gray-50 p-4 rounded-lg shadow">
+                            <div id="nodeContent">
+                                <p class="text-gray-500 text-center py-4">Select a node to edit its properties</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Debug function
+        function debugLog(message) {
+            const debugArea = document.getElementById('debugArea');
+            const entry = document.createElement('div');
+            entry.textContent = new Date().toLocaleTimeString() + ': ' + message;
+            entry.className = 'debug-log';
+            debugArea.appendChild(entry);
+            debugArea.scrollTop = debugArea.scrollHeight;
+            console.log(message);
+        }
+
+        let nodes = [];
+        let connections = [];
+        let currentCourse = null;
+        let selectedNodeId = null;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let isConnecting = false;
+        let connectionStartPoint = null;
+        let tempConnection = null;
+
+        debugLog('Starting script...');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            debugLog('DOMContentLoaded fired');
+            
+            // Load available courses
+            debugLog('About to fetch courses...');
+            fetch('http://localhost:8001/api/courses')
+                .then(response => {
+                    debugLog(`API responded: ${response.status}`);
+                    return response.json();
+                })
+                .then(courses => {
+                    debugLog(`Received ${courses.length} courses`);
+                    const courseSelect = document.getElementById('courseSelect');
+                    courseSelect.innerHTML = '<option value="">Select a course...</option>';
+                    courses.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.title;
+                        courseSelect.appendChild(option);
+                    });
+                    debugLog('Courses populated in dropdown');
+                })
+                .catch(error => {
+                    debugLog(`ERROR loading courses: ${error.message}`);
+                    console.error('Error loading courses:', error);
+                    document.getElementById('courseSelect').innerHTML = '<option value="">Error loading courses</option>';
+                });
+
+            debugLog('About to setup event listeners...');
+            // Setup event listeners
+            setupEventListeners();
+            debugLog('Event listeners setup complete');
+        });
+
+        debugLog('Script definition complete');
+    </script>
+</body>
+</html>

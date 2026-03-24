@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branching Course Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Branching Course Editor</h1>
+            <p class="text-gray-600 mt-2">Create and edit branching courses visually</p>
+        </header>
+
+        <!-- Course Selection -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">Select Course</h2>
+            <div id="course-selector" class="space-y-4">
+                <div class="flex items-center justify-between loading">
+                    <span class="text-gray-500">Loading courses...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Editor -->
+        <div id="course-editor" class="bg-white rounded-lg shadow-md p-6 hidden">
+            <h2 class="text-xl font-semibold mb-4">Course Editor: <span id="course-title-display"></span></h2>
+            
+            <!-- Course Info -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Course ID</label>
+                    <input type="text" id="course-id-input" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                    <input type="text" id="course-title-input" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea id="course-description-input" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+
+            <!-- Nodes Visualization -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-3">Course Structure</h3>
+                <div id="nodes-visualization" class="bg-gray-50 rounded-lg p-4 min-h-[200px]">
+                    <p class="text-gray-500 text-center py-4">Select a course to view its structure</p>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex space-x-3 mt-6">
+                <button id="save-course-btn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50">
+                    Save Changes
+                </button>
+                <button id="view-structure-btn" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
+                    View Full Structure
+                </button>
+            </div>
+        </div>
+
+        <!-- Template Browser -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4">Template Browser</h2>
+            <div id="template-browser" class="space-y-4">
+                <div class="flex items-center justify-between loading">
+                    <span class="text-gray-500">Loading templates...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8001';
+        let currentCourseId = null;
+
+        // Initialize the editor
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCourses();
+            loadTemplates();
+        });
+
+        // Load courses from API
+        async function loadCourses() {
+            try {
+                const response = await fetch(`${API_BASE}/api/courses`);
+                const courses = await response.json();
+                
+                const selector = document.getElementById('course-selector');
+                
+                if (courses.length === 0) {
+                    selector.innerHTML = '<p class="text-gray-500">No courses found. Create one using the API.</p>';
+                    return;
+                }
+
+                selector.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <label class="text-sm font-medium text-gray-700">Choose a course to edit:</label>
+                        <select id="course-select-dropdown" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">-- Select a course --</option>
+                        </select>
+                    </div>
+                    <div id="course-details-preview" class="mt-3 p-3 bg-gray-50 rounded-lg"></div>
+                `;
+
+                const select = document.getElementById('course-select-dropdown');
+                courses.forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course.id;
+                    option.textContent = `${course.title} (${course.node_count} nodes)`;
+                    select.appendChild(option);
+                });
+
+                select.addEventListener('change', async (e) => {
+                    const courseId = e.target.value;
+                    if (courseId) {
+                        await loadCourseDetails(courseId);
+                    } else {
+                        clearCourseEditor();
+                    }
+                });
+            } catch (error) {
+                document.getElementById('course-selector').innerHTML = 
+                    `<p class="text-red-500">Error loading courses: ${error.message}</p>`;
+            }
+        }
+
+        // Load course details
+        async function loadCourseDetails(courseId) {
+            try {
+                currentCourseId = courseId;
+                const response = await fetch(`${API_BASE}/api/courses/${courseId}`);
+                const course = await response.json();
+                
+                // Update UI
+                document.getElementById('course-title-display').textContent = course.title;
+                document.getElementById('course-id-input').value = course.id;
+                document.getElementById('course-title-input').value = course.title;
+                document.getElementById('course-description-input').value = course.description;
+                
+                // Show editor
+                document.getElementById('course-editor').classList.remove('hidden');
+                
+                // Update preview
+                const preview = document.getElementById('course-details-preview');
+                preview.innerHTML = `
+                    <div class="space-y-2">
+                        <div><strong>ID:</strong> <span class="font-mono">${course.id}</span></div>
+                        <div><strong>Nodes:</strong> ${course.node_count}</div>
+                        <div><strong>Connections:</strong> ${course.connection_count}</div>
+                        <div><strong>Version:</strong> ${course.version}</div>
+                    </div>
+                `;
+                
+                // Update nodes visualization
+                updateNodesVisualization(course);
+                
+            } catch (error) {
+                alert(`Error loading course: ${error.message}`);
+            }
+        }
+
+        // Update nodes visualization
+        function updateNodesVisualization(course) {
+            const viz = document.getElementById('nodes-visualization');
+            
+            if (!course.structure || !course.structure.nodes) {
+                viz.innerHTML = '<p class="text-gray-500 text-center py-4">No structure data available</p>';
+                return;
+            }
+
+            const nodes = course.structure.nodes;
+            const connections = course.structure.connections || [];
+            
+            // Simple visualization - just list nodes for now
+            let html = '<div class="space-y-2">';
+            html += '<h4 class="font-semibold mb-2">Nodes:</h4>';
+            
+            Object.values(nodes).forEach(node => {
+                const nodeType = node.type || 'unknown';
+                const typeClass = {
+                    'content': 'bg-blue-100',
+                    'decision': 'bg-green-100', 
+                    'assessment': 'bg-purple-100'
+                }[nodeType] || 'bg-gray-100';
+                
+                html += `
+                    <div class="p-3 ${typeClass} rounded-lg flex justify-between items-start">
+                        <div>
+                            <div class="font-medium">${node.title || 'Untitled'}</div>
+                            <div class="text-xs text-gray-500">${nodeType}</div>
+                            ${node.content ? `<div class="text-xs mt-1">${node.content.substring(0, 50)}${node.content.length > 50 ? '...' : ''}</div>` : ''}
+                        </div>
+                        <div class="text-xs text-gray-400">
+                            ${node.position ? `(${node.position.x}, ${node.position.y})` : 'No position'}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `<h4 class="font-semibold mt-4 mb-2">Connections:</h4>`;
+            if (connections.length === 0) {
+                html += '<p class="text-gray-500">No connections</p>';
+            } else {
+                connections.forEach(conn => {
+                    html += `
+                        <div class="p-2 bg-gray-50 rounded-lg flex justify-between">
+                            <span class="font-medium">${conn.from_node || 'Unknown'} → ${conn.to_node || 'Unknown'}</span>
+                            <span class="text-xs text-gray-500">${conn.type || 'default'}</span>
+                        </div>
+                    `;
+                });
+            }
+            
+            html += '</div>';
+            viz.innerHTML = html;
+        }
+
+        // Clear course editor
+        function clearCourseEditor() {
+            currentCourseId = null;
+            document.getElementById('course-editor').classList.add('hidden');
+            document.getElementById('course-title-display').textContent = '';
+            document.getElementById('course-id-input').value = '';
+            document.getElementById('course-title-input').value = '';
+            document.getElementById('course-description-input').value = '';
+            document.getElementById('nodes-visualization').innerHTML = 
+                '<p class="text-gray-500 text-center py-4">Select a course to view its structure</p>';
+        }
+
+        // Save course changes
+        document.getElementById('save-course-btn').addEventListener('click', async () => {
+            if (!currentCourseId) return;
+            
+            try {
+                const courseData = {
+                    id: document.getElementById('course-id-input').value,
+                    title: document.getElementById('course-title-input').value,
+                    description: document.getElementById('course-description-input').value,
+                    version: "1.0.0",
+                    tags: ["edited"]
+                };
+                
+                const response = await fetch(`${API_BASE}/api/courses/${currentCourseId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(courseData)
+                });
+                
+                if (response.ok) {
+                    alert('Course saved successfully!');
+                    // Reload course list to reflect changes
+                    loadCourses();
+                } else {
+                    const error = await response.json();
+                    alert(`Error saving course: ${error.detail || 'Unknown error'}`);
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        });
+
+        // View full structure
+        document.getElementById('view-structure-btn').addEventListener('click', async () => {
+            if (!currentCourseId) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/courses/${currentCourseId}/structure`);
+                const structure = await response.json();
+                
+                // Show in a modal or new tab for now
+                const structureJson = JSON.stringify(structure, null, 2);
+                const newWindow = window.open('', '_blank');
+                newWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Course Structure - ${currentCourseId}</title>
+                        <style>
+                            body { font-family: monospace; padding: 20px; background: #f5f5f5; }
+                            pre { background: white; padding: 15px; border-radius: 5px; overflow-x: auto; }
+                        </style>
+                    </head>
+                    <body>
+                        <h2>Course Structure: ${currentCourseId}</h2>
+                        <pre>${structureJson}</pre>
+                    </body>
+                    </html>
+                `);
+                newWindow.document.close();
+            } catch (error) {
+                alert(`Error viewing structure: ${error.message}`);
+            }
+        });
+
+        // Load templates
+        async function loadTemplates() {
+            try {
+                const response = await fetch(`${API_BASE}/api/templates`);
+                const templates = await response.json();
+                
+                const browser = document.getElementById('template-browser');
+                
+                if (templates.length === 0) {
+                    browser.innerHTML = '<p class="text-gray-500">No templates found</p>';
+                    return;
+                }
+
+                browser.innerHTML = `
+                    <div class="space-y-4">
+                        ${templates.map(template => `
+                            <div class="border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"
+                                 onclick="applyTemplate('${template.id}')">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold">${template.name}</h3>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">${template.category}</span>
+                                </div>
+                                <p class="text-gray-700 text-sm mb-2">${template.description}</p>
+                                <div class="flex items-center text-xs text-gray-500">
+                                    <span>📊 ${template.structure.length} nodes</span>
+                                    <span class="mx-2">|</span>
+                                    <span>🔗 ${template.connections.length} connections</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('template-browser').innerHTML = 
+                    `<p class="text-red-500">Error loading templates: ${error.message}</p>`;
+            }
+        }
+
+        // Apply template to create new course
+        window.applyTemplate = async (templateId) => {
+            const courseId = prompt('Enter Course ID for new course:');
+            if (!courseId) return;
+            
+            const courseName = prompt('Enter Course Title:') || 'New Course from Template';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/templates/${templateId}/apply/${courseId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const newCourse = await response.json();
+                    alert(`Course "${newCourse.title}" created successfully from template!`);
+                    // Refresh course list and select the new course
+                    loadCourses();
+                    // Auto-select the new course after a brief delay
+                    setTimeout(() => {
+                        const select = document.getElementById('course-select-dropdown');
+                        if (select) {
+                            select.value = courseId;
+                            select.dispatchEvent(new Event('change'));
+                        }
+                    }, 500);
+                } else {
+                    const error = await response.json();
+                    alert(`Error creating course: ${error.detail || 'Unknown error'}`);
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        };
+    </script>
+</body>
+</html>

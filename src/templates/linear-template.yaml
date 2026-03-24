@@ -1,0 +1,35 @@
+id: linear-template
+name: Linear Progression
+description: Simple sequential learning path where each step follows the previous one
+category: basic
+structure:
+  - id: "intro"
+    type: "content"
+    title: "Introduction"
+    content: "Welcome to the course! This is where your learning journey begins."
+    position: {x: 100, y: 100}
+  - id: "lesson-1"
+    type: "content"
+    title: "Lesson 1"
+    content: "This is the first lesson of the course."
+    position: {x: 300, y: 100}
+  - id: "lesson-2"
+    type: "content"
+    title: "Lesson 2"
+    content: "This is the second lesson building on the previous concepts."
+    position: {x: 500, y: 100}
+  - id: "summary"
+    type: "content"
+    title: "Course Summary"
+    content: "Congratulations! You've completed all lessons in this course."
+    position: {x: 700, y: 100}
+connections:
+  - from: "intro"
+    to: "lesson-1"
+    type: "default"
+  - from: "lesson-1"
+    to: "lesson-2"
+    type: "default"
+  - from: "lesson-2"
+    to: "summary"
+    type: "default"

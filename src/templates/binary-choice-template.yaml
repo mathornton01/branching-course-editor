@@ -1,0 +1,59 @@
+id: binary-choice-template
+name: Binary Choice
+description: Simple yes/no decision point that leads to different paths
+category: basic
+structure:
+  - id: "start"
+    type: "content"
+    title: "Introduction"
+    content: "Welcome to this branching scenario. You'll make a choice that affects your path."
+    position: {x: 100, y: 100}
+  - id: "decision-point"
+    type: "decision"
+    title: "Make Your Choice"
+    content: "Which option would you prefer?"
+    options:
+      - id: "option-a"
+        label: "Option A"
+        description: "Choose the first option"
+        condition: "always"
+        target: "path-a"
+      - id: "option-b"
+        label: "Option B"
+        description: "Choose the second option"
+        condition: "always"
+        target: "path-b"
+    position: {x: 300, y: 100}
+  - id: "path-a"
+    type: "content"
+    title: "Path A - Option A Selected"
+    content: "You chose Option A. This path leads to specific content for this choice."
+    position: {x: 500, y: 50}
+  - id: "path-b"
+    type: "content"
+    title: "Path B - Option B Selected"
+    content: "You chose Option B. This path leads to different content for this alternative choice."
+    position: {x: 500, y: 150}
+  - id: "conclusion"
+    type: "content"
+    title: "Conclusion"
+    content: "Thank you for completing this branching scenario!"
+    position: {x: 700, y: 100}
+connections:
+  - from: "start"
+    to: "decision-point"
+    type: "default"
+  - from: "decision-point"
+    to: "path-a"
+    type: "conditional"
+    condition: "option-a-selected"
+  - from: "decision-point"
+    to: "path-b"
+    type: "conditional"
+    condition: "option-b-selected"
+  - from: "path-a"
+    to: "conclusion"
+    type: "default"
+  - from: "path-b"
+    to: "conclusion"
+    type: "default"

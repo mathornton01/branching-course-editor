@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editor Debug - Real Time Course Loading</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <h2 class="text-xl font-bold mb-4">🔍 Editor Debug - Live Course Loading Test</h2>
+    
+    <div id="status" class="mb-4 p-4 bg-blue-50 rounded">
+        <div id="status-text" class="font-medium">Initializing...</div>
+    </div>
+    
+    <div id="details" class="mb-4 p-4 bg-gray-50 rounded h-64 overflow-y-auto text-sm">
+        <div class="text-gray-500 italic">Waiting for test to start...</div>
+    </div>
+    
+    <div id="result" class="mt-4 p-4 bg-green-50 rounded hidden">
+        <h3 class="font-bold mb-2">✅ TEST RESULT:</h3>
+        <p id="result-text"></p>
+    </div>
+    
+    <div id="error-result" class="mt-4 p-4 bg-red-50 rounded hidden">
+        <h3 class="font-bold mb-2">❌ TEST RESULT:</h3>
+        <p id="error-text"></p>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const detailsDiv = document.getElementById('details');
+            const statusDiv = document.getElementById('status-text');
+            const entry = document.createElement('div');
+            
+            let icon = 'ℹ️';
+            if (type === 'success') icon = '✅';
+            if (type === 'error') icon = '❌';
+            if (type === 'warning') icon = '⚠️';
+            
+            entry.innerHTML = `<span class="font-mono">${icon} ${new Date().toLocaleTimeString()}: ${message}</span>`;
+            entry.className = 'mb-1 p-1 bg-white rounded';
+            detailsDiv.appendChild(entry);
+            detailsDiv.scrollTop = detailsDiv.scrollHeight;
+            console.log(message);
+            
+            if (type === 'success') statusDiv.textContent = `✅ ${message}`;
+            if (type === 'error') statusDiv.textContent = `❌ ${message}`;
+            if (type === 'info') statusDiv.textContent = `ℹ️ ${message}`;
+        }
+        
+        function showSuccess(message) {
+            document.getElementById('result-text').textContent = message;
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('error-result').classList.add('hidden');
+        }
+        
+        function showError(message) {
+            document.getElementById('error-text').textContent = message;
+            document.getElementById('error-result').classList.remove('hidden');
+            document.getElementById('result').classList.add('hidden');
+        }
+        
+        log('🧪 Starting editor debug test');
+        log('📍 Testing exact editor course loading flow');
+        
+        // EXACT COPY of the editor's JavaScript - no modifications
+        document.addEventListener('DOMContentLoaded', function() {
+            log('📄 DOMContentLoaded fired');
+            
+            log('🌐 Making fetch request to: http://100.113.204.52:8001/api/courses');
+            
+            // THIS IS THE EXACT CODE FROM YOUR EDITOR
+            fetch('http://100.113.204.52:8001/api/courses')
+                .then(response => {
+                    log(`📡 HTTP ${response.status} ${response.statusText}`, 'info');
+                    log(`📋 Headers: ${JSON.stringify(Object.fromEntries(response.headers.entries()))}`, 'info');
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    return response.json();
+                })
+                .then(courses => {
+                    log(`📚 Successfully received ${courses.length} course(s)`, 'success');
+                    log(`📋 Course data: ${JSON.stringify(courses, null, 2)}`, 'info');
+                    
+                    // Simulate what the editor actually does with the data
+                    const courseSelect = document.createElement('select');
+                    courseSelect.innerHTML = '<option value="">Select a course...</option>';
+                    
+                    courses.forEach((course, index) => {
+                        log(`  ${index + 1}. ${course.title} (ID: ${course.id})`, 'info');
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.title;
+                        courseSelect.appendChild(option);
+                    });
+                    
+                    log(`🎯 Would populate dropdown with ${courses.length} options`, 'success');
+                    showSuccess(`Course loading WORKING! Found ${courses.length} course(s). Editor should now show courses instead of "Loading...".`);
+                })
+                .catch(error => {
+                    log(`💥 FETCH FAILED: ${error.message}`, 'error');
+                    log(`🔍 Error type: ${error.constructor.name}`, 'error');
+                    log(`: ${error.stack}`, 'error');
+                    
+                    showError(`Course loading FAILED: ${error.message}<br/>Check: Is API accessible? Is CORS working? Is network connected?`);
+                });
+        });
+        
+        log('🏝️  Test setup complete - waiting for DOMContentLoaded');
+    </script>
+</body>
+</html>

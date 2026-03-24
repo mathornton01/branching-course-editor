@@ -1,0 +1,201 @@
+course:
+  id: "sample-branching-course"
+  title: "Sample Branching Course"
+  description: "A demonstration of branching course capabilities"
+  version: "1.0.0"
+  tags: ["sample", "demonstration"]
+  metadata:
+    author: "Herald AI Assistant"
+    created: "2026-03-23"
+    estimated_time: "15 minutes"
+
+nodes:
+  - id: "start"
+    type: "content"
+    title: "Welcome"
+    content: |
+      # Welcome to the Sample Branching Course
+      
+      This course demonstrates how branching works. You'll make choices that affect your path through the material.
+    position: {x: 100, y: 100}
+    
+  - id: "learning-style-question"
+    type: "decision"
+    title: "How do you prefer to learn?"
+    content: "Choose your preferred learning style:"
+    options:
+      - id: "visual-learner"
+        label: "Visual Learner"
+        description: "I learn best with diagrams and visual aids"
+        condition: "always"
+        target: "visual-path"
+      - id: "auditory-learner"
+        label: "Auditory Learner"
+        description: "I learn best through listening and discussion"
+        condition: "always"
+        target: "auditory-path"
+      - id: "kinesthetic-learner"
+        label: "Kinesthetic Learner"
+        description: "I learn best by doing hands-on activities"
+        condition: "always"
+        target: "kinesthetic-path"
+    position: {x: 300, y: 100}
+    
+  - id: "visual-path"
+    type: "content"
+    title: "Visual Learning Path"
+    content: |
+      ## Visual Learning Materials
+      
+      Since you prefer visual learning, here are some diagrams and charts:
+      
+      ![Concept Diagram](https://example.com/diagram.png)
+      
+      Key concepts presented visually:
+      - Concept A → Concept B → Concept C
+      - Cause and effect relationships
+      - Process flows and sequences
+    position: {x: 500, y: 50}
+    
+  - id: "auditory-path"
+    type: "content"
+    title: "Auditory Learning Path"
+    content: |
+      ## Auditory Learning Materials
+      
+      Since you prefer auditory learning, here's what you should listen to:
+      
+      **Recommended Audio Resources:**
+      - Podcast episode on the topic
+      - Recorded lecture segments
+      - Discussion forums and Q&A sessions
+      
+      Key concepts to listen for:
+      - Main ideas and themes
+      - Expert opinions and perspectives
+      - Real-world examples and case studies
+    position: {x: 500, y: 100}
+    
+  - id: "kinesthetic-path"
+    type: "content"
+    title: "Kinesthetic Learning Path"
+    content: |
+      ## Kinesthetic Learning Materials
+      
+      Since you prefer hands-on learning, try these activities:
+      
+      **Interactive Exercises:**
+      1. Build a model or prototype
+      2. Conduct an experiment
+      3. Role-play a scenario
+      4. Create a physical representation
+      
+      Key concepts to experience:
+      - Physical manipulation and movement
+      - Tactile feedback and sensations
+      - Muscle memory and practice
+    position: {x: 500, y: 150}
+    
+  - id: "knowledge-check"
+    type: "assessment"
+    title: "Check Your Understanding"
+    content: "Let's see what you've learned about learning styles!"
+    questions:
+      - id: "q1"
+        type: "multiple-choice"
+        prompt: "Which learning style involves learning by doing?"
+        options:
+          - id: "q1-opt1"
+            text: "Visual learning"
+          - id: "q1-opt2"
+            text: "Auditory learning"
+          - id: "q1-opt3"
+            text: "Kinesthetic learning"
+          - id: "q1-opt4"
+            text: "Reading/writing learning"
+        correct_answer: "q1-opt3"
+        points: 10
+      - id: "q2"
+        type: "true-false"
+        prompt: "Visual learners benefit most from diagrams and charts."
+        correct_answer: "true"
+        points: 10
+    passing_score: 70
+    success_target: "conclusion"
+    failure_target: "review"
+    position: {x: 700, y: 100}
+    
+  - id: "review"
+    type: "content"
+    title: "Review Session"
+    content: |
+      Let's review the key points:
+      
+      - Visual learners: prefer seeing information
+      - Auditory learners: prefer hearing information  
+      - Kinesthetic learners: prefer doing/experiencing
+      
+      Understanding your preferred learning style helps you study more effectively!
+    position: {x: 700, y: 200}
+    
+  - id: "conclusion"
+    type: "content"
+    title: "Course Complete"
+    content: |
+      ## Congratulations!
+      
+      You've completed the sample branching course!
+      
+      Key takeaways:
+      - Everyone has different learning preferences
+      - Matching study methods to your preferences improves learning
+      - Branching allows personalized learning paths
+      
+      Feel free to retake the course and try different paths to see how the experience changes!
+    position: {x: 900, y: 100}
+
+connections:
+  - from: "start"
+    to: "learning-style-question"
+    type: "default"
+    
+  - from: "learning-style-question"
+    to: "visual-path"
+    type: "conditional"
+    condition: "visual-learner-selected"
+    
+  - from: "learning-style-question"
+    to: "auditory-path"
+    type: "conditional"
+    condition: "auditory-learner-selected"
+    
+  - from: "learning-style-question"
+    to: "kinesthetic-path"
+    type: "conditional"
+    condition: "kinesthetic-learner-selected"
+    
+  - from: "visual-path"
+    to: "knowledge-check"
+    type: "default"
+    
+  - from: "auditory-path"
+    to: "knowledge-check"
+    type: "default"
+    
+  - from: "kinesthetic-path"
+    to: "knowledge-check"
+    type: "default"
+    
+  - from: "knowledge-check"
+    to: "conclusion"
+    type: "conditional"
+    condition: "assessment-passed"
+    
+  - from: "knowledge-check"
+    to: "review"
+    type: "conditional"
+    condition: "assessment-failed"
+    
+  - from: "review"
+    to: "knowledge-check"
+    type: "default"

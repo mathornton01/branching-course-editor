@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Integration Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-4">
+    <h1 class="text-2xl font-bold mb-4">Testing API Integration</h1>
+    <div id="status" class="mb-4 p-2 bg-gray-100 rounded">Testing...</div>
+    <div id="result"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const statusEl = document.getElementById('status');
+            const resultEl = document.getElementById('result');
+            
+            try {
+                statusEl.textContent = 'Fetching courses from API...';
+                statusEl.className = 'mb-4 p-2 bg-blue-100 rounded';
+                
+                const response = await fetch('http://localhost:8001/api/courses');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const courses = await response.json();
+                
+                statusEl.textContent = `✅ Successfully loaded ${courses.length} course(s)`;
+                statusEl.className = 'mb-4 p-2 bg-green-100 rounded';
+                
+                resultEl.innerHTML = `
+                    <h2 class="text-xl font-bold mb-2">Courses Loaded:</h2>
+                    <div class="space-y-4">
+                        ${courses.map(course => `
+                            <div class="bg-white p-4 rounded-md shadow">
+                                <h3 class="font-semibold">${course.title}</h3>
+                                <p class="text-sm text-gray-600">${course.description}</p>
+                                <div class="text-xs text-gray-500 mt-2">
+                                    ID: ${course.id} | Version: ${course.version} | 
+                                    Nodes: ${course.node_count} | Connections: ${course.connection_count}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-blue-50 rounded">
+                        <h3 class="font-semibold mb-2">API Endpoint Working Correctly!</h3>
+                        <p class="text-sm">The editor can now successfully load courses from http://localhost:8001/api/courses</p>
+                    </div>
+                `;
+                
+            } catch (error) {
+                statusEl.textContent = `❌ Error: ${error.message}`;
+                statusEl.className = 'mb-4 p-2 bg-red-100 rounded';
+                resultEl.innerHTML = `<pre>${error}</pre>`;
+            }
+        });
+    </script>
+</body>
+</html>

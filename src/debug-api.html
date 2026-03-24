@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug API Call</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-4">
+    <h1 class="text-2xl font-bold mb-4">Debugging API Call</h1>
+    <div id="log" class="space-y-2 mb-4 p-4 bg-gray-50 rounded"></div>
+    
+    <script>
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.textContent = new Date().toLocaleTimeString() + ': ' + message;
+            logDiv.appendChild(entry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            log('DOM loaded, starting API test...');
+            
+            log('About to fetch from http://localhost:8001/api/courses');
+            
+            fetch('http://localhost:8001/api/courses')
+                .then(response => {
+                    log(`API responded with status: ${response.status}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    log(`Successfully parsed JSON: ${JSON.stringify(data)}`);
+                    log(`Number of courses: ${data.length}`);
+                    
+                    // Test updating the dropdown like the editor does
+                    const select = document.createElement('select');
+                    select.innerHTML = '<option value="">Select a course...</option>';
+                    data.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.title;
+                        select.appendChild(option);
+                    });
+                    
+                    log(`Dropdown populated with ${data.length} options`);
+                    document.getElementById('log').innerHTML += `<div class="bg-green-50 p-2 rounded mt-2"><strong>SUCCESS:</strong> API working correctly!</div>`;
+                })
+                .catch(error => {
+                    log(`ERROR: ${error.message}`);
+                    log(`Error type: ${error.constructor.name}`);
+                    document.getElementById('log').innerHTML += `<div class="bg-red-50 p-2 rounded mt-2"><strong>ERROR:</strong> ${error.message}</div>`;
+                });
+        });
+    </script>
+</body>
+</html>
