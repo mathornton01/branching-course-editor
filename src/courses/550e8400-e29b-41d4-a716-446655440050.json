@@ -1,0 +1,238 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440050",
+  "title": "Introduction to Rust Programming for Journalists",
+  "description": "Learn Rust through investigative journalism scenarios. Build high-performance data analysis tools and scalable web APIs for news organizations. Make critical decisions that lead to different outcomes.",
+  "topic": "Rust Programming",
+  "theme": "journalism",
+  "difficulty": "beginner",
+  "estimated_minutes": 40,
+  "tags": [
+    "Rust",
+    "programming",
+    "journalism",
+    "systems programming",
+    "web APIs",
+    "data safety"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Newsroom's Digital Challenge",
+      "content": "Your investigative journalism team has uncovered massive datasets related to government spending. You need to process millions of records to find patterns that reveal corruption. Additionally, you want to build tools that other newsrooms can use. Your team has decided to build core infrastructure in a systems programming language. You've narrowed it down to Rust.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "What's Your Priority?",
+      "content": "Your newsroom faces two critical infrastructure needs. Which aligns better with your investigative journalism mission?",
+      "choices": [
+        {
+          "label": "Data Processing Power\u2014Analyze massive government datasets efficiently and safely",
+          "next": "n3"
+        },
+        {
+          "label": "Web Distribution\u2014Build reliable APIs for journalism tools other newsrooms can use",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Building a High-Performance Data Analysis Engine",
+      "content": "Your investigation involves analyzing 500MB+ datasets daily containing sensitive information about offshore accounts. Rust is perfect because its ownership system prevents memory leaks, buffer overflows, and data races at compile-time. Unlike C++ or Python, where bugs can cause crashes at scale, Rust catches memory errors before compilation. This is critical: one memory corruption in sensitive investigative data could lose evidence or expose confidential sources. For example, a C++ system analyzing leaked financial documents crashed halfway through processing, losing 6 hours of work and compromising data integrity. With Rust, the compiler forces you to write safe code.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Understanding Rust's Memory Safety for Data Journalism",
+      "content": "Test your understanding of why Rust prevents the data integrity failures that plague other languages when processing sensitive investigative datasets.",
+      "questions": [
+        {
+          "question": "Why is Rust's ownership system valuable for journalism data processing?",
+          "options": [
+            "It makes programs run faster than other languages",
+            "It prevents memory errors at compile-time, ensuring data integrity and preventing evidence loss",
+            "It automatically publishes your investigative stories",
+            "It reduces the amount of code you need to write"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed is a benefit, but safety is the primary advantage for data integrity.",
+            "Correct! Memory safety prevents data corruption that could invalidate an investigation and expose sources.",
+            "Rust handles infrastructure safely\u2014it doesn't handle journalism workflows.",
+            "Rust may require more code for safety, but that trade-off is worth the integrity guarantee."
+          ],
+          "explanation": "Memory safety is Rust's killer feature. In investigative journalism, one memory corruption could invalidate your entire investigation and cause legal/ethical disasters."
+        },
+        {
+          "question": "Your investigation requires multiple threads reading the same dataset of leaked documents simultaneously. Which Rust feature prevents data races?",
+          "options": [
+            "Rust's borrow checker and lifetime system",
+            "Writing everything in a single file to avoid distribution",
+            "Using global variables that all threads access",
+            "Running all analysis single-threaded to avoid concurrency"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The borrow checker enables fearless concurrency without data races.",
+            "File organization doesn't prevent data races in shared memory.",
+            "Global variables are the primary source of data races\u2014Rust prevents this pattern.",
+            "Single-threading would be too slow for analyzing gigabytes of investigative data."
+          ],
+          "explanation": "Rust's borrow checker enables fearless concurrency\u2014multiple threads can safely access data without races, critical for processing large investigative datasets without corruption."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "Designing Concurrent Data Processing for Sensitive Documents",
+      "content": "Your dataset contains multiple files of offshore account records that need parallel processing. Each thread needs safe access to shared data structures. You must choose your concurrency strategy.",
+      "choices": [
+        {
+          "label": "Use Rust's native concurrency (Arc, Mutex, channels)\u2014proven patterns for data safety",
+          "next": "n6"
+        },
+        {
+          "label": "Share mutable global state across threads\u2014faster but riskier",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Success: Your Investigation Platform Scales with Integrity",
+      "content": "Your newsroom built a tool that processes gigabytes of investigative data in minutes, with zero memory errors. Rust's Arc and Mutex patterns safely handle concurrent access to sensitive documents. Three other newsrooms adopted your platform. The corrupt officials you investigated have no technical grounds to claim data tampering\u2014Rust's compile-time safety guarantees mean the data integrity is ironclad in court. Your success becomes a model for how technology enables fearless journalism."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Data Integrity Failure\u2014Investigation Compromised",
+      "content": "Your global mutable state caused a data race. Halfway through analyzing the offshore account documents, a thread corrupted the dataset. You're left with cryptic error messages and no idea which records are compromised. You must re-run the analysis from scratch, delaying publication by a week. The investigation loses momentum and fails to gain traction. The court cases are dismissed due to data integrity concerns. You learn why Rust's ownership system exists."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Building APIs for Distributed Journalism",
+      "content": "You decide to build a web API that other newsrooms can use to access your journalism tools and research platforms. Rust's async/await system and frameworks like Actix-web let you build ultra-reliable backend services. Unlike Node.js or Python, Rust combines high-level ergonomics with systems-level performance and memory safety. Your API needs to handle thousands of concurrent requests from journalists worldwide during breaking news. When a competing platform's Python API suffered a denial-of-service attack during a major investigation, it went down for 4 hours. Rust's performance and safety let you serve global journalism without interruption.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "assessment",
+      "title": "Rust for Web APIs in Global Journalism",
+      "content": "Test your knowledge of why Rust excels at building reliable infrastructure that serves journalists worldwide.",
+      "questions": [
+        {
+          "question": "Why is Rust's async/await ideal for a journalism API serving thousands of concurrent journalists?",
+          "options": [
+            "It allows handling thousands of concurrent requests without OS thread overhead",
+            "It automatically writes your investigative articles",
+            "It only works with JavaScript frameworks",
+            "It's slower than Python but safer"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Async/await provides concurrency without OS thread overhead\u2014crucial for scaling.",
+            "Rust handles infrastructure, not journalism workflows themselves.",
+            "Rust is a systems language independent of JavaScript.",
+            "Rust is significantly faster than Python for I/O-bound operations like APIs."
+          ],
+          "explanation": "Async/await in Rust gives you concurrency without the overhead of OS threads\u2014essential for serving global journalism demand during breaking news when server load spikes."
+        },
+        {
+          "question": "A journalist's tool queries your API and encounters an error connecting to the database. Which Rust feature ensures the error is handled properly?",
+          "options": [
+            "The Result<T, E> type that forces explicit error handling",
+            "Ignoring errors silently and hoping they go away",
+            "Using global error flags checked periodically",
+            "Crashing immediately when any error occurs"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Rust's Result type forces you to explicitly handle every possible error.",
+            "Silent failures are dangerous in journalism infrastructure\u2014they hide problems.",
+            "Global flags are unreliable, especially in concurrent systems.",
+            "Crashing doesn't help\u2014proper error handling ensures the service recovers gracefully."
+          ],
+          "explanation": "Rust forces you to handle errors explicitly with the Result type, ensuring your API never fails silently during critical journalism operations and provides transparent error messages."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n10",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Your API Becomes the Journalism Infrastructure Standard",
+      "content": "Your web API becomes the de-facto standard for journalism tools. Newsrooms worldwide use it to distribute investigative findings, data visualizations, and collaborative research platforms. The API reliably handles 10,000+ concurrent requests during breaking news without crashes. Journalists trust it with sensitive stories because the error handling is transparent and the service is never compromised by memory corruption. Journalism organizations credit your Rust-powered platform with raising the bar for technical rigor and reliability in the industry."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "to decision"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Data Processing Path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n8",
+      "label": "Web APIs Path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "to assessment"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "to sub-decision"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Good choice\u2014Rust safety patterns"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Poor choice\u2014data races"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "to assessment"
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": "to end"
+    }
+  ],
+  "generated_at": "2026-03-27T17:34:05.970113+00:00",
+  "model": "claude-haiku-4-5"
+}

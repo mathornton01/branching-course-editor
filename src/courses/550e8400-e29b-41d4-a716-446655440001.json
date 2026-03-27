@@ -1,0 +1,256 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440001",
+  "title": "Machine Learning Fundamentals for Urban Planners",
+  "description": "Learn ML concepts through real urban planning scenarios - choose to start with theory or hands-on practice",
+  "topic": "Machine Learning",
+  "theme": "urban planning",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "machine learning",
+    "urban planning",
+    "data science",
+    "AI"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Machine Learning in Urban Planning?",
+      "content": "Machine learning is teaching computers to learn patterns from data without being explicitly programmed. In urban planning, ML helps cities predict traffic patterns, optimize public transit routes, forecast housing demand, and identify optimal locations for new infrastructure. Instead of manually setting rules, planners feed historical data to ML models that automatically discover patterns\u2014like how weather, events, and population changes affect transportation needs. This transforms urban planning from reactive guesswork into data-driven decision-making.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How do you prefer to learn? Start with the mathematical foundations and algorithms, then see them in action? Or jump into real-world application and learn the theory as you go?",
+      "choices": [
+        {
+          "label": "Theory First - Learn algorithms and math foundations",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-On First - Build with data and learn concepts practically",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "ML Algorithms & Mathematical Foundations",
+      "content": "Machine learning algorithms fall into three categories: supervised learning (learning from labeled examples), unsupervised learning (finding hidden patterns), and reinforcement learning (learning through rewards). For urban planning, supervised learning predicts outcomes like housing prices from location features, unsupervised learning clusters neighborhoods by similarity patterns, and reinforcement learning optimizes systems like traffic light timing. Key math concepts include features (inputs like latitude, longitude, population density), models (mathematical functions mapping inputs to outputs), and loss functions (metrics measuring prediction error). The training process iteratively adjusts the model to minimize error on historical data.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Predicting Urban Density Growth: A Worked Example",
+      "content": "A city uses supervised learning to predict population density in new neighborhoods. Training data includes: location coordinates, proximity to metro stations, school district ratings, hectares of green space, and historical population growth rates. The model learns that neighborhoods within 500m of transit stations with top-rated schools experience 3-5% annual growth, while isolated areas grow 0.5% annually. Testing on new areas, it predicts neighborhood X will reach 8,000 people/sq-km within 5 years, guiding infrastructure investment decisions. This demonstrates feature engineering (selecting relevant variables), model training (learning relationships), and prediction (applying to new data).",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Theory Path Assessment",
+      "content": "Test your understanding of ML fundamentals and algorithms.",
+      "questions": [
+        {
+          "question": "A city wants to predict optimal locations for new bike-share stations based on historical ridership data, neighborhood income levels, and proximity to bus transit hubs. Which type of learning is this?",
+          "options": [
+            "Unsupervised learning - finding patterns without predefined categories",
+            "Supervised learning - predicting outcomes from labeled historical examples",
+            "Reinforcement learning - optimizing decisions through reward systems",
+            "Descriptive learning - summarizing existing data patterns"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite - we have labeled examples of past successful and unsuccessful station locations",
+            "Correct! We're predicting station success (labels) from features like income and transit proximity using historical data.",
+            "No - reinforcement learning optimizes sequential decisions over time, not single predictions",
+            "Not a standard ML approach for this problem"
+          ],
+          "explanation": "This is supervised learning because we have historical examples of successful bike-share stations (positive labels) and unsuccessful locations (negative labels), and we want to predict outcomes for new candidate sites."
+        },
+        {
+          "question": "A city government wants to cluster neighborhoods into distinct groups based on demographic patterns, housing types, average income, and land use\u2014without predefining category labels. What learning type is this?",
+          "options": [
+            "Supervised learning with regression models",
+            "Supervised learning with classification models",
+            "Unsupervised learning - clustering analysis",
+            "Reinforcement learning with exploration strategies"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "No - regression predicts continuous numbers, not groupings",
+            "No - classification requires pre-defined categories and labeled training data",
+            "Correct! Clustering discovers natural groupings in data without predefined category labels.",
+            "No - reinforcement learning is for sequential decision-making and optimization"
+          ],
+          "explanation": "Clustering is unsupervised learning because neighborhoods aren't pre-labeled into groups; the algorithm discovers natural groupings based on similarity patterns in demographic and housing data."
+        },
+        {
+          "question": "In the worked example about predicting urban density growth, what are 'features'?",
+          "options": [
+            "The different ML algorithms available for prediction",
+            "Input variables like location coordinates, school ratings, and proximity to transit stations",
+            "The prediction the model makes (future population density)",
+            "The accuracy measurement and error rate of the trained model"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No - algorithms are methods, not input data",
+            "Correct! Features are input variables that the model uses to learn patterns and make predictions.",
+            "No - that's the target variable or output we're predicting",
+            "No - that's a performance metric used to evaluate the model"
+          ],
+          "explanation": "Features are the input variables\u2014the specific data points you feed into the model. The model learns how features (location, school quality, transit proximity) relate to the target outcome (population density growth)."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Building Your First ML Model: Practical Workflow",
+      "content": "The ML workflow has four essential steps: (1) **Data Collection & Preparation** - gather historical urban data (traffic counts, pedestrian volumes, weather, events), handle missing values, and normalize numbers to consistent scales; (2) **Feature Engineering** - decide which variables matter most (distance to downtown core, population density, road width, zoning type) and create new meaningful features; (3) **Model Training** - feed prepared data to an algorithm that discovers patterns and builds a mathematical model; (4) **Evaluation & Deployment** - test accuracy on unseen data, compare against benchmarks, and if performance is acceptable, deploy for real predictions in production. For a traffic planner predicting commute times, you'd collect GPS trajectories from commuters, engineer features like distance traveled and rush-hour status, train on 80% of historical data, test on 20%, and deploy for real-time commute estimates.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Building a Transit Demand Predictor: Hands-On Example",
+      "content": "A metropolitan transit authority builds an ML model to predict bus ridership for dynamic route planning and vehicle allocation. Step 1: Collect 2 years of daily ridership counts per route, weather conditions, temperature, precipitation, day-of-week, holidays, and major local events. Step 2: Engineer features like \"rainy morning rush hour,\" \"proximity to business district,\" \"major sporting event scheduled,\" and \"school holiday period.\" Step 3: Split data\u2014train on 70% of daily observations (500+ days), validate on 15%, test on 15%. Step 4: Evaluate\u2014the model achieves 87% accuracy on test data, exceeding the 80% threshold. Step 5: Deploy the model to predict next day's ridership, enabling the authority to schedule appropriate bus capacity and optimize driver shifts based on predicted demand patterns.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Hands-On Path Assessment",
+      "content": "Test your understanding of the ML workflow, practical implementation, and real-world deployment.",
+      "questions": [
+        {
+          "question": "A city planner has 10 years of traffic volume data including vehicle counts, weather conditions, time-of-day, and accident reports. They use 8 years for model training and 2 years for testing. What is the primary purpose of this train-test split?",
+          "options": [
+            "Training uses less data for faster computation; testing validates accuracy on the full dataset",
+            "Training teaches the model to recognize patterns; testing evaluates performance on completely new, unseen data",
+            "Training prevents overfitting; testing allows overfitting to measure maximum possible accuracy",
+            "Training is a required step; testing is optional to save computation time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite - both datasets should be equally important for reliable evaluation",
+            "Correct! The model learns from training data; testing on separate data measures how well it generalizes to new traffic patterns.",
+            "Reversed - testing on new data actually prevents overfitting conclusions",
+            "Testing is essential, not optional, for validating that a model works on real-world data"
+          ],
+          "explanation": "Train-test splits (typically 70/30 or 80/20) ensure the model hasn't simply memorized training data patterns. Testing on completely separate temporal data reveals whether the model learned generalizable traffic patterns that work on new days and conditions."
+        },
+        {
+          "question": "When engineering features for predicting optimal locations for new neighborhood parks, a team includes: distance to nearest schools, current population density, proximity to bus stops, percentage of green space in area, and average household income. What critical information is missing for real deployment?",
+          "options": [
+            "The specific machine learning algorithm type (neural network, decision tree, etc.)",
+            "Zoning regulations, land availability, acquisition costs, and community engagement readiness",
+            "Weather patterns and seasonal variations in park usage",
+            "Historical data on park utilization and maintenance costs"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The algorithm choice comes after good features are selected; not a blocker",
+            "Correct! ML discovers data patterns, but real decisions require feasibility constraints\u2014land must be zoned appropriately, available, affordable, and aligned with community priorities.",
+            "Weather is useful data but not blocking; parks work in all seasons",
+            "Historical costs inform project ROI but aren't blocking to initial site prediction"
+          ],
+          "explanation": "Machine learning finds patterns in data, but urban planners must also consider implementation constraints: zoning compatibility, land availability and cost, community preferences, and environmental regulations. ML is a decision-support tool, not a complete solution without these domain factors."
+        },
+        {
+          "question": "While testing a housing demand prediction model on 2 years of historical data, the model achieves only 58% accuracy, far below the 80% performance target needed for production deployment. What should the data science team try next?",
+          "options": [
+            "Deploy immediately\u2014any ML model is better than manual guessing for housing forecasts",
+            "Gather additional historical data, engineer new features, try different algorithms, or adjust model parameters and hyperparameters",
+            "Abandon the project\u2014if predictions can't reach 80%, the problem is unsolvable",
+            "Lower the accuracy requirement to 58% to match the model's performance"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "58% accuracy is often worse than random guessing; deploying bad predictions harms planning decisions",
+            "Correct! Iterate by improving data quality, creating better features, testing other algorithms, and tuning parameters until you achieve target performance.",
+            "Low initial accuracy is common; iteration improves results significantly in most cases",
+            "No - standards protect decision quality; lowering them masks an unreliable model"
+          ],
+          "explanation": "Low accuracy indicates the current approach isn't capturing relevant patterns. Teams iterate through: acquiring more or cleaner data, engineering more informative features, trying different algorithms (regression, trees, ensembles), and tuning parameters until performance meets requirements before production deployment."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "You've Mastered Machine Learning Fundamentals for Urban Planning!",
+      "content": "Congratulations! You now understand supervised and unsupervised learning, the complete ML workflow from data collection through deployment, and how to apply these concepts to urban challenges like traffic prediction, neighborhood clustering, housing demand forecasting, and infrastructure optimization. Whether you chose the theory-first path (algorithms and mathematical foundations) or hands-on path (workflow and practical implementation), you're equipped to collaborate with data scientists and make data-informed planning decisions. Next steps: explore specific algorithms (decision trees, random forests, neural networks), learn implementation tools like Python and scikit-learn, or apply these concepts to a real urban planning problem in your community. Cities worldwide are using ML to build smarter, more equitable, and sustainable communities\u2014you're now prepared to lead that transformation."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-On First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "continue"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "continue"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "continue"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T16:46:06.272463+00:00",
+  "model": "claude-haiku-4-5"
+}

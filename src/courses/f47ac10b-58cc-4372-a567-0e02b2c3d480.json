@@ -1,0 +1,238 @@
+{
+  "id": "f47ac10b-58cc-4372-a567-0e02b2c3d480",
+  "title": "Statistical Inference and Hypothesis Testing in Game Design",
+  "description": "Learn how game studios use statistical inference to estimate player metrics, test balance changes, and optimize game features. Explore three key areas: point estimates and confidence intervals for skill ratings, hypothesis testing for balance validation, and A/B testing for feature optimization.",
+  "topic": "Statistical Inference and Hypothesis Testing",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "statistics",
+    "game design",
+    "data analysis",
+    "hypothesis testing",
+    "A/B testing"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Statistical Inference in Game Design",
+      "content": "In game development, you constantly need to make decisions based on data from thousands of players. Statistical inference helps you extract meaningful patterns from player data to improve game balance, economy, and player experience. Whether you're estimating a player's true skill rating, testing if a balance patch worked, or comparing two game mechanics, hypothesis testing and estimation are essential tools. This course teaches you how major game studios use statistical methods to make data-driven design decisions.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "We'll explore three key areas where statistical inference matters in game design. Select one area to dive deep into\u2014each teaches practical techniques used by real game studios.",
+      "choices": [
+        {
+          "label": "Estimating Player Skill & Game Metrics",
+          "next": "n3"
+        },
+        {
+          "label": "Testing Game Balance Changes",
+          "next": "n5"
+        },
+        {
+          "label": "A/B Testing New Mechanics & Features",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Point Estimates & Confidence Intervals",
+      "content": "When a player plays 100 ranked matches in your competitive game, you need to estimate their true skill level from their wins and losses. This is point estimation. A single estimate (say, 2450 ELO) is your point estimate, but you also need a range around it\u2014the confidence interval. A 95% confidence interval might be [2400, 2500], meaning you're 95% confident the true skill falls in this range. Game studios use this to set placement ranks and avoid misclassifying players. Understanding confidence intervals helps you design more accurate matchmaking systems and predict tournament seeding.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Ranking a New Competitive Player",
+      "content": "A new player in your esports game wins 72 out of 100 placement matches. Your sample proportion is 72% win rate. Using binomial statistics, you calculate a 95% confidence interval: [0.63, 0.81]. This tells you the player's true win rate is probably between 63\u201381%. So you don't place them at the top rank (where only 90%+ win rates belong) but also above average ranks. Without confidence intervals, you might rely on a single match and place them incorrectly, ruining matchmaking and frustrating other players.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Hypothesis Testing & Statistical Significance",
+      "content": "After a balance patch that nerfed a popular weapon, you want to know: did it actually affect how much players use the weapon? You start with a null hypothesis (H\u2080): the nerf didn't change usage rates. The alternative hypothesis (H\u2081): the nerf did change usage rates. You collect data (e.g., 10,000 pre-patch vs 10,000 post-patch matches) and calculate a p-value. A p-value < 0.05 typically means the result is statistically significant\u2014unlikely due to random chance. Game studios use this to validate whether balance changes actually work, avoiding decision-making based on noise or small sample flukes.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Testing a Weapon Balance Nerf",
+      "content": "Pre-patch: 5,234 players (out of 50,000) chose the rifle. Post-patch: 4,100 players chose it. That's a drop from 10.47% to 8.2% usage. But is this real or just random fluctuation? You run a two-proportion z-test and get p = 0.002. Since p < 0.05, the nerf's effect is statistically significant. You're confident the nerf worked\u2014players genuinely prefer other weapons now. Without hypothesis testing, you might see the drop, panic, and revert the patch even though it was working as intended.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "A/B Testing & Detecting Real Differences",
+      "content": "You want to test two UI layouts for your loot screen: Layout A (current) vs Layout B (new). You randomly assign 5,000 players to each layout and measure average time spent and purchase rate. A/B testing combines hypothesis testing with practical effect size\u2014you ask not just 'is there a difference?' but 'is the difference big enough to matter?'. An effect size of 2% conversion improvement might be statistically significant (p < 0.05) but too small to justify retaining the new layout. Game studios use A/B testing to validate UI/UX changes, monetization strategies, and new game features before full rollout.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: A/B Testing a New Battle Pass",
+      "content": "Layout A (current BP): 12% of free players convert to premium. Layout B (redesigned BP): 13.5% convert. Sample size: 10,000 per group. The difference is statistically significant (p = 0.01), but the effect size is only 1.5 percentage points. Your monetization team calculates: 1.5% \u00d7 2,000,000 active players \u00d7 $10 average price \u2248 $300k additional annual revenue. That's worth the UI redesign. A/B testing ensures you don't waste engineering resources on changes that look good statistically but don't meaningfully improve business metrics.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Applying Statistical Inference Across Game Design",
+      "content": "You've explored three essential statistical tools: estimation (for understanding player performance), hypothesis testing (for validating balance changes), and A/B testing (for optimizing features). These aren't isolated techniques\u2014they work together. A game studio runs hypothesis tests to confirm a patch worked, uses confidence intervals to guide matchmaking, and A/B tests new monetization models. Understanding their strengths and limitations helps you avoid common mistakes: confusing statistical significance with practical significance, collecting too little data, and drawing conclusions from biased samples. Real game development requires combining these methods with domain knowledge and player feedback.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Assessment: Statistical Inference in Game Design",
+      "content": "Test your understanding of statistical inference techniques in game design. Answer the following questions to demonstrate mastery.",
+      "questions": [
+        {
+          "question": "Your game's economy needs balancing. You observe that sword users won 52% of 1,000 matches vs 48% for axe users. What should you do?",
+          "options": [
+            "Nerf swords immediately; 52% win rate is higher.",
+            "Run a hypothesis test (p-value < 0.05 threshold) to confirm the difference is statistically significant before patching.",
+            "Collect more data because you can't trust results from just 1,000 matches.",
+            "Ignore it; the difference is small."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A 4% difference might be random variation. You need statistical significance testing first.",
+            "Correct. This is how you distinguish real balance issues from random fluctuations.",
+            "Partially right, but you have sufficient data. The key is the p-value threshold.",
+            "Incorrect. Even small differences can be significant if the sample is large enough."
+          ],
+          "explanation": "Hypothesis testing tells you whether an observed difference is likely real or just chance. 1,000 matches is usually adequate to detect meaningful balance differences."
+        },
+        {
+          "question": "You A/B test a new UI and get p = 0.03 (statistically significant) with a 0.5% conversion improvement. What does this mean?",
+          "options": [
+            "The new UI is definitely better and you should roll it out.",
+            "The difference is unlikely due to random chance, but you should evaluate if 0.5% improvement is worth the engineering cost.",
+            "You need to collect more data; p = 0.03 isn't strong enough.",
+            "The new UI is worse."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incomplete. Statistical significance \u2260 practical significance.",
+            "Correct. Significance tells you the effect is real; effect size tells you if it matters for your business.",
+            "Incorrect. p = 0.03 is below the standard 0.05 threshold.",
+            "Incorrect. The p-value shows the improvement is real, not that it's worse."
+          ],
+          "explanation": "Many game studios make the mistake of conflating statistical and practical significance. A 0.5% improvement might not justify redesigning a core UI element."
+        },
+        {
+          "question": "You want to estimate the true win rate of a top player who won 145 out of 200 matches. What does a 95% confidence interval of [0.68, 0.78] tell you?",
+          "options": [
+            "There's a 95% chance the true win rate is between 68\u201378%.",
+            "95% of the player's matches fall between 68\u201378% win rate.",
+            "If you repeated this sampling many times, 95% of the calculated intervals would contain the true win rate.",
+            "The player will maintain a 72.5% win rate in future matches."
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Close, but the interpretation is slightly different. It's about long-run behavior of the interval, not probability of a single interval.",
+            "Incorrect. Confidence intervals describe parameter estimates, not individual match outcomes.",
+            "Correct. This is the frequentist interpretation of confidence intervals.",
+            "Incorrect. An interval describes the true parameter, not future performance."
+          ],
+          "explanation": "Confidence intervals are often misinterpreted. The correct interpretation involves the long-run frequency of the procedure, not the probability for a specific interval."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "You've Mastered Statistical Inference!",
+      "content": "Congratulations! You now understand how game studios use point estimation, hypothesis testing, and A/B testing to make data-driven decisions. These tools help balance competitive games, optimize player experiences, and validate design changes. Remember: always check assumptions, avoid confusing statistical significance with practical significance, and combine data analysis with player feedback. Game development is about creating amazing experiences\u2014statistics helps ensure your changes actually improve them. Good luck with your next game project!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Estimating Player Skill & Game Metrics"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Testing Game Balance Changes"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "A/B Testing New Mechanics & Features"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n4",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c9",
+      "source": "n6",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Continue"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Continue"
+    }
+  ],
+  "generated_at": "2026-03-27T16:11:03.057488+00:00",
+  "model": "claude-haiku-4-5"
+}

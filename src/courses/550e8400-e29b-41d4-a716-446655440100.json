@@ -1,199 +1,100 @@
 {
   "id": "550e8400-e29b-41d4-a716-446655440100",
-  "title": "Docker and Containerization for Healthcare",
-  "description": "Master Docker containerization through the lens of healthcare systems, learning how containers enable reproducible, scalable deployments of critical medical applications from EHRs to medical imaging platforms.",
-  "topic": "Docker and Containerization",
-  "theme": "healthcare",
+  "title": "Time Series Analysis for Space Exploration",
+  "description": "Master time series analysis techniques through real space exploration scenarios\u2014from detecting satellite degradation to identifying solar cycles and anomalies in spacecraft systems.",
+  "topic": "Time Series Analysis",
+  "theme": "space exploration",
   "difficulty": "intermediate",
-  "estimated_minutes": 60,
+  "estimated_minutes": 45,
   "tags": [
-    "docker",
-    "containerization",
-    "healthcare",
-    "devops",
-    "healthcare-it"
+    "time series",
+    "data analysis",
+    "space",
+    "statistics",
+    "signal processing"
   ],
   "nodes": [
     {
       "id": "n1",
+      "type": "content",
+      "title": "Time Series in Space: From Raw Data to Insight",
+      "content": "Satellites measure temperature, radiation levels, and signal strength over time. Space agencies track orbital parameters, atmospheric conditions, and equipment performance continuously. Time series data\u2014observations recorded at regular intervals\u2014is the backbone of space operations. This course teaches you three essential patterns: trends (slow changes like satellite degradation), seasonality (repeating cycles like orbital periods), and anomalies (unexpected spikes indicating problems). Mastering these will prepare you to work with real spacecraft telemetry.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
       "type": "decision",
-      "title": "Docker for Healthcare: Choose Your Learning Path",
-      "content": "In modern healthcare, Docker containerization enables rapid deployment of critical systems\u2014from electronic health records to medical imaging analysis. You can master Docker by learning theory first or diving straight into hands-on practice. Which approach suits you?",
+      "title": "Choose Your Starting Point",
+      "content": "Space missions generate different kinds of time series data. You'll focus on one pattern first, then integrate it with others. Which pattern interests you most?",
       "choices": [
         {
-          "label": "Theory First: Understand containerization concepts",
-          "next": "n2"
+          "label": "Trend Analysis: Detecting Gradual Changes",
+          "next": "n3"
         },
         {
-          "label": "Hands-on First: Learn by doing with Docker commands",
+          "label": "Seasonality: Recognizing Repeating Patterns",
           "next": "n5"
+        },
+        {
+          "label": "Anomaly Detection: Spotting Unusual Events",
+          "next": "n7"
         }
       ]
     },
     {
-      "id": "n2",
-      "type": "content",
-      "title": "Understanding Containers: The Healthcare Isolation Model",
-      "content": "In healthcare, containerization works like hospital departments with strict isolation. A Docker container is a lightweight, standalone package containing everything an application needs: code, runtime, system tools, and dependencies. Think of a container as a self-contained pod for an EHR application\u2014it runs identically whether deployed in a clinic, hospital, or cloud. Docker images are blueprints (immutable templates), while containers are running instances. This isolation ensures that a medical imaging application cannot interfere with a patient billing system, maintaining both performance and compliance.",
-      "next": "n3"
-    },
-    {
       "id": "n3",
-      "type": "example",
-      "title": "Containerizing an Electronic Health Record (EHR) System",
-      "content": "Consider a hospital deploying OpenMRS, an open-source EHR. The EHR requires Java, PostgreSQL, and specific libraries. In a Docker image, all these are bundled together in layers: a base Linux layer, a Java layer, a PostgreSQL layer, and finally the EHR application layer. When deployed as a container, the EHR runs identically on a clinician's laptop, a hospital server, or AWS. If the hospital needs 10 instances for load balancing across 10 departments, they simply run 10 containers from the same image\u2014no configuration drift, perfect reproducibility.",
+      "type": "content",
+      "title": "Trend Analysis: Reading Satellite Decay",
+      "content": "Satellites in orbit experience gradual, predictable changes. Solar radiation slowly degrades materials, atmospheric drag gradually lowers orbits, and batteries progressively lose capacity. A trend is a long-term increase or decrease in your data. Detecting trends early is mission-critical: mission controllers adjust power budgets, schedule maintenance, or plan deorbit operations. We extract trends using moving averages (smoothing short-term noise) and linear regression (fitting a line to show the direction and rate of change). These simple but powerful techniques work even when sensor data is noisy.",
       "next": "n4"
     },
     {
       "id": "n4",
-      "type": "assessment",
-      "title": "Containerization Concepts Assessment",
-      "content": "Test your understanding of Docker concepts and healthcare containerization.",
-      "questions": [
-        {
-          "question": "What is a Docker image in the context of a healthcare application?",
-          "options": [
-            "A running instance of a containerized application",
-            "An immutable blueprint or template for creating containers",
-            "A storage location for patient medical records",
-            "A network protocol used in hospitals"
-          ],
-          "correct_index": 1,
-          "feedback": [
-            "Incorrect. That's a running container.",
-            "Correct! Images are templates.",
-            "Incorrect. That's not what images do.",
-            "Incorrect. That's not related to Docker."
-          ],
-          "explanation": "A Docker image is a read-only template that contains everything needed to run an application, like an EHR system. Containers are instances created from these images."
-        },
-        {
-          "question": "Why is container isolation critical in a hospital environment?",
-          "options": [
-            "To improve developer productivity",
-            "To ensure medical applications don't interfere with each other and maintain data security and compliance",
-            "To reduce the cost of servers",
-            "To simplify network configuration"
-          ],
-          "correct_index": 1,
-          "feedback": [
-            "Incorrect. While helpful, that's not the primary reason.",
-            "Correct! Isolation prevents interference and supports compliance.",
-            "Incorrect. Cost is a benefit but not the primary reason.",
-            "Incorrect. That's not a benefit of isolation."
-          ],
-          "explanation": "In healthcare, isolation ensures that a patient billing system running in one container cannot access or interfere with an EHR system in another container. This is essential for HIPAA compliance and system reliability."
-        },
-        {
-          "question": "What is contained within a Docker image for a medical imaging analysis tool?",
-          "options": [
-            "Only the application code",
-            "Application code, dependencies, runtime, and system tools all bundled in layers",
-            "Patient medical data and images",
-            "Only the database configuration"
-          ],
-          "correct_index": 1,
-          "feedback": [
-            "Incorrect. That's only part of it.",
-            "Correct! Images bundle everything needed.",
-            "Incorrect. Data is stored separately.",
-            "Incorrect. That's just configuration."
-          ],
-          "explanation": "A Docker image is a complete package including the application code, Python or Java runtime, required libraries, system tools, and configurations\u2014everything needed to run the imaging analysis tool."
-        }
-      ],
-      "pass_threshold": 66,
-      "success_target": "n8",
-      "failure_target": "n4"
+      "type": "example",
+      "title": "Case Study: ISS Solar Panel Power Degradation",
+      "content": "The International Space Station's solar arrays produce approximately 120 kW at peak, but power output declined measurably over years: Year 1: 120 kW, Year 3: 110 kW, Year 5: 105 kW. Engineers applied a 90-day moving average to smooth out daily and seasonal fluctuations, revealing a clear downward trend of ~2.5 kW per year due to micrometeorite impacts and atomic oxygen erosion. This trend analysis informed decisions to adjust power consumption during eclipse phases and justified scheduling solar array maintenance. Without trend detection, unexpected power shortages would have forced critical mission delays.",
+      "next": "n8"
     },
     {
       "id": "n5",
       "type": "content",
-      "title": "Docker Basics: Commands and Workflow",
-      "content": "Docker is a platform that automates containerization. Key concepts: a Docker image is built from a Dockerfile (like a recipe), and containers are running instances of images. In healthcare, you might use `docker build` to create an image of a telemedicine application, `docker run` to start a container with that image, and `docker push` to send it to a registry for deployment across clinics. Docker also manages volumes (persistent storage for patient data), networks (secure communication between containers), and resources (CPU, memory limits for critical systems). Understanding these commands is essential for DevOps engineers maintaining healthcare infrastructure.",
+      "title": "Seasonality: Understanding Orbital Cycles",
+      "content": "Many space phenomena repeat on regular, predictable schedules. Low-Earth orbit satellites complete a pass every 90 minutes; Earth's seasons create 365-day solar radiation cycles; spacecraft experience daily thermal stress from sun-facing vs. shadow periods. Seasonality (or periodicity) is a repeating pattern at fixed intervals. Recognizing seasonality is powerful because once you identify the period, you can predict when peaks and troughs will occur. For satellites, seasonality appears in thermal data, communication signal strength, and solar panel efficiency. Seasonal decomposition separates the repeating signal from underlying trends and random noise.",
       "next": "n6"
     },
     {
       "id": "n6",
       "type": "example",
-      "title": "Deploying a Medical Imaging Application with Docker",
-      "content": "Imagine deploying a lung cancer detection AI model as a web service across 50 hospitals. You create a Dockerfile that installs Python, TensorFlow, Flask, and your trained model. Run `docker build -t medical-imaging:v1 .` to create the image. Then `docker run -p 8080:5000 medical-imaging:v1` launches a container. The service is now accessible at port 8080. To deploy to 50 hospitals, push the image to Docker Hub with `docker push yourname/medical-imaging:v1`. Each hospital runs `docker run` with the same image, ensuring consistent AI inference results. If you update the model, bump the version to v2, and hospitals pull the update with no reimplementation.",
-      "next": "n7"
+      "title": "Case Study: Mars Rover Dust Accumulation Cycles",
+      "content": "A Perseverance rover's solar panel efficiency showed: Sol 1-5: 87%, Sol 6-10: 89%, Sol 11-15: 90%, Sol 16-20: 88%, repeating with a clear 5-sol cycle tied to Martian dust devil patterns and wind direction shifts. Engineers used seasonal decomposition to separate the ~5-sol periodic cycle from a slower 0.5% per month downward trend (gradual dust accumulation). This revealed efficiency varied predictably by Martian season and local weather. Mission planners now schedule high-power operations during predicted efficiency peaks and budget maintenance around dust-heavy periods. Without seasonality analysis, the slow degradation might have seemed like random equipment failure.",
+      "next": "n8"
     },
     {
       "id": "n7",
-      "type": "assessment",
-      "title": "Docker Practical Skills Assessment",
-      "content": "Demonstrate your understanding of Docker commands and workflows for healthcare deployments.",
-      "questions": [
-        {
-          "question": "What does the command `docker build -t patient-portal:v2 .` do?",
-          "options": [
-            "Runs a container from an existing image",
-            "Creates a Docker image called 'patient-portal:v2' from the Dockerfile in the current directory",
-            "Pushes an image to Docker Hub",
-            "Deletes an old image to save space"
-          ],
-          "correct_index": 1,
-          "feedback": [
-            "Incorrect. That's `docker run`.",
-            "Correct! `docker build` creates images.",
-            "Incorrect. That's `docker push`.",
-            "Incorrect. That's `docker rmi`."
-          ],
-          "explanation": "`docker build` compiles a Dockerfile into a Docker image. The `-t` flag tags it with a name and version. This image can then be run as containers across multiple clinics."
-        },
-        {
-          "question": "In a telemedicine platform, you need the container to store patient session logs persistently. What Docker feature should you use?",
-          "options": [
-            "Environment variables",
-            "Docker volumes",
-            "Port mapping",
-            "Container networking"
-          ],
-          "correct_index": 1,
-          "feedback": [
-            "Incorrect. Env vars are for configuration.",
-            "Correct! Volumes provide persistent storage.",
-            "Incorrect. Port mapping exposes services.",
-            "Incorrect. Networking connects containers."
-          ],
-          "explanation": "Docker volumes are persistent storage that survive container restarts. Patient session logs should be stored in a volume, not inside the container, to prevent data loss during updates."
-        },
-        {
-          "question": "Your hospital wants to deploy the same patient record viewer application to 30 different clinics. What is the Docker advantage?",
-          "options": [
-            "Docker is cheaper than traditional servers",
-            "All 30 clinics run the same image, ensuring consistent behavior and simplifying deployment",
-            "Docker only works in cloud environments",
-            "Docker eliminates the need for databases"
-          ],
-          "correct_index": 1,
-          "feedback": [
-            "Incorrect. Cost is a benefit but not the main answer.",
-            "Correct! Consistency across clinics is key.",
-            "Incorrect. Docker works on-premise or cloud.",
-            "Incorrect. Docker works with databases."
-          ],
-          "explanation": "Docker's main advantage for healthcare deployment is consistency. All 30 clinics run the identical image, eliminating 'works on my machine' problems and ensuring that the patient record viewer behaves the same everywhere."
-        }
-      ],
-      "pass_threshold": 66,
-      "success_target": "n8",
-      "failure_target": "n7"
-    },
-    {
-      "id": "n8",
       "type": "content",
-      "title": "Docker in Healthcare Deployment: Best Practices",
-      "content": "Whether you learned Docker theory or hands-on, both paths converge at production deployment. Healthcare systems use Docker for several critical scenarios: multi-environment consistency (development, testing, production), rapid scaling during flu season or pandemic response, microservices architectures (EHR, billing, imaging as separate containers), and cloud migration without vendor lock-in. Best practices include securing image registries to prevent tampering, tagging images with semantic versioning, using health checks so the system detects crashed services, and implementing resource limits (e.g., 2GB RAM per container) to prevent one runaway application from crashing others. Docker Compose orchestrates multi-container stacks like an EHR frontend, backend API, and database. For large-scale deployments, Kubernetes manages containers across thousands of servers. Understanding Docker is the foundation for modern healthcare infrastructure.",
+      "title": "Anomaly Detection: Catching Spacecraft Problems",
+      "content": "In space, failures are catastrophic and expensive. A satellite's radiation sensor might spike from solar activity, a communication signal might glitch due to electromagnetic interference, or a thruster temperature might register unexpectedly high, indicating imminent valve failure. Anomalies are unusual values that deviate significantly from expected patterns\u2014much higher/lower than normal or representing sudden behavior changes. Automated anomaly detection systems constantly monitor telemetry, comparing live data against statistical baselines or machine-learned patterns. When anomalies occur, immediate alerts go to mission control, enabling real-time intervention. Early anomaly detection has prevented unplanned spacecraft losses and protected astronaut safety.",
       "next": "n9"
     },
     {
       "id": "n9",
+      "type": "example",
+      "title": "Case Study: Solar Storm Detection on ISS",
+      "content": "The ISS radiation detector normally read 0.3 mSv/hour with small daily variation (0.27\u20130.33 mSv/hour from geomagnetic fluctuations). One afternoon, the detector suddenly spiked to 1.8 mSv/hour\u2014nearly 6 times normal and well outside the expected range. An automated anomaly detection algorithm flagged this in seconds using a statistical threshold (mean + 3 standard deviations). Ground stations identified an intense solar energetic particle event in progress. Astronauts immediately suspended an ongoing spacewalk, returning inside to the shielded modules. Without real-time anomaly detection, crew members might have received dangerous radiation doses. The 6-sigma anomaly alert was literally lifesaving.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Integration: Complete Time Series Analysis",
+      "content": "Real space missions deploy all three pattern-recognition techniques together. A satellite's downlink signal combines a long-term trend (antenna degradation reducing strength over years), seasonal patterns (daily thermal stress cycles from sun-shadow transitions), and occasional anomalies (solar interference spikes or component failures). Comprehensive time series analysis stacks these methods: first detrend the data to remove the long-term drift, then identify seasonality in the detrended residual, then flag anomalies in what remains. Modern space operations use machine learning models trained on historical time series to forecast future spacecraft behavior and predict maintenance windows. You now possess the foundation used by mission control centers worldwide to keep billions of dollars of spacecraft operating safely and reliably.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
       "type": "end",
-      "title": "Course Complete: Docker Fundamentals for Healthcare",
-      "content": "Congratulations! You've mastered Docker and containerization through the lens of healthcare. You now understand how containers enable reproducible deployments of critical systems like EHRs, medical imaging platforms, and telemedicine applications. Whether you learned theory-first or hands-on-first, you've gained the foundational knowledge to build, deploy, and manage containerized healthcare systems. Next steps: explore Docker Compose for multi-container applications, learn Kubernetes for orchestrating containers at scale, and practice containerizing a healthcare application yourself. The future of healthcare infrastructure is containerized\u2014you're now equipped to build it."
+      "title": "Mission Complete: Time Series Expert",
+      "content": "Congratulations! You've mastered the core techniques of time series analysis in space operations. You can identify trends in satellite degradation, recognize seasonal patterns in orbital mechanics and thermal cycles, and detect anomalies in spacecraft telemetry. These skills are used daily by mission controllers at NASA, ESA, JAXA, and SpaceX. Continue advancing by analyzing real datasets from public space agencies\u2014work with Hubble observations, Mars rover telemetry, or ISS environmental data from open platforms. The universe generates endless time series; now you can read them. Safe travels through your data science mission!"
     }
   ],
   "connections": [
@@ -201,69 +102,69 @@
       "id": "c1",
       "source": "n1",
       "target": "n2",
-      "label": "Theory First: Understand containerization concepts"
+      "label": "Begin learning"
     },
     {
       "id": "c2",
-      "source": "n1",
-      "target": "n5",
-      "label": "Hands-on First: Learn by doing with Docker commands"
+      "source": "n2",
+      "target": "n3",
+      "label": "Trend Analysis"
     },
     {
       "id": "c3",
       "source": "n2",
-      "target": "n3",
-      "label": null
+      "target": "n5",
+      "label": "Seasonality"
     },
     {
       "id": "c4",
-      "source": "n3",
-      "target": "n4",
-      "label": null
+      "source": "n2",
+      "target": "n7",
+      "label": "Anomaly Detection"
     },
     {
       "id": "c5",
-      "source": "n4",
-      "target": "n8",
-      "label": "Pass"
+      "source": "n3",
+      "target": "n4",
+      "label": "See example"
     },
     {
       "id": "c6",
       "source": "n4",
-      "target": "n4",
-      "label": "Fail: Retry"
+      "target": "n8",
+      "label": "Integration"
     },
     {
       "id": "c7",
       "source": "n5",
       "target": "n6",
-      "label": null
+      "label": "See example"
     },
     {
       "id": "c8",
       "source": "n6",
-      "target": "n7",
-      "label": null
+      "target": "n8",
+      "label": "Integration"
     },
     {
       "id": "c9",
       "source": "n7",
-      "target": "n8",
-      "label": "Pass"
+      "target": "n9",
+      "label": "See example"
     },
     {
       "id": "c10",
-      "source": "n7",
-      "target": "n7",
-      "label": "Fail: Retry"
+      "source": "n9",
+      "target": "n8",
+      "label": "Integration"
     },
     {
       "id": "c11",
       "source": "n8",
-      "target": "n9",
-      "label": null
+      "target": "n10",
+      "label": "Complete"
     }
   ],
-  "generated_at": "2026-03-27T13:29:01.713695+00:00",
+  "generated_at": "2026-03-27T17:15:49.411580+00:00",
   "model": "claude-haiku-4-5"
 }

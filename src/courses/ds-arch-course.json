@@ -1,0 +1,263 @@
+{
+  "id": "ds-arch-course",
+  "title": "Distributed Systems Architecture",
+  "description": "Master distributed systems through the lens of building and architectural design",
+  "topic": "Distributed Systems",
+  "theme": "architecture",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed-systems",
+    "architecture",
+    "systems-design",
+    "scalability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Distributed Systems: A Building Blueprint",
+      "content": "Distributed systems are fundamental to modern infrastructure\u2014in smart buildings, cloud platforms, and connected infrastructure. Just as large buildings require multiple independent subsystems (HVAC, electrical, plumbing, security) that coordinate seamlessly, distributed systems break complex computational problems across multiple machines that must work together. Architects designing buildings and architects designing systems face identical challenges: coordinating independent components, handling failures gracefully, maintaining consistency, and scaling efficiently. In this course, you'll master distributed systems by understanding how they're implemented in real buildings and modern infrastructure."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "There are two powerful ways to understand distributed systems: by studying the core architectural patterns that govern how systems behave, or by diving directly into real-world building examples that bring these patterns to life. Which approach resonates with you?",
+      "choices": [
+        {
+          "label": "Study Core Patterns First",
+          "next": "n3"
+        },
+        {
+          "label": "Learn Through Real Buildings",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Core Distributed Architecture Patterns",
+      "content": "Distributed systems follow recognizable architectural patterns, just as buildings do. Client-server systems resemble centralized structures like corporate headquarters\u2014efficient but vulnerable to single points of failure. Peer-to-peer systems work like neighborhoods where each building operates independently without central authority. Publish-subscribe patterns are like notification systems where publishers announce events and subscribers listen selectively. Microservices mirror modular architecture where independent functional units coordinate through defined interfaces. Understanding consistency models\u2014eventual versus strong\u2014is like understanding architectural tolerance: how much temporary divergence can you accept before components must synchronize? Strong consistency guarantees immediate agreement but requires expensive coordination; eventual consistency allows temporary inconsistency for better performance and fault tolerance."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Smart Building Architecture Case Study",
+      "content": "A luxury 50-story hotel implements a distributed IoT system for climate control. Rather than a single central controller, each floor has its own thermal zone controller that publishes temperature targets using publish-subscribe messaging. A central coordinator subscribes to all zones and periodically optimizes building-wide HVAC load distribution. When a guest adjusts their room thermostat, the local zone controller immediately acts independently. If the central coordinator fails, every zone continues maintaining temperature\u2014the system degrades gracefully rather than failing completely. This mirrors how modern buildings design resilience: electrical panels on each floor support the central power system without depending entirely on it."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Pattern Recognition Quiz",
+      "content": "Test your understanding of distributed patterns in architectural contexts.",
+      "questions": [
+        {
+          "question": "In a smart building, individual room thermostats communicate with a central coordinator but continue functioning if the coordinator fails. Which pattern does this exemplify?",
+          "options": [
+            "Pure client-server architecture",
+            "Publish-subscribe with graceful degradation",
+            "Hybrid hierarchical with fallback",
+            "Full peer-to-peer mesh"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Client-server would make rooms dependent on the coordinator\u2014they'd stop working if it failed.",
+            "Correct! Each room publishes updates, the coordinator subscribes. If the coordinator fails, rooms continue independently. \u2713",
+            "Partially correct, but this emphasizes the publish-subscribe nature more than hierarchy.",
+            "Rooms don't communicate directly with every other room\u2014there's coordinated hierarchy."
+          ],
+          "explanation": "This hybrid pattern combines efficient coordinated control with resilience of peer independence. Publish-subscribe decouples rooms from the coordinator's availability."
+        },
+        {
+          "question": "When designing a distributed building management system, what architectural concern directly parallels load distribution in a building's structural system?",
+          "options": [
+            "Network latency",
+            "Load balancing across computing nodes",
+            "Available bandwidth",
+            "Memory allocation per server"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Latency affects response time but isn't about distributing load.",
+            "Correct! Load balancing ensures computational load is evenly distributed, like how architects distribute structural loads through support columns and beams. \u2713",
+            "Bandwidth is a capacity constraint but not about distributing load.",
+            "Memory allocation is about individual resources, not distributing overall load."
+          ],
+          "explanation": "In buildings, architects design structures to distribute loads\u2014no single column bears everything. In systems, load balancing ensures no single server becomes a bottleneck."
+        },
+        {
+          "question": "A building's distributed sensor network uses eventual consistency for non-critical occupancy data. What architectural principle does this reflect?",
+          "options": [
+            "All sensors must report identical occupancy simultaneously",
+            "Sensor updates propagate through the system gradually, with temporary inconsistencies acceptable",
+            "Every sensor must respond within 100 milliseconds",
+            "All sensors must connect to a central database directly"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This describes strong consistency, which is too rigid for non-critical data.",
+            "Correct! Eventual consistency accepts brief periods where different parts of the building have slightly different occupancy views. \u2713",
+            "This describes a latency SLA, not a consistency model.",
+            "This eliminates the distributed nature\u2014it's purely centralized."
+          ],
+          "explanation": "Eventual consistency trades immediate accuracy for resilience. You don't need occupancy accurate to the microsecond; allowing temporary divergence means the system operates even if sensors are delayed."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n9",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "How Modern Buildings Use Distributed Systems",
+      "content": "Smart buildings are distributed systems in physical form. HVAC networks distribute climate control across multiple independent units, each with local decision-making capability but coordinating through optimization algorithms. Security systems deploy distributed cameras with edge processing\u2014analyzing video locally before reporting to a central security center. Elevator algorithms coordinate across multiple elevator controllers using distributed consensus; no single elevator dominates decision-making. Lighting systems feature local occupancy sensors and controllers adjusting independently based on immediate conditions while participating in building-wide energy optimization. Power distribution uses distributed generation with solar panels and batteries communicating to balance load. Each subsystem operates semi-independently, reducing failure impact while achieving building-wide optimization through asynchronous messaging and periodic synchronization rather than real-time central control."
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Skyscraper Elevator System",
+      "content": "A 100-story office building cannot use centralized elevator control. If a single controller decided which elevator responds to each call, communication latency would be unacceptable\u2014waiting for a message to travel 100 floors and back would create 5-second delays before elevators move. Instead, each elevator car has its own controller that communicates using distributed consensus algorithms. When you press the call button on floor 47, the system runs an election algorithm across nearby elevator controllers to decide which car responds. Each elevator independently tracks its state and upcoming requests, coordinating through asynchronous messaging. If one elevator fails, others immediately adapt\u2014no single point of failure. This is why modern skyscrapers work reliably: they're engineered as distributed systems where failure of any component doesn't cascade into system-wide collapse."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Building System Analysis Quiz",
+      "content": "Apply your knowledge of real-world distributed building systems.",
+      "questions": [
+        {
+          "question": "In the skyscraper elevator system example, why is centralized control impractical?",
+          "options": [
+            "It's too expensive compared to distributed control",
+            "Communication latency and single-point-of-failure vulnerability",
+            "Modern elevators cannot accept commands from a central system",
+            "Building codes explicitly prohibit centralized elevator control"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While cost might be a factor, the fundamental issues are technical, not economic.",
+            "Correct! A centralized controller creates unacceptable latency (slow response times) and fails completely if that one controller fails. \u2713",
+            "Modern elevators can receive central commands\u2014distributed control is the practical solution.",
+            "Building codes allow centralized control but reliability demands distributed approaches."
+          ],
+          "explanation": "Critical infrastructure can't depend on a single point of failure or communication bottleneck. Distributed control ensures immediate response and resilience when components fail."
+        },
+        {
+          "question": "A smart building's HVAC system uses local zone controllers that communicate periodically every 30 seconds rather than continuously in real-time. What distributed systems principle enables this design?",
+          "options": [
+            "Synchronous replication",
+            "Asynchronous communication",
+            "Consensus algorithm",
+            "Master-slave replication"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Synchronous communication requires continuous real-time responses\u2014the opposite of periodic 30-second updates.",
+            "Correct! Asynchronous communication means controllers don't wait for immediate responses, acting independently and synchronizing periodically. \u2713",
+            "Consensus algorithms address agreement across nodes, not the fundamental communication style.",
+            "Replication patterns describe data copying, not the control communication model."
+          ],
+          "explanation": "Asynchronous communication is fundamental to resilience. Controllers don't block waiting for responses, so network delays or temporary failures don't cascade into system-wide failures."
+        },
+        {
+          "question": "When a building's fire detection system must activate alarms throughout the building within 2 seconds of detecting fire, what does this requirement represent?",
+          "options": [
+            "An eventual consistency requirement",
+            "A strong consistency guarantee",
+            "A latency Service Level Agreement",
+            "A load balancing specification"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Eventual consistency describes data agreement, not response time.",
+            "Consistency describes data correctness, not response speed.",
+            "Correct! The 2-second requirement is an SLA (Service Level Agreement) that defines maximum acceptable latency for fire safety. \u2713",
+            "Load balancing distributes computational work, not about safety response times."
+          ],
+          "explanation": "Critical building systems require strict latency SLAs. Fire safety cannot tolerate delays, so the distributed system must guarantee sub-2-second response times\u2014a key design constraint that drives architecture decisions."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Distributed Systems Architecture Mastery",
+      "content": "Congratulations! You've explored distributed systems through architecture and real buildings. Whether you studied core patterns or learned through building examples, you now understand the fundamental principles governing modern infrastructure: independent components with coordinated communication, graceful failure handling, and scalable design. Every smart building, cloud platform, and large-scale system uses these distributed principles. You're equipped to think architecturally about system design\u2014recognizing single points of failure, understanding consistency trade-offs, appreciating how systems scale through distribution rather than centralization. These insights apply to designing buildings, software systems, and infrastructure."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Study Core Patterns"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Learn Through Buildings"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n8",
+      "label": "fail"
+    }
+  ],
+  "generated_at": "2026-03-27T16:27:54.720438+00:00",
+  "model": "claude-haiku-4-5"
+}

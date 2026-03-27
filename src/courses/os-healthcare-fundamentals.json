@@ -1,0 +1,171 @@
+{
+  "id": "os-healthcare-fundamentals",
+  "title": "Operating Systems Fundamentals for Healthcare",
+  "description": "Learn how operating systems manage hospital resources, patient workflows, and medical data through real healthcare scenarios",
+  "topic": "Operating Systems Fundamentals",
+  "theme": "healthcare",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "operating systems",
+    "healthcare",
+    "processes",
+    "memory",
+    "storage",
+    "IT systems"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Operating Systems: The Hospital's Control Center",
+      "content": "An operating system is the master coordinator of a computer, much like how a hospital administrator orchestrates the entire facility. Just as a hospital must manage multiple surgeries happening simultaneously, allocate limited operating rooms and beds, and maintain organized patient records, an operating system must handle multiple software tasks running at once, distribute limited memory and CPU time, and manage how data is stored and accessed. In healthcare IT systems, operating systems ensure that electronic health records (EHRs) remain available 24/7, that patient monitoring systems run without interruption, and that sensitive medical data is properly protected. Understanding operating systems helps healthcare professionals work with technology more effectively and troubleshoot common system issues.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Operating systems manage three critical functions. Which aspect interests you most?",
+      "choices": [
+        {
+          "label": "How systems handle multiple tasks simultaneously",
+          "next": "n3"
+        },
+        {
+          "label": "How systems manage limited computer resources",
+          "next": "n5"
+        },
+        {
+          "label": "How systems organize and store patient data",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Process Management: Coordinating Multiple Patient Workflows",
+      "content": "A process is a running program that the operating system manages. In a hospital, the OR scheduling system, pharmacy system, and patient monitoring system all run simultaneously. Similarly, your computer might run email, web browsers, and databases all at once. Process management is how the OS decides which task gets the CPU's attention at any moment. The OS uses scheduling algorithms to fairly distribute processing time\u2014think of it like how a hospital scheduler allocates operating room time across surgeries. Context switching allows the OS to pause one task, save its state, and resume another task seamlessly. In healthcare systems, this ensures that patient alerts, medication dispensing, and lab results processing don't interfere with each other. Poor process management could cause critical patient monitoring alarms to be delayed.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Real Example: Operating Room Coordination",
+      "content": "Consider a hospital running four systems simultaneously: (1) the main EHR system processing a doctor's note, (2) a patient monitor sending heart rate data, (3) a pharmacy system preparing medications, and (4) a lab system analyzing blood work. The OS treats each as a process and allocates 25ms of CPU time to each in rotation\u2014so fast that all four appear to run continuously. When the patient monitor needs to send an urgent alert about abnormal vitals, the OS prioritizes it using interrupt handling, giving it the next available CPU time slice. This ensures critical patient data never gets delayed by routine background tasks. Without proper process management, the pharmacy system might lag, causing medication delays, or monitoring alerts might queue up and be seen too late.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Memory Management: Managing Healthcare IT Resources",
+      "content": "Memory (RAM) is the computer's workspace\u2014limited and valuable. Just as a hospital has a fixed number of ICU beds, operating rooms, and surgical instruments, a computer has a fixed amount of RAM. Memory management is how the OS allocates this limited resource among running processes while ensuring no conflicts occur. When you open an EHR application, the OS allocates a chunk of memory for it. If you open another medical imaging application, the OS gives it separate memory space. The OS must track what's in use, what's free, and prevent one application from overwriting another's data. Memory paging allows the OS to extend usable memory by temporarily moving unused data to the hard disk, similar to how a hospital might move less-urgent patient files to archive storage. In healthcare, poor memory management can cause application crashes\u2014imagine if an EHR system crashed while a surgeon is viewing imaging during an operation.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Practical Example: Managing Multiple Healthcare Applications",
+      "content": "A hospital's clinical workstation runs an EHR system (using 2GB RAM), a patient monitoring interface (800MB), a medical imaging viewer (1.5GB), and a medication dispensing system (400MB) on a 5GB workstation. All four must coexist without interfering. The OS allocates separate memory blocks to each. If the imaging viewer needs more RAM for loading a high-resolution scan, the OS might page some unused EHR data to disk temporarily. If the monitoring system detects critical vitals, it gets priority from the memory manager to ensure responsive alerts. If a process tries to access memory it doesn't own, the OS immediately terminates it to protect the other applications. This isolation is critical in healthcare, where failure in one system could compromise patient safety.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "File Systems: Organizing Electronic Health Records",
+      "content": "A file system is how the OS organizes data on storage devices into files and folders. Hospitals generate enormous amounts of data: patient records, medical images (X-rays, MRIs), lab results, insurance information, and clinical notes. A file system provides structure to organize this complexity. Instead of raw, unorganized disk storage, the OS creates a hierarchy: Hospital folder \u2192 Department folders \u2192 Patient folders \u2192 Record types \u2192 Specific files. The OS tracks where each file is located on disk, its size, who can access it, and when it was created. File permissions ensure only authorized staff (treating physicians, administrators) can read sensitive medical data. Backup systems rely on file system structure to protect critical data. Encryption integrated into the file system prevents HIPAA violations if hardware is stolen. Poor file system management could result in lost patient records or security breaches.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: Organizing a Hospital's Electronic Health Record System",
+      "content": "A hospital's main storage system organizes data like this: /PatientRecords/2026/March/Patient_ID_5847/EHR_Notes/DoctorsNote_20260325.txt and /PatientRecords/2026/March/Patient_ID_5847/Medical_Imaging/CT_Scan_20260320.dcm. The file system tracks that the CT scan is 150MB, belongs to patient 5847, is confidential (encrypted and access-restricted), and was created March 20, 2026. When a cardiologist needs imaging, they search by patient ID and the OS instantly locates the correct file with proper permissions. Regular backups use the file system to identify all critical patient data and copy it to redundant secure storage across multiple locations. If a disk fails, backup systems ensure no patient records are lost. Encryption ensures that even if a hard drive is physically stolen, the data remains protected.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrated Operating Systems in Healthcare Practice",
+      "content": "These three OS functions work together constantly in real healthcare environments. When a doctor accesses a complete patient medical record, the OS simultaneously (1) launches multiple processes\u2014EHR viewer, imaging application, lab results formatter\u2014each receiving CPU time via process management; (2) allocates separate RAM to each application while keeping them isolated through memory protection; and (3) retrieves correct patient files from the file system, applying security permissions so only authorized staff see the data. In a hospital with continuous patient monitoring, the OS runs uninterrupted monitoring processes, allocates real-time memory for vital sign data, and stores readings to files that clinicians access later. A failure in any area\u2014processes crashing, memory leaks causing slowdowns, or file system corruption\u2014directly impacts patient safety. Healthcare IT professionals must understand how these three functions interact to design reliable systems and troubleshoot problems quickly.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Congratulations!",
+      "content": "You've completed Operating Systems Fundamentals through a healthcare lens. You now understand how operating systems manage concurrent processes, allocate limited resources, and organize data\u2014all critical skills for healthcare IT professionals. To deepen your knowledge, explore advanced topics like virtual memory optimization, HIPAA-compliant file system security, and distributed systems in hospital networks. You can now recognize how your hospital's current systems implement these OS principles."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "How systems handle multiple tasks"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "How systems manage resources"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "How systems organize data"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T16:01:31.333806+00:00",
+  "model": "claude-haiku-4-5"
+}

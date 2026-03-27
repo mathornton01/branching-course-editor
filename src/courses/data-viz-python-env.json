@@ -1,0 +1,229 @@
+{
+  "id": "data-viz-python-env",
+  "title": "Data Visualization with Python: Environmental Science Applications",
+  "description": "Learn to create compelling visualizations of environmental data using Python. This adaptive course tailors content to your experience level, starting with a diagnostic assessment.",
+  "topic": "Data Visualization",
+  "theme": "environmental science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "python",
+    "matplotlib",
+    "data-visualization",
+    "environmental-science",
+    "seaborn",
+    "plotly"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Python & Visualization Foundations Check",
+      "content": "Let's assess your current knowledge of Python and data visualization to personalize your learning path. This quick diagnostic will help us determine whether you should dive into advanced visualization techniques or start with foundational concepts.",
+      "questions": [
+        {
+          "question": "Which Python library is primarily used for basic 2D plotting?",
+          "options": [
+            "A) NumPy",
+            "B) Matplotlib",
+            "C) Django",
+            "D) Flask"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "NumPy is for numerical computing, not visualization.",
+            "Correct! Matplotlib is the foundational plotting library.",
+            "Django is a web framework.",
+            "Flask is also a web framework."
+          ],
+          "explanation": "Matplotlib is the standard library for creating static plots in Python. It's the foundation for many other visualization libraries."
+        },
+        {
+          "question": "In environmental monitoring, you have daily CO\u2082 measurements in a Python list. How would you create a line plot showing CO\u2082 levels over time?",
+          "options": [
+            "A) Using plt.bar() to show discrete measurements",
+            "B) Using plt.line() with data as parameters",
+            "C) Using plt.plot(days, co2_values) followed by plt.show()",
+            "D) Using pd.DataFrame.visualize()"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Bar plots are for categorical comparisons, not time-series data.",
+            "There's no plt.line() function; you use plt.plot().",
+            "Correct! plt.plot() creates line plots, perfect for time-series environmental data.",
+            "While pandas can help, this isn't the standard syntax."
+          ],
+          "explanation": "For time-series data like daily environmental measurements, plt.plot() is the standard approach. You pass your time values (x-axis) and measurements (y-axis)."
+        },
+        {
+          "question": "What is the primary advantage of using seaborn over matplotlib for environmental data?",
+          "options": [
+            "A) It runs faster with large datasets",
+            "B) It provides statistical visualization with better aesthetics by default",
+            "C) It doesn't require matplotlib installed",
+            "D) It can directly read CSV files"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed isn't a primary difference; both use matplotlib underneath.",
+            "Correct! Seaborn builds on matplotlib and adds statistical plots with attractive defaults.",
+            "Seaborn actually requires matplotlib as a dependency.",
+            "Both seaborn and matplotlib need external data handling."
+          ],
+          "explanation": "Seaborn is built on top of matplotlib and excels at statistical visualizations. It's ideal for exploring relationships in environmental datasets with minimal code."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced Data Visualization Techniques for Environmental Analysis",
+      "content": "Now that you've demonstrated solid fundamentals, let's explore advanced visualization techniques that reveal complex relationships in environmental data. We'll focus on multi-dimensional visualization, statistical plots, and interactive dashboards that help communicate nuanced climate and ecological findings. You'll learn to layer multiple data variables, use color and size encoding effectively, and create publication-ready figures that tell compelling environmental stories. Master techniques like heatmaps for temperature anomalies, 3D surface plots for elevation-dependent phenomena, and animated time-series showing ecosystem changes.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Worked Example: Multi-Variable Ocean Temperature Anomaly Visualization",
+      "content": "Imagine analyzing 20 years of ocean temperature data across three regions (Atlantic, Pacific, Indian). Using advanced techniques, create a figure with four subplots: (1) line plot with 3 regions showing temperature anomalies over time with confidence intervals using `plt.fill_between()`, (2) heatmap showing monthly anomalies, (3) scatter plot comparing salinity vs. temperature with size encoding for depth, and (4) violin plot comparing anomaly distributions by decade. Use `seaborn.set_palette('coolwarm')` to reflect temperature semantics. This multi-panel approach reveals regional differences, seasonal patterns, depth effects, and long-term trends simultaneously\u2014all crucial for understanding ocean climate impacts on marine ecosystems.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Congratulations: Advanced Visualization Path Complete",
+      "content": "You've mastered advanced data visualization techniques for environmental science. You can now create sophisticated multi-variable visualizations that reveal complex patterns in climate and ecological data. Your skills in statistical plots, interactive dashboards, and publication-ready figures will enable you to communicate nuanced environmental findings to both scientific and public audiences. Continue exploring interactive libraries like Plotly and Dash for web-based environmental monitoring dashboards."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundations of Data Visualization with Python",
+      "content": "Let's build your visualization skills from the ground up! You'll start with matplotlib, the fundamental Python plotting library, and learn how to create clear, informative charts of environmental data. We'll cover the essential plot types: line plots for tracking climate variables over time, scatter plots for exploring relationships between environmental factors like temperature and carbon dioxide, and bar charts for comparing measurements across locations or categories. You'll learn to add titles, axis labels, and legends so your plots communicate clearly. By the end, you'll confidently transform raw environmental datasets into visual stories that reveal patterns and trends.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Worked Example: Global Average Temperature Trends Line Plot",
+      "content": "You have a dataset of global average temperatures from 1980\u20132024. Create a simple line plot showing temperature rise over decades: `import matplotlib.pyplot as plt; years = [1980, 1990, 2000, 2010, 2024]; temps = [14.2, 14.4, 14.5, 14.8, 15.3]; plt.plot(years, temps, marker='o', color='#d62728', linewidth=2); plt.xlabel('Year'); plt.ylabel('Temperature (\u00b0C)'); plt.title('Global Average Temperature Anomaly'); plt.grid(True, alpha=0.3); plt.show()`. The line clearly shows warming acceleration, the markers highlight measured decades, red emphasizes the urgent trend, and gridlines aid reading. This simple plot communicates one of the most critical environmental findings: steady global temperature increase.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Visualizing Environmental Datasets",
+      "content": "Apply your new skills to real environmental visualization challenges. You'll create plots from actual datasets, practice labeling and formatting, and learn to choose appropriate plot types for different environmental questions.",
+      "questions": [
+        {
+          "question": "You're tracking annual CO\u2082 emissions (in megatons) from three countries: 2020: China=10000, USA=5500, India=2400. Which plot type best compares these three values?",
+          "options": [
+            "A) Line plot with years on x-axis",
+            "B) Bar chart with countries on x-axis and emissions on y-axis",
+            "C) Scatter plot with country name and emission amount",
+            "D) Pie chart showing percentage of global emissions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Line plots show trends over time, not categorical comparisons.",
+            "Correct! Bar charts excel at comparing discrete categories like different countries.",
+            "Scatter plots need two numerical variables; this needs categorical comparison.",
+            "Pie charts work, but bar charts are clearer for precise comparisons."
+          ],
+          "explanation": "When comparing values across categories (countries, regions, species), bar charts provide the clearest visual comparison. They make it immediately obvious that China's emissions are highest."
+        },
+        {
+          "question": "In matplotlib, you plot biodiversity index (y-axis) vs. forest canopy cover % (x-axis) for 50 locations. What plot type reveals the relationship?",
+          "options": [
+            "A) plt.hist() to show distribution",
+            "B) plt.scatter() to show correlation",
+            "C) plt.bar() to compare locations",
+            "D) plt.pie() to show proportion"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Histograms show single-variable distributions, not relationships.",
+            "Correct! Scatter plots reveal correlations between two continuous variables.",
+            "Bar charts compare discrete categories, not relationships.",
+            "Pie charts show proportions of a whole, not relationships."
+          ],
+          "explanation": "Scatter plots are ideal for exploring whether two environmental variables are correlated. Each point represents one location, and the pattern shows if biodiversity increases with forest cover."
+        },
+        {
+          "question": "You add `plt.xlabel('Canopy Cover (%)')` and `plt.ylabel('Biodiversity Index')` to your plot. Why is this important?",
+          "options": [
+            "A) It makes the plot load faster",
+            "B) It helps viewers understand what each axis represents",
+            "C) It automatically scales the axes optimally",
+            "D) It prevents errors in your code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Labels don't affect performance.",
+            "Correct! Labels are essential for communication\u2014viewers need to know what they're looking at.",
+            "Scaling is handled separately; labels are for clarity.",
+            "Labels don't prevent errors; they're for readability."
+          ],
+          "explanation": "Clear labels are fundamental to effective data visualization. Without them, even brilliant data remains meaningless to your audience. Always label your axes and give your plots descriptive titles."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Congratulations: Visualization Foundations Complete",
+      "content": "You've successfully learned the fundamentals of data visualization with Python! You can now create clear, informative plots of environmental data using matplotlib. You understand when to use different plot types, how to add essential labels and titles, and how to make your visualizations accessible and meaningful. With these foundational skills, you're ready to explore more environmental datasets, create dashboards for monitoring, and communicate your findings effectively. Consider your next step: diving deeper into statistical visualization with seaborn or building interactive web-based dashboards."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Strong fundamentals (pass)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Need foundations (fail)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T14:54:15.616148+00:00",
+  "model": "claude-haiku-4-5"
+}

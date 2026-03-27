@@ -1,0 +1,212 @@
+{
+  "id": "git-version-control-socialwork",
+  "title": "Git and Version Control for Social Work",
+  "description": "A diagnostic branching course teaching Git and version control principles through social work scenarios, with adaptive learning paths based on initial assessment.",
+  "topic": "Git and Version Control",
+  "theme": "social work",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "git",
+    "version-control",
+    "social-work",
+    "collaboration",
+    "documentation",
+    "compliance"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Your Version Control Experience",
+      "content": "Let's assess your current understanding of Git and version control concepts to personalize your learning path.",
+      "questions": [
+        {
+          "question": "Why would a social work agency use version control for case management documentation?",
+          "options": [
+            "To track who accessed records when and what changed",
+            "To make backups of files",
+            "To make files load faster",
+            "To encrypt sensitive client data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Version control provides an audit trail crucial for compliance and accountability.",
+            "Backups are helpful, but version control provides much more\u2014especially detailed change tracking.",
+            "While performance matters, version control's strength is transparency and history.",
+            "Encryption is separate from version control; version control tracks changes."
+          ],
+          "explanation": "Version control's primary value in social work is creating an immutable audit trail showing exactly who made what changes and when\u2014essential for regulatory compliance, supervision, and protecting vulnerable populations."
+        },
+        {
+          "question": "In a collaborative social work setting, what's the main benefit of branching in Git?",
+          "options": [
+            "It reduces file size",
+            "It allows team members to work on different features simultaneously without conflicts",
+            "It makes it easier to write case notes",
+            "It prevents accidental file deletion"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Branching doesn't reduce file size.",
+            "Exactly! Branches enable parallel work without stepping on each other's toes.",
+            "While any tool can help with writing, that's not branching's purpose.",
+            "Preventing deletion requires other safeguards, not branching."
+          ],
+          "explanation": "Branching allows multiple case managers to work on different client cases, interventions, or documentation simultaneously. Each person works in isolation until they're ready to merge their work, eliminating the problem of overwriting someone else's changes."
+        },
+        {
+          "question": "What does merging accomplish in Git?",
+          "options": [
+            "Combines separate lines of work into a unified version",
+            "Deletes old files",
+            "Backs up your data automatically",
+            "Prevents unauthorized access"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Perfect! Merging integrates different work streams together.",
+            "Merging preserves all history.",
+            "Backups are a separate concern.",
+            "Access control is separate from merging."
+          ],
+          "explanation": "Merging takes changes from one branch and integrates them into another, allowing teams to consolidate their work while maintaining the complete history of all changes."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Collaborative Git Workflows for Social Work Teams",
+      "content": "Advanced social work organizations use Git to manage complex, multi-disciplinary case files and maintain audit trails for compliance. In a typical workflow, case managers work on separate branches for different client cases or interventions, committing detailed case notes that reference specific dates, actions, and client outcomes. Teams use pull requests to review changes before merging to ensure documentation accuracy and adherence to protocols. Distributed teams across multiple offices can work simultaneously without conflicts, and the complete history allows supervisors to track decision-making processes and ensure accountability to funders and regulatory bodies.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Multi-Office Case Documentation System",
+      "content": "A large social work agency with offices in three cities uses Git to manage case files. Maria, a case manager in the Denver office, creates a branch 'client-2847-housing-support' to document John's housing assistance journey. Meanwhile, Alex in the Chicago office works on a separate branch for a mental health intervention. Both add comprehensive notes, commit their changes with detailed messages like 'Add intake assessment for housing stability evaluation', and then create pull requests. The clinical supervisor reviews each branch, checks for protocol compliance, provides feedback, and approves the merges. This system maintains a complete audit trail of all interventions and decisions while preventing simultaneous editing conflicts.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Mastery Achieved",
+      "content": "Congratulations! You've learned how collaborative Git workflows enable social work teams to manage complex case documentation, maintain compliance, and coordinate across multiple locations. You're ready to implement version control in your organization. Continue exploring advanced topics like rebasing, cherry-picking, and managing merge conflicts in team settings."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Git Fundamentals for Social Work",
+      "content": "Git is a version control system that tracks changes to files over time. In a social work context, imagine Git as a detailed filing system that remembers every version of a case file, who made changes, and when. Instead of having multiple files labeled 'case_notes_v1, v2, v3', Git stores all versions in one organized system. Each change is recorded as a 'commit' with a timestamp and description. This is crucial for social work where you need to demonstrate that you followed proper protocols and made decisions based on accurate information. Git also helps teams work together by preventing accidental overwrites when multiple people are documenting the same case.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "A Simple Case File Version History",
+      "content": "Sarah is a caseworker starting a new file for a client named Marcus. She creates a new folder for the case and makes her first commit: 'Initial case intake completed'. The next day, she adds assessment documents and commits 'Added psychological assessment results'. A week later, after meeting with Marcus, she commits 'Updated case plan with client goals'. If Sarah ever needs to review what Marcus' needs looked like on a specific date, she can look at the history and see each version. Git stores all of these snapshots, so nothing is ever truly lost, and the agency has a complete audit trail of the case progression.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Git Basics Practice",
+      "content": "Test your understanding of version control fundamentals in a social work context.",
+      "questions": [
+        {
+          "question": "Which of these is the BEST reason a social work agency should use version control?",
+          "options": [
+            "To organize files with a complete, chronological change history",
+            "To make sure files are shared on social media",
+            "To prevent staff from accessing client information",
+            "To automatically generate case reports"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Chronological history with change tracking is fundamental.",
+            "Version control isn't a social media tool.",
+            "Access control is separate from version control.",
+            "Reporting requires separate tools built on top of version control."
+          ],
+          "explanation": "Version control's core purpose is maintaining a complete, time-stamped record of all changes, which is absolutely critical in social work for compliance, supervision, and demonstrating appropriate decision-making."
+        },
+        {
+          "question": "What does a 'commit' do in Git?",
+          "options": [
+            "Saves and records a change with a description and timestamp",
+            "Sends files to the cloud automatically",
+            "Deletes old file versions",
+            "Assigns permissions to documents"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Exactly right! A commit creates a snapshot of changes.",
+            "Commits can sync to the cloud, but that's not their primary purpose.",
+            "Commits preserve all history\u2014nothing is deleted.",
+            "Permissions are managed separately."
+          ],
+          "explanation": "A commit is the fundamental unit of Git. It captures a set of changes with a message explaining what changed and why, along with a timestamp and the author's identity. This creates the audit trail social work organizations need."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundation Complete",
+      "content": "Great work! You've learned the foundational concepts of Git and version control applied to social work documentation. You understand why version control matters for compliance and teamwork. With this foundation, you're ready to learn more advanced Git techniques or begin using Git in your organization. Consider exploring branches next to learn how teams can work on multiple cases simultaneously."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T16:48:34.644305+00:00",
+  "model": "claude-haiku-4-5"
+}

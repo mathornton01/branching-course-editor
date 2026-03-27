@@ -1,0 +1,217 @@
+{
+  "id": "bayesian-urban-planning-2026",
+  "title": "Bayesian Statistics: A Guide to Urban Planning Prediction",
+  "description": "Learn Bayesian Statistics through the practical lens of urban planning. This adaptive course routes you to appropriate depth based on your starting knowledge.",
+  "topic": "Bayesian Statistics",
+  "theme": "urban planning",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "statistics",
+    "bayesian",
+    "urban planning",
+    "probability",
+    "decision-making"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Probability & Belief Updating",
+      "content": "These questions help us understand your background with probability and belief updating. This will determine the right learning path for you.",
+      "questions": [
+        {
+          "question": "A city is evaluating whether a new transit line will boost property values. If we observe that property values near the proposed line have historically increased 70% of the time, what does this represent in Bayesian terms?",
+          "options": [
+            "A) The prior probability",
+            "B) The likelihood",
+            "C) The posterior probability",
+            "D) The marginal probability"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. This is the likelihood\u2014the probability of observing the data given our hypothesis.",
+            "Correct! This historical frequency is the likelihood P(higher values | transit line).",
+            "The posterior is what we calculate after combining prior and likelihood.",
+            "The marginal probability is different\u2014it's the overall probability of the event."
+          ],
+          "explanation": "In Bayesian statistics, the likelihood is the probability of observing our evidence given a hypothesis. Here, the 70% historical success rate is our likelihood."
+        },
+        {
+          "question": "Before analyzing data, an urban planner believes there's a 30% chance a neighborhood will densify based on zoning changes. What is this initial belief called?",
+          "options": [
+            "A) The likelihood",
+            "B) The posterior",
+            "C) The prior",
+            "D) The evidence"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Likelihood is the probability of observing evidence given a hypothesis.",
+            "Posterior is the updated belief after seeing data.",
+            "Correct! The prior is your initial belief before analyzing new data.",
+            "Evidence is the data we observe, not a belief."
+          ],
+          "explanation": "The prior probability is your starting assumption before incorporating new evidence. It's a crucial component of Bayesian reasoning."
+        },
+        {
+          "question": "Which statement best describes the Bayesian approach to urban planning predictions?",
+          "options": [
+            "A) Make predictions using only historical data and ignore current conditions",
+            "B) Update your beliefs about the future based on new evidence",
+            "C) Assume all neighborhoods follow identical development patterns",
+            "D) Never change your initial predictions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Bayesian methods value both historical and current information.",
+            "Correct! Bayesian reasoning updates our beliefs as new evidence emerges.",
+            "Neighborhoods vary; Bayesian methods account for this variation.",
+            "Bayesian methods thrive on incorporating new information."
+          ],
+          "explanation": "The essence of Bayesian statistics is updating beliefs iteratively as new evidence arrives\u2014essential for adaptive urban planning."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n6",
+      "failure_target": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Foundations: Bayes' Theorem for Planners",
+      "content": "Bayes' Theorem is the foundation of Bayesian statistics. It tells us how to update our beliefs when new evidence appears. The formula is: **P(A|B) = P(B|A) \u00d7 P(A) / P(B)**. In urban planning terms: P(neighborhood will densify | observed transit access) = P(observed transit | densification would occur) \u00d7 P(densification initially) / P(observing that transit). Your prior belief gets adjusted by the likelihood of your evidence to produce a posterior belief. For example, a planner might initially believe (prior) that a neighborhood has a 25% chance of becoming a high-density hub. After observing major transit infrastructure investment (evidence), they update that belief to 70% (posterior) using Bayes' Theorem.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Example: Predicting Gentrification Risk",
+      "content": "A city planning department wants to predict if a neighborhood will experience rapid gentrification. Their prior belief: 40% of neighborhoods similar in character experience gentrification within 10 years. They observe a new elementary school opening (evidence of investment). Historical data shows: when neighborhoods DO gentrify, a new school opens 80% of the time. When they DON'T gentrify, a new school opens only 20% of the time. Using Bayes' Theorem, the posterior probability of gentrification given the new school is approximately 73%. This updated belief helps planners prepare for potential displacement and design community preservation policies.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Practice: Apply Bayes to Urban Scenarios",
+      "content": "Test your understanding with these urban planning problems using Bayes' Theorem.",
+      "questions": [
+        {
+          "question": "A planner estimates there's a 30% prior chance a commercial district will attract tech startups. Data shows: when startups DO move in, coffee shops open nearby 85% of the time. When startups DON'T move in, coffee shops open 40% of the time. A new specialty coffee shop just opened. Approximately what is the posterior probability that startups will come?",
+          "options": [
+            "A) 30%",
+            "B) 42%",
+            "C) 63%",
+            "D) 85%"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "That's the prior\u2014unchanged belief.",
+            "Close, but the likelihood of coffee shops is stronger evidence for startup arrival.",
+            "Correct! Using Bayes: P = (0.85 \u00d7 0.30) / [(0.85 \u00d7 0.30) + (0.40 \u00d7 0.70)] \u2248 0.63",
+            "That's the likelihood, not the posterior."
+          ],
+          "explanation": "The strong likelihood of coffee shops appearing when startups arrive (85% vs 40%) updates the prior significantly upward to about 63%."
+        },
+        {
+          "question": "Which of these represents NEW evidence that should update a planner's beliefs in Bayesian analysis?",
+          "options": [
+            "A) The initial assumption about neighborhood character",
+            "B) Census data showing recent population change",
+            "C) How strong the planner 'feels' about the outcome",
+            "D) The prior probability estimate"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's part of forming the prior, not new evidence.",
+            "Correct! New data should update our beliefs via Bayesian updating.",
+            "Feelings are subjective; Bayes uses evidence and prior reasoning.",
+            "The prior is our starting belief, not new evidence."
+          ],
+          "explanation": "In Bayesian analysis, evidence is objective data (like census data, permit records, or zoning changes) that updates our previous beliefs."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n5",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Course Complete: Bayesian Foundations in Urban Planning",
+      "content": "You've mastered the fundamentals of Bayes' Theorem and how to apply it to urban planning predictions. You can now update beliefs as new evidence emerges, calculate posterior probabilities, and use Bayesian reasoning for planning decisions. Next steps: explore advanced applications like multi-stage Bayesian modeling, hierarchical Bayes for cross-neighborhood analysis, or Bayesian networks for complex urban systems. Great work!"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Advanced: Bayesian Inference & Iterative Belief Updating",
+      "content": "Advanced Bayesian analysis goes beyond single updates. In complex urban planning, planners receive evidence sequentially: initial zoning approvals, demographic shifts, business applications, construction starts, and occupancy rates. Bayesian inference treats these as a sequence, updating beliefs with each piece of evidence. The posterior from one update becomes the prior for the next. This iterative process quantifies uncertainty throughout, allowing planners to track confidence levels about development trajectories. For instance, a 60% belief about mixed-use development (prior) might shift to 75% after zoning approval (first update), then to 88% after the first buildings begin occupancy (second update). Bayesian model selection helps choose between competing development scenarios based on accumulated evidence.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Example: Multi-Stage Urban Redevelopment with Evolving Uncertainty",
+      "content": "Consider a brownfield redevelopment project in an industrial waterfront. Initially, planners assess 45% probability of successful mixed-use development. After environmental remediation is approved (evidence 1), that rises to 60%. When the first developer expresses serious interest (evidence 2), belief increases to 72%. Following community approval votes (evidence 3), the posterior reaches 85%. Throughout this sequence, Bayesian updating tracks how each new evidence refines predictions and confidence. Planners quantify remaining uncertainty to adjust insurance, contingency budgets, and timeline expectations. Advanced Bayesian networks allow planners to model dependencies: did transportation funding influence developer interest? Did demographics predict community approval? Such networks reveal which evidence matters most for success.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Advanced Mastery: Bayesian Urban Planning Analytics",
+      "content": "You've achieved advanced understanding of Bayesian statistics applied to urban planning. You can now construct multi-stage Bayesian models, evaluate sequential evidence, quantify uncertainty through development, and use Bayesian networks to analyze complex urban systems. You understand how priors encode domain knowledge, how likelihoods capture data evidence, and how posteriors guide planning decisions. You're equipped to implement Bayesian reasoning in risk assessment, scenario planning, and stakeholder communication. Recommended next directions: computational Bayesian methods (MCMC, variational inference), hierarchical models for multi-neighborhood analysis, or Bayesian optimization for resource allocation across urban projects."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n6",
+      "label": "Strong foundation\u2014advanced track"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n2",
+      "label": "Build foundational skills"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Learn through example"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Apply foundations"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Foundations mastered"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n4",
+      "label": "Retry practice"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Learn advanced methods"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Advanced mastery achieved"
+    }
+  ],
+  "generated_at": "2026-03-27T17:06:56.668719+00:00",
+  "model": "claude-haiku-4-5"
+}

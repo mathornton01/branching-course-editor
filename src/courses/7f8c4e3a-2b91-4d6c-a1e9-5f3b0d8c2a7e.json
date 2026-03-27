@@ -1,0 +1,495 @@
+{
+  "id": "7f8c4e3a-2b91-4d6c-a1e9-5f3b0d8c2a7e",
+  "title": "Linear Algebra for Data Science: Urban Planning Edition",
+  "description": "Master linear algebra concepts through the lens of urban planning applications. Learn vectors, matrices, and eigenvalues by analyzing city data, traffic flows, and neighborhood networks.",
+  "topic": "Linear Algebra for Data Science",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 75,
+  "tags": [
+    "linear algebra",
+    "data science",
+    "urban planning",
+    "vectors",
+    "matrices",
+    "eigenvalues",
+    "eigenvectors"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Vectors in Urban Planning: Representing City Data",
+      "content": "In urban planning, vectors represent directional quantities and flows. A vector can represent a city block's coordinates (x, y), traffic flow direction, or population movement between neighborhoods. In data science, vectors are the foundation of representing locations and measurements. For example, a neighborhood's demographics could be a vector [population, employment_rate, green_space_percentage]. Understanding vectors lets planners model neighborhood characteristics, analyze urban flows, and prepare data for computational analysis.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Assessment: Vector Fundamentals",
+      "content": "Test your understanding of vectors in urban planning contexts.",
+      "questions": [
+        {
+          "question": "A transportation analyst represents a city neighborhood as a vector [42000, 15, 8500]. What does this vector most likely represent if the first component is population?",
+          "options": [
+            "A) Population, average block height in meters, and number of vehicles",
+            "B) Population, walking distance to nearest transit, and monthly housing cost",
+            "C) Population, unemployed residents, and number of schools",
+            "D) Population, percentage of green space, and daily commuters"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Not quite\u2014while vehicles matter, this interpretation doesn't align well with data science applications.",
+            "Walking distance isn't typically represented as a percentage in this context.",
+            "Population and schools don't scale proportionally; this doesn't match the values.",
+            "Correct! These three metrics represent population, percentage of green space (0-100), and a count of commuters."
+          ],
+          "explanation": "In urban planning data science, demographic vectors combine different scales of measurement: absolute counts (population, commuters) and percentages (green space). This mixed-unit vector represents a neighborhood's key planning characteristics."
+        },
+        {
+          "question": "Two neighborhoods have vectors v1 = [50000, 20, 3000] and v2 = [30000, 35, 5000] representing [population, unemployment_rate_%, daily_transit_users]. What does adding these vectors (v1 + v2) represent?",
+          "options": [
+            "A) The combined data for both neighborhoods viewed as a single unit",
+            "B) The average characteristics of both neighborhoods",
+            "C) How much better neighborhood 1 is compared to neighborhood 2",
+            "D) The mathematical sum which isn't meaningful for this data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Vector addition combines data, useful for aggregating neighborhood-level statistics.",
+            "That would be dividing by 2, not adding the vectors.",
+            "That would involve subtraction (v1 - v2), not addition.",
+            "Vector addition is very meaningful for aggregating regional data in urban analysis."
+          ],
+          "explanation": "Vector addition aggregates neighborhood characteristics\u2014useful when analyzing city districts as composed neighborhoods or combining data sources. The result [80000, 55, 8000] represents total population, combined unemployment rate metric, and total transit users of both neighborhoods."
+        },
+        {
+          "question": "An urban planner wants to scale a neighborhood's population vector [45000, 25, 7200] by 0.5 to model a hypothetical smaller area. What does scalar multiplication accomplish here?",
+          "options": [
+            "A) It reduces all characteristics by half, useful for analyzing smaller spatial zones within the same type of neighborhood",
+            "B) It creates a prediction of what the neighborhood will be like in the future",
+            "C) It's a mathematical operation with no practical meaning in urban planning",
+            "D) It normalizes the data so all components have equal weight"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Scalar multiplication proportionally scales all characteristics\u2014crucial for disaggregating or aggregating spatial units.",
+            "Scalar multiplication doesn't account for temporal trends; you'd need different models for prediction.",
+            "Scalar multiplication is fundamental in scaling spatial data analysis.",
+            "Normalization uses different techniques (like dividing by magnitude)."
+          ],
+          "explanation": "Scalar multiplication (multiplying a vector by a constant) preserves the proportional relationships within neighborhoods. It's essential for scaling urban models to different geographic resolutions\u2014analyzing a neighborhood type at different scales."
+        }
+      ],
+      "pass_threshold": 65,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Working with Vectors",
+      "content": "Strengthen your vector understanding through practical urban planning scenarios.",
+      "questions": [
+        {
+          "question": "A city district consists of three neighborhoods: [48000 residents, 18% unemployment], [32000 residents, 22% unemployment], and [55000 residents, 12% unemployment]. Express these as vectors and explain what adding all three vectors represents.",
+          "options": [
+            "A) The total residents and average unemployment rate",
+            "B) The combined residents and sum of unemployment percentages (not meaningful)",
+            "C) The geometric center of the three neighborhoods",
+            "D) The optimal location for a new transit hub"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Adding vectors gives the sum (135000, 52%), not average. The unemployment percentage sum isn't interpretable directly.",
+            "Correct\u2014this demonstrates why we must be careful about what vector operations mean contextually.",
+            "That would require different calculations (centroid analysis).",
+            "That requires optimization, not simple vector addition."
+          ],
+          "explanation": "This illustrates an important principle: mathematical operations (like adding vectors) don't always produce meaningful interpretations. While we can add [48000, 18] + [32000, 22] + [55000, 12] = [135000, 52], the 52% has no standard meaning. Understanding context prevents misapplication of linear algebra."
+        },
+        {
+          "question": "A transportation analyst creates a direction vector from Downtown (0,0) to the Business District (4, 3) miles. What does scaling this vector by 2 represent?",
+          "options": [
+            "A) A route twice as long in the same direction",
+            "B) A route that takes twice as long to travel",
+            "C) Two separate routes to the Business District",
+            "D) The quadrant where the Business District is located"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Scaling the direction vector [4, 3] by 2 gives [8, 6]\u2014a point twice as far in the same direction.",
+            "Scaling doesn't account for speed; that's a different calculation.",
+            "Scalar multiplication creates one scaled vector, not multiple routes.",
+            "The quadrant is determined by the signs of components, not scaling."
+          ],
+          "explanation": "In urban analysis, scalar multiplication of direction vectors extends routes proportionally. This is useful for analyzing transportation networks at different scales or extending trend lines for urban growth modeling."
+        },
+        {
+          "question": "Two neighborhoods have housing cost vectors: Downtown = [400000, 450000, 500000] and Suburbs = [180000, 200000, 220000] for [1-bed, 2-bed, 3-bed apartments]. What practical insight does the vector difference Downtown - Suburbs give?",
+          "options": [
+            "A) The cost premium for living Downtown compared to Suburbs for each bedroom type",
+            "B) The average housing cost in each neighborhood",
+            "C) Which neighborhood is geographically closer to downtown",
+            "D) The population of each neighborhood type"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Subtracting vectors shows the component-wise differences: [220000, 250000, 280000], revealing premium pricing by bedroom type.",
+            "That would be taking averages, not vector subtraction.",
+            "Vector operations don't determine geography; they work with data magnitudes.",
+            "Housing costs don't represent population."
+          ],
+          "explanation": "Vector subtraction reveals differences between groups\u2014in this case, the housing cost premium Downtown commands over Suburbs for each property type. This is essential for comparative urban analysis."
+        }
+      ],
+      "pass_threshold": 65,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Matrices and Matrix Operations: Analyzing City Systems",
+      "content": "A matrix is a rectangular array of numbers representing relationships between multiple urban variables. For example, a city could have a traffic flow matrix where rows represent source neighborhoods and columns represent destinations, with entries showing vehicle counts per hour. Matrix multiplication combines these relationships\u2014multiplying a traffic matrix by a route-efficiency vector yields expected travel times across the city. In urban data science, matrices model neighborhood networks, economic flows between districts, and infrastructure connectivity. Understanding matrix operations enables sophisticated city modeling and optimization.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Matrices and Operations",
+      "content": "Evaluate your understanding of matrices in urban planning applications.",
+      "questions": [
+        {
+          "question": "A city has three neighborhoods (A, B, C) with a daily commute matrix: [[0, 150, 200], [120, 0, 180], [250, 190, 0]] where entry (i,j) represents people commuting from neighborhood i to neighborhood j. What does the entry 150 in position (0,1) represent?",
+          "options": [
+            "A) 150 people commute from neighborhood A to neighborhood B daily",
+            "B) 150 people commute from neighborhood B to neighborhood A daily",
+            "C) 150 people live and work in neighborhood A",
+            "D) 150 is the distance between neighborhoods A and B"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! In row-column notation, position (0,1) is row 0 (source A) to column 1 (destination B).",
+            "That would be position (1,0).",
+            "Diagonal elements (0,0), (1,1), (2,2) are zero, not representing internal employment.",
+            "This matrix represents flows, not distances."
+          ],
+          "explanation": "Matrix indexing is crucial for urban analysis. The matrix structure lets you quickly identify commute patterns, identify neighborhoods that are major employment hubs (high column sums), or understand which neighborhoods send workers elsewhere (high row sums)."
+        },
+        {
+          "question": "If we multiply this commute matrix by a vector of average commute costs per neighborhood [$5, $6, $4], what would the resulting vector represent?",
+          "options": [
+            "A) The total commute cost originating from each neighborhood",
+            "B) The average cost per commute in the entire city",
+            "C) The number of commuters in each neighborhood",
+            "D) This operation is undefined and cannot be performed"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Matrix-vector multiplication applies the cost vector to each row's commute patterns.",
+            "That would be a single scalar value, not a vector.",
+            "The matrix itself represents commuters, not costs.",
+            "The operation is defined: 3\u00d73 matrix times 3\u00d71 vector yields 3\u00d71 result."
+          ],
+          "explanation": "Matrix-vector multiplication (commute matrix \u00d7 cost vector) yields total commute costs per source neighborhood. This is foundational for urban cost-benefit analysis\u2014understanding transportation infrastructure investments' economic impact on different city areas."
+        },
+        {
+          "question": "A city tracks three infrastructure metrics (water use, energy use, waste) for four neighborhoods in a 4\u00d73 matrix. What does multiplying two matrices\u2014a 4\u00d73 neighborhood infrastructure matrix by a 3\u00d72 time-series matrix (metrics over two years)\u2014produce?",
+          "options": [
+            "A) A 4\u00d72 matrix showing how infrastructure metrics changed across neighborhoods over two years",
+            "B) A single number representing total city infrastructure usage",
+            "C) A 3\u00d73 matrix showing correlations between metrics",
+            "D) A 4\u00d74 matrix comparing neighborhoods directly"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! 4\u00d73 \u00d7 3\u00d72 = 4\u00d72. This reveals year-to-year infrastructure changes by neighborhood.",
+            "That would be from summing all entries in the result, not the full matrix multiplication.",
+            "Correlation requires different calculations (covariance analysis).",
+            "That dimension mismatch shows why matrix multiplication rules matter."
+          ],
+          "explanation": "Matrix multiplication dimensions follow strict rules (inner dimensions must match), and the result dimensions are determined by outer dimensions. In urban analysis, this produces meaningful aggregations: combining neighborhood data with temporal patterns yields neighborhood-time infrastructure profiles."
+        }
+      ],
+      "pass_threshold": 65,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Matrix Applications in Urban Data",
+      "content": "Build proficiency with matrices through applied urban planning scenarios.",
+      "questions": [
+        {
+          "question": "A city region has a land-use matrix for 5 neighborhoods (rows) and 6 categories (columns: residential, commercial, industrial, parks, water, other). What insights can you extract by: a) summing each row, b) summing each column?",
+          "options": [
+            "A) Row sums = total land area per neighborhood; Column sums = land area per category across all neighborhoods",
+            "B) Row sums = number of buildings; Column sums = average land price",
+            "C) Row sums = population; Column sums = pollution levels",
+            "D) These operations are meaningless for land-use data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Row operations aggregate across categories (per neighborhood), column operations aggregate across neighborhoods (per category).",
+            "Building count and land price require different data.",
+            "Population and pollution are tracked separately from land use.",
+            "These are fundamental operations in data summarization."
+          ],
+          "explanation": "Understanding matrix operations' practical meaning is essential. Row sums reveal neighborhood composition (Is neighborhood A mostly residential or mixed-use?), while column sums reveal city-wide patterns (How much of the city is parks vs. industrial?). This foundation enables sophisticated urban analytics."
+        },
+        {
+          "question": "You have a 3\u00d73 population density matrix for a city grid (rows = north-south, columns = east-west). Multiplying this by a column vector [1, 1, 1]\u1d40 would produce what?",
+          "options": [
+            "A) A 3\u00d71 vector of row sums\u2014total population density in each north-south band",
+            "B) A 3\u00d73 matrix scaled by 3",
+            "C) The total population density of the entire city",
+            "D) A meaningless operation\u2014dimensions don't match"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Multiplying by [1,1,1] sums each row, producing density aggregations across east-west zones.",
+            "Multiplying by a vector doesn't scale matrices; it performs multiplication.",
+            "That would be the sum of all elements, requiring summing the resulting vector.",
+            "3\u00d73 \u00d7 3\u00d71 = 3\u00d71 is valid matrix multiplication."
+          ],
+          "explanation": "The all-ones vector [1,1,1] is a powerful tool for aggregation. It sums rows (useful for east-west aggregation) or columns (when transposed, for north-south aggregation). This technique is central to exploratory urban data analysis."
+        },
+        {
+          "question": "A transportation authority has two matrices: Commute Matrix (5\u00d75, neighborhoods to neighborhoods) and Transit Costs (5\u00d75, cost multiplier by route). What would matrix multiplication (Commute \u00d7 Transit Costs) represent?",
+          "options": [
+            "A) The element-wise product showing cost-adjusted commute patterns for each route",
+            "B) Total transportation cost from each neighborhood weighted by actual commute patterns",
+            "C) The inverse relationship between commutes and costs",
+            "D) This multiplication is not geometrically meaningful"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Element-wise multiplication (Hadamard product) uses different notation. Full matrix multiplication produces different information.",
+            "Correct! Matrix multiplication combines flow patterns with cost structures to reveal actual economic impact of commuting.",
+            "Matrix multiplication doesn't show inverse relationships.",
+            "It's highly meaningful for urban cost-impact analysis."
+          ],
+          "explanation": "This illustrates why matrix multiplication (not element-wise multiplication) matters: (Commute \u00d7 Transit Cost)\u1d62\u2c7c gives total cost from neighborhood i's commuters using routes to neighborhood j, accounting for their specific commute patterns. This is essential for transportation policy impact modeling."
+        }
+      ],
+      "pass_threshold": 65,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Eigenvalues and Eigenvectors: Finding Urban Patterns",
+      "content": "Eigenvalues and eigenvectors reveal hidden patterns in city systems. An eigenvector represents a direction that remains unchanged under transformation (scaling only), while its eigenvalue is the scaling factor. In urban planning, eigenvectors identify influential neighborhoods in traffic networks\u2014those where small changes propagate throughout the system. Eigenvalue decomposition reveals the principal components of urban data: the most important neighborhood characteristics, the dominant commute patterns, or the critical infrastructure nodes. For example, in a neighborhood importance matrix, the eigenvector corresponding to the largest eigenvalue identifies which neighborhoods most influence the entire urban system, essential for understanding city resilience and planning interventions strategically.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Eigenvalues and Urban System Analysis",
+      "content": "Assess your understanding of eigenvalues and eigenvectors in urban planning contexts.",
+      "questions": [
+        {
+          "question": "In analyzing a city's neighborhood influence network, researchers compute eigenvalues: 4.2, 2.1, 0.9, 0.5, 0.3. What do these eigenvalues represent in the context of system stability?",
+          "options": [
+            "A) The relative importance of eigenvectors; larger eigenvalues indicate directions that amplify changes most strongly in the urban system",
+            "B) The total number of neighborhoods (sum to 5)",
+            "C) A ranking of neighborhoods by population size",
+            "D) Probabilities that neighborhoods will grow in the next decade"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Eigenvalues reveal which directions (eigenvectors) have the strongest effect on system evolution. The dominant eigenvalue's eigenvector shows the strongest structural influence.",
+            "The number of eigenvalues equals matrix dimension, but their values convey system dynamics, not counts.",
+            "Eigenvalues measure dynamic influence, not population ranking.",
+            "Prediction requires temporal models, not eigenanalysis alone."
+          ],
+          "explanation": "The dominant eigenvalue (4.2) and its eigenvector identify the most influential pattern in the urban network. An intervention targeting this eigenvector's principal direction would have maximum system-wide impact. This is crucial for prioritizing urban infrastructure investments."
+        },
+        {
+          "question": "An urban planner finds that a neighborhood network matrix has an eigenvector v = [0.6, 0.8, 0.0] with eigenvalue \u03bb = 2.0. What does this tell you about these neighborhoods?",
+          "options": [
+            "A) Neighborhoods 1 and 2 are influential in the network; neighborhood 3 is isolated. Their influence pattern doubles in each system iteration.",
+            "B) Neighborhoods 1 and 2 have 60% and 80% of the city's population",
+            "C) The three neighborhoods are equally important but scale by 2x annually",
+            "D) This eigenvector is meaningless unless \u03bb = 1"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The eigenvector identifies influential nodes (neighborhoods 1&2 with non-zero components), and eigenvalue 2.0 means their influence pattern amplifies by factor of 2 in system evolution.",
+            "Eigenvector components don't represent population percentages directly.",
+            "Eigenvalue 2.0 doesn't necessarily mean annual growth; it describes the mathematical transformation.",
+            "Eigenvectors are meaningful for any non-zero eigenvalue."
+          ],
+          "explanation": "The zero component for neighborhood 3 indicates it's decoupled from this particular influence pattern. The eigenvalue 2.0 means neighborhoods 1 and 2's influence (in their specific proportions 0.6:0.8) grows by 2x per iteration. This is vital for identifying which neighborhoods' development drives city-wide changes."
+        },
+        {
+          "question": "When analyzing commute flow networks, you find the largest eigenvalue \u03bb\u2081 = 3.8 and second-largest \u03bb\u2082 = 1.2. What does the ratio \u03bb\u2081/\u03bb\u2082 \u2248 3.2 tell you about the city's commute structure?",
+          "options": [
+            "A) The dominant commute pattern is 3.2 times more influential than the secondary pattern, suggesting the city has a strong hierarchical commute structure",
+            "B) 3.2 neighborhoods are involved in the majority of commutes",
+            "C) The city's population grew by 3.2x between measurements",
+            "D) There will be a 3.2x increase in commutes next year"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Eigenvalue ratios reveal relative importance of modes. A large ratio (3.2) indicates one dominant pattern (likely converging to major employment center) versus dispersed secondary patterns.",
+            "Eigenvalues don't count nodes; they measure mode strength.",
+            "Eigenvalue ratios don't measure demographic change.",
+            "That requires predictive models, not eigenanalysis."
+          ],
+          "explanation": "The eigenvalue ratio \u03bb\u2081/\u03bb\u2082 = 3.2 indicates a highly centralized commute network: one dominant pattern (many workers flowing to one central hub) versus weaker secondary patterns (satellite employment centers). This informs whether a city has monocentric (single downtown) or polycentric (multiple hubs) employment structure\u2014critical for transportation planning."
+        }
+      ],
+      "pass_threshold": 65,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Eigenanalysis in Urban Systems",
+      "content": "Apply eigenvalue concepts to solve practical urban planning challenges.",
+      "questions": [
+        {
+          "question": "You're analyzing a city's infrastructure importance network and find the dominant eigenvector is approximately [0.7, 0.5, 0.3, 0.2] for neighborhoods A, B, C, D. What's your recommendation for where to allocate limited infrastructure improvement budget?",
+          "options": [
+            "A) Prioritize neighborhood A (highest eigenvector component) as improvements there ripple most through the city's interconnected systems",
+            "B) Distribute equally since all neighborhoods are part of the city",
+            "C) Choose neighborhood D since it has the smallest component (most potential for growth)",
+            "D) Analyze population sizes instead; eigenvectors are irrelevant to budgeting"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The dominant eigenvector shows influence centrality. Neighborhood A's higher component means improvements propagate more effectively through the connected system.",
+            "Equal distribution ignores network structure and wastes limited resources.",
+            "Low eigenvector components indicate peripheral positions, not growth potential.",
+            "Network structure is essential for resource allocation in interconnected systems."
+          ],
+          "explanation": "This is the practical power of eigenanalysis: identifying leverage points. Investing in neighborhood A (0.7 eigenvector component) has 3.5\u00d7 the network impact of investing in neighborhood D (0.2 component). This transforms budgeting from arbitrary to strategic, data-driven allocation."
+        },
+        {
+          "question": "A city discovers that its land-use transition matrix has an eigenvalue \u03bb = 1.0 with stable eigenvector. What does this equilibrium tell you about long-term urban development?",
+          "options": [
+            "A) The city's land-use composition will remain stable\u2014the current allocation of residential/commercial/industrial is self-perpetuating",
+            "B) The city will stop growing and become static",
+            "C) All neighborhoods will become identical",
+            "D) This eigenvalue is mathematically impossible"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! \u03bb = 1.0 means the transformation preserves the eigenvector direction\u2014the land-use ratio is stable. Current zoning patterns will persist without external intervention.",
+            "Stability in proportions doesn't mean zero growth; absolute amounts could still increase.",
+            "Stability preserves differentiation; neighborhoods remain distinct.",
+            "\u03bb = 1.0 is a meaningful, common eigenvalue."
+          ],
+          "explanation": "An eigenvalue of 1.0 represents a fixed point\u2014the system perpetuates itself without change. If a city's land-use matrix has \u03bb = 1.0, current zoning policies naturally maintain the current mix of residential/commercial/industrial. To change this mix, planners must intervene with new policies (effectively changing the matrix)."
+        },
+        {
+          "question": "While analyzing neighborhood similarity networks, you find the third-largest eigenvalue \u03bb\u2083 = 0.15 (much smaller than \u03bb\u2081 = 8.5 and \u03bb\u2082 = 2.1). What does this suggest about the network structure?",
+          "options": [
+            "A) The network is dominated by 2 main modes; the third mode represents noise or very weak secondary relationships",
+            "B) Only three neighborhoods exist in the city",
+            "C) The neighborhoods are arranged in exactly three clusters",
+            "D) The network is fully connected with equal influence everywhere"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The rapid eigenvalue decay (8.5 \u2192 2.1 \u2192 0.15) indicates structure is dominated by 2 primary patterns; the third captures residual effects.",
+            "Eigenvalues don't enumerate nodes; more neighborhoods exist.",
+            "Three clusters would show in the eigenvectors' structure, not just the count of eigenvalues.",
+            "Full connectivity would show no dominant eigenvalues; decay indicates structure."
+          ],
+          "explanation": "Eigenvalue spectra (the sequence of eigenvalues in decreasing order) reveal a system's complexity. Rapid decay (like here) means you can capture ~90% of the network's behavior with just the first 2 eigenvectors. This is dimensionality reduction\u2014the foundation of Principal Component Analysis (PCA), widely used in urban data science to simplify high-dimensional city data."
+        }
+      ],
+      "pass_threshold": 65,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Linear Algebra for Urban Planning",
+      "content": "Congratulations! You've mastered linear algebra through the lens of urban planning. You can now use vectors to represent neighborhood characteristics, matrices to model city systems and flows, and eigenanalysis to identify influential structures and patterns. These tools are fundamental to modern urban data science\u2014from optimizing traffic networks to analyzing neighborhood dynamics. You're ready to apply these concepts to real city planning challenges, analyze urban datasets, and make data-driven recommendations for city development. Continue practicing with open city datasets and explore how these mathematical foundations unlock insights about urban systems."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    }
+  ],
+  "generated_at": "2026-03-27T14:33:59.148174+00:00",
+  "model": "claude-haiku-4-5"
+}

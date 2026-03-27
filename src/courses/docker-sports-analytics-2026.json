@@ -1,0 +1,235 @@
+{
+  "id": "docker-sports-analytics-2026",
+  "title": "Docker and Containerization for Sports Analytics",
+  "description": "Learn Docker containerization by building reproducible sports analytics pipelines. Choose your learning path: start with architecture concepts or jump into hands-on containerization.",
+  "topic": "Docker & Containerization",
+  "theme": "sports analytics",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "docker",
+    "containerization",
+    "devops",
+    "sports analytics",
+    "reproducibility"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Containers Matter for Sports Analytics",
+      "content": "Sports analytics teams face a critical challenge: ensuring that a player performance model trained on your laptop runs identically on your colleague's machine, in the cloud, and in production. Docker solves this by packaging your entire analytics environment\u2014Python version, dependencies, data preprocessing scripts, and ML models\u2014into a single container. This means your live game prediction pipeline that works locally will work on any server without the \"but it works on my machine\" problem. Containerization also enables your team to deploy multiple analytics services (player tracking, injury prediction, game strategy models) that all run in isolated, reproducible environments.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "You're about to dive into Docker for sports analytics. Do you prefer understanding how containers work under the hood before building one, or learning by doing? Select the path that matches your style.",
+      "choices": [
+        {
+          "label": "Theory First: Learn Docker architecture & concepts",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-On First: Build and deploy a sports analytics container",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Docker Images, Layers, and Reproducibility",
+      "content": "A Docker image is a layered blueprint for your entire analytics environment. Each layer represents a step: the base OS layer, then Python installation, then your dependencies (pandas, scikit-learn, numpy), then your application code. Layers are cached and reusable\u2014if two projects both need Python 3.11 and pandas, they share that layer instead of duplicating it. This makes images efficient and fast to build. When you ship a sports analytics model to production, you're shipping that exact same image with those exact layers. The model that achieved 93% accuracy in practice won't mysteriously drop to 87% in production because of different library versions. Understanding layers is crucial: they determine image size, build time, and whether your live game statistics processor can scale across multiple servers simultaneously.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Building an Image Layer-by-Layer: Player Performance Analyzer",
+      "content": "Imagine building a Docker image for a tool that analyzes player performance metrics in real time. Layer 1: Start with `ubuntu:22.04` as your base OS. Layer 2: Install Python and system dependencies (`apt-get install python3.11 libpq-dev`). Layer 3: Copy `requirements.txt` and run `pip install -r requirements.txt` to get pandas, scikit-learn, and statsmodels. Layer 4: Copy your analytics code (`app.py`, `models/`, `data/`). Each layer sits on top of the previous one. When you rebuild this image next month with an updated injury prediction model, Docker skips layers 1-3 (unchanged) and only rebuilds layer 4. This efficiency matters: your CI/CD pipeline deploys new player analytics to production in seconds, not minutes. Team members pull the same image and get identical results when analyzing historical game data.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Docker Images and Layering",
+      "content": "Test your understanding of how Docker images and layers enable reproducible sports analytics.",
+      "questions": [
+        {
+          "question": "You're building a Docker image for a player injury prediction model. Your image has these layers: (1) Python 3.11, (2) pandas and scikit-learn, (3) your injury model code. A month later, you retrain your model and rebuild the image with updated code but the same libraries. Which layers does Docker rebuild?",
+          "options": [
+            "All three layers",
+            "Only layer 3 (the code)",
+            "Layers 2 and 3",
+            "None\u2014Docker keeps the old image"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Docker caches unchanged layers for speed.",
+            "Correct! Docker skips layers 1 and 2 because they haven't changed, rebuilding only your updated code.",
+            "Incorrect. Layers 1 and 2 are cached if unchanged.",
+            "Incorrect. Docker rebuilds when you request it, but caches what hasn't changed."
+          ],
+          "explanation": "Docker's layer caching is key to efficiency. When rebuilding, it uses cached layers and only rebuilds what's new, so redeploying an updated model to your analytics cluster is fast."
+        },
+        {
+          "question": "Why is layer-based containerization important for a sports analytics team working across laptops, servers, and the cloud?",
+          "options": [
+            "It reduces the cost of cloud storage",
+            "It ensures the same environment everywhere, preventing model prediction discrepancies between development and production",
+            "It automatically optimizes ML models for speed",
+            "It eliminates the need for version control"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Cost reduction is a side benefit, not the primary reason.",
+            "Correct! Layers guarantee reproducibility\u2014your player performance model produces identical predictions across all machines because the environment is identical.",
+            "Incorrect. Containerization doesn't optimize models; it ensures environment consistency.",
+            "Incorrect. You still need version control for your code and models."
+          ],
+          "explanation": "Reproducibility is the core value of containerization for analytics. When your live game prediction pipeline runs in a container, it uses the exact same Python version, library versions, and dependencies everywhere."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Containerizing Your Sports Analytics Pipeline",
+      "content": "Containerization starts with a Dockerfile\u2014a simple text file that describes how to build your analytics environment step by step. You specify your base image (e.g., `FROM python:3.11`), copy your code, install dependencies, and define how the container should run. For sports analytics, a typical Dockerfile might start with a lightweight Python base image, install pandas and your ML libraries, copy your analysis scripts, and set a command that runs your model inference or data processing job. The beauty of containerization is portability: your Dockerfile works on your laptop, your teammate's machine, your company's servers, and cloud clusters. This enables rapid iteration\u2014you test locally, commit your Dockerfile to version control, and continuous integration automatically builds and deploys containers to production. Your live game statistics processor container scales horizontally: need to handle spikes during major sporting events? Spin up more containers.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Real Dockerfile: Live Game Statistics Processor",
+      "content": "Here's a practical Dockerfile for a live game statistics aggregator used in sports analytics. It starts with `FROM python:3.11-slim` (lightweight base). Then `RUN apt-get update && apt-get install -y postgresql-client` (for database access to game data). Next, `COPY requirements.txt /app/requirements.txt` and `RUN pip install -r requirements.txt` (installs pandas, sqlalchemy, and inference libraries). Then `COPY ./stats_processor /app/stats_processor` (your analytics code). Finally, `CMD [\"python\", \"/app/stats_processor/main.py\"]` (what runs when the container starts). When a game is live and stats stream in, this containerized processor ingests raw event data, runs real-time predictions on player performance clusters, and pushes results to your analytics dashboard. Because it's containerized, your operations team can deploy the same image to multiple servers and load-balance incoming game data across them. If you improve the statistics aggregation logic, you update the Dockerfile, commit it, and the CI pipeline automatically rebuilds and redeploys.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Containerizing Analytics Pipelines",
+      "content": "Evaluate your grasp of containerization for sports analytics deployment.",
+      "questions": [
+        {
+          "question": "Your team's player tracking model runs perfectly in development but fails in production with a cryptic error about missing library versions. A colleague suggests containerizing the entire pipeline. How would containerization help?",
+          "options": [
+            "It would automatically fix the error without any code changes",
+            "It would guarantee the production environment matches your development environment, making the error reproducible and debuggable",
+            "It would improve the model's accuracy",
+            "It would eliminate the need to test before deploying"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Containers don't fix broken code, but they make debugging easier.",
+            "Correct! By containerizing, you ensure your development and production environments are identical. If the model works in a local container, it will work in production using the same image.",
+            "Incorrect. Containerization doesn't improve model accuracy.",
+            "Incorrect. You still need thorough testing, but containerization makes failures transparent and reproducible."
+          ],
+          "explanation": "This is a common scenario in sports analytics. Containerization solves the 'works on my machine' problem by making environments portable and reproducible across all deployment targets."
+        },
+        {
+          "question": "You need to deploy three different sports analytics microservices (injury prediction, play recommendation, player fatigue analysis) on your company's servers. What advantage does containerization provide?",
+          "options": [
+            "Each service can run in its own isolated container with its own dependencies, versions, and resource limits\u2014no conflicts or interference",
+            "It combines all three services into a single service",
+            "It reduces the number of servers you need significantly",
+            "It makes the services run faster"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Containerization enables isolation. Each analytics service can have different Python versions, libraries, and resource limits without affecting the others.",
+            "Incorrect. Containers isolate services; they don't merge them.",
+            "Incorrect. Containerization doesn't reduce hardware needs, though it does improve utilization and efficiency.",
+            "Incorrect. Containerization doesn't inherently improve speed, but isolation and efficient resource allocation can help with scaling."
+          ],
+          "explanation": "Isolation is a key benefit. Your injury prediction model (using TensorFlow) and play recommendation engine (using Statsmodels) can coexist on the same hardware without conflicts because each runs in its own container."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Ready to Containerize Your Analytics",
+      "content": "You've learned how Docker containerization enables reproducible, scalable sports analytics pipelines. Whether you started with architecture concepts or hands-on deployment, you understand that containers solve the core problem: ensuring your player performance models, game prediction algorithms, and real-time statistics processors work identically across development, testing, and production. Next steps: write your first Dockerfile for your team's analytics project, push it to a container registry, and deploy it to a staging environment. As your sports analytics platform grows, you'll use container orchestration (like Kubernetes) to manage multiple containers, auto-scale during major sporting events, and maintain highly available inference services. The containerization foundation you've built here is the first step toward a production-grade analytics infrastructure that scales with demand."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory first"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Next"
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": "Assess understanding"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n9",
+      "label": "Passed"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n5",
+      "label": "Retry"
+    },
+    {
+      "id": "c7",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-on first"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Next"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Assess understanding"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Passed"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n8",
+      "label": "Retry"
+    }
+  ],
+  "generated_at": "2026-03-27T15:10:08.534769+00:00",
+  "model": "claude-haiku-4-5"
+}

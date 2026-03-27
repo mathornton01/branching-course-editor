@@ -13,6 +13,8 @@ from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 from typing import Any, Dict, List
 import re
+import threading
+import time as _time
 
 SRC_DIR = Path(__file__).parent
 COURSES_DIR = SRC_DIR / "courses"
@@ -34,6 +36,63 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# --- Auto-rebuild catalog on startup and periodically ---
+
+def _rebuild_catalog():
+    """Scan all course JSON files and rebuild catalog.json."""
+    from datetime import datetime, timezone
+    courses = []
+    for f in sorted(COURSES_DIR.glob("*.json")):
+        if f.name == "catalog.json":
+            continue
+        try:
+            data = json.loads(f.read_text())
+        except Exception:
+            continue
+        course_id = data.get("id") or f.stem
+        courses.append({
+            "id": course_id,
+            "title": data.get("title", f.stem),
+            "description": data.get("description", ""),
+            "topic": data.get("topic", ""),
+            "theme": data.get("theme"),
+            "difficulty": data.get("difficulty", "beginner"),
+            "estimated_minutes": data.get("estimated_minutes", 15),
+            "tags": data.get("tags", []),
+            "generated_at": data.get("generated_at"),
+            "node_count": len(data.get("nodes", [])),
+            "connection_count": len(data.get("connections", [])),
+            "filename": f.name,
+        })
+    catalog = {
+        "courses": courses,
+        "generated": len(courses),
+        "last_updated": datetime.now(timezone.utc).isoformat(),
+    }
+    CATALOG_PATH.write_text(json.dumps(catalog, indent=2))
+    return len(courses)
+
+def _periodic_rebuild(interval=120):
+    """Background thread: rebuild catalog every `interval` seconds."""
+    while True:
+        _time.sleep(interval)
+        try:
+            _rebuild_catalog()
+        except Exception:
+            pass
+
+# Rebuild on startup
+_rebuild_catalog()
+# Start background rebuilder (every 2 minutes)
+_rebuild_thread = threading.Thread(target=_periodic_rebuild, args=(120,), daemon=True)
+_rebuild_thread.start()
+
+@app.get("/api/rebuild-catalog")
+def rebuild_catalog_endpoint():
+    """Force rebuild the catalog from all course files."""
+    count = _rebuild_catalog()
+    return {"ok": True, "courses_indexed": count}
 
 # --- API routes (must be before static mount) ---
 

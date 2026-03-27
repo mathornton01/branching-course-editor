@@ -1,0 +1,493 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440099",
+  "title": "Cryptography Fundamentals",
+  "description": "Master cryptography principles through social work contexts: protecting client confidentiality, secure inter-agency communication, and verifying identities in multi-partner networks.",
+  "topic": "Cryptography Fundamentals",
+  "theme": "social work",
+  "difficulty": "beginner",
+  "estimated_minutes": 40,
+  "tags": [
+    "cryptography",
+    "security",
+    "confidentiality",
+    "data-protection",
+    "social-work"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Your Clients' Data Matters: Introduction to Cryptography",
+      "content": "As a social worker, you handle deeply sensitive information\u2014client histories, trauma narratives, mental health conditions, and personal identifying details. If this data falls into the wrong hands, it can cause severe harm. Cryptography is the science of protecting information through mathematical techniques that ensure only authorized people can read your client data. In this course, you'll learn how encryption works, why it matters for social work, and how to evaluate secure communication tools your organization might adopt. By the end, you'll understand the cryptographic principles protecting vulnerable populations.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Assessment: Why Cryptography in Social Work?",
+      "content": "Test your understanding of why encryption and cryptography are essential for protecting client information in social work practice.",
+      "questions": [
+        {
+          "question": "You're preparing a discharge summary for a client who experienced domestic violence. What is the PRIMARY reason to encrypt this document before sending it via email?",
+          "options": [
+            "To make the document smaller for faster email",
+            "To prevent unauthorized people (like the abuser) from reading sensitive details if the email is intercepted",
+            "To meet standard email formatting requirements",
+            "To make the document look more professional"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Encryption doesn't compress data or reduce file size.",
+            "Correct! Encryption protects confidential information from interception and unauthorized access.",
+            "Encryption is a security measure, not a formatting requirement.",
+            "Encryption is about security and confidentiality, not appearance."
+          ],
+          "explanation": "In social work, protecting sensitive client information from unauthorized access is a core ethical responsibility. Encryption ensures that even if an email is intercepted, only the intended recipient can read it."
+        },
+        {
+          "question": "A hospital social work department shares de-identified research data with a university partner. Why might encryption still be necessary?",
+          "options": [
+            "De-identified data doesn't need any protection",
+            "Encryption prevents the university from accessing the data",
+            "Even de-identified data can be re-identified through cross-referencing; encryption adds an essential security layer",
+            "Encryption is always required by federal law for all data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "De-identified data can still be vulnerable, especially if combined with other datasets.",
+            "The authorized partner should have the decryption key and be able to access the data.",
+            "Correct! Using 'defense in depth'\u2014multiple layers of security\u2014protects even de-identified data from re-identification attacks.",
+            "While regulations may require encryption, the primary reason here is technical protection against re-identification."
+          ],
+          "explanation": "De-identification is not foolproof. Researchers have shown that de-identified datasets can sometimes be re-identified by combining them with other public information. Encryption provides an additional security layer."
+        },
+        {
+          "question": "Your agency uses an unencrypted chat app to coordinate emergency responses between social workers. What is the main risk?",
+          "options": [
+            "Messages will be slow to deliver",
+            "The app interface is unfriendly to use",
+            "An attacker intercepting network traffic could read sensitive case details and emergency plans",
+            "Encrypted apps are always slower than unencrypted ones"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Encryption doesn't significantly impact message delivery speed.",
+            "User interface quality is separate from encryption security.",
+            "Correct! Unencrypted communications can be intercepted by attackers on the same network, exposing vulnerable information.",
+            "Modern encryption is highly optimized and adds minimal overhead."
+          ],
+          "explanation": "In emergency coordination, timing and security both matter. Unencrypted chat exposes case details, emergency locations, and crisis information to potential interception."
+        }
+      ],
+      "pass_threshold": "2/3",
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Client Communication Security Scenarios",
+      "content": "Work through realistic scenarios where social workers must make decisions about protecting client data. These scenarios emphasize why encryption is critical in everyday practice.",
+      "questions": [
+        {
+          "question": "Maria, a social worker at a domestic violence shelter, needs to send a client's safety plan to a therapist at a partner clinic. The plan includes the client's location, contact info, and trauma history. Which method best protects this information?",
+          "options": [
+            "Email the safety plan as an unencrypted attachment",
+            "Call the therapist and verbally explain (no documentation)",
+            "Send through an encrypted email service where both parties share a decryption key",
+            "Post the plan on a shared social media platform"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Unencrypted email can be intercepted by an abuser monitoring the client's inbox.",
+            "Verbal communication lacks documentation needed for continuity of care.",
+            "Correct! Encrypted communication with a trusted partner ensures the information reaches only the intended recipient.",
+            "Social media is public and completely inappropriate for sensitive client information."
+          ],
+          "explanation": "Encrypted channels protect sensitive information while maintaining necessary documentation and continuity of care between providers."
+        },
+        {
+          "question": "A caseworker's laptop with unencrypted client files is stolen. The caseworker had encrypted files 'at rest' but not all data. What risk is most critical?",
+          "options": [
+            "The laptop is now worthless and can't be replaced",
+            "Anyone with the laptop can access any unencrypted client files stored on it",
+            "The laptop will automatically send out spam emails",
+            "The caseworker will be unable to use email from any device"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The laptop's value is irrelevant; the security breach is the priority.",
+            "Correct! Unencrypted files on a lost device can be read immediately by anyone with physical access.",
+            "A stolen laptop doesn't automatically send spam.",
+            "A stolen laptop doesn't prevent email access from other devices."
+          ],
+          "explanation": "This scenario illustrates 'encryption at rest'\u2014protecting stored data. Files on a stolen device without encryption are immediately accessible to anyone with physical access."
+        },
+        {
+          "question": "Why is it risky to use the same simple password across all client communication tools (email, chat, file sharing)?",
+          "options": [
+            "Passwords consume too much storage space",
+            "If one platform is hacked and the password exposed, attackers could access client data on all platforms",
+            "Simple passwords make the social worker work harder",
+            "Using one password is actually the most secure practice"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Passwords don't consume meaningful storage.",
+            "Correct! A compromised password on one platform creates a domino effect of breaches across all platforms.",
+            "The difficulty of remembering a password is not a security issue.",
+            "Using the same password across platforms is one of the highest-risk practices."
+          ],
+          "explanation": "This relates to key management: if one key (password) is exposed, all data protected by it is at risk. Using unique, strong passwords for each platform is essential security hygiene."
+        }
+      ],
+      "pass_threshold": "2/3",
+      "success_target": "n2",
+      "failure_target": "n2"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Shared Keys: Symmetric Encryption for Case File Sharing",
+      "content": "Symmetric encryption uses a single, shared secret key that both sender and recipient possess. Think of it like a locked filing cabinet where both the caseworker and a trusted colleague have the same key. To send a secure message, you encrypt it using your shared key; the recipient decrypts it using that same key. This works well when two parties need to communicate securely\u2014like a social worker sharing a case file with a supervisor, or a child protective services office coordinating with a school counselor. The advantage: it's fast and secure. The challenge: both parties must safely share and protect the key without anyone else obtaining it. If the key leaks, an attacker can decrypt everything encrypted with that key.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Understanding Symmetric Encryption",
+      "content": "Test your understanding of how symmetric encryption works and why it matters in social work case file sharing.",
+      "questions": [
+        {
+          "question": "In symmetric encryption, if a supervisor and caseworker share a single 256-bit encryption key, how many keys are there total in this system?",
+          "options": [
+            "One key shared between both parties",
+            "Two keys\u2014one for the supervisor, one for the caseworker",
+            "256 keys\u2014one for each bit",
+            "Zero keys; they use passwords instead"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Symmetric encryption uses one shared key for both encryption and decryption.",
+            "That describes asymmetric encryption, where each party has a different key pair.",
+            "The 256 refers to the key's size in bits (very secure), not the number of keys.",
+            "Symmetric encryption specifically uses encryption keys, not just passwords."
+          ],
+          "explanation": "The 'symmetric' part means the same key works in both directions. Both parties must protect this single shared key carefully."
+        },
+        {
+          "question": "An agency uses symmetric encryption to share incident reports between field workers. The shared encryption key must be:",
+          "options": [
+            "Publicly posted so everyone can access case files",
+            "Kept secure and known only to the authorized field workers who need it",
+            "Changed with every single message sent",
+            "Less than 128 bits long for maximum speed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Publishing the key would allow anyone to decrypt case files\u2014defeating the purpose.",
+            "Correct! The key is the secret; only authorized parties should possess it.",
+            "Changing the key for every message is impractical and unnecessary with strong keys.",
+            "Longer keys (like 256 bits) are more secure with minimal performance impact."
+          ],
+          "explanation": "In symmetric encryption, the key is the secret. Its security depends entirely on keeping it secret and protected from unauthorized access."
+        },
+        {
+          "question": "What is a significant disadvantage of symmetric encryption when a social work office needs to securely communicate with many different partner organizations?",
+          "options": [
+            "It's too complicated for social workers to understand",
+            "You need a different shared key with each partner, requiring careful management of many keys",
+            "It doesn't actually encrypt anything meaningful",
+            "Partner organizations never trust symmetric encryption"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Symmetric encryption is actually quite straightforward in practice.",
+            "Correct! With 10 partners, you need 10 different keys, each requiring secure storage and management.",
+            "Symmetric encryption is proven secure with proper implementation.",
+            "Symmetric encryption is widely trusted and used by organizations globally."
+          ],
+          "explanation": "This 'key management burden' is why asymmetric (public-key) encryption becomes valuable in large networks. You'll learn about that next."
+        }
+      ],
+      "pass_threshold": "2/3",
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Managing Symmetric Encryption in Partnerships",
+      "content": "Work through realistic scenarios involving symmetric key management in multi-partner social work networks.",
+      "questions": [
+        {
+          "question": "James, a transitional housing caseworker, collaborates with three partners: employment program, mental health clinic, and substance abuse center. Using symmetric encryption, he has a different key with each partner. If James wants to send the same encrypted case update to all three, he should:",
+          "options": [
+            "Use one encryption key and send to all three partners",
+            "Encrypt the message three separate times\u2014once with each partner's unique key",
+            "Not encrypt at all; it's too complicated with three partners",
+            "Ask all partners to agree to use one shared key"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Using one key defeats the purpose of separate partnerships and compartmentalized keys.",
+            "Correct! Each partner has a unique key, so James must encrypt the same content three times.",
+            "Encryption is essential, even when managing multiple keys.",
+            "Consolidating to one key increases risk if that key is compromised."
+          ],
+          "explanation": "When using symmetric encryption with multiple partners, each relationship has its own key. Sensitive information must be re-encrypted for each recipient using their unique key."
+        },
+        {
+          "question": "What is the main security advantage of James using different keys with each partner (rather than one shared key with all three)?",
+          "options": [
+            "It makes encryption faster for everyone",
+            "If one key is compromised, only that partner's data is at risk; other partners' information remains protected",
+            "It makes the social worker's job easier",
+            "There is no advantage; multiple keys are just unnecessary work"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Multiple keys don't inherently improve speed.",
+            "Correct! This is 'compartmentalization'\u2014limiting damage from any single key compromise.",
+            "Multiple keys create more management responsibility.",
+            "Compartmentalization is a critical security principle in social work."
+          ],
+          "explanation": "Using separate keys limits the scope of damage. If the employment program's key is compromised, the mental health clinic's encrypted messages remain secure."
+        },
+        {
+          "question": "A new partner organization joins the network. Using symmetric encryption, how many new keys must be created?",
+          "options": [
+            "Zero\u2014add them to the existing key",
+            "One key that everyone shares",
+            "A new unique key must be established with the new partner (and with each existing partner separately if not already sharing)",
+            "Two keys\u2014one for them, one for everyone else"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Existing keys can't be shared without compromising security.",
+            "One shared key defeats compartmentalization and is high-risk.",
+            "Correct! Each partnership relationship needs its own symmetric key.",
+            "Keys aren't divided this way; each relationship gets one unique key."
+          ],
+          "explanation": "Symmetric encryption requires separate keys for each secure channel. Adding a partner means establishing new keys with that partner and anyone else needing secure communication with them."
+        }
+      ],
+      "pass_threshold": "2/3",
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Public Keys and Private Keys: Asymmetric Encryption for Networks",
+      "content": "Asymmetric encryption uses a pair of keys: a public key (anyone can have) and a private key (only the owner keeps secret). Imagine a mailbox with a slot anyone can use to drop letters, but only you have the key to open and read them. This solves the key-sharing problem! When someone wants to send you an encrypted message, they use your public key to encrypt it; only you can decrypt it with your private key. Asymmetric encryption is essential for social service networks where many organizations need to securely exchange information without complex key-sharing ceremonies. You can also use your private key to digitally sign messages, proving they came from you without revealing your password. This is crucial for verifying the identity of other caseworkers or supervisors in inter-agency communications.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Asymmetric Encryption and Digital Signatures",
+      "content": "Test your understanding of how asymmetric (public-key) encryption works in social work networks and how digital signatures verify identity.",
+      "questions": [
+        {
+          "question": "A social work director publishes her public key in an official directory so partner organizations can securely contact her office. If someone obtains this public key, what can they do?",
+          "options": [
+            "Decrypt all of the director's private emails and confidential messages",
+            "Encrypt messages that only the director can decrypt using her private key",
+            "Impersonate the director in all communications",
+            "Change the director's password"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The public key can't decrypt messages; only the private key can.",
+            "Correct! The public key is specifically designed for others to encrypt messages only the director can read.",
+            "Without the private key, an attacker can't forge the director's signature.",
+            "The public key has no relationship to passwords."
+          ],
+          "explanation": "Public keys are meant to be shared. Their purpose is to allow anyone to send encrypted messages that only the private key holder can decrypt."
+        },
+        {
+          "question": "A caseworker receives an email claiming to be from their supervisor with a digital signature attached. Using the supervisor's public key, the caseworker can verify that:",
+          "options": [
+            "The supervisor's password is correct and safe",
+            "The email came from the supervisor and hasn't been altered (because only the supervisor's private key could create that signature)",
+            "The supervisor approves everything in the caseworker's recent case notes",
+            "The supervisor's email address is definitely real"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Digital signatures have nothing to do with passwords.",
+            "Correct! A valid signature proves the message came from the private key holder and hasn't been modified.",
+            "A signature on one email doesn't imply approval of other documents.",
+            "While a signature helps verify identity, it doesn't prove the email address itself is real."
+          ],
+          "explanation": "Digital signatures use cryptography to prove authenticity and integrity. Only the person with the matching private key could have created the signature, and any modification to the message would invalidate it."
+        },
+        {
+          "question": "Why is asymmetric encryption better than symmetric encryption for communication between 10 different social service organizations?",
+          "options": [
+            "It's faster for all organizations to process",
+            "Each organization publishes one public key; anyone can encrypt to them without needing secure key-exchange meetings",
+            "It uses less electricity and storage",
+            "It doesn't require computers or internet infrastructure"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Asymmetric encryption has similar performance to symmetric encryption.",
+            "Correct! This is the major advantage: scalability without key-sharing complexity. 10 organizations = 10 public keys, not 45 shared symmetric keys.",
+            "Asymmetric and symmetric encryption have similar resource requirements.",
+            "Both encryption types require digital infrastructure."
+          ],
+          "explanation": "With 10 organizations and symmetric encryption, you'd need 45 different shared keys (one for each pair). With asymmetric encryption, you just publish 10 public keys. This is why public-key infrastructure scales to large networks."
+        }
+      ],
+      "pass_threshold": "2/3",
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Building Secure Inter-Agency Networks",
+      "content": "Work through scenarios where social work agencies coordinate using asymmetric encryption and digital signatures.",
+      "questions": [
+        {
+          "question": "A state CPS office coordinates with 15 nonprofits. Instead of managing shared symmetric keys with each nonprofit, CPS publishes its public key. When a nonprofit sends encrypted case information to CPS, what key do they need?",
+          "options": [
+            "Their own private key",
+            "The CPS office's public key",
+            "A symmetric key they share with CPS",
+            "Their own public key"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The nonprofit's private key is for their own use, not for encrypting to others.",
+            "Correct! They use CPS's published public key to encrypt the message.",
+            "Asymmetric encryption eliminates the need for shared symmetric keys.",
+            "The nonprofit's public key allows others to send messages to them, not to CPS."
+          ],
+          "explanation": "Each organization publishes a public key. Others use it to send encrypted messages only that organization can decrypt."
+        },
+        {
+          "question": "A nonprofit receives a policy directive claiming to be from the CPS director. The email includes a digital signature made with the director's private key. The nonprofit uses the director's public key to verify it. What does a valid signature prove?",
+          "options": [
+            "The policy is a good idea and the nonprofit must follow it",
+            "The email came from someone with the director's private key (almost certainly the director) and the message hasn't been altered",
+            "The nonprofit should change their policies immediately",
+            "The director definitely likes this nonprofit's work"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A signature proves authenticity and integrity, not content quality.",
+            "Correct! A valid signature proves the message came from the private key holder and hasn't been modified in transit.",
+            "Policy decisions require careful review regardless of signature validity.",
+            "Signatures prove identity, not emotional approval."
+          ],
+          "explanation": "Digital signatures provide non-repudiation: the signer can't later deny they signed the message. For official communications, this is crucial."
+        },
+        {
+          "question": "If a hacker obtains the CPS director's PUBLIC key, what harm can they cause directly?",
+          "options": [
+            "They can decrypt all messages sent to the director",
+            "They can forge the director's digital signature and send fake policy directives",
+            "Without the private key, they cannot decrypt or forge signatures\u2014the public key is meant to be public",
+            "They can change the director's password"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The public key can't decrypt messages; only the private key can.",
+            "They'd need the private key to create valid signatures.",
+            "Correct! Public keys are intentionally public. Their security doesn't depend on secrecy.",
+            "Public keys have no connection to passwords."
+          ],
+          "explanation": "The entire security of asymmetric encryption depends on the assumption that private keys stay private. Public keys can be compromised without loss of security."
+        }
+      ],
+      "pass_threshold": "2/3",
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Capstone: Applying Cryptography to Social Work Practice",
+      "content": "You've now mastered the cryptographic principles protecting vulnerable populations: symmetric encryption for trusted one-to-one secure channels, and asymmetric encryption for large secure networks. You understand digital signatures verify identity without revealing secrets, and why key management is critical. In your practice, you'll evaluate communication tools your agency uses: Do they encrypt data in transit and at rest? Do they use modern encryption standards? Can you verify the identity of other caseworkers or partner agencies? By applying these principles, you protect the most vulnerable members of our society\u2014clients who have shared their deepest struggles with you in confidence. Whether you're sending a safety plan, coordinating emergency response, or sharing case updates across organizations, cryptography is your ally in keeping client data secure. Your next step: audit your agency's current communication practices. What information is encrypted? What still needs protection? How would you implement these cryptographic tools?"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "continue to assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "needs practice (score < 2/3)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "ready to advance (score \u2265 2/3)"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "practice complete, retry assessment"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "continue to assessment"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "needs practice (score < 2/3)"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "ready to advance (score \u2265 2/3)"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "practice complete, retry assessment"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "continue to assessment"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "needs practice (score < 2/3)"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "ready to advance (score \u2265 2/3)"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "practice complete, retry assessment"
+    }
+  ],
+  "generated_at": "2026-03-27T15:40:11.232303+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,132 @@
+{
+  "id": "stat-inference-journalism",
+  "title": "Statistical Inference and Hypothesis Testing in Journalism",
+  "description": "Learn to verify claims and interpret data like a professional journalist using statistical inference and hypothesis testing",
+  "topic": "Statistical Inference and Hypothesis Testing",
+  "theme": "journalism",
+  "difficulty": "beginner",
+  "estimated_minutes": 25,
+  "tags": [
+    "statistics",
+    "journalism",
+    "hypothesis testing",
+    "inference",
+    "data verification"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Health Claims Investigation",
+      "content": "You're a political reporter investigating a claim made by a mayoral candidate about public support for a new health policy. The candidate states: 'The majority of voters support my new policy.' You conduct a random survey of 500 voters and find that 56% support the policy. But is 56% convincing evidence of majority support, or could this be due to random variation? You need to use statistical inference to answer this question responsibly before publishing your story."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which Statistical Approach?",
+      "content": "You have two main statistical tools available to verify the claim. Which approach will you use?",
+      "choices": [
+        {
+          "label": "Hypothesis Testing: Test if 56% is statistically different from 50%",
+          "next": "n3"
+        },
+        {
+          "label": "Confidence Intervals: Estimate the true range of voter support",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Setting Up the Hypothesis Test",
+      "content": "In hypothesis testing, you make two competing claims and let the data decide. The null hypothesis (H\u2080) assumes the true voter support equals 50%\u2014any observed difference is random noise. The alternative hypothesis (H\u2081) claims support differs from 50%. You set a significance level of \u03b1 = 0.05, accepting a 5% false-positive rate. With 500 voters and 56% support, your z-test yields a p-value of 0.041\u2014less than 0.05. Statistically, you can reject the null hypothesis. But what does this mean for responsible journalism?"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Interpreting the P-Value",
+      "content": "Your p-value is 0.041, meaning 'If true support were 50%, we'd observe 56% or more only 4.1% of the time by chance.' The result is statistically significant. But how should you report this finding responsibly?",
+      "choices": [
+        {
+          "label": "Report with confidence: The p-value clearly supports the candidate's claim",
+          "next": "n5"
+        },
+        {
+          "label": "Dig deeper: The p-value is borderline\u2014investigate further before publishing",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "The Bold Headline Approach",
+      "content": "You publish: 'MAJORITY BACKS HEALTH POLICY: New Survey Shows 56% Support.' This is statistically valid since p < 0.05. However, risks exist: p-hacking (running many tests until one crosses 0.05), and ignoring practical significance (56% is only marginally above 50%). Your headline accurately reflects the statistical test, but readers may not understand that significance \u2260 magnitude. A sophisticated audience might ask: Is one percentage point really newsworthy? This approach prioritizes statistical rigor while potentially overstating practical impact."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "The Cautious Reporting Approach",
+      "content": "You publish: 'New Policy Gains Plurality Support; Experts Urge Nuance on Interpretation.' You report the p-value (0.041) for transparency but emphasize the small practical difference (56% vs. 50%) and sample size (n=500). You ask critical questions: Could demographics explain the difference? Is there selection bias? This reflects best practices in data journalism. Readers see both the finding and its limitations, building sophisticated statistical thinking. You acknowledge statistical significance while contextualizing its magnitude, earning reader trust and credibility."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Using Confidence Intervals Instead",
+      "content": "Rather than asking 'Is there a difference from 50%?', you ask 'What is the true level of support?' You calculate a 95% confidence interval around 56%: [51.6%, 60.4%]. This means you're 95% confident the true population support lies in this range. This approach reveals more: the interval mostly exceeds 50% but includes 50% at its edge, suggesting support likely exceeds 50% but with substantial uncertainty (a 9-point range). Notice the confidence interval directly answers the editor's question 'what's the likely range?'\u2014far more useful than a p-value alone."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "The Transparent CI-Based Report",
+      "content": "You publish: 'Candidate's Policy Estimated at 56% Support, With 95% Confidence Range of 52\u201360%.' You report the point estimate, confidence interval, and sample size. This lets readers see the best estimate and margin of error\u2014the essence of transparent reporting. You avoid binary 'significant or not' thinking and instead acknowledge: all estimates have uncertainty, and your job is reporting that range clearly. Modern data journalism increasingly uses confidence intervals for this reason: they communicate uncertainty more honestly than p-values."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Hypothesis Testing"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Confidence Intervals"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "p < 0.05: Report with confidence"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Investigate further"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T16:03:03.067055+00:00",
+  "model": "claude-haiku-4-5"
+}

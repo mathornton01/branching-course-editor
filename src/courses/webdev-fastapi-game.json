@@ -1,0 +1,253 @@
+{
+  "id": "webdev-fastapi-game",
+  "title": "Web Development with FastAPI: Building Game Servers",
+  "description": "Learn FastAPI by building RESTful APIs for game backends. Choose between mastering theory first or jumping straight into hands-on coding.",
+  "topic": "Web Development with FastAPI",
+  "theme": "game design",
+  "difficulty": "beginner",
+  "estimated_minutes": 120,
+  "tags": [
+    "FastAPI",
+    "Web Development",
+    "REST API",
+    "Python",
+    "Game Development",
+    "Backend"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Welcome: Building Game Servers with FastAPI",
+      "content": "Modern games require robust backend services: player management, score tracking, inventory systems, and real-time matchmaking. FastAPI is a modern Python web framework that makes building these APIs fast, reliable, and easy. In this course, you'll learn web development fundamentals by creating backend services for games. Whether you're building a multiplayer RPG or a leaderboard system, FastAPI provides the tools to handle thousands of concurrent players efficiently. You'll master async programming, data validation, and API design\u2014all essential for production game servers."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Which approach suits your learning style? Path A dives deep into FastAPI concepts and architecture before building. Path B gets you coding immediately and covers theory as you go. Both paths teach the same material\u2014just in different orders.",
+      "choices": [
+        {
+          "label": "Master the Theory First",
+          "next": "n3"
+        },
+        {
+          "label": "Jump Into Building",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "FastAPI Fundamentals: The Architecture of Game Servers",
+      "content": "Think of FastAPI as a dispatcher in a game server: requests come in (player login, score update, inventory check), and your API routes them to the right handler function, which processes the data and sends back a response. FastAPI uses Python type hints to automatically validate incoming data\u2014like checking that a player ID is an integer before processing a purchase. The framework builds documentation automatically (OpenAPI/Swagger), handles async operations for concurrent players, and validates JSON responses. Pydantic models ensure data integrity: a PlayerData model guarantees every player object has required fields like username, email, and level, preventing malformed data from corrupting your game state."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Creating a Player Registration Endpoint",
+      "content": "Here's a practical endpoint for a battle royale game. A client sends: `POST /players {\"username\": \"ShadowNinja\", \"email\": \"user@game.com\"}`. FastAPI's Pydantic model validates this data structure automatically. If the username is missing or email format is wrong, the API rejects it with a helpful error before your code runs. Your handler function receives clean, typed data, queries the database to ensure the username isn't taken, creates the player record, and returns: `{\"id\": 1, \"username\": \"ShadowNinja\", \"created_at\": \"2026-03-27T10:00:00Z\"}`. The client receives exactly this structure because your response model defines it. Status codes matter: 201 Created for successful registration, 409 Conflict if the username exists\u2014clients can handle different outcomes intelligently."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: FastAPI Concepts",
+      "content": "Test your understanding of FastAPI fundamentals and API design patterns used in game servers.",
+      "questions": [
+        {
+          "question": "A game client sends a request to add 100 gold to a player's inventory: `POST /inventory {\"player_id\": 42, \"gold\": 100}`. What is FastAPI's first job before running your handler function?",
+          "options": [
+            "A) Query the database to find player 42",
+            "B) Validate that player_id is an integer and gold is a number using Pydantic",
+            "C) Add the gold to the database immediately",
+            "D) Send a confirmation message to the client"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: validation happens first, before your code runs.",
+            "Correct! Pydantic automatically validates request data against your model schema.",
+            "Incorrect: validation comes before handler logic.",
+            "Incorrect: the handler does that after validation."
+          ],
+          "explanation": "FastAPI validates all incoming data against Pydantic models before your route handler executes. This prevents invalid data from reaching your game logic."
+        },
+        {
+          "question": "You're designing an API endpoint for a leaderboard. Should you return all 1 million global players, or paginate the response?",
+          "options": [
+            "A) Always return all data\u2014clients can ignore what they don't need",
+            "B) Paginate: return 100 scores per request, with a 'next_page' token for the client to fetch more",
+            "C) Return just the top 10 globally; don't let clients paginate",
+            "D) Return data in CSV format to save bandwidth"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: sending 1 million records would crash slow connections and overload clients.",
+            "Correct! Pagination is crucial for scalability. Mobile players on 4G connections need efficient APIs.",
+            "Incorrect: limiting to top 10 removes useful functionality.",
+            "Incorrect: JSON is standard for REST APIs."
+          ],
+          "explanation": "Pagination lets clients fetch data in manageable chunks. A leaderboard API might return {\"scores\": [...100 items...], \"next_page\": \"?page=2\"}, letting players scroll efficiently."
+        },
+        {
+          "question": "When a player tries to redeem a reward code that doesn't exist, what HTTP status code should you return?",
+          "options": [
+            "A) 200 OK with a message 'Code not found'",
+            "B) 500 Internal Server Error",
+            "C) 404 Not Found",
+            "D) 400 Bad Request"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect: 200 means success. A missing resource isn't success.",
+            "Incorrect: 500 is for server bugs, not missing data.",
+            "Correct! 404 tells the client 'this resource doesn't exist.'",
+            "Incorrect: 400 means the request format was wrong, not that the resource is missing."
+          ],
+          "explanation": "HTTP status codes convey intent: 404 tells the client the reward code doesn't exist. Many clients handle 404 automatically (show user-friendly message), but 200 with an error message requires custom handling."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Building Your First Game API with FastAPI",
+      "content": "FastAPI is Python's fastest way to build production APIs. Start by installing FastAPI and Uvicorn (the server), then write a minimal game endpoint: your Python function receives request data, runs game logic, returns a response. That's it. FastAPI automatically converts Python function parameters into HTTP parameters, validates them using type hints, and generates interactive documentation. For a multiplayer game, you need endpoints like `POST /players` to register, `GET /players/{player_id}` to fetch profile data, `PUT /scores/{player_id}` to update scores. Each endpoint is a single Python function\u2014no boilerplate. FastAPI runs asynchronously, meaning it can handle 1000 concurrent players logging in without blocking. This is why game studios prefer it over slower frameworks."
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Example: Creating a Score Submission Endpoint",
+      "content": "A game client submits a score after a match: `POST /games/scores`. The request body: `{\"player_id\": 42, \"level\": 5, \"score\": 15000, \"timestamp\": \"2026-03-27T14:30:00Z\"}`. Your FastAPI function: `async def submit_score(score: ScoreSubmission)` receives a validated ScoreSubmission object. You check if player exists, verify the score is legitimate (didn't exceed level max by 10x), write it to the database, and return the saved score with a ranking: `{\"id\": 789, \"rank\": 127, \"player_id\": 42, \"score\": 15000, \"is_new_record\": false}`. The async keyword means while your function waits for the database, FastAPI handles other players' requests. Response time: <100ms. Without async, each request would block, and 100 concurrent players would create a queue."
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Build Game API Endpoints",
+      "content": "Apply your FastAPI knowledge to realistic game scenarios.",
+      "questions": [
+        {
+          "question": "You're building an endpoint for players to purchase in-game items. A player sends: `POST /store/purchase {\"player_id\": 12, \"item_id\": \"sword_gold\", \"quantity\": 1}`. Write the response status code if the player has insufficient gold.",
+          "options": [
+            "A) 200 OK with message 'Insufficient funds'",
+            "B) 400 Bad Request",
+            "C) 402 Payment Required",
+            "D) 409 Conflict"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect: 200 means the transaction succeeded.",
+            "Incorrect: 400 means the request format was wrong, not the game state.",
+            "Correct! 402 Payment Required semantically means 'I understood your request, but you can't afford it.'",
+            "Incorrect: 409 is for conflicting states like duplicate usernames."
+          ],
+          "explanation": "HTTP 402 is designed for payment failures. It tells the client 'your request is valid, but payment was declined'\u2014they can prompt the user to earn more currency and retry."
+        },
+        {
+          "question": "Your matchmaking endpoint handles 500 concurrent requests during peak hours. You decide to handle each request sequentially (not async). What happens?",
+          "options": [
+            "A) Each player waits only 10ms\u2014no problem",
+            "B) The server processes requests in queue; request 500 waits 50+ seconds while requests 1-499 finish",
+            "C) FastAPI automatically parallelizes even without async",
+            "D) The server crashes immediately"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: sequential processing on 500 requests takes much longer.",
+            "Correct! If each request takes 100ms, request 500 waits ~50 seconds. Players quit during loading.",
+            "Incorrect: FastAPI can't parallelize without async/await.",
+            "Incorrect: the server doesn't crash, but players experience terrible latency."
+          ],
+          "explanation": "Async is non-negotiable for games. If your matchmaking waits 2 seconds for a database lookup per request, 500 concurrent players = 1000 seconds total latency. Async handles all 500 concurrently, turning 2-second per-request time into 2-second total time."
+        },
+        {
+          "question": "You want to return a 'leaderboard' that includes: rank, player_name, score, and last_updated_time. Which tool ensures every leaderboard entry has exactly these fields\u2014no more, no less?",
+          "options": [
+            "A) Python dictionaries\u2014very flexible",
+            "B) Pydantic ResponseModel with exact field definitions",
+            "C) SQL queries without structure",
+            "D) Returning raw JSON strings"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: dictionaries are flexible but don't enforce schema.",
+            "Correct! Pydantic models guarantee structure. Every response has those 4 fields, typed correctly.",
+            "Incorrect: SQL queries don't enforce response format.",
+            "Incorrect: raw JSON strings bypass validation."
+          ],
+          "explanation": "Pydantic response models are contracts: you define LeaderboardEntry with rank (int), player_name (str), score (int), last_updated_time (datetime), and FastAPI enforces it. Clients never receive incomplete or wrongly-typed data."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Next Steps: Building Production Game Servers",
+      "content": "You've learned FastAPI fundamentals and best practices for game APIs. Next, explore: (1) Database integration\u2014use SQLAlchemy with FastAPI to persist player data across server restarts. (2) Authentication\u2014implement JWT tokens so players securely identify themselves. (3) Real-time updates\u2014learn WebSockets for live leaderboards and chat. (4) Deployment\u2014containerize your game server with Docker and deploy to cloud platforms. (5) Monitoring\u2014add logging and metrics to catch issues before players do. Start by building a complete player profile endpoint with create, read, update operations. The skills you learned apply to any backend: social apps, e-commerce, IoT systems. FastAPI is Python's gateway to professional web development."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory first"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c6",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-on first"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T14:31:29.564656+00:00",
+  "model": "claude-haiku-4-5"
+}

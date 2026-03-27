@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Background course generator — uses claude-haiku-4-5 via Claude CLI to continuously generate
-branching courses with optional themes and store them in courses/catalog.json.
+Background course generator — uses claude-sonnet-4-6 via Claude CLI to continuously generate
+rich branching courses with attributes, variables, and exotic layouts.
 """
 import json
 import random
@@ -17,63 +17,119 @@ CATALOG_PATH = COURSES_DIR / "catalog.json"
 TOPICS_PATH = Path(__file__).parent / "topics.json"
 JOURNAL_PATH = Path(__file__).parent / "journal.log"
 
-MODEL = "claude-haiku-4-5-20251001"
+MODEL = "sonnet"
 CLAUDE_BIN = "/home/mathornton/.local/bin/claude"
 
-SYSTEM_PROMPT = """You are an expert instructional designer. Generate a compact branching course as valid JSON.
+SYSTEM_PROMPT = """You are a world-class instructional designer and interactive storyteller. Generate a rich, sophisticated branching course as valid JSON.
 
-=== NODE TYPES ===
-content: {id, type, title, content (markdown, 3-5 sentences), next}
-example: {id, type, title, content (1 worked example, 3-4 sentences), next}
-assessment: {id, type, title, content, questions, pass_threshold, success_target, failure_target}
-  questions format: [{question, options:[A,B,C,D], correct_index:0-3, feedback:[A,B,C,D], explanation}]
-  Use 2-3 questions per assessment.
-practice: same as assessment, different questions
-decision: {id, type, title, content, choices:[{label, next}]}
-end: {id, type, title, content}
+=== NODE TYPES (use ALL that apply — variety is key!) ===
+
+content: Information display with rich markdown (5-10 sentences, use headers, bold, lists, code blocks as appropriate)
+  {id, type:"content", title, content (markdown), position:{x,y}, attribute_effects:{attr:delta,...}, set_variables:{var:val,...}}
+
+example: Detailed worked example with step-by-step breakdown (5-8 sentences)
+  {id, type:"example", title, content (markdown), position:{x,y}, attribute_effects:{attr:delta,...}}
+
+assessment: Scored quiz with 2-4 questions, routing based on score
+  {id, type:"assessment", title, content, questions:[...], passing_score:80, success_target:"nX", failure_target:"nY", position:{x,y}}
+  questions format: [{question, options:[str,str,str,str], correct_index:0-3, feedback:[str,str,str,str], explanation:"..."}]
+
+practice: Like assessment but for reinforcement after failure
+  {id, type:"practice", title, content, questions:[...], passing_score:60, success_target:"nX", failure_target:"nY", position:{x,y}}
+
+decision: Meaningful learner choices that shape the experience
+  {id, type:"decision", title, content, choices:[{label, next}], position:{x,y}}
+
+random: Uniform random branch — use for unpredictable events, varied practice, surprise elements
+  {id, type:"random", title, content, position:{x,y}}
+
+weighted: Probability-weighted branch — use for realistic scenario simulations
+  {id, type:"weighted", title, content, position:{x,y}}
+
+condition: Routes based on learner variables/score
+  {id, type:"condition", title, content, condition:"variable_name", default_target:"nX", position:{x,y}}
+
+gate: Blocks progress until condition met
+  {id, type:"gate", title, content, condition:"expression", default_target:"nX", position:{x,y}}
+
+end: Terminal node — include a summary of what was learned and personalized feedback
+  {id, type:"end", title, content, position:{x,y}}
 
 === CONNECTIONS ===
-{id, source, target, label}
+{id, source, target, label, type:"default"|"conditional"|"weighted"|"random", weight:N (for weighted), condition:"expr" (for conditional)}
+
+=== ATTRIBUTE SYSTEM ===
+Nodes can modify learner attributes via attribute_effects. Track things like:
+- knowledge, confidence, experience, skill_level, creativity, critical_thinking
+Use these to create condition nodes that route based on accumulated attributes.
+Example: A content node about advanced theory might have attribute_effects:{knowledge:10, critical_thinking:5}
+
+=== VARIABLE SYSTEM ===
+Nodes can set variables via set_variables:{var:val}. Use for tracking choices, paths taken, etc.
+Condition nodes evaluate these: "knowledge >= 20", "path == 'research'", etc.
+
+=== POSITION SYSTEM ===
+Give every node a position:{x, y} for visual layout. Use a tree-like layout:
+- Start nodes: x=100
+- Each subsequent layer: +300 x
+- Vertical spacing: ~200 between parallel nodes
+- Branch out vertically, converge back
 
 === OUTPUT FORMAT ===
 Output ONLY raw valid JSON (no markdown fences):
 {"id":"<uuid>","title":"...","description":"...","topic":"...","theme":null,"difficulty":"beginner|intermediate|advanced","estimated_minutes":<n>,"tags":[...],"nodes":[...],"connections":[...]}
 
-=== STRUCTURE TEMPLATES — pick ONE that suits the topic ===
+=== STRUCTURE TEMPLATES — pick ONE or COMBINE elements from multiple ===
 
-A) SKILL TREE (learner chooses their path upfront, 2 branches merge at end)
-   decision(intro) → [branch A: content→example→assessment] AND [branch B: content→example→assessment] → shared end
-   Total: ~9 nodes. Labels on decision choices: e.g. "Theory first" / "Hands-on first"
+A) SKILL TREE (learner chooses path, branches merge)
+   decision(intro) → [branch A: content→example→assessment] AND [branch B: content→example→assessment]
+   → condition(score-check) → [high: advanced content → end] [low: review → end]
+   15-18 nodes. Include attribute_effects on content nodes.
 
-B) MASTERY LADDER (sequential modules, fail loops back for retry)
-   content→assessment [fail→practice→back to assessment] [pass→next content→assessment] → end
-   Total: ~8 nodes. Loops allowed — n5 can point back to n3.
+B) MASTERY LADDER (sequential with fail loops and random practice)
+   content→assessment [fail→random(picks 1 of 3 practice variants)→back to assessment] [pass→next level]
+   → gate(must pass 2 assessments) → synthesis → end
+   14-18 nodes. Use random nodes for practice variety.
 
-C) DIAGNOSTIC BRANCH (opening quiz routes learner to appropriate depth)
-   assessment(diagnostic) → [if strong: advanced content→example→end] [if weak: basic content→example→practice→end]
-   Total: ~8 nodes. Use pass/fail paths for routing, not a decision node.
+C) DIAGNOSTIC BRANCH (opening quiz routes to appropriate depth)
+   assessment(diagnostic) → condition(score-router) → [beginner path | intermediate path | advanced path]
+   Each path has: content→example→practice→decision(explore more?)
+   16-20 nodes. Use condition node with score thresholds.
 
-D) EXPLORE & CONVERGE (multiple topic areas, learner picks 2 of 3 via decisions)
-   intro(content) → decision → [topic A: content→example] AND [topic B: content→example] AND [topic C: content→example]
-   All topics → shared synthesis content → end
-   Total: ~10-12 nodes. Decision has 3 choices; all paths reconverge.
+D) EXPLORE & CONVERGE (multiple topic areas with decisions)
+   intro → decision(3 choices) → [each: content→example→assessment with attribute_effects]
+   → condition(checks accumulated knowledge) → [synthesis or remediation] → end
+   18-22 nodes. Heavy use of attribute_effects.
 
-E) SCENARIO TREE (narrative choices lead to different endings)
-   content(scene 1) → decision → [path A: content→decision→[good end / bad end]] [path B: content→end]
-   Total: ~9 nodes. 2-3 distinct endings reflecting learner choices.
+E) SCENARIO TREE (narrative with weighted random events)
+   content(setup) → decision → [path A with weighted random encounters] [path B with different challenges]
+   Multiple decision points, 3-4 distinct endings reflecting cumulative choices
+   18-24 nodes. Use weighted nodes for realistic drama.
 
-F) ASSESSMENT PYRAMID (escalating challenge, early exit for advanced learners)
-   easy_assessment → [pass: harder_assessment → [pass: expert content → end] [fail: practice → end]]
-                   → [fail: remedial content → example → basic end]
-   Total: ~8 nodes. Rewards mastery with shorter paths.
+F) ASSESSMENT PYRAMID (escalating challenge with gates)
+   easy_assessment → condition(score) → [high: skip ahead via gate] [medium: standard path] [low: remediation]
+   Each tier has content + examples + practice. Gate at top requires knowledge >= threshold.
+   16-20 nodes. Use gates and conditions heavily.
 
-Rules:
-- Pick the template that makes most sense for the topic
-- Node IDs: n1, n2... Connection IDs: c1, c2...
-- All nodes must be reachable; every non-end node must have at least one outgoing connection
-- Real educational content, not placeholders
-- If theme given, use it throughout examples and questions
-- Vary node counts: anywhere from 8 to 13 nodes is fine"""
+G) ADVENTURE PATH (narrative-driven with all node types)
+   Combine content, decisions, random events, weighted outcomes, gates, and assessments
+   into a cohesive narrative. Variables track story state. Multiple endings.
+   20-25 nodes. Showcase everything.
+
+=== CRITICAL RULES ===
+- Generate 15-25 nodes (NOT 7-9 like a simple course)
+- Use at LEAST 4 different node types per course
+- Include at least one random OR weighted node per course
+- Add attribute_effects to at least 5 content/example nodes
+- Write REAL, substantive educational content — paragraphs, not sentences
+- Content nodes should be 5-10 sentences with markdown formatting (headers, lists, bold, code)
+- Assessment questions should be thoughtful with detailed feedback and explanations
+- Decision choices should be meaningful and lead to genuinely different experiences
+- Every connection needs an id (c1, c2...) and proper type field
+- All nodes must be reachable; every non-end node must have outgoing connections
+- If theme given, weave it deeply into every piece of content
+- Include position:{x,y} on every node for visual layout
+- End nodes should summarize what was learned, reference the path taken"""
 
 
 def log_journal(entry: str):
@@ -116,14 +172,14 @@ def claude_chat(system: str, user: str) -> str:
         [CLAUDE_BIN, "--print", "--output-format", "text",
          "--model", MODEL, "--no-session-persistence"],
         input=full_prompt,
-        capture_output=True, text=True, timeout=480,
+        capture_output=True, text=True, timeout=600,
     )
     if result.returncode != 0:
         raise RuntimeError(f"Claude CLI error: {result.stderr[:200]}")
     return result.stdout.strip()
 
 
-STRUCTURE_TEMPLATES = ['A', 'B', 'C', 'D', 'E', 'F']
+STRUCTURE_TEMPLATES = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 _template_idx = [0]
 
 def generate_course(topic: str, theme: str | None = None) -> dict | None:
@@ -132,24 +188,36 @@ def generate_course(topic: str, theme: str | None = None) -> dict | None:
     _template_idx[0] += 1
     template_hint = f"\nUse structure template {template} from the system prompt.\n"
 
+    theme_line = ""
     if theme:
-        prompt = f"""Create a complete branching course on: {topic}
-{template_hint}
-Theme: {theme}
+        theme_line = f"""Theme: {theme}
 Every example, analogy, scenario, case study, and practice question MUST be set in the context of {theme}.
 The content should teach {topic} entirely through the lens of {theme}.
+"""
 
-Make it engaging and educational. Include real content, not placeholders.
-The course should teach the topic effectively through adaptive branching.
-
-IMPORTANT: Output ONLY valid JSON. No explanation, no markdown fences, just raw JSON."""
-    else:
-        prompt = f"""Create a complete branching course on: {topic}
+    prompt = f"""Create a sophisticated, feature-rich branching course on: {topic}
 {template_hint}
-Make it engaging and educational. Include real content, not placeholders.
-The course should teach the topic effectively through adaptive branching.
+{theme_line}
+MANDATORY REQUIREMENTS (courses missing these will be REJECTED):
 
-IMPORTANT: Output ONLY valid JSON. No explanation, no markdown fences, just raw JSON."""
+1. NODE COUNT: Generate 18-28 nodes. NOT 7-10. NOT 12. At least 18.
+2. NODE TYPE VARIETY: Use at least 5 DIFFERENT node types from: content, example, assessment, practice, decision, random, weighted, condition, gate, end
+3. ATTRIBUTE EFFECTS: Add attribute_effects:{{}} on at LEAST 6 content or example nodes.
+   Use attributes like: knowledge, confidence, experience, skill_level, creativity, critical_thinking, intuition, wisdom
+   Example: "attribute_effects": {{"knowledge": 10, "confidence": 5}}
+4. VARIABLES: Use set_variables on at LEAST 3 nodes to track learner state.
+   Example: "set_variables": {{"path": "analytical", "depth": "advanced"}}
+5. RANDOMNESS: Include at least ONE random node AND one weighted node with explicit weight values on connections.
+6. CONDITIONS: Include at least one condition or gate node that evaluates accumulated attributes.
+   Example gate: "condition": "knowledge >= 25"
+7. ASSESSMENTS: At least one assessment with 3+ questions, each with 4 options, per-option feedback[], and explanation.
+8. DECISIONS: At least 2 decision nodes with 2-3 meaningful choices each.
+9. CONTENT DEPTH: Content/example nodes must have 5-10 sentences with markdown (headers, bold, lists, code if relevant).
+10. MULTIPLE ENDINGS: At least 2 different end nodes reflecting different paths.
+11. POSITIONS: Every node needs position:{{x,y}} in a tree layout (x+300 per layer, y spacing ~200).
+12. CONNECTIONS: Every connection needs id, source, target, type, and label.
+
+IMPORTANT: Output ONLY valid JSON. No explanation, no markdown fences, just raw JSON starting with {{ and ending with }}."""
 
     label = f"{topic}" + (f" [{theme}]" if theme else "")
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Generating: {label}...", flush=True)
@@ -207,7 +275,26 @@ IMPORTANT: Output ONLY valid JSON. No explanation, no markdown fences, just raw 
     course["id"] = course.get("id") or str(uuid.uuid4())
     course["theme"] = theme
     course["generated_at"] = datetime.now(timezone.utc).isoformat()
-    course["model"] = "claude-haiku-4-5"
+    course["model"] = "claude-sonnet-4-6"
+
+    # Quality validation — reject shallow courses
+    nodes = course.get("nodes", [])
+    node_types = set(n.get("type") for n in nodes)
+    has_attrs = sum(1 for n in nodes if n.get("attribute_effects"))
+    has_vars = sum(1 for n in nodes if n.get("set_variables"))
+
+    if len(nodes) < 14:
+        print(f"  -> REJECTED: only {len(nodes)} nodes (need 14+)", flush=True)
+        log_journal(f"REJECTED: {label} | only {len(nodes)} nodes")
+        return None
+    if len(node_types) < 4:
+        print(f"  -> REJECTED: only {len(node_types)} node types (need 4+)", flush=True)
+        log_journal(f"REJECTED: {label} | only {len(node_types)} types")
+        return None
+    if has_attrs < 3:
+        print(f"  -> REJECTED: only {has_attrs} nodes with attribute_effects (need 3+)", flush=True)
+        log_journal(f"REJECTED: {label} | only {has_attrs} attribute nodes")
+        return None
 
     return course
 

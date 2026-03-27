@@ -1,0 +1,295 @@
+{
+  "id": "game-theory-forensic-science-course",
+  "title": "Game Theory in Forensic Science: Strategic Thinking for Investigations",
+  "description": "Master game theory concepts through forensic science scenarios. Navigate branching pathways based on your assessment performance, from foundational concepts to expert-level strategic analysis of criminal investigations.",
+  "topic": "Game Theory",
+  "theme": "forensic science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "game-theory",
+    "forensic-science",
+    "strategic-thinking",
+    "criminal-investigation",
+    "decision-making"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Forensic Game Theory Basics",
+      "content": "In forensic science, investigators often face strategic choices similar to game theory scenarios. When two suspects are separately interrogated about a crime scene, each must decide whether to confess or remain silent\u2014knowing their decision affects the other suspect's outcome and their own sentence. This 'Forensic Dilemma' mirrors the classic Prisoner's Dilemma. Understanding game theory helps forensic psychologists predict suspect behavior, interpret evidence patterns, and optimize investigation strategies.",
+      "questions": [
+        {
+          "question": "Two suspects are interrogated about evidence tampering. Suspect A can confess (getting 3 years) or stay silent. If A confesses and B stays silent, A gets 2 years while B gets 5 years. If both confess, both get 4 years. What is A's dominant strategy?",
+          "options": [
+            "Confess",
+            "Stay silent",
+            "It depends on B's choice",
+            "There is no dominant strategy"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! In the forensic dilemma, confessing is the dominant strategy.",
+            "Incorrect. Check each scenario: if B confesses (4 vs 5), confessing is better. If B stays silent (2 vs 3), confessing is still better.",
+            "This is tricky, but there IS a dominant strategy. Confessing is always better for A.",
+            "A dominant strategy exists when one choice is always better, regardless of the other player's choice."
+          ],
+          "explanation": "Confessing gives A the best outcome regardless of B's choice (2 < 3, 4 < 5)."
+        },
+        {
+          "question": "Three forensic labs each independently detect different results from the same DNA sample. This scenario is best described as:",
+          "options": [
+            "A zero-sum game",
+            "A coordination game",
+            "A competitive game",
+            "A dictator game"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Correct! Multiple labs achieving consensus is a coordination game.",
+            "Not quite. Zero-sum means one player's gain is another's loss\u2014that's not the case here.",
+            "This isn't primarily competitive; the labs need to align on the truth.",
+            "A dictator game has one player making all decisions. This requires mutual coordination."
+          ],
+          "explanation": "All labs benefit from finding the same truth, not from beating each other. Success requires cooperation and coordination toward a shared outcome."
+        },
+        {
+          "question": "A detective finds fingerprints at a crime scene but the database match is uncertain. The detective can order more expensive confirmatory tests (payoff: certainty, cost: high expense) or use the uncertain match (payoff: speed, cost: risk of error). This represents which game concept?",
+          "options": [
+            "Payoff matrix",
+            "Nash equilibrium",
+            "Dominant strategy",
+            "Mixed strategy"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! You're analyzing payoffs for different detective choices.",
+            "Not quite. This is about evaluating options, not about equilibrium.",
+            "This isn't a dominant strategy because there's a real tradeoff between cost and certainty.",
+            "A mixed strategy combines probabilistic choices; here we're deciding between specific actions."
+          ],
+          "explanation": "The detective is evaluating outcomes for different choices\u2014a fundamental element of game theory payoff analysis."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Advanced Forensic Game Scenarios",
+      "content": "Complex forensic investigations often involve multiple players with conflicting interests. Consider a criminal network where members decide whether to cooperate with each other or betray colleagues to reduce their own sentences\u2014this multiplayer game creates cascading strategic effects. When forensic experts from different agencies disagree on evidence interpretation, they're playing a coordination game with reputational payoffs. These scenarios require understanding mixed strategies, sequential games, and information asymmetry\u2014concepts that separate novice from expert forensic analysts.",
+      "questions": [
+        {
+          "question": "In a criminal network game: 5 suspects must each choose to 'Cooperate with the group' or 'Defect and testify against others'. If fewer than 4 cooperate, the whole group gets long sentences. If 4+ cooperate, everyone gets light sentences. What's the Nash equilibrium outcome?",
+          "options": [
+            "All cooperate (minimum time)",
+            "All defect (maximum time)",
+            "Mixed outcomes with some defecting",
+            "Cooperation is unstable; likely all defect"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Correct! This multi-player dilemma has defection as the Nash equilibrium despite cooperation being collectively better.",
+            "Even though all cooperating feels ideal, each player has incentive to defect if others cooperate.",
+            "Partial cooperation isn't stable; incentives push toward either full cooperation (unstable) or full defection (stable).",
+            "This is a multi-player prisoner's dilemma. Nash equilibrium occurs where no individual player can improve by changing strategy alone."
+          ],
+          "explanation": "Even though collective cooperation is best, each player individually benefits from defecting while others cooperate. The Nash equilibrium is where no player can unilaterally improve, which is all defecting."
+        },
+        {
+          "question": "A prosecutor and defense counsel both prepare expert witnesses. Each can choose 'Aggressive questioning' or 'Professional questioning'. Both aggressive = contentious trial, both professional = clear evidence evaluation, mixed = muddled outcome. What type of game is this?",
+          "options": [
+            "Zero-sum game",
+            "Coordination game",
+            "Anti-coordination game",
+            "Hawk-Dove game"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Correct! This is an anti-coordination game where the payoff comes from misalignment.",
+            "Not quite. Zero-sum means one player's gain = other's loss, but here it's more nuanced.",
+            "Wrong\u2014they actually want to diverge, not align.",
+            "This is the opposite of a coordination game. Success comes from being different."
+          ],
+          "explanation": "The players benefit from choosing DIFFERENT strategies, not the same ones. This creates strategic tension where each wants to diverge from the other's choice."
+        },
+        {
+          "question": "A forensic linguist analyzes threatening letters. The suspect's writing pattern either matches 70% (strong evidence) or 50% (weak evidence) depending on the analysis method used. Unknown to the linguist, the perpetrator actually wrote 60% matching text with intentional variation. This mismatch illustrates:",
+          "options": [
+            "Information asymmetry",
+            "Perfect information",
+            "Signaling",
+            "Mechanism design"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The unequal information between suspect and investigator is information asymmetry.",
+            "Actually, the investigator lacks the perpetrator's knowledge\u2014information is asymmetric.",
+            "While signaling occurs, the core issue is the information gap.",
+            "This is about unequal information, not about designing mechanisms to elicit truth."
+          ],
+          "explanation": "The forensic linguist and perpetrator have different information. One knows the true matching percentage; the other doesn't. This imbalance affects the game's strategic outcome."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Expert Game Theory in Forensic Investigation",
+      "content": "Expert forensic investigators leverage game theory to design interrogation strategies, predict criminal behavior, and interpret evidence probabilistically. Nash equilibrium analysis helps predict how criminal networks stabilize despite incentives to defect. Bayesian game theory accounts for suspects' private information and uncertainty about other suspects' knowledge or intentions. Sequential game analysis (backward induction) reveals how crime scene decisions cascade\u2014a perpetrator choosing to plant false evidence creates downstream strategic problems for investigators. Advanced forensic professionals use signaling theory to interpret behavior: does a suspect's choice to demand a lawyer signal guilt or legal wisdom?",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Mastery Achieved",
+      "content": "You've completed the expert pathway in game theory for forensic science. You understand Nash equilibrium, multi-player games, signaling theory, and information asymmetry. You're ready to apply game-theoretic thinking to complex real-world forensic investigations, from interrogation strategy to expert testimony preparation. Continue advancing by studying case studies of high-stakes criminal investigations where strategic thinking shaped justice outcomes."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Guided Practice: Game Theory in Forensic Casework",
+      "content": "Let's reinforce your understanding with structured casework. You'll analyze real forensic scenarios, identify the game structure, predict equilibria, and recommend investigation strategies. Each case builds your intuition for recognizing strategic dynamics in forensic work.",
+      "questions": [
+        {
+          "question": "In a cold case, DNA from a crime scene matches two potential suspects in a database (false positive probability is 1%). The prosecutor must decide: 'Charge both suspects aggressively' or 'Investigate further before charging'. Each suspect can 'Confess' or 'Deny'. If both confess, both get 10 years. If one confesses and the other denies, the confessing one gets 8 years, the denier gets 15 years. If both deny, they face trial\u2014and with a 1% false positive, conviction is risky. What should the prosecutor do?",
+          "options": [
+            "Charge aggressively and hope for confessions",
+            "Investigate further to reduce uncertainty",
+            "Ignore the DNA and rely on other evidence",
+            "Charge only the one with the strongest secondary evidence"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Correct! Reducing uncertainty is the optimal first move.",
+            "Aggressive charging in a high-uncertainty game risks false convictions or acquittals.",
+            "DNA evidence is valuable; ignoring it is suboptimal.",
+            "Selective charging may miss the actual perpetrator."
+          ],
+          "explanation": "With 1% false positive probability, charging without investigation creates game theory risk. Investigators should reduce information asymmetry before setting up a confess/deny game."
+        },
+        {
+          "question": "Five crime scene investigators each analyzed blood spatter evidence independently. Their conclusions: 3 say 'left-handed assailant,' 2 say 'unclear.' This distribution reflects:",
+          "options": [
+            "A failed coordination game",
+            "Information variance and expertise differences",
+            "Both A and B",
+            "Neither\u2014they're just wrong"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Correct! Multiple factors explain the disagreement.",
+            "There's disagreement despite trying to coordinate on a shared reality.",
+            "The experts do have different information and interpretations.",
+            "Actually, one or both factors are at play here."
+          ],
+          "explanation": "The investigators haven't coordinated (no single agreed interpretation), AND they possess different expertise/information. Remedying this requires discussion and potentially re-analysis."
+        },
+        {
+          "question": "A forensic lab director must allocate resources: invest in expensive equipment for 100% accuracy on 10 cases/month, or use existing equipment for 95% accuracy on 20 cases/month. The lab's goal is minimizing wrongful convictions. This is a strategic choice about:",
+          "options": [
+            "Zero-sum competition with other labs",
+            "Resource optimization under uncertainty",
+            "A dictator game",
+            "A signaling problem"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Correct! This is strategic allocation under uncertainty about outcomes.",
+            "Other labs aren't the opponent here; the director plays against nature/uncertainty.",
+            "A dictator game has one player making all decisions unilaterally, but consequences matter here.",
+            "This isn't primarily about signals; it's about choosing uncertain outcomes."
+          ],
+          "explanation": "The director is choosing a strategy that affects the probability of correct forensic conclusions. This is game-theoretic decision-making under uncertainty."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Practice Complete: Ready for Real-World Application",
+      "content": "You've strengthened your game-theoretic reasoning through forensic casework. You now understand how to identify game structures in investigations, predict outcomes, and design strategies that account for adversarial and cooperative dynamics. Use these skills in your forensic practice to anticipate suspect behavior, coordinate with other agencies, and interpret expert disagreement as a strategic phenomenon."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Forensic Game Theory Fundamentals",
+      "content": "Game theory is the study of strategic choices between two or more players. In forensic science, this applies whenever an investigation involves decisions by multiple parties\u2014suspects, investigators, experts, prosecutors, and defense attorneys. The simplest game is between a suspect and an investigator: a suspect can tell the truth or lie; an investigator can believe them or doubt them. Each choice leads to a different outcome (payoff). A payoff is the consequence of a strategic choice\u2014it might be freedom, prison time, conviction, or acquittal. Game theory helps forensic professionals predict what choice the suspect is most likely to make.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "A Simple Forensic Game Example",
+      "content": "Imagine two witnesses to a robbery. Witness A can 'Report the true perpetrator' or 'Keep quiet for protection from retaliation.' Witness B faces the same choice. If BOTH report, the robber goes to prison (both safety, justice served). If BOTH stay quiet, the robber remains free (both safe). If A reports and B stays quiet, A gets retribution while B stays safe and the robber is caught anyway. Notice: each witness has incentive to stay quiet IF the other reports (avoiding retaliation), but both staying quiet is worst for everyone except the robber. Game theory predicts many witnesses won't come forward\u2014a critical forensic challenge. Investigators must change the payoff matrix by offering protective measures to make reporting the dominant strategy.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Congratulations: Forensic Game Theory Fundamentals Mastered",
+      "content": "You've completed the foundational course on game theory in forensic science. You understand payoffs, strategies, and dominant outcomes. You recognize how suspects, witnesses, and investigators all make strategic choices based on incentives. To advance, seek out case studies where teams of forensic experts navigate complex multi-player games and real investigations where strategic thinking shaped justice outcomes."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T16:45:04.096495+00:00",
+  "model": "claude-haiku-4-5"
+}

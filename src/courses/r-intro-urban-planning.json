@@ -1,0 +1,295 @@
+{
+  "id": "r-intro-urban-planning",
+  "title": "Introduction to R for Data Analysis: Urban Planning Edition",
+  "description": "Learn R data analysis through real urban planning scenarios. From traffic patterns to population trends, build practical skills analyzing city datasets.",
+  "topic": "R for Data Analysis",
+  "theme": "urban planning",
+  "difficulty": "beginner",
+  "estimated_minutes": 180,
+  "tags": [
+    "R",
+    "data-analysis",
+    "urban-planning",
+    "statistics",
+    "data-visualization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Assessing Your R Fundamentals: Urban Data Basics",
+      "content": "Before we dive deeper into urban planning analysis with R, let's assess your understanding of basic R concepts. These questions focus on fundamental operations you'll need when working with city planning datasets like population, traffic, zoning, and housing data.",
+      "questions": [
+        {
+          "question": "You have a vector of 10 cities' populations: c(1000000, 500000, 750000, 300000, 450000, 600000, 550000, 700000, 400000, 800000). How would you find which city has the largest population?",
+          "options": [
+            "max(cities)",
+            "which.max(cities)",
+            "find_max(cities)",
+            "max.city(cities)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "max() gives the value (1000000) but not which city",
+            "Correct! which.max() returns the index (position) of the maximum value",
+            "This function doesn't exist in base R",
+            "This function doesn't exist in base R"
+          ],
+          "explanation": "which.max() is used when you need the position/index of the maximum value, essential for identifying which city or neighborhood in your analysis."
+        },
+        {
+          "question": "In R, what data structure would you use to store a neighborhood's multiple attributes like name, population, area_sq_km, and year_established?",
+          "options": [
+            "Vector - stores single values of one type",
+            "List - flexible but not ideal for tabular data",
+            "Data frame - stores tabular data with mixed types",
+            "Matrix - requires all elements to be the same type"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Vectors store a single data type, not mixed attributes",
+            "Lists can work but aren't efficient for organized tabular data",
+            "Correct! Data frames are ideal for storing mixed data types in a spreadsheet-like format",
+            "Matrices require homogeneous data, but planning datasets need mixed types"
+          ],
+          "explanation": "Data frames are the fundamental structure in R for storing planning datasets with mixed columns like text (names), numbers (population), and dates."
+        },
+        {
+          "question": "You need to filter a dataset of 100 neighborhoods to show only those with population > 50,000. Which syntax is correct?",
+          "options": [
+            "neighborhoods[neighborhoods$population > 50000, ]",
+            "filter(neighborhoods, population > 50000) # from dplyr",
+            "neighborhoods[population > 50000] # base R shorthand",
+            "Both A and B are correct"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "This is correct base R syntax",
+            "This is correct dplyr syntax",
+            "This syntax won't work - R doesn't know where 'population' column is",
+            "Correct! Both A and B work, though B is more readable"
+          ],
+          "explanation": "Both base R (using square brackets) and dplyr (using filter function) accomplish this, but dplyr's grammar is more intuitive for planning analysts."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n2",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Data Wrangling for Urban Planning: Real-World Scenarios",
+      "content": "You've shown solid fundamentals. Now let's test your ability to manipulate and analyze real urban planning datasets. These scenarios involve complex, multi-source data that city planners encounter daily\u2014matching zoning data with property sales, analyzing traffic over time, and combining demographic information.",
+      "questions": [
+        {
+          "question": "You have two datasets: 'zoning' (columns: zone_id, type, created_year) and 'property_sales' (columns: zone_id, property_id, sale_price, sale_year). You need to find average sale price by zone type for 2023 sales only. What's the most efficient approach?",
+          "options": [
+            "Use merge() function, then filter by year, then aggregate() by zone type",
+            "Use dplyr: left_join(zoning, sales) then filter(year==2023) then group_by(type) and summarize()",
+            "Write a for-loop iterating through each zone",
+            "Both A and B would work, but B is more efficient and readable"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Would work but less efficient and harder to read",
+            "Good thinking - dplyr is more efficient",
+            "For-loops are slow for large datasets and harder to debug",
+            "Correct! dplyr provides a readable, efficient 'grammar of data manipulation'"
+          ],
+          "explanation": "The dplyr approach (left_join \u2192 filter \u2192 group_by \u2192 summarize) is the standard modern R workflow and scales better with large planning datasets."
+        },
+        {
+          "question": "You're analyzing 5 years of traffic data (2019-2024) with 500,000 rows from 200 intersections. What should you do FIRST before running any analysis?",
+          "options": [
+            "Create visualizations immediately to see patterns",
+            "Examine data structure with str(), view summary statistics, check for missing values",
+            "Run a regression model to predict future traffic",
+            "Remove all rows with NA values without investigation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Visualizing before understanding data structure can be misleading",
+            "Correct! Always explore first - you might find data quality issues, missing values, or outliers that affect analysis",
+            "Running models on unexplored data is risky - you might miss problems",
+            "Deleting data without understanding its patterns can bias your results"
+          ],
+          "explanation": "Exploratory Data Analysis (EDA) is essential in planning work\u2014checking for sensor malfunctions, data entry errors, or seasonal patterns before drawing conclusions."
+        },
+        {
+          "question": "Your neighborhood dataset has a column 'near_transit' with values like 'Bus, Subway, Bike Lane' (comma-separated). To analyze each transit type separately, what should you use?",
+          "options": [
+            "Use strsplit() function to break apart the string",
+            "Use separate() from tidyr package to create separate columns",
+            "Manually edit each row in the CSV file",
+            "Use substr() to extract portions of the text"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! strsplit() separates strings; for multiple values per cell, tidyr::separate() is also good",
+            "Also correct! separate() creates new columns and is very clean",
+            "Manual editing doesn't scale to thousands of rows",
+            "substr() works character-by-character, not for delimited values"
+          ],
+          "explanation": "String manipulation and reshaping data is crucial when combining planning data from different sources with different formats."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n3",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Analytics for Urban Planning: Predictive Models and Visualization",
+      "content": "Excellent work! You've demonstrated strong data manipulation skills. Now explore advanced techniques that professional urban planners use: predictive modeling for housing trends, spatial analysis for zoning policy, and creating interactive dashboards for policy decisions. You'll master ggplot2 for publication-quality visualizations, build regression models to forecast population growth, and interpret statistical significance in planning contexts\u2014essential for evidence-based decisions on zoning, infrastructure, and community development. Learn time-series analysis for traffic patterns, neighborhood clustering by demographic similarity, and integrating geospatial data with social indicators. These advanced skills distinguish expert analysts in the planning field.",
+      "next": "n5a"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Practice: Analyzing Traffic Patterns and Mobility Trends",
+      "content": "Let's apply your data wrangling skills to real urban planning challenges. You'll work with datasets from the City Transportation Department containing vehicle counts, intersection sensors, commute patterns, and weather conditions. Your mission: identify peak traffic hours, compare congestion across neighborhoods, discover seasonal patterns, and prepare findings for the Transportation Committee. These are the exact analyses city planners perform when making decisions about traffic signals, road expansion, and transit investment.",
+      "questions": [
+        {
+          "question": "Your traffic sensor data has 50,000 records with columns: timestamp, intersection_id, vehicle_count, weather. You notice the weather column has 2% missing values (NA). What's the best approach?",
+          "options": [
+            "Delete all rows with NA weather values to ensure clean data",
+            "Use mean imputation to fill all NA weather with average weather code",
+            "Analyze vehicle_count with and without weather variable, document your approach",
+            "Ignore the weather column entirely since it's incomplete"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Deleting 2% of 50,000 rows (1,000 records) loses information unnecessarily",
+            "Mean imputation can mask real patterns - weather might not be 'average' when missing",
+            "Correct! Transparent analysis shows how weather affects traffic; document your data decisions",
+            "If weather influences traffic (which it does!), ignoring it weakens your conclusions"
+          ],
+          "explanation": "Professional analysts document missing data handling because it affects policy recommendations. Did those sensors fail in specific conditions? This matters for traffic engineering decisions."
+        },
+        {
+          "question": "You need to compare average vehicle counts by hour-of-day across 20 intersections. Your dataset has 500,000 rows in long format (one row per measurement). Which approach is most efficient?",
+          "options": [
+            "Use group_by(intersection_id, hour_of_day) %>% summarize(mean_count = mean(vehicle_count))",
+            "Create a pivot table manually in Excel for each intersection",
+            "Write 20 separate analyses, one for each intersection",
+            "Use for-loops to calculate each intersection's hourly average"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! dplyr grouping scales instantly from 2 intersections to 2,000",
+            "Manual Excel work doesn't scale, is error-prone, and can't be reproduced",
+            "Running 20 separate analyses is error-prone and hard to compare",
+            "For-loops are slower than vectorized dplyr operations on large datasets"
+          ],
+          "explanation": "The dplyr approach produces a single clean output table comparing all intersections\u2014exactly what planning staff need for presentations and decisions."
+        },
+        {
+          "question": "Your analysis shows intersection A averages 500 vehicles/hour (SD=50), while intersection B averages 510 vehicles/hour (SD=100). You need to recommend signal timing changes. What can you conclude?",
+          "options": [
+            "Intersection B definitely has more traffic, so increase its green light time",
+            "The difference is statistically significant, so B needs more capacity",
+            "Given the overlap in confidence intervals, conduct a formal test before recommending changes",
+            "Intersection A has more consistent traffic patterns, so its system is working better"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "10 vehicles/hour difference might be random variation - higher SD for B suggests variability",
+            "Statistical significance testing is required before making expensive signal changes",
+            "Correct! The overlapping distributions require a t-test to determine if the difference is real",
+            "True about consistency, but this doesn't address whether B needs signal changes"
+          ],
+          "explanation": "City planners make expensive infrastructure decisions based on data. A t-test might show the difference is within normal variation, saving the city costs for unnecessary signal retiming."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n5b",
+      "failure_target": "n5b"
+    },
+    {
+      "id": "n5a",
+      "type": "end",
+      "title": "Expert Analyst: Ready for Advanced Urban Planning Projects",
+      "content": "Congratulations on reaching expert status! You've mastered R's advanced capabilities for urban analysis\u2014predictive modeling for housing markets, spatial statistics for zoning analysis, interactive dashboards for policy makers. Your next moves: (1) Contribute analysis to local planning documents (Comprehensive Plans, Transit Master Plans), (2) Learn GIS integration (sf package) to combine spatial and demographic data, (3) Explore causal inference methods to evaluate policy impacts, (4) Build reproducible analysis portfolios on GitHub to advance your career in urban analytics. The planning field urgently needs analysts with your skills to make evidence-based decisions on housing, climate resilience, and equity."
+    },
+    {
+      "id": "n5b",
+      "type": "end",
+      "title": "Data Analyst: Ready to Support Planning Decisions",
+      "content": "Great work mastering data wrangling! You now have practical skills to analyze real urban planning datasets\u2014traffic counts, demographic trends, zoning patterns, housing markets. Your next steps: (1) Apply skills to open data from your city (data.census.gov, transit agencies, planning departments), (2) Join local planning board meetings to understand how data informs decisions, (3) Build a portfolio of neighborhood analyses (population trends, development patterns, housing affordability), (4) Consider specialized courses in GIS and spatial analysis. Your ability to wrangle and summarize planning data is immediately valuable\u2014many planning departments lack analytical capacity."
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Getting Started: R Fundamentals for Urban Planners",
+      "content": "Let's build a strong foundation in R using real urban planning examples. You'll learn how R stores different types of data\u2014vectors for neighborhood rankings, data frames for property tables, lists for complex objects. We'll work with planning datasets: filtering neighborhoods by population, calculating summary statistics for zoning areas, exploring housing price distributions. Master basic operations: loading CSV files from planning departments, calculating averages and percentiles, creating simple visualizations of city data. By the end, you'll confidently open planning datasets and ask questions like 'Which neighborhoods grew fastest?' and 'How do housing prices vary by proximity to transit?' These foundational skills are building blocks for all future R learning.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Example: Analyzing Population Growth Across Urban Neighborhoods",
+      "content": "Let's work through a real planning scenario. Your city's Planning Department has 2010 and 2020 Census population data for 50 neighborhoods and needs to identify fastest-growing areas for new schools and transit. Here's the complete workflow: (1) Load the data: neighborhoods <- read.csv('neighborhood_pop.csv'), (2) Calculate growth rate: neighborhoods$growth_pct <- ((neighborhoods$pop_2020 - neighborhoods$pop_2010) / neighborhoods$pop_2010) * 100, (3) Find the top 5: top_growth <- neighborhoods[order(neighborhoods$growth_pct, decreasing=TRUE), ][1:5, ], (4) Visualize with barplot(top_growth$growth_pct, names.arg=top_growth$name). This shows you where to prioritize new schools, parks, and transit service based on data, not opinion. This same pattern\u2014load, calculate, subset, visualize\u2014applies to traffic, zoning, housing, and every other planning dataset.",
+      "next": "n5c"
+    },
+    {
+      "id": "n5c",
+      "type": "end",
+      "title": "Foundation Complete: Your Path Forward in R for Planning",
+      "content": "You've built a solid foundation in R! You understand data structures, loading files, basic calculations, and simple visualizations\u2014essential skills for analyzing planning data. Your next steps: (1) Practice with real datasets from your city or region (census data, traffic counts, housing permits), (2) Complete additional projects: analyze one neighborhood's demographic trends, compare your city to similar ones, track zoning changes over time, (3) Gradually explore functions like group_by() and filter() to level up your skills, (4) Join online R communities (r4ds.io, RStudio Community) to learn from planning professionals. Many planners find R initially challenging\u2014you're ahead of most! Keep practicing with real planning questions you care about, and your R skills will grow steadily."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n5a",
+      "label": "complete"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5b",
+      "label": "complete"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n5c",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-27T14:30:27.712549+00:00",
+  "model": "claude-haiku-4-5"
+}

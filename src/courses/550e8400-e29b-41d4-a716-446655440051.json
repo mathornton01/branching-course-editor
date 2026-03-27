@@ -1,0 +1,439 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440051",
+  "title": "Time Series Analysis for EdTech",
+  "description": "Master time series analysis through real education technology scenarios. Learn to analyze student engagement trends, predict course demand, and make data-driven decisions for learning platforms.",
+  "topic": "Data Science / Time Series Analysis",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "time-series",
+    "forecasting",
+    "data-analysis",
+    "education-tech",
+    "analytics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Time Series Fundamentals in EdTech",
+      "content": "A time series is a sequence of data points collected at regular intervals, crucial for understanding educational platforms. In EdTech, time series data appears everywhere: daily active users on your learning platform, weekly assignment submissions, monthly course enrollment patterns. By analyzing these patterns over time, educators and platform designers can identify when students are most engaged, predict future enrollment needs, and adjust resource allocation. Understanding time series is essential for building responsive, adaptive learning systems that serve your users better."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Module 1 Assessment: Time Series Basics",
+      "content": "Test your understanding of time series concepts in educational technology contexts.",
+      "questions": [
+        {
+          "question": "You're managing a learning management system (LMS) and track daily logins over 6 months. What makes this data a time series?",
+          "options": [
+            "A) The data points are ordered chronologically and collected at regular intervals",
+            "B) The data is about student activity",
+            "C) The data requires a computer to analyze",
+            "D) The data includes both numbers and text"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Time series requires sequential ordering and regular intervals.",
+            "Student activity alone doesn't make it a time series; the temporal ordering does.",
+            "Computers help but aren't what defines a time series.",
+            "Data type isn't the defining characteristic of time series."
+          ],
+          "explanation": "A time series is fundamentally defined by data collected sequentially at regular intervals. In your LMS example, daily logins form a time series because each day's value depends on temporal ordering."
+        },
+        {
+          "question": "Your edtech platform shows this pattern: high assignment submissions on Thursdays and Sundays, lower on Mondays. What does this suggest?",
+          "options": [
+            "A) Your platform is unreliable on Mondays",
+            "B) The data exhibits seasonality\u2014repeating patterns at regular intervals",
+            "C) You need to block assignments on Sundays",
+            "D) Students are lazy on Mondays"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Platform reliability isn't indicated by submission patterns alone.",
+            "Correct! This weekly repetition is seasonality, a key time series component.",
+            "Patterns guide understanding, not management decisions like blocking.",
+            "Time series patterns reflect structural/contextual factors, not character judgments."
+          ],
+          "explanation": "Seasonality refers to predictable, recurring patterns. In education, weekly patterns (deadline-driven submissions) are common seasonal effects in time series data."
+        },
+        {
+          "question": "When analyzing course enrollment over 2 years, you notice an overall increase alongside monthly fluctuations. Which term describes the overall increase?",
+          "options": [
+            "A) Seasonality",
+            "B) Trend",
+            "C) Noise",
+            "D) Anomaly"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Seasonality is the repeating pattern, not the overall direction.",
+            "Correct! Trend is the long-term direction or movement.",
+            "Noise is random variation, not systematic growth.",
+            "Anomaly is an unexpected outlier, not a consistent direction."
+          ],
+          "explanation": "Trend represents the general direction of data over time. Growing platform adoption is a positive trend\u2014the underlying movement after removing seasonal patterns."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Identifying Time Series Components",
+      "content": "Reinforce your understanding of time series fundamentals with these practice questions.",
+      "questions": [
+        {
+          "question": "A course platform tracks student login frequency hourly for a week. Do you expect to see seasonality?",
+          "options": [
+            "A) No, hourly data is too granular",
+            "B) Yes, with a 24-hour cycle (students active during day hours)",
+            "C) Yes, with a 7-day cycle",
+            "D) It depends on the course subject"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Granular data can still show patterns; hourly data reveals daily cycles.",
+            "Correct! Daily cycles are a form of seasonality visible in hourly data.",
+            "A 7-day cycle would appear in weekly aggregates, not hourly data.",
+            "Seasonality is structural, not subject-dependent."
+          ],
+          "explanation": "Time series can have seasonality at multiple scales. In hourly login data, you'd expect a 24-hour seasonal pattern reflecting when students typically study."
+        },
+        {
+          "question": "Your edtech platform saw 1,000 signups in January, 1,200 in February, 1,300 in March. What does this suggest?",
+          "options": [
+            "A) A positive trend in platform growth",
+            "B) Seasonality due to academic calendar",
+            "C) Noise in the data",
+            "D) The platform is becoming less popular"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Consistent month-to-month growth indicates an upward trend.",
+            "Seasonality would show predictable repetition, not consistent growth.",
+            "Noise would be erratic; this shows consistent direction.",
+            "Growth is the opposite of declining popularity."
+          ],
+          "explanation": "A trend is the overall directional movement. These consistent monthly increases indicate your edtech platform is in a growth trend."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Time Series Components Deep Dive",
+      "content": "Every educational time series has three key components working together. **Trend** is the long-term direction: your online course platform might show growing enrollment over years as it gains reputation. **Seasonality** is the predictable repetition: you'll see higher course enrollments in September (new school year) and January (new year resolutions) every single year. **Noise** is random, unpredictable variation: a viral social media post might spike your daily signups one day, or a technical outage might dip them the next. Decomposing your time series into these three parts lets you forecast future values, understand what's truly meaningful versus random fluctuation, and make better decisions about resource allocation and course planning."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Module 2 Assessment: Components & Decomposition",
+      "content": "Assess your ability to identify and work with time series components in educational contexts.",
+      "questions": [
+        {
+          "question": "You analyze 3 years of student enrollment data for a mathematics course. You find: growing enrollment (trend), peaks in January and September (seasonality), and daily fluctuations (noise). To forecast next January's enrollment, which component matters most?",
+          "options": [
+            "A) The noise, because it's most recent",
+            "B) The trend and seasonality; the noise should be minimized",
+            "C) Only the seasonality, because January is predictable",
+            "D) All components equally"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Recent data includes noise, but noise is random and shouldn't drive forecasts.",
+            "Correct! Trend and seasonality are systematic; we minimize noise for forecasts.",
+            "Seasonality alone ignores the platform's growth trend.",
+            "Noise is random and actually hurts forecast accuracy."
+          ],
+          "explanation": "When forecasting, focus on trend (systematic long-term movement) and seasonality (predictable cycles). Noise is random variation that averages out and should be filtered out for better predictions."
+        },
+        {
+          "question": "Your edtech platform's daily active user (DAU) data shows: steady growth over months, a dip every weekend, occasional spikes from marketing campaigns. Which is seasonality?",
+          "options": [
+            "A) The steady growth",
+            "B) The weekend dips",
+            "C) The marketing campaign spikes",
+            "D) All of the above"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Growth is trend, not seasonality.",
+            "Correct! Predictable weekly patterns are seasonality.",
+            "Spikes from campaigns are external shocks, not seasonal patterns.",
+            "Only the weekend pattern is true seasonality."
+          ],
+          "explanation": "Seasonality is predictable, recurring patterns. The weekend dips repeat every week\u2014that's seasonality. Growth is trend. Campaign spikes are irregular shocks, not seasonal."
+        },
+        {
+          "question": "You're preparing a budget for next quarter's server capacity based on concurrent user projections. Should you forecast based on the original data with all noise, or decomposed data without noise?",
+          "options": [
+            "A) Use raw data; noise represents real variation",
+            "B) Use raw data for accuracy",
+            "C) Use decomposed data (trend + seasonality); noise is random variation that skews forecasts",
+            "D) You can't forecast server needs from user data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Noise is random; it doesn't represent meaningful variation for planning.",
+            "Raw data includes random noise; cleaned data gives better forecasts.",
+            "Correct! Decomposing removes random noise for cleaner, more reliable forecasts.",
+            "User data is fundamental for capacity planning."
+          ],
+          "explanation": "For reliable forecasting and planning, decompose the series to isolate trend and seasonality. Noise is random and creates uncertainty; removing it yields more accurate projections for resource allocation."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Decomposing Time Series",
+      "content": "Practice identifying trend, seasonality, and noise in educational datasets.",
+      "questions": [
+        {
+          "question": "You track the number of video watch completions on your edtech platform across 2 years. The data shows: increasing completions (trend), higher completions in June-July summer months (seasonality), and minor day-to-day variations (noise). To identify students' learning patterns, which component should you focus on?",
+          "options": [
+            "A) Noise, because it shows real student behavior",
+            "B) Trend, to understand long-term engagement growth",
+            "C) Seasonality, to understand when students engage most",
+            "D) All three equally"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Noise is random variation, not behavioral patterns.",
+            "Trend shows growth but not when students engage.",
+            "Correct! Seasonality reveals when students are most active.",
+            "Noise dilutes your analysis; focus on meaningful patterns."
+          ],
+          "explanation": "Seasonality shows predictable engagement patterns. Knowing that summer months have higher completions helps you time course offerings, send targeted messages, and allocate tutors effectively."
+        },
+        {
+          "question": "A learning platform's monthly quiz score data shows: average scores declining over 6 months (trend), peak scores in December (seasonality), and occasional outliers from technical glitches (noise). What does the declining trend suggest?",
+          "options": [
+            "A) Your course is getting easier",
+            "B) Students are learning more, so harder content is presented",
+            "C) There's a potential engagement or curriculum issue to investigate",
+            "D) You should remove the noise and recalculate"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Declining scores don't indicate easier content.",
+            "That's a positive interpretation, but declining scores usually indicate a problem.",
+            "Correct! Downward trends warrant investigation into causes.",
+            "Handling noise is separate from interpreting trend meaning."
+          ],
+          "explanation": "A declining trend in quiz scores is a red flag. It could signal that course difficulty is misaligned with student readiness, instruction needs improvement, or engagement is dropping. Trends point to actionable insights."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Forecasting Techniques for Educational Data",
+      "content": "With trend and seasonality identified, you're ready to forecast. **Naive forecasting** uses the last observed value\u2014predicting next month's enrollment equals this month's. It's simple but ignores trends and seasonality, so it underperforms for growing platforms. **Moving averages** smooth out noise by averaging recent values, useful for stabilizing volatile engagement metrics. **Exponential smoothing** weights recent data more heavily, adapting quickly to changes\u2014ideal for detecting shifts in student behavior. **ARIMA (AutoRegressive Integrated Moving Average)** captures complex patterns, useful for sophisticated forecasting like predicting dropout rates over a semester. **Seasonal decomposition + linear regression** separates components, forecasts each independently, then recombines\u2014excellent for courses with strong seasonal patterns (always crowded in January). Choose your method based on your data's characteristics and forecasting horizon. For EdTech, a common approach is decomposing the series, then applying exponential smoothing or ARIMA to the trend while forecasting seasonality as a repeating pattern."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Module 3 Assessment: Forecasting Methods",
+      "content": "Demonstrate your ability to select and apply appropriate forecasting techniques for educational scenarios.",
+      "questions": [
+        {
+          "question": "Your free-to-paid course conversion rate over 12 months shows: growing trend, strong December spike (holiday resolutions), and moderate noise. You need to forecast Q1 conversions to plan support staff. Which method is best?",
+          "options": [
+            "A) Naive forecasting (last month = next month)",
+            "B) Moving average of last 3 months",
+            "C) Exponential smoothing",
+            "D) Seasonal decomposition + forecasting trend and seasonality separately"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Naive ignores trend and seasonality; would underforecast Q1.",
+            "Moving average smooths but doesn't capture upward trend or seasonality.",
+            "Exponential smoothing handles trend but requires careful seasonal adjustment.",
+            "Correct! Decomposition + separate forecasting captures both trend growth and known seasonal patterns (January spike)."
+          ],
+          "explanation": "When data has both clear trend and seasonality, decomposing\u2014forecasting each component separately, then recombining\u2014yields the most accurate forecasts. Q1 will see growth (trend) AND elevated conversions (New Year seasonality)."
+        },
+        {
+          "question": "Your LMS logs daily active user (DAU) count for a high-volatility online bootcamp (students start/stop unpredictably). You want a forecast that reacts quickly to sudden changes. Which is best?",
+          "options": [
+            "A) Simple moving average of last 30 days",
+            "B) Naive forecasting",
+            "C) Exponential smoothing (weights recent data more heavily)",
+            "D) ARIMA"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "30-day average is sluggish; won't react to sudden shifts.",
+            "Naive doesn't adapt to trends.",
+            "Correct! Exponential smoothing reacts quickly because recent values have higher weight.",
+            "ARIMA is more complex; exponential smoothing is simpler and sufficient here."
+          ],
+          "explanation": "Exponential smoothing's strength is responsiveness: it weights recent observations more heavily, so it quickly adapts when student enrollment patterns shift\u2014critical for volatile bootcamp cohorts."
+        },
+        {
+          "question": "You're a data analyst at an edtech startup analyzing student course completion rates across 18 months. You find: upward trend, completion drops in summer, and some random spikes. You plan to present a forecast to leadership. What's the best approach?",
+          "options": [
+            "A) Use the last 3 month's average and project it forward",
+            "B) Decompose the series, forecast each component, and recombine; present trend + seasonality separately so leadership understands drivers",
+            "C) Apply ARIMA blindly to the raw data",
+            "D) Ignore the seasonal pattern and focus only on trend"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Simple average ignores drivers; leadership needs to understand why.",
+            "Correct! Decomposition + separate forecasting is transparent and captures all dynamics.",
+            "ARIMA is powerful but a black box; clarity for stakeholders matters.",
+            "Seasonality is a key driver; ignoring it loses forecast accuracy."
+          ],
+          "explanation": "For stakeholder communication, decomposition is ideal. You can show leadership: 'We're growing X% per month (trend), expect a seasonal dip in summer, and forecast Q4 completions at Y% with confidence interval Z.' This builds trust and shows you understand the drivers."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Selecting and Applying Forecasting Methods",
+      "content": "Apply your forecasting knowledge to realistic edtech scenarios.",
+      "questions": [
+        {
+          "question": "You're forecasting monthly course revenue for your platform over the next 6 months. Historical data shows: consistent 15% monthly growth, peak revenue in December, and minimal noise. Which forecasting approach would you use?",
+          "options": [
+            "A) Naive forecasting\u2014just use last month's revenue",
+            "B) Decomposition: separate trend (15% growth) and seasonality (December spike); forecast each, then recombine",
+            "C) Moving average of last 6 months",
+            "D) ARIMA\u2014let the model figure it out"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Naive ignores growth; forecasts would be too low.",
+            "Correct! Clear trend and seasonality benefit from decomposition.",
+            "Moving average works but decomposition is more precise given strong patterns.",
+            "ARIMA is overkill when patterns are already clear."
+          ],
+          "explanation": "Decomposition shines when you have identifiable trend and seasonality. Forecast 15% growth forward 6 months AND layer the December seasonal spike to get an accurate 6-month outlook for budgeting."
+        },
+        {
+          "question": "Your student engagement metric (weekly forum posts) is erratic: some weeks 50 posts, next week 200, then 75. You need a method that handles this volatility. Which should you choose?",
+          "options": [
+            "A) Exponential smoothing\u2014weights recent weeks, adapts to shifts",
+            "B) Simple moving average\u2014stabilizes the erratic signal",
+            "C) Naive forecasting",
+            "D) Both A and B are reasonable; B is simpler, A reacts faster"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Exponential smoothing is good; it's responsive.",
+            "Moving average is stable but slow to react.",
+            "Naive forecasting doesn't help with volatility.",
+            "Correct! Both work; choice depends on whether you value simplicity or responsiveness. B smooths; A detects real shifts quickly."
+          ],
+          "explanation": "With highly volatile data, you're choosing between stability (moving average) and responsiveness (exponential smoothing). For engagement, responsiveness often matters more\u2014you want to quickly detect when forum activity drops, signaling disengagement."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mastery Complete: Time Series Analysis for EdTech",
+      "content": "Congratulations! You've mastered time series analysis in the context of education technology. You can now identify trends, seasonality, and noise in student engagement, course enrollment, and platform metrics. You understand how to choose between forecasting methods\u2014from simple moving averages to exponential smoothing to decomposition-based approaches. Most importantly, you can take these skills back to your edtech role: forecast resource needs, plan course scheduling around seasonal patterns, detect real shifts in student behavior versus random noise, and communicate data-driven insights to stakeholders. Time series analysis transforms raw temporal data into actionable forecasts and insights. Use these tools to build better learning platforms, serve students more effectively, and make smarter business decisions. Your next step: apply these techniques to your own platform's data and watch patterns emerge."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Not yet"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "Retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Next module"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Not yet"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "Retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Final assessment"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Not yet"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "Pass"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "Retry"
+    }
+  ],
+  "generated_at": "2026-03-27T17:30:41.946380+00:00",
+  "model": "claude-haiku-4-5"
+}

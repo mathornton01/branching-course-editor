@@ -1,0 +1,145 @@
+{
+  "id": "cv-forensics-fundamentals",
+  "title": "Computer Vision Fundamentals: Forensic Investigation",
+  "description": "Learn computer vision through a forensic science lens. Investigate a crime scene using facial recognition and image processing techniques. Discover how AI assists in suspect identification and evidence analysis while navigating the ethical and legal considerations.",
+  "topic": "Computer Vision & Forensic Science",
+  "theme": "forensic science",
+  "difficulty": "beginner",
+  "estimated_minutes": 25,
+  "tags": [
+    "computer-vision",
+    "forensic-science",
+    "facial-recognition",
+    "image-processing",
+    "ai-ethics",
+    "criminal-investigation"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Crime Scene: Digital Evidence",
+      "content": "A jewelry heist occurred at the Metropolitan Museum. Security cameras captured surveillance footage showing multiple individuals near the vault. High-resolution images document the crime scene with pristine evidence\u2014scratches on the vault door, fibers on the floor, and close-ups of the security panel. As the forensic analyst, you have access to both video footage and physical evidence photographs. Computer vision can help identify suspects from facial data and extract critical evidence from scene photos. What approach will you take first?"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Investigation Focus",
+      "content": "The digital evidence can be analyzed in different ways. Each approach reveals different insights.",
+      "choices": [
+        {
+          "label": "Use Facial Recognition to Identify Suspects",
+          "next": "n3"
+        },
+        {
+          "label": "Use Image Processing to Enhance Evidence",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Facial Recognition Fundamentals",
+      "content": "Facial recognition is a computer vision technology that detects, analyzes, and compares human faces. The system extracts 68+ facial landmarks\u2014eye spacing, nose profile, jaw geometry, cheekbone structure\u2014converting them into mathematical embeddings (numerical vectors). These unique 'face prints' can be compared against databases of known criminals, suspects, or persons of interest. In forensics, facial recognition generates leads by comparing unknown subjects in surveillance footage against mugshot databases. However, facial recognition requires careful validation: AI can produce false positives, and legal authorization is essential before searching official databases."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Case Study: The Pittsburgh Terminal Identification",
+      "content": "In 2009, federal agents investigated an ATM robbery at Pittsburgh International Airport. Surveillance footage captured the suspect's face during the crime. Investigators obtained a warrant and used facial recognition software to search driver's license and criminal databases. The algorithm flagged a 98.7% similarity match to a suspect with prior convictions. However, the identification wasn't complete\u2014analysts manually compared distinctive features (scar pattern, unusual ear structure) visible in both images. When fingerprints lifted from the ATM matched the database, the suspect was arrested and successfully prosecuted. This case demonstrates why facial recognition is most powerful as a lead generator, not standalone proof."
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "How to Proceed with Facial Recognition?",
+      "content": "You have a suspect image from surveillance footage. Two paths forward present different ethical and legal implications.",
+      "choices": [
+        {
+          "label": "Obtain Warrants and Use Official Channels",
+          "next": "n6"
+        },
+        {
+          "label": "Run Facial Recognition Without Formal Procedures",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Case Closed: Proper Procedure Success",
+      "content": "You obtained the necessary legal authorization and ran the suspect's image through official facial recognition systems. The algorithm matched the perpetrator to a known criminal with 94.2% confidence. You verified this match through manual feature comparison (distinctive scar, unusual birthmark visible in both images) and corroborated with additional evidence: fingerprints on the crowbar found at the scene, witness testimony placing him in the area, and prior convictions for similar crimes. The suspect was arrested, charged, and convicted. The evidence was admissible in court because all procedures followed legal requirements. The case became a success story demonstrating responsible AI use in forensics, and you were recognized for balancing investigative efficiency with ethical standards."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Case Dismissed: Procedural Error",
+      "content": "Without obtaining proper warrants, you ran the suspect's image through facial recognition databases and achieved a 96.1% match. An arrest was made based on this match. However, the suspect's defense attorney challenged the evidence in court. Because facial recognition was used without proper legal authorization, the matching result was deemed inadmissible. The prosecution's case collapsed, and the suspect was released. The department faced civil liability and negative publicity. This case became cautionary\u2014a reminder that computer vision tools, however accurate, must be used within legal frameworks. Cutting procedural corners can undermine even strong technical evidence."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Image Processing for Forensic Evidence",
+      "content": "Image processing uses computer vision algorithms to enhance, analyze, and extract information from crime scene photographs. Contrast enhancement reveals details in shadows and dark areas\u2014crucial for analyzing scratches on the vault or writing on surfaces. Noise reduction clarifies blurry images, recovering details lost in compression or motion blur. Edge detection highlights tool marks and trace evidence boundaries. Thermal imaging reveals heat signatures showing where perpetrators lingered. Color analysis and spectral imaging identify material composition\u2014synthetic fabrics, inks, biological fluids. In your heist case, vault door photos show scratches; enhancement reveals the exact tool mark pattern and depth, pointing to a specific crowbar type used."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Evidence Successfully Reconstructed",
+      "content": "Using computer vision image processing, you enhanced the crime scene photographs with remarkable results. Contrast enhancement revealed micro-scratches on the vault\u2014the pattern matched a rare specialized crowbar sold by only three industrial suppliers. Fiber analysis on enhanced images identified synthetic material as high-end workwear, traceable to a specialty supplier. Thermal imaging reconstruction showed the perpetrator spent 47 seconds at the vault access panel, indicating prior knowledge of the system. You traced the crowbar and workwear to a known industrial theft specialist with previous convictions. The suspect was arrested, and the computer-enhanced evidence proved admissible in court because image processing is a well-established forensic technique. The conviction was secured with detailed evidence analysis, and you demonstrated how computer vision unlocks investigative pathways that human eyes alone cannot access."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Proceed"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Facial recognition approach"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n8",
+      "label": "Image processing approach"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Make a decision"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Proper procedures"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Cut corners"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Analyze evidence"
+    }
+  ],
+  "generated_at": "2026-03-27T17:09:12.190671+00:00",
+  "model": "claude-haiku-4-5"
+}

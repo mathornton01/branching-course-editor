@@ -1,0 +1,296 @@
+{
+  "id": "film-db-sql-design",
+  "title": "Database Design and SQL for Film Production",
+  "description": "Master database design and SQL through the lens of film production, from foundational concepts to advanced query optimization. Adaptively branch based on your performance.",
+  "topic": "Database Design and SQL",
+  "theme": "film production",
+  "difficulty": "beginner",
+  "estimated_minutes": 90,
+  "tags": [
+    "database",
+    "SQL",
+    "film production",
+    "relational design",
+    "queries",
+    "normalization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Film Production Database Fundamentals",
+      "content": "Test your foundational knowledge of database concepts in the context of film production. A film production requires tracking numerous entities: films, scenes, actors, crew members, equipment, and locations. Demonstrate your understanding of how to organize this data into tables, identify unique identifiers, and understand basic relationships between film production entities.",
+      "questions": [
+        {
+          "question": "In a film production database tracking actors, what would be the best choice for a primary key in the 'Actors' table?",
+          "options": [
+            "A) Actor's phone number",
+            "B) Actor's full name",
+            "C) Actor ID (auto-generated unique identifier)",
+            "D) Actor's agency name"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Phone numbers change and can be shared; unreliable as primary keys.",
+            "Multiple actors share the same name; duplicates are possible.",
+            "Correct! A unique identifier ensures each actor is distinct and unchanging.",
+            "Agency names aren't unique; many actors work for the same agency."
+          ],
+          "explanation": "Primary keys must be unique and immutable. An auto-generated Actor ID satisfies both requirements, making it ideal for reliably identifying individual actors across a film production's database."
+        },
+        {
+          "question": "You're building a database to track film equipment (cameras, lights, sound gear). Which of these is NOT a typical column in an 'Equipment' table?",
+          "options": [
+            "A) Equipment_ID",
+            "B) Equipment_Type (camera, light, microphone)",
+            "C) Acquisition_Cost",
+            "D) Director_Phone_Number"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Equipment IDs are essential for tracking.",
+            "Equipment type categorizes your gear.",
+            "Acquisition cost is important for budget tracking.",
+            "Correct! Director contact info belongs in a separate Crew table, not Equipment."
+          ],
+          "explanation": "Well-designed databases separate concerns. Equipment data includes only equipment attributes. Director information belongs in a crew table and links via foreign keys when needed."
+        },
+        {
+          "question": "In a film production database, what is the relationship between a 'Films' table and a 'Scenes' table?",
+          "options": [
+            "A) One film has many scenes",
+            "B) One scene belongs to many films",
+            "C) They should be combined into one table",
+            "D) Scenes and films are unrelated"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A single film production is divided into multiple scenes.",
+            "A scene is shot for only one film.",
+            "These are distinct entities with different attributes.",
+            "Scenes are fundamental components of films."
+          ],
+          "explanation": "This is a one-to-many relationship. A single film like 'Inception' contains hundreds of scenes. Keeping them in separate tables allows efficient queries about which scenes belong to which film."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "SQL Queries and Relational Database Design",
+      "content": "Demonstrate understanding of SQL queries and normalization principles applied to film production. Work with scenarios involving multiple linked tables, crafting queries to extract insights from a film production database\u2014finding which equipment was used in specific scenes, calculating budgets, and analyzing cast-scene relationships.",
+      "questions": [
+        {
+          "question": "Your film production database has: Films, Scenes, Equipment, and Equipment_Usage (a junction table). Find all equipment used in scenes for 'Inception'. Which SQL query is correct?",
+          "options": [
+            "A) SELECT * FROM Equipment WHERE Films.title = 'Inception'",
+            "B) SELECT Equipment.* FROM Equipment JOIN Equipment_Usage ON Equipment.id = Equipment_Usage.equipment_id JOIN Scenes ON Equipment_Usage.scene_id = Scenes.id JOIN Films ON Scenes.film_id = Films.id WHERE Films.title = 'Inception'",
+            "C) SELECT Equipment FROM Films WHERE title = 'Inception'",
+            "D) SELECT * FROM Equipment_Usage WHERE Films = 'Inception'"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Equipment table alone doesn't reference Films; need to join through junctions.",
+            "Correct! Multiple JOINs connect Equipment \u2192 Equipment_Usage \u2192 Scenes \u2192 Films.",
+            "Equipment is in a separate table; can't SELECT it from Films.",
+            "Films table is not directly in Equipment_Usage; need intermediate joins."
+          ],
+          "explanation": "This demonstrates multi-table joins. Equipment_Usage is a junction table bridging the many-to-many relationship between Scenes and Equipment. Proper joins let you traverse this relationship to find all equipment used in a specific film's scenes."
+        },
+        {
+          "question": "Why create a separate 'Locations' table instead of storing location details directly in the 'Scenes' table?",
+          "options": [
+            "A) It makes the database aesthetically cleaner",
+            "B) Avoids data redundancy\u2014if multiple scenes are filmed at the same location, store that location once and reference it",
+            "C) Database design standards strictly forbid storing location in scenes",
+            "D) There is no practical benefit to separation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Aesthetics alone don't drive database design.",
+            "Correct! Normalization eliminates redundancy; store location once, not 15 times.",
+            "Standards are guidelines; the real benefit is efficiency.",
+            "Separation provides significant practical benefits."
+          ],
+          "explanation": "Normalization reduces data redundancy and improves consistency. If location data is stored with every scene and you update a location's address, you'd update it 15 times instead of once\u2014risking inconsistencies."
+        },
+        {
+          "question": "Calculate total equipment rental cost across all scenes in a production. Budget data spans Equipment, Equipment_Usage, and Cost tables. Which SQL function sums values across multiple rows?",
+          "options": [
+            "A) DISTINCT",
+            "B) GROUP BY",
+            "C) SUM()",
+            "D) ORDER BY"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "DISTINCT removes duplicates but doesn't aggregate.",
+            "GROUP BY organizes rows into groups but doesn't sum.",
+            "Correct! SUM() is an aggregate function that totals values.",
+            "ORDER BY sorts results but doesn't aggregate."
+          ],
+          "explanation": "Aggregate functions like SUM() operate on multiple rows and return a single result. SUM(Cost.rental_cost) adds all rental costs to give you total equipment budget for the entire production."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced SQL Patterns for Film Production",
+      "content": "You've mastered the fundamentals\u2014explore advanced SQL techniques powering sophisticated film production analyses. Learn window functions to rank scenes by budget, subqueries to find actors appearing in the most scenes across productions, and indexing strategies optimizing queries on large datasets. Consider queries finding the most expensive scene in each film with actor counts, or calculating rolling budgets across shoot schedules. These patterns enable production managers to make data-driven decisions about resource allocation, scheduling, and cost optimization.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Mastery: Advanced Database Design",
+      "content": "Congratulations! You've achieved expert-level proficiency in database design and SQL for film production. You can design normalized schemas eliminating redundancy, write complex multi-table queries with confidence, and optimize queries for performance. You're ready to architect production databases supporting real-world filmmaking\u2014from independent features to large-scale productions with hundreds of crew and complex equipment inventories."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Intermediate SQL Practice: Reinforcing Your Skills",
+      "content": "Reinforce your understanding with targeted practice on intermediate SQL concepts. These scenarios reflect real challenges in film production database management: finding cast for specific scenes, tracking equipment across productions, and generating production reports. Strengthen your grasp of JOINs, filtering, and aggregation.",
+      "questions": [
+        {
+          "question": "A film has 50 scenes. Each scene uses multiple actors; each actor appears in multiple scenes. What structure best represents this many-to-many relationship?",
+          "options": [
+            "A) Store all actor names in one column in Scenes, separated by commas",
+            "B) Create a junction table (like 'Casting') with foreign keys to Scenes and Actors",
+            "C) Create two separate Scenes and Actors tables with no linking",
+            "D) Store scene information in the Actors table"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Comma-separated strings violate normalization; querying is difficult.",
+            "Correct! A junction table with foreign keys is the standard relational design.",
+            "Without a junction table, you can't easily query actor-scene relationships.",
+            "This inverts the relationship and creates redundancy."
+          ],
+          "explanation": "Junction tables solve many-to-many relationships. They contain foreign keys to both related tables, representing that an actor appears in a scene without data redundancy."
+        },
+        {
+          "question": "List all actors who worked on 'Dune' with the number of scenes each appeared in. Which query pattern is appropriate?",
+          "options": [
+            "A) SELECT Actors.name, COUNT(Casting.scene_id) FROM Actors JOIN Casting ON Actors.id = Casting.actor_id JOIN Scenes ON Casting.scene_id = Scenes.id JOIN Films ON Scenes.film_id = Films.id WHERE Films.title = 'Dune' GROUP BY Actors.id",
+            "B) SELECT Actors.name FROM Actors WHERE Films.title = 'Dune'",
+            "C) SELECT COUNT(*) FROM Casting WHERE Films.title = 'Dune'",
+            "D) SELECT Actors.name, Casting.scene_id FROM Films WHERE title = 'Dune'"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Joins through casting, groups by actor, counts scenes.",
+            "This doesn't join to Films correctly or aggregate by actor.",
+            "Counts castings but doesn't list actors or films.",
+            "Doesn't properly filter by film or aggregate."
+          ],
+          "explanation": "This demonstrates joining through a junction table, filtering by film, and using GROUP BY with COUNT() to aggregate results. A common pattern for 'which talent worked on which production and how much?' queries."
+        },
+        {
+          "question": "In production equipment databases, what is a primary key-foreign key relationship?",
+          "options": [
+            "A) Two names for the same concept",
+            "B) A primary key uniquely identifies a record; a foreign key in another table references that primary key to create a relationship",
+            "C) A security measure preventing unauthorized access",
+            "D) A database backup system"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "They are distinct concepts.",
+            "Correct! This is how relational databases link tables.",
+            "That's database access control, not key relationships.",
+            "That's unrelated to keys."
+          ],
+          "explanation": "The primary-key-foreign-key relationship is relational databases' foundation. When an Equipment_Usage record contains a foreign key to Equipment's primary key, you create a relationship enforcing referential integrity."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Proficiency: SQL and Relational Design",
+      "content": "Great work! You've solidified understanding of SQL queries and relational design. Write JOIN queries across multiple tables, understand many-to-many relationships, and use aggregate functions for reporting. Query film production databases to find actors by film, track equipment usage, and generate reports. Continue developing with advanced topics like window functions and optimization."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Database Fundamentals Explained",
+      "content": "Build your foundation with clear core database concepts. A database is an organized data collection in tables. Each table has columns (attributes like 'actor_name' or 'equipment_cost') and rows (individual records). A primary key uniquely identifies each row. When a film production database has multiple tables\u2014Films, Scenes, Actors\u2014relationships use foreign keys. A Scenes table's 'film_id' foreign key points to Films, indicating which film each scene belongs to. This structure stores data efficiently without repetition and lets you query across tables answering complex production questions.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Film Production Database Example",
+      "content": "Consider a small film production tracking database. 'Films' table: film_id, title, director, budget, release_date. 'Scenes' table: scene_id, film_id (foreign key), scene_number, location, estimated_cost. 'Actors' table: actor_id, name, union_status, day_rate. 'Casting' table links scenes to actors: casting_id, scene_id, actor_id, character_name. A simple query\u2014SELECT Actors.name FROM Actors JOIN Casting ON Actors.id = Casting.actor_id JOIN Scenes ON Casting.scene_id = Scenes.id WHERE Scenes.scene_number = 5\u2014finds all actors in scene 5. This shows how separate tables connected by foreign keys let you query relationships without redundant data.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundation Completed",
+      "content": "You've learned core database concepts and basic queries in film production context. You understand tables, columns, rows, primary keys, and foreign keys. You can understand simple SQL queries and basic relationships in production databases. To build expertise, continue exploring queries and normalization. Return to advanced topics when ready to deepen skills."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Needs Remediation"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Practice & Review"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Complete"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T16:52:35.194494+00:00",
+  "model": "claude-haiku-4-5"
+}

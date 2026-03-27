@@ -1,0 +1,244 @@
+{
+  "id": "webdev-fastapi-social-work",
+  "title": "Web Development with FastAPI for Social Work",
+  "description": "Learn to build modern case management systems using FastAPI, with complete focus on social work applications and real-world scenarios.",
+  "topic": "Web Development",
+  "theme": "social work",
+  "difficulty": "intermediate",
+  "estimated_minutes": 90,
+  "tags": [
+    "FastAPI",
+    "Python",
+    "Web Development",
+    "API Design",
+    "Social Work",
+    "Case Management"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Building Modern Social Work Systems with FastAPI",
+      "content": "Social work organizations increasingly need digital tools to manage client cases, track interventions, and ensure accountability. FastAPI is a modern Python framework that makes building these systems fast and reliable. In this course, you'll learn to use FastAPI to create intake forms, manage case data, and deploy systems that serve vulnerable populations. Through three interconnected topics, you'll see how professional developers build the backends that support your clients' lives."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Select Topics to Explore",
+      "content": "You can explore any combination of these three foundational topics. Each builds essential FastAPI skills. Choose to start with:",
+      "choices": [
+        {
+          "label": "Client Intake Forms",
+          "next": "n3"
+        },
+        {
+          "label": "Case Management APIs",
+          "next": "n5"
+        },
+        {
+          "label": "Production Systems",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "FastAPI Routing & Request Handling for Intake Forms",
+      "content": "When a new client arrives at your agency, an intake worker collects crucial information: family structure, housing status, risk factors, and insurance details. FastAPI routes are like the pathways that direct this information to the right place. A POST /intake route receives client data, while a GET /clients/{id} route retrieves stored records. FastAPI's path parameters and query strings make it trivial to capture information like client IDs or filter criteria. By defining routes explicitly, you create a clear API contract that your frontend (web form) and backend (database) can agree on.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Intake Form Example: A Real Scenario",
+      "content": "Imagine building an intake system for a family services agency. You'd define a POST /clients route that accepts client data: name (string), age (integer), housing_status (homeless/unstable/stable), and primary_concern. When a social worker submits an intake form, FastAPI validates the data\u2014age must be an integer, housing_status must match one of three values\u2014then your handler saves it to the database. If data is missing or malformed, FastAPI rejects it with HTTP 422 and a clear error message. This prevents incomplete records and ensures data consistency for your case management system.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Data Validation with Pydantic for Case Management",
+      "content": "A case manager must track complex client data: demographics, assessment scores, risk factors, and service history. Pydantic models define the exact structure your data must follow. For example, a case assessment might require name (string), date_of_birth (date), risk_score (integer 1\u20135), and identified_needs (list of strings). By defining these as a Pydantic model, FastAPI automatically validates that every case record is complete and correctly formatted. When a caseworker updates a client's risk score, Pydantic ensures it's a valid number between 1 and 5, not text or out-of-range. This guardrail prevents data entry errors and ensures your reports and analytics are based on clean, trustworthy information.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Case Management API Example",
+      "content": "A family services agency manages complex cases with risk assessments (risk level 1\u20135, family structure, economic status) and referrals (mental health services, job training, housing assistance). Using Pydantic: you define a RiskAssessment model with assessment_date (string), risk_level (integer 1\u20135), and notes (string). You create an endpoint POST /cases/{client_id}/assessment that accepts this model. When a caseworker submits a risk assessment, Pydantic validates risk_level is between 1 and 5, assessment_date is present, and notes is text. If risk_level is missing or is '7' instead of 5, the request fails with HTTP 422 and error details. This ensures your case database stays accurate.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Deploying Case Tracking Systems in Production",
+      "content": "Your FastAPI application for case management is powerful on a developer's laptop, but real social workers need it running 24/7 on a reliable server. Production deployment means your application must handle dozens of concurrent users (caseworkers filing cases), run securely (protecting client data with HTTPS and authentication), and stay up even if errors occur. FastAPI applications typically deploy on cloud platforms (AWS, Google Cloud, Heroku) or agency servers using Docker containers. A Docker container packages your FastAPI app, all dependencies, and configuration into a portable unit that runs identically everywhere. Deployment also requires monitoring (to alert staff if the system fails) and logging (to debug issues).",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Deploying a Case Tracking System",
+      "content": "A homeless services agency has built a FastAPI app to track bed availability, client check-ins, and nightly occupancy reports. To deploy: they create a Dockerfile that specifies Python 3.10+, installs FastAPI and dependencies, and runs the app. They build a Docker image, push it to a cloud registry (AWS ECR or Google Container Registry), and deploy it to AWS ECS with 3 replicas. This redundancy means if one container crashes, the other two continue serving requests. They set up HTTPS so data in transit is encrypted, require API keys so only authorized staff access case data, and enable CloudWatch logging to track errors. The first night, 47 clients check in; the system handles the load smoothly. If a bug causes a crash, orchestration automatically restarts a new container within seconds.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating FastAPI Components: Building a Complete Case Management System",
+      "content": "The three pillars of FastAPI development come together in a real case management system. Your intake forms (routes and request handling) capture initial client data through web interfaces. Your data models (Pydantic validation) ensure that data is complete, correctly typed, and ready for analysis and reporting. Your deployment strategy (containerization, cloud infrastructure, redundancy, and monitoring) keeps the system running reliably for your caseworkers. A complete workflow: a client arrives, a worker fills out the intake form, which POSTs to /clients. FastAPI validates using Pydantic, saves to the database, and returns a client ID. Later, a caseworker adds assessments via /cases/{client_id}/assessment; Pydantic ensures complete, valid data. Finally, all of this runs on a cloud-deployed, containerized FastAPI application with monitoring, so vulnerable clients get consistent, reliable service.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Final Assessment: Complete FastAPI System Design",
+      "content": "You've learned routing, validation, and deployment. Test your understanding of how they work together in a real social work context.",
+      "questions": [
+        {
+          "question": "A homeless services agency wants to track shelter bed assignments. They need to POST a bed assignment (bed_id, client_id, check_in_date) and GET current occupancy. Which FastAPI feature ensures that bed_id and client_id are strings and check_in_date is properly formatted?",
+          "options": [
+            "Routing decorators (@app.post)",
+            "Pydantic models",
+            "Docker containers",
+            "Cloud deployment"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Routing decorators define the HTTP path and method, not data types.",
+            "Correct! Pydantic models enforce field types (string, integer, date) and formats.",
+            "Docker packages the app for deployment but doesn't validate request data.",
+            "Cloud deployment runs the app but doesn't define data structure."
+          ],
+          "explanation": "Pydantic models define the exact structure and type of every field. When a POST request arrives, FastAPI uses the model to validate and parse data before passing it to your handler."
+        },
+        {
+          "question": "You're deploying a case management system to AWS. Your app must run 24/7, handle multiple concurrent caseworkers, and recover automatically if a crash occurs. Which deployment strategy addresses all these requirements?",
+          "options": [
+            "Run the app on a single EC2 instance with automatic backups",
+            "Use Docker containers with multiple replicas and orchestration (ECS/Kubernetes)",
+            "Deploy only during office hours (9 AM\u20135 PM)",
+            "Store all case data in the application code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A single instance is a single point of failure; one crash takes the system offline.",
+            "Correct! Multiple replicas with orchestration ensure redundancy and automatic recovery.",
+            "Social workers and clients need 24/7 access; partial uptime fails vulnerable populations.",
+            "Data must never be stored in code; use a separate database."
+          ],
+          "explanation": "Production systems need redundancy. Multiple Docker containers run simultaneously on different servers. If one crashes, the orchestration platform (ECS/Kubernetes) detects it and starts a new container, or routes traffic to healthy instances."
+        },
+        {
+          "question": "A caseworker files a case assessment with risk_level='moderate' instead of the required integer (1\u20135). With Pydantic validation, what happens?",
+          "options": [
+            "The assessment saves with 'moderate' as a string for flexibility",
+            "FastAPI rejects the request with HTTP 422 and explains the problem",
+            "The app crashes and takes down the server",
+            "Pydantic automatically converts 'moderate' to 3"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Pydantic strictly enforces field types; it rejects strings where integers are required.",
+            "Correct! Pydantic validates before your handler runs, returning HTTP 422 with error details.",
+            "Pydantic catches validation errors gracefully; the app doesn't crash.",
+            "Pydantic doesn't convert or guess; it rejects invalid types with clear feedback."
+          ],
+          "explanation": "Pydantic validates the request body against your model before your handler runs. If a field is the wrong type, out of range, or missing, it returns HTTP 422 Unprocessable Entity with a detailed error message, protecting data integrity."
+        }
+      ],
+      "pass_threshold": 66.67,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "You've Mastered FastAPI for Social Work",
+      "content": "Congratulations! You now understand how to build case management systems with FastAPI. You can design intake forms using routing, validate complex case data with Pydantic, and deploy reliable systems that serve vulnerable populations. These skills directly support the social workers and clients who depend on accurate, accessible data. The social work sector needs technologists who understand both the technology and the mission. You're equipped to build systems that matter."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Intake Forms"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Case APIs"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Deployment"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Next"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Next"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Test"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Pass"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "Review"
+    }
+  ],
+  "generated_at": "2026-03-27T16:42:08.513413+00:00",
+  "model": "claude-haiku-4-5"
+}

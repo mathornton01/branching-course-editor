@@ -1,0 +1,458 @@
+{
+  "id": "dist-sys-social-work",
+  "title": "Distributed Systems in Social Services",
+  "description": "Learn how distributed systems principles apply to coordinating social services across multiple agencies and locations through the lens of social work coordination.",
+  "topic": "Distributed Systems",
+  "theme": "social work",
+  "difficulty": "intermediate",
+  "estimated_minutes": 60,
+  "tags": [
+    "distributed-systems",
+    "social-work",
+    "interagency-coordination",
+    "data-management",
+    "resilience"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Social Services Need Distributed Systems",
+      "content": "Social services operate across multiple organizations and geographic locations\u2014child welfare agencies, mental health providers, housing programs, and employment services rarely exist in one place. When a client receives support from multiple providers, information must flow reliably between systems. This is a distributed system: independent agencies (nodes) connected by communication networks, each with their own data and processes. Distributed systems in social work solve real problems: improving client outcomes through coordinated care, reducing duplicated assessment, and ensuring no one falls through the cracks when organizational boundaries exist.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Multi-Agency Case Coordination",
+      "content": "Consider Maria, a 16-year-old in the foster care system. She receives case management from the Department of Children and Family Services (DCFS), mental health counseling from a community clinic, and job training from a workforce development program. Each organization has its own database and staff. When Maria's counselor notes she's struggling with trauma, DCFS needs this information to adjust her placement. When her job trainer sees job-readiness improvements, her case manager needs to know to reduce counseling frequency. Without a distributed system, each agency works in silos. With coordination, information flows securely between systems, enabling holistic care despite institutional boundaries.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Understanding Distributed Systems in Social Work",
+      "content": "Test your understanding of why distributed systems matter in social services coordination.",
+      "questions": [
+        {
+          "question": "In the distributed system of social services, what does each 'node' represent?",
+          "options": [
+            "A caseworker or client",
+            "An independent organization or agency providing services",
+            "A type of service being delivered",
+            "The network connecting different services"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite\u2014nodes are organizational entities, not individuals.",
+            "Correct! Each social service organization is a node in the distributed system.",
+            "Services are handled within nodes, not nodes themselves.",
+            "The network is the connection between nodes, not the nodes themselves."
+          ],
+          "explanation": "In a social services distributed system, nodes are the independent organizations (DCFS, mental health clinics, housing programs) that must coordinate with each other."
+        },
+        {
+          "question": "What is the key challenge in coordinating information across multiple social service agencies?",
+          "options": [
+            "Ensuring all agencies use the same software",
+            "Making sure client information remains consistent and current across different systems while maintaining privacy",
+            "Forcing all agencies to share a single database",
+            "Reducing the number of agencies involved"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Agencies may use different systems and that's okay\u2014coordination is still possible.",
+            "Correct! Maintaining consistency while protecting privacy is the core challenge.",
+            "This isn't feasible and violates agency autonomy and client privacy.",
+            "Consolidation isn't always possible or desirable in a diverse social services ecosystem."
+          ],
+          "explanation": "The real distributed systems challenge is synchronizing information across independent systems while respecting privacy and organizational boundaries."
+        },
+        {
+          "question": "Why would a social work distributed system be considered 'resilient'?",
+          "options": [
+            "Because it never experiences system failures",
+            "Because if one agency's system goes down, clients can still receive services from coordinated providers",
+            "Because it requires less technology",
+            "Because it eliminates the need for client information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No system is perfect\u2014resilience means surviving failures gracefully.",
+            "Correct! Resilience means critical services continue despite partial system failures.",
+            "Resilient systems often require thoughtful technology choices.",
+            "Client information is essential\u2014resilience means maintaining access to it."
+          ],
+          "explanation": "A resilient distributed system ensures that the entire social services network doesn't collapse when one component fails. If one agency's system is unavailable, others can still provide services."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Practice: Identifying Distributed Systems Concepts",
+      "content": "Test your understanding with practical scenarios.",
+      "questions": [
+        {
+          "question": "A homeless services provider and a mental health clinic need to coordinate care for clients experiencing both housing insecurity and depression. What is the 'network' connecting these two nodes?",
+          "options": [
+            "The caseworkers who work at both agencies",
+            "The information systems and communication protocols that allow agencies to share relevant client information securely",
+            "The clients themselves who move between services",
+            "The funding source that supports both organizations"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Caseworkers are users of the network, not the network itself.",
+            "Correct! The network is the technical and procedural infrastructure for secure information sharing.",
+            "Clients are served by the system, not part of the system infrastructure.",
+            "Funding is important but isn't the communication network."
+          ],
+          "explanation": "The network in a social services distributed system is the actual communication infrastructure\u2014secure data exchange, shared standards, APIs, or procedures that enable information flow while protecting privacy."
+        },
+        {
+          "question": "In a distributed social services system, why is redundancy important for resilience?",
+          "options": [
+            "So clients can be served by multiple caseworkers simultaneously",
+            "To ensure that if one agency or location becomes unavailable, backup services or information are available elsewhere",
+            "To require clients to visit multiple locations",
+            "To increase administrative costs"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Redundancy isn't about simultaneous service from multiple workers.",
+            "Correct! Redundancy provides backup capability when primary systems fail.",
+            "Resilience aims to reduce burden on clients, not increase it.",
+            "Resilience is designed to improve efficiency, not waste resources."
+          ],
+          "explanation": "Redundancy in social services means having backup data copies, alternative communication channels, and cross-trained staff so services continue when primary systems or staff are unavailable."
+        },
+        {
+          "question": "A child welfare agency's database goes offline for 2 hours due to a server failure. In a well-designed distributed system, what should happen?",
+          "options": [
+            "All social services for all clients served by that agency stop completely",
+            "Clients can continue receiving services from other coordinated providers, with information shared through backup channels",
+            "All clients must wait until the database comes back online",
+            "Social workers lose access to all client information permanently"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That would indicate a fragile, non-distributed system\u2014not what we want.",
+            "Correct! A resilient distributed system maintains service continuity despite partial failures.",
+            "Resilience means reducing such wait times through backup procedures.",
+            "A distributed system prevents total information loss through redundancy."
+          ],
+          "explanation": "In a resilient distributed system, coordinated providers have access to critical information through backup channels, and services continue uninterrupted while the primary system recovers."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Consistency and Synchronization Across Agencies",
+      "content": "When multiple agencies maintain information about the same client, keeping records consistent is complex. Imagine two agencies each record that a client is in stable housing, but one says 'verified 2 days ago' and the other says 'verified last month'\u2014which is true? Distributed systems use consistency models: strong consistency means all nodes always agree (but is slow), while eventual consistency means agencies may temporarily disagree but eventually align. In social work, we often accept eventual consistency because it enables faster local decision-making. If a client's job status is updated at the employment program, the housing program doesn't need immediate real-time notification\u2014eventual synchronization within hours is acceptable. Understanding these trade-offs prevents both data errors and service delays.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Coordinating Family Information Across Agencies",
+      "content": "The Chen family receives services from multiple agencies: the school system (noting a child's learning disabilities), the mental health clinic (treating a parent's depression), and the family services department (investigating a report of neglect). Each agency maintains client records. When the school learns the child has improved academically after mental health treatment, they document this progress. The mental health clinic updates that the parent's treatment is working. The family services department updates that home conditions have improved. In a well-designed distributed system, this information flows across agencies with a reasonable delay (perhaps same-day or next-day updates), allowing case coordinators to see the full picture. However, there's a moment of 'eventual consistency'\u2014briefly, different agencies have slightly different information. Good distributed design acknowledges this temporary inconsistency and includes procedures so caseworkers understand the timeliness of information they're seeing.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Understanding Consistency and Coordination",
+      "content": "Assess your understanding of data consistency in distributed social services.",
+      "questions": [
+        {
+          "question": "A family services caseworker updates a client's address in their system. The housing program sees the old address for 4 hours before their system syncs. This is an example of which distributed systems concept?",
+          "options": [
+            "Strong consistency",
+            "Eventual consistency",
+            "System failure",
+            "Data corruption"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Strong consistency would mean the update propagates instantly to all systems.",
+            "Correct! Eventual consistency accepts temporary disagreement between systems before they synchronize.",
+            "Brief synchronization delays are normal, not failures.",
+            "Eventual consistency maintains data integrity\u2014both systems will eventually agree."
+          ],
+          "explanation": "Eventual consistency is a reasonable approach in social services where temporary information delays don't harm service quality, as long as systems reliably converge to the same state."
+        },
+        {
+          "question": "Why might a social services system choose eventual consistency over strong consistency?",
+          "options": [
+            "Because it's cheaper and accuracy doesn't matter",
+            "Because it allows faster local decision-making and reduced system complexity, accepting brief delays in information propagation",
+            "Because agencies don't care about coordinating with each other",
+            "Because strong consistency is impossible to implement"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Accuracy absolutely matters in social work\u2014that's not the reason.",
+            "Correct! The trade-off is speed vs. synchronization; eventual consistency is often the right choice.",
+            "Coordination is essential; eventual consistency still provides it, just with brief delays.",
+            "Strong consistency is possible but often slower and more rigid."
+          ],
+          "explanation": "Eventual consistency is a pragmatic choice: it enables agencies to operate independently and quickly, while background processes synchronize data. For social work timescales, same-day or next-day updates are often sufficient."
+        },
+        {
+          "question": "A mental health clinic and a job training program both serve the same client. The clinic records that the client has severe anxiety; the job program records that the client completed a job interview successfully. These seem contradictory. What should a coordinated system do?",
+          "options": [
+            "Choose one record and delete the other as incorrect",
+            "Recognize that both pieces of information can be accurate\u2014they describe different contexts and time periods, and a good system helps resolve apparent contradictions through communication",
+            "Prevent any inconsistency by locking one agency's records during updates",
+            "Require the agencies to have identical databases"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Deleting information would lose important context about the client's condition.",
+            "Correct! In social work, apparent inconsistencies often reflect context (anxiety in one setting, success in another) and should prompt communication, not deletion.",
+            "Locking systems would create bottlenecks and reduce responsiveness.",
+            "Different agencies serve different functions and may appropriately have different data."
+          ],
+          "explanation": "Distributed systems in social work must be smart about conflict resolution. When records disagree, it often reflects legitimate context differences, not errors. The system should flag potential conflicts and facilitate communication between agencies."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Managing Consistency and Conflicts",
+      "content": "Work through scenarios involving data consistency challenges.",
+      "questions": [
+        {
+          "question": "Two agencies are updating information about a client's employment status simultaneously. Agency A records 'employed, full-time' while Agency B records 'unemployed, seeking work.' How should a well-designed distributed system handle this potential conflict?",
+          "options": [
+            "Randomly choose one record and discard the other",
+            "Implement a process that identifies the conflict, timestamps both records, and escalates to a human coordinator to understand why the information differs (perhaps the client has multiple part-time jobs that one agency doesn't know about)",
+            "Lock all employment records until both agencies manually agree on a single version",
+            "Prevent both agencies from updating employment information simultaneously"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Random selection could discard accurate information.",
+            "Correct! Timestamps and human review allow coordinators to understand context and update both systems with accurate information.",
+            "Locking would create bottlenecks and delays in critical information updates.",
+            "Preventing simultaneous updates would reduce system responsiveness."
+          ],
+          "explanation": "In social work, apparent data conflicts often reflect different truths. A distributed system should detect conflicts, preserve both versions with timestamps, and enable human coordinators to investigate and reconcile."
+        },
+        {
+          "question": "A housing program needs to decide whether to place a client in a unit. The family services system shows 'unsafe home environment,' but the housing program's own assessment says 'stable and ready for housing.' Which should they trust?",
+          "options": [
+            "Always trust the most recent update, regardless of source",
+            "Always trust their own assessment over other agencies",
+            "Recognize that both assessments may be accurate (from different times or perspectives) and use both to make a holistic decision, requesting clarification if they substantially conflict",
+            "Wait indefinitely until all agencies agree on a single assessment"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Recency doesn't guarantee accuracy; other factors matter.",
+            "Ignoring other agencies' expertise would undermine the purpose of distributed coordination.",
+            "Correct! Good decision-making uses all available information and investigates conflicts rather than choosing one source blindly.",
+            "This would paralyze the system; eventual consistency expects agencies to make decisions with imperfect information."
+          ],
+          "explanation": "In a distributed social services system, different agencies bring different expertise and perspectives. Rather than choosing one source blindly, professionals should integrate information critically, requesting clarification when records substantially conflict."
+        },
+        {
+          "question": "What is the primary risk of a social services system that enforces very strict strong consistency (all agencies always have identical information)?",
+          "options": [
+            "It would be too expensive to implement",
+            "Agencies might become too dependent on technology rather than professional judgment",
+            "One agency's system failure would slow down or stop the entire network, reducing responsiveness and risking client welfare",
+            "Clients would receive better services because information would always be accurate"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Cost is a concern, but the bigger issue is system robustness.",
+            "Professional judgment should always be primary; the question is about system effects.",
+            "Correct! Strict consistency creates tight coupling that reduces fault tolerance and system responsiveness.",
+            "Accuracy is important, but not if the cost is reduced availability and slower service when systems struggle to stay synchronized."
+          ],
+          "explanation": "Strong consistency systems are tightly coupled\u2014if one component slows down, the whole system slows. In social services, it's better to accept brief inconsistencies than risk entire network slowdowns when an agency's system is stressed."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Fault Tolerance and Service Resilience",
+      "content": "In social services, system failures have real human costs. If a child welfare system goes offline, caseworkers can't access client history. If a housing database fails, intake workers can't process new applications. Resilient distributed systems plan for failures through redundancy: maintaining multiple copies of critical data (replication), having backup communication channels, and enabling services to continue functioning at reduced capacity. Load balancing distributes client cases across multiple caseworkers so no single failure (one worker ill, one office closed) disrupts service. Geographic distribution ensures that if one location's systems fail, others continue. Fault tolerance isn't about preventing all failures\u2014it's about designing systems so that inevitable failures don't cascade into catastrophic service disruptions.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Continuity During Crisis or Failure",
+      "content": "Imagine a winter storm knocks out power and internet at the main office of a family services agency. Without distributed resilience, caseworkers would be completely unable to access client records or communicate with partners. But a resilient system has built-in redundancy: critical client data is replicated to backup servers in another location accessible through mobile networks; caseworkers can access read-only versions of client files through backup systems; appointment information is synchronized to local paper copies and personal devices; partner agencies can contact caseworkers directly while the main system is offline. When a natural disaster or cyberattack affects the system, clients' cases don't halt\u2014they continue with brief delays. Within hours or days, primary systems recover and resynchronize. This resilience matters because families in crisis can't wait weeks for systems to come back online.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Final Assessment: Distributed Systems in Social Services",
+      "content": "Demonstrate your comprehensive understanding of distributed systems in social work coordination.",
+      "questions": [
+        {
+          "question": "Which of the following is the primary benefit of a distributed social services system compared to a centralized single-agency approach?",
+          "options": [
+            "It eliminates the need for data security and privacy protections",
+            "It enables specialized agencies to coordinate while maintaining independence, improving both responsiveness and client outcomes",
+            "It ensures that all decisions are made faster because agencies don't have to consult each other",
+            "It reduces the total number of caseworkers needed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Security is even more important in distributed systems due to data flow between agencies.",
+            "Correct! Distributed design preserves agency autonomy while enabling coordination\u2014the best of both.",
+            "Specialization actually improves decision quality, even if consultation takes more time.",
+            "Coordination may change staffing needs but isn't designed to reduce staff."
+          ],
+          "explanation": "The power of distributed social services systems is enabling specialized agencies (child welfare, mental health, housing, employment) to coordinate seamlessly while maintaining their distinct expertise and responsiveness."
+        },
+        {
+          "question": "A distributed social services system experiences a partial failure: one agency's database goes offline. How should a well-designed system respond?",
+          "options": [
+            "All social services immediately halt until the failed agency's system comes back online",
+            "The system automatically routes information through backup systems, continues serving clients with other agencies, and resynchronizes when the failed system returns",
+            "The failed agency's caseworkers take manual notes and clients wait until the system is fixed before any information is shared with partner agencies",
+            "All agencies must shut down for a security audit before the failed system comes back online"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A total halt would indicate poor fault tolerance\u2014not acceptable in social services.",
+            "Correct! Resilience means the system continues with degraded performance, not total failure.",
+            "Completely manual processes would significantly harm client service during outages.",
+            "Security is important but shouldn't require complete system shutdowns for normal failures."
+          ],
+          "explanation": "A resilient distributed system continues providing services despite partial failures through redundancy and backup channels. The goal is to minimize service disruption, not guarantee zero downtime."
+        },
+        {
+          "question": "Why is geographic distribution of social services systems important for resilience?",
+          "options": [
+            "So clients in different regions receive different quality of service",
+            "So that agencies in different locations can't communicate with each other",
+            "So that localized failures (natural disasters, power outages, cyber attacks in one region) don't disrupt service across the entire network",
+            "So that the organization can reduce the number of physical office locations"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Distribution should ensure consistent quality across regions.",
+            "Distribution is designed to enable communication despite localized failures.",
+            "Correct! Geographic distribution is a key resilience strategy\u2014when one location fails, others continue operating.",
+            "Physical office distribution is separate from system distribution, though they're related."
+          ],
+          "explanation": "Geographically distributed systems ensure that localized events (a hurricane affecting one region, a fire at one facility) don't cascade into network-wide failures. If Region A's systems go offline, Region B can continue serving its clients and provide some support to Region A."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n12",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "Course Complete: Distributed Systems in Social Services",
+      "content": "Congratulations! You've learned how distributed systems principles apply to social services coordination. You understand why distributed systems matter for social work (enabling specialized agencies to coordinate), how to manage consistency across agencies (accepting eventual consistency and managing conflicts), and how to build resilience (through redundancy and fault tolerance). These concepts aren't just theoretical\u2014they shape how social services can be more coordinated, responsive, and resilient. As you work with social services systems, you'll recognize distributed systems patterns and anticipate challenges like consistency delays, failure cascades, and information conflicts. Use this understanding to advocate for better system design that puts client welfare first."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "content to example"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "example to assessment"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n5",
+      "label": "assessment pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "assessment fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n3",
+      "label": "practice loops back"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "content to example"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "example to assessment"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n9",
+      "label": "assessment pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "assessment fail"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n7",
+      "label": "practice loops back"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "content to example"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "example to assessment"
+    },
+    {
+      "id": "c13",
+      "source": "n11",
+      "target": "n12",
+      "label": "to end"
+    }
+  ],
+  "generated_at": "2026-03-27T16:08:45.012472+00:00",
+  "model": "claude-haiku-4-5"
+}

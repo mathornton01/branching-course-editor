@@ -1,0 +1,147 @@
+{
+  "id": "ts-analysis-film-production",
+  "title": "Time Series Analysis for Film Production",
+  "description": "Master time series analysis through the lens of film box office performance, audience engagement, and production decisions. Learn forecasting and analysis techniques by solving real film industry challenges.",
+  "topic": "Time Series Analysis",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "time-series",
+    "forecasting",
+    "data-analysis",
+    "film-production",
+    "decision-making"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Box Office Chronicles: Understanding Your Film's Time Series",
+      "content": "Every successful film tells two stories: the narrative on screen and the narrative of its performance over time. Your indie thriller's box office revenue, audience ratings, and social media mentions\u2014tracked daily\u2014form a *time series*: a sequence of measurements ordered over time. Time series are everywhere in film: box office trajectories, audience engagement metrics, production costs accumulation, and viewing patterns on streaming platforms. Understanding these patterns helps you make critical decisions: when to expand from limited to wide release, whether your film is gaining or losing momentum, and how to allocate marketing budgets. In this course, you'll learn two complementary approaches: *forecasting* (predicting what comes next) and *analysis* (understanding what already happened). Both are essential for thriving in film production and distribution.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Your Film's Story: Choose Your Analytics Focus",
+      "content": "Your indie thriller just launched two weeks ago. You're tracking box office revenue, audience ratings, and social media mentions daily. The data is rich\u2014but which question matters most to your current decision?",
+      "choices": [
+        {
+          "label": "Predict what happens next\u2014I need to decide on theater expansion strategy",
+          "next": "n3"
+        },
+        {
+          "label": "Understand what happened\u2014I want to learn from this release for my next film",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Predicting the Future: Time Series Forecasting Methods",
+      "content": "Forecasting means using past patterns to predict future values. Your film's box office shows structure: a strong opening weekend (typical), followed by a decline curve. But the *shape* differs by genre. Horror films show steep decline (audiences rush opening weekend), while family films sustain interest across weeks. Key methods: exponential smoothing weights recent data heavily (ideal for rapid momentum shifts), ARIMA models autocorrelation and seasonality (useful for established patterns), and trend decomposition separates direction from cycles. For film box office, exponential smoothing excels when momentum changes rapidly; ARIMA works when you have predictable seasonal patterns like summer blockbusters; trend models help long-term forecasts. The choice depends on your time series structure: does your film follow a typical decay curve, or does it have repeating weekly patterns you need to capture?",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Choosing Your Forecasting Weapon",
+      "content": "You've analyzed two weeks of your thriller's box office data: opening weekend of $2.1M, week 2 at $800K. You see strong *trend* (rapid decline) and *seasonality*\u2014weekends are consistently 2.5\u00d7 stronger than weekdays. You need to forecast two weeks ahead to decide: expand from 1,200 to 1,800 theaters (expensive but captures momentum), or hold steady? This decision has real financial stakes: expansion requires marketing spend and theater licensing, but missing peak momentum costs box office revenue.",
+      "choices": [
+        {
+          "label": "Use exponential smoothing\u2014weights recent data heavily, captures momentum shifts perfectly",
+          "next": "n5"
+        },
+        {
+          "label": "Use linear regression\u2014simple trend line projection, ignores weekend/weekday seasonality",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "\ud83c\udfac Strategic Expansion: Exponential Smoothing Pays Off",
+      "content": "You deploy exponential smoothing, weighting the three most recent days at 40% and older data lower. The forecast shows: week 3 peaks Friday at $650K, drops to $300K on weekdays. You interpret this as: momentum is fading but the weekend effect persists. You strategically add 600 theaters focused on metro areas. Week 3's Friday hits $640K\u2014nearly your forecast. The expanded footprint captures peak momentum while the model correctly identified that weekday expansion would waste resources. Your film reaches $18M domestic. **Key learning:** Exponential smoothing captures *how* values change, not just direction. It's the workhorse for rapid-change scenarios like film momentum."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "\u26a0\ufe0f The Linear Regression Lesson",
+      "content": "You fit linear regression to your data: $2.1M declining $275K per week. Forecast shows week 3 at $575K, week 4 at $300K\u2014terminal decline. You reduce marketing spend and hold at 1,200 theaters. But week 3's Friday grosses $780K\u201428% higher than forecast\u2014because the weekend pattern persists. You missed expansion opportunity. Later analysis reveals: your linear model treated every day equally, missing the weekend seasonality. The decline is real but *oscillating*, not monotonic. A time series model capturing seasonal structure would have revealed the repeating weekend peaks. **Key learning:** Linear regression ignores temporal structure. Time series analysis requires methods that respect patterns like seasonality and momentum dynamics. Ignoring these costs real money."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Decoding Success: Analyzing Your Film's Temporal Patterns",
+      "content": "Analysis reveals *why* patterns exist. Decompose your film's time series into: *trend* (overall direction\u2014momentum rising or falling?), *seasonality* (repeating patterns\u2014weekends vs. weekdays, holiday effects), and *irregularity* (unexpected spikes or drops). Your thriller shows: negative trend (declining across weeks, normal for thrillers), strong seasonality (weekends 2.5\u00d7 weekdays\u2014audience availability), and day 10 spike (40% surge, traced to viral social media). Understanding these components reveals audience behavior. The trend is normal. The seasonality shows when people watch. The irregularity shows how external events override patterns. This understanding informs future decisions: which promotional tactics sparked the anomaly? How can your next film leverage the weekend strength? When does your performance deviate from expected patterns, signaling something to investigate?",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Case Study: The Documentary That Outpaced Expectations",
+      "content": "A deep-sea exploration documentary launched on streaming. Daily engagement hours showed: Week 1\u2014$8,000 hours/day (surge), Week 2\u2014decline to $2,000/day (typical fatigue), Week 3\u2014stabilization at $1,800/day (not declining further). Decomposing: *trend* showed decline tapering, *seasonality* showed no strong day-of-week effect (streaming unlike theater), *irregularity* flagged day 16's +35% spike. Investigation revealed: day 16, a major science educator featured the film on YouTube. The stabilization showed audience segmentation\u2014early adopters (week 1) were general audiences; stabilized week 3 audience was core science enthusiasts re-watching and sharing in academic communities. This insight transformed distribution: instead of general-audience marketing, filmmakers partnered with universities and science organizations. The stable, persistent audience became the growth engine. **Insight:** Time series analysis reveals *why* patterns exist, enabling strategic pivots."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "\ud83c\udf9e\ufe0f Informed Decisions: From Data to Future Films",
+      "content": "By analyzing your film's temporal patterns, you've mapped the audience journey: excitement (week 1), adjustment to core audience (decline phase), stabilization or growth. You understand which promotional tactics resonated (reverse-engineer anomalous spikes), how your genre shapes expected patterns (compare your thriller's decay to family films' sustained interest), and where external factors intervened (festivals, reviews, viral moments). You recognize time series analysis isn't about perfect prediction\u2014it's about understanding audience behavior structure over time. This informs better decisions: when to allocate marketing, how to track ahead/behind baseline, and how to recognize when something unexpected happened and investigate why. You're now equipped for data-driven filmmaking."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Forecasting path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Analysis path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Exponential smoothing"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Linear regression"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T14:48:15.174480+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,225 @@
+{
+  "id": "bayesian-music-therapy-course",
+  "title": "Bayesian Statistics in Music Therapy",
+  "description": "Learn Bayesian reasoning through a realistic music therapy scenario. Navigate two different approaches to analyzing patient outcomes and discover how probabilistic thinking can enhance clinical decision-making.",
+  "topic": "Bayesian Statistics",
+  "theme": "music therapy",
+  "difficulty": "intermediate",
+  "estimated_minutes": 28,
+  "tags": [
+    "bayesian",
+    "statistics",
+    "music therapy",
+    "clinical decision-making",
+    "probability",
+    "evidence-based practice"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Case of Two Approaches",
+      "content": "You've been a music therapist treating anxiety disorders for five years. Some of your clients respond remarkably well to individual instrumental therapy\u2014improvisation on piano, cello, or guitar\u2014while others thrive in group drumming circles. Recently, you've gathered outcome data from 20 sessions: 12 individual clients showed significant anxiety reduction, and 8 group participants improved similarly. Now you face a crucial question: which approach should you recommend more frequently? How do you blend your professional experience with this new evidence? The way you answer will define your clinical philosophy."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choosing Your Analytical Method",
+      "content": "You've collected evidence from recent sessions. Two paths lie before you. How will you analyze it to guide your future recommendations?",
+      "choices": [
+        {
+          "label": "Use Bayesian reasoning\u2014combine your professional beliefs with new data",
+          "next": "n3"
+        },
+        {
+          "label": "Trust clinical intuition and tradition\u2014rely on experience-based judgment",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Prior Probabilities: Your Professional Beliefs",
+      "content": "In Bayesian thinking, your 'prior' represents what you already believe before seeing new evidence. After five years of practice, you've developed informed intuitions: you estimate individual instrumental therapy has a 60% chance of producing significant anxiety reduction in a typical client, while group drumming has a 50% chance. These aren't wild guesses\u2014they're grounded in your experience. Bayesian analysis honors this professional wisdom as a legitimate starting point. Rather than discarding your expertise, Bayesian reasoning uses it as a foundation and systematically updates it with new data."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Prior Beliefs in Practice: Maria's Case",
+      "content": "Maria, a 34-year-old client with moderate anxiety (baseline DASS-21 score: 24), arrives at your clinic. Before her first session, based on your experience, you assign a prior probability: 65% chance that weekly individual cello improvisation will reduce her anxiety score by at least 5 points within 3 weeks. This belief isn't rigid\u2014it's your professional estimate grounded in similar past cases. After three weekly sessions, Maria's anxiety score drops to 18\u2014a 6-point improvement, exceeding your hopeful threshold. This new data, the 'likelihood,' directly tests your prior belief. Bayesian thinking lets you update: your confidence in individual cello therapy strengthens, but you remain open to evidence that contradicts it."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Prior, Likelihood, and Evidence",
+      "content": "Test your understanding of Bayesian components in music therapy.",
+      "questions": [
+        {
+          "question": "What is Maria's prior probability in the cello improvisation scenario?",
+          "options": [
+            "65%",
+            "18 (her final DASS score)",
+            "3 weeks",
+            "Cello"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The prior is your initial professional belief before observing the outcome.",
+            "That's her post-intervention score, not the prior belief.",
+            "That's the intervention duration, not a probability.",
+            "That's the therapeutic tool, not a probability."
+          ],
+          "explanation": "The prior is your pre-existing professional belief about treatment effectiveness."
+        },
+        {
+          "question": "What represents the 'likelihood' (new evidence) in Maria's case?",
+          "options": [
+            "Maria's baseline DASS-21 score of 24",
+            "Maria's improvement from 24 to 18",
+            "Your five years of clinical experience",
+            "The 65% prior probability"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's the baseline, not the new evidence.",
+            "Correct! The likelihood is the observed data\u2014her actual improvement.",
+            "That contributed to your prior, not the likelihood.",
+            "That's the prior, not the likelihood."
+          ],
+          "explanation": "Likelihood is the observed evidence that tests and updates your prior belief."
+        },
+        {
+          "question": "After observing Maria's improvement, what should happen to your belief about individual cello therapy?",
+          "options": [
+            "Remain exactly at 65%\u2014one case shouldn't change your belief",
+            "Decrease; you're becoming overconfident",
+            "Increase toward a higher probability; the evidence supports the treatment",
+            "Drop to 0%\u2014certainty is impossible"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Not quite; positive evidence should update your belief upward.",
+            "Backward logic\u2014good results should increase, not decrease, confidence.",
+            "Correct! Positive evidence supports the treatment, raising your posterior probability.",
+            "Too extreme; one positive outcome doesn't guarantee 100%."
+          ],
+          "explanation": "Bayesian updating means your posterior (updated belief) reflects both prior knowledge and new evidence."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "The Posterior: Your Updated Belief",
+      "content": "After Maria's success, your posterior probability (updated belief) might rise from 65% to 75%. If she had shown no improvement, your posterior might drop to 55%. This flexibility is Bayesian reasoning at work. Now scale this up: across your 20 recent sessions, 12 of 15 individual clients improved significantly, and 8 of 15 group clients showed improvement. You systematically update your beliefs: individual instrumental therapy's posterior probability climbs to 80%, while group drumming settles at 53%. These posteriors become your new starting point for the next batch of clients. You're not enslaved to one prior; you're adapting continuously. This is how evidence-informed practice evolves."
+    },
+    {
+      "id": "n7",
+      "type": "decision",
+      "title": "Applying Bayes to a New Patient",
+      "content": "Michael, a 28-year-old with moderate anxiety, books a session with you. Your updated posterior strongly favors individual instrumental therapy (80% likely to work vs. 53% for group). How do you use this Bayesian insight?",
+      "choices": [
+        {
+          "label": "Recommend individual instrumental therapy first, but stay alert to adjust if Michael shows poor progress\u2014adaptive Bayesian thinking",
+          "next": "n8"
+        },
+        {
+          "label": "Recommend individual therapy exclusively and dismiss group work entirely; the data 'proves' it's better",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Success: Integrating Bayesian Practice",
+      "content": "Excellent choice. You recommend individual guitar improvisation to Michael, informed by your 80% posterior probability. Over four weeks, his anxiety score drops from 22 to 14\u2014a meaningful improvement. But here's the Bayesian wisdom: you remain vigilant. You monitor his progress session by session. If he plateaus by week 6, you're ready to introduce group drumming as a complementary modality. You've updated your belief, but you haven't closed your mind. This adaptive, probabilistic thinking\u2014honoring evidence while remaining flexible\u2014marks mature clinical practice. Your clients benefit from decisions grounded in both data and wisdom. You've truly integrated Bayesian reasoning into your music therapy work."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Over-Confidence: The Rigidity Trap",
+      "content": "You commit entirely to individual instrumental therapy for all new clients because the numbers seem to prove it. Michael starts with solo guitar improvisation and does improve\u2014his anxiety drops from 22 to 17. But a colleague later mentions that Michael's social anxiety might have benefited from group drumming's communal element. You never tried it because you'd become dogmatic about the 80% posterior. While Michael improved, you missed a potential deeper breakthrough. The cautionary lesson: Bayesian thinking should update your beliefs, not calcify them. Posterior probabilities inform decisions\u2014they don't mandate them. Your next challenge is to relearn flexibility: posterior beliefs are guides, not gospel."
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "The Traditional Approach: Experience and Intuition",
+      "content": "Some accomplished music therapists rely on accumulated clinical intuition without formal Bayesian analysis. You've treated over 100 anxiety clients, and you 'just know' from experience that individual instrumental work tends to work better. This approach has genuine merit\u2014accumulated clinical wisdom is real and valuable. However, it carries hidden risks. Without explicitly tracking probabilities, you might conflate vivid memories with actual frequencies. Cognitive biases\u2014availability bias, confirmation bias\u2014can distort your intuitions. When new evidence emerges (perhaps group drumming becomes more effective with certain populations), you might not notice until far too late. The traditional path is familiar but less systematic."
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Reliable Practice, Untapped Potential",
+      "content": "You continue your practice much as before, recommending based on accumulated intuition and experience. Your clients do improve\u2014your track record is solid and your reputation grows. But you're missing systematic insight. You're not formally capturing the patterns in your successes and failures. When new music therapy modalities emerge\u2014say, neurologically informed rhythm training for anxiety\u2014you might dismiss them because they're unfamiliar, or embrace them based on a single striking case. You remain a good clinician, but you're not fully harnessing probabilistic reasoning to refine and elevate your practice. The door to Bayesian thinking is still open; consider stepping through it for your next chapter of growth."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Bayesian approach"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n10",
+      "label": "Traditional approach"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Adaptive approach"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "Rigid approach"
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T14:58:12.415003+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,229 @@
+{
+  "id": "bayesian-space-2026",
+  "title": "Bayesian Statistics: Navigating the Unknown Universe",
+  "description": "Master Bayesian inference through space exploration scenarios. Learn how to update beliefs as you gather evidence from the cosmos.",
+  "topic": "Bayesian Statistics",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "bayesian",
+    "statistics",
+    "probability",
+    "space",
+    "inference",
+    "decision-making"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Your Probabilistic Intuition",
+      "content": "Before we dive into Bayesian thinking, let's assess your comfort with probability and belief updating. You'll encounter space scenarios and answer questions about how new evidence should change what you believe.",
+      "questions": [
+        {
+          "question": "A deep space probe searching for extraterrestrial life initially had a 20% prior probability of finding microbial life on a target exoplanet. After landing and collecting soil samples, it detects organic molecules consistent with biological processes. How should this evidence change the scientists' belief about finding life?",
+          "options": [
+            "A) Decrease the probability\u2014organic molecules are common in space",
+            "B) Keep it at 20%\u2014prior probability doesn't change",
+            "C) Increase the probability\u2014the evidence supports the life hypothesis",
+            "D) It's impossible to determine without more calculations"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. While organic molecules are common, finding them in a biological context increases support for the life hypothesis.",
+            "Incorrect. Beliefs should update when new evidence arrives.",
+            "Correct! This is core Bayesian thinking: use prior knowledge plus new evidence to update beliefs.",
+            "Incorrect. Bayesian reasoning provides a systematic way to compute this."
+          ],
+          "explanation": "Bayesian thinking means starting with a prior belief (20% chance), observing evidence (organic molecules), and updating to a posterior belief higher than the prior. This is exactly what Bayes' theorem lets us calculate."
+        },
+        {
+          "question": "An astronomer observing deep space detects an anomalous signal with an initial prior belief of 5% probability it's artificial (alien transmission) vs. 95% natural (pulsar). After analysis, the signal matches a theoretical artificial broadcast protocol with 90% accuracy. Under 5% false-positive rate for natural sources. How would a Bayesian update this probability?",
+          "options": [
+            "A) Ignore the prior; the new evidence proves it's artificial",
+            "B) Update the prior (5%) using the new evidence to get a much higher posterior probability",
+            "C) The 5% prior becomes 100% certain because evidence matches theory",
+            "D) Keep it at 5% because extraordinary claims require impossible evidence"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Bayesian methods combine prior knowledge with new evidence.",
+            "Correct! Bayes' theorem updates the prior (5%) by incorporating the likelihood (90% under alien hypothesis vs. 5% under natural), producing a posterior around 49% for this scenario.",
+            "Incorrect. Evidence strength determines how much we update, not that we reach certainty.",
+            "Incorrect. Bayesian theory handles exactly this\u2014weighting strong evidence appropriately."
+          ],
+          "explanation": "Using Bayes' theorem: P(Alien|Signal) = P(Signal|Alien) \u00d7 P(Alien) / P(Signal). The posterior probability substantially exceeds the prior because the signal is far more likely under the alien hypothesis."
+        },
+        {
+          "question": "A Mars rover's radiation sensor shows elevated levels. Engineers initially believed 30% probability that a specific solar shield was damaged. The radiation reading is 4 times more likely if the shield is damaged than if it's intact. What should they conclude?",
+          "options": [
+            "A) Probability is now 4 \u00d7 30% = 120%, which is impossible",
+            "B) Probability is now roughly 70%\u2014evidence substantially raised the belief",
+            "C) Probability stays at 30% since we don't know exact likelihood values",
+            "D) The likelihood ratio alone determines the posterior probability"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. You cannot multiply probabilities this way\u2014Bayes' theorem is the correct approach.",
+            "Correct! Using Bayes' theorem with the 4:1 likelihood ratio: P(Damaged|Reading) = (4 \u00d7 0.30) / (4 \u00d7 0.30 + 1 \u00d7 0.70) \u2248 63%.",
+            "Incorrect. The likelihood ratio significantly impacts how much we update from the prior.",
+            "Incorrect. The likelihood ratio must be combined with the prior using Bayes' theorem."
+          ],
+          "explanation": "Bayes' theorem: P(Shield Damaged | Reading) = P(Reading | Damaged) \u00d7 P(Damaged) / P(Reading). The 4:1 likelihood ratio substantially raises the posterior from 30% to about 63%, showing how strong evidence can dramatically shift our confidence."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Bayesian Inference and Mission-Critical Decisions",
+      "content": "Excellent work! You're ready for the mathematical framework of Bayesian inference. Bayes' theorem is the engine behind modern space mission analysis: NASA uses it to update estimates of component reliability as telemetry streams in, update probability of mission success as systems are checked, and make real-time trade-offs between fuel, risk, and timeline. The key insight is structural: the posterior probability (what we believe after data) is proportional to the prior (starting belief) times the likelihood (how probable the data is under each hypothesis). This multiplicative relationship means strong, specific evidence can dramatically shift confidence, while weak or ambiguous evidence produces modest updates. Deep space missions like Artemis depend on Bayesian reasoning to integrate dozens of sensor streams, engineering models, and historical failure data into quantified risk estimates that drive billion-dollar decisions.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced Example: Solar Flare Trajectory Correction Decision",
+      "content": "The Artemis deep space probe is six weeks into a six-month journey to Jupiter. Before launch, trajectory engineers estimated a 15% prior probability that solar activity would force a course correction during the mission. Within week three, the solar probe detects a dramatic increase in coronal mass ejections (CME frequency up 300% in 48 hours)\u2014a pattern observed before 85% of major solar storms historically. The likelihood of observing this specific CME pattern when a solar storm is imminent is 85%; when no storm approaches, it's only 8%. Using Bayes' theorem: P(Storm|CME Pattern) = (0.85 \u00d7 0.15) / (0.85 \u00d7 0.15 + 0.08 \u00d7 0.85) \u2248 65%. This Bayesian update from 15% to 65% confidence triggers mission control to pre-position fuel reserves and schedule a correction burn window, trading fuel cost against mission success probability. This example shows how Bayesian inference transforms raw observation into quantified, decision-supporting probability estimates that drive spacecraft operations under uncertainty.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete: Master Bayesian Reasoning for Space Missions",
+      "content": "You have mastered Bayesian inference as a decision-support tool for space exploration. You understand how to combine prior knowledge, likelihood functions, and observed data to compute posterior probabilities that guide mission-critical decisions. You can apply Bayes' theorem to trajectory planning, component reliability assessment, life detection experiments, and exoplanet discovery. These skills position you to tackle advanced applications: hierarchical Bayesian models for integrating multi-mission datasets, Bayesian optimization for spacecraft design trade studies, sequential Bayesian analysis for real-time telemetry, and Bayesian hypothesis testing for exotic physics (dark matter, gravitational waves, exoplanet habitability)."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundational: Bayesian Thinking Step by Step",
+      "content": "Welcome! You're starting at the foundation, and that's perfect\u2014Bayesian statistics becomes clear once you grasp the core idea. Imagine you're a space mission controller. You start with a prior belief: 'There's a 10% chance the spacecraft communication system will fail during the six-month mission.' Then evidence arrives: the spacecraft successfully transmits continuous signals for 30 consecutive days without degradation\u2014much longer than typical failures. That evidence should shift your belief upward. Bayesian thinking gives you a systematic way: combine your prior knowledge with the new evidence to get a posterior belief. Three key ideas: (1) Prior: your belief before data (e.g., 10% failure chance). (2) Likelihood: how probable the observed data is under each hypothesis (high likelihood of 30-day success if the system is reliable). (3) Posterior: your updated belief after combining prior and likelihood (e.g., 2% failure chance now). Let's build intuition through space scenarios, then learn the mathematics.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Foundational Example: Detecting a Distant Habitable Exoplanet",
+      "content": "An astronomical survey hunts for Earth-like exoplanets around distant stars. Before data collection, scientists know from theory that roughly 5% of Sun-like stars have habitable, Earth-sized planets in their orbital zone (this is the prior). A new space telescope observes Star XYZ-47 and detects a periodic dip in starlight consistent with a planet transiting in front of it. From simulation and calibration: when a habitable planet exists around a star, this telescope detects the transit dip 90% of the time (this is the likelihood if planet exists). When no planet exists, the telescope produces false-positive dips only 2% of the time (likelihood if no planet). The Bayesian update combines these: P(Planet|Dip) = (0.90 \u00d7 0.05) / (0.90 \u00d7 0.05 + 0.02 \u00d7 0.95) \u2248 70%. The evidence shifted belief from skeptical (5%) to fairly confident (70%). This is how exoplanet catalogs are built: Bayesian updates accumulate until confidence is high enough to announce a discovery.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Building Bayesian Intuition with Space Scenarios",
+      "content": "Now it's your turn to reason through Bayesian scenarios. These practice questions will help you build intuition for updating beliefs when new space mission evidence arrives.",
+      "questions": [
+        {
+          "question": "A lunar rover is drilling for subsurface water ice at a polar crater site. Geologists estimated a 25% prior probability of finding water ice based on orbital imagery. The rover's ground-penetrating radar shows an anomaly consistent with water ice deposits (but similar anomalies can indicate other minerals like peroxide or sulfates). The radar returns true-positive signals 80% of the time when water ice is present and false-positive signals 20% of the time when water ice is absent. What is the posterior probability that water ice is actually present?",
+          "options": [
+            "A) 25%\u2014the prior doesn't change with one observation",
+            "B) Around 60%\u2014the evidence raised belief substantially but not to certainty",
+            "C) Around 80%\u2014the radar sensitivity",
+            "D) Around 50%\u2014split the difference between prior and likelihood"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Evidence should update beliefs away from the prior.",
+            "Correct! Using Bayes' theorem: P(Ice|Anomaly) = (0.80 \u00d7 0.25) / (0.80 \u00d7 0.25 + 0.20 \u00d7 0.75) \u2248 60%. The posterior is notably higher than the prior 25%.",
+            "Incorrect. The posterior combines prior and likelihood, not just likelihood.",
+            "Incorrect. Bayesian updating is multiplicative through the likelihood, not simple averaging."
+          ],
+          "explanation": "This calculation shows how evidence with a strong likelihood ratio can substantially shift beliefs. The radar reading is 4 times more likely under 'ice present' than 'ice absent,' so the posterior (60%) is significantly higher than the prior (25%). However, a single reading doesn't guarantee ice\u2014multiple confirmations would increase confidence further."
+        },
+        {
+          "question": "An automated near-Earth object (NEO) detector identifies a celestial object in cislunar space. Before this detection, mission control estimated a 1% prior probability this object is an asteroid (99% chance it's known space debris, a satellite, or sensor noise). The detection system has a 95% hit rate (correctly identifies real asteroids 95% of the time) and a 3% false-alarm rate (incorrectly flags non-asteroids 3% of the time). After the detector signals an asteroid, how should mission control update its belief?",
+          "options": [
+            "A) Probability is now 95%\u2014the detector found it, so it's almost certainly an asteroid",
+            "B) Probability is around 24%\u2014surprisingly low due to the very low prior despite strong evidence",
+            "C) Probability stays at 1%\u2014space debris is so much more common that prior dominates",
+            "D) Probability is now 3%\u2014the false-alarm rate determines the posterior"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The hit rate alone doesn't determine the posterior; the false-alarm rate and prior matter greatly.",
+            "Correct! Using Bayes' theorem: P(Asteroid|Detection) = (0.95 \u00d7 0.01) / (0.95 \u00d7 0.01 + 0.03 \u00d7 0.99) \u2248 24%. Despite a 95% accurate detector, the very low prior (1%) means the posterior is still only 24%.",
+            "Incorrect. The prior does shift upward when strong evidence arrives, but the base rate effect is powerful here.",
+            "Incorrect. The posterior is not the false-alarm rate."
+          ],
+          "explanation": "This is the classic base rate fallacy in Bayesian inference: even a 95%-accurate detector produces many false alarms when the base rate (prior) is extremely low. The 1% prior remains so influential that even after a detection, we're only 24% confident it's a real asteroid. Mission control would require additional confirmatory observations (second detection, radar imaging, spectroscopy) before diverting resources to intercept."
+        },
+        {
+          "question": "A Mars life-detection experiment (measuring organic compounds and chemical signatures) tests a soil sample collected from a subsurface cavern. Scientists estimated an 8% prior probability that the sample contains biosignatures of past or present microbial life. The detection test gives a positive result in 92% of cases when life's biomarkers are genuinely present and in 7% of cases when they are absent (false positives from inorganic chemistry). Given a positive test result, what is the posterior probability the sample truly contains life biomarkers?",
+          "options": [
+            "A) Around 10%\u2014the test gives a modest probability gain over the low prior",
+            "B) Around 42%\u2014the Bayesian update raises belief substantially but not to high confidence",
+            "C) Around 92%\u2014the test sensitivity is high",
+            "D) Around 85%\u2014accounting for both test sensitivity and specificity"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. While the test sensitivity is high, the very low prior (8%) significantly constrains the posterior.",
+            "Correct! Using Bayes' theorem: P(Life|Positive) = (0.92 \u00d7 0.08) / (0.92 \u00d7 0.08 + 0.07 \u00d7 0.92) \u2248 42%. The posterior rises from 8% to 42%, a substantial update but still below 50% confidence.",
+            "Incorrect. The posterior is not simply the test sensitivity\u2014it combines prior, sensitivity, and specificity.",
+            "Incorrect. The exact calculation is more nuanced than just combining these percentages."
+          ],
+          "explanation": "Even with a test that appears highly accurate (92% sensitivity, 93% specificity), a very low prior (8% biological probability in harsh Martian subsurface) means a single positive test only raises confidence to 42%. This is why Mars rover findings require multiple independent confirmations (spectrometry, isotope ratios, minerology) before claiming 'evidence of life'\u2014one test is never enough to overcome a low prior belief."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundational Path Complete: You've Learned Bayesian Thinking",
+      "content": "You have successfully learned to think like a Bayesian! You understand that beliefs start with a prior (what you knew before data), update using likelihood (how probable the evidence is under each hypothesis), and produce a posterior (your new, refined belief). You've applied this reasoning to real space exploration scenarios: exoplanet detection via transit photometry, asteroid identification in cislunar space, subsurface water ice detection on the Moon, and biosignature detection on Mars. You've learned the critical lesson: strong priors can persist even against seemingly compelling evidence, especially when evidence is ambiguous. These fundamentals are the foundation for all statistical inference. Your next steps: explore Bayesian theorem's full mathematical form, learn how multiple pieces of evidence compound, discover Bayesian methods in machine learning (classification, neural networks), and apply Bayesian thinking to your own data-driven decisions."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass: \u226567%"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Review: <67%"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T17:24:33.526458+00:00",
+  "model": "claude-haiku-4-5"
+}

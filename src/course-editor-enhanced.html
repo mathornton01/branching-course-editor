@@ -1744,6 +1744,7 @@
     <div class="menu-item" id="menu-file">
       <div class="menu-label" onclick="toggleMenu('file')">File <span style="font-size:9px;opacity:0.5;margin-left:2px">▾</span></div>
       <div class="menu-dropdown">
+        <div class="menu-dropdown-item" onclick="window.open('course-database.html','_blank');closeAllMenus()"><span class="item-icon">📚</span> Course Database</div>
         <div class="menu-dropdown-item" onclick="openLoadModal();closeAllMenus()"><span class="item-icon">☁️</span> Load from server</div>
         <div class="menu-dropdown-item" onclick="saveToServer();closeAllMenus()"><span class="item-icon">💾</span> Save to server</div>
         <div class="menu-sep"></div>
@@ -1902,6 +1903,11 @@
           style="background:#ecfdf5;border:2px solid #34d399;border-radius:20px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer;color:#059669;transition:background 0.1s,transform 0.1s;"
           onmouseover="this.style.transform='translateY(-1px)'"
           onmouseout="this.style.transform=''">🧲 Repel</button>
+        <div style="width:1px;height:20px;background:rgba(0,0,0,0.1);margin:0 2px"></div>
+        <button id="organize-btn" onclick="animatedAutoArrange()" title="Quick Organize — automatically arrange all nodes in a clean layout"
+          style="background:#fef3c7;border:2px solid #f59e0b;border-radius:20px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;color:#92400e;transition:background 0.1s,transform 0.1s;"
+          onmouseover="this.style.background='#fde68a';this.style.transform='translateY(-1px)'"
+          onmouseout="this.style.background='#fef3c7';this.style.transform=''">✨ Organize</button>
         <div style="width:1px;height:20px;background:rgba(0,0,0,0.1);margin:0 2px"></div>
         <div style="position:relative">
           <button id="pattern-menu-btn" onclick="togglePatternMenu()" title="Insert common node patterns"
@@ -2579,12 +2585,50 @@ function autoArrangeNodes() {
   nodes.forEach(n => {
     if (newPos[n.id]) {
       n.position = newPos[n.id];
-      const el = document.getElementById('node-' + n.id);
+      const el = document.querySelector(`.node[data-node-id="${n.id}"]`);
       if (el) { el.style.left = n.position.x + 'px'; el.style.top = n.position.y + 'px'; }
     }
   });
+  renderAllNodes();
   renderConnections();
   setTimeout(fitAll, 50);
+}
+
+function animatedAutoArrange() {
+  if (!nodes.length) return;
+  const newPos = treeLayout(nodes, connections);
+  // Save starting positions
+  const startPos = {};
+  nodes.forEach(n => { startPos[n.id] = { x: n.position.x, y: n.position.y }; });
+  const duration = 500; // ms
+  const startTime = performance.now();
+  // Easing: ease-out cubic
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+  function tick(now) {
+    const elapsed = now - startTime;
+    const t = Math.min(1, elapsed / duration);
+    const et = ease(t);
+    nodes.forEach(n => {
+      if (!newPos[n.id]) return;
+      const sx = startPos[n.id].x, sy = startPos[n.id].y;
+      const tx = newPos[n.id].x, ty = newPos[n.id].y;
+      n.position.x = sx + (tx - sx) * et;
+      n.position.y = sy + (ty - sy) * et;
+      const el = document.querySelector(`.node[data-node-id="${n.id}"]`);
+      if (el) { el.style.left = n.position.x + 'px'; el.style.top = n.position.y + 'px'; }
+    });
+    renderConnections();
+    if (t < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      // Snap to final positions and do a full re-render to sync DOM
+      nodes.forEach(n => { if (newPos[n.id]) n.position = { ...newPos[n.id] }; });
+      renderAllNodes();
+      renderConnections();
+      setTimeout(fitAll, 50);
+    }
+  }
+  requestAnimationFrame(tick);
 }
 
 // ── NODE MANAGEMENT ────────────────────────────────────────────────────────────
@@ -7162,7 +7206,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch(e) {}
   }
 
-  if (!restoredFromAutoLoad) {
+  // Check URL params for ?load=courseId
+  const urlParams = new URLSearchParams(window.location.search);
+  const loadId = urlParams.get('load');
+  if (loadId) {
+    loadCourseFromServer(loadId);
+  } else if (!restoredFromAutoLoad) {
     importData({
       course: { id:'sample-1', title:'Sample Branching Course', description:'A demo course with branching paths.' },
       nodes: [

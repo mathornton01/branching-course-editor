@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Database</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --surface2: #242836;
+  --border: #2d3244;
+  --text: #e4e8f1;
+  --text2: #8b92a8;
+  --accent: #6c8aff;
+  --accent2: #4a6aef;
+  --green: #4ade80;
+  --orange: #fb923c;
+  --red: #f87171;
+  --purple: #a78bfa;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; min-height: 100vh; }
+
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.header h1 { font-size: 20px; font-weight: 600; white-space: nowrap; }
+.header .stats { color: var(--text2); font-size: 13px; margin-left: auto; white-space: nowrap; }
+
+.toolbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+}
+.search-box {
+  flex: 1; min-width: 200px;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+  padding: 8px 12px; color: var(--text); font-size: 14px; outline: none;
+}
+.search-box:focus { border-color: var(--accent); }
+.search-box::placeholder { color: var(--text2); }
+
+select, .btn {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+  padding: 8px 12px; color: var(--text); font-size: 13px; cursor: pointer; outline: none;
+}
+select:hover, .btn:hover { border-color: var(--accent); }
+.btn-accent { background: var(--accent2); border-color: var(--accent2); color: white; }
+.btn-accent:hover { background: var(--accent); }
+
+.view-toggle { display: flex; gap: 0; }
+.view-toggle .btn { border-radius: 0; }
+.view-toggle .btn:first-child { border-radius: 6px 0 0 6px; }
+.view-toggle .btn:last-child { border-radius: 0 6px 6px 0; }
+.view-toggle .btn.active { background: var(--accent2); border-color: var(--accent2); color: white; }
+
+.content { padding: 20px 24px; }
+
+/* Grid View */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 18px; cursor: pointer; transition: all 0.15s;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(108,138,255,0.1); }
+.card-title { font-size: 15px; font-weight: 600; line-height: 1.3; }
+.card-desc { font-size: 13px; color: var(--text2); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.badge {
+  font-size: 11px; padding: 2px 8px; border-radius: 10px;
+  background: var(--surface2); color: var(--text2); border: 1px solid var(--border);
+}
+.badge-beginner { color: var(--green); border-color: rgba(74,222,128,0.3); }
+.badge-intermediate { color: var(--orange); border-color: rgba(251,146,60,0.3); }
+.badge-advanced { color: var(--red); border-color: rgba(248,113,113,0.3); }
+.badge-topic { color: var(--accent); border-color: rgba(108,138,255,0.3); }
+.badge-theme { color: var(--purple); border-color: rgba(167,139,250,0.3); }
+.card-stats { font-size: 12px; color: var(--text2); display: flex; gap: 12px; }
+.card-actions { display: flex; gap: 6px; margin-top: 4px; }
+.card-actions .btn { font-size: 12px; padding: 5px 10px; }
+
+/* Table View */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; padding: 10px 12px; background: var(--surface); border-bottom: 2px solid var(--border); color: var(--text2); font-weight: 600; cursor: pointer; white-space: nowrap; user-select: none; }
+th:hover { color: var(--accent); }
+th .sort-arrow { margin-left: 4px; font-size: 10px; }
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+tr:hover td { background: var(--surface); }
+.table-title { color: var(--accent); cursor: pointer; }
+.table-title:hover { text-decoration: underline; }
+
+/* Pagination */
+.pagination {
+  display: flex; justify-content: center; align-items: center; gap: 8px;
+  padding: 20px 0; flex-wrap: wrap;
+}
+.pagination .btn.active { background: var(--accent2); border-color: var(--accent2); color: white; }
+.pagination .info { color: var(--text2); font-size: 13px; }
+
+/* Detail Panel */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; display: none; }
+.overlay.visible { display: flex; justify-content: center; align-items: start; padding: 40px 20px; overflow-y: auto; }
+.detail-panel {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  max-width: 700px; width: 100%; padding: 28px; position: relative;
+}
+.detail-panel .close { position: absolute; top: 12px; right: 16px; background: none; border: none; color: var(--text2); font-size: 20px; cursor: pointer; }
+.detail-panel .close:hover { color: var(--text); }
+.detail-panel h2 { font-size: 20px; margin-bottom: 12px; padding-right: 30px; }
+.detail-panel .desc { color: var(--text2); line-height: 1.6; margin-bottom: 16px; }
+.detail-section { margin-bottom: 16px; }
+.detail-section h3 { font-size: 14px; color: var(--text2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.detail-section .val { font-size: 14px; }
+.node-list { display: flex; flex-direction: column; gap: 4px; max-height: 200px; overflow-y: auto; }
+.node-item { font-size: 13px; padding: 4px 8px; background: var(--surface2); border-radius: 4px; display: flex; gap: 8px; }
+.node-item .type { color: var(--accent); min-width: 80px; }
+.detail-actions { display: flex; gap: 10px; margin-top: 20px; }
+.detail-actions .btn { padding: 10px 20px; font-size: 14px; }
+
+/* Loading / Empty */
+.loading, .empty { text-align: center; padding: 60px 20px; color: var(--text2); }
+.loading::after { content: ''; display: inline-block; width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.6s linear infinite; margin-left: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Tag cloud */
+.tag-cloud { display: flex; gap: 6px; flex-wrap: wrap; max-height: 120px; overflow-y: auto; padding: 8px 0; }
+.tag-cloud .badge { cursor: pointer; transition: all 0.15s; }
+.tag-cloud .badge:hover { border-color: var(--accent); color: var(--accent); }
+.tag-cloud .badge.active { background: var(--accent2); border-color: var(--accent2); color: white; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📚 Course Database</h1>
+  <div class="stats" id="stats">Loading...</div>
+</div>
+
+<div class="toolbar">
+  <input type="text" class="search-box" id="searchBox" placeholder="Search courses by title, topic, description...">
+  <select id="difficultyFilter">
+    <option value="">All Difficulties</option>
+    <option value="beginner">Beginner</option>
+    <option value="intermediate">Intermediate</option>
+    <option value="advanced">Advanced</option>
+  </select>
+  <select id="topicFilter">
+    <option value="">All Topics</option>
+  </select>
+  <select id="sortBy">
+    <option value="title">Sort: Title</option>
+    <option value="topic">Sort: Topic</option>
+    <option value="difficulty">Sort: Difficulty</option>
+    <option value="nodes">Sort: Nodes (most)</option>
+    <option value="newest">Sort: Newest</option>
+  </select>
+  <select id="perPage">
+    <option value="24">24 / page</option>
+    <option value="48">48 / page</option>
+    <option value="96">96 / page</option>
+    <option value="9999">All</option>
+  </select>
+  <div class="view-toggle">
+    <button class="btn active" data-view="grid" title="Grid view">▦</button>
+    <button class="btn" data-view="table" title="Table view">☰</button>
+  </div>
+  <button class="btn btn-accent" onclick="location.href='course-editor-enhanced.html'" title="Open Editor">✏️ Editor</button>
+</div>
+
+<div class="content" id="content">
+  <div class="loading">Loading courses</div>
+</div>
+
+<div class="pagination" id="pagination"></div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-panel" id="detailPanel"></div>
+</div>
+
+<script>
+const API = '/api/courses';
+let allCourses = [];
+let filteredCourses = [];
+let currentPage = 1;
+let currentView = 'grid';
+let currentSort = 'title';
+let activeTags = new Set();
+
+// Load courses
+async function loadCourses() {
+  try {
+    const res = await fetch(API);
+    const data = await res.json();
+    allCourses = data.courses || [];
+    document.getElementById('stats').textContent = `${allCourses.length} courses | Last updated: ${data.last_updated ? new Date(data.last_updated).toLocaleString() : 'unknown'}`;
+    buildTopicFilter();
+    applyFilters();
+  } catch (e) {
+    document.getElementById('content').innerHTML = '<div class="empty">Failed to load courses. Is the API server running?</div>';
+  }
+}
+
+function buildTopicFilter() {
+  const topics = [...new Set(allCourses.map(c => c.topic).filter(Boolean))].sort();
+  const sel = document.getElementById('topicFilter');
+  topics.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t; opt.textContent = t;
+    sel.appendChild(opt);
+  });
+}
+
+function applyFilters() {
+  const q = document.getElementById('searchBox').value.toLowerCase().trim();
+  const diff = document.getElementById('difficultyFilter').value;
+  const topic = document.getElementById('topicFilter').value;
+
+  filteredCourses = allCourses.filter(c => {
+    if (q) {
+      const haystack = `${c.title} ${c.description} ${c.topic} ${(c.tags||[]).join(' ')} ${c.theme||''}`.toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    if (diff && (c.difficulty||'').toLowerCase() !== diff) return false;
+    if (topic && c.topic !== topic) return false;
+    if (activeTags.size > 0) {
+      const ctags = (c.tags||[]).map(t => t.toLowerCase());
+      for (const at of activeTags) {
+        if (!ctags.includes(at.toLowerCase())) return false;
+      }
+    }
+    return true;
+  });
+
+  sortCourses();
+  currentPage = 1;
+  render();
+}
+
+const DIFF_ORDER = { beginner: 0, intermediate: 1, advanced: 2 };
+
+function sortCourses() {
+  const s = document.getElementById('sortBy').value;
+  currentSort = s;
+  filteredCourses.sort((a, b) => {
+    switch (s) {
+      case 'title': return (a.title||'').localeCompare(b.title||'');
+      case 'topic': return (a.topic||'').localeCompare(b.topic||'');
+      case 'difficulty': return (DIFF_ORDER[a.difficulty]||0) - (DIFF_ORDER[b.difficulty]||0);
+      case 'nodes': return (b.node_count||0) - (a.node_count||0);
+      case 'newest': return (b.generated_at||'').localeCompare(a.generated_at||'');
+    }
+    return 0;
+  });
+}
+
+function render() {
+  const perPage = parseInt(document.getElementById('perPage').value);
+  const totalPages = Math.ceil(filteredCourses.length / perPage);
+  if (currentPage > totalPages) currentPage = totalPages || 1;
+
+  const start = (currentPage - 1) * perPage;
+  const page = filteredCourses.slice(start, start + perPage);
+
+  const content = document.getElementById('content');
+
+  if (filteredCourses.length === 0) {
+    content.innerHTML = '<div class="empty">No courses match your filters</div>';
+    document.getElementById('pagination').innerHTML = '';
+    return;
+  }
+
+  if (currentView === 'grid') {
+    content.innerHTML = '<div class="grid">' + page.map(c => cardHTML(c)).join('') + '</div>';
+  } else {
+    content.innerHTML = '<div class="table-wrap"><table>' +
+      '<thead><tr><th>Title</th><th>Topic</th><th>Theme</th><th>Difficulty</th><th>Nodes</th><th>Actions</th></tr></thead>' +
+      '<tbody>' + page.map(c => rowHTML(c)).join('') + '</tbody></table></div>';
+  }
+
+  renderPagination(totalPages);
+}
+
+function cardHTML(c) {
+  const diffClass = `badge-${(c.difficulty||'beginner').toLowerCase()}`;
+  return `<div class="card" onclick="showDetail('${c.id}')">
+    <div class="card-title">${esc(c.title)}</div>
+    <div class="card-desc">${esc(c.description||'')}</div>
+    <div class="card-meta">
+      <span class="badge ${diffClass}">${esc(c.difficulty||'beginner')}</span>
+      ${c.topic ? `<span class="badge badge-topic">${esc(c.topic)}</span>` : ''}
+      ${c.theme ? `<span class="badge badge-theme">🎨 ${esc(c.theme)}</span>` : ''}
+    </div>
+    <div class="card-stats">
+      <span>📦 ${c.node_count||'?'} nodes</span>
+      <span>🔗 ${c.connection_count||'?'} connections</span>
+      ${c.estimated_minutes ? `<span>⏱ ${c.estimated_minutes}min</span>` : ''}
+    </div>
+    <div class="card-actions" onclick="event.stopPropagation()">
+      <button class="btn" onclick="openInEditor('${c.id}')">✏️ Edit</button>
+      <button class="btn" onclick="openInPlayer('${c.id}')">▶️ Play</button>
+      <button class="btn" onclick="downloadCourse('${c.id}')">⬇️</button>
+    </div>
+  </div>`;
+}
+
+function rowHTML(c) {
+  const diffClass = `badge-${(c.difficulty||'beginner').toLowerCase()}`;
+  return `<tr>
+    <td><span class="table-title" onclick="showDetail('${c.id}')">${esc(c.title)}</span></td>
+    <td>${esc(c.topic||'')}</td>
+    <td>${c.theme ? esc(c.theme) : '<span style="color:var(--text2)">-</span>'}</td>
+    <td><span class="badge ${diffClass}">${esc(c.difficulty||'beginner')}</span></td>
+    <td>${c.node_count||'?'}</td>
+    <td>
+      <button class="btn" onclick="openInEditor('${c.id}')" style="font-size:11px;padding:3px 8px;">Edit</button>
+      <button class="btn" onclick="openInPlayer('${c.id}')" style="font-size:11px;padding:3px 8px;">Play</button>
+    </td>
+  </tr>`;
+}
+
+function renderPagination(totalPages) {
+  const pag = document.getElementById('pagination');
+  if (totalPages <= 1) { pag.innerHTML = ''; return; }
+
+  let html = `<div class="info">${filteredCourses.length} courses</div>`;
+  html += `<button class="btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>◀</button>`;
+
+  const maxVisible = 7;
+  let startP = Math.max(1, currentPage - Math.floor(maxVisible/2));
+  let endP = Math.min(totalPages, startP + maxVisible - 1);
+  if (endP - startP < maxVisible - 1) startP = Math.max(1, endP - maxVisible + 1);
+
+  if (startP > 1) { html += `<button class="btn" onclick="goPage(1)">1</button>`; if (startP > 2) html += `<span style="color:var(--text2)">...</span>`; }
+  for (let i = startP; i <= endP; i++) {
+    html += `<button class="btn ${i===currentPage?'active':''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  if (endP < totalPages) { if (endP < totalPages-1) html += `<span style="color:var(--text2)">...</span>`; html += `<button class="btn" onclick="goPage(${totalPages})">${totalPages}</button>`; }
+
+  html += `<button class="btn" onclick="goPage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>▶</button>`;
+  pag.innerHTML = html;
+}
+
+function goPage(p) {
+  const perPage = parseInt(document.getElementById('perPage').value);
+  const totalPages = Math.ceil(filteredCourses.length / perPage);
+  if (p < 1 || p > totalPages) return;
+  currentPage = p;
+  render();
+  window.scrollTo(0, 0);
+}
+
+async function showDetail(id) {
+  const overlay = document.getElementById('overlay');
+  const panel = document.getElementById('detailPanel');
+  panel.innerHTML = '<div class="loading">Loading course details</div>';
+  overlay.classList.add('visible');
+
+  try {
+    const res = await fetch(`/api/courses/${id}`);
+    const c = await res.json();
+    const meta = allCourses.find(m => m.id === id) || {};
+
+    const nodes = c.nodes || [];
+    const connections = c.connections || [];
+    const types = {};
+    nodes.forEach(n => { types[n.type] = (types[n.type]||0) + 1; });
+
+    const diffClass = `badge-${(c.difficulty||meta.difficulty||'beginner').toLowerCase()}`;
+
+    panel.innerHTML = `
+      <button class="close" onclick="closeDetail()">&times;</button>
+      <h2>${esc(c.title || meta.title)}</h2>
+      <p class="desc">${esc(c.description || meta.description || '')}</p>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+        <span class="badge ${diffClass}">${esc(c.difficulty||meta.difficulty||'beginner')}</span>
+        ${c.topic ? `<span class="badge badge-topic">${esc(c.topic)}</span>` : ''}
+        ${c.theme ? `<span class="badge badge-theme">🎨 ${esc(c.theme)}</span>` : ''}
+        ${(c.tags||[]).map(t => `<span class="badge">${esc(t)}</span>`).join('')}
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="detail-section">
+          <h3>Structure</h3>
+          <div class="val">📦 ${nodes.length} nodes &nbsp; 🔗 ${connections.length} connections</div>
+          <div class="val" style="margin-top:4px;">${Object.entries(types).map(([t,n]) => `${t}: ${n}`).join(', ')}</div>
+        </div>
+        <div class="detail-section">
+          <h3>Info</h3>
+          <div class="val">${c.estimated_minutes ? `⏱ ${c.estimated_minutes} min` : ''}</div>
+          <div class="val">${c.generated_at ? `Generated: ${new Date(c.generated_at).toLocaleDateString()}` : ''}</div>
+          <div class="val">${c.model ? `Model: ${c.model}` : ''}</div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h3>Nodes</h3>
+        <div class="node-list">
+          ${nodes.map(n => `<div class="node-item"><span class="type">${esc(n.type)}</span> <span>${esc(n.title||n.id)}</span></div>`).join('')}
+        </div>
+      </div>
+
+      <div class="detail-actions">
+        <button class="btn btn-accent" onclick="openInEditor('${id}')">✏️ Open in Editor</button>
+        <button class="btn btn-accent" onclick="openInPlayer('${id}')">▶️ Play Course</button>
+        <button class="btn" onclick="downloadCourse('${id}')">⬇️ Download JSON</button>
+        <button class="btn" onclick="closeDetail()">Close</button>
+      </div>
+    `;
+  } catch (e) {
+    panel.innerHTML = `<button class="close" onclick="closeDetail()">&times;</button><div class="empty">Failed to load course details</div>`;
+  }
+}
+
+function closeDetail() {
+  document.getElementById('overlay').classList.remove('visible');
+}
+
+function openInEditor(id) {
+  window.open(`course-editor-enhanced.html?load=${id}`, '_blank');
+}
+
+function openInPlayer(id) {
+  window.open(`player.html?course=${id}`, '_blank');
+}
+
+async function downloadCourse(id) {
+  try {
+    const res = await fetch(`/api/courses/${id}`);
+    const data = await res.json();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${id}.json`;
+    a.click();
+  } catch (e) {
+    alert('Download failed');
+  }
+}
+
+function esc(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Event listeners
+document.getElementById('searchBox').addEventListener('input', debounce(applyFilters, 200));
+document.getElementById('difficultyFilter').addEventListener('change', applyFilters);
+document.getElementById('topicFilter').addEventListener('change', applyFilters);
+document.getElementById('sortBy').addEventListener('change', () => { sortCourses(); render(); });
+document.getElementById('perPage').addEventListener('change', () => { currentPage = 1; render(); });
+
+document.querySelectorAll('.view-toggle .btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.view-toggle .btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentView = btn.dataset.view;
+    render();
+  });
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDetail();
+  if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) {
+    e.preventDefault();
+    document.getElementById('searchBox').focus();
+  }
+});
+
+function debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+
+loadCourses();
+</script>
+</body>
+</html>

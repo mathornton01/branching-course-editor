@@ -1,0 +1,259 @@
+{
+  "id": "course-db-sql-music-therapy",
+  "title": "Database Design and SQL: Music Therapy Edition",
+  "description": "Learn database design and SQL through music therapy scenarios. Choose your path: start with schema design or dive into SQL queries. Both branches teach you to design efficient databases and extract insights from music therapy data.",
+  "topic": "Database Design and SQL",
+  "theme": "music therapy",
+  "difficulty": "intermediate",
+  "estimated_minutes": 75,
+  "tags": [
+    "database",
+    "sql",
+    "schema-design",
+    "queries",
+    "music-therapy",
+    "branching",
+    "adaptive"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Welcome to Music Therapy Database Design",
+      "content": "Learn to design and query databases for music therapy practices. Whether you're managing a therapy clinic with multiple therapists, tracking client progress through different sessions, or analyzing which instruments are most effective for different conditions, databases are essential. This course teaches you Database Design and SQL through the lens of a music therapy clinic. You'll choose your path: start with schema design and normalization, or dive straight into writing SQL queries. Both paths will make you proficient in database management.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How would you like to learn? Schema design provides the foundation for understanding data relationships and structure, while SQL queries let you immediately start working with data. Pick whichever resonates with you\u2014you'll learn both concepts either way.",
+      "choices": [
+        {
+          "label": "Schema Design First: Understand the blueprint before querying",
+          "next": "n3"
+        },
+        {
+          "label": "SQL Queries First: Write queries, then learn why structure matters",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Database Schema Design for Music Therapy",
+      "content": "A music therapy database must track clients, therapists, sessions, and outcomes. Schema design means defining the tables (entities), their columns (attributes), and relationships. Key concepts: primary keys uniquely identify records, foreign keys link tables, and normalization prevents data redundancy. For example, instead of storing a therapist's full information in every session row, store it once in a Therapists table and reference it with a foreign key. This prevents errors if a therapist's contact info changes\u2014you update one record, not hundreds.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Designing a Music Therapy Clinic Database",
+      "content": "A clinic tracks: Clients (ID, name, DOB, condition), Therapists (ID, name, specialization), Sessions (ID, client_ID, therapist_ID, date, duration, instrument), and Outcomes (ID, session_ID, mood_before, mood_after, goals_met). Primary keys: Clients.ID, Therapists.ID, Sessions.ID uniquely identify records. Foreign keys: Sessions.client_ID references Clients.ID, Sessions.therapist_ID references Therapists.ID, linking sessions to their participants. This structure is in 3NF (third normal form) because no non-key attribute depends on another non-key attribute, and all data is atomic. Normalized databases prevent update anomalies and maintain data integrity.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Schema Design Assessment",
+      "content": "Test your understanding of database normalization, primary keys, and foreign keys in the context of music therapy data management.",
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n9",
+      "questions": [
+        {
+          "question": "You're designing a table to store which instruments a therapist is qualified to use. Should you add an 'Instruments' column to the Therapists table containing 'Piano, Guitar, Drums'?",
+          "options": [
+            "Yes, it's simpler and more efficient.",
+            "No, create a separate Therapist_Instruments junction table.",
+            "No, add all instruments to one master table with no therapist links.",
+            "It doesn't matter; both approaches work equally well."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Adding comma-separated data violates normalization rules and makes querying for therapists by instrument very difficult.",
+            "Correct! A junction table allows therapists to have multiple instruments without data duplication, and supports efficient queries.",
+            "That would lose the relationship between therapists and their instruments.",
+            "It definitely matters for data integrity, query performance, and maintainability."
+          ],
+          "explanation": "Normalization requires breaking many-to-many relationships into junction tables to avoid redundancy and enable efficient queries like 'Find all therapists qualified for Piano.'"
+        },
+        {
+          "question": "In the Sessions table (which records individual therapy sessions), what should be the primary key?",
+          "options": [
+            "client_ID, because clients have sessions",
+            "session_ID, a unique identifier for each session",
+            "therapist_ID, because therapists conduct sessions",
+            "date, to order sessions chronologically"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "client_ID repeats across multiple sessions for the same client.",
+            "Correct! session_ID uniquely and distinctly identifies each session record.",
+            "therapist_ID repeats across multiple sessions conducted by the same therapist.",
+            "Multiple sessions can occur on the same date; dates alone cannot be unique identifiers."
+          ],
+          "explanation": "Primary keys must uniquely identify each record. In this case, session_ID is assigned a unique value to every single session."
+        },
+        {
+          "question": "A client's preferred contact method changes from email to phone. If your database is normalized (with a Clients table), how many places do you need to update this information?",
+          "options": [
+            "Multiple places (once in each session row involving that client)",
+            "One place (the Clients table)",
+            "It can't be updated after the fact",
+            "Once per therapist who worked with the client"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's exactly the problem normalization solves. You should only update it in one place.",
+            "Correct! With normalized design, the contact info is stored once in the Clients table. Update it there, and all queries referencing it see the change.",
+            "Of course it can be updated. Update queries allow changing existing data.",
+            "Therapists don't store client contact information; that belongs in the Clients table."
+          ],
+          "explanation": "This is a key benefit of normalization: a single point of truth. Update the record once, and the change is immediately reflected everywhere it's referenced."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Writing SQL Queries for Music Therapy Data",
+      "content": "SQL (Structured Query Language) lets you retrieve and manipulate data from databases. For music therapy, you might query 'Find all sessions where the therapist specialized in trauma' or 'List clients under 18 who improved mood scores.' JOINs combine data from multiple tables: SELECT Clients.name, Sessions.date FROM Clients JOIN Sessions ON Clients.ID = Sessions.client_ID filters to piano sessions. GROUP BY aggregates data, such as counting how many sessions each therapist conducts. These queries power reports that clinics use to track outcomes and allocate resources.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Practical SQL Queries for a Music Therapy Clinic",
+      "content": "Example 1: Find all sessions conducted by therapist 'Alice': SELECT * FROM Sessions WHERE therapist_ID = (SELECT ID FROM Therapists WHERE name = 'Alice'). Example 2: List clients and their most recent session: SELECT Clients.name, MAX(Sessions.date) FROM Clients JOIN Sessions ON Clients.ID = Sessions.client_ID GROUP BY Clients.ID, Clients.name ORDER BY MAX(Sessions.date) DESC. Example 3: Count improved outcomes by instrument: SELECT Sessions.instrument, COUNT(*) as improvements FROM Sessions JOIN Outcomes ON Sessions.ID = Outcomes.session_ID WHERE Outcomes.mood_after > Outcomes.mood_before GROUP BY Sessions.instrument. These queries transform raw data into actionable insights for clinic management.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "SQL Query Assessment",
+      "content": "Test your ability to write SELECT queries, JOINs, and aggregations on music therapy data.",
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n9",
+      "questions": [
+        {
+          "question": "What does this query return? SELECT Clients.name, COUNT(*) as session_count FROM Clients JOIN Sessions ON Clients.ID = Sessions.client_ID GROUP BY Clients.name",
+          "options": [
+            "The names and total session count of each client",
+            "All sessions paired with client names (ungrouped)",
+            "Only clients who have had more than one session",
+            "The total number of sessions across all clients"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! GROUP BY aggregates rows by client name, and COUNT(*) counts the sessions per group.",
+            "That would be the result without GROUP BY; you'd get many rows instead of one per client.",
+            "This shows all clients and their session count, not filtered to >1.",
+            "That would be SELECT COUNT(*) without GROUP BY; this version groups by client first."
+          ],
+          "explanation": "GROUP BY with COUNT aggregates data into summary rows, so you get one row per client showing their session count."
+        },
+        {
+          "question": "You want to find the count of sessions per instrument where clients improved (mood_after > mood_before). Which query is correct?",
+          "options": [
+            "SELECT Sessions.instrument FROM Sessions WHERE Outcomes.mood_after > Outcomes.mood_before",
+            "SELECT Sessions.instrument, COUNT(*) FROM Sessions JOIN Outcomes ON Sessions.ID = Outcomes.session_ID WHERE Outcomes.mood_after > Outcomes.mood_before GROUP BY Sessions.instrument",
+            "SELECT * FROM Sessions WHERE mood_after > mood_before",
+            "SELECT COUNT(*) FROM Outcomes WHERE mood_after > mood_before"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This is missing the JOIN to Outcomes, the COUNT aggregation, and GROUP BY.",
+            "Correct! This JOINs Sessions to Outcomes, filters improvements, groups by instrument, and counts.",
+            "Sessions table doesn't have mood_after/mood_before columns; those are in Outcomes.",
+            "This counts all improvements but doesn't show them per instrument."
+          ],
+          "explanation": "Multi-table queries require JOINs to connect related data, WHERE to filter conditions, GROUP BY to aggregate, and COUNT to summarize."
+        },
+        {
+          "question": "You need to find the names of all therapists who have conducted sessions using the 'Drums' instrument. Which query is correct?",
+          "options": [
+            "SELECT therapist_ID FROM Sessions WHERE Sessions.instrument = 'Drums'",
+            "SELECT Therapists.name FROM Therapists JOIN Sessions ON Therapists.ID = Sessions.therapist_ID WHERE Sessions.instrument = 'Drums'",
+            "SELECT * FROM Therapists",
+            "SELECT Sessions.instrument FROM Sessions WHERE instrument = 'Drums'"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This returns therapist IDs, not names.",
+            "Correct! This JOINs Therapists to Sessions and filters by instrument to get names.",
+            "This returns all therapists without filtering for those who used Drums.",
+            "This returns instruments, not therapist names."
+          ],
+          "explanation": "To get therapist names for a specific instrument, JOIN Therapists to Sessions and filter the Sessions table by instrument."
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Congratulations!",
+      "content": "You've completed Database Design and SQL for Music Therapy! You now understand how to design normalized databases that prevent data redundancy, and write SQL queries to extract insights from music therapy data. Whether you started with schema design or SQL queries, you've learned the complementary skill. Apply these concepts: design efficient databases that track client progress, write queries to analyze therapy outcomes by instrument and therapist, and use data-driven insights to improve clinical decisions. Music therapy is increasingly evidence-based, and your database skills help transform care into actionable intelligence."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Schema Design First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "SQL Queries First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "continue"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "continue"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "continue"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "continue"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "continue"
+    }
+  ],
+  "generated_at": "2026-03-27T14:40:58.570550+00:00",
+  "model": "claude-haiku-4-5"
+}

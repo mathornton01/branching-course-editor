@@ -316,6 +316,91 @@
     .fab-history { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
     .fab-restart { background: #2a1010; color: var(--danger); border: 1px solid #3d1515; }
 
+    /* ── Attributes HUD ── */
+    .attr-bar {
+      display: flex;
+      gap: 10px;
+      padding: 6px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      flex-wrap: wrap;
+    }
+    .attr-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      white-space: nowrap;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .attr-pill.flash-up {
+      animation: attrUp 0.6s ease;
+    }
+    .attr-pill.flash-down {
+      animation: attrDown 0.6s ease;
+    }
+    @keyframes attrUp {
+      0% { transform: scale(1); box-shadow: none; }
+      50% { transform: scale(1.15); box-shadow: 0 0 12px rgba(34,197,94,0.5); border-color: var(--success); }
+      100% { transform: scale(1); box-shadow: none; }
+    }
+    @keyframes attrDown {
+      0% { transform: scale(1); box-shadow: none; }
+      50% { transform: scale(1.15); box-shadow: 0 0 12px rgba(239,68,68,0.5); border-color: var(--danger); }
+      100% { transform: scale(1); box-shadow: none; }
+    }
+    .attr-icon { font-size: 0.85rem; }
+    .attr-name { color: var(--muted); text-transform: capitalize; }
+    .attr-val { font-weight: 700; color: var(--text); }
+    .attr-delta {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      animation: fadeIn 0.3s;
+    }
+    .attr-delta.positive { color: var(--success); background: #0f2a1a; }
+    .attr-delta.negative { color: var(--danger); background: #2a0f0f; }
+
+    /* ── Attribute effects notification ── */
+    .attr-effects-box {
+      background: linear-gradient(135deg, #1a2a1e 0%, #1a1e2a 100%);
+      border: 1px solid #2a4a3a;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .attr-effects-box .label { font-size: 0.75rem; color: var(--muted); margin-right: 4px; }
+    .attr-chip {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .attr-chip.positive { background: #0f2a1a; color: #4ade80; border: 1px solid #1a4a2a; }
+    .attr-chip.negative { background: #2a0f0f; color: #f87171; border: 1px solid #4a1a1a; }
+
+    /* ── Variable display ── */
+    .var-set-box {
+      background: #1a1e30;
+      border: 1px solid #2e3a5a;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .var-set-box code { color: var(--warn); }
+
     /* ── Responsive ── */
     @media (min-width: 480px) {
       main { padding: 32px 24px 100px; }
@@ -331,6 +416,25 @@
     <div style="font-size:3rem;margin-bottom:12px;">🎓</div>
     <h2>Course Player</h2>
     <p>Browse AI-generated courses or upload your own.</p>
+  </div>
+
+  <!-- Featured Showcase -->
+  <div id="showcase-banner" style="width:100%;max-width:600px;margin:0 auto 16px;display:none;">
+    <div onclick="playCourse('showcase-master')" style="cursor:pointer;background:linear-gradient(135deg,#1a1040 0%,#0f2a3a 50%,#1a2a1e 100%);border:1.5px solid #7c3aed;border-radius:14px;padding:18px 20px;transition:transform .15s,box-shadow .15s;" onmouseover="this.style.transform='scale(1.01)';this.style.boxShadow='0 4px 24px rgba(124,58,237,0.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+        <span style="font-size:0.65rem;background:#7c3aed;color:#fff;padding:2px 8px;border-radius:4px;font-weight:700;letter-spacing:.05em;">⭐ FEATURED SHOWCASE</span>
+      </div>
+      <div style="font-weight:700;font-size:1.05rem;margin-bottom:4px;">The Science of Decision Making</div>
+      <div style="font-size:0.8rem;color:var(--muted);margin-bottom:8px;">A complete interactive experience demonstrating every feature — decisions, randomness, weighted outcomes, gates, conditions, attributes, assessments, and multiple endings.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span style="font-size:0.65rem;background:#1e3a5f;border:1px solid #3b82f6;border-radius:4px;padding:2px 6px;color:#60a5fa">🧠 25 nodes</span>
+        <span style="font-size:0.65rem;background:#2a3a1e;border:1px solid #65a30d;border-radius:4px;padding:2px 6px;color:#a3e635">🎲 Random events</span>
+        <span style="font-size:0.65rem;background:#3d2a1e;border:1px solid #d97706;border-radius:4px;padding:2px 6px;color:#fbbf24">⚖️ Weighted outcomes</span>
+        <span style="font-size:0.65rem;background:#3d1e1e;border:1px solid #dc2626;border-radius:4px;padding:2px 6px;color:#f87171">🚧 Gates</span>
+        <span style="font-size:0.65rem;background:#1e3a3a;border:1px solid #0891b2;border-radius:4px;padding:2px 6px;color:#22d3ee">⚡ Conditions</span>
+        <span style="font-size:0.65rem;background:#2d1e5f;border:1px solid #7c3aed;border-radius:4px;padding:2px 6px;color:#a78bfa">📊 6 attributes</span>
+      </div>
+    </div>
   </div>
 
   <!-- Catalog Browser -->
@@ -384,6 +488,7 @@
     </div>
   </header>
   <div id="progress-bar"><div id="progress-fill"></div></div>
+  <div class="attr-bar" id="attr-bar" style="display:none;"></div>
   <main id="main-content"></main>
 </div>
 
@@ -410,8 +515,16 @@ let state = {
   score: 0,
   history: [],      // [{id, title}]
   vars: {},         // learner variables
+  attrs: {},        // learner attributes (knowledge, confidence, etc.)
   visited: new Set(),
   quizAnswers: {},  // nodeId → {idx, correct}
+};
+
+const ATTR_ICONS = {
+  knowledge: '📚', confidence: '💪', experience: '⭐', skill_level: '🎯',
+  creativity: '🎨', critical_thinking: '🧠', intuition: '🔮', wisdom: '🦉',
+  speed: '⚡', accuracy: '🎯', research: '🔬', practical: '🔧',
+  communication: '💬', leadership: '👑', teamwork: '🤝', default: '📊'
 };
 
 // ── Utilities ────────────────────────────────────────────────────────────────
@@ -427,18 +540,72 @@ function getConns(nodeId) {
 }
 
 function evalCondition(expr) {
-  // Safe-ish eval with vars in scope
+  // Safe-ish eval with vars + attrs in scope
   try {
-    const vars = state.vars;
+    const allVars = { ...state.vars, ...state.attrs, score: state.score,
+      completed_modules: state.history.filter(h => nodeMap[h.id]?.type === 'content').length,
+      attempts: state.visited.size,
+      questions_answered: state.questionsAnswered || 0 };
     // eslint-disable-next-line no-new-func
-    return !!(new Function(...Object.keys(vars), `return !!(${expr})`)(...Object.values(vars)));
+    return !!(new Function(...Object.keys(allVars), `return !!(${expr})`)(...Object.values(allVars)));
   } catch { return false; }
+}
+
+function applyNodeEffects(node) {
+  const deltas = {};
+  // Apply attribute_effects
+  if (node.attribute_effects) {
+    for (const [attr, delta] of Object.entries(node.attribute_effects)) {
+      const numDelta = Number(delta) || 0;
+      if (numDelta === 0) continue;
+      state.attrs[attr] = (state.attrs[attr] || 0) + numDelta;
+      deltas[attr] = numDelta;
+    }
+  }
+  // Apply set_variables
+  if (node.set_variables) {
+    for (const [k, v] of Object.entries(node.set_variables)) {
+      state.vars[k] = v;
+    }
+  }
+  return deltas;
+}
+
+function renderAttrBar(deltas) {
+  const bar = $('attr-bar');
+  if (Object.keys(state.attrs).length === 0) { bar.style.display = 'none'; return; }
+  bar.style.display = 'flex';
+  bar.innerHTML = Object.entries(state.attrs).map(([attr, val]) => {
+    const icon = ATTR_ICONS[attr] || ATTR_ICONS.default;
+    const delta = deltas?.[attr];
+    const flashClass = delta > 0 ? 'flash-up' : delta < 0 ? 'flash-down' : '';
+    const deltaHtml = delta ? `<span class="attr-delta ${delta > 0 ? 'positive' : 'negative'}">${delta > 0 ? '+' : ''}${delta}</span>` : '';
+    return `<div class="attr-pill ${flashClass}">
+      <span class="attr-icon">${icon}</span>
+      <span class="attr-name">${attr.replace(/_/g, ' ')}</span>
+      <span class="attr-val">${val}</span>
+      ${deltaHtml}
+    </div>`;
+  }).join('');
+}
+
+function buildAttrEffectsHtml(node) {
+  if (!node.attribute_effects || Object.keys(node.attribute_effects).length === 0) return '';
+  const chips = Object.entries(node.attribute_effects).map(([attr, delta]) => {
+    const num = Number(delta) || 0;
+    if (num === 0) return '';
+    const icon = ATTR_ICONS[attr] || ATTR_ICONS.default;
+    return `<span class="attr-chip ${num > 0 ? 'positive' : 'negative'}">${icon} ${attr.replace(/_/g, ' ')} ${num > 0 ? '+' : ''}${num}</span>`;
+  }).filter(Boolean).join('');
+  if (!chips) return '';
+  return `<div class="attr-effects-box"><span class="label">Effects:</span>${chips}</div>`;
 }
 
 // ── Landing ────────────────────────────────────────────────────────────────────
 function showLanding() {
   $('player').style.display = 'none';
   $('fab-area').style.display = 'none';
+  $('attr-bar').style.display = 'none';
   $('landing').style.display = '';
   fetchCatalog();
 }
@@ -484,7 +651,21 @@ function loadCourse(data) {
   const start = nodes.find(n => n.type === 'start' || n.subtype === 'start') || nodes[0];
   if (!start) { alert('No start node found.'); return; }
 
-  state = { nodeId: start.id, score: 0, history: [], vars: {}, visited: new Set(), quizAnswers: {}, questionsAnswered: 0 };
+  // Initialize attributes from course definition if provided
+  const initAttrs = {};
+  if (data.attributes && Array.isArray(data.attributes)) {
+    data.attributes.forEach(a => { initAttrs[a.id || a.name] = a.default || 0; });
+  }
+
+  state = { nodeId: start.id, score: 0, history: [], vars: {}, attrs: initAttrs, visited: new Set(), quizAnswers: {}, questionsAnswered: 0 };
+
+  // Reset attr bar — show immediately if course defines attributes
+  if (Object.keys(initAttrs).length > 0) {
+    renderAttrBar({});
+  } else {
+    $('attr-bar').style.display = 'none';
+    $('attr-bar').innerHTML = '';
+  }
 
   // Show player
   $('landing').style.display = 'none';
@@ -508,7 +689,11 @@ function goTo(nodeId) {
   state.visited.add(nodeId);
   state.history.push({ id: nodeId, title: node.title || nodeId });
 
+  // Apply attribute effects and variable changes
+  const deltas = applyNodeEffects(node);
+
   updateHUD(node);
+  renderAttrBar(deltas);
   renderHistory();
   renderNode(node);
 }
@@ -522,9 +707,9 @@ function updateHUD(node) {
   $('hud-score').textContent = state.score;
   $('hud-node').textContent = state.questionsAnswered || 0;
 
-  // Progress: track questions answered vs estimated total
-  const totalQ = course.estimated_questions || Math.max(4, (Object.keys(nodeMap).length - 2) * 0.5);
-  const pct = Math.min(99, Math.round(((state.questionsAnswered || 0) / totalQ) * 100));
+  // Progress: track visited nodes vs total
+  const totalNodes = Object.keys(nodeMap).length;
+  const pct = Math.min(99, Math.round((state.visited.size / totalNodes) * 100));
   $('progress-fill').style.width = pct + '%';
 }
 
@@ -581,6 +766,10 @@ function renderNode(node) {
         advance(target);
       });
     }
+    // Handle multi-connection content nodes
+    el.querySelectorAll('.content-multi-btn').forEach(btn => {
+      btn.addEventListener('click', () => advance(btn.dataset.to));
+    });
   }
 }
 
@@ -623,11 +812,14 @@ function buildContentCard(node, conns) {
       ${badge(node)}
       <div class="node-title">${node.title || ''}</div>
       <div class="node-content">${md(node.content)}</div>
+      ${buildAttrEffectsHtml(node)}
       ${hasNext ? `
       <div class="action-row">
         <button class="btn btn-primary" id="next-btn">Continue →</button>
       </div>` : conns.length === 0 ? '' : `
-      <div class="info-box">Multiple connections — handled as decision.</div>`}
+      <div class="choices">
+        ${conns.map((c, i) => `<button class="choice-btn content-multi-btn" data-to="${c.to}"><span class="choice-letter">${'ABCDEFGHIJ'[i]||i+1}</span><span>${c.label || nodeMap[c.to]?.title || 'Option ' + (i+1)}</span></button>`).join('')}
+      </div>`}
     </div>`;
 }
 
@@ -640,6 +832,7 @@ function buildExampleCard(node, conns) {
       ${badge(node)}
       <div class="node-title">${node.title || ''}</div>
       <div class="node-content">${md(node.content)}</div>
+      ${buildAttrEffectsHtml(node)}
       ${hasNext ? `
       <div class="action-row">
         <button class="btn btn-primary" id="next-btn" style="background:#4a7c3f;">Got it — continue →</button>
@@ -649,9 +842,10 @@ function buildExampleCard(node, conns) {
 
 // ── Decision card ──────────────────────────────────────────────────────────────
 function buildDecisionCard(node, conns) {
-  // Options come from node.options (legacy) or connections
-  const options = node.options && node.options.length > 0
-    ? node.options.map((o, i) => ({ label: o.label, to: o.next, score: o.score || 0, idx: i }))
+  // Options come from node.options/node.choices (legacy) or connections
+  const nodeOpts = node.options || node.choices;
+  const options = nodeOpts && nodeOpts.length > 0
+    ? nodeOpts.map((o, i) => ({ label: o.label, to: o.next, score: o.score || 0, idx: i }))
     : conns.map((c, i) => ({ label: c.label || `Option ${i + 1}`, to: c.to, score: c.score || 0, idx: i }));
 
   const letters = 'ABCDEFGHIJ';
@@ -836,6 +1030,7 @@ function renderRandomNode(node, conns) {
   if (conns.length === 0) { showError('Random node has no connections.'); return; }
 
   const pick = conns[Math.floor(Math.random() * conns.length)];
+  const pickLabel = pick.label || nodeMap[pick.to]?.title || 'unknown path';
 
   el.innerHTML = `
     <div class="node-card">
@@ -843,10 +1038,29 @@ function renderRandomNode(node, conns) {
       ${badge(node)}
       <div class="node-title">${node.title || 'Random Branch'}</div>
       <div class="node-content">${md(node.content)}</div>
-      <div class="info-box">🎲 Randomly routing through <strong>${conns.length}</strong> paths…</div>
+      ${buildAttrEffectsHtml(node)}
+      <div class="info-box" id="random-info">
+        🎲 Rolling the dice across <strong>${conns.length}</strong> possible outcomes…
+        <div id="random-result" style="margin-top:8px;display:none;color:var(--accent);font-weight:600;"></div>
+      </div>
     </div>`;
 
-  setTimeout(() => advance(pick.to), 1200);
+  // Animate dice roll effect
+  let rolls = 0;
+  const maxRolls = 8;
+  const rollInterval = setInterval(() => {
+    const randConn = conns[Math.floor(Math.random() * conns.length)];
+    const label = randConn.label || nodeMap[randConn.to]?.title || 'Path ' + (conns.indexOf(randConn)+1);
+    $('random-result').style.display = '';
+    $('random-result').textContent = '→ ' + label;
+    rolls++;
+    if (rolls >= maxRolls) {
+      clearInterval(rollInterval);
+      $('random-result').textContent = '→ ' + pickLabel;
+      $('random-result').style.color = 'var(--success)';
+      setTimeout(() => advance(pick.to), 600);
+    }
+  }, 150);
 }
 
 // ── Weighted node ──────────────────────────────────────────────────────────────
@@ -865,41 +1079,95 @@ function renderWeightedNode(node, conns) {
     if (r <= 0) { pick = conns[i]; break; }
   }
 
+  const pickLabel = pick.label || nodeMap[pick.to]?.title || 'unknown';
+
+  // Show probability bars
+  const bars = conns.map((c, i) => {
+    const w = weights[i];
+    const pct = Math.round((w / total) * 100);
+    const label = c.label || nodeMap[c.to]?.title || `Path ${i+1}`;
+    const isChosen = c === pick;
+    return `<div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
+      <span style="font-size:0.8rem;width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;${isChosen?'color:var(--success);font-weight:600':''}">${isChosen?'→ ':''}${label}</span>
+      <div style="flex:1;height:16px;background:var(--surface);border-radius:4px;overflow:hidden;">
+        <div id="wbar-${i}" style="height:100%;width:0%;background:${isChosen?'var(--success)':'var(--accent)'};border-radius:4px;transition:width 0.8s ease;"></div>
+      </div>
+      <span style="font-size:0.75rem;color:var(--muted);width:35px;text-align:right;">${pct}%</span>
+    </div>`;
+  }).join('');
+
   el.innerHTML = `
     <div class="node-card">
       ${breadcrumb()}
       ${badge(node)}
       <div class="node-title">${node.title || 'Weighted Branch'}</div>
       <div class="node-content">${md(node.content)}</div>
-      <div class="info-box">⚖️ Routing based on weights…</div>
+      ${buildAttrEffectsHtml(node)}
+      <div class="info-box">
+        ⚖️ Calculating probabilities…
+        <div style="margin-top:10px">${bars}</div>
+      </div>
     </div>`;
 
-  setTimeout(() => advance(pick.to), 1200);
+  // Animate bars
+  requestAnimationFrame(() => {
+    conns.forEach((c, i) => {
+      const bar = document.getElementById('wbar-' + i);
+      if (bar) bar.style.width = Math.round((weights[i] / total) * 100) + '%';
+    });
+  });
+
+  setTimeout(() => advance(pick.to), 2000);
 }
 
 // ── Condition node ─────────────────────────────────────────────────────────────
 function renderConditionNode(node, conns) {
-  // Evaluate each connection's condition; take first true; fall back to default_target
+  // Evaluate each connection's condition or label; take first true; fall back to default_target
   let target = node.default_target || (conns.length > 0 ? conns[0].to : null);
+  let matchedExpr = null;
 
   for (const c of conns) {
-    if (c.condition && evalCondition(c.condition)) {
+    const expr = c.condition || c.label;
+    if (expr && evalCondition(expr)) {
       target = c.to;
+      matchedExpr = expr;
       break;
     }
   }
+
+  // Also check node.condition as a simple routing expression
+  if (!matchedExpr && node.condition) {
+    const condConns = conns.filter(c => c.type === 'conditional' || c.condition);
+    for (const c of condConns) {
+      if (c.condition && evalCondition(c.condition)) {
+        target = c.to;
+        matchedExpr = c.condition;
+        break;
+      }
+    }
+  }
+
+  const targetTitle = nodeMap[target]?.title || target;
 
   const el = $('main-content');
   el.innerHTML = `
     <div class="node-card">
       ${breadcrumb()}
       ${badge(node)}
-      <div class="node-title">${node.title || 'Condition'}</div>
+      <div class="node-title">${node.title || 'Condition Check'}</div>
       <div class="node-content">${md(node.content)}</div>
-      <div class="info-box">⚡ Evaluating condition: <code>${node.condition || '…'}</code></div>
+      ${buildAttrEffectsHtml(node)}
+      <div class="info-box">
+        ⚡ Evaluating: <code>${node.condition || matchedExpr || '…'}</code><br>
+        <div style="margin-top:6px;">
+          ${Object.keys(state.attrs).length > 0 ? '<span style="font-size:0.75rem;">Current stats: ' + Object.entries(state.attrs).map(([k,v]) => `${k}=${v}`).join(', ') + '</span><br>' : ''}
+          ${Object.keys(state.vars).length > 0 ? '<span style="font-size:0.75rem;">Variables: ' + Object.entries(state.vars).map(([k,v]) => `${k}=${JSON.stringify(v)}`).join(', ') + '</span><br>' : ''}
+        </div>
+        <div style="margin-top:6px;color:var(--success);font-weight:600;">→ Routing to: ${targetTitle}</div>
+      </div>
     </div>`;
 
-  setTimeout(() => advance(target), 900);
+  setTimeout(() => advance(target), 1500);
 }
 
 // ── Gate card ──────────────────────────────────────────────────────────────────
@@ -907,17 +1175,47 @@ function buildGateCard(node, conns) {
   const open = node.condition ? evalCondition(node.condition) : true;
   const target = open ? (node.default_target || (conns[0] && conns[0].to)) : null;
 
+  // Parse condition to show progress toward meeting it
+  let progressHtml = '';
+  if (node.condition && !open) {
+    const match = node.condition.match(/(\w+)\s*>=?\s*(\d+)/);
+    if (match) {
+      const attr = match[1];
+      const needed = parseInt(match[2]);
+      const current = state.attrs[attr] || state.vars[attr] || 0;
+      const pct = Math.min(100, Math.round((current / needed) * 100));
+      progressHtml = `
+        <div style="margin-top:10px;">
+          <div style="font-size:0.8rem;color:var(--muted);margin-bottom:4px;">${attr}: ${current} / ${needed} needed</div>
+          <div style="height:8px;background:var(--surface);border-radius:4px;overflow:hidden;">
+            <div style="height:100%;width:${pct}%;background:${pct>=100?'var(--success)':'var(--warn)'};border-radius:4px;transition:width 0.5s;"></div>
+          </div>
+        </div>`;
+    }
+  }
+
+  // If locked, find fallback connections (non-default paths)
+  const fallbackConns = !open ? conns.filter(c => c.to !== node.default_target && c.type !== 'default') : [];
+  const fallbackHtml = !open && fallbackConns.length > 0 ? `
+    <div class="action-row">
+      ${fallbackConns.map(c => `<button class="btn btn-secondary gate-fallback-btn" data-to="${c.to}">${c.label || 'Alternative path'}</button>`).join('')}
+    </div>` : !open ? `
+    <div style="margin-top:16px;text-align:center;color:var(--muted);font-size:0.85rem;">
+      🔒 You need more experience to proceed. Try exploring other paths first.
+    </div>` : '';
+
   return `
-    <div class="node-card">
+    <div class="node-card" style="border-color:${open ? 'var(--success)' : 'var(--warn)'};">
       ${breadcrumb()}
       ${badge(node)}
       <div class="node-title">${node.title || 'Gate'}</div>
       <div class="node-content">${md(node.content)}</div>
-      <div class="info-box">
+      <div class="info-box" style="border-color:${open ? '#1a4a2a' : '#4a3a1a'};">
         🚧 Gate condition: <code>${node.condition || '…'}</code><br>
-        Status: ${open ? '✅ Open — you may pass.' : '🔒 Locked — conditions not met.'}
+        Status: ${open ? '✅ Gate open — you may pass!' : '🔒 Locked — conditions not yet met.'}
+        ${progressHtml}
       </div>
-      ${open ? `<div class="action-row"><button class="btn btn-primary" id="gate-btn">Continue →</button></div>` : ''}
+      ${open ? `<div class="action-row"><button class="btn btn-primary" id="gate-btn">Continue →</button></div>` : fallbackHtml}
     </div>`;
 }
 
@@ -927,15 +1225,37 @@ function attachGateHandler(el, node, conns) {
     const target = node.default_target || (conns[0] && conns[0].to);
     btn.addEventListener('click', () => advance(target));
   }
+  // Handle fallback buttons for locked gates
+  el.querySelectorAll('.gate-fallback-btn').forEach(fb => {
+    fb.addEventListener('click', () => advance(fb.dataset.to));
+  });
 }
 
 // ── End card ───────────────────────────────────────────────────────────────────
 function buildEndCard(node) {
+  // Build attribute summary
+  const attrEntries = Object.entries(state.attrs).filter(([,v]) => v !== 0);
+  const attrHtml = attrEntries.length > 0 ? `
+    <div style="margin:20px 0;">
+      <div style="font-size:0.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Attributes Gained</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+        ${attrEntries.map(([attr, val]) => {
+          const icon = ATTR_ICONS[attr] || ATTR_ICONS.default;
+          return `<div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;min-width:100px;text-align:center;">
+            <div style="font-size:1.4rem;">${icon}</div>
+            <div style="font-size:1.2rem;font-weight:700;color:${val > 0 ? 'var(--success)' : 'var(--danger)'}">${val > 0 ? '+' : ''}${val}</div>
+            <div style="font-size:0.7rem;color:var(--muted);text-transform:capitalize;">${attr.replace(/_/g, ' ')}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>` : '';
+
   return `
     <div class="node-card end-screen">
       <div class="trophy">🏆</div>
       <h2>${node.title || 'Course Complete!'}</h2>
-      <p>${node.content ? node.content.replace(/\n/g, '<br>') : 'You have reached the end of this course.'}</p>
+      <div class="node-content" style="text-align:left;margin-bottom:16px;">${md(node.content || 'You have reached the end of this course.')}</div>
+      ${attrHtml}
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-val">${state.questionsAnswered || 0}</div>
@@ -954,10 +1274,24 @@ function buildEndCard(node) {
           <div class="stat-label">Accuracy</div>
         </div>
       </div>
+      ${Object.keys(state.vars).length > 0 ? `
+      <div style="margin:16px 0;">
+        <div style="font-size:0.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Your Journey</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
+          ${Object.entries(state.vars).filter(([k]) => !k.startsWith('quiz_') && k !== 'last_choice').map(([k,v]) =>
+            `<span style="font-size:0.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;"><span style="color:var(--muted)">${k.replace(/_/g,' ')}:</span> <span style="color:var(--accent);font-weight:600">${v}</span></span>`
+          ).join('')}
+        </div>
+      </div>` : ''}
       <p style="font-size:0.82rem;color:var(--muted);max-width:320px;margin:0 auto;">You worked through your own path to mastery. Every path is equally valid.</p>
-      <button class="btn btn-primary" onclick="confirmRestart()" style="max-width:240px;margin:0 auto;">
-        🔄 Play Again
-      </button>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;">
+        <button class="btn btn-primary" onclick="confirmRestart()" style="max-width:200px;">
+          🔄 Play Again
+        </button>
+        <button class="btn btn-secondary" onclick="showLanding()" style="max-width:200px;">
+          📚 Browse More
+        </button>
+      </div>
     </div>`;
 }
 
@@ -995,7 +1329,9 @@ function confirmRestart() {
   if (confirm('Restart from the beginning?')) {
     const nodes = course.nodes || [];
     const start = nodes.find(n => n.type === 'start' || n.subtype === 'start') || nodes[0];
-    state = { nodeId: start.id, score: 0, history: [], vars: {}, visited: new Set(), quizAnswers: {}, questionsAnswered: 0 };
+    state = { nodeId: start.id, score: 0, history: [], vars: {}, attrs: {}, visited: new Set(), quizAnswers: {}, questionsAnswered: 0 };
+    $('attr-bar').style.display = 'none';
+    $('attr-bar').innerHTML = '';
     goTo(start.id);
   }
 }
@@ -1037,6 +1373,9 @@ async function fetchCatalog() {
     allCatalogCourses = data.courses || [];
     const gen = data.generated || allCatalogCourses.length;
     $('catalog-status').textContent = `${gen} course${gen !== 1 ? 's' : ''} in library · auto-generating more`;
+    // Show showcase banner if the showcase course exists
+    const hasShowcase = allCatalogCourses.some(c => c.id === 'showcase-master');
+    $('showcase-banner').style.display = hasShowcase ? '' : 'none';
     populateThemeFilter();
     renderCatalog(allCatalogCourses);
   } catch {
