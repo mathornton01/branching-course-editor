@@ -1,0 +1,392 @@
+{
+  "id": "fp-socialwork-001",
+  "title": "Functional Programming Concepts for Social Work",
+  "description": "Learn functional programming principles through the lens of social work case management systems. Explore pure functions, function composition, and immutability to build reliable, flexible, and accountable systems for vulnerable populations.",
+  "topic": "Functional Programming",
+  "theme": "social work",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "functional programming",
+    "social work",
+    "software design",
+    "case management",
+    "system design"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Functional Programming for Social Work Systems",
+      "content": "Functional programming is a way of writing code that builds reliable, maintainable social work management systems. These principles help track client progress without errors, share workflows between different case workers, and ensure client data remains secure and audit-able. Functional programming treats functions as building blocks that can be combined like LEGO pieces to create complex systems. In social work, where decisions affect vulnerable people's lives, reliability and auditability aren't luxuries\u2014they're essential.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which Functional Programming Concept Interests You Most?",
+      "content": "You'll explore three key functional programming concepts, each solving important problems in social work systems. Choose one to start with; you can explore all three in any order.",
+      "choices": [
+        {
+          "label": "Pure Functions - Learn about reliable, testable assessments",
+          "next": "n3"
+        },
+        {
+          "label": "Function Composition - Build flexible workflows from simple pieces",
+          "next": "n6"
+        },
+        {
+          "label": "Immutability - Understand how to protect and track data changes",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Understanding Pure Functions",
+      "content": "Pure functions always produce the same output for the same input and have no side effects\u2014they don't modify external data, send emails, or update databases. In social work, a depression screening calculator that takes client responses and returns a risk score without modifying records is a pure function. This reliability is crucial: when multiple caseworkers use the same assessment tool, they need confidence it produces consistent, predictable results. Testing becomes easier because you know exactly what will happen, and there are no hidden side effects that might accidentally modify data or trigger unwanted actions.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Risk Assessment Calculator Example",
+      "content": "A child protective services agency uses a pure function to calculate maltreatment risk. Given identical client data (prior reports, family structure, substance use indicators, parent mental health), it always returns the same risk score (1\u201310). It doesn't send alerts, update databases, or modify input data. This consistency means assessment results are identical whether run at 9 AM or 5 PM, once or a hundred times. Auditors can verify the calculation is fair and consistent across all cases. Social work agencies depend on this reliability when assessments influence major decisions like child placement or service allocation.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Pure Functions Assessment",
+      "content": "Test your understanding of pure functions in social work contexts.",
+      "questions": [
+        {
+          "question": "Which of these is a pure function for a social work system?",
+          "options": [
+            "Function that calculates depression screening score from questionnaire responses",
+            "Function that calculates depression screening score AND updates client database",
+            "Function that calculates depression screening score AND sends alert email to supervisor",
+            "Function that calculates depression screening score AND logs activity to file"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This function produces output without side effects.",
+            "Incorrect. Updating the database is a side effect.",
+            "Incorrect. Sending emails is a side effect.",
+            "Incorrect. Logging to files is a side effect."
+          ],
+          "explanation": "Pure functions must not modify external state or trigger external actions. They only transform input to output."
+        },
+        {
+          "question": "A pure function for eligibility assessment will...",
+          "options": [
+            "Always return the same eligibility status for the same input data",
+            "Might return different results depending on the current time of day",
+            "Should automatically update the client's eligibility status in the database",
+            "Should send confirmation emails to case managers"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Purity means deterministic behavior based only on inputs.",
+            "Incorrect. Pure functions don't depend on external state like time.",
+            "Incorrect. Database updates are side effects.",
+            "Incorrect. Sending emails is a side effect."
+          ],
+          "explanation": "Pure functions depend only on their inputs, returning identical output for identical input every single time."
+        },
+        {
+          "question": "Why is purity important in social work systems?",
+          "options": [
+            "It allows auditors to understand exactly what an assessment was based on",
+            "It enables thorough testing of assessment tools",
+            "It prevents accidental data modifications",
+            "All of the above"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Partially correct, but there's more.",
+            "Partially correct, but there's more.",
+            "Partially correct, but there's more.",
+            "Correct! All three benefits matter in social work systems."
+          ],
+          "explanation": "Purity provides reliability (consistent results), testability (known behavior), and safety (no hidden modifications)\u2014all essential when decisions affect vulnerable people."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n12",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Building Workflows Through Composition",
+      "content": "Function composition means building complex workflows by chaining simple functions together. Instead of one massive 'process_client_intake' function, you create small, focused steps: collect_referral_info \u2192 verify_eligibility \u2192 assess_needs \u2192 match_services \u2192 create_service_plan. Each step is simple, testable, and understandable. Different social work offices can reuse these functions in different orders based on their specific processes. Emergency triage might skip detailed assessments; comprehensive programs run every step. Composition makes systems flexible and reusable, preventing duplication and reducing bugs.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Case Management Workflow Example",
+      "content": "A multi-service agency receives three referral types: homelessness prevention, domestic violence, and child protective services. Instead of building three separate systems, they compose small functions: collect_demographics, assess_housing, screen_violence, assess_child_safety, evaluate_crisis, evaluate_substance_abuse, create_plan. For homelessness: housing_assessment \u2192 crisis_eval \u2192 plan. For domestic violence: violence_screen \u2192 safety_plan \u2192 resources. For child safety: child_safety \u2192 comprehensive_assessment \u2192 plan. The same functions serve all programs in different orders, saving development time and ensuring consistency. When clients need multiple services, data flows through relevant steps without duplication.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Function Composition Assessment",
+      "content": "Test your understanding of function composition in social work systems.",
+      "questions": [
+        {
+          "question": "Function composition in social work systems means...",
+          "options": [
+            "Combining many functions into one very large mega-function",
+            "Chaining small, focused functions together into larger workflows",
+            "Using only mathematical functions, never practical code",
+            "Avoiding writing new functions and using manual processes instead"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Composition keeps functions small, not mega-functions.",
+            "Correct! Composition builds complex processes from reusable building blocks.",
+            "Incorrect. Composition applies to practical workflow code.",
+            "Incorrect. Composition requires code functions to work well."
+          ],
+          "explanation": "Function composition builds complex workflows from simple, reusable, testable functions chained together."
+        },
+        {
+          "question": "If you compose: eligibility_check \u2192 needs_assessment \u2192 service_matching \u2192 plan_creation, what advantage does this give?",
+          "options": [
+            "It runs faster than writing it as one function",
+            "You can reorder or skip steps for different client situations (rapid intake vs. comprehensive intake)",
+            "You cannot audit which step failed or where problems occurred",
+            "Composable functions make data more likely to be lost"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Composition doesn't necessarily improve speed.",
+            "Correct! Flexible composition allows different workflows for different needs.",
+            "Incorrect. Composable functions are easier to audit because each step is separate.",
+            "Incorrect. Composition actually improves data handling by separating concerns."
+          ],
+          "explanation": "Composable functions provide flexibility. Different workflows for different situations use the same functions in different orders."
+        },
+        {
+          "question": "A social work agency wants both a 'rapid crisis intake' (10 minutes) and a 'comprehensive intake' (2 hours). How does composition help?",
+          "options": [
+            "Write the same function twice, one optimized for speed and one for comprehensiveness",
+            "Use different selections and orderings of the same small functions for different client situations",
+            "These two goals are incompatible in a single system",
+            "Composition prevents building flexible systems"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Writing twice duplicates code and creates maintenance problems.",
+            "Correct! Composition allows flexible reuse of functions in different configurations.",
+            "Incorrect. Composition makes them entirely compatible.",
+            "Incorrect. Composition enables flexibility."
+          ],
+          "explanation": "Rapid intake runs: eligibility \u2192 quick_assessment \u2192 basic_plan. Comprehensive runs: eligibility \u2192 full_assessment \u2192 detailed_planning \u2192 resource_matching. Same functions, different order."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n12",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Protecting Data Through Immutability",
+      "content": "Immutability means data doesn't change after creation; new versions are created instead. In a mutable system, updating a client's address overwrites the old one\u2014it's gone. In an immutable system, the old record remains unchanged while a new record is created with the new address. Both versions exist, timestamped and connected, creating a complete audit trail. This immutable history shows exactly what information a caseworker had at each decision point. Social work requires this accountability: regulators, courts, and clients need to see the decision history and understand what information led to each choice. Immutability also prevents bugs: code cannot accidentally modify data, and different functions can safely use the same data.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Client Record Audit Trail Example",
+      "content": "A foster care agency maintains immutable client records. When a caseworker updates a child's placement from 'Family A' to 'Family B,' the system doesn't change the old record\u2014it creates a new linked record showing the new placement with timestamp and annotation. Both records exist permanently. If questions later arise about decision-making ('Why was the child moved?'), investigators see exactly what information was available that day, what assessments were run, and the caseworker's documented reasoning. This immutable history has prevented wrongful accusations against caseworkers by providing clear evidence of decisions and justifications. It also protects children by ensuring complete decision records that courts can review.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Immutability Assessment",
+      "content": "Test your understanding of immutability in social work systems.",
+      "questions": [
+        {
+          "question": "In an immutable system, when a caseworker updates a client's address from 'Homeless Shelter' to 'Transitional Housing'...",
+          "options": [
+            "The old address is overwritten and lost forever",
+            "The old address is preserved; a new linked record is created showing the new address with timestamp",
+            "Both addresses are combined into one hybrid record",
+            "The system crashes to prevent any data modification"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Immutability preserves all versions.",
+            "Correct! Immutability creates a linked history of changes.",
+            "Incorrect. Immutability keeps records separate, not combined.",
+            "Incorrect. Immutability prevents crashes by being designed for safe changes."
+          ],
+          "explanation": "Immutable systems preserve all historical versions with timestamps, creating an audit trail of every change."
+        },
+        {
+          "question": "Why is immutability critical in social work systems?",
+          "options": [
+            "It's faster than mutable systems because it doesn't require database updates",
+            "It requires less computer memory than mutable systems",
+            "It creates an audit trail showing all changes, who made them, and when\u2014essential for legal accountability",
+            "It prevents caseworkers from doing their jobs by making data unchangeable"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Speed isn't the primary reason for immutability in social work.",
+            "Incorrect. Immutability may use more memory to store versions.",
+            "Correct! Audit trails are essential for legal accountability and case reviews.",
+            "Incorrect. Immutability allows changes; it just preserves the history."
+          ],
+          "explanation": "Social work decisions affect vulnerable people and are reviewed by courts and regulators. Immutable records provide the accountability and evidence these stakeholders require."
+        },
+        {
+          "question": "A judge is reviewing a child protective services case and asks: 'What information did the caseworker have on January 15th?' How does immutability help?",
+          "options": [
+            "It allows the judge to see the exact state of all records from that specific date",
+            "It means caseworkers can't change anything, so records must be lost",
+            "It makes auditing impossible because too many versions exist",
+            "It only shows current information, not historical snapshots"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Immutable records preserve historical snapshots for legal review.",
+            "Incorrect. Immutability preserves history; it doesn't prevent appropriate changes.",
+            "Incorrect. Multiple versions enable thorough auditing.",
+            "Incorrect. Immutability stores all historical versions."
+          ],
+          "explanation": "Immutable systems preserve a complete historical record, allowing judges and auditors to review decisions with full context."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n12",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Bringing It All Together: Functional Programming in Social Work Systems",
+      "content": "You've explored three powerful functional programming concepts that address real challenges in social work technology. Pure functions ensure assessment tools are reliable and produce consistent results\u2014essential for critical decisions affecting vulnerable people. Function composition allows flexible workflows suited to different client needs and program models\u2014the same code serves rapid crisis response and comprehensive assessments. Immutability maintains complete accountability through audit trails for every decision, providing the legal and ethical documentation social work requires. Together, these principles create systems where caseworkers confidently handle complex client needs, knowing assessments are reliable, workflows match their agency's approach, and every decision is recorded and auditable. Modern case management systems increasingly apply these functional programming principles to serve vulnerable populations safely, fairly, and effectively.",
+      "next": "n13"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "You've Mastered Functional Programming Concepts for Social Work!",
+      "content": "Congratulations! You now understand three pillars of functional programming\u2014pure functions, function composition, and immutability\u2014and how they solve real problems in social work systems. Whether you're a social worker understanding your technology, a software engineer building case management systems, or a manager evaluating solutions, you can now see how functional programming creates reliable, flexible, and accountable systems that serve vulnerable populations. Great work!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start learning"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pure Functions"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Function Composition"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n9",
+      "label": "Immutability"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "See example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": "Test understanding"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c7b",
+      "source": "n5",
+      "target": "n3",
+      "label": "Retry"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "See example"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Test understanding"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c10b",
+      "source": "n8",
+      "target": "n6",
+      "label": "Retry"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "See example"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Test understanding"
+    },
+    {
+      "id": "c13",
+      "source": "n11",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c13b",
+      "source": "n11",
+      "target": "n9",
+      "label": "Retry"
+    },
+    {
+      "id": "c14",
+      "source": "n12",
+      "target": "n13",
+      "label": "Complete course"
+    }
+  ],
+  "generated_at": "2026-03-27T10:56:03.643080+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,258 @@
+{
+  "id": "linear-algebra-social-work",
+  "title": "Linear Algebra for Data Science in Social Work",
+  "description": "Master linear algebra through real social work applications: from client outcome vectors to network analysis matrices. Choose your learning path and build skills in data-driven social work practice.",
+  "topic": "Linear Algebra for Data Science",
+  "theme": "social work",
+  "difficulty": "intermediate",
+  "estimated_minutes": 60,
+  "tags": [
+    "linear algebra",
+    "data science",
+    "social work",
+    "vectors",
+    "matrices",
+    "applied mathematics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Linear Algebra Matters in Social Work",
+      "content": "Social workers increasingly use data to improve client outcomes and demonstrate program effectiveness. Linear algebra is the mathematical foundation for analyzing this data at scale. Whether you're tracking client progress across multiple dimensions, predicting which families need intensive services, or analyzing relationships between social factors, you're using linear algebra. In this course, you'll learn to think in vectors and matrices\u2014the language of modern data science\u2014using real examples from social work practice.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How do you prefer to learn? Start with the theoretical foundations, or dive into practical applications first?",
+      "choices": [
+        {
+          "label": "Theory First: Build from fundamentals",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-On First: Learn through applications",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Vectors and Matrices in Social Work Data",
+      "content": "A **vector** represents a single client or data point across multiple dimensions. For example, a client intake vector might contain: [age, income_level, num_children, mental_health_score, housing_stability_score]. **Matrices** stack these vectors together\u2014each row is a client, each column is a characteristic. When you work with 500 clients, you're really working with a 500\u00d75 matrix. Understanding vectors and matrices as fundamental objects lets you perform bulk operations: finding patterns, measuring similarity between clients, and applying transformations. These operations are the basis for machine learning algorithms that social agencies use daily.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Building a Client Outcome Vector",
+      "content": "A family support program tracks three outcomes for each family: employment hours (0-40), children in school (0-3), and housing stability (0-10). For the Chen family: [18, 2, 7]. For the Rodriguez family: [32, 3, 9]. These vectors live in 3D space. The distance between them\u2014calculated using the Euclidean distance formula\u2014tells us how similar their situations are. This similarity metric helps case managers identify peer support opportunities and transfer lessons from successful families to those still struggling. It's all linear algebra working behind the scenes.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Vectors and Matrices Concepts",
+      "content": "Test your understanding of vectors, matrices, and how they represent social work data.",
+      "questions": [
+        {
+          "question": "A community center tracks client engagement across 5 programs: youth mentoring, job training, mental health support, food assistance, and housing services. Each of 120 clients is either engaged (1) or not engaged (0) in each program. What is the dimension of the matrix representing all this data?",
+          "options": [
+            "5 rows \u00d7 120 columns",
+            "120 rows \u00d7 5 columns",
+            "1 row \u00d7 600 columns",
+            "120 \u00d7 120 matrix"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Remember: rows = observations (clients), columns = features (programs).",
+            "Correct! 120 clients (rows) \u00d7 5 programs (columns) = 120\u00d75 matrix.",
+            "Incorrect. A matrix represents both dimensions of the data, not a flattened vector.",
+            "Incorrect. The matrix is not square unless clients equal programs."
+          ],
+          "explanation": "In data science, the convention is rows = samples and columns = features. With 120 clients and 5 programs, we have a 120\u00d75 matrix."
+        },
+        {
+          "question": "Two clients have outcome vectors: Client A = [8, 6, 7] (stability, employment, wellness scores) and Client B = [8, 6, 7]. What does this tell us?",
+          "options": [
+            "Client A and B need different interventions",
+            "Client A and B have identical outcomes on these dimensions",
+            "Client B is improving faster than Client A",
+            "We need more data to compare them"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Identical vectors mean identical status on these metrics.",
+            "Correct! Identical vectors mean the same measured outcomes, so similar circumstances.",
+            "Incorrect. Vectors show status, not change over time. We'd need sequential vectors to measure improvement.",
+            "Incorrect. We have enough information\u2014the vectors are identical."
+          ],
+          "explanation": "When two vectors are exactly equal, every component matches. This means both clients have the same measured status on stability, employment, and wellness."
+        },
+        {
+          "question": "A casework agency wants to identify which clients are most similar to a success case. Which linear algebra concept is most directly useful?",
+          "options": [
+            "Vector magnitude (length)",
+            "Matrix inverse",
+            "Vector distance (norm)",
+            "Matrix determinant"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Magnitude tells us the length of a vector, not similarity between two vectors.",
+            "Incorrect. Matrix inverse is used for solving systems, not for finding similarity.",
+            "Correct! Distance between vectors measures how similar two cases are.",
+            "Incorrect. Determinant is a property of square matrices, not a similarity metric."
+          ],
+          "explanation": "The distance (Euclidean norm) between two client vectors tells us how different they are. Small distance = similar clients."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Practical Applications: Transforming and Analyzing Client Data",
+      "content": "In real social work practice, you rarely just look at raw data\u2014you transform it. **Matrix multiplication** applies intervention effects: multiply a client status matrix by a transition matrix (which encodes program effectiveness) to predict future outcomes. **Decomposition methods** like principal component analysis break down complex client data into simpler, uncorrelated patterns: instead of 20 intake variables, distill them to 3 independent factors that explain most variation. **Eigenvalues and eigenvectors** identify which client characteristics drive outcomes. These operations let you scale insights from 10 clients to 10,000 without manually analyzing each one. This is how modern social agencies predict who needs help before crisis strikes.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Predicting Program Impact with Matrix Multiplication",
+      "content": "A youth program has data on 50 teens: their baseline risk scores across 4 dimensions (substance abuse risk, school absenteeism, delinquency involvement, housing instability). This is a 50\u00d74 matrix B. Research shows the program's impact as a 4\u00d74 transformation matrix T, where each column represents how the program affects each risk area. Multiplying B \u00d7 T gives us B\u00b7T, a new 50\u00d74 matrix showing predicted post-program risk scores. If the original teen had risk profile [8, 6, 7, 5], and after multiplying by T the profile becomes [5, 3, 4, 3], the program's linear algebra predicts significant risk reduction\u2014validated by follow-up data.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Applying Linear Algebra to Social Work",
+      "content": "Apply your understanding of linear algebra operations to real social work scenarios.",
+      "questions": [
+        {
+          "question": "A family services agency uses matrix multiplication to estimate program outcomes: Outcome = ClientData \u00d7 ProgramEffectMatrix. This assumes:",
+          "options": [
+            "Program effects are the same for all clients",
+            "Client data is randomly distributed",
+            "Program effects are linear and additive",
+            "Matrix multiplication is the only way to predict outcomes"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Linear models do assume uniform effects, but that's not what matrix multiplication fundamentally assumes.",
+            "Incorrect. Random distribution isn't required.",
+            "Correct! Matrix multiplication works when relationships are linear and additive\u2014a strong assumption in complex social dynamics.",
+            "Incorrect. It's a useful method, not the only method."
+          ],
+          "explanation": "Linear models (including matrix multiplication) assume that program effects combine additively and scale proportionally. This is a simplification of reality but useful for prediction."
+        },
+        {
+          "question": "A principal component analysis on homeless outreach client data reduces 15 intake variables to 3 principal components. What does this achieve?",
+          "options": [
+            "It removes unimportant clients from the dataset",
+            "It simplifies the data while retaining most variance (pattern information)",
+            "It guarantees better predictions than the original 15 variables",
+            "It eliminates the need for domain expertise"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. PCA doesn't remove data\u2014it transforms it.",
+            "Correct! PCA finds new uncorrelated dimensions that capture most variation with fewer variables.",
+            "Incorrect. Fewer variables can be helpful, but they don't guarantee better predictions.",
+            "Incorrect. Domain expertise remains essential for interpreting components."
+          ],
+          "explanation": "PCA is a dimensionality reduction technique. It finds new linear combinations of variables that explain most variance, making data easier to visualize and work with."
+        },
+        {
+          "question": "A child welfare agency identifies that family stability (housing, income, support network) is the strongest eigenvector predictor of child placement outcomes. What does this reveal?",
+          "options": [
+            "The agency should ignore other variables",
+            "Family stability is the direction of greatest variance in outcomes",
+            "Eigenvectors are more important than correlation",
+            "All families need housing and income support equally"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Other variables still matter, but this one has special importance in explaining variance.",
+            "Correct! Eigenvectors point to directions of maximum variation\u2014stable families' outcomes differ most from unstable ones.",
+            "Incorrect. Eigenvectors and correlation are different tools with different insights.",
+            "Incorrect. Identifying patterns doesn't prescribe uniform solutions."
+          ],
+          "explanation": "When family stability emerges as a dominant eigenvector, it means variation along that direction (from very unstable to very stable) explains the most variation in placement outcomes."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Mastery: Linear Algebra for Data-Driven Social Work",
+      "content": "Congratulations! You've completed the course. You now understand how vectors represent client data, how matrices organize and transform that data, and how linear algebra enables predictions and insights at scale. Whether you learn theory first or applications first, you've built the foundation to work with data in social work practice. Use these tools to identify patterns, predict need, and ultimately serve clients more effectively. Keep exploring: matrix decomposition, network analysis (social connections as adjacency matrices), and regression models all build on what you've learned here."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Choose path"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory first"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-on first"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Next"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Test knowledge"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Next"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Test knowledge"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T04:46:50.630751+00:00",
+  "model": "claude-haiku-4-5"
+}

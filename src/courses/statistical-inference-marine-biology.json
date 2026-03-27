@@ -1,0 +1,246 @@
+{
+  "id": "statistical-inference-marine-biology",
+  "title": "Statistical Inference and Hypothesis Testing in Marine Biology",
+  "description": "Master hypothesis testing, confidence intervals, and p-values through real marine biology examples including kelp forests, fish populations, and ocean conservation.",
+  "topic": "Statistics",
+  "theme": "marine biology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "statistics",
+    "hypothesis testing",
+    "confidence intervals",
+    "p-values",
+    "marine biology",
+    "inference",
+    "scientific method"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Statistical Inference in Marine Biology",
+      "content": "Welcome to Statistical Inference in Marine Biology! Marine scientists constantly make decisions about ocean ecosystems based on limited data. Do ocean temperatures really affect coral bleaching rates? How many fish are in a particular bay? Should a fishing quota be changed? These questions require statistical inference\u2014the science of drawing conclusions about large populations based on sample data. This course explores three fundamental approaches: hypothesis testing (testing specific claims about marine systems), confidence intervals (estimating ranges for unknown ocean parameters), and p-values (determining statistical significance). Through real marine biology scenarios, you'll learn how oceanographers, marine biologists, and fisheries managers use statistics to protect our oceans.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which statistical approach interests you most?",
+      "content": "Marine research uses three complementary statistical methods. Choose one to explore deeply and discover how scientists make evidence-based decisions about ocean conservation and management.",
+      "choices": [
+        {
+          "label": "Hypothesis Testing: Testing claims about kelp forests",
+          "next": "n3"
+        },
+        {
+          "label": "Confidence Intervals: Estimating fish populations",
+          "next": "n5"
+        },
+        {
+          "label": "P-values and Significance: Water quality monitoring",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Hypothesis Testing Fundamentals",
+      "content": "Hypothesis testing is how scientists rigorously test claims about marine systems. You start with a null hypothesis (H\u2080)\u2014usually stating 'no effect' or 'no difference'\u2014and an alternative hypothesis (H\u2081) representing the claim you're testing. For example, a marine biologist might ask: 'Does warming water reduce kelp forest density?' The null hypothesis would be 'water temperature has no effect on kelp density.' They collect data (measure kelp density at warm and cool sites), compute a test statistic, and calculate a p-value\u2014the probability of observing such extreme data if the null hypothesis were true. If the p-value is smaller than the chosen significance level (often 0.05), they reject the null hypothesis and conclude the alternative is supported. This structured approach prevents researchers from jumping to conclusions based on noise.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Sea Otters and Kelp Forests: A Hypothesis Testing Case Study",
+      "content": "A researcher hypothesizes that sea otter populations increase when kelp forests are healthy. She formulates: Null hypothesis (H\u2080) = sea otter density is independent of kelp forest health. Alternative hypothesis (H\u2081) = healthy kelp forests correlate with higher sea otter density. She surveys 40 coastal areas, measuring both kelp frond density and otter population counts. Using a correlation test, she obtains a test statistic yielding p = 0.012. Since 0.012 < 0.05, she rejects H\u2080 and concludes: there is strong evidence that sea otter populations are associated with kelp forest health. This doesn't prove causation\u2014perhaps healthy otter populations create the kelp forests\u2014but it provides statistical evidence justifying further investigation into this ecological relationship.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Confidence Intervals for Population Estimation",
+      "content": "Instead of testing a specific claim, scientists often want to estimate an unknown parameter\u2014like 'how many fish are in this bay?' Because you can't count every fish, you take a sample, calculate a point estimate (e.g., the sample mean), and acknowledge uncertainty by building a confidence interval around it. A confidence interval is a range of plausible values, typically expressed as a point estimate \u00b1 margin of error. The confidence level (usually 95%) means: if you repeated this sampling procedure 100 times, about 95 of those intervals would contain the true population value. For fisheries management, a 95% CI might estimate, 'We're 95% confident the cod population in this region is between 2.3 and 3.1 million fish.' This approach acknowledges uncertainty while still providing actionable estimates for policy makers.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Purple Sea Urchin Size Estimation",
+      "content": "A marine biologist wants to estimate the average shell diameter of purple sea urchins in a kelp forest. She randomly samples 60 urchins and finds a sample mean of 4.2 cm with standard deviation of 0.8 cm. Using the t-distribution (appropriate for sample data), she calculates a margin of error of approximately 0.2 cm. Her 95% confidence interval is 4.0 to 4.4 cm. She reports: 'We're 95% confident the true mean urchin diameter is between 4.0 and 4.4 cm.' This interval reflects both her sample estimate and the natural variability in urchin sizes. If repeated many times, 95% of such intervals would capture the true population mean\u2014acknowledging that this particular interval either contains it or doesn't.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "P-values and Statistical Significance",
+      "content": "The p-value is one of the most misunderstood concepts in statistics. It is NOT the probability your hypothesis is correct. Instead, it's the probability of observing data as extreme (or more extreme) as what you collected, assuming the null hypothesis is true. In marine biology, imagine testing whether a new water treatment reduces harmful algal blooms. If your p-value = 0.03, it means: 'Given that the treatment has no effect (null hypothesis is true), there's only a 3% chance of observing data this extreme.' A low p-value suggests the null hypothesis is implausible. However, statistical significance \u2260 practical significance. A treatment might reduce algal blooms by 1% with p < 0.001 (statistically significant yet practically unimportant). Always consider both statistical evidence and real-world impact.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Marine Protected Areas and Fish Diversity",
+      "content": "A fisheries scientist tests whether coral reefs in a marine protected area (MPA) have higher fish diversity than unprotected reefs. She measures species richness at 25 MPA sites (mean = 18 species) and 25 unprotected sites (mean = 15 species). Her t-test yields t = 2.45 and p = 0.018. She concludes: 'The p-value of 0.018 means only 1.8% probability of seeing this 3-species difference if MPAs had no effect. This falls below our 0.05 threshold, so we reject the null hypothesis.' Importantly, she also reports the actual difference: 3 extra species in MPAs. She notes this is both statistically significant AND practically meaningful\u2014MPAs genuinely protect fish biodiversity. Reporting only the p-value would be incomplete without discussing effect size.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Statistical Inference Methods",
+      "content": "You've now explored three cornerstones of statistical inference. Hypothesis testing answers yes-or-no questions ('Does this treatment work?'). Confidence intervals estimate unknown values with uncertainty ranges ('What's the fish population?'). P-values quantify evidence against the null hypothesis. In real marine research, these methods work together. A fisheries manager might test whether a quota change affects catch sustainability, estimate the new sustainable harvest range with a 95% CI, and report the p-value to convey evidence strength. Hypothesis tests often report p-values; confidence intervals provide richer information than binary conclusions. Understanding when to apply each method, how to interpret results, and distinguishing statistical significance from practical significance is essential for evidence-based ocean conservation.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Statistical Inference in Marine Biology: Final Assessment",
+      "content": "Test your understanding of hypothesis testing, confidence intervals, and p-values through these marine biology scenarios.",
+      "questions": [
+        {
+          "question": "A marine biologist tests whether a new fish farm location affects wild salmon populations. She sets: Null hypothesis (H\u2080) = 'The farm has no effect on wild salmon abundance.' After collecting data, she calculates p = 0.07. What should she conclude?",
+          "options": [
+            "The farm definitely harms salmon\u2014the p-value is greater than 0.05.",
+            "The evidence is not strong enough to reject the null hypothesis at the 0.05 significance level. She cannot conclude the farm harms salmon based on this data.",
+            "The p-value proves the farm is safe for salmon.",
+            "She should ignore the p-value and trust her intuition."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A p-value above 0.05 means we fail to reject H\u2080, not that it's proven true.",
+            "Correct! A p-value of 0.07 exceeds the common 0.05 threshold, so we lack sufficient evidence to reject the null hypothesis.",
+            "Incorrect. A p-value does not prove a null hypothesis is true; it only indicates insufficient evidence against it.",
+            "Incorrect. Statistical analysis requires objective standards, not intuition alone."
+          ],
+          "explanation": "Understanding p-value interpretation is crucial. P > 0.05 means we lack evidence to reject H\u2080, not that H\u2080 is correct. The researcher might need more data, a larger sample, or a different study design."
+        },
+        {
+          "question": "A researcher estimates that the 95% confidence interval for average ocean pH at a reef site is 8.20 to 8.24. Which statement is correct?",
+          "options": [
+            "There is a 95% probability that the true mean pH is between 8.20 and 8.24.",
+            "If this sampling procedure were repeated infinitely, approximately 95% of the resulting intervals would contain the true mean pH.",
+            "95% of the actual data collected fell between 8.20 and 8.24.",
+            "We are certain the true mean is 8.22."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The true mean is fixed (not random), so it either is or isn't in this interval; probability doesn't apply to a single fixed interval.",
+            "Correct! A 95% CI describes the long-run behavior of the method. If repeated many times, about 95% of such intervals would capture the true parameter.",
+            "Incorrect. The CI estimates the population parameter (mean), not the spread of individual data points.",
+            "Incorrect. The interval reflects uncertainty; 8.22 is the point estimate, but the true value could lie anywhere in the 8.20\u20138.24 range."
+          ],
+          "explanation": "Confidence intervals are frequently misinterpreted. They describe the long-run success rate of the method, not the probability for a single computed interval."
+        },
+        {
+          "question": "A coastal town wants to know if increased runoff has affected phytoplankton abundance. Which statistical approach best answers their question?",
+          "options": [
+            "A hypothesis test to determine if phytoplankton abundance has changed.",
+            "A confidence interval to estimate the range of plausible phytoplankton abundances.",
+            "A hypothesis test for the yes-or-no answer, plus a confidence interval for context about magnitude and uncertainty.",
+            "Neither\u2014you cannot use statistics for environmental monitoring."
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Partially correct, but incomplete. A hypothesis test answers 'has it changed?' but omits information about the magnitude of change.",
+            "Partially correct, but this estimates a range without explicitly testing whether a change occurred.",
+            "Correct! A hypothesis test directly answers 'is there a difference?', while a CI provides context about magnitude and uncertainty. In practice, reporting both is most informative.",
+            "Incorrect. Environmental monitoring and policy decisions rely heavily on statistical inference."
+          ],
+          "explanation": "Real research often combines multiple methods. Hypothesis tests provide yes-or-no answers; confidence intervals offer richer information about effect sizes and plausible parameter ranges."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Course Complete: Statistical Inference in Marine Biology",
+      "content": "Congratulations! You've mastered statistical inference and hypothesis testing in marine biology. You now understand how marine scientists use hypothesis testing to rigorously test claims about ocean ecosystems, confidence intervals to estimate unknown populations and parameters, and p-values to quantify evidence. These tools are essential for evidence-based conservation decisions\u2014from fisheries management to marine protected area policy to climate change impact assessment. The ocean faces unprecedented challenges, and rigorous statistics helps us respond effectively. Continue exploring how oceanographers, marine biologists, and policy makers use data to protect our blue planet!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Hypothesis Testing"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Confidence Intervals"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "P-values"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "pass"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "fail"
+    }
+  ],
+  "generated_at": "2026-03-27T12:43:41.717964+00:00",
+  "model": "claude-haiku-4-5"
+}

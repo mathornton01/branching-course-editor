@@ -1,0 +1,281 @@
+{
+  "id": "hci-sports-analytics",
+  "title": "Human-Computer Interaction through Sports Analytics",
+  "description": "Master HCI principles by designing interfaces for coaches, analysts, and sports teams. Learn through either theoretical foundations or hands-on challenges.",
+  "topic": "Human-Computer Interaction",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "HCI",
+    "user experience",
+    "sports analytics",
+    "interface design"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction: HCI Meets Sports Analytics",
+      "content": "Human-Computer Interaction (HCI) is the discipline of designing systems that people use effectively. In sports analytics, HCI is critical: a coach needs to understand player performance at a glance, an analyst must explore complex datasets quickly, and broadcasters need real-time stats that engage fans. Good sports analytics interfaces respect how users think, make actions obvious (affordances), and confirm what happened (feedback). This course teaches you to design interfaces that coaches, analysts, and teams actually want to use.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How do you learn best? Start with theory and then apply it, or dive into a real challenge and discover principles along the way?",
+      "choices": [
+        {
+          "label": "Theory First: Learn principles, then apply to sports analytics",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-on First: Solve a coaching challenge, then understand why it works",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "HCI Foundations: Mental Models, Affordances & Feedback",
+      "content": "Three principles form the foundation of good HCI design: (1) Mental models are how users think about a system\u2014coaches think of games as strategies, not as raw statistics; your interface should match this natural thinking. (2) Affordances are what users perceive they can do with objects\u2014a button that looks clickable tells users to click it, while gray text suggests it's disabled. (3) Feedback is how the system responds to actions\u2014when a coach applies a filter, the interface should clearly show that the filter is active and what changed. In sports analytics, violating these principles leads to tools nobody uses, even if they contain great data.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Redesigning a Basketball Player Performance Dashboard",
+      "content": "A team's original dashboard showed raw stats in alphabetical order: AST, BLK, FG%, FGA, FT%, FTA, ORB, PTS, STL, TOV. Coaches were confused because they don't think alphabetically\u2014they think by role and decision type. The redesign grouped stats by basketball decisions: Scoring (FG%, 3P%, FT%), Ball Handling (AST, TOV), Defense (STL, BLK), Rebounding (ORB, DRB). Affordances improved: hovering on any stat showed its trend over 5 games. Feedback clarified: when comparing two players, their names stayed highlighted in the comparison view. Result: coaches used the dashboard during games because it matched their mental model of basketball performance.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: HCI Principles in Sports Analytics",
+      "content": "Test your understanding of mental models, affordances, and feedback in sports analytics interfaces.",
+      "questions": [
+        {
+          "question": "A sports analytics tool displays soccer player data sorted alphabetically by player last name. A coach struggles to find 'quick central defenders.' What HCI principle is violated?",
+          "options": [
+            "A) The interface doesn't match the coach's mental model (they think by position, not alphabetically)",
+            "B) The buttons are not clearly labeled",
+            "C) The color scheme is too bright",
+            "D) The interface requires internet connection"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Coaches naturally think 'position first, then player name.' Alphabetical sorting forces them to search inefficiently.",
+            "Incorrect. The issue is deeper than button labels\u2014it's about matching how users think.",
+            "Incorrect. Color is a design detail, not the core HCI problem here.",
+            "Incorrect. Technical requirements don't relate to mental models."
+          ],
+          "explanation": "A strong HCI design respects users' existing mental models. In sports, people naturally organize by role and function, not alphabetically."
+        },
+        {
+          "question": "A cricket team selection interface lets users drag players into a squad, but there's no confirmation message when a player is successfully added. What is missing?",
+          "options": [
+            "A) Affordances (users don't know they can drag)",
+            "B) Feedback (users don't know if their action succeeded)",
+            "C) A mental model (users don't understand cricket selection)",
+            "D) Accessibility features (color-blind users can't see the change)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The drag-and-drop action itself is clear; the problem is what happens after.",
+            "Correct! Feedback tells users their action was received. Without it, selectors won't trust the interface.",
+            "Incorrect. The mental model is about selection logic, not about system response.",
+            "Incorrect. While accessibility matters, this specific problem is feedback."
+          ],
+          "explanation": "Feedback is critical in tools where mistakes are costly. A coach needs to know immediately that a player was added to avoid duplicates or omissions."
+        },
+        {
+          "question": "You're designing an interface for a basketball analyst comparing two teams' defensive strategies. The analyst thinks: 'Team A plays zone defense, Team B plays man-to-man.' How should you organize the data to match this mental model?",
+          "options": [
+            "A) Show all stats alphabetically; let the analyst find defensive comparisons",
+            "B) Group stats by defensive strategy type first (zone vs. man-to-man), then by metric",
+            "C) Show raw numbers without any organization; analysts prefer raw data",
+            "D) Use only graphs; tables confuse analysts"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Alphabetical sorting ignores how analysts actually think about defense.",
+            "Correct! Grouping by strategy matches the analyst's natural mental model and speeds up comparison.",
+            "Incorrect. Even analysts appreciate organization that matches their thinking.",
+            "Incorrect. Different representations suit different tasks; neither is universally better."
+          ],
+          "explanation": "Matching mental models means organizing information the way users naturally categorize it. In sports, strategy type is a primary lens, not secondary."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Real-World Challenge: Designing for Football Coaches",
+      "content": "Imagine this: a football coach needs to review third-down pass plays during a timeout. They open the analytics interface and see 47 menu options. By the time they find the plays, the timeout is over. The problem isn't the data\u2014it's the interface. Coaches don't think sequentially through menus; they think in parallel: 'Show me 3rd-and-long plays from our 20-yard line that worked against similar formations.' A good interface anticipates these decision patterns and makes the right plays findable in seconds. As you work through this challenge, you'll discover why certain interface designs fail and others succeed. You're learning HCI principles by solving a real problem.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Example: Iterative Redesign of a Football Play-Calling Interface",
+      "content": "Version 1 (Failed): Menu-driven interface. Coach clicks 'Plays' \u2192 'Pass' \u2192 'Route Type' \u2192 'Quick' \u2192 'From 20-yard line' (5 clicks to find one category). Finding a specific play takes 10+ clicks. Problem: This design doesn't match how coaches think\u2014they envision plays as combinations (formation + down + distance), not nested categories. Version 2 (Success): Redesigned interface groups plays by coach's natural decision sequence: 'Formation \u2192 Down & Distance \u2192 Route Type.' Play cards show up in filtered results immediately (affords easy scanning). Clicking a play highlights it in the play diagram on the adjacent screen (provides feedback that the play is selected). Coaches can now find and select a play in under 3 seconds. The key insight: understanding how users think (their mental model) leads directly to better interface organization.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Critique a Sports Analytics Interface",
+      "content": "Evaluate a cricket team selection interface and identify HCI problems.",
+      "questions": [
+        {
+          "question": "A cricket team selector interface lists batsmen alphabetically (Agarwal, Bumrah, Gill...) but the selector thinks 'left-handed opener, right-handed middle order.' Which HCI principle is violated?",
+          "options": [
+            "A) Mental model mismatch\u2014the interface organization doesn't match how selectors think",
+            "B) Affordance failure\u2014buttons are not visible",
+            "C) Feedback problem\u2014no confirmation when player is selected",
+            "D) Color contrast\u2014text is too light"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Selectors naturally categorize by batting role (opener, middle, lower order), not alphabetically.",
+            "Incorrect. The buttons are likely visible; the problem is deeper.",
+            "Incorrect. Even with good feedback, alphabetical listing still wastes the selector's time.",
+            "Incorrect. While contrast matters, it's not the core issue here."
+          ],
+          "explanation": "Strong HCI design anticipates how users naturally categorize information and organizes interfaces accordingly. For cricket selection, role is a primary mental model."
+        },
+        {
+          "question": "A rugby analytics tool shows a player stats screen with no obvious way to compare two players side-by-side. What affordance is missing?",
+          "options": [
+            "A) There's no button labeled 'Compare'",
+            "B) The interface doesn't suggest that comparison is possible; users can't see how to initiate it",
+            "C) The stats are displayed in tables instead of graphs",
+            "D) The interface uses blue instead of red"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The label matters less than whether users perceive the action is possible.",
+            "Correct! Affordances make users perceive that an action is available. Without a visible comparison mechanism, users won't think to try it.",
+            "Incorrect. Tables and graphs are representation choices, not affordance issues.",
+            "Incorrect. Color preference is subjective and separate from affordance."
+          ],
+          "explanation": "Affordances are about what users perceive is possible. A 'Compare' button, split view, or drag-to-compare mechanism all create affordances for comparison."
+        },
+        {
+          "question": "A baseball analytics tool lets users filter pitches by velocity, but when the filter is applied, the interface doesn't clearly show that filtering is active. What feedback is missing, and why does this matter?",
+          "options": [
+            "A) The tool should play a sound when filtering completes; users need audio feedback",
+            "B) There should be a clear indication (badge, highlight, text) showing filters are active; users need to trust that their action worked",
+            "C) The filtered results should appear in a popup; current inline results are too subtle",
+            "D) The cursor should change when hovering over a filtered row"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Audio feedback isn't necessary for filtering; visual feedback is more effective.",
+            "Correct! Feedback must clearly communicate state. Without it, users won't trust the interface and may apply filters multiple times.",
+            "Incorrect. Inline results are fine if they're clearly marked as filtered.",
+            "Incorrect. Cursor changes indicate affordance (hovers), not feedback (confirmation)."
+          ],
+          "explanation": "In data tools, feedback is critical because users need to trust that their selections are active. A 'Filters: Velocity 90+ mph' badge or highlighted filter chip provides this trust."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: HCI Principles Unified",
+      "content": "Both learning paths taught the same HCI principles\u2014you just approached them differently. Whether you started with theory or challenges, you've discovered that great sports analytics interfaces share three qualities: (1) they respect mental models (organizing data by how users naturally think: by position, by strategy, by role); (2) they use affordances (making actions visible and obvious through design: clickable buttons, draggable items, obvious comparison views); (3) they provide feedback (confirming that actions were received: 'Filter applied,' 'Player selected,' 'Comparison loaded'). Real tools like Tableau Sport Analytics, broadcast graphics systems, and coaching software succeed because they apply these principles at every level. When a coach opens a tool and immediately finds what they need, or an analyst discovers an insight in seconds, you're seeing HCI in action. As you design sports analytics tools in the future, remember: users think first, then interact. Design for their mental model, make interactions obvious, and confirm that their actions worked.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Congratulations! You've Mastered HCI for Sports Analytics",
+      "content": "You now understand how to design interfaces that coaches, analysts, broadcasters, and sports fans actually want to use. You know that mental models, affordances, and feedback are the foundation of great design. You can identify HCI problems in existing tools and redesign them to be intuitive and fast. Your next challenge: apply these principles to any data tool you encounter, sports-related or not. Every interface is an opportunity to practice HCI design thinking."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-on First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n3",
+      "label": "Fail - Review"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n6",
+      "label": "Fail - Review"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T11:45:41.110310+00:00",
+  "model": "claude-haiku-4-5"
+}

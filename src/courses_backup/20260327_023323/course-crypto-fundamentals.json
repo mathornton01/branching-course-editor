@@ -1,0 +1,269 @@
+{
+  "id": "course-crypto-fundamentals",
+  "title": "Cryptography Fundamentals",
+  "description": "Learn the essential concepts of cryptography, from basic encryption methods to symmetric and asymmetric encryption. This adaptive course guides you through real-world examples and assessments.",
+  "topic": "Cryptography",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "cryptography",
+    "encryption",
+    "security",
+    "caesar-cipher",
+    "RSA",
+    "symmetric",
+    "asymmetric"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Encryption?",
+      "content": "Encryption is the process of converting readable information (plaintext) into a coded format (ciphertext) that cannot be understood without a key. Throughout history, encryption has been crucial for protecting sensitive communications. For example, the Caesar cipher shifted each letter by a fixed number to hide messages from enemies. Modern encryption is far more sophisticated, using complex mathematical algorithms to secure everything from emails to online banking. Understanding encryption basics is essential in our digital world.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "The Caesar Cipher: A Historical Example",
+      "content": "The Caesar cipher is one of the oldest encryption techniques. If we shift each letter by 3 positions in the alphabet, the word 'HELLO' becomes 'KHOOR' (H\u2192K, E\u2192H, L\u2192O, L\u2192O, O\u2192R). To decrypt, the receiver shifts back by 3. This simple method was used by Julius Caesar to protect military communications. While this cipher is easily broken today, it demonstrates the core encryption principle: using a key (the shift value) to transform information.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Encryption Basics Assessment",
+      "content": "Test your understanding of encryption fundamentals and the Caesar cipher.",
+      "questions": [
+        {
+          "question": "What is the key in a Caesar cipher with a shift of 5?",
+          "options": [
+            "The letter being encrypted",
+            "The shift value of 5",
+            "The alphabet",
+            "The message sender"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - the key is the rule used, not the message itself",
+            "Correct! The shift value is the key",
+            "Incorrect - the alphabet doesn't change",
+            "Incorrect - the sender isn't the key"
+          ],
+          "explanation": "The key in cryptography is the secret information needed to encrypt or decrypt. In Caesar cipher, the key is the shift value."
+        },
+        {
+          "question": "If 'ATTACK' is encrypted with a Caesar cipher (shift of 1), what is the ciphertext?",
+          "options": [
+            "ATTACKS",
+            "BUUBDL",
+            "ZSZSGD",
+            "@TT@CK"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - that's adding a letter, not shifting",
+            "Correct! Shift each letter by 1",
+            "Incorrect - that's shifting backward",
+            "Incorrect - encryption uses only letters"
+          ],
+          "explanation": "Each letter shifts forward by the key amount: A\u2192B, T\u2192U, T\u2192U, A\u2192B, C\u2192D, K\u2192L = BUUBDL"
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n5",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Practice: Strengthen Your Encryption Skills",
+      "content": "Work through these additional practice questions to reinforce your understanding of encryption.",
+      "questions": [
+        {
+          "question": "Using a shift of 2, encrypt the word 'CIPHER'",
+          "options": [
+            "EJRJGT",
+            "AKHPGT",
+            "EKRJGT",
+            "CIPHES"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect - check your shift direction",
+            "Incorrect - each letter needs to shift",
+            "Correct! C\u2192E, I\u2192K, P\u2192R, H\u2192J, E\u2192G, R\u2192T",
+            "Incorrect - that's not encryption"
+          ],
+          "explanation": "With a shift of 2: C\u2192E, I\u2192K, P\u2192R, H\u2192J, E\u2192G, R\u2192T = EKRJGT"
+        },
+        {
+          "question": "A message is encrypted, and the receiver doesn't know the shift value. What is this called in cryptography?",
+          "options": [
+            "Decryption",
+            "Brute force attack",
+            "Substitution",
+            "Key exchange"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - decryption requires knowing the key",
+            "Correct! Trying all possible shifts (1-25) is brute force",
+            "Incorrect - that's a type of cipher",
+            "Incorrect - key exchange is sharing secrets securely"
+          ],
+          "explanation": "A brute force attack tries all possible keys until one works. With Caesar cipher, there are only 25 possible shifts, making it vulnerable to brute force."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "Choose Your Next Topic",
+      "content": "Great work! You understand encryption basics. Would you like to explore the differences between symmetric and asymmetric encryption, or are you ready to complete the course?",
+      "choices": [
+        {
+          "label": "Learn about Symmetric and Asymmetric Encryption",
+          "next": "n6"
+        },
+        {
+          "label": "Complete the Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Symmetric and Asymmetric Encryption",
+      "content": "Encryption comes in two main types. Symmetric encryption uses the same key for both encryption and decryption (like Caesar cipher, but more complex like AES). It's fast and efficient, ideal for encrypting large amounts of data. Asymmetric encryption (public-key cryptography) uses two different keys: a public key for encryption and a private key for decryption. This makes secure communication possible without sharing secrets beforehand. While asymmetric encryption is slower, it enables digital signatures, secure key exchange, and many modern security features.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "RSA: Asymmetric Encryption in Practice",
+      "content": "RSA is the most widely used asymmetric encryption algorithm. Alice generates two keys: a public key that anyone can use, and a private key she keeps secret. When Bob wants to send Alice a secret message, he encrypts it using Alice's public key. Only Alice, with her private key, can decrypt it. This is how HTTPS, email encryption, and digital signatures work. RSA's security relies on the mathematical difficulty of factoring large numbers\u2014a task that would take classical computers thousands of years.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Symmetric and Asymmetric Encryption Assessment",
+      "content": "Test your understanding of encryption types and their applications.",
+      "questions": [
+        {
+          "question": "Which encryption type uses the same key for encryption and decryption?",
+          "options": [
+            "Asymmetric",
+            "Symmetric",
+            "Hashing",
+            "Quantum"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - asymmetric uses two different keys",
+            "Correct! Symmetric uses one shared key",
+            "Incorrect - hashing is different from encryption",
+            "Incorrect - quantum is a future possibility"
+          ],
+          "explanation": "Symmetric encryption like AES uses a single shared key. Both the sender and receiver must securely possess this key."
+        },
+        {
+          "question": "What is the main advantage of asymmetric encryption over symmetric encryption?",
+          "options": [
+            "It's faster",
+            "It uses smaller keys",
+            "It doesn't require sharing a secret key beforehand",
+            "It's easier to implement"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect - symmetric is actually faster",
+            "Incorrect - asymmetric keys are larger",
+            "Correct! Public keys can be freely shared",
+            "Incorrect - asymmetric is more complex"
+          ],
+          "explanation": "Asymmetric encryption solves the key distribution problem. People can share their public keys freely, while keeping their private keys secret."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Cryptography Fundamentals Complete!",
+      "content": "Congratulations! You've mastered the fundamentals of cryptography. You understand encryption basics, the Caesar cipher, and the difference between symmetric and asymmetric encryption. These concepts are the foundation for secure communication, digital signatures, and modern cybersecurity. As you continue learning, you'll explore topics like hashing, digital certificates, and real-world cryptographic protocols. Keep practicing these concepts to deepen your expertise!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n5",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Learn more"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-26T09:30:07.921042+00:00",
+  "model": "claude-haiku-4-5"
+}

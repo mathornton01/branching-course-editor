@@ -1,0 +1,269 @@
+{
+  "id": "a1b2c3d4-e5f6-47a8-8b9c-0d1e2f3a4b5c",
+  "title": "Docker and Containerization for Journalists",
+  "description": "Learn Docker containerization through the lens of modern journalism\u2014from newsroom infrastructure to sharing specialized reporting tools.",
+  "topic": "Docker and Containerization",
+  "theme": "journalism",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "docker",
+    "containerization",
+    "journalism",
+    "devops",
+    "technology"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Welcome to Docker for Journalism! You'll learn how containerization streamlines newsroom workflows. Choose whether you'd like to grasp the concepts first, or jump into practical application.",
+      "choices": [
+        {
+          "label": "Understand the Theory First",
+          "next": "n2"
+        },
+        {
+          "label": "Learn by Doing",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Docker Fundamentals: The Newsroom Archive Analogy",
+      "content": "Docker is like organizing your newsroom's archive into standardized filing cabinets. Just as each story has a folder with all its research, photos, and drafts, a Docker container packages your application with all its dependencies in one portable unit. When a journalist moves to a new publication, they can take their complete archive. Similarly, Docker lets journalists deploy news applications consistently across different servers\u2014whether your newsroom runs Linux or Mac, the container works identically. This solves the 'it works on my machine' problem that plagued media organizations for years.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "New York Times News App: A Container Success Story",
+      "content": "The New York Times rebuilt their digital newsroom infrastructure using Docker. Reporters could now publish to multiple platforms (web, mobile, social) from a single containerized application. When the story-publishing container was updated, it deployed instantly across all platforms without manual configuration on each server. A single reporter could now manage what previously required three systems administrators\u2014because the container eliminated environment mismatches. The Times reduced deployment time from hours to minutes, letting journalists focus on journalism instead of technical troubleshooting.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Docker Concepts Assessment",
+      "content": "Test your understanding of Docker fundamentals and why containerization matters for journalism infrastructure.",
+      "questions": [
+        {
+          "question": "What does a Docker container do?",
+          "options": [
+            "Stores database backups",
+            "Packages an app with all its dependencies for consistent deployment",
+            "Compresses files for storage",
+            "Manages email servers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Containers aren't primarily for backup storage",
+            "Correct! This is Docker's core purpose",
+            "Compression is different from containerization",
+            "Docker doesn't manage email servers"
+          ],
+          "explanation": "Docker solves the 'works on my machine' problem by packaging code and dependencies together, ensuring consistent behavior regardless of where it runs."
+        },
+        {
+          "question": "In a newsroom context, why is Docker valuable?",
+          "options": [
+            "It makes coffee cheaper",
+            "It lets developers and journalists work independently without environment conflicts",
+            "It archives old articles",
+            "It replaces human editors"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not related to infrastructure",
+            "Correct! Docker enables different systems to work together seamlessly",
+            "That's version control, not containerization",
+            "No\u2014Docker augments human work"
+          ],
+          "explanation": "Docker ensures that the story-publishing system works the same way for everyone, from the developer who built it to the reporter using it in the field."
+        },
+        {
+          "question": "What problem does Docker solve that's especially relevant to media organizations?",
+          "options": [
+            "Faster internet connections",
+            "Better article writing",
+            "Consistent deployment across different servers and machines",
+            "Cheaper cloud storage"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Docker doesn't affect internet speed",
+            "Docker doesn't improve writing",
+            "Exactly! This is critical for newsrooms with multiple platforms",
+            "Not Docker's primary function"
+          ],
+          "explanation": "Media organizations publish to web, mobile, and social simultaneously. Docker ensures the publishing system behaves identically on each platform's server."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Docker in Practice: Packaging a Newsroom Tool",
+      "content": "Imagine a journalist built a Python script that scrapes public data sources for investigative research. Without Docker, sharing this tool means the colleague needs Python installed, the right libraries (beautifulsoup, requests), and the correct versions\u2014a 20-minute setup nightmare. With Docker, the journalist creates one file (Dockerfile) that packages everything: Python, the libraries, the script. A colleague downloads this container image, runs it, and it works immediately\u2014no setup. The container isolates dependencies, so the script doesn't conflict with other tools on their machine. This is how modern newsrooms distribute reporting tools.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "ProPublica's Data Journalism Pipeline in Containers",
+      "content": "ProPublica's investigative team created containerized workflows for processing datasets. One container validates election records, another geocodes addresses, a third generates visualizations\u2014each isolated and runnable independently. When a junior reporter joins the team, they run: 'docker run propublica/datajournalism' and instantly have a complete, working environment with all tools, data pipelines, and dependencies. No installation guides. No 'run these 15 commands.' The workflow is reproducible across laptops, newsroom servers, and cloud platforms. This reproducibility is essential when investigating stories that might be scrutinized for methodology; anyone can verify the pipeline actually works as documented.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Docker Practical Skills Assessment",
+      "content": "Test your understanding of practical Docker usage in journalism workflows.",
+      "questions": [
+        {
+          "question": "A reporter wants to run a containerized fact-checking tool. What's the likely first command?",
+          "options": [
+            "docker install",
+            "docker run [image-name]",
+            "docker delete",
+            "docker send"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Docker images are usually pre-built",
+            "Correct! This executes a containerized application",
+            "This removes containers",
+            "Not a real command"
+          ],
+          "explanation": "docker run fetches and starts a container. For a journalist, this is the practical command that makes tools work."
+        },
+        {
+          "question": "Why would a newsroom prefer containerized tools over traditional software installation?",
+          "options": [
+            "Containers make stories better",
+            "They're cheaper than software licenses",
+            "They ensure tools work consistently across all machines in the newsroom",
+            "They make coding unnecessary"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Tools serve journalism\u2014quality comes from their use",
+            "Containers can reduce costs but that's secondary",
+            "Exactly! Consistency is critical for collaborative journalism",
+            "Containers still require skilled developers to create"
+          ],
+          "explanation": "In a newsroom with diverse machines (Macs, Linux, Windows), containers guarantee that a data pipeline works identically everywhere\u2014critical for reproducible research."
+        },
+        {
+          "question": "What file do you create to build a Docker container for a tool?",
+          "options": [
+            "Toolfile",
+            "Dockerfile",
+            "Containerfile.txt",
+            "Imagefile"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not a standard Docker file",
+            "Correct! This defines the container",
+            "Not the standard name",
+            "That's not the Docker convention"
+          ],
+          "explanation": "The Dockerfile contains instructions for packaging an application\u2014it's the blueprint that creates a reproducible, shareable container image."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Docker in Modern Newsrooms: Integration Synthesis",
+      "content": "Both paths led here because Docker matters in two complementary ways: as a deployment tool and as a distribution mechanism for tools. Major newsrooms like the BBC, Guardian, and NPR containerize their entire infrastructure\u2014publishing systems, comment threads, recommendation engines\u2014because Docker enables rapid updates without downtime. Simultaneously, smaller teams use Docker to share specialized tools: fact-checking scripts, automated transcription pipelines, network analysis toolkits. Understanding both perspectives\u2014infrastructure AND tooling\u2014makes you effective in modern journalism technology. Docker is no longer a 'nice to have' DevOps concept; it's essential literacy for technical journalists and journalism technologists.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Docker for Journalism: Course Complete",
+      "content": "You've learned that Docker is containerization\u2014packaging software with its dependencies for reliable, reproducible deployment. You understand why newsrooms adopt Docker: consistency across machines, simplified distribution, and faster iteration on the products that power journalism. Next steps: explore Docker Hub (a registry of pre-built containers), try containerizing a simple reporting tool, or investigate how your favorite news organization uses container technology. Docker expertise will make you invaluable in any modern newsroom's technical team."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Theory First"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Hands-On First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n8",
+      "label": "Pass"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n4",
+      "label": "Retry"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Pass"
+    },
+    {
+      "id": "c10",
+      "source": "n7",
+      "target": "n7",
+      "label": "Retry"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T05:05:03.820671+00:00",
+  "model": "claude-haiku-4-5"
+}

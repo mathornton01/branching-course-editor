@@ -1,0 +1,270 @@
+{
+  "id": "info-theory-urban-planning",
+  "title": "Information Theory for Urban Planning",
+  "description": "Master information theory concepts through the lens of urban planning systems, from entropy and uncertainty to data transmission in smart cities.",
+  "topic": "Information Theory",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "information-theory",
+    "urban-planning",
+    "data",
+    "communication",
+    "systems"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction: Information in Urban Systems",
+      "content": "Modern cities generate vast amounts of data\u2014from traffic sensors to building occupancy. Information theory, developed by Claude Shannon, provides a mathematical framework for understanding how cities communicate, process, and transmit data. Just as urban planners optimize flows of people, goods, and resources, information theory helps optimize the flow and efficiency of digital signals. By applying these principles, cities can improve everything from transit systems to emergency response networks.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Would you prefer to start with the foundational theory of information and entropy, or jump into how urban planners apply these concepts in real systems? Both paths lead to the same deep understanding.",
+      "choices": [
+        {
+          "label": "Theory First: Entropy and Information Foundations",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-on First: Real Urban Data and Signals",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Entropy: Measuring Uncertainty in Cities",
+      "content": "Entropy measures uncertainty. In urban planning, entropy describes how unpredictable or random a system is. A city's traffic patterns have high entropy during rush hour\u2014you cannot easily predict which route will be fastest. A well-coordinated transit system has lower entropy: predictable schedules and routes. Information theory quantifies this mathematically: high entropy means high uncertainty (you need more information to describe the state), low entropy means more predictable states. Understanding entropy helps planners design communication systems that handle unpredictability in urban environments.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Traffic Signal Entropy",
+      "content": "Consider a smart traffic intersection. A traditional fixed signal (red-red-red-green) has low entropy\u2014the state is highly predictable and repeats cyclically. An adaptive signal that responds to real-time traffic sensors has higher entropy: the timing varies unpredictably based on current conditions. Yet the adaptive system transmits information (sensor data) that reduces overall city-wide uncertainty about traffic flow. Planners use information theory to design sensors that collect just enough data to reduce entropy in critical zones without overwhelming communication channels.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Entropy in Urban Systems",
+      "content": "Test your understanding of entropy as it applies to urban planning. Consider traffic, communication, and data flow.",
+      "questions": [
+        {
+          "question": "A city transit system displays real-time bus locations on a mobile app that updates every 10 seconds. Compared to a system with only static schedules, the real-time system has:",
+          "options": [
+            "Lower entropy\u2014the app provides so much detail that uncertainty is eliminated",
+            "Higher entropy\u2014real-time updates create unpredictable variation",
+            "Different entropy distribution\u2014it concentrates information in specific channels to reduce uncertainty about bus locations",
+            "No relationship to entropy\u2014apps don't involve information theory"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The app actually helps manage entropy by channeling relevant information.",
+            "Incorrect. The updates reduce uncertainty about actual bus positions.",
+            "Correct! By providing real-time location data, the system makes bus positions less uncertain, concentrating information efficiently.",
+            "Incorrect. Information systems in cities are fundamentally applications of information theory."
+          ],
+          "explanation": "Entropy is about uncertainty. Real-time data doesn't increase entropy\u2014it reduces it. The app efficiently channels information (lower transmission, higher information density) to keep riders informed."
+        },
+        {
+          "question": "A building's smart occupancy system sends a sensor reading every second when occupied, but skips readings when empty. This approach exemplifies:",
+          "options": [
+            "High entropy transmission wasting bandwidth",
+            "Information-efficient design\u2014transmitting data only when occupancy state is uncertain",
+            "Poor design that will fail in emergencies",
+            "A violation of Shannon's theorem"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Conditional transmission is actually efficient.",
+            "Correct! This is an example of information-efficient design. When occupied, state is uncertain; when empty, sending no data confirms the state.",
+            "Incorrect. This design can support emergency systems through burst transmission.",
+            "Incorrect. This aligns perfectly with Shannon's principle of efficient communication."
+          ],
+          "explanation": "Shannon's theory shows we transmit information most efficiently by focusing on uncertain states. When a building is empty, the absence of sensor data itself communicates information."
+        },
+        {
+          "question": "Which urban planning scenario involves the LOWEST entropy?",
+          "options": [
+            "Traffic on a busy highway during rush hour with accidents",
+            "Pedestrian foot traffic in a downtown plaza during a concert",
+            "A scheduled subway train running on fixed intervals with no delays",
+            "A taxi dispatch system during Friday evening"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Accidents create high unpredictability.",
+            "Incorrect. Concert crowds create variable patterns.",
+            "Correct! A scheduled subway with no delays is entirely predictable\u2014the lowest entropy.",
+            "Incorrect. Friday evenings have highly variable taxi demand."
+          ],
+          "explanation": "Entropy measures unpredictability. The subway on a fixed schedule with no disruptions is completely deterministic, requiring minimal information to describe its state."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Information in Urban Data Systems",
+      "content": "Cities are drowning in data. Smart sensors in buildings, traffic cameras, air quality monitors, and mobile devices generate streams of information about urban conditions. Information theory provides tools to measure how much useful data each sensor contributes and how efficiently we can transmit it. In urban planning, 'information' means data that reduces uncertainty about the city's state. A camera that always shows the same empty intersection sends zero information; a camera that detects congestion sends valuable information. This leads to smarter sensor networks and more efficient city systems.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Example: Smart Parking Data Collection",
+      "content": "Smart parking systems in cities like San Francisco deploy magnetic sensors under parking spaces. Each sensor transmits its status (occupied or empty) wirelessly. A naive system might broadcast status every second, wasting power and bandwidth. An information-theory approach recognizes that status changes are rare\u2014perhaps once every 30 minutes. The optimized system only transmits when status changes (transitions from empty to occupied or vice versa). This reduces data transmission by 99% while conveying exactly the same information. Urban planners use this principle across systems: air quality alerts only when levels exceed thresholds, bicycle dock status only when availability drops below useful margins.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Identifying Information in Urban Signals",
+      "content": "Test your ability to recognize information in urban planning scenarios. Which data streams carry the most useful information for decision-making?",
+      "questions": [
+        {
+          "question": "A city monitors air quality with sensors at 50 locations, updating every hour. Which dataset contains more information for urban planners?",
+          "options": [
+            "All 50 sensors reporting their values every hour, regardless of change",
+            "Only sensors reporting when values change beyond a threshold, plus hourly reports from unchanged sensors",
+            "Only sensors in neighborhoods where pollution incidents occurred historically",
+            "A single average reading for the entire city"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This includes redundant data.",
+            "Correct! This balances coverage (hourly from stable sensors) with responsiveness (immediate reporting of changes). Maximum information, minimum noise.",
+            "Incorrect. This is biased and misses new patterns.",
+            "Incorrect. This loses critical spatial variation."
+          ],
+          "explanation": "Information = data that reduces uncertainty. Constant values carry no new information; changes do. An efficient system reports changes immediately and stable conditions periodically."
+        },
+        {
+          "question": "During a major public event, pedestrian flow sensors near transit stations experience communication delays. To maintain information flow, which approach is best?",
+          "options": [
+            "Wait for full data on all sensors before reporting any information",
+            "Transmit partial updates immediately (e.g., critical stations only) and fill gaps later",
+            "Switch to manual observer counts instead",
+            "Disable reporting until systems normalize"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Delayed information is less useful in emergencies.",
+            "Correct! Partial information is better than none. Prioritizing critical sensors ensures decision-makers get actionable data fast.",
+            "Incorrect. Manual processes are slower and less reliable.",
+            "Incorrect. You need information most during crises."
+          ],
+          "explanation": "Shannon's theory shows that some information, transmitted quickly, is more valuable than complete information, transmitted slowly. Event management needs real-time updates."
+        },
+        {
+          "question": "A city's water pipe network has thousands of sensors monitoring pressure. Most readings are stable; ruptures are rare emergencies. The MOST efficient transmission strategy is:",
+          "options": [
+            "Stream all sensor readings continuously to central monitoring",
+            "Report only when pressure changes exceed normal variation thresholds",
+            "Sample randomly across sensors to reduce load",
+            "Require operator requests to retrieve sensor data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This wastes bandwidth on redundant data.",
+            "Correct! Emergency-based transmission maximizes information density. Anomalies get priority; stability can be inferred from silence.",
+            "Incorrect. Random sampling might miss critical zones.",
+            "Incorrect. Reactive systems miss emergencies."
+          ],
+          "explanation": "An efficient communication channel focuses on information-rich events. A pressure reading that matches expectations transmits zero new information."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: Information Theory in Smart Cities",
+      "content": "Whether you started with theory or practice, the core insight is the same: information theory quantifies how efficiently cities can communicate about their states and make decisions. Smart cities use Shannon's principles to design sensor networks (entropy: which sensors reduce uncertainty most?), optimize data transmission (information efficiency: what's worth sending?), manage communication channels (bandwidth: how much data fits?), and handle noise (error correction: what if signals degrade?). A modern smart city is fundamentally an information system, and information theory provides the mathematical foundation for making it work. From traffic signals to emergency response, from energy grids to public health surveillance, information theory shapes how cities process the complexity of millions of people, systems, and decisions.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Information Theory Mastery",
+      "content": "You've mastered the core concepts of information theory through the lens of urban planning. You now understand entropy as uncertainty, information as reduction of uncertainty, and the principles that make smart cities work. Whether designing sensor networks, optimizing data transmission, or evaluating urban communication systems, you can apply Shannon's framework to make better decisions. Urban planning challenges are fundamentally information challenges, and you're now equipped with the theory to address them."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-on First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn Concept"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Test Knowledge"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Assessment Passed"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Learn Concept"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Practice Skills"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "Practice Passed"
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": "Synthesis Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T06:35:43.096926+00:00",
+  "model": "claude-haiku-4-5"
+}

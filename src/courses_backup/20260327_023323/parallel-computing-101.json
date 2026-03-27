@@ -1,0 +1,272 @@
+{
+  "id": "parallel-computing-101",
+  "title": "Parallel Computing Fundamentals",
+  "description": "Learn the core concepts of parallel computing, including parallelism, concurrency, and practical applications.",
+  "topic": "Parallel Computing",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 25,
+  "tags": [
+    "parallel-computing",
+    "concurrency",
+    "performance",
+    "multithreading"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Parallel Computing?",
+      "content": "Parallel computing is the simultaneous execution of multiple tasks on multiple processors to solve a single problem faster. It divides large problems into smaller sub-problems that can be solved independently and concurrently. Modern multi-core processors enable parallelism by executing different threads on different cores. This approach dramatically improves performance for CPU-intensive tasks like simulations, data processing, and scientific computing.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Parallel Computing in Action",
+      "content": "Consider sorting a dataset of 1 million numbers. A sequential algorithm might take 10 seconds on one core. With parallel computing, you divide the data into 4 chunks, sort each chunk on a different core (each takes 2.5 seconds), then merge the results\u2014completing in roughly 3 seconds total. This demonstrates how parallelism reduces time complexity by distributing work across multiple processing units.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Parallel Computing Basics Quiz",
+      "content": "Test your understanding of parallel computing fundamentals.",
+      "questions": [
+        {
+          "question": "What is the primary goal of parallel computing?",
+          "options": [
+            "To increase code complexity",
+            "To solve problems faster by using multiple processors simultaneously",
+            "To reduce memory usage",
+            "To eliminate the need for algorithms"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Parallel computing actually aims to improve performance.",
+            "Correct! Parallel computing leverages multiple processors to solve problems more efficiently.",
+            "Incorrect. While parallelism can affect memory differently, that's not the primary goal.",
+            "Incorrect. Parallel computing still requires well-designed algorithms."
+          ],
+          "explanation": "Parallel computing solves problems by distributing tasks across multiple processors, significantly reducing overall execution time for computationally intensive problems."
+        },
+        {
+          "question": "Which of the following is a practical application of parallel computing?",
+          "options": [
+            "Reading a single text file",
+            "Weather simulations processing millions of data points",
+            "Printing a document",
+            "Writing to a single database record"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Reading a single file doesn't benefit from parallelism.",
+            "Correct! Weather simulations involve massive datasets and calculations that parallel computing excels at.",
+            "Incorrect. Printing is typically a sequential task.",
+            "Incorrect. Writing to a single record is not parallelizable."
+          ],
+          "explanation": "Parallel computing is ideal for compute-intensive problems like weather forecasting, where millions of calculations can be distributed across cores."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Concurrency vs Parallelism",
+      "content": "While often used interchangeably, concurrency and parallelism are distinct concepts. Concurrency means multiple tasks can make progress independently, often on a single processor through context switching. Parallelism means tasks literally execute simultaneously on different cores. A single-core system can be concurrent (switching between tasks) but not parallel. Modern applications often combine both: concurrent design allows flexible task management, while parallelism provides true simultaneous execution when multi-core hardware is available.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Concurrency vs Parallelism Example",
+      "content": "Imagine a restaurant with one cashier and four chefs. The cashier handles multiple customer orders sequentially but interleaves tasks\u2014taking one order, passing it to a chef, then taking another order. This is concurrency. However, the four chefs cooking different dishes simultaneously is parallelism. In programming, a web server handling multiple requests with one thread (concurrency) differs from processing requests across four CPU cores (parallelism). Both improve throughput, but parallelism provides true simultaneous execution.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Concurrency and Parallelism Mastery",
+      "content": "Demonstrate your understanding of when and why these concepts matter.",
+      "questions": [
+        {
+          "question": "A Java program uses thread switching to handle 100 simultaneous network requests on a single-core processor. This is an example of:",
+          "options": [
+            "Parallelism only",
+            "Concurrency only",
+            "Both concurrency and parallelism",
+            "Neither concurrency nor parallelism"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Parallelism requires multiple cores, which isn't available here.",
+            "Correct! Thread switching on a single core provides concurrency, not parallelism.",
+            "Incorrect. Only one core is available, so true parallelism cannot occur.",
+            "Incorrect. Thread switching clearly demonstrates concurrency."
+          ],
+          "explanation": "Single-core systems can achieve concurrency through time-slicing but cannot achieve true parallelism, which requires multiple execution units."
+        },
+        {
+          "question": "A multi-core system running multiple processes where each process executes on a different core is an example of:",
+          "options": [
+            "Concurrency without parallelism",
+            "Parallelism without concurrency",
+            "Both concurrency and parallelism",
+            "Neither concept applies here"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Multiple cores enable true parallelism, not just concurrency.",
+            "Incorrect. Multiple independent processes also exhibit concurrency characteristics.",
+            "Correct! Multiple processes on different cores exhibit both concurrency and parallelism.",
+            "Incorrect. This scenario clearly demonstrates both concepts."
+          ],
+          "explanation": "Modern multi-core systems typically exhibit both concurrency (independent task management) and parallelism (simultaneous execution on multiple cores)."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Applying Concepts",
+      "content": "Let's reinforce key concepts with additional practice problems.",
+      "questions": [
+        {
+          "question": "You need to process 10 GB of image files. Which approach is most suitable?",
+          "options": [
+            "Sequential processing on one core",
+            "Parallel processing, dividing files across multiple cores",
+            "Using more memory",
+            "Switching to a slower algorithm"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Sequential processing would be slow for large datasets.",
+            "Correct! Parallel processing optimally distributes the workload.",
+            "Incorrect. Memory usage isn't the limiting factor here.",
+            "Incorrect. Algorithm choice matters, but parallelism is the key optimization."
+          ],
+          "explanation": "Large data processing tasks are ideal candidates for parallelism, where work is distributed across multiple cores."
+        },
+        {
+          "question": "A web server accepts 1000 requests per second but has only 4 cores. How should it handle this?",
+          "options": [
+            "Process only 4 requests at a time, ignoring the rest",
+            "Use concurrent task management with a queue, executing requests in parallel when cores available",
+            "Use more servers instead of optimization",
+            "Increase single-core performance indefinitely"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This would lose most requests.",
+            "Correct! Concurrency with queues plus parallelism on available cores is the solution.",
+            "Incorrect. While scaling is sometimes needed, smart concurrency solves this.",
+            "Incorrect. Single-core performance has physical limits."
+          ],
+          "explanation": "Real systems combine concurrent design (queuing) with parallelism (multi-core execution) to handle high throughput efficiently."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What Would You Like to Explore Next?",
+      "content": "You've mastered the fundamentals of parallel computing and concurrency. Choose your next learning path:",
+      "choices": [
+        {
+          "label": "Review the core concepts again",
+          "next": "n1"
+        },
+        {
+          "label": "Complete the course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've successfully learned the fundamentals of parallel computing, including the distinction between concurrency and parallelism. You now understand how modern multi-core processors enable faster execution through simultaneous task processing. Use these concepts to optimize compute-intensive applications and make informed decisions about when and how to parallelize your code."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c3b",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9a",
+      "source": "n8",
+      "target": "n1",
+      "label": "review"
+    },
+    {
+      "id": "c9b",
+      "source": "n8",
+      "target": "n9",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-26T09:22:11.312096+00:00",
+  "model": "claude-haiku-4-5"
+}

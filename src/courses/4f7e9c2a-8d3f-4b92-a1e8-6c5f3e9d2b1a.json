@@ -1,0 +1,137 @@
+{
+  "id": "4f7e9c2a-8d3f-4b92-a1e8-6c5f3e9d2b1a",
+  "title": "Signal Processing Fundamentals Through Architecture",
+  "description": "Learn signal processing by designing and managing real buildings. Navigate two distinct architectural challenges\u2014structural vibration monitoring and acoustic design\u2014to master sampling, filtering, and frequency analysis.",
+  "topic": "Signal Processing Fundamentals",
+  "theme": "architecture",
+  "difficulty": "intermediate",
+  "estimated_minutes": 35,
+  "tags": [
+    "signal-processing",
+    "architecture",
+    "vibration",
+    "acoustics",
+    "filtering",
+    "sampling",
+    "frequency-analysis"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Vibrating Tower",
+      "content": "You're an architect redesigning a 45-story residential tower in a major city. Initial wind tunnel tests reveal an unsettling problem: the building sways more than expected during storms. The structural engineers explain that the building is \"vibrating\" at certain frequencies\u2014essentially, the structure is a signal system responding to environmental inputs (wind, earthquakes, footsteps). To fix this, you discover you must understand signal processing: how to measure signals (sampling), separate signal from noise (filtering), and identify critical frequencies. This journey will teach you how modern architecture is deeply connected to the physics of waves and signals.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Diagnosis Approach",
+      "content": "Your building is experiencing unwanted vibrations. How do you approach diagnosis?",
+      "choices": [
+        {
+          "label": "Detailed Measurement \u2014 Install high-frequency sensors everywhere to capture complete vibrational signature",
+          "next": "n3"
+        },
+        {
+          "label": "Acoustic Survey \u2014 Commission periodic acoustic and vibration surveys at key points",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Sampling the Building's Motion",
+      "content": "When you install high-frequency sensors throughout the tower, you're sampling the building's continuous motion. In signal processing, sampling converts analog (continuous) signals into discrete digital data. Your sensors measure acceleration 1,000 times per second (1 kHz sampling rate). According to the Nyquist Theorem, this captures vibrations up to 500 Hz accurately. The building's fundamental modes\u2014frequencies where it naturally oscillates\u2014are typically low: 0.1 Hz (tall building sway) to 10 Hz (column vibrations). Your sensors capture these perfectly at 1 kHz. But here's the critical insight: if vibrations exceed 500 Hz without filtering, your samples misrepresent them through aliasing\u2014false low-frequency signals appear. You now have millions of data points daily describing the building's motion: the raw signal, both useful information and noise mixed together.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Frequency Priority Decision",
+      "content": "After one week of vibration data, your FFT analysis reveals: a dominant 0.8 Hz peak (building sway during wind events), background noise scattered up to 50 Hz, and a mysterious 15 Hz spike during office hours (foot traffic on the 30th-floor gym). The danger is different for each. Which do you prioritize?",
+      "choices": [
+        {
+          "label": "Structural Resonance \u2014 Design dampers tuned precisely to 0.8 Hz and 15 Hz modes",
+          "next": "n5"
+        },
+        {
+          "label": "Reduce All Noise \u2014 Apply aggressive low-pass filter to remove everything above 10 Hz",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Tuned Mass Damper Saves the Day",
+      "content": "By identifying the true frequency peaks, you install a tuned mass damper (large controlled mass on the roof) and viscoelastic dampers throughout the frame. These devices are analog filters, absorbing energy at specific frequencies. The 0.8 Hz sway mode is dangerous during earthquakes; the 15 Hz mode annoys residents but poses no structural risk. By filtering the signal at its source rather than blindly removing content, you've made the building safer and more comfortable. Five years later, when a magnitude-6 earthquake strikes, the building sways gently. Occupants barely feel it. The structural integrity remains perfect. You've transformed signal processing theory into architectural resilience."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Aliasing Disaster",
+      "content": "Your aggressive low-pass filter removes all frequencies above 10 Hz, but this destroys critical information about the building's true dynamic behavior. The high-frequency content doesn't disappear\u2014through aliasing, it folds back into the low-frequency range as false signals. Your model no longer represents reality. Six months after completion, during the first strong wind event, unexpected oscillations emerge that your filtered data never predicted. Emergency structural retrofitting becomes necessary. The building's reputation is damaged and lawsuits follow. You've learned an expensive lesson: signal processing isn't about removing all high-frequency content, but about understanding which frequencies matter and intelligently preserving signal integrity."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Acoustic Frequency Analysis for Interior Design",
+      "content": "Instead of continuous sensors, your team commissions quarterly acoustic surveys. When someone speaks in the lobby, sound radiates as a complex waveform containing energy across many frequencies: fundamental voice tones (100-300 Hz), harmonics (multiples of fundamental), and reflections from concrete and glass. Using FFT (Fast Fourier Transform)\u2014a signal-processing algorithm\u2014you analyze a 30-second lobby recording and discover the acoustic signature: harsh resonances at 125 Hz and 500 Hz (common in hard buildings), poor mid-range clarity, and excessive 2.5-second reverberation. This frequency analysis reveals what your ears perceive as \"cavernous and boomy.\" You specify acoustic panels tuned to these exact frequencies: low-frequency absorbers for the 125 Hz peak, mid-frequency panels for the 500 Hz spike, and diffusers to scatter mid-range reflections. The result: conversations become clear, music sounds balanced, and the space feels alive rather than hollow.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Acoustically Intelligent Building Completed",
+      "content": "Your periodic acoustic surveys have shaped a building where every space has the ideal acoustic signature for its function. The lobby facilitates clear conversations. The concert hall supports rich musical performances. The open offices provide speech intelligibility without excessive noise. The apartments are shielded from street noise through frequency-selective absorption. Each design decision was informed by frequency analysis\u2014you've used signal processing to shape how the building sounds and feels. Within two years, the building becomes regionally renowned for its acoustic excellence. Your mastery of signals and frequency transformed abstract engineering principles into human experience."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Detailed Measurement"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Acoustic Survey"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Structural Resonance"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Reduce All Noise"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T12:01:35.623054+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,136 @@
+{
+  "id": "cv-culinary-fundamentals",
+  "title": "Computer Vision in Your Restaurant Kitchen",
+  "description": "Learn computer vision fundamentals through a narrative scenario where you implement vision systems to improve restaurant operations. Navigate two distinct paths: quality control through image classification, or inventory management through object detection.",
+  "topic": "Computer Vision Fundamentals",
+  "theme": "culinary arts",
+  "difficulty": "beginner",
+  "estimated_minutes": 25,
+  "tags": [
+    "computer vision",
+    "image classification",
+    "object detection",
+    "culinary",
+    "decision-based learning",
+    "scenario-driven"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Your Restaurant Needs Smart Vision",
+      "content": "You're opening a high-end restaurant and face two critical challenges: ensuring every plate that leaves the kitchen meets your exacting quality standards, and managing ingredient freshness to reduce waste. Computer vision\u2014teaching machines to see and interpret images\u2014offers automated solutions. Just as experienced chefs develop an eye for perfectly seared scallops or properly balanced sauce on a plate, computer vision systems can be trained to recognize thousands of visual patterns instantly. This technology uses neural networks to extract meaningful information from images, from identifying individual ingredients to assessing overall plating presentation. Let's explore how you can apply these powerful techniques to your restaurant.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which Challenge Will You Tackle First?",
+      "content": "You have two distinct problems to solve, each requiring different computer vision approaches. Choose which challenge to address first\u2014your decision will shape your entire system architecture.",
+      "choices": [
+        {
+          "label": "Image Classification: Perfect Every Plate with Quality Control",
+          "next": "n3"
+        },
+        {
+          "label": "Object Detection: Track Ingredient Freshness with Real-Time Monitoring",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Image Classification: Teaching Machines to Judge Plating Quality",
+      "content": "You decide to focus on quality control. Image classification is the foundation of computer vision\u2014the system learns to categorize images into predefined classes (e.g., \"plate acceptable\" vs. \"plate rejected\"). At its core, the system uses convolutional neural networks (CNNs) that work like a chef's trained eye, automatically learning which visual features matter. The first convolutional layers detect simple patterns\u2014edges, colors, textures of proteins and vegetables. Middle layers combine these into more complex features\u2014the golden-brown sear on a duck breast or the precise arrangement of microgreens. Deep layers make final decisions based on these learned patterns. You'll train the system on thousands of examples: photos of properly plated dishes your head chef approves, and photos of rejected plates. The network learns the subtle differences\u2014proper sauce distribution, correct temperature (indicated by steam or color), balanced composition. This supervised learning approach is remarkably similar to how you'd train a new sous chef: show them examples, explain what makes each one right or wrong, and let them develop their eye for quality.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "How Complex Should Your Quality Control System Be?",
+      "content": "Your quality classification system is working well, but you face a critical decision about scope and complexity. You could keep it simple and effective, or expand it significantly.",
+      "choices": [
+        {
+          "label": "Keep It Simple: Binary Classification (Acceptable/Rejected)",
+          "next": "n5"
+        },
+        {
+          "label": "Go Advanced: Multi-Class Grading (Rate Quality on a Scale)",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Simple Classification Success: Your Quality Gates Work Perfectly",
+      "content": "Your decision to keep the system focused and simple was brilliant. The binary classifier\u2014trained to distinguish between acceptable and rejected plates\u2014achieves 97% accuracy. Every plate that passes the computer vision gate meets your restaurant's gold standard. Your head chef loves it because the system never debates borderline cases; a clear yes-or-no decision keeps the kitchen moving. You catch the rare burnt sauce, the undercooked protein, or the drooping garnish before they reach customers. Over six months, customer complaints about presentation drop 94%, your reputation for consistency grows, and the system serves as a reliable second pair of eyes for your prep kitchen. The simple approach means the model trains faster, runs on standard hardware, and your team understands exactly what it's evaluating. This is a textbook example of the Pareto principle\u201480% of your quality control benefit comes from focusing on the 20% most critical visual signals. You've successfully deployed computer vision to solve a real kitchen problem with elegance and restraint."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Complex Classification Failure: Ambiguity Undermines the System",
+      "content": "Your ambition to create a five-tier quality grading system (Exceptional, Good, Acceptable, Marginal, Rejected) seemed logical, but it created problems you didn't anticipate. The classifier struggles with the middle categories\u2014what separates 'Good' from 'Acceptable'? Is that slightly-too-yellow beurre blanc 'Acceptable' or 'Marginal'? The model becomes confused, generating inconsistent classifications even for identical scenarios. Your kitchen staff loses trust because the system sometimes rejects plates that look fine, and occasionally approves plates that should be redone. The decision-making overhead\u2014should a 'Marginal' plate be served?\u2014defeats the automation benefit. Your head chef spends as much time reviewing ambiguous cases as they would have spent doing the original inspection. The added complexity also means the model needs three times the training data, longer processing time, and more computational resources. After two months, you're forced to simplify back to binary classification. The lesson: in computer vision, like in knife skills, mastery comes from focusing on fundamentals before attempting complexity. You've learned that clear, well-defined categories drive reliable systems. Next time, you'll start simple and expand only when you have a specific, measurable need."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Object Detection: Real-Time Ingredient Freshness Monitoring",
+      "content": "You choose to tackle ingredient management through object detection, a more sophisticated computer vision task than classification. While image classification answers 'Is this a tomato?', object detection answers 'Where are the tomatoes, how many are there, and what's their quality?' Object detection models (like YOLO or Faster R-CNN) perform two tasks simultaneously: localization (finding bounding boxes around objects) and classification (identifying what each object is). These systems work by scanning the image at multiple scales and aspect ratios, asking 'Is there an ingredient here?' thousands of times. For your restaurant, you'll mount cameras in your walk-in coolers and prep areas. The system identifies individual items\u2014bunches of basil, cuts of protein, heads of lettuce\u2014and timestamps each. It learns what fresh produce looks like (bright color, firm texture, no browning) versus aged produce (color fade, wilting, discoloration). You train it on annotated images showing bounding boxes around each ingredient, with labels like 'fresh_basil', 'wilted_basil', 'prime_beef', 'oxidized_beef'. The neural network learns to detect these items in real-time\u2014processing video feeds at 30 frames per second. This approach requires more computational resources and training data than simple classification, but provides vastly more actionable information for your kitchen operations.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Object Detection Success: Ingredient Freshness Transformed Your Operations",
+      "content": "Your object detection system becomes the quiet hero of your kitchen. Mounted cameras continuously monitor your ingredient stations, automatically tracking what's fresh and what needs rotation. The system alerts your sous chef when basil is beginning to wilt, before it affects the quality of your signature pasta dish. Your prep cooks receive real-time information about which proteins are approaching their optimal use-by-date, enabling just-in-time cooking and prep. The impact is immediate and measurable: ingredient waste drops 32% within the first month, as the system prevents unused items from being discarded. Food cost decreases while quality actually improves\u2014you're always using the freshest available ingredients. Your customers notice the difference, commenting on the vibrancy of flavors and consistency of the dining experience. The object detection system also serves as historical documentation, creating a comprehensive log of ingredient usage patterns. You discover that cilantro purchased from your new supplier stays fresher 40% longer\u2014data that helps you make better sourcing decisions. The multi-task nature of object detection\u2014localizing and classifying simultaneously\u2014proves perfectly suited to the real-world complexity of a restaurant kitchen, where you need to know not just what you have, but where it is, how much, and in what condition."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Image Classification Path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Object Detection Path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Simple Approach"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Complex Approach"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T12:26:21.475992+00:00",
+  "model": "claude-haiku-4-5"
+}

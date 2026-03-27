@@ -1,0 +1,135 @@
+{
+  "id": "alg-complexity-film",
+  "title": "Algorithm Design & Complexity: The Documentary Challenge",
+  "description": "Master algorithm design and complexity analysis through a film production scenario. Learn Big O notation, optimization strategies, and how algorithmic thinking saves time and resources in real-world projects.",
+  "topic": "Algorithm Design and Complexity Analysis",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 35,
+  "tags": [
+    "algorithms",
+    "complexity analysis",
+    "Big O notation",
+    "optimization",
+    "film production"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Documentary Challenge",
+      "content": "Your production studio just secured a major contract to produce a documentary series with 1,000 hours of raw footage. The footage must be transcribed, automatically categorized by scene type (interviews, B-roll, graphics), and organized for editing\u2014all within a tight deadline. You realize this is a massive problem that could take weeks to solve poorly, or days with the right approach. The question isn't whether you can finish, but whether you can finish on time and budget. Your decision right now will determine the project's success.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Optimization Strategy",
+      "content": "You have two fundamentally different approaches. The first involves designing an efficient system upfront, thinking carefully about patterns and structure. The second is jumping straight into processing without planning. Which path do you take?",
+      "choices": [
+        {
+          "label": "Algorithmic Thinking: Design an efficient system first",
+          "next": "n3"
+        },
+        {
+          "label": "Trial and Error: Start processing and figure it out as you go",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Designing Your Algorithm",
+      "content": "You decide to think algorithmically about the problem. You break it down: categorizing 1000 hours of footage is fundamentally a pattern-matching task. Instead of checking every frame against every other frame individually\u2014which would mean millions of redundant comparisons\u2014you identify key distinguishing features: interview scenes have consistent audio characteristics and direct-to-camera framing, B-roll has varied shots and ambient sound, graphics have distinct visual signatures. You design a decision tree that processes each frame once, classifying it based on these features. This O(n log n) approach means roughly 10,000 comparison operations instead of millions. You also implement caching: once a pattern is identified, similar content reuses that decision. As a result, your team focuses on refining edge cases rather than repeating work.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Further Optimize or Settle?",
+      "content": "Your algorithm works well\u2014processing now takes 80 hours instead of the feared months. You've already won massively over a brute-force approach. But a colleague suggests implementing machine learning to automatically detect scene types, cutting processing to 20 hours. Training the model and integration would take 2 days and delay project start. Current timeline is already tight. Do you invest in further optimization or deploy now?",
+      "choices": [
+        {
+          "label": "Implement ML-assisted optimization: Add 2 days for training to cut 60 hours from processing",
+          "next": "n5"
+        },
+        {
+          "label": "Deploy current algorithm: Ship with 80-hour processing, meet original schedule",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "The Optimized Production",
+      "content": "The ML investment pays off spectacularly. Scene detection becomes nearly automated, processing drops to 20 hours. Editing starts on schedule. Your team has time for color grading refinement, sound mixing perfection, and thorough quality review. The documentary ships 2 weeks early, beating competitors to market. The client renews the contract for three more series. You've learned the compound power of algorithmic thinking: small Big O improvements (80 vs 20 hours) seem academic until you're in production\u2014then they mean the difference between rushed and polished work. The difference between O(n log n) and O(n\u00b2) isn't just about speed; it's about whether your team has time to create excellence."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Adequate But Challenged",
+      "content": "Your algorithm successfully prevents disaster, completing in 80 hours versus the feared 2000+. You avoid project collapse. However, you miss the original deadline by one week. Your team rushes the final color-grading pass and some refinements go unfinished. The documentary releases, receives good reviews, but feels slightly unpolished. You realize the harsh lesson: algorithmic optimization isn't purely academic\u2014it directly impacts real constraints. That single week difference between meeting and missing deadline felt minor on paper but cost you quality and client satisfaction. Next project, you'll invest earlier in algorithmic design, understanding that the difference between good and excellent often hinges on complexity management."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "The Manual Approach Begins",
+      "content": "You decide to start processing immediately without elaborate planning. Your team begins reviewing footage and manually categorizing each scene. But for quality assurance, you re-review scenes to catch errors\u2014examining the same footage twice. Edge cases (scenes that are part interview, part graphics) get processed three times because you have no systematic decision framework. Inconsistencies emerge: one editor categorizes a scene as 'interview' while another classifies it as 'graphics' because no clear rules exist. You must re-process work to enforce consistency. What started as 1000 hours becomes 2000+ hours of redundant work. This is the cost of ignoring algorithms: without systematic thinking, complexity grows exponentially\u2014O(n\u00b2) or worse.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "The Production Breakdown",
+      "content": "Three weeks into processing, you're nowhere near done. Processing alone now exceeds 2000 hours. Quality issues pile up: inconsistent metadata, misclassified scenes requiring full re-review, and team frustration growing. The deadline passes. The client, facing their own downstream constraints, cancels the project mid-production and sues for breach. Your studio absorbs massive losses and reputational damage. The brutal lesson: algorithms aren't theoretical luxuries\u2014they're essential for managing real-world complexity at scale. What good algorithmic design could have solved in 20 hours, the brute-force approach couldn't solve in 2000. This is why computer scientists obsess over Big O notation: it's not academic elegance\u2014it's the difference between success and catastrophic failure."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Face the decision"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Algorithmic Thinking path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Trial and Error path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Further optimization decision"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Implement ML optimization"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Deploy current solution"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Consequences unfold"
+    }
+  ],
+  "generated_at": "2026-03-27T11:25:47.434399+00:00",
+  "model": "claude-haiku-4-5"
+}

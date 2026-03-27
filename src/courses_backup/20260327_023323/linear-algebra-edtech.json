@@ -1,0 +1,273 @@
+{
+  "id": "linear-algebra-edtech",
+  "title": "Linear Algebra for Data Science",
+  "description": "Learn linear algebra fundamentals through real education technology applications",
+  "topic": "Linear Algebra",
+  "theme": "education technology",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "linear algebra",
+    "data science",
+    "education technology",
+    "matrices",
+    "vectors"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Vectors: Representing Student Performance",
+      "content": "In education technology, we represent each student's performance using vectors. A vector is an ordered list of numbers representing different dimensions of learning. For example, a student vector might contain [engagement_score, test_score, attendance_rate, assignment_completion]. These vectors allow us to quantify and analyze student progress across multiple dimensions. Understanding vectors is foundational to analyzing large-scale student data in learning management systems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Student Performance Vector Example",
+      "content": "Consider a student in an online course with vector [85, 92, 95, 88] representing engagement score, test score, attendance, and assignment completion respectively. If we want to calculate the student's overall performance strength, we compute the vector's magnitude: \u221a(85\u00b2 + 92\u00b2 + 95\u00b2 + 88\u00b2) \u2248 166.5. This single number summarizes the student's multidimensional performance. EdTech platforms use this to identify high-performing students and those needing intervention.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Assessment: Vector Fundamentals",
+      "content": "Test your understanding of vectors in educational contexts.",
+      "questions": [
+        {
+          "question": "A student vector is [78, 85, 90, 88]. What does the magnitude of this vector represent?",
+          "options": [
+            "A) The sum of all the individual scores",
+            "B) A single measure of the student's overall performance strength across all dimensions",
+            "C) The student's final grade in the course",
+            "D) The average of the four components"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The sum is useful but not the same as magnitude.",
+            "Correct! The magnitude \u221a(78\u00b2 + 85\u00b2 + 90\u00b2 + 88\u00b2) gives a single value representing overall strength.",
+            "The magnitude is a composite measure, not necessarily the final grade.",
+            "The average is different from magnitude; magnitude accounts for vector direction and length."
+          ],
+          "explanation": "Vector magnitude is computed as \u221a(x\u2081\u00b2 + x\u2082\u00b2 + x\u2083\u00b2 + ... + x\u2099\u00b2). It's a powerful way to summarize multidimensional student data into a single comparable metric."
+        },
+        {
+          "question": "In an LMS, you have two students with vectors A = [90, 85, 95] and B = [75, 95, 85]. What does the dot product A\u00b7B tell you?",
+          "options": [
+            "A) Which student performed better overall",
+            "B) The similarity or alignment of their performance patterns across dimensions",
+            "C) The total number of dimensions compared",
+            "D) The difference between their grades"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Magnitude comparison tells you which student performed better, not dot product.",
+            "Correct! Dot product measures alignment: (90\u00d775) + (85\u00d795) + (95\u00d785) = 16300, showing how their performance patterns correlate.",
+            "Dot product is a numeric result, not a count of dimensions.",
+            "Subtraction shows difference, not dot product alignment."
+          ],
+          "explanation": "The dot product A\u00b7B = \u03a3(a\u1d62 \u00d7 b\u1d62) measures the projection of one vector onto another. In education tech, it identifies students with similar performance patterns, useful for peer learning and cohort analysis."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Matrices and Learning Analytics",
+      "content": "A matrix is a rectangular array of numbers\u2014essentially multiple vectors organized together. In education technology, matrices represent entire classes or cohorts of students. For example, a 30\u00d74 matrix might have 30 students (rows) and 4 performance dimensions (columns). Matrices enable batch operations on student data. Matrix operations like multiplication allow us to combine student characteristics with course attributes to predict learning outcomes, personalize content, and identify intervention opportunities at scale.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Matrix Multiplication in Course Recommendation",
+      "content": "Imagine a 3\u00d72 student feature matrix S = [[high_engagement, high_prior_knowledge], [medium, medium], [low, high]] and a 2\u00d73 course difficulty matrix C representing three courses' prerequisites. Multiplying S \u00d7 C produces a 3\u00d73 matrix showing predicted student-course fit. S \u00d7 C tells us which students are best matched to which courses. An EdTech platform uses this calculation to recommend courses to students and identify which learners might struggle, enabling proactive tutoring.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Assessment: Matrix Operations",
+      "content": "Apply matrix concepts to real EdTech scenarios.",
+      "questions": [
+        {
+          "question": "An EdTech platform has a 50\u00d75 matrix of student features (50 students, 5 attributes each). To predict performance on 8 different course types, what dimensions should the course attribute matrix have?",
+          "options": [
+            "A) 5\u00d78",
+            "B) 50\u00d78",
+            "C) 8\u00d750",
+            "D) 5\u00d750"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! For matrix multiplication, inner dimensions must match. 50\u00d75 times 5\u00d78 = 50\u00d78 result.",
+            "The result would have these dimensions, but not the course matrix.",
+            "This would give 8\u00d750, which is transposed from what we want.",
+            "This doesn't match the requirement for matrix multiplication."
+          ],
+          "explanation": "For matrix multiplication A(m\u00d7n) \u00d7 B(n\u00d7p) = C(m\u00d7p), the inner dimensions must match. Here 50\u00d75 times 5\u00d78 correctly produces 50\u00d78 predictions."
+        },
+        {
+          "question": "In an adaptive learning system, you transform a student's feature vector using a transformation matrix to adjust the difficulty of recommended problems. This is an example of which linear algebra operation?",
+          "options": [
+            "A) Vector addition",
+            "B) Scalar multiplication",
+            "C) Matrix-vector multiplication",
+            "D) Determinant calculation"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Vector addition combines vectors; transformation requires matrix multiplication.",
+            "Scalar multiplication scales a vector uniformly; this is about changing representation.",
+            "Correct! Matrix-vector multiplication (transformation matrix \u00d7 student vector) transforms the student's representation, common in adaptive systems.",
+            "Determinants measure matrix properties, not transformations."
+          ],
+          "explanation": "Matrix-vector multiplication is the fundamental operation for transforming vectors. In EdTech, it's used in adaptive algorithms to adjust problem difficulty, personalize learning paths, and represent student state changes."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n7",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n7",
+      "type": "decision",
+      "title": "Choose Your Next Step",
+      "content": "You've successfully mastered vector and matrix fundamentals! You can now apply these concepts to real EdTech applications. What would you like to do?",
+      "choices": [
+        {
+          "label": "Complete Course",
+          "next": "n9"
+        },
+        {
+          "label": "Review Vectors",
+          "next": "n1"
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Reinforcing Concepts",
+      "content": "Let's strengthen your understanding with additional practice.",
+      "questions": [
+        {
+          "question": "In an online tutoring platform, you track three metrics for each student: quiz accuracy [0-100], engagement [0-100], and assignment timeliness [0-100]. For a student with vector [88, 92, 85], what operation would help identify similar students?",
+          "options": [
+            "A) Compute the magnitude of [88, 92, 85]",
+            "B) Compute the dot product between this vector and other student vectors",
+            "C) Multiply by a scalar constant",
+            "D) Calculate the determinant"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Magnitude gives overall strength but doesn't identify similar students.",
+            "Correct! Dot product between [88, 92, 85] and other student vectors shows performance pattern similarity.",
+            "Scalar multiplication changes the vector's scale but doesn't compare students.",
+            "Determinants apply to square matrices, not vectors."
+          ],
+          "explanation": "The dot product is the key operation for finding similar vectors. In EdTech, this enables peer-based learning, cohort analysis, and finding students with matching learning profiles for collaborative activities."
+        },
+        {
+          "question": "A 100\u00d76 matrix represents 100 students' performance across 6 skill dimensions. To compress this into 100 students' scores on 3 aggregate skill groups, what matrix dimensions would you multiply by?",
+          "options": [
+            "A) A 6\u00d73 reduction matrix",
+            "B) A 3\u00d7100 reduction matrix",
+            "C) A 100\u00d73 reduction matrix",
+            "D) A 3\u00d73 reduction matrix"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! 100\u00d76 times 6\u00d73 = 100\u00d73 aggregate scores, compressing 6 dimensions to 3.",
+            "This would give 3\u00d7100, which is transposed.",
+            "This would give 100\u00d7100, not the compression we want.",
+            "This would give 100\u00d7100, not the compression we want."
+          ],
+          "explanation": "Multiplying a 100\u00d76 student matrix by a 6\u00d73 reduction matrix produces 100\u00d73 aggregated scores. This dimension reduction is used in EdTech dashboards to simplify data visualization and focus on key competencies."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete",
+      "content": "Excellent! You've mastered linear algebra fundamentals through the lens of education technology. You understand how vectors represent multidimensional student data, how matrices organize and analyze cohorts, and how matrix operations power adaptive learning systems, course recommendations, and personalized interventions. These concepts form the foundation for advanced data science in EdTech. Continue applying these skills to build smarter learning platforms!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn example"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Test knowledge"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Passed assessment"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n8",
+      "label": "Failed assessment"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Learn example"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Test knowledge"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Passed assessment"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n8",
+      "label": "Failed assessment"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c10",
+      "source": "n7",
+      "target": "n1",
+      "label": "Review"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete practice"
+    }
+  ],
+  "generated_at": "2026-03-26T09:42:25.439088+00:00",
+  "model": "claude-haiku-4-5"
+}

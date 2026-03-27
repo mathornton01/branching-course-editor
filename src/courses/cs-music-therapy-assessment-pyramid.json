@@ -1,0 +1,296 @@
+{
+  "id": "cs-music-therapy-assessment-pyramid",
+  "title": "Control Systems in Music Therapy",
+  "description": "Master control systems concepts through adaptive branching. Navigate an assessment pyramid where early assessments determine your learning path\u2014from foundational concepts to advanced PID control strategies used in therapeutic music systems.",
+  "topic": "Control Systems",
+  "theme": "music therapy",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "control systems",
+    "feedback",
+    "music therapy",
+    "PID control",
+    "closed-loop systems",
+    "therapeutic intervention"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Feedback Basics in Music Therapy",
+      "content": "A music therapist is working with a patient who reports the background music is too loud. The therapist adjusts the volume down. This is an example of a control system where the 'error' is the difference between desired and actual sound level. Can you identify the key components of this control system?",
+      "questions": [
+        {
+          "question": "In this music therapy scenario, what is the 'setpoint'?",
+          "options": [
+            "The actual volume playing",
+            "The volume the patient wants to hear",
+            "How much the therapist turns the knob",
+            "The speaker's maximum capacity"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: the setpoint is not the current output",
+            "Correct! The setpoint is the desired target value",
+            "Incorrect: that's the control action",
+            "Incorrect: that's a system constraint"
+          ],
+          "explanation": "The setpoint is the desired value that a control system tries to achieve. In this case, it's the comfortable volume level the patient wants to hear."
+        },
+        {
+          "question": "What role does the patient play in this control system?",
+          "options": [
+            "The actuator",
+            "The feedback sensor",
+            "The controller",
+            "The disturbance"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: the therapist adjusts volume, not the patient",
+            "Correct! The patient provides feedback about the current state",
+            "Incorrect: the therapist is the controller",
+            "Incorrect: the patient's request sets the goal, not a disturbance"
+          ],
+          "explanation": "In control systems, feedback sensors measure the current output. Here, the patient's feedback about volume being 'too loud' tells the system its current state."
+        },
+        {
+          "question": "Which term best describes the therapist's adjustment?",
+          "options": [
+            "Feedforward control",
+            "Feedback control",
+            "Open-loop control",
+            "Predictive control"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: feedforward doesn't use feedback from the system",
+            "Correct! The therapist responds to feedback from the patient",
+            "Incorrect: open-loop doesn't use feedback",
+            "Incorrect: this isn't purely predictive"
+          ],
+          "explanation": "Feedback control means the system adjusts based on the difference between desired and actual values. The therapist responds to patient feedback to reduce the error."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Closed-Loop Control and Stability",
+      "content": "In a music therapy program for anxiety management, a therapist uses a biofeedback device to monitor a patient's heart rate while playing soothing music. The therapeutic goal is to bring the patient's heart rate down to 60 bpm (the setpoint). The therapist continuously monitors the biofeedback display and adjusts the tempo of the background music, slowing it down when heart rate is too high. Analyze this control system.",
+      "questions": [
+        {
+          "question": "What is the key difference between this biofeedback system and a simple volume adjustment?",
+          "options": [
+            "This one is faster",
+            "This one uses continuous measurement and feedback-driven adjustment",
+            "This one is more expensive",
+            "This one doesn't require patient input"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: speed varies by therapist skill",
+            "Correct! This is a closed-loop system with continuous feedback and adjustment",
+            "Incorrect: cost isn't a distinguishing feature",
+            "Incorrect: patient data drives this system"
+          ],
+          "explanation": "A closed-loop control system continuously measures output and adjusts the input. The biofeedback device continuously shows heart rate, enabling real-time adjustments."
+        },
+        {
+          "question": "What could cause oscillation (unstable behavior) in this system?",
+          "options": [
+            "If the therapist responds too slowly to heart rate changes",
+            "If the therapist overcompensates by slowing music too aggressively",
+            "Both slow response and overcompensation could cause problems",
+            "Neither\u2014the system is inherently stable"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incomplete: slow response is one issue",
+            "Incomplete: overcompensation is one issue",
+            "Correct! Both slow response and aggressive overcompensation can destabilize the system",
+            "Incorrect: control systems can become unstable if poorly tuned"
+          ],
+          "explanation": "Stability requires balance. Too little response causes slow error correction (lag). Too much response causes the output to overshoot the setpoint repeatedly, creating oscillation."
+        },
+        {
+          "question": "How could the therapist improve system stability and responsiveness?",
+          "options": [
+            "Ignore biofeedback and play the same tempo always",
+            "Gradually adjust tempo based on the trend of heart rate changes",
+            "Predict stress changes before heart rate increases",
+            "Both the trend-based and predictive approaches would help"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect: that eliminates feedback and control",
+            "Partially correct: responding to trends helps smooth adjustments",
+            "Partially correct: predicting changes enables prevention",
+            "Correct! Both integral control (responding to trends) and derivative control (predicting) improve system performance"
+          ],
+          "explanation": "Advanced control strategies combine proportional (immediate response), integral (responding to trends), and derivative (predicting changes) for stability and responsiveness."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced PID Control in Music Therapy",
+      "content": "The most sophisticated music therapy systems use PID (Proportional-Integral-Derivative) control. **Proportional (P)** creates immediate adjustments based on current error: if a patient's pain level is higher than target, increase soothing music volume proportionally. **Integral (I)** learns from accumulated error over time and prevents drift: even after significant pain reduction, the system continues gently reinforcing comfort to maintain the therapeutic state. **Derivative (D)** anticipates future changes by measuring the rate at which error is changing: if a therapist detects rising stress markers, the music adjusts preemptively before the patient consciously notices distress.\n\nPractical example: A chronic pain management session uses a wearable device monitoring heart rate variability and muscle tension. The P-component responds immediately when tension rises\u2014increasing music complexity and tempo. The I-component prevents dependency on escalating stimulation by gradually normalizing music as the patient adapts. The D-component analyzes biofeedback trends to predict pain episodes before they fully develop, enabling preventive adjustments. This represents gold-standard responsive, adaptive music therapy that continuously optimizes outcomes.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Level: Mastery Achieved",
+      "content": "Outstanding! You have mastered advanced control systems concepts and their application to music therapy. You understand feedback mechanisms, stability analysis, system tuning, and the sophisticated PID control strategies used in modern therapeutic music systems. You're equipped to design adaptive, responsive music therapy interventions that adjust in real-time to patient needs and optimize therapeutic outcomes."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Practice: Feedback Control in Therapy",
+      "content": "Let's practice applying feedback control principles to music therapy scenarios. These questions reinforce your understanding of how therapists monitor and adjust therapeutic music in real-time.",
+      "questions": [
+        {
+          "question": "During a music therapy session for mood regulation, a therapist notices a client's energy level is dropping when upbeat music is playing. The therapist increases the tempo slightly. Which component of a control system is the energy level?",
+          "options": [
+            "The setpoint",
+            "The measured output (feedback)",
+            "The control input",
+            "The error"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: the setpoint is the desired level",
+            "Correct! The therapist measures energy level to determine if adjustment is needed",
+            "Incorrect: the control input is the tempo adjustment",
+            "Incorrect: the error is the difference between desired and actual"
+          ],
+          "explanation": "In any control system, what you measure (the feedback) is the actual output of the system. Here, observing the client's energy level tells the therapist whether the session is achieving its goal."
+        },
+        {
+          "question": "A therapist wants to maintain a relaxation state by keeping instrumental music at a consistent 50 bpm. If the system plays at 70 bpm for 5 minutes before the therapist notices and corrects it, what aspect of control performance was poor?",
+          "options": [
+            "Response time (the system has slow feedback)",
+            "Stability (the system oscillates)",
+            "Accuracy (the system doesn't hit the exact target)",
+            "Robustness (the system fails with different clients)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A slow response time allowed the error to persist for 5 minutes",
+            "Incorrect: stability is about oscillations after correction",
+            "Incorrect: accuracy doesn't apply to sustained errors",
+            "Incorrect: robustness is about working across conditions"
+          ],
+          "explanation": "Response time is how quickly a control system detects and corrects error. A 5-minute delay indicates slow feedback detection or slow decision-making."
+        },
+        {
+          "question": "A music therapy system that monitors biofeedback makes small, gradual adjustments to music intensity instead of large sudden changes. Which control principle does this follow?",
+          "options": [
+            "Increasing proportional gain",
+            "Limiting proportional gain to avoid overshoot",
+            "Using integral control to smooth changes",
+            "Using derivative control for prediction"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: increasing gain would cause larger adjustments",
+            "Correct! Moderate, smooth adjustments come from carefully tuned proportional gain",
+            "Partially correct: integral control also smooths, but limited P-gain is primary",
+            "Incorrect: derivative control predicts rather than creating smooth adjustments"
+          ],
+          "explanation": "Making small, proportional adjustments avoids overshooting the target and destabilizing the system. This is tuning the proportional gain to the right level."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Level: Solid Understanding",
+      "content": "Excellent work! You've successfully learned key principles of feedback control and their application in music therapy. You understand how therapists use feedback to monitor patient responses, adjust interventions, and maintain therapeutic states. While you haven't reached the advanced PID level, you have the practical understanding needed to design effective, responsive music therapy sessions that adapt to client needs."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Foundations: Control System Basics",
+      "content": "Let's build from the ground up. A control system has five essential components:\n\n**(1) Setpoint**: the desired target value or goal.\n**(2) Actual Output**: what is currently happening in the system.\n**(3) Feedback**: information about the actual output, measured through observation or instruments.\n**(4) Error**: the difference between the desired setpoint and the actual output.\n**(5) Control Action**: the adjustment made to reduce the error.\n\nConsider a music therapist maintaining the right tempo during a relaxation session. The setpoint is 50 beats per minute (bpm)\u2014the tempo that creates optimal relaxation. The therapist plays music at this tempo (that's the output). The therapist listens to and observes the client's breathing pattern (that's the feedback). If breathing is too rapid, the therapist detects an error (client is not relaxed enough). The control action is to slow the music to 45 bpm. Minutes later, breathing slows, error decreases, and the client reaches the desired relaxed state. This cycle\u2014measure, compare, adjust\u2014is the core of all control systems, whether managing tempo, volume, instrumentation, or therapeutic intensity.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Drum Circle Mood Regulation",
+      "content": "**Scenario**: A music therapist leads a drumming circle for adolescents with depression. The therapeutic goal (setpoint) is to elevate mood and energy to create engagement and social connection. The therapist observes the group's behavior and energy (feedback about actual output). Initially, the group is quiet and withdrawn (low energy error detected). The therapist increases tempo, adds varied rhythmic patterns, and invites call-and-response. After 3 minutes, the group is more engaged and vocal (error reduces). The therapist maintains this level by continuing the rhythm and providing positive reinforcement. After 10 minutes, some participants are overstimulated (new error in opposite direction). The therapist slightly slows tempo and transitions to grounding, synchronized rhythms. The feedback loop continues throughout the 30-minute session, keeping the group in the optimal therapeutic energy zone.\n\nNotice the roles: the therapist is the **controller**, the group's mood/energy is the **controlled output**, the drumming elements and facilitation are the **actuators** (tools for influence), and the therapist's observations are the **feedback mechanism**. This is closed-loop control in practice.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundational Level: Ready to Build",
+      "content": "Great work! You've built a solid foundational understanding of control system concepts. You now understand the five essential components: setpoint, output, feedback, error, and control action. You can identify these components in real music therapy scenarios and understand how therapists use feedback loops to guide interventions toward therapeutic goals. This foundation is essential for all therapeutic practice."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Assessment passed"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Assessment failed\u2014review fundamentals"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Assessment passed"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Assessment failed\u2014focused practice"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue to mastery"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Practice complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Move to worked example"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Foundation complete"
+    }
+  ],
+  "generated_at": "2026-03-27T07:47:35.006955+00:00",
+  "model": "claude-haiku-4-5"
+}

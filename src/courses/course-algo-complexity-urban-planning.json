@@ -1,0 +1,257 @@
+{
+  "id": "course-algo-complexity-urban-planning",
+  "title": "Algorithm Design and Complexity: An Urban Planning Perspective",
+  "description": "Master algorithm design principles and complexity analysis through real-world urban planning scenarios. Choose your learning path: start with complexity theory or dive into practical design patterns.",
+  "topic": "Algorithm Design and Complexity",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "algorithms",
+    "complexity",
+    "big-o",
+    "urban-planning",
+    "design-patterns"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Algorithms Matter in Urban Planning",
+      "content": "Cities are systems that require constant optimization. Whether routing emergency services, designing transportation networks, or allocating public resources, urban planners rely on efficient algorithms. Understanding algorithm complexity\u2014how fast an algorithm runs as the problem size grows\u2014is essential. A poorly chosen algorithm in a city serving 100,000 people might fail catastrophically when the population reaches 1 million. This course teaches you algorithm design principles through urban planning challenges you'll recognize.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Two powerful approaches to understanding algorithms exist. The theory-first path builds your intuition about Big O notation and complexity classes, giving you a framework for analyzing any algorithm. The practice-first path shows you concrete design patterns used in real urban systems, building intuition before formalizing. Both paths lead to the same destination\u2014choose the one that matches your learning style.",
+      "choices": [
+        {
+          "label": "Start with Complexity Theory",
+          "next": "n3"
+        },
+        {
+          "label": "Start with Practical Design",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Big O Notation and Complexity Classes",
+      "content": "Big O notation describes how an algorithm's runtime scales as input size grows. Imagine analyzing every building in New York's five boroughs: O(1) is looking up one building's zoning by address (instant). O(n) is inspecting every building once (linear with population). O(n\u00b2) is comparing every intersection with every other intersection to find routing inefficiencies (quadratic\u2014manageable for 1,000 intersections, impossible for 100,000). O(log n) is finding a neighborhood in a sorted list (binary search). O(2^n) is evaluating all possible evacuation routes (exponential\u2014infeasible beyond 20-30 routes). Understanding these classes tells you which algorithms scale and which don't.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Real Example: Optimizing Last-Mile Delivery Routes",
+      "content": "A city's logistics hub must deliver packages to 50 neighborhoods daily. One naive approach: enumerate all possible routes (50! combinations\u2014astronomically large, O(n!)). Better: use a greedy algorithm visiting the nearest unvisited neighborhood repeatedly (O(n\u00b2)\u2014roughly 2,500 comparisons, solvable in seconds). Even better: apply dynamic programming with spatial clustering (O(n log n)\u2014roughly 250 operations, solvable instantly). As the city grows to 500 neighborhoods, the naive approach becomes impossible; the greedy approach slows noticeably; the DP approach remains fast. Choosing the right algorithm determines whether the system works.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Complexity Assessment: Theory Path",
+      "content": "Test your understanding of Big O notation and complexity classes in urban planning contexts.",
+      "questions": [
+        {
+          "question": "A city maintains a database of 10,000 registered buildings. Looking up one building's permit history by address takes roughly the same time regardless of database size. What complexity class is this?",
+          "options": [
+            "O(1) - Constant Time",
+            "O(n) - Linear Time",
+            "O(n\u00b2) - Quadratic Time",
+            "O(log n) - Logarithmic Time"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Direct database lookup is constant time.",
+            "Incorrect. Linear time scales with database size.",
+            "Incorrect. Quadratic time involves comparing pairs.",
+            "Incorrect. Logarithmic is for sorted searches."
+          ],
+          "explanation": "Direct address-based lookup in a database is a hash table operation, which executes in constant time regardless of how many buildings are stored."
+        },
+        {
+          "question": "A city planning algorithm must verify that every intersection is connected to the main road network. The algorithm checks each intersection (1,000 total) against the network, and for each, verifies all connections. This is approximately O(n\u00b2). If the city doubles to 2,000 intersections, how much longer will this algorithm take?",
+          "options": [
+            "Twice as long",
+            "Four times as long",
+            "Ten times as long",
+            "Roughly the same"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Linear algorithms would be twice as slow.",
+            "Correct! O(n\u00b2) means time scales with n\u00b2. Doubling n multiplies time by 4.",
+            "Incorrect. That would be exponential growth.",
+            "Incorrect. Constant-time algorithms are unaffected."
+          ],
+          "explanation": "With O(n\u00b2) complexity, if input size doubles, runtime quadruples: (2n)\u00b2 = 4n\u00b2."
+        },
+        {
+          "question": "A routing system uses binary search to find the fastest path among sorted neighborhood-to-neighborhood distances. This operation is O(log n). For 1 million neighborhoods, roughly how many comparison operations occur?",
+          "options": [
+            "1 million",
+            "500,000",
+            "20",
+            "30"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. That's linear, not logarithmic.",
+            "Incorrect. Still linear.",
+            "Close, but log\u2082(1,000,000) \u2248 20. The answer is closer.",
+            "Correct! log\u2082(1,000,000) \u2248 20 comparisons."
+          ],
+          "explanation": "Logarithmic complexity means the algorithm cuts the problem in half repeatedly. log\u2082(1,000,000) \u2248 19.93, so roughly 20 steps."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Algorithm Design Patterns for Urban Systems",
+      "content": "Urban planners apply several proven algorithm design strategies. Greedy algorithms make locally optimal choices at each step\u2014useful for scheduling garbage collection routes or assigning parking spots. Divide and conquer breaks large problems into smaller ones (analyzing district by district rather than city-wide). Dynamic programming solves optimization problems by building up solutions from smaller subproblems\u2014ideal for long-term infrastructure expansion. Graph algorithms model city networks: finding shortest paths (Dijkstra), identifying critical junctions (centrality), or ensuring all neighborhoods connect with minimum roads (minimum spanning trees). Recognizing which pattern fits a problem is the key to efficient design.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Real Example: Designing an Efficient Street Grid",
+      "content": "A city plans a new neighborhood with 100 blocks. Objective: connect all blocks with minimal road infrastructure. A greedy approach connects nearby blocks first, reducing total road length by 40% compared to a naive grid. A tree-based approach (minimum spanning tree algorithm) guarantees the absolute minimal road network while maintaining connectivity. For 100 blocks, both are fast. But when designing a megacity expansion with 10,000 blocks, the greedy approach might miss better solutions, while the algorithmic MST approach reliably finds optimality. Furthermore, constraints arise: roads must follow terrain, avoid protected lands, and maintain emergency access times. A well-designed algorithm incorporates these constraints, while a naive approach fails to scale.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Algorithm Design Assessment: Practice Path",
+      "content": "Demonstrate your ability to recognize and apply algorithm design patterns to urban planning problems.",
+      "questions": [
+        {
+          "question": "A city needs to deliver mail to 200 addresses in one day. A greedy algorithm always goes to the nearest undelivered address next. Why might this approach be chosen despite potentially not being optimal?",
+          "options": [
+            "It guarantees the shortest total route",
+            "It's simple to implement and runs fast enough for practical use",
+            "It scales perfectly to any city size",
+            "Mail carriers refuse to follow optimal routes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Greedy doesn't guarantee optimality.",
+            "Correct! Greedy algorithms are practical when optimality is less important than speed and simplicity.",
+            "Incorrect. Like all algorithms, greedy faces scalability limits at extreme sizes.",
+            "Incorrect. That's not a technical reason."
+          ],
+          "explanation": "Greedy algorithms are widely used because they're simple and run quickly, even if they don't find the absolute best solution. In urban systems, a 'good enough' fast solution often beats a 'perfect' slow solution."
+        },
+        {
+          "question": "A city's water distribution system must route pipes from 5 pumping stations to 500 neighborhoods with minimal pipe length (cost). This is a classic minimum spanning tree problem. What design pattern best describes this?",
+          "options": [
+            "Greedy algorithm",
+            "Divide and conquer",
+            "Graph algorithm with optimality guarantee",
+            "Brute force enumeration"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. While greedy can approximate, MST uses a specific graph algorithm.",
+            "Incorrect. While DC could work, MST is the standard pattern.",
+            "Correct! Minimum spanning tree is a graph algorithm guaranteeing minimal-cost connectivity.",
+            "Incorrect. Brute force is impractical for 500 nodes."
+          ],
+          "explanation": "Minimum spanning tree algorithms (Kruskal or Prim) solve exactly this problem: connecting all nodes with minimum edge weight. This is a core graph algorithm pattern."
+        },
+        {
+          "question": "A city wants to plan infrastructure expansion over 20 years, deciding which neighborhoods to expand into each year. Some expansions enable future expansions (e.g., building a highway enables satellite towns along it). What design pattern helps solve this?",
+          "options": [
+            "Greedy (always expand into the most profitable neighborhood)",
+            "Dynamic programming (building up solutions from year 1 to year 20)",
+            "Divide and conquer (split into 4 five-year subproblems)",
+            "Binary search (narrow down best neighborhoods)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Greedy misses dependencies between years.",
+            "Correct! Dynamic programming solves multi-stage decision problems where earlier choices enable future choices.",
+            "Incorrect. Divide and conquer doesn't capture the sequential dependencies well.",
+            "Incorrect. Binary search finds items in sorted data, not optimal expansion sequences."
+          ],
+          "explanation": "Dynamic programming is ideal when you have sequential decisions where earlier choices enable or constrain future choices. Planning expansion over time is a textbook DP problem."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Algorithm Design and Complexity Mastered",
+      "content": "You now understand that algorithm design isn't abstract\u2014it's essential to building cities that work. Whether you learned through complexity theory or design patterns, you recognize that the algorithm chosen determines whether a system scales from 100,000 residents to 5 million. In urban planning, this knowledge separates visionary cities that thrive from ambitious plans that collapse under their own weight. Apply these principles: analyze complexity before committing to an algorithm, recognize which design patterns fit your problem, and remember that 'good enough fast' often beats 'perfect slow' in real cities. The cities of tomorrow will be built by planners who master algorithmic thinking."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Start with Complexity Theory"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Start with Practical Design"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T04:55:56.369500+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,273 @@
+{
+  "id": "parallel-computing-culinary",
+  "title": "Parallel Computing Through Culinary Arts",
+  "description": "Learn parallel computing concepts by exploring how modern restaurant kitchens coordinate multiple tasks and chefs working simultaneously.",
+  "topic": "Parallel Computing",
+  "theme": "culinary arts",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "parallel computing",
+    "concurrency",
+    "synchronization",
+    "culinary",
+    "distributed systems"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "From Single Chef to Kitchen Brigade: Sequential vs Parallel Execution",
+      "content": "In a small kitchen with one chef, tasks happen sequentially\u2014prep vegetables, then cook sauce, then plate. But in a modern restaurant with multiple chefs working simultaneously, different tasks happen in parallel. Parallel computing works the same way: instead of a single CPU executing instructions one-by-one, multiple processors work on different parts of a task at the same time. This dramatically speeds up execution, much like how 5 chefs working together can prepare a 10-course meal far faster than one chef alone. Understanding how to coordinate these parallel workers\u2014and avoid conflicts\u2014is the key to scalable systems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "A Five-Course Fine Dining Service: Parallel Execution in Action",
+      "content": "Imagine preparing a five-course meal for 100 guests. Chef A preps and cooks appetizers on station 1 (30 min). Chef B prepares the sauce and vegetable side on station 2 (25 min). Chef C works on the main protein on station 3 (35 min). If they worked sequentially, total time would be 90 minutes. But working in parallel, they each work on their stations simultaneously, and the total time is determined by the slowest task\u201435 minutes. This is the speedup principle: parallel execution time = longest individual task time. The kitchen achieves near-linear speedup because tasks are independent (each chef's work doesn't block the others). Load balancing would mean redistributing prep work so no single chef waits idle\u2014Chef A could help plating while waiting for their appetizers to chill.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Assessment: Parallel Concepts in the Kitchen",
+      "content": "Test your understanding of parallel execution, task independence, and load balancing in a restaurant kitchen context.",
+      "questions": [
+        {
+          "question": "You're managing a kitchen where Chef Alice (20 min), Chef Bob (25 min), and Chef Charlie (15 min) work on independent stations preparing components of a plated dish. What is the total execution time if they work in parallel?",
+          "options": [
+            "20 minutes",
+            "25 minutes",
+            "15 minutes",
+            "60 minutes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This is Alice's time, but the kitchen must wait for all chefs.",
+            "Correct! In parallel, you wait for the slowest (bottleneck) task\u2014Bob at 25 minutes.",
+            "Incorrect. This is Charlie's time, but the kitchen must wait for the slower chefs.",
+            "Incorrect. This is the sequential total\u2014parallel work is much faster."
+          ],
+          "explanation": "In parallel execution, the total time is determined by the longest-running task (the critical path). Even though tasks are independent, you can't finish until all chefs complete their work. This is why identifying bottlenecks is crucial for optimization."
+        },
+        {
+          "question": "Why is a restaurant kitchen a good example of parallel computing, but only if the chefs work on different stations?",
+          "options": [
+            "Because all chefs can taste the food simultaneously.",
+            "Because each chef works on independent tasks without blocking others, similar to independent parallel processes.",
+            "Because restaurants are high-tech.",
+            "Because it requires more money than sequential cooking."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Tasting is not the key parallel computing concept here.",
+            "Correct! Parallel computing requires independent tasks that don't block each other. Different stations = different processors, each with their own work.",
+            "Incorrect. Being high-tech isn't the reason\u2014it's about task independence.",
+            "Incorrect. Cost isn't the defining feature of parallelism; it's about task independence and execution time."
+          ],
+          "explanation": "Parallel computing is only effective when tasks are independent or loosely coupled. If chefs had to constantly wait for each other (dependencies), parallelism would be wasted. This principle extends to multi-core processors, distributed computing, and cloud systems."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Coordinating the Brigade: Synchronization and Race Conditions",
+      "content": "When chefs share resources\u2014like a single oven, shared ingredients, or a plating station\u2014coordination becomes critical. If two chefs try to use the oven at the same time for different dishes, chaos ensues (a race condition). Locks are how systems prevent this: a chef must acquire the 'oven lock' before using it, ensuring exclusive access. Another hazard is deadlock: Chef A waits for the oven while Chef B waits for a station A is using. Synchronization primitives (locks, semaphores, barriers) coordinate parallel workers. Similarly, in parallel computing, threads must synchronize access to shared memory, coordinate execution at checkpoints, and avoid deadlocks to ensure correct, predictable results.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "The Sauce Station: Synchronization in a Shared Resource",
+      "content": "Three chefs need to use a single reduction burner to finish sauces, but only one can use it at a time. Without synchronization, both grab the burner, the sauces burn, and the kitchen fails. The head chef implements a lock: 'Chef must signal before using the burner.' Chef A acquires the lock, reduces her beurre blanc (8 min), then releases it. Chef B acquires it, reduces the demi-glace (6 min), releases it. Chef C waits in queue. Total synchronization cost: 14 minutes for three chefs to safely share one resource. If unsynchronized, they'd fight for it, overcook each other's sauces, and waste time. In parallel computing, this is mutex (mutual exclusion): only one thread accesses a critical section at a time. Without it, corrupted data, lost writes, and unpredictable behavior result. Load balancing here means distributing prep so chefs don't all reach the bottleneck simultaneously.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Assessment: Synchronization and Resource Sharing",
+      "content": "Test your understanding of locks, race conditions, and synchronization in parallel cooking scenarios.",
+      "questions": [
+        {
+          "question": "Two chefs simultaneously try to add salt to a shared sauce pot without coordination. What parallel computing problem does this represent?",
+          "options": [
+            "Load imbalance",
+            "A race condition\u2014both write to shared state without synchronization, causing unpredictable salt concentration.",
+            "Deadlock",
+            "Starvation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Load imbalance is about uneven work distribution, not shared resource conflicts.",
+            "Correct! A race condition occurs when multiple processes access and modify shared data simultaneously without synchronization, leading to unpredictable results.",
+            "Incorrect. Deadlock is when processes wait for each other indefinitely; this is a race condition.",
+            "Incorrect. Starvation is when a process never gets scheduled; this is a race condition."
+          ],
+          "explanation": "Race conditions are among the most subtle bugs in parallel systems. In culinary terms, the race is between two chefs to modify the shared pot. In parallel computing, it's threads racing to write to memory. Synchronization primitives (locks) enforce mutual exclusion: only one racer at a time."
+        },
+        {
+          "question": "A head chef creates a rule: 'Before using the oven, ring the bell and wait for acknowledgment. After you're done, ring the bell again.' This ensures only one chef uses the oven at a time. Which synchronization concept does this represent?",
+          "options": [
+            "Busy waiting",
+            "A barrier synchronization",
+            "A lock (mutual exclusion) protecting the oven resource.",
+            "Asynchronous communication"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Busy waiting is inefficient polling; the bell system is more elegant.",
+            "Incorrect. A barrier synchronizes multiple processes at the same point; this protects a single resource.",
+            "Correct! The bell protocol is a lock: it prevents concurrent access to the oven and ensures mutual exclusion.",
+            "Incorrect. The system is synchronous (acknowledgment required) and relies on mutual exclusion."
+          ],
+          "explanation": "Locks (mutexes) are foundational synchronization primitives. They protect critical sections of code where shared resources are accessed. In distributed systems, locks become more complex (distributed locks, consensus protocols), but the principle remains: ensure exclusive access to prevent race conditions."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n7",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n7",
+      "type": "decision",
+      "title": "Next Steps in Your Parallel Computing Journey",
+      "content": "Congratulations on mastering parallel fundamentals and synchronization! You now understand how to coordinate parallel workers and avoid resource conflicts. Choose your next exploration: dive deeper into advanced patterns or conclude your course.",
+      "choices": [
+        {
+          "label": "Learn Advanced Patterns (Task Scheduling & Load Balancing)",
+          "next": "n8"
+        },
+        {
+          "label": "Complete Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Parallel Cooking Scenarios",
+      "content": "Apply your knowledge to real-world kitchen scenarios and reinforce core parallel computing concepts.",
+      "questions": [
+        {
+          "question": "A catering company must prepare 500 meals in 3 hours. A single kitchen produces 50 meals/hour sequentially. To finish on time using parallelism, how many independent kitchen stations (each with dedicated chefs and equipment) would you need, assuming equal load distribution?",
+          "options": [
+            "3 stations",
+            "4 stations",
+            "5 stations",
+            "10 stations"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. 3 stations produce 150 meals/hour total\u2014not enough for 500 meals in 3 hours.",
+            "Incorrect. 4 stations produce 200 meals/hour total\u2014still short of the 167 meals/hour needed.",
+            "Correct! 5 stations \u00d7 50 meals/hour each = 250 meals/hour > 167 meals/hour required. This is the minimum to meet the deadline.",
+            "Incorrect. 10 stations would work but is overkill\u2014you'd waste resources and money."
+          ],
+          "explanation": "Scaling parallel systems requires calculating the required throughput and matching it with available parallelism. This mirrors cloud computing: if your server can handle 100 req/sec and you need 500 req/sec, you need at least 5 servers (assuming perfect load distribution). Real systems have overhead, so you'd add buffer."
+        },
+        {
+          "question": "At a restaurant, Pastry Chef (40 min), Sauce Chef (25 min), and Protein Chef (50 min) work in parallel. The kitchen is ready when all three finish. However, Pastry Chef finishes early and could help Protein Chef. What parallel computing principle does this optimize?",
+          "options": [
+            "Synchronization",
+            "Load balancing\u2014redistributing work to reduce the critical path (longest task).",
+            "Deadlock prevention",
+            "Memory consistency"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Synchronization ensures safe access to shared resources; this is about optimizing work distribution.",
+            "Correct! Load balancing redistributes tasks to ensure no processor idles while others overload. Pastry Chef helping Protein Chef reduces the critical path from 50 min to less.",
+            "Incorrect. Deadlock is about circular wait chains; this is about work distribution.",
+            "Incorrect. Memory consistency is about ensuring data coherence across multiple processors; this is about work distribution."
+          ],
+          "explanation": "Load balancing is critical for achieving near-linear speedup. If one processor finishes while others toil, speedup plateaus. Dynamic load balancing (redistributing work at runtime) and static load balancing (pre-distributing evenly) are both used in parallel systems (MapReduce, CUDA kernels, thread pools)."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: You're Now a Parallel Computing Chef!",
+      "content": "You've mastered the fundamentals of parallel computing through culinary arts: you understand sequential vs. parallel execution, task independence, the critical path, synchronization primitives, race conditions, and load balancing. These concepts directly apply to multi-threaded programming, distributed systems, GPU computing, and cloud infrastructure. Whether you're optimizing a restaurant kitchen or scaling a cloud service, the principles remain: identify parallelizable tasks, coordinate safely, balance loads, and measure bottlenecks. Keep practicing, and you'll be architecting high-performance systems in no time!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "advanced"
+    },
+    {
+      "id": "c10",
+      "source": "n7",
+      "target": "n9",
+      "label": "complete"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-26T09:49:24.190510+00:00",
+  "model": "claude-haiku-4-5"
+}

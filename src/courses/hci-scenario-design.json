@@ -1,0 +1,135 @@
+{
+  "id": "hci-scenario-design",
+  "title": "Design Decisions in HCI: Building an App for Older Adults",
+  "description": "Navigate real-world design challenges when creating a health-tracking application for elderly users. Make strategic decisions about accessibility, features, and user experience.",
+  "topic": "Human-Computer Interaction",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 20,
+  "tags": [
+    "HCI",
+    "User Experience",
+    "Accessibility",
+    "Design Decisions",
+    "User Research"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Health App Challenge",
+      "content": "You're leading the design of a new health-tracking application for elderly users (65+). Early user research reveals that this demographic faces unique challenges: limited technology experience, declining vision and motor control, and preference for simplicity over features. Your team has identified two fundamentally different design philosophies that could guide your approach. Which will you choose?",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choosing Your Design Strategy",
+      "content": "Your design philosophy will shape every decision ahead. The accessibility-first approach prioritizes inclusive design principles and extensive user research with your target demographic. The feature-rich approach emphasizes functionality and market competitiveness, assuming users will adapt.",
+      "choices": [
+        {
+          "label": "Accessibility-First: Design for the user, not against them",
+          "next": "n3"
+        },
+        {
+          "label": "Feature-Rich: Maximize capabilities and market appeal",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Inclusive Design Principles",
+      "content": "You adopt Don Norman's user-centered design philosophy and begin extensive contextual inquiry with elderly users. You discover critical insights: large touch targets matter more than aesthetic minimalism, clear mental models beat clever interactions, and every feature must justify its presence. Your team implements progressive disclosure, removing less common features from the main interface while keeping them accessible. Color contrast is enhanced to meet WCAG AAA standards, and all text scales proportionally.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "The Notification Feature Dilemma",
+      "content": "Your team debates how to handle health alerts and reminders. The accessibility-first path requires a choice: implement a straightforward notification system with sensible defaults (large text, limited frequency, obvious dismiss options), or add sophisticated customization options allowing users to fine-tune every aspect of notifications.",
+      "choices": [
+        {
+          "label": "Keep it simple: Smart defaults, minimal configuration",
+          "next": "n5"
+        },
+        {
+          "label": "Empower users: Granular control over all notification settings",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Success: Trust and Adoption",
+      "content": "Your accessibility-first approach with sensible defaults succeeds remarkably. User testing shows 87% task completion rates and high satisfaction. Elderly users feel confident using the app. Healthcare providers begin recommending it. Your constraint-driven design forced clarity that benefits everyone: younger users appreciate the straightforward interface too. The app becomes a case study in inclusive design, proving that accessibility and usability aren't trade-offs\u2014they're the same goal."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Unexpected Complexity: The Paradox of Choice",
+      "content": "While still accessibility-focused, the granular customization system backfires. Elderly users feel overwhelmed by settings menus. Most never discover advanced features, yet their presence makes the interface appear cluttered. User testing reveals decision paralysis: users spend 15+ minutes configuring notifications, then disable them entirely. Support tickets spike as users accidentally configure incomprehensible patterns. You've created a paradox of choice\u2014too many options for a population that valued simplicity. The lesson: simplicity itself is accessibility."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "The Feature-Rich Approach",
+      "content": "You prioritize comprehensive functionality: real-time health analytics, predictive alerts, medication reminders with drug interactions, social challenges with friends, wearable integration, and advanced data visualization. Your design team builds polished interactions and animations. The UI is modern and visually sophisticated. However, during testing with elderly users, complete feature walkthroughs required 20+ minutes of guidance. Some users found the interface intimidating. You hypothesize that with practice, adoption will follow and plan to solve usability issues iteratively.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Success in a Niche Market",
+      "content": "The feature-rich app becomes popular\u2014but primarily with younger, tech-savvy users and healthcare enthusiasts, not your intended demographic. Usage among 65+ users plateaus at 12%, while adoption among 35\u201350-year-olds reaches 45%. The app succeeds commercially, attracting investment from health insurers who want tech-forward solutions. However, you've inadvertently excluded the population it was designed for. Post-launch research reveals elderly users switched to simpler competitors. Market success and inclusive design required different choices."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Accessibility-First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Feature-Rich"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Keep it simple"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Empower users"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T02:48:48.438736+00:00",
+  "model": "claude-haiku-4-5"
+}

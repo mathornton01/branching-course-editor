@@ -1,0 +1,257 @@
+{
+  "id": "ts-analysis-socialwork",
+  "title": "Time Series Analysis for Social Workers",
+  "description": "Learn to analyze trends and patterns in client data to improve program delivery and outcomes",
+  "topic": "Time Series Analysis",
+  "theme": "social work",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "data analysis",
+    "time series",
+    "social work",
+    "program evaluation",
+    "casework"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction: Understanding Trends in Your Caseload",
+      "content": "As a social worker, you encounter data every day: client visits, program attendance, housing placements, and support needs. Time series analysis is a statistical method for examining how these values change over time, revealing hidden patterns that can improve program effectiveness. By understanding trends, seasonality, and anomalies in your data, you can make data-driven decisions about resource allocation, identify when clients need additional support, and demonstrate program impact to funders. This skill transforms raw numbers into actionable insights that directly improve outcomes for vulnerable populations.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How would you prefer to learn about time series analysis? You can start with foundational concepts and theory, or dive directly into practical applications with real social work scenarios.",
+      "choices": [
+        {
+          "label": "Theory First: Build a Strong Foundation",
+          "next": "n3"
+        },
+        {
+          "label": "Practice First: Learn Through Real Cases",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Foundations: What Makes Time Series Data Special",
+      "content": "Time series data differs from typical datasets because observations are ordered and depend on previous values. In social work, this means a client's service usage this month often relates to last month's engagement. Key concepts include trends (long-term upward or downward movement, like increasing mental health service demand), seasonality (predictable patterns, like higher shelter occupancy in winter), and stationarity (whether the data fluctuates around a consistent mean). Understanding these patterns helps you distinguish between normal variation and meaningful change\u2014critical for identifying when interventions are needed or programs are succeeding.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Analyzing a Caseload Over One Year",
+      "content": "Consider a social worker managing substance abuse recovery clients. Her caseload ranged from 18 clients in January to 34 by August, then dropped to 22 in December. A time series visualization reveals three elements: a clear upward trend (program growing), seasonal dip at year-end (typical as some clients graduate or transfer), and stable baseline of 20-25 clients. This worker now understands staffing needs won't return to January levels and can plan permanent capacity increases rather than temporary hiring\u2014a data-driven decision impossible without recognizing the trend and seasonality.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Identifying Patterns",
+      "content": "Apply your understanding of time series components to these scenarios.",
+      "questions": [
+        {
+          "question": "A food bank serves 200 families each week throughout the year, then 400 families in November and December. What does this pattern PRIMARILY represent?",
+          "options": [
+            "A. A strong upward trend indicating growing need",
+            "B. Seasonality\u2014predictable variation tied to time of year",
+            "C. A stationarity issue requiring data transformation",
+            "D. Random noise that should be ignored"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. While the numbers increase, the pattern repeats yearly, making it seasonal rather than a long-term trend.",
+            "Correct! This is classic seasonality\u2014the same pattern repeats predictably each year due to holiday giving and increased hardship.",
+            "Incorrect. Stationarity is about whether data fluctuates around a stable mean. This data does, with predictable seasonal variation.",
+            "Incorrect. This pattern is too regular and predictable to be random noise\u2014it's a meaningful seasonal pattern."
+          ],
+          "explanation": "Seasonality is a predictable, recurring pattern tied to time of year. Holiday food drives cause predictable annual spikes. A trend would show consistent long-term growth across all months. Recognizing seasonality helps you staff appropriately and set realistic service targets."
+        },
+        {
+          "question": "A mental health clinic logged 45 therapy appointments in January, 48 in February, 52 in March, 55 in April, and 59 in May. What trend pattern does this suggest?",
+          "options": [
+            "A. Consistent upward trend indicating growing demand",
+            "B. Seasonal pattern related to spring weather",
+            "C. Stationarity with random fluctuation",
+            "D. Data quality problem requiring investigation"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The consistent monthly increase of 3-4 appointments suggests growing demand, warranting resource planning.",
+            "Incorrect. Seasonality would repeat yearly and return to baseline. This shows continuous growth.",
+            "Incorrect. Stationarity means fluctuation around a stable mean; this data clearly shows growth.",
+            "Incorrect. The pattern is logical\u2014therapy demand increases in spring when people seek help."
+          ],
+          "explanation": "A trend is a persistent long-term change in one direction. This 5-month upward trajectory suggests genuine growth in demand, not a temporary seasonal spike. This pattern justifies hiring additional therapists or extending hours."
+        },
+        {
+          "question": "A homeless shelter shows 35 occupants on average each night, varying between 32-38, consistently throughout the year. Which time series component BEST describes this data?",
+          "options": [
+            "A. Strong upward trend",
+            "B. Seasonal winter spike",
+            "C. Stationarity\u2014stable around a consistent mean",
+            "D. Anomaly requiring data cleaning"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. There's no sustained increase or decrease over time.",
+            "Incorrect. The occupancy stays stable year-round without winter spikes.",
+            "Correct! The data fluctuates around a stable mean of 35 with small random variation\u2014this is stationarity.",
+            "Incorrect. Variation between 32-38 is normal and expected in shelter operations."
+          ],
+          "explanation": "Stationarity means the data has no trend and fluctuates around a constant mean. This shelter is stable, with normal operational variation. This is good news for planning\u2014you can reliably expect 35-bed capacity needs without investing in expansion."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Practical Applications: Why Social Workers Need Time Series Skills",
+      "content": "Time series analysis directly addresses social work challenges: Should we hire more staff, or is client demand temporary? Are our interventions working, or is improvement natural seasonal variation? Which community needs more funding? By tracking data over time, you can answer these questions with evidence. Real applications include monitoring service utilization patterns (detecting when more counselors are needed), evaluating program impact (comparing referrals before and after a new initiative), forecasting resource demand (predicting budget requirements), and identifying vulnerable subpopulations (spotting when specific client groups are underserved). Practical time series work transforms monthly dashboards from confusing numbers into clear action plans.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Case Study: Community Center Uses Data to Expand Services",
+      "content": "A community center serving youth at-risk tracked program attendance monthly: averaging 60 teens in months 1-3, jumping to 95-110 in months 4-6, dropping to 40-50 in months 7-9, then recovering to 80-90 in months 10-12. Initial confusion\u2014was staff failing in summer? Time series analysis revealed the pattern: school-year demand (higher winter), summer exodus (students work/travel), and year-end spike (holiday programming). This insight prevented a costly misdiagnosis. Instead of blaming staff, they hired seasonal workers for winter and school-break intensives. The following year, they forecasted 90-100 winter participants and hired accordingly. Attendance met predictions, satisfaction increased, and funders saw evidence-based planning\u2014all from recognizing seasonal patterns.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Making Data-Driven Decisions",
+      "content": "Analyze these social work scenarios and decide on evidence-based actions.",
+      "questions": [
+        {
+          "question": "A pregnancy support program tracked referrals over 12 months: month 1-3 (30/month), month 4-6 (32/month), month 7-9 (29/month), month 10-12 (31/month). Monthly budget is allocated for 30 clients. What should you recommend?",
+          "options": [
+            "A. Increase budget to 35/month\u2014demand is rising",
+            "B. Reduce budget to 25/month\u2014summer demand is dropping",
+            "C. Keep budget at 30/month with 1-2 flexible slots for variation",
+            "D. Eliminate the program\u2014demand is unstable"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The variation (29-32) is minor and centered around 30\u2014not a true trend of growth.",
+            "Incorrect. Summer months (7-9) show only slight dips that are predictable and manageable.",
+            "Correct! The data is stationary around 30 clients. Budget for baseline 30 with flexibility for the small 1-2 client seasonal variation.",
+            "Incorrect. Stable referrals suggest healthy program sustainability, not failure."
+          ],
+          "explanation": "Time series analysis reveals this program has consistent, predictable demand. Smart resource planning means budgeting for the steady baseline (30) while maintaining flexibility for minor seasonal variation. This prevents both over-hiring and under-serving clients."
+        },
+        {
+          "question": "A substance abuse recovery program's client retention shows: Jan (60%), Feb (58%), Mar (55%), Apr (52%), May (48%). What action is most evidence-based?",
+          "options": [
+            "A. Investigate the downward trend immediately\u2014something is wrong",
+            "B. Ignore it\u20145% variation is normal and expected",
+            "C. Celebrate\u2014you're identifying clients better",
+            "D. Wait and see if the trend reverses on its own"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A consistent monthly 2-3% drop is a clear downward trend warranting investigation into treatment approach, staff retention, or client life circumstances.",
+            "Incorrect. A consistent 2-3% monthly drop across 5 months isn't random noise\u2014it's a meaningful trend requiring analysis.",
+            "Incorrect. Declining retention is not a positive outcome regardless of cause.",
+            "Incorrect. A 12% drop over 5 months is significant. Waiting allows more clients to disengage."
+          ],
+          "explanation": "Steady downward trends in client retention signal problems: maybe treatment protocol needs adjustment, staff burnout is affecting quality, or external factors impact clients. Time series analysis flags the issue early so you can intervene before more clients drop out."
+        },
+        {
+          "question": "A job training program served: Jan-Mar (20/month), Apr-Sep (95/month), Oct-Dec (22/month). You're planning next year's budget. Based on this pattern, what's your forecast for July?",
+          "options": [
+            "A. 20 participants\u2014it's the safest historical average",
+            "B. 95-100 participants\u2014summer months show this strong seasonal pattern",
+            "C. 50-60 participants\u2014average the highs and lows",
+            "D. Cannot forecast without statistical software"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. January-March and October-December are off-season; July follows the strong April-September pattern.",
+            "Correct! Clear seasonal pattern: low in academic year (winter), high during summer when youth aren't in school. Forecast 95-100 for July.",
+            "Incorrect. Averaging extremes is less accurate than recognizing the seasonal pattern.",
+            "Incorrect. Basic seasonal pattern recognition allows you to make reasonable forecasts without advanced software."
+          ],
+          "explanation": "Recognizing seasonality enables practical forecasting. Summer programs for out-of-school youth naturally peak when students are available. Knowing this pattern lets you pre-hire summer staff, secure seasonal funding, and set accurate performance targets for that season."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Next Steps: Using Time Series Analysis in Your Practice",
+      "content": "Congratulations on completing Time Series Analysis for Social Workers! You now understand trends, seasonality, and stationarity\u2014the core components of time series data. These skills enable you to: interpret your caseload and program data with confidence, communicate evidence-based justifications for resource needs to supervisors and funders, anticipate service demand and plan accordingly, and recognize when something genuinely changed versus normal variation. Start small: pick one metric you track (client visits, program attendance, wait times) and visualize it monthly for a year. Notice the patterns, discuss insights with your team, and use them to improve decisions. Time series thinking transforms data from a compliance burden into a tool for better serving vulnerable communities."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Practice First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "continue"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "continue"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "continue"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T10:24:21.265844+00:00",
+  "model": "claude-haiku-4-5"
+}

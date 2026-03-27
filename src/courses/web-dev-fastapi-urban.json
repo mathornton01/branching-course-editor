@@ -1,0 +1,293 @@
+{
+  "id": "web-dev-fastapi-urban",
+  "title": "Building City APIs with FastAPI",
+  "description": "Learn FastAPI by building a real-world urban planning application. Navigate through architectural choices and discover how proper design patterns prevent technical debt.",
+  "topic": "Web Development with FastAPI",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "fastapi",
+    "web development",
+    "api design",
+    "python",
+    "urban planning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The City Development Platform Challenge",
+      "content": "Your metropolitan planning office needs a modern API to manage zoning permits, development projects, and contractor registrations. Currently, everything is in spreadsheets and emails. You've decided to build a web service using Python to handle thousands of concurrent permit applications, validate zoning compliance rules, and provide real-time status updates to developers. FastAPI is a strong candidate, but the architecture decisions you make now will determine whether your platform thrives or becomes a maintenance nightmare. Let's start building!"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Development Strategy",
+      "content": "As the lead engineer, you need to decide: how will you structure your city planning API? You have two main options to explore.",
+      "choices": [
+        {
+          "label": "Build with FastAPI and make critical architecture decisions",
+          "next": "n3"
+        },
+        {
+          "label": "Use a simpler approach with basic framework features",
+          "next": "n12"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "FastAPI Foundations for Your City Platform",
+      "content": "FastAPI is built on Starlette (async web framework) and Pydantic (data validation). For your urban planning platform, this means automatic API documentation, request validation, and the ability to handle hundreds of simultaneous permit applications without blocking. When a developer submits a zoning permit application, FastAPI uses Pydantic to validate that all required fields are present and correctly formatted. The async nature means while one application waits for database approval, the server handles other requests. FastAPI also auto-generates OpenAPI documentation, so contractors can discover your API endpoints without manual documentation."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Building Your First Urban Planning Endpoint",
+      "content": "Here's a real FastAPI route for your city district API: `from fastapi import FastAPI` and `from pydantic import BaseModel`. Define a District model with `name: str, area_sq_km: float, zoning_type: str`. Then create a route: `@app.post(\"/districts/\")` that accepts the District model and returns the created district with a unique ID. FastAPI automatically validates that area_sq_km is a number and zoning_type is a string. If someone submits invalid data, FastAPI returns a helpful error message. This is what makes FastAPI different from microframeworks\u2014validation is built-in."
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "Organizing Your Growing Codebase",
+      "content": "Your first endpoints work great! But now you're adding more features: building permits, contractor approvals, audit logs, and zoning compliance checks. How should you organize this code as it grows from 100 to 10,000 lines?",
+      "choices": [
+        {
+          "label": "Use proper architecture: separate files for routes, models, and database logic",
+          "next": "n6"
+        },
+        {
+          "label": "Keep everything in one main.py file for now",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Architecting a Scalable City Platform",
+      "content": "The best FastAPI projects use this structure: `routes/` folder (endpoints), `models/` folder (Pydantic schemas), `database.py` (SQLAlchemy setup), and `crud.py` (database operations). For your city platform, this means your main.py imports from these modules and registers routers. Use `APIRouter` to organize endpoints: `router = APIRouter(prefix=\"/permits\")` keeps permit-related endpoints together. Dependency injection with FastAPI's `Depends()` allows all routes to access the database session without repeating code. When a new team member joins, they immediately understand the structure. When auditors ask about data integrity, you can quickly locate validation logic. This is professional software engineering."
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Mastering FastAPI Architecture",
+      "content": "Test your understanding of proper FastAPI project organization and Pydantic validation patterns.",
+      "questions": [
+        {
+          "question": "You're building a permit management endpoint. A contractor submits a permit with required_documents as a list. How should you validate this in FastAPI?",
+          "options": [
+            "Validate in the route function with if/else checks",
+            "Define a Pydantic model with `required_documents: List[str]` and let FastAPI validate automatically",
+            "Validate in the database layer after saving",
+            "Skip validation and handle errors when they occur"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Validating in the route is messy and repeats code.",
+            "Correct! Pydantic models provide automatic validation and generate clear error messages.",
+            "Database validation is too late; requests should be validated before processing.",
+            "This invites bugs and poor user experience."
+          ],
+          "explanation": "Pydantic models are the FastAPI way to validate request data. They validate at the API boundary, fail fast with clear error messages, and auto-generate API documentation."
+        },
+        {
+          "question": "Your city platform has 15 different permit types. Should you put all permit endpoints in one file or separate them?",
+          "options": [
+            "One file is easier to manage",
+            "Separate them: one router per permit type makes code easier to maintain as the project grows",
+            "It doesn't matter, performance is the same",
+            "Use a separate file only if the file exceeds 500 lines"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "One file becomes unmaintainable at scale.",
+            "Correct! Using separate routers matches how the business thinks about permits and keeps code cohesive.",
+            "Performance is similar, but maintainability differs greatly.",
+            "Structure shouldn't be about line count; it should be about logical separation."
+          ],
+          "explanation": "Proper organization matters for team velocity, onboarding, and long-term maintenance. Separate concerns early, and you avoid painful refactoring later."
+        },
+        {
+          "question": "For database connections in your city API, should each route get its own SQLAlchemy session?",
+          "options": [
+            "Yes, for isolation",
+            "No, use FastAPI's `Depends()` to inject a shared session that FastAPI manages",
+            "Use a global session variable to avoid overhead",
+            "It depends on whether you're using PostgreSQL"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Separate sessions cause connection pool exhaustion and data consistency issues.",
+            "Correct! FastAPI's dependency injection manages sessions efficiently and ensures cleanup.",
+            "Global state is error-prone and doesn't scale.",
+            "Database choice doesn't affect this pattern."
+          ],
+          "explanation": "FastAPI's `Depends()` system is purpose-built for this: it creates a session per request, passes it to your routes, and automatically closes it. This is FastAPI's superpower."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Success: Your City API is Production-Ready",
+      "content": "Congratulations! Your urban planning platform is now architected for scale. Your separated concerns, Pydantic validation, and dependency injection make it easy for contractors to integrate with your API, for auditors to verify compliance, and for your team to add features without fear. When your city adds new permit types, you simply add a new router\u2014no refactoring needed. Your API documentation generates automatically from Pydantic models. New developers onboard in days instead of weeks. You've built something that will serve your city well for years. This is professional software engineering."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "The Monolithic Code Trap",
+      "content": "You choose to put everything in one main.py file. Routes, validation, database logic, and business rules all mixed together. It works at first\u2014endpoints respond quickly, and you move fast. Contractors submit permits, and the system processes them. But six months later, main.py has grown to 2,000 lines. A bug is reported: duplicate permits are being created. Finding the validation logic takes 20 minutes of scrolling. When you fix it, three other endpoints break because they share similar logic you didn't realize existed. New team members get lost in the file. Each change feels risky. Tests are impossible to write because everything is entangled. This is the cost of poor architecture: short-term speed, long-term paralysis."
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Recognizing Code Smell",
+      "content": "Identify the problems with poor FastAPI architecture.",
+      "questions": [
+        {
+          "question": "You see a FastAPI route that directly writes to the database and includes business logic for checking zoning compliance. What's the main problem?",
+          "options": [
+            "It works, so there's no problem",
+            "The same business logic can't be tested independently or reused in other endpoints",
+            "It's inefficient because it uses one database query instead of multiple",
+            "Routes should only handle HTTP; logic belongs in separate files"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Working code can still have architectural problems.",
+            "Correct! When logic is embedded in routes, it's unmaintainable and non-reusable.",
+            "Efficiency isn't the issue; testability and reusability are.",
+            "While true, the real issue is lack of separation allows code to become tangled and unmaintainable."
+          ],
+          "explanation": "Separation of concerns isn't about being verbose\u2014it's about making code testable, maintainable, and reusable. Embed logic in routes, and you pay the price later."
+        },
+        {
+          "question": "When auditors request a report on all zoning compliance decisions made by your platform, where should this business logic live?",
+          "options": [
+            "In a route endpoint so you can serve it directly via HTTP",
+            "In a separate service module that the route calls, so it can be tested and reused by other endpoints",
+            "In the database stored procedure so the database handles it",
+            "Scattered across multiple routes that each implement their own logic"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Routes should orchestrate, not contain business logic.",
+            "Correct! Extracted business logic is testable, reusable, and easier to audit.",
+            "Stored procedures are harder to version control and test.",
+            "Scattered logic is the nightmare you're trying to avoid."
+          ],
+          "explanation": "Write business logic in testable modules that routes call. This makes it auditable, testable, and reusable across endpoints."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n11",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Struggle: Maintenance Becomes Your Bottleneck",
+      "content": "A year later, your city wants to add a new reporting feature. You estimate two weeks. It takes six weeks because changing anything in main.py risks breaking everything else. Validation logic is duplicated across five different endpoints. When you fix a bug, you worry about unintended side effects. The contractor hotline gets angry calls when features break. Your team spends more time fixing regressions than adding features. You wish you had spent a few extra hours architecting properly from the start. The technical debt has come due, and now every sprint is a struggle. This is what happens when architecture is ignored."
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "The Alternative Path: Simpler Tools",
+      "content": "You choose a simpler framework approach for your city platform. It's lighter weight, fewer abstractions, fewer things to learn. For a small project managing just a few hundred permit applications per day, this works fine. You can get a basic MVP to users in days. Endpoints work, data gets stored, the city can start collecting digital permits. However, you sacrifice automatic validation, async capabilities, and the ability to scale to thousands of concurrent users. If your city grows faster than expected, or new requirements demand real-time status updates to contractors, you'll eventually rebuild on a more robust framework. The simpler path works for small projects but creates larger problems as you grow."
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Lesson: Know When Lightweight is Enough",
+      "content": "Your simpler approach works for the city's current needs. You launched in weeks and contractors can submit permits online. But you've learned an important lesson: framework choice depends on requirements. FastAPI shines when you need validation, async handling, and auto-documentation. Simpler tools shine for small, isolated services. You've shipped something useful. As the platform grows, you now understand why the right choice of tools matters. Neither path was wrong\u2014it depends on your constraints and how you anticipate growth."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "FastAPI path"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Good architecture"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Pass"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n11",
+      "label": "Fail"
+    },
+    {
+      "id": "c9",
+      "source": "n5",
+      "target": "n9",
+      "label": "Monolithic"
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n2",
+      "target": "n12",
+      "label": "Simpler path"
+    },
+    {
+      "id": "c13",
+      "source": "n12",
+      "target": "n13",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T11:06:46.804801+00:00",
+  "model": "claude-haiku-4-5"
+}

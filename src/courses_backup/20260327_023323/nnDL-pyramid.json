@@ -1,0 +1,295 @@
+{
+  "id": "nnDL-pyramid",
+  "title": "Neural Networks and Deep Learning",
+  "description": "An adaptive assessment pyramid course on neural networks and deep learning. Early exit for advanced learners; remedial path for those needing foundational review. Three personalized learning paths based on demonstrated mastery.",
+  "topic": "Neural Networks and Deep Learning",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "neural-networks",
+    "deep-learning",
+    "machine-learning",
+    "adaptive-learning",
+    "pyramid-structure"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Foundational Knowledge Check",
+      "content": "Let's assess your existing knowledge of neural network fundamentals. This quick assessment will tailor your learning path.",
+      "questions": [
+        {
+          "question": "What is the primary role of an activation function in a neural network?",
+          "options": [
+            "A) A mathematical component that introduces non-linearity to enable learning of complex patterns",
+            "B) A preprocessing step that normalizes input data before feeding to the network",
+            "C) A function used only in the output layer to calculate the loss",
+            "D) A technique for optimizing the learning rate during training"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "A) Correct! Activation functions like ReLU, sigmoid, and tanh introduce non-linearity, allowing networks to learn complex relationships.",
+            "B) Incorrect. While data normalization is important, activation functions serve a different purpose\u2014they enable non-linear transformations.",
+            "C) Incorrect. Activation functions are used throughout the network, not just in the output layer.",
+            "D) Incorrect. Activation functions are applied to neuron outputs, not for learning rate optimization."
+          ],
+          "explanation": "Activation functions are crucial because without them, stacking multiple layers would be mathematically equivalent to a single layer. Non-linearity allows networks to approximate any continuous function."
+        },
+        {
+          "question": "During backpropagation, what quantity is being calculated and propagated backward through the network?",
+          "options": [
+            "A) The forward pass predictions for the next epoch",
+            "B) The gradients (partial derivatives) of the loss with respect to each weight and bias",
+            "C) The activation values from each neuron in the previous pass",
+            "D) The raw input features being reprocessed for validation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) Incorrect. The forward pass occurs independently; backpropagation is about computing gradients.",
+            "B) Correct! Backpropagation calculates gradients that tell us how much each weight contributed to the error, enabling weight updates.",
+            "C) Incorrect. Activation values are stored during the forward pass, but gradients are what's propagated backward.",
+            "D) Incorrect. Input features aren't reprocessed in backpropagation."
+          ],
+          "explanation": "Backpropagation uses the chain rule to compute gradients efficiently. These gradients guide optimizers like SGD to adjust weights in the direction that reduces loss."
+        },
+        {
+          "question": "What is the primary function of hidden layers in a neural network?",
+          "options": [
+            "A) To hide sensitive data from the user",
+            "B) To perform intermediate feature transformations and learn hierarchical representations",
+            "C) To directly produce the final output predictions",
+            "D) To reduce computational cost by skipping calculations"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) Incorrect. 'Hidden' refers to layers between input and output, not data security.",
+            "B) Correct! Hidden layers learn increasingly abstract features. Early layers might detect edges, while deeper layers recognize shapes or objects.",
+            "C) Incorrect. The output layer produces final predictions; hidden layers enable the network to learn useful representations.",
+            "D) Incorrect. Hidden layers increase computation; they're essential for learning complex patterns."
+          ],
+          "explanation": "Hidden layers enable feature hierarchy. A network with no hidden layers can only learn linear boundaries. Deeper networks learn non-linear decision boundaries and capture complex patterns."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Deep Learning Architecture Assessment",
+      "content": "You've demonstrated solid foundational knowledge. Now let's test your understanding of modern deep learning architectures and training techniques.",
+      "questions": [
+        {
+          "question": "What is the primary advantage of convolutional layers in CNNs for image processing?",
+          "options": [
+            "A) They reduce image size to speed up computation",
+            "B) They detect local spatial patterns through weight sharing and sliding filters, reducing parameters compared to fully-connected layers",
+            "C) They work only with color images, not grayscale",
+            "D) They eliminate the need for activation functions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) Incorrect. While pooling reduces dimensions, convolutions primarily detect spatial patterns.",
+            "B) Correct! Convolutional layers use the same weights across different image regions, capturing translation-invariant features efficiently.",
+            "C) Incorrect. CNNs work with both color and grayscale images.",
+            "D) Incorrect. CNNs use activation functions just like other neural networks."
+          ],
+          "explanation": "Convolutional layers are inspired by the visual cortex. A 3\u00d73 filter applied across an image requires far fewer parameters than connecting every pixel to every neuron, making training faster and more effective."
+        },
+        {
+          "question": "The vanishing gradient problem refers to which of the following?",
+          "options": [
+            "A) Gradients becoming too large and destabilizing training (exploding gradients)",
+            "B) The practice of using gradient descent with mini-batches instead of full batches",
+            "C) Gradient magnitudes shrinking exponentially during backpropagation, making early layers difficult to train",
+            "D) Gradients becoming zero at random, making optimization impossible"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A) Incorrect. That's the exploding gradient problem, which is different.",
+            "B) Incorrect. Mini-batch training is a separate concept from the vanishing gradient problem.",
+            "C) Correct! In deep networks, gradients can become exponentially smaller through multiplication in the chain rule, slowing learning in early layers.",
+            "D) Incorrect. Gradients don't randomly become zero; it's a systematic issue with network depth."
+          ],
+          "explanation": "Vanishing gradients occur because backpropagation multiplies gradients through many layers. If activation derivatives are small, these products shrink exponentially. Solutions include ReLU activations and residual connections."
+        },
+        {
+          "question": "Which statement about Transformer architectures is accurate?",
+          "options": [
+            "A) Transformers use sequential processing and recurrent connections like RNNs",
+            "B) Transformers employ self-attention mechanisms to process all positions in parallel, enabling efficient training on large sequences",
+            "C) Transformers can only process fixed-length sequences",
+            "D) Transformers replaced CNNs entirely and are now used exclusively for vision"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) Incorrect. Transformers process sequences in parallel, not sequentially, eliminating recurrence.",
+            "B) Correct! Self-attention allows the model to weigh relationships between all tokens simultaneously, enabling both better parallelization and longer-range dependencies.",
+            "C) Incorrect. Transformers can handle variable-length sequences through padding or special tokens.",
+            "D) Incorrect. While Transformers dominate NLP, CNNs remain effective for many vision tasks. Vision Transformers are a newer hybrid approach."
+          ],
+          "explanation": "The Transformer's multi-head self-attention mechanism computes attention weights between every pair of positions, allowing the model to learn which parts of the input are most relevant to each other."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Deep Learning Techniques",
+      "content": "You're ready for advanced topics! Modern deep learning builds on architectural innovations and training strategies. **Attention mechanisms** extend beyond Transformers\u2014spatial attention in CNNs, cross-attention in multimodal models\u2014allowing networks to focus on relevant information dynamically. **Vision Transformers (ViTs)** apply self-attention directly to image patches, treating images as sequences. **Diffusion models** have revolutionized generative AI by gradually denoising random noise into structured outputs, surpassing GANs in stability and sample quality. **Knowledge distillation** compresses large models into smaller ones by training students to mimic teachers, enabling edge deployment. **Few-shot and zero-shot learning** reduce data requirements through meta-learning and transfer learning. Explore these topics: understand how attention improves model interpretability, why diffusion models achieve better convergence, and how modern practitioners combine techniques for state-of-the-art performance.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete",
+      "content": "Excellent work! You've explored cutting-edge deep learning techniques from attention mechanisms to diffusion models. You're equipped to engage with recent research papers and implement advanced architectures. Continue deepening your knowledge by studying recent papers on arxiv.org, experimenting with frameworks like PyTorch and Hugging Face Transformers, and building projects that combine these techniques. Welcome to the frontier of deep learning!"
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Neural Network Practice Problems",
+      "content": "Let's solidify your understanding with practical problems. These exercises focus on applying architectural concepts and debugging common training issues.",
+      "questions": [
+        {
+          "question": "You're building a CNN for image classification. Input: 224\u00d7224\u00d73 images. First conv layer: 32 filters, 3\u00d73 kernel, no padding. What is the output shape?",
+          "options": [
+            "A) 222\u00d7222\u00d732",
+            "B) 224\u00d7224\u00d732",
+            "C) 32\u00d732\u00d73",
+            "D) 224\u00d7224\u00d73"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "A) Correct! Without padding, output = (input - kernel + 1) = 224 - 3 + 1 = 222. Channels = number of filters (32).",
+            "B) Incorrect. That would only be true with 'same' padding.",
+            "C) Incorrect. The spatial dimensions don't reduce to 32\u00d732 from a single 3\u00d73 convolution.",
+            "D) Incorrect. The channel dimension changes to match the filter count."
+          ],
+          "explanation": "Convolutional arithmetic is essential for building correct architectures. (input_h - kernel_h + 1) gives output height; (input_w - kernel_w + 1) gives output width."
+        },
+        {
+          "question": "Your neural network trains perfectly on training data but poorly on test data. Which technique would most directly address overfitting?",
+          "options": [
+            "A) Increase batch size and learning rate simultaneously",
+            "B) Apply dropout, L1/L2 regularization, or use data augmentation",
+            "C) Add more hidden layers to increase model capacity",
+            "D) Remove all activation functions to simplify the model"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) Incorrect. These changes might worsen overfitting by allowing the model to memorize more effectively.",
+            "B) Correct! Dropout randomly deactivates neurons during training, regularization penalizes large weights, and augmentation creates artificial variations to improve generalization.",
+            "C) Incorrect. More layers increase capacity, typically worsening overfitting.",
+            "D) Incorrect. Removing activation functions severely limits model expressiveness."
+          ],
+          "explanation": "Overfitting occurs when a model memorizes training data rather than learning generalizable patterns. Regularization techniques reduce model complexity or variance, forcing networks to learn robust features."
+        },
+        {
+          "question": "In a Transformer model, if you have a sequence of 512 tokens and 8 attention heads, what is the dimension of each head if the model's embedding dimension is 512?",
+          "options": [
+            "A) 512",
+            "B) 64",
+            "C) 4096",
+            "D) 8"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) Incorrect. 512 is the total embedding dimension, not per-head.",
+            "B) Correct! Multi-head attention splits the embedding: 512 / 8 = 64 dimensions per head. Each head computes attention independently, then results are concatenated.",
+            "C) Incorrect. That would be 512 \u00d7 8, which is too large.",
+            "D) Incorrect. 8 is the number of heads, not the dimension."
+          ],
+          "explanation": "Multi-head attention allows the model to attend to different representational subspaces. Splitting 512 dimensions across 8 heads maintains computational efficiency compared to a single 512-dimensional attention."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Practice Path Complete",
+      "content": "Great job working through these practice problems! You've reinforced key concepts about CNN architectures, preventing overfitting, and understanding Transformers. These skills form the foundation for building robust deep learning systems. Next steps: apply these concepts by implementing a small CNN for MNIST or CIFAR-10, then explore transfer learning with pre-trained models. Continue practicing with more complex problems as you build confidence."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Neural Network Fundamentals",
+      "content": "Let's build your foundation from the ground up! A **neural network** receives inputs, applies weights and biases to create a weighted sum, passes the result through an activation function, and produces an output. **Weights** strengthen or weaken connections; **biases** shift activation thresholds. **Loss functions** measure prediction error (cross-entropy for classification, MSE for regression). **Gradient descent** computes how much each weight contributed to loss and updates weights to minimize error. A **single-layer network** can only learn linear relationships. **Hidden layers** enable non-linear learning through composition of transformations. **Backpropagation** uses the chain rule to efficiently compute gradients, allowing training of deep networks. Understanding these fundamentals provides the foundation for learning advanced architectures.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "How a Simple Neural Network Works: Binary Classification Example",
+      "content": "Imagine a 2-layer network classifying points as red (0) or blue (1). **Input layer** (2 neurons): receives x and y coordinates. **Hidden layer** (3 neurons): each computes a weighted sum and applies ReLU activation, learning to detect patterns like \"upper-left region\" or \"diagonal stripe.\" **Output layer** (1 neuron): applies sigmoid to output a probability between 0 and 1. **Training example**: A point at (0.5, 0.8) labeled blue. Forward pass: hidden neurons compute features (h1=0.7, h2=0.2, h3=0.9), output neuron produces prediction 0.75. **Loss**: cross-entropy between prediction 0.75 and true label 1 is about 0.29. **Backpropagation**: gradients flow backward\u2014output layer adjusts its weights, gradients propagate to hidden layer which learns better features. After thousands of iterations, the network learns a non-linear decision boundary separating the two classes.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Fundamentals Path Complete",
+      "content": "Congratulations! You've learned foundational concepts of neural networks: weights, biases, activation functions, loss, and backpropagation. You now understand how networks learn. Next, deepen your knowledge by studying specific architectures (CNNs for images, RNNs for sequences), experimenting with PyTorch or TensorFlow, and building projects like digit recognition with MNIST. Your solid foundation will make advanced topics much more accessible!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (\u22652/3 correct)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Fail (<2/3 correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass (\u22652/3 correct)"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fail (<2/3 correct)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue"
+    }
+  ],
+  "generated_at": "2026-03-26T10:01:01.723667+00:00",
+  "model": "claude-haiku-4-5"
+}

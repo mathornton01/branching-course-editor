@@ -1,0 +1,132 @@
+{
+  "id": "cv-fundamentals-001",
+  "title": "Computer Vision Fundamentals: The Autonomous Vehicle Challenge",
+  "description": "Navigate the world of computer vision by building a perception system for autonomous vehicles. Choose between classical methods and deep learning, then make critical architectural decisions that determine your success.",
+  "topic": "Computer Vision",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer vision",
+    "image processing",
+    "deep learning",
+    "autonomous systems",
+    "object detection"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Vision Challenge",
+      "content": "You've been hired to build the perception system for an autonomous vehicle. Your system must detect pedestrians, cars, lane markings, and traffic signs in real-time across varying weather and lighting conditions. Speed is critical\u2014the AI must process camera feeds at 30+ FPS\u2014but safety is paramount. You have a team and budget, but must choose your technical approach carefully. What foundational approach will you take?"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Core Architecture",
+      "content": "Two proven approaches exist in the autonomous vehicle industry. You must decide which path your team will pursue.",
+      "choices": [
+        {
+          "label": "Classical Computer Vision (hand-engineered features)",
+          "next": "n3"
+        },
+        {
+          "label": "Deep Learning (learned representations)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Classical Computer Vision Methods",
+      "content": "Classical CV uses hand-engineered features like edges, corners, colors, and textures to understand images. Techniques include Canny edge detection for lane markings, Hough transforms for line detection, HOG descriptors for pedestrian recognition, and color-based segmentation for traffic sign detection. These methods are computationally efficient, fully interpretable, and don't require massive datasets. However, they struggle with occlusion, varying lighting, and real-world scenarios the engineer didn't anticipate. Each object type typically requires its own carefully tuned detector."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "How Do You Handle Complex Real-World Scenarios?",
+      "content": "Your system performs well on sunny highway driving. Now you must handle nighttime city driving, rain-obscured pedestrians, and unusual vehicle orientations. How do you adapt?",
+      "choices": [
+        {
+          "label": "Build multi-detector ensemble with fallback strategies",
+          "next": "n5"
+        },
+        {
+          "label": "Optimize for the most common case and deploy",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Classical CV System: Robust and Interpretable",
+      "content": "Your ensemble approach\u2014combining edge detection, color analysis, texture features, and temporal consistency checks\u2014successfully handles diverse scenarios. Engineers can diagnose why each detection succeeds or fails. Trade-off: requires significant engineering effort and doesn't learn from new data autonomously. This approach works well in robotics and domains with structured, predictable environments."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "System Fails on Edge Cases",
+      "content": "Your optimized classical system excels on sunny highways but catastrophically fails in rain, fog, and nighttime. A pedestrian in an unusual pose goes undetected. This reveals the fundamental ceiling of classical CV: hand-engineered features cannot adapt to unexpected scenarios beyond their original design assumptions without complete manual redesign."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Deep Learning for Autonomous Perception",
+      "content": "Deep learning uses convolutional neural networks (CNNs) to automatically learn hierarchical feature representations from data. Early layers detect edges and textures, middle layers combine them into shapes, deep layers recognize objects. A single trained model handles pedestrians, cars, signs, and lanes simultaneously. CNNs excel at learning from diverse, high-variance data\u2014rain, fog, occlusion\u2014across 100K+ training images. Architectures like YOLO and Faster R-CNN process real-time video on GPU hardware. Trade-off: requires large labeled datasets, computational resources, and black-box decision-making."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Deep Learning System: Deployed Successfully",
+      "content": "Your CNN-based pipeline, trained on 100K+ diverse driving scenarios, detects objects reliably across all weather and lighting conditions. Fine-tuned from pre-trained ImageNet weights on your driving domain, it achieves 95%+ accuracy at 30+ FPS on automotive GPUs. Success came from substantial data engineering and annotation effort, plus continuous hardware investment. The learned model adapts automatically where classical methods hit their ceiling, making it the industry standard for autonomous vehicles."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Classical CV"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Deep Learning"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Robust ensemble"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Limited approach"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T03:33:18.844162+00:00",
+  "model": "claude-haiku-4-5"
+}

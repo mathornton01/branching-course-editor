@@ -1,0 +1,439 @@
+{
+  "id": "b4d7e9f2-8c3a-47e1-9f6b-2d8e5a1c3f7b",
+  "title": "Computer Networks and Protocols: Sports Analytics Edition",
+  "description": "Master computer networks and protocols through real-world sports analytics applications. Learn how data flows from stadiums to fan dashboards in real-time.",
+  "topic": "Computer Networks and Protocols",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "networks",
+    "protocols",
+    "sports analytics",
+    "data infrastructure",
+    "real-time systems"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Networks in Sports Analytics: From Sensor to Dashboard",
+      "content": "Modern sports analytics relies on sophisticated networks to deliver real-time insights. Imagine a basketball game where motion sensors track 25 player positions per second, generating 600 data points per minute. This information must flow from the arena's sensors through multiple network layers to reach analysts, broadcasters, and fans within milliseconds. Computer networks make this possible by providing the infrastructure for data collection, transmission, and distribution across vast distances and complex systems."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Assessment: Network Fundamentals",
+      "content": "Test your understanding of how networks enable sports analytics.",
+      "questions": [
+        {
+          "question": "A sports stadium has 50 motion-capture cameras tracking player movements. The cameras need to send video feeds to the central analytics server. What type of network is most appropriate for this direct, local communication?",
+          "options": [
+            "Local Area Network (LAN)",
+            "Wide Area Network (WAN)",
+            "Metropolitan Area Network (MAN)",
+            "Personal Area Network (PAN)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A LAN is perfect for connecting devices within a limited geographic area like a stadium.",
+            "While WANs are important for distribution, they're designed for larger distances.",
+            "MANs are larger than what's needed within a single stadium.",
+            "PANs are for personal devices like smartwatches, not stadium infrastructure."
+          ],
+          "explanation": "A Local Area Network (LAN) connects devices within a limited area (stadium) with high bandwidth and low latency\u2014essential for real-time sports analytics."
+        },
+        {
+          "question": "Why is bandwidth especially critical for real-time sports analytics platforms?",
+          "options": [
+            "To store player statistics in databases",
+            "To handle multiple high-resolution video streams and sensor data simultaneously without buffering",
+            "To authenticate user accounts on the analytics dashboard",
+            "To encrypt all communications for security"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Bandwidth isn't directly related to storage.",
+            "Correct! Bandwidth determines how much data can be transmitted per second\u2014crucial for multiple video streams and thousands of sensor readings.",
+            "Authentication uses minimal bandwidth.",
+            "Encryption uses bandwidth, but isn't the primary reason bandwidth is critical."
+          ],
+          "explanation": "Sufficient bandwidth ensures that multiple high-resolution video feeds and thousands of sensor measurements per second can flow without delays or data loss."
+        },
+        {
+          "question": "A broadcaster wants to show live player tracking data to millions of fans globally. What network topology would best handle this one-to-many distribution?",
+          "options": [
+            "Mesh topology",
+            "Star topology",
+            "Tree topology with the broadcast center as root",
+            "Ring topology"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Mesh would be inefficient for this hierarchical distribution.",
+            "Star topology works for LANs, but not for global distribution.",
+            "Correct! A tree topology with the broadcast center as the root efficiently distributes data globally.",
+            "Ring topology has no clear root and is less efficient for broadcasting."
+          ],
+          "explanation": "Tree topologies efficiently distribute data from a central source (the broadcast center) to multiple endpoints worldwide, with data flowing down branches to reach millions of viewers."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Network Basics in Sports Analytics",
+      "content": "Strengthen your understanding with practical scenarios.",
+      "questions": [
+        {
+          "question": "A tennis tournament streams 10 court feeds simultaneously to a content platform. Each feed is 10 Mbps. What minimum total bandwidth is needed?",
+          "options": [
+            "10 Mbps",
+            "50 Mbps",
+            "100 Mbps",
+            "1000 Mbps"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "That's just one stream.",
+            "That's five streams.",
+            "Correct! 10 streams \u00d7 10 Mbps each = 100 Mbps total.",
+            "That would be 100 streams worth of bandwidth."
+          ],
+          "explanation": "Multiple simultaneous streams require bandwidth multiplication: number of streams \u00d7 bandwidth per stream."
+        },
+        {
+          "question": "Which of the following is NOT a key constraint in designing networks for live sports analytics?",
+          "options": [
+            "Latency (time delay in data transmission)",
+            "Bandwidth (data transmission capacity)",
+            "Reliability (data arriving correctly)",
+            "Player uniform color preferences"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Latency is critical\u2014fans expect live data, not delayed.",
+            "Bandwidth must be sufficient for all data streams.",
+            "Reliability ensures data integrity for accurate analytics.",
+            "Correct! Uniform colors don't affect network design."
+          ],
+          "explanation": "Network design focuses on technical constraints like latency, bandwidth, and reliability\u2014not aesthetic choices like uniform colors."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Protocols: How Sports Data Gets Where It Needs to Go",
+      "content": "If networks are the highways, protocols are the traffic rules. TCP/IP forms the backbone of modern sports analytics. TCP (Transmission Control Protocol) ensures data like play-by-play footage arrives complete and in order\u2014critical when a missed packet means missing a crucial goal replay. IP (Internet Protocol) handles routing, determining the best path for data from a stadium camera to millions of viewers. UDP offers faster transmission with less overhead, ideal for live streaming where occasional missed frames are acceptable. Understanding these protocols helps us choose the right tool for each analytics task: TCP for reliability (score updates, player injuries), UDP for speed (live video feeds)."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Protocols and Data Transmission",
+      "content": "Demonstrate your understanding of protocols in sports analytics.",
+      "questions": [
+        {
+          "question": "A fantasy sports platform must guarantee that every player transaction (trades, acquisitions) reaches the server without any data loss. Which protocol should it use?",
+          "options": [
+            "UDP for speed",
+            "TCP for reliability",
+            "ICMP for diagnostics",
+            "DNS for naming"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "UDP prioritizes speed over reliability.",
+            "Correct! TCP guarantees reliable, ordered delivery\u2014essential for financial transactions.",
+            "ICMP is for diagnostics, not data transmission.",
+            "DNS handles domain names, not data transactions."
+          ],
+          "explanation": "TCP's three-way handshake and acknowledgment system guarantee every byte of data arrives intact\u2014crucial for transactions where data loss would corrupt leagues or accounts."
+        },
+        {
+          "question": "A coach's real-time tactical dashboard displays live player positions with a 100ms latency requirement. Which protocol prioritizes speed over guaranteed delivery?",
+          "options": [
+            "TCP/IP",
+            "HTTPS",
+            "UDP",
+            "FTP"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "TCP adds overhead ensuring delivery, increasing latency.",
+            "HTTPS is for secure web traffic, not optimal for real-time position data.",
+            "Correct! UDP sends data faster without delivery guarantees\u2014a 1-2% data loss doesn't hurt tactical awareness.",
+            "FTP is for file transfer, not real-time data."
+          ],
+          "explanation": "UDP eliminates TCP's acknowledgment overhead. In live sports, a missed position update every few seconds is acceptable for lower latency and higher throughput."
+        },
+        {
+          "question": "How does the IP address 192.168.1.100 differ from 8.8.8.8?",
+          "options": [
+            "They're both local private addresses",
+            "One is private (local network), the other is public (internet)",
+            "They're both public addresses",
+            "The first is faster than the second"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "192.168.x.x is private, but 8.8.8.8 is public.",
+            "Correct! Private addresses (192.168/10/172.16) work within LANs; public addresses route across the internet.",
+            "192.168.x.x is private, not public.",
+            "Speed depends on network conditions, not the address format."
+          ],
+          "explanation": "Private IP ranges (192.168.0.0/16, etc.) are reserved for local networks like stadiums. Public IPs route globally. This separation enables secure internal networks while connecting to global audiences."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Protocols and Transmission",
+      "content": "Reinforce your protocol knowledge with practical scenarios.",
+      "questions": [
+        {
+          "question": "A sports injury alert system must notify medical staff within 50ms of an injury detection. Which protocol and why?",
+          "options": [
+            "TCP\u2014to ensure the alert arrives",
+            "UDP\u2014for lowest latency even if rare alerts are missed",
+            "DNS\u2014to find the medical server",
+            "SMTP\u2014to send email notifications"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "TCP's reliability comes with higher latency overhead.",
+            "Correct! UDP's minimal overhead ensures sub-50ms latency. Missing one alert in 1000 is acceptable; missing the time window isn't.",
+            "DNS is for name resolution, not alert delivery.",
+            "SMTP has much higher latency than needed."
+          ],
+          "explanation": "Critical real-time systems need UDP's speed. The 50ms requirement is harder to meet than perfect reliability."
+        },
+        {
+          "question": "Why do sports broadcasters use Content Delivery Networks (CDNs) instead of streaming directly from the stadium?",
+          "options": [
+            "CDNs are cheaper",
+            "CDNs cache content at locations near viewers to reduce latency and distribute bandwidth load",
+            "CDNs provide better security than direct streaming",
+            "CDNs eliminate the need for protocols"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Cost is secondary to performance.",
+            "Correct! CDNs place servers geographically close to viewers, reducing latency and spreading the bandwidth load.",
+            "While CDNs add security features, that's not their primary function.",
+            "CDNs still use TCP/IP and other protocols."
+          ],
+          "explanation": "A CDN with edge servers in 50 countries ensures fans everywhere experience low-latency streams by receiving data from nearby servers rather than directly from the stadium."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Real-Time Architecture: Building the Sports Analytics Backbone",
+      "content": "Modern sports analytics platforms combine networks and protocols into sophisticated multi-tier architectures. The edge tier consists of sensors and cameras in the stadium (LAN, microsecond latencies). The processing tier uses regional data centers connected via WAN protocols to aggregate and analyze data. The distribution tier spreads results globally using CDNs and optimized protocols. Consider the NBA: motion sensors track 25 positions per second per player; this creates 120 Mbps per court flowing through stadium LANs, gets processed regionally, then distributed as play-by-play feeds (TCP for accuracy) and video streams (UDP for speed). Routing protocols ensure data takes optimal paths, load balancing prevents bottlenecks, and failover systems maintain service if primary links fail. Understanding this architecture helps you design systems that handle millions of concurrent analytics queries and maintain sub-second latencies globally."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Final Assessment: Complete Network Architecture",
+      "content": "Demonstrate mastery of networks and protocols in sports analytics.",
+      "questions": [
+        {
+          "question": "A multi-sport facility with 15 arenas needs to share analytics data globally while maintaining privacy between teams. What architecture best serves this?",
+          "options": [
+            "Single central server processing all data",
+            "Separate LANs per arena (TCP for internal reliability), federated to a central hub via WAN, then to global CDN",
+            "Mesh network connecting all arenas directly",
+            "Public internet with no internal networks"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A single server is a bottleneck and single point of failure.",
+            "Correct! Separate LANs provide isolation and reliability locally, WAN federation scales to the facility, and CDN distribution reaches global audiences efficiently.",
+            "Mesh networking is computationally expensive for 15 nodes.",
+            "Public internet without internal networks sacrifices privacy and local performance."
+          ],
+          "explanation": "This three-tier architecture (local LANs \u2192 central hub via WAN \u2192 global CDN) balances isolation, scalability, and performance\u2014the standard pattern for enterprise sports analytics."
+        },
+        {
+          "question": "During a championship game with 100 million concurrent viewers, the stadium's uplink connection fails for 10 seconds. What system should handle this?",
+          "options": [
+            "Load balancing to shift data to redundant uplinks",
+            "Buffering in edge servers to bridge the gap and replay cached data",
+            "Asking viewers to refresh their browsers",
+            "Hoping the connection comes back"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Load balancing helps with distributed load, but here the uplink itself failed.",
+            "Correct! Edge servers buffer 10-30 seconds of data; if the main link fails, they serve cached content to viewers, maintaining continuity.",
+            "Asking viewers to refresh would cause them to miss content.",
+            "Hoping is not a network design strategy."
+          ],
+          "explanation": "Redundancy and caching are critical for high-availability sports systems. Edge servers act as safety nets, bridging gaps in upstream connectivity."
+        },
+        {
+          "question": "A player tracking system transmits player positions 30 times per second to both a coach's app (needs <100ms latency) and a data warehouse (can accept 10-minute delays). Should these use the same protocol?",
+          "options": [
+            "Yes, always use the same protocol for consistency",
+            "Yes, use TCP for both since it's more reliable",
+            "No, use UDP for the low-latency coach app and batch TCP for the data warehouse",
+            "No, they should use completely different networks"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Different requirements warrant different protocols.",
+            "TCP's overhead would exceed the coach app's 100ms budget.",
+            "Correct! Real-time systems use UDP for low-latency delivery; batch systems use TCP to reliably accumulate data for later processing.",
+            "Different protocols don't require different networks\u2014they coexist on the same infrastructure."
+          ],
+          "explanation": "Protocol choice depends on application requirements, not consistency. Real-time coaching uses UDP's speed; analytics warehouses use TCP's reliability within their higher tolerance for delays."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Complete Architecture Scenarios",
+      "content": "Apply your understanding to realistic sports analytics challenges.",
+      "questions": [
+        {
+          "question": "A golf tournament tracks ball locations from 500 cameras across 18 holes. The data must reach the broadcast control room within 200ms. Which component is most critical in this architecture?",
+          "options": [
+            "The Wi-Fi network on fan phones",
+            "The LAN and edge processing infrastructure within the tournament grounds",
+            "The CDN for global distribution",
+            "The backup database server"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Fan networks don't affect broadcast production.",
+            "Correct! 500 cameras \u2192 local LAN with edge processing to aggregate 5000+ Mbps into manageable streams within the 200ms budget.",
+            "The CDN is important for viewing, not for broadcast production latency.",
+            "The database doesn't affect production latency."
+          ],
+          "explanation": "Local infrastructure (LAN, edge servers) handles the heavy lifting for real-time requirements. Global distribution (CDN) comes later in the chain."
+        },
+        {
+          "question": "Your sports analytics platform must withstand a DDoS attack where an attacker sends UDP packets flooding your server. Why is UDP vulnerable here?",
+          "options": [
+            "UDP is slower than TCP",
+            "UDP has no connection validation\u2014the server must process every packet even from attackers",
+            "UDP can't encrypt data",
+            "UDP doesn't work on the internet"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed isn't the vulnerability here.",
+            "Correct! UDP stateless design means servers accept any UDP packet. TCP's three-way handshake would reject invalid connections from attackers.",
+            "Encryption is orthogonal to UDP vulnerability.",
+            "UDP definitely works on the internet."
+          ],
+          "explanation": "UDP's stateless design (no connection validation) is efficient for streaming but vulnerable to DDoS. TCP's connection establishment adds overhead but provides natural DDoS protection."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Congratulations! Network Architecture Mastery Achieved",
+      "content": "You've completed the Computer Networks and Protocols course for sports analytics! You now understand how LANs connect stadium sensors, how protocols like TCP and UDP route different data types, and how multi-tier architectures scale to reach millions of concurrent viewers. You can design reliable systems for critical data (TCP), optimize real-time feeds (UDP), plan redundancy for high-availability events, and understand the networks powering modern sports analytics. Apply these concepts to build faster, more reliable, and more scalable sports analytics systems. Well done!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Needs practice"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "Passed"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "Ready to retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Start assessment"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Needs practice"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Passed"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "Ready to retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Start assessment"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Needs practice"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "Passed"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "Ready to retry"
+    }
+  ],
+  "generated_at": "2026-03-27T04:18:31.237846+00:00",
+  "model": "claude-haiku-4-5"
+}

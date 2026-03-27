@@ -1,0 +1,228 @@
+{
+  "id": "gt-healthcare-001",
+  "title": "Graph Theory and Applications in Healthcare",
+  "description": "Learn graph theory fundamentals and advanced applications through real-world healthcare scenarios, from patient referral networks to hospital resource optimization.",
+  "topic": "Graph Theory and Applications",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "graph-theory",
+    "algorithms",
+    "healthcare",
+    "networks",
+    "optimization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Your Graph Theory Foundation",
+      "content": "Let's assess your current understanding of graph concepts and healthcare applications. This will help us personalize your learning path.",
+      "questions": [
+        {
+          "question": "In a hospital patient referral network, what would the nodes (vertices) represent?",
+          "options": [
+            "A) Individual patients only",
+            "B) Healthcare facilities and practitioners",
+            "C) Referral documents",
+            "D) Treatment protocols"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. Nodes represent the entities in the network, not individual data points.",
+            "Correct! Nodes are the entities (hospitals, clinics, doctors) connected in the referral network.",
+            "Referral documents are the edges, not nodes.",
+            "Treatment protocols are not typically nodes in a referral network."
+          ],
+          "explanation": "In graph terminology, nodes (vertices) are the fundamental entities. In healthcare networks, these are the key institutions and practitioners."
+        },
+        {
+          "question": "A telemedicine platform connects 50 hospitals. To find the minimum number of hops needed for a specialist referral from Hospital A to Hospital Z, which graph concept would you use?",
+          "options": [
+            "A) Graph coloring",
+            "B) Shortest path algorithm",
+            "C) Minimum spanning tree",
+            "D) Graph density"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Graph coloring is used for resource scheduling, not path finding.",
+            "Correct! Shortest path algorithms (like Dijkstra's) find the minimum hops between two nodes.",
+            "A minimum spanning tree connects all nodes with minimum total edges\u2014useful for network coverage, not routing.",
+            "Graph density measures connectivity, not specific paths."
+          ],
+          "explanation": "Finding the shortest referral chain is a classic shortest path problem, fundamental to optimizing patient care coordination."
+        },
+        {
+          "question": "A hospital network has an edge-weight representing travel time between facilities. Which algorithm is most appropriate for planning emergency ambulance routes?",
+          "options": [
+            "A) Breadth-first search (unweighted)",
+            "B) Dijkstra's algorithm (weighted)",
+            "C) Depth-first search",
+            "D) Topological sort"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "BFS works for unweighted graphs. Since travel times vary, we need weighted algorithms.",
+            "Correct! Dijkstra's algorithm handles weighted edges to find fastest emergency routes.",
+            "DFS is useful for exploring but doesn't optimize for shortest distance.",
+            "Topological sort applies to directed acyclic graphs like task dependencies, not routing."
+          ],
+          "explanation": "In real emergency response, edge weights (time, distance) matter critically. Dijkstra's algorithm is the standard choice."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Network Optimization in Healthcare Systems",
+      "content": "Healthcare networks are inherently complex graphs where optimization directly impacts patient outcomes. **Shortest Path Algorithms**: Emergency response systems use Dijkstra's algorithm to route ambulances through traffic-aware road networks, minimizing time-to-care. **Network Flow**: Hospital resource allocation models use flow algorithms to distribute limited ICU beds, blood supplies, and surgical equipment across regional networks based on demand and capacity. **Centrality Metrics**: Identifying high-degree nodes (well-connected hospitals) reveals critical care hubs; betweenness centrality finds bottleneck facilities affecting referral chains. **Graph Coloring**: Scheduling non-conflicting surgeries in shared operating rooms is a practical graph coloring problem.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced Example: Regional Emergency Response Network",
+      "content": "A five-hospital region experiences an earthquake. Hospital A has 50 trauma beds (25 occupied), Hospital B has 30 beds (28 occupied), Hospital C has 15 beds (all full), Hospital D has 40 beds (30 occupied), Hospital E is 45 min away. Road network edges have time weights: A-B (8 min), A-D (12 min), B-C (10 min), B-D (6 min), D-E (45 min). Using Dijkstra's algorithm, we calculate shortest times: from A to available beds are B (8 min, 2 beds) and D (12 min, 10 beds). For 40 incoming patients: send 2 to B immediately (8 min), 10 to D via B (14 min total), and 28 to D directly (12 min), utilizing network flow principles. Betweenness centrality reveals B is critical\u2014most referral paths pass through it, making it a priority for resource backup.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced: You're Ready for Complex Systems",
+      "content": "Excellent work! You've mastered advanced graph theory applications in healthcare. You now understand how optimization algorithms solve real-world problems: emergency routing, resource allocation, and network bottleneck identification. These concepts extend to pandemic modeling, supply chain optimization, and telemedicine network design. Consider exploring network simulation tools, or how AI applies graph neural networks to predict disease spread through patient contact networks."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundation: Graphs and Healthcare Networks",
+      "content": "A graph is a collection of connected points. In graph terminology, the points are called **nodes** (or vertices), and the connections between them are called **edges**. In healthcare, nodes represent facilities (hospitals, clinics, diagnostic labs) or actors (doctors, specialists, patients), while edges represent relationships like referrals, consultations, or patient transfers. **Directed vs. Undirected**: A referral from Hospital A to Specialist B might be directional (one-way), while a shared patient record between two clinics is undirected (bidirectional). **Weighted Edges**: Some edges have values\u2014travel time, cost, capacity\u2014crucial for routing and resource decisions. Understanding these basic building blocks lets us model and solve real healthcare problems.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Foundation Example: Simple Referral Chain",
+      "content": "A patient visits their primary care doctor at Clinic A and receives a referral for cardiology. Clinic A refers to Hospital B's cardiology department (edge: referral, weight: 2-day wait). Hospital B's cardiologist orders an imaging study at Imaging Center C (edge: direct referral, weight: 1-day wait). This forms a simple three-node graph: Clinic A \u2192 Hospital B \u2192 Imaging Center C. The total wait time (path weight) is 3 days. This is a directed graph because referrals flow one direction, and it's a **path**\u2014a sequence of connected edges. Real healthcare systems have dozens of nodes with overlapping edges, making them complex networks.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Building Healthcare Graphs",
+      "content": "Apply your foundation knowledge to realistic scenarios.",
+      "questions": [
+        {
+          "question": "A small town has a clinic (C), hospital (H), and specialist center (S). Patients can go C\u2192H, H\u2192S, or C\u2192S directly. How many nodes and edges exist in this graph?",
+          "options": [
+            "A) 2 nodes, 3 edges",
+            "B) 3 nodes, 3 edges",
+            "C) 3 nodes, 2 edges",
+            "D) 4 nodes, 3 edges"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Count each facility as one node.",
+            "Correct! Three facilities (C, H, S) are nodes; three referral paths (C\u2192H, H\u2192S, C\u2192S) are edges.",
+            "There are three distinct pathways in this network.",
+            "There are only three facilities mentioned."
+          ],
+          "explanation": "Nodes = distinct entities; edges = direct connections. In this undirected referral network, each pathway is one edge."
+        },
+        {
+          "question": "A patient must visit three clinics in sequence: Cardiology (stops bleeding), then Orthopedics (sets broken arm), then Physical Therapy (rehabilitation). This is an example of:",
+          "options": [
+            "A) A cycle (nodes visited multiple times)",
+            "B) A path with three edges",
+            "C) A weighted graph",
+            "D) A disconnected graph"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A cycle returns to the starting node; this sequence does not.",
+            "Correct! Four nodes (3 clinics + patient), connected in order = a path of three edges.",
+            "The graph doesn't explicitly mention weights like time or cost.",
+            "The sequence is fully connected in one direction."
+          ],
+          "explanation": "A path visits nodes in sequence without repeating. Here: Patient \u2192 Cardiology \u2192 Orthopedics \u2192 PT forms a 3-edge path."
+        },
+        {
+          "question": "In a hospital, Dr. Smith consults with Dr. Johnson on a case, and Dr. Johnson consults back with Dr. Smith on another case. Is this edge directed or undirected?",
+          "options": [
+            "A) Directed (consultations go one way)",
+            "B) Undirected (mutual consultation relationship)",
+            "C) Weighted (based on number of consultations)",
+            "D) Cyclic (because they consult each other)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "If consultations can flow both ways, it's undirected.",
+            "Correct! When two entities interact bidirectionally, the edge is undirected.",
+            "Undirected doesn't exclude adding weights (like number of consultations).",
+            "Cycles exist in undirected graphs too; this doesn't make it cyclic\u2014it's just bidirectional."
+          ],
+          "explanation": "Directed edges have one direction (A\u2192B); undirected edges allow two-way relationships. Doctor-to-doctor consultations are mutual, so undirected."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundation: Graphs in Your Toolkit",
+      "content": "Great job! You now understand the fundamentals of graph theory in healthcare. You can model healthcare networks (facilities, practitioners, patient flows), identify nodes and edges, and recognize directed vs. undirected relationships. This foundation opens doors to understanding real-world applications: finding the shortest referral pathway, optimizing resource distribution, identifying critical care hubs, and mapping disease transmission. As you encounter more complex scenarios, these core concepts will anchor your understanding. Continue exploring how graphs solve healthcare challenges!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass diagnostic (2+ correct)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Needs foundation (<2 correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Continue"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Complete"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T05:57:37.330544+00:00",
+  "model": "claude-haiku-4-5"
+}

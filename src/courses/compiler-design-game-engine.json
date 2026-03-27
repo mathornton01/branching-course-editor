@@ -1,0 +1,135 @@
+{
+  "id": "compiler-design-game-engine",
+  "title": "Compiler Design: From Game Scripts to Machine Code",
+  "description": "Learn compiler fundamentals\u2014lexical analysis, parsing, semantic analysis, code generation\u2014through the lens of building a game engine compiler. Make strategic choices about compilation strategy and witness the consequences in a branching narrative.",
+  "topic": "Compiler Design",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "compilers",
+    "game-development",
+    "systems-programming",
+    "code-generation",
+    "architecture"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Building a Game Engine Compiler",
+      "content": "You're hired to architect a compiler for a game engine that translates GDScript (game scripts) into executable code. Like a graphics pipeline transforms meshes into rendered frames, your compiler transforms readable code into machine instructions. Every modern engine\u2014Unreal, Unity, Godot\u2014relies on compilers or interpreters. Your architecture choice: compile directly to optimized machine code (AOT), prioritizing runtime speed, or compile to bytecode for a VM (JIT), prioritizing flexibility. Each path requires different design decisions in lexical analysis, parsing, semantic analysis, and code generation. This course walks you through both scenarios.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Compilation Strategy",
+      "content": "Every compiler makes fundamental trade-offs. AOT maximizes runtime performance; JIT maximizes developer experience and flexibility. Which philosophy guides your design?",
+      "choices": [
+        {
+          "label": "Ahead-of-Time (AOT): Compile directly to optimized machine code for maximum speed",
+          "next": "n3"
+        },
+        {
+          "label": "Just-in-Time (JIT): Compile to bytecode with runtime profiling and optimization for flexibility",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "AOT Frontend: Lexical Analysis & Parsing",
+      "content": "You chose AOT. Your compiler's frontend must be bulletproof. The lexer tokenizes raw source: `if (player.health < 10) takeDamage(5)` becomes [IF, LPAREN, IDENTIFIER(player), DOT, IDENTIFIER(health), LT, NUMBER(10), RPAREN, IDENTIFIER(takeDamage), LPAREN, NUMBER(5), RPAREN]. The parser consumes tokens and builds an Abstract Syntax Tree representing operator precedence and nesting: an assignment like `position += velocity * deltaTime` parses as an assignment node with a multiplication subtree. This frontend mirrors how GPU shaders and scripting languages work. Lexer bugs cause token misidentification; parser bugs cause precedence errors and incorrect ASTs. These bugs cascade catastrophically into the optimizer and code generator. AAA game studios spend weeks stress-testing frontend correctness.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "AOT Code Generation: Direct or Intermediate?",
+      "content": "Your AST is ready. Now: generate machine code directly, or first convert to Static Single Assignment (SSA) form for cleaner optimization?",
+      "choices": [
+        {
+          "label": "Direct codegen: Walk AST, emit x86-64 immediately (fast compilation, intricate register allocation)",
+          "next": "n5"
+        },
+        {
+          "label": "SSA intermediate: AST\u2192SSA\u2192optimizations\u2192machine code (slower compilation, elegant optimizations)",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Direct AOT Success: Speed Wins the Day",
+      "content": "Your direct-to-machine-code compiler launches. Game scripts compile in milliseconds. Your register allocator keeps hot variables in CPU registers, minimizing memory traffic. Physics, AI pathfinding, and input handling maintain 60+ FPS on mid-range hardware. An indie studio ships 'Pixel Rush' using your compiler; it wins a performance award and trends on itch.io. Within two years, five AAA publishers adopt your architecture. You've proven that simplicity and directness can outperform theoretical elegance. Your compiler becomes the industry standard."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "SSA Complexity: Brilliant but Too Late",
+      "content": "You pursue SSA intermediate representation. Theoretically superior: optimization passes run cleanly, dead-code elimination works elegantly, register allocation is straightforward. Reality: three months building SSA lowering and optimization pipelines. Code review bottlenecks. A register allocator bug emerges on AMD Radeon + specific driver versions, causing player crashes. You patch it, but a competitor with simpler direct-generation tech captured the market. Players migrate to their engine. Your SSA compiler becomes an internal research project\u2014brilliant, technically sound, but unused. You learn: in game development, shipped beats perfect. Version 2.0 will use SSA, but version 1.0 cost you everything."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "JIT Semantics & Bytecode Compilation",
+      "content": "You chose JIT. Forget machine code for now; compile game scripts to bytecode\u2014a simple, portable intermediate language. A lightweight VM interprets bytecode; as the game runs, the JIT monitor detects hot loops and re-compiles them to native code on-the-fly. Semantic analysis becomes critical: type checking, scope validation, detecting read-only violations. Example: `player.health -= damage` must error if 'health' is read-only; a good error message saves developers hours. Beyond type checking, instrument bytecode with profiling: each instruction records execution frequency. The runtime uses this heat data to identify and aggressively optimize hot paths. Unreal Blueprints and Godot GDScript both use JIT strategies. The payoff: developers edit scripts, save, and see changes instantly\u2014no engine restart. This flexibility is gold for rapid prototyping, live tweaking, and artist-driven iteration.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "JIT Success: The Developer's Dream Engine",
+      "content": "Your JIT compiler ships. Hot-reload works flawlessly: edit a script, save, and the engine recompiles and executes new code in under 100ms. Artists tweak gameplay mid-playtest without waiting for builds. When performance bottlenecks emerge, your profiler pinpoints exact bytecode loops, and the JIT inlines and optimizes them. A multiplayer studio ships a live-service game using your engine; they deploy balance updates daily without patching the executable. Within three years, over two thousand indie and AA games ship on your engine. You've built a compiler that prioritizes iteration speed, developer experience, and flexibility\u2014the values that matter in modern game development. Your engine becomes known as the 'maker's choice.'"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "AOT Path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "JIT Path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Direct Codegen"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "SSA Intermediate"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T06:08:10.958866+00:00",
+  "model": "claude-haiku-4-5"
+}

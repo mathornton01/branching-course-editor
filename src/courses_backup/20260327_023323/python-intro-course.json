@@ -1,0 +1,342 @@
+{
+  "id": "python-intro-course",
+  "title": "Introduction to Python Programming",
+  "description": "Learn the fundamentals of Python programming, including variables, data types, and control flow through interactive lessons and assessments.",
+  "topic": "Python Programming",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 60,
+  "tags": [
+    "python",
+    "programming",
+    "fundamentals",
+    "variables",
+    "control-flow"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Variables and Data Types in Python",
+      "content": "In Python, variables store values and are dynamically typed, meaning the type is determined by the value assigned. Python supports several basic data types: integers (whole numbers like 5 or -10), floats (decimal numbers like 3.14 or 2.5), strings (text enclosed in quotes like 'hello'), and booleans (True or False). You don't need to declare a variable's type\u2014Python automatically detects it based on what you assign. For example, `x = 5` makes x an integer, while `x = '5'` makes x a string. Variables are named containers that help organize and manipulate data in your programs. Python is flexible: you can even reassign a variable to a different type later, such as `x = 5` followed by `x = 'now a string'`. This dynamic typing is one of Python's most powerful features, allowing you to focus on solving problems rather than managing type declarations.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Working with Variables",
+      "content": "Let's say you want to store a student's information. You'd write: `name = 'Alice'` (string), `age = 20` (integer), `gpa = 3.85` (float), `is_active = True` (boolean). Then you can use these variables: `print(name, 'is', age, 'years old')` outputs 'Alice is 20 years old'. Notice that Python keeps track of each variable's type automatically\u2014'Alice' is text, 20 is a number, and True is a boolean. You can also perform operations: `years_until_grad = 26 - age` would give you 6. Python lets you mix variables in expressions: `print(name + ' has a GPA of', gpa)` works fine. When you use a variable name (like `name`) without quotes, Python substitutes the actual value stored in that variable.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Variables and Data Types Assessment",
+      "content": "Test your understanding of variables and basic data types.",
+      "questions": [
+        {
+          "question": "What is the type of the value '42' (the text shown, including quotes)?",
+          "options": [
+            "Integer",
+            "String",
+            "Float",
+            "Boolean"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "42 without quotes is an integer, but '42' with quotes is a string.",
+            "Correct! Text in quotes is a string, regardless of its content.",
+            "A float would be 42.0, not '42'.",
+            "Booleans are True or False."
+          ],
+          "explanation": "In Python, anything enclosed in quotes (single or double) is a string, regardless of whether it looks like a number."
+        },
+        {
+          "question": "Which of the following is a valid variable assignment?",
+          "options": [
+            "2variable = 5",
+            "var_name = 10",
+            "var-name = 10",
+            "int = 100"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Variables cannot start with a number; they must start with a letter or underscore.",
+            "Correct! This follows Python naming conventions perfectly.",
+            "Hyphens (dashes) are not allowed in variable names; use underscores instead.",
+            "int is a reserved keyword in Python and cannot be used as a variable name."
+          ],
+          "explanation": "Variable names must start with a letter or underscore, contain only letters, numbers, and underscores, and avoid reserved keywords like 'int', 'str', 'list', etc."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Control Flow: If Statements",
+      "content": "Control flow statements allow your program to make decisions and execute different code based on conditions. The 'if' statement is the most basic decision-making tool: it runs a block of code only if a condition is True. Conditions use comparison operators: `>` (greater than), `<` (less than), `>=` (greater than or equal), `<=` (less than or equal), `==` (equal), and `!=` (not equal). You can also use 'else' to provide an alternative block when the condition is False, or 'elif' (else if) to check multiple conditions in sequence. For example, `if score > 90: print('A')` executes the print only if score is greater than 90. Python evaluates conditions strictly: `if 5:` is True (any non-zero number is truthy), while `if 0:` is False. Control flow is essential for creating programs that respond intelligently to different situations and make dynamic decisions based on data.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Using If Statements",
+      "content": "Suppose you're checking if a student passed a test (score \u2265 60): `score = 75` / `if score >= 60:` / `    print('Passed!')` / `else:` / `    print('Try again')` This outputs 'Passed!' because 75 \u2265 60. If the score were 50, it would output 'Try again'. You can chain conditions with 'elif': `if score >= 90: print('A') elif score >= 80: print('B') else: print('C or lower')`. Notice the indentation: Python requires indented blocks under if/elif/else. The comparison `>=` checks if the left side is greater than or equal to the right side. Each condition is evaluated in order until one is True, then the rest are skipped.",
+      "next": "node-combined-ex"
+    },
+    {
+      "id": "node-combined-ex",
+      "type": "example",
+      "title": "Combining Variables with Conditional Logic",
+      "content": "Let's solve a realistic problem that combines variables and control flow. Imagine you're building a system to validate user registration: `username = 'alice_123'` / `age = 17` / `email = 'alice@example.com'` / `is_valid = True` / `if age < 18:` / `    print('Must be 18 or older')` / `    is_valid = False` / `elif len(username) < 5:` / `    print('Username too short')` / `    is_valid = False` / `else:` / `    print('Welcome, ' + username + '!')` / `    is_valid = True`. Here, we use the variable `age` in a comparison, check the variable `username` length with `len()`, and use `is_valid` to track the registration status. Notice how variables store data that controls the program flow through if/elif/else blocks. The conditions evaluate our variables, and we update variables based on decisions. This combination\u2014variables holding state and control flow making decisions based on that state\u2014is fundamental to all programming.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Control Flow Assessment",
+      "content": "Test your understanding of if statements and conditional logic.",
+      "questions": [
+        {
+          "question": "What is the output of this code? x = 10 / if x > 5: / print('big') / else: / print('small')",
+          "options": [
+            "big",
+            "small",
+            "No output",
+            "Error"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Since 10 > 5, the if block executes and prints 'big'.",
+            "The else block doesn't execute because the condition is True.",
+            "The if block will execute and produce output.",
+            "The syntax is valid Python code."
+          ],
+          "explanation": "When the if condition is True, only the if block runs. The else block is skipped."
+        },
+        {
+          "question": "Which block executes? age = 16 / if age < 13: / print('Child') / elif age < 18: / print('Teen') / else: / print('Adult')",
+          "options": [
+            "None of them",
+            "Child",
+            "Teen",
+            "Adult"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "One of the blocks will execute.",
+            "age = 16, which is not less than 13.",
+            "Correct! 16 < 18 is True, so the Teen block executes.",
+            "The elif condition catches it before the else block."
+          ],
+          "explanation": "elif (else if) conditions are checked in order; the first True condition executes, and remaining conditions are skipped."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Python Fundamentals Practice",
+      "content": "Let's reinforce your understanding of variables and control flow with focused practice. These exercises combine the concepts you've learned. Variables are essential because they store the data your programs work with, and control flow lets you make decisions based on that data. The combination is powerful: a variable holds a value, and an if statement makes a decision based on that value. As you practice, pay attention to how comparisons work and how to use variables in conditions. Remember: any non-zero number is considered 'truthy' in Python, while 0 is 'falsy'. Strings and lists follow similar rules\u2014empty ones are falsy, non-empty ones are truthy.",
+      "questions": [
+        {
+          "question": "What will this code output? name = 'Python' / if len(name) > 5: / print('Long') / else: / print('Short')",
+          "options": [
+            "Long",
+            "Short",
+            "Error",
+            "No output"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! 'Python' has 6 characters, and 6 > 5 is True, so 'Long' prints.",
+            "The string 'Python' has more than 5 characters.",
+            "The syntax is valid Python code.",
+            "The if condition is True, so output will be produced."
+          ],
+          "explanation": "The len() function counts the number of characters in a string. 'Python' has 6 letters, so 6 > 5 is True, and the if block executes."
+        },
+        {
+          "question": "What data type is the result of 10 / 2 in Python 3?",
+          "options": [
+            "Integer",
+            "Float",
+            "String",
+            "Boolean"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "In Python 3, the / operator always returns a float, even when dividing evenly.",
+            "Correct! The / operator returns a float. Use // for integer division.",
+            "This would only be a string if you enclosed it in quotes like '5'.",
+            "Division operations don't produce boolean values; they produce numbers."
+          ],
+          "explanation": "In Python 3, the / operator always returns a float. To get integer division (floor division), use the // operator instead."
+        },
+        {
+          "question": "What is printed? score = 85 / if score >= 90: / print('A') / elif score >= 80: / print('B') / else: / print('C')",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "AB"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "score is 85, which is not >= 90.",
+            "Correct! 85 >= 80 is True, so the elif block executes and prints 'B'. The else block is skipped.",
+            "The condition score >= 80 is True, so the elif executes before reaching else.",
+            "Only one block executes; once a condition is True, the remaining blocks are skipped."
+          ],
+          "explanation": "In an if/elif/else chain, once a condition evaluates to True, that block executes and all remaining blocks are skipped."
+        }
+      ],
+      "pass_threshold": 2,
+      "next": "node-review-dec"
+    },
+    {
+      "id": "node-review-dec",
+      "type": "decision",
+      "title": "Continue Your Learning",
+      "content": "Great work completing the practice! You've reinforced your understanding of variables and control flow. Now you can choose to review specific topics or move forward to complete the course. If you feel ready, proceed to completion. If you'd like more reinforcement, reviewing the foundational concepts can help solidify your understanding.",
+      "choices": [
+        {
+          "label": "Review Variables and Data Types",
+          "next": "n1"
+        },
+        {
+          "label": "Review Control Flow",
+          "next": "n4"
+        },
+        {
+          "label": "Complete the Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Excellent Progress! What Would You Like to Do Next?",
+      "content": "Congratulations on passing both assessments! You've successfully demonstrated your understanding of variables, data types, and control flow\u2014core Python concepts that form the foundation for all programming. You now understand how to store and manipulate data, make decisions based on conditions, and structure logical programs. You can review what you've learned to deepen your mastery, or complete the course and move on to more advanced topics.",
+      "choices": [
+        {
+          "label": "Review Variables and Control Flow",
+          "next": "n4"
+        },
+        {
+          "label": "Complete the Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Excellent work! You've successfully completed the Introduction to Python Programming course. You now understand variables, data types, and control flow\u2014foundational concepts for Python programming. You can store data in variables with appropriate types (integers, floats, strings, booleans), use comparison operators to evaluate conditions, and make decisions with if/elif/else statements. Continue practicing with real projects, explore more advanced topics like loops and functions, and build amazing applications! Remember: the best way to master programming is through consistent practice and building projects that interest you."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Success"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "Needs Practice"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "node-combined-ex",
+      "label": "Next"
+    },
+    {
+      "id": "c6b",
+      "source": "node-combined-ex",
+      "target": "n6",
+      "label": "Next"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "Success"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Needs Practice"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "node-review-dec",
+      "label": "Next"
+    },
+    {
+      "id": "c9b",
+      "source": "node-review-dec",
+      "target": "n1",
+      "label": "Review Variables and Data Types"
+    },
+    {
+      "id": "c9c",
+      "source": "node-review-dec",
+      "target": "n4",
+      "label": "Review Control Flow"
+    },
+    {
+      "id": "c9d",
+      "source": "node-review-dec",
+      "target": "n9",
+      "label": "Complete the Course"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n4",
+      "label": "Review Variables and Control Flow"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete the Course"
+    }
+  ],
+  "generated_at": "2026-03-26T09:15:56.024534+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T09:23:37.930982+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

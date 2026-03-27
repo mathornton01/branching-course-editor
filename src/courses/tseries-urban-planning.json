@@ -1,0 +1,408 @@
+{
+  "id": "tseries-urban-planning",
+  "title": "Time Series Analysis for Urban Planners",
+  "description": "Master time series analysis techniques through real urban planning scenarios. Learn to analyze temporal patterns, forecast city trends, and detect system anomalies.",
+  "topic": "Time Series Analysis",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "time series",
+    "urban planning",
+    "data analysis",
+    "forecasting",
+    "anomaly detection"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Cities Need Time Series Analysis",
+      "content": "Urban planners make decisions about infrastructure, transportation, and services based on how city metrics change over time. Traffic patterns, population growth, water consumption, and energy usage all follow temporal trends and cycles. By analyzing these time series\u2014sequences of measurements taken at regular intervals\u2014cities can make data-driven decisions. This course teaches you three powerful ways to extract insights from urban time series data.",
+      "next": [
+        "n2"
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Focus Area",
+      "content": "Time series analysis serves different planning needs. Which aspect interests you most?",
+      "choices": [
+        {
+          "label": "Understand Patterns: Analyze seasonal and cyclical trends in city data",
+          "next": "n3"
+        },
+        {
+          "label": "Make Predictions: Forecast future urban demand and growth",
+          "next": "n6"
+        },
+        {
+          "label": "Spot Problems: Detect anomalies and system failures early",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Temporal Patterns in Urban Data",
+      "content": "Cities exhibit predictable patterns over time. Traffic volume peaks during rush hours and dips at night. Energy consumption varies seasonally\u2014higher in summer (air conditioning) and winter (heating). Population movements follow weekly cycles: weekday commuting differs sharply from weekend behavior. Time series decomposition breaks data into three components: trend (long-term direction), seasonality (repeating cycles), and residuals (random variation). Understanding these patterns lets planners optimize resources, schedule maintenance, and anticipate peak demand periods.",
+      "next": [
+        "n4"
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Traffic Flow Case Study: Rush Hour Patterns",
+      "content": "A city analyzed hourly traffic counts on Main Street for 2 years. The data shows a clear daily seasonality: flow peaks at 8-9 AM and 5-6 PM (commuting hours), drops to 20% of peak at 2 AM. Weekly seasonality appears too\u2014weekends have 30% lower overall traffic. A slight trend shows +2% growth year-over-year. Using these insights, the city shifted trash collection to off-peak hours, coordinated traffic signals based on predictable patterns, and planned road repairs during low-traffic periods. This scheduling saved $2M annually by avoiding congestion.",
+      "next": [
+        "n5"
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Understanding Urban Time Series Patterns",
+      "content": "Test your understanding of temporal patterns, seasonality, and trend analysis in city systems.",
+      "questions": [
+        {
+          "question": "A city's water consumption data shows high usage in summer months but consistent daily peaks at 7-9 AM and 6-8 PM. Which component of time series decomposition explains the daily peaks?",
+          "options": [
+            "Trend component",
+            "Seasonality component",
+            "Residual component",
+            "Cyclical component"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Trend describes long-term direction, not repeating daily patterns.",
+            "Correct! Daily repeating patterns are seasonality (intra-day seasonality in this case).",
+            "Residuals are random, unexplained variation\u2014not a predictable daily pattern.",
+            "Cyclical is sometimes used synonymously with seasonality, but seasonality is the standard term for repeating patterns."
+          ],
+          "explanation": "Seasonality captures repeating patterns at fixed intervals. Daily peaks in water usage at shower times are seasonal patterns, even though 'seasonality' often implies yearly seasons."
+        },
+        {
+          "question": "A transit planner notices that subway ridership increased 8% year-over-year for 3 consecutive years, with consistent daily and weekly patterns. Which component would you use to identify the 8% annual increase?",
+          "options": [
+            "Seasonal adjustment",
+            "Trend analysis",
+            "Anomaly detection",
+            "Stationarity testing"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Seasonal adjustment removes seasonal patterns but doesn't identify growth.",
+            "Correct! Trend analysis isolates the long-term direction of change.",
+            "Anomaly detection flags unexpected deviations, not consistent growth.",
+            "Stationarity testing checks if statistical properties change, but doesn't measure growth rate."
+          ],
+          "explanation": "The trend component reveals the underlying growth rate. Once you separate out daily/weekly seasonality, the 8% annual growth becomes visible as a clear trend."
+        },
+        {
+          "question": "After decomposing parking occupancy data, you find strong daily seasonality (peaks during business hours) but residuals are large and random. What does this tell you?",
+          "options": [
+            "The forecast will be very accurate",
+            "Parking demand is predictable on a daily cycle, but other unexplained factors cause variation",
+            "The data is not suitable for time series analysis",
+            "There is no trend in parking demand"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Large random residuals suggest limited forecast accuracy.",
+            "Correct! Strong seasonality means daily patterns are predictable; large residuals mean other factors (events, weather, etc.) cause unexpected changes.",
+            "Large residuals don't disqualify time series analysis; they just mean other variables matter.",
+            "Residuals don't tell us about trend; trend could still exist."
+          ],
+          "explanation": "This result suggests you've captured the main pattern (daily cycle) but need additional variables (weather, events, holidays) to explain the remaining variation."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n12",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Forecasting Urban Demand and Growth",
+      "content": "Cities must anticipate future needs to plan infrastructure, housing, schools, and services. Time series forecasting uses historical patterns to project future values. Methods range from simple (exponential smoothing) to complex (ARIMA, machine learning). The key principle: if your past data is stationary (mean and variance don't change over time), simple methods work well. If you have trends or changing patterns, you need methods that adapt. Urban planners use forecasts to decide whether to expand a highway, build new housing, or increase utility capacity. Accuracy directly impacts budget allocation\u2014overestimating wastes money; underestimating creates bottlenecks.",
+      "next": [
+        "n7"
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Housing Demand Forecasting: Planning for Growth",
+      "content": "A suburban city analyzed 20 years of single-family home permits and population growth, finding a clear upward trend (+3% annually). Using ARIMA forecasting, they projected that housing demand would exceed supply by 2028 unless construction increased. Armed with this forecast, city council approved zoning changes and infrastructure funding 5 years early. They coordinated water system expansions, road improvements, and school capacity additions before crises hit. When housing demand surged in 2028, the infrastructure was ready. Without forecasting, the city would have faced school overcrowding, water shortages, and traffic chaos\u2014costing far more to fix retroactively.",
+      "next": [
+        "n8"
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Urban Forecasting Concepts",
+      "content": "Evaluate your understanding of forecasting methods, stationarity, and their application to city planning.",
+      "questions": [
+        {
+          "question": "A city's electricity demand shows an upward trend (growing 5% annually) and strong seasonal patterns (high in summer/winter). Which forecasting approach is most appropriate?",
+          "options": [
+            "Simple moving average (assumes stable demand)",
+            "Exponential smoothing (adapts to recent changes)",
+            "ARIMA after differencing to remove trend (handles both trend and seasonality)",
+            "Linear regression only (ignores seasonal cycles)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Moving average won't capture the trend or seasonal patterns well.",
+            "Exponential smoothing helps but doesn't explicitly model seasonality.",
+            "Correct! Differencing removes the trend, ARIMA then captures seasonality and any remaining patterns.",
+            "Linear regression alone ignores the repeating seasonal patterns."
+          ],
+          "explanation": "When data has both trend and seasonality, methods like ARIMA that differentiate (remove trend) and model seasonal patterns are most effective."
+        },
+        {
+          "question": "You're forecasting parking demand at a downtown lot. Your model has an RMSE (prediction error) of \u00b150 spaces on 500-space lot. What does this tell you?",
+          "options": [
+            "The forecast is always wrong",
+            "The forecast is accurate enough for general planning but not for daily operations",
+            "You must use a more complex model",
+            "Parking demand is unpredictable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "RMSE of \u00b150 out of 500 (10% error) is reasonable for aggregate planning.",
+            "Correct! For monthly/annual planning, 10% error is acceptable; for real-time operations, you'd need better accuracy.",
+            "More complexity isn't always better; this error level may be sufficient for your use case.",
+            "The model explains most variation; planning decisions can work with this uncertainty."
+          ],
+          "explanation": "Forecast accuracy should match your decision context. Planning infrastructure needs annual forecasts; real-time parking guidance needs minute-level accuracy."
+        },
+        {
+          "question": "A transit authority forecasts ridership using data from 2019-2022, but 2023 shows a permanent 15% increase due to new development. Why might the old forecast be unreliable?",
+          "options": [
+            "The data is too old",
+            "The forecast method was wrong",
+            "A structural break occurred: the underlying data process changed, breaking the assumption that past patterns continue",
+            "The forecast was made incorrectly"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Timing alone doesn't cause inaccuracy; the issue is structural change.",
+            "The method might be fine, but the data it learned from no longer represents reality.",
+            "Correct! Structural breaks\u2014permanent shifts in the underlying process\u2014invalidate forecasts based on pre-break data.",
+            "The method execution isn't the issue; the model's assumptions are violated."
+          ],
+          "explanation": "Time series forecasting assumes the past predicts the future. Major events (new developments, policy changes, crises) create structural breaks that require reforecasting with updated data or manual adjustments."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n12",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Detecting Anomalies in Urban Systems",
+      "content": "Cities operate complex interconnected systems\u2014water, power, transport, communications. When something breaks, early detection prevents cascading failures. Anomaly detection in time series identifies unusual deviations from expected patterns. A water main break causes sudden usage spikes or drops. A power station failure creates unusual voltage fluctuations. A traffic accident triggers congestion patterns that don't match historical norms. Anomalies differ from noise: noise is random, small variation; anomalies are significant, often systematic deviations. Detection methods use baselines (expected values based on history) and thresholds\u2014if today's value deviates beyond a threshold, an alert fires. Early alerts give maintenance crews hours or days to respond, preventing service disruptions.",
+      "next": [
+        "n10"
+      ]
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Water System Anomaly Detection: Preventing Breaks",
+      "content": "A water utility monitored consumption across 12 districts hourly. Normal patterns were well-documented: residential areas peak at 7-8 AM and 6-8 PM; commercial zones peak midday. An algorithm compared each hour against historical averages for that hour and day-of-week, flagging any deviation >20%. One Tuesday evening, District 7 showed 35% lower flow than normal\u2014an anomaly. Investigation revealed a water main break on Oak Street; the deviation preceded customer complaints by 6 hours. Repair crews mobilized quickly and fixed the break before significant service loss occurred. The same algorithm later detected a faulty meter misreporting usage, and caught a hydrant theft (unusual late-night usage spike). Anomaly detection became a critical operations tool, saving thousands in emergency repairs and service disruptions annually.",
+      "next": [
+        "n11"
+      ]
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Assessment: Anomaly Detection in Cities",
+      "content": "Test your understanding of anomaly detection methods and their urban applications.",
+      "questions": [
+        {
+          "question": "A city's air quality monitoring station measures PM2.5 hourly. The 30-day average is 35 \u03bcg/m\u00b3 with a standard deviation of 5. One hour shows 68 \u03bcg/m\u00b3. Is this an anomaly?",
+          "options": [
+            "No, it's just normal variation",
+            "No, it's only 2 standard deviations above the mean",
+            "Yes, it's 6.6 standard deviations above the mean\u2014likely an anomaly or real pollution spike",
+            "Cannot determine without more data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A reading nearly double the average is too extreme to dismiss as variation.",
+            "Actually, it's 33/5 = 6.6 standard deviations\u2014far beyond the typical \u00b12-3 range.",
+            "Correct! 6.6 standard deviations is extremely unusual (probability <0.0001), indicating either a sensor error or a real pollution event requiring investigation.",
+            "You have the statistical tools to evaluate this."
+          ],
+          "explanation": "In time series anomaly detection, readings beyond 3 standard deviations are typically flagged. This reading at 6.6\u03c3 is almost certainly anomalous and warrants investigation."
+        },
+        {
+          "question": "Traffic sensors on Route 9 show hourly vehicle counts. Wednesday 2 PM normally averages 450 vehicles (\u00b140). One Wednesday shows 380 vehicles. Is this an anomaly worth investigating?",
+          "options": [
+            "Yes, it's clearly below normal and indicates a problem",
+            "No, 380 is within the normal range; it's just random variation",
+            "Maybe\u2014it depends on the context (is there an accident, closed lane, special event?)",
+            "The statistical criterion isn't met, but domain knowledge might suggest investigation"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "It's 1.75 standard deviations below mean\u2014within typical variation.",
+            "Correct, statistically it's within 2\u03c3, but context matters in real operations.",
+            "Correct! Statistics alone don't determine if something is 'anomalous' in practice.",
+            "Right\u2014this illustrates that anomaly detection requires domain expertise, not just statistics."
+          ],
+          "explanation": "A 380-count reading is within normal statistical variation (about 1.75 standard deviations below mean). But if a lane closure or special event occurred, it's not anomalous\u2014it's expected. Anomaly detection systems must combine statistical thresholds with contextual knowledge."
+        },
+        {
+          "question": "An electricity grid operator sets an anomaly detection threshold: flag any hourly demand more than 15% above the historical average for that hour. What's a risk of this approach?",
+          "options": [
+            "It might miss true anomalies that are smaller",
+            "It might flag normal variation on hot days when demand legitimately increases",
+            "It won't work if there's no seasonal pattern",
+            "Thresholds are always unreliable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "True, smaller anomalies would be missed, but that's often an acceptable trade-off.",
+            "Correct! If a heat wave causes demand 12% above historical average (but 15% below threshold), it's not flagged, even if capacity is tight. The threshold is too coarse for dynamic conditions.",
+            "Seasonal patterns help, but the real issue is fixed thresholds in dynamic environments.",
+            "Thresholds work well when set thoughtfully; the issue is how to set them adaptively."
+          ],
+          "explanation": "Fixed thresholds (\u00b115%) work for stable environments but struggle with gradual change (climate trends) or temporary conditions (seasonal extremes). Adaptive thresholds or ensemble methods work better in complex urban systems."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n12",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Integrating Time Series Insights for City Planning",
+      "content": "The three approaches you explored\u2014analyzing patterns, forecasting demand, and detecting anomalies\u2014work together in real urban planning. A smart city integrates all three: it understands traffic patterns to optimize signals, forecasts population growth to expand infrastructure, and detects system failures to maintain service reliability. Consider a multi-modal transportation network: analyze historical patterns to understand peak commuting hours, forecast where population will grow to plan new transit lines, and detect anomalies (a broken train signal, unexpected congestion) to dispatch crews. Smart water systems analyze consumption patterns, forecast demand under growth scenarios, and detect leaks early. Comprehensive urban data systems combine pattern analysis, forecasting, and anomaly detection to create responsive, resilient cities that serve residents better and operate more efficiently.",
+      "next": [
+        "n13"
+      ]
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Master Time Series Analysis for Urban Planning",
+      "content": "You've learned to extract three critical insights from time series data: recognize temporal patterns that reveal city rhythms, forecast future demand to guide infrastructure investment, and detect anomalies that signal problems. These skills help you make data-driven decisions that shape how cities grow, operate, and serve residents. Apply these methods to your city's own data\u2014transit ridership, energy consumption, crime, permits, environmental metrics. Start small: analyze one year of a simple metric, identify its patterns, and share insights with colleagues. As you gain confidence, tackle multi-variable forecasts and real-time anomaly detection. Your ability to read the data tells cities how to thrive."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin exploration"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Temporal Patterns"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn by example"
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": "Self-assess"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n12",
+      "label": "Pass assessment"
+    },
+    {
+      "id": "c2b",
+      "source": "n2",
+      "target": "n6",
+      "label": "Forecasting"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "Learn by example"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Self-assess"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n12",
+      "label": "Pass assessment"
+    },
+    {
+      "id": "c2c",
+      "source": "n2",
+      "target": "n9",
+      "label": "Anomaly Detection"
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": "Learn by example"
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": "Self-assess"
+    },
+    {
+      "id": "c11",
+      "source": "n11",
+      "target": "n12",
+      "label": "Pass assessment"
+    },
+    {
+      "id": "c12",
+      "source": "n5",
+      "target": "n5",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c13",
+      "source": "n8",
+      "target": "n8",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c14",
+      "source": "n11",
+      "target": "n11",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c15",
+      "source": "n12",
+      "target": "n13",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T07:12:17.934567+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,442 @@
+{
+  "id": "ml-fundamentals-course",
+  "title": "Machine Learning Fundamentals",
+  "description": "Master the core concepts of machine learning through an interactive, adaptive learning path",
+  "topic": "Machine Learning",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "machine-learning",
+    "fundamentals",
+    "supervised-learning",
+    "data-science",
+    "algorithms"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Machine Learning?",
+      "content": "Machine Learning is a branch of artificial intelligence that enables systems to learn and improve from experience without explicit programming. Instead of following predetermined rules, ML algorithms identify patterns in data and use those patterns to make predictions or decisions. There are three main types: **Supervised Learning** (learning from labeled examples, like predicting house prices), **Unsupervised Learning** (finding hidden patterns in unlabeled data, like customer segmentation), and **Reinforcement Learning** (learning through trial and error with rewards, like game-playing AI). From recommendation systems suggesting movies to medical diagnosis tools, ML powers many applications we use daily.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "ML Fundamentals Quiz",
+      "content": "Test your understanding of the core concepts of machine learning and its applications.",
+      "questions": [
+        {
+          "question": "You're building a system to detect spam emails. The system has access to thousands of emails labeled as 'spam' or 'not spam'. Which type of machine learning is this?",
+          "options": [
+            "Supervised Learning",
+            "Unsupervised Learning",
+            "Reinforcement Learning",
+            "Deep Learning"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! You have labeled examples (spam/not spam) that the system learns from.",
+            "Not quite. Unsupervised learning finds patterns without labels.",
+            "Not quite. Reinforcement learning learns through rewards and penalties.",
+            "Close, but Deep Learning is more specific. This is fundamentally supervised."
+          ],
+          "explanation": "Supervised Learning uses labeled data where the 'answer' is known. This is perfect for classification tasks like spam detection."
+        },
+        {
+          "question": "An online retailer wants to segment their customers into groups with similar shopping behaviors, but they don't have predefined categories. Which approach is best?",
+          "options": [
+            "Supervised Learning with a classification algorithm",
+            "Unsupervised Learning with clustering",
+            "Reinforcement Learning with customer feedback",
+            "Ask customers to label themselves"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. You don't have predefined labels to supervise with.",
+            "Correct! Clustering finds natural groupings in unlabeled customer data.",
+            "Not the best approach. RL is for sequential decision-making.",
+            "This would be labeling, but it's inefficient at scale."
+          ],
+          "explanation": "Unsupervised Learning, specifically clustering, is ideal when you want to discover natural groups in data without predefined categories."
+        },
+        {
+          "question": "What is the fundamental difference between Supervised and Unsupervised Learning?",
+          "options": [
+            "Supervised uses more data than Unsupervised",
+            "Supervised learning requires labeled data; Unsupervised does not",
+            "Supervised is faster than Unsupervised",
+            "Unsupervised is only for neural networks"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Data size isn't the main difference.",
+            "Correct! The presence or absence of labels is the key distinction.",
+            "Speed varies with implementation, not the learning type.",
+            "Unsupervised can use many types of algorithms."
+          ],
+          "explanation": "Supervised Learning trains on labeled examples (input-output pairs), while Unsupervised Learning finds patterns in unlabeled data."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Understanding ML Learning Types",
+      "content": "Let's work through some real-world scenarios to solidify your understanding of different ML types.",
+      "questions": [
+        {
+          "question": "A bank wants to predict whether a loan applicant will default on their loan. They have historical data with past applicants and their repayment outcomes. What type of ML is this?",
+          "options": [
+            "Unsupervised Learning - clustering loan applicants",
+            "Supervised Learning - predicting default yes/no from labeled history",
+            "Reinforcement Learning - the system learns from loan outcomes",
+            "Transfer Learning - applying patterns from other banks"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No. They have explicit labels (defaulted/didn't default).",
+            "Yes! Historical data with outcomes = labeled data = supervised.",
+            "While outcomes matter, this is primarily supervised prediction.",
+            "Transfer learning is a technique, not the primary approach here."
+          ],
+          "explanation": "The bank has a labeled dataset (applicants + their outcomes), making this a classic supervised learning problem - specifically binary classification (default or not)."
+        },
+        {
+          "question": "A music streaming app analyzes listening patterns across millions of users to find groups with similar tastes, without predefined genres. This is:",
+          "options": [
+            "Supervised Learning - classifying into music genres",
+            "Unsupervised Learning - discovering user preference clusters",
+            "Reinforcement Learning - learning from user ratings",
+            "Semi-supervised Learning"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The app doesn't have predefined genres to classify with.",
+            "Right! Finding natural groupings = unsupervised clustering.",
+            "This discovers groups, not sequential learning with rewards.",
+            "While possible, the clearer approach is unsupervised."
+          ],
+          "explanation": "Without predefined user segments, the app uses unsupervised clustering to discover natural communities of similar listeners."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Supervised Learning: Features, Labels & Patterns",
+      "content": "In supervised learning, we learn from **labeled examples**. Each example has **features** (input variables) and a **label** (the target output we want to predict). For example, to predict house prices, features might include square footage, number of bedrooms, and location, while the label is the actual price. There are two main categories: **Regression** predicts continuous values (house prices, temperature), while **Classification** predicts categories (spam/not spam, disease present/absent). The algorithm finds patterns in the feature-label relationships from training data, then applies these patterns to make predictions on new, unseen data. Quality matters: more varied examples and relevant features lead to better learning.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Supervised Learning Assessment",
+      "content": "Assess your understanding of supervised learning concepts, features, labels, and problem types.",
+      "questions": [
+        {
+          "question": "In a cancer diagnosis ML system: patient age, weight, tumor size, and imaging results are _____, while whether the patient has cancer (yes/no) is the _____.",
+          "options": [
+            "labels; feature",
+            "features; label",
+            "training data; test data",
+            "inputs; algorithm"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Reversed. Patient characteristics are features.",
+            "Correct! Observable characteristics = features; diagnosis outcome = label.",
+            "These are roles in the dataset, not that relationship.",
+            "Features and labels are parts of the data, not the algorithm."
+          ],
+          "explanation": "Features are the input variables the system observes; the label is what we're trying to predict. The system learns the relationship between them."
+        },
+        {
+          "question": "Predicting tomorrow's stock price (e.g., $145.32) is a _____ problem. Predicting whether a customer will cancel their subscription (yes/no) is a _____ problem.",
+          "options": [
+            "regression; classification",
+            "classification; regression",
+            "clustering; regression",
+            "prediction; classification"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Perfect! Continuous values = regression; categories = classification.",
+            "Reversed. Stock prices are continuous.",
+            "Clustering is unsupervised. Stock prices aren't continuous outcomes.",
+            "'Prediction' is too broad. 'Regression/Classification' are specific types."
+          ],
+          "explanation": "Regression handles continuous outputs (any number value); Classification handles discrete categories. This distinction determines which algorithms and metrics you use."
+        },
+        {
+          "question": "What happens if your ML model memorizes training data perfectly but performs poorly on new, unseen data?",
+          "options": [
+            "The model is performing well - it learned the training set",
+            "The model has overfit - it learned noise rather than real patterns",
+            "The model needs more features to improve generalization",
+            "This is impossible; good training performance guarantees good test performance"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Good training performance isn't enough - we need good test performance.",
+            "Exactly! This is overfitting - memorizing details instead of learning true patterns.",
+            "Features help, but the core issue is fitting too closely to training noise.",
+            "Not true. This mismatch (overfit) is very common."
+          ],
+          "explanation": "A model that memorizes training data rather than learning generalizable patterns is overfit. This is why we always evaluate on separate test data."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Features, Labels & Problem Types",
+      "content": "Strengthen your understanding with realistic ML scenarios involving features, labels, and problem classification.",
+      "questions": [
+        {
+          "question": "Building a recommendation system for movies: user's age, genres watched, ratings given, and time of day are features. The system predicts the rating (1-5 stars) the user will give a new movie. This is a _____ problem because we're predicting a _____.",
+          "options": [
+            "classification; category",
+            "regression; continuous value",
+            "clustering; similarity score",
+            "ranking; preference list"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "1-5 stars is continuous, not a discrete category.",
+            "Correct! Ratings are continuous values, so it's regression.",
+            "Clustering is unsupervised; this has labeled ratings.",
+            "Ranking is different; we're predicting actual rating values."
+          ],
+          "explanation": "Since the predicted value (1-5 stars) is continuous and ordered, this is a regression problem, even though stars are discrete numbers. The distinction is whether categories matter or if ordering matters."
+        },
+        {
+          "question": "A manufacturing plant wants to predict equipment failure before it happens. They collect: sensor readings (temperature, vibration), maintenance history, and equipment age. Past equipment failures are labeled. This setup is:",
+          "options": [
+            "Unsupervised - discovering equipment failure patterns",
+            "Supervised regression - predicting exact time to failure",
+            "Supervised classification - predicting failure yes/no",
+            "Reinforcement learning - learning from equipment repairs"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "They have labels (failure/no failure), so it's supervised.",
+            "Possible, but the clearer formulation is predicting the binary outcome.",
+            "Right! Predicting binary outcomes from labeled data = classification.",
+            "RL applies to sequential decision-making, not this predictive task."
+          ],
+          "explanation": "With labeled historical failures, this is supervised learning. Whether equipment fails (yes/no) is a classification problem. The system learns to identify patterns that precede failures."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Training, Evaluation & Avoiding Overfitting",
+      "content": "Machine learning models must be rigorously evaluated to ensure they work on new data, not just memorize training examples. We split data into **training data** (used to teach the model) and **test data** (used to fairly evaluate it). Key evaluation metrics differ by problem type: **Accuracy** works for classification; **Mean Squared Error (MSE)** or **R\u00b2** for regression. **Overfitting** occurs when models fit training noise instead of real patterns, leading to poor generalization. **Cross-validation** helps by splitting training data into multiple folds, training and validating on each fold to get robust performance estimates. **Regularization** techniques penalize overly complex models. Remember: a model that scores 99% on training but 70% on test data has overfit and won't perform well in production.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "ML Fundamentals Comprehensive Assessment",
+      "content": "Integrate your knowledge of ML types, supervised learning, and evaluation to tackle real-world scenarios.",
+      "questions": [
+        {
+          "question": "You build a credit card fraud detection model. It achieves 99% accuracy on training data but only 75% accuracy on test data. What's most likely happening?",
+          "options": [
+            "The model is working perfectly and ready for production",
+            "The test set is too small or unrepresentative",
+            "The model is overfitting to training data patterns and noise",
+            "You need more features to improve generalization"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A 24% gap between train and test is a red flag.",
+            "While possible, the large gap indicates overfitting, not data issues.",
+            "Correct! This train-test gap is a classic overfitting signature.",
+            "Features might help, but the core issue is the model complexity."
+          ],
+          "explanation": "A large gap between training and test accuracy is the hallmark of overfitting. The model learned training data specifics rather than generalizable fraud patterns."
+        },
+        {
+          "question": "You're predicting customer lifetime value ($100-$50,000+). You split your 1000 customers into 800 for training and 200 for testing. Which evaluation metric is most appropriate?",
+          "options": [
+            "Accuracy (percentage of correct predictions)",
+            "Precision and Recall (for classification)",
+            "Mean Squared Error or R\u00b2 (for continuous values)",
+            "Confusion Matrix (classification performance)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Accuracy is for classification, not continuous predictions.",
+            "Precision/Recall apply to yes/no predictions, not continuous values.",
+            "Exactly! Predicting continuous monetary values uses regression metrics.",
+            "Confusion matrix is for classification, not regression."
+          ],
+          "explanation": "Predicting continuous values like customer lifetime value requires regression metrics. MSE measures average prediction error; R\u00b2 shows what percentage of variance the model explains."
+        },
+        {
+          "question": "A medical imaging AI predicts whether a scan shows a tumor (yes/no). A patient has a tumor but the model misses it (false negative). From an ML perspective, which mistake is worse?",
+          "options": [
+            "A false positive is worse - wrongly diagnosing healthy patients",
+            "A false negative is worse - missing actual tumors endangers patients",
+            "Both are equally bad - all errors are equally problematic",
+            "Mistakes don't matter if overall accuracy is high"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "False positives cause unnecessary anxiety, but missing tumors is dangerous.",
+            "Correct! In healthcare, missing disease (false negative) has serious consequences.",
+            "Different errors have different real-world impacts.",
+            "Overall accuracy can be misleading; error types matter contextually."
+          ],
+          "explanation": "Context matters enormously. In medical diagnosis, false negatives (missing disease) are typically more harmful than false positives. ML practitioners must choose metrics aligned with business/ethical priorities."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Advanced ML Practice: Real-World Integration",
+      "content": "Apply integrated ML knowledge to complex, realistic scenarios combining multiple concepts.",
+      "questions": [
+        {
+          "question": "You're building a loan approval system using supervised learning. You have 10,000 historical loans with approval/rejection decisions and 50 features per application. Your model achieves 94% accuracy on the test set, but when deployed, it approves very different numbers of loans than your historical approval rate (which was ~70%). What might be wrong?",
+          "options": [
+            "High accuracy proves the model will work well in production",
+            "The model may have learned historical biases instead of true approval logic",
+            "You need more features to better predict approval",
+            "The test set was too different from real-world applications"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "High accuracy doesn't guarantee good real-world performance.",
+            "Correct! The model may have learned proxy patterns for bias or non-generalizable quirks.",
+            "Features might help, but the core issue is the pattern learned.",
+            "If deployment differs from test data, that's a distribution shift, but the approval rate difference suggests learned bias."
+          ],
+          "explanation": "High accuracy can mask problems. The model might have learned historical decision-making patterns that don't reflect true approval logic, or it learned proxies for protected characteristics. Always validate real-world alignment, not just accuracy."
+        },
+        {
+          "question": "You're predicting house prices (regression). You have 500 houses in your training set. You notice: Training R\u00b2 = 0.91, Test R\u00b2 = 0.87. What does this tell you?",
+          "options": [
+            "The model is overfit and needs to be simpler",
+            "The model is well-generalized; the small gap suggests good real-world performance",
+            "You need more training data to improve generalization",
+            "A 4% gap in R\u00b2 is too large and unacceptable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A small gap between train and test is actually a good sign, not overfitting.",
+            "Correct! A 4% gap suggests the model learned real patterns, not noise.",
+            "The small generalization gap indicates you have enough data.",
+            "Small gaps are normal and healthy; large gaps (>10-20%) would be concerning."
+          ],
+          "explanation": "A small train-test performance gap indicates the model found generalizable patterns, not memorized training data. This model is likely to perform well on new houses."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Congratulations! ML Fundamentals Mastered",
+      "content": "You've successfully completed Machine Learning Fundamentals! You now understand: (1) The three main types of ML - Supervised, Unsupervised, and Reinforcement Learning, and when each applies. (2) Supervised learning details - how features and labels drive prediction, the difference between regression and classification. (3) Critical evaluation practices - splitting data, using appropriate metrics, recognizing and avoiding overfitting. You have a solid foundation to explore advanced topics like deep learning, natural language processing, or specialized applications. Next steps: try building models with real datasets using scikit-learn or TensorFlow, participate in Kaggle competitions, or dive deeper into specific ML domains that interest you."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass (\u22652/3)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "retry (<2/3)"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "review again"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass (\u22652/3)"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "retry (<2/3)"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "review again"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass (\u22652/3)"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "retry (<2/3)"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "review again"
+    }
+  ],
+  "generated_at": "2026-03-27T03:36:35.842376+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,272 @@
+{
+  "id": "course-neural-networks-deep-learning",
+  "title": "Neural Networks and Deep Learning Fundamentals",
+  "description": "A comprehensive introduction to neural networks and deep learning, from basic perceptrons to convolutional neural networks.",
+  "topic": "Machine Learning",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "neural-networks",
+    "deep-learning",
+    "machine-learning",
+    "AI"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Neural Networks",
+      "content": "Neural networks are computational systems inspired by biological neurons. A neural network consists of interconnected nodes (neurons) organized in layers: input, hidden, and output. Each connection between neurons has a weight that gets adjusted during training. The network learns by processing examples and adjusting weights through backpropagation. Neural networks are powerful tools for pattern recognition, classification, and prediction tasks.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "The Perceptron: A Simple Neural Network",
+      "content": "Consider a perceptron classifying emails as spam (1) or not spam (0). It has three input features: word_frequency (w\u2081=0.3), sender_reputation (w\u2082=0.5), and attachment_count (w\u2083=0.2). For an email with inputs [2, 0.8, 1], the calculation is: (2\u00d70.3) + (0.8\u00d70.5) + (1\u00d70.2) = 1.4. If the threshold is 1.0, the output is 1 (spam). The weights are learned from examples, making the perceptron adapt to new spam patterns.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Quiz: Neural Network Basics",
+      "content": "Test your understanding of how neural networks and perceptrons work.",
+      "questions": [
+        {
+          "question": "In a perceptron, what role do weights play?",
+          "options": [
+            "They determine the importance and influence of each input on the output decision",
+            "They store the training data for the network",
+            "They measure how many layers the network has",
+            "They control the speed of computation"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Weights control how much each input influences the final decision.",
+            "Incorrect. Training data is separate from weights. Weights are learned from data.",
+            "Incorrect. The number of layers is architecture, not determined by weights.",
+            "Incorrect. Computation speed depends on hardware, not weights."
+          ],
+          "explanation": "Weights are the learnable parameters of a neural network. During training, the network adjusts these weights to minimize prediction errors, effectively learning patterns in the data."
+        },
+        {
+          "question": "What is the primary purpose of hidden layers in a neural network?",
+          "options": [
+            "To store backup data in case the model fails",
+            "To learn complex patterns and non-linear relationships in data",
+            "To reduce the number of parameters needed",
+            "To make the network run faster"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Neural networks don't use hidden layers for data backup.",
+            "Correct! Hidden layers enable networks to learn complex patterns and capture non-linear relationships.",
+            "Incorrect. Hidden layers actually add parameters, though they improve model capacity.",
+            "Incorrect. More layers generally increase computation time, not reduce it."
+          ],
+          "explanation": "Hidden layers are the key to deep learning's power. They extract increasingly abstract features from the input, allowing the network to model complex decision boundaries that a single-layer network couldn't represent."
+        }
+      ],
+      "pass_threshold": 1.5,
+      "success_target": "n4",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "You've mastered neural network basics! You can now choose to explore deep learning and advanced architectures, or conclude the course here.",
+      "choices": [
+        {
+          "label": "Learn Deep Learning and CNNs",
+          "next": "n6"
+        },
+        {
+          "label": "End Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Practice: Reinforcing Neural Network Concepts",
+      "content": "Let's reinforce your understanding with additional practice questions.",
+      "questions": [
+        {
+          "question": "If a perceptron has inputs [2, 2, 1], weights [0.5, 0.4, 0.3], and a bias of 0.2, what is the weighted sum before applying the activation function?",
+          "options": [
+            "1.5",
+            "1.8",
+            "2.3",
+            "2.0"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Check your multiplication and addition.",
+            "Incorrect. You may have missed the bias term.",
+            "Correct! (2\u00d70.5) + (2\u00d70.4) + (1\u00d70.3) + 0.2 = 1.0 + 0.8 + 0.3 + 0.2 = 2.3",
+            "Incorrect. Recalculate the weighted sum step by step."
+          ],
+          "explanation": "To calculate the weighted sum, multiply each input by its corresponding weight, sum them all, and add the bias term. This is the pre-activation output of the neuron."
+        },
+        {
+          "question": "Which of the following is NOT a characteristic of deep learning?",
+          "options": [
+            "Uses multiple hidden layers to learn hierarchical representations",
+            "Requires less training data than shallow networks",
+            "Can automatically extract relevant features from raw data",
+            "Performs better on complex, high-dimensional problems"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Deep learning excels at learning hierarchical features through multiple layers.",
+            "Correct! Deep networks typically require MORE data, not less, due to having more parameters.",
+            "Incorrect. Feature extraction is a key advantage of deep learning over traditional methods.",
+            "Incorrect. Deep learning is particularly effective for complex, high-dimensional problems."
+          ],
+          "explanation": "One of the trade-offs of deep learning is that it requires more training data due to the increased number of parameters to optimize. This is why data collection and augmentation are critical in deep learning projects."
+        }
+      ],
+      "pass_threshold": 1.5,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Deep Learning Fundamentals",
+      "content": "Deep learning uses neural networks with many hidden layers to learn hierarchical representations of data. Backpropagation is the key algorithm that enables training\u2014it calculates gradients by working backwards through the network, allowing weights at all levels to be optimized. Convolutional Neural Networks (CNNs) are specialized for image processing, using convolutional layers that detect features like edges and textures. Recurrent Neural Networks (RNNs) excel at sequential data like text and time series. Deep learning has achieved breakthrough results in computer vision, natural language processing, and game playing.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Convolutional Neural Networks (CNNs) for Image Recognition",
+      "content": "Consider a CNN trained to recognize handwritten digits. The first convolutional layer applies small filters (5\u00d75 kernels) that detect basic features like horizontal and vertical edges. Each filter produces a feature map showing where that feature appears in the image. A second convolutional layer combines these basic features to detect more complex patterns like corners and curves. Max pooling layers downsample the feature maps, reducing computation while preserving important information. Finally, fully connected layers classify the image by combining all learned features. This hierarchical feature learning is why CNNs outperform fully-connected networks on image tasks.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Quiz: Deep Learning Concepts",
+      "content": "Test your understanding of deep learning architectures and training.",
+      "questions": [
+        {
+          "question": "What is the main advantage of convolutional layers in CNNs compared to fully connected layers for image processing?",
+          "options": [
+            "They require more parameters and can memorize images better",
+            "They exploit spatial structure by using local receptive fields and weight sharing",
+            "They are faster to compute but less accurate",
+            "They can only process grayscale images"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Convolutional layers actually use fewer parameters through weight sharing.",
+            "Correct! Convolutional layers use shared weights and local connectivity, which is efficient and effective for images.",
+            "Incorrect. Convolutional layers are actually quite efficient computationally.",
+            "Incorrect. CNNs work with both grayscale and color images."
+          ],
+          "explanation": "Convolutional layers exploit the spatial structure of images. A single filter slides across the image, detecting the same feature everywhere. This weight sharing dramatically reduces parameters compared to fully connected layers, while the local receptive field captures spatial relationships effectively."
+        },
+        {
+          "question": "In the backpropagation algorithm, what is the gradient used for?",
+          "options": [
+            "To determine which layer to remove from the network",
+            "To calculate how much each weight should change to reduce prediction error",
+            "To measure the accuracy of the model on test data",
+            "To compress the network size"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Backpropagation doesn't automatically remove layers.",
+            "Correct! Gradients tell us the direction and magnitude to adjust weights during training.",
+            "Incorrect. That's what validation metrics do, not gradients.",
+            "Incorrect. Model compression is a separate technique."
+          ],
+          "explanation": "Backpropagation calculates the gradient of the loss function with respect to each weight. The gradient points in the direction of steepest increase in error, so moving weights in the opposite direction reduces error. This is the foundation of gradient descent optimization."
+        }
+      ],
+      "pass_threshold": 1.5,
+      "success_target": "n9",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've successfully completed the Neural Networks and Deep Learning Fundamentals course. You've learned how neural networks work, from basic perceptrons to advanced convolutional networks. You now understand key concepts like weights, hidden layers, backpropagation, and feature learning. To deepen your knowledge, consider experimenting with frameworks like TensorFlow or PyTorch, and working on real datasets. The field of deep learning is rapidly evolving\u2014keep learning and building!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Introduction \u2192 Example"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Example \u2192 Assessment"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n5",
+      "label": "Fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n6",
+      "label": "Learn Deep Learning"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "End Course"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n9",
+      "label": "Practice \u2192 End"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Content \u2192 Example"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Example \u2192 Assessment"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n5",
+      "label": "Fail"
+    }
+  ],
+  "generated_at": "2026-03-26T09:45:18.803377+00:00",
+  "model": "claude-haiku-4-5"
+}

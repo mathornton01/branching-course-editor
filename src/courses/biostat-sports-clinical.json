@@ -1,0 +1,133 @@
+{
+  "id": "biostat-sports-clinical",
+  "title": "Biostatistics for Clinical Research: A Sports Analytics Guide",
+  "description": "Learn biostatistics principles through real sports medicine scenarios. Design rigorous clinical studies to evaluate athlete performance interventions using epidemiological principles.",
+  "topic": "Biostatistics for Clinical Research",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "biostatistics",
+    "clinical research",
+    "study design",
+    "statistical analysis",
+    "sports medicine",
+    "epidemiology"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Athletic Recovery Protocol Trial",
+      "content": "Your sports medicine team has developed an innovative recovery protocol combining cryotherapy, targeted stretching, and sleep optimization aimed at reducing injury rates. You need to evaluate whether this intervention actually works by designing and analyzing a clinical study. The core challenge: distinguish true treatment effects from random variation, confounding factors, and measurement error. This requires rigorous biostatistical thinking. Let's explore how elite sports organizations approach evidence-based medicine."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Study Design Strategy",
+      "content": "How will you evaluate the recovery protocol's true effectiveness?",
+      "choices": [
+        {
+          "label": "Design a randomized controlled trial with athletes",
+          "next": "n3"
+        },
+        {
+          "label": "Compare athletes who voluntarily adopted the protocol",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Designing a Rigorous RCT in Sports Medicine",
+      "content": "You recruit 100 elite athletes and randomly assign 50 to receive your recovery protocol and 50 to standard recovery (control). Randomization is critical\u2014it balances unknown confounders like natural talent, coaching quality, and facility access between groups. Your primary endpoint is season injury incidence; secondary endpoint is return-to-play time. Using sample size calculations: to detect a clinically meaningful 35% relative injury reduction with 80% power requires 50 athletes per group. You must pre-specify all analysis plans before seeing data to avoid p-hacking and selective reporting bias. This prospective design is the gold standard in clinical research."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Choose Your Statistical Reporting Approach",
+      "content": "You've completed your RCT. Data shows injury reduction. How will you communicate results?",
+      "choices": [
+        {
+          "label": "Report p-values and declare statistical significance",
+          "next": "n5"
+        },
+        {
+          "label": "Report effect sizes, confidence intervals, and clinical significance",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Incomplete Analysis: P-Value Trap",
+      "content": "You announce injury reduction is 'statistically significant' at p=0.04. Unfortunately, you didn't report the effect size: actual injury reduction was only 2.5% (from 8% to 7.8 baseline). The 95% confidence interval spans [0.1%, 5.2%]\u2014the true effect could be negligible. Coaching staff asks: 'Is a 2.5% injury reduction worth implementing?' You cannot answer with just p-values. Your study fails to influence practice guidelines. Clinical trialists worldwide now demand effect sizes alongside p-values. Lesson: p-values answer 'Is there an effect?' but effect sizes answer 'How large and clinically important is it?' Both are essential\u2014significance \u2260 clinical importance."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Rigorous Evidence-Based Practice Change",
+      "content": "Your results show 28% relative injury reduction (absolute risk: 8% \u2192 5.8%, OR=0.72, 95% CI [0.48, 1.08], p=0.11). Though p>0.05, the effect size is substantial. Return-to-play improved by 5.1 days (95% CI [2.3, 7.9], p=0.0004). You report confidence intervals and effect sizes alongside p-values, showing the protocol has meaningful clinical benefit. Medical review boards approve league-wide implementation. Your properly designed RCT with pre-specified endpoints, transparent reporting, and effect size communication produces actionable evidence that changes sports medicine practice. This is how biostatistics drives evidence-based decision making in clinical research."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Observational Data: The Confounding Problem",
+      "content": "Instead of randomization, you compare injury rates between athletes who voluntarily adopted your recovery protocol versus those using standard recovery. This observational approach seems efficient. However, critical confounders lurk: athletes choosing your protocol likely have invested coaches and better facilities. Measurement bias may occur\u2014athletes using the new protocol might report injuries differently. Selection bias is present\u2014perhaps only injury-prone athletes seek the protocol. Without randomization, you cannot separate the protocol's true effect from these competing explanations. Confounding is the fundamental threat to observational study validity in clinical research."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Confounding Undermines Conclusions",
+      "content": "Your observational analysis shows impressive 35% injury reduction. You confidently recommend league-wide adoption. Six months later, an independent RCT finds zero effect. Your result was entirely driven by confounding: volunteer athletes had superior coaching and infrastructure, not better outcomes from the protocol. You've wasted resources on an ineffective intervention and damaged credibility in your organization. This real-world cautionary tale illustrates why randomized trials are gold standard in clinical research: randomization removes confounding bias that observational designs cannot eliminate. Rigorous study design and honest acknowledgment of limitations are central to biostatistics in clinical medicine."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "RCT approach"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "observational approach"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "p-values only"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "effect sizes + significance"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T06:15:11.069958+00:00",
+  "model": "claude-haiku-4-5"
+}

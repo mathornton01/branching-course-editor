@@ -1,0 +1,337 @@
+{
+  "id": "ca-101",
+  "title": "Computer Architecture Fundamentals",
+  "description": "Learn the core concepts of CPU architecture, instruction execution, and memory hierarchy through interactive examples and assessments.",
+  "topic": "Computer Architecture",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 30,
+  "tags": [
+    "cpu",
+    "memory",
+    "architecture",
+    "processors",
+    "cache"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "CPU Fundamentals",
+      "content": "A CPU (Central Processing Unit) is the brain of a computer. It contains key components: the Arithmetic Logic Unit (ALU) performs calculations, the Control Unit directs operations, and Registers store temporary data. Instructions are executed in cycles: the clock signal times all operations. Understanding how these components work together is essential for grasping computer architecture.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "CPU Instruction Execution Example",
+      "content": "Let's trace a simple instruction: ADD R1, R2, R3 (add values in registers R2 and R3, store in R1). **Fetch**: The Control Unit retrieves this instruction from memory. **Decode**: The instruction is translated to determine operation and operands. **Execute**: The ALU performs the addition. **Store**: The result is placed in R1. This fetch-decode-execute-store cycle happens billions of times per second in modern CPUs.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "CPU Fundamentals Assessment",
+      "content": "Test your understanding of CPU components and the instruction execution cycle.",
+      "questions": [
+        {
+          "question": "Which CPU component performs arithmetic and logical operations?",
+          "options": [
+            "Control Unit",
+            "Arithmetic Logic Unit (ALU)",
+            "Register File",
+            "Memory Controller"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The Control Unit manages instruction flow, not calculations.",
+            "Correct! The ALU performs all arithmetic and logical operations.",
+            "Incorrect. Registers store data, they don't perform operations.",
+            "Incorrect. The Memory Controller manages memory access, not calculations."
+          ],
+          "explanation": "The ALU (Arithmetic Logic Unit) is responsible for executing all mathematical and logical operations in the CPU, such as addition, subtraction, AND, OR operations."
+        },
+        {
+          "question": "In the fetch-decode-execute-store cycle, what does the Control Unit do during the decode phase?",
+          "options": [
+            "Retrieves the instruction from memory",
+            "Determines the operation and operands from the instruction",
+            "Performs the actual calculation",
+            "Writes the result to the register"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Fetching the instruction happens in the fetch phase.",
+            "Correct! The decode phase interprets the instruction to determine what operation to perform.",
+            "Incorrect. The execute phase runs the operation, not the decode phase.",
+            "Incorrect. Storing the result happens in the store phase."
+          ],
+          "explanation": "During the decode phase, the Control Unit translates the binary instruction into signals that tell the rest of the CPU which operation to perform and which operands to use."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Memory Hierarchy and Cache",
+      "content": "Computers use a memory hierarchy to balance speed and capacity. Registers (fastest, ~1 cycle) are built into the CPU, followed by L1/L2/L3 caches (2-20 cycles) for fast temporary storage, then RAM (100-300 cycles) for main memory. Finally, disk storage (millions of cycles) provides permanent storage. The CPU accesses faster memory first; if data isn't found (cache miss), it fetches from slower memory. This hierarchy leverages **locality of reference**: programs typically reuse nearby memory locations, so caching closer data greatly improves performance.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Cache Performance Example",
+      "content": "Consider summing an array of 1 million integers. Without cache optimization, the CPU fetches each value from RAM (100-300 cycles each), taking ~100+ million cycles. With L3 cache (20 cycles), accessing nearby array elements that are already cached costs just 20 cycles. Modern CPUs fetch data in 64-byte lines, so nearby array elements are automatically loaded together. This *spatial locality* means the first element might cost 200 cycles (cache miss), but the next 15 integers cost just 20 cycles each. Caching reduces total time by 10-50x for this workload.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Memory Hierarchy Assessment",
+      "content": "Evaluate your knowledge of memory layers, access times, and cache optimization.",
+      "questions": [
+        {
+          "question": "Approximately how many CPU cycles does it take to access data from L1 cache versus main RAM?",
+          "options": [
+            "L1: 1 cycle, RAM: 10 cycles",
+            "L1: 4 cycles, RAM: 100+ cycles",
+            "L1: 50 cycles, RAM: 200 cycles",
+            "Both take about the same time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. While L1 is fast, RAM access takes much longer than 10 cycles.",
+            "Correct! L1 cache is ~4-5 cycles while main RAM is ~100-300 cycles, a massive difference.",
+            "Incorrect. RAM access is slower than 200 cycles on average, and L1 is much faster.",
+            "Incorrect. There is a huge performance gap between L1 cache and RAM."
+          ],
+          "explanation": "L1 cache provides nearly CPU-speed access (3-5 cycles), while main RAM access is 20-100x slower (100-300+ cycles). This is why cache hierarchy is so critical for performance."
+        },
+        {
+          "question": "What is 'spatial locality' in the context of cache optimization?",
+          "options": [
+            "CPUs always access the same memory location repeatedly",
+            "Data accessed together is stored nearby in memory, so caching one item likely caches others nearby",
+            "Cache automatically predicts which data you'll need next",
+            "Memory is organized in a physical location near the CPU"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Temporal locality describes reusing the same location; spatial locality is different.",
+            "Correct! Spatial locality means nearby memory is accessed in sequence, so cache lines bring multiple items together.",
+            "Incorrect. While CPUs have prefetchers, spatial locality is a property of data access patterns, not prediction.",
+            "Incorrect. This is a physical property, not about cache optimization principle."
+          ],
+          "explanation": "Spatial locality refers to the principle that programs tend to access memory locations near recently accessed locations. CPUs exploit this by loading data in 64-byte cache lines, bringing nearby data along when fetching a single item."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Memory and CPU Concepts Practice",
+      "content": "Review and reinforce key concepts before continuing.",
+      "questions": [
+        {
+          "question": "Why do CPU registers exist if we have caches and RAM?",
+          "options": [
+            "Registers are cheaper than RAM",
+            "Registers provide the fastest possible storage directly in the CPU for immediate operands",
+            "Registers hold instructions while RAM holds data",
+            "Registers are only used by older computer architectures"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Cost isn't the primary reason; performance is.",
+            "Correct! Registers are the fastest storage, built into the CPU for immediate access with zero wait time.",
+            "Incorrect. Both instructions and data can be cached; this distinction isn't accurate.",
+            "Incorrect. Registers remain essential in all modern CPU architectures."
+          ],
+          "explanation": "Registers are small, ultra-fast memory built directly into the CPU core. They hold operands for the current instruction with minimal latency, enabling the fastest possible computation."
+        },
+        {
+          "question": "What happens when the CPU looks for data in L1 cache but doesn't find it?",
+          "options": [
+            "The program crashes with an error",
+            "The CPU checks L2 cache, then L3, then RAM until it finds the data",
+            "The CPU waits indefinitely",
+            "The data is automatically created in cache"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A cache miss doesn't crash the program.",
+            "Correct! Caches operate hierarchically; misses cascade through L2, L3, and ultimately main memory.",
+            "Incorrect. The CPU continues the memory access chain, it doesn't wait indefinitely.",
+            "Incorrect. Data must exist before retrieval; it's not created on demand."
+          ],
+          "explanation": "A cache miss triggers a lookup in the next level of the hierarchy. The CPU checks L2 cache, then L3, then RAM. Once found, the data is loaded back up through the caches for future access."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Learning Path Decision",
+      "content": "Excellent work! You've mastered the fundamentals of computer architecture. You now understand CPU design, instruction execution, and memory performance optimization.\n\nYou have demonstrated solid understanding of how CPUs execute instructions through the fetch-decode-execute-store cycle, and how memory hierarchy and cache locality impact performance. You're now at a crossroads: you can dive deeper into advanced architectural concepts that explain how modern CPUs optimize instruction execution, explore practical techniques for writing memory-efficient code, or proceed directly to complete the course.\n\nYour learning goals will guide your choice. Advanced CPU concepts build theoretical knowledge about architecture design, while memory optimization focuses on practical programming techniques. Choose your next step:",
+      "choices": [
+        {
+          "label": "Dive Deeper: Advanced CPU Concepts",
+          "next": "n10"
+        },
+        {
+          "label": "Dive Deeper: Memory Optimization",
+          "next": "n11"
+        },
+        {
+          "label": "I'm Ready to Finish",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Advanced CPU Architecture: Pipelining and Superscalar Execution",
+      "content": "Modern CPUs don't execute instructions one at a time. Pipelining overlaps instruction execution stages so multiple instructions progress simultaneously. A simple 5-stage pipeline (Fetch, Decode, Execute, Memory, Write) can have 5 instructions in flight at once, theoretically achieving 1 instruction per cycle.\n\nSuperscalar CPUs go further, executing multiple instructions per cycle by running independent instructions in parallel. For example, while one ALU executes an addition, another ALU performs multiplication, and a load unit fetches from memory simultaneously. Modern CPUs like Intel's latest processors can execute 4-6 instructions per cycle.\n\nPipeline hazards (data dependencies, branches) can create stalls where instructions can't proceed. CPUs use branch prediction to guess which way branches go, achieving approximately 95% accuracy with modern predictors and minimizing stalls. When predictions fail, the CPU must flush the pipeline and restart, a costly operation that modern designs work hard to prevent.\n\nThese architectural innovations are why modern CPUs achieve massive throughput despite relatively modest frequency increases over the past decade. Understanding pipelining and superscalar design reveals the true source of modern CPU performance.",
+      "next": "n10a"
+    },
+    {
+      "id": "n10a",
+      "type": "example",
+      "title": "Pipelined and Superscalar Execution Example",
+      "content": "Consider this simple instruction sequence:\nADD R1, R2, R3\nMUL R4, R5, R6\nLOAD R7, [R8]\nAND R9, R10, R11\n\nWithout pipelining: These instructions execute sequentially. Each takes approximately 5 cycles, so total time is approximately 20 cycles.\n\nWith 5-stage pipelining: After filling the pipeline in the first 5 cycles, each instruction completes one per cycle thereafter. Total time drops to approximately 5 plus 3 additional cycles equals 8 cycles total.\n\nWith superscalar execution: If two ALUs are available and the load unit can run independently, multiple instructions complete per cycle. The ADD and MUL can execute simultaneously in one functional unit set, while LOAD runs in parallel, and AND begins immediately after. Depending on dependencies and memory latency, all 4 instructions might complete in approximately 7-9 cycles.\n\nThe key insight: modern CPUs hide latency by executing multiple instructions in parallel, dramatically increasing throughput even when clock frequency remains relatively constant. This is why pipelining and superscalar design are fundamental to achieving performance improvements year over year.",
+      "next": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "content",
+      "title": "Memory Optimization Techniques in Practice",
+      "content": "Understanding the memory hierarchy is step one; optimizing code to leverage it is step two. Cache-aware programming designs algorithms to maximize cache hits and minimize misses, directly improving real-world performance.\n\nPrefetching is a key technique. Modern CPUs include hardware prefetchers that detect sequential access patterns and load data into cache before it's requested. Additionally, programmers can use software prefetching hints to explicitly tell the CPU to fetch data. For example, if processing a linked list, prefetching the next node's data while processing the current node significantly reduces memory stalls.\n\nCache blocking reorganizes algorithms to work on small chunks that fit in L1 or L2 cache. Instead of traversing an entire matrix row-by-row (causing cache misses), process 64x64 tiles that fit entirely in cache. This increases cache reuse significantly and can improve performance by 10-100x in memory-bound workloads.\n\nFalse sharing is a common pitfall in multi-threaded code. When two threads write to nearby memory locations (different variables on the same 64-byte cache line), the CPU must bounce the cache line between cores, destroying performance. Using padding to separate variables on different cache lines prevents this costly synchronization.\n\nNUMA (Non-Uniform Memory Access) awareness matters on multi-socket systems. Accessing memory local to the current socket is 2-3x faster than remote memory. Modern operating system schedulers and algorithms account for this to optimize performance on these systems.",
+      "next": "n11a"
+    },
+    {
+      "id": "n11a",
+      "type": "example",
+      "title": "Cache Blocking Optimization Example",
+      "content": "Imagine multiplying two 1000x1000 matrices (C = A times B). The naive algorithm:\n\nfor i from 0 to 999:\n  for j from 0 to 999:\n    for k from 0 to 999:\n      C[i,j] = C[i,j] plus A[i,k] times B[k,j]\n\nThis accesses B column-by-column (bad cache locality), causing approximately 1000 cache misses per column, totaling approximately 1 million misses. With each miss costing approximately 200 cycles, performance suffers dramatically.\n\nWith cache blocking (process 64x64 tiles at a time):\n\nfor tile_i from 0 to 15:\n  for tile_j from 0 to 15:\n    for tile_k from 0 to 15:\n      for i from 0 to 63:\n        for j from 0 to 63:\n          for k from 0 to 63:\n            C[i,j] = C[i,j] plus A[i,k] times B[k,j]\n\nNow, a 64x64 tile of A (approximately 16 kilobytes) and B (approximately 16 kilobytes) fit in L2 cache. After the first approximately 32 misses loading the tile, the next approximately 4000 accesses hit cache. Total cache misses drop from 1 million to approximately 10,000. Performance improves by approximately 100x for this memory-bound computation.\n\nThis is why high-performance libraries like BLAS spend significant engineering effort on these optimizations\u2014they're not micro-optimizations but essential transformations that directly impact real-world performance.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete",
+      "content": "Congratulations! You've completed the Computer Architecture Fundamentals course. You now understand:\n\n**CPU Components & Execution**: The ALU, Control Unit, and Registers work together in the fetch-decode-execute-store cycle to process instructions billions of times per second.\n\n**Memory Hierarchy**: Registers, L1/L2/L3 caches, RAM, and disk storage form a performance pyramid, where faster layers are smaller but closer to the CPU.\n\n**Cache Optimization**: Spatial and temporal locality principles explain why accessing nearby or recent data is dramatically faster than fetching from main memory.\n\nThese foundational concepts are essential for understanding computer performance. Consider exploring Instruction Set Architecture, CPU pipelining, or parallel processing to deepen your knowledge!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Take Assessment"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "Needs Practice"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Take Assessment"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "Pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Needs Practice"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n10",
+      "label": "Advanced CPU Concepts"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n11",
+      "label": "Memory Optimization"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n9",
+      "label": "Finish"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n10a",
+      "label": "Continue"
+    },
+    {
+      "id": "c14",
+      "source": "n10a",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c15",
+      "source": "n11",
+      "target": "n11a",
+      "label": "Continue"
+    },
+    {
+      "id": "c16",
+      "source": "n11a",
+      "target": "n9",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-26T02:11:25.095996+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T09:41:27.160397+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

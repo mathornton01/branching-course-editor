@@ -1,0 +1,144 @@
+{
+  "id": "ml-fundamentals-culinary",
+  "title": "Machine Learning Fundamentals: The Chef's Journey",
+  "description": "Learn machine learning concepts through opening and optimizing a fusion restaurant. Choose between supervised learning (predicting customer ratings) and unsupervised learning (discovering flavor harmonies).",
+  "topic": "Machine Learning Fundamentals",
+  "theme": "culinary arts",
+  "difficulty": "beginner",
+  "estimated_minutes": 25,
+  "tags": [
+    "machine-learning",
+    "supervised-learning",
+    "unsupervised-learning",
+    "overfitting",
+    "clustering"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Recipe Lab Opens",
+      "content": "You're a chef opening a new fusion restaurant called The Recipe Lab. Your goal: serve dishes that make customers come back. You notice some dishes earn rave reviews and five-star ratings, while others disappoint diners. A mentor suggests using machine learning to understand customer preferences. You decide to explore two powerful approaches: analyzing labeled customer feedback to predict success, or discovering hidden patterns in how dishes and flavors naturally pair together."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which ML Approach for Your Restaurant?",
+      "content": "Two paths open before you. One uses supervised learning\u2014you'll train a model on customer ratings to predict what new dishes will succeed. The other uses unsupervised learning\u2014you'll discover flavor combinations hidden in your ingredient data without needing labels. Which resonates with your chef's intuition?",
+      "choices": [
+        {
+          "label": "Supervised Learning: Train on labeled customer ratings to predict dish success",
+          "next": "n3"
+        },
+        {
+          "label": "Unsupervised Learning: Discover hidden flavor harmonies without labels",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Training Your Taste Model",
+      "content": "In supervised learning, you need labeled training data. You collect 500 customer reviews, each with a 1-5 star rating. From each review, you extract features: spice level (1-5), primary protein type (chicken, beef, fish, vegetarian), cooking time (minutes), and total ingredient count. You feed these labeled examples into a machine learning model. The model learns: customers tend to rate dishes with bold spices and fresh proteins highly, especially when cooking time stays under 25 minutes. This relationship between features and ratings becomes your prediction engine."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Labeling Training Data: Three Real Dishes",
+      "content": "Here are three dishes from your customer reviews, labeled with ratings. Spicy Thai Basil Chicken: features [spice level: 4, protein: chicken, time: 20 min, ingredients: 8], rating: 4.8 stars. Classic Carbonara: [spice: 1, protein: pork, time: 15 min, ingredients: 5], rating: 4.2 stars. Molecular Foam Appetizer: [spice: 0, protein: none, time: 45 min, ingredients: 12], rating: 2.1 stars. Your model learns the pattern: bold spices and quick cooking predict high ratings. When you input a new recipe [spice: 4, protein: salmon, time: 18 min, ingredients: 7], the model predicts 4.6 stars."
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "The Perfection Trap",
+      "content": "You train the model on your 500 labeled dishes. On the data you trained it with, it's 99% accurate\u2014almost perfect. But when you launch five new dishes predicted at 4.8+ stars, customers give them average ratings of 2.5 stars. A data scientist colleague warns: 'You may be overfitting\u2014memorizing the training data rather than learning true patterns.' She proposes two options: retrain with cross-validation to achieve 85% test accuracy, or trust the 99% model and launch boldly.",
+      "choices": [
+        {
+          "label": "Accept 85% accuracy: Use cross-validation and test on hold-out data to catch overfitting",
+          "next": "n6"
+        },
+        {
+          "label": "Trust the 99% model: Launch new dishes confidently based on perfect predictions",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "The Balanced Menu Succeeds",
+      "content": "You choose restraint. You validate the model on dishes it has never seen. The new model shows 85% accuracy on test data\u2014and this honest metric proves predictive in the real world. New dishes predicted at 4.5+ stars succeed 78% of the time. Your restaurant gains a devoted customer base who trusts your featured specials. You continue collecting customer feedback and retraining the model monthly, watching for data drift. Your success comes not from perfect accuracy, but from a model humble enough to generalize beyond its training data."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "The Menu Collapses",
+      "content": "You launch five new dishes, each predicted at 4.8+ stars by your perfect model. Customers rate them 1-2 stars. The model had memorized the training data\u2014learning noise rather than signal. Three bad weeks later, diners stop trying your specials. You're forced to rebuild with proper train/test splits and cross-validation, learning an expensive lesson: a model that fits training data perfectly often fails in the real world. Overfitting is supervised learning's hidden trap."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Discovering Hidden Flavor Harmonies",
+      "content": "You take the unsupervised path. Instead of predicting ratings, you apply clustering\u2014an unsupervised learning algorithm that discovers patterns without labels. You gather 200 of your best dishes and encode their features: primary protein (chicken, beef, fish, plant-based), cooking method (saut\u00e9, braise, steam, fry, raw), flavor profile (bitter, sweet, salty, sour, umami dominance), and cuisine of origin (Thai, Italian, Brazilian, Korean, Mediterranean). The clustering algorithm groups similar dishes and discovers surprising harmonies: Thai cuisine naturally clusters near coastal Brazilian cuisine\u2014both rich in coconut, lime, and umami from fish sauce."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "The Fusion Menu Thrives",
+      "content": "You use the clusters to create a 'Hidden Harmonies' menu, combining insights from distant clusters. You invent Thai-Moqueca Fusion: coconut-lime curry base with Brazilian seafood braise technique. You create Szechuan-Korean Taco Night: numbing Szechuan peppers with gochugaru heat and fermented flavors. Customers rave\u2014combinations feel both novel and naturally balanced. Your restaurant gains fame for unexpected, delightful pairings. You've used unsupervised learning not to predict ratings, but to explore structure in your ingredient and technique space."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Supervised"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Validate"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "Overfit"
+    },
+    {
+      "id": "c7",
+      "source": "n2",
+      "target": "n8",
+      "label": "Unsupervised"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T11:16:26.947588+00:00",
+  "model": "claude-haiku-4-5"
+}

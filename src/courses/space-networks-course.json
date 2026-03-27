@@ -1,0 +1,228 @@
+{
+  "id": "space-networks-course",
+  "title": "Computer Networks and Protocols: A Space Exploration Journey",
+  "description": "Learn how networks and protocols enable communication across the cosmos, from Earth to distant planets and spacecraft.",
+  "topic": "Computer Networks and Protocols",
+  "theme": "space exploration",
+  "difficulty": "beginner",
+  "estimated_minutes": 35,
+  "tags": [
+    "networking",
+    "protocols",
+    "space",
+    "communication",
+    "diagnostic"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Cosmic Communication Assessment",
+      "content": "Before we launch into the universe of networks, let's assess your current understanding of how computers communicate across vast distances\u2014much like how NASA communicates with rovers on Mars. This diagnostic will help us customize your learning path.",
+      "questions": [
+        {
+          "question": "What is the primary purpose of a network protocol?",
+          "options": [
+            "A protocol is a set of rules that defines how data is formatted, transmitted, and received over a network",
+            "A protocol is software that displays web pages in a web browser",
+            "A protocol is a physical cable that connects computers together",
+            "A protocol is a security password for accessing computer systems"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Protocols are agreed-upon rules enabling communication.",
+            "Incorrect. That describes a web browser, not a network protocol.",
+            "Incorrect. That describes physical infrastructure, not a protocol.",
+            "Incorrect. That's not what protocols are used for."
+          ],
+          "explanation": "Network protocols are like the language and rules for communication. Just as NASA had to establish specific communication standards with the Curiosity rover on Mars, computers use protocols like TCP/IP to ensure they understand each other."
+        },
+        {
+          "question": "In the context of Earth-to-Mars communication, which of these best describes latency?",
+          "options": [
+            "The time it takes for a signal to travel from Earth to Mars and back",
+            "The maximum speed at which data can be transmitted",
+            "The number of packets lost during transmission",
+            "The type of encryption used to protect data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Latency is the delay in communication.",
+            "Incorrect. That describes bandwidth, not latency.",
+            "Incorrect. That's about packet loss, not latency.",
+            "Incorrect. That's about security, not latency."
+          ],
+          "explanation": "Mars is about 225 million kilometers away on average, meaning radio signals take 12-20 minutes to travel one way. This extreme latency fundamentally affects how space agencies design their communication protocols."
+        },
+        {
+          "question": "What does TCP/IP stand for, and what is its primary role?",
+          "options": [
+            "Transmission Control Protocol/Internet Protocol; it's the foundational suite of protocols that enables data transmission and routing across networks",
+            "Telephone Central Processing/Information Platform; it's a phone system protocol",
+            "Transfer Computer Protocol/Integrated Processing; it manages computer hardware",
+            "Technical Communication Protocol/Interstellar Protocol; it's used only for space communications"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! TCP/IP is fundamental to modern networking.",
+            "Incorrect. TCP/IP is not related to telephone systems.",
+            "Incorrect. TCP/IP is for network communication, not hardware management.",
+            "Incorrect. While used in space, TCP/IP is used everywhere."
+          ],
+          "explanation": "TCP/IP is the backbone of the internet and modern networks. Even space agencies like NASA use adapted versions of these protocols for spacecraft communication, though they must modify them for the extreme conditions and latency of space."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced Network Protocols in Deep Space Missions",
+      "content": "Deep-space missions like Voyager, New Horizons, and the Mars rovers communicate using sophisticated protocol stacks adapted from Earth networks. These missions use variants of TCP/IP, along with specialized protocols like the Consultative Committee for Space Data Systems (CCSDS) standards. Advanced protocols must handle extreme latency (signals take 20+ minutes round-trip to Mars), packet loss over vast distances, and the need for autonomy\u2014spacecraft must make decisions without waiting for Earth commands. The OSI model helps us understand how protocols layer: physical transmission (radio waves), data-link (frame formatting), network routing (determining paths), and application layers (mission control interfaces). Understanding these layers is crucial for designing resilient communication systems in environments where re-transmission delays are measured in hours.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Mars Rover Protocol Stack in Action",
+      "content": "Consider NASA's Perseverance rover on Mars. When it needs to transmit soil analysis data back to Earth, the data passes through multiple protocol layers. At the application layer, scientific instruments format raw sensor readings. At the network layer, the rover's onboard computer uses CCSDS packet standards and TCP/IP-inspired routing. At the data-link layer, data is packaged into frames with error-checking codes (Reed-Solomon encoding). At the physical layer, a 100-watt radio transmitter broadcasts the signal toward Earth antennas. This journey takes 22 minutes one-way due to the speed of light and distance. Meanwhile, Perseverance doesn't wait for acknowledgment\u2014it continues operating autonomously using pre-programmed protocols, demonstrating how space protocol design differs fundamentally from interactive Earth-based networking.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete: Welcome to Deep Space Networks",
+      "content": "You've mastered the advanced concepts! You understand that space networks are built on layered protocols similar to Earth systems, but with critical adaptations for extreme latency, vast distances, and autonomous operation. You're now ready to design communication systems for interplanetary missions. Consider exploring real CCSDS documentation and NASA's space communication protocols to deepen your expertise further."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Network Fundamentals: Connecting Across the Cosmos",
+      "content": "Let's start with the basics of how networks enable communication, using space exploration as our lens. A network is simply a group of computers or devices connected together to share information. Just as NASA has a global network of antennas called the Deep Space Network to communicate with spacecraft, Earth's internet is a network of interconnected computers. Data travels across networks in small packets\u2014like space probes carrying their payloads. These packets follow rules called protocols, which are like the flight plans for data. The most important protocol family is TCP/IP: TCP ensures packets arrive in order and without errors (like a spacecraft's guidance system), while IP routes packets to their destination (like plotting a course through the solar system). When you send a message or view a website, you're using TCP/IP protocols without realizing it. In space missions, similar protocols help spacecraft communicate reliably across millions of kilometers.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "International Space Station Communication",
+      "content": "The International Space Station orbits Earth at 28,000 kilometers per hour. Astronauts aboard need constant communication with mission control on Earth, which is only about 400 kilometers away. NASA uses specialized radio protocols to maintain this connection. When an astronaut sends a message, it's encoded, transmitted via radio to ground stations, then routed through the internet using TCP/IP protocols to mission control centers. The round-trip takes less than a second\u2014dramatically different from Mars communications! The ISS relies on multiple communication satellites and ground stations to maintain continuity as it orbits. This example shows that even in space, the same fundamental protocols (TCP/IP, DNS for addressing, etc.) work together, though the scale, speed, and redundancy requirements differ from typical Earth networks.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Basic Space Network Protocols",
+      "content": "Test your understanding of fundamental networking concepts in space contexts. These questions reinforce core ideas about how data travels across networks, from Earth orbit to deep space.",
+      "questions": [
+        {
+          "question": "Why is packet loss a bigger concern for Mars rover communications than for ISS communications?",
+          "options": [
+            "Mars rovers are further away, and signals degrade over extreme distances, plus the 20+ minute latency makes re-transmission problematic",
+            "Mars rovers use older technology than the ISS",
+            "Mars rovers don't need to receive data, only send it",
+            "ISS communications don't use the internet, so packet loss isn't relevant"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Distance and latency create unique challenges for deep-space networks.",
+            "Incorrect. Technology age isn't the main factor.",
+            "Incorrect. Mars rovers both send and receive data.",
+            "Incorrect. ISS communications do use internet protocols."
+          ],
+          "explanation": "At 400 km altitude, the ISS can communicate with ground stations in near real-time. Mars is 225 million km away, with signals taking 20 minutes round-trip. This extreme latency means engineers must design protocols where rovers work autonomously rather than waiting for responses."
+        },
+        {
+          "question": "What is an IP address in the context of space networks?",
+          "options": [
+            "A unique identifier that helps route data to the correct destination, like a space station's coordinates",
+            "A password used to secure spacecraft communications",
+            "The speed at which data travels through space",
+            "A type of satellite used for Earth-to-space communication"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! IP addresses serve as identifiers for routing, just as coordinates identify locations in space.",
+            "Incorrect. That's not the function of an IP address.",
+            "Incorrect. That would be bandwidth or latency.",
+            "Incorrect. Satellites transmit signals but aren't IP addresses."
+          ],
+          "explanation": "Just as mission control needs to know a spacecraft's location to send commands, routers need IP addresses to know where to send data packets. Every device on a network, from satellites to ground stations, has an IP address."
+        },
+        {
+          "question": "In a space mission, which protocol layer would handle the actual transmission of radio signals to and from a spacecraft?",
+          "options": [
+            "Physical layer\u2014it deals with the actual hardware and transmission medium",
+            "Data-link layer\u2014it manages frames and error detection",
+            "Network layer\u2014it handles routing of packets",
+            "Application layer\u2014it manages mission control software"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The physical layer manages the actual transmission medium and hardware.",
+            "Incorrect. The data-link layer works above the physical layer.",
+            "Incorrect. The network layer routes packets but doesn't transmit them.",
+            "Incorrect. The application layer is the highest level."
+          ],
+          "explanation": "The OSI model has 7 layers. The physical layer (Layer 1) is at the bottom and handles radio transmitters, antennas, and the actual electromagnetic waves carrying spacecraft signals back to Earth."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Fundamentals Complete: Networks Connect the Cosmos",
+      "content": "Congratulations! You've learned that networks and protocols are the backbone of space exploration, enabling communication from the International Space Station in low Earth orbit to rovers millions of kilometers away on Mars. You understand that TCP/IP, IP addresses, and the OSI model apply to space communications just as they do to Earth networks, though space introduces unique challenges like extreme latency and distance. You're now equipped to understand how real space missions maintain contact with their assets across the solar system."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Strong baseline knowledge"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n1",
+      "target": "n5",
+      "label": "Needs reinforcement"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:49:27.464763+00:00",
+  "model": "claude-haiku-4-5"
+}

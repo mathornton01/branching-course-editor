@@ -1,0 +1,273 @@
+{
+  "id": "hypothesis-testing-course",
+  "title": "Statistical Inference and Hypothesis Testing",
+  "description": "Master the fundamentals of hypothesis testing: from setting up null and alternative hypotheses to interpreting p-values and making statistically sound decisions.",
+  "topic": "Statistics",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "statistics",
+    "hypothesis testing",
+    "inference",
+    "p-values",
+    "significance"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Hypothesis Testing?",
+      "content": "Hypothesis testing is a statistical method for making decisions about a population based on sample data. We start with a null hypothesis (H\u2080), which represents no effect or relationship, and an alternative hypothesis (H\u2081), which represents the effect we're testing. The test helps us determine if our sample provides enough evidence to reject the null hypothesis. This framework is fundamental to empirical research across science, medicine, and business.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Setting Up Null and Alternative Hypotheses",
+      "content": "A researcher wants to know if a new teaching method improves test scores compared to the current baseline of 75. They formulate: H\u2080: \u03bc = 75 (no improvement) and H\u2081: \u03bc > 75 (improvement exists). This is a one-tailed test because they only care about improvement. They collect data from 50 students and set a significance level \u03b1 = 0.05, meaning they'll tolerate a 5% chance of falsely rejecting the null hypothesis.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Hypothesis Setup Assessment",
+      "content": "Test your understanding of hypothesis formulation and error types.",
+      "questions": [
+        {
+          "question": "A pharmaceutical company tests if a new drug reduces blood pressure from a baseline of 140 mmHg. Which represents the correct hypotheses?",
+          "options": [
+            "H\u2080: \u03bc = 140, H\u2081: \u03bc \u2260 140",
+            "H\u2080: \u03bc < 140, H\u2081: \u03bc = 140",
+            "H\u2080: \u03bc = 140, H\u2081: \u03bc < 140",
+            "H\u2080: \u03bc > 140, H\u2081: \u03bc = 140"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A two-tailed test is used when we don't know the direction of change. Here we expect reduction in blood pressure.",
+            "The null hypothesis should reflect 'no change' from the baseline value.",
+            "Correct! H\u2080 states no reduction; H\u2081 states the reduction we're testing for.",
+            "The null hypothesis doesn't state an inequality; it represents the baseline condition."
+          ],
+          "explanation": "In hypothesis testing, H\u2080 always states no effect or the baseline value, while H\u2081 states the direction or magnitude of the hypothesized change. Since we specifically expect reduction, this is a one-tailed test."
+        },
+        {
+          "question": "Which of the following is a Type I error in hypothesis testing?",
+          "options": [
+            "Rejecting H\u2080 when it is actually true",
+            "Failing to reject H\u2080 when it is actually false",
+            "Correctly rejecting H\u2080",
+            "Having a sample size that is too small"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A Type I error is rejecting a true null hypothesis (false positive).",
+            "This describes a Type II error, which is a false negative.",
+            "This is the correct decision in hypothesis testing.",
+            "Sample size affects statistical power but is not an error type."
+          ],
+          "explanation": "Type I error (\u03b1) is the probability of falsely rejecting a true null hypothesis; Type II error (\u03b2) is the probability of failing to reject a false null hypothesis. Researchers control \u03b1 through the predetermined significance level."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Understanding P-values",
+      "content": "A p-value is the probability of observing a test statistic as extreme or more extreme than the one calculated, assuming the null hypothesis is true. A smaller p-value provides stronger evidence against H\u2080. We compare the p-value to a predetermined significance level (\u03b1), typically 0.05. The decision rule is straightforward: if p < \u03b1, we reject H\u2080; otherwise, we fail to reject it. The p-value does not tell us the probability that H\u2080 is true.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "P-value Interpretation in Practice",
+      "content": "A teacher wonders if their class's average test score differs from the school's long-standing average of 80 points. After testing 30 students, they calculate t = 2.15 with a p-value = 0.042. Since p = 0.042 < 0.05 (the predetermined significance level), they reject H\u2080 and conclude the class mean differs significantly from 80. Note: statistical significance doesn't guarantee practical importance\u2014a small difference might be statistically significant but educationally trivial.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "P-value Decision Assessment",
+      "content": "Test your ability to interpret p-values and make appropriate statistical decisions.",
+      "questions": [
+        {
+          "question": "In a study testing if exercise improves mood, the researcher obtains p = 0.08 with \u03b1 = 0.05. What conclusion is appropriate?",
+          "options": [
+            "Reject H\u2080; exercise definitely improves mood",
+            "Fail to reject H\u2080; there is not enough evidence to conclude exercise improves mood",
+            "Accept H\u2080; exercise does not affect mood",
+            "Collect more data because the p-value is close to \u03b1"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A p-value > \u03b1 means we do not have sufficient evidence to reject H\u2080.",
+            "Correct! When p > \u03b1, we fail to reject the null hypothesis.",
+            "Using 'accept' is incorrect terminology in hypothesis testing; we 'fail to reject.'",
+            "While data collection could be beneficial, the immediate decision is to fail to reject H\u2080."
+          ],
+          "explanation": "The significance level \u03b1 = 0.05 is a predetermined threshold. If p \u2265 \u03b1, we fail to reject H\u2080, regardless of how close the p-value is to the threshold. This protects against Type I errors."
+        },
+        {
+          "question": "What does it mean if a hypothesis test has a p-value of 0.002?",
+          "options": [
+            "There is a 0.2% chance the null hypothesis is true",
+            "The probability of observing the data (or more extreme) given H\u2080 is true is 0.2%",
+            "There is a 99.8% chance the alternative hypothesis is true",
+            "The sample mean is definitely different from the population mean"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The p-value does not directly give the probability that H\u2080 is true.",
+            "Correct! This is the precise definition of a p-value: P(data | H\u2080).",
+            "We cannot calculate the probability of H\u2081 being true from the p-value.",
+            "A small p-value suggests a difference but doesn't guarantee practical significance."
+          ],
+          "explanation": "A p-value is a conditional probability: P(data|H\u2080), not P(H\u2080|data). It measures how extreme the observed data would be if the null hypothesis were true. Smaller p-values indicate stronger evidence against H\u2080."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Hypothesis Testing Practice",
+      "content": "Strengthen your skills with practice problems that integrate hypothesis setup and p-value interpretation.",
+      "questions": [
+        {
+          "question": "A company claims their batteries last 500 hours on average. A consumer group tests 25 batteries and finds a mean of 485 hours. Which hypothesis setup is correct?",
+          "options": [
+            "H\u2080: \u03bc = 500, H\u2081: \u03bc < 500",
+            "H\u2080: \u03bc \u2260 500, H\u2081: \u03bc = 500",
+            "H\u2080: \u03bc < 500, H\u2081: \u03bc = 500",
+            "H\u2080: \u03bc = 485, H\u2081: \u03bc = 500"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The company's claim is the baseline (H\u2080), and we test if it's lower than claimed.",
+            "Hypotheses cannot be reversed like this.",
+            "The null hypothesis represents the company's claim, not the alternative.",
+            "Both hypotheses should use the same parameter: the population mean."
+          ],
+          "explanation": "We always set H\u2080 to the baseline or claim being tested. Since consumers suspect shorter life, H\u2081 is one-tailed: \u03bc < 500."
+        },
+        {
+          "question": "If the calculated p-value is 0.035 and the significance level is \u03b1 = 0.05, what decision should be made?",
+          "options": [
+            "Fail to reject H\u2080",
+            "Reject H\u2080",
+            "The test is inconclusive",
+            "Collect more data before deciding"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The p-value (0.035) is less than \u03b1 (0.05), so we reject H\u2080.",
+            "Correct! Since p < \u03b1, we reject the null hypothesis.",
+            "With a defined \u03b1, we have a clear decision rule.",
+            "The decision rule is predetermined; we don't make data collection decisions post-hoc."
+          ],
+          "explanation": "The decision rule is simple: if p < \u03b1, reject H\u2080. Here, 0.035 < 0.05, so we reject the null hypothesis and conclude there is sufficient evidence of an effect."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Choose Your Next Step",
+      "content": "You've successfully mastered the fundamentals of hypothesis testing! You now understand how to set up hypotheses, conduct tests, and interpret p-values. Would you like to review the concepts, or complete the course?",
+      "choices": [
+        {
+          "label": "Review Hypothesis Concepts",
+          "next": "n1"
+        },
+        {
+          "label": "Complete Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've completed the Statistical Inference and Hypothesis Testing course. You now understand the core principles of hypothesis testing: formulating null and alternative hypotheses, conducting statistical tests, interpreting p-values, and making informed decisions based on evidence. These skills form the foundation for critical thinking in research, data analysis, and decision-making across disciplines."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Ready to assess"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Ready to assess"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "Pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n1",
+      "label": "Review"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "Finish"
+    }
+  ],
+  "generated_at": "2026-03-26T09:53:41.995265+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,141 @@
+{
+  "id": "sp-forensics-001",
+  "title": "Signal Processing Fundamentals: Forensic Investigation",
+  "description": "Learn signal processing concepts through crime scene analysis scenarios. Use real signal processing techniques to solve forensic cases.",
+  "topic": "Signal Processing Fundamentals",
+  "theme": "forensic science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "signal processing",
+    "forensics",
+    "audio analysis",
+    "video forensics",
+    "digital evidence"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Crime Scene Discovery: Multiple Signal Sources",
+      "content": "You arrive at a crime scene where a robbery occurred. Officers collected evidence including a disputed voice recording claiming to identify the suspect, security camera footage from the building, and biometric data from the victim's smartwatch. Each signal type contains crucial investigative information, but you must choose which analysis approach will best solve this case. Understanding how to process different signal types is key to forensic success.",
+      "next": [
+        "n2"
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Investigation Strategy",
+      "content": "Different signal types require different analytical approaches. The voice recording contains temporal patterns of speech, while video contains spatial and temporal pixel information. Your choice determines which signal processing techniques you'll master and which evidence leads your case.",
+      "choices": [
+        {
+          "label": "Analyze the voice recording using audio forensics",
+          "next": "n3"
+        },
+        {
+          "label": "Analyze the security footage using video signal processing",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Audio Signals in Forensics: From Waveforms to Frequency Domains",
+      "content": "Audio forensics begins with understanding that sound is a continuous analog signal (pressure waves). When recorded, you digitize it by sampling at a rate determined by the Nyquist theorem: at least twice the highest frequency you want to capture. For voice analysis (0-4000 Hz), an 8000 Hz sample rate is standard, and detecting subtle artifacts like edited sections requires examining the frequency domain using Fourier transforms.",
+      "next": [
+        "n4"
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Choose Your Audio Processing Strategy",
+      "content": "Now you must decide your processing approach. Should you remove background noise first using a band-pass filter, then analyze the clean signal? Or should you attempt frequency analysis directly on the raw recording? This choice significantly impacts your ability to detect tampering and isolate speaker characteristics.",
+      "choices": [
+        {
+          "label": "Apply noise filtering first, then frequency analysis (proper methodology)",
+          "next": "n5"
+        },
+        {
+          "label": "Perform frequency analysis directly on raw recording (risky shortcut)",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Successful Investigation: Audio Evidence Confirms Suspect Identity",
+      "content": "By properly filtering background noise with a 300-4000 Hz band-pass filter, you isolated the speaker's voice characteristics. Your frequency domain analysis revealed distinct formant patterns (voice resonances) matching the suspect's known recordings. Spectral envelope analysis confirmed with 94% certainty that the same person appears in both the crime scene recording and the suspect's reference samples. You detected no signs of digital editing, splicing, or synthetic voice. The spectral peaks remained consistent across the recording, indicating a genuine single speaker. The case is solved through rigorous signal processing methodology, and your evidence is admissible in court because you followed proper preprocessing procedures."
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Video Forensics: Digital Image Sequences as Signals",
+      "content": "Video is a sequence of frames sampled in time (30 fps samples the scene 30 times per second). Each frame contains spatial signal information represented as pixel intensity values across the image. Video forensics analyzes motion signals (differences between consecutive frames), detects faces using spatial pattern recognition, and identifies temporal discontinuities indicating editing. You'll examine the security footage to detect frame deletions, identify and match faces, and analyze distinctive gait patterns.",
+      "next": [
+        "n7"
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Case Solved: Video Evidence Provides Conclusive Proof",
+      "content": "Your video analysis proved decisive. Optical flow analysis (examining the motion signal between frames) clearly shows the suspect entering the building. Face detection algorithms successfully matched facial features to the suspect's ID photograph with 96% confidence using landmark detection and feature vectors. Gait analysis\u2014studying the biomechanical signal of the person's walking pattern\u2014revealed a distinctive limp matching the suspect's record from previous arrests. Temporal discontinuity analysis showed no editing artifacts, frame deletions, or timestamp manipulation. The temporal coherence of motion across all frames confirms authenticity. The security footage provides irrefutable evidence directly identifying the perpetrator. Your choice to pursue video forensics led to faster case resolution with higher certainty than audio analysis alone could have provided. Case closed with conviction-level evidence."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Investigation Stalled: Contaminated Analysis Leads to Inconclusive Results",
+      "content": "By skipping the critical noise filtering step, your frequency analysis was severely compromised. The background noise from the crime scene (traffic, sirens, radio chatter) obscured the speaker's formant patterns, making speaker identification impossible. When you attempted spectral analysis on the noisy signal, the noise floor was too high to reliably detect editing artifacts or extract the speaker's unique voice characteristics. Your analysis results are inconclusive and inadmissible in court because you violated fundamental signal processing principles: proper preprocessing is mandatory when dealing with contaminated real-world signals. Without filtering, you cannot distinguish genuine speaker information from noise artifacts. The case cannot be prosecuted based on your audio evidence, and the suspect may go free due to improper methodology. This failure demonstrates why signal preprocessing is crucial in forensic analysis\u2014garbage in, garbage out."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "proceed"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "audio path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "video path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "proceed"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "proper method"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n8",
+      "label": "shortcut"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "proceed"
+    }
+  ],
+  "generated_at": "2026-03-27T07:30:10.196869+00:00",
+  "model": "claude-haiku-4-5"
+}

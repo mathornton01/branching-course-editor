@@ -1,0 +1,256 @@
+{
+  "id": "bayesian-stats-001",
+  "title": "Bayesian Statistics: Making Decisions Under Uncertainty",
+  "description": "Learn to reason about evidence using Bayes' Theorem. Navigate a medical diagnosis scenario where your choices determine whether you correctly interpret test results and reach sound conclusions.",
+  "topic": "Bayesian Statistics",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 35,
+  "tags": [
+    "bayesian",
+    "probability",
+    "statistics",
+    "decision-making",
+    "medical",
+    "base-rate"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Medical Diagnosis: The Base Rate Problem",
+      "content": "A patient tests positive for a rare disease affecting 1 in 10,000 people. The test is 99% accurate\u2014correctly identifying disease 99% of the time if present, and correctly showing negative 99% of the time if absent. Your task: should you tell the patient they have the disease? This scenario highlights a critical challenge: integrating rare events (low prior probability) with test evidence. The answer depends on Bayesian thinking, not intuition. In medicine, law, cybersecurity, and business, this reasoning prevents costly errors.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "How Will You Interpret This Test Result?",
+      "content": "You must integrate two pieces of information: the rarity of the disease (the prior) and the test accuracy (the likelihood). Two fundamentally different reasoning approaches exist.",
+      "choices": [
+        {
+          "label": "Account for how rare the disease is (Bayesian approach)",
+          "next": "n3"
+        },
+        {
+          "label": "Focus on the test accuracy alone (Intuitive but risky)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Bayes' Theorem: Combining Evidence with Prior Belief",
+      "content": "Bayes' Theorem: P(Disease|+Test) = P(+Test|Disease) \u00d7 P(Disease) / P(+Test). For your patient: Prior P(Disease) = 1/10,000 = 0.01%. Likelihood P(+Test|Disease) = 99%. P(+Test) accounts for both true positives (1 \u00d7 99% = 0.99) and false positives (9,999 \u00d7 1% \u2248 100). Posterior P(Disease|+Test) = 0.99 / (0.99 + 100) \u2248 1%. Counterintuitively, even with 99% accuracy, only ~1% of positive results are truly diseased. This reveals why base rates matter enormously\u2014ignoring them costs lives in medicine and justice.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "How Confident Are You in the Test's Reported Accuracy?",
+      "content": "The 99% accuracy sounds definitive, but real-world tests often perform differently. Factors like patient populations, operator skill, and equipment calibration affect true accuracy. How much should this uncertainty influence your Bayesian reasoning?",
+      "choices": [
+        {
+          "label": "Trust the 99% accuracy; apply Bayes' Theorem precisely",
+          "next": "n5"
+        },
+        {
+          "label": "Adjust for real-world variation; be more conservative",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Confident Bayesian Conclusion",
+      "content": "You apply Bayes' Theorem with 99% accuracy and conclude true positive probability is ~1%. You tell the patient: 'Your test is positive, but because the disease is so rare, you likely don't have it. We'll arrange a confirmatory test.' The patient is spared unnecessary anxiety, expensive treatment, and invasive procedures. By properly integrating prior rarity with test accuracy, you've made a probability-based decision. This is Bayesian mastery in action\u2014decisions grounded in evidence and logic, not panic."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Skeptical Bayesian Conclusion",
+      "content": "Recognizing that test accuracy claims may not account for real-world confounders, you adjust your prior slightly upward and use a conservative likelihood of 95% instead of 99%. Your revised posterior is still ~2%, reinforcing the need for confirmation. You explain: 'This test suggests you likely don't have the disease, but let's verify with a second independent method.' By questioning your evidence and adjusting defensively, you've protected the patient from both false reassurance and unnecessary treatment. This reflects mature statistical thinking."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "The Intuitive Trap: Accuracy Without Context",
+      "content": "Many people see '99% accurate test' and think: 'If positive, there's 99% chance of disease.' This sounds logical but commits a critical error: ignoring the base rate. When disease is rare, even highly accurate tests produce mostly false positives. In 10,000 patients, the test correctly identifies 1 actual case (true positive) but falsely flags ~100 healthy people (1% false positive rate). The test is accurate, but 99% of positive results are wrong. This base rate fallacy appears constantly in medicine, criminal justice (DNA testing with rare alleles), and cybersecurity (intrusion detection with rare attack patterns).",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "A Cautionary Tale: The Cost of Ignoring Base Rates",
+      "content": "You tell the patient: 'The test is 99% accurate, so you almost certainly have the disease.' The patient is devastated, undergoes expensive confirmatory testing, endures weeks of anxiety, and is eventually told they're healthy. You've caused needless suffering and medical expense. This scenario repeats daily: patients are overdiagnosed, overmedicated, and overtreated because practitioners ignored base rates. The same error appears in law (innocent people convicted on DNA evidence with low-prevalence alleles) and security (legitimate users flagged as attackers). Without Bayesian reasoning, decision-makers systematically commit the base rate fallacy."
+    },
+    {
+      "id": "n9",
+      "type": "assessment",
+      "title": "Test Your Bayesian Intuition",
+      "content": "You've seen how base rates dramatically affect interpretation of test results. Apply this reasoning to new scenarios.",
+      "questions": [
+        {
+          "question": "A cybersecurity system flags a packet as 'malicious' with 95% accuracy. Truly malicious packets are 1 in 100,000. If a packet is flagged, what's the actual probability it's genuinely malicious?",
+          "options": [
+            "95%",
+            "~4.7%",
+            "~0.0047%",
+            "99%"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. High accuracy \u2260 high precision when base rate is low.",
+            "Incorrect. This ignores base rate calculation.",
+            "Correct! Even with 95% accuracy, ~99,950 false positives overwhelm ~1 true positive per 100,000 packets.",
+            "Incorrect. Don't assume accuracy equals posterior probability."
+          ],
+          "explanation": "Using Bayes: P(Malicious|Flagged) = (0.95 \u00d7 1/100,000) / (0.95 \u00d7 1/100,000 + 0.05 \u00d7 99,999/100,000) \u2248 0.0047%. The system is accurate, but most flags are false alarms."
+        },
+        {
+          "question": "Which statement best captures Bayesian reasoning?",
+          "options": [
+            "Ignore prior beliefs; only trust new data.",
+            "Posterior = Prior \u00d7 (Likelihood / Base rate)",
+            "Test accuracy alone determines result interpretation.",
+            "Combine prior information, observed evidence, and base rates to update beliefs."
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. Priors encode valuable prior knowledge.",
+            "Close but not the clearest statement.",
+            "Incorrect. Base rates matter even for accurate tests.",
+            "Correct! This is the essence of Bayesian reasoning."
+          ],
+          "explanation": "Bayes' Theorem: P(H|E) \u221d P(E|H) \u00d7 P(H). Ignoring any component\u2014especially priors and base rates\u2014leads to systematic errors."
+        },
+        {
+          "question": "Why is the posterior probability of disease only ~1% despite 99% accurate test?",
+          "options": [
+            "The disease is extremely rare (low prior).",
+            "Even 1% false positive rate produces ~100 false alarms per 10,000 tests.",
+            "Low prior AND high false positives combine: base rates dominate.",
+            "The doctor made a calculation error."
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Part of the answer but incomplete.",
+            "Part of the answer but incomplete.",
+            "Correct! Among 101 positive results (1 true + ~100 false), disease probability \u2248 1%.",
+            "Incorrect. The math is sound; the result is counterintuitive but correct."
+          ],
+          "explanation": "In 10,000 patients: ~1 has disease, ~9,999 don't. Test catches the 1 diseased patient but flags ~100 healthy ones. Among 101 positive results, only 1 reflects disease, so P(Disease|+Test) \u2248 1%."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "practice",
+      "title": "Worked Example: A/B Testing with Priors",
+      "content": "Company X ran an A/B test: variant 15% conversion, control 14%. Frequentist t-test shows p=0.08 (not significant). But historical data: similar variants succeed ~10% of the time. Using Bayes, the posterior probability of success, accounting for the 10% prior and weak evidence, is ~18%\u2014higher than frequentist p-value but still uncertain. Lesson: prior knowledge and evidence work together. Bayesian approach avoids false confidence and false skepticism.",
+      "questions": [
+        {
+          "question": "Why does Bayesian posterior (18%) differ from frequentist p-value (92% credible)?",
+          "options": [
+            "Bayesian methods are always wrong.",
+            "Bayes incorporates 10% historical prior; frequentist ignores it.",
+            "Sample size was too small.",
+            "They measure different things: Bayes = P(Hypothesis|Data); p-value = P(Data|Null)."
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect.",
+            "True but not the deepest answer.",
+            "Incorrect.",
+            "Correct! Posterior answers 'How likely is success?' P-value answers 'How rare is this data if null is true?'"
+          ],
+          "explanation": "Bayesian posterior explicitly uses P(Success)=10% as prior and updates with evidence. Frequentist p-value only considers rarity of data under null hypothesis. They answer fundamentally different questions."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n11",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Bayesian Mastery Achieved",
+      "content": "You've learned the core insight of Bayesian statistics: sound decisions under uncertainty require integrating three elements: prior knowledge (what we believe), observed evidence (what data shows), and base rates (how common the hypothesis is). Whether in medical diagnosis, criminal investigation, A/B testing, or machine learning, this reasoning framework prevents costly errors. You now think like a statistician and avoid the base rate fallacy that misleads most intuitive reasoners. You're equipped to make evidence-based decisions with proper probability reasoning."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Bayesian approach"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Intuitive approach"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Trust the test"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Be skeptical"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n9",
+      "target": "n11",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": "fail"
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": "complete"
+    },
+    {
+      "id": "c11",
+      "source": "n10",
+      "target": "n3",
+      "label": "retry"
+    }
+  ],
+  "generated_at": "2026-03-27T02:58:21.989826+00:00",
+  "model": "claude-haiku-4-5"
+}

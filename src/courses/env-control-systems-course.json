@@ -1,0 +1,295 @@
+{
+  "id": "env-control-systems-course",
+  "title": "Control Systems for Environmental Management",
+  "description": "Master control systems through real-world environmental science applications. Adaptive pathway based on your knowledge level.",
+  "topic": "Control Systems",
+  "theme": "environmental science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "control systems",
+    "environmental science",
+    "feedback",
+    "regulation",
+    "adaptive learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Foundations Assessment: Control System Concepts",
+      "content": "Test your understanding of basic control system principles as applied to environmental management. These concepts form the foundation for understanding how environmental systems are monitored and regulated.",
+      "questions": [
+        {
+          "question": "In a greenhouse with automatic watering, the soil moisture sensor sends a signal to the irrigation system. If the soil is too dry, water is added. This is an example of what type of control?",
+          "options": [
+            "Open-loop control",
+            "Negative feedback control",
+            "Feedforward prediction",
+            "Manual adjustment"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No - there's a sensor providing continuous information",
+            "Correct! The system measures soil moisture and acts to correct the error",
+            "No - feedforward predicts needs without measuring current conditions",
+            "No - this is fully automated"
+          ],
+          "explanation": "This demonstrates negative feedback control: the system measures the actual state, compares it to the desired state, and corrects the difference."
+        },
+        {
+          "question": "A carbon dioxide monitoring system in a building measures CO2 levels and adjusts ventilation accordingly. Which component acts as the 'sensor'?",
+          "options": [
+            "The CO2 detector",
+            "The ventilation fan",
+            "The desired CO2 level setting",
+            "The building management system"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The sensor provides feedback about the current state",
+            "That's the actuator - it receives commands to change the system",
+            "That's the setpoint or target value",
+            "That's the controller - it processes sensor data"
+          ],
+          "explanation": "Sensors measure the actual state of the system and send this information back to the controller for comparison against the desired state."
+        },
+        {
+          "question": "If a water treatment plant's pH control system stops receiving signals from its sensor, what would most likely happen?",
+          "options": [
+            "The system would maintain perfect pH",
+            "The system would stop adjusting chemicals automatically",
+            "Oscillations would decrease",
+            "The sensor would automatically recalibrate"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No - without feedback, the system can't know if corrections are working",
+            "Correct! Without feedback, the system cannot make intelligent adjustments",
+            "No - without feedback, control would be lost entirely",
+            "No - sensors require active maintenance, not self-calibration"
+          ],
+          "explanation": "Feedback is essential for control. Without it, the system operates 'open-loop' and cannot respond intelligently to changes."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Advanced Assessment: Control System Design",
+      "content": "Demonstrate your understanding of control system parameters, dynamics, and design tradeoffs. This assessment evaluates your readiness for advanced applications in environmental control systems.",
+      "questions": [
+        {
+          "question": "In a precision agriculture irrigation system, the farmer sets the soil moisture target at 60% field capacity. This target value is called the:",
+          "options": [
+            "Feedback signal",
+            "Error signal",
+            "Setpoint",
+            "Actuator response"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "No - that's the measured value from the soil sensor",
+            "No - that's the difference between desired and actual",
+            "Correct! The setpoint is the desired operating point",
+            "No - that's the system output (irrigation amount)"
+          ],
+          "explanation": "The setpoint is the target or desired value that the controller tries to maintain. The error is the difference between setpoint and measured value."
+        },
+        {
+          "question": "A greenhouse temperature control system using proportional control overshoots the target temperature and oscillates around it. What would adding integral control help address?",
+          "options": [
+            "Reduce oscillation magnitude",
+            "Completely eliminate temperature overshoot",
+            "Reduce steady-state error",
+            "Remove the need for sensors"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Not directly - oscillation is more about proportional gain tuning",
+            "No - integral control cannot eliminate physical overshoot",
+            "Correct! Integral control accumulates past errors and reduces steady-state deviation",
+            "No - all control systems require feedback sensors"
+          ],
+          "explanation": "Integral control is effective at eliminating steady-state error by accumulating the error over time, but derivative or proportional adjustments are better for handling overshoot."
+        },
+        {
+          "question": "A water reclamation system uses cascade control: an outer loop maintains overall water quality while an inner loop adjusts pH in real-time. What is the main advantage of this approach?",
+          "options": [
+            "Significantly reduces system cost",
+            "Allows faster correction of disturbances in the inner loop",
+            "Eliminates the need for multiple sensors",
+            "Removes the need for proportional control"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not the primary advantage - cost isn't the main benefit",
+            "Correct! Cascade control handles inner disturbances quickly without waiting for outer loop correction",
+            "No - cascade control actually requires more sensors",
+            "No - cascade uses all types of control together"
+          ],
+          "explanation": "Cascade control divides the problem: the inner loop handles fast disturbances locally, while the outer loop manages overall goals. This improves disturbance rejection."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Expert Topic: Adaptive Control in Environmental Systems",
+      "content": "Advanced control systems adapt their behavior based on changing environmental conditions. Model Predictive Control (MPC) is increasingly used in precision agriculture to forecast soil conditions and adjust irrigation before problems occur. Adaptive control in renewable energy systems maintains grid stability as wind and solar generation fluctuate unpredictably. Self-tuning controllers in water treatment plants adjust PID parameters automatically as water quality characteristics change with seasons. These sophisticated approaches represent the frontier of environmental management, where systems learn from experience and anticipate future needs.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Path Complete: Advanced Control Systems Mastery",
+      "content": "Excellent! You've demonstrated mastery of advanced control system concepts and their application to environmental challenges. You're ready to tackle complex real-world environmental engineering problems using adaptive and predictive control strategies."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Intermediate Practice: Applying Control Systems",
+      "content": "Strengthen your understanding through practical scenarios. These questions ask you to apply control system principles to real environmental challenges.",
+      "questions": [
+        {
+          "question": "An air quality control system in an urban greenhouse maintains CO2 at 800 ppm for optimal plant growth. When plants are removed during harvest, CO2 spikes to 1200 ppm. The controller increases ventilation. This response addresses:",
+          "options": [
+            "Setpoint change",
+            "Disturbance rejection",
+            "Sensor drift",
+            "Actuator failure"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No - the setpoint (800 ppm) didn't change",
+            "Correct! An unexpected disturbance (plant removal) requires the controller to reject it",
+            "No - the sensor is still accurate",
+            "No - the actuator is working"
+          ],
+          "explanation": "Disturbance rejection is a key control system objective - the system must respond to unexpected changes and bring the process back to setpoint."
+        },
+        {
+          "question": "A soil moisture irrigation system needs to respond very quickly to sudden dry conditions. Which would be most helpful?",
+          "options": [
+            "Increasing the setpoint value",
+            "Using only proportional control with high gain",
+            "Implementing a faster sensor with lower measurement delay",
+            "Adding more sensors"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "No - setpoint is the target, not response speed",
+            "Not best - high proportional gain causes oscillation",
+            "Correct! Measurement delay is often the limiting factor in response time",
+            "Not directly - more sensors without faster measurement don't help"
+          ],
+          "explanation": "System response speed is limited by sensor measurement delay, actuator speed, and process dynamics. Faster sensors enable faster control action."
+        },
+        {
+          "question": "In a wastewater treatment plant, two parameters need control: ammonia (NH3) and dissolved oxygen (DO). Should you use two separate independent controllers or one coordinated system?",
+          "options": [
+            "Two independent controllers are always better",
+            "One coordinated system to account for interactions",
+            "It doesn't matter - both work the same",
+            "Neither - manual control is better"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No - these parameters interact, so independent control may cause problems",
+            "Correct! Coordinated control accounts for how adjusting one affects the other",
+            "No - interactions mean coordination is important",
+            "No - automated control is more effective"
+          ],
+          "explanation": "Many environmental systems have coupled parameters where controlling one affects others. Coordinated control systems account for these interactions."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Path Complete: Applied Control Systems",
+      "content": "Great work! You've developed practical understanding of how control systems are applied to environmental challenges. You can now analyze real environmental systems and understand how they maintain stability and respond to disturbances."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Foundations: Understanding Feedback and Control",
+      "content": "All environmental systems naturally seek balance through feedback mechanisms. When a forest experiences drought, trees close their stomata to conserve water - this is negative feedback that prevents further water loss. Control systems formalize this principle: measure the current state, compare it to the desired state, and adjust until they match. In environmental management, a wetland naturally filters pollutants (open-loop), but we can design a treatment system that measures pollutant levels, adjusts chemical dosing automatically, and verifies effectiveness - this is controlled feedback. The key insight: feedback allows systems to be self-correcting and responsive to change.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Water Tank Level Control",
+      "content": "Consider a rainwater harvesting tank for agricultural irrigation. The tank has a desired level (setpoint) of 75% full. A float sensor measures actual level (feedback). When level drops below 70%, the inlet valve opens to refill. When level reaches 80%, the inlet closes (proportional control). If heavy rainfall causes overflow, the excess drains automatically. This simple system demonstrates all key concepts: setpoint (75%), sensor (float), controller (comparison logic), actuator (valve), and feedback loop. The system continuously measures, compares, and adjusts - maintaining stability despite changing conditions like rainfall, plant water demand, and seasonal variation.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundations Complete: Control System Essentials",
+      "content": "Excellent start! You've learned how feedback enables systems to self-regulate and adapt. You understand the core principle that control depends on measuring, comparing, and correcting. This foundation is essential before advancing to more complex environmental applications."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T12:52:30.957952+00:00",
+  "model": "claude-haiku-4-5"
+}

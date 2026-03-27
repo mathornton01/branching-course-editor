@@ -1,0 +1,133 @@
+{
+  "id": "cybersec-env-basics",
+  "title": "Cybersecurity Basics: Protecting Environmental Data",
+  "description": "Learn cybersecurity principles through the lens of protecting environmental research and conservation data. Navigate a realistic incident scenario and make decisions that impact outcomes.",
+  "topic": "Cybersecurity Basics",
+  "theme": "environmental science",
+  "difficulty": "beginner",
+  "estimated_minutes": 18,
+  "tags": [
+    "cybersecurity",
+    "data-protection",
+    "incident-response",
+    "environmental-conservation",
+    "decision-making",
+    "threat-response"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The EcoNet Incident Begins",
+      "content": "EcoNet is a global environmental monitoring network that tracks endangered species locations, climate data, and pollution levels across 150 countries. Their biodiversity database contains sensitive information that guides conservation efforts and protects vulnerable ecosystems. Early this morning, security alerts show unusual login attempts from unfamiliar locations and failed efforts to download large datasets targeting exact poacher-sensitive data. Your organization must decide how to respond within hours."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Immediate Response to Security Threat",
+      "content": "You've discovered suspicious activity in EcoNet's systems. How should your organization respond?",
+      "choices": [
+        {
+          "label": "Implement immediate security lockdown",
+          "next": "n3"
+        },
+        {
+          "label": "Investigate the threat thoroughly first",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Implementing Emergency Security Protocols",
+      "content": "Your team activates a security lockdown immediately. Multi-factor authentication (MFA) is deployed\u2014researchers now need both credentials and a time-based code, like using two keys to access a secure facility. You segment the network into protected zones: public databases isolate from sensitive species location servers. All critical data gets encrypted, rendering it unreadable if stolen. System patches deploy immediately with continuous monitoring for further intrusion attempts, hardening defenses like reinforcing research station doors and installing security cameras."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "How to Proceed with Incident Response",
+      "content": "You've secured the immediate threat. Now, how should your organization handle this incident?",
+      "choices": [
+        {
+          "label": "Notify security experts and stakeholders immediately",
+          "next": "n5"
+        },
+        {
+          "label": "Handle internally, restrict access, avoid publicity",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Collaborative Security Victory",
+      "content": "By involving external security experts and stakeholders, incident response was thorough and effective. Cybersecurity forensics revealed a researcher's credentials were compromised in an unrelated website breach where they reused passwords\u2014a tactic called credential stuffing. You notified partner organizations, regulatory bodies, and implemented stronger password policies requiring unique, complex credentials for all researchers. Mandatory security awareness training taught researchers why environmental data is targeted by criminals seeking endangered species locations. Your transparency built trust with conservation partners, and the organization became known for responsible data stewardship\u2014essential for global environmental collaboration."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Isolated Security Response Fails",
+      "content": "By keeping the incident internal without expert input, critical errors compounded the problem. Without thorough forensics, the actual breach scope remained unknown. Two weeks later, a conservation partner discovered endangered elephant migration routes\u2014downloaded from EcoNet\u2014circulating in poaching networks. Regulators determined your organization violated data protection laws by not disclosing the breach within required timeframes. Conservation partners lost trust in your data stewardship. Working in isolation prevented access to threat intelligence that would have identified the compromise source, and your incomplete security measures were reactive rather than preventive."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Analyzing the Threat Carefully",
+      "content": "Your security team begins methodical investigation, reviewing detailed system logs\u2014an audit trail of every access and timestamp. Threat intelligence reveals this is credential stuffing, a known pattern where hackers use passwords stolen from public data leaks. Impact assessment shows attackers never gained access before being blocked. Root cause analysis identifies that a researcher reused the same password across multiple services where it was compromised. Only then does the team develop a comprehensive response plan\u2014like properly diagnosing an environmental problem before implementing a solution."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Thorough Investigation Leads to Better Security",
+      "content": "The investigation-first approach provided significant benefits. Understanding the threat enabled a measured, proportionate response\u2014securing systems without excessive fieldwork disruption. You addressed the exact vulnerability by implementing password managers and mandatory unique passwords. Your team created security training teaching researchers to recognize phishing attempts and understand why environmental data is criminally valuable. Formal incident response procedures were established for future threats, ensuring consistent effective responses. Conservation work continued uninterrupted because your response was strategic, not panicked. Partners appreciated professional competence, and your environmental data remained secure while supporting critical conservation missions across continents."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Lockdown immediately"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Investigate first"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Notify experts"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Handle internally"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:10:42.023739+00:00",
+  "model": "claude-haiku-4-5"
+}

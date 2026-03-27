@@ -1,0 +1,401 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440050",
+  "title": "Information Theory Fundamentals",
+  "description": "Learn the foundations of information theory, including entropy, bits, and data compression",
+  "topic": "Information Theory",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 30,
+  "tags": [
+    "information-theory",
+    "entropy",
+    "shannon",
+    "bits",
+    "compression",
+    "communication"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Information?",
+      "content": "Information is fundamentally about reducing uncertainty. Before receiving a message, you're uncertain about its content. Afterward, that uncertainty decreases\u2014that reduction is information. In information theory, we measure this using entropy: a mathematical way to quantify how much uncertainty or surprise exists in a message. The more unpredictable something is, the more information its outcome carries. This concept, formalized by Claude Shannon in 1948, revolutionized telecommunications and data science. Understanding information as measurable quantity rather than vague concept enables us to design efficient communication systems, optimize storage, and understand the limits of what can be reliably transmitted over noisy channels. This foundation underlies everything from smartphone networks to artificial intelligence.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Calculating Entropy: A Fair Coin",
+      "content": "Let's work through Shannon's entropy formula step by step: H = -\u03a3 p(x) log\u2082 p(x). Imagine flipping a fair coin. Before the flip, you're 50/50 on heads or tails. Each outcome has probability p = 0.5. Substituting into the formula: H = -(0.5 \u00d7 log\u2082(0.5) + 0.5 \u00d7 log\u2082(0.5)). Since log\u2082(0.5) = -1, we get: H = -(0.5 \u00d7 -1 + 0.5 \u00d7 -1) = -(-1) = 1 bit. This means each coin flip carries exactly 1 bit of information.\n\nNow consider a biased coin (75% heads, 25% tails). Its entropy is H = -(0.75 \u00d7 log\u2082(0.75) + 0.25 \u00d7 log\u2082(0.25)). Computing: log\u2082(0.75) \u2248 -0.415, log\u2082(0.25) = -2. So H \u2248 -(0.75 \u00d7 -0.415 + 0.25 \u00d7 -2) = -(-0.311 - 0.5) \u2248 0.81 bits. The biased coin carries less information per flip because outcomes are more predictable\u2014heads is likely, so learning the result is less surprising.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Basic Entropy Assessment",
+      "content": "Test your understanding of information entropy and uncertainty.",
+      "questions": [
+        {
+          "question": "A six-sided die is rolled. What is its entropy in bits?",
+          "options": [
+            "1 bit",
+            "2 bits",
+            "2.58 bits",
+            "6 bits"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. A fair die has 6 equally likely outcomes, not 2. The entropy formula for n equally likely outcomes is H = log\u2082(n).",
+            "Incorrect. That would be the entropy of a four-sided die (log\u2082(4) = 2). For six outcomes, log\u2082(6) \u2248 2.58.",
+            "Correct! H = log\u2082(6) \u2248 2.58 bits. Each outcome carries approximately 2.58 bits of information. This is because it takes 2.58 binary decisions to uniquely identify one of 6 equally likely outcomes.",
+            "Incorrect. While there are 6 outcomes, entropy is logarithmic, not linear. You don't need 6 bits to distinguish 6 outcomes; you need log\u2082(6) \u2248 2.58 bits."
+          ],
+          "explanation": "For n equally likely outcomes, entropy H = log\u2082(n). With 6 outcomes, H = log\u2082(6) \u2248 2.58 bits. This represents the average information gained from learning the outcome."
+        },
+        {
+          "question": "Entropy is maximized when:",
+          "options": [
+            "One outcome is certain (100% probability)",
+            "All outcomes are equally likely",
+            "The probability distribution is heavily skewed",
+            "There are more possible outcomes than before"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A certain outcome has zero entropy H = 0, since there is no uncertainty. You gain no information if you already know what will happen.",
+            "Correct! When all outcomes are equally likely, uncertainty is maximum. This is because you have no reason to expect one outcome over another, so each outcome is maximally surprising.",
+            "Incorrect. Skewed distributions produce lower entropy (more predictability). The more concentrated the probability mass, the more you can predict the outcome, reducing uncertainty and information.",
+            "Incorrect. The number of outcomes matters, but equal probability distribution is the key. A distribution with 10 possible but heavily skewed outcomes has less entropy than a balanced 4-outcome distribution."
+          ],
+          "explanation": "Entropy is highest with maximum uncertainty. This occurs when all outcomes have equal probability, because no outcome can be predicted better than any other."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n5",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Practice: Entropy and Uncertainty",
+      "content": "Let's strengthen your understanding with these practice problems. Work through the entropy calculations carefully, using H = -\u03a3 p(x) log\u2082 p(x) for each scenario.",
+      "questions": [
+        {
+          "question": "A bag contains 3 red balls and 1 blue ball. When drawing one ball, what is the entropy?",
+          "options": [
+            "0 bits",
+            "0.81 bits",
+            "1 bit",
+            "2 bits"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. There is uncertainty since we don't know which ball we'll draw. Only if the outcome were certain would entropy be 0.",
+            "Correct! H = -(0.75\u00d7log\u2082(0.75) + 0.25\u00d7log\u2082(0.25)) \u2248 -(0.75\u00d7-0.415 + 0.25\u00d7-2) = -(-0.311-0.5) \u2248 0.81 bits. The imbalanced probabilities create less uncertainty than a 50/50 split.",
+            "Incorrect. That would be for a perfectly balanced 50/50 distribution (like a fair coin).",
+            "Incorrect. Entropy is always less than or equal to log\u2082(n) where n is the number of outcomes. Here with 2 outcomes, max entropy is 1 bit, and with imbalanced probabilities it's less."
+          ],
+          "explanation": "Use H = -\u03a3 p(x) log\u2082 p(x) with the actual probabilities: p(red)=0.75, p(blue)=0.25. The unequal distribution produces less entropy than an equal split."
+        },
+        {
+          "question": "Which scenario has zero entropy?",
+          "options": [
+            "Flipping a fair coin",
+            "Drawing a random card from a deck",
+            "A die showing a predetermined number every time",
+            "Rolling a biased die"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. A fair coin has perfect uncertainty (50/50), which produces maximum entropy for 2 outcomes: H = 1 bit.",
+            "Incorrect. A standard deck of 52 cards has very high entropy (log\u2082(52) \u2248 5.7 bits) since each card is equally likely.",
+            "Correct! If the outcome is certain (one outcome has probability 1, others have probability 0), then H = -(1 \u00d7 log\u2082(1) + 0\u00d7...) = 0. There is no uncertainty, so entropy is zero.",
+            "Incorrect. Even a heavily biased die still has multiple possible outcomes with non-zero probabilities, so entropy > 0."
+          ],
+          "explanation": "Entropy equals zero only when the outcome is completely certain\u2014when one outcome has probability 1 and all others have probability 0. This represents no uncertainty whatsoever."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Shannon Entropy and Bits",
+      "content": "Claude Shannon's information theory tells us that information can be quantified and transmitted reliably even over noisy channels. A bit (binary digit) is the fundamental unit of information: it's the amount of information needed to distinguish between two equally likely outcomes. Shannon proved that by using optimal coding (like Huffman codes), we can compress data to approach the entropy limit\u2014the theoretical minimum bits needed per symbol. This insight powers all modern data compression, from ZIP files to video streaming. Remarkably, Shannon showed that even in the presence of noise, we can transmit information reliably up to a theoretical maximum rate called channel capacity. The practical implications are profound: knowing entropy allows engineers to design systems that achieve near-theoretical efficiency, making modern telecommunications, video conferencing, and digital storage possible at scale. This single mathematical framework unified disparate fields and provided the foundation for the digital age.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Efficient Encoding: Text Compression",
+      "content": "Let's see how Huffman coding works in practice. In English text, letters have different frequencies: 'e' appears ~11%, 't' ~7%, 'a' ~8%, while 'z' appears ~0.07%, 'q' ~0.1%. Traditional ASCII uses 8 bits per character regardless of frequency.\n\nWith Huffman coding, we build a tree where frequent letters get short bit codes and rare letters get longer codes. For example:\n- 'e' might use 3 bits: \"101\"\n- 't' might use 4 bits: \"1100\"\n- 'z' might use 11 bits: \"11010110101\"\n\nIn a 10,000-character English document:\n- ASCII uses: 10,000 \u00d7 8 = 80,000 bits\n- With Huffman: roughly 10,000 \u00d7 4.2 = 42,000 bits (approximately)\n- This achieves ~47% compression!\n\nWhy does this work? The document's actual entropy might be ~4.2 bits per character. Huffman coding approaches this theoretical limit by using fewer bits for predictable (frequent) symbols and more bits for rare symbols. The total bits used approaches the entropy\u2014no wasted bits.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Bits and Information Capacity",
+      "content": "Test your understanding of bits, encoding, and channel capacity.",
+      "questions": [
+        {
+          "question": "What is the minimum average number of bits needed to encode each symbol when you have 8 equally likely symbols?",
+          "options": [
+            "1 bit",
+            "2 bits",
+            "3 bits",
+            "8 bits"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. You have 8 possible symbols, not 2. The formula is log\u2082(n), so log\u2082(8) = 3.",
+            "Incorrect. That would work for 4 symbols: log\u2082(4) = 2. For 8 symbols you need more bits.",
+            "Correct! H = log\u2082(8) = 3 bits exactly. You need at least 3 bits to distinguish between 8 equally likely options, since 2\u00b3 = 8. This is the information-theoretic lower bound.",
+            "Incorrect. Using one bit per symbol for 8 symbols would require 8 bits total and be highly wasteful. Information theory shows 3 bits suffice."
+          ],
+          "explanation": "For n equally likely symbols, the minimum average bits needed is log\u2082(n). Here, log\u2082(8) = 3 bits, since 2\u00b3 = 8. Any encoding scheme must use at least 3 bits per symbol on average."
+        },
+        {
+          "question": "Shannon's channel capacity theorem states that:",
+          "options": [
+            "Perfect information transmission is possible at any rate, even on noisy channels",
+            "Information can be reliably transmitted up to a maximum rate determined by bandwidth and noise",
+            "Noise always destroys all transmitted information",
+            "Channels with high bandwidth have unlimited capacity"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Noise absolutely limits our transmission rate. Shannon's genius was showing that reliable transmission is still possible up to a limit, but that limit is real.",
+            "Correct! Channel capacity C = B \u00d7 log\u2082(1 + S/N), where B is bandwidth and S/N is signal-to-noise ratio. This formula shows that capacity depends on both the bandwidth available and the quality of the channel (noise level). It's the theoretical maximum rate for reliable transmission.",
+            "Incorrect. Shannon proved the opposite: even with noise, we CAN communicate reliably by using codes that correct errors. We just can't exceed the channel capacity.",
+            "Incorrect. Bandwidth is only half the story. A high-bandwidth channel with massive noise (low signal-to-noise ratio) may have lower capacity than a narrow bandwidth channel with clean signal."
+          ],
+          "explanation": "Shannon's Channel Capacity theorem: C = B log\u2082(1 + S/N) bits per second. This is the fundamental speed limit for reliable communication. Exceeding it means errors become inevitable, no matter what encoding you use."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "node-63f4d1a2",
+      "failure_target": "n4"
+    },
+    {
+      "id": "node-63f4d1a2",
+      "type": "content",
+      "title": "Advanced Concepts: From Theory to Application",
+      "content": "You've now mastered the core concepts of information theory. The practical implications extend far beyond text compression. In modern applications, these principles determine how fast your internet can be, how reliably medical data is transmitted, how efficiently your phone stores photos, and how machine learning systems identify patterns in noisy data. Error-correcting codes (used in QR codes, deep space communication, and memory systems) directly apply Shannon's insights to add redundancy that protects against corruption. Neural networks learn by reducing entropy\u2014organizing randomness into meaningful patterns. Understanding information theory gives you a framework for thinking about data, efficiency, and reliability across countless domains.",
+      "next": "node-8f2e4c9b"
+    },
+    {
+      "id": "node-8f2e4c9b",
+      "type": "assessment",
+      "title": "Challenge: Integrated Information Theory",
+      "content": "Test your deep understanding by applying information theory concepts to more complex scenarios.",
+      "questions": [
+        {
+          "question": "You design a communication system transmitting DNA sequences (4 bases: A, T, G, C) over a channel with signal-to-noise ratio of 16. If bandwidth is 1 MHz, approximately what is the maximum reliable transmission rate?",
+          "options": [
+            "2 Mbps",
+            "4 Mbps",
+            "8 Mbps",
+            "16 Mbps"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Using C = B \u00d7 log\u2082(1 + S/N): C = 1 \u00d7 log\u2082(1 + 16) = log\u2082(17) \u2248 4.09 Mbps. This is higher than your answer.",
+            "Correct! C = B \u00d7 log\u2082(1 + S/N) = 1 \u00d7 log\u2082(1 + 16) = log\u2082(17) \u2248 4.09 Mbps. This represents the maximum rate for reliable transmission over this noisy channel.",
+            "Incorrect. This would be C = B \u00d7 log\u2082(1 + 256), which would require S/N = 256. Your channel has S/N = 16.",
+            "Incorrect. This would require C = B \u00d7 log\u2082(1 + 65536), far beyond what this channel can support."
+          ],
+          "explanation": "Apply Shannon's channel capacity formula: C = B \u00d7 log\u2082(1 + S/N) = 1 MHz \u00d7 log\u2082(17) \u2248 4.09 Mbps. The S/N ratio of 16 is the limiting factor."
+        },
+        {
+          "question": "A data compression algorithm reduces a file from 1 GB to 250 MB (compression ratio 4:1). What was the average entropy of the original data?",
+          "options": [
+            "0.5 bits per symbol",
+            "1 bit per symbol",
+            "2 bits per symbol",
+            "Cannot determine from given information"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. Entropy depends on the probability distribution of symbols, not just the compression ratio. The same compression ratio could result from different probability distributions.",
+            "Incorrect. A 4:1 compression might imply average entropy of 2 bits per symbol (if originally using 8-bit bytes), but we'd need more information about the original encoding.",
+            "Incorrect. While 4:1 compression (from 8 bits/byte to 2 bits/byte) might suggest 2 bits entropy, we don't know if the original file used 8-bit symbols or something else.",
+            "Correct! The entropy depends on the original symbol size and probability distribution. A 4:1 compression ratio doesn't uniquely determine entropy without knowing: (1) what were the original symbol sizes, and (2) what probability distribution did they follow. Different distributions can achieve similar compression ratios."
+          ],
+          "explanation": "Compression ratio alone doesn't determine entropy. We'd need to know the original encoding scheme and symbol probabilities. For example, if the original used 8-bit bytes, a 4:1 ratio suggests ~2 bits/byte entropy. But if it used 2-bit symbols, the calculation differs entirely."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n8",
+      "failure_target": "node-d7a3e1f5"
+    },
+    {
+      "id": "node-d7a3e1f5",
+      "type": "practice",
+      "title": "Advanced Practice: Complex Scenarios",
+      "content": "Let's work through more challenging applications of information theory. These problems require integrating entropy calculations with real-world constraints.",
+      "questions": [
+        {
+          "question": "If you want to transmit 1 kilobyte of data and your channel has capacity of 4 kbps, what is the minimum transmission time?",
+          "options": [
+            "0.25 seconds",
+            "2 seconds",
+            "4 seconds",
+            "8 seconds"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. 1 kbyte = 8 kilobits. Dividing by 4 kbps gives 2 seconds, not 0.25 seconds.",
+            "Correct! 1 kbyte = 8 kilobits. Time = 8 kb \u00f7 4 kbps = 2 seconds minimum. This is the theoretical limit; real systems may take longer due to protocol overhead.",
+            "Incorrect. This would be the time if your channel capacity were 2 kbps, not 4 kbps.",
+            "Incorrect. This would be the time if your channel capacity were 1 kbps."
+          ],
+          "explanation": "Channel capacity formula rearranged: Time = Data \u00f7 Capacity = 8 kilobits \u00f7 4 kbps = 2 seconds."
+        },
+        {
+          "question": "Compare the entropy of a uniform distribution (all outcomes equally likely) vs. a distribution where one outcome has 90% probability and the rest split the remaining 10%. Which has higher entropy?",
+          "options": [
+            "Uniform distribution always has higher entropy",
+            "Skewed distribution has higher entropy",
+            "They always have equal entropy",
+            "It depends on the number of outcomes"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The uniform distribution maximizes entropy because maximum uncertainty occurs when you can't predict the outcome. The skewed distribution concentrates probability mass, making outcomes more predictable and thus lower entropy.",
+            "Incorrect. Concentrated probability distributions always have lower entropy than uniform distributions with the same number of outcomes.",
+            "Incorrect. These distributions have very different probability profiles and thus different entropies.",
+            "Incorrect. While the number of outcomes matters, the fundamental principle holds: uniform distributions maximize entropy for any given number of outcomes."
+          ],
+          "explanation": "Among all distributions over n outcomes, the uniform distribution (all outcomes equally likely) has the maximum entropy of log\u2082(n) bits. Any skewed distribution with the same outcomes has lower entropy."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What would you like to explore?",
+      "content": "Excellent work! You've now mastered the foundations of information theory, understanding entropy, bits, Shannon's theorems, and how these concepts apply to real-world systems. What interests you next?",
+      "choices": [
+        {
+          "label": "Learn about error correction and noisy channels",
+          "next": "n9"
+        },
+        {
+          "label": "Review fundamentals once more",
+          "next": "n1"
+        },
+        {
+          "label": "I'm satisfied\u2014finish the course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: Information Theory Foundations",
+      "content": "Congratulations! You've completed the Information Theory Fundamentals course. You now understand entropy (the measure of uncertainty), bits (the unit of information), and Shannon's groundbreaking theorems on compression and channel capacity. These concepts form the foundation for modern digital communication, cryptography, data compression, and machine learning. Your next learning paths could include error correction codes, quantum information theory, or practical applications in data science and telecommunications."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n5",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n9",
+      "label": "complete"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "node-63f4d1a2",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n4",
+      "label": "fail"
+    },
+    {
+      "id": "c10",
+      "source": "node-63f4d1a2",
+      "target": "node-8f2e4c9b",
+      "label": "next"
+    },
+    {
+      "id": "c11",
+      "source": "node-8f2e4c9b",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c12",
+      "source": "node-8f2e4c9b",
+      "target": "node-d7a3e1f5",
+      "label": "fail"
+    },
+    {
+      "id": "c13",
+      "source": "node-d7a3e1f5",
+      "target": "n8",
+      "label": "complete"
+    },
+    {
+      "id": "c14",
+      "source": "n8",
+      "target": "n1",
+      "label": "review"
+    },
+    {
+      "id": "c15",
+      "source": "n8",
+      "target": "n9",
+      "label": "continue"
+    }
+  ],
+  "generated_at": "2026-03-26T09:40:52.813195+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T09:57:01.668199+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

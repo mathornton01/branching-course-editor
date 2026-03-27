@@ -1,0 +1,134 @@
+{
+  "id": "ethics-ai-marine-biology-scenario",
+  "title": "Ethics in AI: A Marine Biology Journey",
+  "description": "Navigate ethical dilemmas in artificial intelligence through a branching scenario set in marine conservation research",
+  "topic": "Ethics in Artificial Intelligence",
+  "theme": "marine biology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 35,
+  "tags": [
+    "ethics",
+    "ai",
+    "marine biology",
+    "conservation",
+    "algorithmic bias",
+    "responsible AI",
+    "human oversight"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Coral Reef Monitoring Challenge",
+      "content": "You lead a marine conservation initiative monitoring coral bleaching across the Great Barrier Reef. Your team deployed an AI system trained on underwater images to classify coral species and detect bleaching\u2014processing thousands of reef sections daily, 100x faster than human divers. But your lead scientist just discovered the AI was trained primarily on Pacific reef imagery and makes systematic errors on Atlantic coral species. This efficiency breakthrough now presents an ethical dilemma: do you investigate the problem thoroughly, or move forward quickly with improvements?"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "The Audit Decision",
+      "content": "Your team faces two instincts. Some want to patch the AI quickly and keep operations running. Others argue you must understand the full scope of the bias before deploying a system that influences conservation decisions. Which approach will you take?",
+      "choices": [
+        {
+          "label": "Pause operations and conduct a thorough audit of the AI system",
+          "next": "n3"
+        },
+        {
+          "label": "Apply quick fixes and continue monitoring with the improved AI",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Uncovering Algorithmic Bias in Marine Research",
+      "content": "Your audit reveals critical bias: the AI misidentifies endangered elkhorn coral 40% of the time when surrounded by soft corals, but only 5% of the time in isolation. This happened because your training dataset contained 10x more isolated coral images than natural reef communities. In marine conservation, such bias can cause catastrophic misallocation of resources\u2014misclassifying healthy reefs as bleached diverts protection efforts from truly at-risk areas, while missed bleaching events delay intervention on critical sites. The ethical principle mirrors informed consent: stakeholders relying on your data deserve to know the system's limitations. Transparency about AI capabilities is foundational to responsible research."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Designing the Integration Approach",
+      "content": "You've identified that your AI has blind spots. Now you must choose how to ethically integrate AI into coral conservation work. This decision will shape whether the system serves marine ecosystems responsibly.",
+      "choices": [
+        {
+          "label": "Abandon AI entirely\u2014human experts only, to eliminate algorithmic bias",
+          "next": "n5"
+        },
+        {
+          "label": "Build a collaborative hybrid system where AI suggests candidates and humans verify",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "The Limits of Human-Only Oversight",
+      "content": "Your team discontinues AI analysis entirely to eliminate bias. However, you've created a different ethical problem: with only 5 expert divers and 10,000 reef sections to monitor, you can survey just 500 sites yearly instead of 9,500. Over three years, critical bleaching events in unsurveyed areas go undetected, and two major reef zones collapse. By rejecting AI's imperfect speed to achieve perfect human judgment, you've violated the principle of non-maleficence\u2014do no harm. Sometimes rejecting powerful tools entirely is itself unethical when better alternatives exist. The lesson: ethical AI isn't about rejecting automation, but designing oversight systems where human judgment guides automated power."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Responsible Hybrid Intelligence",
+      "content": "You implement collaborative analysis: AI pre-screens all imagery, flagging likely bleaching events; human experts review every flagged section (2 hours daily) and randomly sample 5% of non-flagged areas for quality control. The system detects 94% of bleaching events, catches most AI errors through human review, and processes 9,500 reef sections annually\u2014maintaining both speed and accountability. Critically, you publish your methodology transparently, including known bias patterns and sampling strategy, enabling the scientific community to evaluate data reliability. This approach embodies modern AI ethics: leveraging technology's power while maintaining human oversight, accountability, and transparency. Your framework becomes a model other conservation programs adopt."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Operating Without Scrutiny",
+      "content": "Your team decides the bias issue is minor\u201495% accuracy is sufficient\u2014and proceeds with the existing system. You rationalize that quick improvements are better than delays. Over two years, the AI's inherent bias systematically underestimates bleaching in Atlantic reefs, where your conservation focus lies. Resource allocation becomes misaligned with actual ecosystem needs. When independent researchers audit your data in year 3, they discover the systematic error. Your organization's credibility collapses, conservation efforts have been misdirected, and marine ecosystems suffered real harm from flawed data. The ethical failure wasn't the AI itself, but deploying it without understanding its limitations or maintaining oversight mechanisms."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "The Cost of Ignoring Ethical Responsibilities",
+      "content": "This outcome illustrates why AI ethics is foundational to responsible science. When AI systems influence real-world decisions\u2014especially in conservation where stakes are measured in ecosystem collapse\u2014failing to acknowledge limitations and maintain oversight creates cascading harm. The lesson transcends marine biology: ethical AI requires humility about system limitations, transparency about flaws, and commitment to human accountability at decision points. Progress without ethics isn't progress\u2014it's misdirection that can damage the very systems we seek to protect. In every domain where AI shapes outcomes, ethics is the foundation, not a constraint on innovation."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Confronting the dilemma"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Choose audit"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Choose to continue"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Understanding the problem"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Eliminate AI entirely"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Build hybrid system"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Consequences emerge"
+    }
+  ],
+  "generated_at": "2026-03-26T10:06:30.808041+00:00",
+  "model": "claude-haiku-4-5"
+}

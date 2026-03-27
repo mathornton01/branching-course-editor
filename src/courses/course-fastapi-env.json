@@ -1,0 +1,340 @@
+{
+  "id": "course-fastapi-env",
+  "title": "Web Development with FastAPI: Building Environmental Applications",
+  "description": "Learn FastAPI by building real-world environmental monitoring applications. Choose your path through APIs, databases, and real-time systems.",
+  "topic": "Web Development with FastAPI",
+  "theme": "environmental science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "FastAPI",
+    "Python",
+    "Environmental Science",
+    "Web Development"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Welcome to FastAPI for Environmental Applications",
+      "content": "FastAPI is a modern Python web framework perfect for building APIs that power environmental monitoring systems. In this course, you'll learn to create APIs for climate sensors, pollution tracking, and real-time environmental alerts. We'll guide you through three core areas: building APIs to serve sensor data, storing and retrieving environmental measurements from databases, and streaming live alerts for environmental hazards. Choose the area that interests you most to get started.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Select the environmental monitoring application you'd like to build first. Each path teaches essential FastAPI concepts through a real-world scenario.",
+      "choices": [
+        {
+          "label": "APIs: Expose Climate Station Data",
+          "next": "n3"
+        },
+        {
+          "label": "Databases: Store Sensor Measurements",
+          "next": "n6"
+        },
+        {
+          "label": "Real-time: Stream Environmental Alerts",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Building Environmental Data APIs with FastAPI",
+      "content": "APIs are the backbone of environmental monitoring systems. FastAPI makes it easy to expose your environmental data to web clients, mobile apps, and dashboards. You'll learn how to define routes (endpoints) that respond to HTTP requests, handle query parameters for filtering by location or date range, and return JSON responses with sensor readings. FastAPI automatically validates data types and generates interactive documentation (Swagger UI), saving you from writing boilerplate code.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Weather Station API",
+      "content": "Imagine you have five weather stations across a national park measuring temperature, humidity, and CO\u2082 levels. You create a FastAPI endpoint `GET /stations/{station_id}/readings?days=7` that returns the last 7 days of readings for that station. With FastAPI, you define the route with `@app.get()`, add type hints for the station_id (integer) and days (integer with a default of 1), and FastAPI automatically validates the inputs. The endpoint returns a JSON object with station metadata and a list of readings, ready for your dashboard to visualize.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Knowledge Check: API Basics",
+      "content": "Test your understanding of FastAPI routing and request handling.",
+      "questions": [
+        {
+          "question": "You want to retrieve pollution readings for a specific city. Which FastAPI decorator and pattern would you use?",
+          "options": [
+            "A) @app.post('/pollution') - POST the city name",
+            "B) @app.get('/pollution/{city}') - GET with path parameter",
+            "C) @app.put('/pollution') - PUT to update",
+            "D) @app.delete('/pollution/{city}') - DELETE the readings"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "POST is for creating new resources, not retrieving existing data.",
+            "Correct! GET with a path parameter is the standard REST pattern for retrieving data for a specific resource.",
+            "PUT is for updating existing resources, not reading them.",
+            "DELETE removes resources; we want to read them."
+          ],
+          "explanation": "REST conventions dictate using GET for read operations. Path parameters like {city} allow you to retrieve data for a specific entity."
+        },
+        {
+          "question": "In FastAPI, what is the primary benefit of using type hints on path and query parameters?",
+          "options": [
+            "A) They make your code prettier",
+            "B) FastAPI automatically validates inputs and generates API documentation",
+            "C) They are required by Python syntax",
+            "D) They improve database performance"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Type hints do improve readability, but that's not the primary benefit.",
+            "Correct! FastAPI uses type hints to validate incoming data and auto-generate Swagger documentation.",
+            "Type hints are optional in Python 3.",
+            "Type hints don't affect database performance."
+          ],
+          "explanation": "FastAPI's automatic validation and documentation generation is one of its key advantages. Type hints tell FastAPI what to expect and document."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n12",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Database Integration for Environmental Monitoring",
+      "content": "Environmental monitoring generates massive amounts of data\u2014millions of sensor readings per day from across the globe. FastAPI integrates seamlessly with databases like PostgreSQL to store, query, and analyze this data at scale. You'll learn how to define data models (using SQLAlchemy ORM) that represent sensors, readings, and locations, create tables automatically, and write queries to retrieve historical data. Databases let you aggregate readings (average temperature across a region), filter by time windows (anomalies in the last hour), and join data (correlate air quality with traffic patterns).",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Example: Pollution Sensor Data Storage",
+      "content": "You maintain 200 air quality sensors across a city, each sending PM2.5 readings every 5 minutes. With FastAPI and SQLAlchemy, you define a Sensor model (id, location, lat/long) and a Reading model (sensor_id, timestamp, pm25_value, status). When a sensor POSTs new data to `/readings`, FastAPI validates it and stores it in PostgreSQL. Later, to show \"sensors with dangerous PM2.5 levels in the last hour,\" you query readings with a JOIN on sensors, filter by timestamp and pm25 > 35.4 (unhealthy threshold), and return the results. Your API endpoint `/dangerous-readings` becomes the data source for alert dashboards.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Knowledge Check: Database Integration",
+      "content": "Assess your understanding of data models and database queries in FastAPI.",
+      "questions": [
+        {
+          "question": "You define a SQLAlchemy model for 'WaterQuality' with fields: station_id, ph_level, dissolved_oxygen, timestamp. You want to query all readings from a specific station in the last 24 hours. Which approach is correct?",
+          "options": [
+            "A) db.query(WaterQuality).all() - retrieves everything",
+            "B) db.query(WaterQuality).filter(WaterQuality.station_id == id, WaterQuality.timestamp > yesterday).all()",
+            "C) WaterQuality.filter({'station_id': id}) - dictionary syntax",
+            "D) db.select(WaterQuality where station_id = id) - SQL string"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That retrieves all readings, ignoring the station and time filters.",
+            "Correct! SQLAlchemy's filter() method chains conditions to query specific records efficiently.",
+            "SQLAlchemy doesn't use dictionary syntax for filtering.",
+            "Avoid raw SQL strings; SQLAlchemy's ORM prevents SQL injection and is cleaner."
+          ],
+          "explanation": "SQLAlchemy's filter() method allows you to chain multiple conditions for precise queries. Multiple filters are AND'd together."
+        },
+        {
+          "question": "Your water quality API receives 10,000 readings per day. After 1 year, the database has 3.6 million rows. Why might adding an index on the 'timestamp' column improve performance?",
+          "options": [
+            "A) Indexes make INSERT operations faster",
+            "B) Indexes let FastAPI cache results",
+            "C) Indexes help the database quickly locate rows without scanning every row",
+            "D) Indexes are required by FastAPI models"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Indexes can actually slow down INSERT operations slightly.",
+            "Caching is separate from indexing.",
+            "Correct! Indexes create a lookup structure that lets the database find rows by timestamp in milliseconds instead of scanning millions.",
+            "Indexes are optional but highly recommended for performance."
+          ],
+          "explanation": "Indexing frequently-queried columns (like timestamp in time-range queries) is essential for performance at scale. Without indexes, the database must scan every row."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n12",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Real-time Environmental Alerts with FastAPI",
+      "content": "Environmental hazards demand real-time response. When a wildfire is detected by satellite, or CO\u2082 levels spike at a monitoring station, alerts must reach decision-makers instantly\u2014not hours later. FastAPI supports WebSockets and background tasks to enable real-time communication. WebSockets maintain an open connection between server and client, allowing the server to push alerts (e.g., \"Flash flood warning in County A\") immediately. Background tasks let your API trigger long-running processes (sending SMS alerts, updating dashboards) without blocking the HTTP response. Together, these features power live environmental dashboards and emergency response systems.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Example: Stream Alert System for Wildfire Detection",
+      "content": "Forest monitoring satellites detect potential wildfires every 5 minutes. Your FastAPI application receives satellite imagery, analyzes heat signatures, and if a potential fire is detected, it needs to alert rangers, fire departments, and the public in real-time. You implement a WebSocket endpoint `/alerts` that clients (ranger dashboards, mobile apps) connect to. When a fire is detected, you send a JSON message through the WebSocket: {\"event\": \"wildfire_detected\", \"latitude\": 45.8, \"longitude\": -120.5, \"confidence\": 0.92, \"timestamp\": \"2025-12-15T14:32:00Z\"}. In the background, you queue a task to send SMS notifications and update a GIS map. All connected clients receive the alert instantly.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Knowledge Check: Real-time Features",
+      "content": "Evaluate your understanding of WebSockets and background tasks in FastAPI.",
+      "questions": [
+        {
+          "question": "You implement a WebSocket endpoint to stream live air quality alerts. A client connects and receives real-time PM2.5 readings. Why is WebSocket preferable to polling (the client repeatedly asking 'any new readings?')?",
+          "options": [
+            "A) WebSockets are easier to code",
+            "B) WebSockets use less bandwidth and deliver data instantly; polling creates unnecessary server load",
+            "C) WebSockets support images; polling only supports text",
+            "D) WebSockets work on mobile; polling doesn't"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Coding complexity is similar.",
+            "Correct! WebSockets maintain one connection and push data instantly. Polling (every 5 seconds, e.g.) wastes bandwidth and adds latency.",
+            "Both WebSockets and polling can transmit any data type.",
+            "Both technologies work on mobile."
+          ],
+          "explanation": "WebSockets are designed for bidirectional real-time communication. Polling creates unnecessary HTTP requests and increases latency\u2014critical drawbacks for environmental alerts."
+        },
+        {
+          "question": "Your wildfire alert system detects a fire and needs to: (1) immediately notify clients via WebSocket, (2) send SMS to rangers (3-5 seconds), (3) update a GIS database (2-3 seconds). What's the best approach?",
+          "options": [
+            "A) Execute all three steps synchronously in the detection endpoint (block until all complete)",
+            "B) Send WebSocket alert immediately, queue SMS and database updates as background tasks",
+            "C) Queue all three as background tasks (accept trade-off in alert speed)",
+            "D) Only send WebSocket; skip SMS and database updates to keep it fast"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Blocking on SMS and database operations would delay alert delivery.",
+            "Correct! Instantly deliver critical alerts via WebSocket, then offload slower operations (SMS, DB) to background tasks.",
+            "Queuing everything introduces unnecessary delay for time-critical alerts.",
+            "SMS and database updates are essential; don't skip them."
+          ],
+          "explanation": "For life-safety systems, deliver the critical alert immediately via WebSocket, then handle secondary operations asynchronously. This balances speed and reliability."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n12",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Integrating It All: A Complete Environmental Monitoring Platform",
+      "content": "You've learned three essential components: APIs to expose data, databases to store it, and real-time alerts to notify stakeholders. A production environmental monitoring platform combines all three. Your API exposes historical readings and sensor metadata from the database. Real-time events (threshold crossings, anomalies) are pushed via WebSocket to dashboards. Background tasks trigger actions (sending alerts, running forecasts). For example, a climate platform might expose `/stations/{id}/readings` to show past temperature trends (API + database), stream `/alerts` to show active warnings (WebSocket), and queue a background task to compute regional averages nightly (background task). FastAPI's flexibility and simplicity make building such systems efficient.",
+      "next": "n13"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Course Complete: FastAPI for Environmental Applications",
+      "content": "Congratulations! You've mastered the core concepts of FastAPI through real environmental applications. You can now build APIs that expose climate and sensor data, integrate databases to handle massive data volumes, and stream live alerts for environmental hazards. Whether you're tracking air quality, wildfire spread, ocean temperatures, or renewable energy output, you have the skills to develop robust, scalable systems. Next steps: explore FastAPI's security features (authentication for sensitive environmental data), learn about scaling with Docker and Kubernetes, and consider contributing to open-source environmental data projects."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "APIs: Expose Climate Station Data"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Databases: Store Sensor Measurements"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n9",
+      "label": "Real-time: Stream Environmental Alerts"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Next"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": "Next"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n4",
+      "label": "Retry"
+    },
+    {
+      "id": "c9",
+      "source": "n6",
+      "target": "n7",
+      "label": "Next"
+    },
+    {
+      "id": "c10",
+      "source": "n7",
+      "target": "n8",
+      "label": "Next"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n7",
+      "label": "Retry"
+    },
+    {
+      "id": "c13",
+      "source": "n9",
+      "target": "n10",
+      "label": "Next"
+    },
+    {
+      "id": "c14",
+      "source": "n10",
+      "target": "n11",
+      "label": "Next"
+    },
+    {
+      "id": "c15",
+      "source": "n11",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c16",
+      "source": "n11",
+      "target": "n10",
+      "label": "Retry"
+    },
+    {
+      "id": "c17",
+      "source": "n12",
+      "target": "n13",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T10:20:52.309665+00:00",
+  "model": "claude-haiku-4-5"
+}

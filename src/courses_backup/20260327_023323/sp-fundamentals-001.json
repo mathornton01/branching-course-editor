@@ -1,0 +1,303 @@
+{
+  "id": "sp-fundamentals-001",
+  "title": "Signal Processing Fundamentals",
+  "description": "Master the core concepts of signal processing including signals, sampling, and frequency domain analysis with the Fourier Transform.",
+  "topic": "Signal Processing",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "signal-processing",
+    "fourier-transform",
+    "sampling",
+    "digital-signal-processing",
+    "dsp"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is a Signal?",
+      "content": "A signal is any function that conveys information about a physical phenomenon. Common examples include audio waveforms from a microphone, voltage measurements from sensors, electromagnetic waves in radio communication, or pixel values in images. In signal processing, we distinguish between two fundamental types: analog signals (continuous in both time and amplitude, like a sound wave in air) and digital signals (discrete in both time and amplitude, suitable for computers). Sampling is the critical process of converting a continuous analog signal into a discrete digital signal by measuring and recording its value at regular, uniform time intervals. This transformation is fundamental to digital signal processing because it enables computers to capture, store, manipulate, and analyze real-world signals. The sampling rate (number of measurements per second) is crucial\u2014sample too infrequently, and you lose important information and introduce distortion called aliasing. Sample at the right rate, and you can perfectly reconstruct the original signal.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Sampling an Audio Signal",
+      "content": "Let's walk through a concrete example: a microphone recording a 1 kHz pure tone (a musical note). Audio CDs use a sampling rate of 44,100 Hz, meaning the microphone electronically measures the sound's amplitude 44,100 times per second. After recording for just 1 second, we've captured 44,100 discrete numerical values representing the original continuous sound wave. Here's the key insight from the Nyquist-Shannon theorem: to accurately capture a signal without losing information, you must sample at least twice the highest frequency in that signal. For audio, human ears hear frequencies up to about 20 kHz, so 44.1 kHz sampling captures them all with room to spare. The maximum frequency we can accurately represent is called the Nyquist frequency, which equals half the sampling rate: 44.1 kHz \u00f7 2 = 22.05 kHz. This is why 44.1 kHz became the standard for CD-quality audio\u2014it's just above the minimum needed for human hearing, balancing quality with file size.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Assessment: Signals and Sampling",
+      "content": "Test your understanding of signals, sampling, and the Nyquist theorem.",
+      "questions": [
+        {
+          "question": "What is the minimum sampling rate needed to capture a signal with a maximum frequency of 5 kHz without aliasing?",
+          "options": [
+            "2.5 kHz",
+            "5 kHz",
+            "10 kHz",
+            "20 kHz"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect - You've calculated half of what's needed. Remember, the Nyquist theorem requires sampling at least 2\u00d7 (not 1\u00d7) the maximum frequency.",
+            "Incorrect - This is the maximum frequency in the signal, not the sampling rate required. You need to multiply by 2, not use the frequency itself.",
+            "Correct! The Nyquist theorem requires sampling at least 2\u00d7 the maximum frequency: 5 kHz \u00d7 2 = 10 kHz.",
+            "Incorrect - While this would work, it's more than necessary. The minimum required is exactly twice the maximum frequency."
+          ],
+          "explanation": "The Nyquist-Shannon theorem states that the sampling frequency must be at least twice the maximum frequency in the signal to avoid aliasing. For a 5 kHz signal: 5 kHz \u00d7 2 = 10 kHz minimum sampling rate."
+        },
+        {
+          "question": "Which is NOT a characteristic of a properly sampled digital signal?",
+          "options": [
+            "It has discrete time values",
+            "It can perfectly reconstruct any continuous signal",
+            "It has finite amplitude values",
+            "It follows the Nyquist-Shannon theorem"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - Discrete time is indeed a defining characteristic of digital signals. Values are recorded at specific moments, not continuously.",
+            "Correct! No sampling can perfectly reconstruct all aspects of a signal. Only frequencies below the Nyquist limit can be faithfully captured; higher frequencies are lost or cause aliasing.",
+            "Incorrect - Digital values are always finite in amplitude. Computers store numbers with limited precision, creating a finite range of possible values.",
+            "Incorrect - Proper sampling absolutely requires following the Nyquist-Shannon theorem to avoid aliasing and information loss."
+          ],
+          "explanation": "Proper sampling can faithfully capture frequencies up to the Nyquist limit, but cannot perfectly reconstruct all aspects of a continuous signal that contain frequencies above that limit. This is a fundamental physical limit, not a design flaw."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Frequency Domain and Fourier Transform",
+      "content": "The Fourier Transform is a powerful mathematical tool that reveals the hidden structure within signals by decomposing them into their constituent frequencies. While the time-domain representation (what we see on an oscilloscope) shows signal amplitude changing over time, the frequency-domain representation shows which frequencies are present and how strong each frequency component is. This perspective is often remarkably insightful: a complex-looking signal in time domain might reveal itself as just a few simple frequency components. The Fast Fourier Transform (FFT) is an efficient computational algorithm that calculates the Fourier Transform in a fraction of the time required by the mathematical definition. Understanding frequency domain analysis is crucial for numerous practical applications: identifying and filtering out unwanted noise (like 60 Hz electrical hum), compressing audio and images by removing imperceptible frequencies, analyzing system responses, detecting patterns in signals, and designing filters. In real-world engineering, switching between time and frequency domain perspectives is essential because different problems become solvable in different domains.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "FFT of a Mixed Signal",
+      "content": "Imagine an audio engineer recording a session with a vocalist. The desired signal is a beautiful vocal at roughly 200 Hz (fundamental frequency), but there's also unwanted 60 Hz power-line hum from the electrical wiring and some background hum at 120 Hz (the second harmonic). In the time-domain plot, the waveform looks messy and complex\u2014you can't easily see what frequencies are present just by looking at the amplitude over time. Now apply the FFT. The frequency-domain plot reveals three sharp peaks: one at 60 Hz, one at 120 Hz, and one at 200 Hz. This immediately tells us the signal composition. The engineer can now design a filter to remove everything below 150 Hz, eliminating the unwanted noise peaks while preserving the vocal at 200 Hz. After filtering and applying the inverse Fourier Transform, the output is clean: just the vocal without the hum. This frequency-domain technique is standard practice in audio engineering, medical imaging (removing noise from ultrasound), communications (identifying signal components), and countless other fields. The Fourier Transform makes invisible frequency information visible and actionable.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Assessment: Frequency Domain and Fourier Transform",
+      "content": "Test your understanding of frequency domain analysis and the Fourier Transform.",
+      "questions": [
+        {
+          "question": "What does the Fourier Transform convert a signal from?",
+          "options": [
+            "Frequency domain to time domain",
+            "Time domain to frequency domain",
+            "Digital domain to analog domain",
+            "Discrete to continuous"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - That's the inverse Fourier Transform, which goes the opposite direction. The regular Fourier Transform starts with time domain.",
+            "Correct! The Fourier Transform decomposes a time-domain signal (amplitude vs. time) into its frequency components (amplitude vs. frequency).",
+            "Incorrect - The Fourier Transform operates within the digital domain. Both input and output are in the digital domain when using computers.",
+            "Incorrect - The Fourier Transform converts between domains, not between discrete and continuous forms. Both representations can be discrete or continuous."
+          ],
+          "explanation": "The Fourier Transform decomposes a signal expressed in the time domain (showing how amplitude changes over time) into the frequency domain (showing which frequencies are present and their magnitudes). This transformation reveals information hidden in the time-domain view."
+        },
+        {
+          "question": "Which advantage does frequency domain analysis provide when cleaning audio recordings?",
+          "options": [
+            "It increases the volume of the signal",
+            "It allows identification and removal of specific unwanted frequencies",
+            "It makes the signal longer",
+            "It eliminates the need for amplification"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - Frequency domain analysis reveals what frequencies exist but doesn't inherently change volume. Volume is a time-domain characteristic.",
+            "Correct! By analyzing which frequencies contain noise, we can design filters to remove only those frequencies while preserving desired signal components. This is far more precise than time-domain noise removal.",
+            "Incorrect - Frequency analysis doesn't affect signal duration. The number of samples and sampling rate remain unchanged.",
+            "Incorrect - Frequency domain analysis and amplification are independent concerns. You might need both to properly process a signal."
+          ],
+          "explanation": "Frequency domain analysis reveals which frequencies are present in a signal. This allows engineers to identify that a 60 Hz component is unwanted noise while a 400 Hz component is desired voice, then design filters to remove unwanted frequencies while preserving desired ones. This precision is the key advantage."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Signal Processing Concepts",
+      "content": "You're about to practice the core concepts that are critical for success in signal processing. The practice questions below focus on two fundamental relationships: how the sampling rate determines what frequencies can be captured (the Nyquist theorem), and how the frequency domain reveals hidden signal structure that isn't visible in time-domain representations. These concepts appear in nearly every real-world signal processing application\u2014from audio engineering to medical imaging to telecommunications. Work through each question carefully and study the explanations provided with each answer, as they highlight the reasoning you'll apply to more complex signal processing problems. Mastering these fundamentals now will make advanced topics much more manageable.",
+      "questions": [
+        {
+          "question": "A signal is sampled at 8 kHz. What is the maximum frequency it can accurately represent?",
+          "options": [
+            "2 kHz",
+            "4 kHz",
+            "8 kHz",
+            "16 kHz"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - This is one-quarter of the sampling rate. Remember the Nyquist frequency is half, not one-quarter.",
+            "Correct! The Nyquist frequency is half the sampling rate: 8 kHz \u00f7 2 = 4 kHz. Any frequency above this will be lost or distorted.",
+            "Incorrect - This is the sampling rate itself, not the maximum representable frequency. You need to divide by 2.",
+            "Incorrect - This is twice the sampling rate. Remember, the Nyquist limit is half, not double."
+          ],
+          "explanation": "The maximum representable frequency is the Nyquist frequency, which equals exactly half the sampling rate. For 8 kHz sampling: 8 kHz \u00f7 2 = 4 kHz maximum."
+        },
+        {
+          "question": "In the frequency domain, what does a high peak at a specific frequency indicate?",
+          "options": [
+            "That frequency is absent from the signal",
+            "That frequency has high energy or amplitude in the signal",
+            "The signal needs filtering",
+            "The sampling rate is too low"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - A peak indicates presence and strength, not absence. If a frequency has high amplitude, there's a tall peak at that frequency.",
+            "Correct! The vertical axis in a frequency-domain plot shows amplitude or magnitude. A high peak means that frequency component contributes significant energy to the overall signal.",
+            "Incorrect - The presence of a frequency doesn't indicate whether filtering is needed. You filter based on whether the frequency is wanted or unwanted for your application.",
+            "Incorrect - Peaks in the frequency domain don't directly indicate sampling rate problems. Those issues show up as aliasing, which makes unexpected peaks appear."
+          ],
+          "explanation": "In frequency domain representation, the magnitude (height) of a peak at a particular frequency directly indicates how much energy that frequency component contributes to the overall signal. Tall peaks = strong frequency components."
+        },
+        {
+          "question": "Why does aliasing occur when sampling too slowly?",
+          "options": [
+            "The analog-to-digital converter breaks",
+            "High frequencies are lost and cannot be recovered",
+            "The storage medium fills too quickly",
+            "The computer runs out of processing power"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - The hardware continues working fine; the problem is information loss, not equipment failure.",
+            "Correct! When sampling below the Nyquist rate, high frequency information is lost and cannot be recovered. Additionally, high frequencies can 'fold back' into lower frequency ranges, creating false signals.",
+            "Incorrect - Storage issues don't cause aliasing; they're separate concerns. In fact, slower sampling uses less storage.",
+            "Incorrect - Processing power isn't the issue. The problem is mathematical\u2014you simply don't have enough samples to capture the frequency content."
+          ],
+          "explanation": "Aliasing occurs when high frequencies in the signal contain information you want to keep, but your sampling rate is too low to capture them. You lose that information permanently, and you may also get false low-frequency signals created by the undersampling."
+        },
+        {
+          "question": "If you want to capture frequencies up to 10 kHz, but you're getting aliasing artifacts, what should you do?",
+          "options": [
+            "Apply a stronger filter to remove the artifacts",
+            "Increase the sampling rate above 20 kHz",
+            "Decrease the signal amplitude",
+            "Use better quality cables"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - Filtering alone won't help because the damage is already done by aliasing. Once high frequencies are folded into low frequencies, they're indistinguishable from legitimate content.",
+            "Correct! To capture 10 kHz frequencies without aliasing, you must sample at least at 20 kHz (2\u00d7 the maximum frequency). This gives you the minimum Nyquist rate needed.",
+            "Incorrect - Signal amplitude doesn't affect aliasing. The problem is sampling rate, not signal strength.",
+            "Incorrect - Cable quality doesn't determine whether aliasing occurs. Aliasing is a mathematical consequence of insufficient sampling rate."
+          ],
+          "explanation": "Aliasing at the sampling stage means information is permanently lost. The only solution is to increase the sampling rate above the Nyquist requirement (2\u00d7 the maximum frequency of interest) before the signal is digitized, or use an anti-aliasing filter to remove high frequencies before sampling."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Course Completion Options",
+      "content": "Excellent work! You've successfully mastered the core concepts of signal processing: understanding signals and sampling theory, and learning how frequency domain analysis reveals hidden signal structure. These fundamentals\u2014the Nyquist theorem, aliasing, and frequency decomposition\u2014appear in nearly every real-world application from audio engineering to medical imaging to telecommunications. You now have a strong foundation for exploring more advanced topics. What would you like to do?",
+      "choices": [
+        {
+          "label": "Review Key Concepts",
+          "next": "n9"
+        },
+        {
+          "label": "Complete Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: Signal Processing Fundamentals",
+      "content": "Excellent! You've completed the Signal Processing Fundamentals course and mastered the essential concepts powering modern signal processing. Your understanding of signals, sampling theory, and frequency domain analysis using the Fourier Transform forms the foundation for applications in audio engineering, telecommunications, medical imaging, and countless other fields. The core concepts you've mastered\u2014the Nyquist theorem, aliasing, and frequency decomposition\u2014will be tools you use throughout your signal processing career. You're now well-positioned to explore advanced topics like filter design, signal modulation, and real-time signal processing implementations. Use what you've learned here as your reference point when encountering these more complex topics."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "continue"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "continue"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "continue"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "any"
+    }
+  ],
+  "generated_at": "2026-03-26T09:17:35.728591+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T10:03:59.319817+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

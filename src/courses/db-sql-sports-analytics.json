@@ -1,0 +1,269 @@
+{
+  "id": "db-sql-sports-analytics",
+  "title": "Database Design and SQL for Sports Analytics",
+  "description": "Master database design and SQL querying through the lens of sports analytics. Choose to learn design principles first or jump into hands-on querying\u2014both paths converge to make you a data-driven analyst.",
+  "topic": "Database Design and SQL",
+  "theme": "sports analytics",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "database",
+    "SQL",
+    "data design",
+    "analytics",
+    "sports"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Building Analytics Databases for Sports",
+      "content": "Modern sports teams are drowning in data\u2014player statistics, game events, performance metrics, injury reports, and coaching decisions. To extract actionable insights from this deluge, you need two things: a **database** that organizes this data efficiently, and **SQL** to query it. A well-designed database schema ensures data integrity and fast queries. Today, you'll learn both approaches through the lens of sports analytics: whether you're analyzing pitcher strikeout rates, predicting playoff outcomes, or optimizing team rosters, solid database skills are your foundation.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Do you prefer to understand the blueprint first, or jump into querying? Both paths teach the same concepts\u2014just in different order.",
+      "choices": [
+        {
+          "label": "Theory First: Learn Database Design Principles",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-on First: Start Writing SQL Queries",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Designing Schemas for Sports Data",
+      "content": "A database **schema** is the blueprint defining how data is organized into tables, columns, and relationships. **Normalization** is the art of eliminating redundancy. Imagine you store game results with full team information (name, city, coach, founded year) repeated in every row\u2014that's wasteful and dangerous. If the coach changes, you'd have to update hundreds of rows and risk inconsistency. Instead, create separate tables: a Teams table (team_id, name, city, coach), a Games table (game_id, date, home_team_id, away_team_id, score), and a Player_Stats table. Each piece of information lives in one place. Foreign keys (like home_team_id) link tables. This structure ensures consistency, saves storage, and makes updates reliable.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Designing a Baseball Team Database",
+      "content": "A baseball team wants to track 162-game seasons across multiple years. Create: **Players** (player_id, name, position, batting_hand, draft_year, team_id) \u2014 players only appear once. **Teams** (team_id, name, city, manager, founded) \u2014 team info centralized. **Games** (game_id, date, home_team_id, away_team_id, home_score, away_score, stadium) \u2014 one row per game. **Batting_Stats** (stat_id, game_id, player_id, hits, at_bats, home_runs, rbis) \u2014 one row per player-game. Notice: a player's name is stored once in Players, then referenced by player_id elsewhere. To change a player's team, update one row in Players. This schema prevents duplicates and ensures data consistency across 160+ games and 750+ players per season.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Database Design",
+      "content": "Test your understanding of schema design and normalization.",
+      "questions": [
+        {
+          "question": "You're designing a basketball database. Player 'LeBron James' plays for the Los Angeles Lakers. The Lakers' city is 'Los Angeles' and the arena is 'Crypto.com Arena'. Should you store the Lakers' city in every row of a Game_Stats table?",
+          "options": [
+            "Yes, it's necessary for queries",
+            "No, create a Teams table with team_id, name, city, arena; then reference it in Game_Stats",
+            "Yes, it's faster than joining tables",
+            "No, cities are stored in a separate Cities table"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This causes redundancy and consistency issues.",
+            "Correct! This is normalization\u2014eliminate redundancy by separating concerns.",
+            "Incorrect. Modern databases optimize joins; redundancy is slower overall.",
+            "Incorrect. Teams and cities have a 1-to-1 relationship; keep them together."
+          ],
+          "explanation": "Normalization avoids repeating team information. Create a Teams table referenced by foreign key (team_id), so updating team info happens once."
+        },
+        {
+          "question": "A Pitcher_Stats table has columns: pitcher_id, game_id, strikeouts, walks, earned_runs. Is this table properly normalized?",
+          "options": [
+            "No, pitcher_id should be replaced by pitcher_name to be more readable",
+            "Yes, it follows 1st normal form\u2014each column is atomic (not repeating groups)",
+            "No, it's missing a pitcher_name column, which violates normalization rules",
+            "Yes, but only if earned_runs is calculated, not stored separately"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. IDs, not names, should be stored to avoid redundancy.",
+            "Correct! Each column contains a single value; there are no repeating groups.",
+            "Incorrect. Adding pitcher_name would create redundancy (one pitcher, many games).",
+            "Incorrect. Both calculated and stored values are fine; context matters."
+          ],
+          "explanation": "This table is normalized: pitcher_id is a foreign key to a Pitchers table, and statistics are atomic values."
+        },
+        {
+          "question": "You're told to 'denormalize' a database for sports analytics. This typically means:",
+          "options": [
+            "Adding redundant copies of data to speed up queries",
+            "Converting all names to uppercase for consistency",
+            "Removing all foreign keys",
+            "Splitting one table into many tables"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Denormalization intentionally adds redundancy for query performance.",
+            "Incorrect. Case normalization has nothing to do with database normalization.",
+            "Incorrect. Denormalization retains relationships, not removes them.",
+            "Incorrect. That's normalization, the opposite."
+          ],
+          "explanation": "Denormalization trades consistency risk for speed. A sports analytics dashboard might denormalize to avoid slow joins on millions of game records."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Writing SQL Queries for Sports Analytics",
+      "content": "SQL (Structured Query Language) is the tool to ask questions of your database. The **SELECT** statement retrieves data; **FROM** specifies which table(s); **WHERE** filters rows; **JOIN** combines tables; **GROUP BY** aggregates; **ORDER BY** sorts results. For sports analytics: 'Show me the average points per game for each player in the 2023 season' becomes SELECT player_id, AVG(points) FROM Game_Stats WHERE season = 2023 GROUP BY player_id. To find 'games where the home team won by 20+ points' requires WHERE home_score - away_score >= 20. Joins let you combine related data: 'List all Lakers players with field goal % > 50%' requires joining the Players table (to filter by team) with the Stats table (to filter by shooting percentage). Mastering these patterns unlocks insights hidden in your data.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Querying a Football Database",
+      "content": "Your NFL database has: **Teams** (team_id, name, city, coach), **Players** (player_id, name, position, team_id), **Games** (game_id, date, home_team_id, away_team_id, home_score, away_score), and **Passing_Stats** (stat_id, game_id, player_id, completions, attempts, passing_yards, touchdowns). To find 'Tom Brady's average passing yards per game across his career': SELECT AVG(p.passing_yards) FROM Passing_Stats p JOIN Players pl ON p.player_id = pl.player_id WHERE pl.name = 'Tom Brady'; Or 'Teams with the highest average home-game scores': SELECT t.name, AVG(g.home_score) as avg_home_score FROM Games g JOIN Teams t ON g.home_team_id = t.team_id GROUP BY t.team_id ORDER BY avg_home_score DESC LIMIT 10; These queries combine multiple tables, filter, aggregate, and sort\u2014answering real coaching questions.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: SQL Querying",
+      "content": "Write SQL queries against a sports analytics database.",
+      "questions": [
+        {
+          "question": "Your tennis database has a Matches table (match_id, player1_id, player2_id, sets_won_p1, sets_won_p2) and a Players table (player_id, name, country). Write a query to find the match win percentage for player_id = 5. Which is correct?",
+          "options": [
+            "SELECT COUNT(*) FROM Matches WHERE player1_id = 5 AND sets_won_p1 > sets_won_p2",
+            "SELECT COUNT(*) * 100 / (SELECT COUNT(*) FROM Matches WHERE player1_id = 5 OR player2_id = 5) FROM Matches WHERE (player1_id = 5 AND sets_won_p1 > sets_won_p2) OR (player2_id = 5 AND sets_won_p2 > sets_won_p1)",
+            "SELECT SUM(sets_won) / COUNT(*) FROM Matches WHERE player_id = 5",
+            "SELECT player_id, COUNT(*) as total_matches FROM Matches WHERE player_id = 5 GROUP BY player_id"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This only counts matches where player 5 was player1 and won.",
+            "Correct! You must count wins (player1 with sets_won_p1 > sets_won_p2 OR player2 with sets_won_p2 > sets_won_p1) divided by total matches.",
+            "Incorrect. There's no sets_won column in the schema; you must compare sets_won_p1 and sets_won_p2.",
+            "Incorrect. This counts total matches, not win percentage."
+          ],
+          "explanation": "Win percentage requires counting matches where the player won divided by total matches played. A player appears in either player1_id or player2_id, and wins based on comparing set scores."
+        },
+        {
+          "question": "You want to find 'the top 5 soccer players by goals scored across all matches'. Your database has Players (player_id, name, team_id) and Match_Stats (stat_id, match_id, player_id, goals, assists). Which query is correct?",
+          "options": [
+            "SELECT name, SUM(goals) FROM Players JOIN Match_Stats USING (player_id) GROUP BY player_id ORDER BY SUM(goals) DESC LIMIT 5",
+            "SELECT name, goals FROM Match_Stats JOIN Players USING (player_id) ORDER BY goals DESC LIMIT 5",
+            "SELECT DISTINCT player_id, SUM(goals) FROM Match_Stats GROUP BY player_id ORDER BY goals DESC LIMIT 5",
+            "SELECT player_id, AVG(goals) FROM Match_Stats GROUP BY player_id ORDER BY AVG(goals) DESC LIMIT 5"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Join Players and Match_Stats, group by player_id, sum goals (not average, since you want career totals), and order descending.",
+            "Incorrect. This shows individual match stats, not career totals. You need GROUP BY and SUM.",
+            "Incorrect. Using DISTINCT is redundant with GROUP BY, and you reference 'goals' in ORDER BY without an alias\u2014it's ambiguous.",
+            "Incorrect. AVG(goals) gives average goals per match, not total. You want SUM(goals)."
+          ],
+          "explanation": "To find top goal scorers, aggregate stats across matches using SUM(goals) grouped by player, then order by total in descending order."
+        },
+        {
+          "question": "A cricket database tracks Players, Teams, and Batting_Stats (batsman_id, match_id, runs, balls_faced). You want to find 'batsmen with an average above 40 runs per match and at least 10 matches played'. What's the correct approach?",
+          "options": [
+            "SELECT batsman_id, AVG(runs) FROM Batting_Stats WHERE AVG(runs) > 40 GROUP BY batsman_id",
+            "SELECT batsman_id, AVG(runs) FROM Batting_Stats GROUP BY batsman_id WHERE AVG(runs) > 40 AND COUNT(*) >= 10",
+            "SELECT batsman_id, AVG(runs) FROM Batting_Stats GROUP BY batsman_id HAVING AVG(runs) > 40 AND COUNT(*) >= 10",
+            "SELECT batsman_id, SUM(runs) / COUNT(*) FROM Batting_Stats WHERE COUNT(*) >= 10 GROUP BY batsman_id HAVING SUM(runs) / COUNT(*) > 40"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. WHERE is evaluated before GROUP BY; you can't filter on AVG(runs) in WHERE.",
+            "Incorrect. WHERE comes before GROUP BY; HAVING comes after. Use HAVING for aggregate filters.",
+            "Correct! HAVING filters grouped results. Group by batsman, calculate AVG and COUNT, then filter with HAVING.",
+            "Incorrect. You can't use COUNT(*) in WHERE (it's evaluated before grouping). The logic is correct but the syntax is wrong."
+          ],
+          "explanation": "HAVING is the WHERE clause for aggregate functions. After grouping and calculating AVG(runs) and COUNT(*), HAVING filters results where average > 40 and count >= 10."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Integrated Database Design & SQL Mastery",
+      "content": "You've now learned two complementary skills: **database design** ensures your data is organized, consistent, and efficient; **SQL** lets you ask sophisticated questions and extract insights. In sports analytics, this synergy matters enormously. A well-normalized schema makes queries fast, even across millions of game records. Poor design forces slow, error-prone queries that no analyst wants to write. Real-world success combines both: design schemas that facilitate the queries your coaches and GMs will ask, then master SQL to answer them accurately. Keep building: learn query optimization (indexes, execution plans), explore window functions for advanced ranking (e.g., 'rank players by performance relative to teammates'), and consider time-series techniques for seasonal analysis. The data-driven teams that compete in the modern sports landscape depend on analysts who master both database architecture and SQL. You're on that path."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-on First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c6b",
+      "source": "n5",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c9b",
+      "source": "n8",
+      "target": "n6",
+      "label": "fail"
+    }
+  ],
+  "generated_at": "2026-03-27T06:28:10.726666+00:00",
+  "model": "claude-haiku-4-5"
+}

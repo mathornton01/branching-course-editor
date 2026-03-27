@@ -1,0 +1,271 @@
+{
+  "id": "stat-inference-edtech-001",
+  "title": "Statistical Inference and Hypothesis Testing for EdTech",
+  "description": "Master statistical inference and hypothesis testing through real educational technology scenarios. Choose between building foundational theory first or jumping into hands-on EdTech examples.",
+  "topic": "Statistical Inference and Hypothesis Testing",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "statistics",
+    "hypothesis testing",
+    "data analysis",
+    "educational technology",
+    "A/B testing",
+    "learning analytics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Statistical Inference in Educational Technology",
+      "content": "Educational technology platforms generate massive amounts of student data daily. To make evidence-based decisions about feature improvements, course design, or instructional strategies, EdTech leaders use statistical inference\u2014the process of drawing conclusions about populations from sample data. Whether an LMS wants to know if a new interface design reduces dropout rates, or an adaptive learning platform needs to verify that personalized learning paths improve assessment scores, hypothesis testing provides a rigorous framework for these decisions. In this course, you'll learn how statistical inference drives real EdTech innovation.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How would you prefer to learn statistical inference and hypothesis testing?",
+      "choices": [
+        {
+          "label": "Theory First: Master the concepts and foundations",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-on First: Learn through EdTech case studies",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Foundations: Hypothesis Testing and Statistical Significance",
+      "content": "The foundation of statistical inference rests on hypothesis testing. We begin with two competing claims: the null hypothesis (H\u2080), which assumes no effect or difference, and the alternative hypothesis (H\u2081), which claims an effect exists. In EdTech, imagine testing whether an adaptive learning system reduces time-to-mastery. H\u2080 might state: 'The new system has no impact on time-to-mastery.' H\u2081 claims: 'The new system reduces time-to-mastery.' We also define significance level (\u03b1), typically 0.05, representing our tolerance for Type I error\u2014rejecting H\u2080 when it's actually true. The p-value quantifies the probability of observing our data if H\u2080 were true. These concepts form the backbone of evidence-based EdTech decisions.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Worked Example: Testing a New LMS Interface",
+      "content": "An EdTech platform redesigned its learning management system dashboard to improve student engagement. They collected data from 200 randomly selected students: 100 using the new interface and 100 using the old interface. Engagement was measured by daily login frequency. Average logins per week: new interface = 4.8, old interface = 4.2. They set H\u2080: 'The new interface has no effect on engagement' and H\u2081: 'The new interface increases engagement.' Using \u03b1 = 0.05, they performed a t-test. Result: t-statistic = 2.15, p-value = 0.032. Since 0.032 < 0.05, they rejected H\u2080, concluding with 95% confidence that the new interface significantly increases student engagement.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Hypothesis Testing Fundamentals",
+      "content": "Test your understanding of hypothesis testing concepts in educational technology contexts.",
+      "questions": [
+        {
+          "question": "An online tutoring platform tests if AI-generated explanations improve student comprehension scores. Which is the correct null hypothesis?",
+          "options": [
+            "A) AI explanations improve comprehension scores compared to human explanations",
+            "B) AI explanations have no effect on comprehension scores compared to human explanations",
+            "C) AI explanations decrease comprehension scores compared to human explanations",
+            "D) Some students prefer AI explanations"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The null hypothesis assumes NO difference or effect, not a positive one.",
+            "Correct! The null hypothesis always assumes no effect or difference.",
+            "This would be an alternative hypothesis, not the null.",
+            "This is too vague and not properly stated as a hypothesis."
+          ],
+          "explanation": "The null hypothesis (H\u2080) always represents the 'no effect' position. When testing whether AI explanations improve comprehension, H\u2080 states they have no effect."
+        },
+        {
+          "question": "A course platform conducted an A/B test on spaced repetition features. The p-value was 0.07 with \u03b1 = 0.05. What should they conclude?",
+          "options": [
+            "A) The spaced repetition feature is effective; reject H\u2080",
+            "B) The spaced repetition feature is not effective; fail to reject H\u2080",
+            "C) The result is inconclusive; they should collect more data",
+            "D) The feature has a statistically significant negative effect"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The p-value (0.07) is greater than \u03b1 (0.05), so we fail to reject H\u2080.",
+            "Correct! Since 0.07 > 0.05, we fail to reject the null hypothesis.",
+            "While more data might be helpful, the decision rule is clear: fail to reject H\u2080.",
+            "A p-value of 0.07 does not indicate a significant negative effect."
+          ],
+          "explanation": "The decision rule is: if p-value \u2264 \u03b1, reject H\u2080; if p-value > \u03b1, fail to reject H\u2080. Here, 0.07 > 0.05, so we fail to reject the null hypothesis."
+        },
+        {
+          "question": "What does a Type I error represent in an EdTech context?",
+          "options": [
+            "A) Concluding a feature is effective when it actually isn't",
+            "B) Concluding a feature isn't effective when it actually is",
+            "C) Collecting insufficient sample size for statistical power",
+            "D) Using the wrong statistical test"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Type I error = rejecting H\u2080 when it's true = false positive.",
+            "This describes a Type II error, not Type I.",
+            "This relates to statistical power, not Type I error.",
+            "This is a methodological issue, not a Type I or Type II error."
+          ],
+          "explanation": "Type I error occurs when we reject H\u2080 when it's actually true. In EdTech, this means launching a feature we believe is effective, but it's actually not."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Practical Statistical Inference: EdTech A/B Testing",
+      "content": "Let's jump into the real world of EdTech data science. Imagine you're at an adaptive learning startup that just built a new recommendation engine for suggesting courses to learners. Your product team wants to know: does this new engine lead to higher course completion rates than the current system? This is a perfect scenario for A/B testing combined with statistical inference. You'll randomly assign learners to either the old system (control group) or the new system (treatment group), collect data on completion rates, and use statistical tests to determine if differences are real or due to chance. The key is understanding sample size, effect size, and how to interpret your results to make business decisions.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Case Study: EdTech Course Recommendation Engine",
+      "content": "EduLearn, an online learning platform, deployed a new AI-powered course recommendation engine to 500 randomly selected learners (treatment group) while 500 others continued using the existing algorithm (control group). After 30 days, course completion rates were: treatment = 62%, control = 58%. The difference is 4 percentage points. Using a chi-square test, they calculated p-value = 0.041 (\u03b1 = 0.05). Conclusion: reject H\u2080; the new recommendation engine significantly increases course completion. Effect size (Cohen's h) = 0.083, indicating a small but meaningful practical improvement. Based on this evidence, EduLearn rolled out the new engine platform-wide, expecting to increase course completions by approximately 4 percentage points.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Analyzing EdTech Experimental Results",
+      "content": "Apply your understanding to interpret real EdTech scenarios and make data-driven decisions.",
+      "questions": [
+        {
+          "question": "An LMS tested a 'discussion forum prompt' intervention to increase student collaboration. Control group (n=300): 45% students participated in discussions. Treatment group (n=300): 48% participated. Chi-square test: p-value = 0.31, \u03b1 = 0.05. What's the appropriate conclusion?",
+          "options": [
+            "A) The intervention is effective and should be rolled out immediately",
+            "B) The intervention is slightly effective; increase sample size for more power",
+            "C) We lack evidence that the intervention works; fail to reject H\u2080",
+            "D) The intervention decreases collaboration; do not implement"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "With p = 0.31 >> 0.05, we cannot conclude the intervention is effective.",
+            "While reasonable, the statistical decision at \u03b1 = 0.05 is to fail to reject H\u2080.",
+            "Correct! Since 0.31 > 0.05, we fail to reject the null hypothesis.",
+            "There's no evidence of a negative effect; we simply can't reject H\u2080."
+          ],
+          "explanation": "The p-value of 0.31 is far above the significance level of 0.05, indicating the observed 3% difference could easily occur by chance. We fail to reject H\u2080."
+        },
+        {
+          "question": "A tutoring platform tested two pedagogical approaches: (A) immediate feedback on quizzes vs. (B) delayed feedback after 24 hours. With n=1000 per group, immediate feedback showed 8% higher test scores (p = 0.002). How should they interpret effect size?",
+          "options": [
+            "A) The 8% difference is large enough to always recommend immediate feedback",
+            "B) Statistical significance (p < 0.05) guarantees practical importance",
+            "C) With large sample sizes, small differences become statistically significant but may lack practical impact; analyze effect size separately",
+            "D) The p-value of 0.002 proves immediate feedback is the only approach that works"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Large sample sizes can make small differences statistically significant without practical importance.",
+            "Statistical significance \u2260 practical significance. Effect size must also be considered.",
+            "Correct! Large sample sizes amplify statistical significance; effect size tells us practical importance.",
+            "While the result is statistically significant, other factors (cost, implementation) matter."
+          ],
+          "explanation": "With n=1000, a statistically significant result (p=0.002) doesn't automatically mean the 8% difference is practically important. The platform should calculate effect size (Cohen's d) to assess practical significance and costs of implementation."
+        },
+        {
+          "question": "An adaptive learning system tracked whether personalizing learning paths reduces time-to-mastery. After 6 months: control group (n=200) mean time = 12 weeks, treatment group (n=200) mean time = 11.5 weeks. t-test: t = 1.42, p = 0.156, \u03b1 = 0.05. What is the proper inference?",
+          "options": [
+            "A) Personalization reduces time-to-mastery by 0.5 weeks; implement immediately",
+            "B) The observed difference could easily occur by chance under H\u2080; insufficient evidence for personalization",
+            "C) The sample size was too small to detect an effect",
+            "D) Type II error occurred; the feature actually works but wasn't detected"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "With p = 0.156 > 0.05, we cannot claim the effect is real.",
+            "Correct! p = 0.156 > 0.05 means we fail to reject H\u2080; no statistical evidence of effect.",
+            "While possible, the statistical decision rule at \u03b1 = 0.05 is clear: fail to reject H\u2080.",
+            "We can't distinguish Type II error from 'no effect'; both lead to failing to reject H\u2080."
+          ],
+          "explanation": "The p-value of 0.156 indicates a 15.6% probability of observing this data if H\u2080 were true. This is well above the 5% threshold, so we fail to reject H\u2080 and lack evidence that personalization reduces time-to-mastery."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "From Evidence to EdTech Impact",
+      "content": "You've now mastered the art of statistical inference in educational technology. Whether you started with theory or hands-on examples, you understand how to frame hypotheses about educational interventions, design experiments, interpret statistical results, and distinguish between statistical significance and practical impact. EdTech leaders use these exact skills to decide which features to launch, which instructional strategies work best, and where to invest engineering resources. The power of statistical inference lies in transforming curiosity ('Does our new feature work?') into evidence-based answers. As you return to your EdTech work, remember: data without proper statistical reasoning can mislead; but rigorous hypothesis testing ensures your decisions are sound and your innovations truly benefit learners.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Statistical Inference Mastery",
+      "content": "Congratulations! You've completed the Statistical Inference and Hypothesis Testing course. You now have the skills to design robust experiments, test hypotheses rigorously, and make data-driven decisions in educational technology. Apply these concepts to your EdTech projects and drive meaningful improvements in student learning outcomes."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-on First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T11:00:59.274649+00:00",
+  "model": "claude-haiku-4-5"
+}

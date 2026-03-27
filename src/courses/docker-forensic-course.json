@@ -1,0 +1,172 @@
+{
+  "id": "docker-forensic-course",
+  "title": "Docker and Containerization: A Forensic Investigation Journey",
+  "description": "Master Docker and containerization through the lens of forensic science. Learn how containerization provides isolation, reproducibility, and reliability\u2014just like forensic investigation protocols.",
+  "topic": "Docker and Containerization",
+  "theme": "forensic science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "Docker",
+    "Containerization",
+    "DevOps",
+    "Forensic Science",
+    "Isolation",
+    "Images",
+    "Networking"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Docker: The Forensic Laboratory of the Digital World",
+      "content": "Just as forensic investigators require isolated, controlled environments to examine evidence without contamination, Docker provides containerization\u2014the ability to isolate applications, dependencies, and configurations into sealed digital containers. Each container is like a forensic evidence locker: sealed, reproducible, and protected from external interference. When a forensic lab analyzes malware samples, recovers deleted files, or reconstructs a crime scene's digital timeline, they require complete control over the environment to maintain chain of custody and ensure credibility. Docker makes this possible for software applications, treating them with the same rigor as forensic evidence.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Forensic Docker Specialty",
+      "content": "A forensic investigator specializes in different areas: evidence processing, contamination prevention, or multi-lab coordination. Which aspect of Docker will you explore first?",
+      "choices": [
+        {
+          "label": "Images & Layers: Building Your Forensic Kit",
+          "next": "n3"
+        },
+        {
+          "label": "Container Isolation: Maintaining Chain of Custody",
+          "next": "n5"
+        },
+        {
+          "label": "Networking & Volumes: Evidence Transfer and Storage",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Docker Images and Layers: Building Your Digital Forensic Kit",
+      "content": "A Docker image is like a forensic kit\u2014it contains everything needed for specific investigations: a base OS (Ubuntu), specialized tools (Volatility for memory analysis, Autopsy for disk analysis), and investigation scripts. Docker images build in layers, each immutable after creation, just like sealed evidence bags. The base layer is the foundation OS, middle layers add forensic tools, and the top layer contains case-specific code. When you run a container, Docker applies these layers and creates a thin writable layer where case data lives. This separation ensures investigation frameworks are never modified, maintaining evidence integrity. Each time you deploy, you get an identical environment\u2014zero configuration drift, perfect reproducibility.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Building a Forensic Malware Analysis Container Kit",
+      "content": "Your cybercrime unit builds a Docker image for analyzing suspicious executables seized at crime scenes. The Dockerfile starts with 'FROM ubuntu:20.04' (your base forensic framework), then installs IDA Pro symbol libraries, Wireshark network analysis tools, and Python libraries for binary reverse engineering. Each RUN command creates an immutable layer. When investigators process malware evidence, they run 'docker run malware-analyzer sample.exe' and get a fresh, pristine container with all tools ready. Case results write to a mounted volume. Every execution is identical\u2014same tools, same versions, same configuration. Courts accept this because the analysis environment is auditable, reproducible, and provably unchanged between cases.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Container Isolation: Maintaining Chain of Custody",
+      "content": "Forensic evidence must never cross-contaminate. If you analyze evidence from Case A in the same room as Case B, fibers or trace evidence could transfer, destroying case integrity. Docker containers use Linux namespaces and cgroups to enforce complete isolation\u2014each container has its own filesystem, process tree, network stack, and user namespace. A container analyzing a compromised database cannot see or interfere with another container extracting artifacts from a hard drive image. This isolation is kernel-enforced, not just software rules. Each container is like a sealed room in a forensic lab: no shared air circulation, no contact, no possibility of cross-contamination. Even if malware in one container attempts escape, it cannot reach the host or other containers.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Isolated Evidence Extraction Pipeline",
+      "content": "Your department processes 100 hard drives daily from cybercrime investigations. Running extraction sequentially is slow; running in-process on the same host is risky (evidence contamination). Instead, you deploy 100 Docker containers in parallel\u2014one per drive image. Each container has isolated filesystem and process namespace, cannot see other cases, cannot interfere with other extractions. If Container 42 crashes during suspicious artifact recovery from Case X, Container 7 analyzing Case Y is unaffected. The kernel enforces hard boundaries. You now analyze evidence 100\u00d7 faster while maintaining forensic integrity. After each case, the container is discarded and evidence archived in a volume. This process is auditable, repeatable, and legally defensible.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Docker Networking & Volumes: Evidence Transfer and Storage",
+      "content": "Forensic investigations often require multi-lab collaboration. The city police department needs to send evidence analysis results to the FBI's cybercrime division, which shares findings with Interpol. But evidence must travel securely and audit trails must be preserved. Docker volumes are persistent storage attached to containers\u2014like evidence lockers that follow investigators across jurisdictions. Docker networks allow containers to communicate securely, like encrypted channels between labs. Volumes persist after containers stop (evidence doesn't disappear), and networking enables multi-step investigations where Container A (evidence extraction) passes data to Container B (analysis) to Container C (reporting), with every step logged and auditable.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Multi-Agency Forensic Analysis Pipeline",
+      "content": "A suspect's laptop is seized by local police. Docker containers extract artifacts (Windows registry, Event Logs, browser cache, email) and write to a volume. This volume is shipped to the FBI regional lab, where advanced analysis containers perform behavioral reconstruction and write findings back to the same volume. Containers communicate over a Docker bridge network\u2014secure, encrypted, audit-trail logged. The volume travels as immutable evidence, analyzed by isolated containers at each step with no human intermediary to contaminate findings. The entire pipeline is reproducible: same images, same volumes, same network\u2014another lab can re-run analysis and obtain identical results. Courts accept this because chain of custody is unbreakable and analysis is forensically sound.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Complete Forensic Investigation: Bringing It All Together",
+      "content": "A real cybercrime investigation uses all Docker components simultaneously: Your department's forensic image (containing Volatility, Sleuthkit, Autopsy, and Python analysis scripts) is pulled from the internal registry. You deploy three containers in parallel with complete isolation: one extracts memory dumps from a server, one analyzes disk images, one extracts network logs. All write to a shared volume mount. Containers communicate over your internal Docker network to coordinate findings and reconcile evidence. After analysis completes, the volume (containing all evidence and annotated findings) is archived and encrypted. Containers are discarded and can be redeployed for other cases. The image can be version-controlled and reused forever, guaranteeing that future cold-case reviews run identical analysis. This end-to-end workflow achieves the forensic ideal: perfect chain of custody, complete auditability, zero contamination risk, and reproducible results.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Your Docker Forensic Toolkit is Ready",
+      "content": "You now understand Docker containerization through forensic investigation principles: Docker images provide standardized, immutable investigation frameworks that guarantee tool consistency. Containers enforce process isolation preventing evidence contamination and enabling parallel case processing. Volumes enable secure, auditable evidence storage and safe transfer between agencies. Docker networks create documented communication channels for multi-step investigation pipelines. Master these Docker concepts, and you have mastered modern application deployment architecture\u2014where reliability, reproducibility, and security matter as much as they do in a forensic laboratory."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2a",
+      "source": "n2",
+      "target": "n3",
+      "label": "Images & Layers"
+    },
+    {
+      "id": "c2b",
+      "source": "n2",
+      "target": "n5",
+      "label": "Container Isolation"
+    },
+    {
+      "id": "c2c",
+      "source": "n2",
+      "target": "n7",
+      "label": "Networking & Volumes"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T05:58:38.676212+00:00",
+  "model": "claude-haiku-4-5"
+}

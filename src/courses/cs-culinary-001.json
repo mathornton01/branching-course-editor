@@ -1,0 +1,209 @@
+{
+  "id": "cs-culinary-001",
+  "title": "Mastering Control Systems Through Culinary Arts",
+  "description": "Learn control systems principles by becoming a head chef managing a high-end kitchen. Navigate a narrative-driven course where your choices lead to success or failure, teaching you about feedback loops, setpoints, and real-time control.",
+  "topic": "Control Systems",
+  "theme": "culinary arts",
+  "difficulty": "beginner",
+  "estimated_minutes": 30,
+  "tags": [
+    "control-systems",
+    "feedback-loops",
+    "culinary-arts",
+    "process-control",
+    "systems-thinking"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Kitchen Challenge",
+      "content": "You've just been hired as head chef at a Michelin-starred restaurant. Your first task: perfect the signature souffl\u00e9 that must rise exactly 3 inches with a golden top and creamy center. The challenge isn't just the recipe\u2014it's managing multiple variables simultaneously: oven temperature, egg foam consistency, cooking time, and kitchen humidity. This is your first real-world introduction to control systems: managing inputs to achieve desired outputs despite constant disturbances.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Approach",
+      "content": "The head pastry chef gives you two paths to master the craft. Which appeals to you?",
+      "choices": [
+        {
+          "label": "Path A: Master the Theory\u2014Understand the System First",
+          "next": "n3"
+        },
+        {
+          "label": "Path B: Learn Empirically\u2014Perfect Through Practice",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "The Science Behind the Souffl\u00e9: Feedback Systems",
+      "content": "Control systems come in two types: open-loop and closed-loop. An open-loop system follows a preset recipe without adjusting\u2014preheat to 375\u00b0F, bake 18 minutes, done. Closed-loop systems use feedback to adjust in real-time. Professional chefs use closed-loop control because every oven differs, every egg batch differs. Your souffl\u00e9's rise height provides feedback (rising fast enough?). Color provides feedback (top cooking too fast?). These observations let you fine-tune control inputs in real-time, like a thermostat adjusting heating to maintain room temperature. The sensor reads the state, the controller decides, the actuator responds, and the feedback loop repeats.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Feedback Systems Quiz",
+      "content": "Test your understanding of closed-loop versus open-loop control in the kitchen.",
+      "questions": [
+        {
+          "question": "You're making hollandaise sauce (an emulsion of butter, egg yolks, and lemon juice). If temperature exceeds 160\u00b0F unmonitored, the emulsion breaks irreversibly. Once broken mid-cooking, you can't fix it. This is a failure of which control type?",
+          "options": [
+            "Open-loop: you lacked real-time monitoring and couldn't adjust before failure occurred",
+            "Closed-loop: you adjusted too aggressively during heating",
+            "Both: you needed monitoring and adjustment capability",
+            "Neither: purely a recipe precision issue"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Once the emulsion breaks, there is no feedback path to recovery. You needed constant monitoring to catch temperature creep before the irreversible threshold.",
+            "Not quite. The failure is lack of monitoring, not over-adjustment.",
+            "Close, but the core failure is the absence of real-time feedback control.",
+            "Hollandaise absolutely demands closed-loop control with continuous temperature monitoring."
+          ],
+          "explanation": "Hollandaise requires rapid feedback and fast response times because the system has a critical failure threshold. Without monitoring, you cannot correct errors in time."
+        },
+        {
+          "question": "You're making caramelized onions (a 90-minute gentle heating process). The recipe says '350\u00b0F for 90 minutes,' but your kitchen is unusually humid today. Using closed-loop control, what should you do?",
+          "options": [
+            "Follow the recipe exactly\u2014it's the proven blueprint",
+            "Check onions every 10\u201315 minutes; adjust heat if browning too fast or too slow",
+            "Trust the timer; caramelization depends only on time",
+            "Use the highest heat possible to finish faster"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This is open-loop control. Environmental factors (humidity, oven variation) demand monitoring and adaptation.",
+            "Exactly! Your sensory feedback (color, aroma) signals whether you're on track. Adjust heat to maintain desired caramelization rate despite humidity changes.",
+            "Time is one variable, but onion color and aroma are your real feedback signals for success.",
+            "High heat would burn the onions and destroy the Maillard reaction you're developing."
+          ],
+          "explanation": "Sensory feedback (color, aroma, texture) combined with time creates effective closed-loop control. Humidity, oven variability, and onion size all require adaptive adjustment."
+        },
+        {
+          "question": "A sous-vide water bath maintains exactly 63.5\u00b0C for 2 hours by continuously measuring temperature and adjusting heating elements up or down. What control system type is this?",
+          "options": [
+            "Open-loop: the fixed setpoint (63.5\u00b0C) means no feedback is needed",
+            "Closed-loop: the bath continuously monitors and adjusts heating to maintain the setpoint",
+            "Hybrid: it combines both types",
+            "Neither: it's just an automated timer system"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The fixed setpoint doesn't eliminate feedback\u2014the sous-vide cooker constantly checks temperature with a sensor.",
+            "Exactly! Sous-vide is textbook closed-loop: Sensor (thermometer) \u2192 Controller (thermostat logic) \u2192 Actuator (heating element) \u2192 back to Sensor. It adjusts continuously to correct any temperature drift.",
+            "Sous-vide is purely closed-loop. No open component exists here.",
+            "Sous-vide is a perfect example of automated closed-loop control in the kitchen."
+          ],
+          "explanation": "Sous-vide continuously cycles: sensor detects 63.2\u00b0C, controller says 'heat more,' heating element responds, then sensor checks again. This feedback loop runs continuously."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "The Critical Moment",
+      "content": "Minute 12 of your 18-minute bake: the souffl\u00e9 is rising beautifully through the oven window. But the edges are browning faster than expected (your oven runs ~10\u00b0F hot). Your humidity monitor shows 35% humidity today instead of the usual 55%\u2014this affects how the egg foam sets and rises. You have two control options: adjust based on these real-time disturbances, or trust the preset recipe parameters.",
+      "choices": [
+        {
+          "label": "Adjust: Lower oven to 365\u00b0F to compensate for oven variation and slow edge browning (closed-loop feedback control)",
+          "next": "n6"
+        },
+        {
+          "label": "Trust the recipe: Keep 375\u00b0F exactly\u2014proven recipe means no adjustment needed (open-loop control)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Perfect: The Michelin Moment",
+      "content": "At minute 18, you pull out a souffl\u00e9 risen to exactly 3.2 inches. The top is light golden-brown. Inside: creamy, custard-like, no raw egg taste. The judges are impressed. You've mastered closed-loop feedback control\u2014continuous monitoring of real-world disturbances (oven variation, humidity, browning rate), real-time adjustment of control inputs (temperature), and achievement of your setpoint (the perfect souffl\u00e9) despite environmental variability. This is professional process control in culinary arts. You've earned your place in the kitchen."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Near-Miss: The Harsh Lesson",
+      "content": "At minute 18, your souffl\u00e9 is done but flawed: edges are dark brown (nearly burnt), top has a slight bitter aroma, center is creamy but burnt-taste dominates. Judges are disappointed. Your feedback signals (rapid browning, aroma) warned you to adjust, but you stuck rigidly to preset parameters. You relied on open-loop control without real-time disturbance compensation. The oven's +10\u00b0F variation and low humidity were disturbances you could have corrected. Professional cooking requires closed-loop control: sense, decide, adjust, repeat. You've learned an expensive lesson."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Learning Through Practice: The Empirical Method",
+      "content": "The head pastry chef dismisses theory for now. She gives you a simple mantra: 'Watch, smell, taste, adjust.' For the next week, you make souffl\u00e9s repeatedly\u20145 to 10 per day. You learn to recognize subtle signs: the exact moment foam peaks (stiff peaks, glossy surface), the smell of caramelization on edges, visual cues of rise rate (fast initially, slower as center sets). You fail plenty\u2014some too runny, some overbaked, some collapsed. Each failure teaches: 'if center was runny, maybe 2 more minutes,' or 'if edges burned, oven runs hot.' Gradually, your senses become calibrated feedback sensors, and your hands learn to adjust in response.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Competence Through Repetition: The Intuitive Chef",
+      "content": "After 50 souffl\u00e9s, you consistently make good ones\u2014usually rising 2.8\u20133.2 inches, usually golden-brown. You've internalized relationships between variables without explicit explanation (temperature \u2194 rise speed, humidity \u2194 foam stability, rise rate \u2194 doneness timing). This is intuitive mastery: effective practical control without explicit systems theory. However, unexpected conditions challenge you\u2014broken oven dial, high altitude, different egg sizes\u2014because you lack the conceptual framework to troubleshoot systematically. You're a good cook, but not yet a master who adapts to any condition."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2a",
+      "source": "n2",
+      "target": "n3",
+      "label": "Path A: Theory"
+    },
+    {
+      "id": "c2b",
+      "source": "n2",
+      "target": "n8",
+      "label": "Path B: Practice"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4p",
+      "source": "n4",
+      "target": "n5",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c4f",
+      "source": "n4",
+      "target": "n7",
+      "label": "Fail (< 2 correct)"
+    },
+    {
+      "id": "c5a",
+      "source": "n5",
+      "target": "n6",
+      "label": "Adjust"
+    },
+    {
+      "id": "c5b",
+      "source": "n5",
+      "target": "n7",
+      "label": "Trust recipe"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T09:29:08.502193+00:00",
+  "model": "claude-haiku-4-5"
+}

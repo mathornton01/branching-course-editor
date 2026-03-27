@@ -1,0 +1,243 @@
+{
+  "id": "ds-env-science-001",
+  "title": "Distributed Systems Through Environmental Science",
+  "description": "Learn distributed systems concepts by exploring how environmental monitoring networks operate at scale. Choose between theory-first and practice-first learning paths.",
+  "topic": "Distributed Systems",
+  "theme": "environmental science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed-systems",
+    "environmental-monitoring",
+    "systems-design",
+    "resilience"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "In environmental monitoring, we need systems where many components work together without central control. Would you like to start with the theory behind distributed systems, or jump into building a practical distributed environmental monitoring network?",
+      "choices": [
+        {
+          "label": "Start with Theory",
+          "next": "n2"
+        },
+        {
+          "label": "Start with Practice",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Distributed Systems Fundamentals",
+      "content": "A distributed system is a network of independent computers or sensors that coordinate to achieve a common goal. In environmental science, distributed systems are essential for monitoring large geographic areas. Key principles include: (1) No single point of failure\u2014if one weather station fails, others continue monitoring; (2) Parallel processing\u2014multiple sensors collect data simultaneously across vast landscapes; (3) Eventual consistency\u2014data from different locations eventually synchronizes. Think of a global network of CO\u2082 monitoring stations spread across continents, each collecting data independently but contributing to unified understanding of atmospheric composition.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Global Weather Station Network",
+      "content": "The World Meteorological Organization operates thousands of weather stations across continents, forming a distributed system. Each station independently measures temperature, humidity, and pressure. Data flows through regional centers that aggregate information without waiting for all stations to report. A station in the Amazon rainforest and another in Antarctica work asynchronously\u2014if one loses connectivity, the other continues operating. Together, they create weather predictions that would be impossible with any single centralized location. This demonstrates how distributed systems handle geographic scale, variable network conditions, and component failures while maintaining critical environmental monitoring capabilities.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Understanding Distributed System Concepts",
+      "content": "Test your understanding of distributed systems principles through environmental monitoring scenarios.",
+      "questions": [
+        {
+          "question": "In a global ocean temperature monitoring system, sensors at different locations measure water temperature simultaneously but report data at different times due to variable network conditions. What distributed systems principle does this demonstrate?",
+          "options": [
+            "Centralization\u2014all data must arrive at the same time",
+            "Eventual consistency\u2014data becomes consistent over time",
+            "Single point of failure\u2014if one sensor fails, the system collapses",
+            "Synchronous processing\u2014all operations happen in exact sequence"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Distributed systems don't require simultaneous reporting.",
+            "Correct! Sensors collecting asynchronously is a hallmark of distributed systems.",
+            "Incorrect. Distributed systems are designed to avoid single points of failure.",
+            "Incorrect. Distributed systems often use asynchronous processing."
+          ],
+          "explanation": "Eventual consistency means the system accepts that different parts may temporarily have different data, but all will synchronize eventually. This is crucial for environmental monitoring across vast distances."
+        },
+        {
+          "question": "A network of air quality sensors loses connectivity with 15% of stations due to storms. The remaining 85% continue operating and reporting. What advantage of distributed systems does this demonstrate?",
+          "options": [
+            "Increased latency\u2014data takes longer to process",
+            "Fault tolerance\u2014the system continues functioning despite component failures",
+            "Increased consistency\u2014data is more reliable",
+            "Centralized backup\u2014the main server creates redundancy"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Fault tolerance is about continuing operation, not latency.",
+            "Correct! This is fault tolerance\u2014the system gracefully handles failed components.",
+            "Incorrect. With fewer sensors, consistency might actually be affected temporarily.",
+            "Incorrect. Distributed systems avoid central points of failure."
+          ],
+          "explanation": "Fault tolerance is a primary benefit of distributed systems. When components fail, the system continues operating with reduced capacity rather than complete failure."
+        },
+        {
+          "question": "In a distributed soil moisture sensing system, sensors in different fields operate independently and send data asynchronously to regional processing centers. How would you describe the communication pattern?",
+          "options": [
+            "Synchronous\u2014all sensors must report at the same moment",
+            "Centralized\u2014one main sensor controls all others",
+            "Asynchronous\u2014components operate independently with delayed communication",
+            "Real-time\u2014all data arrives instantly with zero latency"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Synchronous systems require simultaneous operation.",
+            "Incorrect. This describes a centralized, not distributed system.",
+            "Correct! Independent operation with delayed communication is asynchronous.",
+            "Incorrect. Distributed systems can have significant latency."
+          ],
+          "explanation": "Asynchronous communication is fundamental to distributed systems, allowing components to operate independently and handle variable network delays."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Building Distributed Environmental Systems",
+      "content": "Practical distributed systems require solving real challenges: how do sensors communicate when networks are unreliable? How do we ensure data consistency when components fail? In environmental monitoring, you might deploy sensors across a watershed to track water quality. Each sensor independently collects readings and attempts to send them to collection points. The system must handle sensors being offline, messages arriving out of order, and multiple collection points. You start by understanding actual deployment considerations: power management (sensors need solar panels), communication protocols (radio, LoRaWAN, cellular), and data reconciliation when different sensors show conflicting readings. This hands-on approach builds intuition for the real complexities of distributed systems.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Forest Fire Detection Network",
+      "content": "Imagine deploying 500 infrared and smoke sensors across a 10,000 km\u00b2 forest. Each sensor detects local conditions and transmits alerts to nearby relay nodes, which forward messages toward decision centers. Critically, no sensor knows the full state of the forest\u2014they only know their local environment and what neighbors tell them. A sensor on the forest perimeter might report a small fire, but that information must spread through the network for the system to coordinate a response. Fire can move faster than data propagates, yet the system must work with incomplete, delayed, and sometimes contradictory information from different parts of the forest. Successful fire prevention requires distributed decision-making where each sensor contributes what it knows, and the system collectively determines where resources are needed.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Designing Distributed Environmental Systems",
+      "content": "Apply distributed systems principles to real environmental monitoring scenarios.",
+      "questions": [
+        {
+          "question": "You're designing a distributed system to monitor water quality across a river system with 12 monitoring stations. If the central data collection point fails, what should happen?",
+          "options": [
+            "All stations stop measuring\u2014the system is useless without the center",
+            "Stations continue collecting data locally and resume sending when the center comes back online",
+            "The river stops flowing and water quality monitoring becomes unnecessary",
+            "One station automatically becomes the new center immediately"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A well-designed distributed system continues functioning.",
+            "Correct! Stations should buffer data locally and resume when the center recovers.",
+            "Incorrect. Environmental monitoring continues regardless of system components.",
+            "Incorrect. Automatic failover is complex and not always necessary."
+          ],
+          "explanation": "Distributed environmental systems should degrade gracefully. If the central collection point fails, stations should continue operating independently, buffering data until connectivity restores."
+        },
+        {
+          "question": "In a forest temperature monitoring network, you discover that sensor A reports 25\u00b0C while nearby sensor B reports 18\u00b0C simultaneously. What's the most likely explanation in a distributed system?",
+          "options": [
+            "One sensor is broken and should be immediately deactivated",
+            "Temperature truly varies across the forest due to elevation, tree density, and local conditions",
+            "The sensors are not actually distributed, so they should report identical values",
+            "A network error prevents proper synchronization"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Different readings don't automatically indicate failure.",
+            "Correct! Environmental variation is expected and valuable in distributed monitoring.",
+            "Incorrect. Distributed sensors across geographic areas should expect variation.",
+            "Incorrect. This variation reflects real environmental differences."
+          ],
+          "explanation": "In environmental monitoring, distributed sensors across different locations naturally measure different values. This variation is data, not error. The system must preserve this information rather than forcing consensus."
+        },
+        {
+          "question": "You're adding new carbon dioxide sensors to a distributed atmospheric monitoring network. How should the system handle sensors that temporarily go offline?",
+          "options": [
+            "Remove them from the network immediately to ensure data quality",
+            "Store their data temporarily and merge it in temporal order when they reconnect",
+            "Halt all monitoring until all sensors are online",
+            "Assume their readings are outdated and ignore them upon reconnection"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Sensors may go offline temporarily without needing removal.",
+            "Correct! Buffering and temporal ordering handles temporary disconnections gracefully.",
+            "Incorrect. The system should continue despite individual sensor outages.",
+            "Incorrect. Historical data is valuable and should be preserved."
+          ],
+          "explanation": "Distributed systems must handle temporary unavailability gracefully. Data from reconnected sensors should be integrated based on timestamps, even if delayed, to maintain accurate environmental records."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Distributed Systems in Environmental Science",
+      "content": "You've explored how distributed systems enable environmental monitoring at global and local scales. Whether you focused on theory or practice, you understand that environmental science increasingly relies on networks of distributed sensors, analysis systems, and decision-making infrastructure. From climate monitoring networks spanning continents to local watershed sensors, distributed systems handle the geographic scale, component failures, and coordination challenges that environmental science demands. These concepts\u2014resilience, parallel processing, eventual consistency\u2014are not just computer science abstractions; they're solutions to real problems in understanding and protecting our environment."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start with Theory"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Start with Practice"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    }
+  ],
+  "generated_at": "2026-03-27T07:48:50.957076+00:00",
+  "model": "claude-haiku-4-5"
+}

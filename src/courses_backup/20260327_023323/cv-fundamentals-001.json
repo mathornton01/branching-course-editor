@@ -1,0 +1,271 @@
+{
+  "id": "cv-fundamentals-001",
+  "title": "Computer Vision Fundamentals",
+  "description": "Master the core concepts of digital images, color spaces, and edge detection through interactive lessons and assessments.",
+  "topic": "Computer Vision",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer-vision",
+    "image-processing",
+    "fundamentals",
+    "beginner"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What are Digital Images?",
+      "content": "Digital images are composed of discrete elements called pixels, each representing a small color sample. Images are typically represented using color spaces like RGB (Red, Green, Blue), where each pixel has values for intensity of red, green, and blue light. Understanding pixel representation is fundamental to computer vision, as all image processing operations manipulate these pixel values. Color spaces help us interpret and manipulate colors in different ways, depending on the application. The ability to access and modify individual pixel values forms the foundation for all computer vision techniques.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Understanding RGB Values",
+      "content": "Consider a 3x3 pixel image. The top-left pixel has RGB values (255, 0, 0), representing pure red. The center pixel has (128, 128, 128), a neutral gray. The bottom-right pixel has (0, 255, 0), representing pure green. In a grayscale image, the same RGB value is used for all three channels. Each value ranges from 0 (no intensity) to 255 (maximum intensity). By understanding these values, we can write algorithms to detect colors, adjust brightness, or apply filters.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Image Representation Assessment",
+      "content": "Test your understanding of digital image representation and color spaces.",
+      "questions": [
+        {
+          "question": "In the RGB color space, what RGB values represent pure white?",
+          "options": [
+            "(0, 0, 0)",
+            "(255, 255, 255)",
+            "(128, 128, 128)",
+            "(255, 0, 0)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, that's black.",
+            "Correct! All channels at maximum = white.",
+            "That's gray.",
+            "That's red."
+          ],
+          "explanation": "In RGB, white is when all three color channels are at their maximum value of 255."
+        },
+        {
+          "question": "What is the primary purpose of color spaces in digital image processing?",
+          "options": [
+            "To make images look prettier",
+            "To provide different ways of representing and manipulating colors",
+            "To reduce file size",
+            "To add artistic effects"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite.",
+            "Correct! Color spaces provide different representations for different tasks.",
+            "That's compression.",
+            "That's filtering."
+          ],
+          "explanation": "Color spaces like RGB, HSV, and LAB allow us to represent and manipulate colors in ways suited to different applications."
+        }
+      ],
+      "pass_threshold": 0.5,
+      "success_target": "n4",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "What would you like to explore next?",
+      "content": "Excellent work! You understand image basics. Now you can either continue learning about edge detection\u2014one of the most powerful techniques in computer vision\u2014or complete the course and explore more topics later.",
+      "choices": [
+        {
+          "label": "Learn Edge Detection",
+          "next": "n5"
+        },
+        {
+          "label": "Complete Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Edge Detection Fundamentals",
+      "content": "Edges are transitions in pixel intensity that mark boundaries between objects and regions. Edge detection algorithms identify these transitions automatically, forming the basis for object recognition, image segmentation, and feature extraction. The Sobel operator and Canny edge detector are two popular algorithms that apply mathematical filters to highlight edges. These filters work by computing gradients\u2014measuring how quickly pixel intensity changes\u2014in different directions. Detecting edges effectively requires balancing sensitivity (catching all edges) with specificity (avoiding false positives from noise).",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "The Sobel Edge Detector in Action",
+      "content": "The Sobel operator uses two 3x3 kernels to detect edges in horizontal and vertical directions. When applied to an image of a hand, the algorithm computes gradients at each pixel, producing high values where intensity changes rapidly (at object boundaries) and low values in uniform regions. The vertical Sobel kernel emphasizes left-right edges, while the horizontal kernel emphasizes up-down edges. Combining both kernels reveals all edges in the image. By adjusting the threshold for what constitutes an 'edge,' you control the detector's sensitivity to subtle or noisy transitions.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Edge Detection Assessment",
+      "content": "Test your understanding of edge detection concepts and algorithms.",
+      "questions": [
+        {
+          "question": "What does an edge in an image represent?",
+          "options": [
+            "A sudden change in color or brightness",
+            "The border of the image frame",
+            "A straight line in the image",
+            "A region with high contrast"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Edges are intensity transitions.",
+            "Not quite.",
+            "That's too narrow.",
+            "That's related but not precise."
+          ],
+          "explanation": "Edges are defined as rapid transitions in pixel intensity values, typically at object boundaries."
+        },
+        {
+          "question": "Why is it important to adjust the threshold when using edge detectors?",
+          "options": [
+            "To make the image brighter",
+            "To control sensitivity and avoid detecting noise as edges",
+            "To speed up processing",
+            "To apply multiple filters simultaneously"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's brightness adjustment.",
+            "Correct! Threshold controls what counts as an edge.",
+            "That's optimization.",
+            "That's multi-scale analysis."
+          ],
+          "explanation": "Threshold adjustment balances finding true edges while rejecting noise-induced false positives."
+        }
+      ],
+      "pass_threshold": 0.5,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Reinforcing Concepts",
+      "content": "Take your time with these practice questions to solidify your understanding of image representation, pixel values, and edge detection algorithms.",
+      "questions": [
+        {
+          "question": "What is a pixel?",
+          "options": [
+            "A small square region of color in a digital image",
+            "A type of camera sensor",
+            "A light source in photography",
+            "A data compression format"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Pixels are the smallest unit of a digital image.",
+            "Not quite.",
+            "That's related but not right.",
+            "That's not what we mean by pixel."
+          ],
+          "explanation": "A pixel is the smallest discrete element of a digital image, containing color information."
+        },
+        {
+          "question": "Which algorithm is known for using gradients to detect edges?",
+          "options": [
+            "Gaussian blur filter",
+            "Sobel operator",
+            "Histogram equalization",
+            "Color quantization"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That smooths images.",
+            "Correct! Sobel uses gradient calculations.",
+            "That adjusts contrast.",
+            "That reduces color palette."
+          ],
+          "explanation": "The Sobel operator is one of the most popular gradient-based edge detection methods in computer vision."
+        }
+      ],
+      "pass_threshold": 0.5,
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Congratulations!",
+      "content": "You've completed Computer Vision Fundamentals! You now understand digital image representation, color spaces, and edge detection techniques. These foundational concepts form the basis for advanced computer vision tasks like object detection, image segmentation, and feature matching. Next steps: implement these algorithms using OpenCV or scikit-image, experiment with real images, and explore more specialized topics like feature descriptors, optical flow, or deep learning-based vision. Keep building and learning!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "content"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "example"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Learn Edge Detection"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Complete Course"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "content"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "example"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c10",
+      "source": "n7",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "practice"
+    }
+  ],
+  "generated_at": "2026-03-26T09:38:40.469328+00:00",
+  "model": "claude-haiku-4-5"
+}

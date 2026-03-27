@@ -1,0 +1,239 @@
+{
+  "id": "a3f5c8e1-9b2d-4f8a-b1c3-5e7d9a2f4c6b",
+  "title": "Distributed Systems Through Film Production",
+  "description": "Learn distributed systems principles\u2014communication, fault tolerance, and consistency\u2014through the lens of a global film production with simultaneous shoots across multiple locations.",
+  "topic": "Distributed Systems",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed-systems",
+    "film-production",
+    "systems-design",
+    "fault-tolerance",
+    "consistency",
+    "communication"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Your Film Production as a Distributed System",
+      "content": "Imagine directing a blockbuster film with simultaneous shoots in three locations, post-production teams in different cities, and vendors supplying assets worldwide. Each location must coordinate shot timing, share footage instantly, handle equipment breakdowns, and keep master asset libraries in sync. This is exactly how distributed systems work: independent nodes communicating, tolerating failures, and maintaining consistency. In this course, you'll explore three core challenges facing your production's distributed infrastructure and discover how to design systems that work despite distance, delays, and occasional catastrophes.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which aspect of your production would you like to focus on?",
+      "content": "Your distributed production faces three interconnected challenges. Choose which to explore first.",
+      "choices": [
+        {
+          "label": "Communication & Coordination",
+          "next": "n3"
+        },
+        {
+          "label": "Fault Tolerance & Resilience",
+          "next": "n5"
+        },
+        {
+          "label": "Consistency & Data Sync",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Coordinating Across Filming Locations",
+      "content": "Your production spans London, New Zealand, and Vancouver\u2014each location shooting simultaneously. The director needs live updates, editors need footage metadata, and continuity supervisors must verify consistency across locations. In distributed systems, this is inter-node communication: how do separate nodes exchange information reliably, consistently, and efficiently? You need synchronous updates (video calls for time-sensitive decisions) and asynchronous messaging (email notifications that don't require immediate responses). Message ordering matters\u2014a 'cut' command must arrive before 'reset for next take,' or chaos ensues. Every choice trades off latency, bandwidth, and complexity; no perfect solution exists.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Real-time Dailies Coordination",
+      "content": "Each evening, London renders dailies (rough cuts) and sends them to Vancouver's editorial suite and New Zealand's post-production. London publishes: 'Dailies ready 10:00 PM GMT. Scene 45A, 7 takes, 12 GB.' Vancouver acknowledges in 15 seconds; New Zealand in 30 seconds due to bandwidth limits. This is pub-sub messaging\u2014one sender, multiple subscribers, eventual consistency. London chose asynchronous delivery (vs. live streaming) because video would saturate bandwidth. Trade-off: editorial teams see freshest cuts if they wait, but can begin planning while waiting. All subscribers eventually get the message, but not instantaneously.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Handling Equipment and Network Failures",
+      "content": "Day 52 of your 120-day shoot: the main server managing all asset metadata suffers hard drive failure in Vancouver. Without fault tolerance, all data about which props, costumes, and equipment are stored where vanishes. In distributed systems, fault tolerance means the system continues functioning even when nodes fail. Strategies include replication (store data on three servers so losing one is survivable), redundancy (backup equipment ready), and heartbeat monitoring (detect failures before they cascade). The cost is overhead: three copies means 3x storage; checking heartbeats every 5 seconds adds network traffic. But upside is business continuity\u2014your $50M production doesn't halt for a $10K server failure.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Redundant Production Tracking System",
+      "content": "Your production management tool runs on three servers in different regions. Server 1 (London) is primary; Servers 2 and 3 are replicas. When a location uploads a footage manifest, the primary writes it, then broadcasts to replicas. If Server 1 fails, Server 2 detects silence (no heartbeat for 30 seconds) and promotes itself to primary. The continuity supervisor gets an immediate answer from Server 2. Edge case: if 'Scene 47 complete' was written to Server 1 but not replicated before failure, it's lost. This is the consistency-availability tradeoff. You choose: wait for all replicas to acknowledge (slow, consistent) or let primary respond immediately (fast, but risking loss on failure).",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Keeping Master Assets Synchronized",
+      "content": "Your costume department maintains a master inventory in London: which costumes are available, in laundry, or on set. Vancouver has a local copy for fast lookups. At 2 PM London time, Vancouver's continuity supervisor marks 'Red coat #5' as dirty. At 2:02 PM, London's wardrobe master also marks it dirty. By 2:30 PM, one system shows it clean, the other dirty. This is the consistency problem: multiple data copies in different locations fall out of sync. Solutions include strict consistency (all writes go through London, slower but correct) or eventual consistency (writes to local copy, sync later, temporarily inconsistent). Real distributed systems rarely achieve strong consistency\u2014the latency cost is too high.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Asset Metadata Synchronization Across Locations",
+      "content": "Your production uses version control (Git) for all digital assets: scripts, storyboards, visual effects previews, sound design. London has script version 1.7.3; Vancouver pulled 1.7.2 this morning before the update. When Vancouver's script supervisor adds a note, they're annotating an old version. London's director updated that section differently. Now two competing versions exist\u2014a merge conflict. The system can't auto-resolve; humans must decide: keep London's, keep Vancouver's, or manually merge both. This exemplifies the CAP theorem: you can't have consistency (all replicas match immediately), availability (every location writes anytime), and partition tolerance (systems work when network splits) all three.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Bringing It Together: Your Distributed Production",
+      "content": "You've explored three pillars of distributed systems: communication (dailies coordination), fault tolerance (redundant servers), and consistency (asset synchronization). Real systems must balance all three. Your architecture might include: location servers communicating via pub-sub for urgent updates (fast, asynchronous) and database replication for master records (resilient, eventually consistent). Equipment failures are handled by redundant nodes and heartbeat monitoring. Asset conflicts are resolved by version control with human oversight. Every choice trades off simplicity, latency, durability, and bandwidth. As systems grow (more locations, crew, assets), these tradeoffs become critical. Distributed systems design is ultimately pragmatic engineering informed by real-world constraints.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Test Your Distributed Systems Understanding",
+      "content": "Demonstrate your understanding of distributed systems principles applied to film production.",
+      "questions": [
+        {
+          "question": "You're coordinating footage uploads from three filming locations. The director needs to see dailies by 6 PM London time. Which approach prioritizes availability and partition tolerance over immediate consistency?",
+          "options": [
+            "Wait for all three locations to sync before releasing dailies (consistency-first)",
+            "Publish dailies as soon as the primary location uploads them; sync other locations asynchronously (availability-first)",
+            "Only show dailies if all locations confirm they've received them (consensus-based)",
+            "Use multiple backup transmission methods for maximum redundancy"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This ensures consistency but sacrifices availability\u2014if one location is slow, everyone waits.",
+            "Correct! Async replication prioritizes speed for the director; consistency arrives eventually when all locations sync.",
+            "This is consensus, which blocks until agreement\u2014slow and availability-killing.",
+            "Redundancy is useful but doesn't address the consistency-availability tradeoff directly."
+          ],
+          "explanation": "The CAP theorem says you can't have all three: Consistency, Availability, Partition tolerance. Film productions often choose availability (director sees content immediately) and partition tolerance (system works even if one location disconnects) over strict consistency."
+        },
+        {
+          "question": "A server managing costume inventory fails suddenly. What distributed systems strategy prevents complete data loss?",
+          "options": [
+            "Store inventory only on one server and accept the risk of total loss",
+            "Replicate inventory across three servers and use heartbeat monitoring to detect failures (fault tolerance + redundancy)",
+            "Reconstruct the inventory from crew memory (manual recovery)",
+            "Assume loss and restart the inventory system from scratch"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This is no fault tolerance at all.",
+            "Correct! Replication and heartbeat monitoring are textbook fault tolerance. When one server fails, replicas take over.",
+            "Unreliable and doesn't scale with production size.",
+            "This avoids the problem rather than solving it."
+          ],
+          "explanation": "Fault tolerance requires redundancy (multiple copies) and health monitoring (heartbeat). This is the defense against cascading failures in distributed systems."
+        },
+        {
+          "question": "Two script supervisors in different locations both edit the master script simultaneously, creating a merge conflict. What distributed systems principle does this exemplify?",
+          "options": [
+            "Replication\u2014the script exists in multiple places",
+            "The CAP theorem\u2014the system sacrifices one of Consistency, Availability, or Partition tolerance",
+            "Asynchronous messaging\u2014edits are communicated over the network",
+            "Heartbeat monitoring\u2014failures are detected and reported"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Replication is part of the setup, but not the core principle at play.",
+            "Correct! Strong consistency (one authoritative version) would require locking, sacrificing availability. The system chose availability and partition tolerance, accepting temporary inconsistency resolved by merge.",
+            "Messaging is how edits are communicated, but not why the conflict happens.",
+            "Heartbeat monitoring is for failure detection, not version conflicts."
+          ],
+          "explanation": "This scenario highlights the CAP theorem: you can't have all three. Real systems must acknowledge this and design thoughtfully for their specific constraints and priorities."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n11",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "You've Mastered Distributed Systems in Film Production",
+      "content": "Congratulations! You've explored how distributed systems principles apply to film production: coordinating across locations, tolerating failures, and managing consistency. These principles scale from a three-location shoot to global productions and beyond. As you face real distributed challenges\u2014whether in film, software engineering, or other domains\u2014remember the tradeoffs: speed vs. safety, simplicity vs. resilience, immediate consistency vs. eventual consistency. Distributed systems aren't perfect; they're pragmatic choices informed by constraints. Now go make great films (or systems)!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Communication & Coordination"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fault Tolerance & Resilience"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Consistency & Data Sync"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T10:47:08.253428+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,295 @@
+{
+  "id": "bayes-forensic-course",
+  "title": "Bayesian Statistics in Forensic Science",
+  "description": "Master Bayesian reasoning through real forensic science cases. Adaptive learning path based on your level.",
+  "topic": "Bayesian Statistics",
+  "theme": "forensic science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "Bayesian",
+    "Statistics",
+    "Forensic Science",
+    "Evidence",
+    "Probability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic Assessment: Understanding Bayes' Theorem",
+      "content": "A forensic analyst finds that a suspect's DNA matches DNA recovered at a crime scene. The DNA match has a probability of occurring randomly in 1 out of 10 million people. However, the police stopped 10,000 people for questioning. How should we interpret this evidence?",
+      "questions": [
+        {
+          "question": "In the context above, what does 'prior probability' refer to?",
+          "options": [
+            "A) The probability that a randomly selected person from the 10,000 has the matching DNA",
+            "B) The probability of finding the DNA evidence if the suspect is innocent",
+            "C) The probability that the suspect committed the crime before considering the DNA evidence",
+            "D) The accuracy of the DNA testing procedure"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Not quite. The prior is about the suspect's guilt before evidence, not just random selection.",
+            "That's the likelihood, not the prior probability.",
+            "Correct! Prior probability is our initial belief about guilt before considering new evidence.",
+            "The testing accuracy is separate from the prior probability."
+          ],
+          "explanation": "In Bayesian terms, prior probability is what we believe before seeing evidence. In forensics, it's the initial probability that the suspect committed the crime based on all information except the current evidence."
+        },
+        {
+          "question": "A drug test is 95% accurate (true positive rate) and has a 10% false positive rate. A suspect tests positive for heroin. What does Bayes' theorem help us determine?",
+          "options": [
+            "A) Whether the test was administered correctly",
+            "B) The probability the suspect actually used heroin, given the positive test",
+            "C) The probability of getting a positive test result",
+            "D) Whether heroin use is common in the suspect's age group"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Bayes' theorem doesn't tell us about test administration.",
+            "Exactly! Bayes' theorem reverses the conditional probability: from P(test|drug) to P(drug|test).",
+            "That's just the likelihood, not what Bayes' theorem calculates.",
+            "Bayes' theorem is about individual probability, not population statistics."
+          ],
+          "explanation": "Bayes' theorem is powerful because it answers the question forensic experts care about: 'Given this evidence, what's the probability of guilt/presence of a substance?' This reverses the conditional probability."
+        },
+        {
+          "question": "A fingerprint is found at a crime scene. The examiner says the probability of this fingerprint pattern occurring in the general population is 1 in 500,000. The suspect's fingerprints match. What's the most important missing information for a Bayesian analysis?",
+          "options": [
+            "A) The crime scene location and date",
+            "B) The suspect's criminal history",
+            "C) The probability that the suspect was at the crime scene before considering the fingerprint evidence",
+            "D) The examiner's experience level"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Location and date don't directly affect the Bayesian calculation.",
+            "While relevant, this doesn't directly impact the Bayesian probability calculation.",
+            "Correct! Without knowing the prior probability, we can't calculate the posterior probability of guilt.",
+            "The examiner's skill affects likelihood but not the prior probability needed for Bayes' theorem."
+          ],
+          "explanation": "Even with extremely low random match probability, Bayes' theorem requires us to multiply by the prior probability of guilt. A 1-in-500,000 match is more convincing if the prior probability of guilt is high (e.g., suspect was seen fleeing) than if it's low (suspect was nowhere near the area)."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Complex Forensic Scenarios: Multiple Evidence Integration",
+      "content": "A suspect in a homicide case has three pieces of evidence against them: (1) DNA found under the victim's fingernails matches the suspect (1 in 10 million random match probability), (2) A security camera captured someone matching the suspect's description 2 blocks away 15 minutes before the crime, (3) The suspect was unable to account for their whereabouts during the crime timeframe. How would you use Bayes' theorem to evaluate the cumulative probability of guilt?",
+      "questions": [
+        {
+          "question": "When combining multiple independent pieces of evidence using Bayes' theorem, what mathematical operation combines the likelihoods?",
+          "options": [
+            "A) Multiply the likelihood ratios together",
+            "B) Add the likelihood ratios together",
+            "C) Take the average of the likelihood ratios",
+            "D) Use only the strongest piece of evidence"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! For independent evidence, we multiply likelihood ratios. This exponentially increases the posterior probability.",
+            "Adding would artificially inflate the probability. Multiplication correctly compounds evidence.",
+            "Averaging loses information about the strength of each piece of evidence.",
+            "Using only the strongest evidence ignores valuable corroborating evidence."
+          ],
+          "explanation": "The power of Bayesian reasoning in forensics is that multiple weak pieces of evidence can combine to create a strong conclusion. A security camera description alone might not be enough, but combined with DNA and inability to account for whereabouts, the posterior probability of guilt becomes very high."
+        },
+        {
+          "question": "In the scenario above, the suspect claims they were home alone (unable to verify). How does this inability to establish an alibi affect the Bayesian calculation?",
+          "options": [
+            "A) It doesn't affect the calculation\u2014we only use positive evidence of guilt",
+            "B) It reduces the prior probability of guilt",
+            "C) It increases the likelihood ratio of the observed evidence (weak alibi)",
+            "D) It proves the suspect is guilty"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Actually, it does affect the calculation through the likelihood of the suspect's statement.",
+            "A weak alibi doesn't reduce prior guilt; if anything, it makes guilt more likely given the evidence.",
+            "Correct! A weak or absent alibi increases how much the observed evidence matters. If the suspect had a verified alibi, the DNA evidence would be less damaging.",
+            "Bayes' theorem gives probabilities, not proof. We work with degrees of certainty."
+          ],
+          "explanation": "This is subtle: the inability to establish an alibi affects the likelihood component. Strong evidence is more incriminating when the suspect's explanation for the evidence is weak. This is why prosecutors emphasize lack of corroboration."
+        },
+        {
+          "question": "A forensic lab reports a Bayes factor of 10,000 for DNA evidence in a sexual assault case (meaning the evidence is 10,000 times more likely if the suspect is guilty than if innocent). If the prior probability of guilt based on non-DNA evidence is only 1%, what is the approximate posterior probability of guilt?",
+          "options": [
+            "A) Approximately 50% (the Bayes factor overwhelms the low prior)",
+            "B) Approximately 1% (the prior probability doesn't change much)",
+            "C) Approximately 99% (the Bayes factor multiplied by the prior)",
+            "D) Approximately 10% (the Bayes factor divided by 100)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Even with a low prior probability, a Bayes factor of 10,000 shifts the posterior to approximately 50%. This is why DNA evidence is so powerful in forensics.",
+            "The Bayes factor is too strong to not significantly change the probability.",
+            "This calculation is close but imprecise. The actual formula is: Posterior = (Prior \u00d7 Bayes Factor) / Normalizing Factor.",
+            "This doesn't match the Bayesian calculation."
+          ],
+          "explanation": "This demonstrates Bayes' theorem's power: strong evidence (high Bayes factor) can overcome a low prior probability. In forensic science, this is why DNA evidence can exonerate someone with a high prior probability of guilt or convict someone with weak circumstantial evidence, as long as the DNA evidence is powerful enough."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Bayesian Applications in Forensic Science",
+      "content": "Expert forensic scientists use sophisticated Bayesian methods to evaluate complex evidence. In DNA profiling, the Reference Index (RI) and Likelihood Ratio are calculated across multiple genetic markers to assess how much more likely the observed DNA profile is under the hypothesis of guilt versus innocence. In fingerprint analysis, Bayesian approaches quantify the evidentiary weight of ridge detail matches. In toxicology, Bayesian methods integrate population pharmacokinetics with case-specific variables to determine if a measured concentration is consistent with a single exposure or chronic use. Advanced practitioners also employ Bayesian networks to model dependencies between different evidence types, creating directed acyclic graphs that reveal how fibers, location evidence, and witness statements propagate to update overall guilt probability. This hierarchical approach prevents overestimating evidence strength by properly accounting for uncertainties and dependencies in real-world forensic investigations.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Completion: Bayesian Mastery in Forensics",
+      "content": "Congratulations! You've mastered the advanced application of Bayesian statistics in forensic science. You understand how to combine multiple sources of evidence, calculate Bayes factors, and recognize the importance of properly estimating prior probabilities. You're ready to critically evaluate complex forensic cases where Bayesian reasoning guides decisions about guilt, innocence, and evidentiary strength. Your knowledge of likelihood ratios, hierarchical modeling, and evidence integration positions you to contribute meaningfully to forensic science practice and expert testimony."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Practice: Building Intuition for Bayesian Evidence",
+      "content": "Let's strengthen your understanding of how Bayes' theorem applies to forensic scenarios through guided practice questions.",
+      "questions": [
+        {
+          "question": "A forensic pathologist examines a bite mark on a victim. The prosecutor claims the mark matches the suspect's dental impression (1 in 1000 match probability). However, the suspect was in custody 100 miles away when the crime occurred. What does Bayesian reasoning tell us?",
+          "options": [
+            "A) The match probability of 1 in 1000 proves guilt despite the alibi",
+            "B) The verified alibi makes the bite mark evidence much less incriminating (very high likelihood the mark is coincidental)",
+            "C) The alibi and bite mark cancel each other out, resulting in 50% guilt probability",
+            "D) Bayes' theorem cannot evaluate alibis"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The alibi is strong evidence that contradicts the bite mark match.",
+            "Exactly! A strong alibi dramatically changes how we interpret the 1-in-1000 match. If the suspect couldn't be at the crime scene, the match becomes evidence of coincidence rather than guilt.",
+            "Bayesian reasoning doesn't simply average conflicting evidence; it calculates the proper posterior probability.",
+            "Bayes' theorem is perfect for evaluating how alibis and physical evidence interact."
+          ],
+          "explanation": "This illustrates a critical forensic principle: prior probability (where was the suspect?) heavily influences how we interpret evidence. Strong alibis don't eliminate suspicious evidence; rather, they make alternative explanations (coincidental match) more likely."
+        },
+        {
+          "question": "A toxicology test for cocaine returns a positive result. The test has 99% sensitivity (detects cocaine when present) and 1% false positive rate (positive when absent). The base rate of cocaine use in the general population is 2%. What is approximately the probability the person actually used cocaine given a positive test?",
+          "options": [
+            "A) Approximately 99% (the test sensitivity)",
+            "B) Approximately 67% (using Bayes' theorem to account for the base rate)",
+            "C) Approximately 2% (the base rate)",
+            "D) Approximately 50% (test and base rate average)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The test sensitivity alone doesn't account for the base rate. This is a common misconception.",
+            "Correct! Using Bayes' theorem: P(cocaine|positive) = (0.99 \u00d7 0.02) / [(0.99 \u00d7 0.02) + (0.01 \u00d7 0.98)] \u2248 0.67 or 67%.",
+            "The base rate is important but doesn't directly equal the posterior probability.",
+            "Averaging oversimplifies the Bayesian calculation."
+          ],
+          "explanation": "Even with a 99% accurate test, a positive result in a low-prevalence population means there's roughly a 1 in 3 chance of a false positive. This is why forensic toxicologists always confirm positive screening tests with more specific methods\u2014Bayes' theorem shows why single tests on low-prevalence populations can be misleading."
+        },
+        {
+          "question": "A forensic examiner finds a fiber from a common brand of carpet (found in 30% of homes) on a suspect's clothing. The fiber came from the victim's house. Using Bayesian reasoning, what's the most important factor in evaluating this evidence?",
+          "options": [
+            "A) The exact location where the fiber was found on the suspect's clothing",
+            "B) The suspect's explanation for being at the victim's house",
+            "C) The prior probability of the suspect being at the crime scene (based on non-fiber evidence)",
+            "D) The brand and color of the carpet fiber"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The location is relevant to the likelihood but not the most important factor for Bayesian reasoning.",
+            "The suspect's explanation affects our assessment but isn't part of the Bayesian calculation itself.",
+            "Correct! The prior probability is crucial. A common fiber is more suspicious if the suspect had no reason to be at the victim's house than if they visited recently.",
+            "While relevant to matching probability, the Bayesian impact depends on the prior probability of presence."
+          ],
+          "explanation": "This demonstrates a fundamental forensic challenge: common fibers have high likelihood ratios only when the prior probability of innocent transfer is low. A fiber from common carpet means little if the suspect might legitimately have been at the victim's house, but much more if they had no reason to be there."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Completion: Practicing Bayesian Thinking",
+      "content": "Excellent work on these practice scenarios! You've developed important intuitions about how Bayesian reasoning applies to forensic evidence. You understand that strong evidence becomes more or less incriminating depending on prior probabilities, that common evidence requires careful interpretation, and that multiple pieces of evidence can be combined mathematically. These practice scenarios have strengthened your ability to think critically about forensic science. Continue applying these Bayesian principles to real-world cases."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Remedial Content: Foundations of Bayes' Theorem",
+      "content": "Let's build your foundation with the core concept of Bayes' theorem, expressed simply: Posterior Probability = (Likelihood \u00d7 Prior Probability) / Normalizing Factor. In forensics, this means: The probability of guilt given evidence = (Probability of the evidence given guilt \u00d7 Probability of guilt before evidence) / Probability of the evidence overall. Think of it this way: if you find a suspect's DNA at a crime scene, the evidence is only powerful if (1) it's unlikely the DNA got there by coincidence (high likelihood), and (2) you already had some reason to suspect this person (reasonable prior). Finding unknown DNA is much more valuable than matching DNA from someone who was supposed to be at the location. Bayes' theorem quantifies this intuition. It shows why eyewitness identification is more valuable when it's surprising (few people look like the suspect) and less valuable when it's unsurprising (many people match the description). This principle underlies all forensic evidence evaluation.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: DNA Evidence in a Burglary Investigation",
+      "content": "A homeowner is burgled; DNA is recovered from a gloved hand touching a window. After database searching, the DNA matches a suspect with a 1-in-100,000 random match probability (likelihood ratio = 100,000). Before considering DNA, the suspect was one of 500 people in the area who might plausibly have committed the burglary (prior probability of guilt = 1/500 = 0.2%). Using Bayes: Posterior = (100,000 \u00d7 0.002) / [(100,000 \u00d7 0.002) + (1 \u00d7 0.998)] = 200 / 200.998 \u2248 99.5%. Despite seeming like overwhelming evidence before considering the prior, the DNA match is actually even more powerful: the suspect went from being one of 500 possible perpetrators (0.2% likely) to being 99.5% likely to be guilty. This is the power of Bayesian reasoning in forensics: strong, precise evidence (DNA with high likelihood ratio) applies its power multiplicatively to your existing beliefs.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Completion: Foundations Established",
+      "content": "You've successfully learned the foundational principles of Bayes' theorem and how they apply to forensic science. You understand prior probability, likelihood, and posterior probability. You can follow the logic of how forensic evidence, properly evaluated through Bayes' theorem, leads to rational conclusions about guilt or innocence. You've seen how even strong evidence depends on context. These foundations position you well to apply Bayesian thinking to forensic problems. As you advance, you'll explore more complex scenarios and formal calculations."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T11:27:17.537453+00:00",
+  "model": "claude-haiku-4-5"
+}

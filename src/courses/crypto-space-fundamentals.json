@@ -1,0 +1,189 @@
+{
+  "id": "crypto-space-fundamentals",
+  "title": "Cryptography Fundamentals: Space Exploration Edition",
+  "description": "Learn encryption through a space mission scenario where critical decisions lead to different operational outcomes.",
+  "topic": "Cryptography Fundamentals",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 25,
+  "tags": [
+    "cryptography",
+    "encryption",
+    "security",
+    "space",
+    "symmetric",
+    "asymmetric",
+    "key-management"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Emergency: Secure Space Communication",
+      "content": "A distress signal from the International Space Station indicates our communication channel has been compromised. Unauthorized signals are intercepting command transmissions. You have 2 hours to establish a new secure protocol before the next critical launch window. You must choose between two fundamental encryption approaches: sharing a secret key with your team, or using a mathematical puzzle that only recipients can solve. Which approach will you recommend?",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Encryption Strategy",
+      "content": "Two proven paths exist in cryptography. Will you implement Symmetric Encryption (one shared secret key enabling fast, real-time communication) or Asymmetric Encryption (each party has unique public and private keys)?",
+      "choices": [
+        {
+          "label": "Symmetric Encryption: Fast, simple, one shared secret",
+          "next": "n3"
+        },
+        {
+          "label": "Asymmetric Encryption: Slower, but scalable with unique keypairs",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Symmetric Encryption Fundamentals",
+      "content": "Symmetric encryption is like creating a locked box where both sender and receiver have identical keys. When Mission Control sends 'REDUCE SOLAR PANEL ANGLE,' it transforms the message using the shared key\u2014modern AES-256 performs trillions of operations per second. The receiver applies the same key to unlock the original message. This blazing speed is critical for real-time satellite commands where latency means mission failure. However, the shared secret must be fiercely protected; if an adversary obtains the key, all communications are exposed.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Mars Rover Command Encryption",
+      "content": "Mission Control encrypts 'DEPLOY_ARM_POSITION_45' using AES-256 with shared key 'PERSIST_EXPLORATION_2029,' transforming it into '4F7A3B2E1C9A5D8K'. The rover, knowing the same key, reverses the process and executes the command. Without the key, eavesdroppers see only gibberish. This method has protected NASA Mars missions for decades. The critical challenge: both Mission Control and Rover must guard the key absolutely\u2014no logs in accessible backups, no hardcoding in source code, no sharing with unauthorized personnel.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "How to Protect Your Shared Key?",
+      "content": "Encryption is only as strong as the weakest point where the key is stored or transmitted. For your Mars mission, where will the shared key live and how will it be managed?",
+      "choices": [
+        {
+          "label": "Store securely: HSM hardware, monthly rotation, access logs, cryptographic audit trails",
+          "next": "n6"
+        },
+        {
+          "label": "Store simply: Embed in mission software for convenience and speed",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Best Practice: Professional Key Management",
+      "content": "Elite space agencies use Hardware Security Modules (HSMs)\u2014specialized devices that never export keys in plain text. Keys rotate monthly with authenticated transmission to spacecraft on separate secure channels. Only pre-authorized personnel can request key material; every access attempt is cryptographically audited. This layered defense means compromise requires breaking multiple barriers simultaneously\u2014not just stealing one file.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "\u2713 Mission Success: Secure Mars Rover Operations",
+      "content": "Your symmetric encryption with rigorous key management worked flawlessly. The rover executed 47 critical commands over 8 months with zero interception. The Mars settlement expanded safely. Industry standard achieved: AES-256 with HSM protection. Recommended for future high-priority missions."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Risky Practice: Hardcoded Keys in Code",
+      "content": "To save time, a developer embeds the shared key directly in rover software: const ENCRYPTION_KEY = 'PERSIST_EXPLORATION_2029'. Source code is backed up to the cloud, shared with 15 contractors, and archived on USB drives. What seemed convenient becomes catastrophic\u2014the key leaks in three days when a contractor's laptop is stolen.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "\u2717 Mission Failed: Rover Hijacked",
+      "content": "Adversaries decrypt all past commands and inject malicious orders. The rover drives into a crater, ending the mission. Lesson: symmetric encryption is only secure when the key itself is treated as your crown jewel. This incident led to international guidelines mandating key management best practices. Never hardcode secrets."
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Asymmetric Encryption Fundamentals",
+      "content": "Asymmetric encryption (public-key cryptography) works like a mailbox with a visible slot\u2014anyone can drop a message in (encrypt with public key), but only the owner with the hidden key can open and read it (decrypt with private key). Each spacecraft gets a unique keypair. Mission Control broadcasts its public key; so do all rovers. A rover encrypts messages using Mission Control's public key. Mission Control decrypts with its private key. Even if adversaries intercept the message and public key, they cannot decrypt without the private key\u2014RSA-2048 would take 300 trillion years to crack with current computers. This solves the key-distribution problem.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "example",
+      "title": "Space Station Authentication with Public Keys",
+      "content": "The ISS generates an RSA keypair: the public key is shared with Earth. When Earth sends a signal, it includes a digital signature using Earth's private key. ISS verifies the signature using Earth's public key\u2014proving Earth truly sent it (authentication). ISS encrypts its reply using Earth's public key. Earth decrypts with its private key. Both parties now trust each other; eavesdroppers see only ciphertext. This two-way authenticated channel requires no pre-shared secrets. Each public key is like a radio frequency everyone can tune to; only the private key holder transmits meaningful messages.",
+      "next": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "\u2713 Mission Success: Secure Station Network",
+      "content": "Asymmetric encryption enabled secure communication with 47 spacecraft without pre-sharing a single secret key. Scalability achieved: the space network grew from 5 to 200 vessels, each authenticating safely without a central coordinator. This is how modern internet security works (HTTPS, SSL/TLS). Your choice enabled a decentralized, trustworthy deep-space network."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Choose approach"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Symmetric path"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn example"
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": "Key protection decision"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Best practices"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "Success"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n8",
+      "label": "Risky shortcut"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Failure"
+    },
+    {
+      "id": "c9",
+      "source": "n2",
+      "target": "n10",
+      "label": "Asymmetric path"
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": "Learn example"
+    },
+    {
+      "id": "c11",
+      "source": "n11",
+      "target": "n12",
+      "label": "Success"
+    }
+  ],
+  "generated_at": "2026-03-27T05:25:42.032826+00:00",
+  "model": "claude-haiku-4-5"
+}

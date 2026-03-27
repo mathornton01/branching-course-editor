@@ -1,0 +1,227 @@
+{
+  "id": "docker-containerization-space",
+  "title": "Docker and Containerization: A Space Exploration Journey",
+  "description": "Learn Docker and containerization concepts through the lens of space exploration missions. Adaptive branching routes you to advanced or foundational content based on diagnostic assessment.",
+  "topic": "Docker and Containerization",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "docker",
+    "containers",
+    "devops",
+    "space-exploration"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Your Space Containerization Knowledge",
+      "content": "Let's assess your current understanding of containerization concepts. Think of this as a pre-mission briefing to determine which training path is right for you.",
+      "questions": [
+        {
+          "question": "What is the primary difference between a Docker image and a Docker container in the context of a space mission?",
+          "options": [
+            "A Docker image is like a spacecraft blueprint, while a container is the actual spacecraft running the mission",
+            "They are essentially the same thing with different names",
+            "A Docker image is used for testing, a container is used in production",
+            "A container requires an image, but an image can run independently"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Images are templates (blueprints) and containers are running instances (actual craft).",
+            "Not quite. These are distinct concepts with different roles.",
+            "While there's some truth here, the better analogy is blueprint vs. actual craft.",
+            "Close, but the direction isn't quite right."
+          ],
+          "explanation": "In space missions, a Docker image is like a spacecraft design blueprint containing all mission specifications. A container is the actual spacecraft created from that blueprint, running in orbit with real systems and processes."
+        },
+        {
+          "question": "Why is container isolation important for a distributed space mission control system?",
+          "options": [
+            "It allows multiple mission control services to run independently without interfering with each other, just like separate compartments in a space station",
+            "It reduces the size of the Docker image",
+            "It ensures the container runs faster",
+            "It prevents other containers from storing data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Excellent! Isolation keeps systems independent and safe, like compartmentalization in spacecraft.",
+            "Image size is controlled by the Dockerfile content, not isolation.",
+            "Isolation affects reliability, not speed.",
+            "While isolation affects data access, the primary benefit is independence and safety."
+          ],
+          "explanation": "Just as modern spacecraft have sealed compartments so that a breach in one section doesn't compromise the whole vessel, Docker containers isolate applications so failures are contained and systems remain independent."
+        },
+        {
+          "question": "What does it mean to 'containerize' an application for your space exploration project?",
+          "options": [
+            "Package the application with all its dependencies into a self-contained unit that runs the same way everywhere\u2014just as a lander contains all systems needed for an independent mission",
+            "Store the application data in a secure container for backup",
+            "Compress the application to save space on servers",
+            "Create multiple versions of the application for different spacecraft"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Perfect! Containerization packages everything needed for consistent execution anywhere.",
+            "That's data backup, not containerization.",
+            "Compression is not containerization.",
+            "Versioning and containerization are separate concepts."
+          ],
+          "explanation": "Containerizing means bundling your application code, runtime, libraries, and dependencies into a single, portable unit. Like a planetary lander that carries everything it needs for independent operation, a container carries all dependencies to run consistently on any system."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Container Orchestration & Enterprise Mission Control",
+      "content": "You've demonstrated strong foundational knowledge. Now let's explore how Docker scales to complex operations. In space exploration, imagine coordinating dozens of mission modules, monitoring stations, and probe communications simultaneously. This is where Docker Compose and Kubernetes shine. Docker Compose orchestrates multiple containerized services on a single system\u2014like managing all subsystems of a single spacecraft. Kubernetes manages containers across entire clusters of servers\u2014like coordinating a fleet of interplanetary probes. Understanding these tools is essential for building resilient, distributed systems that can handle the complexity of modern space missions.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced Example: Multi-Service Deep Space Mission Control",
+      "content": "Consider the Deep Space Network: multiple ground stations worldwide track missions, receive telemetry, and send commands. Each station runs containerized services: a TelemetryReceiver (listens for probe signals), a DataProcessor (analyzes data), and a CommandSender (transmits orders). Using Docker Compose, you define all three services in one `docker-compose.yml` file and deploy to ground stations. Each service runs in isolation, updates independently, and auto-restarts on failure. If one station fails, Kubernetes redistributes containers to other stations, ensuring continuous mission control. This architecture powers NASA's Deep Space Network and SpaceX's satellite constellation operations.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Mission Complete: Advanced Containerization Expert",
+      "content": "Excellent work! You've mastered Docker orchestration at enterprise scale. You understand container clustering, service mesh patterns, and distributed system resilience. You're ready to architect mission-critical systems for deep-space operations. Next steps: explore Kubernetes StatefulSets for databases, learn Helm for package management, and study observability for distributed systems. Your expertise positions you to lead container infrastructure for the next generation of space exploration missions."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundations: Docker Basics & Container Fundamentals",
+      "content": "Let's build your Docker knowledge from the ground up. Docker is a platform that packages applications and their dependencies into containers\u2014self-contained units that run consistently everywhere. Think of a Docker container like a sealed habitat module on the International Space Station: everything an astronaut needs is contained inside, isolated from the external vacuum. A Docker image is the blueprint for that habitat (the design specifications), while the container is the actual functioning module in orbit. Containers solve the 'works on my machine' problem by ensuring your application runs identically on a developer's laptop, testing servers, and production spacecraft control systems.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Foundations Example: Spacecraft Telemetry Processor",
+      "content": "You've written a Python script that processes telemetry data from orbiting satellites. On your laptop it works perfectly, but your colleague gets errors\u2014different Python version, missing libraries. Solution: containerize it with Docker. Create a Dockerfile specifying Python 3.11, install dependencies, copy your script. Run `docker build -t satellite-telemetry .` to create the image, then `docker run satellite-telemetry` to launch the container. Now anyone with Docker runs your processor identically\u2014whether at mission control, a field station, or analyzing lunar data. The container works the same everywhere, just like an identical habitat module functions in Earth orbit or on the Moon.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Containerization Scenario Assessment",
+      "content": "Test your understanding with practical scenarios from space missions.",
+      "questions": [
+        {
+          "question": "You've developed a mission planning algorithm that works on your development system. What's the primary benefit of containerizing it with Docker before deploying to spacecraft command centers?",
+          "options": [
+            "It will run identically across all command centers regardless of their system configurations, eliminating environment-related failures",
+            "It makes the code run 50% faster",
+            "It allows multiple people to edit the code simultaneously",
+            "It reduces the file size of the application"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Containerization ensures consistency across environments.",
+            "Docker doesn't inherently improve runtime speed.",
+            "Version control systems enable collaboration, not Docker.",
+            "Docker doesn't necessarily reduce file size."
+          ],
+          "explanation": "The critical value of containerization is reproducibility. Your containerized algorithm will behave identically on every command center's system, preventing the 'it worked in development' problem that can compromise mission-critical operations."
+        },
+        {
+          "question": "In your space mission, multiple services must run: a navigation system, a life support monitor, and a communication handler. What's the best way to organize these with Docker?",
+          "options": [
+            "Put all three services in a single container so they stay together",
+            "Create separate containers for each service, allowing independent scaling and failure isolation",
+            "Create one container for navigation only, then manually run the others separately",
+            "Use a single Docker image with all three services and run multiple copies of it"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That works for simple cases, but violates separation of concerns.",
+            "Perfect! Each service in its own container provides modularity and resilience.",
+            "Inconsistent approach that makes orchestration difficult.",
+            "Inefficient\u2014you'd run duplicate copies of unneeded services."
+          ],
+          "explanation": "Best practice is one-service-per-container. This mirrors modern spacecraft design: separate systems (life support, navigation, communications) operate independently. If navigation fails, life support and communications continue. You can update communication without restarting navigation."
+        },
+        {
+          "question": "You want your containerized telemetry processor to auto-restart if it crashes during a critical 48-hour lunar eclipse pass. What Docker feature accomplishes this?",
+          "options": [
+            "Docker restart policies (like `--restart=always` or `--restart=on-failure`)",
+            "Docker image compression settings",
+            "Docker port mapping",
+            "Docker environment variables"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Exactly! Restart policies ensure your container recovers from failures automatically.",
+            "Image compression doesn't affect container behavior.",
+            "Port mapping connects containers to networks, not recovery.",
+            "Environment variables configure app settings, not container restart behavior."
+          ],
+          "explanation": "Docker's restart policies are critical for mission-critical applications. Using `--restart=on-failure:5` tells Docker to automatically restart the container up to 5 times if it fails, ensuring your telemetry processor never misses crucial data during the eclipse pass."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Mission Accomplished: Docker Fundamentals Mastered",
+      "content": "Congratulations! You've successfully learned Docker and containerization fundamentals with real-world space exploration applications. You now understand containers, images, isolation, and deployment. To advance further, explore: multi-stage builds for efficient images, pushing containers to registries, and networking multiple containers. You have the foundation to containerize any application and contribute to modern, scalable mission-critical systems powering space exploration."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "strong foundation"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "needs fundamentals"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "completion"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "completion"
+    }
+  ],
+  "generated_at": "2026-03-27T12:56:30.458551+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,256 @@
+{
+  "id": "docker-enviro-course",
+  "title": "Docker and Containerization for Environmental Science",
+  "description": "Learn Docker containerization through the lens of environmental science. Choose between theory-first and hands-on approaches to master container concepts and commands.",
+  "topic": "Docker and Containerization",
+  "theme": "environmental science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "docker",
+    "containerization",
+    "environmental science",
+    "devops"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "decision",
+      "title": "Learning Docker for Environmental Science",
+      "content": "Docker containerization is revolutionizing how environmental scientists deploy and share data processing applications. Just as ecosystems are self-contained systems that maintain stable conditions for their inhabitants, Docker containers are isolated environments that contain all dependencies needed for your environmental applications to run reliably. Choose your learning path: build a solid understanding of the concepts first, or jump straight into building a containerized environmental application.",
+      "choices": [
+        {
+          "label": "Theory First: Understand containerization concepts",
+          "next": "n2"
+        },
+        {
+          "label": "Hands-On First: Build Docker containers immediately",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Understanding Docker and Containerization Concepts",
+      "content": "A **Docker container** is like a sealed biosphere in environmental science\u2014it's an isolated environment containing everything an application needs: code, runtime, libraries, and configuration. The key benefit is reproducibility: your climate modeling application runs identically on your laptop, your colleague's machine, and in cloud production. A **Docker image** is the blueprint or specification\u2014like documentation describing which species, soil types, and environmental conditions define a specific ecosystem. The **Docker daemon** manages containers like an environmental manager oversees multiple nature reserves. **Registries** (like Docker Hub) are libraries of pre-made images, similar to how the Global Biodiversity Information Facility shares ecological data.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Containerizing a Carbon Footprint Calculator",
+      "content": "Imagine you've built a Python script that calculates carbon emissions from transportation data. Normally, colleagues would need to install Python, NumPy, Pandas, and your custom libraries to run it. Instead, you create a Dockerfile\u2014a recipe that says: 'Start with a Python 3.9 image, install these packages, copy my script, and run it.' Docker then builds this into a container image. Others can now simply run `docker run carbon-calculator` and it works identically, with all dependencies pre-installed in the isolated environment. This is exactly like documenting a habitat: once specified, anyone can recreate it faithfully. The container includes only what the application needs, making it lightweight and portable across different environmental monitoring stations.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Docker Concepts Assessment",
+      "content": "Test your understanding of Docker fundamentals in the context of environmental science applications.",
+      "questions": [
+        {
+          "question": "What is the primary advantage of using Docker containers for environmental data processing applications?",
+          "options": [
+            "A) They make your code run faster",
+            "B) They ensure your application runs identically across different computers (laptop, server, cloud)",
+            "C) They reduce the need for version control systems",
+            "D) They automatically clean environmental data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Speed improvements depend on the application itself, not the container.",
+            "Correct! Containers ensure reproducibility\u2014essential when colleagues need to verify your climate model or biodiversity analysis across different systems.",
+            "Incorrect. Version control and containerization serve different purposes.",
+            "Incorrect. Containers don't clean data; you write code to do that."
+          ],
+          "explanation": "Docker's primary value is reproducibility. An environmental model that works on your machine will work identically on a colleague's machine or a cloud server, because the container bundles all dependencies. This is critical for scientific validation."
+        },
+        {
+          "question": "In Docker terminology, what does an 'image' represent?",
+          "options": [
+            "A) A photograph of a container running",
+            "B) A static blueprint or template used to create containers",
+            "C) A log file showing what the container did",
+            "D) The hardware that runs containers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. An image is not a photograph.",
+            "Correct! An image is a template. Just as an ecological species description is a static specification that multiple individual organisms follow, a Docker image is a static template from which multiple running containers are created.",
+            "Incorrect. That would be logs, not an image.",
+            "Incorrect. Images are software specifications, not hardware."
+          ],
+          "explanation": "Understanding the image-versus-container distinction is fundamental. An image is the specification (like a habitat description), and a container is the running instance (like an actual ecosystem)."
+        },
+        {
+          "question": "A marine biologist needs to share her ocean temperature analysis tool with colleagues worldwide. Why is Docker ideal?",
+          "options": [
+            "A) It makes the tool available on the dark web",
+            "B) It compresses files to save storage space",
+            "C) It packages the tool with all dependencies so colleagues can run it identically, regardless of their OS or installed software",
+            "D) It automatically backs up data to cloud storage"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Docker is not related to web accessibility.",
+            "Incorrect. Docker is not primarily about compression.",
+            "Correct! Docker ensures that the ocean temperature analysis tool runs the same way everywhere\u2014whether colleagues use macOS, Linux, or Windows. All dependencies are bundled.",
+            "Incorrect. Docker doesn't handle backup automatically."
+          ],
+          "explanation": "Docker's portability solves a real problem in environmental science: ensuring reproducible, shareable research across teams and institutions."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n2"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Getting Started with Docker Commands",
+      "content": "Docker provides command-line tools to interact with containers. **`docker pull`** downloads an image from a registry (like fetching a habitat blueprint). **`docker run`** creates and starts a container from an image\u2014imagine spinning up a new ecosystem from a template. **`docker images`** lists all images on your machine, like a catalog of available habitat types. **`docker ps`** shows running containers (active ecosystems), while **`docker ps -a`** shows all containers including stopped ones. **`docker build`** creates a new image from a Dockerfile recipe, similar to designing a new habitat specification. **`docker logs`** shows what a container printed while running\u2014like reviewing field notes from an ecological survey. These commands let you manage the full lifecycle of containerized environmental applications.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Running an Environmental Data Analysis Container",
+      "content": "You find a Docker image called `enviro-biodiversity-scanner` that analyzes biodiversity data. You run: `docker run -v /data/surveys:/input enviro-biodiversity-scanner`. This command creates a container from that image and mounts your survey data from `/data/surveys` into the container's `/input` folder. The application processes the data and outputs results. You can run this same command on any machine with Docker installed, and it will work identically\u2014no installation, no dependency conflicts. If you need to modify the analysis, you'd create a Dockerfile specifying a Python image, copying your biodiversity analysis code, installing required libraries like GeoPandas and Rasterio, and setting it as the entry point. Then `docker build -t my-biodiversity-analyzer .` packages it into a reusable image that teammates can run with a single command.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Docker Practical Skills Assessment",
+      "content": "Test your ability to work with Docker commands for environmental applications.",
+      "questions": [
+        {
+          "question": "You have air quality sensor data in a folder `/measurements/pm25`. You want to run a Docker container that analyzes this data. Which command is correct?",
+          "options": [
+            "A) docker run air-quality-analyzer /measurements/pm25",
+            "B) docker run -v /measurements/pm25:/data air-quality-analyzer",
+            "C) docker pull air-quality-analyzer /measurements/pm25",
+            "D) docker build -v /measurements/pm25 air-quality-analyzer"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. You need to mount the volume with the -v flag.",
+            "Correct! The -v flag mounts your sensor data folder from your machine into the container's /data folder, so the application inside can access it.",
+            "Incorrect. docker pull just downloads an image; it doesn't run it or handle data.",
+            "Incorrect. docker build creates an image from a Dockerfile; it doesn't run containers or mount volumes."
+          ],
+          "explanation": "The -v (or --volume) flag connects your machine's filesystem to the container's filesystem, essential for environmental applications that need to read input data and write results."
+        },
+        {
+          "question": "What does `docker ps` show?",
+          "options": [
+            "A) All images stored on your computer",
+            "B) All containers currently running",
+            "C) Post-processing steps in a Dockerfile",
+            "D) The processing speed of Docker"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That would be docker images.",
+            "Correct! `docker ps` lists active containers\u2014the running ecosystems. Add `-a` to see stopped ones too.",
+            "Incorrect. That's not a Docker concept.",
+            "Incorrect. That's not what the command does."
+          ],
+          "explanation": "`docker ps` is your window into what's currently running. For environmental monitoring, you'd use this to check if your data pipeline container is still processing."
+        },
+        {
+          "question": "You want to create a custom Docker image for your climate model. What do you write?",
+          "options": [
+            "A) A Dockerfile with instructions like FROM, RUN, COPY, and ENTRYPOINT",
+            "B) A shell script named docker.sh",
+            "C) A JSON configuration file",
+            "D) A Python file that calls docker commands"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A Dockerfile is a text file with a recipe: specify the base image (FROM), install dependencies (RUN), copy your code (COPY), and define how to run it (ENTRYPOINT or CMD).",
+            "Incorrect. A shell script doesn't define an image; you'd build it with `docker build`.",
+            "Incorrect. Docker uses a Dockerfile format, not JSON (though you can pass JSON configs).",
+            "Incorrect. A Python script could call docker commands, but wouldn't define an image."
+          ],
+          "explanation": "A Dockerfile is the blueprint for your environmental application container. It specifies everything needed: base image, dependencies, code, and runtime configuration."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Deploying Environmental Monitoring Solutions with Docker",
+      "content": "Now that you understand containerization and Docker commands, you're ready to think about real-world deployment. Environmental scientists increasingly use Docker to deploy long-running services: continuous air quality monitors, stream flow sensors, and satellite data pipelines. A containerized application can be deployed identically across a network of research stations or replicated in the cloud for scalability. Docker Compose allows you to orchestrate multiple containers (database, API, frontend) as a single unit\u2014like managing an interconnected ecosystem with multiple zones. Container orchestration platforms like Kubernetes extend this to thousands of containers, essential for processing massive environmental datasets. By containerizing your environmental analysis code, you ensure reproducibility, enable collaboration, and prepare your research for real-world deployment. Your climate model, biodiversity tool, or water quality analyzer becomes portable, shareable, and maintainable.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: Docker and Containerization for Environmental Science",
+      "content": "Congratulations! You've mastered Docker containerization through an environmental science lens. You understand the concepts, can execute Docker commands, and know how to containerize and deploy environmental applications. Whether you chose the theory-first or hands-on path, you're now equipped to package your environmental research for reproducibility, collaboration, and impact. Next steps: build your first environmental container, explore Docker Hub for existing scientific tools, or dive into Docker Compose for multi-container applications."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Theory first"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Hands-on first"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T08:23:51.634243+00:00",
+  "model": "claude-haiku-4-5"
+}

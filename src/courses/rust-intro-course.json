@@ -1,0 +1,132 @@
+{
+  "id": "rust-intro-course",
+  "title": "Introduction to Rust Programming: Building Safer Systems",
+  "description": "Learn Rust through architectural design scenarios. Guide a smart building system design through critical decisions that determine safety, performance, and long-term success.",
+  "topic": "Rust Programming",
+  "theme": "architecture",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "rust",
+    "programming",
+    "systems-design",
+    "memory-safety",
+    "ownership"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Smart Building Challenge",
+      "content": "You're architecting the control system for a 50-story smart building managing HVAC, security, lighting, and energy distribution. The system must process thousands of sensor events per second while maintaining absolute reliability\u2014a cascade failure could endanger occupants. Three teams propose different languages. Before deciding, you must understand Rust: a language that makes safe architecture enforceable by the compiler, not hope."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Your Design Philosophy",
+      "content": "What principle will guide your architectural choice?",
+      "choices": [
+        {
+          "label": "Safety and correctness\u2014prevent failures at the design stage",
+          "next": "n3"
+        },
+        {
+          "label": "Practicality\u2014fast iteration and proven tools",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Ownership: Architecture's Core Principle",
+      "content": "A building's strength comes from clear responsibility: one contractor owns the foundation, another the electrical wiring, another the plumbing. Ownership prevents conflicts and ensures accountability. Rust's ownership system works the same way. Every value has exactly one owner responsible for it. When you move a value (like transferring a blueprint to a new team), the original owner no longer controls it\u2014Rust enforces this at compile time. You cannot accidentally have two parts of your system modifying the same data simultaneously. Borrowing lets you temporarily lend data (like showing a blueprint), but the original owner retains responsibility. This eliminates entire categories of bugs: use-after-free errors, memory leaks, and data races. These aren't theoretical concerns; they've caused real building system failures."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Enforcing Ownership in Your Design",
+      "content": "Your engineering team is ready to code. How strictly will you enforce ownership patterns?",
+      "choices": [
+        {
+          "label": "Follow Rust's ownership rules completely\u2014the compiler becomes your architect's assistant",
+          "next": "n5"
+        },
+        {
+          "label": "Use unsafe blocks and workarounds to move faster\u2014the team knows what they're doing",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Success: A Resilient System",
+      "content": "Your team embraced Rust's ownership model. When the climate control subsystem shares sensor data with the security system, the borrow checker ensures neither writes to the same data unsafely. Memory leaks become impossible by construction\u2014when a subsystem shuts down, its resources release automatically. A year later, during a maintenance update to the lighting system, your engineers modify the code confidently; the compiler rejects any change that could corrupt the building's state. When a simultaneous earthquake and power surge stress all systems at once, your architecture holds firm. You've built a structure that stands\u2014not through luck, but through design."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Failure: The Cost of Shortcuts",
+      "content": "Your team used unsafe blocks liberally, bypassed the borrow checker, and achieved initial speed. The system launches. Within weeks, under specific load patterns, a memory corruption bug surfaces: a stale sensor reading pointer writes to the wrong memory location, corrupting the security system's access list. An unauthorized door opens during a fire emergency. The post-mortem reveals the bug was impossible to catch in testing\u2014it only manifested under race conditions your team never simulated. You've learned a hard lesson: Rust's rules exist because the dangers are real. What felt like bureaucracy was actually blueprint review."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Performance Without Sacrifice",
+      "content": "Rust eliminates the garbage collector\u2014that background process that periodically freezes everything while it cleans up memory. Your building system processes thousands of sensor events per second. In languages like Java or Python, garbage collection pauses could cause a lighting response to lag by milliseconds, or an HVAC adjustment to miss a critical window. Rust's ownership system releases memory the instant it's no longer needed, with zero runtime overhead. The compiled code runs at the speed of C++, but with memory safety the C++ team has to enforce manually. Your system is both fast and provably safe: Rust makes the safety rules part of the language, checked at compile time, with no performance cost. You get architecture-grade reliability with lightning-fast response times."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Launch: Safe, Fast, and Scalable",
+      "content": "Your building system is live, built in Rust. Sensor updates flow in nanoseconds. Your team debugged far fewer undefined-behavior crashes than other projects. The codebase's clarity makes onboarding new architects straightforward\u2014the compiler explains the rules. Years later, when you design the controls for five more buildings, you expand the system with confidence. The foundation you built\u2014Rust's ownership model\u2014scaled without compromise. You've discovered that the best architecture is one the compiler enforces. Rust isn't a language for slower, safer code; it's a language where safety and speed are the same thing."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Safety-first"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Pragmatism"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Follow rules"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Use workarounds"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T08:12:48.420584+00:00",
+  "model": "claude-haiku-4-5"
+}

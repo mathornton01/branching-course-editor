@@ -1,0 +1,204 @@
+{
+  "id": "c7b5f3e1-2d4a-4c8f-b1a9-e6d8f9a2c5b3",
+  "title": "Cybersecurity Basics: The Forensic Investigation",
+  "description": "Learn cybersecurity fundamentals through the lens of digital forensic investigation. Follow a realistic scenario involving a compromised evidence database and make decisions that impact the integrity of criminal investigations.",
+  "topic": "Cybersecurity Basics",
+  "theme": "forensic science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "cybersecurity",
+    "forensic science",
+    "digital evidence",
+    "access control",
+    "integrity",
+    "incident response"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Digital Crime Scene: Evidence Database Breach",
+      "content": "You're a cybersecurity specialist at a forensic laboratory who has discovered that the digital evidence database has been compromised. Evidence files from dozens of criminal investigations may have been accessed or altered. As a forensic professional, you understand that compromised digital evidence can invalidate entire investigations and potentially allow guilty parties to go free. You must act quickly to determine the scope of the breach, secure the system, and preserve the integrity of evidence. Your decisions will directly impact whether criminal cases can proceed successfully in court.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Investigation Priority",
+      "content": "You have limited time and resources. Which cybersecurity principle will you prioritize to protect the evidence database?",
+      "choices": [
+        {
+          "label": "Implement strict access controls and audit logs",
+          "next": "n3"
+        },
+        {
+          "label": "Verify evidence integrity using forensic imaging and hashing",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Access Control & Authentication in Digital Forensics",
+      "content": "In a forensic laboratory, access control works like the security of a physical evidence room\u2014it prevents unauthorized people from handling evidence. You implement multi-factor authentication (MFA), requiring both a password and a security token, on all evidence database accounts. You establish role-based access control (RBAC): a DNA analyst accesses only DNA evidence, not cybercrime files; evidence technicians cannot modify records without supervisor approval. Most critically, you enable comprehensive audit logging that records every access: who, what file, when, from which computer, what action. These logs become your digital crime scene, showing exactly how the breach occurred. Like a forensic investigator documenting a physical scene, you document the digital landscape before, during, and after the breach.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Access Control in Digital Evidence Management",
+      "content": "Test your understanding of how access control protects forensic evidence from unauthorized access and tampering.",
+      "questions": [
+        {
+          "question": "A forensic lab technician's password is stolen by a hacker. With only password protection, what happens next?",
+          "options": [
+            "The hacker can immediately access the evidence database",
+            "The system sends a notification but allows access",
+            "Access is blocked because of automatic timeout",
+            "The evidence is automatically backed up"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "CORRECT: This is why multi-factor authentication (MFA) is critical\u2014even with a compromised password, the attacker cannot access the system without the second factor (like a security token).",
+            "Incorrect: Notifications alone don't prevent access. MFA prevents unauthorized access even with a stolen password.",
+            "Incorrect: Timeout doesn't prevent an attacker with valid credentials from accessing the system during an active session.",
+            "Incorrect: Automatic backups don't prevent unauthorized access to the live evidence database."
+          ],
+          "explanation": "With only password protection, a compromised credential grants full access. Multi-factor authentication adds a second factor that the attacker doesn't have, preventing account takeover even if passwords are stolen\u2014like requiring both a key and a fingerprint to enter an evidence room."
+        },
+        {
+          "question": "Why is role-based access control (RBAC) essential in a forensic evidence database?",
+          "options": [
+            "It makes the system faster",
+            "It ensures employees only access evidence necessary for their role, limiting damage if their account is compromised",
+            "It encrypts all evidence files",
+            "It automatically deletes old evidence"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: RBAC doesn't significantly impact performance.",
+            "CORRECT: RBAC follows the 'principle of least privilege'\u2014if a DNA technician's account is compromised, the attacker only accesses DNA evidence, not cybercrime cases. This limits damage, like an intruder getting into only one evidence locker instead than the entire room.",
+            "Incorrect: Encryption is separate from RBAC, though they complement each other.",
+            "Incorrect: RBAC doesn't govern evidence retention or deletion policies."
+          ],
+          "explanation": "Role-based access control implements the principle of least privilege. If a junior technician's account is compromised, the attacker's capabilities are restricted to that technician's normal access level\u2014minimizing the forensic damage."
+        },
+        {
+          "question": "Audit logs show a senior detective accessed classified evidence at 3 AM from an IP address in another country. What does this indicate?",
+          "options": [
+            "The detective was working overtime on an international case",
+            "Likely credential compromise\u2014investigate immediately",
+            "The system has a timezone bug",
+            "Nothing unusual\u2014detectives work odd hours"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: While detectives work odd hours, the foreign IP combined with unusual timing raises critical red flags.",
+            "CORRECT: Anomalous access patterns (unusual time, unexpected location, accessing files outside normal duties) are the first signs of breach\u2014exactly what audit logs detect, like fingerprints at a crime scene.",
+            "Incorrect: While timezone issues exist, audit logs use consistent time references.",
+            "Incorrect: Detectives do work odd hours, but accessing classified evidence from a foreign IP requires immediate investigation."
+          ],
+          "explanation": "Audit logs are your digital crime scene. Anomalous patterns\u2014unusual times, unexpected locations, accessing files outside normal duties\u2014are red flags indicating credential compromise or insider threats. Like a forensic investigator analyzing footprints and fingerprints, you analyze access patterns to reconstruct the breach."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "What the Audit Logs Reveal",
+      "content": "After analyzing weeks of audit logs, you've identified the breach pattern. What does it show?",
+      "choices": [
+        {
+          "label": "A single admin account accessed evidence files at unusual times over three months",
+          "next": "n6"
+        },
+        {
+          "label": "Multiple user accounts accessed restricted areas from unexpected locations",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Incident Contained: Forensic Evidence Secured",
+      "content": "Excellent investigative work. The audit logs revealed a single compromised admin account\u2014likely from a phishing attack or credential theft. You immediately revoked the account and reset credentials for all admins. Because of comprehensive audit logs, you determined exactly which evidence files were accessed and when\u2014reconstructing the attacker's movements like footprints at a crime scene. Write-protected backups confirmed no evidence was modified. The chain of custody remained intact because access was logged and explainable. Law enforcement traced and apprehended the attacker. Criminal investigations using this protected evidence proceed successfully, and convictions are secured based on verified, secure digital evidence."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Evidence Compromised: Investigation Derailed",
+      "content": "This is far more complex and damaging. Multiple accounts accessed restricted areas from unexpected locations, suggesting either a widespread phishing campaign or someone with higher-level access who created false trails. Unlike a single-account compromise, you cannot determine exactly what was accessed, when, by whom, or for what purpose. The chain of custody is broken\u2014you cannot prove evidence wasn't tampered with. In court, defense attorneys argue evidence authenticity is questionable due to unclear access patterns. Multiple criminal cases depending on this evidence are dismissed, and guilty parties go free. This scenario demonstrates why comprehensive access controls and audit logging must be in place BEFORE a breach occurs\u2014not after."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Digital Evidence Integrity & Forensic Imaging",
+      "content": "Instead of preventing access, you focus on detecting tampering. In physical forensic science, investigators document a crime scene before examination\u2014photographing it, measuring, creating detailed records. Digital forensics works identically. You create cryptographic hashes of all evidence files\u2014mathematical fingerprints where even one altered bit produces a completely different hash value. You create forensic images: bit-for-bit copies made with write-blocking tools preventing accidental modification, like creating a sealed envelope around evidence. You document these hashes and images with digital signatures proving they haven't been altered. Now, if anyone modifies an evidence file, you detect it immediately by comparing current hashes to originals. This doesn't prevent the breach, but it ensures you KNOW if tampering occurred. If hashes match, you can prove in court that evidence is authentic and unchanged\u2014mathematical proof as irrefutable as DNA evidence.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Chain of Custody Maintained: Evidence Admissible",
+      "content": "Your integrity-focused approach succeeds. When you discover the breach, comparing current file hashes to original documented hashes reveals they match perfectly\u2014no files were modified, only accessed. You present forensic evidence in court: hash values prove authenticity, write-protected forensic images prove evidence was never altered, digital signatures prove your documentation is authentic. Defense attorneys cannot argue about tampering because cryptographic proof is mathematically undeniable\u2014like presenting irrefutable DNA evidence. Criminal investigations using verified, protected evidence proceed successfully. Perpetrators are convicted. This scenario demonstrates that if you cannot prevent all breaches, ensuring you can DETECT and PROVE tampering is equally powerful\u2014and in many cases better, because mathematical proof is admissible in any court of law."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Access Control Path"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Single Account Breach"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "Multiple Accounts Compromised"
+    },
+    {
+      "id": "c7",
+      "source": "n2",
+      "target": "n8",
+      "label": "Integrity Verification Path"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:35:45.824358+00:00",
+  "model": "claude-haiku-4-5"
+}

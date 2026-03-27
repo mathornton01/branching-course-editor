@@ -1,0 +1,182 @@
+{
+  "id": "course-nn-deep-learning-urban-planning-2026",
+  "title": "Neural Networks and Deep Learning: Building AI-Powered Cities",
+  "description": "Learn neural networks and deep learning through realistic urban planning scenarios. Navigate strategic decisions implementing AI systems in cities, experiencing the consequences of your technical and deployment choices across multiple branching paths.",
+  "topic": "Neural Networks and Deep Learning",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "machine-learning",
+    "neural-networks",
+    "deep-learning",
+    "urban-planning",
+    "ai-ethics",
+    "scenario-based",
+    "adaptive-learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Crisis in Metropolitan Central",
+      "content": "You're a data scientist hired by Metropolitan Central, a rapidly growing city of 2.5 million people. The city faces critical challenges: traffic congestion has increased 40% in three years, infrastructure planning can't keep pace with neighborhood growth, and city officials urgently need AI-driven solutions. You have two viable approaches using neural networks and deep learning to modernize the city's systems. Which path will you take?"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Strategic Decision: Choose Your Focus",
+      "content": "As the city's data science lead, you must focus your neural network expertise on either optimizing real-time traffic flow or predicting where neighborhoods will grow. Both are crucial for the city's future, but resources require you to choose your primary approach.",
+      "choices": [
+        {
+          "label": "Develop deep learning for traffic prediction and signal optimization",
+          "next": "n3"
+        },
+        {
+          "label": "Build neural networks to predict urban growth patterns",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Understanding Temporal Neural Networks for Traffic",
+      "content": "Traffic flow follows temporal patterns\u2014hour of day, day of week, weather, events, and seasonal variations. Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) networks excel at learning these time-series sequences. For Metropolitan Central, you'll use historical traffic camera feeds and sensor data to train a CNN-LSTM hybrid architecture. The CNN extracts features from camera images (vehicle detection, congestion density), while the LSTM learns temporal dependencies to predict traffic patterns 30 minutes ahead. This allows traffic signals to adapt dynamically, optimizing signal timing across 847 intersections citywide."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Worked Example: Downtown Corridor Pilot Success",
+      "content": "The 5th Avenue corridor (3.2 km, 28 intersections) was selected as the pilot project. The team collected 18 months of traffic data: camera feeds, sensor counts, weather, and event schedules. They built an LSTM with 2 hidden layers (128 and 64 units), training on 15 months of data and validating on 3 months. The model achieved 87% prediction accuracy on held-out test data. Deployment improved average journey time 12% during peak hours and reduced accidents 8% because signal timing became predictable."
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "Validation and Deployment Strategy",
+      "content": "The Downtown Corridor pilot succeeded, but scaling to 847 intersections across the entire city is risky. Cities are complex\u2014traffic patterns in residential neighborhoods, industrial zones, near airports, and near stadiums differ significantly from downtown. How will you proceed with citywide implementation?",
+      "choices": [
+        {
+          "label": "Deploy immediately citywide\u2014the pilot proved the model works",
+          "next": "n6"
+        },
+        {
+          "label": "Validate rigorously first across diverse neighborhoods and edge cases",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "The Rush Deployment Disaster: When Overfitting Fails",
+      "content": "Within 6 weeks, all 847 intersections are equipped and running the model. The first month looks good. But in month 2, during an unseasonably cold spell with heavy snow and ice, the system fails catastrophically. Traffic backs up unpredictably. The model had overfit to 18 months of downtown historical data\u2014it didn't generalize to edge cases. Your training data lacked snow-heavy scenarios (the region experiences mild winters). Additionally, when the city hosts an unexpected major event affecting regional traffic patterns, the rigid model couldn't adapt. Signal timing, which should be adaptive, becomes worse than before AI deployment."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Failure: Public Distrust and System Shutdown",
+      "content": "After 8 weeks of citywide deployment, the system is shut down. Traffic management reverts to pre-AI methods. The city spent $8 million with negative returns. Critically, public and government trust in AI for infrastructure was damaged for years. The lesson learned: neural networks require diverse training data covering edge cases, rigorous validation across different contexts, and continuous monitoring before deployment in safety-critical systems. Overfitting isn't just a technical failure\u2014it's a trust failure that damages public institutions."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Smart Validation: The Thorough Approach",
+      "content": "Before scaling citywide, you invest 3 months in rigorous validation. You retrain the model on data from 5 neighborhood types: downtown (high volume), residential (predictable), industrial (heavy trucks), near-airport (event-driven), and near-stadium (event-driven). You explicitly augment training data with edge cases: simulated rain/snow, accidents, road closures, and special events. You test against a 'surprise set'\u2014data from last year's major snowstorm, unexpected jams, and a concert drawing 50,000 people. The model performs well (79-89% accuracy across all conditions). You implement a monitoring dashboard; if performance drops below 75% on any corridor, automated retraining triggers. Deployment happens gradually: 10 intersections first, then 100, then citywide over 6 months."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Success: Thriving Adaptive Traffic System",
+      "content": "Three years later, Metropolitan Central's traffic system is a national model. Average commute times decreased 18% citywide. Traffic accidents dropped 11%. Air quality improved 6% from reduced idling. The model continuously learns, retraining monthly on recent data to adapt to gradual changes. The city expanded the system to 2,100 intersections across the metro area. Public trust in AI increased because citizens directly experience improved commutes. The project won prestigious urban innovation awards. Key lesson: deep learning in critical infrastructure requires diverse training data, rigorous edge-case validation, continuous monitoring, and humility about model limitations."
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Spatial Pattern Recognition: Predicting Urban Growth",
+      "content": "Urban growth isn't random\u2014it follows geographic, economic, and social patterns. Convolutional Neural Networks (CNNs) excel at spatial pattern recognition. For Metropolitan Central, you build a system using satellite imagery (20-year history, every 2 years), demographic census data, zoning maps, transit networks, and economic development pipelines as inputs. The CNN learns where growth clusters form: areas with good transit access, existing commercial density, proximity to tech hubs, and proximity to amenities grow faster. Historical satellite imagery combined with census data forms the training set. The model predicts the next 3-5 years of growth at the neighborhood level (approximately 2km \u00d7 2km tiles), enabling proactive planning."
+    },
+    {
+      "id": "n11",
+      "type": "example",
+      "title": "Case Study: The Northeast Quadrant Growth Success",
+      "content": "The model predicted significant growth (2.8x population increase) in the Northeast Quadrant within 5 years. The city approved transit-oriented development zoning, planned a new subway line, and reserved land for schools and parks before growth occurred. When growth materialized (2.6x actual), infrastructure was ready. The Northeast Quadrant developed into a thriving, well-planned neighborhood with modern transit, adequate schools, green space, and strong community character. This neural network prediction saved the city an estimated $2.3 billion in avoided infrastructure crisis costs and enabled $4.1 billion in economic development."
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "Success: Proactive Urban Planning Transforms the City",
+      "content": "Using neural networks to predict urban growth transformed Metropolitan Central's planning from reactive to proactive. Over the next decade, the city's population grew to 3.8 million with thoughtfully planned growth. Schools, transit, and parks existed when residents arrived. Neighborhoods developed with intention, not chaos. The system demonstrated that deep learning, when applied with foresight and validated robustness, helps cities grow sustainably. Urban planners worldwide adopted similar systems, recognizing that the future is partially predictable through pattern recognition, enabling cities to build better outcomes."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "begin"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "traffic-optimization-path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n10",
+      "label": "growth-prediction-path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "learn-from-example"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "scale-decision"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "rush-deployment"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n8",
+      "label": "careful-validation"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "failure-outcome"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "success-outcome"
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": "case-study"
+    },
+    {
+      "id": "c11",
+      "source": "n11",
+      "target": "n12",
+      "label": "final-outcome"
+    }
+  ],
+  "generated_at": "2026-03-27T03:40:44.713643+00:00",
+  "model": "claude-haiku-4-5"
+}

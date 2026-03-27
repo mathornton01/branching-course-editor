@@ -1,0 +1,350 @@
+{
+  "id": "graph-theory-course-001",
+  "title": "Graph Theory and Applications",
+  "description": "Master graph theory fundamentals and discover how graphs model real-world networks, from social media to transportation systems.",
+  "topic": "Graph Theory",
+  "difficulty": "intermediate",
+  "estimated_minutes": 120,
+  "tags": [
+    "algorithms",
+    "discrete-math",
+    "network-analysis",
+    "computer-science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Welcome to Graph Theory",
+      "content": "# What is Graph Theory?\n\nGraph theory is a fundamental area of mathematics and computer science that studies graphs\u2014networks consisting of vertices (nodes) and edges (connections). From social networks connecting billions of people to airline routes spanning the globe, graphs model countless real-world systems.\n\n**Why Learn Graph Theory?**\n- Solve routing and navigation problems\n- Analyze social networks and relationships\n- Design efficient networks and infrastructure\n- Optimize resource allocation\n- Understand computer networks and data structures\n\nIn this course, you'll learn the core concepts of graph theory and see how they apply to solving practical problems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "How Would You Like to Learn?",
+      "content": "Different learners have different preferences. Would you prefer to start with the mathematical theory first, or jump into real-world applications?\n\nChoose the path that best matches your learning style and goals:",
+      "choices": [
+        {
+          "label": "Theory First - Learn formal definitions and concepts",
+          "next": "n3"
+        },
+        {
+          "label": "Applications First - See real examples before theory",
+          "next": "n4"
+        },
+        {
+          "label": "Balanced - Mix theory with examples",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Formal Graph Definitions",
+      "content": "# Graph Definitions\n\nA **graph G** is formally defined as G = (V, E) where:\n- **V** is a finite set of vertices (nodes)\n- **E** is a set of edges (pairs of vertices)\n\n## Types of Graphs\n\n**Undirected Graphs**: Edges have no direction. An edge between A and B is identical to an edge between B and A. Example: friendship networks.\n\n**Directed Graphs (Digraphs)**: Edges have direction, shown as arrows. An edge from A to B differs from B to A. Example: Twitter follows.\n\n**Weighted Graphs**: Each edge has an associated weight or cost. Example: distance between cities.\n\n**Simple Graphs**: No multiple edges between the same pair of vertices, no self-loops.\n\n## Degree\n\nThe **degree** of a vertex is the number of edges incident to it. In directed graphs:\n- **In-degree**: number of edges pointing to the vertex\n- **Out-degree**: number of edges pointing away from the vertex\n\n**Handshaking Lemma**: The sum of all vertex degrees equals twice the number of edges.",
+      "next": "n6"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Real-World Graph Applications",
+      "content": "# Where Are Graphs Used?\n\n## Social Networks\nFacebook, Instagram, and Twitter all use graphs where users are vertices and connections (friendships, follows) are edges. Graph analysis helps recommend friends and detect communities.\n\n## Transportation Networks\nGoogle Maps uses graphs to represent:\n- Vertices: intersections and destinations\n- Edges: roads with weights (distance or travel time)\nFinding the shortest path is crucial for navigation.\n\n## Computer Networks\nThe internet itself is a graph:\n- Vertices: computers and servers\n- Edges: network connections\nRouter algorithms use graph theory to efficiently route data packets.\n\n## Recommendation Systems\nNetflix and Amazon use bipartite graphs:\n- One set of vertices: users\n- Another set: movies/products\n- Edges: viewing/purchase history\nGraph algorithms find similar users and recommend content.\n\n## Biology\nProtein interaction networks, genetic networks, and neural networks all use graph representations to understand biological systems.",
+      "next": "n6"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Graph Fundamentals: Theory & Practice",
+      "content": "# Understanding Graphs\n\nA **graph** is a mathematical structure consisting of:\n- **Vertices (V)**: Entities or points (people, cities, computers)\n- **Edges (E)**: Connections between vertices (relationships, distances, transactions)\n\n## Visual Example\nImagine a social network with 4 friends: Alice, Bob, Charlie, Diana\n- Vertices: {Alice, Bob, Charlie, Diana}\n- If Alice knows Bob, there's an edge between them\n\n## Directed vs Undirected\n- **Undirected**: Connections go both ways (friendship)\n- **Directed**: Connections have direction (Twitter follows: asymmetric)\n\n## Weighted Graphs\nEdges can have weights representing cost, distance, or strength:\n- Flight routes: weight = distance\n- Social networks: weight = interaction frequency\n- Roadmaps: weight = travel time\n\n## Real Applications\nThese concepts immediately apply to:\n- **Shortest path**: GPS navigation, network routing\n- **Community detection**: Social network analysis\n- **Recommendation systems**: What you might like based on similar users\n- **Resource optimization**: Efficient delivery routes, communication networks",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Graph Properties and Classifications",
+      "content": "# Important Graph Properties\n\n## Connectivity\n- **Connected Graph**: There's a path between every pair of vertices\n- **Disconnected Graph**: Some vertices can't reach others\n- **Strongly Connected (Directed)**: Every vertex can reach every other vertex\n\n## Paths and Cycles\n- **Path**: A sequence of vertices where each is connected to the next\n- **Cycle**: A path that starts and ends at the same vertex\n- **Acyclic**: Contains no cycles (DAGs - Directed Acyclic Graphs)\n\n## Special Graph Types\n\n**Tree**: Connected acyclic graph (hierarchical structure)\n- Example: file system directories, organizational charts\n\n**Complete Graph (Kn)**: Every vertex connects to every other vertex\n\n**Bipartite Graph**: Vertices split into two groups; edges only go between groups\n- Example: job applicants and positions\n\n## Graph Representations\n1. **Adjacency Matrix**: 2D array where entry (i,j) = 1 if edge exists\n2. **Adjacency List**: For each vertex, list its neighbors\n3. **Edge List**: Simple list of all edges\n\nChoice depends on graph density and operations needed.",
+      "next": "node-worked-ex-001"
+    },
+    {
+      "id": "node-worked-ex-001",
+      "type": "content",
+      "title": "Worked Examples: Applying Graph Concepts",
+      "content": "# Step-by-Step Examples\n\nLet's work through concrete examples before the assessment.\n\n## Example 1: Determining Undirected Graph Edges\n\n**Problem**: In an undirected graph representing friendships, if Alice is connected to Bob, what can we say about Bob's connection to Alice?\n\n**Solution**: In undirected graphs, edges have no direction. If there's an edge A-B, it's the same as edge B-A. So if Alice is connected to Bob, Bob is definitely connected to Alice (it's the same edge viewed from different endpoints).\n\n**Key Insight**: Undirected edges represent symmetric relationships (friendship is mutual).\n\n## Example 2: Calculating Vertex Degree\n\n**Problem**: In this graph:\n- Vertex A connects to B, C, D\n- Vertex B connects to A, C\n- Vertex C connects to A, B, D, E\n- Vertex D connects to A, C\n- Vertex E connects to C\n\nWhat is the degree of each vertex?\n\n**Solution**:\n- Degree(A) = 3 (connects to B, C, D)\n- Degree(B) = 2 (connects to A, C)\n- Degree(C) = 4 (connects to A, B, D, E) \u2190 highest degree\n- Degree(D) = 2 (connects to A, C)\n- Degree(E) = 1 (connects to C)\n\n**Verification**: Sum of degrees = 3+2+4+2+1 = 12 = 2\u00d76 edges \u2713 (Handshaking Lemma confirms)\n\n## Example 3: Identifying Graph Types\n\n**Problem**: Classify these scenarios:\n1. Facebook friendships (bidirectional)\n2. Twitter follows (one direction)\n3. City road network with speed limits\n4. Organization chart (boss \u2192 employee)\n\n**Solution**:\n1. Undirected (friendship is mutual)\n2. Directed (following is one-way)\n3. Weighted + Undirected (weights = speed limits; roads are usually two-way)\n4. Directed (hierarchy flows one way)\n\n## Example 4: In-Degree and Out-Degree in Twitter\n\n**Problem**: On Twitter, user Alex follows 50 accounts but is followed by 200 accounts. If we model Twitter as a directed graph, what are Alex's in-degree and out-degree?\n\n**Solution**:\n- **Out-degree** = 50 (edges pointing away: people Alex follows)\n- **In-degree** = 200 (edges pointing in: people following Alex)\n- These can be completely different in directed graphs!\n\n**Practical Impact**: High in-degree = high influence; high out-degree = widely interested.\n\n## Example 5: Recognizing Tree Structure\n\n**Problem**: Is this structure a tree?\n- 5 vertices: A, B, C, D, E\n- Edges: A-B, A-C, B-D, B-E\n- Connected? Yes\n- Contains cycles? No\n\n**Solution**: Yes, this is a tree! It's connected, acyclic, and has exactly 4 edges for 5 vertices (property: tree with n vertices has n-1 edges).\n\nNow that you've seen these examples, you're ready to test your understanding!",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Graph Fundamentals Quiz",
+      "content": "# Test Your Understanding\n\nAnswer these questions about graph theory basics to see how well you've grasped the concepts so far.",
+      "questions": [
+        {
+          "question": "In an undirected graph, if there is an edge from vertex A to vertex B, what can you say about the connection from B to A?",
+          "options": [
+            "There is definitely an edge from B to A",
+            "There might or might not be an edge from B to A",
+            "There is no edge from B to A",
+            "The question doesn't make sense for undirected graphs"
+          ],
+          "correct_index": 0,
+          "explanations": [
+            "\u2713 CORRECT: In undirected graphs, edges are symmetric. If A-B exists, then B-A is the same edge.",
+            "\u2717 Incorrect: Undirected edges don't allow 'might or might not' - the connection is mutual and definite.",
+            "\u2717 Incorrect: In undirected graphs, edges go both ways by definition.",
+            "\u2717 Incorrect: The question makes perfect sense for undirected graphs - it's about the fundamental property of undirected edges."
+          ]
+        },
+        {
+          "question": "What is the degree of a vertex?",
+          "options": [
+            "The number of edges connected to it",
+            "The distance to the nearest vertex",
+            "The color assigned to it",
+            "The position in the graph visualization"
+          ],
+          "correct_index": 0,
+          "explanations": [
+            "\u2713 CORRECT: Degree is simply the count of edges touching a vertex. For directed graphs, we distinguish in-degree and out-degree.",
+            "\u2717 Incorrect: That would be a distance or path length, not degree.",
+            "\u2717 Incorrect: Graphs are abstract mathematical objects; color is just a visualization choice.",
+            "\u2717 Incorrect: Position is a visualization property, not a mathematical property of the graph."
+          ]
+        },
+        {
+          "question": "A tree is best described as:",
+          "options": [
+            "Any graph with vertices and edges",
+            "A connected acyclic graph",
+            "A graph that contains exactly one cycle",
+            "A directed graph only"
+          ],
+          "correct_index": 1,
+          "explanations": [
+            "\u2717 Incorrect: That's too broad - it would include graphs with cycles (like cycles, complete graphs, etc.).",
+            "\u2713 CORRECT: A tree is defined as connected (one component) and acyclic (no cycles). Key property: n vertices \u27f9 n-1 edges.",
+            "\u2717 Incorrect: A graph with exactly one cycle is called a 'unicyclic graph,' not a tree. Trees have zero cycles.",
+            "\u2717 Incorrect: Trees can be directed or undirected. The key properties (connected + acyclic) apply to both."
+          ]
+        },
+        {
+          "question": "Which is a real-world application of graph theory?",
+          "options": [
+            "Only social networks",
+            "Only transportation networks",
+            "Only one of the above",
+            "Social networks, transportation, recommendations, and many others"
+          ],
+          "correct_index": 3,
+          "explanations": [
+            "\u2717 Incorrect: While social networks are one major application, graph theory has many other uses.",
+            "\u2717 Incorrect: Transportation is important, but it's far from the only application.",
+            "\u2717 Incorrect: Graph theory has applications across many domains, not limited to just one.",
+            "\u2713 CORRECT: Graph theory is incredibly versatile! It applies to social networks, transportation, recommendations, biology, web ranking, and dozens of other fields."
+          ]
+        },
+        {
+          "question": "In a directed graph representing Twitter follows, what does 'in-degree' mean?",
+          "options": [
+            "The number of people you follow",
+            "The number of people following you",
+            "The total interactions you have",
+            "The distance to the most followed account"
+          ],
+          "correct_index": 1,
+          "explanations": [
+            "\u2717 Incorrect: That's out-degree (edges you initiate by following others).",
+            "\u2713 CORRECT: In-degree counts edges pointing TO you. In Twitter, this means followers - people who follow you.",
+            "\u2717 Incorrect: Total interactions is not captured by in-degree alone; you'd need to combine in-degree and out-degree.",
+            "\u2717 Incorrect: That's a path length or distance metric, not degree."
+          ]
+        }
+      ],
+      "pass_threshold": 0.6,
+      "success_target": "n8",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Choose Your Path Forward",
+      "content": "Excellent! Now let's go deeper. Based on your interests and learning goals, choose which topic you'd like to focus on:\n\n**Graph Algorithms & Techniques**: Learn BFS, DFS, Dijkstra's algorithm, and other powerful methods for solving graph problems. Best if you want to understand how to compute solutions efficiently.\n\n**Real-World Applications Deep Dive**: Explore how companies like Google, Netflix, and Facebook use graphs in practice. Best if you want to see the practical impact of graph theory.\n\n**Comprehensive Study**: Get both algorithmic depth AND real-world context. Best if you want a complete understanding.",
+      "choices": [
+        {
+          "label": "Graph Algorithms & Techniques",
+          "next": "n9"
+        },
+        {
+          "label": "Real-World Applications Deep Dive",
+          "next": "n10"
+        },
+        {
+          "label": "Comprehensive Study (Algorithms + Applications)",
+          "next": "n12"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Graph Algorithms",
+      "content": "# Essential Graph Algorithms\n\n## Breadth-First Search (BFS)\n\nBFS explores all vertices at the current distance before moving to farther vertices. It uses a queue data structure to maintain the exploration frontier.\n\n**How it works:** Start from a source vertex, visit all neighbors, then visit all neighbors of neighbors, and so on, spreading outward level by level.\n\n**Real-world analogy:** Like ripples spreading in a pond\u2014each ripple touches all points at that distance before reaching farther points.\n\n**Uses:**\n- Finding shortest path in unweighted graphs (each edge counts as 1 unit)\n- Level-order traversal (useful in trees, organizational hierarchies)\n- Connected component analysis (finding clusters of connected vertices)\n- Social network analysis (finding friends at distance k)\n\n**Time Complexity:** O(V + E) where V = vertices, E = edges\n**Space Complexity:** O(V) for the queue\n\n**When to use:** When you need the shortest path and all edges have equal weight, or when you need to explore by distance levels.\n\n---\n\n## Depth-First Search (DFS)\n\nDFS explores as far as possible along each branch before backtracking. It uses a stack (or recursion) to maintain the exploration path.\n\n**How it works:** Start from a source vertex and go deep into one branch before trying other branches. Backtrack only when reaching a dead end.\n\n**Real-world analogy:** Like exploring a maze by always taking the first available passage and backtracking only when stuck.\n\n**Uses:**\n- Topological sorting (ordering tasks based on dependencies)\n- Cycle detection (finding if a graph contains loops)\n- Finding strongly connected components (in directed graphs)\n- Solving puzzles and backtracking problems\n- Detecting bridges and articulation points\n\n**Time Complexity:** O(V + E)\n**Space Complexity:** O(V) for the recursion stack\n\n**When to use:** When you need to explore all possibilities, detect cycles, or perform topological sorting.\n\n---\n\n## Dijkstra's Algorithm\n\nFinds the shortest path from a source vertex to all other vertices in a weighted graph with non-negative weights. Uses a greedy approach with a priority queue.\n\n**How it works:**\n1. Mark source vertex with distance 0\n2. Always visit the unvisited vertex with smallest distance\n3. Update distances to its neighbors\n4. Repeat until all vertices visited\n\n**Real-world use cases:**\n- GPS navigation systems (Google Maps, Apple Maps): find fastest route considering real-time traffic\n- Network routing protocols: route data packets with minimum latency\n- Flight booking systems: find cheapest connections between airports\n- Social networks: find degrees of separation between users\n\n**Time Complexity:** O((V + E) log V) with binary heap\n**Space Complexity:** O(V)\n\n**Limitation:** Cannot handle negative edge weights (would give incorrect results). For negative weights, use Bellman-Ford instead.\n\n**Example:** In a road network, find the path from New York to Los Angeles that minimizes total travel distance, accounting for different road lengths.\n\n---\n\n## Minimum Spanning Tree (MST)\n\nAlgorithms like Kruskal's and Prim's find the tree connecting all vertices with minimum total edge weight. Useful when you need to connect all nodes with least cost.\n\n**Key property:** MST has exactly V-1 edges for V vertices and connects all vertices without cycles.\n\n**Real-world use cases:**\n- Telecommunications: minimize cable needed to connect all cities\n- Power grids: optimal electrical line placement to minimize copper usage\n- Water utilities: minimum pipe length to distribute water\n- Network design: least-cost infrastructure connecting all locations\n\n**Time Complexity:** O(E log V) for Kruskal's, O(V\u00b2) or O(E log V) for Prim's\n\n**Example:** A telecom company wants to connect 10 cities with fiber optic cables. MST finds the minimum cable length while ensuring all cities are connected.\n\n---\n\n## Floyd-Warshall Algorithm\n\nFinds shortest paths between ALL pairs of vertices, even with negative weights (but no negative cycles).\n\n**How it works:** Dynamic programming approach that considers routing through intermediate vertices.\n\n**Uses:**\n- Networks where you need all shortest paths (not just from one source)\n- Detecting negative-weight cycles\n- Transitive closure problems\n\n**Time Complexity:** O(V\u00b3) - cubic, so best for smaller graphs (V < 500)\n**Space Complexity:** O(V\u00b2) for the distance matrix\n\n**When to use:** When you need shortest paths between all pairs and your graph is relatively small, or when dealing with negative weights.\n\n---\n\n## Algorithm Comparison\n\n| Algorithm | Best For | Complexity | Handles Negative? |\n|-----------|----------|-----------|-------------------|\n| BFS | Unweighted shortest path | O(V+E) | N/A (equal weights) |\n| DFS | Cycles, topological sort | O(V+E) | N/A |\n| Dijkstra | Single-source shortest path | O((V+E) log V) | No |\n| MST (Kruskal/Prim) | Connecting all nodes minimum cost | O(E log V) | No |\n| Floyd-Warshall | All-pairs shortest path | O(V\u00b3) | Yes (no negative cycles) |\n\n**Choose based on:**\n- Is the graph weighted? (BFS only for unweighted)\n- Do you need one source or all pairs?\n- Are there negative weights?\n- Graph size and density?\n\nThese algorithms form the foundation for solving real-world graph problems efficiently!",
+      "next": "n13"
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Advanced Applications and Case Studies",
+      "content": "# Real-World Graph Applications in Depth\n\n## Social Network Analysis\n**Problem:** Detect communities and identify influencers\n- Graph structure: Users as vertices, friendships/follows as edges\n- Analysis: Find densely connected clusters (communities)\n- Use case: Facebook groups, Reddit communities, influencer identification\n- Algorithms: Community detection, centrality measures (betweenness, closeness)\n\n## Route Optimization and Logistics\n**Problem:** Find the most efficient delivery route\n- Graph structure: Locations as vertices, routes as weighted edges (distances)\n- Challenge: Traveling Salesman Problem (NP-hard)\n- Solutions: Approximation algorithms, heuristics (nearest neighbor, genetic algorithms)\n- Impact: Saves fuel, reduces delivery time, improves customer satisfaction\n\n## Protein Interaction Networks (Bioinformatics)\n**Problem:** Understand how proteins interact\n- Graph structure: Proteins as vertices, interactions as edges\n- Analysis: Find important proteins, predict interactions\n- Application: Drug discovery, disease research\n- Tools: Network analysis, motif detection\n\n## Recommendation Engines\n**Problem:** Suggest relevant products/content\n- Graph structure: Bipartite graph (users and items), edges = interactions\n- Analysis: Find similar users or similar items\n- Algorithms: Collaborative filtering, graph-based ranking\n- Examples: Netflix recommendations, YouTube suggestions\n\n## Web Ranking (PageRank)\n**Problem:** Rank web pages by importance\n- Graph structure: Web pages as vertices, hyperlinks as directed edges\n- Algorithm: PageRank - models web surfing as random walk\n- Impact: Foundation of Google search ranking\n- Insight: Links from important pages matter more",
+      "next": "n13"
+    },
+    {
+      "id": "n11",
+      "type": "content",
+      "title": "Remediation: Core Graph Concepts Review",
+      "content": "# Let's Reinforce the Fundamentals\n\nNo worries! Let's review the key concepts to strengthen your understanding.\n\n## Basic Definitions\n- **Graph**: A set of vertices (V) connected by edges (E)\n- **Vertex**: A node or point in the graph\n- **Edge**: A connection between two vertices\n\n## Graph Types\n1. **Undirected**: Edges work both ways (friendship)\n   - If A connects to B, then B connects to A (same edge)\n   - Example: Facebook friendships\n\n2. **Directed**: Edges have direction (one-way street)\n   - A\u2192B is different from B\u2192A\n   - Example: Twitter follows (asymmetric)\n\n3. **Weighted**: Edges have values/weights (distances, costs)\n   - Edge weight = cost, distance, strength, etc.\n   - Example: Road network (weight = miles between cities)\n\n## Key Concepts to Remember\n\n**Degree**: Count how many edges touch a vertex\n- In undirected graphs: just count all edges\n- In directed graphs: separate in-degree (edges coming in) and out-degree (edges going out)\n- Example: A with edges to B, C, D has degree 3\n\n**Path**: A sequence of connected vertices\n- Start from one vertex, follow edges to others\n- Example: A\u2192B\u2192C\u2192D is a path\n\n**Connected**: Can you reach any vertex from any other vertex?\n- Connected graph: yes for all pairs\n- Disconnected: some pairs can't reach each other\n\n**Cycle**: A path that loops back to where it started\n- A\u2192B\u2192C\u2192A is a cycle\n- Trees have no cycles\n\n## Visual Thinking Tip\nAlways try to draw or visualize graphs. Even simple sketches help you understand the structure and relationships.\n\n## Practice\nTry creating small graphs for familiar things:\n- A friend group and who knows whom\n- Cities and roads connecting them\n- Website links and how they connect\n- Your social media connections\n\nOnce you're comfortable with these foundations, you'll find graph algorithms and applications much clearer! Take your time, and feel free to revisit these concepts as needed.",
+      "next": "n8"
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Comprehensive: Algorithms + Real Applications",
+      "content": "# Integrated Study: Theory Meets Practice\n\n## Shortest Path Problem: From Theory to Real World\n\n**The Theory:**\nDijkstra's algorithm efficiently finds the shortest path in weighted graphs using a greedy approach with priority queue.\n\n**The Application:**\nGPS navigation systems (Google Maps, Apple Maps, Waze) use variants of this algorithm:\n- Vertices: Intersections and key locations\n- Edge weights: Travel time (dynamically updated with traffic)\n- Real-time optimization: Alternative routes when traffic appears\n\n## Network Design: From Theory to Real World\n\n**The Theory:**\nMinimum Spanning Tree algorithms (Kruskal's, Prim's) find the most cost-efficient way to connect all vertices.\n\n**The Application:**\n- Telecommunications: Minimum cable needed to connect all cities\n- Power grids: Minimize distribution line construction\n- Water utilities: Optimal pipeline layout\n\n## Community Structure: From Theory to Real World\n\n**The Theory:**\nModularity optimization and spectral clustering detect dense subgraphs in networks.\n\n**The Application:**\n- Social networks: Find friend groups, communities\n- Biology: Identify protein complexes in interaction networks\n- Marketing: Find customer segments with similar behaviors\n\n## Ranking and Centrality: From Theory to Real World\n\n**The Theory:**\nCentrality measures (degree, betweenness, closeness, eigenvector) quantify vertex importance.\n\n**The Application:**\n- PageRank: Rank web pages by link importance\n- Influence: Identify key people in social networks\n- Vulnerability: Find critical infrastructure points\n- Disease spread: Identify superspreaders in contact networks\n\nThe beauty of graph theory is that the same mathematical tools solve diverse real-world problems!",
+      "next": "n13"
+    },
+    {
+      "id": "n13",
+      "type": "content",
+      "title": "You've Mastered Graph Theory Fundamentals!",
+      "content": "# What You've Learned\n\n\u2713 **Graph Fundamentals**: Vertices, edges, and different graph types\n\n\u2713 **Graph Properties**: Connectivity, paths, cycles, and special graph types\n\n\u2713 **Real-World Applications**: How graphs model social networks, transportation, the web, and more\n\n\u2713 **Graph Algorithms**: BFS, DFS, Dijkstra's, MST, and their practical applications\n\n\u2713 **Advanced Topics**: Community detection, network design, recommendation systems, and more\n\n# Next Steps\n\n**To deepen your knowledge:**\n1. **Implement algorithms**: Code BFS, DFS, and Dijkstra's in your favorite language\n2. **Analyze real networks**: Download social network or web graph data and analyze it\n3. **Explore specialized topics**: Graph machine learning, knowledge graphs, temporal networks\n4. **Solve problems**: LeetCode, HackerRank, and Project Euler have excellent graph problems\n\n# Applications to Explore\n- Build a social network analyzer\n- Create a route optimizer\n- Implement a recommendation engine\n- Analyze Wikipedia link structure\n- Model biological networks\n\nGraph theory is a powerful tool with endless applications. You're now equipped with the fundamentals to tackle complex problems!",
+      "next": "n14"
+    },
+    {
+      "id": "n14",
+      "type": "end",
+      "title": "Course Complete",
+      "content": "# Thank You for Learning Graph Theory!\n\nYou've successfully completed the **Graph Theory and Applications** course.\n\n**Key Takeaways:**\n- Graphs are powerful abstractions for modeling real-world networks\n- Mathematical tools from graph theory solve practical problems efficiently\n- Applications span from social media to transportation to biology\n\n**Keep Learning:**\nGraph theory opens doors to advanced topics in:\n- Algorithms and complexity theory\n- Network science\n- Machine learning and AI\n- Operations research\n\nCongratulations on completing this course!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "Applications First"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Balanced"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n6",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "node-worked-ex-001",
+      "label": "Review Examples"
+    },
+    {
+      "id": "c8b",
+      "source": "node-worked-ex-001",
+      "target": "n7",
+      "label": "Test Knowledge"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Passed (\u226560%)"
+    },
+    {
+      "id": "c10",
+      "source": "n7",
+      "target": "n11",
+      "label": "Review Needed (<60%)"
+    },
+    {
+      "id": "c11",
+      "source": "n11",
+      "target": "n8",
+      "label": "Ready to Continue"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n9",
+      "label": "Algorithms"
+    },
+    {
+      "id": "c13",
+      "source": "n8",
+      "target": "n10",
+      "label": "Applications"
+    },
+    {
+      "id": "c14",
+      "source": "n8",
+      "target": "n12",
+      "label": "Both"
+    },
+    {
+      "id": "c15",
+      "source": "n9",
+      "target": "n13",
+      "label": "Complete"
+    },
+    {
+      "id": "c16",
+      "source": "n10",
+      "target": "n13",
+      "label": "Complete"
+    },
+    {
+      "id": "c17",
+      "source": "n12",
+      "target": "n13",
+      "label": "Complete"
+    },
+    {
+      "id": "c18",
+      "source": "n13",
+      "target": "n14",
+      "label": "Finish"
+    }
+  ],
+  "generated_at": "2026-03-25T23:42:18.313775+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T09:30:52.696263+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

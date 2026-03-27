@@ -39,10 +39,10 @@
 
 ### Week 3 Tasks
 - [x] Build visual branching interface:
-  - [✅] Drag-and-drop node placement (enhanced with visual feedback)
-  - [x] Connection drawing between nodes
+  - [✅] Drag-and-drop node placement (fixed positioning issue)
+  - [✅] Connection drawing between nodes (intuitive UX - click nodes to connect)
   - [x] Node editing interface (content, type, settings)
-  - [x] Connection editing (conditions, labels)
+  - [ ] Connection editing (conditions, labels)
 - [ ] Implement decision tree logic:
   - [ ] Path validation (ensure no dead ends unless intentional)
   - [ ] Loop detection prevention

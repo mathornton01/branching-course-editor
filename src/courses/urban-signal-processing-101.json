@@ -1,0 +1,149 @@
+{
+  "id": "urban-signal-processing-101",
+  "title": "Signal Processing Fundamentals: Urban Planning Edition",
+  "description": "Learn signal processing through urban planning scenarios. Explore how cities use sensor data to optimize traffic, reduce noise pollution, and improve livability. Choose between theory-first and practical-first approaches, then see how your decisions impact real city outcomes.",
+  "topic": "Signal Processing Fundamentals",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "signal-processing",
+    "urban-planning",
+    "fourier-analysis",
+    "filtering",
+    "sensors",
+    "data-analysis"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Urban Noise Crisis",
+      "content": "A rapidly growing mid-sized city is struggling with increasing noise pollution from traffic, construction, and industry. The planning department has installed acoustic sensors throughout the city, collecting thousands of measurements daily. However, the raw data is overwhelmingly noisy and difficult to interpret. You are hired as a signal processing consultant tasked with extracting meaningful patterns from this noisy data to identify acoustic hotspots and guide urban mitigation strategies. Your decisions will shape how the city addresses livability for its residents.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Processing Strategy",
+      "content": "You face a strategic decision. Do you spend time building a deep theoretical foundation in how signals work (Fourier analysis, frequency decomposition, filter design theory), or do you jump straight to practical implementation of real-time filtering algorithms? Both approaches have merit.",
+      "choices": [
+        {
+          "label": "Start with signal processing theory (Fourier analysis, frequency domain)",
+          "next": "n3"
+        },
+        {
+          "label": "Jump to practical real-time filtering techniques",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Understanding Noise as Frequency Content",
+      "content": "In signal processing, every signal\u2014including noise\u2014can be decomposed into different frequency components. Urban acoustic signals are rich mixtures: engine sounds dominate 60\u2013200 Hz, construction equipment occupies 50\u2013300 Hz, air conditioning units concentrate around 100\u2013500 Hz, and random events scatter energy across the spectrum. Using Fourier analysis, we can transform time-domain sensor readings into the frequency domain, revealing which frequencies carry meaningful information about traffic and which are noise. Once you understand the frequency structure, you can design filters to isolate what matters and suppress what doesn't.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "A Day in the Life: Sensor on Main Street",
+      "content": "Consider a single acoustic sensor on Main Street. At 6 AM, it records 85 dB with a sharp peak at 120 Hz (truck passing). At 8 AM during morning commute, it reads 78 dB with energy spread across 60\u2013200 Hz (mixed vehicle traffic). At 2 PM, traffic calms and the sensor shows 72 dB concentrated at 100 Hz (air conditioning units from nearby buildings). Your team collects a week of measurements and performs Fourier analysis. The pattern emerges: 60\u201380 Hz is consistently traffic-related, while 200+ Hz is mostly wind and vibration. Using frequency-domain insights, the planning department focuses noise reduction on the 60\u201380 Hz band where the biggest impact awaits.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "Designing Your Filter Response",
+      "content": "Your frequency analysis reveals that traffic noise dominates the 60\u2013200 Hz band, with 100 Hz being the strongest component. Now you must design a filter. Option A: A notch filter that surgically removes energy at precisely 100 Hz, leaving all other frequencies untouched. Option B: A high-pass filter starting at 60 Hz that removes low-frequency rumble and sensor drift while preserving all traffic-related signals. Both reduce noise, but they tell different stories about the city.",
+      "choices": [
+        {
+          "label": "Design a notch filter centered at 100 Hz to surgically remove traffic noise",
+          "next": "n6"
+        },
+        {
+          "label": "Design a high-pass filter at 60 Hz to preserve traffic signals while removing rumble",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "The Missed Opportunity",
+      "content": "Your notch filter works perfectly\u2014it eliminates the 100 Hz component. But you've removed the very signal that tells planners where peak traffic noise occurs. Without this frequency marker, they can't prioritize expensive barriers where needed most. The city installs barriers evenly across neighborhoods, spending millions in low-traffic areas while missing high-impact corridors. Three years later, a new analysis reveals the mistake. This teaches a critical lesson: signal processing is not about blind removal; it's about extraction and selective filtering. Understanding what you preserve is as important as what you discard. Context-driven decision-making separates good engineering from wasted resources."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Successful Noise Reduction Blueprint",
+      "content": "Your high-pass filter reveals the underlying traffic signal while suppressing low-frequency rumble and sensor drift. The cleaned data clearly shows Elm Street (85\u201390 dB) and Park Avenue (80\u201385 dB) are the worst corridors. The city implements targeted mitigation: noise barriers on Elm Street, traffic signal retiming on Park Avenue, and off-peak delivery encouragement. Peak noise levels drop by 8 dB\u2014roughly a 50% reduction in perceived loudness. Resident satisfaction surveys improve markedly. The city expands this signal processing methodology to air quality, water quality, and energy usage prediction. Your decision to preserve meaningful signals while removing irrelevant noise creates ripple effects across the entire data-driven planning infrastructure."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Real-time Denoising for City Operations",
+      "content": "In practice, city planners often need immediate, actionable insights without deep Fourier analysis. Real-time filtering algorithms like moving averages and Kalman filters clean noisy sensor data on-the-fly. A simple 5-sample moving average smooths glitches while preserving genuine trends. A Kalman filter is more sophisticated\u2014it learns sensor noise characteristics and adapts filtering strength dynamically. These practical tools extract signal from noise in seconds without lengthy analysis. The advantage: rapid response and stakeholder buy-in. The downside: you might miss subtle patterns like weekly cycles or seasonal shifts that full frequency-domain analysis would reveal.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Live Traffic Noise Dashboard",
+      "content": "Your team deploys a real-time filtering dashboard displaying noise levels updated every 30 seconds. False alerts drop by 60%, allowing city controllers to respond quickly to genuine events\u2014a burst pipe, a major accident\u2014versus sensor glitches. The practical approach delivers fast value. However, six months later, you notice missed patterns: noise drops weekends, rises predictably during weekday rush hours, and varies seasonally. These patterns would have been obvious in full frequency-domain analysis, revealing optimization opportunities like weekend signal timing adjustments. The lesson: practical and theoretical approaches are complementary, not rivals. Success in signal processing comes from knowing when to use each tool."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory-first"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n8",
+      "label": "Practical-first"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Remove specific frequency"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Preserve signal, remove rumble"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T08:45:31.439463+00:00",
+  "model": "claude-haiku-4-5"
+}

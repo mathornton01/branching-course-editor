@@ -1,0 +1,131 @@
+{
+  "id": "control-systems-course",
+  "title": "Control Systems Fundamentals: Designing an Industrial Oven Controller",
+  "description": "Learn control systems concepts through scenario-based decision making. Design a temperature controller for an industrial oven and see how different choices lead to different outcomes.",
+  "topic": "Control Systems",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 20,
+  "tags": [
+    "control systems",
+    "feedback control",
+    "industrial automation",
+    "decision-making"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Industrial Oven Dilemma",
+      "content": "You've been hired by a manufacturing plant to design a temperature controller for an industrial oven used to cure composite materials. The oven must maintain a temperature of 120\u00b0C (\u00b1tolerance) during a 2-hour curing cycle. Currently, an operator manually adjusts the heating element, leading to inconsistent results and material defects. Your task is to design an automated control system that maintains stable temperature. Different control strategies will have different trade-offs in terms of response speed, precision, and system stability."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Control Strategy",
+      "content": "Before implementing, you must decide on a control architecture. Each strategy has different complexity, cost, and performance characteristics. What approach will you take?",
+      "choices": [
+        {
+          "label": "Simple On-Off (Bang-Bang) Control",
+          "next": "n3"
+        },
+        {
+          "label": "Proportional (P) Control",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Bang-Bang Control Strategy",
+      "content": "Bang-bang control is the simplest approach: if the temperature is below target, heat at full power; if above target, shut off heat completely. This creates a simple on/off controller that can be implemented with basic thermostats. However, this binary approach often causes the system to oscillate around the target temperature like a pendulum. The heating element cycles between on and off, creating temperature swings that depend heavily on how you set your tolerance band. While cheap and reliable for applications like home heating, it can be problematic for precision processes like material curing."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Set Your Bang-Bang Tolerance Band",
+      "content": "With bang-bang control, you must choose how close to the target temperature (120\u00b0C) the system must stay before switching the heater. A narrow band demands tighter control but causes more frequent switching. A wide band is gentler on the heating element but less precise. What tolerance do you choose?",
+      "choices": [
+        {
+          "label": "Wide Tolerance (\u00b18\u00b0C) \u2014 Heat on below 112\u00b0C, off above 128\u00b0C",
+          "next": "n5"
+        },
+        {
+          "label": "Tight Tolerance (\u00b12\u00b0C) \u2014 Heat on below 118\u00b0C, off above 122\u00b0C",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Success: Acceptable Control Achieved",
+      "content": "Your wide tolerance bang-bang controller works reasonably well. The oven temperature stays mostly between 112-128\u00b0C, which is acceptable for the curing process. The heating cycles are infrequent (every 15-20 minutes), reducing wear on components. However, material samples near the lower end of the tolerance range cure more slowly than those at the higher end, creating minor batch-to-batch inconsistency. This is a practical, low-cost solution suitable for less demanding manufacturing."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Problem: Excessive Oscillation",
+      "content": "Your tight tolerance bang-bang controller causes problems. The heating element cycles rapidly (every 2-3 minutes), creating temperature swings between 118-122\u00b0C that are too extreme for material curing. Some batches are over-cured while others are under-cured. The frequent on/off switching burns out the heating element faster than expected, driving up maintenance costs. You realize that for precision applications, a simpler on-off approach isn't sufficient\u2014you need proportional control."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Proportional (P) Control Strategy",
+      "content": "Proportional control adjusts the heating power smoothly based on how far the temperature is from the target. If the temperature is 10\u00b0C below target, the heater runs at partial power; if only 2\u00b0C below, it runs at lower power. This reduces oscillation because the controller 'eases in' to the target instead of switching fully on and off. The heater output is proportional to the error (difference between actual and desired temperature). This requires an analog control system with precise measurement and variable heating power, but it provides much better precision and stability than bang-bang control, making it ideal for sensitive industrial processes."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Excellent Outcome: Smooth, Stable Control",
+      "content": "Your proportional controller maintains the oven temperature within \u00b11\u00b0C of 120\u00b0C consistently throughout the 2-hour curing cycle. The heating power varies smoothly from 20% to 80% as needed, minimizing thermal stress on materials. All batches cure uniformly, defects drop by 85%, and the heating element lasts much longer with reduced switching cycles. The manufacturing plant adopts your design plant-wide. You've successfully applied fundamental control systems principles to solve a real industrial problem and understand the trade-offs between simplicity and performance."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "On-Off"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": "Wide"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n6",
+      "label": "Tight"
+    },
+    {
+      "id": "c6",
+      "source": "n2",
+      "target": "n7",
+      "label": "Proportional"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-26T09:59:42.452165+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,171 @@
+{
+  "id": "docker-urban-planning-course",
+  "title": "Docker and Containerization: A City Planner's Guide",
+  "description": "Master Docker and containerization through urban planning analogies. Explore images, containers, and orchestration as zoning, neighborhoods, and city infrastructure.",
+  "topic": "Docker and Containerization",
+  "theme": "urban planning",
+  "difficulty": "beginner",
+  "estimated_minutes": 50,
+  "tags": [
+    "Docker",
+    "containerization",
+    "DevOps",
+    "urban planning",
+    "microservices",
+    "infrastructure"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Docker: Building Cities in Code",
+      "content": "Docker is like a modern city planning system. Just as cities use standardized building codes, utilities, and infrastructure to ensure neighborhoods function independently yet harmoniously, Docker uses containers as standardized units that package everything an application needs. In urban planning, each neighborhood operates independently with its own utilities while connecting to the broader city system. Similarly, Docker containers run independently with their own isolated environments while communicating through well-defined networks. This course explores how Docker concepts mirror urban planning principles, from zoning (images) to neighborhood autonomy (containers) to city-wide infrastructure (orchestration).",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Urban Planning Focus",
+      "content": "Which aspect of Docker and containerization would you like to explore first? Each path deepens your understanding of how Docker mirrors city infrastructure and planning principles.",
+      "choices": [
+        {
+          "label": "Explore Docker Images (like city zoning & blueprints)",
+          "next": "n3"
+        },
+        {
+          "label": "Explore Containers & Isolation (like autonomous neighborhoods)",
+          "next": "n5"
+        },
+        {
+          "label": "Explore Docker Compose & Orchestration (like city infrastructure)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Docker Images: City Zoning and Blueprints",
+      "content": "Docker images are like architectural blueprints and zoning regulations for cities. Each image consists of layers, similar to how a city zoning plan has different levels: the foundation layer (base OS) is like the city's basic infrastructure and legal framework, then each application layer builds on top like adding specific zoning requirements (commercial, residential, industrial). When you create an image, you're defining exactly what resources, libraries, and code go into a container\u2014just as zoning regulations define what can be built in each area. These layers are immutable and reusable; multiple neighborhoods can follow the same zoning template. The read-write layer at the top (when a container runs) is like temporary construction permits that don't affect the underlying zoning codes.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Building a Commercial District with Standardized Blueprints",
+      "content": "Consider a city planner creating a master blueprint for a new commercial district (a Dockerfile). The blueprint specifies: base infrastructure (Ubuntu OS layer), utilities required (Node.js layer), specific code for businesses (application layer), and configuration ports (networking layer). This blueprint becomes the image. City officials can stamp this same blueprint across multiple districts\u2014each district (container) follows identical specifications. When the planner discovers they need an additional utility (a new npm library), they update the blueprint and release v2.0. Legacy districts stay on v1.0, while new developments use v2.0. This versioning ensures compatibility\u2014the historic district's systems keep working while innovation happens in newer zones.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Containers & Isolation: Autonomous Neighborhoods",
+      "content": "A container is like an autonomous neighborhood within a larger city. Each neighborhood has clearly defined boundaries (isolated filesystem), its own utilities (isolated networking), and independent infrastructure that doesn't interfere with other neighborhoods. In Docker, containers provide process isolation\u2014each container runs independently with its own complete operating environment, files, and network namespace. A bug in one neighborhood's systems doesn't crash the entire city. Similarly, if one container crashes, others keep running undisturbed. Containers share the host's kernel (the city's basic laws and infrastructure) but maintain strict isolation for applications. This isolation means developers can run MySQL 5.7 in one container and MySQL 8.0 in another on the same machine, each with its own data and configuration, without conflicts or compatibility nightmares.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Incompatible Systems Coexisting in One City",
+      "content": "In a large metropolitan area, the downtown district runs a Python 3.9-based traffic management system, while the waterfront district runs a Java 17-based logistics system for port operations. Decades ago, they would require separate server infrastructure. With Docker, each district's system runs in its own container with complete isolation. If downtown's traffic team upgrades to Python 3.10, waterfront's Java 17 container remains unchanged. If a memory leak crashes the traffic system, the logistics system keeps processing shipments safely. Both containers run on the same server, share the kernel, but are completely isolated in their environments. The database for downtown traffic never touches the waterfront shipping manifest. This isolation transforms how cities innovate\u2014each district can upgrade independently without coordinating with others or risking collateral damage.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Docker Compose & Orchestration: City Infrastructure Coordination",
+      "content": "Docker Compose is like a city's master infrastructure coordination system managing all utilities and services. In a real city, power plants, water treatment, sewage, transportation, and emergency services must coordinate seamlessly. Docker Compose defines how multiple containers interact: which databases each application requires, how services communicate through networks, how data volumes (persistent storage) are shared, and the startup order dependencies. A compose file is the city's master infrastructure plan declaring 'web service needs database service,' 'API needs cache,' 'database needs persistent storage.' The orchestration engine ensures dependencies start in correct order (power generation before pumping water) and services discover each other by name. Docker Compose transforms isolated containers into a coordinated system, just as city infrastructure coordinates essential services into a functioning metropolis.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "E-Commerce District Infrastructure Coordination",
+      "content": "A city's e-commerce district requires three coordinated services: a Node.js web frontend (customer interface), a Python backend API (order processing), and a PostgreSQL database (persistent order and customer data). The Docker Compose file declares: 'web listens on port 8080 and connects to api-service via network. api-service connects to database-service. database-service mounts pgdata volume for persistence.' When the city manager executes 'docker-compose up,' the database initializes first, then the API connects to it, then the web frontend connects to the API. If traffic spikes crash the API, the database stays secure and unaffected. The web frontend shows an error, but customer data remains safe. Next week, if traffic patterns change, the city manager scales the API to 5 copies\u2014each independently running, load-balanced through the network, all connected to the single shared database.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: The Complete Docker Framework",
+      "content": "Docker transforms software infrastructure like modern planning transformed cities. Images provide standardized blueprints (reproducibility), containers provide autonomous neighborhoods (isolation), and orchestration provides city-wide coordination (scalability). A microservices architecture mirrors a modern city\u2014dozens of specialized districts each handling specific functions. Each service container (district) deploys, updates, and scales independently without affecting others. The traffic system updates while logistics keeps running. DevOps teams use Docker to ensure 'it works on my machine' becomes 'it works everywhere'\u2014containers package code, runtime, libraries, and exact OS versions. This standardization eliminates the 'works in dev, breaks in production' surprise. From single-container deployments to orchestrating thousands of instances across clouds, these urban planning principles scale. You now understand Docker's complete architecture: images as zoning standards, containers as autonomous neighborhoods, and composition/orchestration as city-wide infrastructure. These concepts form the foundation for modern DevOps, microservices, and cloud-native applications.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Docker Mastery: Ready for Deployment",
+      "content": "Congratulations! You've mastered Docker and containerization through urban planning analogies. You understand how images work like city zoning, containers like autonomous neighborhoods, and orchestration like city infrastructure coordination. These concepts form the foundation for modern DevOps practices, microservices architecture, and cloud-native applications. Your next steps: practice building Dockerfiles for real applications, experiment with Docker Compose for multi-service projects, and explore container orchestration platforms like Kubernetes. You're now ready to deploy applications with reliability, consistency, and scalability."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Images & Zoning"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Containers & Isolation"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Orchestration & Coordination"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "converge"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "converge"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "converge"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T11:24:40.140006+00:00",
+  "model": "claude-haiku-4-5"
+}

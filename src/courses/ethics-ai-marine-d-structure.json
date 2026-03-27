@@ -1,0 +1,154 @@
+{
+  "id": "ethics-ai-marine-d-structure",
+  "title": "Ethics in Artificial Intelligence: A Marine Biology Perspective",
+  "description": "Explore three critical ethical dimensions of AI in marine science: bias and fairness, transparency and explainability, and accountability and responsibility.",
+  "topic": "Ethics in Artificial Intelligence",
+  "theme": "marine biology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "ethics",
+    "AI",
+    "marine biology",
+    "conservation",
+    "fairness",
+    "transparency",
+    "accountability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction: AI in Marine Science",
+      "content": "Artificial intelligence is increasingly used in marine research and conservation\u2014from predicting fish migration patterns to monitoring coral reef health and assessing whale populations. However, as these systems influence critical decisions about ocean management, we must ask important questions: Are they fair across different ocean regions? Can we understand their reasoning? Who is responsible when they fail? This course explores three interconnected ethical dimensions that shape trustworthy AI in marine science.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Focus Area",
+      "content": "Select one ethical challenge in AI that interests you most. You'll explore real marine examples in depth, then synthesize insights across all three areas to understand how they work together.",
+      "choices": [
+        {
+          "label": "Bias & Fairness: Ensuring equitable AI across ocean regions",
+          "next": "n3"
+        },
+        {
+          "label": "Transparency & Explainability: Understanding AI's ocean predictions",
+          "next": "n5"
+        },
+        {
+          "label": "Accountability & Responsibility: Governing AI-driven conservation decisions",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Bias and Fairness in Marine AI",
+      "content": "AI models learn from historical data, and that data reflects existing research infrastructure and funding. If training data comes primarily from wealthy nations' heavily-monitored oceans, the model may perform poorly in developing regions or remote areas with fundamentally different ecosystems and oceanographic conditions. A temperature-prediction model trained on Atlantic herring populations and Gulf Stream patterns might completely misclassify Pacific salmon behavior or miss Indian Ocean monsoon effects. This creates unfair outcomes: wealthy coastal regions receive reliable AI tools for marine management, while developing nations get unreliable recommendations that harm their fisheries. Fairness requires intentional effort to source diverse, representative training data from multiple ocean basins and validate models across different ecosystems.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Worked Example: Fish Stock Assessment Bias",
+      "content": "A global AI system for predicting fish stock decline was trained on 30 years of high-quality data from the North Atlantic and Mediterranean\u2014regions with extensive scientific infrastructure. When deployed to assess tuna populations in the Indian Ocean, it predicted catastrophic collapse that never materialized. The model had learned Atlantic-specific patterns: seasonal temperature cycles, Gulf Stream impacts, and European fishing practices that don't apply to tropical waters. After the costly failure, developers retrained with Indian Ocean data and created region-specific models incorporating monsoon patterns, tropical current systems, and local fishing methods. This example shows why bias-aware AI requires representative data from target regions and validation against local expertise.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Transparency and Explainability in Marine AI",
+      "content": "Marine managers make consequential decisions based on AI recommendations: Should we close this fishing zone for three months? Can we safely increase commercial harvest quotas by 20 percent? Should we expand marine protected areas? Managers need to understand WHY the AI recommends these actions, not just accept a prediction and hope for the best. Black-box AI systems that produce predictions without explanation are risky in conservation\u2014if an AI recommends shutting down fisheries worth millions of dollars to local communities, stakeholders deserve to know the reasoning. Explainability means building AI systems that can articulate which factors (water temperature anomalies, plankton bloom timing, historical catch patterns, breeding season indicators) most strongly influenced the decision. Transparent AI builds trust and allows domain experts to catch errors.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Worked Example: Coral Reef Risk Assessment",
+      "content": "A marine research team built an AI system to predict coral bleaching events using satellite imagery, water temperature data, and wave stress measurements. Initially, the model achieved 87% accuracy at predicting bleaching risk, but it was a complete black box\u2014stakeholders couldn't understand its reasoning. Managers were reluctant to close recreation areas or restrict fishing based on unexplained recommendations. Researchers then added explainability features that revealed the model's decision logic: sustained water temperature above 30.5\u00b0C contributed 45% to bleaching predictions, combined wave stress contributed 30%, and nutrient levels 25%. With transparent reasoning visible to marine biologists, managers gained confidence, could validate predictions against their field observations, and found errors the black box had missed\u2014improving both trust and accuracy.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Accountability and Responsibility in Marine AI",
+      "content": "When AI systems directly influence marine policy and resource management, someone must be accountable for outcomes and impacts. If an AI-driven marine reserve boundary inadvertently damages a spawning ground or if AI-based regulations harm fishing communities, who bears responsibility? The software developers? The marine scientists who selected the tool? The government policymakers who enacted recommendations? The oversight agency? Clear accountability requires establishing who owns decisions at each stage, documenting the AI's training data and limitations, creating oversight mechanisms, and maintaining human review of critical decisions. In marine conservation, accountability might mean mandatory environmental impact assessments before deploying AI in new regions, establishing escalation paths when predictions underperform in field conditions, maintaining human expertise in the decision loop, and transparent documentation of how AI shaped specific regulations.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Whale Population Forecast Gone Wrong",
+      "content": "An AI system analyzing 40 years of humpback whale population data predicted unusually rapid population recovery in the South Pacific, leading regulators to substantially increase whale-watching permits and tourism activities. The model had identified a statistical trend but missed a crucial context: the data included an anomalous warm-water period (a marine heat wave) that wouldn't persist. When oceanographic conditions normalized to historical patterns, the whale population stabilized at previous levels, unable to support the increased tourist traffic. The stress from excessive whale-watching caused behavioral changes and declining birth rates. Investigation revealed three systemic failures: developers hadn't documented assumptions about climate stability, no marine biologist had reviewed predictions for ecological plausibility, and policymakers didn't understand confidence intervals around forecasts. The failure prompted new protocols requiring peer review with domain experts, mandatory documentation of model limitations and assumptions, and human verification before implementing major policy changes based on AI predictions.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: Integrated Ethics in Marine AI",
+      "content": "Bias, transparency, and accountability are deeply interconnected ethical challenges. Fair AI requires transparent methods so we can identify and correct regional biases and inequities in model performance. Accountability mechanisms ensure we investigate when bias causes harm and take responsibility for improving systems. Transparency enables stakeholders to catch errors and validate recommendations against their domain expertise. In marine science, these principles work together synergistically: diverse training data from multiple ocean regions and communities (fairness) + explainable models that show decision reasoning (transparency) + clear responsibility structures and human oversight (accountability) = trustworthy AI that serves ocean conservation and justice. These integrated principles extend far beyond marine biology to all AI ethics challenges in medicine, criminal justice, finance, and governance.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Ethics in Marine AI",
+      "content": "You've explored how fairness, transparency, and accountability shape AI use in marine conservation and ocean research. These ethical principles protect both ocean ecosystems and the human communities\u2014especially developing nations and fishing communities\u2014that depend on them. As AI continues transforming environmental science and policy, thoughtful ethical practice ensures these powerful tools serve justice, sustainability, and the long-term health of our oceans."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Bias & Fairness"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Transparency & Explainability"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Accountability & Responsibility"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T11:50:58.255946+00:00",
+  "model": "claude-haiku-4-5"
+}

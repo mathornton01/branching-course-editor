@@ -1,76 +1,102 @@
-# Branching Courses System - Strategy Document
+# Branching Course Platform -- Strategy Document
 
-## Project Goals
-1. **MVP in 8 weeks**: Deliver a minimum viable product that allows creation of simple branching scenarios
-2. **Template-driven approach**: Provide pre-built templates for common branching patterns
-3. **User-friendly interface**: Enable non-technical users to create branching courses
-4. **Scalable architecture**: Design for future expansion and integration with LMS systems
+Updated: 2026-03-27
 
-## Success Metrics
-- Time to create first branching course: < 30 minutes for trained users
-- Template adoption rate: 80% of users start with a template
-- User satisfaction: > 4/5 rating on usability surveys
-- System performance: < 2 second load time for course editor
+## Current State
 
-## Development Phases
+The editor (course-editor-enhanced.html) is a fully functional single-page canvas app served via Python HTTP server on DGX Spark. It supports:
 
-### Phase 1: Foundation (Weeks 1-2)
-- Set up development environment and project structure
-- Design core data models for courses, branches, and decisions
-- Implement basic course creation and editing functionality
-- Create initial template system
+- Visual node-based course authoring (Content, Decision, Quiz, Condition, Page Link, End nodes)
+- Drag-and-drop from toolbar onto canvas
+- Connection creation between nodes via output dots
+- Link Drag (rope/tether physics) toggle
+- Downstream Drag (rigid group move) toggle
+- Node Repulsion toggle (nodes push apart to avoid overlap)
+- Pattern insertion (pre-built node configurations)
+- Multi-page course support
+- Course save/load via API server (YAML-based)
+- Auto-layout engine with snap-to-grid
+- Settings panel with zoom, grid, physics toggles
 
-### Phase 2: Branching Core (Weeks 3-4)
-- Build visual branching interface
-- Implement decision tree logic and navigation
-- Add progress tracking and basic analytics
-- Create first set of branching templates (linear, binary choice, multi-path)
+Supporting infrastructure:
+- API server (course_api_server.py) for CRUD operations
+- Course generator (course_generator.py) for AI-assisted course creation
+- Course improver (course_improver.py) for AI-assisted quality improvements
+- Course auditor and deduplicator for maintenance
+- Player (player.html) for course playback
+- GitHub repo: github.com/mathornton01/branching-course-editor
 
-### Phase 3: Enhancement (Weeks 5-6)
-- Advanced template system with conditional logic
-- Assessment integration at decision points
-- Responsive design for mobile/tablet
-- Export/import functionality for course templates
+## Roadmap
 
-### Phase 4: Polish & Launch (Weeks 7-8)
-- User testing and feedback incorporation
-- Performance optimization
-- Documentation and tutorial creation
-- Deployment preparation
+### Phase A: Player Enhancement (next)
 
-## Technical Stack Considerations
-- **Frontend**: React with TypeScript for type safety and component reusability
-- **Backend**: Node.js/Express or Python/FastAPI for API development
-- **Database**: PostgreSQL for relational data (courses, branches, user progress)
-- **Storage**: AWS S3 or similar for media assets
-- **Real-time features**: WebSocket for collaborative editing (future phase)
-- **Deployment**: Docker containers with Kubernetes orchestration
+Goal: Make the player a first-class citizen with deep editor integration.
 
-## Risk Assessment
-1. **Scope creep**: Mitigate by strict adherence to template-driven MVP approach
-2. **Technical complexity**: Address by using established frameworks and libraries
-3. **User adoption**: Counteract by involving potential users in design process early
-4. **Performance issues**: Prevent through early profiling and optimization
+1. Editor-to-Player hooks
+   - "Preview" button in editor opens player with current course loaded
+   - Deep links: editor node click jumps to that point in player, and vice versa
+   - Live reload: player auto-refreshes when editor saves
 
-## Resource Requirements
-- 1 Full-stack developer (lead)
-- 1 Frontend specialist (for UI/UX)
-- 1 UX/UI designer (part-time)
-- 1 QA engineer (part-time)
-- Instructional design consultant (advisory role)
+2. Customer-facing player
+   - Clean, distraction-free UI for end-users (learners)
+   - Progress tracking (which nodes visited, decisions made)
+   - Bookmarking / resume support
+   - Mobile-responsive layout
+   - Embeddable via iframe for LMS integration
 
-## Timeline & Milestones
-- **Week 1**: Project setup, data models, basic CRUD operations
-- **Week 2**: Initial template system, basic course editor
-- **Week 3**: Branching interface prototype, decision logic
-- **Week 4**: Template library expansion, basic analytics
-- **Week 5**: Advanced templates, assessment integration
-- **Week 6**: Responsive design, export/import features
-- **Week 7**: User testing, feedback incorporation
-- **Week 8**: Performance optimization, documentation, launch prep
+### Phase B: Database Structure
 
-## Next Steps
-1. Finalize technical stack decisions
-2. Create detailed data models
-3. Set up development environment
-4. Begin Phase 1 implementation
+Goal: Move from flat YAML files to a proper database for scalability and multi-user support.
+
+1. Schema design
+   - Courses table (id, title, description, author, created, updated, status)
+   - Nodes table (id, course_id, type, position, content, metadata)
+   - Connections table (id, source_node, target_node, label, condition)
+   - Pages table (id, course_id, title, ordering)
+   - User progress table (user_id, course_id, current_node, history, score)
+   - Analytics table (events, timestamps, aggregations)
+
+2. Migration path
+   - Keep YAML import/export for portability
+   - Add SQLite for local development, PostgreSQL for production
+   - API server switches to DB-backed storage
+
+### Phase C: Multi-user and Collaboration
+
+1. User accounts and authentication
+2. Course ownership and sharing permissions
+3. Version history per course
+4. Real-time collaborative editing (WebSocket)
+
+### Phase D: LMS Integration
+
+1. SCORM/xAPI export
+2. LTI provider integration
+3. Grade passback
+4. Completion certificates
+
+## Technical Stack
+
+Current:
+- Frontend: Vanilla HTML/CSS/JS (single-file SPA)
+- Backend: Python (HTTP server + Flask-style API)
+- Storage: YAML files on disk
+- Hosting: DGX Spark (local network)
+
+Target:
+- Frontend: Same SPA approach (works well, no framework needed yet)
+- Backend: Python FastAPI
+- Database: SQLite (dev) / PostgreSQL (prod)
+- Hosting: DGX Spark local, cloud deployment later
+
+## Key Decisions
+
+- Keep the single-file SPA architecture -- it's simple, portable, and works
+- YAML stays as import/export format even after DB migration
+- Player and editor share the same data layer but are separate HTML files
+- AI-assisted course generation is a differentiator -- keep investing in it
+
+## GitHub Repository
+
+Repo: https://github.com/mathornton01/branching-course-editor
+Branch: main

@@ -1,0 +1,282 @@
+{
+  "id": "la-data-science-001",
+  "title": "Linear Algebra for Data Science",
+  "description": "A branching course teaching linear algebra fundamentals through two complementary paths: mathematical theory and practical applications in machine learning.",
+  "topic": "Linear Algebra",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 120,
+  "tags": [
+    "linear-algebra",
+    "data-science",
+    "mathematics",
+    "machine-learning",
+    "foundations"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Linear Algebra for Data Science",
+      "content": "Linear algebra is the mathematical foundation of modern data science. It provides the language and tools for working with vectors, matrices, and transformations\u2014essential for machine learning, neural networks, and data analysis. Understanding linear algebra will help you grasp how algorithms work under the hood and optimize computations for real-world problems. Whether you're training neural networks, performing dimensionality reduction, or analyzing high-dimensional data, linear algebra is indispensable. This course will guide you through the fundamentals with two distinct learning paths tailored to your preferences.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "We offer two complementary learning paths. The Theory First path builds strong mathematical foundations before applications. The Applications First path starts with practical examples and uses them to motivate theory. Choose based on your learning style and background.",
+      "choices": [
+        {
+          "label": "Theory First: Master mathematical foundations",
+          "next": "n3"
+        },
+        {
+          "label": "Applications First: Learn through real-world examples",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Vector Spaces and Linear Transformations",
+      "content": "A vector space is a fundamental mathematical structure where vectors can be added together and multiplied by scalars, following specific axioms. In data science, vectors represent features or data points in high-dimensional spaces. A linear transformation is a function that maps vectors to vectors while preserving vector addition and scalar multiplication. Matrices are the standard way to represent linear transformations, and understanding this connection is crucial for machine learning. Key operations like projections, rotations, and changes of basis are all linear transformations that you'll encounter in real applications.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Customer Features as Vectors and Transformations",
+      "content": "Consider a simple 2D vector space representing customer features: age and purchase history. The vector v = [25, $500] describes one customer. A linear transformation T could combine these features: T(v) = 0.1 \u00d7 age + 0.05 \u00d7 history = 0.1 \u00d7 25 + 0.05 \u00d7 500 = 27.5. This is represented as matrix multiplication: [0.1, 0.05] \u00d7 [25, 500]\u1d40 = [27.5]. This same principle scales to thousands of features and customers in real machine learning pipelines, where each row of data is a vector and the weight matrix applies the transformation.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Theory Path Assessment",
+      "content": "Test your understanding of vector spaces and linear transformations.",
+      "questions": [
+        {
+          "question": "In the context of vectors and matrices, what do we call an operation that preserves both vector addition and scalar multiplication?",
+          "options": [
+            "Differentiation",
+            "Linear transformation",
+            "Nonlinear function",
+            "Diagonalization"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite\u2014differentiation is a calculus concept.",
+            "Correct! Linear transformations are fundamental to data science.",
+            "That's a different concept from linear transformations.",
+            "That's a specific matrix decomposition, not the general operation."
+          ],
+          "explanation": "Linear transformations preserve the structure of vector spaces, making them predictable and analyzable\u2014essential for machine learning and data science."
+        },
+        {
+          "question": "If you have a vector v = [3, 4] and apply the linear transformation matrix [[2, 0], [0, 2]], what is the result?",
+          "options": [
+            "[6, 8]",
+            "[5, 6]",
+            "[3, 4]",
+            "[0.5, 1]"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The matrix scales both components by 2.",
+            "The matrix operation requires proper multiplication of each element.",
+            "Identity transformation doesn't apply here.",
+            "That's the inverse operation\u2014we're multiplying by 2, not dividing."
+          ],
+          "explanation": "Matrix-vector multiplication applies the transformation. Here, the 2\u00d72 matrix scales both components by 2: [2\u00d73, 2\u00d74] = [6, 8]."
+        },
+        {
+          "question": "In data science, matrices primarily represent:",
+          "options": [
+            "Individual data points only",
+            "Only rotations and reflections",
+            "Linear transformations and datasets",
+            "Probability distributions"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incomplete\u2014matrices do much more than that.",
+            "Matrices do represent these geometric operations, but their role is broader.",
+            "Correct! Matrices are the workhorses of data science.",
+            "Matrices can help represent probabilities, but that's not their primary role."
+          ],
+          "explanation": "Matrices elegantly represent both individual transformations (weights, rotations) and entire datasets (rows = samples, columns = features), making them central to ML."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Linear Algebra in Machine Learning",
+      "content": "Machine learning algorithms are built on linear algebra at their core. In supervised learning, we represent datasets as matrices where rows are samples and columns are features. Linear regression finds a weight vector that minimizes prediction errors\u2014a linear algebra optimization problem. Principal Component Analysis (PCA) uses eigenvectors to find directions of maximum variance, reducing dimensionality without losing information. Deep learning relies on matrix multiplications for forward and backward passes through neural networks. Understanding eigenvalues, decompositions, and norms directly translates to understanding algorithm behavior, convergence, and performance.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "PCA Example: Housing Data Dimensionality Reduction",
+      "content": "Consider a dataset of 1000 houses with 3 features: size (sqft), age (years), and price ($). A data scientist wants to apply PCA to identify the most important feature combinations. PCA computes eigenvectors of the covariance matrix, revealing that a combination of size and age explains 95% of price variation. This means we can represent each house using just one number instead of three, improving model speed without losing information. This eigenvalue decomposition is pure linear algebra enabling practical ML insights and more efficient algorithms.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Applications Path Assessment",
+      "content": "Test your understanding of linear algebra in practical machine learning.",
+      "questions": [
+        {
+          "question": "In Principal Component Analysis (PCA), what does the first eigenvector represent?",
+          "options": [
+            "The most common data point",
+            "The direction of maximum variance in the data",
+            "The average of all features",
+            "The error in prediction"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not a data point\u2014PCA finds directions, not points.",
+            "Correct! That's why we use it for dimensionality reduction.",
+            "That's the mean vector, not a principal component.",
+            "That's a different metric, not what eigenvectors represent."
+          ],
+          "explanation": "PCA identifies directions (eigenvectors) where data varies most, allowing us to capture information in fewer dimensions while retaining 95%+ of variance."
+        },
+        {
+          "question": "When training a neural network with 1000 input features and 100 hidden units, what linear algebra operation happens at each layer?",
+          "options": [
+            "Matrix-vector multiplication",
+            "Only addition",
+            "Division",
+            "Eigenvalue decomposition"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Each neuron computes w\u00b7x + b where w and x are vectors.",
+            "Addition alone doesn't capture the transformative power needed.",
+            "Neural networks need multiplication for expressiveness.",
+            "That's used for analysis, not forward passes through networks."
+          ],
+          "explanation": "Each layer performs matrix multiplication (weights \u00d7 inputs + bias), transforming the feature space to learn non-linear representations through composition."
+        },
+        {
+          "question": "A dataset of 1000 customers \u00d7 50 features is in matrix M. To standardize features with different scales (e.g., age vs. income), what operation ensures each feature has mean 0 and variance 1?",
+          "options": [
+            "Matrix inversion",
+            "Normalization using mean and standard deviation",
+            "Determinant calculation",
+            "Cross product"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Inversion is for solving linear systems, not normalization.",
+            "Correct! Feature scaling (z = (x - \u03bc) / \u03c3) is crucial.",
+            "Determinant gives a single scalar property of a matrix.",
+            "Cross product is for 3D vectors only."
+          ],
+          "explanation": "Normalization ensures features contribute equally regardless of their original scale, improving algorithm convergence, stability, and interpretability in machine learning."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: Integrating Theory and Practice",
+      "content": "You've now seen linear algebra from two perspectives: deep mathematical foundations and practical machine learning applications. Both paths converge on the same truth: linear algebra is the indispensable language of data science. Whether you reasoned from theory (transformations and spaces) or from practice (PCA, neural networks), you understand that matrices, vectors, and decompositions are not abstract\u2014they solve real, quantifiable problems. Moving forward, you'll encounter concepts like singular value decomposition (SVD) for recommendation systems, matrix factorization for collaborative filtering, and optimization via gradient descent. The skills you've built translate across all these domains. Continue exploring, and you'll find linear algebra appearing everywhere in data science and AI.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations on completing the Linear Algebra for Data Science course! You've mastered fundamental concepts and seen how they apply to real-world problems. You're now equipped to understand how machine learning algorithms work under the hood. Continue your journey by exploring advanced topics like singular value decomposition, matrix factorization for recommendation systems, and tensor algebra. Practice these concepts with real datasets, and you'll develop strong intuition for when and how to apply linear algebra tools. Remember: linear algebra is not just theory\u2014it's the foundation of intelligent systems and modern data science."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Applications First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n4",
+      "label": "Retry"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n7",
+      "label": "Retry"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-26T10:02:05.450672+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,171 @@
+{
+  "id": "control-systems-101",
+  "title": "Control Systems Mastery",
+  "description": "Master the fundamentals of control systems through three adaptive learning paths covering open-loop vs closed-loop control, feedback and stability, and PID control systems.",
+  "topic": "Control Systems",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "control-systems",
+    "engineering",
+    "automation",
+    "feedback",
+    "PID",
+    "engineering-fundamentals"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Control Systems",
+      "content": "Control systems are fundamental to modern technology, from cruise control in cars to temperature regulation in buildings. A control system automatically manages a process to achieve a desired outcome. In this course, you'll explore three essential areas: the distinction between open-loop and closed-loop control, the critical role of feedback in system stability, and practical PID control implementations. By the end, you'll understand how these concepts integrate to create effective automated systems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Which aspect of control systems interests you most? Select your preferred focus area to begin your personalized learning journey.",
+      "choices": [
+        {
+          "label": "Open-Loop vs Closed-Loop Control",
+          "next": "n3"
+        },
+        {
+          "label": "Feedback and Stability",
+          "next": "n5"
+        },
+        {
+          "label": "PID Control Systems",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Open-Loop vs Closed-Loop Control",
+      "content": "An open-loop system operates without monitoring its output\u2014like a toaster that runs for a fixed time regardless of toast color. A closed-loop system measures its output and adjusts automatically\u2014like a thermostat that monitors room temperature and adjusts heating. Closed-loop systems are more accurate and adaptable but also more complex and costly. Understanding this distinction is crucial for choosing the right control approach for any application.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Open-Loop vs Closed-Loop Examples",
+      "content": "Consider a washing machine: an open-loop washer runs through fixed cycles regardless of soil level, while a closed-loop washer with soil sensors adjusts water and agitation time accordingly. Another example is a car's cruise control (closed-loop) versus a car's headlights at fixed brightness (open-loop). The closed-loop cruise control maintains constant speed despite hills by adjusting engine throttle, while fixed headlights don't adapt to darkness or weather conditions.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Feedback and Stability",
+      "content": "Feedback occurs when a system's output is measured and compared to the desired reference, with the difference (error) used to adjust the input. Positive feedback amplifies changes and can cause instability (oscillations or runaway behavior), while negative feedback reduces error and promotes stability. The stability of a control system depends on loop gain, sensor quality, and system response time. A well-designed feedback system eliminates steady-state error and helps the system respond to disturbances.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Feedback and Stability Examples",
+      "content": "In a heated room, the thermostat measures temperature (feedback) and compares it to the setpoint. If the room is too cold, the heater turns on; if too hot, it turns off. This negative feedback stabilizes room temperature around the setpoint. Without feedback, you'd need to manually adjust heating constantly. In contrast, a badly tuned system might overshoot the target temperature repeatedly (oscillation), demonstrating how improper feedback can cause instability.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "PID Control Systems",
+      "content": "PID stands for Proportional-Integral-Derivative. The Proportional term responds to current error; the Integral term corrects accumulated past error; and the Derivative term predicts future error. Together, these three components enable precise, stable control with minimal overshoot and settling time. PID controllers are used in countless applications\u2014aircraft autopilots, robotic arms, power plant governors, and medical infusion pumps. Tuning the three coefficients (Kp, Ki, Kd) determines system performance.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "PID Control Systems Examples",
+      "content": "An autopilot system must maintain an aircraft at a target altitude. The Proportional term adjusts elevator position based on current altitude error. The Integral term corrects for wind pushing the aircraft up or down. The Derivative term anticipates and dampens oscillations. If only Proportional tuning were used, the plane might oscillate around the target; adding Integral eliminates persistent offset, and Derivative prevents overshoot. A well-tuned PID autopilot maintains altitude within inches despite turbulence.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Control Concepts",
+      "content": "Control system design requires integrating all three concepts: choosing between open-loop and closed-loop approaches based on accuracy needs and cost, designing feedback loops for stability and error elimination, and tuning PID parameters for responsive, stable behavior. Modern control systems often combine multiple techniques\u2014a car's traction control uses closed-loop feedback with PID tuning to maintain wheel slip within an optimal range. Understanding how open-loop efficiency, feedback stability, and PID precision work together enables you to design effective control systems for any application.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Control Systems Mastery Complete",
+      "content": "You've completed the Control Systems course! You now understand the core concepts of control system design: the trade-offs between open-loop and closed-loop architectures, the role of feedback in stability, and the power of PID control. Continue exploring by implementing a simple PID controller or analyzing the control systems in devices around you. Control systems are everywhere\u2014from your smartphone's gyroscope stabilization to smart home automation."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Open-Loop vs Closed-Loop"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Feedback and Stability"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "PID Control Systems"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T03:32:32.539661+00:00",
+  "model": "claude-haiku-4-5"
+}

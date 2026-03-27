@@ -1,0 +1,257 @@
+{
+  "id": "rust-intro-9bd2c4e1",
+  "title": "Introduction to Rust Programming",
+  "description": "Master Rust fundamentals through ownership, references, and pattern matching with adaptive branching and practice.",
+  "topic": "Rust Programming",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "Rust",
+    "Programming",
+    "Systems Programming",
+    "Ownership",
+    "Pattern Matching"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Rust Ownership Basics",
+      "content": "Rust's ownership system ensures memory safety without garbage collection. Every value in Rust has a single owner responsible for deallocating it. When the owner goes out of scope, Rust automatically frees the memory. This eliminates null pointer exceptions and data races at compile time. Ownership is the foundation of Rust's safety guarantees.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Ownership in Action",
+      "content": "When you write `let s1 = String::from(\"hello\");` and then `let s2 = s1;`, ownership moves from s1 to s2\u2014s1 becomes invalid. If you need to keep both variables, use a reference: `let s2 = &s1;` borrows s1 without taking ownership. This move semantics prevents use-after-free bugs while references enable sharing without losing ownership.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Ownership Checkpoint",
+      "content": "Test your understanding of Rust's ownership and borrowing system.",
+      "questions": [
+        {
+          "question": "What happens when you assign one String to another variable?",
+          "options": [
+            "The value is copied",
+            "Ownership moves; the original becomes invalid",
+            "Memory is shared between both",
+            "A compiler error occurs"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: Strings use move semantics, not copying",
+            "Correct! Ownership transfers in a move",
+            "Incorrect: Without explicit sharing, ownership is exclusive",
+            "Incorrect: Move semantics compile successfully"
+          ],
+          "explanation": "Assignment transfers ownership (move) to prevent double-free. The original variable is no longer valid."
+        },
+        {
+          "question": "How do you let multiple variables access the same value without moving ownership?",
+          "options": [
+            "Clone the value each time",
+            "Use references with &",
+            "Use the Copy trait",
+            "Create separate scopes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: Cloning creates new owned copies",
+            "Correct! References borrow without transferring ownership",
+            "Incorrect: Copy doesn't enable sharing",
+            "Incorrect: Scopes don't enable multi-access"
+          ],
+          "explanation": "References (&) allow borrowing data without taking ownership, letting multiple parts of code access the same value."
+        }
+      ],
+      "pass_threshold": 1.5,
+      "success_target": "n5",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Ownership Reinforcement",
+      "content": "Strengthen your understanding of ownership rules. Remember: moves transfer ownership, references borrow data, and mutable references allow changes. Each rule exists to prevent memory errors.",
+      "questions": [
+        {
+          "question": "Why does Rust restrict multiple mutable references to the same variable?",
+          "options": [
+            "Performance optimization",
+            "To prevent data races and corruption",
+            "To make code harder to write",
+            "For stylistic consistency"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: Restriction is for safety, not performance",
+            "Correct! One mutable reference prevents concurrent modification",
+            "Incorrect: Restrictions improve safety",
+            "Incorrect: This is a safety rule, not style"
+          ],
+          "explanation": "Only one mutable reference at a time prevents data races where multiple threads modify the same data."
+        },
+        {
+          "question": "What error would this code produce? `let mut x = 5; let r1 = &mut x; let r2 = &mut x;`",
+          "options": [
+            "Runtime panic",
+            "Compiler error: cannot have two mutable references",
+            "No error; both references are valid",
+            "Undefined behavior"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: Rust catches this at compile time",
+            "Correct! The borrow checker prevents this compile-time",
+            "Incorrect: Rust forbids this",
+            "Incorrect: Rust prevents this, not permits it"
+          ],
+          "explanation": "The borrow checker enforces that only one mutable reference exists at a time, catching this error during compilation."
+        }
+      ],
+      "pass_threshold": 1.5,
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Pattern Matching in Rust",
+      "content": "Pattern matching is Rust's powerful way to destructure values and handle different cases. The `match` expression compares a value against multiple patterns and executes code for the first match. Patterns can match enums, structs, tuples, and values, extracting data in one operation. This makes complex logic concise while ensuring all cases are handled at compile time.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Pattern Matching Example",
+      "content": "Consider: `match result { Ok(value) => println!(\"Success: {}\", value), Err(e) => println!(\"Error: {}\", e) }`. Each arm matches a pattern and binds variables you can use. With enums like `Option<T>`, patterns like `Some(x)` destructure and bind the inner value. Pattern matching forces you to handle all possibilities, eliminating unhandled error cases that plague other languages.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Pattern Matching Checkpoint",
+      "content": "Test your pattern matching knowledge.",
+      "questions": [
+        {
+          "question": "What does the pattern `Some(n)` do in a match expression?",
+          "options": [
+            "Matches nothing",
+            "Matches Option::Some and binds the inner value to n",
+            "Matches any value named n",
+            "Matches only the value 'Some'"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: Some(n) does match Something",
+            "Correct! It destructures Some and binds the inner value",
+            "Incorrect: n is a binding pattern, not a value match",
+            "Incorrect: Some is the variant, n is the binding"
+          ],
+          "explanation": "The pattern `Some(n)` matches the `Some` variant and destructures it, binding the contained value to variable `n`."
+        },
+        {
+          "question": "What is the advantage of Rust's match expression over if-else statements?",
+          "options": [
+            "It's faster",
+            "Compiler ensures all cases are handled; patterns destructure data",
+            "It's easier to read",
+            "It returns values directly"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: Performance is similar",
+            "Correct! Match exhaustiveness and destructuring are powerful",
+            "Incorrect: Both can be readable",
+            "Incorrect: Both can return values"
+          ],
+          "explanation": "Match enforces exhaustiveness (compiler error if cases are missed) and allows destructuring in one operation, preventing data access bugs."
+        }
+      ],
+      "pass_threshold": 1.5,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Course Completion",
+      "content": "Excellent progress! You've mastered Rust's ownership system and pattern matching\u2014core concepts that make Rust unique and safe. These foundations enable you to write concurrent, memory-safe code without garbage collection.",
+      "choices": [
+        {
+          "label": "Complete Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Rust Fundamentals Mastered!",
+      "content": "Congratulations! You've completed Introduction to Rust Programming. You now understand ownership (the core safety feature), borrowing through references, and pattern matching (destructuring with safety). These concepts work together to make Rust uniquely safe. Next, explore error handling with Result, lifetimes for complex references, and traits for abstraction. Build small projects to reinforce your learning. Welcome to the Rust community!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Explore example"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Test knowledge"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n5",
+      "label": "Mastered"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Review"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Explore example"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Test knowledge"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Complete modules"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "Finish"
+    }
+  ],
+  "generated_at": "2026-03-26T09:22:56.555137+00:00",
+  "model": "claude-haiku-4-5"
+}

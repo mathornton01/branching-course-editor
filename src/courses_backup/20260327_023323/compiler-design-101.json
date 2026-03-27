@@ -1,0 +1,282 @@
+{
+  "id": "compiler-design-101",
+  "title": "Compiler Design Fundamentals",
+  "description": "Learn the foundational phases of compilation: lexical analysis and syntax analysis. Understand tokenization, parsing, and how compilers transform source code into executable programs.",
+  "topic": "Compiler Design",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 30,
+  "tags": [
+    "compilers",
+    "lexical-analysis",
+    "syntax-analysis",
+    "parsing",
+    "fundamentals"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Lexical Analysis: Breaking Down Source Code",
+      "content": "Lexical analysis is the first phase of compilation, where the compiler reads source code character by character and groups them into meaningful tokens such as keywords, identifiers, operators, and literals. Tokens are the building blocks\u2014each has a type (like KEYWORD or NUMBER) and value (like 'if' or '42'). Without proper tokenization, the compiler wouldn't distinguish where one construct ends and another begins. Understanding lexical analysis sets the foundation for all subsequent compilation phases.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Tokenizing a Simple Expression",
+      "content": "Consider: `int x = 42;`. The lexer produces: TOKEN(KEYWORD,'int'), TOKEN(IDENTIFIER,'x'), TOKEN(OPERATOR,'='), TOKEN(NUMBER,'42'), TOKEN(PUNCTUATION,';'). Each token carries metadata about its source location. This tokenized output feeds into the syntax analyzer, which verifies the token sequence follows the language's grammar rules. Real lexers use finite automata to recognize these patterns efficiently.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Lexical Analysis Checkpoint",
+      "content": "Test your understanding of tokenization and lexical analysis fundamentals.",
+      "questions": [
+        {
+          "question": "What is the primary purpose of lexical analysis in a compiler?",
+          "options": [
+            "To check if code follows grammatical rules",
+            "To convert source code characters into meaningful tokens",
+            "To optimize variable names",
+            "To execute the compiled program"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite\u2014lexical analysis happens before grammar checking",
+            "Correct! Lexical analysis tokenizes source code",
+            "Lexical analysis doesn't rename variables",
+            "Execution happens after compilation"
+          ],
+          "explanation": "Lexical analysis is the foundational phase that breaks source code into tokens. Grammar checking (syntax analysis) happens in the next phase."
+        },
+        {
+          "question": "How many tokens would be produced from: `if (x > 5)`?",
+          "options": [
+            "4 tokens",
+            "5 tokens",
+            "6 tokens",
+            "7 tokens"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "You miscounted\u2014remember parentheses are tokens too",
+            "Close, but you missed one",
+            "Correct! 'if', '(', 'x', '>', '5', ')' = 6 tokens",
+            "That's one too many"
+          ],
+          "explanation": "The tokens are: KEYWORD(if), PUNCTUATION((), IDENTIFIER(x), OPERATOR(>), NUMBER(5), PUNCTUATION()). That's exactly 6 tokens."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Syntax Analysis: Checking Grammar",
+      "content": "After lexical analysis produces tokens, the syntax analyzer (parser) checks whether token sequences follow the language's grammar rules. The parser builds a parse tree or abstract syntax tree (AST)\u2014a hierarchical structure representing the program's structure. For example, an assignment requires: identifier = expression. Invalid orderings like 'x = if' are syntactically rejected. This phase ensures code makes structural sense before semantic analysis or code generation, catching grammar errors early.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Building a Parse Tree",
+      "content": "For tokens from 'int x = 42;', the parser builds a tree with root 'Declaration' and branches for type ('int'), identifier ('x'), and value ('42'). Each node represents a language construct\u2014declarations, expressions, statements, or operators. This tree structure is far more useful than flat token lists because compilers can traverse it to perform type checking, optimization, and code generation. Most modern compilers use recursive descent or LR parsing to build these trees efficiently.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Syntax Analysis Checkpoint",
+      "content": "Test your understanding of parsing and syntax analysis.",
+      "questions": [
+        {
+          "question": "What does the syntax analyzer do with valid tokens?",
+          "options": [
+            "Converts them into machine code",
+            "Checks if they follow grammatical rules and builds a parse tree",
+            "Optimizes them for faster execution",
+            "Stores them in a symbol table"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Code generation comes later",
+            "Correct! The parser checks grammar and creates an AST",
+            "Optimization is a separate phase",
+            "Symbol tables are used, but that's not the main job"
+          ],
+          "explanation": "The syntax analyzer verifies tokens follow the language's grammar and constructs a parse tree (AST) representing the program's structure."
+        },
+        {
+          "question": "Which would be rejected by a syntax analyzer?",
+          "options": [
+            "'if (x > 5) { y = x * 2; }'",
+            "'y = x * 2;'",
+            "'if x > 5 { y = x * 2; }'",
+            "'int x = 10;'"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "This follows correct grammar",
+            "This is a valid assignment statement",
+            "Correct! Missing parentheses violates grammar\u2014should be 'if (...)' not 'if ...'",
+            "Variable declaration is grammatically correct"
+          ],
+          "explanation": "Option C is missing required parentheses. The if statement grammar requires 'if (condition)' not 'if condition'."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Lexical and Syntax Analysis Practice",
+      "content": "Reinforce key concepts about tokenization and parsing with these practice questions.",
+      "questions": [
+        {
+          "question": "Which compilation phase detects 'int x = ;' is incomplete?",
+          "options": [
+            "Lexical analysis",
+            "Syntax analysis",
+            "Semantic analysis",
+            "Code optimization"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Lexical analysis still tokenizes this",
+            "Correct! Syntax analysis detects missing expression after '='",
+            "Semantic analysis comes later",
+            "Optimization is the final phase"
+          ],
+          "explanation": "Syntax analysis checks if tokens follow grammar. Missing an expression after '=' violates assignment grammar rules."
+        },
+        {
+          "question": "How many tokens in: 'array[10] = 42'?",
+          "options": [
+            "4 tokens",
+            "5 tokens",
+            "6 tokens",
+            "7 tokens"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "You missed several tokens",
+            "Getting closer",
+            "Correct! 'array', '[', '10', ']', '=', '42' = 6 tokens",
+            "That's one too many"
+          ],
+          "explanation": "Tokenization yields: IDENTIFIER(array), PUNCTUATION([), NUMBER(10), PUNCTUATION(]), OPERATOR(=), NUMBER(42)\u2014six tokens total."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Choose Your Path",
+      "content": "Excellent work! You've mastered lexical and syntax analysis\u2014the first two critical compilation phases. You understand tokenization, parsing, and how compilers structure source code. You're ready to explore the next phase of your compiler learning journey.",
+      "choices": [
+        {
+          "label": "Finish Course",
+          "next": "n9"
+        },
+        {
+          "label": "Explore More Topics",
+          "next": "node-adv-topics"
+        }
+      ]
+    },
+    {
+      "id": "node-adv-topics",
+      "type": "content",
+      "title": "Next Steps: Beyond Lexical and Syntax Analysis",
+      "content": "You've successfully mastered lexical and syntax analysis\u2014the foundational phases of compilation. Now that you understand tokenization, parsing, and abstract syntax trees, you're ready to explore the subsequent phases that transform correctly-structured code into efficient executable programs. Semantic analysis verifies that operations are valid\u2014ensuring you don't add a number to a string without proper type conversion, checking that variables are declared before use, and validating type compatibility across operations. Code generation then converts your abstract syntax tree into machine code or an intermediate representation (IR) that can be executed or further optimized. Finally, optimization techniques improve performance, reduce code size, and enhance efficiency through techniques like dead code elimination, function inlining, loop unrolling, and vectorization. These phases build directly on the lexical and syntax analysis knowledge you've mastered, making them logical next topics in your compiler design journey.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Compilation Fundamentals Mastered!",
+      "content": "Congratulations! You've completed Compiler Design fundamentals. You now understand lexical analysis (tokenization), syntax analysis (parsing), tokens, parse trees, and grammar rules\u2014essential foundations for compilers, interpreters, and language design. You're ready to explore code generation, optimization, semantic analysis, and advanced compiler techniques. Keep building your expertise!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start Example"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Assess Knowledge"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Correct! Continue"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "Review Needed"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Start Example"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Assess Knowledge"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "Correct! Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Review Needed"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Ready to Continue"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c11",
+      "source": "node-adv-topics",
+      "target": "n9",
+      "label": "Ready for Course Completion"
+    }
+  ],
+  "generated_at": "2026-03-26T09:48:23.068888+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T09:53:30.600163+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

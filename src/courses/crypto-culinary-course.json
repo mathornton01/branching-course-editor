@@ -1,0 +1,258 @@
+{
+  "id": "crypto-culinary-course",
+  "title": "Cryptography Fundamentals: A Chef's Guide to Secret Recipes",
+  "description": "Learn cryptography fundamentals through culinary arts analogies, from Caesar Ciphers to modern encryption concepts.",
+  "topic": "Cryptography",
+  "theme": "culinary arts",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "cryptography",
+    "ciphers",
+    "encryption",
+    "security",
+    "culinary",
+    "skill-tree"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "decision",
+      "title": "Cryptography Fundamentals: Choose Your Recipe Path",
+      "content": "Welcome to Cryptography Fundamentals through Culinary Arts! Just as chefs protect their secret recipes with hidden preparation methods, we all need to protect our digital information. In this course, you'll learn how encryption works by exploring how chefs historically disguised their secret recipes. Choose your learning style: would you prefer to start with the theory of how ciphers work, or jump straight into hands-on practice with real examples?",
+      "choices": [
+        {
+          "label": "Theory First: Understanding the Science of Secret Recipes",
+          "next": "n2"
+        },
+        {
+          "label": "Hands-On First: Learning by Making Dishes",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Caesar Cipher: The Rotating Recipe",
+      "content": "A Caesar Cipher, named after Julius Caesar, is the simplest form of encryption. Imagine a master chef who writes down her signature recipe but shifts every ingredient name by a certain number of positions in the alphabet. If her shift key is 3, 'SALT' becomes 'VDOW', 'BUTTER' becomes 'EXWWHU'. This consistent shift\u2014always the same number for every letter\u2014is the 'key' to both hiding and revealing the recipe. In cryptography, this unchanging pattern is called symmetric encryption: the same key locks and unlocks the secret. Though simple, the Caesar Cipher teaches us the fundamental principle: transformation requires a secret key that only authorized people should know.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Caesar Cipher in the Kitchen",
+      "content": "Let's encrypt a simple recipe instruction using a Caesar Cipher with a shift of 3. Original (plaintext): 'ADD BUTTER TO PAN'. We shift each letter forward 3 positions: A\u2192D, D\u2192G, D\u2192G, B\u2192E, U\u2192X, T\u2192W, T\u2192W, E\u2192H, R\u2192U, and spaces remain unchanged. Result (ciphertext): 'DGG EXWWHU WR SDQ'. To decrypt, whoever possesses the key (shift of 3) simply reverses the process, shifting backward 3 positions. Without the key, an attacker sees only 'DGG EXWWHU WR SDQ' and must guess which shift was used\u2014with only 26 possibilities, trying all of them takes seconds, showing why Caesar Ciphers are weak by modern standards.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Test Your Caesar Cipher Skills",
+      "content": "Answer these questions about Caesar Ciphers to ensure you understand this foundational encryption method.",
+      "questions": [
+        {
+          "question": "If you encrypt 'SUGAR' using a Caesar Cipher with a shift of 2, what is the ciphertext?",
+          "options": [
+            "SYGAT",
+            "UWICV",
+            "TWHBS",
+            "RWFZQ"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Remember, S shifts to U, U shifts to W, and so on.",
+            "Correct! Each letter shifts forward by 2 positions in the alphabet.",
+            "Incorrect. That would be a different shift amount.",
+            "Incorrect. The shift must be consistent for each letter."
+          ],
+          "explanation": "In a Caesar Cipher, each letter shifts forward by the same amount. Here, S\u2192U, U\u2192W, G\u2192I, A\u2192C, R\u2192T, giving UWICV."
+        },
+        {
+          "question": "You receive the ciphertext 'BRPH VRRN' which was encrypted with a Caesar Cipher shift of 3. What is the original plaintext?",
+          "options": [
+            "COME SOON",
+            "EULY WXRM",
+            "ADNC QKML",
+            "EUQI TWWP"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! You shifted backward 3 positions to decrypt.",
+            "Incorrect. That would require a shift in the wrong direction.",
+            "Incorrect. That shift amount is incorrect.",
+            "Incorrect. Remember to shift backward to decrypt."
+          ],
+          "explanation": "To decrypt a Caesar Cipher, you reverse the shift: B\u2192C, R\u2192O, P\u2192M, H\u2192E, etc., revealing 'COME SOON'."
+        },
+        {
+          "question": "Why is a Caesar Cipher considered weak for protecting modern secrets?",
+          "options": [
+            "There are only 26 possible keys to try",
+            "It's too easy to remember",
+            "Letter frequency patterns are preserved",
+            "All of the above"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Partially correct, but there are other weaknesses too.",
+            "Partially correct, but there are more serious cryptographic weaknesses.",
+            "Partially correct, but Caesar Ciphers have other vulnerabilities.",
+            "Correct! All of these make Caesar Ciphers unsuitable for protecting modern secrets."
+          ],
+          "explanation": "Caesar Ciphers have multiple critical weaknesses: only 26 possible keys (trivial to brute force), predictable memorability, and preserved letter frequency patterns that enable frequency analysis attacks."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Substitution Cipher: Ingredient Swaps",
+      "content": "A Substitution Cipher takes the Caesar Cipher concept much further. Instead of shifting every letter by the same amount, you create a unique one-to-one mapping: perhaps 'A' becomes 'Q', 'B' becomes 'W', 'C' becomes 'E', and every other letter gets its own unique substitute. Think of a master chef with 26 exotic ingredients who creates a secret personal mapping: 'salt' maps to 'saffron', 'sugar' maps to 'sumac', 'butter' maps to 'beurre', and so on. The key is this entire mapping\u2014with 26 letters, there are 26! (26 factorial) possible keys: over 400 quadrillion combinations, making brute force practically impossible. However, substitution ciphers have a fatal weakness: they preserve the frequency of letters. In English text (and in recipe instructions), 'E' appears most often, then 'T', 'A', and 'O'. A cryptanalyst counts letter frequencies in the ciphertext, matches patterns to known frequencies, and guesses the key\u2014this attack is called frequency analysis.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Substitution Cipher Cooking Example",
+      "content": "Let's encrypt a secret recipe using a substitution cipher. Original plaintext: 'SALT SUGAR BUTTER'. We create a substitution key: S\u2194P, A\u2194W, L\u2194R, T\u2194K, U\u2194V, G\u2194B, B\u2194M, E\u2194X. Applying this key: SALT becomes PWRK, SUGAR becomes PVBWX, BUTTER becomes MVKKXU. Ciphertext: 'PWRK PVBWX MVKKXU'. To decrypt, the authorized recipient applies the reverse mapping. Unlike Caesar (only 26 possible keys), this substitution has billions of possibilities. However, notice that 'V' and 'K' appear twice in our short ciphertext\u2014just like 'A' and 'T' appear twice in common English recipe words. A frequency analyst would recognize these patterns, guess common letter mappings, and gradually crack the cipher by finding which substitutions produce readable English words.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Practice Your Substitution Cipher Knowledge",
+      "content": "Test your understanding of substitution ciphers and their strengths and vulnerabilities.",
+      "questions": [
+        {
+          "question": "In a substitution cipher, why is frequency analysis such a powerful attack method?",
+          "options": [
+            "It reveals the original recipe",
+            "English text has predictable letter frequency patterns",
+            "Substitution ciphers preserve the frequency of each letter",
+            "Both B and C are correct"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. Frequency analysis doesn't directly reveal recipes.",
+            "Partially correct, but there's another key reason.",
+            "Partially correct, but letter frequency alone isn't the full explanation.",
+            "Correct! Frequency analysis works because English (and recipe text) has predictable letter frequencies, and substitution preserves these frequencies."
+          ],
+          "explanation": "Frequency analysis is powerful because: (1) in English, 'E', 'T', 'A', 'O' appear most frequently, and (2) substitution ciphers preserve these frequency patterns, allowing analysts to match common ciphertext letters to common plaintext letters."
+        },
+        {
+          "question": "If you create a substitution cipher with a completely random key, how many possible keys exist theoretically?",
+          "options": [
+            "26",
+            "26\u00b2",
+            "26!",
+            "2^26"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. That's the number of keys for a Caesar Cipher.",
+            "Incorrect. That's only 676 combinations.",
+            "Correct! 26 factorial (26! \u2248 4 \u00d7 10\u00b2\u2076) represents all possible unique substitution mappings.",
+            "Incorrect. That's 2 to the power of 26, not factorial."
+          ],
+          "explanation": "A substitution cipher maps 26 letters to 26 letters in all possible unique ways. The first letter has 26 choices, the second has 25 remaining choices, the third has 24, and so on: 26 \u00d7 25 \u00d7 24 \u00d7 ... \u00d7 1 = 26!"
+        },
+        {
+          "question": "Which statement best contrasts substitution ciphers with Caesar Ciphers?",
+          "options": [
+            "Substitution ciphers are easier to break",
+            "Substitution ciphers have more possible keys but are still vulnerable to frequency analysis",
+            "Caesar Ciphers preserve letter frequency while substitution ciphers do not",
+            "Substitution ciphers use only one shift value"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Substitution ciphers have far more possible keys.",
+            "Correct! Substitution ciphers offer 26! keys vs Caesar's 26, but frequency analysis exploits the preserved letter frequencies in both.",
+            "Incorrect. Both preserve letter frequency\u2014that's their shared vulnerability.",
+            "Incorrect. Caesar Ciphers use one shift; substitution uses individual mappings."
+          ],
+          "explanation": "Substitution ciphers dramatically increase key space (26! vs 26), but both methods fail against frequency analysis because they preserve how often each letter appears, allowing pattern matching attacks."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "From Historical Ciphers to Modern Cryptography",
+      "content": "You've now explored two foundational ciphers: Caesar (simple but brittle) and Substitution (stronger but still breakable). These historical methods teach critical concepts that underpin all cryptography: the essential role of keys, the principle of symmetric encryption (same key locks and unlocks), and why patterns in data create vulnerabilities. Modern cryptography evolved from these lessons. Today's encryption methods like AES (Advanced Encryption Standard) use mathematical complexity rather than simple letter shuffling\u2014they scramble data through billions of transformation steps in microseconds, making even the world's fastest supercomputers require millions of years to crack it through brute force. In the culinary world, protecting recipes remains vital: companies like Coca-Cola guard their formulas so fiercely that the recipe is locked in a vault accessible only to a select few. In the digital world, cryptography protects everything from your personal messages to your banking credentials to national security secrets. Both old and new methods share the same core principle: only those possessing the key can access the secret.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: You're a Culinary Cryptographer!",
+      "content": "Congratulations! You've mastered the fundamentals of cryptography through culinary examples. You understand how keys function as the foundation of encryption, why pattern recognition defeats weak encryption methods, and how modern cryptographic algorithms protect secrets through mathematical complexity. You've learned that whether protecting grandma's secret recipe or your digital privacy, the same principles apply: secure keys, strong algorithms, and awareness of vulnerabilities. Continue exploring cryptography, and remember\u2014just as a chef's intuition improves with practice, so does a cryptographer's understanding."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Theory First"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Hands-On First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n8",
+      "label": "Pass"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Pass"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:20:51.889681+00:00",
+  "model": "claude-haiku-4-5"
+}

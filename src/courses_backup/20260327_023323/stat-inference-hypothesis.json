@@ -1,0 +1,493 @@
+{
+  "id": "stat-inference-hypothesis",
+  "title": "Statistical Inference and Hypothesis Testing",
+  "description": "Master the fundamentals of hypothesis testing, p-values, and statistical decision-making through an adaptive learning pathway.",
+  "topic": "Statistics and Data Analysis",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 60,
+  "tags": [
+    "statistics",
+    "hypothesis testing",
+    "p-values",
+    "effect size",
+    "statistical inference"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Hypothesis Testing",
+      "content": "Hypothesis testing is a structured method for making decisions about populations based on sample data. You'll start by formulating two competing hypotheses: the null hypothesis (H\u2080), which represents no effect or the status quo, and the alternative hypothesis (H\u2081), which represents what you're trying to demonstrate. For example, a pharmaceutical company might test H\u2080: the new drug has no effect versus H\u2081: the new drug improves outcomes. This process allows us to quantify uncertainty and control the probability of making incorrect conclusions.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Assessment 1: Understanding Hypotheses",
+      "content": "Test your understanding of null and alternative hypotheses, and the structure of hypothesis testing.",
+      "questions": [
+        {
+          "question": "A company wants to test whether their new website design increases user engagement. Which statement correctly describes the null hypothesis?",
+          "options": [
+            "The new design increases engagement",
+            "The new design has no effect on engagement",
+            "The new design decreases engagement",
+            "We cannot determine the null hypothesis without more data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The null hypothesis assumes no effect or change.",
+            "Correct! The null hypothesis represents the status quo\u2014no effect.",
+            "Incorrect. This would be an alternative hypothesis for a one-tailed test in the negative direction.",
+            "Incorrect. We can always formulate H\u2080 and H\u2081 from the research question."
+          ],
+          "explanation": "The null hypothesis always states that there is no effect or difference. In this case, H\u2080: the design has no effect, and H\u2081: the design increases engagement."
+        },
+        {
+          "question": "When conducting a hypothesis test, the alternative hypothesis is:",
+          "options": [
+            "Always true",
+            "What you're trying to find evidence for",
+            "The same as the null hypothesis",
+            "Proven when p > 0.05"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The alternative hypothesis is what we hope to support with evidence.",
+            "Correct! The alternative hypothesis represents the claim we're testing for.",
+            "Incorrect. H\u2080 and H\u2081 are mutually exclusive and exhaustive.",
+            "Incorrect. We reject H\u2080 (not prove H\u2081) when p < \u03b1."
+          ],
+          "explanation": "The alternative hypothesis is the research hypothesis\u2014what you expect to be true. We gather evidence to test against H\u2080."
+        },
+        {
+          "question": "Which scenario best describes a two-tailed hypothesis test?",
+          "options": [
+            "Testing if a new fertilizer increases crop yield (one direction)",
+            "Testing if a treatment differs from the control in either direction",
+            "Testing only positive effects",
+            "Testing only negative effects"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This is a one-tailed test (directional).",
+            "Correct! Two-tailed tests check for differences in both directions.",
+            "Incorrect. That would be a one-tailed test.",
+            "Incorrect. That would also be one-tailed."
+          ],
+          "explanation": "A two-tailed test has H\u2081: parameter \u2260 value, testing for difference in either direction. One-tailed tests specify direction: > or <."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Hypothesis Formulation",
+      "content": "Practice formulating hypothesis pairs for different research scenarios. Remember: the null hypothesis typically assumes no effect, difference, or relationship, while the alternative hypothesis is directional (one-tailed) or non-directional (two-tailed). Focus on clearly stating what you expect and what the null position would be.",
+      "questions": [
+        {
+          "question": "A researcher suspects that caffeine improves reaction time. What would be an appropriate alternative hypothesis?",
+          "options": [
+            "H\u2081: Caffeine has no effect on reaction time",
+            "H\u2081: Caffeine improves reaction time",
+            "H\u2081: Caffeine decreases reaction time",
+            "H\u2081: Reaction time depends on caffeine type"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This is the null hypothesis.",
+            "Correct! This matches the researcher's suspicion.",
+            "Incorrect. The researcher suspects improvement, not worsening.",
+            "Incorrect. This goes beyond the original hypothesis."
+          ],
+          "explanation": "Since the researcher suspects caffeine improves reaction time, H\u2081 should reflect this directional expectation. H\u2080 would be: caffeine has no effect on reaction time."
+        },
+        {
+          "question": "For a clinical trial testing a new pain medication, which represents H\u2080?",
+          "options": [
+            "The medication is more effective than placebo",
+            "The medication has no effect compared to placebo",
+            "Patients prefer the medication",
+            "The medication is dangerous"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This is what we might hope H\u2081 would support.",
+            "Correct! The null hypothesis assumes no benefit.",
+            "Incorrect. This is about preference, not the medication's effect.",
+            "Incorrect. We would test safety separately."
+          ],
+          "explanation": "In clinical trials, H\u2080 assumes the new treatment has no advantage over existing treatment or placebo. We seek evidence to reject this."
+        },
+        {
+          "question": "A school wants to test if a new tutoring program changes student math scores. Which is the correct H\u2080?",
+          "options": [
+            "H\u2080: The program improves scores",
+            "H\u2080: The program has no effect on scores",
+            "H\u2080: All students benefit equally",
+            "H\u2080: The program hurts some students"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This would be H\u2081.",
+            "Correct! H\u2080 assumes no change from the program.",
+            "Incorrect. H\u2080 doesn't specify distribution of effects.",
+            "Incorrect. H\u2080 is about overall effect, not individual harm."
+          ],
+          "explanation": "The null hypothesis always represents the position of no effect or no difference. Only if we find strong evidence do we reject H\u2080 in favor of H\u2081."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "P-Values, Significance Levels, and Decision Rules",
+      "content": "The p-value is the probability of observing your data (or more extreme data) if the null hypothesis were true. It quantifies how unusual your sample results are under H\u2080. If the p-value is less than your predetermined significance level (\u03b1, typically 0.05), you reject the null hypothesis\u2014this means your sample provides sufficient evidence against H\u2080. It's crucial to understand that rejecting H\u2080 doesn't prove H\u2081 is true; it simply means the data are unlikely under H\u2080. Common significance levels are \u03b1 = 0.05 (5%), 0.01 (1%), and 0.10 (10%), depending on the consequences of a Type I error (false positive). Type I error (\u03b1) is rejecting a true H\u2080, while Type II error (\u03b2) is failing to reject a false H\u2080.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment 2: P-Values and Significance",
+      "content": "Evaluate your understanding of p-values, significance levels, and decision rules in hypothesis testing.",
+      "questions": [
+        {
+          "question": "A hypothesis test yields a p-value of 0.03. If \u03b1 = 0.05, what should you conclude?",
+          "options": [
+            "Fail to reject H\u2080 because p > \u03b1",
+            "Reject H\u2080 because p < \u03b1",
+            "Accept H\u2080 as definitely true",
+            "The result is inconclusive"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Since p = 0.03 is less than 0.05, we reject H\u2080.",
+            "Correct! When p < \u03b1, we reject H\u2080 at the chosen significance level.",
+            "Incorrect. Rejecting H\u2080 is not the same as accepting H\u2080.",
+            "Incorrect. With \u03b1 = 0.05 and p = 0.03, the result is clear."
+          ],
+          "explanation": "The decision rule is simple: if p \u2264 \u03b1, reject H\u2080; if p > \u03b1, fail to reject H\u2080. Here, 0.03 < 0.05, so we reject H\u2080."
+        },
+        {
+          "question": "What does a p-value of 0.20 in a study mean?",
+          "options": [
+            "There's a 20% chance H\u2080 is true",
+            "There's a 20% probability your sample results (or more extreme) would occur if H\u2080 were true",
+            "The alternative hypothesis is true with 80% probability",
+            "You should reject H\u2080 at \u03b1 = 0.05"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The p-value is not the probability that H\u2080 is true.",
+            "Correct! The p-value is computed under the assumption that H\u2080 is true.",
+            "Incorrect. The p-value doesn't directly tell us the probability H\u2081 is true.",
+            "Incorrect. If p = 0.20 > \u03b1 = 0.05, we fail to reject H\u2080."
+          ],
+          "explanation": "The p-value is defined as P(data|H\u2080). It's the probability of observing these results under H\u2080, not the probability that H\u2080 is true."
+        },
+        {
+          "question": "Which scenario represents a Type I error?",
+          "options": [
+            "Rejecting H\u2080 when it's actually true",
+            "Failing to reject H\u2080 when it's actually false",
+            "Correctly rejecting a false H\u2080",
+            "Correctly failing to reject a true H\u2080"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Type I error is a false positive\u2014rejecting H\u2080 when it's true.",
+            "Incorrect. This is a Type II error (false negative).",
+            "Incorrect. This is a correct decision.",
+            "Incorrect. This is also a correct decision."
+          ],
+          "explanation": "Type I error (\u03b1) = rejecting H\u2080 when H\u2080 is true (false alarm). Type II error (\u03b2) = failing to reject H\u2080 when H\u2080 is false (missed detection)."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Interpreting P-Values and Making Decisions",
+      "content": "Apply your understanding of p-values and decision rules to realistic scenarios. Remember: the significance level \u03b1 is your predetermined threshold, and comparing p to \u03b1 determines your decision. Always compare the p-value to your chosen significance level\u2014that's the core decision rule.",
+      "questions": [
+        {
+          "question": "In a quality control test, p-value = 0.08 and \u03b1 = 0.05. What decision do you make?",
+          "options": [
+            "Reject H\u2080",
+            "Fail to reject H\u2080",
+            "Accept H\u2080 as proven true",
+            "Increase sample size before deciding"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Since p = 0.08 > \u03b1 = 0.05, we don't have sufficient evidence.",
+            "Correct! When p > \u03b1, we fail to reject H\u2080 at this significance level.",
+            "Incorrect. Failing to reject H\u2080 is not proof that H\u2080 is true.",
+            "Incorrect. We already have a decision rule with our \u03b1 level."
+          ],
+          "explanation": "The decision rule is universal: p \u2264 \u03b1 means reject H\u2080; p > \u03b1 means fail to reject H\u2080. Here, 0.08 > 0.05, so we fail to reject H\u2080."
+        },
+        {
+          "question": "If a researcher uses \u03b1 = 0.01 (stricter than typical 0.05), what are they trying to minimize?",
+          "options": [
+            "Type I errors (false positives)",
+            "Type II errors (false negatives)",
+            "Sample size",
+            "The importance of the results"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A lower \u03b1 means fewer Type I errors but more Type II errors.",
+            "Incorrect. A stricter \u03b1 (lower) actually increases Type II error risk.",
+            "Incorrect. Sample size is independent of the significance level choice.",
+            "Incorrect. Significance level doesn't affect result importance."
+          ],
+          "explanation": "Lowering \u03b1 from 0.05 to 0.01 makes it harder to reject H\u2080, reducing false positives but increasing false negatives (Type II errors)."
+        },
+        {
+          "question": "A study compares two treatments. p-value = 0.0001 and \u03b1 = 0.05. What's the most accurate statement?",
+          "options": [
+            "We definitely proved H\u2081 is true",
+            "We reject H\u2080; the data provide strong evidence against H\u2080",
+            "The result is practically significant",
+            "The treatment difference is large"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Rejecting H\u2080 doesn't prove H\u2081; it shows evidence against H\u2080.",
+            "Correct! A very small p-value provides strong evidence against H\u2080.",
+            "Incorrect. Statistical significance doesn't guarantee practical significance.",
+            "Incorrect. A small p-value doesn't tell us effect size."
+          ],
+          "explanation": "A very small p-value (0.0001) indicates the observed data are extremely unlikely under H\u2080, providing strong evidence against it. But significance \u2260 practical importance."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Effect Size and Statistical Power",
+      "content": "Statistical significance (small p-value) doesn't always mean practical significance\u2014this is where effect size comes in. Effect size quantifies the magnitude of the difference or relationship (e.g., Cohen's d for comparing means: small d \u2248 0.2, medium d \u2248 0.5, large d \u2248 0.8). A large sample can produce statistically significant results from tiny, meaningless effects. Conversely, statistical power (typically 0.80 or 80%) is the probability of detecting a real effect when it exists. Power depends on effect size, sample size, and significance level. Assumptions matter too: many tests require normally distributed data, independence of observations, or equal variances. Always check these before interpreting results. A complete statistical analysis considers significance, effect size, power, and assumptions together.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment 3: Comprehensive Understanding",
+      "content": "Demonstrate mastery of hypothesis testing by integrating significance, effect size, power, and assumptions.",
+      "questions": [
+        {
+          "question": "A study finds p = 0.02 with Cohen's d = 0.10. What is the most appropriate interpretation?",
+          "options": [
+            "The result is statistically significant and practically important",
+            "The result is statistically significant but has a small practical effect size",
+            "The result is not statistically significant",
+            "We need a larger sample size to determine significance"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. d = 0.10 is considered a small effect, not practically important.",
+            "Correct! p = 0.02 < 0.05 shows significance, but d = 0.10 is a small effect.",
+            "Incorrect. p = 0.02 < \u03b1 = 0.05, so the result is statistically significant.",
+            "Incorrect. We already have clear significance; effect size is the concern here."
+          ],
+          "explanation": "Statistical significance and practical significance are different. A large sample can detect tiny effects. Here, significant but small effect means limited practical utility."
+        },
+        {
+          "question": "Statistical power of 0.90 means:",
+          "options": [
+            "There's a 90% probability that H\u2080 is false",
+            "There's a 90% probability of detecting a true effect if it exists",
+            "The p-value will definitely be less than 0.10",
+            "The study result is 90% likely to be true"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Power doesn't tell us if H\u2080 is false in reality.",
+            "Correct! Power is the probability of rejecting H\u2080 when H\u2080 is false.",
+            "Incorrect. Power and p-values are related but distinct concepts.",
+            "Incorrect. Power is a frequentist probability, not about this result."
+          ],
+          "explanation": "Power = P(reject H\u2080 | H\u2080 is false). A power of 0.90 means 90% chance of detecting a real effect if it truly exists."
+        },
+        {
+          "question": "Which is most important when checking test assumptions?",
+          "options": [
+            "Using the test anyway if the sample is large enough",
+            "Verifying that conditions are met before interpreting results",
+            "Assuming assumptions are always satisfied",
+            "Choosing a significance level based on the data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Large samples don't excuse assumption violations.",
+            "Correct! Always verify assumptions before trusting your test results.",
+            "Incorrect. We must check assumptions for each analysis.",
+            "Incorrect. \u03b1 must be set before collecting data (pre-registered)."
+          ],
+          "explanation": "Violating test assumptions (normality, independence, equal variance) can invalidate your results. Always check assumptions before interpreting conclusions."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Effect Size and Power in Context",
+      "content": "Integrate your understanding of significance, effect size, and power. Consider both statistical and practical significance when evaluating research conclusions. Think critically about what results mean in real-world contexts.",
+      "questions": [
+        {
+          "question": "A drug trial finds a statistically significant reduction in symptoms (p = 0.04) but effect size d = 0.15. What should clinicians consider?",
+          "options": [
+            "The drug should definitely be prescribed to all patients",
+            "The statistical significance doesn't guarantee clinical meaningfulness; the small effect size may not justify treatment",
+            "The results are meaningless because p > 0.05",
+            "Effect size doesn't matter if p < 0.05"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Statistical significance alone doesn't justify clinical use.",
+            "Correct! Practical significance requires both p < \u03b1 AND meaningful effect size.",
+            "Incorrect. p = 0.04 < 0.05, so the result is statistically significant.",
+            "Incorrect. Effect size is crucial; statistical significance can be trivial."
+          ],
+          "explanation": "Medical decisions require both statistical significance and practical importance. A tiny effect (d = 0.15) may not warrant changing clinical practice."
+        },
+        {
+          "question": "To increase statistical power, which approach is most effective?",
+          "options": [
+            "Lower the significance level (\u03b1)",
+            "Increase sample size",
+            "Use a weaker alternative hypothesis",
+            "Ignore effect size"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Lowering \u03b1 actually decreases power.",
+            "Correct! Larger samples improve ability to detect true effects.",
+            "Incorrect. The alternative hypothesis is fixed by the research question.",
+            "Incorrect. Effect size is one of the main determinants of power."
+          ],
+          "explanation": "The main factors affecting power are: effect size (bigger = higher power), sample size (larger = higher power), and significance level (lower \u03b1 = lower power)."
+        },
+        {
+          "question": "A researcher reports: 'We found no significant effect (p = 0.12) but power was only 0.60.' What does this mean?",
+          "options": [
+            "The null hypothesis is definitely true",
+            "A real effect probably doesn't exist",
+            "There was only 60% chance to detect a real effect; low power makes null results inconclusive",
+            "The study was a complete failure"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Failing to reject H\u2080 doesn't prove it's true.",
+            "Incorrect. Low power makes it hard to conclude anything from null results.",
+            "Correct! Low power means weak ability to detect effects; the study is inconclusive.",
+            "Incorrect. Low power studies can still be informative if properly interpreted."
+          ],
+          "explanation": "When power is low (< 0.80), a null result is inconclusive. The study may have missed a real effect. High power is needed for both positive and negative results."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mastery Achieved: Statistical Inference and Hypothesis Testing",
+      "content": "Congratulations! You've mastered the fundamentals of hypothesis testing and statistical inference. You now understand how to formulate hypotheses, interpret p-values, control error rates, consider effect sizes, and design powerful studies. These concepts are essential for evaluating research claims, conducting experiments, and making evidence-based decisions. Continue applying these principles in your statistical work, remembering that statistical significance and practical significance are different\u2014always consider both when interpreting results. You're ready to advance to specialized topics like specific hypothesis tests, Bayesian approaches, or multivariate inference."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Fail (<2 correct)"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "Retry Assessment"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Fail (<2 correct)"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "Retry Assessment"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n10",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "Fail (<2 correct)"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "Retry Assessment"
+    }
+  ],
+  "generated_at": "2026-03-26T09:57:13.564607+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,272 @@
+{
+  "id": "docker-containerization-001",
+  "title": "Docker and Containerization",
+  "description": "Learn Docker fundamentals and containerization from basics to Dockerfile and image management",
+  "topic": "Docker",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "docker",
+    "containers",
+    "devops",
+    "containerization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Docker and Containerization?",
+      "content": "Docker is a containerization platform that packages applications with all dependencies into standardized units called containers. Unlike virtual machines that require full operating systems, containers share the host OS kernel, making them lightweight and fast. A container includes your application code, runtime, system tools, libraries, and settings\u2014everything needed to run your app consistently anywhere. Docker ensures that if your app works on your laptop, it will work identically in production.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Docker Container Example: Running a Web Server",
+      "content": "Imagine you're deploying a Node.js web server. Without Docker, you'd install Node.js, npm, and dependencies on each server. With Docker, you create a Dockerfile that starts with an official Node.js image, copies your code, installs dependencies, and exposes port 3000. Running `docker run -p 3000:3000 my-app` launches your container instantly, isolated from other applications. If you ship this container to a colleague or production server, it runs identically\u2014no 'works on my machine' problems.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Docker Fundamentals Assessment",
+      "content": "Test your understanding of Docker basics and containerization concepts.",
+      "questions": [
+        {
+          "question": "What is the primary advantage of containers over virtual machines?",
+          "options": [
+            "Containers require less disk space and startup faster because they share the host OS kernel",
+            "Containers are more secure than VMs because they isolate the entire OS",
+            "Containers automatically scale horizontally without any configuration",
+            "Containers eliminate the need for any development tools"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Containers are lightweight because they don't bundle a full OS.",
+            "Not quite. Security is comparable, but lightweight is the key advantage.",
+            "Not quite. Scaling requires orchestration (like Kubernetes), not just containers.",
+            "Not quite. Containers still need development tools and configuration."
+          ],
+          "explanation": "Containers share the host OS kernel, eliminating the need for a full OS copy in each container. This makes them much lighter and faster than VMs, which each need their own complete OS."
+        },
+        {
+          "question": "Which of the following best describes what a Docker container is?",
+          "options": [
+            "A lightweight, isolated environment that packages an application with all its dependencies",
+            "A virtual machine that runs a complete copy of the operating system",
+            "A storage system for saving Docker images in the cloud",
+            "A tool for monitoring application performance in production"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A container is a packaged, isolated environment with all dependencies included.",
+            "Not quite. That describes a VM, not a container.",
+            "Not quite. That describes a Docker registry, not a container.",
+            "Not quite. That describes monitoring tools, not containers."
+          ],
+          "explanation": "Docker containers are lightweight, isolated runtime environments. They include your application code, runtime, libraries, and dependencies\u2014everything needed to run your app."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "What Would You Like to Explore Next?",
+      "content": "Congratulations on mastering Docker fundamentals and images! Now you can choose your next learning path based on your interests and goals.",
+      "choices": [
+        {
+          "label": "Deploy to Production & Cloud Platforms",
+          "next": "n9"
+        },
+        {
+          "label": "Explore Docker Orchestration",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Docker Images and Dockerfile",
+      "content": "A Docker image is a blueprint\u2014a snapshot of your application environment. A Dockerfile is a text file with instructions to build an image. Each line in a Dockerfile creates a layer: FROM specifies a base image (e.g., Ubuntu, Node.js), RUN executes commands (install dependencies), COPY adds your code, WORKDIR sets the working directory, and CMD defines the default command. Layers are cached, so rebuilding after small changes is fast. Once built, an image is immutable and can be version-controlled, pushed to registries, and run on any machine.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Writing a Dockerfile: Python Flask Application",
+      "content": "Here's a Dockerfile for a Flask app: `FROM python:3.11` starts with Python. `WORKDIR /app` sets the directory. `COPY requirements.txt .` copies dependencies. `RUN pip install -r requirements.txt` installs them. `COPY . .` copies your code. `EXPOSE 5000` documents the port. `CMD [\"python\", \"app.py\"]` runs the app. Building with `docker build -t my-flask-app .` creates an image. Running `docker run -p 5000:5000 my-flask-app` starts a container. Each layer caches, so small code changes rebuild quickly.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Docker Images and Dockerfile Assessment",
+      "content": "Test your understanding of Docker images, Dockerfiles, and image layers.",
+      "questions": [
+        {
+          "question": "In a Dockerfile, what is the purpose of the FROM instruction?",
+          "options": [
+            "To specify the base image that the new image will build upon",
+            "To copy files from your local machine into the container",
+            "To install all dependencies required for the application",
+            "To expose ports so the container can receive network traffic"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! FROM specifies the base image\u2014the starting point for your custom image.",
+            "Not quite. That's what COPY does.",
+            "Not quite. That's typically done with RUN (e.g., RUN pip install...).",
+            "Not quite. That's what EXPOSE does."
+          ],
+          "explanation": "The FROM instruction is always the first line in a Dockerfile. It tells Docker which base image to use as the starting point (e.g., ubuntu:22.04, python:3.11, node:18)."
+        },
+        {
+          "question": "Why are Docker image layers important?",
+          "options": [
+            "Layers are cached during builds, so rebuilding after changes is faster",
+            "Layers allow you to run multiple containers simultaneously",
+            "Layers provide security by encrypting different parts of the image",
+            "Layers enable you to store images in multiple cloud providers"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Docker caches each layer, so rebuilds skip unchanged layers\u2014much faster.",
+            "Not quite. That's not what layers do; containers already run independently.",
+            "Not quite. Encryption is separate; layers are for build efficiency.",
+            "Not quite. Layer structure doesn't determine registry location."
+          ],
+          "explanation": "Docker builds images in layers. Once a layer is built, Docker caches it. On subsequent builds, unchanged layers are reused, making rebuilds much faster. This is why you should put frequently changing instructions (like COPY app code) near the end."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Docker Practice: Deepening Your Skills",
+      "content": "Let's reinforce your understanding with targeted practice questions.",
+      "questions": [
+        {
+          "question": "You have a Dockerfile with: FROM ubuntu:22.04 / RUN apt-get install python3 / COPY app.py . / CMD [\"python3\", \"app.py\"]. You update only app.py and rebuild. Which layers are rebuilt from scratch?",
+          "options": [
+            "Only the COPY layer and CMD layer are rebuilt; FROM and RUN layers use cache",
+            "All layers are rebuilt from scratch every time",
+            "Docker rebuilds only the CMD layer; everything else is cached",
+            "FROM layer is rebuilt; all others are cached"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! When app.py changes, the COPY and subsequent CMD layers rebuild. FROM and RUN are unchanged, so they use cache.",
+            "Not quite. Docker caches unchanged layers to speed up builds.",
+            "Not quite. When COPY changes, CMD must also rebuild because its dependencies changed.",
+            "Not quite. FROM is always cached once built; it never depends on code changes."
+          ],
+          "explanation": "Docker builds layers sequentially. When a layer changes, all subsequent layers must rebuild. Since only app.py changed, the COPY layer and everything after it rebuild. The FROM and RUN layers are unchanged and are retrieved from cache."
+        },
+        {
+          "question": "What is the difference between a Docker image and a Docker container?",
+          "options": [
+            "An image is a static template; a container is a running instance of that image",
+            "An image is a container that has been stopped; a container is a container that is running",
+            "An image is stored in the cloud; a container is stored locally",
+            "An image requires a Dockerfile; a container does not"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Images are blueprints (immutable templates), containers are running instances of those images.",
+            "Not quite. A stopped container is still a container, not an image.",
+            "Not quite. Both can be local or in the cloud.",
+            "Not quite. Containers are instances of images; images are built from Dockerfiles."
+          ],
+          "explanation": "Think of it this way: a class definition is like an image (the blueprint), and an instance of that class is like a container (the running thing). You can create many containers from one image."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: Docker Mastery Achieved!",
+      "content": "Excellent work! You've learned Docker fundamentals\u2014what containers are, why they matter, how to write Dockerfiles, and how images and layers work. You now understand containerization well enough to package applications, build images, and run containers reliably. Next steps: practice with real projects, explore Docker Compose for multi-container apps, dive into Kubernetes for orchestration, or learn about container registries like Docker Hub and ECR. The containerization world is now open to you. Keep building!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn by example"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Test understanding"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n5",
+      "label": "Assessment passed"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n8",
+      "label": "Assessment failed"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Learn by example"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "Test understanding"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n4",
+      "label": "Assessment passed"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Assessment failed"
+    },
+    {
+      "id": "c9",
+      "source": "n4",
+      "target": "n9",
+      "label": "Deploy to Production & Cloud Platforms"
+    },
+    {
+      "id": "c10",
+      "source": "n4",
+      "target": "n9",
+      "label": "Explore Docker Orchestration"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete course"
+    }
+  ],
+  "generated_at": "2026-03-26T09:19:22.715949+00:00",
+  "model": "claude-haiku-4-5"
+}

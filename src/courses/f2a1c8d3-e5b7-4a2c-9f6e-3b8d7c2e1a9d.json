@@ -1,0 +1,132 @@
+{
+  "id": "f2a1c8d3-e5b7-4a2c-9f6e-3b8d7c2e1a9d",
+  "title": "Reinforcement Learning in Game Design",
+  "description": "Learn how RL powers game AI through interactive scenarios where your design choices lead to vastly different outcomes.",
+  "topic": "Reinforcement Learning",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "reinforcement learning",
+    "game design",
+    "AI",
+    "game development",
+    "adaptive systems"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Your Mission: Create Intelligent Game AI",
+      "content": "You're a game AI engineer tasked with using reinforcement learning to improve player experience. Reinforcement learning is a machine learning technique where agents learn from rewards and punishments\u2014much like how a game AI learns to play better by receiving +50 points for a successful boss move and -30 for taking damage. In this course, you'll face two real game design challenges and decide how to apply RL to solve them. Each choice leads to dramatically different outcomes, showing how RL concepts directly impact game quality and player engagement."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Game Design Challenge",
+      "content": "Two critical problems demand your RL expertise. Which will you tackle first?",
+      "choices": [
+        {
+          "label": "Design an NPC boss that learns from player tactics",
+          "next": "n3"
+        },
+        {
+          "label": "Create a difficulty system that adapts to each player's skill",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "The Adaptive Boss Problem",
+      "content": "Your game needs a boss NPC that improves over multiple player encounters. Currently it runs fixed attack patterns\u2014players memorize and exploit them by round 3. You'll implement an RL agent where: the boss observes state (player distance, health, recent attacks), takes actions (attack type, timing, dodge), and receives rewards (+50 for successful hit, +20 for blocked attack, -30 for taking damage). The reward signal guides the learning process. But here's the design challenge: should your boss aggressively explore new tactics, or mostly exploit the moves it's learned work well? This exploration-exploitation trade-off is fundamental to RL."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "How Should Your Boss Learn?",
+      "content": "Two training approaches exist for balancing exploration versus exploitation in your reinforcement learning algorithm.",
+      "choices": [
+        {
+          "label": "Maximum Exploration\u2014Boss tries random move 50% of the time",
+          "next": "n5"
+        },
+        {
+          "label": "Epsilon-Greedy Balance\u2014Boss uses best move 90% of time, explores 10%",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Chaotic Boss\u2014Learning Failed",
+      "content": "You configure the boss with 50% exploration rate. Fights 1-10 feel genuinely threatening\u2014unpredictable, aggressive, players struggle. But by round 15, players notice: the boss is just acting randomly. It never converges to intelligent tactics; it keeps trying moves without building on successes. Players exploit this complete randomness in speedruns. The outcome: boss feels broken, not intelligent. **Why it failed**: Pure exploration prevents the agent from converging to a good policy. You sacrificed all exploitation\u2014the algorithm never capitalized on discovered good moves. **RL lesson**: Exploration without exploitation means no learning progress. A balanced approach is essential."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Adaptive Boss\u2014Learning Succeeded",
+      "content": "You configure epsilon-greedy with 90% exploitation, 10% exploration. By round 20, the boss has discovered powerful patterns: attacking during player stamina recovery, dodging to set up counters, timing specials to interrupt combos. It still explores 10% of the time\u2014occasionally discovering that defensive stances create counter-attack opportunities. Players report the boss 'adapts to their playstyle.' Speedrunners find subtle exploits but respect the AI's intelligence. **Metrics**: Engagement time +40%, boss difficulty rated 'challenging' by 85% of players. **RL lesson**: Balanced exploration-exploitation allows the agent to learn effective policies while still discovering novel strategies. This is how real RL agents master complex environments."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "The Flow State Optimization Problem",
+      "content": "Your game has a critical retention issue: casual players quit when it's too hard, hardcore players quit when it's too easy. Solution: dynamic difficulty using RL. Your agent (difficulty controller) observes each player's state (win rate, engagement time, death patterns), takes actions (scale enemy health 0-50%, adjust spawn rates \u00d70.5 to \u00d72, unlock abilities early/late), and receives rewards (+10 for 55-65% win rate 'flow state', -20 for >80% win rate 'boredom', -30 for <40% 'frustration'). Goal: keep each player in the sweet spot where they win ~60% of encounters. This is optimization with a learner-defined objective."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Dynamic Difficulty Maintained Engagement",
+      "content": "You deploy an RL-based difficulty system that continuously adjusts between encounters. Casual player winning 85% fights \u2192 system increases enemy health \u2192 they win 60% \u2192 they stay engaged. Hardcore player at 35% win rate \u2192 system reduces spawn rate \u2192 they're challenged at 58% \u2192 they keep playing. After one month: average session length +35%, endgame completion doubled, 'too hard' complaints -70%. **Why RL solved this**: The algorithm optimizes directly toward the defined reward (flow state), continuously adapting to individual player behavior. This mirrors human learning\u2014we grow best at the edge of our capability. **RL lesson**: Reinforcement learning excels at continuous optimization toward domain-specific goals, far better than static balance tuning."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Path A"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Path B"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "High Exploration"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Balanced Approach"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T06:41:36.318323+00:00",
+  "model": "claude-haiku-4-5"
+}

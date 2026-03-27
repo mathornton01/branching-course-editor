@@ -1,0 +1,493 @@
+{
+  "id": "a8f5e3c2-4b9d-47e1-9c5f-2d8e4a6b7f3c",
+  "title": "Docker and Containerization for EdTech",
+  "description": "Learn Docker containerization through the lens of education technology platforms, from basics to multi-container deployments with Docker Compose.",
+  "topic": "Docker and Containerization",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 90,
+  "tags": [
+    "docker",
+    "containerization",
+    "devops",
+    "education-technology",
+    "deployment"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Docker Matters for Educational Platforms",
+      "content": "Educational technology platforms face a critical challenge: ensuring code runs identically across development machines, testing servers, and production environments. A learning management system (LMS) developed on an instructor's Windows laptop with Node.js 16 may behave differently on a Linux production server with Node.js 18. Docker solves this by packaging your entire application\u2014code, runtime, dependencies, and configuration\u2014into a container that runs the same everywhere. This means your course delivery platform works consistently whether deployed to a cloud provider, on-premises server, or hybrid infrastructure. Containers also provide isolation: multiple educational apps can run on the same server without interfering with each other, improving security and resource utilization.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Docker Fundamentals Assessment",
+      "content": "Test your understanding of containerization concepts and why Docker is essential for education platforms.",
+      "questions": [
+        {
+          "question": "An educational institution runs a virtual classroom platform on their instructor's MacBook Pro for testing, but when deployed to production on Linux servers, the video streaming feature breaks. What problem does Docker solve for this scenario?",
+          "options": [
+            "Docker automatically fixes compatibility issues with video codecs",
+            "Docker ensures the application environment is identical across all machines, preventing 'works on my machine' problems",
+            "Docker eliminates the need for testing altogether",
+            "Docker reduces the cost of cloud infrastructure by 90%"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Docker doesn't fix code bugs, but it ensures consistent environments.",
+            "Correct! Docker containerizes the entire environment, eliminating inconsistencies.",
+            "Testing is still essential; Docker just makes testing more reliable.",
+            "Docker may help reduce costs, but that's not the primary reason for using it here."
+          ],
+          "explanation": "Docker's core value is environment consistency. By containerizing the application, dependencies, and runtime, Docker guarantees the same behavior across development, testing, and production environments."
+        },
+        {
+          "question": "Your LMS needs to run a legacy course authoring tool alongside a modern API for mobile learning. Why is container isolation valuable for this scenario?",
+          "options": [
+            "Containers use less disk space than virtual machines",
+            "Containers allow both applications to run on the same server without conflicts, each with its own dependencies",
+            "Containers automatically back up your course data",
+            "Containers eliminate the need for security updates"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While containers are lightweight, that's not the main benefit here.",
+            "Correct! Isolation means each container has its own filesystem and dependencies.",
+            "Container isolation doesn't provide data backup automatically.",
+            "Containers actually require regular security updates like any software."
+          ],
+          "explanation": "Container isolation is crucial when running multiple applications. Each container has its own runtime, libraries, and configurations, preventing dependency conflicts and improving security."
+        },
+        {
+          "question": "How does Docker differ from simply installing an application directly on a server?",
+          "options": [
+            "Docker is slower and less secure than direct installation",
+            "Docker packages the entire environment (OS, runtime, dependencies) ensuring consistency, while direct installation depends on the host system's setup",
+            "Docker only works for educational applications",
+            "Docker requires less storage space than direct installation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Docker is actually optimized for performance and security.",
+            "Correct! Docker's portability comes from packaging everything needed to run the app.",
+            "Docker works for any type of application.",
+            "Docker containers are typically larger than direct installations due to packaging overhead."
+          ],
+          "explanation": "Direct installation is server-dependent and error-prone. Docker packages everything your app needs, making it portable and reproducible across any environment."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Docker Fundamentals Practice",
+      "content": "Reinforce your understanding of Docker's core concepts through practical scenarios in education technology.",
+      "questions": [
+        {
+          "question": "Your online tutoring platform uses Python 3.9, Flask 2.0, and PostgreSQL 12. You want to ensure every team member and production server runs identical versions. What should you containerize?",
+          "options": [
+            "Only the Python code and Flask application",
+            "Only the database because that's where problems usually occur",
+            "The entire application stack: Python runtime, Flask, PostgreSQL, and all dependencies",
+            "Just the operating system files"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "You'd miss the runtime and other dependencies.",
+            "The database is important, but you need the full stack for consistency.",
+            "Correct! Everything needed to run the app should be containerized.",
+            "That's too much; you only need the application and its dependencies."
+          ],
+          "explanation": "Docker containerizes the entire application stack\u2014code, runtime, all libraries, and services. This ensures that whether an instructor runs the tutoring app on their laptop or it runs on production servers, the environment is identical."
+        },
+        {
+          "question": "Two students take an online exam at the same time. The exam platform runs in two separate containers on the same server. A security vulnerability is found in the shared database driver. Which benefit of container isolation helps here?",
+          "options": [
+            "Containers can share vulnerability patches instantly",
+            "Each container's isolation means the vulnerability affects only one exam, not both",
+            "Isolation prevents vulnerabilities from being discovered",
+            "Containers automatically update all dependencies"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Isolation alone doesn't provide automatic patching, but it limits damage.",
+            "Correct! Isolation contains the risk; fixing one container doesn't break others.",
+            "Vulnerabilities are still discovered; isolation just limits their impact.",
+            "Containers don't auto-patch; you must update them."
+          ],
+          "explanation": "Container isolation means each container has its own environment. If you need to patch one container, other containers running on the same server are unaffected."
+        },
+        {
+          "question": "Your LMS development team uses Mac, Linux, and Windows machines. Without Docker, testing is inconsistent because each OS has different default configurations. With Docker, what changes?",
+          "options": [
+            "Docker eliminates the need for testing on multiple operating systems",
+            "All team members test in identical containerized environments, regardless of their host OS",
+            "Docker makes applications run faster on Windows only",
+            "Docker handles all testing automatically without human involvement"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "You still need to test, but now in consistent environments.",
+            "Correct! The container's environment is consistent regardless of the host OS.",
+            "Docker works consistently across all operating systems.",
+            "Automated testing requires automation tools; Docker just provides the environment."
+          ],
+          "explanation": "Docker ensures that all team members\u2014regardless of their local operating system\u2014test in the same containerized environment. This eliminates 'works on my machine' problems."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Docker Images and Containers: Building Blocks of EdTech Deployment",
+      "content": "A Docker image is a blueprint\u2014a snapshot of your application, runtime, and dependencies. A container is a running instance of that image, similar to how a class object is a blueprint and an object instance is a running copy. For an educational video platform, you might create an image containing Node.js 18, your Express API, and all npm dependencies. When you run this image, Docker creates a container\u2014an isolated environment where your API executes. Images are built using a Dockerfile, a simple text file with instructions like 'install Node.js 18, copy my code, run npm install.' You can version images (e.g., student-portal:v1.0, student-portal:v1.1), push them to a registry for your team to share, and deploy thousands of identical containers from the same image. For educational platforms supporting millions of concurrent learners, this reproducibility is essential.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Docker Images and Containers Assessment",
+      "content": "Evaluate your understanding of Docker images, containers, and the lifecycle of containerized educational applications.",
+      "questions": [
+        {
+          "question": "You're building a container for your course management system. The Dockerfile includes instructions to install Python 3.10, copy your Django code, and run pip install -r requirements.txt. What is created when you execute 'docker build'?",
+          "options": [
+            "A running container ready to serve student requests",
+            "A Docker image\u2014a reusable blueprint that can launch many containers",
+            "A virtual machine with Python installed",
+            "A database to store course information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "'docker build' creates an image, not a running container.",
+            "Correct! 'docker build' creates an image from the Dockerfile instructions.",
+            "Docker images are lighter than VMs; they share the host's OS kernel.",
+            "Images don't include database creation; that's a separate step."
+          ],
+          "explanation": "'docker build' reads your Dockerfile and creates a Docker image\u2014a static snapshot of your application and its environment. You then use 'docker run' to launch containers from that image."
+        },
+        {
+          "question": "Your learning analytics platform image is 2GB. You push it to your company's Docker registry and a teammate pulls it. Later, you update the analytics algorithm, rebuild the image, and push v2.0. What happens to the old image on your colleague's machine?",
+          "options": [
+            "It automatically deletes to save space",
+            "It remains; your colleague must manually pull and build the new version",
+            "Both versions exist; your colleague can run either v1.0 or v2.0 containers",
+            "Docker automatically updates all running containers"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Docker doesn't automatically delete unused images.",
+            "Partially correct, but both versions can coexist.",
+            "Correct! Image versions are independent; your colleague can run either.",
+            "Running containers aren't automatically updated; you must restart them."
+          ],
+          "explanation": "Docker images are versioned. Both versions can exist on the same machine, allowing your team to maintain different versions for backward compatibility or gradual rollout of updates to the learning platform."
+        },
+        {
+          "question": "You launch 3 containers from your exam platform image on the same server. Each handles traffic from different time zones. All three containers share the same image but have isolated filesystems and processes. Why is this architecture valuable?",
+          "options": [
+            "It reduces the image file size for faster downloads",
+            "It allows efficient resource sharing while maintaining isolation, and if one container crashes, others keep running",
+            "It automatically balances load across time zones",
+            "It eliminates the need for database backups"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The image size doesn't change; multiple containers share the same image.",
+            "Correct! Multiple containers from one image = efficiency + isolation + resilience.",
+            "Load balancing requires separate configuration, not just multiple containers.",
+            "Containers don't affect database backup strategy."
+          ],
+          "explanation": "Running multiple containers from the same image is efficient: they share the image but have isolated environments. If one container fails, others continue running\u2014improving availability for your educational platform."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Docker Images and Containers Practice",
+      "content": "Build practical skills with Docker images and containers in realistic education technology scenarios.",
+      "questions": [
+        {
+          "question": "You're writing a Dockerfile for a course recommendation engine. It needs Python 3.9, TensorFlow, scikit-learn, and your recommendation code. What should the Dockerfile include?",
+          "options": [
+            "Only COPY instructions to move your recommendation code into the container",
+            "RUN pip install to install TensorFlow and scikit-learn, COPY to add your code, and CMD to specify what runs when the container starts",
+            "Instructions to download Python from the internet each time the container starts",
+            "Only the operating system installation; dependencies are installed later"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "You need dependencies too, not just your code.",
+            "Correct! A proper Dockerfile installs dependencies and specifies the startup command.",
+            "Docker images already include the base OS; downloading Python separately is inefficient.",
+            "All dependencies should be in the image for reproducibility."
+          ],
+          "explanation": "A Dockerfile specifies the entire environment: base image, dependency installation, code copying, and startup command. This creates a reproducible, self-contained image."
+        },
+        {
+          "question": "Your student submission platform image is 3GB. You rebuild it 10 times during development. What could make rebuilds faster and save disk space?",
+          "options": [
+            "Delete the Dockerfile and use a different tool",
+            "Docker layers: reorder your Dockerfile so dependencies are installed before code, reducing rebuild time when only code changes",
+            "Increase your server RAM",
+            "Use only container images without storing them"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Dockerfile is essential; don't delete it.",
+            "Correct! Docker layers cache previous builds, speeding rebuilds and saving space.",
+            "RAM doesn't affect image rebuilds.",
+            "Images must be stored to launch containers from them."
+          ],
+          "explanation": "Docker builds images in layers. If you install dependencies (which change infrequently) before copying code (which changes often), Docker caches the dependency layer, making subsequent builds much faster."
+        },
+        {
+          "question": "Your team runs a tutoring platform with 5 containers on one server: 3 for API instances and 2 for background job processing. They're all from the same image. A security patch is needed. What do you do?",
+          "options": [
+            "Rebuild the image and restart each of the 5 containers manually",
+            "Rebuild the image with the patch, and restart all 5 containers from the new image (they'll all instantly get the patch)",
+            "Patch each container individually with shell commands",
+            "Wait and manually patch each container's code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Restarting without rebuilding doesn't apply the patch.",
+            "Correct! Rebuild once, restart all containers\u2014they all get the patch instantly.",
+            "Direct container patching breaks reproducibility and causes drift.",
+            "Delayed patching is a security risk."
+          ],
+          "explanation": "With Docker, you patch the image once, then restart all containers from the patched image. All 5 containers immediately run the patched version, ensuring consistency and security across your platform."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Docker Compose: Orchestrating Multi-Service EdTech Applications",
+      "content": "Educational platforms are rarely single-container applications. A modern LMS typically needs a web frontend container, an API backend container, a PostgreSQL database container, a Redis cache container, and maybe an Elasticsearch service for search. Managing all these containers individually is tedious and error-prone. Docker Compose simplifies this with a simple YAML file that defines all services, their images, networking, and volumes. A single command 'docker-compose up' launches your entire platform\u2014all containers, properly networked so the API can reach the database, and volumes so data persists when containers stop. For development, this means any instructor or developer can start the entire LMS on their laptop with one command. For production, orchestration tools like Kubernetes build on this concept. Docker Compose is essential for educational technology because it makes complex, multi-service applications manageable and reproducible.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Docker Compose Assessment",
+      "content": "Assess your understanding of Docker Compose and multi-service application orchestration for educational platforms.",
+      "questions": [
+        {
+          "question": "Your virtual classroom platform has a React frontend, Node.js API, PostgreSQL database, and Redis cache. You're using Docker Compose. What does 'docker-compose up' do?",
+          "options": [
+            "Launches only the frontend container; other services must be started separately",
+            "Launches all 4 containers simultaneously, sets up networking between them, and makes the platform accessible",
+            "Creates the Docker images; you still need to run containers manually",
+            "Only starts the database; the API and frontend are configured but not started"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "'docker-compose up' launches all services defined in the compose file.",
+            "Correct! One command starts your entire multi-service educational platform.",
+            "'docker-compose up' runs images; you build them separately.",
+            "'docker-compose up' starts all services, not just the database."
+          ],
+          "explanation": "'docker-compose up' is the power of Compose: one command that launches, networks, and configures all services in your compose file. Perfect for an instructor or developer who needs the entire LMS running locally."
+        },
+        {
+          "question": "In your docker-compose.yml, the API service needs to connect to the database using hostname 'postgres'. How does Docker Compose make this work?",
+          "options": [
+            "It requires you to hardcode the database IP address in the API code",
+            "Compose automatically creates a network and provides DNS resolution, so 'postgres' resolves to the database container's IP",
+            "You must manually configure network bridges outside of Compose",
+            "Compose doesn't support inter-container networking; you need Kubernetes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Hardcoding IPs is fragile; Compose provides automatic DNS.",
+            "Correct! Compose's built-in networking allows services to find each other by hostname.",
+            "Compose handles networking automatically; no manual bridges needed.",
+            "Compose is purpose-built for multi-container applications."
+          ],
+          "explanation": "Docker Compose creates an internal network and provides DNS resolution by service name. When your API container connects to 'postgres', Docker's DNS resolves it to the PostgreSQL container's IP, even if that IP changes."
+        },
+        {
+          "question": "Your course database is stored in a Docker volume defined in docker-compose.yml. What happens to that data when you run 'docker-compose down'?",
+          "options": [
+            "The data is deleted immediately",
+            "The containers stop, but the volume persists, so data is preserved across restarts",
+            "The volume is corrupted and unrecoverable",
+            "Compose automatically backs up the data to the cloud"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "'docker-compose down' doesn't delete volumes by default.",
+            "Correct! Volumes are independent of containers; they persist after 'down'.",
+            "Volumes are robust; they don't corrupt from normal operations.",
+            "Automatic backups require explicit configuration."
+          ],
+          "explanation": "Docker volumes decouple data from containers. When you stop containers with 'docker-compose down', volumes remain, preserving your course data. The next 'docker-compose up' uses the same volume with existing data intact."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Docker Compose Practice",
+      "content": "Master Docker Compose through realistic multi-service education technology scenarios.",
+      "questions": [
+        {
+          "question": "Your docker-compose.yml defines a 'frontend' service on port 3000 and an 'api' service on port 5000. The frontend needs to call the API. What URL should the frontend use to call the API from within the container?",
+          "options": [
+            "http://localhost:5000 (the API might not be on localhost from the frontend container's perspective)",
+            "http://api:5000 (Compose provides DNS resolution from service name to container IP)",
+            "http://127.0.0.1:5000 (loopback only works within the same container)",
+            "You must hardcode the API container's IP address from docker inspect"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "From the frontend container's perspective, localhost is the frontend, not the API.",
+            "Correct! Compose's service networking allows frontend to reach api by hostname.",
+            "Loopback (127.0.0.1) is only for the same container.",
+            "Hardcoding IPs breaks if containers are recreated."
+          ],
+          "explanation": "Docker Compose's service networking lets containers communicate by service name. The frontend container can reach the API by calling http://api:5000 because Compose's internal DNS resolves 'api' to the API container."
+        },
+        {
+          "question": "You want your course authoring tool (backend) to write logs to a file that persists even after 'docker-compose down'. What should you use?",
+          "options": [
+            "Write logs to a local file inside the container (logs are lost when the container stops)",
+            "Define a Docker volume in the compose file, mount it in the container, and write logs there",
+            "Print all logs to stdout and let Compose handle storage (Compose doesn't persist stdout)",
+            "Use a separate logging service outside of Docker"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Container-internal files are lost when the container stops.",
+            "Correct! Volumes persist data outside the container lifecycle.",
+            "Stdout is useful for real-time monitoring but isn't persisted by Compose.",
+            "While possible, Docker volumes are simpler and part of Compose."
+          ],
+          "explanation": "Docker volumes store data outside containers, making them perfect for persistent logs. Define a volume in docker-compose.yml, mount it in the container (e.g., /var/log), and logs persist across container restarts."
+        },
+        {
+          "question": "Your team member runs 'docker-compose up' for the first time on their laptop. It pulls images and launches 4 services (frontend, API, database, cache). Later, they update the API code and run 'docker-compose up' again. What happens?",
+          "options": [
+            "All services restart from scratch; Compose rebuilds all images",
+            "If the API image hasn't changed, Compose reuses it; only changed images rebuild",
+            "Compose detects code changes and automatically rebuilds the API image",
+            "Nothing happens; existing containers continue running with old code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Compose doesn't automatically rebuild unchanged images.",
+            "Correct! Compose reuses cached images if the build context hasn't changed.",
+            "Compose doesn't auto-rebuild; you must update the Dockerfile or run 'docker-compose build'.",
+            "Existing containers keep running with old code unless explicitly restarted."
+          ],
+          "explanation": "By default, 'docker-compose up' reuses existing images. To rebuild after code changes, run 'docker-compose up --build' or 'docker-compose build' first. For development efficiency, consider using volumes to mount code directly into containers."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Docker Mastery Complete!",
+      "content": "Congratulations! You've mastered Docker and containerization for education technology. You understand how Docker ensures consistency across development, testing, and production environments for learning platforms. You can build Docker images with Dockerfiles, run and manage containers, and orchestrate multi-service applications with Docker Compose. These skills are essential for modern educational technology deployment, whether you're building an LMS, virtual classroom, course authoring tool, or student analytics platform. Your educational platform is now ready for reliable, scalable deployment!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    }
+  ],
+  "generated_at": "2026-03-27T10:44:32.676688+00:00",
+  "model": "claude-haiku-4-5"
+}

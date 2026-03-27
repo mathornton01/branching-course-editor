@@ -1,0 +1,227 @@
+{
+  "id": "cc-compiler-design-socialwork",
+  "title": "Compiler Design: A Social Work Perspective",
+  "description": "Learn compiler design principles by analyzing how social workers process, validate, and structure case information\u2014from initial intake through case plan generation.",
+  "topic": "Compiler Design",
+  "theme": "social work",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "compiler design",
+    "social work",
+    "programming concepts",
+    "system design"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic Assessment: Compiler Concepts",
+      "content": "Before diving into compiler design, let's assess your understanding of the key phases. In this diagnostic, you'll answer questions about compilation stages. Your results will guide you to either an advanced or foundational learning path tailored to your current knowledge.",
+      "questions": [
+        {
+          "question": "In compiler design, which phase breaks source code into meaningful tokens (like keywords, identifiers, and operators)?",
+          "options": [
+            "A. Syntax analysis",
+            "B. Lexical analysis",
+            "C. Semantic analysis",
+            "D. Code generation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. Syntax analysis works with tokens, but a different phase creates them.",
+            "Correct! Lexical analysis tokenizes the input.",
+            "Semantic analysis validates meaning, not tokenization.",
+            "Code generation produces output, but this happens later."
+          ],
+          "explanation": "Lexical analysis is the first compiler phase, converting raw input characters into meaningful units called tokens. This is fundamental to compilation."
+        },
+        {
+          "question": "What does semantic analysis check in a compiler?",
+          "options": [
+            "A. Whether the program follows the grammar rules",
+            "B. Whether variable types are used consistently and operations are valid",
+            "C. Whether the code runs efficiently",
+            "D. Whether the output executable is correct"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's syntax analysis\u2014checking grammar structure.",
+            "Exactly! Semantic analysis validates meaning and type safety.",
+            "That's optimization, which is separate.",
+            "That's verification, which tests the final result."
+          ],
+          "explanation": "Semantic analysis ensures the program makes logical sense\u2014variables are declared before use, types match, operations are valid. It's the 'meaning checker' of the compiler."
+        },
+        {
+          "question": "In what order do these compiler phases typically occur?",
+          "options": [
+            "A. Lexical \u2192 Semantic \u2192 Syntax \u2192 Code Generation",
+            "B. Syntax \u2192 Lexical \u2192 Semantic \u2192 Code Generation",
+            "C. Lexical \u2192 Syntax \u2192 Semantic \u2192 Code Generation",
+            "D. Semantic \u2192 Syntax \u2192 Lexical \u2192 Code Generation"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Semantic analysis comes after syntax analysis.",
+            "Syntax analysis requires tokens from lexical analysis first.",
+            "Correct! Lexical creates tokens, syntax builds structure, semantic validates meaning, then code is generated.",
+            "Lexical analysis must come first to create tokens."
+          ],
+          "explanation": "The compiler pipeline is: Lexical Analysis \u2192 Syntax Analysis \u2192 Semantic Analysis \u2192 Code Generation. Each phase builds on the previous one."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: From Tokenization to Validation (Semantic Depth)",
+      "content": "In social work, compilers and case processing share a profound parallel. When a client presents, their narrative flows as raw text: complaints, background, needs. A compiler's lexical phase mirrors a social worker's intake process\u2014breaking the narrative into tokens (presenting problems, family history, current stressors). Next, syntax analysis checks the logical structure: Do the issues connect coherently? Is the narrative structured appropriately? Finally, semantic analysis validates deeper meaning: Do the identified problems align with available services? Are intervention goals type-safe (compatible with the client's actual diagnosis and needs)? Compilers generate executable code; social workers generate case plans. Both involve validating that structure and meaning align before producing actionable output. Understanding these parallels\u2014how information flows through validation layers\u2014is key to grasping compiler design at an advanced level.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced Example: Processing a Complex Case",
+      "content": "Consider a client intake in a mental health and addiction social work setting. Raw narrative: 'I've been drinking heavily for 3 years, lost my job 6 months ago, my family won't talk to me, and I'm homeless now.' Lexical phase (tokenization): Client story becomes tokens: [substance_abuse, job_loss, family_estrangement, homelessness, depression]. Syntax phase: Check structure\u2014are these issues logically connected? Yes: substance abuse caused job loss; unemployment worsened isolation and family conflict; housing instability compounds all issues. Semantic phase: Validate meaning\u2014can our agency provide services for each issue? Check type compatibility: substance_abuse (requires addiction counselor) \u2713, homelessness (requires housing liaison) \u2713, family_estrangement (requires family therapist) \u2713. Are dependencies type-safe? Family work won't help until housing and addiction treatment stabilize the client\u2014the intervention sequence is logically valid. Code generation (case plan): Produce structured output: Phase 1 (weeks 1-4): Detox placement + emergency housing + psychiatric evaluation. Phase 2 (weeks 5-12): Family counseling begins. Phase 3 (weeks 13+): Job training and employment support.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete",
+      "content": "You've explored compiler design at depth\u2014understanding how lexical, syntax, and semantic phases work together, and how these concepts apply directly to social work case processing. The parallel is real: both systems transform raw input into structured, validated output through multiple passes of analysis. This foundation prepares you to understand advanced topics like compiler optimization (case plan efficiency), error recovery (crisis response protocols), and multi-pass compilation (case review and adaptation cycles). Excellent work!"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundations: Lexical Analysis & Case Intake",
+      "content": "Every compiler starts by reading raw source code\u2014a continuous stream of characters with no structure or meaning markers. The lexical analysis phase breaks this stream into meaningful pieces called tokens. Think of a social worker receiving a client's initial narrative. Initially, it's an unstructured story: words, pauses, emotions flowing together. Lexical analysis in the compiler context mirrors case intake in social work: the worker listens, asks clarifying questions, and identifies key tokens\u2014presenting problems, demographics, assets, barriers. For example, in source code, 'while' is a keyword token, '42' is a numeric token, 'client_age' is an identifier token. In case intake, 'depression' is a diagnosis token, 'homeless' is a status token, 'employed' is an employment token, 'primary caregiver' is a role token. By the end of lexical analysis, both the compiler and social worker have transformed raw input into structured, organized pieces ready for deeper analysis. Tokens are the foundation for all subsequent processing.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Basic Example: Tokenizing a Client Intake",
+      "content": "A homeless youth arrives at an outreach center and meets with a social worker. Raw intake narrative: 'I'm 17, dropped out of school last year, been on the streets for 4 months, my parents won't help me, but I really want to finish my education and get a job.' Lexical analysis (tokenization) breaks this unstructured narrative into meaningful tokens: age[17], status[homeless_youth], education_history[high_school_dropout], months_homeless[4], family_support[unavailable], goal_education[completion], goal_employment[desired]. Each token identifies a key piece of information the case manager needs. Notice the worker doesn't yet decide what services to offer\u2014that decision comes later in semantic analysis. Here, the goal is simply to identify and name the pieces. The narrative is converted into structured data that can be processed systematically. Once tokenized, this youth's case can move forward: checking whether the pieces fit coherently and whether the agency can provide matching services.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Tokenizing Case Narratives",
+      "content": "Practice breaking real case narratives into tokens. This builds your ability to recognize how raw information becomes structured data, just as a compiler transforms source code into tokens.",
+      "questions": [
+        {
+          "question": "A client says: 'I'm 45, unemployed for 2 years, dealing with chronic pain from an old injury, lost custody of my kids 6 months ago, but I want to rebuild my life and reconnect with them.' Which is NOT a meaningful token to extract during intake?",
+          "options": [
+            "A. age[45]",
+            "B. employment_status[unemployed_2_years]",
+            "C. health_status[chronic_pain]",
+            "D. family_connection[strengthening_in_future]"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "This is a meaningful token from the narrative.",
+            "This is a meaningful token from the narrative.",
+            "This is a meaningful token from the narrative.",
+            "Correct. The client expressed a desire for future reconciliation, not current status. We extract stated facts, not predictions or hopes as tokens."
+          ],
+          "explanation": "Lexical analysis extracts tokens from what's explicitly stated in the source. The client wants to reconnect (hope/goal), but that's not a current status token. We tokenize facts and stated information, not future aspirations."
+        },
+        {
+          "question": "During intake, a social worker learns a client speaks three languages, has a supportive partner, lives in inadequate housing, and has moderate depression. Which best describes the tokenization of this information?",
+          "options": [
+            "A. The worker immediately decides multilingual counseling services are the best fit.",
+            "B. The worker extracts distinct tokens (language_skills[trilingual], support_system[partner], housing[inadequate], mental_health[moderate_depression]) without yet validating against available services.",
+            "C. The worker skips language and support details because they're 'soft' information.",
+            "D. The worker combines all information into a single 'overall_functioning' token."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's semantic analysis (matching to services), not lexical analysis.",
+            "Correct! Lexical analysis extracts and structures tokens without judgment or application.",
+            "All tokens are relevant for complete case understanding.",
+            "Each distinct piece of information deserves its own token for precision and later use."
+          ],
+          "explanation": "Lexical analysis identifies and names distinct pieces of information. Later phases validate and apply them to service planning. Never skip or merge tokens\u2014preserve the structure for downstream analysis."
+        },
+        {
+          "question": "A case file note reads: 'Client reports feeling hopeless and hasn't left the house in two weeks.' In tokenization, what are the primary tokens here?",
+          "options": [
+            "A. emotional_state[hopelessness], social_withdrawal[2_weeks]",
+            "B. mood_disorder[depression] and isolation_indicator[severe]",
+            "C. prognosis[poor_without_intervention]",
+            "D. symptoms[psychological_distress]"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Tokenize the observed facts: emotional state and withdrawal duration.",
+            "That's interpretation and semantic analysis, not raw token extraction.",
+            "That's a future prediction, not a current token.",
+            "That's a generalized label; be specific: which emotions and which behaviors?"
+          ],
+          "explanation": "Tokenization extracts what the client stated or demonstrated: 'hopeless' (emotion) and 'hasn't left house 2 weeks' (behavior/timeline). Diagnosis and prognosis come later in semantic analysis."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundations Complete",
+      "content": "You've mastered the foundational concept: lexical analysis and case intake both transform raw, unstructured information into organized, meaningful tokens. This is the first critical step in compiler design and case management. Tokens are the building blocks for all subsequent analysis phases. You now understand how information flows through the first phase of structured processing. In a real compiler, tokens move to syntax analysis to check structure; in social work, tokenized information moves to assessment and case planning to validate fit. You've built a solid foundation for understanding how complex systems\u2014whether compilers or case management systems\u2014handle information systematically and professionally!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (advanced path)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Fail (foundational path)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T05:32:44.604459+00:00",
+  "model": "claude-haiku-4-5"
+}

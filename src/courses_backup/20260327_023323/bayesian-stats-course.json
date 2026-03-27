@@ -1,0 +1,234 @@
+{
+  "id": "bayesian-stats-course",
+  "title": "Bayesian Statistics Fundamentals",
+  "description": "Learn the foundations of Bayesian statistics and how to apply Bayes' Theorem to real-world problems",
+  "topic": "Bayesian Statistics",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "statistics",
+    "probability",
+    "bayesian",
+    "inference"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Bayes' Theorem",
+      "content": "Bayes' Theorem describes how to update our beliefs when we get new evidence. Mathematically, P(A|B) = P(B|A) \u00d7 P(A) / P(B), where P(A|B) is the posterior probability (our updated belief after seeing evidence B), P(B|A) is the likelihood, P(A) is the prior probability, and P(B) is the marginal probability. This formula revolutionized statistics by providing a systematic way to incorporate prior knowledge into our analysis. Bayesian thinking is used everywhere: spam detection, medical diagnosis, machine learning, and weather forecasting.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Example: Testing for a Rare Disease",
+      "content": "A disease affects 1 in 1000 people (prior = 0.001). A test is 99% accurate for positive cases and 95% accurate for negative cases. If your test is positive, what's the actual probability you have the disease? Using Bayes' Theorem: P(Disease|Positive) = (0.99 \u00d7 0.001) / (0.99 \u00d7 0.001 + 0.05 \u00d7 0.999) \u2248 0.0198 or about 2%. This counterintuitive result shows why understanding base rates (priors) is critical\u2014even with a 99% accurate test, a positive result on a rare disease only means you have roughly a 2% chance of actually having it.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Assessment: Understanding Bayes' Theorem",
+      "content": "Test your understanding of Bayes' Theorem and how priors affect posterior probabilities.",
+      "questions": [
+        {
+          "question": "In Bayes' Theorem P(A|B) = P(B|A) \u00d7 P(A) / P(B), what does P(A) represent?",
+          "options": [
+            "The posterior probability",
+            "The prior probability",
+            "The likelihood",
+            "The marginal probability"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. P(A) is our initial belief before considering the evidence.",
+            "Correct! P(A) is the prior probability\u2014our initial belief.",
+            "Incorrect. P(B|A) is the likelihood.",
+            "Incorrect. P(B) is the marginal probability."
+          ],
+          "explanation": "P(A) is the prior\u2014it represents what we believed about A before collecting evidence B. The other terms update this belief based on new data."
+        },
+        {
+          "question": "A spam filter correctly identifies 98% of spam emails (true positive rate) and 5% of legitimate emails as spam (false positive rate). If 2% of emails are actually spam, what is the probability an email flagged as spam is truly spam?",
+          "options": [
+            "Approximately 29%",
+            "Approximately 50%",
+            "Approximately 73%",
+            "Approximately 98%"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Using Bayes' Theorem: (0.98 \u00d7 0.02) / (0.98 \u00d7 0.02 + 0.05 \u00d7 0.98) \u2248 0.286",
+            "Incorrect. The calculation requires applying Bayes' Theorem with the given rates.",
+            "Incorrect. This overlooks the high false positive rate relative to the low spam prior.",
+            "Incorrect. This is the true positive rate, not the posterior probability."
+          ],
+          "explanation": "Even though the filter catches 98% of spam, the low prior probability of spam (2%) combined with the 5% false positive rate means most flagged emails are legitimate. This demonstrates Bayes' Theorem's practical importance."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Bayesian Inference in Practice",
+      "content": "Bayesian inference extends Bayes' Theorem to estimate unknown parameters using observed data. Instead of asking 'Is this hypothesis true?', Bayesian inference asks 'Given what I observed, what do I believe about this parameter?' We specify a prior distribution for the parameter, observe data, and calculate a posterior distribution that combines both. This posterior becomes the new prior when more data arrives, enabling sequential learning. Bayesian methods are powerful for decision-making under uncertainty, A/B testing, and machine learning because they naturally incorporate prior knowledge and quantify uncertainty.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Example: Estimating a Coin's Fairness",
+      "content": "You flip a coin 10 times and get 8 heads. Is the coin fair? Bayesian inference starts with a prior (assuming fairness), observes your data (8 heads in 10 flips), and calculates a posterior probability distribution for the coin's true bias. With a weak prior and this data, the posterior suggests the coin is probably biased toward heads, but not certainty. If you flip it 100 more times and get 55 heads in those 100 flips (95 total), the posterior shifts toward fairness. Bayesian updating elegantly handles sequential data collection and shrinks estimates toward the prior when data is sparse.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Assessment: Bayesian Inference",
+      "content": "Test your understanding of Bayesian inference and sequential learning.",
+      "questions": [
+        {
+          "question": "In Bayesian inference, what is the primary advantage of updating beliefs sequentially as new data arrives?",
+          "options": [
+            "It allows the posterior from one observation to become the prior for the next",
+            "It eliminates the need for prior distributions",
+            "It guarantees the true parameter value",
+            "It reduces computational complexity"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Sequential updating is a core Bayesian strength.",
+            "Incorrect. Bayesian inference still requires prior distributions.",
+            "Incorrect. No method guarantees the true value; inference produces distributions.",
+            "Incorrect. Sequential updating often increases computational complexity."
+          ],
+          "explanation": "Bayesian sequential learning naturally incorporates new evidence by treating the previous posterior as the new prior, enabling principled learning from streaming data without reprocessing everything."
+        },
+        {
+          "question": "You're testing a new drug. Your prior belief is that it's effective for 50% of patients. You observe 20 patients and 15 recover. What does Bayesian inference tell you about the drug's effectiveness?",
+          "options": [
+            "The posterior probability shifts toward 75% effectiveness, influenced by both prior and data",
+            "The prior is ignored and effectiveness is exactly 75%",
+            "The posterior probability returns to the prior of 50%",
+            "Bayesian inference cannot handle this problem"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The posterior balances prior belief and observed evidence.",
+            "Incorrect. Bayesian methods blend prior and likelihood, not ignore the prior.",
+            "Incorrect. The data pulls the estimate away from the prior.",
+            "Incorrect. Drug effectiveness is a standard Bayesian inference application."
+          ],
+          "explanation": "The posterior distribution for effectiveness would be centered around 75% but pulled somewhat back toward the 50% prior, depending on prior strength. The strength of belief in the prior affects how much the data can move it."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Reinforcing Bayesian Concepts",
+      "content": "A medical test for a condition has a 99% sensitivity (true positive rate) and 95% specificity (true negative rate). The condition affects 0.5% of the population. If a patient tests positive, calculate the probability they actually have the condition. Work through this step-by-step: (1) Define P(Condition), P(Positive|Condition), P(Positive|No Condition). (2) Calculate P(Positive) = P(Positive|Condition)\u00d7P(Condition) + P(Positive|No Condition)\u00d7P(No Condition). (3) Apply Bayes' Theorem: P(Condition|Positive) = P(Positive|Condition)\u00d7P(Condition) / P(Positive). The answer is approximately 9%\u2014demonstrating again how low disease prevalence leads to high false positive rates.",
+      "next": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Next Steps",
+      "content": "Congratulations! You've mastered Bayesian statistics fundamentals. What would you like to do next?",
+      "choices": [
+        {
+          "label": "Complete the course",
+          "next": "n9"
+        },
+        {
+          "label": "Review practice problems",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "You've successfully learned Bayesian Statistics! You now understand Bayes' Theorem, how to interpret probabilities correctly, and how Bayesian inference enables learning from data while incorporating prior knowledge. These skills apply to medicine, finance, machine learning, and any field requiring decision-making under uncertainty. Continue exploring Bayesian methods through advanced topics like hierarchical modeling, MCMC sampling, or Bayesian networks."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn example"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Test understanding"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Pass - Continue to Inference"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "Fail - Practice more"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Learn example"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Test understanding"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "Pass - Next steps"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Fail - Practice more"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Finish"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n7",
+      "label": "Review"
+    }
+  ],
+  "generated_at": "2026-03-26T09:46:04.216498+00:00",
+  "model": "claude-haiku-4-5"
+}

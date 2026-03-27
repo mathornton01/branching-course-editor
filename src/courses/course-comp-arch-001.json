@@ -1,0 +1,136 @@
+{
+  "id": "course-comp-arch-001",
+  "title": "Computer Architecture: Designing Digital Structures",
+  "description": "Learn computer architecture principles by designing computer systems like buildings, making key trade-off decisions that shape system performance, reliability, and cost.",
+  "topic": "Computer Architecture",
+  "theme": "architecture",
+  "difficulty": "intermediate",
+  "estimated_minutes": 28,
+  "tags": [
+    "computer-architecture",
+    "system-design",
+    "cpu",
+    "memory",
+    "thermal-management",
+    "distributed-systems"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Building Your Computer: Architectural Principles",
+      "content": "Just as architects design buildings with a foundation, load-bearing walls, and integrated systems, computer engineers design systems with a CPU (the main structural element), memory hierarchy (different material grades), and I/O systems (utilities). Every design decision\u2014from processor choice to cooling strategy\u2014affects performance, reliability, and cost. In this course, you'll make key architectural decisions as if designing buildings for different purposes: personal workstations or enterprise servers. Let's begin by understanding that computer architecture, like building architecture, is about creating structures that work efficiently within constraints.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your System's Scale",
+      "content": "You're an architect designing a computer system. What is your primary use case? This choice will shape all subsequent design decisions, just as a residential architect's process differs fundamentally from an enterprise architect's.",
+      "choices": [
+        {
+          "label": "Personal Workstation (residential scale)",
+          "next": "n3"
+        },
+        {
+          "label": "Enterprise Server Infrastructure (commercial scale)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "The Single-Core Foundation: CPU as Load-Bearing Wall",
+      "content": "For a personal workstation, we design around a single CPU socket\u2014like a house built around a central load-bearing wall. The CPU processes instructions sequentially (or with limited parallelism), much like a single structural element supporting the entire load. Memory is organized hierarchically: L1 cache is like a tool closet in the main room (tiny, instant access), L2 cache is like a garage (larger, slightly slower), and main RAM is like external storage (large but requires a trip). This memory locality principle is critical for performance. Power consumption and thermal dissipation are major concerns because CPUs generate extreme heat density\u2014up to 300W in a small area\u2014requiring engineered cooling.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Thermal Design Trade-off",
+      "content": "Your personal workstation's CPU generates significant heat. How should you manage it? This decision shapes system cost, noise, reliability, and lifespan\u2014similar to choosing between passive ventilation or active HVAC in building design.",
+      "choices": [
+        {
+          "label": "Passive Cooling (optimize for efficiency and silence)",
+          "next": "n5"
+        },
+        {
+          "label": "Active Cooling (maximize performance with forced air/liquid)",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Efficiently Cooled Personal Workstation",
+      "content": "You've designed a personal system optimized for energy efficiency. Your CPU runs at moderate clock speeds with a large heat sink, similar to a building using passive solar design and natural ventilation. The system consumes 65-95W, operates quietly, maintains stable temperatures under normal loads, and has excellent longevity. This design is ideal for everyday computing tasks, home offices, and environments where power bills and noise matter. Just like a well-insulated building that maintains temperature naturally, your system achieves thermal equilibrium through intelligent material choice and geometry rather than brute-force cooling."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Performance-Optimized System (Thermal Trade-offs)",
+      "content": "You've prioritized maximum performance, running your CPU at high clock speeds with aggressive cooling. This is like designing a building with wall-to-wall glass for maximum interior volume\u2014impressive but demanding. Your system reaches 150-200W consumption and generates 70-90\u00b0C operating temperatures. Under sustained loads, the CPU thermally throttles (reduces speed to limit heat), defeating the original goal. Cooling fans run constantly, creating noise. The CPU has shortened lifespan from thermal stress. Electricity costs rise significantly. The lesson: performance without thermal architecture leads to self-limiting systems, much like buildings without proper climate control become uninhabitable under stress."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Enterprise Architecture: The Data Center Complex",
+      "content": "An enterprise system is like designing a multi-building complex: multiple processors (often 2-4 per server, sometimes more) work independently but in concert, coordinated by the operating system. Redundancy is paramount\u2014if one processor fails, others continue. Memory distributes across multiple NUMA (Non-Uniform Memory Access) zones with different access latencies, similar to how a shopping complex has multiple separate electrical systems. The network fabric\u2014high-speed interconnects between servers\u2014acts like roads connecting buildings. Load balancing distributes incoming requests (like traffic through intersections), preventing bottlenecks. Reliability trumps raw speed: systems must survive single-component failures, network disruptions, and partial outages, mirroring how critical buildings use redundant structural systems and backup utilities.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Resilient Enterprise System Deployed",
+      "content": "You've architected a robust multi-server infrastructure capable of handling enterprise workloads. With 6-16 cores per server, distributed memory, redundant power supplies, and clustered systems, your design sustains 99.99% uptime (less than one hour of downtime per year). Servers transparently failover when hardware fails. Load balancers distribute traffic like a well-designed traffic network. This architecture mirrors a modern city: multiple independent systems (servers), interconnected infrastructure (networks), and coordinated management. Cost is higher than personal systems, but reliability and throughput justify it for businesses. Your \"building complex\" is ready for millions of concurrent users and petabytes of data\u2014the ultimate expression of computer architecture principles applied to scale."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Personal Workstation"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": "Passive Cooling"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n6",
+      "label": "Active Cooling"
+    },
+    {
+      "id": "c6",
+      "source": "n2",
+      "target": "n7",
+      "label": "Enterprise Infrastructure"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T09:02:15.066549+00:00",
+  "model": "claude-haiku-4-5"
+}

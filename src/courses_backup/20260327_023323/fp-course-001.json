@@ -1,0 +1,274 @@
+{
+  "id": "fp-course-001",
+  "title": "Functional Programming Concepts",
+  "description": "Master the fundamentals of functional programming through interactive learning, covering pure functions, immutability, and higher-order functions.",
+  "topic": "Functional Programming",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "programming",
+    "functional",
+    "advanced",
+    "interactive"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Pure Functions & Immutability",
+      "content": "Functional programming treats computation as the evaluation of mathematical functions. A pure function always returns the same output for the same input and has no side effects\u2014it doesn't modify external state or rely on mutable data. Immutability means once data is created, it cannot be changed. Instead, we create new data with modifications. These principles make code predictable, testable, and easier to reason about. By avoiding mutable state and side effects, functional programs are more reliable and less prone to subtle bugs.",
+      "next": null
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Pure vs Impure Functions",
+      "content": "Consider a function that adds tax to a price. A pure function takes price and tax rate as parameters and returns the new total: `const addTax = (price, rate) => price * (1 + rate)`. An impure function might modify a global variable: `let total = 0; const addTax = (price, rate) => { total = price * (1 + rate); return total; }`. The pure version is predictable\u2014calling it 10 times with the same inputs yields the same result. The impure version's behavior depends on total's previous value, making it harder to test and debug.",
+      "next": null
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Pure Functions Assessment",
+      "content": "Test your understanding of pure functions and immutability.",
+      "questions": [
+        {
+          "question": "Which of the following is a characteristic of a pure function?",
+          "options": [
+            "It always returns the same output for the same input and has no side effects",
+            "It can modify variables outside its scope",
+            "It depends on the current time or random state",
+            "It prints to the console as part of its computation"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Pure functions are deterministic and have no side effects.",
+            "Incorrect. Modifying external variables makes a function impure.",
+            "Incorrect. Depending on external state makes a function impure.",
+            "Incorrect. Printing is a side effect; pure functions don't have them."
+          ],
+          "explanation": "A pure function's output depends only on its inputs. It doesn't modify external state, read from mutable sources, or perform I/O operations."
+        },
+        {
+          "question": "What does immutability mean in functional programming?",
+          "options": [
+            "Variables cannot be redeclared",
+            "Once data is created, it cannot be changed; new data is created instead",
+            "Functions cannot call other functions",
+            "Programs run faster because memory is not updated"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Variable redeclaration rules are about scoping, not immutability.",
+            "Correct! Immutability means creating new data rather than modifying existing data.",
+            "Incorrect. Functional programming relies heavily on function composition.",
+            "Incorrect. Immutability is about design, not performance directly."
+          ],
+          "explanation": "Immutability ensures data cannot be unexpectedly modified. Instead of changing an array in place, you create a new array with the desired changes. This prevents bugs from shared mutable state."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Higher-Order Functions",
+      "content": "A higher-order function is a function that takes other functions as arguments or returns a function as its result. The most powerful are map, filter, and reduce. Map transforms each element in a collection using a function. Filter selects elements that meet a condition. Reduce combines all elements into a single value using an accumulator. These tools enable elegant, composable solutions without explicit loops or mutable state, making code more declarative and easier to understand at a glance.",
+      "next": null
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Real-World: Processing User Data",
+      "content": "Imagine processing user objects to find average age of active users. With functional programming: `const avgAge = users.filter(u => u.active).map(u => u.age).reduce((sum, age, i, arr) => sum + age / arr.length, 0)`. Filter selects active users, map extracts ages, reduce sums them. Each step is clear and testable independently. This approach scales elegantly\u2014adding new transformations is as simple as adding another function in the chain without modifying the original data.",
+      "next": null
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Higher-Order Functions Assessment",
+      "content": "Test your understanding of map, filter, reduce, and function composition.",
+      "questions": [
+        {
+          "question": "What does the map function do in functional programming?",
+          "options": [
+            "Filters elements based on a condition",
+            "Transforms each element in a collection using a function",
+            "Combines all elements into a single value",
+            "Sorts elements in a specific order"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's what filter does.",
+            "Correct! Map applies a function to each element and returns a new collection.",
+            "Incorrect. That's what reduce does.",
+            "Incorrect. Sorting is a separate operation."
+          ],
+          "explanation": "Map takes a function and applies it to each element, creating a new collection with the results. For example, `[1, 2, 3].map(x => x * 2)` produces `[2, 4, 6]`."
+        },
+        {
+          "question": "When would you use reduce instead of map or filter?",
+          "options": [
+            "When you want to transform elements",
+            "When you want to select specific elements",
+            "When you want to combine elements into a single value",
+            "When you want to check if all elements meet a condition"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. That's what map does.",
+            "Incorrect. That's what filter does.",
+            "Correct! Reduce accumulates values into a single result.",
+            "Incorrect. That's what every() or some() does."
+          ],
+          "explanation": "Reduce is for aggregation. It takes an accumulator and applies a function to each element, combining them. For example, `[1, 2, 3].reduce((sum, x) => sum + x, 0)` returns 6."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Functional Programming",
+      "content": "Let's reinforce what you've learned with practice questions that challenge your understanding of pure functions and higher-order functions. These problems will test whether you can identify correct implementations, optimize functional patterns, and apply the principles we've covered. Working through these will strengthen your intuition for functional programming and prepare you for real-world coding scenarios.",
+      "questions": [
+        {
+          "question": "Write a pure function that doubles each number. Which is correct?",
+          "options": [
+            "const double = (arr) => { for(let i = 0; i < arr.length; i++) arr[i] *= 2; return arr; }",
+            "const double = (arr) => arr.map(x => x * 2);",
+            "const double = (arr) => { arr.forEach(x => x *= 2); return arr; }",
+            "const double = (arr) => arr.forEach(x => x * 2);"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This modifies the original array (side effect).",
+            "Correct! This creates a new array without modifying the original.",
+            "Incorrect. This modifies the original array and returns it.",
+            "Incorrect. forEach doesn't return anything useful here."
+          ],
+          "explanation": "Pure functions must not modify their inputs. Using map creates a new array without side effects, which is the functional approach."
+        },
+        {
+          "question": "How would you calculate total cost of items over $50 using functional programming?",
+          "options": [
+            "products.filter(p => p.price > 50).reduce((sum, p) => sum + p.price, 0)",
+            "products.map(p => p.price).filter(p => p > 50).reduce((sum, p) => sum + p, 0)",
+            "products.reduce((sum, p) => sum + (p.price > 50 ? p.price : 0), 0)",
+            "All of the above are equivalent and correct"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "This is correct, but not the only correct answer.",
+            "This is correct, but not the only correct answer.",
+            "This is correct, but not the only correct answer.",
+            "Correct! All three approaches produce the same result using functional composition."
+          ],
+          "explanation": "Functional programming allows multiple valid approaches. The key is using pure functions and composition. Filter then reduce, or reduce with conditional logic\u2014both work well."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What's Next?",
+      "content": "Excellent work! You've mastered the core concepts of functional programming\u2014pure functions, immutability, and higher-order functions. These foundational principles will transform how you write code, making it more predictable, testable, and maintainable. You're ready to apply these concepts in real projects. What would you like to do now?",
+      "choices": [
+        {
+          "label": "Complete the course",
+          "next": "n9"
+        },
+        {
+          "label": "Practice more problems",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've successfully learned functional programming concepts including pure functions, immutability, and higher-order functions like map, filter, and reduce. You now have the foundation to write more predictable, testable, and maintainable code. Continue practicing these principles in your projects, refactor existing code with a functional approach, and experiment with composition patterns to deepen your mastery and build real-world expertise!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n7",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-26T09:51:30.435490+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T10:07:04.747949+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

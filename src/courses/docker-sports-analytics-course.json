@@ -1,0 +1,275 @@
+{
+  "id": "docker-sports-analytics-course",
+  "title": "Docker and Containerization for Sports Analytics",
+  "description": "Learn Docker and containerization through the lens of sports analytics. Discover how to containerize sports data pipelines, manage Docker images, and deploy analytics tools globally.",
+  "topic": "Docker and Containerization",
+  "theme": "sports analytics",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "docker",
+    "containerization",
+    "devops",
+    "sports analytics",
+    "infrastructure"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Understanding Docker and Containerization",
+      "content": "Think of a Docker container like a self-contained analytics environment that bundles your sports stats processing code, Python libraries, and data pipeline together - just like how a sports team packages all its analytics tools in one transportable unit. Containers isolate your sports data pipelines from the host system, ensuring that your real-time basketball game analysis runs the same way on any machine. Docker ensures reproducibility and eliminates 'works on my machine' problems common in sports analytics teams. Key benefit: your fantasy sports prediction model runs identically in development, testing, and production environments. This consistency is critical when your models analyze millions of live game events.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Building a Sports Stats Pipeline Container",
+      "content": "A sports analytics team has a real-time NBA stats processing pipeline. They use Docker to containerize it with Python 3.9, pandas, numpy, and a custom sports data API wrapper. Their Dockerfile includes the base image (python:3.9), installs dependencies from requirements.txt, copies their stats processing script, and sets the entrypoint to run the pipeline. When they deploy this container on AWS, Google Cloud, or their on-premise server, the pipeline behaves identically - fetching live game data, processing it, and updating their fantasy sports leaderboard without environment conflicts. The same container runs consistently across development, QA, and production.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Docker Fundamentals",
+      "content": "Test your understanding of Docker basics and containerization concepts in the context of sports analytics.",
+      "questions": [
+        {
+          "question": "In a sports analytics platform, you're building a real-time soccer performance analysis tool. Your containerized app needs to run the same way across your development laptop, QA server, and production cloud. What is Docker's PRIMARY value here?",
+          "options": [
+            "Reduces the cost of cloud infrastructure",
+            "Ensures your analytics pipeline behaves identically everywhere",
+            "Automatically optimizes your data processing speed",
+            "Makes your code run faster than non-containerized code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Cost reduction is a benefit but not the primary value.",
+            "Correct! Docker provides environment consistency across all platforms.",
+            "Docker doesn't inherently optimize processing speed.",
+            "Speed depends on code quality, not containerization."
+          ],
+          "explanation": "Docker's isolation ensures that dependencies, OS-level libraries, and your code work the same way regardless of the host environment. This is critical for sports analytics teams working across multiple platforms."
+        },
+        {
+          "question": "Your fantasy sports prediction model needs specific versions of Python (3.8), scikit-learn (1.0), and custom libraries. Which Docker concept ensures these exact versions run on any machine?",
+          "options": [
+            "Docker Hub",
+            "Docker Registry",
+            "Container images",
+            "Docker daemon"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Docker Hub is a registry service, not the packaging mechanism.",
+            "Registries store images, but don't ensure version consistency.",
+            "Correct! Images encapsulate your code, dependencies, and exact configurations.",
+            "The daemon manages containers, not dependencies."
+          ],
+          "explanation": "A Docker image is a snapshot that includes your application code, exact library versions, and system configuration. When you run a container from this image, you get those exact versions every time."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n8",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "You've mastered Docker basics! Now choose your path: advance to Docker images and registries for production deployments, or complete the course.",
+      "choices": [
+        {
+          "label": "Learn Docker Images & Registries (Advanced)",
+          "next": "n5"
+        },
+        {
+          "label": "Complete Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Docker Images and Container Registries",
+      "content": "Docker images are blueprints for containers, and registries are where you store and share them. For sports analytics, imagine a Docker image as a 'recipe' for your win-probability prediction engine - it specifies exactly how the environment should be built. Docker Hub is the public registry where teams share their sports analytics base images. Private registries (like AWS ECR or Google Artifact Registry) are where professional sports franchises store proprietary analytics images without exposing their competitive models. Tagging your images (e.g., sports-analytics:v1.2.0) lets your team version their analytics tools, ensuring that the same model version runs across all game analysis systems. This versioning is critical for maintaining model consistency in production.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Building and Pushing a Sports Analytics Image",
+      "content": "A Major League Baseball organization builds a Docker image for their advanced metrics pipeline. They start with a Dockerfile using ubuntu:22.04 as the base, install Python 3.10 and required libraries (statsmodels, scipy, matplotlib for player performance analysis), copy their Statcast data processor code, and build the image with `docker build -t baseball-analytics:latest .`. They tag it with their private AWS ECR registry (`docker tag baseball-analytics:latest 123456789.dkr.ecr.us-east-1.amazonaws.com/baseball-analytics:latest`) and push it. Now their analytics team globally can pull the exact same image and run identical player performance analysis across all regional offices.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Docker Images and Registries",
+      "content": "Demonstrate your understanding of Docker images, versioning, and registries for sports analytics deployments.",
+      "questions": [
+        {
+          "question": "Your sports analytics startup wants to version your player injury prediction model. You build a Docker image and tag it as 'injury-model:v2.1.0'. Why is versioning critical?",
+          "options": [
+            "It reduces the size of Docker images",
+            "It allows you to roll back to previous model versions if a new one performs poorly",
+            "It speeds up image downloads",
+            "It replaces the need for documentation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Versioning doesn't affect image size.",
+            "Correct! Versioning lets you manage multiple versions and rollback if needed.",
+            "Versioning doesn't affect download speed.",
+            "Versioning complements but doesn't replace documentation."
+          ],
+          "explanation": "In sports analytics, model versions matter - a v2.0 model might perform worse on playoff games than v1.9. Versioning lets you track which version is deployed where and roll back if performance degrades."
+        },
+        {
+          "question": "Your cricket analytics platform has built a bowling performance prediction image. You need your team in India to use it, and external sports consultants need to use it too. Which approach is best?",
+          "options": [
+            "Email the Docker image file to everyone",
+            "Store it in a private Docker registry for your team, and a separate version in Docker Hub for external consultants",
+            "Rebuild the image separately for each user",
+            "Store it only in Docker Hub publicly"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Emailing large image files is impractical.",
+            "Correct! Use private registries for proprietary models and public registries for shared tools.",
+            "Rebuilding creates inconsistencies.",
+            "Exposing proprietary sports models publicly is a security risk."
+          ],
+          "explanation": "Registries provide access control. Private registries protect proprietary sports analytics models, while public sharing democratizes sports technology."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n8",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Docker Concepts Review",
+      "content": "Practice your understanding of Docker containerization and image management with these reinforcement questions.",
+      "questions": [
+        {
+          "question": "Your sports analytics company deploys a live scoring dashboard that pulls data from multiple sports APIs. You've containerized it to run consistently. What problem does Docker solve here?",
+          "options": [
+            "It eliminates the need to write code",
+            "It ensures the dashboard runs the same way on your laptop, staging server, and production cloud",
+            "It automatically makes your code more efficient",
+            "It manages your sports data storage"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Docker doesn't write code.",
+            "Correct! Docker ensures consistency across environments.",
+            "Efficiency depends on code optimization.",
+            "Docker doesn't manage data storage directly."
+          ],
+          "explanation": "Docker solves the consistency problem by providing isolated environments that work identically everywhere."
+        },
+        {
+          "question": "When building a Docker image for your tennis match prediction system, you specify a base image, install libraries, and add your prediction model code. What encapsulates all of this?",
+          "options": [
+            "Docker Hub",
+            "A container instance",
+            "A Docker image",
+            "A registry"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Hub hosts images.",
+            "Containers are running instances of images.",
+            "Correct! The image is the blueprint that bundles everything.",
+            "Registries store and serve images."
+          ],
+          "explanation": "A Docker image is the complete package containing your code, dependencies, and configuration. Containers are running instances of these images."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Docker Mastery for Sports Analytics",
+      "content": "Excellent work! You've learned how Docker containerizes sports analytics pipelines, ensuring consistency and reproducibility. You understand Docker images as versioned blueprints and registries as storage systems for sharing them globally. You're now ready to containerize real sports data workflows - whether you're building live game analysis, injury prediction models, or fantasy sports engines. Continue building with Docker and explore orchestration tools like Kubernetes to scale your sports analytics infrastructure!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "proceed"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "proceed"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "advanced"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "exit"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "proceed"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "proceed"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c10",
+      "source": "n7",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-26T09:32:12.289051+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,171 @@
+{
+  "id": "ca-edtech-course",
+  "title": "Computer Architecture Through Education Technology",
+  "description": "Explore computer architecture by examining real education technology systems. Choose your learning path through processors, memory systems, or I/O communication, then synthesize all three components to understand how modern EdTech platforms are built.",
+  "topic": "Computer Architecture",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer-architecture",
+    "cpu",
+    "memory",
+    "io-systems",
+    "education-technology",
+    "branching-course"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Understanding Computer Architecture Through EdTech",
+      "content": "Modern education technology systems depend on sophisticated computer architecture to deliver engaging learning experiences. From processing student interactions in learning management systems to caching course videos for fast delivery, computer architecture is the foundation beneath every digital classroom. In this course, we'll explore three core architectural components through real education technology scenarios, helping you understand how your devices power online learning.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Journey",
+      "content": "Computer architecture has three main areas. Choose which component you'd like to explore first\u2014your understanding will deepen as you progress through all three topics.",
+      "choices": [
+        {
+          "label": "Focus on Processors & Instruction Sets",
+          "next": "n3"
+        },
+        {
+          "label": "Focus on Memory & Caching Systems",
+          "next": "n5"
+        },
+        {
+          "label": "Focus on I/O & Communication",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Processors & Instruction Sets in EdTech",
+      "content": "The CPU is the brain of a computer, executing instructions that power every student interaction with an LMS. A processor executes billions of operations per second, from loading a course page to running AI-powered learning recommendations. Instructions are the basic operations the CPU understands\u2014load, store, add, compare\u2014and instruction sets define the vocabulary of operations available to software. In education technology, efficient instruction execution determines how quickly a student's quiz response is graded or how smoothly a video plays in a course player. Modern processors use techniques like pipelining and multi-core processing to handle multiple student requests simultaneously.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: How an LMS Processes a Quiz Submission",
+      "content": "When a student submits a quiz in an LMS, the processor executes thousands of instructions: 1) Load the student's answer from memory (LOAD instruction), 2) Retrieve the correct answer from the database (LOAD + COMPARE), 3) Check if they match (BRANCH instruction), 4) Update the student's score (ADD + STORE), 5) Log the submission timestamp (STORE). The CPU's instruction pipeline allows it to start processing the next student's submission before finishing the first one, enabling thousands of concurrent users. The processor's clock speed (measured in GHz) determines how quickly these instructions complete\u2014a faster processor means students see their quiz results more quickly.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Memory Hierarchy & Caching in EdTech",
+      "content": "Computers use multiple levels of memory, each faster but smaller than the last: registers (fastest, tiny), L1/L2/L3 caches (fast, small), RAM (medium speed, medium size), and disk storage (slow, huge). This hierarchy exists because fast memory is expensive. In education technology, this principle is crucial\u2014the most frequently accessed course content (like a course syllabus or common assignment) should be cached close to the processor for instant access. When a video course gets thousands of concurrent viewers, caching strategies determine whether it streams smoothly or buffers constantly. Memory management in education platforms involves predicting what content students will need next and pre-loading it into faster memory levels.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Video Caching in an Online Course Platform",
+      "content": "A popular online course has 50,000 students watching lecture videos. Without caching: every student request hits the slow disk storage, causing buffering delays and server overload. With caching: frequently watched sections are loaded into RAM (fast, but limited capacity), while other sections stay on disk. The system's cache controller predicts the next few seconds of video and loads them into L3 cache on the CPU. When a student rewinds to a popular moment (the definition slide), it's already in memory, serving instantly. Advanced systems use machine learning to predict student rewinding behavior, proactively loading likely next segments. This is why popular EdTech platforms can serve millions of concurrent users smoothly.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "I/O Systems & Communication in EdTech",
+      "content": "Input/Output systems connect the CPU to the outside world: keyboards, mice, network cards, disk drives, and displays. I/O is inherently slow compared to the CPU\u2014a network request to fetch course materials might take milliseconds while the CPU executes billions of instructions per second. To manage this speed mismatch, systems use I/O controllers and interrupt handlers that allow the CPU to work on other tasks while I/O operations complete in the background. In education technology, I/O performance is critical because students interact with the system through various devices (laptops, tablets, smartphones) and expect instant feedback. Network bandwidth determines how quickly video streams reach learners; disk I/O speed affects how fast quizzes load; display I/O quality affects learning experience.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: Multi-Device EdTech Architecture",
+      "content": "Consider a student using an education platform: they start on a laptop watching a video (USB display I/O), pause to answer a quiz question (keyboard I/O), switch to a mobile phone to check notifications (wireless I/O), then return to the laptop for an assignment (network I/O to cloud storage). Each device has different I/O characteristics: the laptop has fast wired network, the phone has variable wireless bandwidth. The I/O subsystem must abstract these differences, allowing the same course content to stream smoothly whether accessed via Ethernet or 4G. Interrupt handlers manage notifications arriving while the student is working. The operating system's I/O scheduler prioritizes the student's current interaction over background syncing of course progress.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Computer Architecture in EdTech Systems",
+      "content": "You've explored processors, memory, and I/O\u2014the three pillars of computer architecture. In real education technology systems, these work together seamlessly. When you watch a lecture video, the processor executes codec instructions while the I/O subsystem streams data and the memory hierarchy caches frequently accessed frames. When you submit an assignment, the I/O network layer sends your data, the processor validates it, and the memory system stores your progress for fast retrieval next time you log in. Modern EdTech platforms optimize all three components: using multi-core processors to handle thousands of concurrent students, implementing intelligent caching to deliver course content instantly, and managing I/O efficiently across diverse devices. Understanding these components helps you appreciate why some learning platforms feel snappy and responsive while others lag, and it's the foundation for designing the next generation of educational technology.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "You've Mastered Computer Architecture for EdTech",
+      "content": "Congratulations! You now understand how computer processors execute instructions, how memory hierarchies enable fast access to course content, and how I/O systems connect students to learning platforms. You've seen concrete examples of these concepts in real education technology systems. This knowledge forms the foundation for deeper studies in computer systems, network design, and educational technology optimization. The next time you use an online course, notice how quickly it responds\u2014that's the result of careful architectural decisions at the processor, memory, and I/O levels."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Processors First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Memory First"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "I/O First"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn Example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Learn Example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Learn Example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T06:14:16.402461+00:00",
+  "model": "claude-haiku-4-5"
+}

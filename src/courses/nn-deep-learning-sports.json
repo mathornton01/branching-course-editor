@@ -1,0 +1,532 @@
+{
+  "id": "nn-deep-learning-sports",
+  "title": "Neural Networks and Deep Learning for Sports Analytics",
+  "description": "Master neural networks and deep learning through practical sports analytics applications. Learn from predicting player performance to analyzing game footage with adaptive branching that reinforces mastery.",
+  "topic": "Neural Networks and Deep Learning",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 120,
+  "tags": [
+    "neural networks",
+    "deep learning",
+    "sports analytics",
+    "machine learning",
+    "prediction"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Neural Networks: The Foundation",
+      "content": "Neural networks are computational systems inspired by biological brains that learn patterns from data. In sports analytics, neural networks excel at finding hidden relationships between player statistics and outcomes like scoring performance or team success. A neural network consists of three types of layers: input neurons (which receive player stats like shooting percentage, rebounds, assists), hidden neurons (which discover complex patterns and relationships), and output neurons (which produce predictions like expected points per game or win probability). For example, a basketball analytics team might feed a network 15 years of player statistics to learn which combinations of attributes predict playoff success. The network adjusts internal connection strengths (called weights) based on its errors until it accurately predicts outcomes that seem unpredictable to traditional analysis.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Predicting Tennis Match Outcomes with Neural Networks",
+      "content": "Imagine a sports analytics team building a neural network to predict tennis match results. They input player statistics: current ranking, serve speed, first-serve percentage, and match wins in the past month. The network's hidden layers learn that serve speed combined with consistency matters more than either alone. After training on 400 past matches, the network learns that a player with 120 mph serve and 65% first-serve accuracy facing a lower-ranked opponent has approximately 72% win probability. The neural network discovered this automatically\u2014the pattern emerged from data without explicit programming. When tested on matches it never saw, the model predicts accurately 78% of the time, beating traditional ranking-based predictions by 4 percentage points.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Neural Network Fundamentals Quiz",
+      "content": "Test your understanding of neural network basics and their applications in sports analytics.",
+      "questions": [
+        {
+          "question": "In a neural network predicting NFL quarterback performance, what role do input neurons serve?",
+          "options": [
+            "A) They store the predictions made by the network",
+            "B) They receive raw player statistics like passing yards, interceptions, and completion percentage",
+            "C) They discover hidden patterns in the data",
+            "D) They determine how accurate the prediction is"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Input neurons don't store predictions.",
+            "Correct! Input neurons are the entry point for raw data that the network will process.",
+            "Incorrect. That is the role of hidden neurons.",
+            "Incorrect. That is determined by comparing predictions to actual outcomes."
+          ],
+          "explanation": "Input neurons receive and transmit the initial raw data (player stats) to hidden layers, which then process and learn patterns from that data."
+        },
+        {
+          "question": "A sports team trains a neural network on 10 years of soccer player data to predict goals scored. What does 'training' mean in this context?",
+          "options": [
+            "A) Showing the network labeled examples and adjusting weights to minimize prediction errors",
+            "B) Running the network once on historical data",
+            "C) Displaying the final predictions to stakeholders",
+            "D) Selecting which statistics to include as inputs"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Training involves iteratively adjusting the network's internal weights based on prediction errors.",
+            "Incorrect. Training is a repeated iterative process, not a one-time execution.",
+            "Incorrect. That is deployment or presentation, not training.",
+            "Incorrect. That is feature selection, which occurs before training begins."
+          ],
+          "explanation": "Training is where the network learns by comparing predictions to actual outcomes repeatedly, adjusting weights each time to reduce errors until it generalizes well to new data."
+        },
+        {
+          "question": "Why are hidden layers important in neural networks for sports analytics?",
+          "options": [
+            "A) They store backup copies of data",
+            "B) They discover complex non-obvious relationships between player statistics and outcomes",
+            "C) They determine how many input features are needed",
+            "D) They prevent the network from making predictions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Hidden layers do not serve as data backups.",
+            "Correct! Hidden layers allow the network to learn complex, non-linear relationships that simple models miss.",
+            "Incorrect. That is determined by domain expertise and available data.",
+            "Incorrect. Hidden layers enable prediction; they are essential, not preventive."
+          ],
+          "explanation": "Hidden layers are where the network learns abstract features. For example, they might discover that the combination of high three-point shooting AND strong defense together predicts playoff success better than either statistic alone."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Neural Networks in Sports: Practice Questions",
+      "content": "Apply neural network concepts to realistic sports analytics scenarios.",
+      "questions": [
+        {
+          "question": "A basketball analytics team wants to predict team defensive rating using player statistics. Which is a reasonable input to their neural network?",
+          "options": [
+            "A) The team's final playoff seeding",
+            "B) Individual player steal counts and block counts",
+            "C) The date the game was played",
+            "D) The predicted defensive rating"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That is an outcome, not an input feature.",
+            "Correct! Player defensive actions like steals and blocks are appropriate inputs for predicting team defense.",
+            "Incorrect. Game dates alone do not directly predict defensive performance.",
+            "Incorrect. That is the output we want to predict, not an input."
+          ],
+          "explanation": "Inputs should be observable, measurable features. The network learns how individual defensive actions combine to determine overall team defensive performance."
+        },
+        {
+          "question": "If a neural network trained on baseball statistics is applied to cricket without retraining, what problem might occur?",
+          "options": [
+            "A) The network will predict only negative numbers",
+            "B) The network learned patterns specific to baseball that do not apply to cricket",
+            "C) The network will require additional hidden layers",
+            "D) Deep networks cannot be used for cricket"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Networks usually do not fail in this specific way.",
+            "Correct! The network learned baseball-specific patterns; cricket has fundamentally different statistical relationships.",
+            "Incorrect. Network architecture does not change based on switching sports.",
+            "Incorrect. Deep learning is increasingly used in cricket analytics."
+          ],
+          "explanation": "Neural networks learn domain-specific patterns. A network trained on one sport will not generalize to another without retraining because the relationships between player attributes and performance are different."
+        },
+        {
+          "question": "Why might a sports team choose a neural network over simple linear regression?",
+          "options": [
+            "A) Neural networks always produce better predictions",
+            "B) Linear models cannot be used in sports",
+            "C) Neural networks can capture non-linear relationships, like how defensive schemes interact with player talent",
+            "D) Neural networks require less training data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. More complex models do not always perform better.",
+            "Incorrect. Linear models are still valuable in many sports applications.",
+            "Correct! Neural networks excel when relationships are complex and non-linear, which is common in sports.",
+            "Incorrect. Neural networks typically require more data, not less."
+          ],
+          "explanation": "In sports, success often depends on complex interactions. A player's value depends not just on individual stats but on team fit, coaching style, and opponent matchups\u2014relationships too complex for linear models."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Deep Learning: Why Depth Matters in Sports",
+      "content": "Deep learning extends neural networks by stacking many hidden layers to learn progressively more abstract patterns. In sports analytics, shallow networks might learn that shooting percentage predicts scoring, but deep networks discover that elite scorers combine high shooting percentage with specific ball-handling patterns and court positioning\u2014abstractions that emerge across multiple layers. Convolutional Neural Networks (CNNs) excel at analyzing sports video by recognizing spatial patterns like formations and ball position, while Recurrent Neural Networks (RNNs) handle sequential data like play-by-play sequences. A CNN analyzing 100 soccer matches can learn to detect goal-scoring opportunities 2-3 seconds before the shot by recognizing spatial patterns scouts miss. A deep basketball model might use layers that detect basic features (player positions), recognize offensive sets (pick-and-roll), and finally evaluate play success probability\u2014each layer building abstraction on the layer below.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Deep Learning Analyzes Soccer Goal Probability in Real-Time",
+      "content": "A professional soccer club deployed a deep CNN to analyze video of shots on goal. Early network layers learned basic features: ball location, player positions, goalkeeper stance. Middle layers composed these into patterns: attack formations, passing lanes, defensive gaps. Deep layers evaluated situations: 'wide angle with 2 defenders present = 40% goal probability' versus 'penalty area, clear lane = 65% goal probability.' After training on 500 matches, the network identifies dangerous chances better than experienced analysts. The club now uses predictions to evaluate decision-making: did the forward take the highest-probability shot available? This data-driven feedback improved their shot selection coaching precision significantly. The deep architecture succeeded where shallow networks failed because the problem requires understanding compositions of compositions\u2014visual patterns nested inside tactical patterns nested inside strategic situations.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Deep Learning Concepts in Sports Quiz",
+      "content": "Assess your understanding of deep learning architectures and their sports applications.",
+      "questions": [
+        {
+          "question": "What advantage do Convolutional Neural Networks (CNNs) provide when analyzing sports video?",
+          "options": [
+            "A) They process data faster than regular neural networks",
+            "B) They recognize spatial patterns like player positions and formations across video frames",
+            "C) They do not require any training data",
+            "D) They can predict game outcomes without other context"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Speed is not the primary advantage of CNNs for video.",
+            "Correct! CNNs detect spatial patterns, which is ideal for analyzing formations and tactical elements.",
+            "Incorrect. CNNs require training data like all neural networks.",
+            "Incorrect. While CNNs analyze video well, outcomes require additional context."
+          ],
+          "explanation": "Convolutional layers scan images or video frames for spatial patterns. This makes them perfect for detecting player formations, defensive schemes, and tactical positioning in sports footage."
+        },
+        {
+          "question": "Why is a Recurrent Neural Network (RNN) suitable for analyzing basketball offensive sequences?",
+          "options": [
+            "A) RNNs watch video faster",
+            "B) RNNs understand sequential nature of plays\u2014each action depends on previous actions",
+            "C) RNNs automatically score points",
+            "D) RNNs require no training data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Video speed is not RNNs' advantage.",
+            "Correct! RNNs excel with sequential data where order matters. Basketball plays unfold step-by-step.",
+            "Incorrect. RNNs are analytical tools, not game-playing tools.",
+            "Incorrect. RNNs require training data like other networks."
+          ],
+          "explanation": "RNNs have memory cells that retain information from previous steps. This is crucial for play sequences where the current action builds on previous positioning and decisions."
+        },
+        {
+          "question": "A team builds a deep model to predict injury-prone players. What is a potential downside of too many hidden layers?",
+          "options": [
+            "A) The network will predict zero injuries",
+            "B) The model might overfit to training players and fail on new players",
+            "C) The network will run out of memory",
+            "D) Deep networks are inappropriate for injury prediction"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Networks do not typically fail in this specific way.",
+            "Correct! Too many parameters enable overfitting\u2014learning noise in training data instead of general patterns.",
+            "Incorrect. Memory constraints are usually not limiting for reasonable network sizes.",
+            "Incorrect. Deep learning is increasingly used for injury prediction."
+          ],
+          "explanation": "A very deep network with many parameters can memorize training data including its quirks. When applied to new players or new seasons, performance degrades because it learned specifics, not generalizable patterns."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Deep Learning Applications: Practice Problems",
+      "content": "Practice applying deep learning concepts to realistic sports scenarios.",
+      "questions": [
+        {
+          "question": "A cricket analytics team has 10 years of play-by-play data: each delivery, batter position, and outcome. Which deep learning architecture fits best?",
+          "options": [
+            "A) CNN, because there is lots of data",
+            "B) RNN, because each delivery's outcome depends on previous deliveries and innings context",
+            "C) Shallow network, because cricket is simple",
+            "D) Traditional statistics instead of deep learning"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. CNN is for spatial data like images, not sequential deliveries.",
+            "Correct! Cricket unfolds as a sequence. Bowling strategies adapt based on recent events.",
+            "Incorrect. Cricket is complex; architecture choice depends on data type, not sport simplicity.",
+            "Incorrect. Deep learning uncovers patterns traditional statistics miss."
+          ],
+          "explanation": "RNNs are ideal because cricket plays unfold sequentially. Bowlers adjust strategies based on recent balls, batsmen adapt to patterns, and innings context influences decisions\u2014all sequential considerations."
+        },
+        {
+          "question": "Why does a deep learning model trained on high school basketball data perform poorly on NBA data?",
+          "options": [
+            "A) NBA games use different-sized courts",
+            "B) The network learned patterns specific to high school (slower pace, less athleticism) that do not generalize to NBA",
+            "C) Deep learning works only for professional sports",
+            "D) NBA and high school use different measurement methods"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Court size is the same; playing styles differ greatly.",
+            "Correct! High school and NBA have different paces, skill levels, and strategies. Patterns learned do not transfer.",
+            "Incorrect. Deep learning works across skill levels; transfer between levels is just challenging.",
+            "Incorrect. Both use similar methods (points, rebounds, assists)."
+          ],
+          "explanation": "This is a domain transfer problem. A network trained on one data distribution struggles on a different distribution because patterns differ. Professional players take different shots, defend differently, and make different decisions."
+        },
+        {
+          "question": "A team builds a CNN to identify whether an opposing team will run or pass. After training on their main rival, model accuracy drops significantly against other teams. What is the issue?",
+          "options": [
+            "A) CNNs cannot analyze game film",
+            "B) The model overfit to that rival's formations and did not learn general patterns",
+            "C) The team should use RNNs instead",
+            "D) Neural networks do not work for play calling"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. CNNs are excellent for game film analysis.",
+            "Correct! The model learned that rival's specific tendencies, not general offensive patterns.",
+            "Incorrect. The architecture is appropriate; the issue is overfitting.",
+            "Incorrect. Neural networks are widely used for play analysis."
+          ],
+          "explanation": "Overfitting occurs when a model learns specific training data details rather than general patterns. The CNN memorized 'this rival shows formation X then passes 80% of the time' instead of learning that formation X generally suggests passing across all offenses."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Training Neural Networks: Backpropagation and Optimization",
+      "content": "Training a neural network involves showing it examples and adjusting weights to minimize prediction errors through backpropagation and gradient descent. Backpropagation calculates how much each weight contributed to errors, working backward from output to input layers. For tennis player ranking predictions, the network makes a prediction, compares to actual results, calculates error, then uses backpropagation to determine which weights adjust. Gradient descent updates weights in small steps toward lower error\u2014like descending a mountain always moving downhill. Critical hyperparameters include learning rate (step size: too big means overshooting, too small means glacially slow training), batch size (how many examples before updating), and epochs (complete passes through all data). A sports team might spend weeks tuning hyperparameters to balance accuracy against computational cost. Loss functions measure error: mean squared error for predicting continuous values like player statistics, categorical crossentropy for win/loss classification.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Training a Basketball Shot Classification Model",
+      "content": "A basketball analytics team built a CNN to classify shots as 'makes' or 'misses' using video frames from 20,000 shots. Starting with random weights, the model was 50% accurate (guessing). They fed 32 shots at a time (batch size 32), measured prediction error, and backpropagation calculated which billions of weights needed adjustment. Using gradient descent with learning rate 0.001, they updated all weights slightly. After each complete pass (epoch), accuracy improved: 55%, 62%, 71%, 78%, 84%. By epoch 50, they reached 91% accuracy on validation shots never shown the network. They stopped there because validation accuracy stopped improving\u2014achieving the right balance. This took 6 hours of computation. Without careful hyperparameter tuning (learning rate, batch size, epochs, regularization), they might have stopped too early (underfitting) or continued too long, memorizing training quirks (overfitting).",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Neural Network Training and Optimization Quiz",
+      "content": "Test your understanding of how neural networks learn and effective training strategies.",
+      "questions": [
+        {
+          "question": "What does backpropagation accomplish in neural network training for sports analytics?",
+          "options": [
+            "A) It predicts future game outcomes",
+            "B) It calculates how much each weight contributed to errors and should be adjusted",
+            "C) It collects data from sports leagues",
+            "D) It determines which players to recruit"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Backpropagation is about learning, not direct prediction.",
+            "Correct! Backpropagation works backward through the network assigning responsibility for errors to each weight.",
+            "Incorrect. Backpropagation is an algorithm, not a data collection method.",
+            "Incorrect. Backpropagation is mathematical; recruitment involves other factors."
+          ],
+          "explanation": "Backpropagation is the learning algorithm that enables networks to improve. It calculates gradients\u2014direction and magnitude each weight should adjust to reduce errors."
+        },
+        {
+          "question": "A team training a model to predict NFL quarterback performance sets learning rate to 0.5 (very large). What problem might occur?",
+          "options": [
+            "A) The model learns too slowly",
+            "B) Weights might jump too far each update, causing the model to never converge to good predictions",
+            "C) The network uses too much memory",
+            "D) Learning rate does not matter; only batch size matters"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Large learning rate causes the opposite\u2014too fast learning.",
+            "Correct! Very large updates cause the model to oscillate wildly and never settle at good solutions.",
+            "Incorrect. Learning rate does not directly affect memory usage.",
+            "Incorrect. Both learning rate and batch size are important hyperparameters."
+          ],
+          "explanation": "Learning rate controls update step size. Too large means overshooting optimal weights. Think of descending a mountain with huge steps\u2014you might jump over the valley to the opposite slope."
+        },
+        {
+          "question": "A baseball salary prediction model reaches 85% accuracy on training data but only 60% on new players. What does this indicate?",
+          "options": [
+            "A) The network needs more hidden layers",
+            "B) The model is underfitting training data",
+            "C) The model is overfitting\u2014memorizing training data rather than learning general patterns",
+            "D) The team should use different data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. More layers could worsen overfitting.",
+            "Incorrect. Underfitting causes low accuracy on both training and new data.",
+            "Correct! The gap between training accuracy and test accuracy is the classic overfitting indicator.",
+            "Incorrect. The issue is model generalization, not data source."
+          ],
+          "explanation": "Overfitting occurs when a model learns training data quirks rather than general patterns. High training accuracy with low test accuracy is diagnostic. Solutions include regularization, more training data, or model simplification."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n13",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "practice",
+      "title": "Training Strategies: Practice Problems",
+      "content": "Practice applying training concepts to sports analytics challenges.",
+      "questions": [
+        {
+          "question": "A soccer team trains a model to predict game outcomes. Batch size 1 (update after each game) versus batch size 32 (update after 32 games)\u2014which is likely more efficient?",
+          "options": [
+            "A) Batch size 1 is better because it updates more frequently",
+            "B) Batch size 32 is likely more efficient\u2014it is more stable and computational updates can be batched",
+            "C) Both are equally efficient",
+            "D) Batch size does not affect efficiency"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. More frequent updates is not always better; noise destabilizes training.",
+            "Correct! Batch size 32 provides stability (averaging gradients) and computational efficiency (batch operations are faster).",
+            "Incorrect. Batch size significantly affects stability and speed.",
+            "Incorrect. Batch size is crucial for training efficiency."
+          ],
+          "explanation": "Batch size affects stability-efficiency tradeoffs. Small batches give noisy gradients; large batches smooth gradients but might miss patterns. Batch size 32 is a common sweet spot for many applications."
+        },
+        {
+          "question": "A team training a player performance model notices validation accuracy decreases after epoch 30 while training accuracy continues improving. What should they do?",
+          "options": [
+            "A) Keep training; the model will eventually improve",
+            "B) Stop training immediately; use epoch 30 weights because the model is overfitting",
+            "C) Add more hidden layers",
+            "D) Increase the learning rate"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Continuing worsens overfitting.",
+            "Correct! This is the classic early stopping signal indicating overfitting.",
+            "Incorrect. More layers could worsen overfitting.",
+            "Incorrect. Learning rate is unrelated to this overfitting signal."
+          ],
+          "explanation": "When training accuracy improves but validation accuracy decreases, the model is memorizing training data. Early stopping\u2014saving at the best validation point\u2014is the solution."
+        },
+        {
+          "question": "Why might sports teams train separate models for different leagues (NBA versus European basketball) rather than one combined model?",
+          "options": [
+            "A) Combining data is always worse",
+            "B) Different leagues have different playing styles and rules; patterns may not transfer",
+            "C) Professional models must be divided",
+            "D) Combining leagues violates regulations"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. More data is usually better if patterns are similar.",
+            "Correct! NBA and European basketball differ in pace, athleticism, and rules. Separate models learn league-specific patterns better.",
+            "Incorrect. Practice depends on the data and task.",
+            "Incorrect. No regulations prohibit combining data."
+          ],
+          "explanation": "When data comes from different distributions, mixing them confuses the model. Separate models specialize on patterns relevant to their context. Domain knowledge about sport differences is crucial for analytics success."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n13",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Mastery Complete: Neural Networks and Deep Learning for Sports",
+      "content": "Congratulations! You have completed a comprehensive journey through neural networks and deep learning for sports analytics. You understand fundamentals: how networks learn patterns from player and game data, why depth matters for complex sports problems, and how to train models effectively using backpropagation and gradient descent. You can identify appropriate architectures\u2014CNNs for video analysis, RNNs for sequential play data. You recognize practical challenges like overfitting and understand solutions like early stopping. Most importantly, you apply these concepts to real sports problems: predicting player performance, analyzing goal probability, classifying shots, and designing decision systems that improve coaching. The field increasingly relies on deep learning to find human-invisible patterns. Your understanding positions you to build these systems or evaluate their outputs critically. Continue by exploring TensorFlow and PyTorch, studying real team case studies, and experimenting with sports datasets. The future of sports analytics belongs to those who master both domain knowledge and machine learning tools. You are now equipped with that combination of knowledge."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n5",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n3",
+      "label": "retry"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n7",
+      "label": "retry"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "next"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "next"
+    },
+    {
+      "id": "c13",
+      "source": "n11",
+      "target": "n12",
+      "label": "fail"
+    },
+    {
+      "id": "c14",
+      "source": "n11",
+      "target": "n13",
+      "label": "pass"
+    },
+    {
+      "id": "c15",
+      "source": "n12",
+      "target": "n11",
+      "label": "retry"
+    }
+  ],
+  "generated_at": "2026-03-27T02:54:09.954606+00:00",
+  "model": "claude-haiku-4-5"
+}

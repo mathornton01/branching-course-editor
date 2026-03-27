@@ -1,0 +1,239 @@
+{
+  "id": "os-fundamentals-edtech",
+  "title": "Operating Systems Fundamentals: An EdTech Perspective",
+  "description": "Explore how operating systems power educational technology platforms through three key topics: processes and scheduling, memory management, and file systems. Learn real-world EdTech scenarios and how OS fundamentals ensure reliable, responsive, and secure learning platforms.",
+  "topic": "Operating Systems Fundamentals",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "operating systems",
+    "education technology",
+    "processes",
+    "memory",
+    "file systems",
+    "platform administration"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Operating Systems: The Foundation of Educational Technology",
+      "content": "Every learning platform\u2014from video lectures to adaptive quizzes\u2014runs on an operating system managing resources. An OS is software that coordinates CPU, memory, storage, and devices to run applications. In this course, you'll explore three critical OS concepts that directly impact the platforms and tools educators use daily. Understanding these fundamentals helps you troubleshoot, optimize, and design better educational technology systems. You'll investigate processes, memory, and file systems through real EdTech scenarios.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "You'll explore three essential OS concepts. Select the order that fits your needs: start with how systems execute tasks, how they manage memory resources, or how they organize data.",
+      "choices": [
+        {
+          "label": "Processes & Scheduling",
+          "next": "n3"
+        },
+        {
+          "label": "Memory Management",
+          "next": "n5"
+        },
+        {
+          "label": "File Systems",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Processes and Task Scheduling in Learning Platforms",
+      "content": "A process is a running program\u2014when a student accesses an online course, submits an assignment, or watches a video, the application creates processes to handle these tasks. The OS scheduler decides which process runs at any moment, switching rapidly between them (context switching). In a typical EdTech platform, the OS might handle a student's quiz submission, another student's video playback, and a background gradebook update simultaneously. The scheduler uses algorithms to be fair (each student's request gets CPU time) and efficient (prioritizing urgent tasks like login requests over slower background jobs). Understanding scheduling helps educators and developers design platforms that feel responsive even under heavy load.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "EdTech Scenario: An Overloaded Learning Platform",
+      "content": "Imagine a 1000-student course during exam day. At 2 PM, 500 students log in simultaneously. The OS scheduler assigns CPU time slices to each login request, forum post, and quiz submission. If the scheduler poorly prioritizes, quiz submissions might lag while background tasks consume CPU. A good OS with intelligent scheduling (like priority queues) ensures the quiz process gets adequate CPU time, keeping the exam responsive. This is why cloud-based learning platforms use OS tuning and load-balancing strategies to handle peak traffic smoothly.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Memory Management: The RAM Behind Real-Time Learning",
+      "content": "Memory (RAM) is the fast, temporary storage the OS uses while programs run. When a student logs into a learning platform, the OS loads user data, course materials, and session information into RAM. The OS memory manager allocates space for each process and prevents one process from overwriting another's data. Virtual memory extends RAM by using disk storage as overflow. In EdTech, memory management is critical: a video player needs memory for buffering frames, a quiz engine needs memory for questions and student responses, and a gradebook needs memory for computation. Poorly managed memory causes crashes, slowdowns, or data corruption\u2014devastating for an exam system. Modern EdTech platforms use containerization and memory limits to isolate each user's session.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Why Your Online Exam Crashed",
+      "content": "During a final exam, the testing platform's memory manager fails to properly deallocate memory from previous student sessions. Each student's exam session leaks memory\u2014data isn't freed when they finish. After 100 students, the platform has consumed 80% of available RAM. Student 101's quiz submission requires memory to store answers, but the OS has none left. The platform crashes or severely lags, interrupting the exam. This real-world scenario highlights why operating systems use garbage collection and memory limits. Modern solutions include containerization (Docker) where each exam session gets isolated, maximum memory constraints, and automatic memory reclamation.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "File Systems: Storing Courses, Assignments, and Data Securely",
+      "content": "A file system is the OS component that organizes and retrieves data on disk storage. Files are collections of data (a syllabus PDF, a submitted assignment, video files), and the file system manages where they're stored, who can access them, and how they're retrieved. In EdTech, file systems must support: organizing thousands of course materials into folders, storing millions of student submissions securely, managing file permissions (a student shouldn't access another's submissions), and providing reliable backups. The file system uses hierarchical directories (folders), metadata (timestamps, permissions), and indexing to quickly locate files. File system failures can result in lost student work, security breaches, or system downtime\u2014making this a critical OS responsibility.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Case Study: A Secure Course Repository",
+      "content": "A university's learning platform hosts 500 courses with 50,000 students. The file system must organize course materials so an instructor can quickly find a lecture from Fall 2024, allow students to download materials without accessing other courses' files, and prevent unauthorized access. The OS file system implements: (1) directory hierarchy (/2024/Fall/Introduction_to_Biology/lectures/), (2) permission bits (instructor: read/write, students: read-only), (3) journaling (logs all changes for recovery). When a student's assignment submission is lost to disk failure, journaling allows recovery from backup. This illustrates why EdTech platforms rely on RAID storage, automated backups, and file system redundancy.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "How OS Fundamentals Power Modern EdTech",
+      "content": "Processes, memory, and file systems are interconnected. A video platform's streaming service runs as multiple processes (one per student), each allocated a memory limit by the OS, storing video files in an organized file system with access controls. When a learning platform scales to 10,000 simultaneous users, the OS scheduler distributes CPU fairly, the memory manager prevents crashes, and the file system serves files quickly. EdTech reliability, speed, and security depend on OS optimization. Administrators tune CPU scheduling for responsiveness, allocate memory to prevent leaks, and organize file systems for both performance and security. Understanding these fundamentals makes you a better educator, administrator, or developer in the EdTech space.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Operating Systems Fundamentals Assessment",
+      "content": "Test your understanding of how OS concepts apply to educational technology platforms. Answer all questions to complete the course.",
+      "questions": [
+        {
+          "question": "A learning platform experiences slow quiz submissions during peak hours despite having plenty of free RAM and disk space. What OS component is likely the bottleneck?",
+          "options": [
+            "File system fragmentation",
+            "CPU scheduler (process scheduling)",
+            "Memory leak in the web server",
+            "File permission restrictions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. File fragmentation wouldn't prevent RAM from being available.",
+            "Correct! With adequate RAM and disk, the bottleneck is CPU scheduling. Too many processes competing for CPU time causes delays. The OS scheduler needs tuning.",
+            "Incorrect. You said there's plenty of free RAM, so a memory leak isn't the issue.",
+            "Incorrect. File permissions wouldn't affect submission speed."
+          ],
+          "explanation": "Process scheduling is the OS deciding which process gets CPU time. When many students submit simultaneously, the scheduler must fairly distribute CPU. Poor scheduling algorithms or low CPU allocation can cause delays despite available memory and disk."
+        },
+        {
+          "question": "An EdTech administrator notices that student submissions are corrupted after power failures. Which OS file system feature would prevent this?",
+          "options": [
+            "Journaling",
+            "Virtual memory",
+            "Process prioritization",
+            "Memory allocation tables"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Journaling logs file changes before committing them to disk. If power fails mid-write, the journal can recover the correct state.",
+            "Incorrect. Virtual memory relates to RAM/disk overflow, not file corruption protection.",
+            "Incorrect. Process prioritization affects CPU scheduling, not file integrity.",
+            "Incorrect. Memory allocation doesn't protect disk storage."
+          ],
+          "explanation": "Journaling is a file system feature that writes a log of changes before applying them. If failure occurs, the journal can replay or roll back changes, preventing corruption. This is critical for storing student data reliably."
+        },
+        {
+          "question": "You're deploying a containerized learning app with OS-level memory limits (1 GB per container). Why is this important?",
+          "options": [
+            "Containers automatically compress data",
+            "It prevents one container from consuming all host memory and crashing other containers",
+            "It increases file system performance",
+            "It eliminates the need for backup systems"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Containers don't compress data; memory limits prevent excessive allocation.",
+            "Correct! Memory limits isolate containers. If one container (e.g., a quiz engine) leaks memory and hits 1 GB, it's terminated, not affecting other containers.",
+            "Incorrect. Memory limits don't directly impact file system performance.",
+            "Incorrect. Memory limits don't replace backups."
+          ],
+          "explanation": "Memory limits (enforced by the OS) prevent one misbehaving process from consuming all system memory. In EdTech, this ensures one student's session doesn't crash the platform for all students."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Congratulations: OS Fundamentals Complete!",
+      "content": "You've explored how operating systems manage the processes, memory, and files that power educational technology. These concepts apply across all EdTech platforms\u2014from learning management systems (Canvas, Blackboard) to video conferencing (Zoom uses OS scheduling and memory management) to online testing platforms. As an educator, administrator, or developer, understanding OS fundamentals helps you: troubleshoot performance issues, design scalable platforms, ensure data security, and optimize student experience. Continue learning by exploring advanced topics like distributed systems, database optimization, or cloud infrastructure\u2014all built on these foundational OS concepts."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Processes & Scheduling"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Memory Management"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "File Systems"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "View example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Continue to synthesis"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "View example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Continue to synthesis"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "View example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue to synthesis"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Take assessment"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Finish"
+    }
+  ],
+  "generated_at": "2026-03-27T12:50:35.891708+00:00",
+  "model": "claude-haiku-4-5"
+}

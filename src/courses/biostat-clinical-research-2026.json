@@ -1,0 +1,375 @@
+{
+  "id": "biostat-clinical-research-2026",
+  "title": "Biostatistics for Clinical Research",
+  "description": "Master the statistical foundations of clinical research through exploring descriptive statistics, hypothesis testing, and regression analysis in real healthcare scenarios.",
+  "topic": "Biostatistics",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "biostatistics",
+    "clinical research",
+    "healthcare",
+    "statistics",
+    "data analysis",
+    "evidence-based medicine"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Biostatistics in Clinical Research",
+      "content": "Biostatistics is the application of statistical methods to healthcare data, enabling clinicians and researchers to make evidence-based decisions that directly impact patient care. Every clinical trial, observational study, and quality improvement initiative relies on biostatistical analysis to determine whether treatments work, identify side effects, and understand disease patterns. In this course, you'll explore three core pillars: how to describe and organize patient data, how to test whether treatments truly make a difference, and how to predict and understand what factors drive patient outcomes. Mastering these skills transforms raw patient data into actionable clinical insights.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "You'll explore two of three complementary areas of biostatistics. Which two topics interest you most? You can start with either, and we recommend choosing based on your immediate clinical needs.",
+      "choices": [
+        {
+          "label": "Descriptive Statistics & Data Management",
+          "next": "n3"
+        },
+        {
+          "label": "Hypothesis Testing & Study Design",
+          "next": "n6"
+        },
+        {
+          "label": "Regression Analysis & Risk Prediction",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Descriptive Statistics & Data Management",
+      "content": "The foundation of any clinical study is accurately describing your patient population and managing the data they generate. Descriptive statistics summarize key characteristics\u2014age, baseline disease severity, medication use\u2014using measures like mean, median, and standard deviation. Proper data management ensures accuracy, handles missing values appropriately (patients who drop out, lab tests not completed), and identifies outliers that might indicate data errors or truly unusual cases. A well-described patient cohort enables readers to understand who was studied and whether results apply to their own patients. Missing data must be addressed thoughtfully: ignoring it biases results, while inappropriate imputation creates artificial certainty.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Baseline Characteristics in a Heart Failure Trial",
+      "content": "A randomized trial comparing a new diuretic to standard therapy in 200 heart failure patients reveals: mean age 68 years (SD 12), 60% male, median ejection fraction 35% (IQR 28\u201342%), and 95% on ACE inhibitors. Eight patients (4%) have missing ejection fraction values\u2014perhaps they declined echocardiograms or had contraindications. Rather than excluding them, multiple imputation uses relationships between ejection fraction and other variables to estimate reasonable values. Your baseline table communicates that groups are comparable and identifies the study population's severity level, crucial for readers determining if results apply to their patients.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Descriptive Statistics",
+      "content": "Test your understanding of summarizing clinical data and addressing common data challenges.",
+      "questions": [
+        {
+          "question": "In a study of 150 diabetic patients, fasting glucose values have mean 145 mg/dL (SD 35). One patient has a value of 320 mg/dL. What is the most appropriate first step?",
+          "options": [
+            "Remove the outlier immediately to normalize the distribution",
+            "Verify the data entry and clinical context\u2014does this patient truly have severe hyperglycemia, or is it a transcription error?",
+            "Replace it with the group median",
+            "Report the data as-is without investigating further"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Removing outliers without investigation introduces bias and loses valid clinical information.",
+            "Correct! Outliers may represent real clinical variation or data errors. Verification determines appropriate handling.",
+            "Replacing observed data with median artificially reduces variance and distorts the true population picture.",
+            "Unverified errors compromise data integrity and mislead clinicians interpreting results."
+          ],
+          "explanation": "Outliers in clinical data often reflect genuine severity in individual patients. A 320 mg/dL value might indicate a patient with uncontrolled diabetes needing different therapy\u2014clinically important information. Investigate first, then decide whether to keep, correct, or flag the value."
+        },
+        {
+          "question": "A longitudinal study tracks blood pressure in 180 hypertensive patients over 12 months. Baseline systolic BP measurements are missing for 22 patients due to equipment failure. Which approach best preserves validity?",
+          "options": [
+            "Exclude the 22 patients from the entire analysis",
+            "Use multiple imputation to estimate missing baseline BP based on observed patient characteristics and available data",
+            "Assume missing values equal the group average and substitute it for all 22",
+            "Report only the 158 complete cases and note the missing data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Excluding 22 patients reduces power and introduces selection bias\u2014patients lost to equipment failure may differ systematically.",
+            "Correct! Multiple imputation preserves sample size, accounts for uncertainty in missing values, and provides valid statistical inferences.",
+            "Simple substitution of group average underestimates variance and ignores relationships with other variables.",
+            "Complete-case analysis is acceptable in some contexts but loses power and is suboptimal when missingness relates to other data."
+          ],
+          "explanation": "Missing data due to equipment failure is likely 'missing at random.' Multiple imputation uses relationships within the data (e.g., baseline BP correlates with age and BMI) to estimate missing values, producing valid confidence intervals and p-values superior to deletion or naive substitution."
+        },
+        {
+          "question": "A study reports baseline characteristics: mean age 65.2 years (SD 11.3), median comorbidity count 2 (IQR 1\u20133). Why report both pairs?",
+          "options": [
+            "To appear more thorough; either would suffice",
+            "Age is normally distributed so mean/SD applies; comorbidity count is skewed so median/IQR better represents typical patients",
+            "Mean/SD is always superior for clinical data",
+            "Median/IQR is always superior for clinical data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Choice of summary statistics is not arbitrary; it reflects the data's distribution and communicates the right information.",
+            "Correct! Age often follows a near-normal distribution (mean/SD is interpretable), while comorbidity count is discrete and skewed, so median/IQR better reflects where most patients cluster.",
+            "Mean/SD is misleading if data are highly skewed; it can suggest a 'typical' patient who doesn't exist in your cohort.",
+            "Median/IQR is useful for skewed data, but for normally distributed variables like age, mean/SD conveys information efficiently."
+          ],
+          "explanation": "Choosing the right summary statistic matches the data distribution. For age, SD of \u00b111.3 years around mean 65.2 means most patients are 54\u201376 years old\u2014interpretable and meaningful. For comorbidities, if median is 2 and IQR is 1\u20133, you know half have 1\u20133 comorbidities; reporting mean would be less meaningful if distribution is discrete or skewed."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n12",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Hypothesis Testing & Study Design",
+      "content": "Hypothesis testing answers: 'Is this treatment effect real, or could it be chance?' Clinical trials begin with a null hypothesis (drug A and placebo are equally effective) and statistical tests determine whether observed differences are unlikely under that assumption. A p-value of 0.05 means only 5% probability of seeing such an extreme result if treatments truly were equal\u2014suggesting the difference is 'statistically significant.' However, statistical significance differs from clinical significance; a tiny reduction in cholesterol might be statistically significant in 10,000 patients but clinically meaningless. Study design\u2014sample size calculation, randomization, blinding\u2014ensures valid inference. Underpowered studies fail to detect real effects; poorly blinded trials introduce bias that obscures the truth.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Example: Comparing Antihypertensive Agents",
+      "content": "A double-blind randomized trial assigns 160 hypertensive patients: 80 to a new ACE inhibitor and 80 to standard amlodipine. After 8 weeks, the new drug reduces systolic BP by 18 mmHg (SD 12) while amlodipine reduces it by 12 mmHg (SD 10). The difference is 6 mmHg; a t-test yields p = 0.032 (unlikely by chance). However, a 6 mmHg difference, while statistically significant, is clinically modest\u2014both achieved good control. If the sample size had been 300 per arm, an even smaller 3 mmHg difference might yield p < 0.05. Good study design pre-specifies the minimum clinically relevant difference (e.g., 10 mmHg) during planning, ensuring that statistical power targets detection of meaningful benefits rather than trivial ones.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Hypothesis Testing & Study Design",
+      "content": "Evaluate your understanding of p-values, power, and the relationship between study design and valid conclusions.",
+      "questions": [
+        {
+          "question": "A new diabetes medication is compared to placebo in 240 patients. Mean HbA1c reduction is 0.8% (drug) vs 0.3% (placebo), p = 0.048. Before celebrating, what question should you ask?",
+          "options": [
+            "Since p < 0.05, the drug is proven effective and should be recommended",
+            "Is the 0.5% difference clinically meaningful in terms of preventing complications, mortality, or reducing burden?",
+            "The p-value is too close to 0.05; results are unreliable",
+            "We need p < 0.01 to trust the result"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Statistical significance (p < 0.05) and clinical significance are different. A small p-value says the result is unlikely by chance, not that it matters clinically.",
+            "Correct! A 0.5% HbA1c difference might or might not prevent future complications or justify the drug's cost, side effects, and complexity.",
+            "The p-value of 0.048 is valid; the threshold of 0.05 is conventional, not a magic barrier. What matters is whether effect size is clinically relevant.",
+            "Different studies use different thresholds (0.05, 0.01) depending on context. The 'correct' threshold is determined before the study begins."
+          ],
+          "explanation": "Statistical significance is necessary but not sufficient for clinical relevance. A p = 0.048 means strong evidence the drug differs from placebo, but a 0.5% HbA1c reduction might prevent only a small fraction of future complications. Decision-makers must weigh benefit against cost, side effects, and feasibility. This is why pre-specifying the 'minimum clinically important difference' during study design is crucial."
+        },
+        {
+          "question": "A hospital-wide hand hygiene intervention is tested: baseline infection rate 4.2%, post-intervention rate 3.8% (p = 0.28). The hospital concludes the intervention failed. What assumption might be incorrect?",
+          "options": [
+            "The intervention definitely didn't work; non-significant p-value proves no effect",
+            "The study lacked power\u2014perhaps sample size was too small to detect a modest but clinically important reduction in infections",
+            "Hand hygiene interventions never work in real-world settings",
+            "The p-value should have been reported as a confidence interval"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Absence of evidence (non-significant p-value) is not evidence of absence (no effect). An underpowered study can miss real benefits.",
+            "Correct! A 0.4 percentage-point reduction in infection rate is clinically meaningful, but if the study is small, random variation masks the benefit.",
+            "This reasoning ignores the possibility that the study design itself was insufficient to detect a real effect.",
+            "Confidence intervals and p-values provide equivalent information in different forms. This doesn't resolve the power question."
+          ],
+          "explanation": "A 0.4 percentage-point reduction in hospital-wide infection rate is substantial\u2014if real, it prevents patient harm and improves outcomes. But if the study only tracked infections in 2 wards over 3 months, random variation might obscure a genuine benefit. Pre-study power calculation ensures sample size is adequate to detect a clinically relevant effect. Non-significant findings from adequately powered studies indicate no effect; those from underpowered studies remain inconclusive."
+        },
+        {
+          "question": "Why is blinding important in a trial comparing a new migraine medication to placebo?",
+          "options": [
+            "Blinding ensures patients are randomly assigned to groups",
+            "Blinding prevents expectation effects and bias that could inflate the placebo arm or inflate improvement in the active arm",
+            "Blinding is optional and only used in small trials",
+            "Blinding guarantees statistical significance will be achieved"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Randomization (not blinding) ensures group balance. Blinding addresses bias in outcome assessment and patient expectations.",
+            "Correct! If patients know they're on active drug, they expect improvement (placebo effect). If clinicians know assignments, they may assess outcomes differently.",
+            "Blinding is critical in most trials, especially where outcomes involve subjective judgment like pain or fatigue.",
+            "Blinding supports fair comparison but doesn't determine significance. The true effect size does."
+          ],
+          "explanation": "Migraine outcomes involve patient perception. If a patient knows they received the new drug, they expect it to work, unconsciously reporting improvement even without pharmacologic benefit. Blinding both participants and assessors preserves the integrity of the comparison, ensuring observed differences reflect pharmacology, not expectation or bias."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n12",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Regression Analysis & Risk Prediction",
+      "content": "Regression models predict patient outcomes and quantify how risk factors contribute to disease. Logistic regression predicts binary outcomes (survive to discharge? yes/no), while linear regression predicts continuous outcomes (blood glucose level). A regression coefficient tells you how much the outcome changes per unit change in a predictor: each year of age might increase mortality odds by 3%. Confidence intervals convey precision; wide intervals suggest uncertainty, while narrow intervals indicate a robust relationship. Adjusted odds ratios account for confounders\u2014if age and smoking both relate to heart disease, does smoking truly increase risk independent of age? Regression separates effects. Model calibration ensures predictions are accurate across risk levels; a model saying '70% mortality risk' should see death in 70% of such patients.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Example: Predicting 30-Day Hospital Readmission After Stroke",
+      "content": "A logistic regression model trained on 800 prior stroke patients predicts 30-day readmission from admission data. Key predictors: age (OR 1.04 per year), Charlson comorbidity score (OR 1.15 per point), living alone (OR 1.8), and receiving rehabilitation (OR 0.6, protective). For a 72-year-old living alone with 3 comorbidities receiving rehab, the model estimates 35% readmission risk. This prediction identifies high-risk patients: those flagged at >40% risk receive intensive discharge planning (social work involvement, early follow-up clinic visits, nurse phone calls). Those at <15% risk receive standard discharge. The model's accuracy and calibration are validated on new patients not in the training set, ensuring it works in practice.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Assessment: Regression Analysis & Risk Prediction",
+      "content": "Demonstrate your understanding of regression coefficients, odds ratios, confounding, and model validation.",
+      "questions": [
+        {
+          "question": "In logistic regression predicting surgical site infection, the coefficient for BMI is 0.08 with 95% CI (0.02, 0.14). What does this mean clinically?",
+          "options": [
+            "Obese patients definitely get infections because BMI causally causes them",
+            "For each BMI unit increase, odds of infection rise approximately 8%, with 95% confidence the true effect is between 2% and 14% per unit",
+            "BMI is unimportant since the CI includes zero",
+            "The coefficient explains the mechanism by which BMI causes infection"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Regression identifies associations, not causation. Other factors might explain both high BMI and infection (reduced mobility, comorbidity burden).",
+            "Correct! A coefficient of 0.08 means each 1-unit BMI increase multiplies infection odds by e^0.08 \u2248 1.083 (8.3% increase). The CI excludes zero, indicating statistical significance.",
+            "The CI does NOT include zero (2%\u201314% are both positive), so BMI is significantly associated with infection in this model.",
+            "Regression identifies associations and quantifies them. Causation requires biological plausibility, temporal precedence, and other study designs."
+          ],
+          "explanation": "A coefficient of 0.08 in logistic regression is interpreted on the log-odds scale. The odds ratio is e^0.08 = 1.083 (8.3% increase per BMI unit). The 95% CI (0.02, 0.14) means we're 95% confident the true effect is between 2% and 14% per BMI unit\u2014reflecting uncertainty from sample variation but excluding 'no effect.' Clinically: higher BMI associates with higher infection risk, and this association is real, though other factors likely contribute."
+        },
+        {
+          "question": "A model predicts mortality in cardiac patients using age, ejection fraction, and kidney function. Adding smoking status slightly decreases the age coefficient. What does this suggest?",
+          "options": [
+            "Age is unimportant and should be removed from the model",
+            "Smoking confounds the age-mortality relationship; age's apparent effect was partly due to older patients being more likely to have smoked",
+            "Smoking causes aging, so it should be excluded as implausible",
+            "The model is overfit; smoking is noise and should be removed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The change in age's coefficient indicates confounding, suggesting age remains important but its effect was partially explained by smoking.",
+            "Correct! When a confounder is added, it explains part of the original predictor's association with outcome, reducing that predictor's coefficient.",
+            "This reasoning confuses causation direction. Age doesn't 'cause' smoking; rather, older cohorts may smoke more. Including smoking clarifies age's independent effect.",
+            "Including predictors that reduce other coefficients isn't overfitting if the predictors are real and clinically relevant; it's controlling for confounding."
+          ],
+          "explanation": "Confounding occurs when a variable is associated with both the predictor (age) and outcome (mortality). If older patients smoked more, and smoking increases mortality, observed age effects include both aging and smoking. Adding smoking separates these: the age coefficient shrinks because smoking now accounts for some of the age-mortality association. The adjusted (confounding-controlled) age effect is more accurate than the crude effect."
+        },
+        {
+          "question": "A prediction model for diabetes developed at Hospital A is applied to Hospital B's patients. Discrimination is good, but calibration is poor: predicted risks are systematically higher than observed. What does this mean?",
+          "options": [
+            "The model is invalid and should not be used at Hospital B",
+            "The model orders patients correctly by risk but overestimates absolute risk, possibly due to differences in patient severity or care quality",
+            "Hospital B has worse care than Hospital A, explaining the discrepancy",
+            "Discrimination and calibration are redundant; poor calibration is unimportant if discrimination is good"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Poor calibration is important and should be addressed, though good discrimination means the model's ranking is useful. Recalibration can fix this.",
+            "Correct! Discrimination (ROC curve, c-statistic) measures relative ranking; calibration measures absolute risk accuracy. Differences in patient severity or care quality explain the gap. Recalibration adjusts intercepts and slopes to improve performance.",
+            "While possible, differences in case mix, care protocols, or baseline health may also explain the discrepancy.",
+            "They're related but distinct. A model can discriminate well (ranking correctly) but give wrong absolute risks. For clinical decisions, both matter."
+          ],
+          "explanation": "A model trained on Hospital A learns the relationship between patient factors and diabetes incidence in that population. If Hospital B's patients are healthier overall or receive better preventive care, baseline diabetes rates are lower. The model, calibrated to Hospital A's higher rate, overestimates absolute risk at Hospital B. However, the model's ability to identify high- vs low-risk patients remains valid. Recalibration\u2014adjusting the model to match Hospital B's outcome rates\u2014preserves discrimination while fixing absolute risk accuracy."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n12",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Integrating Biostatistics into Clinical Practice",
+      "content": "You've explored three pillars of biostatistics: describing populations, testing hypotheses, and predicting outcomes. In real clinical practice, these integrate seamlessly. A well-designed trial begins with clear patient description (baseline characteristics confirm randomization worked), tests hypotheses with appropriate power (ensuring observed differences reflect true effects), and often includes regression analysis (does benefit vary by age, severity, or biomarker?). Quality improvement initiatives use descriptive data to understand current performance, hypothesis tests to evaluate interventions, and prediction models to identify high-risk patients for targeted support. Precision medicine applies regression models trained on large cohorts to personalize treatment selection. As a clinician or researcher, your role is interpreting these analyses critically: asking whether findings are clinically meaningful, whether populations match your patients, whether models are externally validated, and whether results align with biological plausibility and patient values.",
+      "next": "n13"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Course Complete: Biostatistics for Clinical Research",
+      "content": "Congratulations! You've mastered core biostatistical concepts underlying clinical research and evidence-based practice. You now understand how to summarize patient populations, recognize when treatment effects are real and clinically meaningful, and interpret predictive models. Continue building expertise by applying these concepts in your clinical context: review p-values critically, examine baseline tables for imbalance, question whether confidence intervals guide practice, and validate prediction tools before adoption. Biostatistics is ultimately about improving patient care through rigorous evidence\u2014keep that mission at the forefront as you advance your clinical and research career."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Descriptive Statistics & Data Management"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hypothesis Testing & Study Design"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n9",
+      "label": "Regression Analysis & Risk Prediction"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n12",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n12",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": null
+    },
+    {
+      "id": "c13",
+      "source": "n11",
+      "target": "n12",
+      "label": null
+    },
+    {
+      "id": "c14",
+      "source": "n12",
+      "target": "n13",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T12:34:14.047335+00:00",
+  "model": "claude-haiku-4-5"
+}

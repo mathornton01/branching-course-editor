@@ -1,0 +1,272 @@
+{
+  "id": "rust-game-dev-course",
+  "title": "Introduction to Rust Programming",
+  "description": "Learn Rust fundamentals through building a game engine. Choose your specialization and experience different outcomes based on your architectural decisions in a game development scenario.",
+  "topic": "Rust Programming for Game Development",
+  "theme": "game design",
+  "difficulty": "beginner",
+  "estimated_minutes": 50,
+  "tags": [
+    "Rust",
+    "Game Development",
+    "Programming",
+    "Memory Safety",
+    "Performance",
+    "Concurrency"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Your Game Studio: Choosing the Rust Path",
+      "content": "You're founding a game studio and building a custom engine in Rust\u2014a language famous for safety and performance. Your team is talented but small, so you must choose one critical specialization: a **rock-solid multiplayer server** that AAA studios will license, or an **ultra-optimized physics engine** that delivers stunning visuals at 60+ FPS. This decision shapes your entire development roadmap and determines which Rust features you'll master first. Make it wisely.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Game Engine Specialization",
+      "content": "Which architecture will you build first to gain your competitive advantage?",
+      "choices": [
+        {
+          "label": "Safe Multiplayer Server (Memory Safety Focus)",
+          "next": "n3"
+        },
+        {
+          "label": "High-Performance Physics Engine (Performance Focus)",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Rust Ownership & Borrowing for Multiplayer Games",
+      "content": "Rust's **ownership system** is the secret sauce for safe multiplayer servers: only one owner can modify data at a time, but many can read it through borrowing. When you pass player state to a thread, Rust's borrow checker enforces this rule\u2014preventing the race conditions that plague C++ servers. In your multiplayer game, each player's inventory and stats are owned by a GameSession, while physics and networking systems borrow read-only or mutable references. The borrow checker prevents two threads from modifying the same data simultaneously, eliminating undefined behavior. Your compiler becomes your safety net.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Real Example: Player Connection Manager",
+      "content": "Your login system handles 10,000 concurrent players. In Rust, you wrap the player registry in `Arc<Mutex<PlayerRegistry>>`: the Arc allows multiple threads to own it, the Mutex ensures only one accesses it at a time. When a new player connects, the main thread takes a mutable borrow, adds the player, and releases it. Other threads immediately see the update via read-only borrows\u2014the borrow checker prevents race conditions before they compile.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Ownership & Borrowing Assessment",
+      "content": "Test your understanding of Rust's ownership model in a multiplayer game context.",
+      "questions": [
+        {
+          "question": "In your player registry, you want multiple threads to read player stats simultaneously while one thread updates leaderboards. Which Rust construct best enables this safely?",
+          "options": [
+            "Arc<Mutex<PlayerRegistry>> with immutable borrows for readers and mutable for leaderboard updates",
+            "Unsafe raw pointers with manual synchronization",
+            "Shared global variables with volatile keywords",
+            "Copy player data into each thread to avoid sharing"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Arc enables safe sharing across threads, Mutex ensures only one mutable access, and borrowing rules enforce the read-write safety pattern.",
+            "Incorrect. Unsafe code defeats Rust's purpose and introduces undefined behavior in multiplayer scenarios.",
+            "Incorrect. Volatile doesn't provide thread synchronization\u2014race conditions still occur.",
+            "Incorrect. Copying large player registries wastes memory and creates synchronization problems."
+          ],
+          "explanation": "The Arc<Mutex<T>> pattern is idiomatic Rust for thread-safe shared state. Arc (Atomic Reference Counted) allows multiple threads to own the data, while Mutex ensures only one thread can access it mutably at any moment. Immutable borrows allow many threads to read simultaneously."
+        },
+        {
+          "question": "A player's inventory is owned by a GameSession struct. You want to let an NPC read the inventory without the GameSession losing ownership. How do you pass the inventory to the NPC code?",
+          "options": [
+            "Pass an immutable reference (&PlayerInventory) to the NPC function",
+            "Use 'move' to transfer ownership of the inventory to NPC code",
+            "Clone the inventory and pass the clone to the NPC",
+            "Use unsafe code to share pointers directly"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! An immutable reference lets the NPC read without taking ownership. The GameSession retains control.",
+            "Incorrect. Moving ownership would prevent the GameSession from using its own inventory afterward.",
+            "Incorrect. Cloning is wasteful and creates out-of-sync data. Borrowing is the idiomatic solution.",
+            "Incorrect. Unsafe code is unnecessary and defeats Rust's safety guarantees."
+          ],
+          "explanation": "Rust's borrowing mechanism lets you share read access without transferring ownership. This is perfect for passing game data to systems that need to read it without modifying it."
+        },
+        {
+          "question": "Your physics system needs to temporarily modify player positions during collision resolution. The GameSession owns the player data. What's the safe pattern?",
+          "options": [
+            "GameSession passes a mutable reference (&mut PlayerPos) to the physics system",
+            "Physics system calls unsafe code to directly access memory",
+            "GameSession clones positions, physics modifies clones, then syncs back manually",
+            "Both threads own PlayerPos and hope they don't conflict"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Mutable borrowing lets the physics system modify data temporarily while the GameSession retains ownership. The borrow checker ensures exclusive access.",
+            "Incorrect. Unsafe code removes compile-time safety checks\u2014exactly what causes multiplayer bugs.",
+            "Incorrect. Manual syncing is error-prone and defeats Rust's safety model.",
+            "Incorrect. Shared mutable ownership without synchronization causes data races."
+          ],
+          "explanation": "A mutable reference (&mut T) grants temporary exclusive access to owned data. When the reference goes out of scope, the owner regains access. This pattern is core to Rust's safe concurrency."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Building Your Multiplayer Server Architecture",
+      "content": "You've mastered ownership and borrowing, the foundation of safe servers. Now implement **async/await** with Rust's tokio runtime: spawn thousands of lightweight tasks (not threads) to handle player connections, with automatic task switching during I/O waits. Your server handles 10,000 players on 8 cores\u2014requiring thread pools and complex synchronization in C++. Shared data remains protected by Arc<Mutex<T>>, but async/await makes concurrency ergonomic and efficient. Your studio's multiplayer infrastructure is now a competitive advantage.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "\ud83c\udfae Success: Enterprise Multiplayer Server Launched",
+      "content": "Your game studio's reputation for rock-solid netcode spreads across the industry. Major publishers approach you for engine licensing. Your server has zero critical race conditions reported in the first year\u2014a record unmatched by C++ competitors. Rust's safety guarantees prevented catastrophic bugs before they reached production. You're not just writing games; you're setting the industry standard for reliable multiplayer architecture. Your startup is acquired by a AAA publisher for $50M."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "\u26a0\ufe0f Failure: Race Condition in Production",
+      "content": "Three months after launch, a critical bug surfaces: a data race causes player progress to randomly disappear during ranked matches. Thousands of players lose hours of progress. Your support channel explodes with complaints. You spend two weeks debugging with unsafe code workarounds, but the damage is done\u2014you ignored Rust's ownership system and tried to 'optimize' with manual memory management, introducing undefined behavior. The incident costs you $2M in refunds and reputation damage. This is exactly why Rust's borrow checker exists."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Zero-Cost Abstractions for Game Physics",
+      "content": "You're taking a different path: building a high-performance physics engine in Rust. Rust excels here through **zero-cost abstractions**\u2014you write safe code that compiles to assembly as efficient as hand-optimized C++, with no garbage collector and predictable memory deallocation. **Move semantics** let you transfer ownership instead of copying; **Iterator abstractions** compile to fast loops; and **stack allocation** is the default. Physics simulations never stall for GC pauses, and data layout stays cache-friendly. This is why AAA studios adopt Rust for game engines: C++ performance with memory safety baked in.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Optimizing Your Physics Loop: SIMD in Rust",
+      "content": "Your game has 100,000 rigid bodies to simulate each frame. Using Rust's `packed_simd` library, you process 4 bodies at once with a single CPU SIMD instruction\u20144x faster than scalar code. Rust's type system ensures cache-friendly memory layout (contiguous arrays), while C++ developers struggle with layout mistakes causing 50% regressions. Your physics loop achieves 120 FPS with 100k bodies\u2014rivals achieve half the fidelity or need twice the hardware.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "practice",
+      "title": "Practice: Identifying Performance Bottlenecks",
+      "content": "Test your understanding of Rust performance patterns in game development.",
+      "questions": [
+        {
+          "question": "Your physics loop processes 50k bodies and runs at 30 FPS instead of the target 60. You suspect memory layout is the issue. How should you profile before optimizing?",
+          "options": [
+            "Use Rust's flamegraph tool to measure CPU cache misses and identify where time is spent",
+            "Rewrite everything in unsafe code to 'squeeze out performance'",
+            "Switch to a garbage-collected language for predictability",
+            "Add more threads to parallelize without measuring first"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Measure first. Flamegraph shows where time is actually spent. Often surprising\u2014it's not where you think. Cache misses are a common culprit in physics loops.",
+            "Incorrect. Unsafe code doesn't automatically optimize. You need data to guide optimization.",
+            "Incorrect. Garbage collectors introduce unpredictable pauses\u2014the opposite of what you need for 60 FPS physics.",
+            "Incorrect. More threads without measurement may worsen performance due to contention."
+          ],
+          "explanation": "Premature optimization is the root of all evil. Profile first with tools like flamegraph or perf. In physics engines, cache misses and memory layout often dominate performance. Rust's iterator abstractions help the compiler optimize memory access patterns, but you need to structure your data layout for cache efficiency."
+        },
+        {
+          "question": "You're iterating over 10k game entities applying velocity to position each frame. Which Rust pattern gives the best performance?",
+          "options": [
+            "Use a for loop with .iter_mut() on an array of entities; let Rust inline and vectorize the loop",
+            "Use unsafe raw pointers to bypass bounds checks",
+            "Clone entities into a separate vector, modify clones, then copy back",
+            "Use a linked list of entities for easy insertion/deletion"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! .iter_mut() on arrays is cache-friendly and the compiler optimizes aggressively. Bounds checks are eliminated via range analysis. This is peak Rust performance.",
+            "Incorrect. Unsafe pointers don't improve performance\u2014the compiler already optimizes bounds checks away.",
+            "Incorrect. Cloning and copying is wasteful. Move semantics avoid the copy.",
+            "Incorrect. Linked lists have terrible cache locality. Arrays are always faster for iteration."
+          ],
+          "explanation": "Rust's iterator abstractions compile to optimal code. Arrays with sequential access are cache-friendly. The compiler knows bounds are guaranteed for iterators and eliminates checks. This is a zero-cost abstraction: safe code that runs as fast as unsafe C++."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n12",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "\ud83c\udfae Success: 60+ FPS Physics Engine Delivered",
+      "content": "Your physics engine handles 100k bodies at 60+ FPS on commodity hardware\u2014a benchmark that rivals professional engines costing millions. AAA studios license your tech stack. Your startup becomes the go-to Rust physics partner in the industry. Rust's zero-cost abstractions proved that safety and performance aren't tradeoffs\u2014they're allies. No GC pauses. No undefined behavior. No memory leaks. Your company is acquired for $100M."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Memory Safety"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n9",
+      "label": "Performance"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Passed"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n8",
+      "label": "Failed"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n11",
+      "target": "n12",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T04:44:19.271521+00:00",
+  "model": "claude-haiku-4-5"
+}

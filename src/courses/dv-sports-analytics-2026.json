@@ -1,0 +1,336 @@
+{
+  "id": "dv-sports-analytics-2026",
+  "title": "Data Visualization with Python: Sports Analytics",
+  "description": "Master data visualization for sports analytics using Matplotlib, Seaborn, and Plotly. Learn to create player performance charts, compare team statistics, and build interactive dashboards through a structured mastery ladder with adaptive fail-back loops.",
+  "topic": "Data Visualization",
+  "theme": "sports analytics",
+  "difficulty": "beginner",
+  "estimated_minutes": 120,
+  "tags": [
+    "python",
+    "matplotlib",
+    "seaborn",
+    "plotly",
+    "sports analytics",
+    "data visualization",
+    "interactive dashboards"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Matplotlib for Sports Analytics",
+      "content": "Matplotlib is Python's foundational visualization library, perfect for tracking player and team performance metrics. In sports analytics, you'll use Matplotlib to create line charts tracking a player's scoring throughout a season, bar charts comparing team statistics, and scatter plots revealing relationships between variables like field goal percentage and wins. This module introduces the core plotting workflow: creating a figure, adding data, and customizing appearance. Understanding these fundamentals is essential before exploring advanced techniques and interactive dashboards used by professional sports teams."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Matplotlib Fundamentals Quiz",
+      "content": "Test your understanding of basic Matplotlib concepts applied to sports data visualization.",
+      "questions": [
+        {
+          "question": "You want to visualize LeBron James' points per game throughout the 2023-24 NBA season. Which Matplotlib function would you use to create a line chart?",
+          "options": [
+            "plt.scatter()",
+            "plt.plot()",
+            "plt.bar()",
+            "plt.histogram()"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. scatter() creates scatter plots, not line charts.",
+            "Correct! plt.plot() creates line charts, ideal for showing trends over time.",
+            "Incorrect. bar() creates bar charts for categorical comparisons.",
+            "Incorrect. histogram() shows distributions, not time-series data."
+          ],
+          "explanation": "Line charts are best for showing how a single metric changes over time, making them perfect for sports performance tracking."
+        },
+        {
+          "question": "When analyzing team shooting statistics, you need to compare 3-point percentage across 5 NBA teams. What would be the best Matplotlib chart type?",
+          "options": [
+            "Line chart",
+            "Histogram",
+            "Bar chart",
+            "Scatter plot"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Line charts show trends over time, not categorical comparisons.",
+            "Incorrect. Histograms display distributions of continuous data.",
+            "Correct! Bar charts excel at comparing values across categories.",
+            "Incorrect. Scatter plots show relationships between two continuous variables."
+          ],
+          "explanation": "Bar charts are ideal for comparing discrete categories, making them perfect for side-by-side team statistics."
+        },
+        {
+          "question": "You're creating a visualization with 500 player salary data points and want to show the relationship between experience (years in league) and salary. Which chart minimizes overplotting?",
+          "options": [
+            "Bar chart with 500 bars",
+            "Scatter plot with transparency (alpha parameter)",
+            "Line chart",
+            "Histogram"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A bar chart with 500 bars would be unreadable and inappropriate.",
+            "Correct! Scatter plots with transparency handle dense data well, revealing clustering and relationships.",
+            "Incorrect. Line charts require ordered data and wouldn't show point density.",
+            "Incorrect. Histograms group data into bins, losing individual relationships."
+          ],
+          "explanation": "The alpha parameter in Matplotlib allows overlapping points to blend, revealing patterns in dense datasets\u2014essential for exploratory sports analytics."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Matplotlib Practice - Player Performance Tracking",
+      "content": "Practice creating basic sports visualizations using Matplotlib. Task 1: Create a line chart showing Serena Williams' tennis ranking over 12 months. Task 2: Create a bar chart comparing serve speeds (mph) across 4 professional tennis players. Task 3: Add axis labels, a title, and a legend to your visualizations. Focus on the workflow: plt.figure(), plt.plot()/plt.bar(), plt.xlabel/ylabel/title(), plt.legend(), plt.show(). These three exercises reinforce selecting the right chart type and customizing basic appearance for sports data storytelling.",
+      "questions": [],
+      "pass_threshold": 100,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Advanced Chart Types for Sports Data Analysis",
+      "content": "Beyond basic line and bar charts, sports analytics requires scatter plots (salary vs. performance), histograms (distribution of player heights or game scores), heatmaps (game-by-game performance grids), and box plots (injury recovery timelines across athletes). Seaborn extends Matplotlib with high-level functions perfect for sports: sns.scatterplot() reveals correlations between stats like rebounds and wins; sns.boxplot() compares performance distributions across positions (guard, forward, center); sns.heatmap() visualizes team matchup history. Choosing the right chart type makes insights jump out\u2014a heatmap of quarterly performance is far more readable than a table of 100 numbers. This module covers when to use each chart type and how to implement them."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Chart Selection for Sports Analytics",
+      "content": "Demonstrate your ability to select appropriate visualizations for different sports analytics scenarios.",
+      "questions": [
+        {
+          "question": "A soccer coach wants to identify if there's a relationship between pass completion percentage and goals scored across 20 players. Which Seaborn visualization is most appropriate?",
+          "options": [
+            "sns.boxplot()",
+            "sns.scatterplot()",
+            "sns.heatmap()",
+            "sns.histplot()"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. boxplot() compares distributions across groups, not relationships between two variables.",
+            "Correct! Scatter plots are ideal for revealing correlations between two continuous variables.",
+            "Incorrect. heatmap() shows relationships in matrix data, not two-variable correlations.",
+            "Incorrect. histplot() shows distributions of single variables."
+          ],
+          "explanation": "When exploring correlation between two continuous sports metrics, scatter plots are standard exploratory tools."
+        },
+        {
+          "question": "You're analyzing MLB player heights and need to compare the distribution of heights across three positions (pitcher, infielder, outfielder). What visualization works best?",
+          "options": [
+            "sns.scatterplot(x='position', y='height')",
+            "sns.boxplot(x='position', y='height')",
+            "plt.plot(position, height)",
+            "sns.heatmap()"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Scatter plots would show individual points, making distribution comparison harder.",
+            "Correct! Box plots show median, quartiles, and outliers\u2014perfect for distribution comparison across groups.",
+            "Incorrect. Line charts require ordered categorical data and don't suit distribution analysis.",
+            "Incorrect. Heatmaps are for matrix/grid data, not distribution comparison."
+          ],
+          "explanation": "Box plots simultaneously show central tendency, spread, and outliers\u2014ideal for comparing distributions across sports positions."
+        },
+        {
+          "question": "Your team tracks game-by-game performance across 10 games and 8 key metrics (points, rebounds, assists, etc.) as a matrix. You need to identify performance patterns visually. What's the best choice?",
+          "options": [
+            "sns.scatterplot()",
+            "Multiple bar charts",
+            "sns.heatmap()",
+            "sns.boxplot()"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Scatter plots show relationships between pairs of variables, not matrix data.",
+            "Incorrect. Multiple bar charts become cluttered and hard to scan for patterns.",
+            "Correct! Heatmaps excel at displaying matrix data, with color intensity revealing high/low performance.",
+            "Incorrect. Box plots compare distributions, not matrix relationships."
+          ],
+          "explanation": "Heatmaps use color gradients to reveal patterns in multi-dimensional data\u2014common in sports for visualizing game-to-game consistency."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Advanced Chart Types Practice - Sports Comparison",
+      "content": "Reinforce advanced chart selection with sports analytics scenarios. Task 1: Create a scatter plot showing the relationship between field goal attempts and field goals made across 15 NBA players; add a trend line. Task 2: Create a box plot comparing scoring distribution across 5 basketball positions. Task 3: Create a heatmap showing player performance metrics (points, rebounds, assists, steals) across 5 games. These exercises train you to select appropriate Seaborn/Matplotlib visualizations for different analysis questions. Focus on interpreting the visual output to draw sports analytics insights.",
+      "questions": [],
+      "pass_threshold": 100,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Interactive Visualizations with Seaborn & Plotly",
+      "content": "Static charts tell part of the story; interactive dashboards enable deeper exploration. Plotly creates interactive plots where users hover to see exact values, zoom into time periods, and filter data\u2014essential for sports broadcasting analytics and team strategy sessions. Seaborn integrates seamlessly with Matplotlib for publication-quality static visualizations, while Plotly is ideal for web dashboards showing live game stats, player comparisons, or seasonal trends. A scout analyzing international talent needs to hover over 500 players to compare stats; Plotly's interactivity makes this exploration intuitive. This module covers Plotly's graph_objects and express APIs, combined with Seaborn for exploratory analysis workflows that professional sports organizations use daily."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Sports Analytics Dashboard Design Assessment",
+      "content": "Assess your ability to choose and implement visualization libraries for professional sports analytics scenarios.",
+      "questions": [
+        {
+          "question": "You're building a real-time dashboard for a basketball team's coaching staff to monitor player performance during games. Which visualization library is most appropriate?",
+          "options": [
+            "Matplotlib only",
+            "Seaborn only",
+            "Plotly with interactive hover/zoom",
+            "Static PDF charts"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Matplotlib creates static images; real-time monitoring requires interactivity.",
+            "Incorrect. Seaborn is excellent for exploration but lacks real-time interactivity.",
+            "Correct! Plotly's interactivity allows coaches to explore player stats, zoom into quarters, and filter by player in real-time.",
+            "Incorrect. PDFs are static and don't support exploration."
+          ],
+          "explanation": "Interactive dashboards are standard in professional sports analytics for in-game decision support and post-game analysis."
+        },
+        {
+          "question": "A cricket team wants to publish a final analysis of their batting performance across 10 test matches, showing 6 metrics for each innings. They need one static publication-quality visualization. What's most appropriate?",
+          "options": [
+            "Plotly interactive dashboard",
+            "Seaborn heatmap on Matplotlib backend",
+            "Plotly 3D scatter",
+            "Basic matplotlib.pyplot"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Interactive plots aren't necessary for publication; they add complexity without benefit.",
+            "Correct! Seaborn + Matplotlib excels at publication-quality visualizations with fine control over aesthetics.",
+            "Incorrect. 3D plots are hard to interpret and unnecessary here.",
+            "Incorrect. Basic pyplot lacks the refinement for professional publication."
+          ],
+          "explanation": "Publication-quality analysis uses Seaborn for elegance and Matplotlib for control; interactivity isn't needed for static reports."
+        },
+        {
+          "question": "You're integrating multiple visualizations into a Plotly dashboard: (1) a time-series line chart of team wins over seasons, (2) a scatter plot of player salary vs. performance, and (3) a bar chart of top scorers. What's the best approach?",
+          "options": [
+            "Create three separate Matplotlib figures",
+            "Use Plotly subplots with shared interactivity",
+            "Combine with Seaborn and print as images",
+            "Use multiple Plotly figures without linking"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Matplotlib figures don't interact; separate figures fragment the user experience.",
+            "Correct! Plotly subplots keep all visualizations interactive and can share filters/hover information.",
+            "Incorrect. Printing images loses all interactivity.",
+            "Incorrect. Multiple unlinked Plotly figures don't leverage dashboard cohesion."
+          ],
+          "explanation": "Plotly dashboards link multiple visualizations, allowing single selections to filter all charts\u2014powerful for sports analytics exploration."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Interactive Dashboard Practice - Full Sports Analytics Project",
+      "content": "Create an end-to-end interactive sports analytics dashboard. Task 1: Use Plotly to create a dashboard with 3 visualizations of a team's season: (a) win-loss trends over time (line chart), (b) scoring distribution by player (bar chart), (c) correlation heatmap of 5 key statistics. Task 2: Ensure the dashboard is publication-ready with proper titles, labels, and color schemes. Task 3: Add interactivity: hover tooltips showing exact values, ability to zoom into specific date ranges, and clear visual hierarchy. This capstone exercise combines Matplotlib for static exploration, Seaborn for polished analysis, and Plotly for interactive dashboards\u2014the full toolkit professional sports analytics teams use.",
+      "questions": [],
+      "pass_threshold": 100,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Data Visualization Mastery Complete",
+      "content": "You've progressed from Matplotlib fundamentals through advanced charting to interactive dashboard design, mastering the full data visualization toolkit used by professional sports analytics teams. You can now create line charts to track player performance, select appropriate visualizations for different analysis questions (scatter for correlation, box plots for distribution), and build interactive dashboards that reveal insights through exploration. These skills enable you to transform raw sports data into compelling visual narratives\u2014whether for coaching strategy, player scouting, or broadcast analytics. Continue practicing by visualizing real sports datasets (NBA, Premier League, etc.) and building dashboards that your team can actually use. The visualization journey never ends, but you now have the foundation to go deeper into specialized domains like biomechanics analysis, game theory visualization, or real-time performance tracking."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn fundamentals"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Review & practice"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "Pass - advance"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Learn advanced charts"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Review & practice"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "Pass - advance"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Learn Plotly"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Review & practice"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "Pass - complete"
+    }
+  ],
+  "generated_at": "2026-03-27T09:24:47.473709+00:00",
+  "model": "claude-haiku-4-5"
+}

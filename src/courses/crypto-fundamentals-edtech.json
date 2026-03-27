@@ -1,0 +1,150 @@
+{
+  "id": "crypto-fundamentals-edtech",
+  "title": "Cryptography Fundamentals for EdTech",
+  "description": "Learn encryption fundamentals by securing an online course platform. Make strategic choices about encryption approaches and key management, discovering how cryptography protects student data in real-world EdTech scenarios.",
+  "topic": "Cryptography",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 20,
+  "tags": [
+    "cryptography",
+    "encryption",
+    "security",
+    "edtech",
+    "symmetric-encryption",
+    "asymmetric-encryption",
+    "key-management"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Securing Your EdTech Platform",
+      "content": "You're launching an online course platform that will serve thousands of students. Your platform stores sensitive data: student grades, learning progress, payment information, and course materials. You realize that without proper security, this data could be intercepted during transmission or stolen from your database. You've learned that encryption is the cornerstone of data protection. Now you need to understand the two main encryption approaches: symmetric encryption (one shared key) and asymmetric encryption (public and private keys), and decide which to implement first for your platform's security architecture.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Security Implementation Strategy",
+      "content": "Your platform needs protection on multiple fronts. You can focus first on protecting stored data (student grades, course materials in your database) using symmetric encryption, or you can prioritize securing student authentication and communication between students and teachers using asymmetric encryption. Which approach aligns better with your immediate security needs?",
+      "choices": [
+        {
+          "label": "Encrypt stored data (symmetric encryption)",
+          "next": "n3"
+        },
+        {
+          "label": "Secure authentication and communication (asymmetric encryption)",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Symmetric Encryption: Protecting Data at Rest",
+      "content": "Symmetric encryption uses a single secret key to both encrypt and decrypt data. When a student's final grade is submitted, your system encrypts it using AES-256 (Advanced Encryption Standard) before storing it in your database. If your database is breached, attackers see only encrypted gibberish, not actual grades. The challenge: you must securely store and manage this encryption key. Unlike asymmetric encryption, the same key that encrypts the data must decrypt it, so if someone obtains your key, all protected data is compromised. Symmetric encryption is fast and efficient, making it ideal for protecting large volumes of data like course videos and student records.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Real Example: Encrypting Course Progress Records",
+      "content": "Your course tracking system stores whether students have completed modules (completion percentage, quiz scores, time spent). Before writing this to the database, you use a symmetric key to encrypt it: plaintext 'Student123_Module5_85%' becomes ciphertext 'x7k9mP2zQ4wE8rT1y3uI5oA2sD4f6g8h'. The database stores only the ciphertext. When the student logs in and views their progress dashboard, your system decrypts the data using the same key, showing them their actual scores and completion status. This works seamlessly because the key is stored securely in your application's key management system, not in the code or database.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "Choose Your Key Management Strategy",
+      "content": "Your symmetric encryption is configured, but now comes the critical decision: how will you store and protect your encryption key? This decision determines whether your encryption provides real security or becomes a false sense of security.",
+      "choices": [
+        {
+          "label": "Store key securely in a key management service (KMS) with access controls",
+          "next": "n6"
+        },
+        {
+          "label": "Embed the key directly in your application code for quick setup",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Secure Encryption Implementation: Success",
+      "content": "Excellent decision! You've implemented symmetric encryption with a secure key management strategy. Your encryption key is stored in AWS KMS (or similar service) with role-based access controls. Only your application servers can decrypt student data, and the decryption logs are audited. Students trust your platform because their grades and progress are truly encrypted. Your system passes security audits, and you achieve SOC 2 compliance. When a minor database breach occurs months later, investigators find only encrypted data with no value. Your platform reputation remains intact, and you've protected thousands of students' educational records."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Insecure Key Management: Failure and Consequences",
+      "content": "Unfortunately, embedding the encryption key in your code proved disastrous. A security researcher finds the key in your open-source JavaScript frontend library. Within hours, the key is public and circulating on security forums. An attacker gains database access and uses the exposed key to decrypt all student records: grades, quiz answers, learning patterns, and personal notes. The breach affects 50,000 students. Parents file lawsuits, regulatory agencies investigate, and your platform is shut down pending security fixes. The incident costs millions in liability, remediation, and reputation damage. This teaches a hard lesson: encryption without proper key management provides zero actual security."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Asymmetric Encryption: Securing Authentication and Communication",
+      "content": "Asymmetric encryption uses two mathematically related keys: a public key (shared openly) and a private key (kept secret). When a student logs in, their password is verified using asymmetric encryption. Your server has a public key that encrypts login requests; only your server's private key can decrypt them. Teachers can digitally sign course certificates using their private key, and students verify the signature using the teacher's public key, proving the certificate's authenticity. This is the foundation of secure authentication, digital signatures, and secure communication between students and instructors. RSA and ECDSA are common asymmetric algorithms. Unlike symmetric encryption, compromising the public key doesn't compromise the system\u2014only the private key matters.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Secure Authentication System: Success",
+      "content": "You've successfully implemented asymmetric encryption across your platform. Students log in securely\u2014even if network traffic is captured, attackers can only see encrypted login requests they cannot decrypt without the server's private key. Teachers sign course completion certificates using their private keys, and these signatures are independently verifiable by employers and other institutions. The public key infrastructure (PKI) you've built ensures that students and teachers can communicate securely without needing to exchange encryption keys beforehand. Your authentication system becomes a trusted component of your EdTech ecosystem, enabling partnerships with other educational platforms through secure, signature-verified data exchange."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Encrypt stored data"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n8",
+      "label": "Secure authentication"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Secure KMS"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Hardcoded key"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:18:07.806974+00:00",
+  "model": "claude-haiku-4-5"
+}

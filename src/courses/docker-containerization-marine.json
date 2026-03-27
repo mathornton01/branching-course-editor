@@ -1,0 +1,238 @@
+{
+  "id": "docker-containerization-marine",
+  "title": "Docker and Containerization: A Marine Biology Journey",
+  "description": "Learn Docker and containerization concepts through the lens of marine biology, exploring how containers work like isolated ocean ecosystems.",
+  "topic": "Docker and Containerization",
+  "theme": "marine biology",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "Docker",
+    "Containerization",
+    "DevOps",
+    "Marine Biology",
+    "Technical Education"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Welcome to the Docker Ocean",
+      "content": "Imagine you're a marine biologist managing multiple aquariums, each with different species, water conditions, and requirements. Containers in Docker work exactly like this\u2014they're isolated, self-contained environments that bundle everything an application needs to run: code, libraries, runtime, and dependencies. Instead of managing marine habitats where oxygen, salinity, and temperature differ, Docker ensures each container has exactly what it needs, preventing conflicts and ensuring reproducibility. Docker transforms how we deploy applications by treating them as standardized, portable ecosystems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Like marine biologists specializing in different ecosystems, you can explore containerization from three angles. Select the path that interests you most, then you'll converge with peers who chose differently to see how everything connects.",
+      "choices": [
+        {
+          "label": "Container Fundamentals: Master the Basics",
+          "next": "n3"
+        },
+        {
+          "label": "Images & Registries: Build and Store Blueprints",
+          "next": "n5"
+        },
+        {
+          "label": "Orchestration: Manage at Scale",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Container Fundamentals: Isolated Habitats",
+      "content": "A Docker container is like a self-contained aquarium ecosystem. Each container runs in complete isolation\u2014one coral reef environment won't interfere with a deep-sea vent ecosystem running beside it. Containers use Linux kernel features (namespaces and cgroups) to isolate processes, filesystems, and network interfaces, much like how a barrier reef creates distinct marine zones. Unlike virtual machines (which are like separate buildings), containers are lightweight because they share the host OS kernel, like separate bays in a larger ocean. This isolation ensures your jellyfish cultivation app won't crash your whale tracking app, and environment variables like SALINITY=35ppt in one container don't affect another's SALINITY=5ppt.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Running Your First Container: A Plankton Counter",
+      "content": "Let's deploy a plankton-counting application. You run `docker run -e DEPTH=200m -e SPECIES=copepod --name plankton-counter marine/counter:v1`. Docker pulls the pre-built image, creates an isolated container with the specified environment variables (depth and species type), assigns it a name, and starts the process. Your plankton counter runs in its own namespace\u2014it can't see other containers' processes, has its own filesystem, and communicates only through defined network ports. This single command encapsulates everything: the exact Python version, required libraries, and configuration, ensuring the counter behaves identically on a marine research vessel or a university lab.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Images & Registries: Species Blueprints and Catalogs",
+      "content": "A Docker image is like a genetic blueprint for a marine species\u2014it contains all the instructions to create an instance (container) of that species. Images are built using a Dockerfile (like a species specification document) and consist of layered instructions that build up a filesystem snapshot. The FROM directive specifies the base environment (like an ocean current you build upon), then RUN commands install libraries (equipment a species needs), COPY brings in your application code (the creature's DNA), and EXPOSE declares which ports it communicates through. Docker Registries (like Docker Hub or private registries) are libraries cataloging these blueprints, versioned by tags (v1.0, v1.1, latest). This standardization means a coral reef simulator image built on your research vessel works identically when deployed to your university server or the field station\u2014the exact dependencies, configurations, and versions are guaranteed.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Building and Publishing a Kelp Forest Image",
+      "content": "You create a Dockerfile for a kelp forest growth simulator: `FROM python:3.11-slim` (start with Python environment), `RUN pip install numpy scipy` (install required libraries), `COPY kelp_simulator.py /app/` (add your code), `EXPOSE 5000` (declare the port), `CMD [\"python\", \"kelp_simulator.py\"]` (startup command). Running `docker build -t marine/kelp-forest:v2` creates an image with layers. Each layer is cached and reusable. When you push to a registry with `docker push marine/kelp-forest:v2`, anyone can pull it with `docker pull marine/kelp-forest:v2`, receiving the exact same application\u2014same Python version, same dependencies, same code. If bugs are found, you release v2.1, and users choose when to upgrade.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Orchestration: Managing Ocean-Scale Systems",
+      "content": "When managing a single plankton counter or kelp simulator, containers are powerful. But marine research ecosystems are complex: your water quality sensor container must run 24/7, the temperature logger needs 3 replicas for redundancy, the whale tracking system requires automatic scaling during migration season, and all containers must communicate reliably. Docker Compose handles moderate complexity (like managing a single research station's ecosystem), letting you define multiple containers, networks, and volumes in a YAML file\u2014each service represents a monitoring component. Kubernetes orchestrates massive scale (like managing the entire global ocean): it schedules containers across clusters, automatically restarts failed whale cameras, scales the shark tracking system during feeding seasons, performs rolling updates to the coral bleaching detector, and provides service discovery so containers find each other. Both tools ensure your distributed marine monitoring network stays healthy and responsive.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Orchestrating a Complete Marine Research Ecosystem",
+      "content": "Your Docker Compose file defines five services: `plankton-counter` (collects data), `temperature-logger` (monitors thermal fluctuations), `data-aggregator` (processes streams), `database` (PostgreSQL, stores metrics), and `dashboard` (visualizes real-time data). You declare that `temperature-logger` should have 2 replicas for reliability, `data-aggregator` should restart on failure, and all services should communicate on a private network. `docker-compose up` starts the entire ecosystem. When you need to upgrade the plankton counter, you update the image tag and run `docker-compose up` again\u2014Docker handles stopping the old container and starting the new one with zero downtime. In Kubernetes, this same orchestration supports thousands of researchers: the system automatically scales the data-aggregator when sensor readings spike during a red tide event, restarts any crashed containers, and distributes workload across continental clusters.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Convergence: Docker as Unified Ocean",
+      "content": "You've explored containerization from three perspectives, and now you can see how they interconnect. Containers (isolated habitats) are instances created from images (blueprints stored in registries). When managing single containers, Docker or Docker Compose work well; when managing dozens across a research network, orchestration ensures reliability and scale. A real marine biology platform combines all three: you build Docker images of your analysis tools (stored in a registry), run containers for specific research questions with customized environments, and orchestrate multiple services\u2014data ingestion, processing, storage, visualization\u2014as an integrated ecosystem. Understanding these three concepts transforms you from managing individual aquariums to managing the entire ocean of your application infrastructure. Docker makes this possible because every piece is standardized, portable, and reproducible across any environment.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Docker Mastery Assessment",
+      "content": "Test your understanding of Docker and containerization through the lens of marine biology.",
+      "questions": [
+        {
+          "question": "A marine research team has a temperature logger application that works perfectly on the researcher's laptop but fails on the ship's server. The ship has an older version of a required library. Which Docker concept directly solves this problem?",
+          "options": [
+            "A) Using multiple containers on the same host",
+            "B) Docker images that bundle the exact library version needed",
+            "C) Docker Compose for multi-service orchestration",
+            "D) Kubernetes for large-scale deployment"
+          ],
+          "correct_index": 1,
+          "feedback": {
+            "A": "Multiple containers can run independently, but this doesn't ensure library versions match.",
+            "B": "Correct! Docker images bundle code and all dependencies (including exact versions), ensuring consistency.",
+            "C": "Docker Compose is for managing multiple services, not solving single-app dependency issues.",
+            "D": "Kubernetes manages many containers but doesn't solve the core dependency problem."
+          },
+          "explanation": "Docker images encapsulate applications with their exact dependencies. The temperature logger image includes the specific library version, so docker run produces identical behavior everywhere."
+        },
+        {
+          "question": "You manage a whale tracking system with three independent containers: data-collection, analysis-engine, and web-dashboard. They need reliable inter-container communication, automatic restart on crash, and consistent deployment. What's the best tool?",
+          "options": [
+            "A) Docker run commands for each container separately",
+            "B) Docker images alone",
+            "C) Docker Compose",
+            "D) A private Docker Registry"
+          ],
+          "correct_index": 2,
+          "feedback": {
+            "A": "Manual management is error-prone and doesn't handle failures automatically.",
+            "B": "Images define what runs, but don't orchestrate how containers interact.",
+            "C": "Correct! Docker Compose defines multiple services, dependencies, restart policies, and networking in one file.",
+            "D": "Registries store images but don't manage orchestration."
+          },
+          "explanation": "Docker Compose is perfect for multi-container applications. A single docker-compose.yml defines all services, networks, and restart behavior\u2014then docker-compose up starts the complete ecosystem."
+        },
+        {
+          "question": "Your coral reef simulation app has a Dockerfile with these layers: FROM alpine:3.18, RUN pip install numpy, COPY reef_sim.py /app/, CMD python reef_sim.py. When you build this image twice without changing anything, what happens?",
+          "options": [
+            "A) Docker rebuilds all layers from scratch",
+            "B) Docker downloads alpine:3.18 again but caches remaining layers",
+            "C) Docker uses cached layers for all steps, completing instantly",
+            "D) Docker requests credentials because it needs to pull from a registry"
+          ],
+          "correct_index": 2,
+          "feedback": {
+            "A": "Docker uses layer caching for efficiency, not rebuilding from scratch.",
+            "B": "Close! The alpine layer is also cached locally.",
+            "C": "Correct! Since nothing changed, Docker recognizes each unchanged layer and uses cached versions instantly.",
+            "D": "Credentials are only needed when pulling from registries, not for local builds."
+          },
+          "explanation": "Docker's layered architecture and caching system make rebuilds fast. Since the Dockerfile is unchanged, Docker uses cached versions of all layers, completing instantly."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Course Complete: You're a Docker Ocean Navigator",
+      "content": "Congratulations! You've mastered Docker and containerization through the marine biology lens. You understand how containers create isolated habitats, how images serve as reusable blueprints stored in registries, and how orchestration tools manage complex ecosystems. You can now apply Docker to real-world marine research platforms, packaging analysis tools, ensuring reproducibility across research locations, and scaling systems as your research grows. The principles you've learned\u2014isolation, consistency, reproducibility, and scalability\u2014are the foundation of modern software deployment. Whether you're deploying a single plankton counter or orchestrating a global ocean monitoring network, Docker provides the tools to do it reliably."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Container Fundamentals"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Images & Registries"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Orchestration"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Pass"
+    }
+  ],
+  "generated_at": "2026-03-27T11:05:34.389026+00:00",
+  "model": "claude-haiku-4-5"
+}

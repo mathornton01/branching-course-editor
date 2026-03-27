@@ -1,0 +1,156 @@
+{
+  "id": "la-ds-course",
+  "title": "Linear Algebra for Data Science",
+  "description": "Master the fundamentals of linear algebra and unlock its power in data science applications.",
+  "topic": "Mathematics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 120,
+  "tags": [
+    "linear-algebra",
+    "data-science",
+    "mathematics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Linear Algebra?",
+      "content": "Linear algebra is a branch of mathematics that deals with the study of linear equations and their solutions. It provides tools for solving systems of linear equations, finding the eigenvalues and eigenvectors of matrices, and understanding vector spaces.",
+      "next": null
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Vector Spaces",
+      "content": "A vector space is a set of vectors that can be added together and scaled by real numbers. It's a fundamental concept in linear algebra, and we'll explore it further in this course.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "decision",
+      "title": "Do you know the difference between row and column vectors?",
+      "content": "A row vector is a 1x3 matrix, while a column vector is a 3x1 matrix. Which one do you think we'll be using more often in data science applications?",
+      "choices": [
+        {
+          "label": "Row vectors",
+          "next": "n4"
+        },
+        {
+          "label": "Column vectors",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Linear Transformations",
+      "content": "A linear transformation is a function that takes one vector space to another. It's an essential concept in linear algebra, and we'll explore its applications in data science.",
+      "next": "n6"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Eigenvalues and Eigenvectors",
+      "content": "The eigenvalues of a matrix are scalar values that represent how much the matrix stretches or shrinks a vector. The eigenvectors are the directions in which this stretching or shrinking occurs.",
+      "next": "n7"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Linear Transformations Quiz",
+      "content": "Take this quiz to test your understanding of linear transformations!",
+      "questions": [
+        {
+          "question": "What is the dimension of a vector space?",
+          "options": [
+            "1",
+            "2",
+            "3"
+          ],
+          "correct_index": 0
+        },
+        {
+          "question": "Is a linear transformation invertible?",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "correct_index": 1
+        }
+      ],
+      "pass_threshold": 0.6,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Principal Component Analysis (PCA)",
+      "content": "PCA is a technique used in data science to reduce the dimensionality of high-dimensional data. It uses eigenvalues and eigenvectors to find the directions of maximum variance.",
+      "next": null
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Congratulations!",
+      "content": "You've completed the linear algebra for data science course! You now have a solid understanding of vector spaces, linear transformations, and eigenvalues and eigenvectors."
+    },
+    {
+      "id": "n9",
+      "type": "decision",
+      "title": "Do you want to review the material?",
+      "content": "You didn't pass the quiz. Do you want to review the material on linear transformations before trying again?",
+      "choices": [
+        {
+          "label": "Yes, I want to review",
+          "next": "n6"
+        },
+        {
+          "label": "No, I'll try again without reviewing",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Good Luck!",
+      "content": "You're going to take the quiz again. Good luck!",
+      "next": null
+    },
+    {
+      "id": "c1",
+      "source": "n2",
+      "target": "n3",
+      "label": "Next"
+    },
+    {
+      "id": "c2",
+      "source": "n4",
+      "target": "n6",
+      "label": "Complete the quiz to get a certificate!"
+    },
+    {
+      "id": "c3",
+      "source": "n5",
+      "target": "n7",
+      "label": "Apply PCA to your next project"
+    },
+    {
+      "id": "c4",
+      "source": "n6",
+      "target": "n8",
+      "label": "You did it!"
+    },
+    {
+      "id": "c5",
+      "source": "n7",
+      "target": null,
+      "label": "Done"
+    }
+  ],
+  "connections": [],
+  "generated_at": "2026-03-25T23:36:17.120332+00:00",
+  "model": "llama3.1:8b"
+}

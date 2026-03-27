@@ -1,0 +1,164 @@
+{
+  "id": "crypt-film-production-001",
+  "title": "Cryptography Fundamentals: Securing the Midnight Premiere",
+  "description": "A narrative-driven course on cryptography fundamentals using a film production scenario. Navigate encryption decisions as a studio security lead protecting a blockbuster release.",
+  "topic": "Cryptography",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 25,
+  "tags": [
+    "cryptography",
+    "encryption",
+    "security",
+    "symmetric",
+    "asymmetric",
+    "RSA",
+    "AES",
+    "film production"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Midnight Premiere",
+      "content": "A major film studio is preparing to premiere their blockbuster film. The director's final cut footage, VFX sequences, and script must be securely transmitted to international theaters, streaming partners, and investors. However, recent industry rumors suggest competitors and hackers are targeting pre-release content for leaks. The team needs a security strategy to protect this $200 million investment while ensuring legitimate partners can access what they need. Your task: choose how to secure these critical assets.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Security Strategy",
+      "content": "You have two proven approaches to encrypt and distribute the film. Which path will you take?",
+      "choices": [
+        {
+          "label": "Use symmetric encryption to scramble all files with a shared key",
+          "next": "n3"
+        },
+        {
+          "label": "Use public key cryptography so each recipient has unique access",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Symmetric Encryption: The Shared Lock Approach",
+      "content": "Symmetric encryption is like creating a single master key that unlocks all your film files. With this approach, you'd scramble the footage using an algorithm like AES (Advanced Encryption Standard), the same that protects classified government files. The same key that encrypted the files must decrypt them, so all trusted partners (theaters, streaming services, investors) receive the identical key. This method is fast and efficient\u2014a 4GB final cut can be encrypted in seconds. However, this speed comes with a challenge: sharing a single key across dozens of international partners creates more opportunities for interception.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Caesar Cipher in the Script Department",
+      "content": "Imagine your production assistant wrote the script in a simple cipher: shift each letter 3 positions forward (A\u2192D, B\u2192E). The villain's monologue 'HELLO WORLD' becomes 'KHOOR ZRUOG.' This is symmetric encryption's ancestor\u2014everyone with the key knows to shift back by 3. Real symmetric encryption (AES) is mathematically sophisticated: it uses 256-bit keys and multiple rounds of transformation. A Caesar cipher can be cracked in seconds; AES would take billions of years with current computers. In your film distribution, you'd use AES with unique 256-bit keys generated specifically for this project.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "Key Distribution Challenge",
+      "content": "You've decided on AES encryption for all files. Now you must decide how to distribute the master key to 50+ international partners (theaters, streaming platforms, post-production vendors). This critical juncture determines security success or failure.",
+      "choices": [
+        {
+          "label": "Create a robust key management system: secure key server, audit all access, rotate keys monthly, multi-factor authentication",
+          "next": "n6"
+        },
+        {
+          "label": "Email the key to partners with a note saying 'Keep it confidential'",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Secure Release: The Professional Approach",
+      "content": "Your systematic approach worked flawlessly. The master key is stored in a Hardware Security Module (HSM)\u2014a tamper-proof device that never exposes the raw key. Partners authenticate through a secure portal; each request is logged. Two weeks before premiere, encrypted files are transmitted, and partners decrypt them using the master key accessed through your secure system. After release, keys are archived and retired. The film releases without leaks. Competitors never obtained the footage. The studio's $200M investment is protected. Lesson: symmetric encryption's strength depends entirely on key security. One exposed key compromises everything; therefore, key management must be impeccable."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "The Leak: A Costly Shortcut",
+      "content": "Within 48 hours of emailing the key, someone accessing a vendor's unsecured email account finds it. The leaked master key allows decryption of all files. Pre-release footage appears on piracy sites. The film studio faces $50M in losses and a PR crisis. Post-mortem analysis reveals the key was compromised through a vendor's email system\u2014you had no oversight, no audit trail. Lesson: symmetric encryption offers no access control. With a single shared key, you cannot distinguish between authorized and unauthorized decryption. One weak link breaks the entire chain. For next time: implement robust key management infrastructure or choose public key cryptography."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Public Key Cryptography: Unique Locks for Each Partner",
+      "content": "Public key cryptography (RSA, ECC) works like this: you create a master pair of mathematically linked keys. The public key is like a mailbox\u2014anyone can deposit something, but only you can retrieve it. Each partner receives your public key and uses it to encrypt files they send you. Only your corresponding private key can decrypt them. Alternatively, you encrypt files with each partner's public key; only they can decrypt with their private key. This elegant system means no shared secret ever exists. Each theater, streamer, and investor receives files encrypted specifically for them\u2014stealing one key doesn't compromise others.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "example",
+      "title": "Film Festival Digital Distribution",
+      "content": "You're distributing the final cut to 30 international film festivals. Each festival generates an RSA key pair and sends you their public key via their official website. You encrypt the film with Festival A's public key; only Festival A's private key decrypts it. You encrypt the same film with Festival B's public key; only Festival B decrypts it. If a rogue employee sells Festival A's private key, Festival B's copy remains secure because it was encrypted with a different public key. You maintain complete control: no shared master key vulnerable across dozens of endpoints. Even a breach at one partner doesn't compromise others.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "The Premiere: Secure Distribution at Scale",
+      "content": "Using public key cryptography, you distribute encrypted copies to 150+ partners worldwide. Each receives a version encrypted specifically for them. No single key can decrypt multiple versions. Your private key remains secure on your server; you never share it. Throughout release week, there are zero leaks. The film launches successfully across 50 countries simultaneously. Your studio becomes known for security excellence. Lesson: public key cryptography enables secure distribution at scale without centralizing key risk. Each participant has unique encryption, making compromise of any single partner insufficient to break the entire system."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Symmetric path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n8",
+      "label": "Asymmetric path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Robust system"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Risky shortcut"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T05:42:09.562692+00:00",
+  "model": "claude-haiku-4-5"
+}

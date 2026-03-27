@@ -1,0 +1,263 @@
+{
+  "id": "net-proto-001",
+  "title": "Computer Networks and Protocols",
+  "description": "Learn the fundamentals of computer networks, the OSI model, and TCP/IP protocols through interactive modules with examples and assessments.",
+  "topic": "Computer Networks and Protocols",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "networking",
+    "OSI model",
+    "TCP/IP",
+    "protocols",
+    "fundamentals"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Networks and the OSI Model",
+      "content": "A computer network is a group of interconnected devices that share data and resources. The Open Systems Interconnection (OSI) model is a conceptual framework that standardizes network communication into seven layers. Each layer has specific responsibilities: the Physical layer (1) handles hardware transmission, the Data Link layer (2) manages MAC addressing, the Network layer (3) handles IP routing, the Transport layer (4) ensures reliable delivery (TCP/UDP), the Session layer (5) manages connections, the Presentation layer (6) handles encryption/formatting, and the Application layer (7) provides user services like HTTP and email. Understanding these layers helps us troubleshoot network problems and design scalable systems."
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "The OSI Model in Action: Sending an Email",
+      "content": "When you send an email from your laptop, multiple OSI layers work together. At Layer 7 (Application), your email client creates the message using SMTP protocol. At Layer 6 (Presentation), the message is formatted and potentially encrypted. Layer 5 (Session) establishes the connection to the mail server. Layer 4 (Transport) uses TCP to ensure reliable delivery. Layer 3 (Network) adds the destination IP address and routes the email across the internet. Layer 2 (Data Link) adds MAC addresses for local network hops. Finally, Layer 1 (Physical) transmits the electrical signals through cables or wifi. This coordinated layering ensures your email reaches its destination intact."
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "OSI Model Knowledge Check",
+      "content": "Test your understanding of the OSI model layers and their functions.",
+      "questions": [
+        {
+          "question": "Which OSI layer is responsible for routing data packets across networks using IP addresses?",
+          "options": [
+            "Application Layer (7)",
+            "Transport Layer (4)",
+            "Network Layer (3)",
+            "Data Link Layer (2)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The Application layer handles user services, not routing.",
+            "The Transport layer manages TCP/UDP, not routing.",
+            "Correct! The Network layer (Layer 3) handles IP routing and logical addressing.",
+            "The Data Link layer uses MAC addresses for local network delivery."
+          ],
+          "explanation": "The Network Layer (OSI Layer 3) is responsible for logical addressing (IP addresses) and routing packets between different networks."
+        },
+        {
+          "question": "Which layer is responsible for establishing, maintaining, and terminating conversations between applications?",
+          "options": [
+            "Network Layer (3)",
+            "Session Layer (5)",
+            "Transport Layer (4)",
+            "Application Layer (7)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The Network layer handles routing, not session management.",
+            "Correct! The Session Layer (Layer 5) manages dialog control and session establishment.",
+            "The Transport layer handles end-to-end delivery mechanisms.",
+            "The Application layer provides services but doesn't manage sessions directly."
+          ],
+          "explanation": "The Session Layer (OSI Layer 5) manages conversations between applications, including establishing, maintaining, and terminating sessions."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "TCP/IP Protocols and Reliable Communication",
+      "content": "The TCP/IP model is a practical network model with four layers that powers the modern internet. TCP (Transmission Control Protocol) provides reliable, ordered delivery of data by establishing a connection through a three-way handshake (SYN, SYN-ACK, ACK) and uses sequence numbers to ensure packets arrive in order. UDP (User Datagram Protocol) is faster but unreliable, sending data without guarantees\u2014useful for streaming and gaming where speed matters more than perfection. IP (Internet Protocol) handles addressing and routing, with IPv4 using 32-bit addresses and IPv6 using 128-bit addresses to accommodate more devices. Together, these protocols form the backbone of internet communication."
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "TCP/IP in Action: Loading a Web Page",
+      "content": "When you type a URL into your browser, several protocols work together. First, your device uses DNS (port 53) to resolve the domain name into an IP address. Then your browser establishes a TCP connection using the three-way handshake with the web server's IP address. Once connected, your browser sends an HTTP GET request containing the page you want. The server responds with HTML, images, and CSS files, all reliably delivered by TCP which checks for missing packets and resends them if needed. Finally, the connection is closed with a four-way handshake (FIN, ACK, FIN, ACK). Throughout this process, IP handles the routing of packets across the internet to find the fastest path."
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "TCP/IP Protocols Assessment",
+      "content": "Test your understanding of TCP/IP protocols and how they work together.",
+      "questions": [
+        {
+          "question": "Which protocol ensures reliable, ordered delivery of data and is used for web browsing (HTTP)?",
+          "options": [
+            "UDP (User Datagram Protocol)",
+            "TCP (Transmission Control Protocol)",
+            "ICMP (Internet Control Message Protocol)",
+            "DNS (Domain Name System)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "UDP is fast but unreliable; it doesn't guarantee delivery order.",
+            "Correct! TCP provides reliable, ordered delivery and is the foundation for HTTP.",
+            "ICMP is used for diagnostics like ping, not for web traffic.",
+            "DNS is for name resolution, not data delivery."
+          ],
+          "explanation": "TCP (Transmission Control Protocol) establishes connections, ensures all packets arrive, delivers them in order, and retransmits lost packets."
+        },
+        {
+          "question": "What is the name of the TCP process used to establish a connection before data transmission?",
+          "options": [
+            "Two-way handshake",
+            "Three-way handshake",
+            "Four-way handshake",
+            "Five-way handshake"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "TCP uses more than two steps to establish a connection.",
+            "Correct! The three-way handshake (SYN, SYN-ACK, ACK) establishes a TCP connection.",
+            "The four-way handshake is used to close a connection.",
+            "There is no five-way handshake in TCP."
+          ],
+          "explanation": "TCP's three-way handshake consists of: (1) Client sends SYN, (2) Server responds with SYN-ACK, (3) Client sends ACK."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Additional Practice: Reinforcing Network Concepts",
+      "content": "Let's reinforce your understanding with additional practice questions covering both the OSI model and TCP/IP protocols.",
+      "questions": [
+        {
+          "question": "Which of the following best describes the relationship between TCP and UDP?",
+          "options": [
+            "TCP and UDP are the same protocol with different names",
+            "TCP is reliable but slower, UDP is faster but unreliable",
+            "UDP is only used for local networks, TCP for the internet",
+            "Both provide the same services but TCP is for applications and UDP is for operating systems"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "They are different protocols with different characteristics.",
+            "Correct! This captures the essential tradeoff: TCP trades speed for reliability.",
+            "Both are used across different network types.",
+            "They both operate at the same layer and serve different application needs."
+          ],
+          "explanation": "TCP includes error checking and retransmission (slower but reliable), while UDP skips these features for speed."
+        },
+        {
+          "question": "In the OSI model, what is the primary function of the Physical Layer (Layer 1)?",
+          "options": [
+            "Converting digital data to electrical signals and transmitting them over cables or wireless",
+            "Managing MAC addresses and forwarding frames between devices",
+            "Routing packets between different networks",
+            "Encrypting data for secure transmission"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Layer 1 handles the physical transmission of bits as electrical, optical, or radio signals.",
+            "That is the function of the Data Link Layer (Layer 2).",
+            "That is the function of the Network Layer (Layer 3).",
+            "That is typically done at the Presentation or Application Layer."
+          ],
+          "explanation": "The Physical Layer is the lowest OSI layer and deals with hardware: cables, switches, signals, and voltages."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What Would You Like to Do Next?",
+      "content": "You've mastered the fundamentals of networks and protocols! Would you like to continue learning advanced networking topics, or complete this course?",
+      "choices": [
+        {
+          "label": "Learn Advanced Topics (Routing, Security, DNS)",
+          "next": "n9"
+        },
+        {
+          "label": "Complete the Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations on completing the Computer Networks and Protocols course! You now understand the OSI model's seven layers, how TCP and UDP provide different communication guarantees, and how these protocols work together to power the internet. These fundamentals form the foundation for advanced networking, cybersecurity, and system design. Keep exploring and practicing with real network tools like ping, traceroute, and packet sniffers to deepen your understanding!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "continue"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "continue"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "continue"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "choice"
+    }
+  ],
+  "generated_at": "2026-03-26T09:43:17.508761+00:00",
+  "model": "claude-haiku-4-5"
+}

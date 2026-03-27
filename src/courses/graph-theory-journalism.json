@@ -1,0 +1,443 @@
+{
+  "id": "graph-theory-journalism",
+  "title": "Graph Theory and Applications: A Journalist's Network",
+  "description": "Master graph theory through journalism investigations. Learn to model source networks as graphs, apply pathfinding algorithms to find information efficiently, and use centrality measures to identify influential actors and gatekeepers. A complete three-level mastery course with adaptive practice loops.",
+  "topic": "Graph Theory",
+  "theme": "journalism",
+  "difficulty": "intermediate",
+  "estimated_minutes": 75,
+  "tags": [
+    "graph-theory",
+    "journalism",
+    "network-analysis",
+    "algorithms",
+    "data-structures",
+    "investigations"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Graphs as Journalist Networks",
+      "content": "In journalism, you constantly work with networks\u2014sources talking to sources, information flowing from person to person, stories connecting to related investigations. A graph is simply a way to represent these networks mathematically. Each person, organization, or piece of information becomes a 'vertex' (or node), and the connections between them are 'edges.' Understanding graphs helps you visualize how information spreads, identify key sources, and uncover hidden patterns in your investigations. Whether you're mapping a political scandal, tracing corporate influence, or understanding how misinformation spreads, graph theory provides the tools to make sense of complex networks.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Understanding Graph Basics",
+      "content": "Test your knowledge of fundamental graph concepts used in journalism investigations.",
+      "questions": [
+        {
+          "question": "In a journalist's source network, what would represent a person or organization?",
+          "options": [
+            "A vertex",
+            "An edge",
+            "A path",
+            "A cycle"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Vertices represent entities in the network.",
+            "Not quite. An edge represents connections between entities.",
+            "Not quite. A path is a sequence of connected entities.",
+            "Not quite. A cycle is a closed path that returns to itself."
+          ],
+          "explanation": "In graph theory, vertices (nodes) represent discrete entities. In a journalism context, these could be sources, journalists, organizations, or any actors in your story."
+        },
+        {
+          "question": "What graph concept best describes the relationship between a journalist and their source?",
+          "options": [
+            "A vertex",
+            "An edge",
+            "A component",
+            "A weight"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That represents an entity, not a relationship.",
+            "Correct! Edges represent relationships or connections between vertices.",
+            "A component is a connected subgraph of the network.",
+            "A weight assigns a value to an edge."
+          ],
+          "explanation": "Edges are the connections between vertices. The professional relationship between a journalist and source is an edge in the network graph."
+        },
+        {
+          "question": "When investigating a story, a journalist discovers that Source A talks to Source B, who talks to Source C. What is this sequence called?",
+          "options": [
+            "A vertex",
+            "A cycle",
+            "A path",
+            "A tree"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "No, that's a single entity.",
+            "A cycle is a closed path that returns to the start.",
+            "Correct! This is a path through the network.",
+            "A tree is a connected graph with no cycles."
+          ],
+          "explanation": "A path is a sequence of vertices connected by edges, where no vertex repeats. Tracing information flow creates a path through your network."
+        }
+      ],
+      "pass_threshold": 60,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Identifying Graphs in Journalistic Scenarios",
+      "content": "Work through these scenarios to reinforce your understanding of vertices, edges, and paths. Consider: A political scandal involves 3 politicians, 2 journalists, and 5 unnamed sources. Several connections exist between them\u2014some politicians talk to journalists, journalists contact sources, and sources know each other. Try to identify: How many vertices are in this network? What are some possible edges? Can you trace different paths from one entity to another?",
+      "questions": [
+        {
+          "question": "A major corporate fraud story involves Company X, 4 executives, 3 whistleblowers, and 2 law enforcement officials. How many vertices are in this network?",
+          "options": [
+            "7 vertices",
+            "9 vertices",
+            "10 vertices",
+            "12 vertices"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "You missed some entities.",
+            "Closer, but incomplete count.",
+            "Correct! 1 company + 4 executives + 3 whistleblowers + 2 officials = 10 vertices.",
+            "Too many."
+          ],
+          "explanation": "Count all unique entities as separate vertices: Company X (1) + executives (4) + whistleblowers (3) + law enforcement (2) = 10 total vertices."
+        },
+        {
+          "question": "Your editor tells you to contact Expert A. Expert A refers you to Expert B. Expert B connects you with Expert C who has exclusive information. This represents what?",
+          "options": [
+            "A cycle",
+            "A vertex",
+            "A directed path",
+            "An isolated component"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Not a cycle; information doesn't loop back.",
+            "That's a single entity.",
+            "Correct! Information flows in one direction through these connections.",
+            "These are all connected, not isolated."
+          ],
+          "explanation": "This is a directed path\u2014it shows the sequence and direction of information flow: Editor \u2192 Expert A \u2192 Expert B \u2192 Expert C. Each step depends on the previous one."
+        }
+      ],
+      "pass_threshold": 60,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Pathfinding and Information Spread in Investigative Journalism",
+      "content": "Once you understand graph structure, the next critical skill is pathfinding\u2014discovering how information spreads through your source network and finding efficient routes to key contacts. Journalists use pathfinding to answer crucial questions: What's the shortest path from me to my target source (fewest intermediaries)? Which routes have more credible intermediaries? How does a story rumor spread through the newsroom? Two fundamental algorithms help: Breadth-first search (BFS) finds the shortest path and works well for identifying 'degrees of separation' between sources. Depth-first search (DFS) explores possibilities thoroughly and works well when you want to follow chains of evidence to their conclusions. By understanding these algorithms, you can map the most efficient communication routes, minimize information distortion, and identify critical gatekeepers in your investigation.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Mastering Pathfinding Algorithms",
+      "content": "Test your ability to apply graph algorithms to journalistic investigations and network analysis.",
+      "questions": [
+        {
+          "question": "A journalist wants to find the shortest chain of contacts from themselves to a reluctant whistleblower. Which algorithm should they use?",
+          "options": [
+            "Depth-first search",
+            "Breadth-first search",
+            "Random walk",
+            "Greedy search"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "DFS explores thoroughly but doesn't guarantee the shortest path.",
+            "Correct! BFS guarantees the shortest path in unweighted networks.",
+            "Random walking isn't systematic.",
+            "Greedy searches are often suboptimal."
+          ],
+          "explanation": "Breadth-first search (BFS) explores the graph level-by-level and guarantees the shortest path. In an unweighted network, this minimizes intermediaries\u2014critical for reliable sourcing."
+        },
+        {
+          "question": "A reporter investigating organized crime wants to explore all possible connections from a known associate to uncover the full network structure. Which algorithm suits this?",
+          "options": [
+            "Breadth-first search",
+            "Depth-first search",
+            "Shortest path only",
+            "Random sampling"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "BFS finds shortest paths, not all paths.",
+            "Correct! DFS thoroughly explores each branch before backtracking.",
+            "Not comprehensive enough.",
+            "Not systematic."
+          ],
+          "explanation": "Depth-first search (DFS) goes deep into each connection before backing up, exploring all reachable nodes. This is ideal for thorough investigation where you want to follow every lead."
+        },
+        {
+          "question": "In a source network, you find three paths to a key witness: Path A (3 intermediaries), Path B (2 intermediaries), Path C (4 intermediaries). What should you prioritize?",
+          "options": [
+            "Path A",
+            "Path B",
+            "Path C",
+            "All paths equally"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A has more intermediaries than B.",
+            "Correct! Fewer intermediaries means less distortion of information.",
+            "C is the longest path.",
+            "Different path lengths have different strategic value."
+          ],
+          "explanation": "The shortest path (fewest intermediaries) reduces risk of information being distorted as it passes through the network. Path B's 2 intermediaries make it most direct and reliable."
+        }
+      ],
+      "pass_threshold": 60,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Applying Pathfinding to News Investigations",
+      "content": "A major government scandal emerges. You have a source network with multiple journalists and officials connected in various ways. Your task is to analyze different paths to reach key government insiders. Scenario: You (a journalist) know Contact A. A knows Contact B. B knows Official C (your target). But you also know Contact D, who directly knows Contact E, who knows Official C. Compare: Path 1 (You \u2192 A \u2192 B \u2192 C) versus Path 2 (You \u2192 D \u2192 E \u2192 C). Which is shorter? How does path length affect your reporting reliability?",
+      "questions": [
+        {
+          "question": "Between Path 1 (You \u2192 A \u2192 B \u2192 C) with 3 connections and Path 2 (You \u2192 D \u2192 E \u2192 C) with 2 connections, which should you prioritize first?",
+          "options": [
+            "Path 1 (safer)",
+            "Path 2 (shorter)",
+            "Both equally",
+            "Neither is reliable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Path 1 is longer.",
+            "Correct! Path 2 with 2 hops is shorter and more direct.",
+            "They have different lengths.",
+            "The question assumes both exist."
+          ],
+          "explanation": "Path 2 is shorter with fewer intermediaries between you and the official, reducing information distortion and making it more reliable for sensitive sourcing."
+        },
+        {
+          "question": "If Contact B (from Path 1) is exposed as unreliable, how does this affect your options?",
+          "options": [
+            "You lose all paths to the official",
+            "You still have Path 2 available",
+            "You must wait for B to become reliable",
+            "Both paths are equally affected"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Path 2 doesn't depend on B.",
+            "Correct! Path 2 (D \u2192 E \u2192 C) bypasses B entirely, so it remains viable.",
+            "Don't rely on unreliable sources.",
+            "Only Path 1 uses B."
+          ],
+          "explanation": "In network analysis, having multiple paths provides redundancy. If one path has an unreliable node, you can still reach your target through an alternate route. This is why network mapping is crucial."
+        }
+      ],
+      "pass_threshold": 60,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Advanced: Centrality Measures and Influence in Networks",
+      "content": "At the advanced level, journalists analyze not just individual paths but the overall structure of networks to identify who wields the most influence. Centrality measures are metrics that quantify a node's importance in a network. Degree centrality counts how many direct connections a person has\u2014someone with many connections is a hub in the network. Betweenness centrality identifies 'bridges'\u2014people who connect otherwise separate groups and control information flow between communities. Closeness centrality measures how quickly someone can reach all others\u2014high closeness means central positioning in the network. In journalism, a politician with high betweenness centrality might be the key gatekeeper between rival factions. A media executive with high degree centrality might drive media narratives across multiple outlets. An influencer with high closeness centrality might be a thought leader whose opinions ripple through the entire social ecosystem. Mastering these measures helps you identify real power players, understand structural vulnerabilities in networks, and explain to your audience how influence actually flows through society.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Advanced Assessment: Network Centrality and Influence",
+      "content": "Test your understanding of centrality measures and their application to journalistic network analysis.",
+      "questions": [
+        {
+          "question": "In a corporate bribery scandal, one executive appears in every communication chain between the sales, finance, and operations departments. What centrality measure best captures this executive's critical role?",
+          "options": [
+            "Degree centrality",
+            "Betweenness centrality",
+            "Closeness centrality",
+            "Eigenvector centrality"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Degree only counts direct connections.",
+            "Correct! Betweenness centrality identifies bridges connecting different groups.",
+            "Closeness measures distance to others.",
+            "Eigenvector considers connections of important nodes."
+          ],
+          "explanation": "Betweenness centrality measures how often a node lies on the shortest path between other nodes. Someone connecting different departments is a critical information bridge and potential gatekeeper."
+        },
+        {
+          "question": "In your source network, one source has 30 direct contacts while others have 3-8. What does this most directly indicate?",
+          "options": [
+            "They're the most influential person overall",
+            "They have high degree centrality",
+            "They're automatically the most trustworthy",
+            "They're the network's single most powerful player"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "High degree \u2260 highest overall influence.",
+            "Correct! Degree centrality is simply the count of direct connections.",
+            "More connections \u2260 more reliable.",
+            "Other measures determine overall power."
+          ],
+          "explanation": "Degree centrality measures only the number of direct connections. While 30 connections is high degree centrality, other factors determine overall influence\u2014whether they're bridges, how close they are to others, etc."
+        },
+        {
+          "question": "A journalist analyzing a media influence network finds that a particular news anchor can reach all other journalists in the network with an average of 1.5 'hops'. What does this indicate?",
+          "options": [
+            "They have low closeness centrality",
+            "They have high closeness centrality",
+            "They are isolated from the network",
+            "They're only 1.5 people apart from everyone"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Short average distance = high closeness.",
+            "Correct! Short average path length indicates high closeness centrality.",
+            "Low closeness would show isolation.",
+            "That's not how averages work here."
+          ],
+          "explanation": "Closeness centrality measures the average distance to all other nodes. An average of 1.5 hops is very central, indicating this anchor is strategically positioned to reach most others quickly\u2014a powerful network position."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Analyzing Network Centrality in Journalism",
+      "content": "Practice identifying different centrality measures in real journalism scenarios. Analyze a newsroom network: Reporter A knows 25 industry contacts (high degree). Reporter B appears in every collaboration between the print and online teams (high betweenness). Reporter C can reach most other journalists in 1-2 steps on average (high closeness). A press secretary from a major political campaign is friends with 5 journalists, but she's the only connection between the campaign's inner circle and media outlets. Which centrality measure matters most for each role? How would you pitch different story angles to different reporters based on their network position?",
+      "questions": [
+        {
+          "question": "A press secretary is the only connection between a political campaign's leadership and journalists. What centrality measure best describes her importance?",
+          "options": [
+            "Degree centrality (she only knows a few journalists)",
+            "Betweenness centrality (she's a bridge to the media)",
+            "Closeness centrality (she's near everyone)",
+            "Eigenvector centrality (she knows important people)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Her low degree isn't why she's important.",
+            "Correct! She's the critical bridge between two groups.",
+            "Being a bridge isn't about closeness.",
+            "Knowing important people isn't the issue."
+          ],
+          "explanation": "This press secretary is a gatekeeper\u2014a critical bridge between the campaign and media. High betweenness centrality captures this bottleneck role."
+        },
+        {
+          "question": "Reporter A has only 3 direct contacts but can reach all other journalists in 2-3 steps. What can you infer?",
+          "options": [
+            "Reporter A is isolated",
+            "Reporter A has low closeness centrality",
+            "Reporter A has high closeness despite low degree",
+            "Reporter A should be ignored"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "They can reach most people.",
+            "Short average distance = high closeness.",
+            "Correct! Low degree doesn't prevent network centrality.",
+            "This reporter clearly has network influence."
+          ],
+          "explanation": "This reporter has few direct contacts (low degree) but is well-connected through those contacts (high closeness). They may be strategically positioned despite a small direct network."
+        }
+      ],
+      "pass_threshold": 60,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mastery Complete: Graph Theory in Journalism",
+      "content": "Congratulations! You've mastered graph theory concepts and their applications to journalism. You understand how to represent information networks as graphs, find efficient paths to sources using pathfinding algorithms, and analyze network structure using centrality measures to identify key influencers and gatekeepers. These tools will help you in your investigations: visualize complex relationships, identify key sources and power players, find efficient sourcing routes, and understand how information and misinformation spread through networks. Whether you're investigating corporate scandals, political networks, or social media influence, graph theory provides rigorous, systematic methods to analyze the networks that shape our world. Continue applying these concepts to uncover deeper stories and explain the hidden structures behind major events."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass (\u226560%)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail (<60%)"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass (\u226560%)"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail (<60%)"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "continue"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass (\u226570%)"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail (<70%)"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    }
+  ],
+  "generated_at": "2026-03-27T10:00:41.177240+00:00",
+  "model": "claude-haiku-4-5"
+}

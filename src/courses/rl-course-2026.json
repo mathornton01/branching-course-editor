@@ -1,0 +1,307 @@
+{
+  "id": "rl-course-2026",
+  "title": "Reinforcement Learning Fundamentals",
+  "description": "Master the core concepts of reinforcement learning through interactive examples and assessments.",
+  "topic": "Reinforcement Learning",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "reinforcement learning",
+    "machine learning",
+    "AI",
+    "decision making"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Reinforcement Learning?",
+      "content": "Reinforcement Learning (RL) is a machine learning approach where an agent learns to make decisions by interacting with an environment. The agent observes states (current situation), takes actions (decisions), receives rewards or penalties (feedback), and aims to maximize cumulative reward over time. Unlike supervised learning where labeled data guides learning, RL agents learn through trial and error\u2014discovering which actions lead to better outcomes. This agent-environment interaction creates a feedback loop: the agent acts, the environment responds with rewards, and the agent uses this signal to improve future decisions. RL powers game-playing AIs like AlphaGo, robot control systems that learn manipulation, and autonomous systems that optimize complex behaviors.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Grid World: A Simple MDP",
+      "content": "Let's explore a Markov Decision Process (MDP)\u2014the mathematical framework for RL problems. Imagine a robot on a 3\u00d73 grid that must reach the goal (G) while avoiding obstacles (X). The robot starts at S.\n\nGrid:\nS . . \n. X . \n. . G\n\nThe environment defines:\n\u2022 States: Each grid cell is a state (e.g., \"robot at position (0,0)\")\n\u2022 Actions: The robot can move up, down, left, right\n\u2022 Rewards: Each move costs -1 (encourages efficiency), reaching G grants +10 (the goal)\n\u2022 Transitions: Moving right from S leads deterministically to the right cell\n\nThe robot learns that going right, then down, then right reaches G in 3 steps with total reward: 3\u00d7(-1) + 10 = 7. An MDP has all these elements: a set of states S, actions A, immediate rewards R, and transition dynamics P(s'|s,a). This structure lets us formally reason about agent learning.",
+      "next": "node-agent-learn"
+    },
+    {
+      "id": "node-agent-learn",
+      "type": "example",
+      "title": "How Agents Learn: The Trial-and-Error Cycle",
+      "content": "Now let's see how an agent actually learns in an MDP. Our robot starts with a random policy\u2014it picks actions without any strategy. Here's what happens:\n\nEpisode 1 (random exploration):\n\u2022 At S, robot randomly moves right: gets -1 reward, now at cell (0,1)\n\u2022 From (0,1), randomly moves down: gets -1 reward, now at cell (1,1)\n\u2022 At (1,1) there's an obstacle! Hits it, gets -1 reward, stays at (1,1)\n\u2022 Randomly moves right: gets -1 reward, now at (1,2)\n\u2022 From (1,2), randomly moves down: gets +10 for reaching G!\n\u2022 Episode return: -1 + (-1) + (-1) + (-1) + 10 = 6\n\nEpisode 2-10: The robot tries many different random paths. Some crash into obstacles (low returns), others reach G efficiently (high returns).\n\nLearning: After many episodes, the robot notices: \"Paths that go right and down reach the goal and get +10.\" Its policy gradually shifts toward these successful actions. When in state S, it learns to prefer moving right. When at (1,1) and avoided the obstacle, it learns down is dangerous from there. This accumulated experience shapes the policy, replacing random choices with learned preferences. This is reinforcement learning: the reward signal guides the agent toward better decisions through repeated experience.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "RL Fundamentals Check",
+      "content": "Test your understanding of core reinforcement learning concepts.",
+      "questions": [
+        {
+          "question": "In reinforcement learning, what does an agent learn by interacting with the environment?",
+          "options": [
+            "A) Labeled data classifications",
+            "B) A policy for decision-making",
+            "C) Supervised training rules",
+            "D) Pre-computed answers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) No, RL uses unlabeled feedback through rewards.",
+            "B) Correct! The agent learns a policy mapping states to actions.",
+            "C) No, RL is unsupervised learning via rewards.",
+            "D) No, the agent discovers policies through experience."
+          ],
+          "explanation": "The core goal of RL is to learn a policy\u2014a strategy that tells the agent what action to take in each state to maximize reward."
+        },
+        {
+          "question": "In the Grid World example, if each move costs -1 and reaching the goal gives +10, what is the total reward for the optimal 3-step path?",
+          "options": [
+            "A) 10",
+            "B) 7",
+            "C) -3",
+            "D) 13"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) No, we must account for movement cost.",
+            "B) Correct! 3 moves \u00d7 (-1) + 10 = 7.",
+            "C) No, the final reward is +10, not -3.",
+            "D) No, recalculate: -1 - 1 - 1 + 10 = 7."
+          ],
+          "explanation": "The optimal path costs -3 in movement penalties but gains +10 for reaching the goal, totaling +7 reward."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n8",
+      "failure_target": "n7",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Policy and Value Functions",
+      "content": "A policy \u03c0 (pi) is the core of what an agent learns\u2014a rule or strategy that maps states to actions. There are two main types: (1) Deterministic policies always choose one action per state (e.g., \u03c0(s) = \"move right\"). (2) Stochastic policies assign probabilities to actions (e.g., 70% chance move right, 20% up, 10% down). A value function V(s) estimates the long-term reward you can expect from being in state s. It answers: \"If I'm here and follow my current policy, how much total discounted reward will I get?\" The Bellman equation connects policy and value: V(s) = r + \u03b3V(s'), where r is the immediate reward from the current state, \u03b3 (gamma) is a discount factor (typically 0.9-0.99) that weights future rewards lower than immediate rewards, and V(s') is the estimated value of the next state. This recursive relationship is powerful\u2014it lets agents estimate long-term consequences of being in a state without simulating the entire future. By improving policies to lead toward high-value states, agents learn increasingly better decision strategies. Value functions are foundational to Q-learning, SARSA, policy gradients, and actor-critic methods\u2014virtually all modern RL algorithms use them.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Bellman Equation in Action",
+      "content": "Let's compute values using the Bellman equation in a concrete scenario. Consider our robot at state S with three possible next moves:\n\nScenario 1: Move right\n\u2022 Immediate reward r = -1 (movement cost)\n\u2022 Next state (0,1) has estimated value V(0,1) = 8 (we've learned this state usually leads to goal)\n\u2022 Using \u03b3 = 0.9: V_right(S) = -1 + 0.9 \u00d7 8 = -1 + 7.2 = 6.2\n\nScenario 2: Move down  \n\u2022 Immediate reward r = -1\n\u2022 Next state (1,0) has value V(1,0) = 2 (dead end)\n\u2022 V_down(S) = -1 + 0.9 \u00d7 2 = -1 + 1.8 = 0.8\n\nScenario 3: Move left\n\u2022 Immediate reward r = -1  \n\u2022 Next state would be off-grid, bad (wall): V(wall) = -10\n\u2022 V_left(S) = -1 + 0.9 \u00d7 (-10) = -1 - 9 = -10\n\nConclusion: Moving right has the highest value (6.2), so a learned policy would prefer right from S. The Bellman equation lets agents evaluate and compare actions by looking one step ahead, accounting for immediate cost and discounted future value. Over many episodes, agents learn accurate value estimates V(s) for each state, and policies that navigate toward high-value states naturally emerge\u2014this is value-driven learning.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Policy and Value Functions Assessment",
+      "content": "Verify your understanding of how policies and value functions drive learning.",
+      "questions": [
+        {
+          "question": "What does a value function V(s) represent in reinforcement learning?",
+          "options": [
+            "A) The immediate reward of taking an action",
+            "B) The long-term discounted reward expected from a state",
+            "C) The optimal action to take in a state",
+            "D) The probability of reaching the goal state"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) No, that's the immediate reward r, not V(s).",
+            "B) Correct! V(s) estimates cumulative discounted future reward from state s.",
+            "C) No, that's what a policy does.",
+            "D) No, value functions estimate expected reward, not probability."
+          ],
+          "explanation": "A value function predicts the total future reward from a given state, accounting for the discount factor."
+        },
+        {
+          "question": "Using Bellman: V(S) = -1 + 0.8 \u00d7 V(S') where V(S') = 10. What is V(S)?",
+          "options": [
+            "A) 9",
+            "B) 6",
+            "C) 7",
+            "D) 11"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A) No, calculate: -1 + 0.8 \u00d7 10 = -1 + 8 = 7.",
+            "B) No, check the math again.",
+            "C) Correct! -1 + 0.8 \u00d7 10 = 7.",
+            "D) No, the discount factor reduces the next state's value contribution."
+          ],
+          "explanation": "V(S) = -1 + 0.8 \u00d7 10 = -1 + 8 = 7. The discount factor weights future reward lower than immediate reward."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n9",
+      "failure_target": "n7",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Reinforce Core Concepts",
+      "content": "Strengthen your understanding with additional worked problems and calculations. Review these scenarios to solidify your grasp of policies, values, and the Bellman equation before moving on.",
+      "questions": [
+        {
+          "question": "An agent in state S can go left (immediate reward 1, next value 2) or right (immediate reward 5, next value 0) with \u03b3=0.9. Which is better?",
+          "options": [
+            "A) Left: 1 + 0.9 \u00d7 2 = 2.8",
+            "B) Right: 5 + 0.9 \u00d7 0 = 5",
+            "C) Both are equally good",
+            "D) Cannot determine without more information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) This yields lower value.",
+            "B) Correct! Right gives 5, which exceeds left's 2.8.",
+            "C) No, they have different values.",
+            "D) No, we have sufficient information to compare."
+          ],
+          "explanation": "Right action yields higher total value (5 > 2.8), so the optimal policy chooses right from this state."
+        },
+        {
+          "question": "In the Bellman equation V(s) = r + \u03b3V(s'), what does the discount factor \u03b3 do?",
+          "options": [
+            "A) Scales the magnitude of rewards",
+            "B) Reduces the weight of future value relative to immediate reward",
+            "C) Determines policy probability",
+            "D) Controls state transition probability"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) No, r is the immediate reward.",
+            "B) Correct! \u03b3 controls how much future reward matters relative to immediate reward.",
+            "C) No, policy probabilities are \u03c0(a|s).",
+            "D) No, transition probability is P(s'|s,a)."
+          ],
+          "explanation": "The discount factor \u03b3 (typically 0.9-0.99) makes future rewards less valuable than immediate rewards, encouraging timely action."
+        },
+        {
+          "question": "An agent is in state S with V(S) = 4. It takes an action with immediate reward 2 and arrives at state S' with V(S') = 5. If \u03b3 = 0.8, what is the return for this single step?",
+          "options": [
+            "A) 2",
+            "B) 5",
+            "C) 6",
+            "D) 2 + 0.8 \u00d7 5 = 6"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "A) No, you need to include the discounted future value.",
+            "B) No, that's just the next state's value.",
+            "C) Incorrect calculation.",
+            "D) Correct! Return = immediate reward + discounted next value = 2 + 0.8 \u00d7 5 = 6."
+          ],
+          "explanation": "In the Bellman framework, the value of an action is the immediate reward plus the discounted value of the resulting state."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n9",
+      "failure_target": "n9",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What's Next?",
+      "content": "Excellent work! You've successfully mastered the fundamentals of reinforcement learning\u2014you understand what RL is, how agents learn through interaction, the concept of MDPs, policies, and basic value functions. At this point, you have two meaningful paths: You can dive deeper into the mathematical and algorithmic foundations of RL by exploring advanced topics (value-based algorithms like Q-learning and policy gradient methods), or you can complete the course with the solid foundational knowledge you've gained. Both are valid\u2014choose based on your learning goals and available time.",
+      "choices": [
+        {
+          "label": "Continue to Advanced Topics",
+          "next": "n4"
+        },
+        {
+          "label": "Review and Complete Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've successfully learned the fundamentals of reinforcement learning. You now understand the agent-environment interaction model, Markov Decision Processes, how agents learn policies through trial and error, and the role of value functions in guiding learning. These core concepts form the foundation for advanced algorithms like Q-learning, policy gradients, and actor-critic methods. Use this knowledge to build intelligent systems that learn from interaction and optimize decision-making in complex environments. Whether you complete this course here or continue to explore advanced topics, you've built a solid understanding of how machines learn to make decisions through reward-driven interaction."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "node-agent-learn",
+      "label": "next"
+    },
+    {
+      "id": "c-agent-learn",
+      "source": "node-agent-learn",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n8",
+      "target": "n4",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n8",
+      "target": "n9",
+      "label": "end"
+    },
+    {
+      "id": "c7",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c9",
+      "source": "n6",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c10",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n7",
+      "target": "n9",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-26T09:26:07.406289+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T09:38:11.553985+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

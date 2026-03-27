@@ -1,0 +1,210 @@
+{
+  "id": "fp-urban-planning",
+  "title": "Functional Programming Concepts for Urban Planners",
+  "description": "Learn functional programming principles through urban planning scenarios and applications.",
+  "topic": "Functional Programming Concepts",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "functional programming",
+    "urban planning",
+    "programming concepts",
+    "adaptive learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Functional Programming Fundamentals Assessment",
+      "content": "This diagnostic assessment will route you to the appropriate learning path. Answer questions about functional programming concepts as they apply to urban planning systems.",
+      "questions": [
+        {
+          "question": "A city planning department needs a function that determines residential zoning based on coordinates. Which property makes this a 'pure function'?",
+          "options": [
+            "The function always returns the same zoning type for the same coordinates, regardless of when it's called",
+            "The function considers current political opinions and budget changes",
+            "The function modifies the original city map while calculating",
+            "The function depends on external weather APIs"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A pure function produces the same output for the same input every time.",
+            "Incorrect. Functions that depend on changing external state are not pure.",
+            "Incorrect. Pure functions don't have side effects like modifying original data.",
+            "Incorrect. Pure functions only depend on their parameters, not external data."
+          ],
+          "explanation": "Pure functions are the foundation of functional programming. They always produce the same result for identical inputs and have no side effects."
+        },
+        {
+          "question": "An urban planner creates a new version of a district plan by applying zoning changes, leaving the original plan unchanged. This follows which FP principle?",
+          "options": [
+            "Immutability - creating new versions rather than modifying originals",
+            "Recursion - repeating the planning process",
+            "Higher-order functions - using functions as parameters",
+            "Side effects - changing the planning database"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Immutability is key to preventing unintended consequences from changes.",
+            "Incorrect. Recursion is about functions calling themselves.",
+            "Incorrect. Higher-order functions are about treating functions as data.",
+            "Incorrect. Side effects are avoided in functional programming, not encouraged."
+          ],
+          "explanation": "Immutability ensures data integrity. When planning changes, you create new versions rather than overwriting existing ones, maintaining a complete audit trail."
+        },
+        {
+          "question": "A planning system needs to apply zoning rules, then infrastructure requirements, then environmental assessments to every district. How would functional programming approach this?",
+          "options": [
+            "Write three separate procedures that each modify the original district data",
+            "Compose three pure functions together to create a single integrated planning pipeline",
+            "Combine all rules into one massive function with multiple responsibilities",
+            "Randomly apply one rule at a time until all are processed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Modifying original data creates side effects and makes debugging difficult.",
+            "Correct! Function composition creates reusable, testable, and maintainable pipelines.",
+            "Incorrect. Large functions with multiple responsibilities violate functional principles.",
+            "Incorrect. Planning should be deterministic and ordered."
+          ],
+          "explanation": "Function composition chains pure functions together, creating complex behavior from simple, reusable building blocks. This is central to functional programming."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n2b"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced Functional Programming: Function Composition & Higher-Order Functions",
+      "content": "Master function composition by building sophisticated planning pipelines. Function composition is the art of combining multiple pure functions to create complex workflows. In urban planning, you might compose zoning rules, infrastructure validators, and environmental checkers into a single pipeline that transforms raw land into planned districts.\n\nHigher-order functions take other functions as parameters, enabling flexible planning strategies. A planning supervisor function could accept different zoning strategies, infrastructure approaches, or budget constraints as function parameters, creating specialized planners without code duplication. This is currying: binding some arguments to create new specialized functions from general ones.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Composing a City District Planning Pipeline",
+      "content": "Consider a city expansion project: raw undeveloped land must pass through zoning composition, then infrastructure integration, then environmental validation. Using function composition, define pure functions for each step. The zoning function takes coordinates and returns allowed land uses. The infrastructure function takes a land use and returns infrastructure requirements. The environment function validates the complete plan. By composing these three pure functions, a single call transforms coordinates into a fully validated, immutable district plan. Changes propagate cleanly through the pipeline; testing each function independently ensures reliability. This compositional approach lets planners experiment with different validation sequences without rewriting the entire system.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Functional Programming Complete",
+      "content": "You've mastered function composition and higher-order functions! You can now design sophisticated planning systems using functional principles. These techniques scale to city-wide planning challenges, enabling teams to compose complex policies from simple, testable building blocks."
+    },
+    {
+      "id": "n2b",
+      "type": "content",
+      "title": "Functional Programming Fundamentals: Pure Functions & Immutability",
+      "content": "Functional programming is built on two core principles: pure functions and immutability.\n\nPure functions always produce the same output for the same input, with no side effects. Imagine a zoning regulation function: given coordinates, it always returns the same zone type, never modifying anything else. This predictability is powerful\u2014zoning decisions are consistent, auditable, and easy to test.\n\nImmutability means never modifying data directly. Instead, create new versions. When a city updates its district boundaries, the old map remains unchanged, creating a complete history of planning decisions. This prevents accidental data corruption and enables planners to easily revert to previous versions.",
+      "next": "n3b"
+    },
+    {
+      "id": "n3b",
+      "type": "example",
+      "title": "Pure Function Example: The Zoning Classifier",
+      "content": "A city needs a function to determine zoning type based on distance from downtown and land elevation. The pure function classifyZone(distanceFromDowntown, elevation) examines these two inputs and always returns the same zone type\u2014residential, commercial, or industrial. It never checks the current budget, never asks the mayor's opinion, never modifies the city database. This purity makes it reliable: the zoning decision depends only on geography, not politics. Developers can test it thoroughly. City planners can chain multiple zoning classifiers together. Because it has no side effects, running it 100 times produces 100 identical results, enabling confident decision-making.",
+      "next": "n4b"
+    },
+    {
+      "id": "n4b",
+      "type": "practice",
+      "title": "Practice: Pure Functions & Immutability",
+      "content": "Apply pure function and immutability principles to urban planning scenarios.",
+      "questions": [
+        {
+          "question": "A planning system needs to assign neighborhoods to city districts. Which design follows functional principles?",
+          "options": [
+            "A function that modifies a master district list each time it's called",
+            "A function that takes neighborhoods as input and returns a new district assignment map, leaving the original unchanged",
+            "A function that only works on Mondays when budget approvals are finalized",
+            "A function that randomly assigns neighborhoods to districts"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Modifying shared data creates side effects and bugs.",
+            "Correct! Returning new data maintains immutability and predictability.",
+            "Incorrect. Pure functions must produce consistent results regardless of time.",
+            "Incorrect. Pure functions must be deterministic."
+          ],
+          "explanation": "Immutable returns preserve data integrity and enable safe parallelization\u2014multiple teams can work with the same neighborhood data without conflicts."
+        },
+        {
+          "question": "Why is immutability useful in urban planning data systems?",
+          "options": [
+            "It allows planners to change their minds instantly",
+            "It creates a complete audit trail and enables easy rollback to previous plan versions",
+            "It prevents new construction from happening",
+            "It makes calculations run faster"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Immutability actually makes changes more deliberate, not instant.",
+            "Correct! Immutability creates accountability and recovery options essential for planning.",
+            "Incorrect. Immutability doesn't affect construction permissions.",
+            "Incorrect. Immutability may slightly reduce speed but gains far outweigh costs."
+          ],
+          "explanation": "Urban planning requires accountability. Immutable records mean every planning decision is documented, and if a mistake is discovered, you can revert to a previous plan version without losing intermediate work."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5b",
+      "failure_target": "n5b"
+    },
+    {
+      "id": "n5b",
+      "type": "end",
+      "title": "Functional Programming Fundamentals Complete",
+      "content": "You've learned how pure functions and immutability form the foundation of functional programming. These principles help urban planning teams build reliable, maintainable, and auditable systems. As you continue exploring programming, remember: predictable functions and immutable data are the keys to building systems you can trust."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Assessment Pass (2+ correct)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n2b",
+      "label": "Assessment Fail (0-1 correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n2b",
+      "target": "n3b",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n3b",
+      "target": "n4b",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n4b",
+      "target": "n5b",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T07:10:32.643995+00:00",
+  "model": "claude-haiku-4-5"
+}

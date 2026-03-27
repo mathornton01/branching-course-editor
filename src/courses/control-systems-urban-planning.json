@@ -1,0 +1,392 @@
+{
+  "id": "control-systems-urban-planning",
+  "title": "Control Systems in Urban Planning",
+  "description": "Learn how cities use feedback loops, response timing, and stability mechanisms to manage traffic, buildings, and resources",
+  "topic": "Control Systems",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "control-systems",
+    "urban-planning",
+    "feedback-loops",
+    "system-response",
+    "stability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Control Systems in Modern Cities",
+      "content": "Control systems are everywhere in urban environments. From traffic lights that respond to vehicle flow, to building HVAC systems that maintain comfort, to water reservoirs that balance supply and demand\u2014cities depend on systems that automatically adjust to meet changing conditions. In this course, you'll explore three key principles of control systems by examining real urban planning applications that shape how millions of people live.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Which aspect of urban control systems interests you most?",
+      "choices": [
+        {
+          "label": "Feedback Loops: Traffic Control",
+          "next": "n3"
+        },
+        {
+          "label": "System Response: Building Climate",
+          "next": "n6"
+        },
+        {
+          "label": "Stability: Water Management",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Feedback Loops in Traffic Systems",
+      "content": "A feedback loop is the heart of any control system. In urban traffic control, sensors detect vehicle density at intersections, feeding this data back to signal controllers. The controller compares actual traffic flow to a desired target, then adjusts signal timing accordingly. This creates a continuous cycle: measure \u2192 compare \u2192 adjust \u2192 measure again. This feedback ensures traffic flows efficiently even when conditions change unexpectedly.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Traffic Light Adaptive Control",
+      "content": "Consider an intersection in downtown Manhattan. During rush hour, the traffic management system measures how many cars are waiting at each approach. If the northbound queue is growing too large, the system extends the green light phase for north-south traffic. Sensors continuously monitor if this adjustment worked\u2014is the queue shrinking? If traffic flow improves, the system maintains this timing. If not, it lengthens the phase further. This real-time feedback loop keeps traffic balanced throughout the day.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Feedback Loops Practice",
+      "content": "Test your understanding of feedback loops in traffic control systems.",
+      "questions": [
+        {
+          "question": "In a traffic signal feedback system, what is the primary purpose of measuring vehicle density at intersections?",
+          "options": [
+            "To determine if the system needs adjustment",
+            "To calculate the cost of maintaining signals",
+            "To predict future population growth",
+            "To reduce the number of intersections"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Measurement provides the data needed for comparison and adjustment.",
+            "Incorrect. Sensor systems measure traffic flow, not maintenance costs.",
+            "Incorrect. Traffic density and population growth are different metrics.",
+            "Incorrect. System adjustments improve efficiency, they don't remove intersections."
+          ],
+          "explanation": "Feedback loops work by continuously measuring the system state. In traffic control, vehicle density sensors provide the data the controller needs to decide if signal timing should change."
+        },
+        {
+          "question": "Which sequence correctly describes a complete feedback loop in traffic control?",
+          "options": [
+            "Measure \u2192 Adjust \u2192 Compare \u2192 Measure again",
+            "Measure \u2192 Compare \u2192 Adjust \u2192 Measure again",
+            "Compare \u2192 Adjust \u2192 Measure \u2192 Compare",
+            "Adjust \u2192 Measure \u2192 Compare \u2192 Adjust"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Comparison should happen before adjustment.",
+            "Correct! The proper sequence ensures data informs decisions.",
+            "Incorrect. Measurement must come first to gather data.",
+            "Incorrect. This sequence skips the initial measurement."
+          ],
+          "explanation": "The correct feedback loop sequence is: Measure (current state) \u2192 Compare (to target) \u2192 Adjust (parameters) \u2192 Measure again (to verify). This cycle repeats continuously."
+        },
+        {
+          "question": "If a traffic signal feedback system detects that a northbound queue is still growing after extending the green phase, what should the system do?",
+          "options": [
+            "Shorten the green phase immediately",
+            "Switch to manual control",
+            "Extend the green phase further or investigate other factors",
+            "Stop collecting sensor data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. If the queue is still growing, reducing green time would worsen the problem.",
+            "Incorrect. Manual control eliminates the advantage of automatic feedback.",
+            "Correct! The system should continue adjusting based on feedback.",
+            "Incorrect. Data collection is essential for control system operation."
+          ],
+          "explanation": "A responsive feedback system continuously monitors results and makes iterative adjustments. If the queue persists, the system might extend the phase further, adjust related intersections, or analyze whether external factors (accidents, events) are causing the congestion."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n12",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "System Response in Building Climate Control",
+      "content": "How quickly and effectively a system responds to disturbances is called system response. In urban buildings, when outdoor temperature drops from 70\u00b0F to 50\u00b0F, the HVAC system must increase heating. The building's thermal mass acts as a buffer\u2014walls and materials store heat\u2014so response isn't instantaneous. Designers must tune the system to balance comfort with energy efficiency. Too fast a response wastes energy; too slow leaves occupants uncomfortable. Understanding system response characteristics helps planners design efficient urban infrastructure.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Smart Building HVAC in a High-Rise",
+      "content": "A 40-story office tower in Chicago uses a smart HVAC system. Temperature sensors on each floor report to a central controller every minute. When a sensor shows temperature dropping, the system activates heating, but recognizing the building's thermal mass, it does so gradually. The system predicts future conditions using weather forecasts and occupancy data. On a cold morning, it pre-heats before employees arrive. This measured response reduces energy consumption by 20% compared to reactive systems while maintaining comfort.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "System Response Practice",
+      "content": "Test your understanding of how control systems respond to changes.",
+      "questions": [
+        {
+          "question": "What does 'system response' mean in the context of HVAC systems?",
+          "options": [
+            "How quickly the system reacts to temperature changes",
+            "Answering customer complaints about temperature",
+            "Installing new heating equipment in the building",
+            "Measuring humidity levels in the air"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! System response is the speed and manner of reacting to input changes.",
+            "Incorrect. Response refers to technical performance, not customer service.",
+            "Incorrect. System response is about existing equipment operation, not installation.",
+            "Incorrect. While humidity is monitored, response refers to reacting to changes."
+          ],
+          "explanation": "System response describes how a control system behaves when conditions change. It includes both speed (how quickly it reacts) and character (smooth vs. oscillating vs. sluggish)."
+        },
+        {
+          "question": "In a smart building, why is thermal mass important to system response?",
+          "options": [
+            "It stores heat, creating a buffer that slows temperature changes",
+            "It makes the building structure stronger and more durable",
+            "It reduces the cost of purchasing HVAC equipment",
+            "It prevents air from flowing through the building"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Thermal mass acts as a buffer, moderating temperature swings.",
+            "Incorrect. Strength is a structural property, not related to thermal response.",
+            "Incorrect. Thermal mass is about the building's existing materials, not equipment cost.",
+            "Incorrect. Thermal mass doesn't block airflow; it absorbs and releases heat."
+          ],
+          "explanation": "Thermal mass (heavy walls, concrete, etc.) absorbs heat when temperatures rise and releases it when temperatures drop. This natural buffering effect means the HVAC system doesn't need to respond instantly, allowing for more efficient, gradual adjustments."
+        },
+        {
+          "question": "What is the benefit of an HVAC system that responds gradually rather than instantly to temperature changes?",
+          "options": [
+            "It reduces energy consumption while maintaining comfort",
+            "It makes the building warmer overall",
+            "It eliminates the need for thermostats",
+            "It prevents the heating system from ever malfunctioning"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Gradual response is more energy-efficient and maintains comfort.",
+            "Incorrect. Response speed doesn't determine overall temperature.",
+            "Incorrect. Thermostats are still needed to set targets.",
+            "Incorrect. No response design prevents all malfunctions."
+          ],
+          "explanation": "Rapid, reactive heating/cooling creates energy waste and comfort swings (too hot, then too cold, then too hot again). Gradual response anticipates needs, uses the building's thermal mass effectively, and reduces on/off cycling, lowering energy costs by 15\u201325%."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n12",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Stability in Water Distribution Systems",
+      "content": "An urban water system must balance supply and demand while maintaining stable pressure and quality. If demand suddenly increases (many residents shower simultaneously), pressure drops unless the system responds. Reservoirs act as buffers\u2014they release stored water during peaks and refill during low-demand periods. For stability, the system must reach an equilibrium where inflow equals outflow over time. Unstable systems cause water outages or dangerous pressure spikes. Engineers design systems with appropriate feedback mechanisms and buffer capacity to maintain stable, reliable water distribution.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Metropolitan Reservoir Management",
+      "content": "Los Angeles manages water stability through a network of reservoirs, treatment plants, and demand-responsive systems. During summer drought, irrigation demand surges, potentially destabilizing the system. LA's control strategy uses weather-based controllers that predict demand, storage tanks that buffer variations, and consumption feedback that adjusts treatment output. If reservoir levels drop too far, the system triggers conservation campaigns to reduce demand. This multi-layered feedback maintains stability\u2014the system neither overflows nor runs dry, keeping 2.1 million residents supplied consistently.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "practice",
+      "title": "Water System Stability Practice",
+      "content": "Test your understanding of stability in water distribution control systems.",
+      "questions": [
+        {
+          "question": "In an urban water system, what does stability mean?",
+          "options": [
+            "Maintaining consistent supply even when demand changes",
+            "Making sure water tastes better",
+            "Keeping all water pipes the same diameter",
+            "Preventing all leaks in the system"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Stability means the system maintains equilibrium despite demand variations.",
+            "Incorrect. Taste is a quality issue, not a stability issue.",
+            "Incorrect. Pipe sizing is a design issue, not stability.",
+            "Incorrect. Preventing all leaks is a maintenance goal, not stability."
+          ],
+          "explanation": "Stability in control systems means the system reaches a balanced state and maintains it despite disturbances. For water systems, this means pressure and flow remain within acceptable ranges even when demand varies significantly."
+        },
+        {
+          "question": "How do reservoirs help maintain stability in water distribution systems?",
+          "options": [
+            "By storing water during low-demand periods and releasing it during peak demand",
+            "By filtering out impurities from the water",
+            "By decreasing the total amount of water available",
+            "By making water more expensive to conserve it"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Reservoirs act as buffers, decoupling supply from demand.",
+            "Incorrect. Filtration improves water quality, not stability.",
+            "Incorrect. Reservoirs increase available water storage and reliability.",
+            "Incorrect. Pricing is a demand management tool, not a stability mechanism."
+          ],
+          "explanation": "Reservoirs are critical stabilizing elements. They store water when demand is low and supply is high, then release water when demand spikes. This buffer effect prevents pressure drops during peak use and overflow during low-demand periods."
+        },
+        {
+          "question": "What could happen if an urban water system becomes unstable?",
+          "options": [
+            "Water outages, pressure spikes, or inconsistent service",
+            "Water becomes more flavorful",
+            "Buildings in the city become taller",
+            "Traffic lights start working faster"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Instability directly threatens reliability and safety.",
+            "Incorrect. Flavor is a quality metric, not a stability consequence.",
+            "Incorrect. Building height is unrelated to water system stability.",
+            "Incorrect. Traffic systems are independent of water systems."
+          ],
+          "explanation": "Unstable water systems can't maintain reliable service. Oscillations might cause pressure spikes (damaging pipes) followed by pressure drops (causing outages). Extreme instability can lead to system failure and service interruption affecting entire neighborhoods."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n12",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Integrating Control Principles in Urban Planning",
+      "content": "Modern cities orchestrate multiple control systems simultaneously. A smart city integrates traffic control, building climate systems, and water management into a coordinated network. Understanding feedback loops, system response, and stability helps planners design resilient cities that adapt to changing conditions. Real-world applications combine all three principles: feedback ensures responsiveness, proper response tuning balances efficiency and comfort, and stability mechanisms prevent cascading failures. As urban populations grow and climate change intensifies, control system design becomes increasingly critical to creating sustainable, livable cities.",
+      "next": "n13"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Control Systems Mastery Unlocked",
+      "content": "Congratulations! You've learned how modern cities use control systems to manage traffic, climate, and resources. You understand how feedback loops enable adaptive responses, how system response timing affects efficiency and comfort, and how stability mechanisms create resilient infrastructure. These principles apply beyond cities\u2014from industrial automation to aerospace engineering. You're now equipped to recognize and appreciate the hidden systems that keep urban environments functioning smoothly. Continue exploring how data and automation shape the cities of the future."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Feedback Loops: Traffic Control"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "System Response: Building Climate"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n9",
+      "label": "Stability: Water Management"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n12",
+      "label": "pass"
+    },
+    {
+      "id": "c7b",
+      "source": "n5",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n12",
+      "label": "pass"
+    },
+    {
+      "id": "c10b",
+      "source": "n8",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c13",
+      "source": "n11",
+      "target": "n12",
+      "label": "pass"
+    },
+    {
+      "id": "c13b",
+      "source": "n11",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c14",
+      "source": "n12",
+      "target": "n13",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T07:20:31.108842+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branching Course Editor - Enhanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .node {
+            position: absolute;
+            transition: all 0.2s ease;
+            cursor: grab;
+            user-select: none;
+        }
+        .node.dragging {
+            opacity: 0.8;
+            cursor: grabbing;
+            transform: scale(0.95);
+        }
+        .node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .connection {
+            transition: stroke-width 0.2s ease;
+        }
+        .connection:hover {
+            stroke-width: 3;
+        }
+        .connection-point {
+            width: 20px;
+            height: 20px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+        .connection-point:active {
+            background-color: #10b981 !important;
+            transform: scale(1.5);
+        }
+        .connection-point:hover {
+            background-color: #2563eb;
+            transform: scale(1.2);
+        }
+        .connection-point.active {
+            background-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+            border-color: #10b981;
+            animation: pulse 1.5s infinite;
+        }
+        .connection-point.start-point {
+            background-color: #f59e0b !important;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+            border-color: #f59e0b;
+            transform: scale(1.2);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+        .node-panel {
+            transition: all 0.3s ease;
+        }
+        .node-panel.hidden {
+            display: none;
+        }
+        .btn {
+            transition: all 0.2s ease;
+        }
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .canvas-container {
+            position: relative;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border: 2px dashed #e2e8f0;
+            transition: all 0.2s ease;
+            min-height: 400px;
+        }
+        .canvas-container.dragover {
+            background-color: #eff6ff;
+            border-color: #3b82f6;
+        }
+    </style>
+    <style>
+        /* DEBUG: Make temp lines extra visible */
+        .connection.temp {
+            stroke-width: 4 !important;
+            stroke: #ff0000 !important; /* Red for visibility */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-4">
+    <div class="max-w-7xl mx-auto">
+        <header class="mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Branching Course Editor</h1>
+            <p class="text-gray-600">Create and edit branching scenarios with drag-and-drop nodes</p>
+        </header>
+
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex justify-between items-start mb-6">
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <label for="courseSelect" class="font-medium text-gray-700">Select Course:</label>
+                        <select id="courseSelect" class="w-64 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Loading courses...</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button id="loadCourseBtn" class="btn bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50">
+                            Load Course
+                        </button>
+                        <button id="addNodeBtn" class="btn bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 disabled:opacity-50">
+                            Add Node
+                        </button>
+                        <button id="addConnectionBtn" class="btn bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:opacity-50">
+                            Add Connection
+                        </button>
+                        <button id="saveCourseBtn" class="btn bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 disabled:opacity-50">
+                            Save Course
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Editor Canvas -->
+                <div class="lg:col-span-2">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold text-gray-700">Course Canvas</h2>
+                            <div class="flex space-x-2">
+                                <button id="zoomOutBtn" class="btn bg-gray-200 text-gray-800 px-3 py-1 rounded-md hover:bg-gray-300">-</button>
+                                <span id="zoomLevel" class="px-3 py-1 bg-white border border-gray-300 rounded-md text-center w-10">100%</span>
+                                <button id="zoomInBtn" class="btn bg-gray-200 text-gray-800 px-3 py-1 rounded-md hover:bg-gray-300">+</button>
+                            </div>
+                        </div>
+
+                        <div class="canvas-container" id="courseCanvas">
+                            <svg id="connectionsSVG" class="absolute inset-0 pointer-events-none"></svg>
+                            <div id="nodesContainer" class="relative"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Properties Panel -->
+                <div class="lg:col-span-1">
+                    <div class="space-y-4">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-700">Node Properties</h2>
+                        </div>
+                        <div id="nodePanel" class="node-panel hidden bg-gray-50 p-4 rounded-lg shadow">
+                            <div id="nodeContent">
+                                <p class="text-gray-500 text-center py-4">Select a node to edit its properties</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let nodes = [];
+        let connections = [];
+        let currentCourse = null;
+        let selectedNodeId = null;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let isConnecting = false;
+        let connectionStartPoint = null;
+        let tempConnection = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load available courses
+            fetch('http://100.113.204.52:8001/api/courses')
+                .then(response => response.json())
+                .then(courses => {
+                    const courseSelect = document.getElementById('courseSelect');
+                    courseSelect.innerHTML = '<option value="">Select a course...</option>';
+                    courses.forEach(course => {
+                        const option = document.createElement('option');
+                        option.value = course.id;
+                        option.textContent = course.title;
+                        courseSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading courses:', error);
+                    document.getElementById('courseSelect').innerHTML = '<option value="">Error loading courses</option>';
+                });
+
+            // Setup event listeners
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Load Course button
+            document.getElementById('loadCourseBtn').addEventListener('click', loadSelectedCourse);
+
+            // Add Node button
+            document.getElementById('addNodeBtn').addEventListener('click', addNewNode);
+
+            // Add Connection button
+            document.getElementById('addConnectionBtn').addEventListener('click', startConnectionMode);
+
+            // Save Course button
+            document.getElementById('saveCourseBtn').addEventListener('click', saveCourse);
+
+            // Zoom controls
+            document.getElementById('zoomInBtn').addEventListener('click', () => zoomCanvas(1.1));
+            document.getElementById('zoomOutBtn').addEventListener('click', () => zoomCanvas(0.9));
+
+            // Canvas drag and drop
+            const canvas = document.getElementById('courseCanvas');
+            canvas.addEventListener('mousedown', startDrag);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', endDrag);
+            
+            // Prevent text selection during drag
+            canvas.addEventListener('selectstart', (e) => e.preventDefault());
+
+            // Connection point and node listeners (for creating connections)
+            // GLOBAL MOUSEDOWN DETECTOR - see if ANY mousedown works
+            document.addEventListener('mousedown', function(e) {
+                document.body.style.border = '3px solid #00ff00'; // Green border = global mousedown
+                document.body.style.transition = 'border 0.1s';
+                setTimeout(() => {
+                    document.body.style.border = 'none';
+                }, 100);
+            });
+            
+            document.getElementById('nodesContainer').addEventListener('mousedown', function(e) {
+                // SUPER BASIC FLASH - confirm mousedown listener is firing
+                document.body.style.backgroundColor = '#ff0000'; // Red = mousedown detected
+                document.body.style.transition = 'background-color 0.1s';
+                setTimeout(() => {
+                    document.body.style.backgroundColor = '#f8fafc';
+                }, 100);
+                
+                const connectionPoint = e.target.closest('.connection-point');
+                const nodeElement = e.target.closest('.node');
+                
+                // If in connection mode and clicked on a node, treat as clicking its connection point
+                if (isConnecting && nodeElement && !connectionPoint) {
+                    // Try to find connection point by matching node ID (more reliable than class query)
+                    const targetNodeId = nodeElement.dataset.nodeId;
+                    connectionPoint = document.querySelector(`.connection-point[data-node-id="${targetNodeId}"]`);
+                    
+                    // VERIFY WE GOT THE CONNECTION POINT FROM NODE
+                    if (connectionPoint) {
+                        document.body.style.backgroundColor = '#ffff00'; // Yellow = got connection point from node
+                        document.body.style.transition = 'background-color 0.1s';
+                        setTimeout(() => {
+                            document.body.style.backgroundColor = '#f8fafc';
+                        }, 100);
+                    } else {
+                        document.body.style.backgroundColor = '#ff00ff'; // Magenta = FAILED to get connection point
+                        document.body.style.transition = 'background-color 0.1s';
+                        setTimeout(() => {
+                            document.body.style.backgroundColor = '#f8fafc';
+                        }, 100);
+                    }
+                }
+                
+                // If we have a connection point (either direct click or via node in connection mode)
+                if (connectionPoint) {
+                    startConnection(e);
+                }
+            });
+
+            // Node click listener for selecting nodes (only when not in connection mode)
+            document.getElementById('nodesContainer').addEventListener('click', function(e) {
+                // Only treat as node selection if it's not a connection point AND not in connection mode
+                const connectionPoint = e.target.closest('.connection-point');
+                if (!connectionPoint && !isConnecting) {
+                    const nodeElement = e.target.closest('.node');
+                    if (nodeElement) {
+                        const nodeId = nodeElement.dataset.nodeId;
+                        selectNode(nodeId);
+                    }
+                }
+            });
+        }
+
+        function loadSelectedCourse() {
+            const courseId = document.getElementById('courseSelect').value;
+            if (!courseId) return;
+            
+            document.getElementById('loadCourseBtn').disabled = true;
+            document.getElementById('loadCourseBtn').textContent = 'Loading...';
+            
+            fetch(`http://100.113.204.52:8001/api/courses/${courseId}`)
+                .then(response => response.json())
+                .then(course => {
+                    currentCourse = course;
+                    loadCourseIntoEditor(course);
+                })
+                .catch(error => {
+                    console.error('Error loading course:', error);
+                    alert('Failed to load course');
+                })
+                .finally(() => {
+                    document.getElementById('loadCourseBtn').disabled = false;
+                    document.getElementById('loadCourseBtn').textContent = 'Load Course';
+                });
+        }
+
+        function loadCourseIntoEditor(course) {
+            // Clear existing nodes
+            document.getElementById('nodesContainer').innerHTML = '';
+            document.getElementById('connectionsSVG').innerHTML = '';
+            
+            nodes = course.nodes || [];
+            connections = course.connections || [];
+            
+            renderNodes();
+            renderConnections();
+            
+            // Enable buttons
+            document.getElementById('addNodeBtn').disabled = false;
+            document.getElementById('saveCourseBtn').disabled = false;
+        }
+
+        function renderNodes() {
+            const container = document.getElementById('nodesContainer');
+            container.innerHTML = '';
+            nodes.forEach(node => {
+                const nodeElement = createNodeElement(node);
+                container.appendChild(nodeElement);
+            });
+        }
+
+        function createNodeElement(node) {
+            const div = document.createElement('div');
+            div.className = 'node p-4 bg-white rounded-lg shadow-md w-48 cursor-move';
+            div.style.left = `${node.position.x}px`;
+            div.style.top = `${node.position.y}px`;
+            div.dataset.nodeId = node.id;
+            div.innerHTML = `
+                <div class="font-bold mb-2">${node.title}</div>
+                <div class="text-sm text-gray-600">${node.type}</div>
+                <div class="mt-2 connection-point" data-point-type="output" data-node-id="${node.id}"></div>
+            `;
+            return div;
+        }
+
+        function createArrowMarker() {
+            // Only create marker once
+            if (document.getElementById('arrowhead')) return;
+            
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+            marker.id = 'arrowhead';
+            marker.setAttribute('markerWidth', '10');
+            marker.setAttribute('markerHeight', '7');
+            marker.setAttribute('refX', '10');
+            marker.setAttribute('refY', '3.5');
+            marker.setAttribute('orient', 'auto');
+            
+            const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            polygon.setAttribute('points', '0 0, 10 3.5, 0 7');
+            polygon.setAttribute('fill', '#3b82f6');
+            
+            marker.appendChild(polygon);
+            defs.appendChild(marker);
+            document.getElementById('connectionsSVG').appendChild(defs);
+        }
+
+        function renderConnections() {
+            const svg = document.getElementById('connectionsSVG');
+            svg.innerHTML = '';
+            createArrowMarker();
+            
+            connections.forEach(connection => {
+                const startNode = nodes.find(n => n.id === connection.from);
+                const endNode = nodes.find(n => n.id === connection.to);
+                
+                if (!startNode || !endNode) return;
+                
+                // Calculate connection points using node centers
+                const startX = startNode.position.x + 60;
+                const startY = startNode.position.y + 40;
+                const endX = endNode.position.x;
+                const endY = endNode.position.y + 40;
+                
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('class', 'connection');
+                path.setAttribute('d', `M${startX} ${startY} L${endX} ${endY}`);
+                path.setAttribute('stroke', '#3b82f6');
+                path.setAttribute('stroke-width', '2');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('marker-end', 'url(#arrowhead)');
+                
+                svg.appendChild(path);
+            });
+        }
+
+        function startDrag(e) {
+            const nodeElement = e.target.closest('.node');
+            if (!nodeElement) return;
+            
+            isDragging = true;
+            const node = nodes.find(n => n.id === nodeElement.dataset.nodeId);
+            if (!node) return;
+            
+            dragStartX = e.clientX - node.position.x;
+            dragStartY = e.clientY - node.position.y;
+            
+            nodeElement.classList.add('dragging');
+            // Visual feedback
+            nodeElement.style.border = '2px solid #3b82f6';
+            e.preventDefault();
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            
+            const nodeElement = document.querySelector(`.node.dragging`);
+            if (!nodeElement) return;
+            
+            const node = nodes.find(n => n.id === nodeElement.dataset.nodeId);
+            if (!node) return;
+            
+            // Calculate new position - simple approach
+            let newX = e.clientX - dragStartX;
+            let newY = e.clientY - dragStartY;
+            
+            // Update node position
+            node.position.x = newX;
+            node.position.y = newY;
+            
+            // Update element position
+            nodeElement.style.left = `${newX}px`;
+            nodeElement.style.top = `${newY}px`;
+            
+            // Re-render connections
+            renderConnections();
+        }
+
+        function endDrag(e) {
+            if (!isDragging) return;
+            
+            isDragging = false;
+            const nodeElement = document.querySelector(`.node.dragging`);
+            if (nodeElement) {
+                nodeElement.classList.remove('dragging');
+                // Remove visual feedback
+                nodeElement.style.border = '';
+            }
+        }
+
+        function startConnection(e) {
+            const connectionPoint = e.target.closest('.connection-point');
+            if (!connectionPoint) return;
+            
+            const nodeElement = connectionPoint.closest('.node');
+            if (!nodeElement) return;
+            
+            isConnecting = true;
+            connectionStartPoint = {
+                element: connectionPoint,
+                nodeId: nodeElement.dataset.nodeId,
+                pointType: connectionPoint.dataset.pointType || 'output'
+            };
+            
+            // Visually indicate this is the selected start point
+            connectionPoint.classList.add('start-point');
+            
+            // Create temporary connection line
+            const svg = document.getElementById('connectionsSVG');
+            if (!svg) {
+                alert('ERROR: SVG element not found!');
+                return;
+            }
+            
+            tempConnection = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            if (!tempConnection) {
+                alert('ERROR: Failed to create SVG line element!');
+                return;
+            }
+            
+            tempConnection.setAttribute('class', 'connection temp');
+            tempConnection.setAttribute('stroke', '#3b82f6');
+            tempConnection.setAttribute('stroke-width', '2');
+            tempConnection.setAttribute('stroke-dasharray', '5,5');
+            svg.appendChild(tempConnection);
+            
+            // VISUAL CONFIRMATION: Flash background briefly to confirm line creation
+            document.body.style.backgroundColor = '#ffeb3b';
+            document.body.style.transition = 'background-color 0.3s';
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#f8fafc'; // Reset to original
+            }, 300);
+            
+            // IMMEDIATE LINE VERIFICATION: Make line extra bright for first 100ms
+            if (tempConnection) {
+                tempConnection.setAttribute('stroke', '#ffff00'); // Bright yellow
+                tempConnection.setAttribute('stroke-width', '6');
+                setTimeout(() => {
+                    if (tempConnection) {
+                        tempConnection.setAttribute('stroke', '#3b82f6');
+                        tempConnection.setAttribute('stroke-width', '2');
+                    }
+                }, 100);
+            }
+            
+            // Update temp connection position on mouse move
+            const updateTempConnection = (moveE) => {
+                if (!tempConnection) return;
+                
+                // Get the actual position of the connection point from DOM
+                const pointRect = connectionStartPoint.element.getBoundingClientRect();
+                const svgRect = svg.getBoundingClientRect();
+                
+                const startX = pointRect.left + pointRect.width / 2 - svgRect.left;
+                const startY = pointRect.top + pointRect.height / 2 - svgRect.top;
+                
+                tempConnection.setAttribute('x1', startX);
+                tempConnection.setAttribute('y1', startY);
+                tempConnection.setAttribute('x2', moveE.clientX - svgRect.left);
+                tempConnection.setAttribute('y2', moveE.clientY - svgRect.top);
+            };
+            
+            document.addEventListener('mousemove', updateTempConnection);
+            document.addEventListener('mouseup', endConnection);
+            
+            // CONFIRM LISTENERS ATTACHED - Flash purple briefly
+            document.body.style.backgroundColor = '#8a2be2'; // Blue violet
+            document.body.style.transition = 'background-color 0.2s';
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#f8fafc';
+            }, 200);
+            
+            console.log('Mouse move and up listeners attached');
+        }
+
+        function endConnection(e) {
+            if (!isConnecting) return;
+            
+            // VERIFY ENDCONNECTION CALLED
+            document.body.style.backgroundColor = '#90ee90'; // Light green
+            document.body.style.transition = 'background-color 0.3s';
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#f8fafc';
+            }, 300);
+            
+            // Update debug indicator for mouseup
+            let debugIndicator = document.getElementById('debug-indicator');
+            if (debugIndicator) {
+                debugIndicator.innerHTML += `<br>🔵 DEBUG: MOUSE UP<br>
+                    TargetPoint: ${e.target.closest('.connection-point') ? 'YES' : 'NO'}<br>
+                    ConnectionStartPoint: ${connectionStartPoint ? connectionStartPoint.nodeId : 'none'}<br>
+                    ConnectionStarted: ${connectionStartPoint ? 'YES' : 'NO'}`;
+            }
+            
+            // Check if we ended on a connection point
+            const targetPoint = e.target.closest('.connection-point');
+            
+            // Remove temp connection
+            if (tempConnection) {
+                // VERIFY TEMP CONNECTION REMOVAL
+                tempConnection.setAttribute('stroke', '#ff00ff'); // Magenta = removal
+                tempConnection.remove();
+                tempConnection = null;
+            }
+            
+            document.removeEventListener('mousemove', updateTempConnection);
+            document.removeEventListener('mouseup', endConnection);
+            
+            // If we didn't end on a connection point, or we ended on the same point (click to cancel)
+            if (!targetPoint) {
+                // Clicked on empty space - cancel connection attempt
+                // Remove start point highlighting
+                if (connectionStartPoint && connectionStartPoint.element) {
+                    connectionStartPoint.element.classList.remove('start-point');
+                }
+                resetConnectionModeUI();
+                return;
+            }
+            
+            const targetNode = targetPoint.closest('.node');
+            if (!targetNode) return;
+            
+            const targetNodeId = targetNode.dataset.nodeId;
+            
+            // Don't connect to self - this means user clicked same point twice to cancel
+            if (targetNodeId === connectionStartPoint.nodeId) {
+                // Remove start point highlighting
+                if (connectionStartPoint && connectionStartPoint.element) {
+                    connectionStartPoint.element.classList.remove('start-point');
+                }
+                resetConnectionModeUI();
+                return;
+            }
+            
+            // We have a valid connection between two different points
+            // Create connection
+            const newConnection = {
+                id: `conn-${Date.now()}`,
+                from: connectionStartPoint.nodeId,
+                to: targetNodeId
+            };
+            
+            connections.push(newConnection);
+            renderConnections();
+            
+            // VERIFY PERMANENT CONNECTION CREATED
+            document.body.style.backgroundColor = '#00ffff'; // Cyan = success
+            document.body.style.transition = 'background-color 0.3s';
+            setTimeout(() => {
+                document.body.style.backgroundColor = '#f8fafc';
+            }, 500);
+            
+            // Brief debug flash to confirm connection was added
+            console.log(`Connection created: ${newConnection.from} → ${newConnection.to}`);
+            
+            // Remove start point highlighting
+            if (connectionStartPoint && connectionStartPoint.element) {
+                connectionStartPoint.element.classList.remove('start-point');
+            }
+            
+            // Reset connection mode UI
+            resetConnectionModeUI();
+        }
+
+        function resetConnectionModeUI() {
+            isConnecting = false;
+            connectionStartPoint = null;
+            document.getElementById('addConnectionBtn').textContent = 'Add Connection';
+            document.getElementById('addConnectionBtn').classList.remove('bg-indigo-500');
+            document.getElementById('addConnectionBtn').classList.add('bg-indigo-600');
+            document.querySelectorAll('.connection-point').forEach(point => {
+                point.classList.remove('connection-point-active');
+                point.classList.remove('start-point');
+            });
+            // Clear debug indicator
+            const debugIndicator = document.getElementById('debug-indicator');
+            if (debugIndicator) {
+                debugIndicator.remove();
+            }
+        }
+
+        function addNewNode() {
+            const newNode = {
+                id: `node-${Date.now()}`,
+                title: 'New Node',
+                type: 'content',
+                position: {
+                    x: 100 + (nodes.length * 30),
+                    y: 100 + (nodes.length * 30)
+                }
+            };
+            
+            nodes.push(newNode);
+            renderNodes();
+        }
+
+        function startConnectionMode() {
+            if (nodes.length < 2) {
+                alert('You need at least 2 nodes to create a connection');
+                return;
+            }
+            
+            isConnecting = true;
+            connectionStartPoint = null;
+            document.getElementById('addConnectionBtn').textContent = 'Click Start Node';
+            document.getElementById('addConnectionBtn').classList.add('bg-indigo-500');
+            document.getElementById('addConnectionBtn').classList.remove('bg-indigo-600');
+            
+            // Update connection points to show they're active
+            document.querySelectorAll('.connection-point').forEach(point => {
+                point.classList.add('connection-point-active');
+            });
+        }
+
+        function selectNode(nodeId) {
+            selectedNodeId = nodeId;
+            const node = nodes.find(n => n.id === nodeId);
+            if (!node) return;
+            
+            document.getElementById('nodePanel').classList.remove('hidden');
+            document.getElementById('nodeContent').innerHTML = `
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                        <input type="text" value="${node.title}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateNodeTitle(this.value)">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateNodeType(this.value)">
+                            <option value="content" ${node.type === 'content' ? 'selected' : ''}>Content</option>
+                            <option value="question" ${node.type === 'question' ? 'selected' : ''}>Question</option>
+                            <option value="feedback" ${node.type === 'feedback' ? 'selected' : ''}>Feedback</option>
+                            <option value="assessment" ${node.type === 'assessment' ? 'selected' : ''}>Assessment</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Position X</label>
+                        <input type="number" value="${node.position.x}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateNodePositionX(this.value)">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Position Y</label>
+                        <input type="number" value="${node.position.y}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="updateNodePositionY(this.value)">
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateNodeTitle(title) {
+            if (!selectedNodeId) return;
+            const node = nodes.find(n => n.id === selectedNodeId);
+            if (node) {
+                node.title = title;
+                renderNodes();
+            }
+        }
+
+        function updateNodeType(type) {
+            if (!selectedNodeId) return;
+            const node = nodes.find(n => n.id === selectedNodeId);
+            if (node) {
+                node.type = type;
+                renderNodes();
+            }
+        }
+
+        function updateNodePositionX(x) {
+            if (!selectedNodeId) return;
+            const node = nodes.find(n => n.id === selectedNodeId);
+            if (node) {
+                node.position.x = parseInt(x) || 0;
+                renderNodes();
+            }
+        }
+
+        function updateNodePositionY(y) {
+            if (!selectedNodeId) return;
+            const node = nodes.find(n => n.id === selectedNodeId);
+            if (node) {
+                node.position.y = parseInt(y) || 0;
+                renderNodes();
+            }
+        }
+
+        function saveCourse() {
+            if (!currentCourse) return;
+            
+            currentCourse.nodes = nodes;
+            currentCourse.connections = connections;
+            
+            // In a real app, this would make an API call to save
+            // For now, we'll just show a success message
+            alert('Course saved successfully!');
+            
+            document.getElementById('saveCourseBtn').textContent = 'Saved!';
+            setTimeout(() => {
+                document.getElementById('saveCourseBtn').textContent = 'Save Course';
+            }, 1500);
+        }
+
+        function zoomCanvas(scaleFactor) {
+            const canvas = document.getElementById('courseCanvas');
+            const currentScale = parseFloat(document.getElementById('zoomLevel').textContent) / 100;
+            const newScale = Math.max(0.5, Math.min(2.0, currentScale * scaleFactor));
+            
+            canvas.style.transform = `scale(${newScale})`;
+            document.getElementById('zoomLevel').textContent = `${Math.round(newScale * 100)}%`;
+        }
+    </script>
+</body>
+</html>

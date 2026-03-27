@@ -1,0 +1,223 @@
+{
+  "id": "intro-robotics-diagnostic",
+  "title": "Introduction to Robotics",
+  "description": "Learn robotics fundamentals with adaptive branching. A diagnostic quiz routes you to either foundational content or advanced topics based on your current knowledge level.",
+  "topic": "Robotics",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 30,
+  "tags": [
+    "robotics",
+    "introductory",
+    "STEM",
+    "engineering",
+    "adaptive learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Robotics Knowledge Check",
+      "content": "Let's assess your current understanding of robotics fundamentals. This diagnostic quiz will personalize your learning path by determining whether you need foundational content or are ready for advanced topics.",
+      "questions": [
+        {
+          "question": "What is the primary function of an actuator in a robotic system?",
+          "options": [
+            "Process sensor data",
+            "Convert electrical energy into mechanical motion",
+            "Store energy",
+            "Provide computational power"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Actuators don't process data\u2014that's the controller's job.",
+            "Correct! Actuators are the 'muscles' that create movement.",
+            "Actuators use energy but don't primarily store it.",
+            "Controllers provide computation, not actuators."
+          ],
+          "explanation": "Actuators are electromechanical devices that convert electrical or hydraulic energy into physical motion, enabling robots to perform actions in the real world."
+        },
+        {
+          "question": "Which of the following is NOT an essential component of a robot?",
+          "options": [
+            "Sensors",
+            "Actuators",
+            "Controller",
+            "Marketing database"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Sensors are essential for perception.",
+            "Actuators are essential for action.",
+            "Controllers are essential for decision-making.",
+            "Correct! Marketing databases have nothing to do with robot function."
+          ],
+          "explanation": "While a robot needs sensors to perceive, a controller to decide, and actuators to act, marketing databases are not robot components."
+        },
+        {
+          "question": "In robotics, what does 'kinematics' refer to?",
+          "options": [
+            "The study of motion without considering forces",
+            "The study of the causes of motion",
+            "Robot communication protocols",
+            "Power management systems"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Kinematics focuses on position, velocity, and acceleration.",
+            "That's dynamics, not kinematics.",
+            "That's networking or software architecture.",
+            "That's power electronics."
+          ],
+          "explanation": "Kinematics analyzes how robots move\u2014positions, angles, and velocities\u2014without considering the forces that cause motion."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced Robot Architectures and Control",
+      "content": "You've demonstrated solid robotics knowledge! Modern robots use distributed control architectures where multiple processors handle different tasks simultaneously\u2014vision processing on one chip, motor control on another, high-level planning on a third. Modular robot designs enable rapid prototyping and scalability across diverse applications. Understanding subsystems integration\u2014from locomotion to manipulation to sensing\u2014is crucial for designing autonomous robots that operate in dynamic, unpredictable environments. Advanced feedback control loops enable robots to adapt to variations and maintain stability during complex manipulation and locomotion tasks.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Case Study: Humanoid Robot Architecture",
+      "content": "Consider the ATLAS humanoid robot developed for disaster response. Its architecture uses 28 hydraulic actuators across arms, legs, and torso providing 36 degrees of freedom. A central controller processes input from hundreds of sensors\u2014inertial measurement units, joint encoders, pressure sensors, and force/torque sensors\u2014at 1000 Hz for real-time stability. The kinematic model uses inverse kinematics solvers to convert desired end-effector positions into joint angles for grasping. When navigating rough terrain, the control system dynamically adjusts balance by modifying hip and ankle outputs based on gyroscope feedback. This integration of redundant sensing, distributed computation, and coordinated actuation exemplifies modern advanced robotic system design.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Robotics Path Complete!",
+      "content": "Congratulations! You've mastered advanced robotics concepts including distributed control, complex kinematics, sensor fusion, and adaptive feedback systems. You now understand how sophisticated robots integrate sensing, computation, and actuation to operate autonomously. Explore machine learning in robotics, advanced manipulation algorithms, or contribute to humanoid robotics research. The field needs your expertise!"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Robotics Fundamentals",
+      "content": "Let's build your robotics knowledge from the ground up. A robot is a programmable machine that performs physical tasks with varying autonomy levels. Every robot needs three essential components working together: sensors that perceive the environment, a controller that processes information and makes decisions, and actuators that create movement. Robots can repeat tasks with precision or respond intelligently to changing conditions. From manufacturing arms to household vacuums to space rovers, understanding these core components helps you grasp how any robot works, regardless of complexity.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Automotive Assembly Robot",
+      "content": "Imagine a robotic arm welding car bodies in an automotive factory. The robot has six joints (actuators) powered by electric motors, allowing movement in multiple directions. Sensors measure exact joint positions and detect when the welding tool contacts the vehicle frame. The controller executes a pre-programmed sequence: pick up the tool, position it at the first joint, apply pressure while activating the welder, move to the next location, and repeat dozens of times. When the car moves down the line, the robot resets and welds the next vehicle. This sequence repeats thousands of times daily with perfect consistency\u2014exactly why robots excel in manufacturing.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Robot Components and Functions",
+      "content": "Test your understanding of robot components with these practice questions.",
+      "questions": [
+        {
+          "question": "Which component of a robot is directly responsible for moving the robot's parts?",
+          "options": [
+            "Sensor",
+            "Actuator",
+            "Processor",
+            "Power supply"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sensors detect information; they don't create movement.",
+            "Correct! Actuators are the mechanism that creates physical motion.",
+            "Processors control actions but don't directly move parts.",
+            "Power supplies provide energy but don't create directed motion."
+          ],
+          "explanation": "Actuators are electromechanical devices (motors, hydraulic cylinders, pneumatic systems) that convert electrical or hydraulic energy into mechanical motion."
+        },
+        {
+          "question": "What type of sensor would a robot use to prevent collisions with obstacles?",
+          "options": [
+            "Accelerometer",
+            "Proximity or force sensor",
+            "Temperature sensor",
+            "Light sensor"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Accelerometers measure velocity changes, not proximity.",
+            "Correct! These sensors detect nearby objects or impacts.",
+            "Temperature sensors measure heat, not collision.",
+            "Light sensors detect illumination, not proximity."
+          ],
+          "explanation": "Proximity sensors (ultrasonic, infrared, lidar) detect nearby obstacles before collision. Force sensors detect impact. Both help robots avoid or respond to collisions."
+        },
+        {
+          "question": "Why are robots particularly effective in manufacturing environments?",
+          "options": [
+            "They never require maintenance",
+            "They work 24/7 with perfect consistency and precision without fatigue",
+            "They cost less than any human worker",
+            "They make creative decisions independently"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Robots do require regular maintenance.",
+            "Correct! This is the key advantage for manufacturing.",
+            "Cost varies greatly by application.",
+            "Robots execute programs but don't create independently."
+          ],
+          "explanation": "Robots excel at repetitive, precise tasks and operate continuously without variation in quality, making them ideal for high-volume manufacturing."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Robotics Foundations Complete!",
+      "content": "Excellent! You've mastered the fundamentals of robotics. You now understand sensors, controllers, and actuators and how they work together. You're ready for specialized topics like mobile robotics, industrial automation, drone technology, or humanoid robotics. Continue learning with robotics kits, demonstrations, and hands-on courses. The world of robotics offers exciting opportunities to make real-world impact!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Advanced"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Foundational"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8"
+    }
+  ],
+  "generated_at": "2026-03-26T09:58:19.859722+00:00",
+  "model": "claude-haiku-4-5"
+}

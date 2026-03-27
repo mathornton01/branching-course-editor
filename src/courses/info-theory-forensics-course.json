@@ -1,0 +1,259 @@
+{
+  "id": "info-theory-forensics-course",
+  "title": "Information Theory in Forensic Science",
+  "description": "Master how information theory underpins evidence analysis and identification in forensic investigations through adaptive branching",
+  "topic": "Information Theory",
+  "theme": "forensic science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "information-theory",
+    "forensics",
+    "entropy",
+    "pattern-recognition",
+    "evidence-analysis",
+    "DNA",
+    "fingerprints"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "decision",
+      "title": "How Evidence Reveals Identity",
+      "content": "In forensic investigations, physical evidence\u2014DNA, fingerprints, fibers\u2014contains hidden information that quantifies a suspect's likelihood of guilt. Information theory provides the mathematical framework to measure how much identifying power each piece of evidence holds. The more unique an evidence marker is in a population, the more information it carries. This course explores how forensic scientists leverage information theory to build unshakeable cases. Choose your learning path based on your preference.",
+      "choices": [
+        {
+          "label": "Theory First: Understand entropy and information content fundamentals",
+          "next": "n2"
+        },
+        {
+          "label": "Hands-on First: Analyze patterns in real forensic evidence",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Entropy and Information in Forensic Evidence",
+      "content": "Entropy measures uncertainty or randomness. In forensics, evidence reduces uncertainty about a suspect's identity. A piece of evidence with high entropy\u2014many possible values distributed across a population\u2014carries more information than low-entropy evidence. DNA markers have high information content because each locus can take many alleles with varying population frequencies. The rarer an allele combination in the population, the more bits of information it encodes. Shannon's information formula quantifies this: Information (bits) = log\u2082(1/probability). A DNA allele present in only 0.1% of the population encodes log\u2082(1/0.001) \u2248 10 bits of identifying information, while one present in 5% encodes only log\u2082(1/0.05) \u2248 4.3 bits.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "DNA Profile Information: Calculating Evidence Power",
+      "content": "A forensic DNA profile examines 13 core CODIS loci. At each locus, an individual inherits two alleles from parents. Consider the CODIS locus D5S818: it has 13 common alleles in the population with varying frequencies. If a suspect's allele pair at this locus appears in only 0.1% of the population, that single locus encodes log\u2082(1/0.001) \u2248 10 bits. With 13 independent loci, the combined profile encodes roughly 130 bits of information, allowing unique identification among 2^130 individuals\u2014approximately 1.3 \u00d7 10^39 people. This is why DNA evidence is so powerful in court: the cumulative entropy of rare allele combinations is astronomically high, making false matches virtually impossible.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Information Content in Forensic Markers",
+      "content": "Test your understanding of how information theory quantifies the identifying power of forensic evidence.",
+      "questions": [
+        {
+          "question": "A crime scene fingerprint pattern occurs in 5% of the population, while a DNA marker combination occurs in 0.2% of the population. Which contains more information for suspect identification?",
+          "options": [
+            "The fingerprint pattern",
+            "The DNA marker combination",
+            "They contain equal information",
+            "Cannot determine without additional data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Lower population frequency = higher information content.",
+            "Correct! Rarer evidence carries more identifying power.",
+            "Incorrect. Information content is inversely proportional to frequency.",
+            "Incorrect. Population frequency directly determines information content."
+          ],
+          "explanation": "Using Shannon's formula, the DNA marker at 0.2% (probability = 0.002) yields log\u2082(1/0.002) \u2248 8.6 bits, while the fingerprint at 5% (probability = 0.05) yields log\u2082(1/0.05) \u2248 4.3 bits."
+        },
+        {
+          "question": "If a DNA locus has only 2 possible alleles equally distributed (50% each in the population), how much information does observing one particular allele provide?",
+          "options": [
+            "0.5 bits",
+            "1 bit",
+            "2 bits",
+            "0 bits (no information)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Use log\u2082(1/probability).",
+            "Correct! log\u2082(1/0.5) = log\u2082(2) = 1 bit.",
+            "Incorrect. Two bits would require 4 equally likely outcomes.",
+            "Incorrect. Any observation with less than 100% probability carries information."
+          ],
+          "explanation": "Each equally likely allele with 50% probability carries exactly 1 bit: log\u2082(1/0.5) = 1 bit. Rare alleles carry exponentially more information."
+        },
+        {
+          "question": "A complete 13-locus DNA profile has approximately 130 bits of cumulative information. Roughly how many individuals in the world can this profile uniquely identify?",
+          "options": [
+            "About 2^13 individuals",
+            "About 2^130 individuals",
+            "About 130 \u00d7 7 billion individuals",
+            "About 13 \u00d7 10 million individuals"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's far too few\u2014only 13 loci separately.",
+            "Correct! 2^130 \u2248 1.3 \u00d7 10^39, vastly exceeding Earth's population.",
+            "Incorrect. This vastly underestimates the discriminatory power.",
+            "Incorrect. This also significantly underestimates the power."
+          ],
+          "explanation": "With I bits of information, you distinguish 2^I possibilities. 130 bits identifies one person among 2^130 individuals\u2014about 10^39 people, making false matches virtually impossible."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Pattern Recognition and Evidence Compression",
+      "content": "Before identifying a specific suspect, forensic investigators compress evidence through hierarchical pattern classification. Fingerprints are organized into five main pattern types: loops, whorls, arches, tented arches, and accidental patterns. This classification alone reduces the search space from 50 million fingerprints to roughly 10\u201315 million, eliminating 70\u201380% of comparisons. Further subdivision by ridge count, whorl shape, and core position narrows candidates even more. Fibers are compressed by material type (natural, synthetic), color family, and weave pattern. DNA evidence is organized via population frequency databases that account for ethnic variation. This hierarchical compression uses the structure already present in evidence to organize information efficiently, allowing investigators to allocate high-resolution matching effort where it's most likely to succeed.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Fingerprint Classification and Ridge Pattern Encoding",
+      "content": "A crime scene fingerprint enters the Automated Fingerprint Identification System (AFIS). First, the pattern type is identified\u2014say, a loop. This single classification eliminates 65% of the database immediately, reducing candidates from 50 million to roughly 17 million. Next, ridge count (total ridges crossing an imaginary line from delta to core) further subdivides: a loop with 11 ridges eliminates another 85% of remaining candidates, leaving 2.6 million. Finally, minutiae points\u2014ridge endings, bifurcations, dots, and lakes\u2014are extracted. A typical fingerprint has 20\u201330 minutiae points; when 12+ minutiae match between crime scene and suspect with proper spatial relationships, identification is confirmed. This hierarchical compression of identity information\u2014from pattern type (5 possibilities) \u2192 ridge count (10+ categories) \u2192 individual minutiae (2^30+ combinations)\u2014demonstrates how information is progressively refined, focusing computational effort where it matters most.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Pattern Compression in Evidence Analysis",
+      "content": "Test your understanding of how pattern recognition and data compression organize and efficiently process forensic evidence.",
+      "questions": [
+        {
+          "question": "Why do forensic fingerprint databases classify prints by pattern type (loops, whorls, arches) before comparing detailed minutiae points?",
+          "options": [
+            "Pattern type is more accurate than minutiae for identification",
+            "Hierarchical classification dramatically reduces the search space, improving efficiency",
+            "Pattern type is the only legally admissible feature in court",
+            "Minutiae comparison is impossible without prior pattern classification"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Minutiae are actually more discriminating for individual identification.",
+            "Correct! Pattern classification is a compression strategy that narrows candidate pools by 70\u201380%.",
+            "Incorrect. Both pattern classification and minutiae analysis are legally admissible.",
+            "Incorrect. Minutiae can be compared independently; classification is an optimization strategy."
+          ],
+          "explanation": "Hierarchical compression prioritizes computational efficiency. By eliminating unlikely candidates early through pattern type, ridge count, and other macro-level features, investigators reserve detailed minutiae comparison for a manageable subset."
+        },
+        {
+          "question": "A crime scene fingerprint has a whorl pattern with 13 ridge crossings. The AFIS database contains 50 million fingerprints. Approximately what fraction will undergo high-resolution minutiae matching?",
+          "options": [
+            "About 5\u201310% of the database",
+            "About 40\u201350% of the database",
+            "About 80\u201390% of the database",
+            "Less than 0.5% of the database"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Whorls comprise ~30% (15M) of prints; ridge count further narrows to 2.5\u20135M candidates.",
+            "Incorrect. Whorls are only about 30% of fingerprints; additional filters reduce this significantly.",
+            "Incorrect. Compression reduces the search space much more dramatically.",
+            "Incorrect. While more efficient than brute-force, the remaining pool is still substantial."
+          ],
+          "explanation": "Whorls account for ~30% of all fingerprints (15 million candidates). Ridge count of 13 is relatively uncommon among whorls, reducing this to approximately 2.5\u20135 million candidates\u2014a 5\u201310% reduction of the initial database."
+        },
+        {
+          "question": "Why is hierarchical feature extraction (pattern \u2192 ridge count \u2192 minutiae) more efficient than comparing all minutiae details across an entire fingerprint database?",
+          "options": [
+            "Minutiae are inherently less reliable than pattern features",
+            "Hierarchical filtering reduces the number of detailed comparisons exponentially, lowering computational cost",
+            "Modern fingerprint databases cannot be organized by minutiae",
+            "Pattern features are always more accurate than minutiae for identification"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Minutiae are highly reliable; this is an efficiency question, not accuracy.",
+            "Correct! Searching billions of minutiae comparisons is computationally prohibitive; filtering by macro-features reduces this to thousands.",
+            "Incorrect. Modern AFIS systems are fully capable of organizing and indexing minutiae.",
+            "Incorrect. Minutiae are actually more discriminating than pattern features."
+          ],
+          "explanation": "A brute-force minutiae comparison across 50 million fingerprints would require trillions of comparisons. Hierarchical filtering using pattern type and ridge count narrows the candidate pool to thousands, making detailed comparison computationally feasible within seconds."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Integrating Theory and Practice: Building Unshakeable Cases",
+      "content": "Expert forensic investigators combine entropy-based evidence evaluation with pattern-based organization to construct ironclad cases. A single DNA locus with 1% population frequency provides log\u2082(1/0.01) \u2248 6.6 bits; a fingerprint match with 12 minutiae points adds roughly 20+ bits if properly documented. Trace evidence\u2014fiber, glass, soil\u2014each contributes information, but only if properly linked to source and suspect location. Spatial analysis (evidence co-location) adds evidence independent of the markers themselves. The cumulative certainty grows exponentially: 6.6 bits (DNA locus) + 20 bits (fingerprint) + 8 bits (fiber match) + 5 bits (spatial analysis) yields 39.6 bits\u2014identifying a suspect among roughly 2^39.6 individuals. Information theory reveals why multiple independent evidence sources create overwhelming proof. A skilled analyst understands which evidence types are truly independent (adding information) and which are correlated (confirming the same fact), using information theory to quantify case strength objectively rather than relying on intuition or subjective judgment.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Mastery: Information Theory in Forensic Science",
+      "content": "You now understand how information theory\u2014entropy, information content, hierarchical compression, and independence\u2014guides forensic evidence evaluation and case construction. You can quantify how unique an evidence marker is in a population, organize investigative databases hierarchically for computational efficiency, build cumulative cases from multiple independent sources, and explain to juries why rare allele combinations or matched minutiae patterns constitute proof beyond reasonable doubt. These principles transform forensic science from subjective judgment into objective, mathematically rigorous identification."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Theory First"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Hands-on First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n4",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T05:20:40.316063+00:00",
+  "model": "claude-haiku-4-5"
+}

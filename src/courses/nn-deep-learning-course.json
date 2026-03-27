@@ -1,0 +1,278 @@
+{
+  "id": "nn-deep-learning-course",
+  "title": "Neural Networks and Deep Learning",
+  "description": "An adaptive course on neural networks and deep learning with personalized learning paths based on assessment performance",
+  "topic": "Artificial Intelligence, Machine Learning",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "neural-networks",
+    "deep-learning",
+    "machine-learning",
+    "AI",
+    "adaptive-learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Neural Networks Foundational Assessment",
+      "content": "Test your understanding of neural network fundamentals before we dive deeper. This assessment will help us personalize your learning path.",
+      "questions": [
+        {
+          "question": "What is the primary function of a neuron in an artificial neural network?",
+          "options": [
+            "A) To store data permanently",
+            "B) To receive inputs, apply weights, and produce an output through an activation function",
+            "C) To connect to the internet",
+            "D) To prevent overfitting"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Neurons don't store permanent data.",
+            "Correct! Neurons process weighted inputs and apply activation functions to produce outputs.",
+            "Incorrect. Neural networks don't require internet connectivity.",
+            "Incorrect. That's a regularization technique, not a neuron's primary function."
+          ],
+          "explanation": "A neuron is the basic computational unit that combines weighted inputs and applies an activation function to produce an output, mimicking biological neurons."
+        },
+        {
+          "question": "In a neural network, what do weights represent?",
+          "options": [
+            "A) The importance or strength of connections between neurons",
+            "B) The number of layers in the network",
+            "C) The size of the training dataset",
+            "D) The computational speed of the network"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Weights determine how much each input contributes to the neuron's output.",
+            "Incorrect. The number of layers is separate from weights.",
+            "Incorrect. Dataset size doesn't relate to individual connection weights.",
+            "Incorrect. Weights affect accuracy, not computational speed directly."
+          ],
+          "explanation": "Weights are learnable parameters that scale inputs. During training, the network adjusts weights to minimize error, effectively learning patterns in data."
+        },
+        {
+          "question": "What is the purpose of an activation function in a neural network?",
+          "options": [
+            "A) To turn off neurons that aren't needed",
+            "B) To introduce non-linearity and enable the network to learn complex patterns",
+            "C) To multiply all weights by a constant",
+            "D) To store intermediate results"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Activation functions don't selectively disable neurons.",
+            "Correct! Activation functions like ReLU and sigmoid add non-linearity, allowing networks to approximate non-linear functions.",
+            "Incorrect. Activation functions don't uniformly scale weights.",
+            "Incorrect. They transform values, not just store them."
+          ],
+          "explanation": "Activation functions (ReLU, sigmoid, tanh) introduce non-linearity, which is essential for deep networks to learn complex, non-linear relationships in data."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Deep Learning Advanced Assessment",
+      "content": "You've demonstrated foundational knowledge. Let's assess your understanding of training mechanisms and advanced concepts in deep learning.",
+      "questions": [
+        {
+          "question": "How does backpropagation enable neural networks to learn?",
+          "options": [
+            "A) It randomly adjusts weights until accuracy improves",
+            "B) It computes gradients of the loss function with respect to weights, then updates weights to minimize loss",
+            "C) It eliminates neurons that produce incorrect outputs",
+            "D) It prevents overfitting by limiting network size"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Random adjustment isn't systematic learning.",
+            "Correct! Backpropagation uses the chain rule to compute gradients and gradient descent to update weights efficiently.",
+            "Incorrect. Neurons aren't removed; their weights are adjusted.",
+            "Incorrect. That's a regularization concern, not backpropagation's mechanism."
+          ],
+          "explanation": "Backpropagation calculates how much each weight contributed to the error, then adjusts weights in the direction that reduces error. This is the foundation of deep learning training."
+        },
+        {
+          "question": "What problem does the ReLU activation function address that sigmoid/tanh have?",
+          "options": [
+            "A) ReLU is faster to compute",
+            "B) ReLU prevents the vanishing gradient problem in deep networks",
+            "C) ReLU works only for positive inputs",
+            "D) ReLU requires fewer training epochs"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Partially true but not the primary advantage.",
+            "Correct! ReLU's constant gradient (1) for positive values helps deep networks learn more effectively, addressing sigmoid/tanh's exponentially small gradients.",
+            "Incorrect. ReLU handles negative inputs by outputting 0.",
+            "Incorrect. Training epochs depend on many factors, not just activation."
+          ],
+          "explanation": "Sigmoid and tanh have gradients near zero at extremes, making deep networks hard to train. ReLU's gradient of 1 for positive inputs mitigates the vanishing gradient problem."
+        },
+        {
+          "question": "What is the relationship between convolutional layers and parameter efficiency in deep networks?",
+          "options": [
+            "A) Convolution requires more parameters than fully connected layers",
+            "B) Convolutional layers share weights across spatial locations, dramatically reducing parameters",
+            "C) Convolution is only useful for text data",
+            "D) Convolutional layers eliminate the need for activation functions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Convolution actually reduces parameters.",
+            "Correct! Weight sharing in convolutional layers exploits spatial correlation, requiring far fewer parameters than fully connected layers while capturing local patterns.",
+            "Incorrect. CNNs excel at image and video data, not text.",
+            "Incorrect. Convolutional layers still use activation functions."
+          ],
+          "explanation": "A CNN with a 3\u00d73 filter shares the same 9 weights across an entire image, versus a fully connected layer that would have millions of unique weights. This efficiency enables learning from images."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Expert Deep Learning Architectures",
+      "content": "You've mastered the fundamentals. **Transformer architectures** revolutionized deep learning by replacing recurrence with self-attention mechanisms, enabling parallel processing and better long-range dependencies. **ResNets** introduced skip connections that allow gradients to flow directly through layers, enabling training of networks with 100+ layers. **Optimization techniques** like Adam combine momentum and adaptive learning rates, while batch normalization stabilizes training and reduces sensitivity to weight initialization. Understanding these advanced concepts is crucial for modern applications in NLP, computer vision, and beyond.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Learner Path Complete",
+      "content": "Congratulations! You've demonstrated mastery of neural networks and deep learning. You're ready to explore cutting-edge research papers, implement Vision Transformers and BERT, and tackle complex real-world problems. Consider exploring reinforcement learning, generative models, or meta-learning to deepen your expertise."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Deep Learning Reinforcement Practice",
+      "content": "Let's reinforce your understanding with practice problems focused on the concepts where you showed uncertainty.",
+      "questions": [
+        {
+          "question": "You're training a neural network and notice the loss stops decreasing after a few epochs. What is this phenomenon called?",
+          "options": [
+            "A) Convergence",
+            "B) Overfitting",
+            "C) Plateau or local minima",
+            "D) Divergence"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Convergence is when loss decreases to a stable value.",
+            "Incorrect. Overfitting occurs when validation loss increases while training loss decreases.",
+            "Correct! When loss stops decreasing, the optimizer may be stuck at a plateau or local minimum.",
+            "Incorrect. Divergence is when loss increases uncontrollably."
+          ],
+          "explanation": "Plateaus and local minima are common in neural network training. Techniques like adjusting learning rate, using momentum, or trying different initializations can help escape these points."
+        },
+        {
+          "question": "A convolutional layer has 32 filters of size 3\u00d73, applied to a 28\u00d728 RGB image. Approximately how many parameters does this layer have (excluding bias)?",
+          "options": [
+            "A) 32 parameters",
+            "B) 864 parameters (32 \u00d7 3 \u00d7 3 \u00d7 3)",
+            "C) 25,088 parameters",
+            "D) 100,352 parameters"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A single 3\u00d73 filter on 3-channel input has 27 parameters.",
+            "Correct! Each of 32 filters has 3\u00d73\u00d73 = 27 parameters, totaling 32 \u00d7 27 = 864 parameters.",
+            "Incorrect. This would be the output size, not parameter count.",
+            "Incorrect. This is too high for a single convolutional layer."
+          ],
+          "explanation": "Convolutional layer parameters = (filter_height \u00d7 filter_width \u00d7 input_channels) \u00d7 num_filters. This is why convolutions are so parameter-efficient compared to fully connected layers."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Learner Path Complete",
+      "content": "Great work! You've gained solid understanding of neural network training mechanisms and advanced concepts. You're ready to build practical deep learning models using TensorFlow or PyTorch. Try implementing a CNN for image classification or an LSTM for sequential data."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Neural Network Fundamentals Refresher",
+      "content": "Let's build your foundation step by step. A **neural network** is a computational model inspired by biological brains, consisting of interconnected layers of artificial neurons. Each **neuron** receives multiple inputs, multiplies each by a **weight** (learnable parameter), sums them, adds a **bias**, and passes the result through an **activation function**. **Weights** are adjusted during training to minimize the difference between predicted and actual outputs. The simplest network has three layers: **input** (receives data), **hidden** (processes information), and **output** (produces predictions). During training, we use **gradient descent** to adjust weights based on how much they contribute to errors.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Simple Neural Network Example",
+      "content": "Imagine predicting house prices with inputs: square footage and age. The input layer receives these values. A hidden neuron computes: (0.5 \u00d7 square_footage + 0.3 \u00d7 age - 1.2) passed through ReLU activation. Another hidden neuron does similar computation with different weights. The output layer combines features: (2.1 \u00d7 feature1 + 1.8 \u00d7 feature2 - 0.5) giving the predicted price. During training, if the prediction is wrong, backpropagation calculates how much each weight contributed to the error, then adjusts all weights slightly to reduce error. After thousands of adjustments on many examples, the network learns to predict prices accurately.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Beginner Learner Path Complete",
+      "content": "Excellent! You've mastered fundamental concepts of neural networks. You now understand how neurons work, what weights and activation functions do, and how networks learn through training. Next steps: implement a simple neural network from scratch or use scikit-learn's MLPClassifier to reinforce these concepts with hands-on practice."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T03:34:19.489675+00:00",
+  "model": "claude-haiku-4-5"
+}

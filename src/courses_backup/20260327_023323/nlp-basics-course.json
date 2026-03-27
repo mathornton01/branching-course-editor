@@ -1,0 +1,272 @@
+{
+  "id": "nlp-basics-course",
+  "title": "Natural Language Processing Basics",
+  "description": "Learn the fundamentals of NLP, from understanding what NLP is to practical text preprocessing techniques.",
+  "topic": "Natural Language Processing",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 20,
+  "tags": [
+    "NLP",
+    "AI",
+    "Text Processing",
+    "Basics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Natural Language Processing?",
+      "content": "Natural Language Processing (NLP) is a branch of artificial intelligence focused on enabling computers to understand, interpret, and generate human language. NLP combines linguistics, computer science, and machine learning to process unstructured text and speech data. From chatbots and translation services to sentiment analysis and information extraction, NLP powers many modern AI applications. The field aims to bridge the gap between human communication and machine comprehension.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Real-World NLP: Email Spam Detection",
+      "content": "Consider Gmail's spam filter. When you receive an email, NLP algorithms analyze the text to identify suspicious patterns\u2014sender addresses, phishing keywords like 'Confirm your password', and unusual formatting. By tokenizing the email content and comparing word patterns against known spam signatures, the system classifies emails in milliseconds. This demonstrates NLP in action: converting raw text into structured data that machines learn from.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "NLP Fundamentals Quiz",
+      "content": "Test your understanding of NLP basics and its real-world applications.",
+      "questions": [
+        {
+          "question": "What is the primary goal of Natural Language Processing?",
+          "options": [
+            "Create digital art using language",
+            "Enable computers to understand and work with human language",
+            "Replace human workers in all industries",
+            "Store large amounts of text data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not the purpose of NLP",
+            "Correct! NLP bridges human communication and machine understanding",
+            "NLP assists rather than replaces humans",
+            "Data storage is a secondary function"
+          ],
+          "explanation": "Natural Language Processing specifically aims to help machines comprehend, interpret, and generate human language, making systems like chatbots, translators, and search engines possible."
+        },
+        {
+          "question": "Which of the following is an example of an NLP application?",
+          "options": [
+            "Facial recognition system",
+            "Email spam detection",
+            "Motion detection in video",
+            "Temperature sensor monitoring"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's computer vision",
+            "Correct! Spam detection uses NLP to analyze email text",
+            "That's video processing",
+            "That's IoT sensor work"
+          ],
+          "explanation": "Spam detection analyzes the text content of emails using NLP techniques to classify them as spam or legitimate, making it a direct application of natural language processing."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Tokenization and Text Preprocessing",
+      "content": "Before NLP systems can analyze text, raw data must be cleaned and broken into manageable units. Tokenization is the process of splitting text into individual words, phrases, or sentences called tokens. Preprocessing also includes removing punctuation, converting to lowercase, eliminating common words (stop words), and stemming\u2014reducing words to their root form. For example, 'The quick brown foxes are jumping' becomes tokens: ['the', 'quick', 'brown', 'fox', 'jump'] after preprocessing. This ensures ML models focus on meaningful words.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Tokenizing Product Reviews for Sentiment Analysis",
+      "content": "Imagine analyzing customer reviews. A review like 'The product is amazing! It's absolutely perfect!' becomes tokens: [The, product, is, amazing, It's, absolutely, perfect]. After removing stop words and normalizing: [product, amazing, perfect]. With stemming: [product, amaz, perfect]. Now the sentiment analyzer focuses on opinion words, not grammar. This preprocessing helps recognize that 'wonderful', 'excellent', and 'great' all express similar positive sentiment across different reviews.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Text Processing Techniques Quiz",
+      "content": "Assess your understanding of tokenization, preprocessing, and text normalization.",
+      "questions": [
+        {
+          "question": "What is tokenization in NLP?",
+          "options": [
+            "Removing punctuation from text",
+            "Splitting text into individual units like words or sentences",
+            "Converting all letters to lowercase",
+            "Encrypting text for security"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's part of preprocessing but not tokenization itself",
+            "Correct! Tokenization breaks text into meaningful units",
+            "That's lowercasing, a separate preprocessing step",
+            "That's not related to NLP"
+          ],
+          "explanation": "Tokenization is specifically the process of dividing text into tokens\u2014individual words, phrases, or sentences\u2014which become the basic units that NLP models analyze."
+        },
+        {
+          "question": "Why do we remove stop words during text preprocessing?",
+          "options": [
+            "To make text shorter and reduce file size",
+            "To focus on meaningful words by eliminating common ones like 'the', 'is', 'and'",
+            "Because all machine learning models require it",
+            "To make the text harder for humans to read"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Reducing file size is just a side effect",
+            "Correct! Stop word removal helps focus on semantically important words",
+            "Not all models require this preprocessing step",
+            "Preprocessing improves machine efficiency, not human readability"
+          ],
+          "explanation": "Stop word removal helps NLP models concentrate on words that carry the most meaning and context for the task at hand, such as adjectives in sentiment analysis or nouns in topic modeling."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Applying NLP Concepts",
+      "content": "Reinforce your understanding of NLP fundamentals and text preprocessing with these practical scenarios.",
+      "questions": [
+        {
+          "question": "You're building a chatbot to detect customer frustration in support tickets. Which preprocessing approach would be most useful?",
+          "options": [
+            "Keep all punctuation and formatting exactly as written",
+            "Tokenize the text and remove stop words to identify emotional keywords",
+            "Convert all text to binary numbers",
+            "Store and analyze the original text without any modifications"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Extra formatting adds noise without adding semantic value",
+            "Correct! Tokenization and stop word removal help identify emotion-bearing words",
+            "That's encoding for different purposes",
+            "Raw text without preprocessing loses important structure for analysis"
+          ],
+          "explanation": "Preprocessing through tokenization and stop word removal helps focus on meaningful words that indicate frustration or emotion, making them more detectable by sentiment analysis algorithms."
+        },
+        {
+          "question": "Which preprocessing step helps recognize that 'running', 'runs', and 'runner' are all related to the root concept of 'run'?",
+          "options": [
+            "Tokenization",
+            "Lowercasing",
+            "Stemming",
+            "Stop word removal"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Tokenization splits text into words, not reduces them",
+            "Lowercasing only handles capitalization",
+            "Correct! Stemming reduces words to their root form",
+            "Stop word removal eliminates common words"
+          ],
+          "explanation": "Stemming reduces words to their root form, so 'running', 'runs', 'runner', and 'run' all become 'run', helping models recognize they represent the same underlying concept."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What Would You Like to Do Next?",
+      "content": "You've mastered NLP fundamentals and text preprocessing! You understand what NLP is, how it's applied in the real world, and the essential techniques for preparing text for analysis.",
+      "choices": [
+        {
+          "label": "Take additional practice questions",
+          "next": "n7"
+        },
+        {
+          "label": "Complete the course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Congratulations!",
+      "content": "You've completed the Natural Language Processing Basics course! You now understand the fundamentals of NLP, real-world applications like spam detection, and essential text preprocessing techniques including tokenization, stop word removal, and stemming. These concepts form the foundation for more advanced NLP topics like sentiment analysis, named entity recognition, and machine translation. Continue learning and exploring how NLP powers the AI systems you use every day!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n7",
+      "label": "practice"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-26T09:31:09.765001+00:00",
+  "model": "claude-haiku-4-5"
+}

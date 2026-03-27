@@ -1,0 +1,455 @@
+{
+  "id": "rust-healthcare-intro",
+  "title": "Introduction to Rust Programming for Healthcare Systems",
+  "description": "Learn Rust programming fundamentals through healthcare system design, from memory safety principles to building your first patient monitoring application.",
+  "topic": "Introduction to Rust Programming",
+  "theme": "healthcare",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "rust",
+    "programming",
+    "healthcare",
+    "memory-safety",
+    "systems-programming"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Rust for Healthcare Systems: Reliability & Safety",
+      "content": "Healthcare systems process patient data with zero margin for error. A single memory bug in a patient monitoring system could cause critical failures. Rust is designed to prevent memory-related bugs at compile time, making it ideal for healthcare applications. Unlike other languages, Rust forces you to write safe code before it even runs, ensuring patient data remains secure and systems remain reliable. This course will teach you Rust by building actual healthcare solutions.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Module 1: Understanding Rust's Role in Healthcare",
+      "content": "Test your understanding of why Rust matters for healthcare systems and what compile-time safety means.",
+      "questions": [
+        {
+          "question": "A hospital's patient monitoring system crashes due to a memory bug, causing delayed alerts for critical patients. Which Rust feature would prevent this?",
+          "options": [
+            "Memory safety enforcement at compile time",
+            "Faster code execution",
+            "Automatic data backup",
+            "Real-time data encryption"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Rust's compile-time checks catch memory errors before code runs, preventing crashes.",
+            "While Rust is fast, execution speed doesn't prevent memory bugs.",
+            "Automatic backup is unrelated to memory safety.",
+            "Encryption is important for security but doesn't prevent memory bugs."
+          ],
+          "explanation": "Rust's borrow checker and ownership system prevent memory bugs at compile time, making it excellent for critical healthcare systems."
+        },
+        {
+          "question": "What does 'compile-time safety' mean in healthcare applications?",
+          "options": [
+            "Safety checks happen before the code is compiled",
+            "Safety checks happen before the code runs, catching errors early",
+            "Safety checks happen while the program is running",
+            "Safety checks happen after patient data is processed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's backwards - compile-time happens before runtime.",
+            "Correct! Compile-time means errors are caught before deployment.",
+            "That's runtime checking, which comes after compile-time.",
+            "Safety checks must happen before data processing."
+          ],
+          "explanation": "Compile-time safety in Rust means bugs are found during development, not in production, protecting patient systems."
+        },
+        {
+          "question": "A medical device must be guaranteed safe for patient use. Why is Rust a good choice?",
+          "options": [
+            "It requires formal proof of correctness",
+            "It's the newest programming language",
+            "It prevents memory errors before code runs, enabling safer medical devices",
+            "It makes code run faster on hospital servers"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Rust doesn't require formal proofs, though it enables safer code.",
+            "Being new doesn't determine suitability for healthcare.",
+            "Correct! Memory safety is critical for medical device reliability.",
+            "Speed doesn't address patient safety concerns."
+          ],
+          "explanation": "For medical devices, preventing bugs before deployment is essential, making Rust's compile-time safety a key advantage."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Module 1 Practice: Healthcare & System Safety",
+      "content": "Review the core concepts of why Rust matters for healthcare before moving forward.",
+      "questions": [
+        {
+          "question": "Imagine you're building an insulin pump controller. A memory bug could cause incorrect dosing. Why would Rust be beneficial?",
+          "options": [
+            "Because Rust is easier to learn",
+            "Because Rust prevents memory bugs before deployment",
+            "Because Rust is free to use",
+            "Because Rust has more libraries"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Ease of learning isn't Rust's main advantage in this context.",
+            "Correct! This is critical for life-critical medical devices.",
+            "Cost isn't the issue here.",
+            "Library availability isn't the primary concern."
+          ],
+          "explanation": "For safety-critical medical devices, Rust's ability to catch memory errors at compile time is essential."
+        },
+        {
+          "question": "What is the main advantage of 'catching errors at compile time' versus 'at runtime'?",
+          "options": [
+            "Compile-time errors are always less expensive to fix",
+            "Compile-time errors are found before code reaches patients, preventing patient harm",
+            "Compile-time errors are found faster by the computer",
+            "Compile-time errors don't exist in production"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Cost is a benefit, but patient safety is the primary advantage.",
+            "Correct! In healthcare, preventing patient harm is paramount.",
+            "While true, this doesn't capture why it matters for patients.",
+            "Compile-time errors don't exist in production code."
+          ],
+          "explanation": "For healthcare applications, catching errors before deployment protects patients from harm."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Ownership & Memory Safety: Protecting Patient Data",
+      "content": "Rust's ownership system is like a patient record management protocol in a hospital. Just as each patient record has one primary owner (the medical team currently caring for them), each piece of data in Rust has exactly one owner. When you pass data to another function, you can either transfer ownership (the new function is responsible) or lend it (borrowing\u2014the original owner retains responsibility). Rust tracks these relationships, ensuring no two parts of code accidentally claim the same patient data, preventing corruption and unauthorized access. This system, verified at compile time, makes healthcare data protection automatic and foolproof.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Module 2: Ownership & Data Protection",
+      "content": "Test your understanding of Rust's ownership system and how it protects healthcare data.",
+      "questions": [
+        {
+          "question": "In Rust's ownership model, what happens when you pass a patient record to a function without borrowing?",
+          "options": [
+            "The original code keeps the data",
+            "Ownership transfers to the function; the original code can't access it afterward",
+            "Both the original code and function can modify it",
+            "The data is copied automatically"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Without borrowing, ownership transfers.",
+            "Correct! This prevents multiple parts of code from claiming the same data.",
+            "Rust prevents this\u2014only one owner can modify.",
+            "Without explicit copy, ownership transfers, not copies."
+          ],
+          "explanation": "Ownership transfer prevents bugs where multiple parts of code accidentally modify shared patient data."
+        },
+        {
+          "question": "A developer borrows a patient's vital signs to read them without modifying. What is true about the original owner?",
+          "options": [
+            "The original owner loses access during the borrow",
+            "The original owner retains ownership and responsibility",
+            "Both owner and borrower can modify the data",
+            "The data is duplicated automatically"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "With borrowing, the owner retains access.",
+            "Correct! Borrowing allows temporary access without transferring ownership.",
+            "Rust prevents simultaneous modification for data safety.",
+            "Borrowing doesn't create copies."
+          ],
+          "explanation": "Borrowing in Rust is ideal for healthcare\u2014you can share data for reading without risk of unauthorized modification."
+        },
+        {
+          "question": "How does Rust's ownership system improve healthcare data security?",
+          "options": [
+            "It encrypts data automatically",
+            "It ensures only one part of code can access and modify patient data at a time",
+            "It backs up data to the cloud",
+            "It requires passwords for data access"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Encryption is separate from ownership.",
+            "Correct! Ownership prevents accidental corruption and unauthorized modification.",
+            "Backup strategy is separate.",
+            "Access control is separate from ownership."
+          ],
+          "explanation": "By ensuring exclusive access during modification, Rust's ownership system prevents accidental data corruption."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Module 2 Practice: Ownership in Healthcare Scenarios",
+      "content": "Practice applying ownership concepts to realistic healthcare data scenarios.",
+      "questions": [
+        {
+          "question": "A patient's appointment data needs to be shared with both the doctor's office and insurance. How should Rust's ownership model handle this?",
+          "options": [
+            "Both systems own the data",
+            "One system owns it; the other borrows it for read-only access",
+            "The data is duplicated for each system",
+            "Ownership is shared equally"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Shared ownership causes data corruption risks.",
+            "Correct! This is the safe Rust pattern for shared data.",
+            "Duplication defeats the purpose of single-source-of-truth.",
+            "Rust prevents shared mutable ownership."
+          ],
+          "explanation": "Healthcare systems often share data; Rust's borrowing model lets multiple systems access it safely."
+        },
+        {
+          "question": "Why is Rust's single-ownership model important for patient records?",
+          "options": [
+            "It makes code run faster",
+            "It prevents accidental data loss or unauthorized modification",
+            "It reduces storage requirements",
+            "It simplifies encryption"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Single ownership isn't primarily about speed.",
+            "Correct! Preventing accidental or unauthorized changes is critical for patient safety.",
+            "Ownership model doesn't affect storage.",
+            "Ownership model is separate from encryption."
+          ],
+          "explanation": "Single ownership ensures patient records are modified only by authorized parts of the system."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Building Your First Healthcare Application: Patient Vital Monitor",
+      "content": "Now let's build a simple patient vital signs monitoring system. You'll create a struct to represent patient vitals (heart rate, blood pressure, oxygen saturation), implement a function to validate readings (ensuring values are within safe ranges), and write logic to flag abnormal vitals for nurse alerts. This application demonstrates how Rust's types and safety features work together: the type system prevents mixing up different vital measurements, Rust ensures data integrity, and ownership rules guarantee vitals are safely passed between monitoring stations. By the end, you'll have a working system that would scale to a real hospital with confidence.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: ECG Signal Processing in Rust",
+      "content": "Consider processing electrocardiogram (ECG) signals for arrhythmia detection. You'd define a struct for ECG samples with timestamp and voltage. A function receives ownership of a vector of samples and calculates heart rate by analyzing peak intervals. Another function borrows the samples (without taking ownership) to check for dangerous patterns. Rust's type system ensures you never confuse voltage (mV) with time (ms), the borrow checker prevents two parts of code from analyzing the same sample simultaneously, and memory safety guarantees no data corruption. This example shows how Rust prevents the bugs that could cause misdiagnosis in real cardiac monitoring.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "assessment",
+      "title": "Final Assessment: Integrating All Concepts",
+      "content": "Demonstrate your understanding of Rust for healthcare by answering scenario-based questions.",
+      "questions": [
+        {
+          "question": "You're designing a system where a pharmacy module needs to read (but not modify) medication dosages calculated by the dosage module. Which Rust pattern is most appropriate?",
+          "options": [
+            "Transfer ownership of the dosage data to pharmacy",
+            "Have pharmacy borrow the dosage data immutably",
+            "Duplicate the dosage data in both modules",
+            "Make dosage data publicly mutable to both"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Transferring ownership would prevent the dosage module from using it.",
+            "Correct! Immutable borrowing allows reading without risk of modification.",
+            "Duplication creates inconsistency and maintenance issues.",
+            "Public mutability defeats Rust's safety guarantees."
+          ],
+          "explanation": "Borrowing is the Rust way to safely share read-only access, critical for healthcare data consistency."
+        },
+        {
+          "question": "A hospital system is migrating from an unsafe language with frequent data corruption bugs to Rust. What will Rust primarily prevent?",
+          "options": [
+            "All patient errors in diagnosis",
+            "Memory safety bugs that could corrupt patient records or cause system crashes",
+            "The need for security protocols",
+            "The requirement for data backups"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Rust prevents technical bugs, not medical errors.",
+            "Correct! Memory bugs are Rust's primary safeguard.",
+            "Security requires multiple layers beyond Rust.",
+            "Backups are still essential."
+          ],
+          "explanation": "Memory safety is foundational; other security and reliability measures build on top of it."
+        },
+        {
+          "question": "Why is compile-time error detection especially important for medical devices?",
+          "options": [
+            "It makes development faster",
+            "Errors caught before deployment prevent patient harm and costly recalls",
+            "It reduces the number of programmers needed",
+            "It eliminates the need for testing"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed is a minor benefit compared to safety.",
+            "Correct! Medical device regulations and patient safety depend on pre-deployment error detection.",
+            "Team size isn't a primary concern.",
+            "Testing is still essential."
+          ],
+          "explanation": "For medical devices, finding bugs before deployment is both a regulatory requirement and a patient safety imperative."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "practice",
+      "title": "Final Practice: Comprehensive Review",
+      "content": "Review all course concepts through integrated healthcare scenarios.",
+      "questions": [
+        {
+          "question": "A telemedicine platform needs to transmit patient data from a remote clinic to a central hospital. Which Rust concepts would ensure data integrity during this transfer?",
+          "options": [
+            "Fast network transmission only",
+            "Ownership transfer and borrowing to control who accesses data when",
+            "Encryption alone",
+            "Database replication"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed doesn't ensure integrity.",
+            "Correct! Rust's ownership system ensures data isn't corrupted by concurrent access.",
+            "Encryption protects privacy but not data structure integrity.",
+            "Replication is a backup strategy, not an integrity mechanism."
+          ],
+          "explanation": "Rust's ownership system prevents the concurrent-access bugs that could corrupt shared patient data."
+        },
+        {
+          "question": "A developer writes Rust code for a patient monitoring system that compiles without errors. What safety guarantee does this provide?",
+          "options": [
+            "The code will never have bugs",
+            "The code is free from memory safety errors and data races",
+            "The code will always make correct medical decisions",
+            "No testing is required"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Compilation doesn't prevent all bugs, just memory/safety ones.",
+            "Correct! Rust's compile-time checks guarantee no memory or concurrency bugs.",
+            "Logic correctness is separate from memory safety.",
+            "Testing is still essential."
+          ],
+          "explanation": "Rust's compile-time guarantees catch entire categories of bugs before they reach production."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n11",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Course Complete: You're Ready to Build Safe Healthcare Systems",
+      "content": "Congratulations! You've learned why Rust is critical for healthcare, how ownership protects patient data, and how to structure your first healthcare application. You understand that Rust's compile-time safety guarantees prevent entire classes of bugs before code reaches patients. You're now equipped to build medical software with confidence. Next steps: explore Rust's concurrency features for real-time monitoring systems, study integration patterns for hospital information systems, and apply these concepts to your own healthcare projects. The patients depending on your code will thank you for choosing Rust."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "continue"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "continue"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n11",
+      "label": "pass"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n10",
+      "label": "fail"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "retry"
+    }
+  ],
+  "generated_at": "2026-03-27T07:50:13.893712+00:00",
+  "model": "claude-haiku-4-5"
+}

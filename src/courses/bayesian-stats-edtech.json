@@ -1,0 +1,236 @@
+{
+  "id": "bayesian-stats-edtech",
+  "title": "Bayesian Statistics in Education Technology",
+  "description": "Master Bayesian reasoning through real-world education technology scenarios, from foundational concepts to expert applications",
+  "topic": "Bayesian Statistics",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "bayesian",
+    "statistics",
+    "edtech",
+    "adaptive-learning",
+    "data-driven"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Bayesian Thinking in Adaptive Learning",
+      "content": "Educational technology systems use Bayesian reasoning to personalize learning. When an EdTech platform observes a student struggle with a math concept, it updates its belief about that student's understanding. This iterative updating\u2014starting with a prior belief, then incorporating evidence through user interactions\u2014is the core of Bayesian thinking. Rather than assuming a fixed misconception, Bayesian systems treat student performance as probabilistic data that refines predictions in real time. This approach powers recommendation engines, adaptive pathways, and intelligent tutoring systems."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Foundational Assessment: Bayesian Concepts",
+      "content": "Assess your understanding of prior beliefs, likelihood, and updating in EdTech contexts.",
+      "questions": [
+        {
+          "question": "A learning platform initially estimates that a student has a 60% chance of mastering algebra (prior belief). After the student correctly solves three problems in a row, the platform updates to 80%. What is the platform doing?",
+          "options": [
+            "Applying Bayes' theorem to update its belief based on new evidence",
+            "Replacing the prior belief with a fixed prediction",
+            "Ignoring the prior and starting fresh",
+            "Using only the three problems to determine mastery"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is Bayesian updating: starting with a prior, incorporating evidence (the three correct answers), and updating the posterior belief.",
+            "Not quite. The prior (60%) informed the update; it wasn't replaced.",
+            "Incorrect. Bayesian reasoning preserves prior information.",
+            "Incorrect. Bayesian systems weight both the prior and the new evidence."
+          ],
+          "explanation": "Bayesian updating combines prior knowledge with new evidence to form a posterior belief. The platform's shift from 60% to 80% reflects how Bayes' theorem incorporates observation."
+        },
+        {
+          "question": "In an EdTech system, the 'likelihood' is best described as:",
+          "options": [
+            "The probability of observing the student's performance given their true skill level",
+            "The platform's initial guess about the student's ability",
+            "The final conclusion about whether the student is ready to advance",
+            "The number of correct answers divided by total attempts"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Likelihood quantifies how probable the observed data (e.g., correct answers) is, given a hypothesis about the student's skill.",
+            "That's the prior belief, not likelihood.",
+            "That's the posterior, not likelihood.",
+            "That's just accuracy; it doesn't account for uncertainty or skill levels."
+          ],
+          "explanation": "Likelihood P(data|hypothesis) bridges the prior and observations. In EdTech, it answers: 'If this student has skill level X, how likely is it they'd answer this question correctly?'"
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Intermediate Assessment: Bayes' Theorem in Practice",
+      "content": "Apply Bayes' theorem to realistic EdTech scenarios involving multiple sources of evidence.",
+      "questions": [
+        {
+          "question": "An online tutoring platform observes that 30% of students who eventually drop out show disengagement (low session time) in week 1. However, 10% of continuing students also show week 1 disengagement. Prior data shows 20% of all students drop out. What is the probability a student drops out given they show week 1 disengagement?",
+          "options": [
+            "Approximately 43%",
+            "Approximately 30%",
+            "Approximately 20%",
+            "Approximately 10%"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Using Bayes: P(disengaged) = 0.30\u00d70.20 + 0.10\u00d70.80 = 0.14. So P(dropout|disengaged) = (0.30\u00d70.20)/0.14 \u2248 43%.",
+            "That's the likelihood P(disengaged|dropout), not the posterior.",
+            "That's the prior P(dropout), not the conditional probability.",
+            "That's P(disengaged|staying), not what we're solving for."
+          ],
+          "explanation": "This shows how EdTech systems combine base rates (20% dropout), likelihoods (30% disengaged among dropouts), and current evidence to revise risk predictions per student."
+        },
+        {
+          "question": "A learning management system uses two independent indicators of student struggle: quiz performance and time-on-task. Why would a Bayesian approach handle these better than treating them sequentially?",
+          "options": [
+            "Because Bayes' theorem can combine multiple sources of evidence in a principled way to update a single posterior belief",
+            "Because quiz performance is always more reliable than time-on-task",
+            "Because independent indicators should never be combined",
+            "Because Bayesian methods avoid the need for prior beliefs"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Bayesian reasoning integrates evidence from multiple sensors simultaneously, avoiding errors from sequential over-updating.",
+            "Not always true; context matters.",
+            "Incorrect. Independent evidence strengthens inference when properly combined.",
+            "Incorrect. Priors are essential to Bayesian inference."
+          ],
+          "explanation": "Bayesian models elegantly fuse independent observations into a coherent posterior estimate, which is why they're so effective in multi-signal EdTech systems."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Expert Applications: Hierarchical Bayesian Models in EdTech",
+      "content": "Advanced EdTech platforms employ hierarchical Bayesian models to balance individual and population-level insights. When predicting a new student's success, these systems learn from thousands of past students while remaining sensitive to each individual's trajectory. For example, a platform models reading comprehension improvement by estimating a population-level learning curve, then adapting it based on the specific student's first five lessons. This prevents overfitting to individuals and cold-start bias. Sophisticated platforms use Bayesian model selection to automatically choose between explanations\u2014is failure due to prerequisite gaps, cognitive load, or low motivation?\u2014without manual intervention."
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Expert Mastery: Advanced Bayesian EdTech",
+      "content": "You've mastered Bayesian reasoning at an expert level. You understand how to model complex learning scenarios with hierarchical priors, integrate multiple evidence streams, and let data drive adaptive decisions. You're ready to design or audit sophisticated EdTech systems that learn and adapt intelligently."
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Bayes' Theorem Problem Set",
+      "content": "Reinforce your understanding of Bayes' theorem with additional scenarios from education technology.",
+      "questions": [
+        {
+          "question": "A student dashboard flags a learner as 'at risk' if P(fail final exam | current behavior) > 70%. Prior: 15% of students fail. Students who fail typically miss 40% of sessions; passing students miss 5%. This student missed 30% of sessions. Should they be flagged?",
+          "options": [
+            "Yes, because 30% is closer to 40% than to 5%",
+            "No, because 30% is between the two baselines",
+            "Yes, if Bayesian calculation shows P(fail|30% missed) > 70%",
+            "No, because only missing >40% sessions guarantees failure"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incomplete reasoning. We need Bayes' theorem, not just baseline comparison.",
+            "Incorrect. Being between baselines doesn't automatically mean balanced risk.",
+            "Correct! Calculate P(fail|0.30) = P(0.30|fail) \u00d7 P(fail) / P(0.30). This determines if intervention is warranted.",
+            "Incorrect. Probability is continuous; risk exists below 40%."
+          ],
+          "explanation": "EdTech interventions depend on precise probabilistic estimates. Bayes' theorem gives the rigorous posterior needed for principled decision-making."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n7",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Intermediate Achievement: Confident Bayesian Practitioner",
+      "content": "You've successfully applied Bayes' theorem to realistic EdTech scenarios. You understand how to update beliefs with evidence and work with probability calculations in learning systems. With continued practice, you'll progress toward expert-level hierarchical modeling."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Remedial: Foundations of Bayesian Thinking",
+      "content": "Let's rebuild your foundation. Bayesian thinking has three core ingredients: (1) **Prior**\u2014your initial belief before seeing data. An EdTech platform assumes each new user has average reading ability until proven otherwise. (2) **Likelihood**\u2014how probable is the data if your belief is true? If the student has high ability, how likely is it they answer a hard question correctly? (3) **Posterior**\u2014your updated belief after observing data. When the student answers correctly, you update to a higher belief in their ability. Bayes' theorem combines these: Posterior \u221d Likelihood \u00d7 Prior. Think of the algorithm updating its mind as it observes student behavior."
+    },
+    {
+      "id": "n9",
+      "type": "example",
+      "title": "Worked Example: Student Mastery Prediction",
+      "content": "An adaptive platform starts by assuming each new student has a 50% chance of mastering fractions (neutral prior). The student answers a hard practice question correctly\u2014the likelihood of this outcome is higher if the student truly has mastery. Bayes' theorem updates the posterior belief upward to 70%. Next question is easier, but the student misses it. Likelihood of missing an easy question is low if they have mastery, so Bayes' theorem revises downward to 55%. Each interaction refines the platform's belief about true mastery through iterative Bayesian updating."
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Remedial Completion: Solid Foundation",
+      "content": "You've solidified the foundational concepts of Bayesian thinking. Understanding prior beliefs, likelihood, and posterior updates is the essential base for all Bayesian reasoning. Continue practicing with simple scenarios before advancing to complex analyses."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n8",
+      "label": "Fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Pass"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n6",
+      "label": "Fail"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Complete"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Review example"
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T10:41:07.010603+00:00",
+  "model": "claude-haiku-4-5"
+}

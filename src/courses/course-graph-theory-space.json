@@ -1,0 +1,492 @@
+{
+  "id": "course-graph-theory-space",
+  "title": "Graph Theory and Applications: Space Exploration Edition",
+  "description": "Master graph theory through the lens of space exploration. Learn from fundamentals through network optimization using real space scenarios.",
+  "topic": "Graph Theory",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 90,
+  "tags": [
+    "graph-theory",
+    "algorithms",
+    "space-exploration",
+    "network-analysis"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Graph Fundamentals for Space Navigation",
+      "content": "A graph is a collection of nodes (vertices) and connections (edges) between them. In space exploration, think of nodes as space stations, planets, or satellites, and edges as communication links or travel routes between them. Graphs help us model the topology of space networks and understand how different celestial bodies or spacecraft are connected. A simple example might be mapping the connections between the International Space Station, lunar bases, and Mars colonies. Understanding graphs is essential for planning routes, optimizing communication networks, and analyzing the structure of space infrastructure.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Graph Fundamentals Quiz",
+      "content": "Test your understanding of graph basics in space contexts.",
+      "questions": [
+        {
+          "question": "In graph theory, what do we call the individual points in a network?",
+          "options": [
+            "Edges",
+            "Vertices/Nodes",
+            "Paths",
+            "Cycles"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Edges are connections between nodes",
+            "Correct! Vertices (or nodes) are individual points",
+            "Paths are sequences of edges",
+            "Cycles are paths that return to starting point"
+          ],
+          "explanation": "Vertices (or nodes) are the fundamental units in a graph, representing individual entities like space stations or planets."
+        },
+        {
+          "question": "If a space station is connected to 3 other stations directly, what is the degree of that node?",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Degree counts all direct connections",
+            "That would be 2 connections",
+            "Correct! Degree is the number of direct connections",
+            "That would be 4 connections"
+          ],
+          "explanation": "The degree of a node is the number of edges directly connected to it. Your station has 3 direct connections, so its degree is 3."
+        },
+        {
+          "question": "A communication network between Mars, Venus, and Earth where all three are mutually connected forms what type of structure?",
+          "options": [
+            "A path graph",
+            "A complete graph (all connected)",
+            "A tree (no cycles)",
+            "A disconnected graph"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A path has at most 2 connections per node",
+            "Correct! Each node connects to all others",
+            "Trees have no cycles, but this has cycles",
+            "Disconnected means not all reachable"
+          ],
+          "explanation": "When every node connects to every other node, we have a complete graph. For 3 planets all communicating with each other, this forms a complete graph K\u2083."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Graph Fundamentals Practice",
+      "content": "Work through these practice problems to strengthen your understanding of graph basics.",
+      "questions": [
+        {
+          "question": "A space communication network connects Earth (E) to Moon (M) and Venus (V), Moon to Mars (Ma), and Venus to Mars. How many edges are in this network?",
+          "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite, count all connections",
+            "Correct! E-M, E-V, M-Ma, V-Ma",
+            "You're close but count again",
+            "That's too many"
+          ],
+          "explanation": "The edges are: E-M, E-V, M-Ma, and V-Ma. That's 4 edges total. Each connection between two celestial bodies counts as one edge, regardless of direction."
+        },
+        {
+          "question": "In a graph representing asteroid mining locations, a node has degree 4. What does this tell you?",
+          "options": [
+            "The location is connected to 4 other locations",
+            "The location has 4 units of resources",
+            "The location is 4 steps away from a base",
+            "The location is the 4th most important"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Degree equals number of direct connections",
+            "Degree measures connections, not resources",
+            "That would be distance, not degree",
+            "Degree doesn't determine importance"
+          ],
+          "explanation": "The degree of a node equals the number of edges connected to it. A degree of 4 means 4 direct connections to other mining locations."
+        },
+        {
+          "question": "Which describes a simple graph (no self-loops or multiple edges)?",
+          "options": [
+            "A network where Station A connects to itself",
+            "Two space stations connected by three separate communication lines",
+            "A network where A connects to B, B to C, and C to A with no self-loops",
+            "A network with isolated stations"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Self-loops make it not simple",
+            "Multiple edges between same nodes make it not simple",
+            "Correct! No self-loops and single edges is a simple graph",
+            "Isolated nodes are separate from the graph"
+          ],
+          "explanation": "A simple graph has no self-loops (edges from a node to itself) and no multiple edges between the same pair of nodes. Option C describes a valid simple graph."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Pathfinding in Space Networks",
+      "content": "Now that we understand graph structures, let's explore pathfinding\u2014finding the best route between two points in a space network. The shortest path problem is crucial in space missions: when a spacecraft needs to travel from Earth to a distant colony, we must consider all possible routes and choose the most efficient one (shortest distance, least fuel consumption, or fewest stops). Dijkstra's algorithm is a classic method for finding shortest paths in weighted graphs, where edges have costs (like distance in light-years or fuel required). Another important concept is connectivity: determining whether two locations are reachable from each other and identifying critical nodes whose failure would isolate parts of the network.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Shortest Paths Assessment",
+      "content": "Assess your understanding of pathfinding algorithms and network connectivity in space.",
+      "questions": [
+        {
+          "question": "In a space network, you're at Station A and need to reach Station D. The direct route costs 100 fuel units, but going A\u2192B\u2192D costs 70 fuel units. What is the shortest path?",
+          "options": [
+            "A\u2192D (100 fuel)",
+            "A\u2192B\u2192D (70 fuel)",
+            "You need to know all possible routes to be sure",
+            "There's no way to determine this from the given information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This costs more fuel",
+            "Correct! The lower cost path is the shortest",
+            "We can determine it from these two options",
+            "We have enough information to compare"
+          ],
+          "explanation": "The shortest path is the one with the lowest total cost. Between these options, A\u2192B\u2192D at 70 fuel is better than A\u2192D at 100 fuel, so it's the shortest path."
+        },
+        {
+          "question": "Dijkstra's algorithm finds the shortest path by:",
+          "options": [
+            "Randomly trying different routes until finding the best one",
+            "Continuously selecting the nearest unvisited node and updating distances",
+            "Checking every possible path simultaneously",
+            "Using precomputed lookup tables of all distances"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not random; Dijkstra is deterministic",
+            "Correct! It greedily selects the nearest unvisited node and updates distances",
+            "It's efficient, not exhaustive",
+            "It computes distances dynamically, not from a table"
+          ],
+          "explanation": "Dijkstra's algorithm works by maintaining visited and unvisited nodes, continuously selecting the unvisited node with the smallest known distance, then updating distances to its neighbors. This greedy approach efficiently finds shortest paths."
+        },
+        {
+          "question": "In a connected space network, removing a single critical station causes the network to split into two disconnected groups. This station is called:",
+          "options": [
+            "A redundant node",
+            "An articulation point (or cut vertex)",
+            "An isolated node",
+            "A leaf node"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Redundant nodes can be removed without disconnecting",
+            "Correct! Removing such a node disconnects the graph",
+            "Isolated nodes are already disconnected",
+            "Leaf nodes have only one connection"
+          ],
+          "explanation": "An articulation point (or cut vertex) is a node whose removal increases the number of connected components. In space networks, identifying these is vital for mission planning and network reliability."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Pathfinding Practice",
+      "content": "Practice finding shortest paths and analyzing network connectivity in space scenarios.",
+      "questions": [
+        {
+          "question": "In a space route network: Earth (E) to Venus (V) costs 50, Venus to Mars (M) costs 40, and Earth directly to Mars costs 120. What is the shortest path from E to M?",
+          "options": [
+            "E\u2192M (cost 120)",
+            "E\u2192V\u2192M (cost 90)",
+            "Both routes cost the same",
+            "We need more information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This route costs 120, which is more",
+            "Correct! 50 + 40 = 90, which is less than 120",
+            "90 is not equal to 120",
+            "We have all the information needed"
+          ],
+          "explanation": "Calculate total costs: E\u2192M = 120 versus E\u2192V\u2192M = 50+40 = 90. The shorter path is E\u2192V\u2192M at 90 total cost units."
+        },
+        {
+          "question": "A mining satellite network has redundancy if:",
+          "options": [
+            "Multiple satellites have identical mining capacity",
+            "Multiple paths exist between any two satellites so no single failure disconnects them",
+            "Satellites are geographically clustered near each other",
+            "The network uses a central hub satellite"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's capacity, not redundancy",
+            "Correct! Multiple paths mean the network survives individual failures",
+            "Physical proximity doesn't ensure redundancy",
+            "A hub design is actually vulnerable to single failures"
+          ],
+          "explanation": "Network redundancy is achieved through multiple paths. If multiple routes exist between two points, the network can survive losing individual nodes or edges. This is critical for reliable space operations."
+        },
+        {
+          "question": "Using breadth-first search (BFS) to navigate a space network from Station A, what does it guarantee?",
+          "options": [
+            "The path with the lowest total distance",
+            "The path with the fewest number of hops (edges)",
+            "The path that takes least time",
+            "The most fuel-efficient route"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "BFS finds minimum hops, not minimum cost; use Dijkstra for that",
+            "Correct! BFS finds the path with fewest edges",
+            "Hops and time aren't equivalent without edge weights",
+            "Fuel efficiency requires weighted algorithms like Dijkstra"
+          ],
+          "explanation": "BFS explores the graph level by level and finds the path with the minimum number of edges. It's useful when all edges have equal cost or when counting hops is the priority."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Network Optimization for Space Missions",
+      "content": "Advanced graph analysis optimizes space infrastructure at scale. A spanning tree connects all nodes using minimum edges\u2014n nodes require exactly n-1 edges, with no cycles. The minimum spanning tree (MST) finds this spanning tree with the lowest total cost, essential for cost-effective networks like interplanetary communication systems. The traveling salesman problem (TSP) finds the shortest route visiting every destination exactly once\u2014critical for deep-space probes exploring multiple asteroids. Network flow analysis determines maximum data or resource transmission capacity through network paths. Graph coloring assigns groups or frequencies to nodes so no adjacent nodes share the same group, solving problems like assigning radio frequencies to space stations to prevent interference.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Network Optimization Assessment",
+      "content": "Evaluate your understanding of spanning trees, TSP, and graph coloring.",
+      "questions": [
+        {
+          "question": "A minimum spanning tree (MST) connecting 6 planets must contain:",
+          "options": [
+            "4 edges",
+            "5 edges",
+            "6 edges",
+            "7 edges"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "For 6 nodes you need 5 edges",
+            "Correct! For n nodes, an MST has n-1 edges",
+            "That would create cycles",
+            "Too many edges"
+          ],
+          "explanation": "A spanning tree connecting n nodes requires exactly n-1 edges. For 6 planets, that's 6-1 = 5 edges. This is the minimum needed to connect all nodes without creating redundant cycles."
+        },
+        {
+          "question": "Kruskal's algorithm for finding a minimum spanning tree works by:",
+          "options": [
+            "Sorting edges by weight and adding them if they don't create a cycle",
+            "Starting from one node and repeatedly adding the cheapest adjacent edge",
+            "Finding and removing the heaviest edge repeatedly",
+            "Randomly selecting edges until all nodes connect"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Kruskal's is an edge-based greedy algorithm",
+            "That describes Prim's algorithm",
+            "That's not how MST algorithms work",
+            "Neither Kruskal's nor Prim's algorithms are random"
+          ],
+          "explanation": "Kruskal's algorithm sorts all edges by weight, then iteratively adds the smallest-weight edge that doesn't create a cycle. This greedy approach guarantees finding the MST."
+        },
+        {
+          "question": "The traveling salesman problem (TSP) for a probe visiting multiple asteroids is computationally challenging because:",
+          "options": [
+            "It's impossible to visit all asteroids",
+            "The number of possible routes grows factorially with asteroids, making it exponentially hard",
+            "Communication delays prevent advance planning",
+            "Asteroids move too quickly to predict accurate routes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "It's possible but computationally hard",
+            "Correct! With n destinations there are n! possible routes, exponentially growing",
+            "That's a practical concern but not the mathematical challenge",
+            "Motion is real but not the computational problem"
+          ],
+          "explanation": "With n destinations, there are roughly n! possible routes. For 5 asteroids that's 120 routes. For 20 asteroids, it's 2.4\u00d710\u00b9\u2078. This exponential growth makes TSP NP-hard. Heuristics find good-enough solutions instead of optimal ones."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Network Optimization Practice",
+      "content": "Practice solving network optimization problems in space scenarios.",
+      "questions": [
+        {
+          "question": "To build a minimum spanning tree connecting 7 space colonies with varying connection costs, you need at least:",
+          "options": [
+            "6 edges",
+            "7 edges",
+            "8 edges",
+            "14 edges"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! n-1 edges for n nodes; 7-1 = 6",
+            "That would create cycles",
+            "Too many edges",
+            "Way too many edges"
+          ],
+          "explanation": "A spanning tree for 7 colonies requires exactly 6 edges. This is the minimum to connect all colonies. Additional edges would create cycles; fewer wouldn't connect everything."
+        },
+        {
+          "question": "A space probe starting from Earth must visit 4 planets (Mars, Venus, Saturn, Uranus) and return. How many distinct possible routes are there?",
+          "options": [
+            "4",
+            "6",
+            "12",
+            "24"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Too few",
+            "That's (n-1)!, but we count all permutations",
+            "Half the total",
+            "Correct! 4! = 24 possible orderings"
+          ],
+          "explanation": "The probe must visit 4 planets in some order. There are 4! = 24 different orders. Finding the shortest among these 24 is the TSP. Even for just 4 planets, trying all routes can be computationally intensive."
+        },
+        {
+          "question": "For 3 space stations arranged in a triangle where each communicates with the other two, graph coloring (assigning radio frequencies) requires a minimum of:",
+          "options": [
+            "1 frequency",
+            "2 frequencies",
+            "3 frequencies",
+            "6 frequencies"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Can't work; all stations neighbor each other",
+            "Can't work; triangle requires 3 colors",
+            "Correct! A triangle (3-cycle) requires 3 different frequencies",
+            "Way more than necessary"
+          ],
+          "explanation": "In a triangle, every node connects to every other node. Each must have a different frequency since they all communicate directly with each other. Thus, 3 frequencies minimum."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Graph Theory Master",
+      "content": "Congratulations! You've mastered graph theory through the lens of space exploration. You now understand graph fundamentals (nodes, edges, degrees), pathfinding algorithms (Dijkstra's, BFS), and network optimization (minimum spanning trees, TSP, graph coloring). These concepts directly apply to real space missions: designing communication networks between planets, planning spacecraft routes, optimizing fuel usage, assigning frequencies to avoid interference, and identifying critical infrastructure. Your skills in graph analysis will serve you well in network design, logistics, artificial intelligence, and countless other fields. Well done, space explorer!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T09:42:38.799631+00:00",
+  "model": "claude-haiku-4-5"
+}

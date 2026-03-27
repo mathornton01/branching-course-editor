@@ -1,0 +1,270 @@
+{
+  "id": "course-bayesian-journalism",
+  "title": "Bayesian Statistics for Journalists",
+  "description": "Master probabilistic reasoning through the lens of investigative reporting and fact-checking",
+  "topic": "Bayesian Statistics",
+  "theme": "journalism",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "statistics",
+    "journalism",
+    "critical-thinking",
+    "fact-checking",
+    "data-literacy"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction: Belief Updates and Breaking Stories",
+      "content": "As a journalist, you constantly update your confidence in claims as new evidence emerges. You might start skeptical of an anonymous tip, but corroborating witnesses increase your belief it's credible. Bayesian statistics formalizes exactly this process\u2014combining what you knew before (prior belief) with new evidence to reach a rational conclusion (posterior belief). This course teaches you to quantify uncertainty and make defensible editorial decisions backed by probabilistic reasoning. You'll learn to avoid confirmation bias and communicate your confidence levels to editors and readers.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Which approach helps you most? Start with the mathematical foundations and build to real examples? Or dive into newsroom scenarios first and understand the theory behind them?",
+      "choices": [
+        {
+          "label": "Learn the Formula First",
+          "next": "n3"
+        },
+        {
+          "label": "Learn from Real Stories First",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Bayes' Theorem: The Journalist's Confidence Calculator",
+      "content": "Bayes' Theorem states: P(Hypothesis|Evidence) = P(Evidence|Hypothesis) \u00d7 P(Hypothesis) / P(Evidence). In journalism terms: your updated confidence in a story claim equals (how likely this evidence is IF the claim is true) \u00d7 (how likely you thought the claim was before) \u00f7 (how likely this evidence is overall). The key insight: evidence only makes you *more* confident if it's more surprising under the false claim than under the true one. A single corroborating witness (weak evidence) barely moves the needle. A confession from the accused (strong evidence) dramatically increases posterior probability. This is how you avoid the trap of confirmation bias\u2014by explicitly weighing how much the evidence actually changes your mind.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Political Scandal Investigation",
+      "content": "You receive a tip that a local official took bribes. Initially, you assign 20% probability to this (prior\u2014tips are often unreliable). A financial disclosure contradicting their claims raises this to 40%. A bank record showing a deposit from the briber's company raises it to 75%. Finally, an on-the-record quote from a witness admitting their role raises it to 95%. Each piece of evidence updates your confidence because it becomes increasingly unlikely under the innocence hypothesis. Bayesian thinking helps you explain to your editor why each new evidence piece matters differently\u2014the bank record matters *because* it's harder to explain away than the disclosure contradiction.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Bayes in Action",
+      "content": "Test your understanding of Bayesian reasoning in journalism.",
+      "questions": [
+        {
+          "question": "A reporter starts with a 30% belief that a company dumped toxic waste. A water test shows contamination. This contamination is 5x more likely if dumping happened (likelihood) than if it didn't. What should happen to the reporter's confidence?",
+          "options": [
+            "Decrease\u2014water can be contaminated from other sources",
+            "Increase significantly\u2014the evidence is more consistent with dumping",
+            "Stay at 30%\u2014one test isn't conclusive",
+            "Jump to 100%\u2014dumping is now proven"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The source of contamination doesn't matter\u2014we're comparing likelihood ratios.",
+            "Correct! When evidence is more likely under the hypothesis, posterior probability increases.",
+            "Bayes accounts for that\u2014we weighted by the likelihood ratio, not certainty.",
+            "No single test reaches certainty in Bayesian terms."
+          ],
+          "explanation": "The likelihood ratio (5:1 in favor of dumping) multiplies your prior, significantly increasing posterior probability. This is how Bayesian thinking handles uncertainty while still moving toward conviction."
+        },
+        {
+          "question": "Two sources independently report that a politician accepted payment. How does this affect your confidence compared to one source?",
+          "options": [
+            "It doubles your confidence",
+            "It increases confidence much more than doubling\u2014independent corroboration is exponentially stronger",
+            "It barely changes confidence\u2014independent reports don't verify each other",
+            "It shows confirmation bias\u2014you're hearing one story from two people"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The increase is larger than doubling\u2014independence matters crucially.",
+            "Correct! Independent sources multiply likelihood ratios. Two independent weak witnesses create stronger evidence than one.",
+            "This misunderstands independence\u2014separate sources DO verify each other in Bayesian terms.",
+            "Bayesian reasoning actively helps you avoid confirmation bias by quantifying evidence."
+          ],
+          "explanation": "In Bayes' Theorem, independent evidence multiplies likelihoods. Two independent corroborating sources create likelihood ratios that multiply, giving you exponentially more confidence than one source alone."
+        },
+        {
+          "question": "A lie detector test is 90% accurate (catches guilty 90% of the time, clears innocent 90% of the time). A suspect fails it. Before you publish, what must you consider?",
+          "options": [
+            "90% accuracy means you can publish\u2014the test is very reliable",
+            "You must consider what percentage of people fail the test anyway\u2014the prior probability of false positives",
+            "Lie detectors are inadmissible, so the test proves nothing",
+            "You must get three more tests to reach publication confidence"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Raw accuracy hides the base rate problem\u2014what % of innocent people also fail?",
+            "Correct! Even 90% accurate tests generate false positives at rates determined by base rates. A test alone rarely justifies publication.",
+            "Inadmissibility is a legal question\u2014Bayesian thinking applies anyway.",
+            "More tests help, but without base rate information, additional tests don't solve the fundamental problem."
+          ],
+          "explanation": "This is the base rate fallacy. If 1 in 1000 innocent people fail the test (false positive rate), then a failure from an otherwise-unsuspected person is weak evidence. Bayesian reasoning forces you to account for how many false alarms the test produces."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Source Reliability: Bayesian Evidence Evaluation",
+      "content": "Every source has a prior probability of accuracy based on their track record, incentives, and position. A named official with institutional accountability carries higher prior (say 70%) than an anonymous internet tipster (20%). When a source makes a claim, you assess the likelihood\u2014how likely is this specific claim if they're reliable versus unreliable? A source claiming knowledge about their own department's decision has higher likelihood ratio than claiming secret board discussions they shouldn't know about. Bayesian journalism means explicitly weighing sources: How reliable is this person? How much more likely is this claim from a reliable source? Would a disreputable source make up this claim? These questions formalize what good reporters do intuitively, helping you avoid both cynical dismissal of unfamiliar sources and naive trust in official channels.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Fact-Checking a Viral Healthcare Rumor",
+      "content": "A TikTok video claims that a medication causes infertility (prior belief: 5%\u2014extreme medical claims are usually false). An anonymous Reddit user corroborates it (likelihood ratio barely moves\u2014Reddit strangers often echo misinformation). A clinical researcher who has no stake in the claim provides a peer-reviewed study showing no link (likelihood ratio strongly favors the rumor being false\u2014reliable experts with no incentive would not spread false alarms). Your updated belief: under 2%. However, if you find 500 Reddit testimonials claiming they lost fertility after the drug, your likelihood calculation shifts\u2014it becomes less likely that 500 people would independently fabricate identical stories. Bayesian thinking doesn't dismiss any source, but it weights sources by reliability and independence, letting you navigate from initial viral claim to evidence-based conclusion.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Source Evaluation & Confidence",
+      "content": "Apply Bayesian thinking to newsroom source decisions.",
+      "questions": [
+        {
+          "question": "A disgruntled former employee claims their company pollutes illegally. You assign them 60% reliability (they could be motivated by spite or by truth). An EPA regulator independently confirms suspicious findings. How should this change your confidence?",
+          "options": [
+            "Only slightly\u2014the EPA is just another source",
+            "Dramatically\u2014the EPA's reliability and independence multiply the likelihood ratio",
+            "Not at all\u2014the EPA and employee might be coordinating",
+            "You should remain skeptical since EPA is government"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Independence and reliability matter\u2014the EPA's corroboration is strong evidence.",
+            "Correct! High-reliability independent sources multiply likelihood ratios.",
+            "Unlikely coordination reduces the probability of false corroboration.",
+            "Government status matters for evaluating reliability and incentives, but confirmation from an independent regulator still strongly updates your belief."
+          ],
+          "explanation": "Bayesian reasoning values independent corroboration from reliable sources. The EPA's confirmation becomes stronger evidence *because* they're independent and because false EPA confirmation is unlikely."
+        },
+        {
+          "question": "You're investigating fraud. Victim A tells her story (prior reliability: 80%, but victims sometimes misremember). Victim B tells the identical story independently (corroboration from another reliable source). Victim C tells a slightly different version (mostly corroborates but with contradictions). How does this sequence affect your confidence?",
+          "options": [
+            "A alone = 80% confident, B makes it 95%, C drops it to 70%",
+            "A alone = maybe 70%, B's independent corroboration significantly increases it (maybe 88%), C's contradiction slightly decreases it (maybe 82%)",
+            "All three together are meaningless\u2014they're victim accounts, not evidence",
+            "C's contradiction means the whole story is false"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "You're assigning too much weight to raw reliability numbers\u2014independence matters.",
+            "Correct! Independent corroboration multiplies confidence gains. Minor contradictions slightly reduce confidence, as expected in human memory.",
+            "Victim testimony is evidence; the Bayesian question is how to weight it properly.",
+            "Minor contradictions don't invalidate a pattern\u2014Bayesian reasoning quantifies, not dismisses."
+          ],
+          "explanation": "Bayes' Theorem weights the entire pattern. Two victims telling nearly identical stories is multiplicatively stronger than one. A third person with contradictions suggests either honest misremembering or selective lying\u2014you update downward slightly but remain reasonably confident."
+        },
+        {
+          "question": "An anonymous source claims insider knowledge of a merger. They say it's happening 'soon.' How confident should you be in publishing this?",
+          "options": [
+            "Very confident\u2014they have inside knowledge",
+            "Not confident\u2014anonymous + vague timeline is low likelihood evidence",
+            "Moderately confident\u2014anonymous sources are standard in business journalism",
+            "You should publish and let readers assess the source quality themselves"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Anonymity reduces reliability, and 'soon' is unprovable\u2014assess likelihood carefully.",
+            "Correct! Anonymous sources with vague claims and no track record create weak likelihood ratios.",
+            "Standard practice doesn't override Bayesian confidence assessment.",
+            "Responsible journalism requires higher confidence before publishing market-moving claims."
+          ],
+          "explanation": "Anonymous sources have lower prior reliability, and unprovable claims ('soon') create weak likelihood evidence. Without other corroboration, your posterior confidence should stay low\u2014the base rate of false merger rumors is high."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Bayesian Journalism in Practice",
+      "content": "Integrate Bayesian thinking across your newsroom workflow. When pitching a story, quantify your confidence: 'I'm 70% confident this happened based on two corroborating sources and a financial record.' When updating a story, recalculate: does the new source change your posterior? By how much? When defending an editorial decision, use likelihood language: 'We published because the evidence was 5x more consistent with guilt than innocence.' This transforms vague intuitions into defensible reasoning. Avoid confirmation bias by actively asking: 'How would a disreputable source make up this claim? If they did, would the pattern of evidence look like this?' Use competing hypotheses\u2014does the evidence better fit conspiracy or incompetence? Bayesian thinking doesn't eliminate editorial judgment, but it anchors that judgment in quantified uncertainty. As you become fluent, you'll spot when sources are playing probability games ('five experts agree') and when evidence actually moves the needle ('independent corroboration from unexpected parties').",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "You're Ready to Report with Confidence",
+      "content": "You now understand how to apply Bayesian reasoning to journalism: starting with prior beliefs, assessing likelihood ratios of evidence, and updating posterior confidence systematically. You can explain to editors why some evidence matters more than other evidence, why source reliability and independence matter, and why the base rate of false claims in your beat affects your confidence thresholds. Use this framework to avoid both reckless certainty and paralyzing doubt. Report confidently when evidence warrants it; stay skeptical when it doesn't. Your readers will benefit from journalism grounded in probabilistic clarity."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Learn the Formula First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Learn from Real Stories First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "See an example"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Test your understanding"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "See an example"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Test your understanding"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": "Finish course"
+    }
+  ],
+  "generated_at": "2026-03-27T10:50:38.759636+00:00",
+  "model": "claude-haiku-4-5"
+}

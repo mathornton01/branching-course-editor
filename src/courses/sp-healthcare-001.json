@@ -1,0 +1,304 @@
+{
+  "id": "sp-healthcare-001",
+  "title": "Signal Processing Fundamentals: A Healthcare Perspective",
+  "description": "Master signal processing through real-world healthcare monitoring and diagnostic scenarios. From ECG electrodes to advanced artifact detection, learn why filtering matters in patient care.",
+  "topic": "Signal Processing Fundamentals",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "signal-processing",
+    "healthcare",
+    "ECG",
+    "EEG",
+    "filtering",
+    "signal-analysis",
+    "medical-devices"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Medical Signals",
+      "content": "Healthcare systems continuously monitor patient vital signs through various signals\u2014ECG for heart activity, EEG for brain waves, pulse oximetry for oxygen levels, and continuous glucose monitors for metabolic health. These analog signals from medical devices are converted to digital data and processed to extract meaningful patterns. Signal processing is the mathematical foundation that enables clinicians to filter noise, detect anomalies, and make life-saving decisions. Understanding signal fundamentals is essential for anyone working in healthcare technology, biomedical engineering, or clinical informatics. Let's explore how signals work and why they matter in patient care.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Basic Signal Processing Concepts",
+      "content": "Demonstrate your understanding of core signal concepts by answering the following questions about signals, sampling, and filtering in healthcare.",
+      "questions": [
+        {
+          "question": "What is a signal in the context of healthcare monitoring?",
+          "options": [
+            "A message sent between hospital departments",
+            "A measurable quantity (like voltage, pressure, or concentration) that varies over time",
+            "An alert that sounds when a patient is in danger",
+            "A wireless connection between medical devices"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite\u2014signals are data, not messages.",
+            "Correct! Signals are time-varying measurements from sensors.",
+            "Alarms are based on signals, but not the signals themselves.",
+            "Wireless is a communication method, not a signal definition."
+          ],
+          "explanation": "Signals in healthcare are continuous or sampled measurements of physiological variables. They form the raw data that medical devices process to inform clinical decisions."
+        },
+        {
+          "question": "What is sampling rate, and why is it critical for medical devices?",
+          "options": [
+            "The number of times per second a signal is measured and converted to digital form",
+            "The total duration a patient is monitored",
+            "The loudness level of the monitor's alarm",
+            "The percentage of patients in a study"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Sampling rate (frequency) determines how well we capture signal details.",
+            "That's monitoring duration, not sampling rate.",
+            "Alarm volume has nothing to do with sampling.",
+            "That's a statistical term, not signal-related."
+          ],
+          "explanation": "Sampling rate is measured in Hertz (Hz) and determines the temporal resolution of the digital signal. Higher sampling rates capture faster changes and finer details."
+        },
+        {
+          "question": "Why do we apply filters to physiological signals like ECG or EEG?",
+          "options": [
+            "To remove unwanted noise (like 60Hz electrical interference or movement artifacts) without losing medical information",
+            "To make the signal look prettier on the monitor",
+            "To reduce storage space requirements",
+            "To increase the signal's amplitude"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Filtering isolates the clinically relevant information.",
+            "Aesthetics aren't the goal\u2014clinical accuracy is.",
+            "Filtering might help storage slightly, but that's not the main reason.",
+            "Filters don't amplify; they remove or suppress components."
+          ],
+          "explanation": "Filters are the primary tool for separating meaningful physiological signals from noise and artifacts introduced by electronics, patient movement, or environmental interference."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Signal Analysis & Filtering in Clinical Practice",
+      "content": "Apply your knowledge to more complex clinical scenarios involving filter selection, signal analysis, and the Nyquist theorem.",
+      "questions": [
+        {
+          "question": "A cardiac monitor picks up 60Hz electrical interference (from AC power lines) superimposed on the ECG. Which filter type would be most appropriate?",
+          "options": [
+            "A low-pass filter set to ~100 Hz to keep heart rate information (0\u2013100 Hz) while attenuating 60 Hz",
+            "A high-pass filter set to 60 Hz to remove only the interference",
+            "A bandpass filter centered at 60 Hz to isolate and measure the interference",
+            "An all-pass filter that doesn't change the signal"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Low-pass filters attenuate high-frequency noise while preserving the low-frequency cardiac signal.",
+            "A high-pass filter centered at 60 Hz would remove the interference but also remove important ECG features.",
+            "Bandpass filters isolate frequencies; we want to remove 60 Hz, not isolate it.",
+            "All-pass filters don't remove anything."
+          ],
+          "explanation": "ECG signals primarily contain frequencies below 100 Hz. A low-pass filter at 100 Hz removes the 60 Hz interference and higher-frequency muscle artifacts while preserving all clinically relevant cardiac features."
+        },
+        {
+          "question": "An EEG signal has both neurological activity (0.5\u201340 Hz) and muscle artifact (>100 Hz). What filter strategy would you use?",
+          "options": [
+            "Apply a high-pass filter at 0.5 Hz, then a low-pass filter at 40 Hz (bandpass filtering)",
+            "Remove all frequencies above 100 Hz using a low-pass filter",
+            "Digitally amplify the signal to override the muscle noise",
+            "Record the patient in a completely shielded room to avoid any noise"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Bandpass filtering (high-pass then low-pass) isolates clinically relevant EEG while rejecting muscle artifact.",
+            "While a low-pass at 40 Hz would work, a bandpass (0.5\u201340 Hz) is more precise.",
+            "Amplifying doesn't remove noise; it amplifies both signal and noise.",
+            "Shielded rooms help but aren't a signal processing solution."
+          ],
+          "explanation": "Bandpass filtering combines high-pass and low-pass filters to isolate a specific frequency band. For EEG, this preserves the narrow neurological frequency range (0.5\u201340 Hz) while rejecting out-of-band muscle noise."
+        },
+        {
+          "question": "A continuous glucose monitor samples blood glucose every 15 minutes. Can this sampling rate adequately capture glucose dynamics during a meal (which change rapidly in the first 30\u201360 minutes)?",
+          "options": [
+            "Yes\u201415 minutes is frequent enough because glucose changes slowly overall",
+            "No\u2014the Nyquist theorem suggests we need to sample at least twice the fastest signal frequency; rapid post-meal changes need more frequent sampling",
+            "Yes\u2014glucose doesn't change, so any sampling rate works",
+            "No\u2014we should sample only once per hour to save battery"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Glucose changes rapidly after meals; 15 minutes may miss critical details.",
+            "Correct! The Nyquist theorem requires sampling \u22652\u00d7 the highest frequency of interest; meals cause high-frequency glucose swings.",
+            "Glucose definitely changes; that's why we monitor it!",
+            "Less frequent sampling would miss even more detail."
+          ],
+          "explanation": "The Nyquist theorem is fundamental: to capture all frequency components up to f Hz, you must sample at least 2f times per second. Post-meal glucose changes occur over minutes, requiring sampling every few minutes, not every 15 minutes."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Advanced Signal Processing in Healthcare",
+      "content": "Advanced signal processing techniques enable clinicians to extract subtle patterns from complex physiological data. Wavelet analysis, for instance, decomposes signals into time-frequency representations, allowing detection of transient events like cardiac arrhythmias or seizure onset that fixed-frequency methods miss. Artifact detection algorithms identify and reject corrupted signal segments (patient movement during EEG, electrode contact loss during ECG) to ensure diagnostic accuracy. Real-time processing systems combine multiple signals\u2014such as ECG, blood pressure, and oxygen saturation\u2014to create integrated patient risk scores. Adaptive filtering learns from a patient's baseline and adjusts dynamically, improving sensitivity for detecting deterioration. These techniques are fundamental to intensive care unit (ICU) monitoring, where automated detection systems alert clinicians to life-threatening conditions within seconds. Mastering advanced signal processing prepares you to develop next-generation diagnostic and monitoring systems.",
+      "next": "n8"
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Filtering Techniques Practice",
+      "content": "Practice applying filtering and signal processing concepts to realistic clinical challenges.",
+      "questions": [
+        {
+          "question": "A patient in the ICU has an arterial line monitoring continuous blood pressure, but motion artifact (from the patient's arm movement) is contaminating the signal with frequencies from 1\u20133 Hz, overlapping with respiratory-related pressure variations (0.2\u20130.5 Hz). Which approach best preserves respiratory information while removing motion?",
+          "options": [
+            "Apply a high-pass filter at 0.7 Hz to remove motion while preserving respiratory",
+            "Apply a low-pass filter at 0.5 Hz to remove all motion above respiration rate",
+            "Use a notch filter at 2 Hz to remove only the motion frequencies",
+            "Increase alarm sensitivity to compensate for the noise"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A high-pass filter at 0.7 Hz removes frequencies below respiration (motion artifact, slow drift) while preserving respiratory and systolic/diastolic information.",
+            "A low-pass at 0.5 Hz would eliminate systolic/diastolic pressure variations, losing important diagnostic info.",
+            "Notch filters target narrow frequencies; motion spans 1\u20133 Hz.",
+            "Alarms are triggered by the artifact, not solved by higher sensitivity."
+          ],
+          "explanation": "A high-pass filter at 0.7 Hz creates a sharp cutoff that removes motion artifact (1\u20133 Hz) while preserving respiratory variations (0.2\u20130.5 Hz) and the slower oscillations of blood pressure waveforms."
+        },
+        {
+          "question": "An EEG patient has movement-related artifact bursts lasting ~500 ms. A fixed low-pass filter would blur the entire signal. What adaptive approach would help?",
+          "options": [
+            "Detect artifact segments in real time and either discard them or apply stronger local filtering only to those regions",
+            "Increase the sampling rate to 10 kHz so brief artifacts are easier to see",
+            "Stop recording during periods of motion",
+            "Use a single aggressive filter that removes all frequencies >5 Hz"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Adaptive or segmented processing preserves clean signal while aggressively filtering only corrupted portions.",
+            "Higher sampling captures more detail but doesn't remove the artifact itself.",
+            "Stopping recording creates gaps in the clinical record.",
+            "An aggressive fixed filter would lose EEG details (alpha, beta waves are 8\u201330 Hz)."
+          ],
+          "explanation": "Adaptive signal processing dynamically adjusts filter parameters based on detected signal quality. When artifacts are identified, local aggressive filtering or segment rejection preserves overall signal fidelity."
+        },
+        {
+          "question": "A wearable heart rate monitor transmits ECG via Bluetooth at 250 Hz sampling rate. The signal passes through a moving average filter (averaging every 4 samples). What is the effective new sampling rate, and does this preserve the ability to detect fast heart rate changes?",
+          "options": [
+            "Effective rate is 62.5 Hz; limited ability to detect very fast arrhythmias (>~30 bpm changes)",
+            "Effective rate is 250 Hz; no change in detection capability",
+            "Effective rate is 1000 Hz; better detection due to smoothing",
+            "Effective rate is 1 Hz; only useful for resting heart rate"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Averaging 4 samples reduces the effective rate by 4\u00d7. This smooths out noise but may miss rapid arrhythmia patterns.",
+            "The moving average decimates the signal; rate and resolution both decrease.",
+            "Averaging reduces rate and resolution, not improves them.",
+            "A 4-sample average still preserves much faster dynamics than 1 Hz."
+          ],
+          "explanation": "Moving average filtering with 4-sample windows reduces the effective sampling rate from 250 Hz to 62.5 Hz. The trade-off is reduced noise but also reduced temporal resolution for detecting rapid rhythm changes."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Signals & Sampling Fundamentals",
+      "content": "A signal is any measured quantity that carries information. In healthcare, signals come from devices that convert physiological activity into electrical or digital data: an ECG electrode picks up the heart's electrical impulses, a pulse oximeter measures light absorption changes as blood flows through a finger, and a temperature sensor detects thermal variations. All of these are continuous analog signals from the real world. To analyze signals in a computer, we must sample them\u2014measure their value at regular intervals\u2014and convert each measurement to a digital number. The sampling rate (how many times per second we measure) is crucial: if we sample too slowly, we miss important details and introduce aliasing (false low-frequency patterns). If we sample too fast, we waste storage and processing power. A rule called the Nyquist theorem tells us that we must sample at least twice the highest frequency we care about. Once signals are digital, we can apply filters\u2014mathematical operations that suppress unwanted frequencies (noise, interference, artifacts) and enhance the clinically relevant parts. Filtering makes medical signals cleaner and easier for doctors and algorithms to interpret correctly.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Worked Example: ECG Signal Processing",
+      "content": "**Scenario:** A patient in the hospital is connected to a bedside cardiac monitor. The ECG electrode senses electrical activity from the heart muscle, producing a waveform that repeats with each heartbeat.\n\n**Step 1\u2014Acquisition:** The monitor samples the electrode voltage 500 times per second (500 Hz sampling rate), converting each measurement to a digital value. The heart's electrical frequencies of interest (QRS complex, P waves, T waves) span roughly 0.05\u2013100 Hz, so 500 Hz is well above the Nyquist minimum of 200 Hz.\n\n**Step 2\u2014Noise & Interference:** The raw signal is contaminated by 60 Hz electrical interference (from AC power in the building), baseline wander (slow drifts from electrode movement, ~0.1 Hz), and muscle artifact (from patient muscle contractions, 50\u2013200 Hz). A clinician looking at this messy signal might miss important diagnostic features or be fooled by noise.\n\n**Step 3\u2014Filtering:** The monitor applies a chain of digital filters:\n- High-pass filter at 0.5 Hz removes baseline wander\n- Low-pass filter at 100 Hz removes muscle artifact and high-frequency noise\n- Notch filter at exactly 60 Hz removes the power-line hum\n\nAfter filtering, the QRS complexes (the sharp spikes representing the heart's main contraction) stand out clearly, and the P and T waves are visible without noise.\n\n**Step 4\u2014Detection & Diagnosis:** With a clean signal, automated algorithms detect each heartbeat and measure intervals between beats, allowing the system to identify arrhythmias (irregular rhythms like atrial fibrillation or premature contractions). A clinician reviews the filtered tracing and ECG measurements to assess heart health.\n\n**Result:** What would have been an unreadable, noisy signal is now a diagnostic-quality ECG, all thanks to signal processing. This is why every hospital monitor applies similar filtering\u2014it saves lives by ensuring accurate, real-time arrhythmia detection.",
+      "next": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Advanced Mastery Achieved",
+      "content": "Congratulations! You've demonstrated mastery of signal processing fundamentals through the lens of clinical healthcare. You understand how physiological signals are captured, why filtering is essential, and how advanced techniques like wavelet analysis and adaptive filtering improve patient monitoring and diagnosis. You're equipped to design medical signal processing systems, troubleshoot noisy clinical data, and appreciate the engineering behind every monitor in the hospital. Continue exploring real-time processing systems, machine learning for artifact detection, and multi-modal signal integration. Your expertise will shape the future of precision medicine and patient safety."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundational Understanding Achieved",
+      "content": "You've built a solid foundation in signal processing basics! You understand what signals are, why we sample them, how filtering works, and why these concepts matter in healthcare. With this knowledge, you can grasp how medical devices process patient data and why clinicians trust their monitors. To deepen your expertise, explore more advanced filtering techniques, revisit frequency-domain concepts, and study real clinical cases. Every expert started here\u2014keep learning, and you'll master signal processing in healthcare."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue to assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Needs review (<2 correct)"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n5",
+      "label": "Needs practice (<2 correct)"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n8",
+      "label": "Proceed to completion"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n8",
+      "label": "Practice complete"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Learn from example"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "Proceed to completion"
+    }
+  ],
+  "generated_at": "2026-03-27T08:39:18.207036+00:00",
+  "model": "claude-haiku-4-5"
+}

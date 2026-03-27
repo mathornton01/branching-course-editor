@@ -1,0 +1,480 @@
+{
+  "id": "db-sql-fundamentals",
+  "title": "Database Design and SQL Fundamentals",
+  "description": "Learn database design principles and SQL query basics through adaptive learning. Master normalization, schema design, and SELECT queries.",
+  "topic": "Database Design and SQL",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 60,
+  "tags": [
+    "database",
+    "sql",
+    "data-design",
+    "queries"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Understanding Database Design",
+      "content": "A database is an organized collection of structured data stored in tables with rows and columns. Proper database design ensures data integrity, reduces redundancy, and improves query performance. The foundation of good design is normalization, which organizes data to eliminate duplication and anomalies. First Normal Form (1NF) ensures each column contains only atomic values with no repeating groups. Second Normal Form (2NF) requires that non-key attributes depend on the entire primary key. Third Normal Form (3NF) ensures non-key attributes depend only on the primary key, not on other non-key attributes. You'll learn how to identify entities, relationships, and create meaningful database schemas that follow these principles. This module establishes the core concepts needed for professional database work."
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Designing a Library Management System",
+      "content": "Consider a library that tracks books, members, and loans. Step 1: Identify entities - we need three main entities: Books (ISBN, title, author, publication_date, publisher), Members (member_id, name, email, phone, join_date), and Loans (loan_id, member_id, book_id, loan_date, return_date, due_date). Step 2: Define relationships - each Member can have many Loans, and each Book can be associated with many Loans. Members link to Loans (one-to-many), and Books link to Loans (one-to-many). Step 3: Normalize - by storing Book information only once, when an author or title changes, you update one record instead of many loan records. Similarly, member information stays in one place. This design achieves Second Normal Form because each non-key attribute (title, author, member_name) depends on the full primary key, and Third Normal Form because attributes don't depend on other non-key attributes. Step 4: Query benefits - you can efficiently find all books borrowed by a member or all members who borrowed a specific book without scanning redundant data. This design prevents storing duplicate book information for each loan and enables efficient queries."
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Database Design Concepts",
+      "content": "Test your understanding of fundamental database design principles and normalization.",
+      "questions": [
+        {
+          "question": "In a well-designed library database, why is it better to store Book information separately from Loan information?",
+          "options": [
+            "To make the database larger",
+            "To prevent data duplication and maintain consistency when book details change",
+            "Because SQL doesn't support multiple tables",
+            "To make queries run slower"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Database size is not a primary design concern. In fact, normalized databases are typically more efficient in storage.",
+            "Correct! Separating entities prevents redundant data and makes updates simple. When a book's title or author changes, you update it in one place, and all loans automatically reference the current information.",
+            "Incorrect. SQL fully supports multiple tables and relationships through JOINs. This is actually a core feature of SQL databases.",
+            "Incorrect. Proper design actually improves query performance. Normalized structures allow the database optimizer to create better execution plans."
+          ],
+          "explanation": "Separating entities prevents redundant data. If book details are stored only once in the Books table, updating them is simple and error-free. Every Loan record references the Books table, so changes are instantly reflected everywhere."
+        },
+        {
+          "question": "What is the primary goal of database normalization?",
+          "options": [
+            "To make the database as complex as possible",
+            "To organize data to eliminate redundancy and improve integrity",
+            "To use as many tables as possible",
+            "To prevent anyone from querying the database"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Complexity is avoided, not pursued. Normalization actually simplifies data maintenance.",
+            "Correct! Normalization reduces duplication and anomalies, making databases maintainable and reliable. It follows rules like 1NF, 2NF, and 3NF to structure data optimally.",
+            "Incorrect. The goal is appropriate table use, not maximization. You add tables only when needed to eliminate redundancy.",
+            "Incorrect. Databases are designed to be queried. Normalization actually makes querying more efficient."
+          ],
+          "explanation": "Normalization reduces data duplication and anomalies, making databases maintainable and reliable. It follows structured rules to eliminate insertion, update, and deletion anomalies."
+        }
+      ],
+      "pass_threshold": 80,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Mastering SQL SELECT Queries",
+      "content": "SQL (Structured Query Language) is the standard language for querying databases. The SELECT statement retrieves data from one or more tables using WHERE clauses to filter results, ORDER BY to sort, and JOIN operations to combine data from multiple tables. There are several JOIN types: INNER JOIN returns only rows with matches in both tables, LEFT JOIN returns all rows from the left table with matching data from the right, RIGHT JOIN does the opposite, and FULL OUTER JOIN returns all rows from both tables. Understanding how to write efficient SELECT queries is essential for data analysis and reporting. You'll use aggregate functions like COUNT, SUM, AVG, and MAX for summaries, and GROUP BY to organize results into meaningful categories. Mastering these fundamentals prepares you for more complex multi-table queries and data analysis."
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Writing a SELECT Query with JOIN",
+      "content": "To find all books borrowed by a specific member named 'Alice', follow these steps: Step 1 - Identify tables needed: we need the books, loans, and members tables. Step 2 - Use INNER JOINs to connect them: START with 'SELECT books.title, loans.loan_date'. Step 3 - Connect tables: 'FROM books INNER JOIN loans ON books.book_id = loans.book_id'. This matches each book with its loans. Step 4 - Add member connection: 'INNER JOIN members ON loans.member_id = members.member_id'. This connects member information. Step 5 - Filter for Alice: 'WHERE members.name = 'Alice''. The complete query: SELECT books.title, loans.loan_date FROM books INNER JOIN loans ON books.book_id = loans.book_id INNER JOIN members ON loans.member_id = members.member_id WHERE members.name = 'Alice'. The result shows each book title Alice has borrowed and when, with no duplicates and no redundant data because we're joining at the row level rather than repeating information."
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "SQL Query Fundamentals",
+      "content": "Test your understanding of SQL SELECT queries, WHERE clauses, and basic aggregation.",
+      "questions": [
+        {
+          "question": "What does the WHERE clause in a SELECT statement do?",
+          "options": [
+            "It creates new tables",
+            "It specifies conditions to filter which rows are returned",
+            "It always returns all rows",
+            "It deletes data from the database"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. WHERE is for filtering, not creating tables. CREATE TABLE is used to create new tables.",
+            "Correct! WHERE filters rows based on conditions, comparing column values against criteria you specify. Only rows matching all WHERE conditions are returned.",
+            "Incorrect. WHERE restricts the rows returned. Without WHERE, all rows are returned; with WHERE, only matching rows appear in results.",
+            "Incorrect. WHERE is part of SELECT queries which read data. DELETE statements remove data and have their own syntax."
+          ],
+          "explanation": "WHERE filters rows based on conditions, returning only data matching your criteria. You can use comparison operators (=, <, >, <=, >=, !=) and logical operators (AND, OR) to build complex conditions."
+        },
+        {
+          "question": "In the query 'SELECT COUNT(*) FROM members WHERE join_date > \"2024-01-01\"', what does this do?",
+          "options": [
+            "Counts all members who joined after January 1, 2024",
+            "Deletes members who joined after January 1, 2024",
+            "Updates the join_date of all members",
+            "Returns a list of all members with their dates"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! COUNT(*) with WHERE counts matching rows. The query returns a single number representing how many members have join_date > 2024-01-01.",
+            "Incorrect. This is a SELECT query which reads data, not a DELETE statement which removes data.",
+            "Incorrect. This query reads data, doesn't modify it. UPDATE statements change data; SELECT statements only retrieve it.",
+            "Incorrect. COUNT(*) returns a single count value, not a list. To get a list of all members, you'd use SELECT * FROM members without COUNT(*)."
+          ],
+          "explanation": "COUNT(*) counts rows, and WHERE filters for those with join_date after 2024-01-01, giving the count of new members. This is a common pattern for aggregating data based on conditions."
+        }
+      ],
+      "pass_threshold": 80,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "SQL Query Practice",
+      "content": "Practice writing correct SQL queries with real-world scenarios. Work through these questions to reinforce your understanding of SELECT syntax, WHERE clauses, and aggregate functions.",
+      "questions": [
+        {
+          "question": "Write a query to find all books published by 'Harper & Row'. The table is 'books' with columns 'publisher' and 'title'. Which query is correct?",
+          "options": [
+            "SELECT title WHERE publisher = 'Harper & Row'",
+            "SELECT title FROM books WHERE publisher = 'Harper & Row'",
+            "SELECT FROM books title WHERE publisher = 'Harper & Row'",
+            "SELECT books title FROM WHERE publisher = 'Harper & Row'"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Missing FROM clause to specify the table. The FROM clause tells SQL which table to query.",
+            "Correct! Proper syntax: SELECT columns FROM table WHERE conditions. This returns the title of every book published by Harper & Row.",
+            "Incorrect. Invalid syntax and word order. FROM comes before the column list in standard SQL syntax.",
+            "Incorrect. Invalid syntax and missing table reference. The table name must come after FROM."
+          ],
+          "explanation": "Correct SQL syntax requires SELECT (which columns), FROM (which table), WHERE (which conditions) in that order. This is the standard SELECT statement structure."
+        },
+        {
+          "question": "What query would calculate the total number of loans made in the database?",
+          "options": [
+            "COUNT loans",
+            "SELECT COUNT(*) FROM loans",
+            "SELECT loans",
+            "COUNT(*) loans"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Missing SELECT and FROM keywords. These are required for a valid SQL statement.",
+            "Correct! This counts all rows in the loans table. COUNT(*) counts every row, and FROM loans specifies which table.",
+            "Incorrect. This would return all loan records, not a count. SELECT * returns every column and row, not an aggregate count.",
+            "Incorrect. Invalid syntax and missing FROM clause. COUNT(*) must be used with SELECT and FROM."
+          ],
+          "explanation": "COUNT(*) with FROM specifies the table and counts all matching rows. This is how you aggregate data in SQL using aggregate functions."
+        },
+        {
+          "question": "You need to find members who joined in 2024. Which query is correct?",
+          "options": [
+            "SELECT * FROM members WHERE join_date >= '2024-01-01' AND join_date < '2025-01-01'",
+            "SELECT members WHERE year(join_date) = 2024",
+            "SELECT * FROM members WHERE YEAR(join_date) = 2024",
+            "Both A and C are acceptable"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Correct! This works well - it checks if join_date falls between Jan 1 and Dec 31 of 2024 using comparison operators.",
+            "Incorrect. Missing FROM clause - you must specify which table to query.",
+            "Correct! This uses the YEAR function to extract the year from join_date and compare it to 2024. This is concise and clear.",
+            "Correct! Both approaches work. Option A uses date range comparison; Option C uses the YEAR function. Choose based on your SQL dialect support and preference for clarity."
+          ],
+          "explanation": "Multiple SQL approaches can solve the same problem. Option A explicitly compares the date range, while Option C uses the YEAR function. Both are valid - use whichever you're most comfortable with."
+        },
+        {
+          "question": "How would you find the average number of books borrowed per member?",
+          "options": [
+            "SELECT AVG(book_id) FROM loans",
+            "SELECT COUNT(DISTINCT member_id), AVG(COUNT(*)) FROM loans GROUP BY member_id",
+            "SELECT member_id, COUNT(*) FROM loans GROUP BY member_id",
+            "SELECT AVG(COUNT(*)) FROM loans GROUP BY member_id"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. This averages book_id values, not the count of books. You need COUNT(*) to count loans, then AVG to average the counts.",
+            "Incorrect. You cannot nest aggregate functions without GROUP BY and proper syntax. The syntax here is invalid.",
+            "Incorrect. This shows each member and their loan count, but doesn't average them across all members. You'd need another SELECT wrapping this.",
+            "Correct! This groups loans by member, counts loans per member, then averages those counts. It's the right way to calculate average books per member."
+          ],
+          "explanation": "To find an average of counts, you need: GROUP BY to organize by member, COUNT(*) to count each member's loans, then AVG() to average those counts across all members. This is a nested aggregation pattern."
+        }
+      ],
+      "pass_threshold": 80,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What Would You Like To Do?",
+      "content": "You've mastered database design fundamentals and SQL query essentials. Choose how you'd like to proceed with your learning journey.",
+      "choices": [
+        {
+          "label": "Continue to advanced topics",
+          "next": "node-aggregation-content"
+        },
+        {
+          "label": "Practice more SQL queries",
+          "next": "n7"
+        },
+        {
+          "label": "Complete the course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "node-aggregation-content",
+      "type": "content",
+      "title": "Advanced SQL: Aggregation and GROUP BY",
+      "content": "Now that you understand basic SELECT queries, let's explore advanced aggregation techniques. GROUP BY allows you to organize data into groups and apply aggregate functions to each group. Aggregate functions include COUNT(*) to count rows, SUM() to add values, AVG() to calculate averages, MIN() to find minimum values, and MAX() to find maximum values. The HAVING clause filters grouped results similar to how WHERE filters rows before grouping. For example, GROUP BY publisher allows you to summarize statistics for each publisher separately. You can group by multiple columns to create hierarchical summaries, like grouping by author AND year to see each author's books by publication year. The DISTINCT keyword removes duplicate values from results when you only want unique values. These advanced techniques are essential for data analysis, reporting, and business intelligence applications."
+    },
+    {
+      "id": "node-aggregation-example",
+      "type": "example",
+      "title": "Using GROUP BY and Aggregate Functions",
+      "content": "Step 1 - Define your goal: Count how many books each author has written. Step 2 - Identify the table: The 'books' table has author and book_id columns. Step 3 - Structure the query: SELECT author, COUNT(*) FROM books GROUP BY author. This groups all books by author and counts them. Step 4 - Add filtering: To see only authors with more than 5 books, use HAVING COUNT(*) > 5: SELECT author, COUNT(*) FROM books GROUP BY author HAVING COUNT(*) > 5. Step 5 - Enhance results: SELECT author, COUNT(*) as book_count, MIN(publication_date) as first_book, MAX(publication_date) as latest_book FROM books GROUP BY author ORDER BY book_count DESC. This shows each author's count, earliest, and latest publication, sorted by most prolific authors first. These patterns appear in countless business queries for sales summaries, performance analytics, and data insights."
+    },
+    {
+      "id": "node-aggregation-assessment",
+      "type": "assessment",
+      "title": "Advanced SQL Aggregation",
+      "content": "Test your understanding of GROUP BY, aggregate functions, and data analysis patterns.",
+      "questions": [
+        {
+          "question": "What does GROUP BY do in a SELECT statement?",
+          "options": [
+            "It organizes rows into groups based on column values and applies aggregate functions to each group",
+            "It sorts results in alphabetical order",
+            "It removes duplicate rows from results",
+            "It limits the number of rows returned"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! GROUP BY creates groups of rows with matching values in the specified column(s), then aggregate functions like COUNT(), SUM(), AVG() operate on each group separately.",
+            "Incorrect. Sorting is done with ORDER BY, not GROUP BY.",
+            "Incorrect. Removing duplicates uses DISTINCT. GROUP BY groups rows but doesn't deduplicate.",
+            "Incorrect. Limiting rows uses LIMIT or TOP. GROUP BY organizes data for aggregation."
+          ],
+          "explanation": "GROUP BY is essential for aggregation. It partitions your data into groups, then COUNT(), SUM(), AVG(), MIN(), and MAX() functions compute statistics for each group separately."
+        },
+        {
+          "question": "In the query 'SELECT publisher, SUM(price) FROM books GROUP BY publisher', what does SUM(price) calculate?",
+          "options": [
+            "The highest price in each publisher's catalog",
+            "The total price of all books combined across publishers",
+            "The total price of all books from each publisher",
+            "The average price of books from each publisher"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. SUM() adds values, not finds the maximum. MAX(price) would find the highest price.",
+            "Incorrect. The GROUP BY publisher ensures SUM calculates per publisher, not across all publishers.",
+            "Correct! SUM(price) adds all price values within each publisher group, giving the total revenue per publisher.",
+            "Incorrect. AVG(price) calculates average price. SUM(price) calculates the total."
+          ],
+          "explanation": "SUM() is an aggregate function that adds values. With GROUP BY publisher, it sums the prices for each publisher separately, showing total book value per publisher."
+        },
+        {
+          "question": "What is the purpose of the HAVING clause?",
+          "options": [
+            "To filter rows before they are grouped",
+            "To filter grouped results after aggregation, similar to WHERE for groups",
+            "To sort the results in ascending order",
+            "To combine data from multiple tables"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's what WHERE does - it filters rows before grouping. HAVING filters after grouping.",
+            "Correct! HAVING is like WHERE for grouped data. It filters groups based on aggregate function results, e.g., HAVING COUNT(*) > 5.",
+            "Incorrect. ORDER BY sorts results. HAVING filters groups based on aggregate conditions.",
+            "Incorrect. JOINs combine tables. HAVING filters groups in aggregation queries."
+          ],
+          "explanation": "HAVING allows you to filter grouped results based on aggregate function values. For example, 'HAVING COUNT(*) > 5' shows only groups with more than 5 rows. WHERE filters before grouping; HAVING filters after."
+        }
+      ],
+      "pass_threshold": 80,
+      "success_target": "n9",
+      "failure_target": "node-aggregation-practice"
+    },
+    {
+      "id": "node-aggregation-practice",
+      "type": "practice",
+      "title": "Advanced SQL Practice: Aggregation",
+      "content": "Practice advanced SQL patterns using GROUP BY, aggregate functions, and HAVING clauses to solve real-world data analysis problems.",
+      "questions": [
+        {
+          "question": "You need to find the total number of loans per member. Which query is correct?",
+          "options": [
+            "SELECT member_id, COUNT(*) FROM loans GROUP BY member_id",
+            "SELECT COUNT(*) FROM loans",
+            "SELECT member_id FROM loans GROUP BY member_id",
+            "SELECT * FROM loans GROUP BY member_id"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This groups loans by member_id and counts loans in each group, showing total loans per member.",
+            "Incorrect. Without GROUP BY, this counts total loans across all members, not per member.",
+            "Incorrect. This shows unique members but doesn't count their loans.",
+            "Incorrect. GROUP BY requires aggregate functions in SELECT; you can't use SELECT * with GROUP BY for meaningful aggregation."
+          ],
+          "explanation": "GROUP BY member_id organizes loans by member, and COUNT(*) counts the loans in each group. This is the pattern for finding counts per category."
+        },
+        {
+          "question": "How would you find publishers who have published more than 10 books?",
+          "options": [
+            "SELECT publisher FROM books WHERE COUNT(*) > 10",
+            "SELECT publisher FROM books GROUP BY publisher HAVING COUNT(*) > 10",
+            "SELECT publisher, COUNT(*) FROM books GROUP BY publisher WHERE COUNT(*) > 10",
+            "SELECT COUNT(*) FROM books GROUP BY publisher WHERE COUNT(*) > 10"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. WHERE filters rows before grouping, not grouped results. HAVING filters groups.",
+            "Correct! GROUP BY publisher organizes by publisher, HAVING COUNT(*) > 10 filters to show only publishers with more than 10 books.",
+            "Incorrect. WHERE comes before GROUP BY and filters individual rows, not groups. HAVING comes after GROUP BY.",
+            "Incorrect. WHERE is incorrect for filtering groups (should be HAVING), and SELECT should include the publisher column."
+          ],
+          "explanation": "The pattern is: GROUP BY (organize), aggregate function (COUNT), HAVING (filter groups). WHERE filters before grouping; HAVING filters after."
+        },
+        {
+          "question": "Which query finds each author's average book price?",
+          "options": [
+            "SELECT author, AVG(price) FROM books",
+            "SELECT author, AVG(price) FROM books GROUP BY author",
+            "SELECT AVG(price) FROM books WHERE author = author",
+            "SELECT author FROM books GROUP BY price"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Without GROUP BY, this returns only one average price across all authors, not per author.",
+            "Correct! GROUP BY author organizes books by author, and AVG(price) calculates the average price for each author's books.",
+            "Incorrect. WHERE author = author is always true and meaningless. You need GROUP BY to calculate per-author statistics.",
+            "Incorrect. This groups by price and shows authors, but doesn't calculate any aggregate function."
+          ],
+          "explanation": "To calculate statistics per category, use GROUP BY. SELECT author, AVG(price) FROM books GROUP BY author shows average price for each author separately."
+        }
+      ],
+      "pass_threshold": 80,
+      "success_target": "n9",
+      "failure_target": "node-aggregation-practice"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've successfully completed the Database Design and SQL fundamentals course. You now understand database design principles including normalization and normal forms, can design efficient schemas that prevent data redundancy, and can write effective SQL queries including SELECT with WHERE, JOINs to combine tables, and advanced aggregation with GROUP BY and HAVING. You have the foundation to analyze data, generate reports, and make informed decisions based on database queries. Continue practicing with real databases and explore advanced topics like transactions, indexing, optimization, and database performance tuning. You're well-prepared to apply these skills in professional environments. Great work!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "complete"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n7",
+      "label": "practice"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "node-aggregation-content",
+      "label": "advanced"
+    },
+    {
+      "id": "c13",
+      "source": "node-aggregation-content",
+      "target": "node-aggregation-example",
+      "label": "next"
+    },
+    {
+      "id": "c14",
+      "source": "node-aggregation-example",
+      "target": "node-aggregation-assessment",
+      "label": "next"
+    },
+    {
+      "id": "c15",
+      "source": "node-aggregation-assessment",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c16",
+      "source": "node-aggregation-assessment",
+      "target": "node-aggregation-practice",
+      "label": "fail"
+    },
+    {
+      "id": "c17",
+      "source": "node-aggregation-practice",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-26T02:12:25.971095+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T10:11:31.161933+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

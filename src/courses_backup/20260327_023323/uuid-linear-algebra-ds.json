@@ -1,0 +1,266 @@
+{
+  "id": "uuid-linear-algebra-ds",
+  "title": "Linear Algebra for Data Science",
+  "description": "Master vectors and matrices\u2014the mathematical foundations of machine learning, dimensionality reduction, and data transformation.",
+  "topic": "Linear Algebra",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "linear-algebra",
+    "data-science",
+    "mathematics",
+    "machine-learning",
+    "foundations"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Understanding Vectors",
+      "content": "A vector is a mathematical object with both magnitude and direction, represented as an ordered list of numbers. In data science, vectors are fundamental\u2014they represent features of data points, embeddings, and parameters in machine learning models. Vectors can be visualized as arrows in space, where each component corresponds to a dimension. For example, a student's performance might be represented as a vector [math, reading, science] = [85, 92, 78].",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Vector Operations in Practice",
+      "content": "Consider two students' test scores as vectors: Student A = [85, 92, 78] and Student B = [78, 88, 90]. To find the average, add corresponding components: [81.5, 90, 84]. Dot products measure similarity: A\u00b7B = 85(78) + 92(88) + 78(90) = 21,746, showing alignment. This is how recommender systems compute user similarity and how neural networks combine weighted features.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Vector Fundamentals Assessment",
+      "content": "Test your understanding of vectors and basic vector operations.",
+      "questions": [
+        {
+          "question": "Two vectors represent customer purchase amounts: Month 1 = [100, 50, 75] and Month 2 = [120, 45, 80]. What is the sum of all components in Month 1 + Month 2?",
+          "options": [
+            "225",
+            "470",
+            "345",
+            "590"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. You may have only added one vector's components.",
+            "Correct! 100+50+75+120+45+80 = 470.",
+            "Incorrect. Check your addition of corresponding components.",
+            "Incorrect. This doesn't match the vector sum."
+          ],
+          "explanation": "When adding two vectors, add corresponding components: [100+120, 50+45, 75+80] = [220, 95, 155]. The sum of all components is 220+95+155 = 470."
+        },
+        {
+          "question": "If vector v = [3, 4], what is its magnitude (length)?",
+          "options": [
+            "7",
+            "5",
+            "12",
+            "25"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's just adding components.",
+            "Correct! The magnitude is \u221a(3\u00b2 + 4\u00b2) = \u221a25 = 5.",
+            "Incorrect. The magnitude uses the Pythagorean theorem, not addition.",
+            "Incorrect. That's the sum of squared components."
+          ],
+          "explanation": "Vector magnitude is calculated using the Euclidean norm: ||v|| = \u221a(v\u2081\u00b2 + v\u2082\u00b2 + ... + v\u2099\u00b2). For v = [3, 4]: ||v|| = \u221a(9 + 16) = \u221a25 = 5."
+        }
+      ],
+      "pass_threshold": 1.5,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Understanding Matrices",
+      "content": "A matrix is a rectangular array of numbers organized in rows and columns. In data science, matrices are everywhere\u2014datasets are matrices (rows = samples, columns = features), images are matrices (pixel values), and neural networks process data through matrix operations. Matrix multiplication enables transformations: data \u00d7 transformation matrix rotates, scales, or projects your data into new spaces. This is how PCA reduces dimensionality and how deep learning propagates information through layers.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Matrix Multiplication in Machine Learning",
+      "content": "Consider a dataset matrix D with 4 students and 3 test scores: D = [[85, 92, 78], [78, 88, 90], [90, 85, 88], [88, 90, 92]]. Apply weights w = [0.3, 0.3, 0.4] for a final exam emphasis: D\u00b7w = [86.1, 85.8, 88.1, 89.6]. This is exactly how neural networks work\u2014each layer multiplies your data by a weight matrix, applies transformations, and passes results to the next layer.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Matrix Operations Assessment",
+      "content": "Test your understanding of matrices and matrix multiplication.",
+      "questions": [
+        {
+          "question": "A 2\u00d73 matrix A and a 3\u00d72 matrix B are multiplied: A\u00d7B. What are the dimensions of the result?",
+          "options": [
+            "3\u00d73",
+            "2\u00d72",
+            "2\u00d73",
+            "3\u00d72"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The inner dimensions cancel.",
+            "Correct! The result is 2\u00d72 (outer dimensions).",
+            "Incorrect. You must use the outer dimensions.",
+            "Incorrect. The columns of the result match rows of A."
+          ],
+          "explanation": "In matrix multiplication A(2\u00d73) \u00d7 B(3\u00d72), the inner dimensions (3 and 3) must match. The result has dimensions of the outer values: 2\u00d72. Rule: (m\u00d7n) \u00d7 (n\u00d7p) = (m\u00d7p)."
+        },
+        {
+          "question": "Given matrix M = [[1, 2], [3, 4]] and vector v = [5, 6], what is the first component of M\u00d7v?",
+          "options": [
+            "8",
+            "17",
+            "23",
+            "44"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's 5+3.",
+            "Correct! First row dotted with v: 1(5) + 2(6) = 17.",
+            "Incorrect. Check your matrix-vector multiplication.",
+            "Incorrect. That's not the correct calculation."
+          ],
+          "explanation": "Matrix-vector multiplication: each row of M is dotted with vector v. First component: [1, 2]\u00b7[5, 6] = 1(5) + 2(6) = 5 + 12 = 17."
+        }
+      ],
+      "pass_threshold": 1.5,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Linear Algebra Practice",
+      "content": "Let's reinforce your understanding with additional practice problems.",
+      "questions": [
+        {
+          "question": "Three vectors represent RGB color values: Red = [255, 0, 0], Green = [0, 255, 0], Blue = [0, 0, 255]. What is the dot product Red \u00b7 Green?",
+          "options": [
+            "0",
+            "255",
+            "510",
+            "765"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Orthogonal vectors have a dot product of 0.",
+            "Incorrect. These vectors are perpendicular.",
+            "Incorrect. Check the dot product calculation.",
+            "Incorrect. That's the sum of all components."
+          ],
+          "explanation": "Dot product: Red \u00b7 Green = 255(0) + 0(255) + 0(0) = 0. Vectors with dot product 0 are orthogonal\u2014they share no directional similarity. This is used in computer graphics and signal processing."
+        },
+        {
+          "question": "Vector u = [2, 2, 1]. What is its magnitude?",
+          "options": [
+            "5",
+            "3",
+            "4",
+            "\u221a9"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's 2+2+1.",
+            "Correct! \u221a(4+4+1) = \u221a9 = 3.",
+            "Incorrect. Check your squared terms.",
+            "Correct notation, but choose the numerical answer."
+          ],
+          "explanation": "Magnitude: ||u|| = \u221a(2\u00b2 + 2\u00b2 + 1\u00b2) = \u221a(4 + 4 + 1) = \u221a9 = 3. This metric is essential for normalizing vectors in machine learning."
+        }
+      ],
+      "pass_threshold": 1.5,
+      "next": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What's Your Next Adventure?",
+      "content": "You've mastered vectors and matrices\u2014the foundations of data science! Choose your next learning path:",
+      "choices": [
+        {
+          "label": "Advanced: Matrix Decomposition & Dimensionality Reduction",
+          "next": "n9"
+        },
+        {
+          "label": "Applied: Linear Algebra in Real Machine Learning",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Linear Algebra Mastery Unlocked!",
+      "content": "Congratulations! You've completed the Linear Algebra for Data Science course. You now understand vectors, vector operations, matrices, and matrix multiplication\u2014essential building blocks for machine learning, dimensionality reduction, neural networks, and data transformation. The mathematical intuition you've built forms the foundation for deep learning, recommendation systems, and advanced analytics. Practice these concepts with Python NumPy and TensorFlow on real datasets. You're ready to unlock advanced topics! \ud83d\ude80"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Test"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Pass"
+    },
+    {
+      "id": "c3b",
+      "source": "n3",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": "Learn"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Test"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n8",
+      "label": "Pass"
+    },
+    {
+      "id": "c6b",
+      "source": "n6",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Finish"
+    }
+  ],
+  "generated_at": "2026-03-26T09:36:19.201289+00:00",
+  "model": "claude-haiku-4-5"
+}

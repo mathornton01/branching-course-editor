@@ -1,0 +1,281 @@
+{
+  "id": "crypto-fundamentals-games",
+  "title": "Cryptography Fundamentals: Securing Game Worlds",
+  "description": "Master cryptography through game design scenarios. Learn how to protect player data, verify actions, and build secure multiplayer systems.",
+  "topic": "Cryptography Fundamentals",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "cryptography",
+    "game design",
+    "security",
+    "game development"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Cryptography Basics in Game Design",
+      "content": "Before we dive deeper, let's assess your understanding of fundamental cryptography concepts as they apply to game design. These concepts are essential for building secure multiplayer games where player data is protected and game integrity is maintained.",
+      "questions": [
+        {
+          "question": "In a multiplayer online game, why do game servers encrypt player actions before transmission over the network?",
+          "options": [
+            "A) To compress data and reduce bandwidth usage",
+            "B) To prevent rival players from seeing each other's actions before they're confirmed",
+            "C) To make the game run faster",
+            "D) To automatically save player progress"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Encryption is not primarily about compression.",
+            "Correct! Encryption ensures that player actions remain secret until the server confirms and broadcasts them, preventing cheating and maintaining game integrity.",
+            "Incorrect. Encryption adds processing overhead, not speed benefits.",
+            "Incorrect. Saving happens separately from encryption."
+          ],
+          "explanation": "Encryption protects data confidentiality. In games, this prevents players from seeing opponents' moves before they're official, which is crucial for fair gameplay."
+        },
+        {
+          "question": "A game server wants to verify that an item purchased by a player was genuinely paid for, and not forged by a hacker. What cryptographic technique is most useful here?",
+          "options": [
+            "A) Symmetric encryption with a shared secret key",
+            "B) Digital signatures or hash functions to verify authenticity",
+            "C) Compression algorithms",
+            "D) Network protocols like TCP"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Symmetric encryption protects secrecy, not authenticity.",
+            "Correct! Digital signatures and hash functions prove that data hasn't been tampered with and came from the right source.",
+            "Incorrect. Compression doesn't help verify authenticity.",
+            "Incorrect. Network protocols handle data transmission, not verification."
+          ],
+          "explanation": "Authentication and integrity are verified using digital signatures and hashes. This ensures the purchase transaction is genuine and unmodified."
+        },
+        {
+          "question": "In a lobby-based multiplayer game, all players must know a password to join a private match. All players use the same password. What type of encryption is this?",
+          "options": [
+            "A) Asymmetric encryption",
+            "B) Symmetric encryption",
+            "C) Hash-based encryption",
+            "D) One-time password encryption"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Asymmetric encryption uses two different keys.",
+            "Correct! Symmetric encryption uses one shared secret key known to all parties.",
+            "Incorrect. Hashes are one-way functions, not encryption.",
+            "Incorrect. One-time passwords are a separate security mechanism."
+          ],
+          "explanation": "When all participants share the same secret key (password), that's symmetric encryption. It's fast but requires secure key distribution."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Advanced Cryptography Architecture",
+      "content": "Now let's test your understanding of more complex cryptographic systems used in real game architectures. These concepts form the backbone of modern online game security infrastructure.",
+      "questions": [
+        {
+          "question": "In a modern MMO, players connect to a game server using their account credentials. The server issues a session token that proves the player is authenticated. Why is it better to use public-key (asymmetric) encryption during login instead of symmetric encryption?",
+          "options": [
+            "A) It's faster than symmetric encryption",
+            "B) It doesn't require secure key distribution; the player can use the server's public key to encrypt without prior key exchange",
+            "C) It's harder for hackers to break",
+            "D) It reduces the size of encrypted messages"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Asymmetric encryption is actually slower.",
+            "Correct! Asymmetric encryption solves the key distribution problem. Players can encrypt with the server's public key without needing to receive a secret key first.",
+            "Incorrect. Both types can be broken with sufficient effort; security depends on proper implementation.",
+            "Incorrect. Asymmetric encryption creates larger messages, not smaller ones."
+          ],
+          "explanation": "Asymmetric encryption eliminates the chicken-and-egg problem of symmetric key distribution. The server's public key can be known to everyone."
+        },
+        {
+          "question": "A game developer wants to detect if a player's game file has been modded or corrupted during download. They store a SHA-256 hash of the official game file on their server. When a player downloads the game, they compute the hash locally and compare it. What property of hash functions makes this work?",
+          "options": [
+            "A) Hashes are encrypted, so they're impossible to crack",
+            "B) Hash functions are reversible, allowing the original file to be recovered",
+            "C) Hashes are deterministic; the same input always produces the same output, and any change in the file produces a different hash",
+            "D) Hash functions use public-key cryptography internally"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Hashes aren't encrypted; they're one-way functions.",
+            "Incorrect. Hash functions are intentionally one-way for security.",
+            "Correct! Determinism means integrity can be verified. Any modification\u2014accidental or intentional\u2014changes the hash.",
+            "Incorrect. Hash functions are independent of public-key cryptography."
+          ],
+          "explanation": "Hash functions provide integrity verification. Because they're deterministic and one-way, they detect any tampering with game files."
+        },
+        {
+          "question": "In a competitive esports game, player rankings and match results are stored in a database. The game company wants to prove to auditors that the data hasn't been tampered with since a specific date. Which cryptographic solution is most appropriate?",
+          "options": [
+            "A) Encrypting all database records with symmetric encryption",
+            "B) Creating digital signatures for each match result and storing them separately",
+            "C) Using a blockchain or hash chain that links each record to the previous one",
+            "D) Using compression to protect the data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Encryption protects secrecy, not long-term integrity verification.",
+            "Partially helpful, but signatures work better for individual records, not time-series chains.",
+            "Correct! A hash chain creates an immutable audit trail. Tampering with any record breaks the chain, proving the breach occurred.",
+            "Incorrect. Compression doesn't protect data integrity."
+          ],
+          "explanation": "Hash chains and blockchains link records cryptographically so that tampering with historical data is immediately detectable. This is essential for audit trails."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Expert: Certificate Infrastructure and Secure Game Distribution",
+      "content": "Congratulations on reaching the advanced level! Modern game platforms like Steam, Epic Games, and console ecosystems rely on certificate-based infrastructure (Public Key Infrastructure, or PKI) to establish trust chains. When you download a game, your system verifies that the download came from the legitimate publisher, not an imposter. This happens through X.509 certificates and certificate authorities (CAs). A CA is a trusted third party that cryptographically signs a publisher's public key, creating a certificate. Your game launcher trusts the CA, so it trusts any certificate signed by that CA. This creates a chain of trust: Root CA \u2192 Intermediate CA \u2192 Game Publisher Certificate \u2192 Game Files. Each signature uses the signer's private key, and verification uses their public key from the certificate. Modern games also use certificate pinning: hardcoding the expected certificate into the game client so that even if a hacker compromises a CA, they can't fool your game. Finally, key rotation and expiration are critical: certificates expire after a few years, forcing publishers to refresh their keys regularly, limiting the damage if a key is ever compromised.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Achievement: Cryptography Master",
+      "content": "You've mastered cryptography fundamentals with an expert-level understanding of how modern game platforms secure their entire supply chain. You understand symmetric and asymmetric encryption, hash functions, digital signatures, and certificate infrastructure. You're ready to implement cryptographic solutions in game development or analyze security in existing games. Recommended next steps: study specific cryptographic libraries (e.g., OpenSSL, libsodium), learn about TLS/SSL protocols, or explore cryptanalysis and attack vectors. Your expertise positions you to build or audit secure game systems."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Intermediate Practice: Cryptography Problem Sets",
+      "content": "You've demonstrated solid foundational knowledge. Let's reinforce your understanding with practical scenarios from real game development. These problems require you to think through cryptographic solutions for common game security challenges.",
+      "questions": [
+        {
+          "question": "A competitive game wants to prevent players from modifying their player rank in the local game cache before uploading to the server. The server stores the official rank, but players cache it locally for offline viewing. What cryptographic approach ensures the cached rank can't be faked?",
+          "options": [
+            "A) Encrypt the cached rank with a symmetric key stored in the game code",
+            "B) Have the server sign the rank with its private key; the client verifies the signature using the server's public key",
+            "C) Hash the rank and store the hash instead of the plaintext",
+            "D) Compress the rank data to make it smaller"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A symmetric key stored in game code can be easily extracted by reverse engineering.",
+            "Correct! A digital signature proves the rank came from the server and hasn't been tampered with.",
+            "Incorrect. A hash is one-way; you can't recover the rank from it.",
+            "Incorrect. Compression doesn't provide authenticity."
+          ],
+          "explanation": "Digital signatures bind data to a signer. The server's signature proves authenticity and integrity, preventing forgery even if the game code is fully reverse-engineered."
+        },
+        {
+          "question": "A game server communicates with a third-party payment processor to verify in-app purchases. It needs to ensure the response is genuinely from the payment processor, not a hacker intercepting the connection. What should be verified?",
+          "options": [
+            "A) The server's IP address",
+            "B) The payment processor's TLS certificate against a trusted certificate authority",
+            "C) The size of the response message",
+            "D) The response arrives within 1 second"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. IP addresses can be spoofed or intercepted.",
+            "Correct! TLS certificates tied to trusted CAs prove the server's identity cryptographically.",
+            "Incorrect. Message size isn't a security indicator.",
+            "Incorrect. Timing isn't a reliable security measure."
+          ],
+          "explanation": "TLS (Transport Layer Security) uses certificates to authenticate servers. Certificate validation against trusted CAs is the gold standard for secure communication."
+        },
+        {
+          "question": "A multiplayer game uses a hybrid approach: symmetric encryption for gameplay data (fast) and asymmetric encryption for account authentication (secure key exchange). Why is this design better than using only one approach?",
+          "options": [
+            "A) It makes the game impossible to hack",
+            "B) Asymmetric encryption is too slow for frequent gameplay updates, while symmetric is fast but requires secure initial key exchange (which asymmetric provides)",
+            "C) It uses less memory than single-approach designs",
+            "D) It's easier to code and understand"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. No design is hack-proof; this just optimizes security and performance.",
+            "Correct! This is a practical balance: asymmetric encryption establishes trust securely, then symmetric encryption handles high-volume data efficiently.",
+            "Incorrect. Hybrid approaches use similar or more memory.",
+            "Incorrect. Hybrid designs are more complex to implement correctly."
+          ],
+          "explanation": "Hybrid cryptography is industry standard. Asymmetric encryption is too slow for bulk data, so it's used only for key exchange. Then symmetric encryption, with its speed advantage, handles the actual data."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Completion: Practical Cryptographer",
+      "content": "You've completed the intermediate path and built practical knowledge of cryptographic systems. You understand how to apply encryption, hashing, and signatures to solve real game security problems. You can now confidently discuss cryptographic solutions with game developers and make informed decisions about security architecture. Recommended next steps: dive deeper into specific cryptographic algorithms (AES, RSA, ECDSA), study network security protocols (TLS/SSL), or work through cryptographic implementation challenges. Your intermediate mastery provides a strong foundation for security-focused game development."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Remedial: Cryptography Fundamentals Explained",
+      "content": "Let's build your cryptography foundation with clear game design examples. **Encryption** is scrambling data so only someone with the right key can read it. Imagine a player sends a message to a teammate. Without encryption, any hacker on the network can read it. With encryption, the message becomes gibberish unless the hacker has the decryption key. **There are two main types:** (1) Symmetric encryption uses one shared secret key\u2014like a private match password. Everyone uses the same password to lock and unlock messages. It's fast but requires securely sharing the password first. (2) Asymmetric encryption (public-key) uses two linked keys: a public key (like your game profile, visible to everyone) and a private key (like your password, known only to you). Someone can encrypt a message using your public key, but only you can decrypt it with your private key. **Hashing** is a one-way function\u2014you can't reverse it. You use it to verify integrity: if you send a game file and its hash, the recipient can compute the hash and compare. Any modification changes the hash, revealing tampering. **Digital signatures** combine hashing and asymmetric encryption: the sender hashes data, encrypts the hash with their private key, and sends both. The recipient decrypts the hash with the sender's public key and compares it to their own hash. This proves the sender sent it (authentication) and it hasn't been changed (integrity). These three tools\u2014encryption, hashing, and signatures\u2014solve the core security problems in games: secrecy, integrity, and authenticity.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundational Completion: Security Awareness Achieved",
+      "content": "You've completed the foundational pathway and now understand the core concepts of cryptography through game design examples. You know why encryption matters, the difference between symmetric and asymmetric approaches, and how hashing and digital signatures verify data integrity and authenticity. These concepts are fundamental to building and understanding secure games. To continue learning, review the key concepts, explore simple cryptographic tools and libraries, and apply these ideas to think about security in games you play. You now have the foundation to advance to more complex cryptographic topics whenever you're ready."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Fail (< 2 correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fail (< 2 correct)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    }
+  ],
+  "generated_at": "2026-03-27T09:30:20.253735+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,212 @@
+{
+  "id": "ts-analysis-001",
+  "title": "Time Series Analysis Fundamentals",
+  "description": "Learn to analyze and interpret time series data, understand trends and seasonality, and prepare for forecasting.",
+  "topic": "",
+  "difficulty": "beginner",
+  "estimated_minutes": 60,
+  "tags": [
+    "statistics",
+    "time series",
+    "data analysis",
+    "forecasting",
+    "temporal patterns"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Time Series",
+      "content": "A time series is a sequence of data points measured at regular intervals over time. Examples include stock prices, temperature readings, and website traffic. Time series analysis helps us understand patterns, trends, and seasonality in data. The primary goals are to describe the past behavior of the data and forecast future values. Time series analysis combines statistics, data visualization, and domain expertise to extract meaningful insights.",
+      "position": {
+        "x": 80,
+        "y": 80
+      },
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "E-Commerce Sales Example",
+      "content": "Let's examine monthly sales data for an online retailer over 24 months. The data shows an overall upward trend increasing from $50K in month 1 to $95K in month 24, reflecting business growth. Additionally, clear seasonal patterns emerge: sales spike during November-December (holiday shopping), surge in July-August (back-to-school), and dip during slower months like January-February. By visualizing this as a line chart, we see both the rising trend line and regular peaks and valleys overlaid on top. This real-world example demonstrates why time series analysis matters: identifying these patterns enables accurate sales forecasting and strategic inventory planning.",
+      "position": {
+        "x": 460,
+        "y": 80
+      },
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Fundamentals Assessment",
+      "content": "Test your understanding of time series core concepts.",
+      "position": {
+        "x": 840,
+        "y": 80
+      },
+      "questions": [
+        {
+          "question": "Which of the following best describes what a time series is?",
+          "options": [
+            "A collection of unordered data points",
+            "A sequence of data points measured at regular intervals over time",
+            "A single data point measured multiple ways",
+            "Independent data sources combined randomly"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. Time series data must be ordered chronologically.",
+            "Correct! Time series are fundamentally ordered sequences measured at regular intervals.",
+            "Not quite. Time series involve many data points, not just one.",
+            "Not quite. Time series data must be organized temporally."
+          ],
+          "explanation": "A time series is specifically defined as an ordered sequence of measurements taken at regular time intervals. This temporal ordering is fundamental to all time series analysis."
+        },
+        {
+          "question": "What is a key advantage of time series analysis?",
+          "options": [
+            "It eliminates the need for other statistical methods",
+            "It identifies patterns, trends, and enables forecasting of future values",
+            "It works only for financial and stock market data",
+            "It requires no domain knowledge or expertise"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. Time series analysis complements, not replaces, other methods.",
+            "Correct! Time series analysis reveals temporal patterns and supports forecasting.",
+            "Not quite. Time series applies across many domains: healthcare, weather, manufacturing.",
+            "Not quite. Domain expertise significantly enhances time series analysis quality."
+          ],
+          "explanation": "Time series analysis is powerful because it uncovers temporal patterns (trends, seasonality, cycles) and enables data-driven forecasts about future values based on historical behavior."
+        }
+      ],
+      "passing_score": 80,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Trends and Seasonality",
+      "content": "A trend is the long-term direction of a time series: whether values generally increase, decrease, or remain stable over extended periods. Seasonality describes regular, predictable fluctuations occurring at fixed intervals\u2014like quarterly retail patterns or daily website traffic cycles. Decomposing a time series into trend and seasonal components is essential for understanding and forecasting. Most real-world time series combine both elements: a steady upward or downward trend with regular seasonal variations layered on top. By isolating these components mathematically, we build more accurate models and make better business decisions.",
+      "position": {
+        "x": 1077.1864380412303,
+        "y": -273.5010393945384
+      },
+      "next": "node-decomp-ex"
+    },
+    {
+      "id": "node-decomp-ex",
+      "type": "content",
+      "title": "Decomposing a Time Series: Step-by-Step",
+      "content": "Let's walk through the process of decomposing a time series step-by-step using a practical example: daily website visits over 28 days (4 weeks). **Step 1: Observe the raw data.** Plot the values and notice patterns. You see daily visits ranging from 80 to 150, with an overall slight increase from day 1 (~100) to day 28 (~120), and a clear repeating pattern every 7 days (weekends get more traffic). **Step 2: Extract the trend component.** Using a method like 7-day moving average, you smooth out the daily fluctuations to reveal the underlying trend: a gentle upward slope that increases by about 20 visits over the full period. **Step 3: Isolate the seasonal component.** Subtract the trend from the original data at each point. What remains is the repeating weekly pattern: roughly +20 visits on Saturday-Sunday, -15 visits on weekdays. **Step 4: Verify your decomposition.** Recombine trend + seasonal components\u2014they should closely match the original data, confirming you've captured the essential patterns. **Why this matters:** By understanding that your traffic growth is +20 visits/month (trend) AND that you always see a weekend spike (seasonality), you can forecast next month more accurately. The trend tells you expected growth; the seasonality tells you when peaks and valleys occur.",
+      "position": {
+        "x": 1600,
+        "y": 80
+      },
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Utility Company Load Forecasting",
+      "content": "Consider a utility company's monthly electricity consumption over 48 months. The data reveals two key components: an upward trend where average consumption increases from year 1 to year 4 (due to population growth and increased air conditioning demand), and strong seasonality with consumption peaking every summer (June-August) and winter (December-February), creating a repeating zigzag pattern around the trend line. By decomposing the series into trend component (the rising baseline) and seasonal component (the regular ups and downs), analysts forecast future demand and plan generation capacity. This decomposition makes predictions dramatically more accurate than treating the entire series as noise, enabling utilities to balance supply with demand efficiently.",
+      "position": {
+        "x": 1600,
+        "y": 310
+      },
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Advanced Concepts Assessment",
+      "content": "Assess your grasp of trends and seasonality in time series.",
+      "position": {
+        "x": 1980,
+        "y": 80
+      },
+      "questions": [
+        {
+          "question": "What does a positive trend indicate in a time series?",
+          "options": [
+            "Values are becoming more random over time",
+            "Seasonal patterns are growing stronger",
+            "Values are generally increasing over the long term",
+            "The data is unsuitable for analysis"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Not quite. A trend reflects consistent directional movement, not randomness.",
+            "Not quite. Trend and seasonality are separate, independent components.",
+            "Correct! A positive trend shows values increasing over time on average.",
+            "Not quite. Data with clear trends is excellent for analysis and forecasting."
+          ],
+          "explanation": "A trend describes the long-term directional movement in a time series. A positive (upward) trend means values consistently increase as time progresses, even with seasonal variation."
+        },
+        {
+          "question": "Which scenario best demonstrates seasonality?",
+          "options": [
+            "Cryptocurrency prices fluctuating randomly day to day",
+            "Retail sales peaking predictably in November-December, with summer and January-February dips",
+            "Stock prices changing due to unexpected market shocks",
+            "Random daily temperature variations in a desert"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. Cryptocurrency movements are unpredictable, not seasonal.",
+            "Correct! Retail sales show regular, predictable seasonal patterns tied to holidays and seasons.",
+            "Not quite. Unexpected shocks are irregular, not seasonal patterns.",
+            "Not quite. Temperature does show seasonality annually, but retail sales demonstrate it more clearly."
+          ],
+          "explanation": "Seasonality is a regular, predictable pattern repeating at fixed time intervals. Retail sales exemplify this perfectly due to holiday shopping, back-to-school periods, and seasonal consumer behavior."
+        }
+      ],
+      "passing_score": 80,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Practice: Core Concepts Reinforcement",
+      "content": "Reinforce your understanding with additional practice spanning fundamentals and advanced concepts.",
+      "position": {
+        "x": 1220,
+        "y": 310
+      },
+      "next": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What's Next?",
+      "content": "Congratulations! You've successfully mastered the core concepts of time series analysis, including understanding what distinguishes temporal data, identifying trends (long-term directional movement) and seasonality (regular, predictable patterns), and learning how to decompose complex series into interpretable components. This foundational knowledge applies across industries\u2014from retail sales planning and demand forecasting in utilities to website traffic prediction and financial analysis. You're now well-positioned to either complete this introductory course or review the fundamentals module to deepen your expertise before advancing to more sophisticated techniques like ARIMA modeling and exponential smoothing. Choose the path that best matches your confidence level and learning goals.",
+      "position": {
+        "x": 2360,
+        "y": 80
+      },
+      "choices": [
+        {
+          "label": "Complete this course",
+          "next": "n9"
+        },
+        {
+          "label": "Review Fundamentals module",
+          "next": "n1"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've mastered time series analysis fundamentals. You now understand core concepts, trends, seasonality, and their real-world applications in forecasting and decision-making. You're equipped to apply these techniques to business problems, analyze temporal data effectively, and build foundational skills for advanced techniques like ARIMA, exponential smoothing, and multivariate time series modeling. Continue practicing with real datasets to deepen your expertise!",
+      "position": {
+        "x": 1600,
+        "y": 540
+      },
+      "next": null
+    }
+  ]
+}

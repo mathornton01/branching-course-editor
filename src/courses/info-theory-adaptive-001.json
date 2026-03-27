@@ -1,0 +1,229 @@
+{
+  "id": "info-theory-adaptive-001",
+  "title": "Information Theory Essentials",
+  "description": "An adaptive branching course on Information Theory that diagnoses your level and guides you through either foundational concepts or advanced mathematical frameworks.",
+  "topic": "Information Theory",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "information-theory",
+    "entropy",
+    "compression",
+    "shannon",
+    "bits",
+    "data"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Information Theory Fundamentals Diagnostic",
+      "content": "Let's assess your current knowledge of information theory to guide your learning path. Answer these questions about entropy, bits, and information concepts.",
+      "questions": [
+        {
+          "question": "What does the Shannon entropy H(X) = -\u03a3 p(x)log\u2082p(x) measure?",
+          "options": [
+            "The total amount of data in a message",
+            "The average amount of uncertainty or information in a random variable",
+            "The speed of data transmission",
+            "The number of errors in encoded data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Total data and entropy are different concepts.",
+            "Correct! Entropy quantifies average uncertainty.",
+            "Incorrect. That relates to channel capacity, not entropy itself.",
+            "Incorrect. Entropy measures information, not errors."
+          ],
+          "explanation": "Shannon entropy measures the average information content or uncertainty in a random variable. It's the fundamental concept in information theory."
+        },
+        {
+          "question": "In information theory, what is a 'bit'?",
+          "options": [
+            "A small piece of anything",
+            "The basic unit of information, representing the answer to one binary question",
+            "The smallest physical component of a computer",
+            "A measurement of data transfer speed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's colloquial usage.",
+            "Correct! A bit is the fundamental information unit.",
+            "Incorrect. That's a physical property.",
+            "Incorrect. That's typically measured in bits per second, but a bit itself is an information unit."
+          ],
+          "explanation": "A bit is the basic unit of information in information theory, representing the answer to one yes-or-no question, or distinguishing between two equally likely outcomes."
+        },
+        {
+          "question": "If we have a coin that always comes up heads, what is its Shannon entropy?",
+          "options": [
+            "1 bit",
+            "0.5 bits",
+            "0 bits",
+            "Infinite bits"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. A certain outcome has zero uncertainty.",
+            "Incorrect. That would be for a fair coin, which has maximum entropy.",
+            "Correct! A certain outcome has zero entropy.",
+            "Incorrect. Entropy is bounded and finite."
+          ],
+          "explanation": "Since the outcome is certain (always heads), there is no uncertainty. Entropy H = 0 bits because we learn nothing new from the result."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced Information Theory: Entropy and Data Compression",
+      "content": "Shannon entropy quantifies the average information content in a random variable. For a distribution with probabilities p(x\u2081), p(x\u2082), ..., p(x\u2099), the entropy H(X) = -\u03a3 p(x)log\u2082p(x) measures average uncertainty in bits. This connects directly to data compression: by the source coding theorem, any lossless compression scheme requires at least H(X) bits per symbol on average. Real-world applications include Huffman coding, which assigns shorter bit sequences to more probable symbols, and modern compression algorithms like gzip that exploit patterns in natural data to approach the entropy limit.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Example: Huffman Coding and Entropy",
+      "content": "Consider text with letter frequencies: E (40%), T (20%), A (20%), other (20%). Shannon entropy is H(X) = -[0.4\u00d7log\u2082(0.4) + 0.2\u00d7log\u2082(0.2) + 0.2\u00d7log\u2082(0.2) + 0.2\u00d7log\u2082(0.2)] \u2248 1.86 bits/symbol. Huffman coding assigns: E\u21920 (1 bit), T\u219210 (2 bits), A\u2192110 (3 bits), other\u2192111 (3 bits). Average encoding length is 0.4(1) + 0.2(2) + 0.2(3) + 0.2(3) = 1.9 bits/symbol, very close to the entropy bound. This demonstrates how entropy sets the theoretical limit for lossless compression and how practical algorithms approach it.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Learning Complete",
+      "content": "You've explored the mathematical foundations of information theory, including Shannon entropy and optimal coding strategies. You understand how entropy quantifies information and sets bounds on data compression. Continue exploring mutual information, channel capacity, and applications in cryptography and machine learning."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Information Theory Basics: What is Information?",
+      "content": "Information is a measure of how much surprise or uncertainty we remove by learning something. In information theory, we quantify this using the concept of 'bits.' A bit represents the answer to one yes-or-no question. If an event is very likely, learning it happened gives us little information (low surprise). If an event is unlikely, learning it happened gives us more information (high surprise). Shannon entropy measures the average amount of information in a random event, combining both the probability of each outcome and how surprising each outcome is.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Information in a Weather Forecast",
+      "content": "Imagine a region where it rains 90% of the time and is sunny 10% of the time. Learning 'it will rain tomorrow' gives you little information\u2014you already expected rain. But learning 'it will be sunny tomorrow' is surprising and informative. In bits: a sunny day contains about 3.3 bits of information (since log\u2082(1/0.1) \u2248 3.3), while a rainy day contains about 0.15 bits. Events that are equally likely (50-50) give 1 bit of information each, which is why we use 'bit' as our unit.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Understanding Information and Entropy",
+      "content": "Test your understanding of information content and entropy with these practical questions.",
+      "questions": [
+        {
+          "question": "Which scenario contains more information?",
+          "options": [
+            "Learning it rained in a desert where it rains 1% of the time",
+            "Learning it rained in a rainforest where it rains 90% of the time",
+            "Learning the time of day in a place with equal day/night",
+            "Both A and B contain equal information"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Rare events contain more information.",
+            "Incorrect. Rain in a rainforest is expected.",
+            "Incorrect. That's less surprising.",
+            "Incorrect. Rare events are more informative."
+          ],
+          "explanation": "Since rain is rare in a desert (1%), learning it rained is very informative. Rain is expected in a rainforest, so that news is less informative."
+        },
+        {
+          "question": "What is the Shannon entropy of a fair die roll (6 equally likely outcomes)?",
+          "options": [
+            "1 bit",
+            "2.58 bits",
+            "6 bits",
+            "0.5 bits"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's for a coin flip.",
+            "Correct! H = log\u2082(6) \u2248 2.58 bits.",
+            "Incorrect. That's the number of outcomes.",
+            "Incorrect. That's less than the actual entropy."
+          ],
+          "explanation": "For 6 equally likely outcomes, entropy is H = -\u03a3 (1/6)log\u2082(1/6) = log\u2082(6) \u2248 2.58 bits. You need 2-3 bits to encode six different possibilities."
+        },
+        {
+          "question": "If you flip a coin and it always comes up heads, how much information does it contain?",
+          "options": [
+            "1 bit",
+            "0.5 bits",
+            "0 bits\u2014it's completely predictable",
+            "Infinite bits"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. A predictable event contains no information.",
+            "Incorrect. That's for a fair coin.",
+            "Correct! Certainty means zero information.",
+            "Incorrect. Entropy is bounded."
+          ],
+          "explanation": "Since the outcome is certain, there's no surprise or uncertainty removed. You gain zero information from a predictable outcome."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Basic Learning Complete",
+      "content": "You've learned the fundamentals of information theory: what information means, how we measure it in bits, and why surprising events contain more information. You understand that entropy measures average information content. To deepen your knowledge, explore how these concepts apply to data compression, communication channels, and real-world applications."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Strong Understanding"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Needs Foundation"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T03:31:30.702894+00:00",
+  "model": "claude-haiku-4-5"
+}

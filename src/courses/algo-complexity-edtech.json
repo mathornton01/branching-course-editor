@@ -1,0 +1,228 @@
+{
+  "id": "algo-complexity-edtech",
+  "title": "Algorithm Design and Complexity for Education Technology",
+  "description": "Master algorithm design and complexity analysis through real education technology examples",
+  "topic": "Algorithm Design and Complexity",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "algorithms",
+    "complexity",
+    "optimization",
+    "edtech",
+    "computer science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Your Complexity Understanding",
+      "content": "Let's assess your current understanding of algorithm efficiency and complexity analysis. These questions will help personalize your learning path.",
+      "questions": [
+        {
+          "question": "You're building a student recommendation system for an EdTech platform. The system checks every student's interaction history to find similar learners. With 100,000 students and 500 interactions each, this takes 3 hours daily. What is the time complexity, and why is it problematic?",
+          "options": [
+            "O(n log n) - inefficient sorting",
+            "O(n\u00b2) - comparing each student to all others, causing quadratic growth",
+            "O(n) - linear scan of all data",
+            "O(1) - constant time regardless of data size"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not a sorting problem.",
+            "Correct! With 100,000 students, O(n\u00b2) means ~10 billion comparisons, growing exponentially with scale.",
+            "The problem involves comparing multiple students, not a simple linear scan.",
+            "This clearly depends on dataset size."
+          ],
+          "explanation": "O(n\u00b2) complexity is why real platforms use indexing, clustering, or approximation algorithms instead of naive pairwise comparisons."
+        },
+        {
+          "question": "An online course platform needs to retrieve one student's quiz history from 10,000 students. Linear search takes 5ms per student; binary search on sorted data takes 13 checks. What does this teach about algorithm design?",
+          "options": [
+            "Linear search is always better because it's simpler",
+            "Binary search saves 50,000ms per query; the upfront sorting cost is worthwhile for frequent lookups",
+            "Sorting takes too much time, so linear search is practical",
+            "Both methods have identical performance for small datasets"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Simpler isn't better when serving thousands of students.",
+            "Exactly! 13 \u00d7 5ms \u2248 65ms vs 50,000ms\u2014a 770\u00d7 improvement justifies one-time sorting.",
+            "Sorting is one-time; savings compound across thousands of queries.",
+            "They diverge rapidly beyond ~100 items."
+          ],
+          "explanation": "Algorithm design means investing optimization where it compounds. EdTech platforms cache and sort data once nightly, then enjoy 100\u00d7 faster lookups throughout the day."
+        },
+        {
+          "question": "You're optimizing an adaptive learning system that uses O(n) memory for learning paths, but it runs on resource-constrained mobile devices. Can you optimize memory without sacrificing functionality?",
+          "options": [
+            "Yes, compression or lazy-loading always works",
+            "No, O(n) is the theoretical minimum for storing n items",
+            "Maybe\u2014depends on whether you can trade memory for computation, like recalculate versus cache",
+            "Just buy more device storage"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Lazy-loading is one technique, but not all optimizations work for all problems.",
+            "You can often trade space for time through clever design.",
+            "Correct! Store essential data, recompute recommendations on-demand: saves memory but uses more CPU.",
+            "Hardware can't solve algorithmic design issues."
+          ],
+          "explanation": "Space-time tradeoffs are central to algorithm design. Real platforms choose: cache everything (fast, memory-heavy) versus compute on-demand (slower, memory-light) based on constraints."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Complexity Analysis & Optimization in Real EdTech Systems",
+      "content": "You've demonstrated strong fundamentals! In production EdTech systems, algorithm choices directly impact user experience and server costs. You'll learn how platforms like Coursera and Khan Academy optimize for scale: using Big O analysis to predict bottlenecks, applying dynamic programming to recommendations, and managing space-time tradeoffs serving millions. Real systems don't just count operations\u2014they profile actual workloads, measure cache effects, and optimize constant factors that Big O notation hides. A poorly written O(n log n) sort can be slower than a well-tuned O(n\u00b2) algorithm on small datasets, so adaptive algorithms choose the best approach based on input size. You'll explore distributed algorithms, approximate algorithms, and data structure choices that power global EdTech platforms.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Worked Example: Optimizing Peer Learning Recommendations",
+      "content": "Given a student who completed a machine learning course, find 5 similar learners for collaboration. Naive approach: compute similarity (3 features) for every student pair\u2014O(n\u00b2) with 5 million students means 12.5 trillion comparisons. Solution: use locality-sensitive hashing to bucket students into ~10,000 hash buckets based on learning profile, then search only similar buckets\u2014reducing comparisons from trillions to millions. This trades small memory increase for 1000\u00d7 speedup. Real platforms further optimize by caching results (O(1) lookup) and updating recommendations asynchronously (avoiding real-time computation entirely). The lesson: think beyond textbook complexity\u2014data structure choices, caching, and paradigms like hashing, indexing, and approximation compound small improvements into massive gains.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Mastery Unlocked: Advanced Algorithm Design",
+      "content": "You're ready to tackle production challenges! You understand Big O analysis, space-time tradeoffs, and algorithmic paradigms for scale. Next steps: profile actual EdTech systems to see constant factors and cache effects, implement dynamic programming for recommendations, and study distributed algorithms for multi-server platforms. Keep optimizing for real constraints."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Fundamentals: What Makes Algorithms Efficient?",
+      "content": "An algorithm is a step-by-step procedure to solve a problem. Complexity measures how many steps (time) and memory (space) an algorithm needs. In education technology, this matters: slow dashboards lose users, memory-heavy recommendation engines crash on phones, and poorly scaled systems break under peak load. Big O notation compares algorithms: O(1) is instant, O(n) grows with data, O(n\u00b2) becomes slow fast. Searching a list is O(n), but a well-indexed database lookup is O(log n)\u2014huge difference for 1 million students. Your goal: choose algorithms that stay responsive as EdTech platforms scale from 100 to 100 million learners.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Worked Example: Sorting Student Quiz Scores",
+      "content": "An EdTech platform displays leaderboards showing top scorers across 50,000 students. Bubble sort: O(n\u00b2) = 2.5 billion comparisons, ~10 seconds. Merge sort: O(n log n) = ~850,000 comparisons, ~0.001 seconds. Real platforms do better: store scores in indexed databases or Redis sorted sets\u2014lookup is O(log n) without sorting at all. This shows massive impact of algorithm choice on user experience. A 10-second delay means students abandon the feature. A 0.001-second lookup keeps them engaged. This is why understanding complexity before coding is essential.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Apply Complexity Analysis",
+      "content": "Test your understanding with realistic EdTech scenarios.",
+      "questions": [
+        {
+          "question": "An adaptive platform stores 10,000 student profiles (100 attributes each). Finding 'similar' students requires comparing the target to every student (O(100) per comparison). What's faster than naive O(n\u00b2)?",
+          "options": [
+            "Increase attributes to O(1000) for accuracy",
+            "Use K-means clustering to group students, then search only relevant clusters\u2014reduces comparisons from 1M to ~10K",
+            "Sort students by one attribute and linear search",
+            "Store each student only once"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "More attributes make it slower.",
+            "Correct! Clustering preprocesses once, then searches within clusters\u2014100\u00d7 speedup.",
+            "Sorting by one attribute misses multi-dimensional similarity.",
+            "You can't lose data without losing information."
+          ],
+          "explanation": "Don't always search linearly\u2014cluster, index, or hash to reduce search space. Real recommender systems use locality-sensitive hashing or approximate nearest neighbors for exactly this reason."
+        },
+        {
+          "question": "A video course has cached watchlists for 10,000 students. Displaying 'students watching similar courses' requires O(n\u00b2) comparisons. The platform has 1 second to compute. Would you redesign?",
+          "options": [
+            "No, O(n\u00b2) is acceptable",
+            "Yes\u2014O(n\u00b2) = 100 million comparisons; at 1M comparisons/second, this takes 100 seconds. Redesign using hashing/indexing to O(n log n)",
+            "No, caching makes performance irrelevant",
+            "Yes, but only if students exceed 1 billion"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Complexity absolutely matters for real performance.",
+            "Exactly right! O(n\u00b2) is too slow. Use minhashing or inverted indexes for O(n log n).",
+            "Caching helps, but slow algorithms are still slow.",
+            "Optimize before problems grow 100,000\u00d7 worse."
+          ],
+          "explanation": "Real thinking: measure performance requirement (1 second), estimate cost (100 seconds), decide to redesign. Engineers use approximate algorithms or incremental updates instead of recomputing from scratch."
+        },
+        {
+          "question": "Mobile EdTech apps have 500MB memory. Downloaded courses are 1GB. Should you decompress everything into memory or read compressed data on demand?",
+          "options": [
+            "Decompress everything\u2014faster access",
+            "Read on demand\u2014saves memory, slower access. This is a space-time tradeoff; choose based on whether you prioritize speed or low memory",
+            "Compress to 50MB and hope decompression is fast",
+            "Store in cloud, never download"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Decompressing 1GB into 500MB memory crashes the app.",
+            "Correct! Mobile developers constantly make this tradeoff. Limited memory \u2192 lazy-load. Servers \u2192 cache everything.",
+            "You can't reliably compress 1GB to 50MB without data loss.",
+            "Then offline access fails."
+          ],
+          "explanation": "Space-time tradeoffs are everywhere. Mobile = tight memory, prioritize space. Servers = loose memory, prioritize speed. Algorithm design means understanding constraints and choosing accordingly."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Fundamentals Complete: Ready for Real Systems",
+      "content": "Great work! You understand how algorithms scale and why complexity matters in EdTech. You've learned Big O notation, compared sorting and searching, and practiced space-time tradeoffs. Next: explore actual EdTech codebases\u2014look at database indexes, caching strategies, and recommendation algorithms in Coursera, Khan Academy, or Blackboard. Apply complexity thinking to your projects, and you'll write systems serving millions without breaking under load."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Strong understanding (pass)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Needs reinforcement (fail)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T05:23:21.026630+00:00",
+  "model": "claude-haiku-4-5"
+}

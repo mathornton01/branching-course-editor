@@ -1,0 +1,269 @@
+{
+  "id": "58a1f4c2-3d8b-4b9c-9e2f-7a1c9d6f5b8a",
+  "title": "Web Development with FastAPI",
+  "description": "Master modern Python web development with FastAPI. Learn to build high-performance APIs with async/await, type hints, and automatic validation.",
+  "topic": "Web Development",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "FastAPI",
+    "Python",
+    "Web Development",
+    "REST API",
+    "Backend"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Welcome to FastAPI",
+      "content": "FastAPI is a modern Python framework for building web APIs with exceptional speed and ease. Built on Starlette and Pydantic, it enables you to write type-safe, production-ready APIs with minimal boilerplate. This course will teach you FastAPI fundamentals through two complementary learning paths: theory-first (understanding the 'why') and hands-on-first (learning by doing). Choose the approach that matches your learning style.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Which approach resonates with you? Theory-first learners start with core concepts before implementation. Hands-on learners prefer building immediately to understand concepts through practice.",
+      "choices": [
+        {
+          "label": "Theory First: Master the Concepts",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-On First: Learn by Building",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Core FastAPI Concepts",
+      "content": "FastAPI leverages three key technologies: async/await for non-blocking I/O, type hints for automatic validation and documentation, and Pydantic for data serialization. Async functions allow your server to handle many requests concurrently without blocking. Type hints enable FastAPI to automatically generate OpenAPI documentation and validate incoming data. Pydantic models ensure type safety and provide helpful validation error messages.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Async Endpoint Example",
+      "content": "Here's a simple async GET endpoint: `from fastapi import FastAPI; app = FastAPI(); @app.get(\"/users/{user_id}\"); async def get_user(user_id: int): return {\"user_id\": user_id, \"name\": \"Alice\"}`. The `async` keyword enables concurrent request handling. Type hints (`user_id: int`) automatically validate path parameters. FastAPI generates interactive Swagger docs at `/docs`. This endpoint demonstrates all three core concepts working together.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assess Your Understanding",
+      "content": "Test your knowledge of FastAPI fundamentals and async concepts.",
+      "questions": [
+        {
+          "question": "Why does FastAPI use `async def` instead of regular `def` functions?",
+          "options": [
+            "To make the code run faster",
+            "To allow non-blocking I/O and handle concurrent requests efficiently",
+            "Because it's required by Python",
+            "To automatically validate request data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Speed improvements come from architecture, not the async keyword alone.",
+            "Correct! Async functions enable your server to handle multiple requests simultaneously without blocking.",
+            "Incorrect. Async is optional in Python and FastAPI.",
+            "Incorrect. Type hints and Pydantic handle validation, not the async keyword."
+          ],
+          "explanation": "Async functions are the foundation of FastAPI's performance. They allow the event loop to serve other requests while waiting for I/O operations (database queries, external APIs, etc.) to complete."
+        },
+        {
+          "question": "What does this type hint accomplish: `def get_item(item_id: int)`?",
+          "options": [
+            "It makes the function run faster",
+            "It automatically validates that item_id is an integer and generates API documentation",
+            "It prevents any errors from occurring",
+            "It encrypts the parameter for security"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Type hints don't affect execution speed.",
+            "Correct! FastAPI uses type hints to validate inputs and auto-generate OpenAPI/Swagger documentation.",
+            "Incorrect. Type hints provide validation, not error prevention for logic.",
+            "Incorrect. Security requires additional mechanisms beyond type hints."
+          ],
+          "explanation": "Type hints are the secret sauce of FastAPI. They enable automatic request validation, serialization, and documentation generation without any extra configuration."
+        },
+        {
+          "question": "Which statement about Pydantic models in FastAPI is true?",
+          "options": [
+            "They are optional and never used",
+            "They enforce type validation and provide helpful error messages for invalid data",
+            "They slow down your API significantly",
+            "They only work with SQL databases"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Pydantic models are central to FastAPI.",
+            "Correct! Pydantic provides powerful validation and clear error messages when data doesn't match the schema.",
+            "Incorrect. Pydantic adds minimal overhead and actually improves reliability.",
+            "Incorrect. Pydantic works with any data source."
+          ],
+          "explanation": "Pydantic models define the shape of your data and validate it on request/response. Invalid data is rejected with helpful messages before reaching your business logic."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n9",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Build Your First FastAPI Endpoint",
+      "content": "Let's jump straight into building. FastAPI is incredibly accessible\u2014install it with `pip install fastapi uvicorn`, then create a minimal app with just five lines of code. Start with a simple GET endpoint that returns JSON. As you build, you'll naturally encounter key concepts: how HTTP methods work, request/response handling, and data validation. This hands-on approach makes abstract concepts concrete.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "CRUD Operations Example",
+      "content": "Here's a simple in-memory CRUD API: POST `/items` creates with `@app.post()`, GET `/items/{item_id}` reads, PUT `/items/{item_id}` updates, DELETE `/items/{item_id}` removes. Each endpoint uses FastAPI decorators and type hints: `@app.post(\"/items\"); async def create(item: ItemSchema) \u2192 ItemSchema:`. Pydantic automatically validates the incoming JSON against ItemSchema. This pattern scales from prototypes to production systems.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Build and Test Your API",
+      "content": "Demonstrate your practical FastAPI skills.",
+      "questions": [
+        {
+          "question": "Which decorator creates an endpoint that accepts JSON POST requests in FastAPI?",
+          "options": [
+            "@app.get()",
+            "@app.post()",
+            "@app.create()",
+            "@app.request()"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. @app.get() is for GET requests.",
+            "Correct! @app.post() handles POST requests, which are used to create resources.",
+            "Incorrect. FastAPI doesn't have a @app.create() decorator.",
+            "Incorrect. @app.request() is not a standard FastAPI decorator."
+          ],
+          "explanation": "HTTP POST requests are the standard way to send data to create new resources. In FastAPI, @app.post() decorates the handler function."
+        },
+        {
+          "question": "You have a Pydantic model `class Book(BaseModel): title: str; pages: int`. What happens if you send `{\"title\": \"1984\", \"pages\": \"invalid\"}`?",
+          "options": [
+            "The string 'invalid' is stored in pages",
+            "FastAPI returns a 422 validation error with a helpful message",
+            "The request succeeds with pages = 0",
+            "The server crashes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Pydantic enforces type validation.",
+            "Correct! Pydantic validates types and returns clear error messages when data doesn't match the schema.",
+            "Incorrect. Invalid data is rejected, not coerced to 0.",
+            "Incorrect. FastAPI handles validation gracefully without crashing."
+          ],
+          "explanation": "Pydantic's validation happens automatically. Invalid data returns HTTP 422 (Unprocessable Entity) with details about what went wrong\u2014invaluable for debugging client errors."
+        },
+        {
+          "question": "How do you access path parameters in a FastAPI endpoint like `/users/{user_id}`?",
+          "options": [
+            "Through a global variable",
+            "As a function parameter with matching name: `async def get_user(user_id: int)`",
+            "By parsing the URL string manually",
+            "Using FastAPI's get_params() method"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Path parameters are not global.",
+            "Correct! FastAPI automatically extracts and validates path parameters from the function signature.",
+            "Incorrect. FastAPI handles URL parsing for you.",
+            "Incorrect. There is no get_params() method."
+          ],
+          "explanation": "The elegance of FastAPI: just declare parameters in your function signature with type hints. FastAPI extracts values from the URL path and validates them automatically."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n9",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: You're a FastAPI Developer!",
+      "content": "Congratulations! You've mastered the fundamentals of FastAPI. You understand async/await, type hints, and Pydantic validation\u2014the core pillars of modern API development. Whether you chose theory-first or hands-on-first, you now have the foundation to build high-performance, production-ready web APIs. Next steps: explore FastAPI's advanced features (dependency injection, middleware, background tasks), build a real project, and dive into database integration with SQLAlchemy."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-On First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c6b",
+      "source": "n5",
+      "target": "n3",
+      "label": "Fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c9b",
+      "source": "n8",
+      "target": "n6",
+      "label": "Fail"
+    }
+  ],
+  "generated_at": "2026-03-27T03:43:01.716594+00:00",
+  "model": "claude-haiku-4-5"
+}

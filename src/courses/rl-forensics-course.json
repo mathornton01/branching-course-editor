@@ -1,0 +1,272 @@
+{
+  "id": "rl-forensics-course",
+  "title": "Reinforcement Learning in Forensic Science",
+  "description": "Master how investigators and AI systems learn from evidence feedback through Reinforcement Learning, with assessment-driven adaptive learning paths.",
+  "topic": "Reinforcement Learning",
+  "theme": "forensic science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "reinforcement learning",
+    "machine learning",
+    "forensic science",
+    "AI",
+    "evidence analysis"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Forensic Investigation Fundamentals",
+      "content": "You are learning how investigators and AI systems improve through experience. Just like how an experienced forensic analyst learns which techniques work best from past cases, Reinforcement Learning (RL) teaches machines to make better decisions by rewarding good outcomes and penalizing poor ones. In forensic science, an 'agent' (investigator or algorithm) takes 'actions' (collect DNA sample, run chemical test, interview witness) based on the current 'state' (available evidence), and receives 'rewards' (case closure, correct match) or 'penalties' (contaminated sample, false identification).",
+      "questions": [
+        {
+          "question": "In a forensic DNA analysis workflow using Reinforcement Learning, what would be the primary reward signal?",
+          "options": [
+            "Number of DNA samples collected",
+            "Correct identification and case resolution",
+            "Time spent analyzing samples",
+            "Number of failed attempts"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: Quantity of samples doesn't indicate learning success.",
+            "Correct: Case closure and accurate identification are the ultimate goals that drive learning.",
+            "Incorrect: Efficiency matters, but accurate results matter more in forensics.",
+            "Incorrect: Failures are learning opportunities, not rewards."
+          ],
+          "explanation": "In RL systems applied to forensic work, the reward signal must reflect the ultimate objective: solving cases correctly. This aligns the AI system's learning with actual investigative success."
+        },
+        {
+          "question": "An investigator learns that photographing the crime scene before collecting evidence improves case success. What RL concept does this represent?",
+          "options": [
+            "State-action-reward learning",
+            "Punishment feedback only",
+            "Random exploration",
+            "Negative reinforcement"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct: The investigator learned that a specific action (photograph first) in a particular state (arrival at scene) yields better rewards (stronger cases).",
+            "Incorrect: This involves positive learning, not just punishment.",
+            "Incorrect: This is learned behavior, not random.",
+            "Incorrect: This is positive reinforcement, not negative."
+          ],
+          "explanation": "This demonstrates the core RL loop: observing the state, taking an action, and receiving reward feedback that informs future decisions in similar states."
+        },
+        {
+          "question": "Which forensic scenario best describes an agent learning through trial and error with rewards?",
+          "options": [
+            "A fingerprint technician following the same standard procedure every time",
+            "A digital forensics expert adjusting data recovery techniques based on past case outcomes",
+            "A pathologist using only textbook methods regardless of results",
+            "A lab manager creating new policies without testing them"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: No learning occurs without varying approach.",
+            "Correct: This shows adaptation based on feedback from real case outcomes.",
+            "Incorrect: No learning or adaptation is happening.",
+            "Incorrect: Policies created without evidence feedback won't show learning."
+          ],
+          "explanation": "RL requires active feedback loops. The digital forensics expert's approach of adjusting techniques based on case outcomes exemplifies how RL works in practice."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Advanced Reinforcement Learning in Investigation",
+      "content": "As investigation techniques improve, forensic teams must optimize their strategies. In Reinforcement Learning, agents learn to maximize cumulative rewards over time by discovering optimal 'policies'\u2014sequences of decisions that lead to the best outcomes. In forensic science, this means developing investigative procedures that maximize case closure rates, evidence quality, and resource efficiency. The challenge is balancing immediate rewards (quick evidence collection) with long-term success (admissible evidence that stands in court).",
+      "questions": [
+        {
+          "question": "A forensic lab implements an AI system that prioritizes quick DNA extraction over thorough sample documentation. The system closes cases faster (immediate reward) but faces evidence challenges in court. What RL concept explains this problem?",
+          "options": [
+            "Optimal policy learning",
+            "Reward myopia\u2014prioritizing short-term rewards over cumulative long-term success",
+            "Proper exploration-exploitation balance",
+            "Correct state representation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: Optimal policies account for long-term outcomes, not just immediate gains.",
+            "Correct: The system is optimizing for immediate case closure rather than the actual objective of successful prosecution.",
+            "Incorrect: This is about reward structure, not balancing exploration vs. exploitation.",
+            "Incorrect: The state might be represented correctly; the problem is in the reward signal."
+          ],
+          "explanation": "Reward myopia is a critical challenge in RL: if you reward the wrong thing, the agent optimizes for the wrong thing. Here, the agent should be rewarded for convictions that survive appeal, not just case closures."
+        },
+        {
+          "question": "An investigative AI learns that combining ballistics analysis with trajectory modeling yields confessions in 78% of cases, versus ballistics alone at 45%. This represents:",
+          "options": [
+            "State-action-reward mapping leading to policy improvement",
+            "Exploration without exploitation",
+            "Punishment-based learning only",
+            "Random strategy selection"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct: The AI discovered that specific action combinations in certain states produce higher rewards.",
+            "Incorrect: This is successful exploitation of a learned pattern.",
+            "Incorrect: This involves positive rewards for successful strategies.",
+            "Incorrect: This is learned pattern recognition, not randomness."
+          ],
+          "explanation": "This demonstrates how RL discovers effective policies: by testing different action sequences and retaining those that produce the highest rewards (confession rates, case resolution)."
+        },
+        {
+          "question": "A forensic team discovers that their evidence collection order affects courtroom admissibility. This discovery that action sequence matters most represents:",
+          "options": [
+            "Learning the optimal policy for their domain",
+            "Finding random solutions",
+            "Avoiding all penalties",
+            "Ignoring environmental feedback"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct: Recognizing that the sequence and procedure of actions (the policy) affects outcomes is core to policy learning in RL.",
+            "Incorrect: This is structured learning, not random.",
+            "Incorrect: They're learning which procedures maximize success, not just avoiding failure.",
+            "Incorrect: They're directly responding to environmental feedback."
+          ],
+          "explanation": "Policies in RL aren't about individual actions but about the strategy\u2014the learned sequence and timing of decisions. Forensic teams discovering that procedures matter is discovering that their policy needs refinement."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Reinforcement Learning Essentials in Forensic Work",
+      "content": "Let's solidify the core concepts. Reinforcement Learning is a machine learning approach where an agent learns by interacting with an environment and receiving feedback. In forensic science, imagine a crime lab technician: they take an action (perform a fingerprint comparison technique), receive feedback from the environment (the print matches or doesn't match a suspect), and adjust their approach next time. The agent's goal is to maximize cumulative rewards\u2014in forensic work, this means accurate evidence analysis, successful case closures, and procedural reliability. Key concepts: **State** (current evidence available), **Action** (which forensic test to perform), **Reward** (case success indicator), and **Policy** (the decision-making strategy the agent learns).",
+      "next": "n6"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Advanced Reinforcement Learning Strategies in Forensics",
+      "content": "At the expert level, understand how sophisticated RL algorithms apply to complex forensic challenges. **Value-based methods** (like Q-learning) estimate the long-term value of each action in every investigative state\u2014for example, determining which evidence collection sequence yields the most reliable admissible evidence. **Policy gradient methods** directly learn the best decision strategy by understanding which actions lead to higher rewards in specific crime scene states. **Model-based approaches** simulate investigation strategies before deploying them, allowing forensic teams to predict optimal procedures without trial-and-error in real cases. **Deep Reinforcement Learning** combines neural networks with RL to handle complex pattern recognition in trace evidence, digital forensics, and behavioral analysis\u2014recognizing subtle patterns in crime scenes that traditional methods miss. Real application: AI-assisted crime pattern analysis uses deep RL to identify serial offender signatures and optimize surveillance resource allocation.",
+      "next": "n7"
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Applying Reinforcement Learning to Crime Scene Strategy",
+      "content": "Practice applying RL concepts to realistic forensic scenarios. A crime lab receives a contaminated trace evidence sample. The technician must decide: (1) attempt extraction anyway, offering quick results (immediate reward) but risking inadmissible evidence in court (large penalty), or (2) request a new sample, which takes time (small penalty) but guarantees admissibility (large reward). In RL terms, which action maximizes cumulative reward? Consider how a properly-structured reward system would guide decision-making, and how algorithms learn to balance speed against reliability in forensic contexts.",
+      "questions": [
+        {
+          "question": "A digital forensics investigator has a suspect's encrypted drive. They can attempt password cracking (50% success, 3 days) or request a warrant for decryption key (100% success, 10 days). Which represents better RL policy optimization for legal admissibility?",
+          "options": [
+            "Always attempt cracking first",
+            "Prioritize methods that guarantee admissible evidence, accepting longer investigation times",
+            "Use only the fastest method regardless of outcome",
+            "Randomly choose each time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect: 50% success rate leads to failed prosecutions.",
+            "Correct: RL should optimize for the true objective: admissible, usable evidence.",
+            "Incorrect: Speed without legal admissibility wastes resources.",
+            "Incorrect: Random selection doesn't represent learned policy."
+          ],
+          "explanation": "In forensic RL, the reward structure must reflect real consequences. Evidence that's inadmissible wastes investigation time and resources, so policies should heavily reward admissibility over speed."
+        },
+        {
+          "question": "A forensic DNA lab learns that rapid processing (24 hours) has 15% contamination issues, while thorough processing (48 hours) has 2% contamination. For a murder investigation, what policy should maximize long-term case success?",
+          "options": [
+            "Always use rapid processing",
+            "Use rapid only for minor crimes, thorough for major crimes",
+            "Use thorough processing due to lower penalty from contamination in important cases",
+            "Alternate randomly"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect: High contamination rate leads to case failures.",
+            "Partially correct: Adapting to case importance is good, but the answer should emphasize the low-risk method for critical cases.",
+            "Correct: For serious crimes where penalties for contamination are severe, the policy should favor reliability.",
+            "Incorrect: No learned optimization occurs with random selection."
+          ],
+          "explanation": "RL rewards should account for case severity. Contamination in a murder case is catastrophic (wrongful conviction, real criminal walks free), so the policy should weight reliability heavily."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Real Forensic RL Application: DNA Mixture Analysis",
+      "content": "A modern forensic lab faces this challenge: DNA samples from crime scenes often contain DNA from multiple people (mixtures). An AI system must learn which analysis parameters and mixture ratio assumptions yield accurate suspect identification. The **state** is the mixture profile (2-person, 3-person, degraded DNA, etc.). The **action** is choosing statistical thresholds and analysis algorithms. The **reward** is correctly identifying contributors and excluding innocent people (case success), while the **penalty** is false inclusions leading to wrongful conviction. The lab trains the AI on hundreds of known mixture cases, rewarding accurate analyses and penalizing errors. Over time, the AI develops a **policy** that adapts its approach based on mixture characteristics\u2014using different thresholds for degraded vs. fresh DNA, different algorithms for 2-person vs. multi-person mixtures. This learned policy becomes the standard operating procedure that investigators trust for critical decisions. The RL system has essentially learned which investigative decisions work best in which forensic contexts.",
+      "next": "n8"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Congratulations: Forensic RL Expert",
+      "content": "You've mastered Reinforcement Learning's application to forensic science. You understand value-based and policy-based learning algorithms, can design reward structures that guide forensic workflows toward legally and scientifically sound outcomes, and recognize how RL optimizes investigative procedures for both accuracy and efficiency. You're prepared to implement RL solutions in advanced forensic AI systems, guide your team in understanding algorithmic decision-making, and contribute to the next generation of evidence analysis technology."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Forensic RL Foundations Complete",
+      "content": "You've completed the Reinforcement Learning course with a solid foundation in how agents learn from forensic feedback. You understand core concepts: states (evidence available), actions (investigative choices), rewards (case outcomes), and policies (learned strategies). You can explain RL to colleagues, recognize RL applications in forensic workflows, and contribute to discussions about evidence analysis optimization. Continue exploring specialized topics like Bayesian statistics in forensics, advanced pattern recognition, or machine learning fairness in criminal justice to deepen your expertise."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n6",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n7",
+      "label": "continue"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n8",
+      "label": "continue"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n8",
+      "label": "continue"
+    }
+  ],
+  "generated_at": "2026-03-27T11:44:23.712758+00:00",
+  "model": "claude-haiku-4-5"
+}

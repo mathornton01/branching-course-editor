@@ -1,0 +1,492 @@
+{
+  "id": "fp-concepts-course",
+  "title": "Functional Programming Concepts",
+  "description": "Master the core principles of functional programming through sequential modules with adaptive practice and assessment.",
+  "topic": "Functional Programming",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "functional programming",
+    "programming paradigms",
+    "pure functions",
+    "higher-order functions"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Functional Programming",
+      "content": "Functional programming is a paradigm where computation is treated as the evaluation of mathematical functions, minimizing state changes and mutable data. Unlike imperative programming which focuses on *how* to do things, functional programming emphasizes *what* to compute. The core idea is that functions are first-class objects that can be passed around, composed, and combined. This approach leads to more predictable, testable, and maintainable code.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "FP Fundamentals Assessment",
+      "content": "Test your understanding of the basic concepts and motivation behind functional programming.",
+      "questions": [
+        {
+          "question": "What is the primary focus of functional programming?",
+          "options": [
+            "A) Managing mutable state and object lifecycles",
+            "B) Treating computation as the evaluation of mathematical functions",
+            "C) Creating classes and inheritance hierarchies",
+            "D) Using loops and conditional statements"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Functional programming actually minimizes mutable state.",
+            "Correct! FP treats computation as evaluating functions, like in mathematics.",
+            "Incorrect. OOP uses classes; FP uses functions as first-class objects.",
+            "Incorrect. FP uses functional constructs instead of imperative loops."
+          ],
+          "explanation": "Functional programming is fundamentally different from imperative or object-oriented programming. It models computation after mathematical functions where inputs always produce the same outputs without side effects."
+        },
+        {
+          "question": "In functional programming, what does 'first-class function' mean?",
+          "options": [
+            "A) Functions are the most important code structure",
+            "B) Functions can be assigned to variables, passed as arguments, and returned from other functions",
+            "C) Functions must be defined before they are used",
+            "D) Functions always return a value"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. 'First-class' is a technical term, not about importance.",
+            "Correct! First-class functions can be treated like any other data type.",
+            "Incorrect. Order of definition varies by language.",
+            "Incorrect. This describes total functions, not first-class status."
+          ],
+          "explanation": "First-class functions are a cornerstone of functional programming. They allow functions to be stored in variables, passed to other functions as arguments (callbacks), and returned as results (higher-order functions)."
+        },
+        {
+          "question": "Why do developers prefer functional programming for certain problems?",
+          "options": [
+            "A) It requires less code overall",
+            "B) It makes code more readable and easier to understand",
+            "C) It reduces unpredictability by minimizing state changes and side effects",
+            "D) It runs faster on modern computers"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Code length isn't the primary benefit.",
+            "Readability improves, but that's secondary.",
+            "Correct! Predictability and reduced side effects make debugging and testing easier.",
+            "Incorrect. Performance depends on implementation, not the paradigm."
+          ],
+          "explanation": "The real benefit of functional programming is that functions with no side effects are easier to reason about, test, and debug. You don't have to worry about hidden state changes affecting your logic."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "FP Fundamentals Practice",
+      "content": "Practice identifying functional programming principles in code examples.",
+      "questions": [
+        {
+          "question": "Which of these best describes a functional programming approach?",
+          "options": [
+            "A) A program that updates global variables in a loop",
+            "B) A program that transforms input data through a series of pure function calls",
+            "C) A program organized into classes with methods",
+            "D) A program that tracks state in instance variables"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. FP avoids global state mutations.",
+            "Correct! Transforming data through pure functions is the FP approach.",
+            "Incorrect. That's object-oriented programming.",
+            "Incorrect. FP emphasizes immutable data, not tracked state."
+          ],
+          "explanation": "Functional programming chains together pure functions that transform data, rather than mutating state. Each function takes input and produces output without side effects."
+        },
+        {
+          "question": "In a functional programming style, how would you typically handle a list of numbers to get their squares?",
+          "options": [
+            "A) Use a for loop to iterate and modify an array",
+            "B) Create a 'square' function and apply it to each element using a map function",
+            "C) Use an imperative algorithm with counters",
+            "D) Store results in global variables as you process"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's imperative programming.",
+            "Correct! Mapping a function over data is the functional way.",
+            "Incorrect. Imperative algorithms contradict functional principles.",
+            "Incorrect. Global state is antithetical to functional programming."
+          ],
+          "explanation": "The functional approach is to define a pure function (square) and then use higher-level operations like map to apply it. This is composable, testable, and avoids mutations."
+        },
+        {
+          "question": "What advantage does avoiding mutable state provide?",
+          "options": [
+            "A) The code uses less memory",
+            "B) The code runs without errors",
+            "C) It's easier to reason about what the code does and test it",
+            "D) It eliminates the need for loops"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Immutability might use more memory.",
+            "Incorrect. It doesn't eliminate all errors.",
+            "Correct! Immutability makes behavior predictable and testable.",
+            "Incorrect. FP still uses iteration, just in a functional way."
+          ],
+          "explanation": "When you don't mutate state, a function always produces the same output for the same input. This predictability makes testing trivial and debugging straightforward."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Pure Functions and Immutability",
+      "content": "A pure function is one that produces the same output for the same input and has no side effects\u2014it doesn't modify external state, perform I/O, or depend on mutable data. Immutability means data cannot be changed after creation; instead of modifying, you create new versions. Together, these principles ensure that functions are deterministic, easy to test, and composable. Example: `const square = (x) => x * x;` is pure because it always returns the same result for the same input. An impure version might be `let count = 0; const increment = () => ++count;` because it depends on and modifies external state.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Pure Functions and Immutability Assessment",
+      "content": "Evaluate your understanding of pure functions, side effects, and immutable data structures.",
+      "questions": [
+        {
+          "question": "Which code snippet represents a pure function?",
+          "options": [
+            "A) let total = 0; function add(x) { total += x; return total; }",
+            "B) function multiply(a, b) { return a * b; }",
+            "C) function getData() { return fetch(url); }",
+            "D) function processUser(user) { user.name = 'John'; return user; }"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This modifies external state (total).",
+            "Correct! This always returns the same output for the same inputs.",
+            "Incorrect. Fetching from a URL is a side effect.",
+            "Incorrect. This mutates the input object."
+          ],
+          "explanation": "A pure function like `multiply(a, b)` depends only on its parameters and always returns the same result. It doesn't modify external state, perform I/O, or have hidden dependencies."
+        },
+        {
+          "question": "What is the main benefit of immutable data structures in functional programming?",
+          "options": [
+            "A) They use less memory than mutable structures",
+            "B) They guarantee thread safety and make concurrency easier",
+            "C) They prevent any errors in your program",
+            "D) They eliminate the need for garbage collection"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Immutable structures may use more memory.",
+            "Correct! Since data can't be changed, multiple threads can safely share it.",
+            "Incorrect. They prevent certain errors, but not all.",
+            "Incorrect. Garbage collection is still needed."
+          ],
+          "explanation": "Immutable data is inherently thread-safe because no concurrent modification is possible. This simplifies concurrent programming significantly."
+        },
+        {
+          "question": "In a functional approach, how should you handle updating an object's property?",
+          "options": [
+            "A) Directly modify the property: obj.name = 'new value'",
+            "B) Create a new object with the updated property: {...obj, name: 'new value'}",
+            "C) Use a setter method to update the object",
+            "D) Use Object.freeze() and then modify"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Direct mutation violates functional principles.",
+            "Correct! Spread syntax or Object.assign creates new objects without mutation.",
+            "Incorrect. Setters still mutate state.",
+            "Incorrect. You can't modify a frozen object."
+          ],
+          "explanation": "Functional programming creates new objects instead of mutating existing ones. In JavaScript, the spread operator `{...obj, property: value}` is the functional way to 'update' objects."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Pure Functions and Immutability Practice",
+      "content": "Practice identifying and writing pure functions, and transforming impure code to be pure.",
+      "questions": [
+        {
+          "question": "Which of these is a side effect?",
+          "options": [
+            "A) Returning a calculated value from a function",
+            "B) Writing to a database or calling an external API",
+            "C) Using a parameter in a calculation",
+            "D) Returning the same value for the same input"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Returning a value is not a side effect.",
+            "Correct! Modifying external systems (DB, API) is a side effect.",
+            "Incorrect. Using parameters is expected.",
+            "Incorrect. Determinism is not a side effect."
+          ],
+          "explanation": "Side effects are any observable interactions with the outside world: modifying state, performing I/O, calling APIs, or printing output. Pure functions have none of these."
+        },
+        {
+          "question": "How would you make this impure function pure? `let cache = []; function add(x, y) { cache.push(x + y); return x + y; }`",
+          "options": [
+            "A) Remove the cache and just return the sum: `const add = (x, y) => x + y;`",
+            "B) Make cache immutable with Object.freeze()",
+            "C) Use a database instead of a local cache",
+            "D) Keep everything the same; it's already functional"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Removing side effects makes it a pure function.",
+            "Incorrect. Even frozen data structures don't eliminate the mutation issue.",
+            "Incorrect. Using a DB would still be a side effect.",
+            "Incorrect. Modifying external state is impure."
+          ],
+          "explanation": "To make a function pure, remove all external state mutations. The function should depend only on its parameters and return a value without affecting anything outside itself."
+        },
+        {
+          "question": "What pattern should you use instead of mutating an array in functional programming?",
+          "options": [
+            "A) array.push(item); // modify in place",
+            "B) [...array, item] or array.concat(item) // create new array",
+            "C) array[array.length] = item; // direct assignment",
+            "D) array.splice(0, 0, item); // use splice"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. push() mutates the original array.",
+            "Correct! Spread syntax and concat create new arrays without mutation.",
+            "Incorrect. Direct assignment mutates.",
+            "Incorrect. splice() mutates the original array."
+          ],
+          "explanation": "In functional programming, you create new arrays instead of modifying existing ones. Spread operator `[...arr, item]` and methods like `concat()` are the functional way."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Higher-Order Functions and Composition",
+      "content": "Higher-order functions are functions that take other functions as arguments or return functions as results. Common examples include `map` (transforms each element), `filter` (keeps elements matching a condition), and `reduce` (accumulates values into a single result). Function composition combines multiple functions so that the output of one becomes the input to the next, creating pipelines. For instance, to get even numbers squared: `numbers.filter(n => n % 2 === 0).map(n => n * n)`. This compositional style is powerful because it's readable, reusable, and declarative\u2014you describe *what* data transformations happen, not *how* they happen.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Higher-Order Functions and Composition Assessment",
+      "content": "Test your understanding of map, filter, reduce, and function composition.",
+      "questions": [
+        {
+          "question": "What does the following code do? `[1,2,3,4,5].filter(x => x > 2).map(x => x * 2)`",
+          "options": [
+            "A) Multiplies all elements by 2",
+            "B) Keeps elements greater than 2, then multiplies each by 2 ([6,8,10])",
+            "C) Filters out 2 and multiplies remaining by 2",
+            "D) Returns the first element greater than 2"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Filter removes some elements first.",
+            "Correct! Filter selects 3,4,5, then map doubles them to get 6,8,10.",
+            "Incorrect. 'Greater than 2' includes 3, 4, 5.",
+            "Incorrect. This returns an array, not a single element."
+          ],
+          "explanation": "This is a composition chain: filter creates a new array with elements > 2, then map transforms each element by multiplying by 2. The pipeline is readable and functional."
+        },
+        {
+          "question": "Which scenario is best suited for the reduce() function?",
+          "options": [
+            "A) Transforming each element of an array to a new value",
+            "B) Filtering out unwanted elements from an array",
+            "C) Summing all numbers in an array or accumulating values into a single result",
+            "D) Getting the first element that matches a condition"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. That's what map() does.",
+            "Incorrect. That's what filter() does.",
+            "Correct! reduce() is for aggregating values into a single result.",
+            "Incorrect. That's what find() does."
+          ],
+          "explanation": "reduce() takes an accumulator and a current value, updating the accumulator with each iteration. It's perfect for sums, products, counts, or any aggregation operation."
+        },
+        {
+          "question": "What is function composition in functional programming?",
+          "options": [
+            "A) Writing multiple functions inside a single larger function",
+            "B) Chaining functions where the output of one becomes the input to the next",
+            "C) Creating functions that handle both data and logic",
+            "D) Using callback functions in nested structures"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Composition is about chaining, not nesting inside one function.",
+            "Correct! Composition chains functions in a pipeline.",
+            "Incorrect. That's not composition.",
+            "Incorrect. Callbacks are related but different from composition."
+          ],
+          "explanation": "Function composition creates a pipeline where each function's output feeds into the next function's input. This makes complex transformations readable and maintainable."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Higher-Order Functions and Composition Practice",
+      "content": "Practice using map, filter, reduce, and composing functions together.",
+      "questions": [
+        {
+          "question": "Write the code to get the sum of all even numbers in the array [1,2,3,4,5,6]. Which approach is functional?",
+          "options": [
+            "A) let sum = 0; for (let i = 0; i < arr.length; i++) { if (arr[i] % 2 === 0) sum += arr[i]; }",
+            "B) arr.filter(x => x % 2 === 0).reduce((sum, x) => sum + x, 0)",
+            "C) Both A and B work equally well",
+            "D) Array methods are imperative, not functional"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's imperative style with loops and mutation.",
+            "Correct! This uses functional composition: filter for evens, reduce for sum.",
+            "Incorrect. B is clearly more functional and declarative.",
+            "Incorrect. Array methods enable functional programming."
+          ],
+          "explanation": "The functional approach clearly expresses intent: 'filter to evens, then reduce to sum.' It avoids mutation and is easier to understand at a glance."
+        },
+        {
+          "question": "What would `[1,2,3].map(x => x * 2).filter(x => x > 3)` return?",
+          "options": [
+            "A) [2,4,6] because map runs first",
+            "B) [4,6] because map produces [2,4,6], then filter keeps values > 3",
+            "C) [1,2,3] unchanged",
+            "D) A syntax error"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. map runs, but then filter removes 2.",
+            "Correct! Composition applies map first [2,4,6], then filter keeps [4,6].",
+            "Incorrect. Both map and filter modify the data.",
+            "Incorrect. This is valid JavaScript."
+          ],
+          "explanation": "Functional composition chains operations left to right. Map transforms all elements, then filter selects only those passing the condition."
+        },
+        {
+          "question": "Why is `arr.map(fn).filter(isValid).reduce(combine, init)` considered good functional style?",
+          "options": [
+            "A) It processes data in fewer steps than a loop",
+            "B) It clearly expresses each transformation step and is easy to test and modify",
+            "C) It always runs faster than imperative code",
+            "D) It uses built-in methods instead of custom code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Performance isn't the main benefit.",
+            "Correct! Readability and composability are the real advantages.",
+            "Incorrect. Performance varies by implementation.",
+            "Incorrect. That's secondary to the composition aspect."
+          ],
+          "explanation": "Functional composition excels at clarity. Each method expresses a single transformation. The pipeline is declarative and easy to modify, test, and understand."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Functional Programming Mastery",
+      "content": "Congratulations! You've mastered the core concepts of functional programming: pure functions that eliminate side effects, immutable data that ensures predictability, and higher-order functions that enable powerful composition. You now understand why functional programming produces more testable, maintainable, and scalable code. Continue by applying these patterns in your own projects\u2014start with small functions, compose them together, and gradually shift toward a more functional style. Explore languages like Haskell or Lisp if you want to dive deeper, or practice these patterns in your preferred language. Great work!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-26T10:03:36.052051+00:00",
+  "model": "claude-haiku-4-5"
+}

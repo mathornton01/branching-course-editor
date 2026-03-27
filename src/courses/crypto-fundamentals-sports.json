@@ -1,0 +1,257 @@
+{
+  "id": "crypto-fundamentals-sports",
+  "title": "Cryptography Fundamentals for Sports Analytics",
+  "description": "Master encryption, hashing, and digital signatures through the lens of sports analytics and athlete data protection",
+  "topic": "Cryptography Fundamentals",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "cryptography",
+    "encryption",
+    "security",
+    "sports analytics",
+    "data protection"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Protecting Your Sports Analytics Pipeline",
+      "content": "Every day, sports teams and analytics platforms process enormous amounts of sensitive data: player performance metrics, contractual information, injury assessments, and proprietary training insights. Cryptography is the foundation that keeps this data secure from competitors and bad actors. In this course, you'll learn how encryption, hashing, and digital signatures protect the competitive advantage that professional sports teams rely on. Whether you're building a fantasy sports platform, analyzing player performance, or managing team data, understanding cryptography is essential.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How do you like to learn best? Select the approach that matches your style, and we'll tailor the course to your preferences.",
+      "choices": [
+        {
+          "label": "Theory First: Understand the concepts before applying them",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-On First: Learn by working with actual sports data",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Cryptographic Foundations: Theory",
+      "content": "Cryptography uses mathematical algorithms to transform readable data (plaintext) into unreadable scrambled data (ciphertext) using a secret key. Think of it like a coach's playbook: without the key, an intercepted copy is just meaningless symbols. There are two main approaches: symmetric encryption (both parties share one secret key, like AES-256) and asymmetric encryption (two different keys\u2014public and private). Hash functions add another layer, creating fixed-length fingerprints of data that make tampering impossible to hide. Together, these tools form the foundation of data security in modern sports analytics.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "How the NFL Secures Player Biometric Data",
+      "content": "When the NFL collects real-time biometric data from players (heart rate, GPS location, acceleration metrics), that data is encrypted end-to-end using AES-256 symmetric encryption. The encrypted data travels to secure servers, where teams verify its authenticity using digital signatures based on public-key cryptography. Additionally, hashes of performance metrics ensure that if anyone tries to modify historical stats in the database, the mismatch immediately reveals tampering. This multi-layered approach\u2014encryption for privacy, signatures for authentication, hashes for integrity\u2014protects the competitive advantage these metrics represent.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Cryptographic Theory Assessment",
+      "content": "Test your understanding of cryptographic concepts and how they apply to protecting sports data.",
+      "questions": [
+        {
+          "question": "A sports analytics team needs to encrypt player salary information that multiple authorized team members must quickly access and decrypt. Which approach would be most appropriate?",
+          "options": [
+            "Asymmetric encryption (public-key cryptography)",
+            "Symmetric encryption (shared secret key)",
+            "Hash functions only",
+            "No encryption; use access controls instead"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Asymmetric encryption is slower and better suited for key exchange, not bulk data encryption.",
+            "Correct! Symmetric encryption like AES-256 is fast and efficient for bulk data that authorized users need to access.",
+            "Hash functions create one-way fingerprints; they cannot decrypt data.",
+            "Encryption is necessary to protect sensitive financial information from unauthorized access."
+          ],
+          "explanation": "For bulk data that multiple authorized users need to quickly access, symmetric encryption is the standard. It's fast and works well in trusted environments where key sharing has been established securely."
+        },
+        {
+          "question": "A rival team intercepts encrypted player performance data but lacks the decryption key. What property of encryption prevents them from reading the data?",
+          "options": [
+            "Confidentiality - encryption ensures only authorized parties can read the data",
+            "Integrity - encryption detects if data has been modified",
+            "Non-repudiation - encryption prevents the sender from denying they sent it",
+            "Authentication - encryption verifies who sent the data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Confidentiality is the core property that keeps data unreadable without the key.",
+            "Integrity is about detecting modification, not preventing unauthorized reading.",
+            "Non-repudiation involves digital signatures, not encryption alone.",
+            "Authentication verifies identity, not readability of encrypted data."
+          ],
+          "explanation": "Encryption's primary role is confidentiality: rendering data unreadable without the secret key. Even if someone intercepts encrypted data, they cannot understand it without the key."
+        },
+        {
+          "question": "A sports league stores a hash of each player's career statistics alongside the actual data in their database. What happens if someone modifies a player's career batting average?",
+          "options": [
+            "The data is automatically restored to its original value",
+            "The modification is invisible and undetectable",
+            "The hash no longer matches the modified data, revealing tampering",
+            "The player's contract is automatically voided"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Hashes don't restore data\u2014they only detect changes.",
+            "That's the opposite of what hashes do; they detect tampering.",
+            "Correct! Even a tiny change produces a completely different hash, instantly revealing tampering.",
+            "Hashes don't automatically trigger contract actions."
+          ],
+          "explanation": "Hash functions create fingerprints of data. Any change, no matter how small, produces a completely different hash. By comparing stored hashes to newly computed hashes, you instantly detect tampering."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Cryptography in Practice: Working with Sports Data",
+      "content": "In practice, sports analytics platforms encrypt data at every stage: data at rest (stored on servers), data in transit (moving between systems), and data in use (being processed). Most platforms use TLS/SSL encryption for network communication and AES-256 for database encryption. Key management is critical\u2014you need secure ways to generate, store, and rotate keys without exposing them. Digital signatures ensure performance data genuinely comes from official sources and hasn't been modified. Understanding these practical implementations helps you make secure design decisions for any sports analytics system.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Encrypting Player Contract Negotiations Data",
+      "content": "A sports agent exchanges confidential contract proposals with a team's GM using asymmetric encryption: the agent's system encrypts the contract terms using the GM's public key, which only the GM can decrypt with their private key. Once a deal is reached, they digitally sign the final contract using the agent's private key, so the team verifies using the agent's public key that the signature genuinely came from the agent and the contract hasn't been modified. The contract is also stored in a database with AES-256 encryption, and its hash is recorded separately. This combination\u2014asymmetric for secure key exchange, symmetric for efficient bulk storage, and signatures for authentication\u2014represents a complete cryptographic system protecting high-value sports transactions.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Applied Cryptography Assessment",
+      "content": "Demonstrate your practical understanding of cryptographic implementation in sports analytics.",
+      "questions": [
+        {
+          "question": "A fantasy sports platform transmits millions of real-time player statistics to users over the internet. Which approach is most efficient and appropriate?",
+          "options": [
+            "Encrypt each stat individually with asymmetric encryption",
+            "Use a TLS/SSL connection (symmetric encryption over a secure channel) to transmit all stats",
+            "Hash all stats and transmit only the hashes",
+            "Send stats in plaintext since they're already public information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Asymmetric encryption is too slow for high-volume data transmission.",
+            "Correct! TLS/SSL provides encrypted channels for bulk data transmission and is the internet standard.",
+            "Hashes are one-way functions\u2014you cannot retrieve actual stats from hashes.",
+            "Even public stats need encryption in transit to prevent modification attacks."
+          ],
+          "explanation": "For high-volume data transmission, symmetric encryption via TLS/SSL is the practical choice. It's fast, standardized, and widely supported. Asymmetric encryption is used for key exchange and authentication, not bulk encryption."
+        },
+        {
+          "question": "A team's analytics system generates a new encryption key for seasonal contracts. What's the biggest security risk if the key is stored in a text file on the same server as the encrypted contracts?",
+          "options": [
+            "The encryption becomes weaker over time",
+            "Someone who gains server access can access both the key and encrypted data, defeating encryption's purpose",
+            "The key will randomly change and become unrecoverable",
+            "Players can easily decrypt their own contracts"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Encryption strength doesn't degrade with time if implemented correctly.",
+            "Correct! Keys must be protected separately from data. If an attacker compromises the server, they shouldn't also get the decryption key.",
+            "Keys don't randomly change when stored in files.",
+            "Encryption specifically prevents unauthorized decryption."
+          ],
+          "explanation": "A fundamental principle of cryptography is key management: the encryption key must be protected as carefully as (or more carefully than) the encrypted data. Keys should be stored in separate, hardened systems like key management services."
+        },
+        {
+          "question": "An official league API signs each player stat update with a digital signature using the league's private key. When your platform receives an update, what should you verify?",
+          "options": [
+            "That the update came from the league by verifying the signature with their public key",
+            "That the stats make sense (e.g., batting average is between 0 and 1)",
+            "That you can encrypt the data using your own private key",
+            "That the update hasn't been delayed by more than 5 minutes"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Digital signatures prove authenticity and that data hasn't been modified using the sender's public key.",
+            "Validation of data reasonableness is good practice, but not what signatures verify.",
+            "You verify using the sender's public key, not your private key.",
+            "Digital signatures verify authenticity, not timeliness."
+          ],
+          "explanation": "Digital signatures provide two guarantees: the data genuinely came from the claimed sender, and it hasn't been modified. Verifying the signature with the sender's public key confirms both properties."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Cryptography Mastery Achieved",
+      "content": "Congratulations! You've mastered cryptography fundamentals through the lens of sports analytics. You understand how encryption protects confidential player data, how hashing ensures integrity, and how digital signatures verify authenticity. Whether you chose the theory-first or hands-on path, you now grasp the tools that secure modern sports platforms\u2014from real-time biometric data to contract negotiations. Apply these concepts to build secure systems that protect the competitive advantages teams depend on."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": "Test Knowledge"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c6",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-On First"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Apply Knowledge"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T04:17:09.459380+00:00",
+  "model": "claude-haiku-4-5"
+}

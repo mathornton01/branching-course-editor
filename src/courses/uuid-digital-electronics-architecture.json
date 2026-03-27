@@ -1,0 +1,134 @@
+{
+  "id": "uuid-digital-electronics-architecture",
+  "title": "Digital Electronics for Smart Buildings",
+  "description": "Learn digital electronics fundamentals through designing an intelligent building automation system. Choose your design path and navigate the consequences of your architectural decisions.",
+  "topic": "Digital Electronics",
+  "theme": "architecture",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "digital-electronics",
+    "logic-gates",
+    "binary",
+    "building-automation",
+    "architecture"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Scene 1: The Smart Building Challenge",
+      "content": "You're the lead systems architect for a new 50-story office tower in Downtown Tokyo. The client wants an intelligent building where lights, HVAC, elevators, and access control all work together seamlessly. Your first decision: how will you control all these systems using digital electronics? Modern buildings rely on digital signals\u2014where everything is either ON (1) or OFF (0)\u2014to coordinate complex operations. This is your chance to apply digital logic to real architectural systems and see how your choices impact the building's intelligence and maintainability.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Design Philosophy",
+      "content": "You must decide between two fundamental approaches to building automation: build the system primarily with digital logic gates and microcontrollers, or start with analog sensors and convert everything to digital signals. Each path teaches you different aspects of how buildings 'think.'",
+      "choices": [
+        {
+          "label": "Full Digital Logic Approach: Use digital circuits and logic gates to control everything directly",
+          "next": "n3"
+        },
+        {
+          "label": "Sensor-to-Digital Path: Use analog sensors with digital converters for intelligent sensing",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Understanding Digital Logic for Building Control",
+      "content": "In your chosen path, every building system uses binary logic: 1 represents ON (power flowing, circuits activated), and 0 represents OFF (no signal, inert). Your elevator system uses AND gates\u2014it only moves (output=1) when BOTH the floor button is pressed (input1=1) AND the doors are closed (input2=1). Your lighting uses OR gates\u2014any motion sensor (input A) OR manual switch (input B) can turn on the lights. Your emergency system uses NOT gates\u2014if the alarm condition exists (input=1), then normal operations reverse (output=0). These three basic logic gates\u2014AND, OR, NOT\u2014form the foundation of everything in your building. Understanding Boolean algebra (the math of true/false logic) lets you design systems that work reliably under any condition.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Implementation Strategy Decision",
+      "content": "Now you must decide how to implement your logic. Will you keep the system simple with basic logic gate combinations, or create comprehensive truth tables that anticipate every possible scenario? This affects both how quickly you can build and how resilient the system is to unexpected conditions.",
+      "choices": [
+        {
+          "label": "Simple Rule-Based Control: Use straightforward gates for core functions, prioritize reliability and maintainability",
+          "next": "n5"
+        },
+        {
+          "label": "Complex Truth Table Logic: Create exhaustive logic for all possible combinations of inputs and conditions",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Success: The Elegant Smart Building",
+      "content": "Your building becomes a model of intelligent design. The elevator system responds instantly because its AND logic is clean and fast. Lights adjust smoothly because the OR gate logic is straightforward. When a fire alarm triggers, the NOT gate logic safely de-energizes elevators. The building operations team loves it\u2014digital logic gates are fast, predictable, and easy to repair. Tenants report feeling the building 'understands' their needs. You've mastered the fundamental principle: in digital electronics, complex behavior emerges from simple, elegant logic gates applied correctly. Your architecture firm wins awards for innovation, and other buildings now follow your smart design principles."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Warning: The Overcomplicated Building",
+      "content": "Six months after opening, your building's systems start failing unpredictably. The truth table you created was so comprehensive\u2014tracking 256 different input combinations\u2014that it's become impossible to debug when something goes wrong. A small sensor malfunction causes cascading failures because the complex logic wasn't designed with edge cases in mind. The operations team spends months trying to simplify it. You've learned the hard way: in digital electronics, elegant simplicity beats complex completeness. Boolean algebra teaches us to minimize logic\u2014using Karnaugh maps and algebraic simplification to find the shortest, most robust path to correct behavior. Complexity in electronics often means fragility."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Analog Sensors and Digital Conversion in Architecture",
+      "content": "In this approach, your building starts with analog sensors\u2014continuous measurement devices. A temperature sensor continuously measures room temperature (producing an analog signal that's 0V at 0\u00b0C, 5V at 50\u00b0C, and every voltage in between). A light sensor similarly produces a continuous voltage based on ambient brightness. Humidity, pressure, and motion detectors all work this way. But your building's control systems use digital electronics (microcontrollers, PLCs), which only understand discrete values: 0 or 1. This is where Analog-to-Digital Converters (ADCs) enter. An ADC is a specialized digital circuit that samples the analog signal thousands of times per second and converts each measurement into a digital number (8-bit, 16-bit, etc.). Your climate control system now 'reads' the digital temperature value and compares it to a setpoint using digital logic. This hybrid approach is how smart buildings sense their environment and respond intelligently."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Completion: The Functionally Responsive Building",
+      "content": "Your building successfully senses and responds to environmental conditions. The HVAC system maintains optimal temperature by reading digital temperature conversions from analog sensors. Lighting adjusts brightness continuously based on natural light levels. Humidity is monitored and reported to maintenance systems. However, without the additional optimization layer you might have gained from logic gate design, your system works reliably but isn't as elegant or anticipatory. The building responds to what is, but doesn't predict what might be. You've learned that digital electronics combines both continuous measurement (analog sensing) and discrete decision-making (digital logic). Both approaches\u2014pure digital logic and sensor-to-digital conversion\u2014are essential tools in modern architectural systems."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin challenge"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Digital Logic Approach"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Sensor-to-Digital Path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Design decision"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Simple approach"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Complex approach"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Complete design"
+    }
+  ],
+  "generated_at": "2026-03-27T12:51:25.572454+00:00",
+  "model": "claude-haiku-4-5"
+}

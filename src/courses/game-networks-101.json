@@ -1,0 +1,253 @@
+{
+  "id": "game-networks-101",
+  "title": "Computer Networks and Protocols for Game Design",
+  "description": "Learn how games communicate over networks, from protocol fundamentals to real-world multiplayer architecture.",
+  "topic": "Computer Networks and Protocols",
+  "theme": "game design",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "networking",
+    "protocols",
+    "multiplayer",
+    "game development",
+    "TCP/UDP"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Networks Power Every Modern Game",
+      "content": "Every multiplayer game relies on networks to connect players. Whether you're playing a massive battle royale with 100 players or a cozy turn-based puzzle game with friends, networks handle the invisible communication between your device and game servers. Understanding how this works\u2014from low-level protocols to high-level game architecture\u2014is essential for game developers. This course teaches you networking through the lens of game design, using real examples from popular games.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How would you prefer to learn? Start with the foundational theory of how networks work, or jump into practical multiplayer game architecture?",
+      "choices": [
+        {
+          "label": "Protocol Theory First",
+          "next": "n3"
+        },
+        {
+          "label": "Practical Networking First",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Protocols: The Language Games Speak",
+      "content": "Networks use protocols\u2014standardized rules for communication. Think of protocols like game rules: both players must follow the same rules, or the game breaks. The OSI model organizes networking into 7 layers. For games, layers 4-7 matter most: the Transport layer (TCP/UDP), Internet layer (IP routing), Data Link layer (Ethernet), and Physical layer (cables/WiFi). TCP guarantees messages arrive in order (like turn-based chess), while UDP sends messages fast but won't retry (like real-time action games). Game developers choose TCP for turn-based games and UDP for fast-paced shooters where speed matters more than perfection.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "TCP vs UDP: A Game Developer's Choice",
+      "content": "Imagine you're building a competitive fighting game. Each frame, your character's position, health, and attacks must reach opponents instantly. UDP is ideal here\u2014it sends data fast and doesn't care if a few position updates get lost. In contrast, a card game like Hearthstone must guarantee every spell card drawn and every action taken arrives perfectly, so it uses TCP. A real example: Valorant's Deathmatch uses UDP for gameplay but TCP for reliable events like bomb plants and defuses. This shows why game developers must understand both protocols.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Protocol Fundamentals Check",
+      "content": "Test your understanding of protocols and their uses in games.",
+      "questions": [
+        {
+          "question": "You're developing a real-time battle royale game with 100 players. Characters drop from the sky and must land precisely. Which protocol would you primarily use for gameplay updates?",
+          "options": [
+            "TCP, because position data is critical",
+            "UDP, because speed matters more than perfection",
+            "Both equally, TCP and UDP have no differences",
+            "Ethernet, because it's the physical layer"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "TCP guarantees delivery but adds latency\u2014too slow for fast-paced action.",
+            "Correct! UDP's speed is essential. A missed position update is better than delayed gameplay.",
+            "They have very different tradeoffs in reliability vs speed.",
+            "Ethernet is a data link layer, not suitable for choosing gameplay protocols."
+          ],
+          "explanation": "Battle royales are action-intensive. Missing a few position updates is acceptable if it keeps the game responsive. UDP wins."
+        },
+        {
+          "question": "A turn-based strategy game (like XCOM) needs players to take turns commanding units. Player A's attack kills a key enemy. This action MUST reach Player B. Which protocol guarantees this?",
+          "options": [
+            "UDP\u2014it's always better",
+            "TCP\u2014it guarantees in-order, reliable delivery",
+            "IP\u2014the internet protocol handles it",
+            "Neither\u2014no protocol can guarantee delivery"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "UDP doesn't guarantee delivery; retries are your problem.",
+            "Correct! TCP ensures every attack command is received and processed in order.",
+            "IP is a routing protocol, not a transport protocol for games.",
+            "TCP absolutely can and does guarantee delivery."
+          ],
+          "explanation": "Turn-based games cannot tolerate lost commands. TCP's reliability is worth the slight latency cost."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Multiplayer Architectures: How Games Connect",
+      "content": "Games use three main network architectures. Client-Server (most common): all players connect to a central server which validates actions\u2014like Fortnite or League of Legends. Peer-to-Peer (P2P): players connect directly to each other, useful for small player counts\u2014like some fighting games online modes. Hybrid: a mix, where the server handles authentication but gameplay runs P2P. Each architecture has tradeoffs: servers cost money but ensure fair play, P2P is cheaper but players with bad connections can cheat. Understanding these architectures explains how latency, lag compensation, and server tick rates shape the games you play.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Latency and Lag Compensation in Action",
+      "content": "In Valorant, a competitive shooter, servers tick 128 times per second (128 Hz). When you fire a shot, the client sends your action to the server instantly, but network latency (often 50-150ms) means it arrives slightly later. The server uses lag compensation: it rewinds the game state to when your shot was fired on YOUR screen, then checks if you hit. This is why sometimes a shot looks like a miss on your enemy's screen but a hit on yours. Without lag compensation, high-latency players would always lose. In contrast, Minecraft uses a simpler approach: your client predicts the outcome (you mined the block), sends it to the server, and the server validates. This works because mining is instant and no other players are racing you.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Multiplayer Architecture Scenarios",
+      "content": "Apply your knowledge of game network architectures to real scenarios.",
+      "questions": [
+        {
+          "question": "You're developing a 2-player local co-op game that lets friends play online. Each player controls one character. Network bandwidth is minimal. You want zero server costs. Which architecture fits best?",
+          "options": [
+            "Client-Server: one player acts as the host/server",
+            "P2P: players connect directly, one validates actions",
+            "Hybrid: use a server only for matchmaking",
+            "No architecture needed\u2014just use UDP"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "If one player acts as the server, they're still a client-server model.",
+            "Correct! P2P is ideal for small player counts with low bandwidth.",
+            "This works, but you don't need a server for validation if trust isn't critical.",
+            "Architecture choice isn't about protocol; UDP is just the transport layer."
+          ],
+          "explanation": "2-player co-op games benefit from P2P's simplicity and zero infrastructure cost. One player can designate the other as authority for conflict resolution."
+        },
+        {
+          "question": "A massive MMO with 10,000 concurrent players needs to prevent cheating (e.g., teleporting or infinite gold). Which architecture is necessary?",
+          "options": [
+            "P2P\u2014players trust each other",
+            "Client-Server\u2014the server is the source of truth",
+            "No architecture prevents cheating",
+            "Hybrid is the only option"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "P2P has no central authority; cheating is rampant.",
+            "Correct! Servers validate all critical actions, making cheating much harder.",
+            "Architecture absolutely affects cheat prevention.",
+            "Hybrid can work, but client-server is the standard for anti-cheat."
+          ],
+          "explanation": "MMOs use client-server because the server is the source of truth. Players send inputs; the server validates and broadcasts outcomes. Cheating requires hacking the server."
+        },
+        {
+          "question": "You're optimizing your game server to reduce latency for players globally. You have servers in US, EU, and Asia. Which networking concept is most important to minimize latency?",
+          "options": [
+            "Choosing UDP over TCP",
+            "Geographic routing: placing servers close to players",
+            "Increasing the server tick rate to 256 Hz",
+            "Using P2P instead of client-server"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Protocol choice affects reliability, not latency significantly.",
+            "Correct! Physical distance is the primary latency factor. Use regional servers.",
+            "Tick rate affects responsiveness, not network latency.",
+            "Architecture affects scalability, not geographic latency."
+          ],
+          "explanation": "Latency is dominated by the time packets travel across the internet. Placing servers geographically close to players is far more effective than optimizing protocol choices."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: Building Your First Networked Game",
+      "content": "You now understand both the theory (protocols, layers, reliability) and practice (architectures, latency, lag compensation). When you build a multiplayer game, you'll choose your architecture first (client-server for fairness, P2P for simplicity), then select your protocol (TCP for guaranteed delivery, UDP for speed). If you chose theory-first, you can now see how protocols power the architectures. If you chose hands-on-first, you can now understand the low-level mechanics beneath the architectures. Real games combine these: Valorant uses client-server with UDP for gameplay but TCP for critical events. Minecraft uses client-server with a hybrid approach. Understanding both perspectives makes you a better game network engineer.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Ready to Build",
+      "content": "You've learned how games communicate over networks, from protocols and architectures to real-world examples like Valorant and Minecraft. You understand the tradeoffs between reliability and speed, the role of servers in preventing cheating, and why latency matters. Next steps: explore a game networking library like Photon or Mirror (for Unity), or dive deeper into network security and encryption. Keep building!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Protocol Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Practical Networking First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:53:30.200083+00:00",
+  "model": "claude-haiku-4-5"
+}

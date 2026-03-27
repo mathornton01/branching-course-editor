@@ -1,0 +1,262 @@
+{
+  "id": "de-101",
+  "title": "Digital Electronics Fundamentals",
+  "description": "Learn the foundations of digital electronics including logic gates and Boolean algebra",
+  "topic": "Digital Electronics",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "electronics",
+    "logic",
+    "boolean",
+    "digital"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Logic Gates",
+      "content": "Logic gates are the fundamental building blocks of digital circuits. They process binary inputs (0 or 1) and produce binary outputs based on logical operations. The three basic gates are AND, OR, and NOT. AND gates output 1 only when all inputs are 1; OR gates output 1 when at least one input is 1; NOT gates invert the input. Understanding these gates is essential for designing digital systems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "AND Gate Worked Example",
+      "content": "Consider a security system with an AND gate: it activates an alarm only when BOTH motion is detected (input A = 1) AND the system is armed (input B = 1). If motion = 1 and system is armed = 1, the output is 1 (alarm activates). If either input is 0, the output is 0 (no alarm). Truth table: (0,0)\u21920, (0,1)\u21920, (1,0)\u21920, (1,1)\u21921.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Logic Gates Fundamentals Assessment",
+      "content": "Test your understanding of basic logic gates and their truth tables.",
+      "questions": [
+        {
+          "question": "What is the output of an OR gate when input A = 0 and input B = 0?",
+          "options": [
+            "0",
+            "1",
+            "undefined",
+            "depends on the circuit"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! OR gates only output 0 when all inputs are 0.",
+            "Incorrect. OR gates output 1 only when at least one input is 1.",
+            "Incorrect. Logic gates always produce defined outputs.",
+            "Incorrect. OR gates have a fixed truth table regardless of circuit context."
+          ],
+          "explanation": "An OR gate produces 0 only when all inputs are 0. Since both inputs are 0 here, the output is 0."
+        },
+        {
+          "question": "Which gate outputs 1 only when all inputs are 1?",
+          "options": [
+            "OR gate",
+            "NOT gate",
+            "AND gate",
+            "XOR gate"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. OR gates output 1 when at least one input is 1.",
+            "Incorrect. NOT gates only work with single inputs.",
+            "Correct! AND gates output 1 only when all inputs are 1.",
+            "Incorrect. XOR gates output 1 when inputs are different."
+          ],
+          "explanation": "The AND gate is defined by outputting 1 exclusively when all of its inputs are 1. This is its defining characteristic."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Next Topic Selection",
+      "content": "Great! You've mastered logic gates. Now let's explore Boolean algebra, which helps us simplify complex logic circuits. Continue to learn how to express and minimize Boolean expressions?",
+      "choices": [
+        {
+          "label": "Continue to Boolean Algebra",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Boolean Algebra Fundamentals",
+      "content": "Boolean algebra is the mathematical system for analyzing and simplifying logic circuits. It uses variables (A, B, C) representing binary values and operations (AND, OR, NOT). Key laws include De Morgan's Laws: NOT(A AND B) = NOT(A) OR NOT(B), and the Commutative Law: A AND B = B AND A. These laws allow engineers to minimize circuits, reducing gates and improving efficiency.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Boolean Expression Simplification",
+      "content": "Simplify the expression: (A AND B) OR (A AND C). Using the Distributive Law, we can factor out A: A AND (B OR C). This shows that instead of needing three gates (two ANDs and one OR), we only need two gates (one OR and one AND). This simplification reduces circuit complexity, power consumption, and cost.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Boolean Algebra Assessment",
+      "content": "Test your understanding of Boolean algebra, simplification, and De Morgan's Laws.",
+      "questions": [
+        {
+          "question": "Using De Morgan's Law, NOT(A OR B) simplifies to:",
+          "options": [
+            "NOT(A) OR NOT(B)",
+            "NOT(A) AND NOT(B)",
+            "A AND B",
+            "A OR B"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This would be the result of NOT(A AND B).",
+            "Correct! De Morgan's Law states NOT(A OR B) = NOT(A) AND NOT(B).",
+            "Incorrect. That's the opposite of the simplified form.",
+            "Incorrect. De Morgan's Laws always invert the operator."
+          ],
+          "explanation": "De Morgan's First Law: The NOT of an OR expression equals the AND of the inverted inputs. NOT(A OR B) = NOT(A) AND NOT(B)."
+        },
+        {
+          "question": "Which Boolean law allows us to factor out common variables to simplify expressions?",
+          "options": [
+            "Commutative Law",
+            "Distributive Law",
+            "De Morgan's Law",
+            "Absorption Law"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The Commutative Law only changes the order of operations.",
+            "Correct! The Distributive Law allows factoring: A AND (B OR C) = (A AND B) OR (A AND C).",
+            "Incorrect. De Morgan's Laws deal with inverting operations.",
+            "Incorrect. The Absorption Law is used for different simplifications."
+          ],
+          "explanation": "The Distributive Law is the key to factoring Boolean expressions, similar to factoring in algebra. It enables significant circuit simplification."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Digital Electronics Practice Problems",
+      "content": "Let's reinforce your understanding with more practice problems.",
+      "questions": [
+        {
+          "question": "A NOT gate with input 1 produces output:",
+          "options": [
+            "1",
+            "0",
+            "2",
+            "undefined"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. NOT gates invert their input.",
+            "Correct! NOT inverts: NOT(1) = 0.",
+            "Incorrect. Logic gates only produce binary outputs (0 or 1).",
+            "Incorrect. Logic gates always produce defined outputs."
+          ],
+          "explanation": "The NOT gate (inverter) always inverts its input. When input is 1, output is 0."
+        },
+        {
+          "question": "Simplify: (A AND B) OR (A AND NOT(B)). What is the simplified form?",
+          "options": [
+            "A",
+            "B",
+            "A AND B",
+            "A OR B"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Using the Distributive Law: A AND (B OR NOT(B)) = A AND 1 = A.",
+            "Incorrect. Try factoring out the common variable.",
+            "Incorrect. This is more complex than the simplified form.",
+            "Incorrect. Check your application of the Distributive Law."
+          ],
+          "explanation": "Factor out A: A AND (B OR NOT(B)). Since B OR NOT(B) always equals 1 (a tautology), the expression simplifies to A AND 1 = A."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've mastered the fundamentals of digital electronics. You now understand logic gates (AND, OR, NOT), how they function, and Boolean algebra for circuit optimization. These concepts form the foundation for microprocessors, computers, and all modern digital systems. Continue building on this knowledge by exploring topics like multiplexers, flip-flops, and digital design."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "learn"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "test"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "learn"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "test"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-26T02:03:58.157145+00:00",
+  "model": "claude-haiku-4-5"
+}

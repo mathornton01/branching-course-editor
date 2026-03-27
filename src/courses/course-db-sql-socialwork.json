@@ -1,0 +1,494 @@
+{
+  "id": "course-db-sql-socialwork",
+  "title": "Database Design and SQL for Social Work Case Management",
+  "description": "Learn how to organize and access client information effectively using databases and SQL queries, with examples throughout rooted in social work practice.",
+  "topic": "Database Design and SQL",
+  "theme": "social work",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "database",
+    "sql",
+    "social-work",
+    "case-management",
+    "data-management",
+    "case-coordination"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Social Work Needs Organized Data",
+      "content": "In social work, caseworkers manage information about clients, their families, services provided, and outcomes. Imagine tracking 100+ clients, each with multiple service encounters, family members, and referrals. A database is an organized system for storing, retrieving, and updating this information efficiently. Rather than scattered files and spreadsheets, a database allows caseworkers to quickly find client history, identify patterns, and ensure no one falls through the cracks. Proper data organization is the foundation for effective case management and evidence-based practice.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Database Concepts Checkpoint",
+      "content": "Test your understanding of why databases matter in social work case management.",
+      "pass_threshold": 70,
+      "success_target": "n4",
+      "failure_target": "n3",
+      "questions": [
+        {
+          "question": "A social work agency manages information about 150 clients, each with multiple service encounters, family members, and referral histories. What is the PRIMARY advantage of using a database instead of separate paper files?",
+          "options": [
+            "A) It looks more professional and organized",
+            "B) It eliminates the need for caseworker expertise",
+            "C) It enables quick retrieval and prevents data duplication across multiple records",
+            "D) It automatically generates funding reports"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "While databases can appear organized, that's not the primary advantage.",
+            "Databases support caseworkers; they don't replace professional judgment.",
+            "Correct! Databases excel at preventing duplication and enabling rapid access to information - critical for managing complex client cases.",
+            "Databases don't automatically generate reports, though they make generating reports easier."
+          ],
+          "explanation": "Databases are designed to store information efficiently, prevent duplication, and allow rapid retrieval - essential for managing large caseloads in social work."
+        },
+        {
+          "question": "A caseworker needs to find all clients ages 65+ who received home-based services in the past 6 months to conduct an outcome evaluation. Why would a database be particularly useful for this task?",
+          "options": [
+            "A) It would replace the need for the caseworker to review files",
+            "B) It would automatically improve client outcomes",
+            "C) It would allow the caseworker to search and filter information quickly without manually reviewing every file",
+            "D) It would eliminate the need for documentation"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A database supports the caseworker's analysis; it doesn't replace their professional judgment.",
+            "A database helps organize and access information; it doesn't directly improve outcomes.",
+            "Correct! Databases allow caseworkers to query information by multiple criteria (age, service type, date range) much faster than manual file review.",
+            "Documentation is still essential; a database helps organize and access existing documentation."
+          ],
+          "explanation": "One of a database's key strengths is enabling quick searching and filtering of large amounts of information by multiple criteria - perfect for evaluation and analysis work."
+        },
+        {
+          "question": "In a social work agency database, a 'record' most likely refers to:",
+          "options": [
+            "A) A video recording of a case conference meeting",
+            "B) A collection of related information about one client or case",
+            "C) A financial transaction or budget item",
+            "D) A formal complaint filed with the agency"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While case conferences might be documented, that's not what a database record is.",
+            "Correct! A record is all the related information stored about one entity - in this case, everything we know about one client.",
+            "Financial data might be stored in a database, but that's not the general definition of a record.",
+            "Complaints might be tracked in a database, but a record refers to the basic unit of data about one entity."
+          ],
+          "explanation": "In databases, a 'record' is the fundamental unit representing one instance of an entity (like one client), containing all the fields of information about that client."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Database Fundamentals",
+      "content": "Reinforce your understanding of databases in social work by applying these concepts to realistic scenarios.",
+      "pass_threshold": 70,
+      "success_target": "n2",
+      "failure_target": "n3",
+      "questions": [
+        {
+          "question": "A small community social services organization currently keeps client information in separate paper files, Excel spreadsheets, and handwritten notes. Which problem would a properly designed database solve BEST?",
+          "options": [
+            "A) It would reduce the time caseworkers spend with clients",
+            "B) It would ensure all client information is stored in one organized place and can be found quickly",
+            "C) It would eliminate all errors in documentation",
+            "D) It would automatically contact clients for follow-ups"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A database doesn't change time allocation to direct services.",
+            "Correct! A database centralizes scattered information into one organized system, solving the fragmentation problem described.",
+            "While databases help prevent some errors through organization, they don't eliminate all documentation errors.",
+            "A database is a storage and retrieval system; it doesn't automate client contact."
+          ],
+          "explanation": "One of the biggest problems with scattered data is inability to access it efficiently. A database solves this by providing a central, organized location for all information."
+        },
+        {
+          "question": "A supervisor wants to understand which clients in a family services program have received case management, mental health services, AND substance abuse treatment - all three services. Why would a database be helpful for answering this question?",
+          "options": [
+            "A) It would identify which caseworkers are most effective",
+            "B) It would automatically improve services to clients",
+            "C) It would allow the supervisor to filter and cross-reference services received by individual clients",
+            "D) It would eliminate the need for service documentation"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A database might help analyze caseworker performance, but that's not its primary use here.",
+            "A database organizes information; it doesn't directly improve services.",
+            "Correct! A database allows you to filter and match records based on multiple criteria - finding clients with all three services.",
+            "Documentation is still essential; the database helps access and analyze that documentation."
+          ],
+          "explanation": "Databases excel at filtering and cross-referencing data, allowing supervisors and analysts to answer complex questions about service patterns and client characteristics."
+        },
+        {
+          "question": "What would be a consequence of NOT having a database for managing client information in a large social work organization?",
+          "options": [
+            "A) Caseworkers would have more time to spend on direct service",
+            "B) The organization would save money on technology",
+            "C) Information would be harder to find, track, and keep consistent across the agency",
+            "D) There would be no need for case notes"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Without a database, caseworkers actually spend MORE time searching for information.",
+            "While databases have costs, the lack of one creates operational inefficiencies and higher risk.",
+            "Correct! Without a database, information is scattered, inconsistent, and difficult to access - leading to poor case coordination and potential gaps in service.",
+            "Case notes are essential documentation; databases help organize them, not replace them."
+          ],
+          "explanation": "The absence of a database system creates chaos: duplicate information, lost files, inconsistent data, and difficulty finding or updating client information - all harmful to client outcomes."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Organizing Data: Tables, Keys, and Relationships",
+      "content": "Good database design starts with tables - organized groups of related information. For example, a Clients table stores information about each person served: ClientID, FirstName, LastName, DateOfBirth, PrimaryLanguage, etc. A Services table tracks what was provided: ServiceID, ServiceName, ServiceDate, Hours, ClientID (which client received this?). The relationship between tables is the key: ClientID connects them. A Primary Key (like ClientID) uniquely identifies each record, ensuring no duplicates. A Foreign Key (ClientID in the Services table) references another table, maintaining the relationship. This design prevents data duplication: store a client's language once, then reference it through their ID elsewhere. Think of it like a filing system - instead of writing down a client's full information on every service note, you write down their client ID. Updates become simple too: change a phone number in one place, and it's updated everywhere it's referenced.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Database Design Checkpoint",
+      "content": "Test your ability to design a database structure for social work scenarios.",
+      "pass_threshold": 70,
+      "success_target": "n7",
+      "failure_target": "n6",
+      "questions": [
+        {
+          "question": "A family services agency wants to track which caseworkers are assigned to which clients, since clients may work with multiple caseworkers over time and caseworkers manage multiple clients. Which table structure would BEST support this?",
+          "options": [
+            "A) One Clients table with a 'Caseworker' column that lists all assigned caseworkers for each client",
+            "B) One Caseworkers table and one Clients table, with a separate CaseAssignments table that links them",
+            "C) One combined table with all client and caseworker information merged together",
+            "D) Separate tables for each caseworker with their assigned clients"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Listing multiple caseworkers in one column creates problems: it's hard to search, hard to update, and violates database design principles.",
+            "Correct! A junction table (CaseAssignments) linking Clients and Caseworkers allows many-to-many relationships and keeps data clean and queryable.",
+            "Merging creates duplication and makes it hard to update caseworker information or track multiple assignments.",
+            "Separate tables per caseworker would be extremely inefficient and make it impossible to reassign clients."
+          ],
+          "explanation": "When there's a many-to-many relationship (multiple caseworkers per client, multiple clients per caseworker), a junction table is the correct database design pattern."
+        },
+        {
+          "question": "In a housing services database, you have a Clients table and a HousingUnits table. A client may be placed in different housing units over time, and a housing unit may house multiple clients. How should you structure this relationship?",
+          "options": [
+            "A) Add a 'HousingUnitID' column to the Clients table pointing to their current housing unit",
+            "B) Add a 'ClientID' column to the HousingUnits table listing all clients who have lived there",
+            "C) Create a Placements table with ClientID, HousingUnitID, StartDate, and EndDate to track each placement",
+            "D) Keep the tables completely separate with no connection"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Storing only current unit loses historical information about where clients have lived.",
+            "Storing multiple clients in one field creates duplication and makes the data hard to work with.",
+            "Correct! A Placements table tracks each time a client is placed in a unit, including when they moved in and out, maintaining complete history.",
+            "Not connecting the tables means you can't determine which clients are in which units."
+          ],
+          "explanation": "For historical many-to-many relationships, a junction table with date fields allows you to track all placements while maintaining clean, queryable data structure."
+        },
+        {
+          "question": "When designing a database for a mental health agency, what is the PRIMARY benefit of using a Primary Key (like ClientID) in the Clients table?",
+          "options": [
+            "A) It makes the table look more professional",
+            "B) It ensures each client record is unique and can be reliably referenced from other tables",
+            "C) It automatically improves client care",
+            "D) It reduces the amount of information you need to store"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Appearance isn't the purpose of database design.",
+            "Correct! A primary key guarantees uniqueness and enables reliable relationships between tables - the foundation of good database design.",
+            "Database structure supports care but doesn't directly improve it.",
+            "A primary key doesn't reduce information; it helps organize what you have."
+          ],
+          "explanation": "A primary key is essential for database integrity - it ensures each record is unique and can be reliably referenced, preventing errors in data relationships."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Database Design",
+      "content": "Apply database design principles to social work scenarios.",
+      "pass_threshold": 70,
+      "success_target": "n5",
+      "failure_target": "n6",
+      "questions": [
+        {
+          "question": "A domestic violence shelter wants to track clients, the referral sources that referred them, and when referrals happened. Some clients came from multiple referral sources (police, hospital, self-referral), and some referral sources have referred many clients. What design would work best?",
+          "options": [
+            "A) A Clients table with a 'ReferralSource' column listing all sources",
+            "B) A Referrals table with ClientID and ReferralSourceID columns, plus a ReferralDate field",
+            "C) Store all information in one combined table",
+            "D) Separate tables that don't connect at all"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Listing multiple referral sources in one column is inefficient and makes queries difficult.",
+            "Correct! A Referrals junction table captures both the relationship and the timing of each referral.",
+            "One combined table creates duplication and makes the data hard to manage.",
+            "Unconnected tables can't answer questions about which referral sources brought in which clients."
+          ],
+          "explanation": "A junction table with date information perfectly captures many-to-many relationships while maintaining data integrity and enabling complex queries."
+        },
+        {
+          "question": "You're designing a database for a child welfare agency. Which is the BEST example of a Primary Key for the Children table?",
+          "options": [
+            "A) FirstName (many children have the same first name)",
+            "B) DateOfBirth (children can share birthdays)",
+            "C) ChildID - a unique number assigned to each child in the system",
+            "D) Address (children move frequently)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "First names are not unique - multiple children share the same name.",
+            "Birthdays are not unique - multiple children can be born on the same date.",
+            "Correct! A ChildID is unique to each child and never changes, making it a perfect primary key.",
+            "Addresses change, so they're unreliable as a permanent identifier."
+          ],
+          "explanation": "A primary key must be unique for every record and stable over time - system-generated IDs are ideal for this purpose."
+        },
+        {
+          "question": "A substance abuse treatment agency wants to store information about clients, treatment programs they've attended, and the counselors who worked with them. Each client attends multiple programs, and each program has multiple counselors. What is the minimum number of tables needed for a good design?",
+          "options": [
+            "A) 2 tables (Clients and Programs)",
+            "B) 3 tables (Clients, Programs, and Counselors)",
+            "C) 4 tables (Clients, Programs, Counselors, and junction tables for relationships)",
+            "D) 5 or more tables"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Two tables can't properly capture the relationship between Clients and Counselors through Programs.",
+            "Correct! You need Clients, Programs, Counselors, plus likely ProgramEnrollments (linking Clients to Programs) and ProgramStaff (linking Counselors to Programs).",
+            "You don't need two separate junction tables if one enrollment table links clients to programs and programs have their staff list.",
+            "Four or more tables would be over-designed for this scenario."
+          ],
+          "explanation": "With multiple many-to-many relationships, you need base tables plus junction tables to capture all the connections properly."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Finding Information with SQL Queries",
+      "content": "SQL (Structured Query Language) is how we retrieve information from databases. The most common query uses SELECT (which fields?), FROM (which table?), and WHERE (with what conditions?). For example: SELECT Name, Phone FROM Clients WHERE PrimaryLanguage = 'Spanish' returns names and phone numbers of Spanish-speaking clients. Another query: SELECT ServiceName, COUNT(*) FROM Services GROUP BY ServiceName tells us how many times each service was provided - useful for resource planning. SQL can answer critical questions: Which clients haven't been contacted in 30 days? What's the average client age in our foster care program? Are there duplicates in our client database? These queries enable caseworkers and supervisors to make data-informed decisions, identify gaps in service delivery, and ensure equitable resource allocation.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "SQL Queries Checkpoint",
+      "content": "Test your ability to write SQL queries for case management scenarios.",
+      "pass_threshold": 70,
+      "success_target": "n10",
+      "failure_target": "n9",
+      "questions": [
+        {
+          "question": "You need to find all clients in your senior services program (over age 75) who haven't received a service visit in more than 60 days. Which SQL query structure would be MOST appropriate?",
+          "options": [
+            "A) SELECT * FROM Clients WHERE Age > 75",
+            "B) SELECT Name FROM Clients WHERE Age > 75 AND LastServiceDate < DATE_SUB(NOW(), INTERVAL 60 DAY)",
+            "C) SELECT ALL Clients FROM Services WHERE Age > 75",
+            "D) SELECT Name, Age, LastServiceDate FROM Clients WHERE Age > 75 OR LastServiceDate < 60 DAYS"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This would find all seniors, but doesn't check for lack of recent service.",
+            "Correct! This query finds seniors AND filters for those without recent service using a date comparison.",
+            "SELECT ALL and FROM Services are incorrect syntax for this query.",
+            "OR would find seniors OR old records, not specifically seniors with no recent service."
+          ],
+          "explanation": "Good SQL queries use both SELECT (what fields), FROM (what table), and WHERE (with specific conditions) to get exactly the data you need."
+        },
+        {
+          "question": "A supervisor wants to know which child welfare caseworkers currently have caseloads over 20 clients each. How would you structure an SQL query to find this?",
+          "options": [
+            "A) SELECT Caseworker, COUNT(ClientID) FROM CaseAssignments GROUP BY Caseworker WHERE COUNT(ClientID) > 20",
+            "B) SELECT Caseworker FROM CaseAssignments WHERE ClientCount > 20",
+            "C) SELECT Caseworker, COUNT(ClientID) as ClientCount FROM CaseAssignments GROUP BY Caseworker HAVING COUNT(ClientID) > 20",
+            "D) SELECT * FROM Caseworkers WHERE Caseload > 20"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "WHERE can't be used with aggregate functions; you need HAVING.",
+            "ClientCount is not a stored field; you need to count the relationships.",
+            "Correct! GROUP BY groups records by caseworker, and HAVING filters groups based on the count.",
+            "Caseload is not a stored field; you calculate it by counting client assignments."
+          ],
+          "explanation": "When analyzing grouped data (like counting clients per caseworker), you use GROUP BY and HAVING rather than WHERE."
+        },
+        {
+          "question": "You want to identify clients who received both mental health services AND case management from your behavioral health program. Which query approach is BEST?",
+          "options": [
+            "A) SELECT Clients FROM Services WHERE ServiceName = 'Mental Health' OR ServiceName = 'Case Management'",
+            "B) SELECT ClientID FROM Services WHERE ServiceName = 'Mental Health' INTERSECT SELECT ClientID FROM Services WHERE ServiceName = 'Case Management'",
+            "C) SELECT Name FROM Clients WHERE MentalHealthService = TRUE AND CaseManagement = TRUE",
+            "D) SELECT DISTINCT Client FROM Services WHERE Service IN ('Mental Health', 'Case Management')"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "OR would find clients with either service, not both.",
+            "Correct! INTERSECT finds ClientIDs that appear in both result sets - those who received both services.",
+            "Those fields likely don't exist as TRUE/FALSE flags; you need to query the Services table.",
+            "DISTINCT would still return all clients with either service, not specifically those with both."
+          ],
+          "explanation": "When you need to find records that meet multiple conditions across different service types, INTERSECT or a JOIN with multiple conditions works best."
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Writing SQL Queries",
+      "content": "Practice writing SQL queries to answer real social work case management questions.",
+      "pass_threshold": 70,
+      "success_target": "n8",
+      "failure_target": "n9",
+      "questions": [
+        {
+          "question": "A homeless services coordinator wants to find all clients currently in transitional housing who have been there for more than 90 days. Which query is most appropriate?",
+          "options": [
+            "A) SELECT Name FROM Clients WHERE HousingType = 'Transitional'",
+            "B) SELECT Name, EntranceDate FROM Placements WHERE HousingType = 'Transitional' AND EntranceDate < DATE_SUB(NOW(), INTERVAL 90 DAY)",
+            "C) SELECT * FROM Clients WHERE Housed = TRUE",
+            "D) SELECT Name FROM HousingPrograms WHERE Duration > 90"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This finds all clients in transitional housing but doesn't check the duration.",
+            "Correct! This queries placements (which include entrance dates) and filters for those more than 90 days old.",
+            "This is too vague and doesn't specify housing type or duration.",
+            "This searches the wrong table; you need to look at individual placements."
+          ],
+          "explanation": "For questions about duration in housing, you need to query the placements table with entrance date information."
+        },
+        {
+          "question": "You need to find the average number of family members per client in your family services database. What query would work?",
+          "options": [
+            "A) SELECT AVG(FamilyMembers) FROM Clients",
+            "B) SELECT ClientID, COUNT(FamilyMembers) FROM FamilyMembers GROUP BY ClientID",
+            "C) SELECT AVG(MemberCount) FROM (SELECT ClientID, COUNT(*) as MemberCount FROM FamilyMembers GROUP BY ClientID)",
+            "D) SELECT AVG(*) FROM FamilyMembers"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "There likely isn't a FamilyMembers field - you need to count records in a FamilyMembers table.",
+            "This counts family members per client but doesn't calculate the average across clients.",
+            "Correct! This subquery first counts family members per client, then averages those counts.",
+            "AVG(*) is invalid syntax; you need to specify what you're averaging."
+          ],
+          "explanation": "For more complex calculations like average counts, subqueries are useful to organize the logic."
+        },
+        {
+          "question": "Your agency is implementing cultural competency initiatives. You want to find which languages are spoken by your clients and how many clients speak each language. Which query would work best?",
+          "options": [
+            "A) SELECT PrimaryLanguage FROM Clients",
+            "B) SELECT PrimaryLanguage, COUNT(*) as ClientCount FROM Clients GROUP BY PrimaryLanguage ORDER BY ClientCount DESC",
+            "C) SELECT * FROM Clients WHERE Language IS NOT NULL",
+            "D) SELECT COUNT(DISTINCT Language) FROM Clients"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This lists languages but doesn't count clients or summarize by language.",
+            "Correct! GROUP BY groups by language, COUNT(*) counts clients, and ORDER BY shows the most common languages first.",
+            "This filters for non-null values but doesn't aggregate or count.",
+            "This counts unique languages but doesn't show how many clients speak each one."
+          ],
+          "explanation": "GROUP BY is perfect for summary questions like 'how many X per category' - here, how many clients speak each language."
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Complete: Database Design and SQL for Case Management",
+      "content": "Congratulations! You've learned the fundamentals of databases and SQL for social work case management. You now understand how to organize client information in well-designed database tables, use primary and foreign keys to create reliable relationships, and write SQL queries to retrieve meaningful information. These skills enable you to leverage technology to reduce administrative burden, ensure nothing is missed, prevent data duplication, and ultimately support better outcomes for the people you serve. Continue practicing these skills in your organization's case management system, and explore how data analysis can enhance your understanding of client needs, program effectiveness, and equitable resource allocation. Strong data management is a cornerstone of modern, evidence-based social work practice."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry assessment"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry assessment"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry assessment"
+    }
+  ],
+  "generated_at": "2026-03-27T08:01:03.487565+00:00",
+  "model": "claude-haiku-4-5"
+}

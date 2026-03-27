@@ -1,0 +1,273 @@
+{
+  "id": "ml-fundamentals-001",
+  "title": "Machine Learning Fundamentals",
+  "description": "Master the core concepts of machine learning including supervised and unsupervised learning, key algorithms, and practical applications.",
+  "topic": "Machine Learning",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 30,
+  "tags": [
+    "machine-learning",
+    "fundamentals",
+    "supervised-learning",
+    "algorithms",
+    "data-science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Machine Learning?",
+      "content": "Machine learning is a subset of artificial intelligence that enables computers to learn from data without being explicitly programmed. It works by identifying patterns in training data and using those patterns to make predictions or decisions on new data. There are two main categories: **supervised learning** (where the algorithm learns from labeled examples) and **unsupervised learning** (where it finds patterns in unlabeled data). Machine learning powers recommendation systems, image recognition, spam filters, and countless other applications we use daily.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Supervised Learning Example: House Price Prediction",
+      "content": "Imagine you have a dataset of 100 houses with their features (size, bedrooms, location) and their actual selling prices. You train a supervised learning algorithm on this data. The algorithm learns the relationship between features and price. When a new house comes on the market with 3 bedrooms and 2000 sq ft, your trained model predicts its likely price by applying what it learned from the training data. This is supervised learning\u2014the algorithm learned from labeled examples (houses with known prices) to make predictions.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Assessment: Understanding ML Types",
+      "content": "Test your understanding of supervised vs. unsupervised learning and when to use each approach.",
+      "questions": [
+        {
+          "question": "You have customer purchase history and want to discover groups of similar customers. Which approach is best?",
+          "options": [
+            "A) Supervised learning with labeled customer groups",
+            "B) Unsupervised learning to automatically cluster customers",
+            "C) Supervised learning with customer IDs",
+            "D) Neither\u2014this can't be solved with ML"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. You don't have labeled groups to train on.",
+            "Correct! Unsupervised learning finds hidden patterns without labels.",
+            "Incorrect. Customer IDs aren't useful features for clustering.",
+            "Incorrect. This is a classic machine learning problem."
+          ],
+          "explanation": "When you want to discover natural groupings in data without pre-existing labels, unsupervised learning (like clustering) is the right approach. The algorithm finds patterns on its own."
+        },
+        {
+          "question": "Which of these is an example of supervised learning?",
+          "options": [
+            "A) Finding customer segments by purchasing behavior",
+            "B) Predicting whether an email is spam based on past examples of spam and non-spam emails",
+            "C) Grouping similar products without any labels",
+            "D) Discovering anomalies in network traffic"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This is unsupervised clustering.",
+            "Correct! You have labeled examples (spam/not spam) to learn from.",
+            "Incorrect. This is unsupervised learning.",
+            "Incorrect. This is typically unsupervised anomaly detection."
+          ],
+          "explanation": "Supervised learning requires labeled training data. In this case, the model learns from examples of emails that are labeled as spam or not spam."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Common ML Algorithms and Applications",
+      "content": "Decision trees are simple algorithms that make predictions by learning a series of yes/no questions about the data. Neural networks are inspired by the human brain and excel at finding complex patterns, especially in images and text. Support Vector Machines work well for classification tasks by finding the best boundary between categories. Random Forests combine multiple decision trees for better accuracy and robustness. Each algorithm has strengths\u2014your choice depends on your data type, problem size, and accuracy requirements. Understanding these algorithms helps you pick the right tool for your problem.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Example: Image Classification with Neural Networks",
+      "content": "A company wants to automatically identify defective products on an assembly line using photos. They collect thousands of photos: some showing good products and some showing defects. They train a neural network on these labeled images. The network learns to recognize visual patterns that indicate defects\u2014scratches, discoloration, deformation, etc. Once trained, the network can instantly classify new photos from the assembly line as 'good' or 'defective'. This real-time quality control saves time and catches defects humans might miss.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Assessment: Algorithms and Applications",
+      "content": "Test your knowledge of different ML algorithms and their appropriate applications.",
+      "questions": [
+        {
+          "question": "A decision tree works well for your credit approval task. What is the main advantage of decision trees for this application?",
+          "options": [
+            "A) They can process images very quickly",
+            "B) They're easy to interpret\u2014you can see the exact rules the model uses",
+            "C) They always have perfect accuracy",
+            "D) They work better with large unstructured data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Decision trees aren't optimized for image processing.",
+            "Correct! Decision trees create interpretable rules, which is crucial for decisions that need to be explained (like credit approval).",
+            "Incorrect. No algorithm guarantees perfect accuracy.",
+            "Incorrect. Decision trees work better with structured tabular data."
+          ],
+          "explanation": "Decision trees are valuable in applications requiring transparency\u2014you can explain exactly why a credit was approved or denied by showing the decision path the model followed."
+        },
+        {
+          "question": "You need to predict stock prices based on 50 different financial indicators. Which algorithm might be a good choice?",
+          "options": [
+            "A) A simple decision tree\u2014it's the fastest",
+            "B) A neural network, because it can find complex relationships in high-dimensional data",
+            "C) Only unsupervised learning can handle this",
+            "D) This problem cannot be solved with ML"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Decision trees can struggle with complex multi-dimensional relationships.",
+            "Correct! Neural networks excel at finding complex patterns in high-dimensional data.",
+            "Incorrect. Stock price prediction is supervised learning\u2014you have historical prices to train on.",
+            "Incorrect. This is a classic ML regression problem."
+          ],
+          "explanation": "Neural networks are powerful for regression tasks with many features because they can discover complex non-linear relationships between inputs and outputs."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Review and Reinforce",
+      "content": "Let's strengthen your understanding with more practice questions.",
+      "questions": [
+        {
+          "question": "A bank has labeled examples of credit card transactions: fraudulent or legitimate. They want to catch fraud. Is this supervised or unsupervised learning?",
+          "options": [
+            "A) Unsupervised\u2014there's no way to know if transactions are fraudulent",
+            "B) Supervised\u2014they have labeled examples to train from",
+            "C) Neither\u2014fraud detection can't use ML",
+            "D) Both, simultaneously"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. They do have labels.",
+            "Correct! Labeled fraud/legitimate examples = supervised learning.",
+            "Incorrect. Fraud detection is a major ML application.",
+            "Incorrect. A problem is typically one or the other."
+          ],
+          "explanation": "With historical labels, supervised learning can train a model to recognize fraud patterns."
+        },
+        {
+          "question": "Which algorithm would you avoid for a task requiring complete transparency?",
+          "options": [
+            "A) Decision trees\u2014they're too simple",
+            "B) Neural networks\u2014they're 'black boxes' hard to interpret",
+            "C) Support Vector Machines\u2014they're always wrong",
+            "D) Random forests\u2014they don't exist"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Simplicity can be good for transparency.",
+            "Correct! Neural networks are complex and hard to interpret.",
+            "Incorrect. They work fine; transparency is the issue.",
+            "Incorrect. Random forests are real and useful."
+          ],
+          "explanation": "Neural networks are powerful but not interpretable\u2014you can't easily explain why they made a prediction. Use decision trees or simpler models when explainability matters."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What's Your Next Step?",
+      "content": "You've learned the fundamentals of machine learning! Choose your next learning path:",
+      "choices": [
+        {
+          "label": "Complete Course",
+          "next": "n9"
+        },
+        {
+          "label": "Review Fundamentals",
+          "next": "n1"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've mastered Machine Learning Fundamentals. You now understand supervised vs. unsupervised learning, common algorithms (decision trees, neural networks), and how to apply them to real-world problems. Next steps: explore specific algorithms in depth, practice with datasets, or learn about evaluation metrics and model improvement techniques. Keep building on this foundation!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "complete"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n1",
+      "label": "review"
+    }
+  ],
+  "generated_at": "2026-03-26T09:16:38.658987+00:00",
+  "model": "claude-haiku-4-5"
+}

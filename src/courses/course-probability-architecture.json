@@ -1,0 +1,351 @@
+{
+  "id": "course-probability-architecture",
+  "title": "Probability Theory and Random Variables in Architecture",
+  "description": "Master probability concepts through architectural design scenarios. Learn how architects use probability distributions, random variables, and risk assessment to design resilient buildings.",
+  "topic": "Probability Theory",
+  "theme": "architecture",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "probability",
+    "statistics",
+    "architecture",
+    "risk-assessment",
+    "structural-design"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Probability in Architectural Design",
+      "content": "Probability theory helps architects make decisions under uncertainty. When designing buildings, architects must consider random variables like wind loads, material strength variations, and human occupancy patterns. Understanding probability distributions helps predict how buildings will perform under different conditions. By quantifying uncertainty, architects can design safer, more resilient structures that account for unpredictable factors. In this module, we'll explore how probability concepts apply to real-world architectural challenges.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Foundations of Probability",
+      "content": "Test your understanding of basic probability concepts applied to architectural design and material selection.",
+      "questions": [
+        {
+          "question": "An architect is evaluating building materials. A concrete batch has a 15% chance of having strength below specifications. If 4 independent batches are tested, what type of random variable describes the number of defective batches?",
+          "options": [
+            "Continuous uniform",
+            "Binomial",
+            "Normal",
+            "Poisson"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This describes a uniform distribution",
+            "Correct! This is a binomial distribution with n=4 and p=0.15",
+            "Normal distributions are continuous",
+            "Poisson is for counting events over time/space, not fixed trials"
+          ],
+          "explanation": "The number of defective batches follows a binomial distribution because we have a fixed number of independent trials (4 batches), each with two outcomes (defective or not), and a constant probability (0.15)."
+        },
+        {
+          "question": "In structural design, wind speed measurements for extreme events follow a pattern where very high values are critical for safety. Which distribution best models wind speeds for building design purposes?",
+          "options": [
+            "Normal distribution",
+            "Poisson distribution",
+            "Exponential distribution",
+            "Extreme value distribution"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Normal distribution is symmetric and doesn't emphasize extremes",
+            "Poisson is for counting discrete events",
+            "Exponential is for waiting times",
+            "Correct! Extreme value distributions are designed specifically for modeling maximum or minimum values"
+          ],
+          "explanation": "The extreme value distribution is specifically designed to model the maximum (or minimum) values in a dataset, which is exactly what architects need for wind speed design\u2014ensuring buildings can withstand rare, extreme wind events."
+        },
+        {
+          "question": "An architectural firm observes that building occupancy varies randomly each day. If the average office floor has 85 workers but occupancy varies from day to day, the firm uses probability to estimate peak load days. This is an example of:",
+          "options": [
+            "Descriptive statistics only",
+            "Inferential statistics",
+            "Probability estimation and prediction",
+            "Deterministic modeling"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Descriptive stats only summarize known data",
+            "Inferential statistics makes conclusions about populations",
+            "Correct! Probability estimation predicts future uncertain outcomes",
+            "Deterministic assumes fixed, known values"
+          ],
+          "explanation": "Using probability to predict future occupancy loads demonstrates probability estimation\u2014quantifying uncertainty about random future events to inform design decisions."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Probability Fundamentals Practice",
+      "content": "Reinforce your understanding with practical problems involving probability calculations in architectural systems.",
+      "questions": [
+        {
+          "question": "A building's fire safety system has two independent alarms. The first alarm works 94% of the time, the second 96% of the time. What's the probability at least one alarm works if a fire starts?",
+          "options": [
+            "0.90",
+            "0.9024",
+            "0.98",
+            "0.9976"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "This is the complement of one probability",
+            "Close, but not the complement of both failing",
+            "This is the average of the two",
+            "Correct! P(at least one works) = 1 - P(both fail) = 1 - (0.06 \u00d7 0.04) = 0.9976"
+          ],
+          "explanation": "Use the complement rule: P(at least one works) = 1 - P(both fail) = 1 - (0.06 \u00d7 0.04) = 1 - 0.0024 = 0.9976. This shows why redundant safety systems are crucial in architecture."
+        },
+        {
+          "question": "In a mixed-use building, 40% of occupants are residential, 35% are office workers, and 25% are retail customers. If an emergency evacuation is needed, what's the probability it involves either residential or office occupants?",
+          "options": [
+            "0.40",
+            "0.75",
+            "0.65",
+            "0.85"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's just residential",
+            "Correct! 0.40 + 0.35 = 0.75",
+            "That's residential + half of office",
+            "That's too high"
+          ],
+          "explanation": "These are mutually exclusive events, so P(residential OR office) = P(residential) + P(office) = 0.40 + 0.35 = 0.75. Architects use this to estimate emergency response needs."
+        },
+        {
+          "question": "An elevator's wait time is uniformly distributed between 0 and 60 seconds. What's the probability a visitor waits more than 45 seconds?",
+          "options": [
+            "0.25",
+            "0.45",
+            "0.50",
+            "0.75"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! (60-45)/(60-0) = 15/60 = 0.25",
+            "That's 45/100",
+            "That's half",
+            "That's too high"
+          ],
+          "explanation": "For a uniform distribution, P(X > 45) = (60 - 45) / (60 - 0) = 15/60 = 0.25. This helps architects size elevator banks to minimize wait times."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Random Variables in Architectural Systems",
+      "content": "A random variable is a function that assigns numerical values to uncertain outcomes in architectural systems. Discrete random variables, like the number of failed components in a facade system or cracks in concrete, take specific countable values. Continuous random variables, like material strength, thermal conductivity, or floor deformation, can take any value within a range. Understanding these distinctions helps architects model realistic building performance scenarios. For example, the number of glass panel failures is discrete (0, 1, 2...), while stress in steel beams is continuous\u2014each requires different probability models for reliable design verification and safety margins.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Understanding Random Variables and Distributions",
+      "content": "Assess your ability to identify appropriate distributions and calculate probabilities for architectural systems.",
+      "questions": [
+        {
+          "question": "A curtain wall system has 200 glass panels. Defects occur randomly with probability 0.02 per panel. Which random variable and distribution best model the total number of defective panels?",
+          "options": [
+            "Poisson with \u03bb=4",
+            "Normal with \u03bc=4, \u03c3\u00b2=3.92",
+            "Either Poisson or Normal (they're approximately equivalent for this problem)",
+            "Binomial only"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "This only describes one possible approximation",
+            "This only describes one possible approximation",
+            "Correct! With n=200, p=0.02, we have np=4 (Poisson parameter), and the binomial can be approximated by either Poisson or Normal distributions",
+            "While binomial is technically correct, both approximations apply here"
+          ],
+          "explanation": "The exact distribution is Binomial(n=200, p=0.02). With np=4, both the Poisson(\u03bb=4) and Normal(\u03bc=4, \u03c3\u00b2=3.92) distributions closely approximate it, which is useful for calculations."
+        },
+        {
+          "question": "An architect measures floor-to-ceiling heights across a residential building. Measurements follow a normal distribution with \u03bc=3.5m and \u03c3=0.02m. What percentage of rooms have heights exceeding 3.54m?",
+          "options": [
+            "2.28%",
+            "47.72%",
+            "97.72%",
+            "34%"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! 3.54m is 2\u03c3 above the mean; 2.28% lies in the upper tail",
+            "That's close to 50%, the center area",
+            "That includes most of the distribution",
+            "That's one standard deviation"
+          ],
+          "explanation": "The value 3.54m is 2 standard deviations above the mean [(3.54-3.5)/0.02 = 2]. From the standard normal table, approximately 2.28% of values exceed 2\u03c3. This helps architects understand construction tolerance impacts."
+        },
+        {
+          "question": "Visitor arrival times at an architectural exhibition follow a Poisson process with an average of 18 arrivals per hour. What's the probability of exactly 2 arrivals in the next 10 minutes?",
+          "options": [
+            "0.042",
+            "0.118",
+            "0.224",
+            "0.366"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "That's too low",
+            "That's the probability of 1 arrival",
+            "Correct! With \u03bb=3 for 10 minutes, P(X=2) = (e\u207b\u00b3 \u00d7 3\u00b2)/2! \u2248 0.224",
+            "That's the probability of 0 arrivals"
+          ],
+          "explanation": "With 18 arrivals/hour, in 10 minutes \u03bb = 18/60 \u00d7 10 = 3. Using the Poisson formula: P(X=2) = (e\u207b\u00b3 \u00d7 3\u00b2)/2! = (0.0498 \u00d7 9)/2 \u2248 0.224. Architects use this for designing crowd management systems."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Random Variables and Distributions Practice",
+      "content": "Practice applying distributions to architectural engineering problems and probability calculations.",
+      "questions": [
+        {
+          "question": "A structural engineer models concrete compressive strength for a new office building. Strength is normally distributed with \u03bc=35 MPa and \u03c3=3 MPa. What's the probability a concrete test sample exceeds 41 MPa?",
+          "options": [
+            "2.28%",
+            "4.55%",
+            "6.68%",
+            "15.87%"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's 3\u03c3 from the mean",
+            "Correct! 41 MPa is 2\u03c3 above the mean; approximately 2.28% lies in the upper tail",
+            "Not quite",
+            "That's about 1\u03c3"
+          ],
+          "explanation": "41 MPa is (41-35)/3 = 2 standard deviations above the mean. The probability of exceeding 2\u03c3 is approximately 2.28% in one tail."
+        },
+        {
+          "question": "Building settling rates at a new foundation follow an exponential distribution with mean settling rate of 2 cm/year. What's the probability that settling exceeds 5 cm in the first year?",
+          "options": [
+            "0.0821",
+            "0.1353",
+            "0.2231",
+            "0.6065"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! P(X>5) = e\u207b\u207d\u2075/\u00b2\u207e = e\u207b\u00b2\u00b7\u2075 \u2248 0.0821",
+            "That's too high",
+            "That's still too high",
+            "That's closer to a probability of exceeding 1 cm"
+          ],
+          "explanation": "For an exponential distribution with mean \u03bc=2, the parameter \u03bb=1/\u03bc=0.5. Then P(X>5) = e\u207b\u2070\u00b7\u2075\u00d7\u2075 = e\u207b\u00b2\u00b7\u2075 \u2248 0.0821. This low probability indicates good foundation stability expected."
+        },
+        {
+          "question": "An HVAC system in a tall building has 10 independent dampers that regulate airflow. Each damper has a 0.95 probability of functioning correctly. What's the probability that at least 9 dampers work properly?",
+          "options": [
+            "0.5987",
+            "0.7361",
+            "0.9140",
+            "0.9885"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "That's just P(all 10 work)",
+            "Not quite",
+            "Correct! P(X\u22659) = P(X=9) + P(X=10) with binomial n=10, p=0.95",
+            "That's too high"
+          ],
+          "explanation": "P(X=9) = C(10,9) \u00d7 0.95\u2079 \u00d7 0.05\u00b9 \u2248 0.3151; P(X=10) = 0.95\u00b9\u2070 \u2248 0.5987. Sum \u2248 0.9140. This shows high reliability with redundant dampers."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Applying Probability in Architectural Design",
+      "content": "Architects apply probability theory strategically to optimize designs under uncertainty and ensure safety. Risk assessment uses probability distributions to model material failures, environmental loads, and human behavior patterns. For instance, structural engineers design for specific return periods\u2014a '100-year flood' means there's approximately a 1% annual probability of water levels exceeding design height. Thermal comfort modeling uses distributions to ensure temperature remains in acceptable ranges for 90% of occupants throughout the year. Daylighting analysis applies probability to predict natural light availability on typical workdays. By integrating probability theory, architects create resilient buildings that balance safety margins, lifecycle costs, and performance expectations. This evidence-based approach enables informed decisions about construction standards, maintenance schedules, redundancy requirements, and design safety factors.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Mastery Complete: Probability and Random Variables in Architecture",
+      "content": "Congratulations! You've mastered probability theory and random variables in architectural design contexts. You can now model uncertainty in material properties, predict system failures under random conditions, design for extreme environmental events, estimate occupancy-driven loads, and optimize building performance using probabilistic methods. Apply these concepts confidently to evaluate building designs, assess risks quantitatively, interpret safety standards, and make evidence-based architectural decisions that balance innovation with resilience."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn Fundamentals"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Needs Practice"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "Try Again"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "Ready to Progress"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Apply Concepts"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Needs Practice"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "Try Again"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "Mastered"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Complete Course"
+    }
+  ],
+  "generated_at": "2026-03-27T02:38:29.280486+00:00",
+  "model": "claude-haiku-4-5"
+}

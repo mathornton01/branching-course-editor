@@ -1,0 +1,170 @@
+{
+  "id": "os-fundamentals-101",
+  "title": "Operating Systems Fundamentals",
+  "description": "Explore three pillars of OS design: process management, memory management, and file systems. Learn how modern operating systems manage resources, enable multitasking, and ensure security.",
+  "topic": "Operating Systems",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "operating systems",
+    "processes",
+    "memory management",
+    "file systems",
+    "system design"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Welcome to Operating Systems Fundamentals",
+      "content": "Operating systems (OSes) are the software that manage your computer's hardware and enable applications to run. Every computer, smartphone, and device has an OS managing processes, memory, and storage. In this course, you'll explore three foundational pillars: how OSes manage running programs, allocate memory efficiently, and organize files on disk. Understanding these concepts will deepen your appreciation for how your device works and prepare you for advanced systems topics. Let's begin!",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Select the topics you'd like to explore first. You can work through multiple topics to build a complete understanding.",
+      "choices": [
+        {
+          "label": "Process Management \u2013 Learn how OSes manage running programs and CPU time",
+          "next": "n3"
+        },
+        {
+          "label": "Memory Management \u2013 Explore how systems allocate and manage RAM",
+          "next": "n5"
+        },
+        {
+          "label": "File Systems \u2013 Understand how files are stored and organized on disk",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Understanding Processes and the CPU Scheduler",
+      "content": "A process is an executing instance of a program with its own memory space, registers, and state. The operating system uses a CPU scheduler to decide which process runs at any moment, switching between them rapidly (context switching) to create the illusion of parallel execution. Key concepts include process states (ready, running, blocked), scheduling algorithms (round-robin, priority-based), and the context switch overhead. Modern OSes use preemptive scheduling\u2014the kernel forcibly pauses a running process after a time slice (quantum) to give other processes a fair chance. This fairness and efficiency are central to responsive, multi-tasking systems.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Worked Example: CPU Scheduling in Action",
+      "content": "Imagine three processes: A (email client), B (video player), C (text editor). The scheduler uses a 10ms time slice. At time 0, A runs. At 10ms, the kernel preempts A, saves its context, and loads B (context switch ~1\u03bcs). B runs until 20ms, then C. At 30ms, A resumes from where it left off. This round-robin approach ensures all three seem to run simultaneously, though only one truly runs at a time. If B is blocked waiting for network I/O, the scheduler skips it and moves to C, maximizing CPU utilization. This is why your OS feels responsive even with dozens of apps running.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Memory Hierarchy and Virtual Memory",
+      "content": "Main memory (RAM) is limited and fast; disk storage is huge and slow. The OS uses virtual memory to give each process the illusion of a large, private address space. Paging divides physical RAM into fixed-size frames and process memory into equal-size pages. The OS maintains a page table mapping virtual addresses to physical frames, with some pages swapped to disk. When a process accesses a virtual address, the Memory Management Unit (MMU) translates it; if the page isn't in RAM, a page fault triggers the OS to load it from disk. Techniques like least-recently-used (LRU) eviction and working-set algorithms optimize which pages stay in RAM, balancing performance and utilization.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Worked Example: Virtual Memory and Page Faults",
+      "content": "A 32-bit process has a 4GB virtual address space, but your computer has only 8GB of RAM shared among all processes. The process requests data from virtual address 0x12345678. The MMU checks the page table: that page isn't in RAM (page fault). The OS kernel pauses the process, finds a least-recently-used page to evict (writing it to disk if dirty), loads the needed page from disk into a free frame, updates the page table, and resumes the process\u2014all transparent to the application. Without virtual memory, you couldn't run multiple large programs; with it, each feels like it owns all of RAM. Modern systems page several gigabytes to disk during intensive tasks.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "File Systems and Storage Organization",
+      "content": "A file system organizes persistent data on disk using a hierarchical directory structure and metadata to track file locations. Inodes (in ext4, NTFS clusters) store file metadata: size, owner, permissions, timestamps, and pointers to data blocks. A directory is a special file containing entries mapping names to inodes; this enables multiple names (hard links) to reference the same file. Free space is managed via bitmaps or free-block lists, allowing rapid allocation. File systems also implement access control (read, write, execute for user, group, others), journaling for crash recovery, and fragmentation management. Understanding inodes and permissions is essential for security and system administration.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Inodes, Permissions, and Directory Traversal",
+      "content": "When you run `ls -la /home/alice/file.txt`, the OS traverses the path: lookup \"/\" (root inode), find \"home\", follow to its inode, find \"alice\", follow to its inode, find \"file.txt\", fetch its inode. The inode stores file size (4096 bytes), owner (alice), permissions (rw-r--r--), and direct/indirect block pointers to actual data on disk. To read the file, the OS follows those pointers, retrieving data blocks. If a 2GB video file is fragmented across 100 blocks, the inode's indirect pointers efficiently locate all blocks. Permissions (chmod 644 = rw-r--r--) enforce access: alice can read/write, others can only read. This structure enables fast lookups, security, and recovery after crashes.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "How It All Works Together: A Complete System View",
+      "content": "These three subsystems\u2014process management, memory management, and file systems\u2014work in concert to make modern computing possible. When you open a browser, the process manager allocates CPU time and creates child processes for each tab. Each process gets virtual memory managed by the paging system. When the browser downloads a file, the file system allocates disk blocks and stores the inode metadata. If the system runs low on RAM, the VM system may page some browser data to disk, slowing that process but freeing RAM for others. Interrupt handlers and system calls bridge these subsystems: a page fault (interrupt) triggers the memory manager; a file I/O request (system call) triggers the file system. This deep integration is why understanding each piece matters.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: OS Fundamentals Mastered",
+      "content": "Congratulations! You've explored three pillars of operating system design: process scheduling, memory management, and file systems. You now understand how your OS manages resources, isolates processes, prevents unauthorized access, and recovers from failures. These concepts transfer across systems\u2014Windows, Linux, macOS, iOS, Android\u2014because they solve fundamental problems of multi-user, multi-tasking computing. Continue learning by exploring kernel implementations (Linux source code, xv6), advanced topics (virtualization, containers), or specialized systems (real-time OS, distributed systems). Your foundation is solid!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Process Management"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Memory Management"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "File Systems"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-26T10:05:32.618826+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,439 @@
+{
+  "id": "dv-python-socialwork",
+  "title": "Data Visualization with Python for Social Work",
+  "description": "Master data visualization techniques to better understand client outcomes, program impact, and community needs. Learn to create compelling charts that tell stories with data in social work contexts.",
+  "topic": "Data Visualization with Python",
+  "theme": "social work",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "python",
+    "visualization",
+    "social-work",
+    "matplotlib",
+    "data-analysis"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Data Visualization Matters in Social Work",
+      "content": "Data visualization is essential for social workers to communicate program outcomes and client progress to stakeholders, funders, and policymakers. A compelling chart can show that your evidence-based program reduced recidivism by 23% or that your community mental health initiative reached underserved populations more clearly than raw statistics. Visualizations help you identify trends\u2014like seasonal patterns in homelessness or correlations between intervention timing and client retention\u2014that guide your program improvements. They also make it easier to advocate for funding by transforming numbers into stories that resonate with grant reviewers and agency leadership."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Understanding Visualization Fundamentals",
+      "content": "Test your knowledge of when and why to use different chart types in social work contexts.",
+      "questions": [
+        {
+          "question": "You're tracking the number of clients in your substance abuse recovery program over 12 months (Jan\u2013Dec). What chart type best shows this trend?",
+          "options": [
+            "Pie chart",
+            "Line chart",
+            "Bar chart",
+            "Scatter plot"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Pie charts show parts of a whole, not trends over time.",
+            "Correct! Line charts excel at showing change and trends across time periods.",
+            "Bar charts work but don't emphasize the continuous trend as effectively.",
+            "Scatter plots show relationships between two variables, not time-series data."
+          ],
+          "explanation": "Line charts are ideal for showing trends over time, which is why they're commonly used to track program metrics month-to-month."
+        },
+        {
+          "question": "Your foster care agency served 5 clients from Hispanic backgrounds, 8 from African American backgrounds, and 12 from white backgrounds. What visualization would best communicate this demographic breakdown to a funder?",
+          "options": [
+            "Line chart",
+            "Pie chart",
+            "Histogram",
+            "Heatmap"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Line charts show trends, not composition.",
+            "Correct! Pie charts (or bar charts) effectively show the composition of a whole.",
+            "Histograms show distributions of continuous variables.",
+            "Heatmaps show correlations or intensity across a matrix."
+          ],
+          "explanation": "Pie or bar charts clearly show how the total caseload is divided by demographic groups, which is essential for demonstrating equitable service delivery."
+        },
+        {
+          "question": "Which of the following is a sign of a misleading visualization in social work reporting?",
+          "options": [
+            "Starting the y-axis at 0",
+            "Using a color-blind friendly palette",
+            "Truncating the y-axis to exaggerate small differences",
+            "Labeling all axes clearly"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Starting at 0 ensures accuracy and is best practice.",
+            "Color-blind friendly palettes support accessibility.",
+            "Correct! Truncating axes can exaggerate modest changes and mislead stakeholders.",
+            "Clear labels are essential for honest visualization."
+          ],
+          "explanation": "Integrity in data visualization is crucial when reporting to funders and policy makers. Truncated axes can make a 5% improvement look like a 50% improvement."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Visualization Fundamentals",
+      "content": "Reinforce your understanding with these scenarios:",
+      "questions": [
+        {
+          "question": "A counselor wants to compare the average session attendance across four different therapy groups (DBT, CBT, Motivational Interviewing, and Psychoeducation). Which chart type is best?",
+          "options": [
+            "Line chart",
+            "Bar chart",
+            "Pie chart",
+            "Box plot"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Line charts show trends over time, not group comparisons.",
+            "Correct! Bar charts are ideal for comparing values across categories.",
+            "Pie charts show composition, not group comparisons.",
+            "Box plots show distribution details, but bar charts are simpler for this comparison."
+          ],
+          "explanation": "Bar charts make it easy for stakeholders to see which intervention type has the best attendance at a glance."
+        },
+        {
+          "question": "You're showing your director how client wait times have decreased over the past 3 years (36 data points, one per month). What chart would you use?",
+          "options": [
+            "Pie chart",
+            "Line chart with trend line",
+            "Histogram",
+            "Stacked bar chart"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Pie charts don't show time-series data.",
+            "Correct! A line chart with a trend line clearly communicates long-term improvement.",
+            "Histograms show distributions, not time-based trends.",
+            "Stacked bar charts show composition within categories."
+          ],
+          "explanation": "Line charts with trend lines are powerful for demonstrating operational improvements and program impact to leadership."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n2",
+      "failure_target": "n2"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Creating Charts with Matplotlib and Seaborn",
+      "content": "Now you'll use Python libraries to bring your data to life. Matplotlib is the foundation for Python visualization, while Seaborn builds on top of it to create publication-quality statistical graphics with minimal code. For a social work program tracking client outcomes, you might import pandas to load your caseload data, then use `matplotlib.pyplot` to create a bar chart showing clients served by program type, or use `seaborn.lineplot()` to visualize mental health symptom scores across therapy sessions. Seaborn's built-in themes and color palettes make it easy to create professional-looking reports for funders and agency boards. Always label your axes clearly with units (e.g., 'Number of Clients'), add a title that includes the date range, and include a legend if you have multiple data series."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Building Your First Visualizations",
+      "content": "Demonstrate your ability to create and customize visualizations with Python.",
+      "questions": [
+        {
+          "question": "You have a pandas DataFrame called 'clients' with columns 'age' and 'program_type'. To create a bar chart showing the average age by program type, which Seaborn function is most appropriate?",
+          "options": [
+            "sns.lineplot()",
+            "sns.barplot()",
+            "sns.scatterplot()",
+            "sns.histplot()"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "lineplot() shows trends over time or continuous relationships.",
+            "Correct! barplot() calculates means and shows comparisons across categories.",
+            "scatterplot() shows individual data points and relationships.",
+            "histplot() shows distributions of a single variable."
+          ],
+          "explanation": "sns.barplot() automatically computes means and is perfect for comparing categorical data like program types."
+        },
+        {
+          "question": "When creating a visualization for a grant report to a funder, what should you always include?",
+          "options": [
+            "Complex color gradients to look professional",
+            "A title, axis labels, and legend with dates and data source",
+            "As many data series as possible to show thorough analysis",
+            "Small fonts to fit more information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Complex colors can confuse readers; simplicity is better.",
+            "Correct! Clear titles, labels, and metadata make reports credible and professional.",
+            "More data isn't always better; focus on your key message.",
+            "Accessibility requires readable fonts, especially for older funders and stakeholders."
+          ],
+          "explanation": "Funders and oversight boards appreciate clarity and transparency. Always document your data source and reporting period."
+        },
+        {
+          "question": "Your director asks for a chart showing the relationship between hours of therapy and client symptom reduction. Which Seaborn function, combined with a trend line, would be best?",
+          "options": [
+            "sns.barplot()",
+            "sns.scatterplot() with a regression line",
+            "sns.heatmap()",
+            "sns.boxplot()"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "barplot() compares categories, not continuous relationships.",
+            "Correct! scatterplot() with a regression line (regplot) shows relationships between continuous variables.",
+            "heatmap() shows correlations across a matrix of variables.",
+            "boxplot() shows distributions and outliers."
+          ],
+          "explanation": "Scatter plots reveal individual cases and overall trends, making them ideal for demonstrating program effectiveness."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Creating and Customizing Charts",
+      "content": "Build your skills with hands-on visualization scenarios:",
+      "questions": [
+        {
+          "question": "You want to create a line chart showing monthly mental health app usage across your clinic's three locations (Downtown, Northside, Southside). In Seaborn, how would you differentiate the three locations on the same plot?",
+          "options": [
+            "Use three separate plt.plot() commands",
+            "Use sns.lineplot() with the 'hue' parameter set to 'location'",
+            "Create three separate subplots",
+            "Use plt.bar() with different x-positions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That works but is less elegant than Seaborn's approach.",
+            "Correct! The 'hue' parameter automatically assigns colors and creates a legend.",
+            "Subplots work but make comparison harder; a single plot is better.",
+            "Bar charts don't show trends as effectively as line charts."
+          ],
+          "explanation": "Using the 'hue' parameter is the Seaborn way to plot multiple groups on one chart with automatic color assignment."
+        },
+        {
+          "question": "Your visualization looks cluttered with too many data points. What technique helps viewers focus on the trend without losing data detail?",
+          "options": [
+            "Remove half the data points",
+            "Add a smoothing/trend line over the scatter points",
+            "Increase font sizes",
+            "Use more colors"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Removing data loses information and credibility.",
+            "Correct! A trend line (using sns.regplot() or seaborn's regression) highlights the pattern.",
+            "Larger fonts improve readability but don't reduce visual clutter.",
+            "More colors add clutter; fewer is better."
+          ],
+          "explanation": "Layering a trend line over your data helps busy stakeholders see the key finding while maintaining transparency about raw data."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Advanced Visualizations: Dashboards and Interactive Charts",
+      "content": "As your social work program grows, you'll want to create interactive dashboards and multi-panel reports that tell a complete story. Tools like Plotly allow you to build interactive plots where stakeholders can hover over data points to see details, and tools like Dash let you build web-based dashboards that auto-update as new client data arrives. For example, a mental health agency might create a dashboard with four panels: (1) a line chart of monthly admissions, (2) a bar chart of diagnoses, (3) a scatter plot of symptom improvement vs. session count, and (4) a heatmap showing demographics. You can also use Matplotlib's `GridSpec` or Seaborn's `FacetGrid` to create multi-panel figures that compare outcomes across different cohorts (e.g., clients who completed your program vs. those who didn't). Always ensure your advanced visualizations answer a specific question that simpler charts cannot."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Mastering Advanced Data Visualization",
+      "content": "Demonstrate your ability to design and critique complex visualizations.",
+      "questions": [
+        {
+          "question": "You want to show how client retention rates differ by treatment type AND vary by the therapist's years of experience. What advanced visualization approach would best display this multi-dimensional data?",
+          "options": [
+            "One bar chart with very many bars",
+            "A scatter plot with hue (color) for treatment type and size for years of experience",
+            "A heatmap with treatment types on one axis and experience levels on the other",
+            "Three separate line charts"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "One crowded bar chart becomes unreadable.",
+            "That works but heatmap is clearer for categorical comparisons.",
+            "Correct! Heatmaps excel at showing relationships between two categorical variables with color intensity representing the third dimension (retention rate).",
+            "Separate charts force readers to compare mentally rather than visually."
+          ],
+          "explanation": "Heatmaps are ideal for showing how outcomes vary across two categorical factors simultaneously, making patterns and outliers easy to spot."
+        },
+        {
+          "question": "Your agency director wants to explore data interactively during a board meeting\u2014hovering over a data point to see details. Which Python tool is best suited for this?",
+          "options": [
+            "Matplotlib static PNG",
+            "Plotly interactive HTML chart",
+            "Excel spreadsheet",
+            "PDF report"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Static PNGs don't support interactivity.",
+            "Correct! Plotly generates interactive HTML charts that work in browsers and support hovering, clicking, and zooming.",
+            "Excel isn't a visualization library.",
+            "PDFs are static."
+          ],
+          "explanation": "Plotly is the go-to library for interactive visualizations in Python, perfect for board presentations and stakeholder engagement."
+        },
+        {
+          "question": "You've created a FacetGrid with 6 subplots showing program outcomes for 6 different demographics. What's critical to ensure readability?",
+          "options": [
+            "Make each subplot's axes independent",
+            "Use the same y-axis scale across all subplots for fair comparison, unless comparing different metrics",
+            "Use different colors for each subplot",
+            "Remove axis labels to reduce clutter"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Independent axes can mislead by exaggerating differences.",
+            "Correct! Consistent scales make comparisons valid; only vary scales when comparing different metrics.",
+            "Color is less important than scale consistency.",
+            "Axis labels are essential for understanding data."
+          ],
+          "explanation": "Consistent axis scales across multi-panel plots ensure fair visual comparison and prevent misleading impressions of program performance across demographic groups."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Building Complex Visualizations",
+      "content": "Refine your advanced skills:",
+      "questions": [
+        {
+          "question": "You're building an interactive Plotly dashboard for case managers. Which feature helps them drill down into data (e.g., click on a program to see individual client cases)?",
+          "options": [
+            "Static PNG export",
+            "Click-and-hover event handlers",
+            "Larger font sizes",
+            "More colors"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Static exports remove interactivity.",
+            "Correct! Plotly's click event handlers enable drill-down filtering and data exploration.",
+            "Font size doesn't enable interaction.",
+            "Colors don't add functionality."
+          ],
+          "explanation": "Interactive dashboards let case managers and supervisors explore data at their own pace, making insights more accessible."
+        },
+        {
+          "question": "You've created a FacetGrid showing recovery outcomes for clients enrolled in 3 different cohorts (2022, 2023, 2024). To make fair comparisons, what do you do?",
+          "options": [
+            "Use a different color for each cohort",
+            "Use the same y-axis scale for all three subplots",
+            "Add a legend showing cohort names",
+            "Include more data points"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Colors distinguish groups but don't ensure fair comparison.",
+            "Correct! Matching y-axis scales allows fair visual comparison of trends across cohorts.",
+            "Legends help identification but don't affect comparison fairness.",
+            "More data isn't about fairness; it's about scale."
+          ],
+          "explanation": "When comparing outcomes across cohorts, consistent axis scales ensure that visual differences reflect real differences, not axis scaling tricks."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Congratulations! You're a Data Visualization Expert",
+      "content": "You've mastered the skills to transform social work data into compelling, honest, and actionable visualizations. You can now create charts that clearly communicate client outcomes to funders, dashboards that help case managers track progress, and reports that advocate for vulnerable populations. Remember: the best visualization is one that answers a real question and respects your audience. Continue to practice with your own agency's data, ask colleagues for feedback, and stay curious about new visualization tools. Your ability to tell stories with data will make you a more effective advocate for your clients and a more valued member of your team."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T08:34:10.200419+00:00",
+  "model": "claude-haiku-4-5"
+}

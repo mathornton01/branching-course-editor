@@ -1,0 +1,134 @@
+{
+  "id": "arch-film-rendering",
+  "title": "Computer Architecture in Film Production",
+  "description": "Learn computer architecture principles through designing a VFX rendering pipeline for a major film production",
+  "topic": "Computer Architecture",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 22,
+  "tags": [
+    "computer-architecture",
+    "rendering-systems",
+    "parallel-processing",
+    "memory-hierarchy"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Great Rendering Challenge",
+      "content": "You're the technical director at Cinematic Studios, responsible for optimizing the VFX rendering pipeline for a blockbuster sci-fi film. The production requires rendering 2,000 shots of complex visual effects\u2014from photorealistic spaceship battles to alien landscapes with subsurface scattering. Your architectural decisions today determine whether the studio meets its deadline and budget. This mirrors how computer architects must choose between raw processing power and intelligent resource management. Every frame needs processing; every decision has tradeoffs.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Rendering Architecture Strategy",
+      "content": "You must choose your core architectural philosophy. Do you build a pipeline optimized for maximum parallel throughput\u2014launching thousands of render jobs simultaneously across your farm? Or do you design for intelligent memory hierarchy and smart asset scheduling, processing fewer jobs at once but with near-zero wait times?",
+      "choices": [
+        {
+          "label": "Parallel Throughput: Distribute shots across render nodes (GPU-style parallel architecture)",
+          "next": "n3"
+        },
+        {
+          "label": "Memory-Efficient Scheduling: Smart cache hierarchy and prefetching (CPU-style architecture)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Parallel Rendering Architecture",
+      "content": "You build a massively parallel rendering farm with 10,000 render cores. Like a GPU with thousands of small processors, each core specializes in rendering tasks. Lighting department, texturing, effects, and composition work simultaneously across different shots. Instructions broadcast to all cores from your main scheduler. Data flows from central asset storage to all cores in parallel\u2014like a GPU's register file pushing data to thousands of execution units. Your system achieves incredible throughput, but you've discovered a critical bottleneck: moving gigabytes of assets (textures, geometry, animation data) from storage to render cores creates constant memory contention.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Memory Management Decision",
+      "content": "Your parallel render farm is powerful but starving for data. Storage bandwidth is maxed out\u2014render cores constantly stall waiting for textures and assets, just like CPU cores stall on cache misses. You need to solve this memory wall. Do you implement a multi-level caching strategy, or push through with faster storage hardware alone?",
+      "choices": [
+        {
+          "label": "Multi-Level Cache Hierarchy: Fast SSD cache for hot assets (L1), warm asset cache (L2), cold storage (L3) \u2014 intelligent data prefetching",
+          "next": "n5"
+        },
+        {
+          "label": "Increase Storage Speed Only: Upgrade to faster drives without restructuring data flow",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Success: Balanced High-Performance System",
+      "content": "Your multi-level caching strategy is transformative. Frequently-used hero assets (main character models, key textures) stay in fast NVMe cache. Common mid-tier assets live in high-speed SSD cache. Archive footage and rarely-needed data reside in slower storage. Your intelligent prefetching system predicts which assets the next render job needs and preloads them. Render core utilization jumps from 58% to 91%. You complete 2,000 shots in 16 weeks, well under deadline. You've replicated the fundamental insight of modern CPU architecture: intelligent memory hierarchy and data movement optimization outperforms raw throughput alone. The studio adopts this design as standard for all future productions."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Partial Success: High Throughput, Wasted Capacity",
+      "content": "Your render farm produces incredible theoretical throughput\u20145,000 frames per hour at peak. But in practice, cores sit idle 40% of the time waiting for data from storage. Faster drives help slightly, but they're expensive and don't solve the architectural problem. After 20 weeks, you've completed 1,600 shots, but you're two weeks behind schedule. You've learned that in computer architecture, like film production, raw horsepower without intelligent data flow creates bottlenecks. The studio realizes that memory hierarchy and prefetching\u2014not faster hardware alone\u2014should have been the priority. Next project, you'll architect differently."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Memory-Hierarchical Rendering Architecture",
+      "content": "You design your system like a CPU with intelligent caching. Hot assets\u2014frequently-rendered textures, common models, reusable animations\u2014stay in fast SSD tier (L1 cache equivalent). Warm assets\u2014specialty textures, unique models\u2014live in medium-speed storage (L2). Cold storage houses archives and one-time-use data (L3). Your scheduler predicts asset dependencies and prefetches data before render jobs request it. You process fewer shots in parallel (1,000 simultaneous jobs instead of 10,000), but each shot has all needed data available instantly. Render cores rarely stall. Like a CPU with excellent cache locality, your pipeline achieves remarkable efficiency through strategic data placement and prefetching.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Success: Optimized Efficient Architecture",
+      "content": "Your hierarchical architecture delivers exceptional results. Despite processing fewer parallel jobs, your core utilization reaches 94%. Zero render stalls. All 2,000 shots complete in 15 weeks, under budget and schedule. Power consumption is 30% lower than the parallel-throughput approach\u2014cores spend zero time idle, so energy spending directly translates to output. Your design becomes industry benchmark. You've proven that like modern CPUs, intelligent memory hierarchy, prefetching, and cache-aware scheduling outperform brute-force parallelism. The studio recognizes that computer architecture isn't about raw throughput; it's about eliminating waste through strategic data movement and intelligent resource utilization."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Parallel Throughput"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Memory-Efficient"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Cache Hierarchy"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Storage Only"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T06:33:22.701496+00:00",
+  "model": "claude-haiku-4-5"
+}

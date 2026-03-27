@@ -1,0 +1,257 @@
+{
+  "id": "course-comp-arch-sports-analytics",
+  "title": "Computer Architecture for Sports Analytics",
+  "description": "Master computer architecture fundamentals by exploring how hardware and software work together to power real-time sports analytics systems. Choose between a hardware-first or software-first learning path.",
+  "topic": "Computer Architecture",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 25,
+  "tags": [
+    "computer-architecture",
+    "sports-analytics",
+    "systems",
+    "hardware",
+    "software",
+    "performance"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "decision",
+      "title": "Welcome to Computer Architecture in Sports Analytics",
+      "content": "To excel in sports analytics, you need to understand how computers process the millions of data points that fuel modern sports insights. This course covers the fundamentals through two complementary approaches: understanding the physical hardware that makes fast stats possible, or understanding the software that orchestrates data flows. Which approach interests you more?",
+      "choices": [
+        {
+          "label": "Hardware Foundation",
+          "next": "n2"
+        },
+        {
+          "label": "Software Execution",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "The Physical Foundation: CPU, Memory, and Cache",
+      "content": "Every sports analytics system begins with physical hardware. The CPU executes instructions at blazing speeds, processing game events as they occur. Memory stores the data your code needs, but it comes in layers: blazingly fast CPU caches, faster RAM, and slower disk storage. When a broadcaster needs live statistics updated every second during a game, the computer architecture determines whether they can deliver it. Understanding CPU cores, memory hierarchy, and cache strategies is essential for building systems that don't lag under the pressure of processing 100+ events per second from a single game.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Real-Time Stats in a Basketball Game",
+      "content": "During an NBA game, a play happens (e.g., three-pointer made). The system must: 1) Read this event from the network into fast cache (nanoseconds), 2) Calculate updated shooting percentage for that player using cached data (microseconds), 3) Push the updated stat to the broadcast feed. If CPU caches were cold and data had to come from disk, this would take milliseconds\u2014missing the broadcast window. Smart architecture places frequently accessed player stats in L3 cache, reducing latency from 100ms (disk) to 10 nanoseconds (cache). This is why multi-core CPUs excel at sports analytics: each core can process different player events in parallel.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Hardware Fundamentals Assessment",
+      "content": "Test your understanding of CPU architecture, memory hierarchy, and caching in sports analytics systems.",
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n3",
+      "questions": [
+        {
+          "question": "Why does a broadcaster use CPU caches to store frequently accessed player statistics?",
+          "options": [
+            "To save electricity",
+            "To reduce latency when serving live stats (3-5 requests per second per sport)",
+            "Because RAM is too expensive",
+            "To comply with data privacy laws"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Caches do use less power, but that's not the primary reason for sports analytics.",
+            "Correct! Caches reduce access time from milliseconds to nanoseconds.",
+            "RAM and caches serve different purposes; cost isn't the main driver.",
+            "Data privacy is handled through encryption and access control, not caching."
+          ],
+          "explanation": "In live sports broadcasting, a 10-millisecond delay updating stats can mean missing the moment. CPU caches, though smaller, serve data 1000x faster than disk, making them critical for responsive analytics."
+        },
+        {
+          "question": "A sports analytics system processes 500 player events per second. Which architectural choice helps most?",
+          "options": [
+            "Adding more disk storage",
+            "Increasing CPU cores and cache size",
+            "Upgrading the monitor resolution",
+            "Using slower memory"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Disk storage doesn't improve processing speed.",
+            "Correct! More cores enable parallel processing, larger caches reduce memory latency.",
+            "Monitor resolution is unrelated to event processing throughput.",
+            "Slower memory would worsen performance."
+          ],
+          "explanation": "Processing 500 events/sec requires both parallel processing (cores) and fast memory access (cache). A single-core system with slow memory would bottleneck."
+        },
+        {
+          "question": "Which layer of the memory hierarchy is typically closest in speed to the CPU?",
+          "options": [
+            "Hard disk drive",
+            "RAM",
+            "L3 cache",
+            "Solid State Drive"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "HDDs are the slowest tier, measured in milliseconds.",
+            "RAM is faster than disk but slower than any cache tier.",
+            "Correct! L3 cache is mere nanoseconds away from the CPU.",
+            "SSDs are much faster than HDDs but still slower than cache."
+          ],
+          "explanation": "The memory hierarchy trades capacity for speed: L1 cache is tiny but near-instant, RAM is larger but slower, disk is huge but very slow. Sports analytics exploits this by keeping hot data in caches."
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Software Execution: System Calls, I/O, and Concurrency",
+      "content": "While hardware executes instructions, software orchestrates the complex choreography of data flowing through a sports analytics system. Your Python script processing millions of play-by-play records relies on system calls to read from disk, write to databases, and handle network requests. Modern sports analytics systems are concurrent\u2014multiple requests arrive simultaneously (fans checking stats, broadcasters pulling live data, analysts querying databases). The operating system schedules your threads and processes across CPU cores, managing I/O bottlenecks (network latency, disk reads, database queries). Understanding execution models, I/O blocking, and concurrency patterns separates slow, laggy systems from responsive platforms.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Processing Game Data: A Pipeline in Action",
+      "content": "A sports analytics pipeline ingests play-by-play data during a live game: 1) The API receives a play event (network I/O\u2014blocks while waiting for data), 2) the system deserializes JSON into Python objects (CPU), 3) calculates updated statistics (CPU), 4) queries a player database to enrich data (database I/O\u2014blocks until results return), 5) caches the result in Redis (network I/O), and 6) pushes to subscribers (network I/O). Each I/O operation is a potential bottleneck. Modern systems use async/await to prevent one slow database query from freezing the entire pipeline. By understanding how the OS schedules work and how I/O blocks, you can design pipelines that process 1000s of events per game without lagging.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Software Execution Assessment",
+      "content": "Test your understanding of system calls, I/O blocking, concurrency, and process scheduling in sports analytics systems.",
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n6",
+      "questions": [
+        {
+          "question": "A sports analytics API serves 10,000 concurrent requests for live stats. What architectural pattern prevents threads from blocking on database queries?",
+          "options": [
+            "Using synchronous database calls",
+            "Using async/await or thread pools",
+            "Increasing the number of static web servers",
+            "Adding more RAM to the database"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Synchronous calls would cause each thread to block, requiring 10,000 threads.",
+            "Correct! Async/await allows other requests to proceed while one awaits I/O.",
+            "More servers don't prevent blocking within each server.",
+            "More database RAM helps with speed but doesn't prevent blocking."
+          ],
+          "explanation": "When a database query takes 100ms and you have 10,000 concurrent requests, a synchronous design would need 10,000 threads. Async/await lets one thread handle multiple requests by continuing to others while I/O completes."
+        },
+        {
+          "question": "Why do sports analytics systems use caching (e.g., Redis) between the application and database?",
+          "options": [
+            "To comply with regulations",
+            "To reduce database I/O latency by serving hot data from memory",
+            "To increase storage capacity",
+            "To eliminate the need for a database"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Compliance is unrelated to caching strategy.",
+            "Correct! Cache hits serve data 1000x faster than disk.",
+            "Caching reduces latency, not storage capacity.",
+            "Caching complements the database but doesn't replace it."
+          ],
+          "explanation": "Popular player stats (top scorers, leaders) are queried thousands of times per game. Serving these from Redis (in-memory, nanosecond latency) instead of the database (millisecond latency) dramatically improves responsiveness."
+        },
+        {
+          "question": "In a live sports broadcast system, a system call to read game events from the network is slow (10ms latency). What OS-level mechanism allows other analytics tasks to run while this I/O completes?",
+          "options": [
+            "Virtual memory",
+            "Context switching / thread scheduling",
+            "CPU cache invalidation",
+            "Memory protection"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Virtual memory helps with address space management, not blocking I/O.",
+            "Correct! The OS switches to another task while I/O blocks.",
+            "Cache invalidation is for cache coherency, not I/O blocking.",
+            "Memory protection prevents unauthorized access, not I/O delays."
+          ],
+          "explanation": "When your thread calls read() on the network, it blocks. The OS doesn't leave the CPU idle\u2014it context-switches to another thread, allowing other analytics work to proceed. When the I/O completes, the original thread resumes."
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Congratulations!",
+      "content": "You've mastered the fundamentals of computer architecture in sports analytics. You now understand how the physical hardware and software layers work together to power the real-time systems that modern sports rely on. Whether you started with hardware or software, you've learned that peak performance requires optimizing across both layers: fast CPUs and memory hierarchies, efficient I/O patterns, and smart concurrency. Apply these principles to your next analytics project and watch your systems outperform the competition."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Hardware Foundation"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Software Execution"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n3",
+      "label": "fail - review"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c10",
+      "source": "n7",
+      "target": "n6",
+      "label": "fail - review"
+    }
+  ],
+  "generated_at": "2026-03-27T06:02:45.962555+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,239 @@
+{
+  "id": "pc-music-therapy-001",
+  "title": "Parallel Computing in Music Therapy",
+  "description": "Learn how concurrent processing, thread synchronization, and load balancing transform modern music therapy programs",
+  "topic": "Parallel Computing",
+  "theme": "music therapy",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "parallel computing",
+    "concurrency",
+    "synchronization",
+    "load balancing",
+    "music therapy",
+    "systems design"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Parallel Computing in Music Therapy: An Overview",
+      "content": "Parallel computing enables systems to perform multiple tasks simultaneously, dramatically improving efficiency. In music therapy, this principle applies when therapists manage multiple patient sessions, coordinate ensemble playing, or balance patient loads across clinical networks. Understanding parallelization helps modern music therapy programs scale their services while maintaining therapeutic quality. Just as an orchestra conductor manages multiple instruments at once, parallel computing orchestrates multiple computational tasks. This course explores three essential approaches to harnessing parallelization for music therapy applications.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which Parallel Computing Concept Interests You?",
+      "content": "Music therapy programs use parallel computing in different ways. Choose which concept you'd like to explore first:",
+      "choices": [
+        {
+          "label": "Managing Multiple Concurrent Sessions",
+          "next": "n3"
+        },
+        {
+          "label": "Coordinating Synchronized Therapist Teams",
+          "next": "n5"
+        },
+        {
+          "label": "Balancing Patient Load Across Programs",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Concurrent Task Processing in Therapy Sessions",
+      "content": "Concurrent task processing allows multiple independent operations to run simultaneously within the same system. In music therapy clinics, a therapist managing five concurrent patient sessions must process each patient's needs, monitor progress, and adjust interventions independently yet continuously. Modern practice management systems use concurrency to handle appointment scheduling, progress note documentation, and billing simultaneously without blocking patient care. Concurrency differs from true parallelism (which requires multiple cores) but achieves similar throughput benefits. Understanding concurrency helps therapists and administrators design more responsive clinical systems.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Case Study: Managing Five Concurrent Sessions in a Music Therapy Clinic",
+      "content": "Consider Dr. Martinez managing five concurrent dementia patients in a large clinic. While Patient A plays the piano, the system records session notes. Simultaneously, Patient B's biometric data streams in, Patient C's mood assessment is processed, Patient D's adaptive playlist updates, and Patient E's family member receives a progress text. The practice management system handles all five concurrent streams using a queue-based scheduler. Each task waits for I/O without blocking others. This concurrent approach increases throughput from ~2 patients/hour (sequential) to ~4.5 patients/hour (concurrent), improving clinic efficiency by 125%.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Thread Synchronization in Ensemble Music Therapy",
+      "content": "Thread synchronization ensures that multiple concurrent operations coordinate correctly when they share resources or dependencies. In ensemble music therapy\u2014where multiple therapists guide a group of patients in collaborative music-making\u2014synchronization is critical. All therapists must stay in rhythm with the same tempo, coordinate chord changes at the precise moment, and respond to group dynamics uniformly. Synchronization mechanisms (locks, semaphores, barriers) prevent race conditions where two therapists accidentally change the same patient's assignment or log conflicting progress notes. Proper synchronization maintains therapeutic integrity while enabling parallel therapeutic work.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Coordinating a 6-Therapist Ensemble Session with Synchronized Playing",
+      "content": "A large music therapy program runs a weekly ensemble session with six therapists guiding twelve patients through a collaborative drumming circle. Each therapist manages two patients and must synchronize on beat timing, volume adjustments, and emotional transitions. Without synchronization, if two therapists log the same patient's progress simultaneously, the notes could corrupt. Using mutex locks, only one therapist can update each patient's record at a time. Barrier synchronization ensures all six therapists wait at measure boundaries before advancing. When Patient 7 needs a tempo adjustment, a shared tempo variable broadcasts the change to all six therapist apps within 50ms. This coordination enables seamless therapeutic flow.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Load Balancing in Distributed Music Therapy Networks",
+      "content": "Load balancing distributes computational or therapeutic work across multiple resources to prevent bottlenecks and ensure consistent service quality. A network of music therapy clinics across a city must assign incoming patients to therapists fairly and efficiently. If one clinic becomes overbooked while others have capacity, new patients experience long waits and reduced care quality. Load balancing algorithms (round-robin, least-connections, weighted assignment) distribute patient assignments dynamically. They account for therapist specialization, current patient load, travel distance, and equipment availability. Effective load balancing ensures no single therapist burns out while underutilized capacity sits idle, improving both therapist well-being and patient access.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Scaling Patient Access Across Five Metro Music Therapy Clinics",
+      "content": "The Metro Music Therapy Network manages five clinics across a city with 450 active patients and 25 therapists. Without load balancing, clinic geographic distribution and therapist specialization cause imbalances: the downtown clinic fills with trauma survivors needing trauma-informed therapists, while the suburban clinic has capacity but fewer specialized therapists. A weighted load-balancing system assigns new patients by least current load at each clinic, therapist specialization match, and travel distance. When a trauma survivor books, the system directs them to the clinic-therapist combination with the shortest wait and appropriate specialization. This approach reduces average patient wait time from 8 weeks to 2 weeks while balancing therapist caseloads within 5% of optimal.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Parallel Computing Approaches in Modern Music Therapy Programs",
+      "content": "Real-world music therapy programs rarely use just one parallelization approach\u2014they combine all three. A modern clinic uses concurrent task processing to handle multiple patient intakes simultaneously while maintaining therapeutic quality. They employ thread synchronization when multiple therapists collaborate on group sessions or shared patient records. They deploy load balancing across clinics and therapists to ensure equitable access and prevent bottlenecks. These approaches together enable music therapy organizations to scale from small practices serving 50 patients to large networks serving thousands while maintaining personalized, responsive care. Understanding when and how to apply concurrency, synchronization, and load balancing transforms how modern music therapy programs operate, improving both patient outcomes and organizational efficiency.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Parallel Computing in Music Therapy - Assessment",
+      "content": "Demonstrate your understanding of concurrent processing, thread synchronization, and load balancing by answering these questions.",
+      "questions": [
+        {
+          "question": "A music therapy clinic uses a patient management system that records session notes for Patient A while simultaneously processing Patient B's biometric data and scheduling Patient C's next appointment. What parallel computing principle is this an example of?",
+          "options": [
+            "Thread synchronization",
+            "Concurrent task processing",
+            "Load balancing",
+            "Distributed networking"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Thread synchronization ensures multiple operations coordinate when sharing resources, not managing independent simultaneous operations.",
+            "Correct! Concurrent processing allows multiple independent operations (note recording, data processing, scheduling) to happen simultaneously.",
+            "Load balancing distributes work across resources to prevent bottlenecks, not manages independent concurrent tasks.",
+            "Distributed networking involves multiple computers communicating, but this describes operation parallelization within one system."
+          ],
+          "explanation": "This scenario describes three independent operations running concurrently within the same system, which is the definition of concurrent task processing."
+        },
+        {
+          "question": "Why must a 6-therapist ensemble session use thread synchronization when all therapists update the same shared patient record?",
+          "options": [
+            "To make the therapists play at the same tempo",
+            "To prevent simultaneous writes from corrupting the patient record",
+            "To ensure therapists are located in the same room",
+            "To reduce the total number of therapists needed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Tempo synchronization uses barriers and timing mechanisms, but this is specifically about data integrity.",
+            "Correct! Without synchronization (e.g., mutex locks), two therapists writing to the record simultaneously could corrupt it or lose one update.",
+            "Thread synchronization is about coordinating access to shared resources, not physical proximity.",
+            "Synchronization enables more efficient use of therapists, not reduction in their numbers."
+          ],
+          "explanation": "Synchronization prevents race conditions where concurrent writes interfere with each other, protecting data integrity."
+        },
+        {
+          "question": "A music therapy network assigns new patients to clinics based on current patient load, therapist specialization, and travel distance. This is an example of which parallel computing concept?",
+          "options": [
+            "Concurrent processing",
+            "Thread synchronization",
+            "Load balancing",
+            "Recursive scheduling"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Concurrent processing manages independent simultaneous operations, not distribution of work.",
+            "Synchronization coordinates access to shared resources, not intelligent distribution.",
+            "Correct! Distributing work (patient assignments) across multiple resources (clinics, therapists) based on capacity and needs is load balancing.",
+            "Recursive scheduling is a technique but not the primary parallel computing principle here."
+          ],
+          "explanation": "Load balancing distributes computational or service work across multiple resources to prevent bottlenecks and ensure efficient utilization."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Congratulations! You've Mastered Parallel Computing in Music Therapy",
+      "content": "You've learned how concurrent task processing, thread synchronization, and load balancing enable modern music therapy programs to scale efficiently while maintaining therapeutic quality. These parallel computing principles are foundational to building responsive, equitable, and sustainable music therapy services. Continue exploring how other computer science concepts can enhance clinical practice and organizational efficiency."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Managing Multiple Concurrent Sessions"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Coordinating Synchronized Therapist Teams"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Balancing Patient Load Across Programs"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Continue to synthesis"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Learn example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Continue to synthesis"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Learn example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue to synthesis"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Test your knowledge"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T04:40:56.344259+00:00",
+  "model": "claude-haiku-4-5"
+}

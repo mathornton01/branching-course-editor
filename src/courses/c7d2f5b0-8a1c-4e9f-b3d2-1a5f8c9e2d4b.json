@@ -1,0 +1,162 @@
+{
+  "id": "c7d2f5b0-8a1c-4e9f-b3d2-1a5f8c9e2d4b",
+  "title": "Database Design and SQL: Space Exploration Edition",
+  "description": "Master database design and SQL by exploring space mission scenarios. Learn relational databases, SQL queries, and data modeling through the lens of managing interplanetary missions and space stations.",
+  "topic": "Database Design and SQL",
+  "theme": "space exploration",
+  "difficulty": "beginner",
+  "estimated_minutes": 30,
+  "tags": [
+    "database-design",
+    "sql",
+    "space-exploration",
+    "data-management",
+    "relational-databases"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Databases Power Space Exploration",
+      "content": "Space missions generate massive amounts of data\u2014spacecraft telemetry, crew communications, scientific observations, and equipment status. Mission control needs a structured system to store and analyze this information in real-time. Databases are the backbone of space exploration, organizing everything from launch schedules to live sensor feeds. In this course, you'll learn to design and query databases like a NASA engineer, managing the vast complexity of coordinating rovers, astronauts, and spacecraft across billions of kilometers."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Database design has three key aspects. Select which area you'd like to explore first. Each path teaches essential concepts through space mission scenarios.",
+      "choices": [
+        {
+          "label": "Start with Relational Fundamentals",
+          "next": "n3"
+        },
+        {
+          "label": "Jump to SQL Queries",
+          "next": "n5"
+        },
+        {
+          "label": "Explore Data Modeling",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Relational Databases: Organizing the Space Station",
+      "content": "The International Space Station generates terabytes of data from hundreds of sensors and systems. NASA uses relational databases with organized tables\u2014think of them as specialized filing systems throughout the ISS. Each table represents a different type of data: one for life support readings, another for power consumption, another for crew schedules. Columns describe specific attributes (timestamp, sensor_value, alert_status), while rows contain individual records. This structure makes it easy to store, update, and retrieve mission-critical information efficiently across multiple systems."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Space Station Inventory System",
+      "content": "The ISS inventory database has a 'Modules' table with columns: module_id (ISS-Lab-001), module_name (Destiny Laboratory), crew_capacity (2), systems_count (47). Another table, 'Equipment', has equipment_id, name, module_location, last_maintenance_date, operational_status. When a gyroscope in the Service Module needs maintenance, engineers update its row in Equipment to mark it offline. When planning an extravehicular activity, they query the Modules table to find which sections support the required crew. This organized structure prevents data confusion and keeps mission-critical information accurate."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "SQL: The Language of Space Data",
+      "content": "SQL (Structured Query Language) is how mission control retrieves and analyzes database information in seconds. The core operations are SELECT (retrieve specific data), WHERE (filter by conditions), and JOIN (combine data from multiple tables). Mission planners use SELECT to find all spacecraft in Earth orbit, WHERE to filter for those with fuel below 50%, and JOIN to match spacecraft with their scheduled resupply missions. These commands execute in milliseconds on millions of telemetry records, giving astronauts and engineers real-time answers to mission-critical questions."
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Querying Mission Telemetry in Real-Time",
+      "content": "Artemis-5 is in lunar orbit. Mission control runs: SELECT crew_member, oxygen_level, temperature FROM habitat_status WHERE spacecraft_id = 'Artemis-5' to monitor each crew member instantly. To find which cargo ship is closest to the ISS for emergency resupply, controllers use: SELECT cs.ship_name, op.current_distance FROM cargo_ships cs JOIN orbital_positions op ON cs.ship_id = op.ship_id WHERE op.current_distance = (SELECT MIN(current_distance) FROM orbital_positions). This multi-part query identifies the nearest cargo ship in milliseconds\u2014critical during emergencies when seconds determine mission success."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Data Modeling: Building the Right Foundation",
+      "content": "A well-designed database starts by understanding relationships between different types of information. Each table should focus on one entity: spacecraft, crew members, missions, or equipment. Primary keys uniquely identify each record (like spacecraft_id). Foreign keys link related tables\u2014a crew_assignments table has a crew_id that references the crew table and a mission_id that references the missions table. This approach prevents duplication: instead of storing a crew member's entire profile in every mission row, you store just their crew_id. Updates become simple: change a crew member's training status once, and it updates everywhere they're referenced."
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Designing an Interplanetary Mission Database",
+      "content": "For future Mars missions, create a spacecrafts table with primary key spacecraft_id. Create a crew table with primary key crew_id and columns like name, specialty, eva_certified. Create a missions table with mission_id, spacecraft_id (foreign key), and mission_lead_id (foreign key to crew). Create a junction table mission_crew with crew_id and mission_id to handle many-to-many relationships: one crew member works multiple missions, one mission involves multiple crew. Create equipment_manifest with foreign keys to both mission_id and equipment_id. This design eliminates redundancy and lets queries instantly answer: Which astronauts are certified for EVA and assigned to Mars-bound missions?"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesizing Your Database Design Skills",
+      "content": "You've now explored the three pillars of database design: relational structure (organized tables for different entities), effective querying (SQL to find information instantly), and sound data modeling (keys and relationships preventing redundancy). Managing space exploration requires combining all three concepts seamlessly. A complete space agency database needs relational tables (spacecraft, crew, missions, equipment), SQL queries to answer mission-critical questions (Which astronauts are certified for EVA? What's the status of deep space probes? Which maintenance is overdue?), and careful data modeling to ensure consistency and efficiency. These principles scale from managing one spacecraft to coordinating humanity's expansion across the solar system."
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Ready for Space Operations",
+      "content": "Congratulations! You've mastered database design and SQL fundamentals through space exploration scenarios. You can now design database schemas for complex space missions, write SQL queries to extract real-time mission data, and model relationships between spacecraft, crew, equipment, and missions. Your skills are foundational to the technology that enables humanity to explore the cosmos. Apply these concepts to your own data challenges\u2014whether managing rovers on Mars or coordinating international space stations."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Start with Relational Fundamentals"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Jump to SQL Queries"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Explore Data Modeling"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "See example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "See example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "See example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T06:32:25.713354+00:00",
+  "model": "claude-haiku-4-5"
+}

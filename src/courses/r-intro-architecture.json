@@ -1,0 +1,648 @@
+{
+  "id": "r-intro-architecture",
+  "title": "Introduction to R for Data Analysis",
+  "description": "Learn R programming fundamentals through the lens of architectural data analysis. Master data structures, manipulation, and visualization using real-world building and design scenarios.",
+  "topic": "R Programming for Architecture",
+  "theme": "architecture",
+  "difficulty": "beginner",
+  "estimated_minutes": 120,
+  "tags": [
+    "R",
+    "data-analysis",
+    "architecture",
+    "statistics",
+    "visualization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "R Fundamentals for Architectural Analysis",
+      "content": "R is a powerful statistical programming language essential for modern architecture. Architects use R to analyze building performance data, evaluate energy efficiency across portfolios, track construction costs and timelines, and visualize design metrics. Whether you're managing a 100-building residential portfolio or analyzing materials sourcing patterns, R provides the statistical power and visualization capabilities architects need. In this course, you'll learn R through real architectural scenarios\u2014from processing floor plans to analyzing facade materials and predicting maintenance costs.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "R Basics Knowledge Check",
+      "content": "Test your understanding of R fundamentals before proceeding to data structures.",
+      "questions": [
+        {
+          "question": "Which of the following correctly creates a numeric vector of floor heights (in meters) for a 5-story building: 3.5, 3.5, 4.0, 4.0, 3.5?",
+          "options": [
+            "c(3.5, 3.5, 4.0, 4.0, 3.5)",
+            "vector(3.5, 3.5, 4.0, 4.0, 3.5)",
+            "v(3.5, 3.5, 4.0, 4.0, 3.5)",
+            "heights <- 3.5 + 4.0"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The c() function combines values into a vector.",
+            "The vector() function creates an empty vector, not one with values.",
+            "v() is not a standard R function.",
+            "This would create a single number, not a vector of floor heights."
+          ],
+          "explanation": "In R, c() is the 'combine' function used to create vectors by listing values separated by commas."
+        },
+        {
+          "question": "An architectural firm has 4 office buildings with annual maintenance costs: $125000, $98000, $112000, $145000. How would you calculate the average maintenance cost?",
+          "options": [
+            "mean(c(125000, 98000, 112000, 145000))",
+            "average(125000, 98000, 112000, 145000)",
+            "sum(125000 + 98000 + 112000 + 145000) / 4",
+            "median(125000, 98000, 112000, 145000)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! mean() calculates the average of numeric values.",
+            "R uses mean(), not average().",
+            "While this would work mathematically, mean() is the standard function.",
+            "Median finds the middle value, not the average."
+          ],
+          "explanation": "The mean() function is the standard R function for calculating averages. Always combine your values into a vector first using c()."
+        },
+        {
+          "question": "What does the assignment operator <- do in R?",
+          "options": [
+            "Stores a value in a variable for later use",
+            "Creates a comment in the code",
+            "Compares two values for equality",
+            "Subtracts the right value from the left value"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! <- stores values and makes them available for later use.",
+            "Comments use # in R.",
+            "Equality comparisons use ==.",
+            "Subtraction uses the - operator."
+          ],
+          "explanation": "The <- operator assigns values to variables. For example: building_height <- 45 stores the value 45 in the variable building_height."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Data Structures for Architectural Projects",
+      "content": "Architectural data comes in different shapes. Vectors store single measurements like room dimensions (length, width, ceiling height). Dataframes organize complex building information\u2014each row is a building, each column is a property (name, year built, total floor area, energy rating). Lists combine different types of data, like a project portfolio that includes vectors of building names, numeric floor plans, and text descriptions. Understanding these structures is crucial for managing real architectural datasets, whether you're working with municipal building databases, BIM export data, or design portfolios with mixed information types.",
+      "next": "n5"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "R Fundamentals Practice",
+      "content": "Master the basics before moving forward.",
+      "questions": [
+        {
+          "question": "A designer needs to store the window widths (in cm) of a facade: 150, 150, 120, 150, 180. Which code is correct?",
+          "options": [
+            "widths <- c(150, 150, 120, 150, 180)",
+            "widths = 150, 150, 120, 150, 180",
+            "widths <- (150 150 120 150 180)",
+            "windows <- vector(150, 150, 120, 150, 180)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This properly creates a vector of window widths.",
+            "This syntax is invalid in R.",
+            "Parentheses require commas between values.",
+            "vector() without length/mode doesn't work this way."
+          ],
+          "explanation": "Use c() with commas to combine values into a vector, and <- to store it in a variable."
+        },
+        {
+          "question": "What is the length of a vector storing the perimeter measurements of 3 buildings?",
+          "options": [
+            "1 (represents 1 measurement total)",
+            "3 (represents 3 buildings)",
+            "It depends on the units used",
+            "0 (vectors have no length)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, the length is the number of elements.",
+            "Correct! A vector with 3 values has length 3.",
+            "Units don't affect the length of a vector.",
+            "Vectors always have a length; this is wrong."
+          ],
+          "explanation": "The length of a vector is the number of elements it contains. Use length() function to check."
+        },
+        {
+          "question": "You want to store a building's name ('Riverside Tower'), year built (2015), and energy rating ('A+'). What data type is each value?",
+          "options": [
+            "character, numeric, character",
+            "string, integer, string",
+            "text, whole number, text",
+            "character, character, character"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Text is character, numbers are numeric, special text like ratings are character.",
+            "R uses 'character' not 'string'; all values aren't integers.",
+            "R uses 'character' and 'numeric' as proper type names.",
+            "Not all values are characters; 2015 is numeric."
+          ],
+          "explanation": "In R, text/strings are 'character' type, whole/decimal numbers are 'numeric' type, and TRUE/FALSE are 'logical' type."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Data Structures Assessment",
+      "content": "Demonstrate your understanding of vectors, dataframes, and lists in architectural contexts.",
+      "questions": [
+        {
+          "question": "An architect creates a dataframe 'buildings' with columns: name, floors, year_built, energy_rating. How many rows and columns does this dataframe have if it contains 8 buildings?",
+          "options": [
+            "8 rows, 4 columns",
+            "4 rows, 8 columns",
+            "8 rows, 8 columns",
+            "4 rows, 4 columns"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Each building is a row, each property is a column.",
+            "Rows and columns are reversed.",
+            "Each building is 1 row, not 8.",
+            "Incorrect row/column count."
+          ],
+          "explanation": "In a dataframe, rows represent individual observations (buildings) and columns represent variables (properties)."
+        },
+        {
+          "question": "Which data structure would best store all information about a renovation project including: project name (text), budget (number), contractor list (multiple names), and timeline (dates)?",
+          "options": [
+            "A list, because it can contain mixed data types",
+            "A vector, because it's simple and efficient",
+            "A dataframe, because all projects have the same structure",
+            "A matrix, because it organizes data in rows and columns"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Lists accommodate different data types and structures.",
+            "Vectors only hold one data type.",
+            "If storing multiple projects, yes; for one project, a list is better.",
+            "Matrices require all numeric data."
+          ],
+          "explanation": "Lists are flexible containers that can hold vectors, dataframes, text, numbers, and other structures\u2014perfect for complex, mixed-type data."
+        },
+        {
+          "question": "To access the 5th floor height in a vector called 'heights', which code is correct?",
+          "options": [
+            "heights[5]",
+            "heights.5",
+            "heights(5)",
+            "heights$5"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Square brackets with an index access vector elements.",
+            "Dot notation is for dataframe columns, not vectors.",
+            "Parentheses call functions, not access elements.",
+            "$ is for dataframe columns, not vector indices."
+          ],
+          "explanation": "Use square brackets [index] to access specific elements in a vector. Vector indexing starts at 1, so [5] gets the 5th element."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Data Manipulation and Analysis for Building Portfolio",
+      "content": "Real architectural datasets are messy. You'll filter buildings by criteria (find all LEED-certified properties), transform data (convert floor areas from feet to meters), calculate statistics (mean construction cost per square meter), and identify patterns (which building types have lowest maintenance costs). R's functions like subset(), filter(), and aggregate() let you quickly extract insights. For example, analyzing your 200-building portfolio to identify which properties exceed energy consumption thresholds, or calculating average occupancy rates by building type. Data manipulation is where raw building records become actionable architectural intelligence.",
+      "next": "n8"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Data Structures Practice",
+      "content": "Build fluency with vectors, dataframes, and lists through architectural examples.",
+      "questions": [
+        {
+          "question": "You have a dataframe 'buildings' with columns: name, floors, city. To see the 'city' column, use:",
+          "options": [
+            "buildings$city",
+            "buildings[city]",
+            "buildings.city",
+            "buildings(city)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! $ accesses dataframe columns by name.",
+            "Square brackets without $ don't work this way.",
+            "Dot notation doesn't work for dataframes.",
+            "Parentheses call functions."
+          ],
+          "explanation": "Use dataframe_name$column_name to access specific columns in a dataframe."
+        },
+        {
+          "question": "A list 'project' contains: project$name, project$budget, project$team. How many elements are in this list?",
+          "options": [
+            "3",
+            "project (it's a reference)",
+            "It depends on the number of team members",
+            "1 (lists are single objects)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The list has 3 named elements: name, budget, team.",
+            "The list itself is the container; it has 3 elements.",
+            "The list has 3 elements regardless of team size.",
+            "Lists have multiple elements; this is wrong."
+          ],
+          "explanation": "A list can contain multiple elements. Use length() to check: length(project) returns 3."
+        },
+        {
+          "question": "To create a vector of the first 10 odd numbers (1, 3, 5, 7, ..., 19), which is most efficient?",
+          "options": [
+            "seq(1, 19, by=2)",
+            "c(1, 3, 5, 7, 9, 11, 13, 15, 17, 19)",
+            "1:19 with 2 as step",
+            "rep(c(1,3,5,7,9), 2)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! seq() creates sequences efficiently with the 'by' parameter.",
+            "This works but isn't scalable for larger sequences.",
+            "1:19 creates all integers; adjusting step requires seq().",
+            "rep() repeats elements; this doesn't create the sequence correctly."
+          ],
+          "explanation": "Use seq(start, end, by=step) for efficient sequence generation. This works great for generating room measurements, floor intervals, etc."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Data Manipulation Assessment",
+      "content": "Apply your knowledge to real architectural data analysis scenarios.",
+      "questions": [
+        {
+          "question": "An architect has 'buildings' dataframe with: 'name', 'year_built', 'stories', 'energy_rating'. To find all buildings built after 2000 with an A+ energy rating, which approach is correct?",
+          "options": [
+            "subset(buildings, year_built > 2000 & energy_rating == 'A+')",
+            "buildings[year_built > 2000 and energy_rating == 'A+']",
+            "filter(buildings, year > 2000, rating = 'A+')",
+            "buildings where year_built > 2000 and energy_rating == 'A+'"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! subset() filters rows based on conditions using & (and) operator.",
+            "R uses & not 'and'; this syntax is invalid.",
+            "filter() is from dplyr, but subset() is base R and works fine.",
+            "'where' syntax isn't valid in R."
+          ],
+          "explanation": "subset(dataframe, condition) filters rows. Use & for 'and', | for 'or'. == checks equality."
+        },
+        {
+          "question": "You want to calculate the mean floor area of all office buildings in your portfolio. The data is in 'buildings' dataframe with columns 'type' and 'floor_area_sqm'. Which is correct?",
+          "options": [
+            "mean(buildings$floor_area_sqm[buildings$type == 'office'])",
+            "mean(buildings$floor_area_sqm) where type == 'office'",
+            "mean(buildings[type == 'office'])",
+            "average.office.floor.area(buildings)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Filter the floor_area column using logical indexing.",
+            "The 'where' clause doesn't work in base R.",
+            "This doesn't extract just the floor_area values.",
+            "This function doesn't exist in R."
+          ],
+          "explanation": "Use subsetting [buildings$type == 'office'] to filter values, then apply mean()."
+        },
+        {
+          "question": "A contractor's cost per square meter is stored in vector 'cost_per_sqm' and building areas are in vector 'floor_area'. To get total cost for each building, use:",
+          "options": [
+            "cost_per_sqm * floor_area",
+            "sum(cost_per_sqm, floor_area)",
+            "cost_per_sqm + floor_area",
+            "multiply(cost_per_sqm, floor_area)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! * multiplies vectors element-wise in R.",
+            "sum() adds values, doesn't multiply them.",
+            "+  adds vectors, doesn't multiply.",
+            "multiply() isn't a standard R function."
+          ],
+          "explanation": "Vector operations in R work element-wise: cost_per_sqm[1] * floor_area[1], cost_per_sqm[2] * floor_area[2], etc."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Data Visualization and Interpretation in Architecture",
+      "content": "Numbers alone don't drive decisions\u2014visualizations do. Architects use R to create plots showing energy consumption trends across building portfolios, bar charts comparing construction costs by building type, scatter plots correlating building age with maintenance expenses, and heatmaps revealing space utilization patterns. A time-series plot might show how a retrofit project reduced energy consumption month-by-month. A histogram visualizes the distribution of ceiling heights across a residential complex. These visualizations communicate findings to stakeholders, identify outliers (the one building with suspiciously high costs), and reveal patterns invisible in raw data. R's plotting libraries like ggplot2 and base graphics turn datasets into compelling visual stories.",
+      "next": "n11"
+    },
+    {
+      "id": "n10",
+      "type": "practice",
+      "title": "Data Manipulation Practice",
+      "content": "Strengthen your data manipulation skills with architectural scenarios.",
+      "questions": [
+        {
+          "question": "To convert all floor areas from square feet to square meters (multiply by 0.0929), which code updates the dataframe correctly?",
+          "options": [
+            "buildings$floor_area_sqm <- buildings$floor_area_sqft * 0.0929",
+            "buildings$floor_area_sqm = buildings$floor_area_sqft * 0.0929",
+            "Both A and B are correct",
+            "transform(buildings, floor_area_sqm = floor_area_sqft * 0.0929)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "<- is the standard R assignment operator.",
+            "= can work but <- is preferred in R.",
+            "Correct! Both <- and = work, though <- is conventional in R.",
+            "transform() works too but creates a new dataframe."
+          ],
+          "explanation": "All three approaches work. <- is standard R style; = is allowed; transform() is functional style."
+        },
+        {
+          "question": "To count how many buildings have energy rating 'B' or higher (A, A+, B), use:",
+          "options": [
+            "sum(buildings$energy_rating %in% c('A', 'A+', 'B'))",
+            "count(buildings where energy_rating == c('A', 'A+', 'B'))",
+            "length(buildings[buildings$energy_rating > 'B'])",
+            "nrow(buildings[buildings$energy_rating == 'A' | 'A+' | 'B'])"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! %in% checks if values are in a list; sum() counts TRUE values.",
+            "count() and 'where' aren't base R syntax.",
+            "Comparison operators don't work with character strings.",
+            "The | syntax here is incorrect; | needs full conditions on both sides."
+          ],
+          "explanation": "%in% is a powerful operator for checking if values belong to a set. sum() counts how many TRUE values result."
+        },
+        {
+          "question": "To add a new column calculating maintenance cost per square meter, where costs are in 'maintenance_cost' and areas in 'floor_area_sqm':",
+          "options": [
+            "buildings$cost_per_sqm <- buildings$maintenance_cost / buildings$floor_area_sqm",
+            "buildings <- buildings + cost_per_sqm_col",
+            "cbind(buildings, cost_per_sqm = maintenance_cost / floor_area_sqm)",
+            "buildings[, 'cost_per_sqm'] = maintenance_cost / floor_area_sqm"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Direct assignment with $ creates a new column.",
+            "You can't add dataframes like this.",
+            "cbind() works but requires proper vector references.",
+            "This syntax doesn't work correctly."
+          ],
+          "explanation": "To add a new column: dataframe$new_column <- values. R automatically extends the dataframe."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n11",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Comprehensive Final Assessment",
+      "content": "Demonstrate mastery by analyzing a realistic architectural dataset scenario.",
+      "questions": [
+        {
+          "question": "You analyze a 'projects' dataframe (name, location, year, total_cost, sqm, energy_rating). To find the average cost per square meter for residential buildings completed in 2023 or later, the correct approach is:",
+          "options": [
+            "mean((projects[projects$type == 'residential' & projects$year >= 2023,])$total_cost / projects$sqm)",
+            "mean(subset(projects, type == 'residential' & year >= 2023)$total_cost / subset(projects, type == 'residential' & year >= 2023)$sqm)",
+            "Both A and B work but A is cleaner",
+            "Neither A nor B; you need dplyr"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This cleanly filters then calculates ratios.",
+            "B works but is inefficient\u2014it subsets twice.",
+            "A is definitely cleaner and more efficient.",
+            "Base R handles this perfectly; dplyr isn't required."
+          ],
+          "explanation": "Subset first, then access columns and perform calculations. Remember vector operations multiply/divide element-wise."
+        },
+        {
+          "question": "An architect creates a list: project <- list(name='Tower Alpha', floors=c(1,2,3,4,5), costs=c(100,150,200,250,300)). To access the cost of floor 3, use:",
+          "options": [
+            "project$costs[3]",
+            "project['costs'][3]",
+            "project[3]$costs",
+            "costs[3] from project"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! $ extracts the vector, [3] gets the 3rd element.",
+            "This extracts the costs vector but as a list, not directly.",
+            "This gets the 3rd element but confuses access order.",
+            "This syntax is invalid."
+          ],
+          "explanation": "project$costs extracts the vector, then [3] indexes into it. This is a two-step access pattern."
+        },
+        {
+          "question": "To create a summary showing the count and average floor area for each building type in 'buildings' dataframe, what's the most straightforward approach?",
+          "options": [
+            "aggregate(floor_area ~ building_type, data=buildings, FUN=function(x) c(count=length(x), mean=mean(x)))",
+            "subset and mean for each type manually",
+            "tapply(buildings$floor_area, buildings$building_type, mean) for means",
+            "table(buildings$building_type) for counts only"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! aggregate() handles grouped statistics elegantly.",
+            "Manual approach is tedious and error-prone.",
+            "tapply() works for single statistics but not combined.",
+            "table() only counts; it doesn't calculate means."
+          ],
+          "explanation": "aggregate(formula, data, FUN) applies functions by groups. Use ~ to specify the grouping variable."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n12",
+      "failure_target": "n13"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "Course Complete: R Master for Architecture",
+      "content": "Congratulations! You've mastered R fundamentals for architectural data analysis. You can now confidently import building datasets, manipulate complex architectural information using vectors and dataframes, filter projects by criteria, calculate performance statistics, and create visualizations that communicate insights to stakeholders. Whether you're analyzing energy performance across a 500-building portfolio, evaluating contractor costs, tracking construction timelines, or visualizing design metrics, you have the R skills to turn raw data into actionable intelligence. Your next steps: explore specialized libraries like ggplot2 for advanced visualization, spatial packages for geographic analysis, and machine learning tools for predictive models. The architectural data world is now open to you."
+    },
+    {
+      "id": "n13",
+      "type": "practice",
+      "title": "Advanced Integration Practice",
+      "content": "Master complex multi-step analyses combining all course concepts.",
+      "questions": [
+        {
+          "question": "A portfolio dataframe has: name, type, year_built, renovation_cost, floor_area, stories. To identify buildings needing renovation (renovated before 2015) and calculate average renovation cost per square meter, use:",
+          "options": [
+            "mean(subset(buildings, year_built < 2015)$renovation_cost / subset(buildings, year_built < 2015)$floor_area)",
+            "old_buildings <- subset(buildings, year_built < 2015); mean(old_buildings$renovation_cost / old_buildings$floor_area)",
+            "Both A and B work but B is clearer and more efficient",
+            "Neither; you must use dplyr %>% for this"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A works but subsets twice, reducing efficiency.",
+            "B is excellent\u2014it's clear and efficient.",
+            "Correct! B is the better practice, though both produce results.",
+            "Base R handles this perfectly; dplyr is optional."
+          ],
+          "explanation": "When filtering multiple times, subset once and store the result to avoid redundancy and improve readability."
+        },
+        {
+          "question": "To visualize the relationship between building age (year_built vs. current year) and energy rating using a plot, which is the most direct approach?",
+          "options": [
+            "plot(2026 - buildings$year_built, as.numeric(factor(buildings$energy_rating)))",
+            "barplot(buildings$energy_rating ~ 2026 - buildings$year_built)",
+            "hist(buildings$year_built, main='Building Age Distribution')",
+            "scatter.plot(buildings$age, buildings$energy_rating)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! plot() creates scatter plots; as.numeric(factor()) converts letter ratings to numeric values for plotting.",
+            "barplot() is for categorical data, not relationships.",
+            "hist() shows age distribution but not the relationship to energy rating.",
+            "scatter.plot() doesn't exist in base R; use plot()."
+          ],
+          "explanation": "plot(x, y) creates a scatter plot. Convert factors/categories to numeric using as.numeric(factor()) when plotting relationships."
+        },
+        {
+          "question": "Given a list of projects with varying data structures, which approach handles diverse project types best?",
+          "options": [
+            "Create a dataframe with consistent columns for comparable projects",
+            "Store everything in a nested list structure",
+            "Use multiple vectors to maintain separation",
+            "Convert all projects to character strings for uniformity"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Dataframes impose structure while accommodating diverse projects.",
+            "Nested lists are flexible but harder to analyze.",
+            "Multiple vectors are hard to coordinate.",
+            "Converting to strings destroys data integrity."
+          ],
+          "explanation": "Dataframes are the best R structure for real-world data. They balance structure with flexibility, enabling efficient analysis."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n11",
+      "failure_target": "n13"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "Fail"
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n2",
+      "label": "Retry"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n5",
+      "label": "Retry"
+    },
+    {
+      "id": "c9",
+      "source": "n6",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "Fail"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n8",
+      "label": "Retry"
+    },
+    {
+      "id": "c13",
+      "source": "n9",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c14",
+      "source": "n11",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c15",
+      "source": "n11",
+      "target": "n13",
+      "label": "Fail"
+    },
+    {
+      "id": "c16",
+      "source": "n13",
+      "target": "n11",
+      "label": "Retry"
+    }
+  ],
+  "generated_at": "2026-03-27T08:50:55.082371+00:00",
+  "model": "claude-haiku-4-5"
+}

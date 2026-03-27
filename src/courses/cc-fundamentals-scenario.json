@@ -1,0 +1,158 @@
+{
+  "id": "cc-fundamentals-scenario",
+  "title": "Cloud Computing Fundamentals: Giuseppe's Restaurant Adventure",
+  "description": "Learn cloud computing concepts through the story of a restaurant owner deciding how to scale operations. Navigate through different architectural choices and see how they impact business outcomes.",
+  "topic": "Cloud Computing Fundamentals",
+  "theme": "culinary arts",
+  "difficulty": "beginner",
+  "estimated_minutes": 30,
+  "tags": [
+    "cloud computing",
+    "infrastructure",
+    "IaaS",
+    "PaaS",
+    "SaaS",
+    "scalability",
+    "scenario-based"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Giuseppe's Expansion Challenge",
+      "content": "Giuseppe's Italian Kitchen started as a small neighborhood trattoria with one location. Recently, success on delivery platforms has exploded, with orders coming from across the city. The restaurant faces a critical decision: invest millions in their own kitchen equipment, point-of-sale systems, and inventory management infrastructure, or find a way to scale operations without owning all the infrastructure. This choice will determine how quickly Giuseppe can expand to multiple locations and adapt to market changes."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "How Should We Scale Our Restaurant?",
+      "content": "Giuseppe must choose between two fundamentally different approaches to managing his restaurant's infrastructure and operations. The decision will shape his ability to expand, adapt, and maintain costs.",
+      "choices": [
+        {
+          "label": "Migrate to cloud services for flexibility and scalability",
+          "next": "n3"
+        },
+        {
+          "label": "Build and manage our own infrastructure locally",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Understanding Cloud Computing",
+      "content": "Cloud computing for restaurants is like switching from owning kitchen equipment to renting a fully-equipped commercial kitchen space. With cloud services, you access computing power, storage, and software through the internet. Three main models exist: Infrastructure-as-a-Service (IaaS) provides raw computing power like renting kitchen space; Platform-as-a-Service (PaaS) adds pre-installed tools like a rental kitchen with equipment already there; Software-as-a-Service (SaaS) is like hiring a catering company to handle everything. The cloud provider manages hardware maintenance, security, and updates, letting you focus on your restaurant's menu and customers rather than server rooms."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Choosing Your Cloud Architecture",
+      "content": "Giuseppe now faces a second crucial decision about which cloud deployment model best serves his growing restaurant business. Each approach offers different trade-offs between cost, control, and scalability.",
+      "choices": [
+        {
+          "label": "Use public cloud with automatic scaling (shared infrastructure)",
+          "next": "n5"
+        },
+        {
+          "label": "Build a private cloud dedicated only to our restaurant",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "The Public Cloud Success Story",
+      "content": "Giuseppe chose AWS for his POS system, inventory management, and delivery platform integration. During Friday nights, the system automatically scales from handling 50 concurrent orders to 5000 as delivery demand peaks\u2014then scales back down on slow Tuesday afternoons, paying only for resources used. The restaurant added two new locations without purchasing a single server. When a food supplier's system went down, Giuseppe could quickly switch to a different integration because the cloud infrastructure's flexibility allowed rapid reconfiguration. His operational costs dropped 40% compared to his original estimate because he pays only for actual usage, and he can innovate quickly by accessing new cloud services in minutes rather than waiting for hardware installation."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Expansion Success \u2713",
+      "content": "Congratulations! Your restaurant empire is growing. Cloud infrastructure gave you the flexibility to scale operations, manage multiple locations, and adapt to market changes without massive capital investments. You've learned that cloud computing enables modern restaurants to compete at scale by paying for what you use, scaling automatically with demand, and innovating quickly. Your next challenge: optimizing costs and ensuring data security across your growing operations."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "The Private Cloud Struggle",
+      "content": "Giuseppe decided to build a private cloud infrastructure dedicated solely to his restaurant, believing he needed complete control and isolation. He purchased expensive servers for $75,000, hired a full-time systems administrator, and built redundancy for reliability. The problem: he built for his peak capacity estimate of 5000 orders per day, but during slow weeks he was paying for infrastructure sitting idle at 10% utilization. When he wanted to add a new location, he needed to purchase additional servers and duplicate the entire infrastructure setup\u2014a 6-month project that delayed expansion. His systems administrator left for another job, and finding a specialized replacement to manage proprietary restaurant software infrastructure proved difficult and costly."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Infrastructure Constraints \u2717",
+      "content": "Your private cloud infrastructure became a bottleneck for growth. While you maintained control, the high fixed costs, maintenance complexity, and slow deployment cycles made it difficult to expand or innovate quickly. You've learned that sometimes control comes at the cost of agility and efficiency. The lesson: consider whether your restaurant's needs require dedicated infrastructure or if shared cloud resources could serve you better while freeing up management overhead for your core business."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Building and Maintaining Your Own Systems",
+      "content": "Giuseppe decided to keep everything on-premises, building his own data center in a secured room at his main restaurant location. He purchased servers costing $100,000, hired an IT staff member, and took on full responsibility for security, backups, and disaster recovery. When he wanted to expand to a second location, replicating the entire infrastructure would cost another $100,000 and 4 months of setup time. His systems could handle peak Friday night loads, but on Tuesday mornings much of the equipment was idle, yet he still paid for it monthly. A power outage knocked out both his POS system and reservation system for 8 hours, costing thousands in lost sales because he lacked geographic redundancy that cloud providers offer."
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Limited by Infrastructure \u2717",
+      "content": "Without cloud infrastructure, scaling operations is capital-intensive and operationally complex. You've discovered that building your own infrastructure requires significant investment in hardware, IT staff, and maintenance that could be better spent on your restaurant's core business\u2014perfecting your cuisine and serving customers. Cloud services offer a more efficient path for future growth, but your current constraints limit expansion opportunities and agility in responding to market changes. The reality of on-premises infrastructure: high uptime risk and limited scalability."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Face the scaling decision"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Choose cloud migration"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n9",
+      "label": "Choose on-premises"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Explore deployment options"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Select public cloud"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n7",
+      "label": "Select private cloud"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Achieve success"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Face limitations"
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": "Experience constraints"
+    }
+  ],
+  "generated_at": "2026-03-27T10:48:15.808089+00:00",
+  "model": "claude-haiku-4-5"
+}

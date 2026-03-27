@@ -1,0 +1,228 @@
+{
+  "id": "course-docker-game-design",
+  "title": "Docker and Containerization for Game Developers",
+  "description": "Master Docker containerization by learning through real game development scenarios. Adaptive branching routes you to advanced or foundational content based on your baseline knowledge.",
+  "topic": "Docker and Containerization",
+  "theme": "game design",
+  "difficulty": "beginner",
+  "estimated_minutes": 35,
+  "tags": [
+    "docker",
+    "containerization",
+    "devops",
+    "game-development",
+    "scalability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Docker Fundamentals Check",
+      "content": "Let's assess your current understanding of Docker and containerization. Your answers will guide you to the right learning path for your level.",
+      "questions": [
+        {
+          "question": "In game development, what is the main advantage of using Docker containers for your game servers?",
+          "options": [
+            "Containers ensure your player's graphics cards run faster",
+            "Containers let you package your game server with all dependencies so it runs the same everywhere",
+            "Containers automatically balance your player load across servers",
+            "Containers eliminate lag in online games"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite\u2014containers don't affect graphics processing on the client side.",
+            "Exactly! Containers bundle your game server code, runtime, and dependencies into a portable unit.",
+            "That's a load balancer's job, not Docker itself.",
+            "Lag reduction comes from network optimization, not containerization."
+          ],
+          "explanation": "Docker containers solve the 'works on my machine' problem by ensuring your game server runs identically in development, staging, and production."
+        },
+        {
+          "question": "A game studio is deploying the same battle-royale server to 3 different cloud providers. Why would Docker images be useful here?",
+          "options": [
+            "Docker images compress game assets so downloads are faster",
+            "Docker images ensure the server runs consistently across all platforms",
+            "Docker images improve the game's frame rate",
+            "Docker images manage player authentication"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Compression happens separately from Docker.",
+            "Correct! Docker images are platform-agnostic, so your game server behaves the same on AWS, Google Cloud, or Azure.",
+            "Frame rate is determined by game code and client hardware, not containerization.",
+            "Authentication is handled by your application code, not Docker."
+          ],
+          "explanation": "Docker's write-once-run-anywhere approach eliminates environment inconsistencies\u2014crucial when scaling across multiple cloud platforms."
+        },
+        {
+          "question": "What does a Docker container represent in the context of a game development pipeline?",
+          "options": [
+            "A single player's gaming session",
+            "A running instance of your game server created from a Docker image",
+            "A backup copy of your game code",
+            "A network protocol for player connections"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not the right analogy for containers.",
+            "Perfect! A container is a live, isolated runtime environment based on your image blueprint.",
+            "Backups are handled by version control or backup systems, not Docker.",
+            "Network protocols are separate from containerization."
+          ],
+          "explanation": "If a Docker image is a recipe, a container is the dish you're serving to players\u2014a running instance with its own isolated filesystem, network, and processes."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Multi-Container Game Architecture",
+      "content": "Professional game servers rarely run in isolation. Learn how Docker Compose orchestrates multiple interdependent services\u2014your game server, matchmaking service, and analytics collector\u2014as a single coordinated system. Each service lives in its own container with clear responsibilities. Your game server container handles player connections and gameplay logic. A separate database container persists player progress and match history. A third analytics container collects telemetry from the game server without slowing it down. Docker's networking layer connects these containers transparently, so they communicate as if running on the same machine, while remaining isolated for security and resilience.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Example: Tournament Server Architecture",
+      "content": "A competitive esports platform needs to host tournament servers that remain responsive even under load. The solution: a Docker Compose file defines three services. The 'game-server' container (built from a custom image) listens on port 7777 for player connections. The 'redis-cache' container (using the official Redis image) stores active match state and player stats with sub-millisecond response times. The 'metrics-exporter' container streams real-time tournament telemetry to a monitoring dashboard. When a match ends, the game-server container sends a webhook to the metrics-exporter, which logs the result to persistent storage. This design scales horizontally\u2014you spin up 10 identical 'game-server' containers behind a load balancer, and they all share access to the same Redis and metrics systems. A single player's match request routes to one game-server container, but all containers see consistent state through Redis, enabling seamless migration if a container crashes.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Containerization Mastered",
+      "content": "You've mastered multi-container architectures and understand how to design scalable, resilient game systems using Docker Compose. Next steps: explore Kubernetes for orchestrating hundreds of containers across clusters, or dive into CI/CD pipelines that automatically build and deploy your game servers. Your architecture can now handle global player bases with confidence."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Containers: A Game Designer's Perspective",
+      "content": "Imagine shipping a board game to stores worldwide. Every store needs the exact same rulebook, pieces, and box dimensions\u2014consistency matters. Docker containers work the same way for game servers. A container packages your game server code, the programming language it runs in (Python, Java, Node.js), and all the libraries it depends on into one bundle. Instead of instructions like 'install Python 3.9, then npm install, then start the server'\u2014which might fail if versions don't match\u2014a container is pre-built with everything inside. When you run a container, it boots up in milliseconds with all dependencies already installed. Think of it as a fully-assembled, ready-to-play game in a box, rather than a pile of pieces players must assemble themselves. This solves the 'works on my machine' problem that plagues game studios: if your game server runs in a container on your laptop, it runs identically on your cloud server and teammates' computers.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Your First Game Server Container",
+      "content": "Let's containerize a simple game server. You write a Node.js server that listens for player connections on port 5000. Instead of asking teammates to install Node.js version 18 and run 'npm install', you create a Dockerfile\u2014a recipe file. It says: 'Start with the official Node.js 18 image, copy my server code into the container, run npm install inside the container, and when started, run my server.' When you build this Dockerfile, Docker creates an image\u2014a snapshot of your server ready to run. Now anyone on your team can run `docker run my-game-server`, and Docker automatically installs Node.js 18, your dependencies, and starts your server, all in one command. No setup, no version conflicts, no wasted Friday afternoons debugging why someone's Node.js version differs.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Container Fundamentals Practice",
+      "content": "Test your understanding of Docker basics with these game development scenarios.",
+      "questions": [
+        {
+          "question": "You're a game engine programmer. Your teammate says 'the server works fine on my computer but crashes on the deployment server.' What could Docker solve?",
+          "options": [
+            "Docker would let them use a better game engine",
+            "Docker ensures the same versions of dependencies run on both computers",
+            "Docker would make their game run faster",
+            "Docker would automatically fix bugs in their code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The game engine isn't the issue here\u2014it's the environment.",
+            "Exactly! Docker containers bundle specific dependency versions, eliminating environment differences.",
+            "Performance is a separate concern from environment consistency.",
+            "Docker can't debug code, only ensure consistent environments."
+          ],
+          "explanation": "The 'works on my machine' problem disappears when both machines run the same container image."
+        },
+        {
+          "question": "What is a Docker image in the simplest terms?",
+          "options": [
+            "A screenshot of your game",
+            "A template or blueprint for creating containers",
+            "A video recording of your server running",
+            "A backup file of your game data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, images aren't screenshots.",
+            "Perfect! An image is a static blueprint that Docker uses to create running containers.",
+            "Images aren't videos\u2014they're code and dependencies packaged together.",
+            "While images can be stored as backups, that's not their primary purpose."
+          ],
+          "explanation": "Think of an image as a mold, and containers as the products you make from that mold. Each mold produces identical products."
+        },
+        {
+          "question": "Your game studio needs to deploy the same server to 5 different computers for testing. Why is Docker useful?",
+          "options": [
+            "Docker copies your code to each computer automatically",
+            "Docker ensures each computer runs the same server version without manual setup",
+            "Docker makes the server code public so others can view it",
+            "Docker automatically scales your player base"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While Docker does distribute images, that's not the main benefit.",
+            "Right! Docker eliminates setup inconsistencies across machines.",
+            "Docker doesn't expose code publicly\u2014images stay private unless you push them to a registry.",
+            "Scaling is a separate concern from containerization."
+          ],
+          "explanation": "Containers turn setup and deployment from a manual, error-prone process into a reliable, repeatable one."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Containerization Fundamentals Complete",
+      "content": "You've learned the essential concepts: containers isolate your game server, images are blueprints for containers, and Docker eliminates environment inconsistencies. You're ready to containerize your first game server. Keep learning: next explore Docker Compose to manage multiple containers, then orchestration tools like Kubernetes when you scale globally."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Strong foundation"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Building basics"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T11:50:04.502227+00:00",
+  "model": "claude-haiku-4-5"
+}

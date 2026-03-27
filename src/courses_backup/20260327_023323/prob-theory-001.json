@@ -1,0 +1,289 @@
+{
+  "id": "prob-theory-001",
+  "title": "Probability Theory and Random Variables",
+  "description": "Master the foundations of probability theory, from basic concepts to random variables. Learn through adaptive pathways tailored to your learning style.",
+  "topic": "Probability Theory and Random Variables",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "probability",
+    "statistics",
+    "mathematics",
+    "random-variables",
+    "foundations"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Probability",
+      "content": "# Probability: The Mathematics of Uncertainty\n\nProbability theory is the mathematical framework for understanding and quantifying uncertainty. It answers questions like:\n- What are the odds of getting heads when flipping a coin?\n- How likely is a specific sequence of events?\n- Can we predict random outcomes?\n\nProbability emerged from games of chance in the 17th century and evolved into a rigorous mathematical discipline. Today, it's essential for statistics, machine learning, finance, physics, and countless other fields.\n\n## Key Insight\nProbability assigns a number between 0 and 1 to events:\n- **0** means the event is impossible\n- **1** means the event is certain\n- **Between 0 and 1** indicates varying degrees of likelihood\n\nFor example, the probability of rolling a 3 on a fair die is 1/6 \u2248 0.167, meaning if you roll many times, you'd expect roughly 1 out of every 6 rolls to be a 3.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Sample Spaces and Events",
+      "content": "# Understanding Sample Spaces and Events\n\nBefore we can calculate probabilities, we need to define what we're working with.\n\n## Sample Space (S or \u03a9)\nThe **sample space** is the set of all possible outcomes of an experiment.\n\n**Examples:**\n- Fair coin flip: S = {Heads, Tails}\n- Rolling a die: S = {1, 2, 3, 4, 5, 6}\n- Flipping two coins: S = {HH, HT, TH, TT}\n- Temperature tomorrow: S = (-\u221e, \u221e) (continuous)\n\n## Events\nAn **event** is a subset of the sample space\u2014a collection of outcomes we're interested in.\n\n**Examples:**\n- Rolling an even number: E = {2, 4, 6}\n- Getting at least one head in two flips: E = {HH, HT, TH}\n- Temperature above 20\u00b0C: E = (20, \u221e)\n\n## The Fundamental Rule\nIf all outcomes are equally likely, the probability of an event is:\n\n**P(E) = (Number of favorable outcomes) / (Total number of outcomes)**\n\nFor rolling a die, P(even) = 3/6 = 1/2 = 0.5",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "decision",
+      "title": "Choose Your Learning Approach",
+      "content": "Probability can be understood in two ways. Which approach interests you more?\n\n**Axiomatic approach:** Start with mathematical foundations and rules that all probability must follow. Rigorous and elegant.\n\n**Practical approach:** Start with frequency and intuition. Learn how probability emerges from repeated observations.",
+      "choices": [
+        {
+          "label": "Axiomatic (Mathematical foundations)",
+          "next": "n4"
+        },
+        {
+          "label": "Practical (Frequency and intuition)",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Axioms of Probability",
+      "content": "# The Axiomatic Foundation of Probability\n\nAny valid probability function must satisfy three fundamental axioms:\n\n## Axiom 1: Non-negativity\n**P(E) \u2265 0** for every event E\n\nProbabilities are never negative.\n\n## Axiom 2: Unit Measure\n**P(S) = 1** where S is the entire sample space\n\nThe probability that *something* happens is always 1 (certainty).\n\n## Axiom 3: Countable Additivity\n**If E\u2081, E\u2082, E\u2083, ... are mutually exclusive events (no overlap), then:**\n\nP(E\u2081 \u222a E\u2082 \u222a E\u2083 \u222a ...) = P(E\u2081) + P(E\u2082) + P(E\u2083) + ...\n\nThe probability of any of several non-overlapping events is the sum of their individual probabilities.\n\n## Why These Matter\nThese three axioms are minimal yet sufficient. Every probability rule you'll learn (complement rule, addition rule, multiplication rule) flows from these axioms.\n\n**Example:** \nFor a fair die:\n- P(1) = P(2) = P(3) = P(4) = P(5) = P(6) = 1/6\n- By Axiom 3: P(1 or 2 or 3) = 1/6 + 1/6 + 1/6 = 1/2",
+      "next": "n6"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Frequency and Empirical Probability",
+      "content": "# Understanding Probability Through Frequency\n\n## The Frequentist View\nProbability is what we observe when we repeat an experiment many times:\n\n**P(E) = (Number of times E occurs) / (Total number of trials)**\n\n## The Law of Large Numbers\nAs we repeat an experiment more and more times, the observed frequency approaches the true probability.\n\n## Real Example: Coin Flips\n- 10 flips: 6 heads \u2192 observed probability = 0.6\n- 100 flips: 48 heads \u2192 observed probability = 0.48\n- 1000 flips: 502 heads \u2192 observed probability = 0.502\n- 10,000 flips: 5003 heads \u2192 observed probability = 0.5003\n\nWith more flips, we converge to the true probability of 0.5.\n\n## Why This Matters\nThis intuitive understanding explains why probability works:\n- If you bet on heads repeatedly, you break even on average (P = 0.5)\n- If a drug cures patients 70% of the time, you'd expect roughly 700 cures per 1000 patients\n- Insurance companies rely on frequencies: if 1 in 1000 houses burn down annually, they price accordingly\n\nThis frequency interpretation makes probability concrete and predictive.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Conditional Probability",
+      "content": "# Conditional Probability: Probability Given Information\n\nOften we know something has happened and want to update our probability accordingly.\n\n## Definition\n**P(A|B)** = Probability of A given that B has occurred\n\nFormally:\n**P(A|B) = P(A \u2229 B) / P(B)** (assuming P(B) > 0)\n\n## Intuitive Example\nImagine a deck of cards:\n- P(Drawing a King) = 4/52\n- P(Drawing a King | I removed all Kings and Aces) = 0/48 = 0\n- P(Drawing a King | I removed all non-Kings) = 4/4 = 1\n\n## Real-World Example: Medical Testing\nA disease affects 1% of the population. A test is 99% accurate:\n- P(Disease | Positive test) \u2260 99%!\n\nUsing Bayes' theorem (next), we find that a positive test means only ~50% chance of having the disease. The initial rarity of the disease dominates.\n\n## Key Insight\nConditional probability lets us incorporate new information. It's how we update beliefs as we learn more.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "decision",
+      "title": "Advanced Topics: Choose Your Path",
+      "content": "You've learned the foundations. Now explore two powerful concepts.\n\n**Bayes' Theorem:** Systematically update beliefs based on evidence. Essential for machine learning, medicine, and science.\n\n**Independence:** Recognize when events don't influence each other. Simplifies probability calculations dramatically.",
+      "choices": [
+        {
+          "label": "Learn Bayes' Theorem",
+          "next": "n8"
+        },
+        {
+          "label": "Learn Independence",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Bayes' Theorem",
+      "content": "# Bayes' Theorem: Updating Beliefs with Evidence\n\n## The Formula\n**P(A|B) = P(B|A) \u00d7 P(A) / P(B)**\n\nOr more intuitively:\n**Posterior = (Likelihood \u00d7 Prior) / Evidence**\n\n## What Each Term Means\n- **P(A|B)** = Posterior: Probability of A after seeing evidence B\n- **P(B|A)** = Likelihood: How likely the evidence is if A is true\n- **P(A)** = Prior: Initial probability of A before evidence\n- **P(B)** = Evidence: Overall probability of observing B\n\n## Classic Example: Disease Testing\nA disease affects 1/100 people. A test is 99% accurate:\n- You test positive. What's the probability you have the disease?\n\n**Using Bayes:**\n- Prior: P(Disease) = 0.01\n- Likelihood: P(Positive|Disease) = 0.99\n- Evidence: P(Positive) = P(Pos|Disease)\u00d7P(Disease) + P(Pos|No Disease)\u00d7P(No Disease)\n  = 0.99\u00d70.01 + 0.01\u00d70.99 = 0.0198\n- Posterior: P(Disease|Positive) = (0.99 \u00d7 0.01) / 0.0198 \u2248 0.50\n\n**Surprising result:** Even with a 99% accurate test, a positive result means only ~50% chance you have the disease!\n\n## Why It Matters\nBayes' theorem is how:\n- Spam filters learn to identify spam\n- Doctors interpret test results\n- Self-driving cars update confidence in object detection\n- Researchers combine multiple studies into meta-analyses",
+      "next": "n10"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Independence of Events",
+      "content": "# Independence: When Events Don't Influence Each Other\n\n## Definition\nEvents A and B are **independent** if learning that B occurred doesn't change the probability of A:\n\n**P(A|B) = P(A)**\n\nEquivalently: **P(A \u2229 B) = P(A) \u00d7 P(B)**\n\n## Examples of Independent Events\n- Two coin flips: P(2nd flip is heads) = 0.5 whether or not the 1st was heads\n- Rolling a die twice: P(2nd roll is 6) = 1/6 regardless of the 1st roll\n- Drawing cards with replacement: Each draw has the same probability\n\n## Examples of Dependent Events\n- Drawing cards without replacement: After removing an Ace, there are fewer Aces left\n- Weather: If it rained yesterday, today's rain is more likely\n- Health: If you smoke, the probability of lung disease increases\n\n## Practical Importance\nIndependence dramatically simplifies calculations:\n\n**Dependent (complicated):** P(A and B) = ?\n\n**Independent (simple):** P(A and B) = P(A) \u00d7 P(B)\n\nFor example:\n- P(both coins are heads) = 0.5 \u00d7 0.5 = 0.25\n- P(rolling two 6s) = (1/6) \u00d7 (1/6) = 1/36",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Random Variables and Distributions",
+      "content": "# Random Variables: Turning Outcomes Into Numbers\n\n## Definition\nA **random variable** is a function that assigns a number to each outcome in a sample space.\n\nSymbol: Usually X, Y, Z (or capital letters)\n\n## Example\nFlip a coin twice. Define X = number of heads:\n- Outcome HH \u2192 X = 2\n- Outcome HT \u2192 X = 1\n- Outcome TH \u2192 X = 1\n- Outcome TT \u2192 X = 0\n\nX is a random variable that takes values {0, 1, 2}.\n\n## Two Types\n\n### Discrete Random Variables\nTake specific, countable values:\n- Number of heads in 10 coin flips: {0, 1, 2, ..., 10}\n- Number of customers arriving per hour: {0, 1, 2, ...}\n- Exam score: {0, 1, 2, ..., 100}\n\n### Continuous Random Variables\nCan take any value in a range:\n- Height of a person: Could be 170.5 cm, 170.50001 cm, etc.\n- Temperature tomorrow: Any real number\n- Time until a light bulb burns out: Any positive real number\n\n## Probability Distributions\nA **distribution** describes the probabilities for all values of a random variable:\n- **Discrete:** Probability mass function P(X = x)\n- **Continuous:** Probability density function f(x)\n\n## Why Random Variables Matter\nThey let us:\n- Summarize complex outcomes with single numbers\n- Apply mathematical tools and theorems\n- Model real-world phenomena\n- Make predictions and decisions under uncertainty",
+      "next": "node-7c3a9e2f"
+    },
+    {
+      "id": "node-7c3a9e2f",
+      "type": "content",
+      "title": "Worked Examples: Probability Problems Solved Step-by-Step",
+      "content": "# Master Probability Through Detailed Solutions\n\nLet's walk through several problems that combine the concepts you've learned. Follow each solution carefully\u2014this is how you'll apply probability in practice.\n\n## Example 1: Conditional Probability with Dice\n**Problem:** You roll a fair die. Given that you rolled greater than 3, what's the probability that you rolled an even number?\n\n**Solution:**\n- Condition B: Rolled > 3, so outcomes = {4, 5, 6}\n- Event A: Even number, so outcomes = {2, 4, 6}\n- We need P(A|B) = P(A \u2229 B) / P(B)\n- A \u2229 B = {4, 6} (even AND > 3)\n- P(A \u2229 B) = 2/6 = 1/3\n- P(B) = 3/6 = 1/2\n- P(A|B) = (1/3) / (1/2) = **2/3**\n\n**Intuition:** Of the three outcomes greater than 3 {4, 5, 6}, two are even {4, 6}. So 2/3 of outcomes meeting the condition also satisfy our event.\n\n## Example 2: Independence Check\n**Problem:** Are \"flipping heads on coin 1\" and \"flipping heads on coin 2\" independent events?\n\n**Solution:**\n- Recall: A and B are independent if P(A \u2229 B) = P(A) \u00d7 P(B)\n- P(heads on coin 1 AND heads on coin 2) = 0.5 \u00d7 0.5 = 0.25\n- P(A) \u00d7 P(B) = 0.5 \u00d7 0.5 = 0.25 \u2713\n- Since P(A \u2229 B) = P(A) \u00d7 P(B), **these events are independent**\n\n**Intuition:** What happens with coin 1 has no effect on coin 2. Knowing the first result doesn't change the second's probability.\n\n## Example 3: Bayes' Theorem Application\n**Problem:** A company's test for a rare disease is 95% accurate. The disease affects 0.5% of the population. A person tests positive. What's P(disease | positive)?\n\n**Solution:**\n- P(Disease) = 0.005 (prior\u2014disease rarity)\n- P(Positive|Disease) = 0.95 (sensitivity\u2014test catches disease)\n- P(Positive|No Disease) = 0.05 (false positive rate)\n\nCalculate P(Positive) using total probability:\n- P(Positive) = 0.95(0.005) + 0.05(0.995) = 0.00475 + 0.04975 = 0.0545\n\nApply Bayes' theorem:\n- P(Disease|Positive) = [P(Positive|Disease) \u00d7 P(Disease)] / P(Positive)\n- P(Disease|Positive) = (0.95 \u00d7 0.005) / 0.0545 = 0.00475 / 0.0545 \u2248 **0.087 or 8.7%**\n\n**Surprising insight:** Despite a 95% accurate test, a positive result means only ~8.7% probability of disease! The extreme rarity of the disease (0.5%) overwhelms the test's accuracy. This is why doctors order follow-up tests.\n\n## Example 4: Random Variables\n**Problem:** Flip 3 coins. Let X = number of heads. Find P(X = 1).\n\n**Solution:**\nList all outcomes and their X values:\n- HHH \u2192 X = 3\n- HHT, HTH, THH \u2192 X = 2\n- HTT, THT, TTH \u2192 X = 1  \u2190 This is what we want\n- TTT \u2192 X = 0\n\nOutcomes with exactly one head: {HTT, THT, TTH} = 3 outcomes\nTotal outcomes: 8\n\nP(X = 1) = 3/8 = **0.375 or 37.5%**\n\n**Intuition:** Out of 8 equally likely coin flip sequences, 3 produce exactly one head.\n\n## Example 5: Combining Concepts\n**Problem:** You draw a card from a deck without replacement. What is P(2nd card is heart | 1st card was a heart)?\n\n**Solution:**\n- Start: 13 hearts out of 52 cards\n- After drawing one heart: 12 hearts remaining, 51 cards total\n- P(2nd heart | 1st heart) = 12/51\n\nThis shows events are **dependent** (not independent):\n- If independent: P(2nd heart | 1st heart) would equal P(2nd heart) = 13/52\n- Actually: P(2nd heart | 1st heart) = 12/51 \u2260 13/52\n- Drawing the first heart removes one heart from the deck, affecting the second draw\n\n**Key pattern:** Drawing without replacement creates dependence. Drawing with replacement preserves independence.\n\n## Summary: Problem-Solving Strategy\n\n1. **Identify the sample space** and all possible outcomes\n2. **Define events** clearly using set notation\n3. **Choose the appropriate rule**:\n   - Basic probability: Count favorable outcomes\n   - Conditional: Use P(A|B) = P(A \u2229 B) / P(B)\n   - Independence: Check if P(A \u2229 B) = P(A) \u00d7 P(B)\n   - Bayes: Reverse conditional probabilities\n4. **Calculate systematically** step-by-step\n5. **Check your answer** against intuition\n\nNow you're ready to test your understanding!",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Probability Knowledge Check",
+      "content": "# Assessment: Test Your Probability Mastery\n\nYou've learned the core foundations and worked through detailed examples. Now it's time to test your understanding across the full range of concepts: sample spaces, conditional probability, independence, Bayes' theorem, and random variables.\n\nThis assessment covers five key ideas you've encountered throughout the course. Answer each question carefully, thinking through the reasoning rather than just guessing. Your goal is to achieve at least 80% to demonstrate mastery and move forward. If you score below 80%, you'll receive a focused remedial review to strengthen any weak areas.\n\nLet's see how well you've integrated these probability concepts!",
+      "questions": [
+        {
+          "question": "What must be true about all probabilities?",
+          "options": [
+            "They must be between 0 and 1, and the sum of all outcomes equals 1",
+            "They can be negative",
+            "They must sum to 0",
+            "They are always greater than 1"
+          ],
+          "correct_index": 0
+        },
+        {
+          "question": "You roll a fair die. What is P(even | greater than 3)?",
+          "options": [
+            "1/2",
+            "1/3",
+            "2/3",
+            "1/6"
+          ],
+          "correct_index": 0
+        },
+        {
+          "question": "Which events are independent?",
+          "options": [
+            "Drawing two cards from a deck without replacement",
+            "Two separate coin flips",
+            "Today's weather and yesterday's weather",
+            "Smoking and developing lung disease"
+          ],
+          "correct_index": 1
+        },
+        {
+          "question": "A disease affects 2% of the population. A test is 98% accurate. You test positive. What is approximately P(Disease | Positive)?",
+          "options": [
+            "98%",
+            "50%",
+            "2%",
+            "49%"
+          ],
+          "correct_index": 1
+        },
+        {
+          "question": "What is a random variable?",
+          "options": [
+            "A variable that changes randomly",
+            "A function assigning numbers to outcomes in a sample space",
+            "The sample space itself",
+            "An event that cannot be predicted"
+          ],
+          "correct_index": 1
+        }
+      ],
+      "pass_threshold": 0.8,
+      "success_target": "n13",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Remedial Practice: Master Probability Through Problem-Solving",
+      "content": "# Let's Strengthen Your Probability Foundation\n\nYou didn't reach mastery on the assessment, but this is exactly where targeted practice helps. Let's review and work through the concepts that need more attention.\n\n## Core Axioms: The Rules All Probabilities Follow\n\n**Axiom 1: Non-negativity** \u2014 P(E) \u2265 0. Probabilities are never negative.\n**Axiom 2: Unit Measure** \u2014 P(S) = 1. The sample space has probability 1.\n**Axiom 3: Additivity** \u2014 For mutually exclusive events: P(A \u222a B) = P(A) + P(B).\n\n**Practice Problem 1:**\nYou flip a coin twice. What's P(at least one heads)?\n- Sample space: {HH, HT, TH, TT} \u2014 4 equally likely outcomes\n- Event: at least one heads = {HH, HT, TH}\n- P(at least one heads) = 3/4\n- By Axiom 3: P(HH) + P(HT) + P(TH) = 1/4 + 1/4 + 1/4 = 3/4 \u2713\n\n**Key insight:** Every probability must fall between 0 and 1. The entire sample space always has probability 1. This is non-negotiable in any probability model.\n\n## Conditional Probability: How New Information Changes Probabilities\n\n**Definition:** P(A|B) = P(A \u2229 B) / P(B)\n\nThis answers: \"Of all the times B happens, what fraction also have A?\"\n\n**Practice Problem 2:**\nA card deck has 13 hearts (and 26 red cards total). You draw one card. Given that it's red, what's P(heart)?\n- P(red) = 26/52\n- P(heart AND red) = 13/52\n- P(heart|red) = (13/52) / (26/52) = 13/26 = 1/2 = 50%\n\nLogic check: There are 26 red cards, and 13 are hearts. So exactly half the red cards are hearts. \u2713\n\n**Common mistake:** Students think P(A|B) is always close to P(A). NOT TRUE! New information can dramatically change probabilities. Here, knowing the card is red increased P(heart) from 13/52 \u2248 25% to 50%.\n\n## Independence: When Events Don't Influence Each Other\n\n**Definition:** A and B are independent if P(A|B) = P(A) OR equivalently P(A \u2229 B) = P(A) \u00d7 P(B).\n\n**Practice Problem 3:**\nYou roll two dice. Are \"die 1 shows 3\" and \"die 2 shows 5\" independent?\n- P(die1=3) = 1/6\n- P(die2=5) = 1/6\n- P(die1=3|die2=5) = 1/6 (die 2's result tells us NOTHING about die 1)\n- Since P(die1=3|die2=5) = P(die1=3), these are **independent** \u2713\n\n**Practice Problem 4:**\nAre drawing two cards without replacement independent?\n- P(1st is Ace) = 4/52\n- P(2nd is Ace | 1st was Ace) = 3/51 (only 3 Aces remain!)\n- Since 3/51 \u2260 4/52, these are **dependent**\n\n**Key point:** Without replacement removes independence. With replacement preserves independence.\n\n## Bayes' Theorem: Updating Beliefs with Evidence\n\n**Formula:** P(A|B) = P(B|A) \u00d7 P(A) / P(B)\n\nThis powerful formula reverses conditional probabilities: we find P(A|B) using P(B|A).\n\n**Practice Problem 5:**\nA disease affects 1% of people. A test is 99% accurate. You test positive. What's P(disease|positive)?\n\nGiven:\n- P(disease) = 0.01 (the prior: rarity of the disease)\n- P(positive|disease) = 0.99 (sensitivity: test catches disease)\n- P(positive|no disease) = 0.01 (false positive: test incorrectly flags healthy people)\n\nStep 1 \u2014 Calculate P(positive) using total probability:\n- P(positive) = P(positive|disease)\u00d7P(disease) + P(positive|no disease)\u00d7P(no disease)\n- P(positive) = 0.99(0.01) + 0.01(0.99) = 0.0099 + 0.0099 = 0.0198\n\nStep 2 \u2014 Apply Bayes' theorem:\n- P(disease|positive) = [P(positive|disease) \u00d7 P(disease)] / P(positive)\n- P(disease|positive) = (0.99 \u00d7 0.01) / 0.0198 = 0.0099 / 0.0198 \u2248 **0.50 or 50%**\n\n**Remarkable result:** Even with a 99% accurate test, a positive result gives only 50% confidence in the disease! Why? Because the disease is rare (1%). For every 10,000 people:\n- ~100 have the disease; ~99 test positive \u2713\n- ~9,900 are healthy; ~99 test positive incorrectly \u2717\n- Total positives: ~198, but only ~99 actually have disease \u2192 99/198 \u2248 50%\n\nThis is why doctors order follow-up tests and why understanding Bayes' theorem matters.\n\n## Random Variables and Distributions\n\n**Definition:** A random variable X assigns numbers to outcomes.\n\n**Practice Problem 6:**\nFlip a coin 3 times. Let X = number of heads. Find P(X \u2264 1).\n\nOutcomes where X \u2264 1:\n- TTT \u2192 X = 0 \u2713\n- HTT \u2192 X = 1 \u2713\n- THT \u2192 X = 1 \u2713\n- TTH \u2192 X = 1 \u2713\n- HHT, HTH, THH, HHH \u2192 X \u2265 2 \u2717\n\nCount: 4 favorable outcomes out of 8 total\n- P(X \u2264 1) = 4/8 = 1/2 = **50%**\n\n## Summary: Your Path Forward\n\nThe key to mastery is **working through problems systematically**:\n\n1. **Define clearly** \u2014 Write out your sample space, events, and what you're finding\n2. **Choose your rule** \u2014 Identify which probability concept applies\n3. **Calculate step-by-step** \u2014 Don't skip steps; show your work\n4. **Verify logically** \u2014 Does the answer make intuitive sense?\n5. **Practice more** \u2014 The more problems you solve, the stronger your intuition\n\nProbability doesn't become intuitive through memorization\u2014it emerges through practice. Work through these problems multiple times. Try variations. Generate your own examples. Each problem strengthens your understanding.\n\nWhen you feel confident, retake the assessment!",
+      "next": "n13"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Course Complete: Probability Master!",
+      "content": "# Congratulations!\n\nYou've successfully completed the Probability Theory and Random Variables course.\n\n## What You've Learned\n\n\u2713 The foundations of probability: sample spaces, events, and axioms\n\u2713 How probability emerges from frequency and mathematical rules\n\u2713 Conditional probability: incorporating new information\n\u2713 Bayes' theorem: systematically updating beliefs with evidence\n\u2713 Independence: recognizing when events don't influence each other\n\u2713 Random variables and distributions: the bridge to statistics\n\n## Your Next Steps\nYou're now ready to explore:\n- **Specific distributions** (normal, binomial, Poisson, etc.)\n- **Expectation and variance** (mean and spread of random variables)\n- **Statistical inference** (estimating and testing claims from data)\n- **Applications** (machine learning, finance, physics, etc.)\n\n## Key Takeaway\nProbability is the language of uncertainty. It appears everywhere: science, medicine, finance, AI, and everyday decision-making. You now understand the principles that power these applications.\n\nKeep practicing with real problems. The intuition deepens with each calculation you work through.\n\n**Well done!**"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Introduction"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Foundation complete"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Axiomatic path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n5",
+      "label": "Practical path"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n6",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Advanced topics"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Bayes' path"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "Independence path"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n10",
+      "label": "Continue"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Continue"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "node-7c3a9e2f",
+      "label": "Worked examples"
+    },
+    {
+      "id": "c12b",
+      "source": "node-7c3a9e2f",
+      "target": "n11",
+      "label": "Ready for assessment"
+    },
+    {
+      "id": "c13",
+      "source": "n11",
+      "target": "n13",
+      "label": "Passed (\u226580%)"
+    },
+    {
+      "id": "c14",
+      "source": "n11",
+      "target": "n12",
+      "label": "Failed (<80%)"
+    },
+    {
+      "id": "c15",
+      "source": "n12",
+      "target": "n13",
+      "label": "Review complete"
+    }
+  ],
+  "generated_at": "2026-03-25T23:50:19.028270+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T01:51:39.772824+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

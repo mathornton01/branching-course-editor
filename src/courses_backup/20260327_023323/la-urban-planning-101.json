@@ -1,0 +1,282 @@
+{
+  "id": "la-urban-planning-101",
+  "title": "Linear Algebra for Data Science: Urban Planning",
+  "description": "Master vectors and matrices through urban planning case studies and applications. Learn how cities are modeled, analyzed, and optimized using linear algebra.",
+  "topic": "Linear Algebra for Data Science",
+  "theme": "urban planning",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "linear-algebra",
+    "data-science",
+    "urban-planning",
+    "vectors",
+    "matrices"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Vectors and City Planning: Positioning Urban Elements",
+      "content": "In urban planning, vectors represent spatial relationships and movement patterns. A vector in a city context has both magnitude (distance) and direction\u2014for example, the displacement from downtown to a suburb, or traffic flow along a street. Just as architects use vectors to map infrastructure networks, data scientists use vectors to represent city data points in multi-dimensional space, enabling analysis of urban patterns like population distribution, transportation networks, and economic zones. Vectors form the foundation for analyzing how different urban elements relate to each other spatially and directionally.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Case Study: Mapping District Displacement Vectors",
+      "content": "Consider a city's downtown district at coordinates (0, 0). The residential district lies at displacement vector (3, 4), meaning 3 km east and 4 km north\u2014a total distance (magnitude) of \u221a(3\u00b2 + 4\u00b2) = 5 km. A commercial district at vector (2, 1) represents 2 km east and 1 km north. Urban planners analyzing decade-long growth trends use these vectors to represent how each district shifts over time. A data scientist calculates the magnitude of growth as \u221a(x\u00b2 + y\u00b2), revealing optimal locations for new services and quantifying neighborhood relationships.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Assessment: Vector Fundamentals in Urban Context",
+      "content": "Test your understanding of vectors in city planning scenarios.",
+      "questions": [
+        {
+          "question": "A city park is located at vector position (6, 8) km from the city center. What is the magnitude (actual distance) of this vector?",
+          "options": [
+            "10 km",
+            "14 km",
+            "48 km",
+            "7 km"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Using the Pythagorean theorem: \u221a(6\u00b2 + 8\u00b2) = \u221a(36 + 64) = \u221a100 = 10 km",
+            "Incorrect. This is 6 + 8, but vector magnitude uses the Pythagorean theorem",
+            "Incorrect. 6 \u00d7 8 = 48, but vector magnitude is not multiplication of coordinates",
+            "Incorrect. The correct formula is \u221a(x\u00b2 + y\u00b2), not approximating by addition"
+          ],
+          "explanation": "Vector magnitude in 2D is calculated using the Pythagorean theorem: |v| = \u221a(x\u00b2 + y\u00b2). This represents the actual distance from the city center to the park."
+        },
+        {
+          "question": "Two neighborhood vectors from the city center are North Vector (0, 5) and East Vector (5, 0). What is the combined displacement vector when analyzing both neighborhoods together?",
+          "options": [
+            "(5, 5)",
+            "(0, 0)",
+            "(5, -5)",
+            "(10, 10)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Vector addition combines corresponding components: (0 + 5, 5 + 0) = (5, 5)",
+            "Incorrect. Zero vector would mean no displacement. Vectors add, not cancel",
+            "Incorrect. This would be a subtraction. The y-component would not be negative",
+            "Incorrect. This would be if we doubled both vectors. We're adding them separately"
+          ],
+          "explanation": "Vector addition works component-wise: (x\u2081, y\u2081) + (x\u2082, y\u2082) = (x\u2081 + x\u2082, y\u2081 + y\u2082). This represents the combined displacement from both neighborhoods."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Matrices for Urban Network Analysis",
+      "content": "Matrices are powerful tools for representing complex urban systems. A matrix in urban planning can represent transportation networks, where each row is an origin location and each column is a destination\u2014values show distance, travel time, or traffic volume. For instance, a 3\u00d73 matrix models connections between downtown, residential, and industrial zones. Urban planners use matrix operations like multiplication to model how changes propagate through city systems\u2014multiplying a traffic pattern matrix by a growth factor predicts future congestion. Matrix transformations help data scientists understand city evolution when policies change, making matrices essential for predictive urban modeling.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Case Study: Traffic Flow Matrix Analysis",
+      "content": "A city transportation analyst creates a matrix tracking vehicles per hour between three districts: Downtown (D), Residential (R), and Industrial (I). The traffic flows are: D to R = 200, D to I = 150, R to D = 180, R to I = 100, I to D = 160, I to R = 120 vehicles/hour. Represented as a 3\u00d73 matrix: [[0, 200, 150], [180, 0, 100], [160, 120, 0]]. Using matrix multiplication by a growth factor matrix, the analyst predicts traffic in 5 years, revealing which roads will become bottlenecks. This matrix-based approach enables planners to design road expansions and optimize public transit before congestion becomes critical.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Assessment: Matrix Operations in Urban Planning",
+      "content": "Apply matrix concepts to urban analysis scenarios.",
+      "questions": [
+        {
+          "question": "A city district matrix shows hourly commute trips: Downtown\u2194Residential = 200, Downtown\u2194Industrial = 150, Residential\u2194Industrial = 100 vehicle trips per hour during a 12-hour business day. What is the total commute volume across all three district pairs?",
+          "options": [
+            "450 \u00d7 12 = 5,400 trips",
+            "900 trips",
+            "10,800 trips",
+            "3,600 trips"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Sum all connections (200 + 150 + 100 = 450) and multiply by 12 hours: 450 \u00d7 12 = 5,400 total trips",
+            "Incorrect. Remember to multiply by the 12-hour business day",
+            "Incorrect. Don't double-count connections or triple the hours",
+            "Incorrect. This accounts for only one district pair. Include all three connections"
+          ],
+          "explanation": "Sum the traffic values (200 + 150 + 100 = 450 vehicles/hour) and multiply by the 12-hour business day: 450 \u00d7 12 = 5,400 total daily commute trips. This helps planners assess infrastructure capacity."
+        },
+        {
+          "question": "A city uses a 2\u00d72 transition matrix to model population shifts between urban core and suburbs over time. If we multiply this matrix by a population vector [current_core, current_suburbs], what does the result represent?",
+          "options": [
+            "The predicted population distribution in the next time period",
+            "The total population of the city",
+            "The distance between neighborhoods",
+            "The percentage growth rate"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Matrix-vector multiplication applies a transformation, predicting how the state changes to the next period",
+            "Incorrect. You'd sum all components for total population, not multiply matrices",
+            "Incorrect. Distance requires geometric data, not transition probabilities",
+            "Incorrect. For growth rates, you'd need eigenvalues or compare consecutive periods"
+          ],
+          "explanation": "A transition matrix models how systems change between time periods. Multiplying it by a state vector produces the next state vector. This is fundamental to predictive modeling in urban systems."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Reinforcing Linear Algebra Concepts",
+      "content": "Apply your understanding of vectors and matrices to real urban planning scenarios. These practice questions help solidify your mastery.",
+      "questions": [
+        {
+          "question": "A smart city tracks bicycle-sharing usage between three stations. From Station A: 45 bikes depart to Station B, and 35 bikes return from Station C. As an outflow vector from Station A, what is the combined vector?",
+          "options": [
+            "(45, 35)",
+            "(45, 30)",
+            "(75, 0)",
+            "(110, 30)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Outflow vectors from Station A show 45 bikes departing to B and 35 returning from C: (45, 35)",
+            "Incorrect. Re-examine which flows originate from Station A",
+            "Incorrect. Vectors preserve both magnitude and direction; don't collapse them into a single value",
+            "Incorrect. Focus only on movements directly involving Station A"
+          ],
+          "explanation": "Outflow vectors represent movement originating from a specific point. Station A sends 45 bikes and receives 35, giving vector (45, 35). Vectors are essential for representing directional flows."
+        },
+        {
+          "question": "A city planner models zoning categories as a matrix where each cell contains land-use density values. Which matrix operation best represents applying development incentives that increase density differently across zones?",
+          "options": [
+            "Multiply the matrix by a scaling/transformation matrix",
+            "Add a constant to every cell",
+            "Transpose the zoning matrix",
+            "Find the determinant of the matrix"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Matrix multiplication applies different transformations to different zones uniquely",
+            "Incorrect. Adding a constant increases all densities equally, not reflecting targeted incentives",
+            "Incorrect. Transposing reorients rows and columns but doesn't apply transformations",
+            "Incorrect. The determinant measures invertibility, not how transformations are applied"
+          ],
+          "explanation": "When different incentives apply differently to different zones, matrix multiplication models the transformation. This is a core operation in predictive urban modeling."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What's Next in Your Linear Algebra Journey?",
+      "content": "Excellent work! You've successfully mastered the fundamentals of linear algebra for urban planning. You now understand how vectors represent spatial relationships and movement patterns in cities\u2014enabling you to model district locations, analyze growth trends, and quantify neighborhood relationships. You've also learned how matrices capture complex urban systems like transportation networks and demographic shifts, allowing you to make predictions about traffic patterns, resource allocation, and city evolution. These powerful tools form the foundation for data-driven urban planning decisions.\n\nYou have two paths forward. If you want to deepen your expertise, explore how eigenvalues and eigenvectors identify critical infrastructure stress points and optimize city services using advanced linear algebra techniques. Alternatively, if you're ready to apply what you've learned, conclude the course and begin working with real urban planning datasets and tools using your new skills.",
+      "choices": [
+        {
+          "label": "Explore Advanced Applications",
+          "next": "n9a"
+        },
+        {
+          "label": "Complete the Course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9a",
+      "type": "content",
+      "title": "Advanced Topic: Eigenvalues and Smart City Optimization",
+      "content": "Eigenvalues and eigenvectors are advanced linear algebra concepts that reveal hidden patterns in urban systems. When a city planner applies a transformation matrix (like a growth or change factor) to the current state of a system, the eigenvectors point in directions where that transformation acts purely as a scaling operation\u2014these are the natural 'modes' of city growth. The eigenvalue tells you the scaling factor: an eigenvalue greater than 1 indicates exponential growth in that direction, while values less than 1 indicate decline. For example, analyzing the transportation network matrix reveals eigenvectors pointing toward critical infrastructure bottlenecks and congestion zones that deserve targeted investment. By identifying eigenvectors of the population shift matrix, urban planners can predict which neighborhoods will experience the most dramatic demographic change and allocate resources accordingly. Smart cities use eigenvalue analysis to detect resilience thresholds\u2014the point at which infrastructure systems become unstable without intervention. This advanced technique transforms raw data about traffic, energy consumption, and service usage into actionable insights for optimizing city services and preparing for future growth patterns.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: Linear Algebra Mastery for Urban Planning",
+      "content": "Congratulations! You've successfully learned how vectors and matrices are fundamental tools for analyzing and predicting urban systems. From mapping neighborhood relationships as vectors to modeling complex traffic patterns and demographic shifts with matrices, you now understand how data science applies linear algebra to solve real challenges in urban planning. You can use these skills to work with sophisticated urban simulation tools, optimize city infrastructure, and make data-driven decisions that impact communities. Your next step: apply these concepts to analyze your own city's planning challenges or explore advanced topics like dimensionality reduction and network analysis."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Test Understanding"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "Retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Learn"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Test Understanding"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "Pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Review Complete"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Finish"
+    },
+    {
+      "id": "c11",
+      "source": "n9a",
+      "target": "n9",
+      "label": "Complete Course"
+    }
+  ],
+  "generated_at": "2026-03-26T02:02:24.484442+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T09:19:51.555233+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

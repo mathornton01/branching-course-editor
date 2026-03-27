@@ -1,0 +1,275 @@
+{
+  "id": "ml-fundamentals-sports-analytics",
+  "title": "Machine Learning Fundamentals: Sports Analytics Edition",
+  "description": "Learn machine learning through the lens of sports analytics. Explore supervised and unsupervised learning by building real-world sports prediction and discovery systems.",
+  "topic": "Machine Learning Fundamentals",
+  "theme": "sports analytics",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "machine learning",
+    "sports analytics",
+    "supervised learning",
+    "unsupervised learning",
+    "data science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "ML in Sports: The Injury Prevention Challenge",
+      "content": "You've just been hired as a machine learning engineer for a professional sports organization. The team's medical staff is losing key players to injuries that could have been prevented with better prediction. Your challenge: build an ML system to predict player injuries before they happen. Machine learning offers two distinct approaches to this problem. You can learn from labeled historical data (which players got injured and when), or discover hidden patterns without predefined labels. The choice you make will shape your entire ML strategy and determine how quickly you can deploy a working solution.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your ML Approach",
+      "content": "Two distinct machine learning paradigms can tackle the injury prevention problem. The first uses historical labeled examples to build predictive models. The second discovers hidden patterns in player data without predetermined answers. Which approach will you pursue?",
+      "choices": [
+        {
+          "label": "Supervised Learning - Predict specific player injury outcomes",
+          "next": "n3"
+        },
+        {
+          "label": "Unsupervised Learning - Discover hidden injury risk patterns",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Supervised Learning: Learning from Labeled Data",
+      "content": "Supervised learning trains algorithms on labeled examples - data points where you already know the correct answer. In sports injury prediction, each player's historical season becomes a labeled training example: the player's workload metrics (games played, minutes, training intensity) form the features, while the outcome (injured or healthy) is the label. The algorithm learns the patterns connecting player features to injury outcomes. You split data into training sets (to learn from) and test sets (to evaluate), ensuring the model can generalize to new, unseen players. This approach is powerful when you have reliable historical labels, but requires significant labeled data collection.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Predicting Injury Risk: A Worked Example",
+      "content": "Consider a basketball team with 3 seasons of player data. Features include: games per week (6-10), position (guard=1, forward=2, center=3), age (22-35), minutes per game (15-38), and prior injuries (0-3). Label: injured during following season (yes/no). Training: the algorithm discovers that guards playing >8 games/week with high minutes are 70% likely to get injured next season, while centers with moderate minutes are 20% likely. Test results: when tested on held-out data from the fourth season, the model correctly predicts 82% of injuries. This performance justifies deployment.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Supervised Learning Fundamentals Quiz",
+      "content": "Test your understanding of supervised learning principles and how they apply to sports prediction.",
+      "questions": [
+        {
+          "question": "In the basketball injury prediction example, what is a 'feature' in your supervised learning model?",
+          "options": [
+            "The team's win-loss record",
+            "A player's games per week, position, age, or minutes per game",
+            "Whether a player got injured (yes/no)",
+            "The algorithm's final prediction"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The team's record is not an individual player feature.",
+            "Correct! Features are the input variables (player attributes) used to make predictions.",
+            "Incorrect. This is the label, not a feature.",
+            "Incorrect. The prediction is the model's output, not an input feature."
+          ],
+          "explanation": "In supervised learning, features are the input variables you feed to the model. Labels are the known correct answers you're trying to predict."
+        },
+        {
+          "question": "Why do we split data into training and test sets in supervised learning?",
+          "options": [
+            "To double the amount of data we have",
+            "To ensure the model learns general patterns, not just memorize training examples",
+            "To make the model train faster",
+            "Because test sets are required by law"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Splitting doesn't create new data.",
+            "Correct! Test sets evaluate whether the model generalizes to unseen data.",
+            "Incorrect. This has minimal impact on training speed.",
+            "Incorrect. There's no legal requirement."
+          ],
+          "explanation": "Training on the same data you test on causes 'overfitting' - the model memorizes answers instead of learning generalizable patterns. Test sets reveal if your model actually works on new data."
+        },
+        {
+          "question": "The basketball injury model was 82% accurate on test data. What does this mean?",
+          "options": [
+            "The model perfectly predicts 82 out of 100 players",
+            "Of test-set players, 82% got injured",
+            "The model correctly predicted injury status for 82 out of 100 test-set players",
+            "The model will always be 82% accurate in the future"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Accuracy isn't about 'perfect' prediction.",
+            "Incorrect. Accuracy isn't about the actual injury rate.",
+            "Correct! Accuracy is the percentage of correct predictions.",
+            "Incorrect. Past accuracy doesn't guarantee future accuracy; new data or seasons may differ."
+          ],
+          "explanation": "Accuracy measures how often the model's predictions match reality. 82% accuracy on test data is promising, but real-world performance depends on whether new seasons have similar patterns."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Success: Injury Prevention Program Launched",
+      "content": "Congratulations! Your supervised learning model was validated with strong test results. The team deployed it at the start of the season, and it correctly predicted high-risk situations for 4 key players. The medical staff implemented targeted rest protocols for these players, and the team not only stayed healthy but made an unexpected playoff run. Your data-driven approach turned raw player statistics into actionable medical decisions, proving that supervised learning excels when you have reliable historical labels and a clear prediction target. The team now plans to integrate this model into real-time monitoring systems for next season."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Lessons Learned: Data Quality Matters",
+      "content": "Your supervised learning model performed well in testing (82% accuracy), but failed in real-world deployment. Several high-risk players stayed healthy while unexpected injuries affected lower-risk ones. Post-analysis revealed the issue: your training data was missing critical contextual features like previous injury severity, recovery methods, and coaching staff changes. This taught you a crucial lesson: supervised learning is only as good as your labeled data. The team halted the program and invested in collecting richer, more complete data. While this setback was disappointing, it highlighted why data collection and validation are as important as the algorithm itself. Next season, with better data, your next supervised model should succeed."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Unsupervised Learning: Discovering Hidden Patterns",
+      "content": "Unsupervised learning finds structure in data without predefined labels or targets. Instead of learning 'injured vs. healthy,' it discovers natural groupings and relationships. In sports, this means clustering similar players together based on their playing characteristics, or finding correlations between game conditions and player performance without prior knowledge of what patterns exist. Unsupervised learning algorithms work with raw features (workload, age, position, stats) and group similar items together using mathematical similarity metrics. The 'patterns' aren't predetermined answers - they emerge from the data itself. This approach is powerful when you don't know what you're looking for, but need to explore and understand your data. It often reveals surprising insights that supervised approaches might miss.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "example",
+      "title": "Finding Player Archetypes: A Worked Example",
+      "content": "The team collects similar data: games per week, position, age, minutes per game, shooting percentage, and defensive stats - but this time without injury labels. A clustering algorithm (k-means) groups players into 4 natural archetypes: (1) 'Workhorses' - high-usage veterans with steady performance; (2) 'Rising Stars' - young players with increasing playing time; (3) 'Role Specialists' - lower-usage experts in specific defensive schemes; (4) 'Injury-Prone Outliers' - inconsistent usage patterns suggesting recovery. The coaching staff notices that 'Rising Stars' have historically transitioned to 'Workhorses' through predictable paths, while 'Injury-Prone Outliers' rarely stabilize. These insights were never explicitly labeled in the data - the algorithm discovered them.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Unsupervised Learning Fundamentals Quiz",
+      "content": "Test your understanding of unsupervised learning and its application to sports data discovery.",
+      "questions": [
+        {
+          "question": "In the player clustering example, what is the key difference between supervised and unsupervised learning?",
+          "options": [
+            "Unsupervised learning is always more accurate",
+            "Supervised learning requires labeled data; unsupervised learning discovers patterns without predefined labels",
+            "Unsupervised learning uses fewer features",
+            "Supervised learning only works for sports analytics"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Accuracy depends on the problem and data, not the approach.",
+            "Correct! Unsupervised learning explores data without target answers; supervised learning learns from labeled examples.",
+            "Incorrect. Both approaches use similar features; the difference is whether data is labeled.",
+            "Incorrect. Both approaches work across many domains."
+          ],
+          "explanation": "The fundamental distinction: supervised learning predicts a known target (injury/healthy), while unsupervised learning discovers unknown patterns (player clusters, archetypes)."
+        },
+        {
+          "question": "The clustering algorithm discovered that 'Injury-Prone Outliers' rarely stabilize into other archetypes. How did the algorithm 'know' this was important?",
+          "options": [
+            "It was explicitly programmed to look for injury patterns",
+            "It learned from labeled injury data during training",
+            "It didn't 'know' - the inconsistent usage patterns were similar to each other, so it grouped them; the interpretation of 'injury-prone' came from human analysis",
+            "Sports datasets automatically flag injury risks"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Unsupervised learning doesn't have predefined targets.",
+            "Incorrect. The clustering example didn't use injury labels.",
+            "Correct! Clustering finds similar items; humans interpret what the clusters mean. The algorithm just saw usage pattern similarities.",
+            "Incorrect. Datasets don't automatically interpret meanings."
+          ],
+          "explanation": "Unsupervised learning is pattern discovery. The algorithm groups similar players (mathematical similarity), and humans must interpret what those groups mean based on domain knowledge."
+        },
+        {
+          "question": "What is a major advantage of unsupervised learning in the sports analytics scenario?",
+          "options": [
+            "It requires no computational power",
+            "It discovers unexpected patterns humans might miss, without needing labeled data",
+            "It is always more accurate than supervised learning",
+            "It works only with numerical data, not categorical data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Unsupervised learning requires significant computation.",
+            "Correct! Without requiring labeled injury outcomes, it explores patterns freely, sometimes revealing surprising insights.",
+            "Incorrect. Accuracy depends on the task, not the method.",
+            "Incorrect. Modern algorithms handle both numerical and categorical data."
+          ],
+          "explanation": "Unsupervised learning excels at exploration when you don't know what to look for - no need to collect expensive labeled data. The discovered patterns might reveal entirely new ways to understand your domain."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n11",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Discovery Complete: Unexpected Playing Styles Identified",
+      "content": "Your unsupervised clustering successfully revealed four distinct player archetypes. The coaching staff was particularly intrigued by the 'Rising Stars' \u2192 'Workhorses' transition pattern - it allowed them to proactively adjust playing time for developing players with natural progression paths. The 'Role Specialists' archetype revealed that the team's defensive specialist players were fundamentally different from others, suggesting they needed separate conditioning programs. Most surprisingly, the 'Injury-Prone Outliers' cluster - identified purely through inconsistent usage patterns with no explicit injury data - turned out to have the highest injury rates historically. You've unlocked actionable intelligence without any labeled injury data. The team now uses these archetypes to inform player development, load management, and strategic decisions. Your unsupervised approach proved that machine learning can discover truths hidden in plain sight."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Supervised Learning"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Pass"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c7",
+      "source": "n2",
+      "target": "n8",
+      "label": "Unsupervised Learning"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T11:34:58.563283+00:00",
+  "model": "claude-haiku-4-5"
+}

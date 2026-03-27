@@ -1,0 +1,302 @@
+{
+  "id": "algo-design-complexity",
+  "title": "Algorithm Design and Complexity",
+  "description": "Learn the fundamentals of algorithm design and how to analyze computational complexity using Big O notation.",
+  "topic": "Algorithm Design and Complexity",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "algorithms",
+    "big-o",
+    "complexity-analysis",
+    "computer-science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Algorithm Design Fundamentals",
+      "content": "Algorithms are step-by-step procedures to solve computational problems efficiently. Effective algorithm design balances correctness, efficiency, and code clarity. Understanding how algorithms perform at scale is fundamental to computer science and software engineering. We'll explore key principles that help you create solutions that work well whether processing 10 items or 10 million. This course teaches you to analyze algorithm performance using Big O notation.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Big O Notation in Practice",
+      "content": "Consider finding a name in a sorted phone book of 1,000 entries. A linear search checks each entry sequentially (worst case: 1,000 operations), while binary search eliminates half with each step (worst case: 10 operations). Linear search is O(n) time complexity; binary search is O(log n). This difference becomes dramatic at scale\u2014with 1 million entries, linear search needs 1 million operations but binary search needs only 20. This is why Big O notation matters for real software.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Algorithm Complexity Assessment",
+      "content": "Test your understanding of Big O notation and algorithm analysis fundamentals.",
+      "questions": [
+        {
+          "question": "If a linear search takes 1,000 operations for 1,000 items, how many operations would it take for 10,000 items?",
+          "options": [
+            "100 operations",
+            "1,000 operations",
+            "10,000 operations",
+            "100,000 operations"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Linear search grows proportionally with input size.",
+            "Incorrect. Linear search doesn't stay constant.",
+            "Correct! Linear search is O(n)\u2014it scales directly with input size.",
+            "Incorrect. That would be quadratic, not linear."
+          ],
+          "explanation": "Linear search (O(n)) processes one item per operation. 10x more items = 10x more operations. This is why O(n) algorithms become slow with large datasets."
+        },
+        {
+          "question": "Which statement best describes the advantage of binary search over linear search?",
+          "options": [
+            "It uses less memory",
+            "It takes half the time for any input size",
+            "It reduces time complexity from O(n) to O(log n) by requiring sorted input",
+            "It works correctly even on unsorted data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Memory usage isn't the primary advantage.",
+            "Incorrect. The speedup varies depending on input size.",
+            "Correct! Binary search trades the requirement for sorted data to achieve logarithmic complexity.",
+            "Incorrect. Binary search requires sorted input."
+          ],
+          "explanation": "Binary search divides the search space in half each iteration. With 1 million items, it finds any value in ~20 steps versus up to 1 million for linear search. This is the O(log n) advantage."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Time and Space Complexity",
+      "content": "Every algorithm consumes both time (CPU cycles) and space (memory). Time complexity describes how execution time grows with input size; space complexity describes memory consumption. Analyzing both tradeoffs is essential for real systems. A fast algorithm that requires terabytes of memory is impractical. A memory-efficient algorithm that takes days to finish is also impractical. Understanding these tradeoffs helps you choose appropriate algorithms for specific constraints\u2014web servers prioritize speed, embedded systems prioritize memory, and mobile apps balance both.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Real-World Complexity Tradeoffs",
+      "content": "Consider sorting 1 million records. Bubble sort uses O(n\u00b2) operations\u2014that's 1 trillion comparisons, taking hours. Quicksort averages O(n log n)\u2014about 20 million operations, finishing in seconds. Merge sort guarantees O(n log n) but requires O(n) extra memory for temporary arrays. In production systems, Quicksort usually wins because it balances speed with minimal extra memory. However, if your data barely fits in RAM, the extra O(n) space from Merge sort might exceed available memory, forcing Quicksort despite its worst-case O(n\u00b2) scenario. Algorithm choice directly impacts user experience and operational costs.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Practical Complexity Assessment",
+      "content": "Apply your knowledge of complexity analysis to real-world algorithm decisions.",
+      "questions": [
+        {
+          "question": "You're building a real-time recommendation system that must process 100 million user profiles. Which algorithm characteristic is most critical?",
+          "options": [
+            "Worst-case guarantee (deterministic behavior)",
+            "Time complexity under O(n\u00b2) to finish within seconds",
+            "Minimal space overhead to fit in limited server memory",
+            "All of the above are equally important"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Real-time systems can often tolerate probabilistic algorithms if they're fast enough.",
+            "Correct! For 100 million items, even O(n log n) is tight. O(n\u00b2) is completely impractical\u2014it would take millions of seconds.",
+            "Incorrect. While important, if the algorithm is too slow, memory optimization doesn't matter.",
+            "Incorrect. In real-time systems, time complexity is the binding constraint."
+          ],
+          "explanation": "With n=100 million, O(n\u00b2) means 10 quintillion operations. Even at 1 billion operations/second, this takes 10 million seconds (115 days). O(n log n) takes only ~2.6 billion operations (2-3 seconds). Execution time dominates here."
+        },
+        {
+          "question": "A student implements a sorting algorithm that is extremely fast (O(n log n)) but requires duplicate copies of the entire dataset in memory. In what scenario would you reject this solution?",
+          "options": [
+            "Sorting 1,000 records on a modern computer with 16GB RAM",
+            "Sorting video files totaling 8TB on a server with 16GB RAM",
+            "Sorting 1 million database records in a web application",
+            "All scenarios would reject this approach"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. 1,000 records use negligible memory.",
+            "Correct! With 8TB of data, requiring a duplicate copy exceeds available memory. The algorithm can't run at all.",
+            "Incorrect. 1 million records in memory is typically fine on modern servers.",
+            "Incorrect. Space requirements depend on the dataset size."
+          ],
+          "explanation": "Space complexity is a hard constraint\u2014you can't exceed available memory. An O(n log n) algorithm is worthless if it requires more memory than exists. In this case, a slower O(n log n) algorithm with O(1) space would be necessary."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Complexity Analysis Review",
+      "content": "Strengthen your understanding of Big O notation and complexity tradeoffs with targeted practice questions. Working through diverse scenarios helps solidify your ability to analyze algorithms across different problem contexts and recognize patterns in complexity growth. These questions emphasize the practical decision-making skills you'll use when choosing algorithms in real-world applications.",
+      "questions": [
+        {
+          "question": "An algorithm processes a dataset by examining each element once, then examining each pair of elements. Its time complexity is:",
+          "options": [
+            "O(n)",
+            "O(n + n\u00b2) = O(n\u00b2)",
+            "O(2n)",
+            "O(n\u00b2/2) = O(n\u00b2)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. You must account for examining pairs too.",
+            "Correct! We add the complexities: O(n) for individual elements plus O(n\u00b2) for pairs equals O(n\u00b2) (the dominant term).",
+            "Incorrect. O(2n) is still O(n), not O(n\u00b2).",
+            "Correct! Constant factors drop in Big O notation, so O(n\u00b2/2) simplifies to O(n\u00b2)."
+          ],
+          "explanation": "Big O notation ignores constant factors and focuses on dominant terms. O(n\u00b2) dominates O(n), so the overall complexity is O(n\u00b2). Both options 1 and 3 are actually correct\u2014Big O hides constant factors."
+        },
+        {
+          "question": "Which algorithm would you choose for sorting a nearly-sorted array of 1 million numbers?",
+          "options": [
+            "Merge sort\u2014it guarantees O(n log n)",
+            "Insertion sort\u2014it degenerates to O(n) when data is nearly sorted",
+            "Quicksort\u2014it's the fastest in practice",
+            "Bubble sort\u2014it's simple to understand"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Merge sort is excellent, but insertion sort exploits the nearly-sorted property.",
+            "Correct! Insertion sort becomes nearly linear on nearly-sorted data, beating O(n log n) algorithms in practice.",
+            "Incorrect. Quicksort is fast on average but doesn't exploit the nearly-sorted property.",
+            "Incorrect. Bubble sort would waste time on comparisons in nearly-sorted data."
+          ],
+          "explanation": "Big O tells part of the story, but real-world performance depends on input characteristics. Insertion sort's adaptive nature makes it faster than O(n log n) algorithms on nearly-sorted data. This is why understanding your data matters."
+        },
+        {
+          "question": "You have two algorithms: Algorithm A is O(n log n) but has a high constant factor (takes 100 \u00d7 n log n operations), while Algorithm B is O(n\u00b2) but with a low constant factor (takes 0.1 \u00d7 n\u00b2 operations). For what input size does Algorithm B become slower?",
+          "options": [
+            "Algorithm B is always slower",
+            "Around n = 1,000 entries",
+            "Around n = 1,000,000 entries",
+            "Algorithm B is never slower because it has a lower constant factor"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. For small n, Algorithm B might actually be faster due to its low constant factor.",
+            "Incorrect. At n=1,000: A takes 100\u00d71,000\u00d710 = 1M ops; B takes 0.1\u00d71,000,000 = 100K ops. B is still faster.",
+            "Correct! At n=1M: A takes ~2B ops; B takes ~100B ops. Algorithm A dominates once n is large enough.",
+            "Incorrect. The asymptotic complexity O(n\u00b2) eventually dominates O(n log n), regardless of constants."
+          ],
+          "explanation": "Constant factors matter for small inputs, but Big O complexity eventually wins. The crossover point where O(n log n) beats O(n\u00b2) depends on the constants, but it's inevitable. This is why we say 'for large n' when discussing complexity."
+        },
+        {
+          "question": "A graph algorithm visits every node once and for each node examines all its edges. In a dense graph with n nodes and approximately n\u00b2 edges, what is the time complexity?",
+          "options": [
+            "O(n) because each node is visited once",
+            "O(n\u00b2) for visiting edges in the worst case",
+            "O(n + m) where m is the number of edges, which becomes O(n\u00b2) for dense graphs",
+            "O(2n) because of the nested loops"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Visiting nodes alone is O(n), but you must also process edges.",
+            "Incorrect. The expression 'm is the number of edges' is the more precise answer.",
+            "Correct! The standard formula is O(n + m). In a dense graph where m \u2248 n\u00b2, this becomes O(n\u00b2). Always express complexity in terms of both n and m when applicable.",
+            "Incorrect. O(2n) simplifies to O(n), not O(n\u00b2). The issue is the nested structure, not 2^n."
+          ],
+          "explanation": "For graph algorithms, express complexity as O(n + m) where n is nodes and m is edges. This is more precise than assuming a specific graph density. In a sparse graph (m \u2248 n), it's O(n). In a dense graph (m \u2248 n\u00b2), it's O(n\u00b2). Always be specific about what you're measuring."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What's Next?",
+      "content": "Congratulations on mastering algorithm complexity! You can now make informed decisions about algorithm selection based on Big O analysis. Choose what you'd like to do next.",
+      "choices": [
+        {
+          "label": "Review key concepts and finish",
+          "next": "n9"
+        },
+        {
+          "label": "Explore advanced topics",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: Algorithm Design and Complexity",
+      "content": "You've successfully learned algorithm design fundamentals and complexity analysis. You can now analyze algorithms using Big O notation, understand time and space tradeoffs, and make informed choices about algorithm selection. Apply this knowledge to interview problems, system design, and real-world optimization challenges. Next steps: practice implementing common algorithms (sorting, searching, graph traversal) and analyze their complexity in different scenarios."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-26T09:23:56.481379+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T09:27:12.522170+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

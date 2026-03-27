@@ -1,0 +1,289 @@
+{
+  "id": "pcup-001",
+  "title": "Parallel Computing Through Urban Planning",
+  "description": "Master parallel computing concepts using urban planning scenarios. Learn about concurrency, synchronization, deadlocks, and optimization through adaptive branching paths.",
+  "topic": "Parallel Computing",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 60,
+  "tags": [
+    "parallel-computing",
+    "concurrency",
+    "urban-planning",
+    "distributed-systems",
+    "synchronization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Parallel Computing Fundamentals Quiz",
+      "content": "Test your understanding of basic parallel computing concepts through urban planning scenarios.",
+      "questions": [
+        {
+          "question": "In a smart city project where 4 districts need water pipe installation simultaneously, what is this an example of?",
+          "options": [
+            "Sequential processing",
+            "Parallel processing",
+            "Single-threading",
+            "Cache management"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sequential processing means doing one task at a time, not multiple simultaneously.",
+            "Correct! Multiple tasks happening at the same time across different districts represents parallel processing.",
+            "Single-threading refers to a single execution path, not multiple simultaneous tasks.",
+            "Cache management is about computer memory optimization, not about parallel task execution."
+          ],
+          "explanation": "Parallel processing is when multiple tasks execute simultaneously across different processors or cores."
+        },
+        {
+          "question": "A construction site uses 8 excavators working on different foundation zones. What does each excavator represent in parallel computing?",
+          "options": [
+            "A process",
+            "A thread",
+            "A core",
+            "All of the above"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "A process is correct, but so are the others in this context.",
+            "A thread is correct, but so are the others in this context.",
+            "A core is correct, but so are the others in this context.",
+            "Correct! Each excavator represents a unit of parallel execution that can be called a process, thread, or core depending on context."
+          ],
+          "explanation": "In parallel computing, each execution unit can be referred to as a process, thread, or core. In our analogy, each excavator is a parallel execution unit."
+        },
+        {
+          "question": "If a city planning office processes building permit applications one at a time, what is this called?",
+          "options": [
+            "Parallelization",
+            "Sequential execution",
+            "Concurrency",
+            "Synchronization"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Parallelization is the process of making something parallel, which is the opposite of what's happening here.",
+            "Correct! Processing one task at a time is sequential execution, the opposite of parallel computing.",
+            "Concurrency can happen with sequential systems too; this is about processing order, not concurrency.",
+            "Synchronization is about coordinating parallel tasks, not about processing one task at a time."
+          ],
+          "explanation": "Sequential execution means processing tasks one at a time. This is inefficient compared to parallel execution."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Parallel Computing Challenges Assessment",
+      "content": "Evaluate your understanding of synchronization, deadlocks, and load balancing in parallel systems.",
+      "questions": [
+        {
+          "question": "A city intersection has 4 traffic light systems that must change in synchronized patterns. If they change without coordination, what problem occurs?",
+          "options": [
+            "Race conditions",
+            "Deadlocks",
+            "Cache misses",
+            "Load imbalance"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Multiple systems trying to act simultaneously without coordination create race conditions, causing unpredictable results like collisions.",
+            "Deadlock is when processes wait for each other; here the lights could change chaotically without causing a deadlock.",
+            "Cache misses relate to computer memory performance, not traffic coordination.",
+            "Load imbalance is about uneven work distribution, not about synchronization failures."
+          ],
+          "explanation": "Race conditions occur when multiple parallel tasks access shared resources without proper synchronization, leading to unpredictable behavior."
+        },
+        {
+          "question": "A city water management system has 20 neighborhoods needing meter readings, and 4 reading crews available. What's the best resource allocation strategy?",
+          "options": [
+            "Assign each crew 5 neighborhoods sequentially",
+            "Dynamically assign neighborhoods as crews finish",
+            "Have one crew read all meters",
+            "Use only one crew to prevent conflicts"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sequential assignment works but isn't optimal; crews might finish at different times, leaving some idle.",
+            "Correct! Dynamic load balancing keeps all workers busy and completes work faster\u2014fundamental to parallel computing efficiency.",
+            "Using only one crew defeats the purpose of parallelism and takes 4 times longer.",
+            "While this prevents conflicts, it's unnecessarily restrictive and ignores parallelism benefits."
+          ],
+          "explanation": "Dynamic load balancing ensures all parallel workers stay busy, maximizing throughput and minimizing total completion time."
+        },
+        {
+          "question": "Two infrastructure repair teams need the same excavator at the same time, and neither can proceed without it. What's this called?",
+          "options": [
+            "Cache contention",
+            "Deadlock",
+            "Thread starvation",
+            "Race condition"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Cache contention is about CPU cache conflicts, not about resource availability.",
+            "Correct! When parallel tasks can't proceed because they're mutually waiting for the same resource, that's a deadlock.",
+            "Thread starvation is when a thread never gets resource access; deadlock is mutual waiting.",
+            "Race condition is about uncoordinated simultaneous access; deadlock is about mutual dependency."
+          ],
+          "explanation": "Deadlock occurs when two or more parallel tasks are mutually waiting for resources the other holds, creating a system-wide halt."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Parallel Computing: Optimization and Deadlock Prevention",
+      "content": "Scaling to thousands of parallel tasks requires sophisticated strategies. Prevent deadlocks using resource ordering\u2014always request the crane before the concrete truck\u2014ensuring a consistent order prevents circular waiting. Implement timeouts, where tasks abandon requests after 30 seconds and retry, mirroring how smart city systems handle unresponsive services. Use thread pooling by maintaining a fixed team of workers (like an emergency response unit) ready to handle incoming tasks, avoiding the overhead of constantly creating and destroying workers. Lock-free algorithms allow parallel progress without synchronization waits\u2014similar to how express lanes in traffic let some vehicles bypass standard intersection rules. Identify bottlenecks where all traffic funnels through one intersection and expand capacity or create alternatives, just as you'd optimize CPU scheduling when all processes compete for limited cores. Monitor performance metrics: if crews consistently wait for equipment, you need more equipment or better scheduling.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Parallel Computing Path Complete",
+      "content": "You've mastered parallel computing through urban planning. You understand synchronization primitives, deadlock prevention strategies, and optimization techniques used in distributed systems managing thousands of concurrent processes. You're ready to tackle real-world challenges in cloud computing, microservices, and high-performance computing systems."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Practice: Real-World Parallel Computing Scenarios",
+      "content": "Apply your knowledge to realistic parallel computing challenges in urban context. These scenarios build intuition for synchronization and coordination patterns.",
+      "questions": [
+        {
+          "question": "A city's water distribution system uses 3 independent pumping stations serving different neighborhoods. If Station A increases pressure while Station B decreases it simultaneously without communication, what happens?",
+          "options": [
+            "Optimal efficiency is achieved",
+            "Water pressure becomes inconsistent across neighborhoods",
+            "Operational costs are reduced",
+            "System continues normally with no impact"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Uncoordinated parallel actions don't optimize efficiency; they create unpredictable behavior.",
+            "Correct! Uncoordinated parallel actions produce inconsistent results. Synchronization points are essential.",
+            "While some savings might occur, the inconsistent pressure defeats the system's purpose.",
+            "Without synchronization, results are definitely affected negatively."
+          ],
+          "explanation": "Parallel systems must synchronize when modifying shared state. Without coordination, undesirable interference occurs."
+        },
+        {
+          "question": "A traffic management system coordinates 8 independent vehicle streams (4 directions \u00d7 2 lanes). What must happen for safe parallel execution?",
+          "options": [
+            "All vehicles must move simultaneously",
+            "Traffic signals must synchronize the streams",
+            "Ignore conflicting flows and let drivers decide",
+            "Only one direction can move at any time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Simultaneous movement of conflicting streams causes collisions\u2014not safe parallelism.",
+            "Correct! Traffic signals are synchronization primitives that coordinate competing parallel resources safely.",
+            "Ignoring conflicts would cause accidents; this isn't viable.",
+            "Restricting to one direction defeats the purpose of parallel traffic flow and creates congestion."
+          ],
+          "explanation": "Synchronization mechanisms (like traffic signals) coordinate parallel tasks that access conflicting resources, enabling safe concurrency."
+        },
+        {
+          "question": "A smart building manages 50 IoT devices (lights, HVAC, locks, cameras). How should the system handle simultaneous update requests from different apps and sensors?",
+          "options": [
+            "Update all devices at exactly the same instant",
+            "Update devices as fast as possible regardless of order",
+            "Queue updates with proper ordering and conflict detection",
+            "Update one device at a time sequentially"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Simultaneous updates to the same device can cause conflicts and inconsistent state.",
+            "Unordered updates can create race conditions and leave the system in unexpected states.",
+            "Correct! Queuing and event ordering prevent race conditions while maintaining parallelism benefits.",
+            "Sequential updates lose the benefits of parallelism for handling many devices."
+          ],
+          "explanation": "Event queues and ordering constraints ensure consistency in parallel systems while preserving concurrency benefits."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n2"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Parallel Computing Foundations: Building Your Understanding",
+      "content": "Let's establish the basics with an urban lens. Imagine a single city department processing all building permits sequentially\u2014one at a time. The office handles 20 permits, and each takes a day. Total time: 20 days. Now imagine 5 permit officers working simultaneously on different applications, each handling 4 permits. Total time: 4 days. That's parallel computing\u2014dividing work across multiple processors. In computer terms, each officer is a processor core, and each permit is a task. Modern multi-core computers (2, 4, 8, or 16 cores) work identically: they execute 2, 4, 8, or 16 tasks simultaneously. A 4-core processor completes computational work in roughly one-fourth the time of a single-core machine (ignoring overhead). This parallelism is why modern computers are dramatically faster than older single-core machines from a decade ago.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Parallel Computing Example: Smart City Infrastructure Upgrade",
+      "content": "Scenario: A major city upgrade project requires three phases\u2014upgrading road infrastructure, updating utility lines (water, gas, electricity), and installing smart building systems (traffic lights, parking sensors, climate control). Traditional sequential approach: complete roads (6 months), then utilities (6 months), then buildings (6 months) = 18 months total. Parallel approach: assign separate teams to each phase; they work simultaneously. Since they use different work areas, they don't conflict. Total time: 6 months. By leveraging parallelism, the city completes the project in one-third the time. In parallel computing terms, this is task parallelism\u2014distinct tasks run on different processors. Similarly, a multi-core computer running 3 independent computational tasks on 3 cores completes in one-third the time of a single core running them sequentially.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Parallel Computing Fundamentals Path Complete",
+      "content": "You've learned the essentials of parallel computing through urban planning analogies. You understand what parallelism is, why it improves efficiency dramatically, and how it works in real systems. You're prepared to progress to the next level and tackle the synchronization and coordination challenges that arise in complex parallel systems."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T09:57:15.782592+00:00",
+  "model": "claude-haiku-4-5"
+}

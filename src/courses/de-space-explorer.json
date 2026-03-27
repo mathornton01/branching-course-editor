@@ -1,0 +1,231 @@
+{
+  "id": "de-space-explorer",
+  "title": "Digital Electronics for Space Exploration",
+  "description": "Learn digital electronics through the lens of spacecraft systems, guidance, communication, and navigation. Choose your learning path and explore how logic gates, digital circuits, and binary computation power modern spacecraft.",
+  "topic": "Digital Electronics",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "digital-electronics",
+    "logic-gates",
+    "spacecraft",
+    "binary",
+    "circuits",
+    "space-exploration"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Digital Electronics: The Foundation of Modern Spacecraft",
+      "content": "Spacecraft from the Apollo Lunar Module to the James Webb Space Telescope rely entirely on digital electronics to navigate, communicate, and survive in space. Digital electronics uses binary signals (on/off, 1/0) and logic gates to process information and make decisions autonomously. Understanding digital electronics is essential to grasp how spacecraft guidance systems, communication networks, and data processing systems work in environments where no human can directly intervene. In this course, you'll explore how digital electronics powers three critical spacecraft systems: guidance, communication, and navigation. Choose your learning path based on your interests!"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Space Mission Focus",
+      "content": "Select which spacecraft system interests you most. You can explore how digital electronics enables different aspects of space exploration.",
+      "choices": [
+        {
+          "label": "Guidance & Control Systems",
+          "next": "n3"
+        },
+        {
+          "label": "Communication & Signal Processing",
+          "next": "n5"
+        },
+        {
+          "label": "Navigation & Computation",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Logic Gates: The Decision-Makers of Spacecraft Guidance",
+      "content": "Logic gates are the fundamental building blocks of digital electronics. They process binary inputs (0s and 1s) to produce outputs following logical rules. AND gates, OR gates, NOT gates, and their combinations form the basis of all digital decision-making in spacecraft. For example, a spacecraft's attitude control system uses AND gates to activate thrusters only when both roll error exceeds a threshold AND power reserves are sufficient. By combining hundreds of logic gates, spacecraft can autonomously make complex decisions about orientation, altitude, and trajectory without waiting for commands from Earth\u2014critical when communication delay can be 20+ minutes. Understanding logic gates reveals how machines can make intelligent decisions with simple components."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "ISS Docking System: Logic Gates in Action",
+      "content": "The International Space Station's automated docking system uses logic gates to achieve autonomous rendezvous. When a visiting spacecraft approaches, range sensors feed distance data to AND gates that check: (distance < 100m) AND (relative_velocity < 2m/s). Only when both conditions are true does the system transition to final approach mode. Separately, OR gates continuously monitor redundant power systems\u2014if (primary_power_healthy) OR (backup_power_healthy), docking proceeds. If neither condition is true, the mission aborts. The entire docking sequence involves thousands of gate evaluations happening in parallel, illustrating how simple logic gates orchestrate one of the most complex automated procedures in space."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Digital Circuits: Processing Space Communication",
+      "content": "A digital circuit is a collection of logic gates interconnected to perform complex functions like amplification, filtering, and data transformation. Spacecraft communication systems must convert analog signals from sensors (solar panel voltage, thruster temperature) into digital format for transmission to Earth. This involves multiplexers (circuits that select one of many inputs), decoders (circuits that convert coded signals into control outputs), and processors that execute algorithms. The Mars Curiosity rover, sitting 400+ million km from Earth, continuously uses digital circuits to compress science data from its 17 cameras into a format that fits through the narrow communication bandwidth available. Understanding digital circuits explains how spacecraft translate the physical world into information that humans can interpret."
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Mars Rover: Multiplexing Sensor Data in Deep Space",
+      "content": "The Mars Curiosity rover collects data from 25+ different sensors\u2014temperature, radiation, humidity, spectrometers, cameras. Sending raw data from all sensors simultaneously would exceed bandwidth limits. Instead, multiplexer circuits select sensors in sequence, creating a single data stream that represents all 25 sensors over time. The rover's processor then applies digital filtering algorithms to remove noise, compresses the data using specialized circuits, and prioritizes the most valuable science data. A typical day involves the rover executing thousands of multiplex operations, selecting sensor outputs in carefully timed sequences. The same multiplexing principle works in modern smartphones but rover engineers must account for extreme temperatures (-140\u00b0C) where traditional circuits might fail."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Binary Numbers: The Language of Spacecraft Navigation",
+      "content": "All digital systems ultimately represent information as binary numbers\u2014sequences of 0s and 1s. In spacecraft navigation, position coordinates, velocity vectors, and orientation angles are all stored and processed as binary numbers. A spacecraft's inertial measurement unit might store its X-position as a 32-bit binary number, which provides a range spanning millions of kilometers with meter-level precision. Boolean logic (true/false operations on binary values) forms the foundation for all spacecraft computations. An Apollo guidance computer with only 4KB of memory and 2MHz processor solved orbital mechanics using binary arithmetic, constraining every algorithm to minimal computation. Modern spacecraft like the James Webb Space Telescope use 64-bit binary representations, enabling extraordinary precision\u2014measuring the positions of distant galaxies to within millionths of a degree."
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Apollo Navigation: Binary Computation in Lunar Flight",
+      "content": "The Apollo Guidance Computer used 37,000 transistors to perform all navigation calculations for lunar missions. Every number\u2014position, velocity, fuel quantity\u2014was represented in binary. When the AGC computed the trajectory correction needed to reach the Moon, it worked entirely with binary arithmetic. Orbital mechanics calculations required solving equations involving millions of binary multiplications. Amazingly, the system verified itself using redundant binary calculations; if two independent processes produced different binary results, the third would break the tie. The 16-bit binary representations used by the AGC provided position accuracy of roughly 2 km over 380,000 km of lunar distance\u2014extraordinary given the computational constraints. This example illustrates how mastering binary representation directly enabled humanity's greatest exploration achievement."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrated Digital Systems: Bringing It All Together",
+      "content": "Modern spacecraft integrate logic gates, digital circuits, and binary computation into unified systems where each component plays a vital role. The James Webb Space Telescope coordinates mirror segments to within nanometers using logic gates controlling piezoelectric actuators, digital circuits processing thermal sensor data, and binary computations tracking absolute position in space. Similarly, the upcoming Artemis lunar missions will depend on integrated guidance systems combining all three technologies. Attitude control logic gates decide which thrusters to fire, digital circuits process gyroscope and accelerometer signals, and binary computations solve orbital mechanics equations. The Space Launch System guidance computer runs millions of logical operations per second across redundant systems. Your understanding of these individual components now enables you to grasp how modern spacecraft achieve autonomous operation in environments where human intervention is impossible."
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Space Mission Integration Challenge",
+      "content": "Demonstrate your understanding by analyzing how digital electronics works in realistic spacecraft systems.",
+      "questions": [
+        {
+          "question": "The Hubble Space Telescope's attitude control system must maintain pointing accuracy to within 0.1 arcseconds while orbiting Earth. Which component is MOST responsible for evaluating whether current pointing error exceeds this threshold and triggering corrective thruster firings?",
+          "options": [
+            "Binary number representation systems",
+            "Logic gates implementing comparison functions",
+            "Multiplexer circuits",
+            "Serial communication ports"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Binary representation stores the error value but doesn't evaluate it.",
+            "Correct! Comparison operations (is error > threshold?) are fundamentally logic gate operations.",
+            "Multiplexer circuits select between inputs but don't perform threshold comparison.",
+            "Communication ports transmit data but don't control local threshold evaluation."
+          ],
+          "explanation": "Comparison operations (is error > threshold?) are fundamentally logic gate operations. While binary representation stores the error value, logic gates perform the actual comparison. Digital circuits and communication ports play supporting roles but don't directly control threshold evaluation."
+        },
+        {
+          "question": "A spacecraft communicates with Earth at a data rate of 1 Mbps (1 million bits per second). If a command to adjust solar panel angles requires 256 bits of data, approximately how many such commands can be transmitted per second?",
+          "options": [
+            "256 commands",
+            "3,906 commands",
+            "1,000,000 commands",
+            "About 4,000 commands"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "This is the size of one command in bits, not commands per second.",
+            "This is close! (1,000,000 \u00f7 256 \u2248 3,906). The correct answer is about 4,000 when rounding.",
+            "This is the total bit rate, not the number of commands.",
+            "Correct! 1,000,000 bits \u00f7 256 bits per command \u2248 3,906 \u2248 4,000 commands."
+          ],
+          "explanation": "Simple division: 1,000,000 bits \u00f7 256 bits per command \u2248 3,906 commands. This calculation demonstrates how binary data rates constrain spacecraft communication bandwidth."
+        },
+        {
+          "question": "The Mars Perseverance rover navigates using a processor that represents positions as 32-bit binary numbers. Compared to a 16-bit representation, what is the advantage of using 32-bit numbers?",
+          "options": [
+            "Faster processing speed",
+            "Ability to represent positions with 4x greater accuracy",
+            "Ability to represent positions across a range 65,536x greater in size",
+            "Requirement for twice as much power consumption"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Processing speed depends on clock frequency and architecture, not bit width.",
+            "Doubling bits provides range expansion, not accuracy improvement in this context.",
+            "Correct! Each additional bit doubles range. 16 extra bits = 2^16 = 65,536x greater range.",
+            "While power consumption may increase slightly, the primary advantage is range expansion."
+          ],
+          "explanation": "Each additional bit doubles the range of values representable. Going from 16-bit to 32-bit means adding 16 bits, enabling 2^16 (65,536) times greater range. This allows representing positions across vast distances like planetary exploration scenarios."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Digital Electronics Mastery: Your Space Career Awaits",
+      "content": "You've now understood the three foundational pillars of spacecraft digital electronics: logic gates that make autonomous decisions, digital circuits that process sensor information, and binary computation that enables precise navigation across the cosmos. These technologies power every spacecraft humanity has ever launched\u2014from Sputnik's simple transmitters to the James Webb Space Telescope. Modern space exploration faces increasingly complex challenges: maintaining the Artemis gateway station in lunar orbit, launching human missions to Mars, and operating autonomous rovers on distant worlds. Each mission depends on engineers who deeply understand digital electronics. Your next steps could involve studying embedded systems, control theory, or digital signal processing. Whether you pursue spacecraft systems engineering, guidance and control, communication networks, or autonomous navigation, the foundations you've learned here form the bedrock of all modern spacecraft design. Welcome to the space technology field!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Guidance & Control"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Communication & Signals"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Navigation & Computation"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "See Example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Converge"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "See Example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Converge"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "See Example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Converge"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Take Assessment"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Complete Course"
+    }
+  ],
+  "generated_at": "2026-03-27T08:44:25.225674+00:00",
+  "model": "claude-haiku-4-5"
+}

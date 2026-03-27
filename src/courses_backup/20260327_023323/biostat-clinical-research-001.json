@@ -1,0 +1,267 @@
+{
+  "id": "biostat-clinical-research-001",
+  "title": "Biostatistics for Clinical Research",
+  "description": "A comprehensive introduction to study design and statistical testing in clinical research, with adaptive branching based on learner performance.",
+  "topic": "Biostatistics",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "biostatistics",
+    "clinical-research",
+    "study-design",
+    "hypothesis-testing",
+    "p-values"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Fundamentals of Clinical Study Design",
+      "content": "Clinical studies are the foundation of evidence-based medicine. The three main designs are: **Randomized Controlled Trials (RCTs)** where participants are randomly assigned to treatment/control groups, **Cohort studies** that follow participants over time, and **Case-control studies** that compare people with/without disease. RCTs provide the strongest causal evidence but are expensive; observational studies are cheaper but prone to confounding. Choosing the right design depends on your research question, budget, and time constraints.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Study Design: Clinical Trial Example",
+      "content": "A pharmaceutical company wants to test a new blood pressure medication. They recruit 500 hypertensive patients and randomly assign 250 to receive the drug and 250 to receive a placebo (RCT design). They measure blood pressure at baseline, 4 weeks, 8 weeks, and 12 weeks. This RCT design is appropriate because: (1) they can control the intervention, (2) randomization reduces bias, (3) a control group provides a clear comparison, and (4) the research question requires causal inference about drug efficacy.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Assessment: Study Design",
+      "content": "Test your understanding of clinical study designs and their applications.",
+      "questions": [
+        {
+          "question": "A researcher wants to investigate the relationship between smoking and lung cancer. She recruits 200 patients with lung cancer and 200 controls without lung cancer, then asks about their smoking history. Which study design is this?",
+          "options": [
+            "A) Randomized Controlled Trial",
+            "B) Case-control study",
+            "C) Cohort study",
+            "D) Cross-sectional survey"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. An RCT requires random assignment to groups.",
+            "Correct! Case-control studies start with disease outcome and look back at exposure history.",
+            "Incorrect. A cohort study follows disease-free people forward to see who develops disease.",
+            "Incorrect. This involves diseased individuals specifically selected for the study."
+          ],
+          "explanation": "This is a case-control study because participants are selected based on their disease status (cases with lung cancer, controls without) and researchers look backward to assess smoking exposure."
+        },
+        {
+          "question": "Which of the following is the primary advantage of a Randomized Controlled Trial over an observational cohort study?",
+          "options": [
+            "A) RCTs are always faster and cheaper",
+            "B) RCTs can establish causal relationships by controlling for confounding through randomization",
+            "C) RCTs require fewer participants",
+            "D) RCTs can study rare diseases more effectively"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. RCTs are often more expensive and time-consuming than cohort studies.",
+            "Correct! Randomization creates comparable groups, allowing causal inference about the treatment effect.",
+            "Incorrect. RCTs often require many more participants than observational studies.",
+            "Incorrect. Cohort and case-control studies are better for studying rare diseases."
+          ],
+          "explanation": "The primary advantage of RCTs is the ability to infer causation because randomization balances known and unknown confounders between groups."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Hypothesis Testing and P-values in Clinical Research",
+      "content": "Hypothesis testing is the statistical framework for making decisions based on data. We start with a **null hypothesis** (H\u2080: no effect) and an **alternative hypothesis** (H\u2081: there is an effect). A **p-value** is the probability of observing data as extreme or more extreme than what we observed, *assuming the null hypothesis is true*. A common threshold is p < 0.05, meaning there's less than 5% probability of such extreme data if no real effect exists. Crucially, a p-value does NOT tell us the probability the null hypothesis is true\u2014it's the probability of the data given the null is true.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Statistical Testing: P-value Example",
+      "content": "In our blood pressure medication trial (n=500), the drug group showed a mean reduction of 12 mmHg and the placebo group showed 3 mmHg reduction. A statistical test yields p = 0.003. This means: IF the drug has no true effect (null hypothesis), there's only a 0.3% chance of observing a difference this large or larger by random sampling variation. Since 0.003 < 0.05, we reject the null hypothesis and conclude the drug has a statistically significant effect. This is strong evidence for a real drug effect, though the clinical significance (9 mmHg difference) should also be evaluated.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Assessment: Statistical Testing & P-values",
+      "content": "Test your understanding of p-values, hypothesis testing, and statistical inference.",
+      "questions": [
+        {
+          "question": "A clinical trial comparing Drug A to Drug B reports p = 0.12. What is the correct interpretation?",
+          "options": [
+            "A) There is a 12% probability that Drug A is more effective than Drug B",
+            "B) There is a 12% probability the null hypothesis is true",
+            "C) If there is truly no difference between drugs, there's a 12% chance of observing data this extreme or more extreme",
+            "D) Drug A is definitely not effective because p > 0.05"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The p-value doesn't directly measure the probability of an hypothesis.",
+            "Incorrect. The p-value is NOT the probability the null hypothesis is true.",
+            "Correct! This is the precise definition of a p-value.",
+            "Incorrect. p = 0.12 means the result is not statistically significant at \u03b1=0.05, but we cannot conclude the drug is ineffective."
+          ],
+          "explanation": "A p-value is the probability of observing the data (or more extreme data) assuming the null hypothesis is true. It's a measure of evidence against the null, not a probability of the hypothesis itself."
+        },
+        {
+          "question": "Which scenario represents a Type I error in clinical research?",
+          "options": [
+            "A) Concluding a drug is effective when it truly has no effect",
+            "B) Concluding a drug has no effect when it truly is effective",
+            "C) Using a sample size that is too small",
+            "D) Not randomizing participants properly"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Type I error (false positive) is rejecting a true null hypothesis.",
+            "Incorrect. That is a Type II error (false negative).",
+            "Incorrect. Small sample size increases the risk of Type II error but isn't itself a Type I error.",
+            "Incorrect. Poor randomization increases confounding but isn't a Type I error."
+          ],
+          "explanation": "Type I error (\u03b1) is the false positive rate\u2014concluding an effect exists when it doesn't. Type II error (\u03b2) is the false negative rate\u2014missing a real effect."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Reinforcing Key Concepts",
+      "content": "Practice applying study design and statistical concepts to reinforce learning.",
+      "questions": [
+        {
+          "question": "A researcher conducts a study where they identify 100 patients with heart disease and 100 without, then measure their cholesterol levels. Which design is this, and what is the main limitation?",
+          "options": [
+            "A) RCT; cannot establish causation",
+            "B) Case-control; cannot establish causation",
+            "C) Cohort; reverse causation",
+            "D) Case-control; expensive"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This is not an RCT because there is no random assignment.",
+            "Correct! Case-control studies cannot establish causation because they start with outcome and look back at exposure.",
+            "Incorrect. This is not a cohort study and reverse causation isn't the main limitation.",
+            "Incorrect. Case-control studies are relatively inexpensive."
+          ],
+          "explanation": "This is a case-control study. The main limitation of case-control designs is difficulty establishing causation because the temporal relationship between exposure and outcome is unclear."
+        },
+        {
+          "question": "In a drug trial, p = 0.03 for the comparison between Drug X and Drug Y. If the researchers set \u03b1 = 0.05 as their significance threshold, which conclusion is appropriate?",
+          "options": [
+            "A) There is a 3% probability that Drug X is more effective",
+            "B) Reject the null hypothesis; the result is statistically significant",
+            "C) The drug is clinically significant because p < 0.05",
+            "D) The null hypothesis must be true because p < 0.5"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. p \u2260 probability of hypothesis.",
+            "Correct! Since p = 0.03 < 0.05, we reject the null hypothesis at the 0.05 level.",
+            "Incorrect. Statistical significance \u2260 clinical significance. Clinical importance requires effect size evaluation.",
+            "Incorrect. p < 0.5 doesn't imply the null is true; in fact p = 0.03 provides evidence against it."
+          ],
+          "explanation": "When p-value < \u03b1, we reject the null hypothesis and conclude the result is statistically significant. However, statistical significance doesn't guarantee clinical importance."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Choose Your Next Learning Path",
+      "content": "Congratulations on mastering study design and hypothesis testing! Choose which advanced topic you'd like to explore next to deepen your biostatistics knowledge:",
+      "choices": [
+        {
+          "label": "Effect Sizes and Confidence Intervals: Learn how to quantify and communicate the magnitude of clinical effects",
+          "next": "n9"
+        },
+        {
+          "label": "Multiple Comparisons and Statistical Power: Understand how to control error rates when conducting multiple tests",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: Biostatistics Fundamentals Mastered",
+      "content": "You've successfully completed this biostatistics course! You now understand the foundations of clinical study design (RCTs, cohort, case-control studies) and can correctly interpret p-values and hypothesis testing results. These skills are essential for conducting rigorous clinical research, critically appraising published studies, and making evidence-based healthcare decisions. Continue building your statistical expertise by exploring advanced topics like effect sizes, confidence intervals, sample size calculation, and multivariate methods."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn example"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Take assessment"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Learn example"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Take assessment"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "Pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "Complete practice"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Choose path"
+    }
+  ],
+  "generated_at": "2026-03-26T09:24:57.303418+00:00",
+  "model": "claude-haiku-4-5"
+}

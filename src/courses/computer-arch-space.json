@@ -1,0 +1,295 @@
+{
+  "id": "computer-arch-space",
+  "title": "Computer Architecture for Space Exploration",
+  "description": "An adaptive course on computer architecture through the lens of spacecraft systems and space exploration",
+  "topic": "Computer Architecture",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer-architecture",
+    "space-exploration",
+    "processors",
+    "memory",
+    "system-design"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Spacecraft Systems Quiz",
+      "content": "Your spacecraft needs different systems to operate. Let's assess your understanding of how computers (like those in spacecraft) manage data and processing. Answer these questions about basic computer architecture concepts.",
+      "questions": [
+        {
+          "question": "In a spacecraft's computer, what is the CPU primarily responsible for?",
+          "options": [
+            "Storing all data permanently",
+            "Executing instructions and processing data",
+            "Communicating with ground control",
+            "Generating electrical power"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's storage/memory",
+            "Correct! The CPU executes all instructions",
+            "That's the communication subsystem",
+            "That's the power system"
+          ],
+          "explanation": "The CPU (Central Processing Unit) is the brain of any computer system, including spacecraft. It fetches instructions and executes them, controlling all other components."
+        },
+        {
+          "question": "What role does a spacecraft's main computer memory play?",
+          "options": [
+            "It permanently stores mission data",
+            "Executes spacecraft commands",
+            "Temporarily stores data during active operations",
+            "Manages power distribution"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "That's long-term storage",
+            "That's the CPU",
+            "Correct! RAM stores working data",
+            "That's power management"
+          ],
+          "explanation": "Memory (RAM) in a spacecraft temporarily holds data the CPU is actively working with\u2014like current sensor readings, navigation calculations, and command sequences."
+        },
+        {
+          "question": "In a spacecraft computer, the bus is most similar to which of these?",
+          "options": [
+            "A communication pathway between components",
+            "A long-term data storage device",
+            "The processing unit itself",
+            "The power supply"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The bus is the highway",
+            "That's storage",
+            "That's the CPU",
+            "That's the power subsystem"
+          ],
+          "explanation": "A bus is the communication pathway that connects the CPU, memory, and other components, allowing them to exchange data and commands\u2014like highways connecting different spacecraft systems."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Mission Control Architecture Challenge",
+      "content": "Your deep-space mission requires understanding how processors manage complex operations. These questions test your knowledge of CPU architecture, instruction execution, and system organization.",
+      "questions": [
+        {
+          "question": "What is a CPU cache in spacecraft computer systems?",
+          "options": [
+            "Long-term storage for archived mission data",
+            "High-speed memory for frequently accessed data and instructions",
+            "The main processor core itself",
+            "The communication system between ground and spacecraft"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's long-term storage/SSD",
+            "Correct! Cache provides fast access",
+            "The cache is separate from the core",
+            "That's communications"
+          ],
+          "explanation": "Cache is ultra-fast memory sitting between the CPU and main RAM. Spacecraft systems use cache to speed up access to frequently needed data\u2014like navigation parameters and sensor readings\u2014avoiding delays from accessing slower main memory."
+        },
+        {
+          "question": "In a multi-core CPU for a space exploration spacecraft, what is the primary advantage?",
+          "options": [
+            "It reduces power consumption",
+            "It allows simultaneous execution of multiple instruction streams",
+            "It increases the size of the spacecraft",
+            "It eliminates the need for memory"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Actually multi-core can increase power use",
+            "Correct! Multiple cores enable parallelism",
+            "Size isn't affected by architecture",
+            "All systems need memory"
+          ],
+          "explanation": "Multi-core processors execute multiple instructions simultaneously. For spacecraft, this means the navigation system can calculate the next course correction while telemetry data is being logged and communication signals are being processed."
+        },
+        {
+          "question": "What is instruction pipelining in the context of spacecraft computers?",
+          "options": [
+            "The process of storing instructions long-term",
+            "Overlapping execution stages so multiple instructions are processed simultaneously",
+            "The power supply system",
+            "The communication protocol with Earth"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's memory storage",
+            "Correct! Pipelining enables parallelism",
+            "That's power management",
+            "That's communications"
+          ],
+          "explanation": "Instruction pipelining breaks instruction execution into stages (fetch, decode, execute, store). While one instruction is executing, another is being decoded and a third is being fetched. This keeps the processor highly utilized\u2014critical for real-time spacecraft operations."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Interstellar Navigation Computer Design",
+      "content": "Advanced spacecraft heading to other star systems require sophisticated computer architectures. Modern processors use multiple cores, deep cache hierarchies, branch prediction, and out-of-order execution to handle complex navigation, life support simulation, and scientific analysis in real-time.\n\nConsider a starship computer: while the primary CPU core calculates orbital mechanics, secondary cores simultaneously manage power systems, monitor radiation sensors, and compress scientific data. Cache hierarchies ensure that frequently-accessed navigation tables stay in the fastest L1 cache (mere nanoseconds away), while less-frequently-needed tables reside in L2 or L3 caches. Branch prediction allows the processor to guess which code path the navigation algorithm will take next, pre-fetching instructions before they're confirmed\u2014reducing stalls that could delay critical course corrections. Out-of-order execution lets the processor rearrange independent instructions to maximize pipeline utilization, even when one instruction has memory latency.\n\nThese architectural innovations allow modern spacecraft computers to perform billions of calculations per second while maintaining reliability in the harsh radiation environment of deep space.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "You're Ready to Design Advanced Spacecraft Systems",
+      "content": "Excellent work! You've mastered complex computer architecture concepts. You understand:\n- How cache hierarchies and branch prediction optimize performance\n- How multi-core processors enable simultaneous mission-critical operations\n- How pipelined execution maintains high throughput\n- How processor design trades off complexity, power, and performance\n\nYou're now equipped to understand cutting-edge spacecraft computer design, from the navigation computers of deep-space probes to the sophisticated systems planning humanity's journey to other stars. Consider how these architectural principles might apply to future exoplanet exploration missions."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Space Station Operations Practice",
+      "content": "Let's reinforce your understanding with practical scenarios from running a space station's computer systems. These problems connect architecture concepts to real operational challenges.",
+      "questions": [
+        {
+          "question": "A space station's environmental control computer reads temperature sensors every 100ms. Why is it critical that sensor data be stored in cache rather than requiring a fetch from main RAM each time?",
+          "options": [
+            "To save electrical power",
+            "To reduce latency so temperature changes are detected and responded to immediately",
+            "Because main RAM isn't reliable in space",
+            "To prevent hackers from accessing the data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Cache uses more power typically",
+            "Correct! Latency matters for real-time control",
+            "Modern RAM is reliable",
+            "Not the primary reason here"
+          ],
+          "explanation": "Real-time systems like life support require immediate sensor access. If the CPU had to wait for main memory access (hundreds of cycles), temperature changes could cause dangerous delays in system response."
+        },
+        {
+          "question": "When a spacecraft's backup navigation computer takes over, it needs to restart computationally-intensive route calculations. How does cache invalidation (clearing old data) help here?",
+          "options": [
+            "It speeds up the reboot process",
+            "It ensures fresh calculations without stale navigation data",
+            "It automatically repairs any corrupted data",
+            "It reduces the spacecraft's mass"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "It's necessary for correctness, not speed",
+            "Correct! Fresh data prevents stale route calculations",
+            "That requires error correction",
+            "Cache size is minimal"
+          ],
+          "explanation": "Stale cached data could cause the backup computer to calculate routes based on outdated position information. Cache invalidation ensures it starts with correct current telemetry data."
+        },
+        {
+          "question": "A deep-space probe processes scientific instrument data while simultaneously communicating with Earth (8+ light-minute delay). Which architectural feature best enables this parallel processing?",
+          "options": [
+            "Larger hard drive",
+            "Multi-core processors with independent instruction streams",
+            "Faster RAM",
+            "Longer power cables"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Storage doesn't enable parallelism",
+            "Correct! Independent cores run simultaneously",
+            "RAM speed helps but doesn't enable parallelism",
+            "That's not an architecture feature"
+          ],
+          "explanation": "With multiple cores, one core can encode scientific data while another processes new sensor readings. This parallel execution allows the probe to maximize use of communication windows with Earth."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Ready for Space Station Operations",
+      "content": "Great progress! You've mastered the essential concepts of computer architecture and can understand how they apply to real space operations:\n- How memory hierarchies optimize data access speed\n- How multi-core processors handle multiple simultaneous tasks\n- How architecture choices impact real-time system reliability\n\nYou're prepared to work with spacecraft computing systems, understand design trade-offs, and troubleshoot operational issues. Your next challenge: apply these concepts to designing systems for specific mission profiles."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Basic Spacecraft Systems",
+      "content": "Let's start with the fundamentals of how spacecraft computers work. Think of a spacecraft as having specialized systems, just like a computer has specialized components.\n\nThe CPU (Central Processing Unit) is like Mission Control\u2014it makes decisions and controls everything. It follows a sequence of instructions (the program) one at a time, executing them at incredible speed.\n\nMemory is like a spacecraft's data vault\u2014it temporarily holds information the CPU needs right now. When you turn off the spacecraft, the data in memory is lost (unlike permanent storage).\n\nStorage (hard drives, SSDs) is like the spacecraft's library\u2014it permanently keeps mission data, photos, and software, even when powered down.\n\nThe Bus is like the communication highways connecting all these systems. Data travels on the bus between the CPU, memory, and storage at very high speeds.\n\nAll these components work together: the CPU reads an instruction from memory, reads data it needs from memory, performs the operation (addition, comparison, etc.), and writes results back to memory. This happens billions of times per second in modern spacecraft.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Simple Space Probe Design Example",
+      "content": "Let's trace how a real space probe's computer works with a concrete example.\n\nImagine the Curiosity rover navigating Mars. Its onboard computer executes this sequence:\n1. CPU reads an instruction from memory: 'Read temperature from sensor #3'\n2. CPU sends a command on the bus to the temperature sensor\n3. Sensor returns the reading (50\u00b0C) via the bus\n4. CPU reads next instruction: 'If temperature > 55\u00b0C, stop moving'\n5. CPU compares: 50 < 55, so condition is false\n6. CPU reads next instruction: 'Move forward 10cm'\n7. CPU sends movement command via bus to the motor controller\n8. Motor controller receives command and moves the wheel\n\nThis whole sequence\u2014from sensor reading to motor command\u2014happens in milliseconds. The CPU, memory, and bus work together like a coordinated team, with the CPU orchestrating everything based on instructions stored in memory. That's computer architecture in action: components cooperating through buses and controlled by a CPU following a program.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Ready to Learn Spacecraft Computing",
+      "content": "Excellent! You've grasped the fundamental concepts of computer architecture:\n- The CPU executes instructions\n- Memory temporarily holds working data\n- Storage permanently keeps data\n- The bus connects all components\n\nYou now have the foundation to understand how spacecraft computers work. These same principles apply to everything from smartphone processors to the massive servers managing NASA's missions. Take your time building on this foundation\u2014you're ready for the next level."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Fail (<2 correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fail (<2 correct)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue"
+    }
+  ],
+  "generated_at": "2026-03-27T03:13:46.265881+00:00",
+  "model": "claude-haiku-4-5"
+}

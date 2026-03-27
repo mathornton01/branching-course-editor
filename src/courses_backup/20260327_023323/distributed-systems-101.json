@@ -1,0 +1,305 @@
+{
+  "id": "distributed-systems-101",
+  "title": "Distributed Systems Fundamentals",
+  "description": "Master the core concepts of distributed systems, from basic principles to the CAP Theorem. Learn how modern systems trade off consistency, availability, and partition tolerance.",
+  "topic": "Distributed Systems",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed systems",
+    "CAP theorem",
+    "consistency",
+    "availability",
+    "scalability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is a Distributed System?",
+      "content": "A distributed system is a collection of independent computers connected by a network that work together to achieve a common goal. These systems appear to the end user as a single coherent system. Distributed systems power modern internet services like cloud computing, social media platforms, and financial systems. Key challenges include managing communication latency, handling failures, and maintaining consistency across machines. Understanding distributed systems is essential for building scalable applications."
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Web Service Architecture Example",
+      "content": "Consider a social media platform like Twitter. User requests are distributed across multiple server machines in different data centers. When you post a tweet, the request goes to a load balancer, which forwards it to one of many servers. Each server processes your request and stores the data on replicated databases across regions. This distributed approach allows millions of concurrent users to interact with the service while maintaining reliability\u2014if one server fails, others continue serving traffic."
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Distributed Systems Fundamentals",
+      "content": "Test your understanding of distributed system basics, including advantages, challenges, and real-world applications.",
+      "questions": [
+        {
+          "question": "What is the primary advantage of a distributed system over a single centralized computer?",
+          "options": [
+            "Lower cost per node",
+            "Increased reliability through redundancy",
+            "Simpler programming model",
+            "Faster execution on single transactions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Cost is secondary to reliability",
+            "Correct! Distributed systems provide fault tolerance",
+            "Distributed systems are actually more complex to program",
+            "Distributed systems may be slower due to network overhead"
+          ],
+          "explanation": "Distributed systems provide fault tolerance\u2014if one node fails, others continue operating. Reliability and redundancy are the primary advantages."
+        },
+        {
+          "question": "Which of these is NOT a challenge unique to distributed systems?",
+          "options": [
+            "Handling network partitions",
+            "Optimizing query performance",
+            "Managing data consistency across nodes",
+            "Dealing with variable network latency"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Network partitions are a unique distributed challenge",
+            "Correct! Query optimization is a concern for all large systems",
+            "Consistency across nodes is unique to distributed systems",
+            "Network latency is specific to distributed systems"
+          ],
+          "explanation": "Query optimization is a concern for all large databases, not unique to distribution. Network partitions, consistency, and latency are challenges specific to distributed systems."
+        }
+      ],
+      "pass_threshold": 100,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "The CAP Theorem",
+      "content": "The CAP Theorem states that distributed systems can guarantee at most two of three properties: Consistency (all nodes have the same data), Availability (system responds to requests), and Partition tolerance (system continues despite network failures). Real-world systems must be partition tolerant, so they choose between consistency and availability. Strongly consistent systems (like banks) prioritize data correctness over uptime. Eventually consistent systems (like social media) prioritize availability, accepting that data may be temporarily inconsistent."
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "CAP in Practice: Database Selection",
+      "content": "Consider two scenarios. A banking system requires strong consistency\u2014you cannot withdraw money twice. It sacrifices availability, accepting possible downtime to ensure every transaction is correct (CP system). In contrast, a social media 'like' counter can be eventually consistent\u2014if a like takes a few seconds to propagate across servers, users tolerate it. These systems sacrifice consistency for availability (AP systems). Understanding CAP helps you choose the right database technology for each use case."
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "CAP Theorem Mastery",
+      "content": "Evaluate your understanding of the CAP Theorem and its real-world applications in system design.",
+      "questions": [
+        {
+          "question": "According to CAP Theorem, which two properties might a banking system choose?",
+          "options": [
+            "Availability and Partition Tolerance",
+            "Consistency and Availability",
+            "Consistency and Partition Tolerance",
+            "All three"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Banks need consistency; they won't sacrifice that",
+            "Banks may sacrifice availability for consistency",
+            "Correct! Banks need consistency and must handle failures",
+            "Impossible according to CAP Theorem"
+          ],
+          "explanation": "Banks need consistency (correct balances) and must handle network failures (partition tolerance). They may sacrifice availability and go offline during network issues to maintain data correctness."
+        },
+        {
+          "question": "Why is partition tolerance often mandatory in real distributed systems?",
+          "options": [
+            "It reduces cost",
+            "Network failures are inevitable in geographically distributed systems",
+            "It simplifies system design",
+            "It improves data consistency"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Partition tolerance doesn't reduce costs",
+            "Correct! You cannot engineer away network failures",
+            "Partition tolerance actually complicates design",
+            "Partition tolerance doesn't improve consistency"
+          ],
+          "explanation": "You cannot engineer away network failures in truly distributed systems. Therefore, partition tolerance is almost always required, leaving the choice between consistency and availability."
+        }
+      ],
+      "pass_threshold": 100,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Understanding Distributed Systems & CAP\u2014Practice & Review",
+      "content": "You've been introduced to distributed systems fundamentals and the CAP Theorem. This practice section reinforces these core concepts through real-world scenarios and decision-making exercises. You'll encounter situations where you need to make trade-off decisions\u2014just like real engineers do every day. As you work through these problems, think about the systems you use daily: banking apps, social media, shopping platforms. Each has made different choices on the CAP spectrum based on their business requirements. By mastering these concepts through practical problem-solving, you'll develop the intuition needed to design systems and choose appropriate technologies for different scenarios. This foundation is essential before moving into advanced topics like replication strategies and consensus algorithms. Work through each scenario carefully, and use your understanding of distributed system principles to reason about each choice.",
+      "questions": [
+        {
+          "question": "You're designing a stock market trading platform with 500ms latency between trading centers. What should you prioritize?",
+          "options": [
+            "High availability (always accept trades)",
+            "Immediate consistency across all centers",
+            "Partition tolerance",
+            "Low network latency"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "High availability could cause double-trading and financial fraud",
+            "Correct! Financial consistency prevents fraud and errors",
+            "Necessary but not the primary priority in this scenario",
+            "Not achievable with geographic distribution"
+          ],
+          "explanation": "Financial trading requires strong consistency\u2014you cannot have the same stock trading at different prices simultaneously across centers. The 500ms latency is acceptable for correct trading. This is a CP system (Consistency + Partition tolerance, sacrificing Availability)."
+        },
+        {
+          "question": "A food delivery app shows 'order placed' status but delivery doesn't start for 30 seconds. Which CAP property is being sacrificed?",
+          "options": [
+            "Consistency",
+            "Availability",
+            "Partition tolerance",
+            "Reliability"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The system is eventually consistent",
+            "The system prioritizes availability, not sacrificing it",
+            "Partition tolerance is about network failures, not timing",
+            "Reliability isn't part of the CAP Theorem"
+          ],
+          "explanation": "The system is eventually consistent but highly available. It prioritizes responding to requests quickly (Availability) over immediate consistency across all servers. After 30 seconds, all servers have the correct state. This is an AP system."
+        }
+      ],
+      "pass_threshold": 50
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Choose Your Next Learning Path",
+      "content": "You've mastered the fundamentals and CAP Theorem! You're ready to explore advanced topics in distributed systems. Which area interests you most?",
+      "choices": [
+        {
+          "label": "Replication Strategies",
+          "next": "node-rep-strat"
+        },
+        {
+          "label": "Consensus Algorithms",
+          "next": "node-consensus-alg"
+        }
+      ]
+    },
+    {
+      "id": "node-rep-strat",
+      "type": "content",
+      "title": "Replication Strategies: Keeping Data Safe and Available",
+      "content": "Data replication is how distributed systems achieve reliability and availability. By storing the same data on multiple nodes, systems can continue operating if one node fails. But replication introduces a critical question: when should replicas be updated? Should updates happen immediately or eventually?\n\nThere are three main strategies:\n\n**Master-Slave (Primary-Replica):** One designated master node accepts all writes and then propagates updates to slave nodes. Slaves accept reads only. This is simple and ensures strong consistency, but the master becomes a bottleneck for write operations and a single point of failure for writes. Examples: MySQL with replication, MongoDB replica sets.\n\n**Multi-Master (Peer-to-Peer):** Any node can accept writes, and changes propagate to all other nodes. This provides high availability and resilience\u2014no single point of failure. However, conflicts can arise when two nodes receive conflicting writes simultaneously. Resolving these conflicts adds complexity. Examples: CouchDB, Cassandra.\n\n**Leaderless:** All nodes are equal and accept both reads and writes. When a client writes data, it sends the write to multiple nodes in parallel and waits for a quorum (majority) to acknowledge. This combines the benefits of multi-master with conflict resolution through quorum voting. Examples: DynamoDB, Riak.\n\nYour choice of replication strategy directly ties to your CAP priorities. Need strong consistency? Master-Slave gives you that. Need maximum availability? Multi-Master or Leaderless provides resilience, trading consistency for uptime."
+    },
+    {
+      "id": "node-consensus-alg",
+      "type": "content",
+      "title": "Consensus Algorithms: Achieving Agreement in Disagreement",
+      "content": "In distributed systems, multiple nodes must sometimes agree on a decision: Who should be the leader? What is the current system state? Has a transaction been committed? When network failures can partition nodes into separate groups, achieving agreement becomes complex. This is where consensus algorithms come in.\n\nConsensus algorithms are protocols that guarantee all functioning nodes eventually agree on a value, even if some nodes fail or the network partitions temporarily. Key properties include: (1) Safety\u2014only valid values are agreed upon, (2) Liveness\u2014the system continues making progress, (3) Fault Tolerance\u2014handles failed nodes.\n\n**Paxos:** One of the first rigorous consensus algorithms. It's proven to be safe and fault-tolerant, but is notoriously difficult to implement and understand. Requires majority quorum. Used in Google Chubby and Apache Zookeeper.\n\n**Raft:** Designed as a more understandable alternative to Paxos while maintaining the same fault tolerance. It separates the problem into logical phases: leader election, log replication, and safety. Much easier to implement and reason about. Used in etcd, Consul, and many modern systems.\n\n**Byzantine Fault Tolerance (BFT):** Handles the harshest failure mode where nodes can maliciously send incorrect information. Practical Byzantine Fault Tolerance (PBFT) achieves agreement even when some nodes are faulty or adversarial. Used in blockchain systems where participants may be untrusted.\n\nConsensus algorithms are computationally expensive and introduce latency\u2014the price of certainty. Systems choose algorithms based on fault tolerance requirements and acceptable latency tradeoffs. Understanding consensus is essential for building reliable distributed systems."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Excellent work! You've learned the foundations of distributed systems, including what makes them distributed, their key challenges, and the critical trade-offs defined by CAP Theorem. You've explored advanced topics like replication strategies and consensus algorithms\u2014the techniques that power today's most reliable systems. These concepts form the foundation for mastering distributed systems architecture, cloud computing, and building scalable services. Keep building\u2014distributed systems power the internet!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "success"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "failure"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "success"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "failure"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Replication Strategies"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "Consensus Algorithms"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "node-rep-strat",
+      "label": "next"
+    },
+    {
+      "id": "c13",
+      "source": "n8",
+      "target": "node-consensus-alg",
+      "label": "next"
+    },
+    {
+      "id": "c14",
+      "source": "node-rep-strat",
+      "target": "n9",
+      "label": "next"
+    },
+    {
+      "id": "c15",
+      "source": "node-consensus-alg",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-26T02:10:24.410678+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T10:00:52.164071+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

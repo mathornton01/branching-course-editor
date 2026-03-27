@@ -1,0 +1,493 @@
+{
+  "id": "rl-architecture-course",
+  "title": "Reinforcement Learning through Architecture",
+  "description": "Master reinforcement learning concepts by designing and optimizing buildings and urban spaces",
+  "topic": "Reinforcement Learning",
+  "theme": "architecture",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "reinforcement-learning",
+    "machine-learning",
+    "architecture",
+    "AI",
+    "optimization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Building Intelligence: Foundations of Reinforcement Learning",
+      "content": "Imagine an architect designing a new office tower. Unlike following a fixed blueprint, the architect makes decisions, observes outcomes, and learns what works best. This is reinforcement learning (RL): an agent interacts with an environment, takes actions, receives rewards, and learns to make better decisions over time. In our architectural context, you are the agent, the building project is the environment, and rewards come from design success metrics like energy efficiency, occupant satisfaction, and sustainability. Unlike supervised learning where experts provide correct answers, RL agents learn through trial, feedback, and iteration\u2014just like architects refine designs based on real-world performance data and client feedback.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Understanding RL Fundamentals",
+      "content": "Test your grasp of reinforcement learning's core concepts in the architectural context.",
+      "questions": [
+        {
+          "question": "In an architectural RL scenario where an AI system optimizes building layouts, what represents the 'agent'?",
+          "options": [
+            "The architect or AI system making design decisions",
+            "The building materials used in construction",
+            "The regulations and building codes",
+            "The client's budget constraints"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The agent is the decision-maker\u2014whether human architect or AI\u2014that interacts with the environment.",
+            "Incorrect. Materials are part of the environment, not the decision-making agent.",
+            "Incorrect. Codes are environmental constraints, not the agent.",
+            "Incorrect. Budget is a parameter, not the active agent."
+          ],
+          "explanation": "The agent is the active entity that takes actions and learns. In architectural design, it's the architect or AI system that makes design choices and learns from outcomes."
+        },
+        {
+          "question": "Why is the learning cycle in architectural design (design \u2192 build \u2192 evaluate \u2192 redesign) similar to reinforcement learning?",
+          "options": [
+            "Both follow a rigid step-by-step process",
+            "Both involve taking actions, observing results, and adjusting strategies based on feedback",
+            "Both require a supervisor to correct mistakes",
+            "Both ignore real-world constraints"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Neither process is rigid; both adapt and learn.",
+            "Correct! Both RL and architectural design involve action, observation, and adaptive learning from feedback.",
+            "Incorrect. RL is unsupervised learning; architects learn from natural consequences, not direct correction.",
+            "Incorrect. Both must consider real-world constraints."
+          ],
+          "explanation": "RL's core loop\u2014action, observation, reward, adaptation\u2014mirrors how architects refine designs through iterative feedback and real-world performance data."
+        },
+        {
+          "question": "In an RL system learning to design sustainable buildings, what would be an appropriate 'reward'?",
+          "options": [
+            "The number of design iterations completed",
+            "The client's emotional satisfaction with the building",
+            "A score combining energy efficiency, material sustainability, and cost-effectiveness",
+            "The architect's personal preference for the design style"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Iterations are effort, not a measure of success.",
+            "Incorrect. While satisfaction matters, it's too subjective for algorithmic learning.",
+            "Correct! A quantified reward combining multiple success metrics allows the RL agent to learn what design choices lead to optimal outcomes.",
+            "Incorrect. Personal preference doesn't represent measurable design quality."
+          ],
+          "explanation": "Rewards in RL must be quantifiable metrics that guide the agent toward desired outcomes. In sustainable architecture, a combined score of energy efficiency, material impact, and cost reflects real design goals."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practicing RL Fundamentals with Architectural Scenarios",
+      "content": "Strengthen your understanding by working through architectural design scenarios.",
+      "questions": [
+        {
+          "question": "An architect is designing a mixed-use tower with 40 stories. She must decide between steel-frame and concrete-core construction, each with different trade-offs for sustainability and cost. Which RL concept best describes her decision-making process?",
+          "options": [
+            "Supervised learning with explicit correct answers",
+            "An agent selecting actions in an environment to maximize a reward signal",
+            "A deterministic algorithm with no learning involved",
+            "A purely random selection process"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. No expert is labeling 'correct' designs; she learns from outcomes.",
+            "Correct! She's an RL agent exploring different actions (construction methods) to maximize rewards (sustainability + cost efficiency).",
+            "Incorrect. The decision-making adapts based on outcomes\u2014it's learning.",
+            "Incorrect. Architects use experience and reasoning, not random choices."
+          ],
+          "explanation": "This is a classic RL scenario: the architect (agent) evaluates construction methods (actions) based on their performance (rewards) and learns which approach best satisfies project goals."
+        },
+        {
+          "question": "In designing a net-zero office building, rewards could include points for solar panel efficiency, thermal mass performance, and operational cost. Why is this multi-factor reward system important for RL?",
+          "options": [
+            "It confuses the RL agent and slows learning",
+            "It allows the agent to learn which design choices best balance multiple success criteria",
+            "It's required by building codes",
+            "It has no impact on the learning process"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Well-designed rewards guide learning; they don't confuse it.",
+            "Correct! A comprehensive reward function teaches the agent what matters and enables learning of balanced, successful design solutions.",
+            "Incorrect. While codes matter, the reward function is an RL tool.",
+            "Incorrect. Rewards directly shape what the agent learns to achieve."
+          ],
+          "explanation": "Multi-factor rewards reflect real-world design goals. By rewarding the combination of thermal efficiency, solar production, and cost, the RL agent learns to optimize all three, leading to genuinely good buildings."
+        },
+        {
+          "question": "An AI system is learning to design building layouts by trying different spatial arrangements and receiving feedback scores. Initially, it generates poor layouts, but over time they improve. What RL mechanism is enabling this improvement?",
+          "options": [
+            "The system uses random generation only, with no learning",
+            "Human architects manually correct every mistake",
+            "The system learns from rewards associated with each layout, adjusting its strategy over time",
+            "The system follows a pre-programmed set of rules"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Pure randomness wouldn't lead to improvement.",
+            "Incorrect. That would be supervised learning with human feedback.",
+            "Correct! The system observes which layouts earn higher scores and gradually learns to generate better designs\u2014this is reinforcement learning in action.",
+            "Incorrect. Pre-programmed rules don't adapt and improve."
+          ],
+          "explanation": "RL's key strength is learning from repeated interaction and feedback. Each layout attempt and its score teaches the system what design patterns work, enabling continuous improvement."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "States, Actions, and Rewards: The Building Decision Framework",
+      "content": "Now let's formalize how RL works. A **state** represents a snapshot of the current situation. In architectural design, a state might be: 'concrete structure complete, HVAC system half-installed, facade decision pending.' An **action** is a choice the agent can make\u2014e.g., 'install aluminum curtain wall' or 'specify stone veneer.' Each action transitions the state to a new one and generates a **reward**\u2014a numerical score reflecting how good that decision was. For instance, choosing a high-performance glass facade might reward you +8 points (excellent thermal efficiency, natural light) but cost +2 points (initial expense). This reward signal guides learning. The **Markov property** (a key principle in RL) means the optimal next action depends only on the current state, not on how you got there. Whether the concrete was poured last week or last month doesn't matter\u2014what matters is the current state: structure complete, HVAC half-done, facade pending. By managing states, actions, and rewards systematically, RL agents learn which action sequences lead to the best buildings.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Mastering States, Actions, and Rewards",
+      "content": "Apply state-action-reward thinking to architectural scenarios.",
+      "questions": [
+        {
+          "question": "A building renovation project has the state: 'original facade intact, windows single-glazed, electrical system outdated, plumbing upgraded.' An architect considers two actions: (A) keep original facade, upgrade systems, or (B) replace facade with modern cladding. Both lead to different states and rewards. What makes this a valid RL problem?",
+          "options": [
+            "The actions have no consequences",
+            "There is no way to measure success",
+            "Each action transitions to a new state and generates measurable rewards reflecting quality outcomes",
+            "Only human judgment matters, not numerical scores"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Both actions have significant consequences.",
+            "Incorrect. Renovation success is measurable (preservation quality, energy efficiency, cost).",
+            "Correct! This is an RL problem because the architect can evaluate outcomes numerically (heritage preservation score, energy savings, cost-benefit ratio).",
+            "Incorrect. RL requires quantifiable rewards, not just human intuition."
+          ],
+          "explanation": "RL requires well-defined states, actions, and rewards. The renovation project has all three: clear states (building condition), distinct actions (design choices), and measurable rewards (renovation quality metrics)."
+        },
+        {
+          "question": "You're designing a hospital layout. The current state is 'emergency department completed, patient wards under construction, no operating theaters built.' Using the Markov property, which information is most relevant for deciding where to place operating theaters?",
+          "options": [
+            "How long the emergency department took to design",
+            "The current state of wards and remaining available space",
+            "Historical decisions made for other hospitals 10 years ago",
+            "The architect's original concept sketches"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Design time for the ED doesn't affect optimal OT placement.",
+            "Correct! The Markov property means only the current state matters. Available space, adjacency to existing facilities, and current constraints guide the decision.",
+            "Incorrect. Past decisions at other projects don't define the optimal choice here.",
+            "Incorrect. Old concept sketches don't reflect current project status."
+          ],
+          "explanation": "The Markov property is powerful: regardless of past decisions or time spent, optimal design choices depend only on the current state. This is why RL can be so efficient\u2014the agent learns decision rules for each state without tracking history."
+        },
+        {
+          "question": "In designing sustainable housing, the reward function combines: (1) carbon footprint score (-50 to +50), (2) affordability score (-50 to +50), and (3) livability score (-50 to +50). A design choice yields rewards: +40 carbon, -20 affordability, +35 livability. What does this mixed reward tell the RL agent?",
+          "options": [
+            "This design is perfect and should always be chosen",
+            "This design is terrible and should be rejected",
+            "This design excels in sustainability and livability but sacrifices affordability\u2014a trade-off worth evaluating",
+            "Rewards are meaningless and shouldn't guide decisions"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Mixed positive and negative rewards indicate trade-offs, not perfection.",
+            "Incorrect. Positive scores in two categories mean this is a viable option.",
+            "Correct! RL rewards capture the real-world trade-offs architects face. This agent learns that some designs are green and livable but pricey\u2014useful knowledge for different project types.",
+            "Incorrect. Rewards directly guide RL learning toward better designs."
+          ],
+          "explanation": "Realistic rewards reflect real-world complexity. By learning from mixed-signal rewards, the RL agent discovers design patterns that balance sustainability, cost, and quality\u2014the essence of good architecture."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practicing State-Action-Reward Analysis",
+      "content": "Work through more architectural scenarios to master state-action-reward thinking.",
+      "questions": [
+        {
+          "question": "You're using RL to optimize a campus master plan. Current state: 'central quad complete, 3 academic buildings done, no dormitories built, no sports facilities.' You must choose: (A) build dormitories first (high student demand), or (B) build sports facilities first (better campus connectivity). Both lead to different states and rewards. Why does the Markov property apply here?",
+          "options": [
+            "Because the architect always makes the same choice",
+            "Because historical campus plans from other universities don't matter\u2014only the current campus state guides the optimal next decision",
+            "Because the number of buildings built so far determines the decision",
+            "Because all decisions must be made simultaneously"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Different decisions can be optimal in different states.",
+            "Correct! The Markov property says the optimal next action depends only on the current state (quad done, 3 buildings done, no dorms/sports yet), not on past decisions at other campuses.",
+            "Incorrect. The number of buildings matters as state info, but historical sequence doesn't determine optimality.",
+            "Incorrect. Decisions can be sequential."
+          ],
+          "explanation": "In RL, what matters is where you are now, not how you got there. The optimal decision to place dormitories or sports facilities depends on the current campus layout and needs, not past decisions elsewhere."
+        },
+        {
+          "question": "An RL system is learning to design modular office spaces. It tries 100 layouts and each gets a reward score. After 50 iterations, layouts average +35 points. After 100 iterations, they average +42 points. What does this improvement indicate?",
+          "options": [
+            "The system is broken and learning nothing",
+            "The system is learning which spatial arrangements generate higher rewards",
+            "Reward scores are meaningless",
+            "Better layouts don't exist beyond +42 points"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Improvement is a sign of successful learning.",
+            "Correct! The rising average rewards show the RL agent is discovering and favoring design patterns that score higher\u2014the core of reinforcement learning.",
+            "Incorrect. This reward trend is meaningful evidence of learning.",
+            "Incorrect. The agent may continue improving; +42 is a snapshot, not a ceiling."
+          ],
+          "explanation": "RL's success is measured by improving reward averages over time. The trend from +35 to +42 shows the agent is learning which office layout principles work best\u2014a real and measurable improvement in design quality."
+        },
+        {
+          "question": "Designing a zero-waste building, the reward function tracks: recycled content %, operational waste reduction %, and construction waste diversion %. A design achieves 65% recycled content, 40% operational reduction, 75% construction diversion. How should the RL system use this multi-dimensional reward?",
+          "options": [
+            "Ignore dimensions where the score is below 100%",
+            "Treat all three as separate reward signals and learn which design patterns best balance all three goals",
+            "Only focus on the highest score (75%) and ignore the others",
+            "Reject this design because no dimension reaches 100%"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Partial progress in any dimension is valuable learning.",
+            "Correct! Multi-dimensional rewards teach the agent how design choices affect multiple sustainability goals, enabling holistic learning.",
+            "Incorrect. Ignoring dimensions would miss important learning.",
+            "Incorrect. Real buildings involve trade-offs; no design is perfect in all measures."
+          ],
+          "explanation": "Sophisticated reward functions capture the complexity of real architectural challenges. By learning from all three dimensions, the RL agent discovers designs that are strong across sustainability metrics\u2014more robust and realistic than optimizing a single dimension."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "From Trial to Optimization: Learning the Best Building Strategies",
+      "content": "With states, actions, and rewards in place, RL agents learn **policies**\u2014decision rules that say 'in this state, take that action.' A policy is a strategy. For example: 'If designing a commercial tower in a hot climate and the state is \"structural frame complete, facade pending,\" always choose high-performance glass with external shading' might be one learned policy rule. The agent learns policies by estimating **value functions**: how good is a state? A state with foundation complete, permits obtained, and budget intact has high value. A state with foundation cracked, permits delayed, and budget exhausted has low value. RL algorithms (like Q-learning) repeatedly evaluate state-action pairs, updating estimates of their values based on rewards received. Over time, the agent learns which actions lead to high-value states. In architecture, this mirrors how experienced architects develop intuitions: 'modular design almost always works well,' 'passive solar design in temperate climates saves money,' 'accessible layouts improve project satisfaction.' These learned heuristics are policies\u2014strategies discovered through experience and feedback. By leveraging RL, architects and AI systems can discover similar patterns without requiring years of hands-on experience.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Evaluating Policies, Value Functions, and Learning",
+      "content": "Test your understanding of how RL agents learn optimal design strategies.",
+      "questions": [
+        {
+          "question": "An RL agent learns a policy: 'if designing a school building in an urban setting with limited land, prefer vertical expansion over horizontal sprawl.' What is this policy doing?",
+          "options": [
+            "Randomly generating design options",
+            "Following a fixed rule from a building code",
+            "Learning from repeated exposure to rewards that favor compact, vertical school designs",
+            "Ignoring the architect's preferences"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. A policy is based on learned patterns, not randomness.",
+            "Incorrect. This is a learned heuristic, not a static code requirement.",
+            "Correct! The agent has learned (from rewards) that vertical expansion consistently produces good outcomes (better land use, reduced sprawl impact, higher satisfaction) for urban schools.",
+            "Incorrect. Good policies actually align with and amplify good professional judgment."
+          ],
+          "explanation": "A learned policy is a decision rule the RL agent discovers through experience. The policy 'prefer vertical expansion for urban schools' emerged because that action pattern generated higher rewards across many design scenarios."
+        },
+        {
+          "question": "When an RL system estimates that a state 'foundation complete, permits approved, 30% budget remaining' has a high value, what does this prediction mean?",
+          "options": [
+            "The project is definitely going to succeed",
+            "This state typically leads to successful projects and high-quality outcomes",
+            "The foundation quality is superior to other projects",
+            "No more decisions need to be made"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. High value is a probability, not a guarantee.",
+            "Correct! The value function estimates that from this state, following learned policies will likely yield good rewards and successful outcomes.",
+            "Incorrect. Value is about future trajectory, not past foundation quality.",
+            "Incorrect. Many decisions remain, and value estimates help guide them."
+          ],
+          "explanation": "Value functions predict future success based on current state. A high-value state is one from which learned policies typically lead to positive outcomes\u2014like a project 'in good standing' with good prospects ahead."
+        },
+        {
+          "question": "In sustainable building design, an RL agent initially tries random facade materials. Over 1000 trials, it learns: 'recycled aluminum + green walls consistently produces +8 rewards, concrete + minimal landscaping produces +2 rewards.' What is the agent learning?",
+          "options": [
+            "That all facade choices are equally good",
+            "That aluminum is the only acceptable material",
+            "A policy: 'For maximizing sustainability rewards, prefer recycled aluminum with green walls'",
+            "That material choice has no impact on rewards"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The reward differences show materials have very different impacts.",
+            "Incorrect. Other materials work, but one combination works much better.",
+            "Correct! The agent is learning a policy\u2014a proven strategy for achieving high sustainability rewards through intelligent material and landscaping choices.",
+            "Incorrect. The 6-point reward difference clearly shows material choice matters greatly."
+          ],
+          "explanation": "RL policies emerge from reward patterns. By repeatedly observing that recycled aluminum with green walls produces higher rewards than other combinations, the agent learns a reusable policy: 'when building sustainably, use these materials'\u2014knowledge a human architect would typically gain only through years of experience."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practicing Policy Learning and Value Estimation",
+      "content": "Master policy learning through realistic architectural scenarios.",
+      "questions": [
+        {
+          "question": "An RL system for hospital design learns: 'placing the pharmacy adjacent to the emergency department produces +15 rewards (efficiency, faster response), while placing it near administrative offices produces +3 rewards.' What policy is emerging?",
+          "options": [
+            "That pharmacy location doesn't matter",
+            "That administrative offices are unimportant",
+            "That adjacency to the ED is a key design principle for pharmacy placement in high-performing hospitals",
+            "That all hospitals should follow the same layout"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The large reward difference shows location matters enormously.",
+            "Incorrect. Admin offices are important; this just shows pharmacy placement has a much bigger impact on emergency response.",
+            "Correct! The 12-point reward gap teaches the agent a clear policy: ED-pharmacy adjacency is a high-value design principle that should be prioritized.",
+            "Incorrect. Policies adapt to context, not apply universally."
+          ],
+          "explanation": "Learned policies emerge from consistent reward patterns. The RL agent discovers that ED-pharmacy adjacency is a winning principle\u2014one that experienced hospital architects often recommend independently, based on operational insight."
+        },
+        {
+          "question": "An RL system has evaluated 500 possible apartment layouts. It observes that layouts featuring open-plan living with good natural light average +45 reward points, while compartmentalized, dim layouts average +20 points. Over the next 500 trials, it focuses heavily on variations of the high-reward template. What learning process is this?",
+          "options": [
+            "Random exploration with no pattern",
+            "Rigidly copying the best layout without variation",
+            "Exploitation: using learned value estimates to focus on high-reward design patterns while exploring variations",
+            "Ignoring feedback and generating arbitrary layouts"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The agent is now focused, not random.",
+            "Incorrect. The agent is trying variations, not copying.",
+            "Correct! This is exploitation\u2014leveraging the learned value function (open-plan + light \u2248 high value) to focus exploration on variations of that winning pattern.",
+            "Incorrect. The agent is clearly using feedback."
+          ],
+          "explanation": "RL balances exploration (trying new things) and exploitation (using what works). After learning that open-plan with good light produces high value, the agent exploits this insight while exploring variations\u2014the smart way to improve iteratively."
+        },
+        {
+          "question": "A value function estimates that the state 'design frozen, all contractors contracted, 20% budget contingency remaining' has value +8.2, while 'design still in flux, contractor negotiations ongoing, 5% budget contingency' has value +3.5. What does the RL system predict?",
+          "options": [
+            "The first project will cost more money",
+            "The first project will have lower design quality",
+            "Following best practices from the frozen, stable project state is more likely to lead to success",
+            "Budget contingency is meaningless"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Value estimates success probability, not absolute cost.",
+            "Incorrect. Frozen designs can have any quality; value reflects trajectory.",
+            "Correct! The higher value (+8.2) means the frozen, stable state is a strong position from which learned policies lead to better outcomes and fewer surprises.",
+            "Incorrect. Budget contingency is visible in the value difference\u2014it matters!"
+          ],
+          "explanation": "Value functions capture project momentum. A frozen design with secured contractors and good contingency is a high-value state because it's stable, predictable, and has cushion for surprises\u2014exactly the conditions that lead to successful building delivery."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mastery: Reinforcement Learning in Architecture",
+      "content": "Congratulations! You have mastered reinforcement learning through the lens of architecture. You now understand how RL agents\u2014whether human architects or computational systems\u2014learn optimal design strategies by interacting with environments, receiving rewards, and refining policies. You grasp the foundation of RL: **agents** make **actions** in **states**, receive **rewards**, and learn **policies** guided by **value functions**. In real architecture, this translates to architects designing buildings, learning from feedback, and discovering principles that work. As AI increasingly augments architectural practice, RL will help optimize space layouts, energy systems, supply chains, and urban planning. Some firms already use RL to explore thousands of design variations and identify high-performing solutions humans might have missed. Your understanding bridges the gap between traditional architectural intuition and data-driven algorithmic design. Keep experimenting, and remember: the best policies\u2014in design and in life\u2014emerge through thoughtful iteration and learning from feedback."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    }
+  ],
+  "generated_at": "2026-03-27T10:36:24.472172+00:00",
+  "model": "claude-haiku-4-5"
+}

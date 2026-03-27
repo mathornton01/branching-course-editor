@@ -1,0 +1,438 @@
+{
+  "id": "ts-001",
+  "title": "Time Series Analysis Fundamentals",
+  "description": "Master essential time series concepts through sequential learning with adaptive feedback loops",
+  "topic": "Data Science",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "time-series",
+    "forecasting",
+    "statistics",
+    "data-science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Time Series",
+      "content": "A time series is a sequence of data points indexed in time order, typically measured at regular intervals. Time series data appears everywhere: stock prices, weather patterns, website traffic, and sensor readings. Every time series can be decomposed into three main components: trend (long-term direction), seasonality (repeating patterns), and noise (random fluctuations). Understanding these components is crucial for forecasting future values and detecting meaningful patterns. Time series analysis helps extract actionable insights and make informed predictions about future behavior."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Time Series Fundamentals Assessment",
+      "content": "Test your understanding of time series basics and core concepts.",
+      "questions": [
+        {
+          "question": "Which of the following is NOT a fundamental component of a time series?",
+          "options": [
+            "Trend",
+            "Seasonality",
+            "Volatility",
+            "Noise"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Trend is a key component showing long-term direction.",
+            "Incorrect. Seasonality represents repeating patterns at fixed intervals.",
+            "Correct! While volatility affects time series, it's not one of the three fundamental components (trend, seasonality, and noise).",
+            "Incorrect. Noise represents random fluctuations in the data."
+          ],
+          "explanation": "Time series decompose into trend (direction), seasonality (repeating patterns), and noise (random variations). Volatility, though important, is not a fundamental component."
+        },
+        {
+          "question": "Daily temperature readings over a year show a strong pattern that repeats annually. What component does this represent?",
+          "options": [
+            "Trend",
+            "Seasonality",
+            "Noise",
+            "All of the above"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Trend would show consistent increase or decrease over the year.",
+            "Correct! The yearly repeating pattern of temperatures is seasonality.",
+            "Incorrect. Noise would be irregular and unpredictable.",
+            "Incorrect. Only seasonality captures the annual repeating pattern."
+          ],
+          "explanation": "Seasonality refers to periodic patterns that repeat at fixed intervals. Daily temperature shows strong annual seasonality due to seasonal weather changes."
+        },
+        {
+          "question": "Which domain would benefit most from time series analysis?",
+          "options": [
+            "Predicting next year's rainfall",
+            "Classifying images",
+            "Analyzing customer satisfaction once",
+            "Comparing two groups statistically"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Rainfall is sequential data with temporal patterns, perfect for forecasting.",
+            "Incorrect. Image classification uses different ML techniques, not time series methods.",
+            "Incorrect. Single satisfaction surveys don't have temporal sequence.",
+            "Incorrect. Statistical comparison doesn't require time series methods."
+          ],
+          "explanation": "Time series analysis excels at predicting future values in sequential data. Rainfall prediction requires forecasting based on historical temporal patterns."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Identifying Time Series Components",
+      "content": "Strengthen your ability to recognize and classify the three main components in any time series dataset.",
+      "questions": [
+        {
+          "question": "In monthly smartphone sales data that grows steadily year-over-year but dips every December, what components are present?",
+          "options": [
+            "Only trend",
+            "Trend and seasonality",
+            "Only seasonality",
+            "Seasonality and noise"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. There's also seasonality in the December dip.",
+            "Correct! The steady growth is trend; December dips repeat seasonally.",
+            "Incorrect. There's a clear growth trend over years.",
+            "Incorrect. These are systematic patterns, not random noise."
+          ],
+          "explanation": "This data exhibits both trend (growing year-over-year) and seasonality (December dips repeat annually)."
+        },
+        {
+          "question": "Which scenario best demonstrates pure noise in a time series?",
+          "options": [
+            "Random daily stock price fluctuations with no pattern",
+            "Weekly traffic spikes every Friday",
+            "Monthly rainfall trending drier",
+            "Hourly temperature with daily cycles"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Truly random fluctuations with no discernible pattern represent noise.",
+            "Incorrect. Weekly spikes are a clear seasonal pattern.",
+            "Incorrect. Decreasing rainfall shows a trend.",
+            "Incorrect. Daily temperature cycles show seasonality."
+          ],
+          "explanation": "Noise is random, unpredictable variation with no underlying pattern. Real financial data combines trend, seasonality, and noise simultaneously."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Trends and Seasonality: Deep Dive",
+      "content": "Trend represents the long-term direction of a time series\u2014whether increasing, decreasing, or stable. Trends can be linear (constant rate of change) or nonlinear (accelerating growth). Seasonality refers to regular repeating patterns at fixed intervals: daily, weekly, monthly, or annually. Time series decomposition separates a series into components, typically using moving averages or seasonal decomposition formulas. Understanding these components is essential for forecasting, as different components require different modeling approaches to capture their dynamics accurately."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Trends and Seasonality Assessment",
+      "content": "Evaluate your understanding of trend and seasonality identification and decomposition.",
+      "questions": [
+        {
+          "question": "A moving average smooths a time series by averaging values within a window. What does this primarily help identify?",
+          "options": [
+            "Trend",
+            "Seasonality",
+            "Noise",
+            "Future values"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Moving averages remove short-term fluctuations to reveal the underlying trend.",
+            "Incorrect. Moving averages typically obscure seasonality; they isolate trend.",
+            "Incorrect. While averaging reduces noise, the primary purpose is trend extraction.",
+            "Incorrect. Moving averages describe past data, not predict the future."
+          ],
+          "explanation": "Moving averages filter out noise and seasonality, making the underlying trend more visible and easier to analyze."
+        },
+        {
+          "question": "If a time series shows stable sales with weekly spikes on Fridays and Saturdays, but no overall growth, what is true?",
+          "options": [
+            "Strong trend, no seasonality",
+            "Strong seasonality, no trend",
+            "Both strong trend and seasonality",
+            "Noise dominates the pattern"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Stable sales with no growth means there's no trend.",
+            "Correct! The repeating weekly pattern is seasonality; stable mean indicates no trend.",
+            "Incorrect. Stable sales show no trend component.",
+            "Incorrect. The patterns are systematic and predictable, not random."
+          ],
+          "explanation": "Seasonality exists independently of trend. This series has pure seasonality (weekly cycle) with no trend component."
+        },
+        {
+          "question": "Which decomposition method assumes seasonality varies proportionally with trend level?",
+          "options": [
+            "Additive decomposition (Trend + Seasonality + Noise)",
+            "Multiplicative decomposition (Trend \u00d7 Seasonality \u00d7 Noise)",
+            "Both work equally well always",
+            "Neither applies to real data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This is additive decomposition, for independent components.",
+            "Correct! Multiplicative decomposition is used when seasonality strength scales with trend.",
+            "Incorrect. The choice depends on whether seasonal variations are constant.",
+            "Incorrect. Both methods apply to real time series depending on data structure."
+          ],
+          "explanation": "Use multiplicative decomposition when seasonal variations grow/shrink with trend level, such as tourism where high-season peaks are larger when trend is up."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Time Series Decomposition",
+      "content": "Build skill in decomposing time series and identifying which components dominate different datasets.",
+      "questions": [
+        {
+          "question": "A retailer's monthly revenue shows values of 10k, 10.2k, 10.5k, 15k, 10.8k (repeating pattern). Is this additive or multiplicative seasonality?",
+          "options": [
+            "Additive\u2014seasonal amount stays constant (~4-5k spike)",
+            "Multiplicative\u2014seasonal percentage increases with trend",
+            "Cannot determine from this data",
+            "Neither; it's pure trend"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The spike is roughly 4-5k regardless of baseline, indicating constant seasonal addition.",
+            "Incorrect. If multiplicative, the spike percentage would vary with trend.",
+            "Incorrect. The pattern clearly shows a fixed seasonal component.",
+            "Incorrect. There's a clear repeating seasonal pattern."
+          ],
+          "explanation": "Additive seasonality shows constant seasonal effects (same absolute amount each cycle), while multiplicative shows proportional effects."
+        },
+        {
+          "question": "After removing trend from a time series using a moving average, you observe large remaining variations that repeat weekly. What is this?",
+          "options": [
+            "Residual noise that should be removed",
+            "Seasonality that should be modeled separately",
+            "A trend you missed",
+            "Evidence of data quality issues"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Repeating patterns aren't noise; they're systematic.",
+            "Correct! Regular weekly patterns in residuals indicate seasonality requiring separate modeling.",
+            "Incorrect. You already removed the trend with the moving average.",
+            "Incorrect. Repeating patterns indicate systematic seasonality, not data problems."
+          ],
+          "explanation": "After detrending, remaining periodic patterns are seasonality. Both components must be identified for complete decomposition."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Forecasting Methods and Model Selection",
+      "content": "Once you understand time series components, select appropriate forecasting methods. Exponential smoothing (Simple, Holt's, Holt-Winters) weights recent observations more heavily, excelling for data with trend and seasonality. ARIMA models capture temporal dependencies through autoregressive and moving average components\u2014ideal for stationary data with moderate autocorrelation. Prophet (Facebook) handles multiple seasonalities and changepoints well for business forecasting. Machine learning approaches like LSTM excel with complex nonlinear patterns. Model selection depends on: How strong is the trend? Is seasonality present? What's your forecast horizon? Does interpretability matter? Matching method complexity to data complexity improves both accuracy and efficiency."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Forecasting Methods Assessment",
+      "content": "Test your ability to select and justify appropriate forecasting methods.",
+      "questions": [
+        {
+          "question": "You have 10 years of monthly sales data with clear trend and annual seasonality. Which method is most appropriate?",
+          "options": [
+            "Simple exponential smoothing",
+            "Holt-Winters exponential smoothing",
+            "Simple moving average",
+            "Random walk"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Simple exponential smoothing handles only level, not trend or seasonality.",
+            "Correct! Holt-Winters handles trend AND seasonality, designed exactly for this data.",
+            "Incorrect. Moving averages don't forecast; they only smooth history.",
+            "Incorrect. Random walk ignores the clear patterns in your data."
+          ],
+          "explanation": "Holt-Winters is purpose-built for data with both trend and seasonal components."
+        },
+        {
+          "question": "ARIMA(p,d,q) requires stationary data. What does 'd' (differencing) accomplish?",
+          "options": [
+            "Reduces trend to make data stationary",
+            "Removes seasonality patterns",
+            "Calculates moving averages",
+            "Selects the model's parameters"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Differencing removes trend and makes non-stationary data stationary.",
+            "Incorrect. Differencing addresses trend, not seasonality directly.",
+            "Incorrect. Moving averages smooth data; differencing transforms it.",
+            "Incorrect. The 'd' value IS the differencing parameter, not selected by it."
+          ],
+          "explanation": "Differencing transforms non-stationary trends into stationary patterns, which ARIMA requires."
+        },
+        {
+          "question": "Your business needs a model handling multiple seasonal patterns (daily + weekly + yearly) with automatic changepoint detection. Best choice?",
+          "options": [
+            "Classical ARIMA",
+            "Holt-Winters",
+            "Prophet",
+            "Exponential smoothing"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. ARIMA handles single seasonality with difficulty.",
+            "Incorrect. Holt-Winters is limited to one main seasonality.",
+            "Correct! Prophet is purpose-built for multiple seasonalities and changepoint detection.",
+            "Incorrect. Standard exponential smoothing doesn't handle multiple seasonalities."
+          ],
+          "explanation": "Prophet's architecture is designed for business forecasting with multiple seasonal patterns and automatic changepoint detection."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Model Selection and Justification",
+      "content": "Sharpen your ability to match forecasting methods to real-world time series characteristics and constraints.",
+      "questions": [
+        {
+          "question": "Your data: hourly web server traffic with no trend, strong daily seasonality, and high noise. Recommended approach?",
+          "options": [
+            "ARIMA(1,0,1) because it handles noise",
+            "Holt-Winters because it's general-purpose",
+            "Exponential smoothing tuned for short cycles",
+            "Prophet because it's always best"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. ARIMA over-complicates data with no trend.",
+            "Incorrect. Holt-Winters is overkill for data with no trend, only daily seasonality.",
+            "Correct! Simple exponential smoothing with seasonal adjustment handles daily patterns efficiently.",
+            "Incorrect. Prophet adds unnecessary complexity for simple daily patterns."
+          ],
+          "explanation": "Match method complexity to data complexity. Simple seasonal exponential smoothing is elegant and efficient for pure seasonal patterns."
+        },
+        {
+          "question": "You fit ARIMA(2,1,1) and ACF/PACF plots of residuals show significant spikes at lag 12. What does this indicate?",
+          "options": [
+            "Model successfully removed all autocorrelation",
+            "Missed seasonality; possibly yearly pattern in residuals",
+            "Model is too complex",
+            "Data has no trend"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Significant spikes mean autocorrelation remains.",
+            "Correct! Regular spikes at lag 12 (months) suggest yearly seasonality the model missed.",
+            "Incorrect. Residual autocorrelation indicates under-specification, not over-specification.",
+            "Incorrect. Differencing (d=1) handles trends; this is about seasonality."
+          ],
+          "explanation": "Always check residual diagnostics. Remaining autocorrelation patterns (especially at fixed intervals) indicate model misspecification requiring adjustment."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Time Series Analysis Mastery",
+      "content": "Congratulations! You've mastered time series fundamentals. You can identify trend and seasonality, decompose data appropriately, and select forecasting methods matching your data characteristics. You understand exponential smoothing, ARIMA, and modern approaches like Prophet. Your next steps: apply these skills to real datasets, practice residual diagnostics, and explore multivariate time series and deep learning methods. Continue building expertise by analyzing your own time series data and rigorously evaluating model performance on hold-out test sets."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T03:16:02.152483+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,228 @@
+{
+  "id": "git-version-control-arch",
+  "title": "Git and Version Control: An Architect's Guide",
+  "description": "Master version control through the lens of architectural projects. Learn how architects manage blueprint revisions, collaborate on complex designs, and maintain project history.",
+  "topic": "Git and Version Control",
+  "theme": "architecture",
+  "difficulty": "beginner",
+  "estimated_minutes": 35,
+  "tags": [
+    "git",
+    "version-control",
+    "collaboration",
+    "architecture",
+    "branching"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Your Version Control Foundation",
+      "content": "Let's assess your understanding of version control concepts through architectural scenarios. Answer these questions to determine whether you need foundational training or are ready for advanced workflows.",
+      "questions": [
+        {
+          "question": "You and three colleagues are designing different wings of a museum. Why would you use version control instead of emailing files back and forth?",
+          "options": [
+            "A) To track who made which changes and when, preventing lost work and design conflicts",
+            "B) Because it's faster than email",
+            "C) Because you need to store files somewhere",
+            "D) Version control is required by law for architectural projects"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Version control maintains a complete history and prevents the chaos of managing multiple file versions.",
+            "While efficient, the real value is change tracking and preventing conflicts.",
+            "Storage helps, but the key benefit is change tracking and collaboration.",
+            "Not required by law, but essential for professional teams."
+          ],
+          "explanation": "Version control prevents lost changes, shows exactly who modified what, and enables safe concurrent work\u2014critical when multiple architects edit shared blueprints."
+        },
+        {
+          "question": "In Git, what is a 'branch' most analogous to in architectural practice?",
+          "options": [
+            "A) A saved snapshot of your blueprint at a specific moment",
+            "B) A parallel design exploration where you test ideas without affecting the main plan",
+            "C) A folder where you store old file versions",
+            "D) A requirement that buildings must be branching structures"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's a commit, not a branch.",
+            "Exactly! A branch lets you explore variations (modern facade vs. classical) without risking the main design.",
+            "That's not how Git branches work.",
+            "Branches are a Git feature, not an architectural requirement."
+          ],
+          "explanation": "Branches are parallel development lines. One team sketches a modern glass facade while another explores a classical stone design\u2014both on separate 'branches' until one is chosen and merged back."
+        },
+        {
+          "question": "Your firm's main blueprint repository has a critical error: a load-bearing column specification was accidentally deleted. How do you recover it?",
+          "options": [
+            "A) Check the trash/recycle bin",
+            "B) Review Git history\u2014the commit log shows exactly when it was deleted and by whom",
+            "C) Ask colleagues to remember the specification",
+            "D) You can't recover it; you'll have to redesign the column"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Files in trash can be recovered, but Git provides a better audit trail.",
+            "Perfect! Git's commit history is an immutable record showing exact changes and allowing instant reversion.",
+            "Memory is unreliable; that's why version control exists.",
+            "Git lets you revert to any previous state\u2014no redesign needed."
+          ],
+          "explanation": "Git's superpower is an immutable history of changes. Every commit is a snapshot, so you can always step back to a known-good state and see exactly what changed."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced Collaboration: Distributed Architectural Teams",
+      "content": "You've demonstrated solid foundational knowledge. Now explore how large architecture firms manage complex projects with distributed teams using Git. This means understanding distributed workflows, advanced branching strategies (Git Flow), and handling merge conflicts when multiple architects modify the same blueprint sections. Learn to maintain a stable main branch while supporting parallel development, use pull requests to review changes before integration, and resolve conflicts when teams improve the same design areas differently. This mirrors real architecture where structural, MEP, and aesthetic teams work in parallel but must produce one cohesive design.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Case Study: The International Airport Terminal Redesign",
+      "content": "A 200-person architecture firm redesigns a major airport terminal using Git with 8 sub-teams: structural (3 architects), MEP (4), interior design (3), facade (2), landscape (2). The workflow uses main 'production' branch (approved design) and 'develop' branch (integration point). Each sub-team creates feature branches: `structural/load-bearing-redesign`, `mep/emergency-system-upgrade`, `interior/seating-optimization`. When ready, leads submit pull requests. Team members review for structural integrity, system conflicts, and aesthetic consistency. Once approved, features merge into 'develop'. Weekly integration tests verify all systems work together. Major milestones are tagged (v1.0-schematic, v2.0-design-development). This prevents chaos of emailed files and ensures everyone works from the current blueprint. A conflict arises when both structural and MEP teams modify the basement\u2014they resolve it together, understanding each other's constraints.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Mastery Achieved",
+      "content": "Congratulations! You've mastered advanced version control workflows. You understand how to lead distributed teams, manage complex branching strategies, resolve merge conflicts thoughtfully, and maintain architectural integrity at scale. You're ready to implement Git workflows in real-world architectural projects with teams of any size, coordinating across disciplines and managing complex design integrations."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Git Fundamentals: Your First Blueprint Repository",
+      "content": "Let's start with Git basics. Git is a version control system that tracks changes to files over time\u2014like a detailed construction log for your blueprints. A 'commit' is a snapshot of your design at a specific moment (marking a project milestone). Every commit includes a message describing changes (e.g., 'Updated column specifications for north wing'). A 'branch' is a parallel version of your blueprint where you safely experiment (testing a modern glass facade) without affecting the main design. By mastering commits and branches, you'll manage your own projects confidently and understand how larger teams collaborate on complex designs.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: The Home Office Renovation",
+      "content": "You're redesigning your home office and create a Git repository to track changes. First commit: 'Initial layout with desk and shelving.' Days later, you add a skylight: 'Added skylight for natural light\u2014north wall.' You create branch 'lighting-exploration' to test recessed ceiling lights instead. On this branch you commit: 'Tested recessed lighting layout.' Realizing the skylight is better, you delete the branch. Meanwhile, on the main branch you add: 'Finalized window treatments.' Each commit builds a timeline of design decisions. If you accidentally deleted the skylight notes, you'd scroll through commits to find exactly when and why it was added. This simple example shows how version control prevents lost work and documents design evolution.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Mastering Git Basics in Architecture",
+      "content": "Apply your knowledge to real Git workflows. These questions test your understanding of commits, branches, and basic collaboration in architectural contexts.",
+      "questions": [
+        {
+          "question": "You're designing a townhouse and make three improvements: upgrade electrical capacity, add a rooftop garden, and refine the kitchen layout. How should you commit these changes?",
+          "options": [
+            "A) One commit: 'Made improvements'",
+            "B) Three separate commits\u2014one for each major change, each with a clear message",
+            "C) Save them as separate files and decide later",
+            "D) Don't commit until the entire project is complete"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Vague messages make it hard to track which change introduced problems.",
+            "Correct! Each logical change gets its own commit. You can revert just the electrical upgrade if needed without losing the garden.",
+            "Files alone don't provide version history.",
+            "Regular commits prevent large data loss if something goes wrong."
+          ],
+          "explanation": "Small, logical commits with clear messages make design evolution understandable and allow isolating and reverting individual changes. If the electrical upgrade causes issues, revert just that commit."
+        },
+        {
+          "question": "You create branch 'experimental-atrium' to test a dramatic central atrium. After two weeks, you decide against it. What should you do?",
+          "options": [
+            "A) Delete the branch; the commits still exist in history if needed",
+            "B) Keep the branch forever in case you change your mind",
+            "C) Copy all branch files back to the main branch",
+            "D) Delete the entire repository because the idea failed"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Deleting the branch removes it from active development but preserves commits in history for future reference.",
+            "Inactive branches clutter your workflow.",
+            "That would merge unwanted changes into the main design.",
+            "The repository remains valuable\u2014only this one branch is removed."
+          ],
+          "explanation": "Branches are cheap to create and delete. Once abandoned, delete it to keep your repository clean. The commits remain in history if you ever want to reference them."
+        },
+        {
+          "question": "Your colleague added a 3D visualization of the atrium, and you added a structural analysis. How do you combine both improvements into the main blueprint?",
+          "options": [
+            "A) Ask them to re-email all files, then manually copy them in",
+            "B) Merge their branch into the main branch\u2014Git combines both changes if there are no conflicts",
+            "C) Tell them to wait until you're done, then they can add their changes",
+            "D) Keep the changes separate so they don't interfere"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That defeats the purpose of version control.",
+            "Perfect! Git's merge feature integrates both branches. If you edited different sections, Git handles it automatically. If both edited the same line, you resolve the conflict together.",
+            "Serializing work is inefficient and defeats version control's purpose.",
+            "Git's whole point is combining parallel work safely."
+          ],
+          "explanation": "Merging integrates work from different branches. When there are no conflicts, Git merges automatically. When conflicts exist (both changed the same line), you and your colleague resolve them together."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundations Established",
+      "content": "Excellent work! You now understand Git's core concepts: commits as design snapshots, branches as parallel explorations, and merging as integration. You can confidently use Git on your own architectural projects and collaborate with small teams. As your projects grow more complex, you're prepared to advance to distributed workflows and larger team coordination."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (Advanced)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Fail (Foundations)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T11:13:03.864806+00:00",
+  "model": "claude-haiku-4-5"
+}

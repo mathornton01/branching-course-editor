@@ -1,0 +1,262 @@
+{
+  "id": "git-version-control-course",
+  "title": "Git and Version Control",
+  "description": "Master the fundamentals of Git and version control through hands-on examples and adaptive learning",
+  "topic": "Git and Version Control",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "git",
+    "version-control",
+    "collaboration",
+    "development"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Git and Why It Matters",
+      "content": "Git is a distributed version control system that tracks changes to your code over time. Instead of keeping one final version of a file, Git maintains a complete history of every modification, allowing you to revert to previous versions, collaborate with others, and maintain multiple versions simultaneously. Every developer gets a complete copy of the repository, making Git resilient and enabling offline work. Version control is essential in modern software development because it enables teams to work together safely, prevents code loss, and provides a clear audit trail of all changes."
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Your First Commit",
+      "content": "Imagine you're starting a new project. You create a file called `app.js` with some initial code. You run `git add app.js` to stage the file, then `git commit -m \"Initial project setup\"` to save a snapshot with a descriptive message. Git records the date, author, message, and complete file contents. Later, if you make changes and commit again, Git stores both versions. You can use `git log` to see all commits in chronological order, and `git show <commit>` to view exactly what changed in any commit."
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Git Basics Assessment",
+      "content": "Test your understanding of Git fundamentals and the commit workflow.",
+      "questions": [
+        {
+          "question": "What is the primary purpose of `git add` in the commit workflow?",
+          "options": [
+            "A) Delete files from the repository",
+            "B) Stage changes to be included in the next commit",
+            "C) Push changes to the remote server",
+            "D) Create a new branch"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. `git add` does not delete files.",
+            "Correct! `git add` stages your changes for the next commit.",
+            "Incorrect. `git push` uploads commits to a remote repository.",
+            "Incorrect. `git branch` is used to create branches."
+          ],
+          "explanation": "`git add` prepares specific files or changes for inclusion in your next commit. Without staging, changes won't be included in the commit."
+        },
+        {
+          "question": "In a distributed version control system like Git, what does each developer have?",
+          "options": [
+            "A) Only read access to the main repository",
+            "B) A complete copy of the entire repository history",
+            "C) Access only to files they created",
+            "D) No local copy of the repository"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Developers have more than read-only access.",
+            "Correct! Every developer has a complete copy of the repository.",
+            "Incorrect. Developers can access and modify any file.",
+            "Incorrect. Having a local copy is a key feature of Git."
+          ],
+          "explanation": "Distributed version control means each developer has a full, independent copy of the repository with all history, enabling offline work and resilience."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Branches and Collaborative Development",
+      "content": "Branches allow you to create parallel versions of your code, essential for collaborative development. The `main` branch typically contains stable, production-ready code. When you want to add a new feature, fix a bug, or experiment, you create a feature branch like `feature/user-authentication` or `bugfix/login-error`. This isolates your work from others, preventing conflicts and allowing multiple features to be developed simultaneously. Once your work is complete and tested, you create a pull request to merge your branch back into main, where teammates can review and discuss your changes before integration."
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Creating and Merging a Feature Branch",
+      "content": "Your team is building an e-commerce site. You're assigned to add a wishlist feature. You create a new branch with `git checkout -b feature/wishlist`. You make several commits adding the wishlist functionality: `git commit -m \"Add wishlist model\"`, then `git commit -m \"Implement wishlist UI\"`. Meanwhile, teammates work on other features in different branches. When your feature is complete, you push it with `git push origin feature/wishlist` and create a pull request. After review and approval, the branch is merged into main with `git merge feature/wishlist`, and the feature becomes part of the product without disrupting others' work."
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Branching and Collaboration Assessment",
+      "content": "Assess your knowledge of branches, merging, and collaborative workflows.",
+      "questions": [
+        {
+          "question": "Why is it important to use separate branches for features rather than committing directly to main?",
+          "options": [
+            "A) It makes the repository larger",
+            "B) It allows parallel development without disrupting the stable codebase, and enables code review before integration",
+            "C) It prevents other developers from seeing your code",
+            "D) It is only necessary for large teams"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Branch usage doesn't increase repository size significantly.",
+            "Correct! Branches isolate work, maintain stability, and enable peer review.",
+            "Incorrect. Branches don't hide code; they enable sharing and collaboration.",
+            "Incorrect. Branches benefit teams of any size."
+          ],
+          "explanation": "Feature branches protect the main branch's stability, enable parallel work, and create a natural point for code review and quality control."
+        },
+        {
+          "question": "What is the typical sequence when working with a feature branch?",
+          "options": [
+            "A) Create branch \u2192 commit changes \u2192 push \u2192 create pull request \u2192 merge after review",
+            "B) Merge immediately \u2192 commit \u2192 push \u2192 create pull request",
+            "C) Push to main directly \u2192 create branch \u2192 commit",
+            "D) Create branch \u2192 delete main branch \u2192 commit"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is the standard feature branch workflow.",
+            "Incorrect. You should not merge immediately without review.",
+            "Incorrect. You shouldn't push to main directly for features.",
+            "Incorrect. You never delete the main branch."
+          ],
+          "explanation": "The proper workflow isolates your work, lets you commit freely, share your branch, and get review before merging, ensuring code quality."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Git Workflows and Scenarios",
+      "content": "Reinforce your Git knowledge with practical scenarios.",
+      "questions": [
+        {
+          "question": "You accidentally committed sensitive information (API keys) to your branch. What should you immediately do?",
+          "options": [
+            "A) Do nothing; only the main branch is public",
+            "B) Use `git revert` to undo the commit and regenerate the API keys immediately",
+            "C) Push the branch anyway and deal with it later",
+            "D) Delete the entire repository"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Any committed information is at risk.",
+            "Correct! Revert the commit and regenerate credentials immediately.",
+            "Incorrect. Never push sensitive data.",
+            "Incorrect. You can fix this without deleting the repository."
+          ],
+          "explanation": "Security is critical. Always revert sensitive commits immediately and rotate credentials to prevent unauthorized access."
+        },
+        {
+          "question": "Two teammates both created branches from main and made overlapping changes. When merging, Git shows a conflict. What does this mean?",
+          "options": [
+            "A) One person's code must be completely deleted",
+            "B) Git cannot understand the changes and the repository is corrupted",
+            "C) The same lines of code were changed differently in both branches, and you must manually decide which changes to keep",
+            "D) Merging is impossible and you must start over"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Both sets of changes can often be integrated.",
+            "Incorrect. A conflict doesn't mean corruption; it's a normal part of collaboration.",
+            "Correct! You review and manually resolve conflicting changes.",
+            "Incorrect. Conflicts are solvable and common."
+          ],
+          "explanation": "Conflicts occur when changes overlap. You examine both versions, decide which to keep (or combine them intelligently), and complete the merge."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What's Next?",
+      "content": "You've mastered the fundamentals of Git and version control! Now decide your next step.",
+      "choices": [
+        {
+          "label": "Complete the course and review key concepts",
+          "next": "n9"
+        },
+        {
+          "label": "Explore advanced topics (coming soon)",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've successfully learned Git and version control fundamentals. You now understand how to use commits to track changes, create branches for isolated development, and collaborate safely with teammates. These skills are foundational for modern software development. Keep practicing by using Git daily, code reviewing teammates' pull requests, and exploring advanced topics like rebasing, cherry-picking, and conflict resolution strategies."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "choice"
+    }
+  ],
+  "generated_at": "2026-03-26T02:08:30.410464+00:00",
+  "model": "claude-haiku-4-5"
+}

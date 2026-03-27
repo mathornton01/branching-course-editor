@@ -1,0 +1,262 @@
+{
+  "id": "graph-theory-101",
+  "title": "Graph Theory and Applications",
+  "description": "Learn the fundamentals of graph theory including vertices, edges, paths, and connectivity with real-world applications",
+  "topic": "Graph Theory",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "mathematics",
+    "graph-theory",
+    "algorithms",
+    "computer-science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Understanding Graphs: Vertices and Edges",
+      "content": "A graph is a mathematical structure consisting of vertices (nodes) connected by edges (lines). Vertices represent entities, and edges represent relationships between them. Graphs can be directed (edges have arrows showing direction) or undirected (edges have no direction). Understanding these basic components is fundamental to analyzing networks, social connections, and many real-world systems."
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Social Network Example",
+      "content": "Consider a simple social network with 4 people: Alice, Bob, Carol, and Dave. Alice is connected to Bob and Carol (they're friends). Bob is connected to Alice and Dave. Carol is connected to only Alice. Dave is connected only to Bob. In graph terminology: {Alice, Bob, Carol, Dave} are vertices, and the friendships are edges. This creates an undirected graph showing how people are connected."
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Assessment: Graph Basics",
+      "content": "Test your understanding of vertices, edges, and graph types.",
+      "pass_threshold": 80,
+      "success_target": "n4",
+      "failure_target": "n7",
+      "questions": [
+        {
+          "question": "In a social network graph, what do vertices represent?",
+          "options": [
+            "The connections between people",
+            "The people themselves",
+            "The strength of relationships",
+            "The time of friendships"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. Edges represent connections.",
+            "Correct! Vertices are the individual entities in a graph.",
+            "While important, this isn't what vertices represent.",
+            "This would be metadata, not what vertices are."
+          ],
+          "explanation": "In graph theory, vertices (or nodes) represent the entities or objects in the system, such as people, cities, or computers. Edges represent the relationships or connections between these entities."
+        },
+        {
+          "question": "If a graph has directed edges, what does this indicate?",
+          "options": [
+            "The graph cannot have cycles",
+            "Each edge has a direction, showing the relationship flows one way",
+            "The graph must be used for social networks only",
+            "All edges must be weighted with numbers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not necessarily. Directed graphs can have cycles.",
+            "Correct! Directed edges have arrows showing the direction of the relationship.",
+            "Directed graphs have many applications beyond social networks.",
+            "Direction and weights are independent properties."
+          ],
+          "explanation": "Directed graphs have edges with directions (arrows), meaning the relationship is asymmetric. For example, in a follow graph on social media, person A can follow person B without B following A back. In undirected graphs, edges have no direction, and relationships are mutual."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Paths, Cycles, and Graph Connectivity",
+      "content": "A path in a graph is a sequence of vertices where each consecutive pair is connected by an edge. The shortest path between two vertices is the path with the fewest edges. A cycle is a path that starts and ends at the same vertex, visiting at least one other vertex. Graph connectivity refers to whether there is a path between any two vertices. A connected graph has at least one path between every pair of vertices, while a disconnected graph has isolated components."
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Finding Paths in a Transportation Network",
+      "content": "Imagine a railway network with cities A, B, C, D, and E. There are direct routes: A\u2194B, B\u2194C, C\u2194D, and D\u2194E. To travel from A to E, one possible path is A\u2192B\u2192C\u2192D\u2192E (4 edges). This is also the shortest path since there are no more direct routes. If we add another route B\u2194D, then we could take A\u2192B\u2192D\u2192E (3 edges), which is now the shortest path. This example shows how understanding paths helps optimize travel or data transmission."
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Assessment: Paths and Connectivity",
+      "content": "Test your understanding of paths, cycles, and connected graphs.",
+      "pass_threshold": 80,
+      "success_target": "n8",
+      "failure_target": "n7",
+      "questions": [
+        {
+          "question": "What is a path in a graph?",
+          "options": [
+            "A straight line connecting any two vertices",
+            "A sequence of vertices where consecutive vertices are connected by edges",
+            "Any edge in the graph",
+            "The set of all vertices in the graph"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Paths don't have to be straight or direct.",
+            "Correct! A path is a sequence of connected vertices.",
+            "An edge is a single connection, not a path.",
+            "A path uses multiple vertices, not the entire set."
+          ],
+          "explanation": "A path is a sequence of vertices (v1, v2, v3, ..., vn) where each consecutive pair of vertices (vi, vi+1) is connected by an edge. The length of a path is the number of edges it contains."
+        },
+        {
+          "question": "In a connected graph with 5 vertices, what is guaranteed?",
+          "options": [
+            "There must be a path between every pair of vertices",
+            "There can be no cycles",
+            "All edges must be directed",
+            "Every vertex must have exactly 4 edges"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is the definition of a connected graph.",
+            "Connected graphs can have cycles.",
+            "Connectivity is independent of whether edges are directed.",
+            "Vertices can have different numbers of edges (different degrees)."
+          ],
+          "explanation": "A connected graph is defined as a graph in which there exists at least one path between every pair of vertices. This is a fundamental property used in analyzing network robustness, communication systems, and transportation networks."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Graph Concepts Review",
+      "content": "Reinforce your understanding with these practice questions covering all concepts learned.",
+      "pass_threshold": 80,
+      "success_target": "n8",
+      "failure_target": "n8",
+      "questions": [
+        {
+          "question": "Which of the following best describes an undirected graph?",
+          "options": [
+            "Edges have arrows showing direction",
+            "Only one vertex can be connected to others",
+            "Relationships between vertices are bidirectional",
+            "The graph cannot represent real-world systems"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Arrows indicate directed graphs.",
+            "Multiple vertices can be connected.",
+            "Correct! Undirected edges go both ways.",
+            "Undirected graphs model many real systems."
+          ],
+          "explanation": "In an undirected graph, each edge represents a bidirectional relationship. If there's an edge between A and B, you can traverse from A to B and from B to A."
+        },
+        {
+          "question": "What is a cycle in a graph?",
+          "options": [
+            "The number of vertices in the graph",
+            "A path that begins and ends at the same vertex",
+            "The shortest distance between two points",
+            "A graph with no edges"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's the order of the graph.",
+            "Correct! Cycles are closed paths.",
+            "That's the distance, not a cycle.",
+            "That's an empty graph."
+          ],
+          "explanation": "A cycle is a closed walk through the graph that starts at a vertex and returns to that same vertex, visiting at least one other vertex along the way. Cycles are important in analyzing graph structure and detecting loops in algorithms."
+        }
+      ]
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "What Would You Like to Do Next?",
+      "content": "You've mastered the fundamentals of graph theory! You can now understand how graphs model relationships and networks. Choose your next step to continue your learning journey.",
+      "choices": [
+        {
+          "label": "Explore advanced graph algorithms",
+          "next": "n9"
+        },
+        {
+          "label": "Review and complete the course",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: Graph Theory Fundamentals",
+      "content": "Congratulations! You've successfully completed the Graph Theory and Applications course. You now understand vertices and edges, directed and undirected graphs, paths and connectivity, and how these concepts apply to real-world networks. Graph theory is fundamental to computer science, operations research, and network analysis. Continue exploring by applying these concepts to practical problems like social networks, transportation systems, or computer networks."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "choice"
+    }
+  ],
+  "generated_at": "2026-03-26T09:37:11.962030+00:00",
+  "model": "claude-haiku-4-5"
+}

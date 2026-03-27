@@ -1,0 +1,210 @@
+{
+  "id": "8a3b5c7d-9f1e-4a6b-8c2d-5e7f9a1b3c5d",
+  "title": "Cryptography Fundamentals for Forensics",
+  "description": "Master the cryptographic techniques essential to digital forensic investigations, from protecting evidence confidentiality to verifying authenticity and integrity.",
+  "topic": "Cryptography",
+  "theme": "forensic science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "cryptography",
+    "digital forensics",
+    "security",
+    "evidence management",
+    "authentication"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Cryptography in Digital Forensics",
+      "content": "Cryptography plays a vital role in modern forensic investigations. From protecting evidence chains and ensuring digital authentication to verifying file integrity, cryptographic techniques are essential tools for forensic professionals. This course explores three fundamental cryptographic approaches: symmetric encryption (keeping secrets confidential), asymmetric encryption (proving identity and authenticity), and hash functions (verifying data hasn't been tampered with). Choose your first area of focus to deepen your understanding of how these methods support forensic science."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your First Focus Area",
+      "content": "Which aspect of cryptography would you like to explore first in your forensic practice?",
+      "choices": [
+        {
+          "label": "Encryption and Confidentiality",
+          "next": "n3"
+        },
+        {
+          "label": "Digital Signatures and Authentication",
+          "next": "n5"
+        },
+        {
+          "label": "Hash Functions and Data Integrity",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Symmetric Encryption in Forensics",
+      "content": "Symmetric encryption uses a single shared key to both encrypt and decrypt messages. In forensic investigations, this approach protects confidential evidence and investigator communications. For example, when storing sensitive witness testimonies or maintaining secure communication channels with other agencies, symmetric encryption ensures that only authorized personnel with the correct key can access the information. The Caesar cipher, one of the oldest encryption methods, demonstrates how a simple shift transformation can obfuscate plaintext. Modern symmetric algorithms like AES (Advanced Encryption Standard) use far more complex substitution and permutation operations, making them virtually impossible to break through brute force, providing robust protection for digital evidence that must remain confidential throughout the investigation lifecycle."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Case Study: Protecting Confidential Witness Statements",
+      "content": "In a recent organized crime investigation, law enforcement needed to store encrypted witness statements in a central database. Using AES-256 symmetric encryption with a shared key distributed only to authorized investigators, they ensured that if the database were compromised, the statements would remain unreadable without the key. During trial preparation, the defense requested access to certain documents. Because the evidence was encrypted with a known key, investigators could selectively decrypt only the required information while keeping other sensitive statements protected. This case demonstrates how symmetric encryption provides both security during storage and flexibility in evidence management."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Asymmetric Encryption and Digital Authentication",
+      "content": "Asymmetric encryption uses two related but distinct keys: a public key for encryption and a private key for decryption. In forensics, asymmetric cryptography enables digital signatures, which prove the authenticity and integrity of digital evidence without revealing sensitive information. When an investigator digitally signs a report using their private key, anyone with their public key can verify that the report came from that investigator and hasn't been modified. This creates a non-repudiation mechanism\u2014the investigator cannot later claim they didn't write or send the report. Beyond signatures, asymmetric encryption allows secure communication between parties without pre-sharing a secret key, making it ideal for inter-agency collaboration. The RSA algorithm and elliptic curve cryptography (ECC) are widely used in digital forensics to establish chain of custody for digital evidence and to authenticate communications between forensic labs."
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Case Study: Authenticating Digital Evidence in Court",
+      "content": "During a cybercrime prosecution, digital forensic examiners digitally signed their evidence reports using their private key. In court, the prosecutor displayed the examiner's public key and used it to verify each report's signature, proving to the jury that: (1) the reports were authentic and came from the certified examiner, (2) no unauthorized modifications had been made after signing, and (3) the examiner could not deny having created them. This digital authentication was as legally powerful as a handwritten signature. When the defense attempted to claim the evidence had been tampered with, the unbroken digital signatures proved otherwise. The defendant's attempts to compromise the evidence chain failed because asymmetric cryptography provided cryptographic proof of authenticity."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Hash Functions and Data Integrity",
+      "content": "Hash functions are one-way mathematical transformations that convert any input data into a fixed-size string of characters (a hash value or digest). Unlike encryption, hashing cannot be reversed to recover the original data. In forensics, hash functions are essential for verifying that digital evidence has not been altered. When investigators acquire a disk drive, they compute its hash (typically using MD5, SHA-256, or SHA-1) and document this hash value in their investigation report. Later, when the same disk is accessed for analysis, its hash is recomputed. If the two hashes match, it proves the data hasn't changed; if they differ even slightly, it proves tampering or corruption occurred. This simple yet powerful concept underpins the entire digital forensic evidence chain."
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Case Study: Establishing Chain of Custody with Hash Values",
+      "content": "In a large financial fraud investigation, forensic examiners seized 47 computers. For each device, they computed a forensic image (an exact bit-by-bit copy) and immediately recorded its SHA-256 hash. These hashes were logged in the case management system and provided to the defense attorney. Over the course of 18 months of investigation, the images were accessed by multiple analysts at different locations. Before each analysis session, examiners recomputed the hash to verify integrity. All 47 images maintained identical hashes throughout the investigation. In court, this hash evidence was presented to prove that no tampering, accidental corruption, or unauthorized modification had occurred at any stage. The consistent hash values provided mathematical proof of integrity."
+    },
+    {
+      "id": "n9",
+      "type": "decision",
+      "title": "Choose Your Next Focus Area",
+      "content": "You've completed your first topic. Would you like to explore another cryptographic approach or continue to the synthesis section where all three methods come together?",
+      "choices": [
+        {
+          "label": "Explore Asymmetric Encryption",
+          "next": "n5"
+        },
+        {
+          "label": "Explore Hash Functions",
+          "next": "n7"
+        },
+        {
+          "label": "Explore Symmetric Encryption",
+          "next": "n3"
+        },
+        {
+          "label": "Continue to Synthesis",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Integrating Cryptography in Forensic Workflows",
+      "content": "Symmetric encryption, asymmetric encryption, and hash functions serve complementary roles in modern forensic investigations. Symmetric encryption protects the confidentiality of sensitive evidence during storage and transmission. Asymmetric encryption and digital signatures provide authentication and non-repudiation, proving who conducted examinations and that reports haven't been modified. Hash functions establish chain of custody and verify data integrity. Together, these three cryptographic pillars form the foundation of digital forensics. In practice, investigators often combine all three: they use asymmetric encryption to securely exchange symmetric keys, use symmetric encryption to protect bulk evidence, and use hash functions to verify integrity at each step, while using digital signatures to authenticate reports."
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Course Complete",
+      "content": "Congratulations! You've completed the Cryptography Fundamentals course for forensic professionals. You now understand the core cryptographic techniques used to protect, authenticate, and verify digital evidence. The concepts you've learned\u2014symmetric encryption, asymmetric encryption, and hash functions\u2014form the backbone of modern forensic practice. As you continue your career in digital forensics, remember that cryptography is not just about mathematics; it's about maintaining the integrity of justice. Every hash computed, every signature verified, and every encryption key managed plays a role in ensuring that digital evidence is admissible in court and justice is served."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2a",
+      "source": "n2",
+      "target": "n3",
+      "label": "Encryption and Confidentiality"
+    },
+    {
+      "id": "c2b",
+      "source": "n2",
+      "target": "n5",
+      "label": "Digital Signatures and Authentication"
+    },
+    {
+      "id": "c2c",
+      "source": "n2",
+      "target": "n7",
+      "label": "Hash Functions and Data Integrity"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9a",
+      "source": "n9",
+      "target": "n5",
+      "label": "Explore Asymmetric Encryption"
+    },
+    {
+      "id": "c9b",
+      "source": "n9",
+      "target": "n7",
+      "label": "Explore Hash Functions"
+    },
+    {
+      "id": "c9c",
+      "source": "n9",
+      "target": "n3",
+      "label": "Explore Symmetric Encryption"
+    },
+    {
+      "id": "c9d",
+      "source": "n9",
+      "target": "n10",
+      "label": "Continue to Synthesis"
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T09:53:30.023335+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,187 @@
+{
+  "id": "intro-rust-film",
+  "title": "Introduction to Rust Programming Through Film Production",
+  "description": "Learn Rust's ownership model and core concepts by building a real-time VFX preview system. Navigate branching scenarios where your design choices lead to different outcomes.",
+  "topic": "Rust Programming",
+  "theme": "film production",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "rust",
+    "programming",
+    "ownership",
+    "memory-safety",
+    "film-production",
+    "vfx"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Your Studio's Challenge",
+      "content": "Your film production studio has decided to build a real-time VFX preview system in Rust to dramatically speed up the editing workflow. This tool needs to safely manage thousands of video frames, apply live filters, and handle multiple editors viewing the same footage simultaneously without crashes. You're tasked with learning Rust to build this system. The question isn't just about syntax\u2014it's about understanding why Rust is the right choice for critical infrastructure.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Your Learning Strategy",
+      "content": "How will you approach mastering Rust for this VFX pipeline project?",
+      "choices": [
+        {
+          "label": "Focus on Understanding Rust's Core Principles (ownership, borrowing, lifetimes)",
+          "next": "n3"
+        },
+        {
+          "label": "Try Familiar Patterns First (like JavaScript or Python)",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Understanding Ownership Through Film Assets",
+      "content": "In Rust, every value has a single owner. Think of your film production: the studio owns raw recordings, the director's assistant owns the working copy, the archive owns the final edit. When you pass ownership of data in Rust, the original owner loses access\u2014only one person is responsible at a time. This prevents chaos of simultaneous overwrites. A 4K video frame in Rust owns its pixel data in memory. When you assign that frame to another variable, ownership transfers completely\u2014the first variable becomes invalid, preventing double-deletion of expensive GPU memory that would crash your pipeline.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Ownership in Action",
+      "content": "Test your understanding of Rust's ownership model through VFX scenarios.",
+      "questions": [
+        {
+          "question": "You have a FrameBuffer storing a 4K video frame. You write `let frame2 = frame1;`. What happens to frame1?",
+          "options": [
+            "frame1 still exists and points to the same data",
+            "frame1 becomes invalid; ownership moved to frame2",
+            "Both frame1 and frame2 own the same data",
+            "The frame is deleted from memory"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. Rust doesn't create shared references on assignment.",
+            "Exactly! This is move semantics. Ownership transfers; frame1 can no longer be used.",
+            "Incorrect. Only one owner allowed at a time.",
+            "The frame isn't deleted\u2014it's moved. Only one variable has it now."
+          ],
+          "explanation": "Move semantics prevent double-free errors that plagued C++. Only one owner at any moment means no memory corruption. Your rendering pipeline stays safe because the compiler enforces this."
+        },
+        {
+          "question": "Your editing team needs three people reviewing the same 4K frame file simultaneously. Can three variables own the same frame without cloning?",
+          "options": [
+            "Yes, with reference counting wrappers like Arc",
+            "No, only one owner allowed",
+            "Yes, if they're careful about it",
+            "Only if the frame is immutable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Reference counting is a workaround, but doesn't change ownership rules.",
+            "Correct! Only one owner. You'll use references next for safe sharing.",
+            "Rust doesn't rely on being careful\u2014it enforces at compile time.",
+            "Immutability doesn't override the single-owner rule."
+          ],
+          "explanation": "This is ownership's core principle. Only one owner prevents data races. You'll use Rust's borrowing system\u2014safe references that let multiple readers access the frame without copying it. This is how your VFX pipeline handles simultaneous editor access."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "The Reference Challenge",
+      "content": "Your editing team needs simultaneous access to frame data\u2014editors reviewing, rendering engine reading, metadata querying. Rust won't let one owner share freely. You face two paths: learn Rust's borrowing system to share safely, or work around ownership with cloning.",
+      "choices": [
+        {
+          "label": "Use Rust's Borrowing System (References and Lifetimes)",
+          "next": "n6"
+        },
+        {
+          "label": "Clone Every Access (Simpler to code, heavier in memory)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Success: A Robust VFX Pipeline",
+      "content": "By embracing Rust's reference system, you built a system where multiple team members safely borrow read-only access to frame data without copying. Mutable borrows are strictly managed\u2014only one editor modifies a frame at a time, preventing conflicts that would corrupt production assets. Your rendering pipeline handles 30,000 frames daily without memory leaks or crashes. The editing team adores the speed and reliability. You've delivered a system that's both safe and performant\u2014exactly what Rust promises. Your approach becomes studio standard, and you're now mentoring other developers in Rust's power."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Lesson Learned the Hard Way",
+      "content": "You chose to clone every frame access, thinking simpler code was worth it. By day three of production, memory pressure became crushing\u2014your preview system consumed 200GB of RAM and slowed to a crawl. The studio reverted to their old system. You realized Rust's strict borrow rules aren't obstacles; they're guards preventing exactly this disaster. Understanding ownership and borrowing would have solved it perfectly the first time. The lesson sticks: Rust's constraints are actually superpowers. You go back to learn references properly."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Trying What You Know",
+      "content": "You write Rust like Python or JavaScript\u2014define references freely, assume lifetime management works intuitively, add Arc<Mutex<T>> wrappers everywhere. Except Rust has no garbage collector, and runtime overhead of reference counting defeats performance goals. You spend days fighting the compiler, adding more .clone() calls, only to build something slower and less safe. The compiler's error messages felt like obstacles but are actually guides. You realize you're fighting Rust instead of working with it.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Pivoting Back to Rust's Way",
+      "content": "After hitting walls with familiar patterns, you return to understanding Rust itself. The compiler wasn't being difficult\u2014it was preventing bugs that plague film pipelines: data races when threads access frames simultaneously, memory leaks from reference cycles, use-after-free when frames are deleted while still being read. Your second attempt, respecting Rust's model, succeeds brilliantly. You now champion Rust at the studio, shipping rock-solid systems. Your team jokes that if it compiles, it works\u2014thanks to Rust's guarantees."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "start"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Focus on Core Principles"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n8",
+      "label": "Try Familiar Patterns"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "continue"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "assessment-pass"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Use Borrowing"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Clone Everything"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "continue"
+    }
+  ],
+  "generated_at": "2026-03-27T04:30:53.717868+00:00",
+  "model": "claude-haiku-4-5"
+}

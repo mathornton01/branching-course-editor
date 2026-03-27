@@ -1,0 +1,174 @@
+{
+  "id": "course-algorithm-design-complexity-architecture",
+  "title": "Algorithm Design and Complexity: Through an Architectural Lens",
+  "description": "Learn algorithm design principles and complexity analysis by designing a 50-story mixed-use development. Choose between theoretical algorithmic patterns and pragmatic optimization approaches to explore how algorithmic thinking applies to architectural problems.",
+  "topic": "Algorithm Design and Complexity",
+  "theme": "architecture",
+  "difficulty": "intermediate",
+  "estimated_minutes": 25,
+  "tags": [
+    "algorithms",
+    "complexity-analysis",
+    "design-patterns",
+    "architecture",
+    "optimization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Skyline Design Challenge",
+      "content": "Your architecture firm has just won a contract to design a 50-story mixed-use development. The design involves coordinating hundreds of interconnected building systems: structural, mechanical, electrical, plumbing, fire safety, and environmental controls. You have two weeks to deliver a master design strategy. How you approach this problem\u2014whether you focus on understanding the algorithmic structure first or dive straight into practical solutions\u2014will determine your success. This is where algorithm design thinking becomes crucial.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Design Philosophy",
+      "content": "You stand at a crossroads. Do you take time to understand the algorithmic structure of your design process before starting, or do you begin solving problems immediately and optimize as you go?",
+      "choices": [
+        {
+          "label": "Study Algorithmic Patterns First: Learn complexity analysis before designing",
+          "next": "n3"
+        },
+        {
+          "label": "Jump to Practical Construction: Optimize as you solve problems",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Algorithmic Thinking in Architectural Design",
+      "content": "In architecture, you need to understand how efficiently your design process scales. This is where Big O notation comes in\u2014it measures how an algorithm's performance grows with the size of the input. An O(n) algorithm scales linearly, O(n\u00b2) quadratically, and O(log n) logarithmically. For your 50-story building, a poorly designed algorithm with O(n\u00b2) complexity means the time to coordinate all systems grows exponentially. Understanding complexity helps you choose design patterns that scale elegantly.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Worked Example: Coordinating Building Systems",
+      "content": "To verify structural-mechanical compatibility, a naive approach compares all 50 floors against 30 mechanical system variants = 1,500 comparisons (O(n\u00b7m)). Instead, pre-categorize floors by load type (5 categories), then compare each against mechanical systems = 150 comparisons (O(5\u00b730)). This restructuring reduces complexity from O(n\u00b2) to O(n log n) by using divide-and-conquer patterns. This is algorithmic optimization in practice.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "How Should You Structure Your Design Algorithm?",
+      "content": "Now you must decide how to organize your design process. Will you use a hierarchical, recursive approach that mirrors the natural structure of the building? Or will you process components sequentially in order?",
+      "choices": [
+        {
+          "label": "Recursive Decomposition: Break the building into floors, zones, spaces",
+          "next": "n6"
+        },
+        {
+          "label": "Linear Sequential: Design floor 1 completely, then floor 2, then floor 3",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Recursive Design Decomposition",
+      "content": "Recursive decomposition mirrors how buildings are naturally structured: 50 floors \u2192 8 zones per floor \u2192 10 spaces per zone \u2192 3 system connections per space. By designing at each level of abstraction, you solve the problem once, then apply it repeatedly (O(n log n) thinking). Your design logic for one space replicates efficiently to all spaces, and changes to floor-level routing apply to all floors. This pattern enables scalability: the design methodology works equally well for a 20-story or 50-story building because complexity grows logarithmically.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Success\u2014Optimal Design Strategy",
+      "content": "By choosing recursive decomposition, you structure your design process to scale elegantly. Each level of the design hierarchy reuses logic from the level below. Your design coordination becomes O(n log n) instead of O(n\u00b2). The 50-story development is completed on schedule. Future projects benefit from this modular design methodology. You've learned that the most elegant architectural solutions come from understanding how your design process itself scales\u2014a lesson borrowed directly from algorithm design."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "The Linear Sequential Trap",
+      "content": "If you design floor 1 completely, then floor 2 identically, and so on sequentially, you're using a linear algorithm for floors but O(n) decisions within each floor (mechanical, structural, electrical), yielding O(n\u00b2) total complexity. By floor 40, you've redesigned the same mechanical logic 40 times with minor variations. Changes to floor-level decisions require backtracking to earlier floors, creating cascading revisions. This is algorithmic inefficiency: solving the same sub-problem repeatedly instead of solving it once and reusing the solution.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Failure\u2014Inefficient Design Process",
+      "content": "The project falls behind schedule by week 3 when you discover that your sequential design approach creates cascading changes: a modification to the structural system on floor 10 requires revising floors 11-50. Your O(n\u00b2) design process means small changes create exponential rework. The client is frustrated. You deliver late and over budget. You realize too late that understanding algorithm complexity in advance would have shaped your methodology more effectively."
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Practical Algorithm Optimization",
+      "content": "You quickly discover that not all 50 floors are identical\u2014there are 3 distinct floor types based on structural loading. Instead of designing 50 unique floors, you're designing 3 templates with variations, reducing complexity through pattern recognition. You establish repeatable processes for each floor type: design checklists, standard routing, tested distributions, and staged reviews. This pragmatic approach uses optimization tools and iterative refinement rather than pursuing theoretical algorithmic perfection.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Success\u2014Delivered with Pragmatism",
+      "content": "Your practical, constraint-driven approach delivers the 50-story mixed-use development on time and on budget. The design is functional and well-coordinated. You complete the project efficiently by focusing on real-world complexity drivers rather than theoretical algorithmic perfection. You've learned that practical success often comes from understanding actual constraints and optimizing around them, rather than pursuing algorithmic purity. Both approaches\u2014theoretical and pragmatic\u2014are valid; success depends on matching your algorithm design methodology to your project context."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Algorithmic"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n10",
+      "label": "Practical"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Recursive"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n8",
+      "label": "Sequential"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T03:55:56.764525+00:00",
+  "model": "claude-haiku-4-5"
+}

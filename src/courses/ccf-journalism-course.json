@@ -1,0 +1,256 @@
+{
+  "id": "ccf-journalism-course",
+  "title": "Cloud Computing Fundamentals for Digital Journalism",
+  "description": "Master cloud computing through the lens of modern newsrooms. Choose your path: theory-first foundations or hands-on applications used by leading news organizations.",
+  "topic": "Cloud Computing Fundamentals",
+  "theme": "journalism",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "cloud-computing",
+    "journalism",
+    "infrastructure",
+    "technology"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "decision",
+      "title": "Cloud Computing for Modern Newsrooms",
+      "content": "In today's digital-first journalism, cloud computing powers everything from breaking news coverage to investigative databases. The Washington Post processes millions of visitor requests daily on cloud infrastructure, while The Guardian uses cloud services to manage real-time global collaboration. This course explores how newsrooms use cloud technology to scale instantly during major events, backup critical data, and collaborate with reporters across continents. You'll learn the same principles that power the news industry's most critical infrastructure.\n\nChoose your learning path: start with the theoretical foundations that underpin cloud infrastructure, or jump into practical applications used by leading news organizations.",
+      "choices": [
+        {
+          "label": "Theory First: Understand cloud fundamentals before applications",
+          "next": "n2"
+        },
+        {
+          "label": "Hands-On First: Learn through real journalism scenarios",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Cloud Foundations: The Architecture Behind Digital Journalism",
+      "content": "Cloud computing delivers computing power, storage, and applications over the internet instead of requiring on-premises servers. A traditional newsroom might have room-sized servers managing email and databases; a cloud-based newsroom accesses the same capabilities through internet services that scale from 1 to 1 million users instantly.\n\nThree essential models power modern journalism: Infrastructure as a Service (IaaS) provides raw computing and storage (like renting a data center); Platform as a Service (PaaS) adds development tools on top (like a newsroom CMS that's always updated); Software as a Service (SaaS) delivers finished applications (like Google Workspace for journalist collaboration). Cloud services operate across multiple geographic locations (regions and availability zones), so if a data center in Virginia experiences an outage during a breaking news event, your news distribution automatically switches to another data center without interruption.\n\nScalability is cloud's defining feature. When a major news story breaks, traffic to a news site might spike 100x in minutes. Cloud infrastructure automatically adds servers to handle the load; when traffic returns to normal, servers automatically shut down and stop charging. This elasticity allows newsrooms to handle any story size without over-provisioning infrastructure.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Case Study: The New York Times Cloud Transformation",
+      "content": "The New York Times migrated its core publishing platform to Amazon Web Services (AWS) to support its digital-first strategy. Previously, the Times managed physical servers that peaked during major elections or Olympic Games but sat idle most of the time. By moving to AWS, the Times eliminated the need to purchase hardware for peak demand\u2014the cloud automatically scales up when 50 million readers visit the site during election night coverage, then scales down afterward.\n\nThe Times also uses cloud storage to archive 170+ years of articles and images. This would be impossible to manage on premises; the Times would need its own massive data centers. Instead, AWS handles the physical infrastructure while the Times focuses on journalism. Additionally, the Times uses cloud machine learning services to recommend articles to readers and detect paywalled content that shouldn't be shared\u2014capabilities that would require hiring a dedicated ML engineering team if built in-house.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Cloud Concepts Quiz: Theory Path",
+      "content": "Test your understanding of cloud computing fundamentals and how they apply to journalism.",
+      "questions": [
+        {
+          "question": "A mid-sized news organization wants to handle 10x traffic during election night without maintaining expensive servers year-round. Which cloud characteristic solves this problem?",
+          "options": [
+            "A) Scalability and elasticity",
+            "B) On-premises redundancy",
+            "C) Single-region deployment",
+            "D) Local data backup"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Cloud scalability allows automatic scaling up during traffic spikes and down afterward\u2014ideal for news events.",
+            "On-premises redundancy still requires purchasing servers for peak capacity.",
+            "Single-region deployment actually increases outage risk.",
+            "Local backup alone doesn't address the scaling challenge."
+          ],
+          "explanation": "Elasticity means you pay only for what you use. During breaking news, the cloud adds resources automatically; during quiet periods, costs drop."
+        },
+        {
+          "question": "The Associated Press stores 40+ years of photos, videos, and articles. Which cloud service model is most appropriate?",
+          "options": [
+            "A) SaaS\u2014finished applications",
+            "B) IaaS\u2014raw computing and storage resources",
+            "C) PaaS\u2014development platforms",
+            "D) On-premises servers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "SaaS provides applications, not storage infrastructure.",
+            "Correct! IaaS provides the raw storage and computing power to archive massive media libraries.",
+            "PaaS is for development, not primary storage.",
+            "On-premises would require AP to purchase and maintain enormous data centers."
+          ],
+          "explanation": "IaaS gives organizations complete control over how they store and compute on massive datasets\u2014perfect for a news archive."
+        },
+        {
+          "question": "Why do cloud data centers distribute content across multiple geographic regions (e.g., US-East, US-West, Europe)?",
+          "options": [
+            "A) To reduce the cost per server",
+            "B) To ensure service continues if one region experiences an outage",
+            "C) To comply with data residency laws",
+            "D) Both B and C"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Regional distribution doesn't primarily affect per-server costs.",
+            "This is one reason, but not the complete answer.",
+            "This is one reason, but not the complete answer.",
+            "Correct! Geographic distribution provides both reliability (if one region fails, others continue serving readers) and legal compliance (some countries require data stored locally)."
+          ],
+          "explanation": "A news site experiencing an outage during breaking news is a business disaster. Multiple regions ensure breaking news reaches every reader, everywhere."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Cloud Services in Action: How Newsrooms Operate",
+      "content": "Cloud computing delivers three types of services that newsrooms use daily. Storage services (like AWS S3) hold terabytes of articles, images, and videos\u2014the New York Times archive, NPR's audio library, Bloomberg's market data. These services charge based on what you store and access, not by fixed hardware costs.\n\nCompute services (like AWS EC2 or Google Compute Engine) are virtual machines that run applications. When CNN publishes breaking news, compute services power the real-time news ticker, video encoding (converting raw footage into formats for phones, tablets, and desktops), and live streaming to millions of concurrent viewers. Databases (like AWS RDS or Google Cloud SQL) store structured data\u2014article metadata, user subscriptions, editorial calendars. During an investigation, journalists query years of database records to find patterns. Cloud databases automatically back up data and handle traffic spikes without journalist intervention.\n\nModern newsrooms combine these services into workflows. A reporter submits an article through a web interface (served by compute). The article text goes into a database; photos and videos go into storage. A content management system queries the database and retrieves images from storage to display the article to readers. Cloud handles automatic updates, security patches, and scaling\u2014journalists focus on reporting.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Reuters: Real-Time Publishing Pipeline on Cloud",
+      "content": "Reuters, a global news organization, uses Google Cloud to power its real-time news distribution to thousands of financial traders, news desks, and media outlets. Here's the workflow: Reuters reporters file stories using content management software (SaaS) running on cloud. The story text is stored in a cloud database; photos and videos go to cloud storage. Instantly, algorithms detect topics (market earnings, political events) and tags the story automatically using machine learning (a cloud-native service). The tagged story is delivered through APIs to trading platforms, news websites, and mobile apps\u2014each receiving exactly the stories relevant to them.\n\nIf one story goes viral and gets 1 million simultaneous requests, the cloud automatically adds servers to handle the load. If Reuters publishes a breaking story about a major corporation's earnings, the cloud scales to serve traders worldwide within milliseconds. Reuters pays only for the resources it actually uses\u2014storage for the article, computing power to process and distribute it, and bandwidth for delivery. Without cloud, Reuters would need data centers on multiple continents, large teams to maintain them, and uncertainty about whether infrastructure could handle the next unexpected news event.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Cloud Services Practice: Real Journalism Scenarios",
+      "content": "Apply cloud concepts to real journalism challenges.",
+      "questions": [
+        {
+          "question": "A journalist investigates a global corruption network and compiles a database of 500,000 individuals, their connections, and financial records. They need secure storage that's accessible from four continents, automatic backup in case of data loss, and ability to search millions of records instantly. Which cloud service combination is best?",
+          "options": [
+            "A) Cloud storage only",
+            "B) Cloud database + cloud storage for encrypted backups",
+            "C) Local laptop storage with USB backups",
+            "D) On-premises server room"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Storage alone doesn't provide the query and search capabilities needed for a complex investigation database.",
+            "Correct! A managed cloud database handles querying, security, and automatic backups; cloud storage provides encrypted geographic backup for maximum protection of sensitive investigation data.",
+            "Laptop storage is vulnerable to theft, hardware failure, and doesn't enable global access.",
+            "On-premises servers limit access to one location and create security risks for sensitive investigation data."
+          ],
+          "explanation": "Investigations involving sensitive data require both powerful querying (database) and encrypted geographic backup (storage). Cloud provides both automatically."
+        },
+        {
+          "question": "A news site experiences a server outage during the Super Bowl, losing 4 hours of traffic and ad revenue. How does cloud computing prevent this in the future?",
+          "options": [
+            "A) Larger on-premises servers prevent all outages",
+            "B) Cloud's geographic redundancy (multiple regions) ensures automatic failover if one region experiences an outage",
+            "C) More expensive hosting plans guarantee 100% uptime",
+            "D) Nothing prevents outages; they're inevitable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Larger servers still fail; they don't prevent all outages.",
+            "Correct! Cloud providers distribute your application across multiple data centers. If one fails during a major event, traffic automatically routes to another region without interruption.",
+            "Price doesn't prevent technical failures.",
+            "Cloud redundancy specifically designed to prevent major event outages."
+          ],
+          "explanation": "Super Bowl, election night, royal wedding\u2014when news is most valuable, outages are most expensive. Cloud's geographic redundancy protects against the hardware failures that cause outages."
+        },
+        {
+          "question": "A nonprofit news outlet publishes stories during slow periods (2-3 hours/day) and handles massive traffic spikes during breaking news events. Why is cloud more cost-effective than on-premises?",
+          "options": [
+            "A) Cloud servers cost less per unit",
+            "B) Cloud allows pay-per-use pricing, scaling compute resources automatically up during spikes and down during quiet periods",
+            "C) Nonprofit discounts always apply",
+            "D) On-premises servers are more reliable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Per-unit costs don't account for utilization patterns.",
+            "Correct! Cloud elasticity means you pay only for what you use. During quiet periods, servers shut down (minimal cost); during breaking news, servers multiply automatically. On-premises requires buying hardware for peak capacity, paying the same amount even when servers sit idle.",
+            "Nonprofit discounts exist but don't eliminate the fundamental over-provisioning cost of on-premises.",
+            "Reliability is cloud's advantage, not a disadvantage."
+          ],
+          "explanation": "Non-profits survive on budgets that require maximum efficiency. Cloud's pay-per-use model allows small outlets to compete with large media companies."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Building Your News Organization's Cloud Strategy",
+      "content": "Whether you chose the theory path or hands-on path, you're now ready to think strategically about cloud computing. Every newsroom's cloud strategy should balance three considerations: cost (cloud can be more expensive if over-provisioned), security (cloud requires trusting a vendor with sensitive data and source information), and speed (cloud enables rapid scaling that traditional infrastructure can't match).\n\nStarting a cloud migration requires choosing a cloud provider (Amazon AWS, Google Cloud, Microsoft Azure). Each excels in different areas: AWS dominates in raw market share and breadth of services; Google Cloud leads in data analytics and machine learning; Azure integrates tightly with Microsoft products like Office 365. For journalism, choosing based on your existing tools makes sense\u2014if your newsroom already uses Google Workspace for collaboration, Google Cloud integrates seamlessly. The most critical step isn't choosing the \"best\" provider; it's starting the journey to cloud computing. Newsrooms that master cloud infrastructure gain competitive advantages in speed, global reach, and cost efficiency. Those that delay risk becoming unable to compete with digital-native competitors or handle major news events gracefully.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Cloud Computing Mastery Unlocked!",
+      "content": "Congratulations! You've completed Cloud Computing Fundamentals for Digital Journalism. You now understand how cloud computing powers modern newsrooms\u2014from the theory of distributed systems and service models to the practical applications of storage, compute, and databases that enable real-time global journalism. You've learned why organizations like Reuters, the New York Times, and the Washington Post depend on cloud infrastructure for their core operations. Next steps: explore cloud certifications (AWS Solutions Architect, Google Cloud Associate), experiment with a cloud provider's free tier, or discuss cloud strategy with your newsroom's technical leaders. The future of journalism is in the cloud."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Theory First"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Hands-On First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T11:54:26.238725+00:00",
+  "model": "claude-haiku-4-5"
+}
