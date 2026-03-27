@@ -1,0 +1,228 @@
+{
+  "id": "crypto-marine-fundamentals",
+  "title": "Cryptography Fundamentals",
+  "description": "Learn cryptography basics through the lens of marine biology. This adaptive course tailors content to your level, from substitution ciphers to public key encryption, all framed in the context of securing marine research and protecting ocean ecosystems.",
+  "topic": "Cryptography Fundamentals",
+  "theme": "marine biology",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "cryptography",
+    "security",
+    "encryption",
+    "marine biology",
+    "adaptive learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Marine Security Diagnostic Quiz",
+      "content": "Test your understanding of cryptography concepts through real-world marine research scenarios. Your responses will guide us to the right level for your learning path.",
+      "questions": [
+        {
+          "question": "A marine research team needs to transmit sensitive whale migration data over the internet. What is encryption?",
+          "options": [
+            "Converting readable data into a secret format that only authorized recipients can understand",
+            "Making data smaller to save storage space",
+            "Backing up data to multiple servers",
+            "Adding metadata tags to scientific datasets"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Encryption is the process of transforming data so only those with the proper key can read it.",
+            "Incorrect. Encryption isn't about file size\u2014it's about security and confidentiality.",
+            "Incorrect. That's data redundancy, not encryption.",
+            "Incorrect. Metadata tagging is organizational, not cryptographic."
+          ],
+          "explanation": "Encryption is fundamental to protecting sensitive information. In marine research, it ensures that proprietary fish population counts and location data remain confidential from competitors."
+        },
+        {
+          "question": "In the context of protecting coral reef monitoring data, what is a cryptographic key?",
+          "options": [
+            "A password you remember by heart",
+            "A secret piece of information (like a password or number sequence) used to encrypt and decrypt data",
+            "A type of fish species used as a mascot",
+            "A backup storage device"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Keys are more complex and secure than simple passwords.",
+            "Correct! A cryptographic key is the secret ingredient that makes encryption work.",
+            "Incorrect. That's not related to cryptography.",
+            "Incorrect. That's a storage solution, not a key."
+          ],
+          "explanation": "Keys are like unique combinations to a lock. In marine conservation, they ensure that only authorized researchers can access sensitive data about endangered species locations."
+        },
+        {
+          "question": "Marine biologists want to verify that a fish sample's genetic sequence hasn't been altered during transmission. Which cryptographic technique is best suited for this?",
+          "options": [
+            "Encryption\u2014to scramble the genetic data",
+            "Hashing\u2014to create a digital fingerprint that detects any changes",
+            "Key exchange\u2014to share passwords securely",
+            "Steganography\u2014to hide data inside other files"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Encryption hides data but doesn't verify integrity.",
+            "Correct! Hashing creates a unique fingerprint. If the data changes, the hash changes.",
+            "Incorrect. Key exchange is for sharing secrets, not checking integrity.",
+            "Incorrect. Steganography hides data but doesn't verify it."
+          ],
+          "explanation": "Hashing is like a biological fingerprint\u2014unique and unchangeable. If someone tampers with genetic data during transmission, the hash will differ, immediately alerting researchers to the problem."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced Topic: Asymmetric Encryption for Marine Networks",
+      "content": "Public key cryptography uses two related keys: a public key (like a coral reef ID everyone knows) and a private key (like a secret genetic marker only you possess). When a researcher wants to send encrypted fish migration data to a colleague, they encrypt it using the colleague's public key. Only the colleague, holding the matching private key, can decrypt it. This system is ideal for secure communication in distributed marine research networks where multiple teams work independently but must share confidential findings. Real-world example: The Ocean Data Portal uses RSA encryption (2048-bit keys) to secure sensitive marine ecosystem assessments before transmission to international conservation bodies.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Case Study: Securing Whale Migration Tracking Data",
+      "content": "A marine research consortium tracks endangered humpback whales across three ocean basins. Team A (Hawaii) generates daily migration coordinates, Team B (Mexico) processes acoustic signals, and Team C (Arctic) monitors breeding grounds. To securely share this data: Team A generates a 2048-bit RSA key pair. Their public key is shared with Teams B and C via a secure channel. When Team B discovers a whale pod, they encrypt the location data using Team A's public key, then transmit it over the internet. Because only Team A's private key can decrypt this data, even if hackers intercept it, they cannot read it. This asymmetric approach eliminates the problem of sharing a single secret key across three teams in different countries.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Congratulations: Advanced Cryptography Mastery",
+      "content": "You've completed the advanced cryptography pathway! You now understand asymmetric encryption, key pairs, and how public key cryptography secures distributed marine research networks. You're ready to explore advanced topics like digital signatures, elliptic curve cryptography, and blockchain applications in ocean conservation."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Cryptography Basics: Substitution Ciphers and Symmetric Keys",
+      "content": "Encryption transforms readable data (plaintext) into scrambled data (ciphertext) using a secret key. In a substitution cipher, each letter is replaced with another letter consistently. For example, if your key shifts each letter by 3 positions, 'A' becomes 'D', 'B' becomes 'E', and so on. This is called a Caesar cipher. In marine biology, researchers might use this to encode fish species codes: 'COD' (Atlantic cod) could become 'FRG' with a shift of 3. A symmetric key system means both sender and receiver use the same secret key. If a marine research team wants to send protected data about overfished populations, they share one secret key with their partner team, then both encrypt and decrypt using that shared key. Modern symmetric encryption (like AES-256) is extremely fast and secure, making it ideal for protecting large datasets of oceanographic measurements.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Encoding Fish Survey Identifiers",
+      "content": "A marine survey team needs to protect the locations of rare seahorse breeding grounds from poaching. They use a simple Caesar cipher with a shift of 5 as their shared key. The location code 'SEAHORSE-LAGOON-47' becomes 'XJSYMTXJ-QDBTTP-47' using the shift cipher. Both the field team and the lab team know the shared secret (shift of 5), so they can encrypt and decrypt messages independently. While Caesar ciphers aren't used in modern security (they're easy to break), they illustrate the core principle: a shared secret key allows two parties to keep secrets from everyone else. Real marine conservation organizations use stronger symmetric encryption like AES-256 to secure databases containing endangered species locations.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Symmetric Encryption and Keys",
+      "content": "Test your understanding of basic encryption concepts with these practice questions. Feedback is provided for each answer to help you learn.",
+      "questions": [
+        {
+          "question": "A coral reef monitoring team shares a secret numeric code (the key) with partner teams. They use this shared code to encrypt daily observation data. What is this called?",
+          "options": [
+            "Symmetric encryption - both sides share the same key",
+            "Asymmetric encryption - they use different keys",
+            "Public encryption - the key is publicly known",
+            "Hash-based encryption - the key is derived from data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! When both parties share the same secret key, it's symmetric encryption.",
+            "Incorrect. Asymmetric uses two different keys (public and private).",
+            "Incorrect. A public key defeats the purpose of secrecy.",
+            "Incorrect. Hashing doesn't encrypt\u2014it verifies."
+          ],
+          "explanation": "Symmetric encryption is the most straightforward approach when both parties can safely share a secret key, like in a trusted marine research partnership."
+        },
+        {
+          "question": "If you change even one letter in encrypted fish survey data, what should happen when the data is decrypted?",
+          "options": [
+            "It decrypts normally with no change",
+            "It decrypts to garbage/incorrect data, revealing the tampering",
+            "It decrypts partially",
+            "The system asks for a new key"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Encryption is sensitive to changes.",
+            "Correct! Changing even one encrypted character produces completely unreadable decrypted data.",
+            "Incorrect. Decryption is all-or-nothing with most ciphers.",
+            "Incorrect. The encryption system doesn't automatically detect tampering without hashing."
+          ],
+          "explanation": "This property\u2014that tiny changes in ciphertext cause huge changes in plaintext\u2014is crucial for detecting whether someone has tampered with transmitted marine data."
+        },
+        {
+          "question": "Why would a marine research station prefer symmetric encryption (one shared key) over asymmetric encryption (public/private keys) for encrypting daily water temperature and salinity measurements?",
+          "options": [
+            "Symmetric encryption is stronger and more secure",
+            "It's faster and simpler when researchers already trust each other",
+            "Asymmetric encryption doesn't exist in marine applications",
+            "Symmetric encryption uses artificial intelligence"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Strength isn't the deciding factor here.",
+            "Correct! For routine data between trusted partners, symmetric is faster and simpler.",
+            "Incorrect. Asymmetric encryption is used in many applications.",
+            "Incorrect. Neither encryption type inherently uses AI."
+          ],
+          "explanation": "When teams already have a secure channel to share a key (like a private meeting), symmetric encryption is practical and efficient for protecting large amounts of scientific data."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Congratulations: Cryptography Fundamentals Complete",
+      "content": "You've completed the cryptography fundamentals course! You now understand symmetric encryption, keys, and how encryption protects sensitive marine research data. Whether you're securing fish population surveys or protecting oceanographic discoveries, you have the foundational knowledge to apply cryptography in real-world conservation and research scenarios."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass (2+ correct)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "fail (<2 correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "continue"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "complete"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "practice"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-27T13:32:07.619370+00:00",
+  "model": "claude-haiku-4-5"
+}

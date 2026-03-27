@@ -1,0 +1,267 @@
+{
+  "id": "ml-marine-fundamentals-2026",
+  "title": "Machine Learning Fundamentals",
+  "description": "Learn machine learning through adaptive assessment pyramid, routing to appropriate depth based on performance. All examples grounded in marine biology contexts.",
+  "topic": "Machine Learning Fundamentals",
+  "theme": "marine biology",
+  "difficulty": "beginner",
+  "estimated_minutes": 50,
+  "tags": [
+    "machine learning",
+    "marine biology",
+    "adaptive learning",
+    "AI fundamentals"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Machine Learning in Marine Science",
+      "content": "Machine learning is transforming how marine biologists understand ocean ecosystems. By analyzing patterns in satellite imagery, acoustic data, and biological samples, ML models predict fish migration routes, identify coral bleaching events, and detect illegal fishing. These algorithms learn from past observations to forecast future conditions. Neural networks track whale populations across acoustic recordings, classification algorithms identify fish species from underwater images, and clustering methods reveal hidden patterns in temperature-salinity data. Marine science relies on these tools to protect biodiversity and manage sustainable fisheries. In this course, you'll discover how computers learn from marine data and make predictions about complex ocean phenomena.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "ML Foundations: Quick Check",
+      "content": "Test your grasp of core machine learning concepts before continuing.",
+      "questions": [
+        {
+          "question": "Marine biologists want to predict whether a fish population will migrate north or south based on ocean temperature. What type of machine learning is this?",
+          "options": [
+            "A) Unsupervised learning",
+            "B) Supervised learning",
+            "C) Reinforcement learning",
+            "D) Descriptive statistics"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This problem has labeled examples (past temperatures paired with actual migration directions).",
+            "Correct! We're using labeled historical data to predict a categorical label (north or south) from input features.",
+            "Incorrect. This isn't learning through trial-and-error interaction with an environment.",
+            "Incorrect. Descriptive statistics summarizes data; we're making predictions about future migration."
+          ],
+          "explanation": "Supervised learning uses labeled training examples (known outcomes) to learn patterns and predict future outcomes. Historical data linking temperature to migration direction is labeled data."
+        },
+        {
+          "question": "You build a classifier to identify healthy vs. bleached coral from underwater images. Training accuracy is 99%, but accuracy on new photos from a different reef drops to 58%. What likely happened?",
+          "options": [
+            "A) The training set was too small",
+            "B) The model is overfitting to training data",
+            "C) Bleaching patterns changed",
+            "D) The testing camera was lower quality"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Training accuracy being high despite poor generalization suggests overfitting, not data scarcity.",
+            "Correct! Overfitting means the model memorized training examples rather than learning general coral health patterns.",
+            "Incorrect. A sudden generalization failure points to a model issue, not environmental change.",
+            "Incorrect. A 41% accuracy drop is too severe to explain by image quality alone."
+          ],
+          "explanation": "Overfitting occurs when a model learns training data so precisely that it captures noise and quirks specific to that reef, rather than generalizing to coral health patterns elsewhere."
+        },
+        {
+          "question": "A researcher has 8000 whale call recordings but hasn't labeled them by species. What machine learning approach helps organize these calls?",
+          "options": [
+            "A) Supervised classification",
+            "B) Unsupervised clustering",
+            "C) Regression analysis",
+            "D) Cross-validation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Supervised learning requires labeled data, which doesn't exist here.",
+            "Correct! Clustering groups similar unlabeled data automatically based on acoustic similarity.",
+            "Incorrect. Regression predicts continuous values, not applicable for organizing recordings.",
+            "Incorrect. Cross-validation is a technique for evaluating models, not for organizing data."
+          ],
+          "explanation": "Unsupervised learning discovers structure in unlabeled data. Clustering algorithms group similar whale calls together, helping researchers identify patterns they may not have anticipated."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Intermediate Challenge: Evaluation & Optimization",
+      "content": "Demonstrate your understanding of model evaluation, feature engineering, and real-world constraints.",
+      "questions": [
+        {
+          "question": "A model predicts sea surface temperature using salinity, ocean depth, and the previous month's temperature. A data scientist removes previous month's temperature because it's highly correlated with the target variable. Why might this be problematic?",
+          "options": [
+            "A) Correlation with the target is bad and causes underfitting",
+            "B) High correlation with the target is useful for prediction; redundancy is the concern, not correlation",
+            "C) Lagged features always cause overfitting",
+            "D) Temperature cannot predict future temperature"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Correlation with the target is exactly what we want in a feature.",
+            "Correct! We remove truly redundant features, not those correlated with the target. Lagged variables often improve forecasting.",
+            "Incorrect. Using past values to predict future values is a standard and effective technique.",
+            "Incorrect. Lagged temperature is actually one of the most useful oceanographic predictors."
+          ],
+          "explanation": "In feature engineering, correlation between a feature and target is desirable. We remove features that are redundant (correlated with other features but add no new predictive information), not those that predict well."
+        },
+        {
+          "question": "You build a detector for harmful algal blooms (HABs) in coastal waters. Your test set is 94% normal water and 6% HAB-contaminated. A naive model that always predicts 'no HAB' gets 94% accuracy. Why is this misleading?",
+          "options": [
+            "A) 94% accuracy proves the model works",
+            "B) Accuracy hides poor performance on rare but critical events; recall and precision matter more here",
+            "C) The test set should be 50-50 balanced",
+            "D) Accuracy is meaningless for classification"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. High accuracy on imbalanced data can hide complete failure on rare events.",
+            "Correct! With imbalanced classes, use recall (catch actual HABs), precision (avoid false alarms), and F1-score instead of accuracy.",
+            "Incorrect. Class balance should match the real-world problem distribution, not be artificially balanced.",
+            "Incorrect. Accuracy is a valid metric; it's just inappropriate for imbalanced datasets without supporting metrics."
+          ],
+          "explanation": "With imbalanced classes, a model predicting the majority class always gets high accuracy while detecting zero rare events. For early warning systems, catching actual HABs (recall) and minimizing false alarms (precision) are critical."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n5",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Building Blocks: Core ML Concepts",
+      "content": "Let's establish a solid foundation. Machine learning teaches computers to recognize patterns in data, much like a marine biologist learns to identify fish species by examining many examples. Supervised learning uses labeled examples\u2014imagine training a system on thousands of sonar images labeled 'tuna' or 'shark'. The algorithm learns distinguishing patterns, then predicts labels for new sonar readings. Unsupervised learning finds hidden patterns without pre-labeled examples\u2014like grouping whale calls by acoustic similarity without knowing species names beforehand. During training, the model adjusts its internal parameters to minimize errors, similar to tuning underwater sensors until they reliably detect target whale songs. Real marine datasets are messy: faulty sensor readings create missing data, different researchers label observations differently, and ocean conditions vary unpredictably. Understanding these foundations prepares you to handle real-world complexity and recognize when models succeed or fail.",
+      "next": "n6"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Advanced Topics: Robust Models & Real Deployments",
+      "content": "With fundamentals mastered, explore techniques that separate excellent models from mediocre ones. Regularization prevents overfitting by penalizing overly complex models\u2014imagine a fish classifier that memorizes exact pixel colors from training images instead of learning distinguishing body shapes that generalize across lighting and angles. L1 and L2 regularization add a complexity cost encouraging simpler, more generalizable decision boundaries. Cross-validation rigorously estimates real-world performance by training on data subsets and testing on held-out portions, revealing whether your sardine catch forecast truly generalizes or merely fits historical noise. Feature engineering\u2014extracting meaningful signals from raw sensor data\u2014often matters more than algorithm choice; computing weekly temperature averages instead of raw readings, for example, can dramatically improve forecasting accuracy. Ensemble methods combine multiple models (averaging neural network predictions with random forest predictions, for instance) to reduce individual model biases and achieve performance that single models cannot match. These techniques transform proof-of-concept models into production systems that reliably serve marine conservation goals.",
+      "next": "n8"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Case Study: Coral Bleaching Classification",
+      "content": "Walk through a realistic application. A research team collects underwater photos and thermal images of 500 coral colonies, labeling each as 'healthy' or 'bleached.' They extract numerical features: dominant color (red = healthy, white = bleached), surface texture roughness (rough = healthy, smooth = bleached), and temperature anomaly (degrees above historical baseline). They train a logistic regression model on 400 samples, reserving 100 for testing. Test accuracy reaches 87%. However, reviewing failures reveals the model struggles with partially bleached colonies where color and texture signals conflict. They add a manual expert review step for uncertain predictions. This case demonstrates that accuracy metrics tell only part of the story\u2014understanding failure modes, business constraints, and whether automation is appropriate matters equally. Sometimes a 'good' model must be supplemented with human oversight.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Evaluating Real Ocean Models",
+      "content": "Reinforce understanding of evaluation metrics and their real-world implications.",
+      "questions": [
+        {
+          "question": "An oceanographer trains a regression model to predict sardine catch volume (tons) from salinity, temperature, and fishing effort. Mean absolute error on test data is 3.2 tons. Is this a good model?",
+          "options": [
+            "A) Yes, 3.2 is a low error",
+            "B) Cannot judge without knowing typical catch range and business requirements",
+            "C) No, all regression models should achieve near-zero error",
+            "D) Error magnitude is context-independent"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Error magnitude only matters relative to the problem's scale.",
+            "Correct! In a 10\u2013600 ton range, 3.2 tons might be excellent. In a 10\u201315 ton range, it's terrible.",
+            "Incorrect. Real-world data always has irreducible noise; zero error is unrealistic.",
+            "Incorrect. A 5-ton error means very different things for different fisheries."
+          ],
+          "explanation": "Always evaluate model performance relative to problem context: the range of expected values, business impact of errors, and decision-making thresholds. A 3.2-ton error is meaningless in isolation."
+        },
+        {
+          "question": "You optimize a whale call detection system for a marine sanctuary. False negatives (missing real whales) disappoint visitors. False positives (false alarms) waste researcher time checking recordings. Which metric should you prioritize?",
+          "options": [
+            "A) Precision\u2014minimize false alarms at all costs",
+            "B) Accuracy\u2014maximize overall correctness",
+            "C) Recall\u2014catch as many real whales as possible",
+            "D) Specificity\u2014avoid false positives"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Precision minimizes false alarms but at the cost of missing whales.",
+            "Incorrect. Accuracy hides the imbalance between false negatives and false positives.",
+            "Correct! High recall means catching most real whales, even if some false alarms occur.",
+            "Incorrect. Specificity minimizes false positives\u2014the opposite of your stated priority."
+          ],
+          "explanation": "Business context determines metric priority. For visitor experiences, missing whales (false negatives) is worse than occasional false alarms. High recall tolerates false positives. If wasted researcher time were critical, you'd prioritize precision instead."
+        }
+      ],
+      "pass_threshold": 50,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Expert Mastery Achieved",
+      "content": "Outstanding! You've progressed from fundamentals through advanced production-ready topics. You understand supervised and unsupervised learning, recognize overfitting and evaluation pitfalls, and can apply regularization, cross-validation, feature engineering, and ensemble methods to real marine challenges. You're prepared to build systems that predict sea surface temperature anomalies, classify underwater species from sonar imagery, forecast harmful algal blooms, and track whale populations across acoustic data. The ocean is generating unprecedented biological, physical, and chemical data\u2014your ML expertise positions you to help marine scientists protect ecosystems, manage sustainable fisheries, and understand climate impacts. Next: apply these concepts to your own research questions, explore specialized topics like deep learning for high-dimensional imagery, or investigate time-series forecasting for oceanographic prediction."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundation Complete",
+      "content": "Excellent progress! You've built a solid foundation in machine learning. You understand how supervised learning works (training on labeled coral photos), recognize overfitting risks, and distinguish between labeled and unlabeled learning scenarios. These concepts are essential for real ML applications. In marine science, you now appreciate how researchers use these tools: training classifiers on sonar data to identify fish species, building regression models to predict catch volumes, or clustering whale calls by acoustic similarity. Continue exploring: work with small datasets, investigate why models fail, and always ask whether predictions generalize beyond training scenarios. Marine ML is rapidly advancing, and your foundational understanding positions you to contribute meaningfully to conservation and ocean science."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "begin"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass (\u226566%)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "fail (<66%)"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n5",
+      "label": "pass (\u226550%)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail (<50%)"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "continue"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n8",
+      "label": "complete"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "complete"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "continue"
+    }
+  ],
+  "generated_at": "2026-03-27T14:21:24.791144+00:00",
+  "model": "claude-haiku-4-5"
+}

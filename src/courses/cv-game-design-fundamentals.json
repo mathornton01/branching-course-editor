@@ -1,0 +1,148 @@
+{
+  "id": "cv-game-design-fundamentals",
+  "title": "Computer Vision Fundamentals: A Game Developer's Journey",
+  "description": "Learn computer vision principles by building vision-enabled games. Explore real-time vision for action games vs. static image analysis for puzzles, and discover how performance constraints shape vision system design.",
+  "topic": "Computer Vision",
+  "theme": "game design",
+  "difficulty": "beginner",
+  "estimated_minutes": 35,
+  "tags": [
+    "computer vision",
+    "game development",
+    "object detection",
+    "real-time systems",
+    "image processing"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Your First Vision-Enabled Game",
+      "content": "You're leading a game development team at a startup. Your technical director challenges you: 'Let's build a game that uses computer vision to interact with players.' The board is excited, but your team needs to decide what kind of vision system to implement. Do you focus on real-time vision processing for action games, or take a simpler approach with static image analysis for puzzle mechanics?",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Game Genre",
+      "content": "Your prototype could be either an action game requiring real-time computer vision, or a puzzle game with image analysis. Which vision challenge do you want to solve?",
+      "choices": [
+        {
+          "label": "Action Game: Build a real-time vision system",
+          "next": "n3"
+        },
+        {
+          "label": "Puzzle Game: Analyze static images",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Real-Time Vision: The Speed Challenge",
+      "content": "Real-time computer vision for games is fundamentally different from offline analysis. Your action game runs at 60 FPS, giving you only ~16 milliseconds per frame to detect objects, track player movement, and update game state. A naive approach\u2014processing every pixel at full resolution\u2014would take 100+ ms per frame, causing unplayable lag. The solution: use efficient techniques like multi-scale feature extraction (image pyramids), region-of-interest selection, and frame prediction to maintain playable frame rates while keeping accuracy high enough for compelling gameplay.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Case Study: Pose-Aware Fighting Game",
+      "content": "Your team prototypes a martial arts game detecting player pose in real-time. A naive implementation processes the full 1080p webcam feed\u2014it runs at 3 FPS. Your CV engineer restructures: detect the player with a fast bounding box, extract only that region, run detailed pose estimation on a 224\u00d7224 crop, and reuse predictions for 2-3 frames. Result: 60 FPS with 99% accuracy. The multi-scale approach reduced computational load by 400x while improving responsiveness. This demonstrates the core principle: match algorithmic complexity to constraints.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "Implementation Crossroads",
+      "content": "Your prototype works, but you need to optimize for different hardware. Two strategies compete: invest in smart feature extraction with temporal prediction, or attempt brute-force processing. What do you choose?",
+      "choices": [
+        {
+          "label": "Smart: Multi-scale pyramid + temporal prediction",
+          "next": "n6"
+        },
+        {
+          "label": "Brute Force: High-resolution every frame",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Success: Vision-Enhanced Game Shipped",
+      "content": "Your team implements multi-scale processing and temporal coherence. The game runs smoothly on mid-range hardware, players love responsive vision-based controls, and reviews praise the 'magical' movement integration. You've mastered the core CV principle: match algorithmic complexity to real-time constraints. Your game becomes a success story, and you're invited to speak at GDC about real-time vision in games. The key insight: efficiency in computer vision isn't optional\u2014it's foundational."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Cautionary Tale: Performance Meltdown",
+      "content": "Your team pushes full-resolution processing every frame. The game stutters with 200ms input lag, breaking player immersion. Bad reviews cite 'broken motion controls.' You realize too late: real-time vision requires ruthless optimization\u2014trading some accuracy for responsiveness, using approximations, and embracing parallel processing. The post-mortem becomes a learning moment: computer vision in games lives at the intersection of accuracy and speed. Both matter, and neither can be ignored."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Static Image Analysis: The Flexibility Path",
+      "content": "Your puzzle game takes a different approach. Players photograph a Rubik's cube, your game detects colors on each face using image segmentation and color quantization, and generates a solving sequence. This eliminates real-time pressure\u2014you can spend 500ms per image without gameplay impact. Computer vision here prioritizes accuracy and completeness over speed, using techniques like histogram equalization, contour detection, and ML classifiers. You learn that static image analysis focuses on robustness: handling shadows, varied lighting, angles, and material reflectance.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Puzzle Game Shipped: Image Analysis Mastered",
+      "content": "Your Rubik's cube solver becomes a hit indie game. Players enjoy the hybrid physical-digital experience. You've learned that computer vision fundamentals apply everywhere: whether handling real-time constraints in action games or perfecting accuracy in puzzle mechanics, the core principles remain constant\u2014understand image data, extract meaningful features, design efficient algorithms. Your next project will combine both approaches."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Action game path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n8",
+      "label": "Puzzle game path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Optimized approach"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Brute force approach"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T14:12:01.950880+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,132 @@
+{
+  "id": "fastapi-film-production-course",
+  "title": "Web Development with FastAPI: A Film Production Studio API",
+  "description": "Learn FastAPI by building a web API for a film production company. Navigate different architectural approaches through branching scenarios.",
+  "topic": "Web Development with FastAPI",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 120,
+  "tags": [
+    "FastAPI",
+    "Web Development",
+    "Python",
+    "API Design",
+    "Film Production"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Reel Productions Needs an API",
+      "content": "You've just been hired as a senior developer at Reel Productions, a growing film production company. The studio produces 30+ films annually and needs a web API to manage productions, track crew assignments, handle location scouting, and coordinate budgets. Your team has chosen FastAPI for its speed, type safety, and async capabilities. The CEO needs your strategic recommendation: should you build a focused MVP first or design a comprehensive system from the start?"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Your Architecture Strategy",
+      "content": "As the lead architect, you must decide your approach to building Reel Productions' production management API. Both paths are viable, but each has tradeoffs in timeline, complexity, and future flexibility.",
+      "choices": [
+        {
+          "label": "Start with an MVP: Focus on core features (films, crew, basic scheduling)",
+          "next": "n3"
+        },
+        {
+          "label": "Build comprehensive upfront: Design for all planned features (scheduling, budgets, equipment, locations)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Building the MVP: FastAPI Foundations",
+      "content": "You decide on the MVP path. FastAPI excels at rapid development with automatic API documentation and Pydantic validation. You start with core endpoints: POST /productions (create a new film), GET /productions/{id} (fetch film details), POST /crew (register crew members), GET /productions/{id}/crew (list assigned crew). Each endpoint validates input data\u2014a film must have a title, budget, and genre. Pydantic models ensure invalid requests fail fast with clear error messages. Your API is async, handling multiple concurrent requests from your web dashboard. Within 2 weeks, the MVP is working and generating real usage data."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "MVP Success\u2014What's Next?",
+      "content": "The MVP launches to positive feedback. Your crew loves the simplicity\u2014fast loading, clear data, minimal bugs. However, production managers mention they need location scheduling and budget tracking. You have two options: refactor to scale and add these features iteratively, or declare the MVP complete and shift focus elsewhere.",
+      "choices": [
+        {
+          "label": "Refactor and iterate: Add scheduling and budget endpoints based on real feedback",
+          "next": "n5"
+        },
+        {
+          "label": "Ship the MVP as-is: You've met the deadline, let stakeholders request enhancements later",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Success Through Iteration",
+      "content": "You spend the next month refactoring with proper database relationships using SQLAlchemy ORM. New endpoints emerge: POST /productions/{id}/locations (assign shooting locations), POST /productions/{id}/budgets (track spending by department). Because you validated with real users first, each new feature aligns with actual workflows. The API scales to handle 50+ concurrent productions. You implement proper filtering (GET /crew?department=cinematography) and pagination. Your team cites this as pragmatic engineering\u2014you shipped fast, learned from users, and evolved based on evidence. Production efficiency increases by 30%, and you're promoted to architecture lead."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "The MVP Stalls",
+      "content": "You ship the MVP as-is, celebrating on time and on budget. For three months, it runs smoothly. Then, mid-year budget reviews hit. Production managers realize they can't track spending per department or scene. Location scouts need to reserve equipment. The API, once praised for simplicity, now feels incomplete. Support tickets pile up. You're assigned to add missing features, but the original simple design wasn't meant for extensions. Refactoring becomes painful\u2014you should have validated feature needs upfront. The project is deprioritized for a replacement. You learn that pragmatism requires stakeholder alignment, not just shipping fast."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Designing a Comprehensive System",
+      "content": "You choose to design comprehensively upfront. You spend two weeks meeting stakeholders\u2014producers, location scouts, crew leads, finance teams\u2014to map all requirements. The API must handle: films (with shooting schedules, genres, budgets), crew (with availability, rates, departments), locations (with equipment, permits, rental costs), and budgets (tracking actuals vs. projections). You design a relational database with proper foreign keys and indexes. In FastAPI, you implement role-based access control (directors see budgets; crew see schedules). You use Pydantic for complex nested validation. SQLAlchemy handles lazy-loading strategies efficiently. Endpoints support filtering, pagination, and sorting. Your API documentation auto-generates via OpenAPI/Swagger. After six weeks of careful development, the system is production-ready and comprehensive."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "A Scalable Foundation",
+      "content": "Your comprehensive API launches with full feature coverage. The production team trusts it immediately\u2014everything they need is there. Locations, equipment, budgets, schedules, crew assignments\u2014all available through well-designed REST endpoints. Within the first year, Reel Productions uses it to manage 40+ simultaneous productions. The codebase remains maintainable because you invested in architecture from day one. When new features emerge (equipment rental notifications, multi-currency budgets, location availability calendars), they integrate smoothly into the existing schema. You're recognized for building a system that scaled gracefully. However, you reflect that some initial features (like equipment tracking) took months to be widely used\u2014a reminder that comprehensive upfront design sometimes over-engineers for needs that emerge slower than expected."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "MVP Path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Comprehensive Path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Iterate & Succeed"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Ship & Stall"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T13:06:58.999537+00:00",
+  "model": "claude-haiku-4-5"
+}

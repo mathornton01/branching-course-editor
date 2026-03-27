@@ -1,0 +1,244 @@
+{
+  "id": "uuid-bayesian-game-design",
+  "title": "Bayesian Statistics in Game Design",
+  "description": "Master Bayesian reasoning for game balance through three key concepts: priors, likelihood, and posterior updates. Learn to make data-driven balance decisions in interactive game design.",
+  "topic": "Bayesian Statistics",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "Bayesian",
+    "game-design",
+    "statistics",
+    "balance",
+    "probability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Bayesian Thinking in Game Design",
+      "content": "Bayesian statistics helps game designers make decisions under uncertainty. In game design, you often start with assumptions (priors) about player behavior or game balance, observe what actually happens in playtesting (evidence), and update your beliefs. This course explores how Bayesian reasoning\u2014updating beliefs with new data\u2014is essential for iterative game design and balancing multiplayer games.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which aspect of Bayesian game design interests you most?",
+      "content": "Choose one of three paths to explore how Bayesian thinking applies to game balance.",
+      "choices": [
+        {
+          "label": "Starting Assumptions (Priors)",
+          "next": "n3"
+        },
+        {
+          "label": "Observing Evidence (Likelihood)",
+          "next": "n5"
+        },
+        {
+          "label": "Updating Beliefs (Posterior)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Prior Probabilities in Game Balance",
+      "content": "In game design, a \"prior\" is your initial belief about something before seeing player data. For example, a designer might assume a new weapon has a 60% win rate because of its design specs. This prior comes from playtester feedback, design intuition, or similar games. When balancing a multiplayer game, priors represent your baseline assumptions. As you gather more player data, you'll update these priors to get more accurate beliefs about true win rates. Understanding priors is crucial because they significantly influence how quickly you correct balance issues during development.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Balancing a New Game Character",
+      "content": "Your game has three character classes. Early playtesting with 20 players suggests Warrior wins 55% of matches, Mage wins 35%, and Rogue wins 10%. You set these as your prior probabilities for character balance. However, you only tested with casual players. Before making balance changes, you recognize this prior might be biased (casual players might not play Rogue well). Your prior of P(Warrior dominance) = 0.55 will be revised when you test with competitive players who have more balanced win rates. This example shows how initial beliefs must account for their own limitations.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Likelihood: Interpreting Game Events",
+      "content": "\"Likelihood\" in Bayesian statistics means the probability of observing certain game events given a specific underlying reality. In game design, if you hypothesize that a spell is overpowered, the likelihood is: what's the probability of seeing this many wins if the spell were actually balanced? A spell that wins 75% of matches is strong evidence that it's overpowered, because such a high win rate is very unlikely if the spell were truly balanced. Likelihood is not the same as your belief; it's about how probable the evidence is under different scenarios.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Detecting an Overpowered Item",
+      "content": "You observe that in 200 ranked matches, a new sword has a 72% win rate when equipped. You want to know: Is this overpowered or just lucky variance? Under the hypothesis \"the sword is balanced (50% win rate)\", what's the likelihood of observing 72% or higher? Using a binomial model, this likelihood is extremely small (p < 0.001), providing strong evidence against the balanced hypothesis. Under the hypothesis \"the sword has a 75% true win rate\", the likelihood of observing 72% is much higher. This comparison of likelihoods across hypotheses is the foundation of Bayesian reasoning.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Posterior Probabilities: Combining Data and Belief",
+      "content": "The posterior is your updated belief after seeing evidence. Bayes' Theorem combines three things: your prior belief, the likelihood of the evidence, and the evidence itself. In game design, after observing 200 matches, your posterior about a weapon's true win rate is more informed than your prior. If your prior was \"probably balanced\" and you observe a 72% win rate, your posterior shifts sharply toward \"overpowered.\" The beauty of Bayesian updating is that it automatically weights the evidence by your confidence in the prior. A strong prior (from expert designers) requires more evidence to shift; a weak prior (from a guess) shifts easily.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Updating a Balance Belief",
+      "content": "Before playtesting a new healer, you set a prior: P(healer is balanced) = 0.7. In 50 matches, the healer wins 62% of games. Using Bayes' theorem, you calculate the posterior: P(balanced | 62% win rate) = 0.15. Your belief has shifted\u2014you now think it's likely overpowered (posterior belief in \"overpowered\" rises to 0.75). The key insight: Bayes' theorem tells you exactly how much to shift your belief. You don't adjust arbitrarily; the math dictates the update based on how surprising the evidence is relative to your prior.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Bayesian Game Design Workflow",
+      "content": "A complete Bayesian game design process cycles through three steps: (1) Set priors\u2014establish baseline assumptions about balance based on design theory and previous playtesting. (2) Gather evidence\u2014collect player data on win rates, abilities, items, and matchups. (3) Update posteriors\u2014use Bayes' theorem to revise your balance beliefs. This cycle repeats in each playtest iteration. Early iterations have weak priors and high uncertainty; late-stage balance testing has strong priors (confident baseline beliefs) and requires larger evidence swings to justify changes. Understanding this Bayesian framework helps designers avoid over-reacting to small sample sizes and make principled balance decisions.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Bayesian Game Balance Mastery",
+      "content": "Demonstrate your understanding of priors, likelihoods, and posteriors in game design.",
+      "questions": [
+        {
+          "question": "You believe a spell has a 50% win rate (your prior). You observe 80 matches where it wins 65%. What does Bayes' theorem help you determine?",
+          "options": [
+            "The exact new win rate after one more match",
+            "How much to shift your belief from 50% toward a higher win rate",
+            "Whether the spell should be buffed or nerfed immediately",
+            "The historical win rate before you started testing"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Bayes' theorem doesn't predict individual matches; it updates your probability belief.",
+            "Correct. Bayes' theorem quantifies how much evidence should shift your belief.",
+            "Incorrect. It informs the decision, but balance changes depend on design goals too.",
+            "Incorrect. Bayes' theorem works with current data, not historical data."
+          ],
+          "explanation": "Bayes' theorem combines your prior belief with new evidence (likelihood) to produce a posterior belief. It tells you exactly how much to shift your view given the strength of the evidence."
+        },
+        {
+          "question": "In your game, Warrior class has a prior win rate of 48%, based on design specs. After 300 matches, you observe 52% win rate. What is the likelihood?",
+          "options": [
+            "The probability that Warrior truly has a 52% win rate",
+            "The probability of observing 52% win rate if Warrior is actually balanced at 50%",
+            "Your updated belief that Warrior is overpowered",
+            "The amount you should nerf Warrior"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's the posterior, not the likelihood.",
+            "Correct. Likelihood is the probability of the evidence given a hypothesis.",
+            "Incorrect. That's the posterior belief.",
+            "Incorrect. The likelihood doesn't directly dictate balance changes."
+          ],
+          "explanation": "Likelihood = P(evidence | hypothesis). It answers 'How probable is this 52% observation if the class is actually balanced?' Strong likelihoods indicate the evidence aligns well with the hypothesis."
+        },
+        {
+          "question": "You're balancing a new item. Your prior (before data) says it's probably balanced. You collect 1,000 matches of data showing a 71% win rate. What should happen to your posterior belief?",
+          "options": [
+            "Stay the same\u2014priors don't change",
+            "Shift moderately toward \"overpowered\" based on the evidence",
+            "Shift strongly toward \"overpowered\" because 1,000 is a large sample size",
+            "Shift to 71% and stay there forever"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Posteriors absolutely change based on evidence.",
+            "Partially correct, but the large sample size (1,000) makes the evidence much more convincing.",
+            "Correct. Large sample sizes (1,000 matches) produce strong evidence; your posterior should shift significantly.",
+            "Incorrect. The posterior is a probability, not a fixed outcome."
+          ],
+          "explanation": "More data = more confident posterior. With 1,000 matches at 71% win rate, you should be very confident the item is overpowered. Small priors about balance are easily overridden by large evidence."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Master of Bayesian Game Design",
+      "content": "You've mastered the three pillars of Bayesian game balancing: setting priors (initial beliefs), calculating likelihood (interpreting evidence), and updating posteriors (refining beliefs with data). Use this framework in every playtest iteration: start with informed priors, gather evidence through playtesting, and let Bayes' theorem guide your balance decisions. This principled approach turns gut feelings into data-driven design decisions, making your games more balanced and fair."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Starting Assumptions (Priors)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Observing Evidence (Likelihood)"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Updating Beliefs (Posterior)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Success"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "Review & Retry"
+    }
+  ],
+  "generated_at": "2026-03-27T13:52:16.992851+00:00",
+  "model": "claude-haiku-4-5"
+}

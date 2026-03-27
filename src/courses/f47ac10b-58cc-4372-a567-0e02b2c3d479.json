@@ -1,182 +1,162 @@
 {
   "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-  "title": "Digital Electronics for Journalists",
-  "description": "Learn how digital electronics power modern journalism through adaptive branching. Master signal processing, binary encoding, and digital systems through a diagnostic pathway tailored to your background.",
-  "topic": "Digital Electronics",
-  "theme": "journalism",
+  "title": "Introduction to R for Data Analysis: Forensic Edition",
+  "description": "Master R programming through forensic science applications. Explore DNA profiling, ballistics analysis, and crime scene statistics with hands-on forensic case studies.",
+  "topic": "Introduction to R for Data Analysis",
+  "theme": "forensic science",
   "difficulty": "beginner",
-  "estimated_minutes": 45,
+  "estimated_minutes": 90,
   "tags": [
-    "digital-electronics",
-    "journalism",
-    "broadcasting",
-    "signal-processing",
-    "diagnostic"
+    "R programming",
+    "data analysis",
+    "forensic science",
+    "statistics",
+    "crime scene investigation"
   ],
   "nodes": [
     {
       "id": "n1",
-      "type": "assessment",
-      "title": "Digital Electronics Fundamentals Check",
-      "content": "This assessment checks your understanding of basic digital concepts used in modern journalism technology. Digital systems form the backbone of broadcasting, recording, and distribution of news content. Your results will guide you to the appropriate learning path.",
-      "questions": [
-        {
-          "question": "When a newsroom's digital recorder captures an interview, it converts analog sound waves into _____, which are then processed and stored.",
-          "options": [
-            "Magnetic waves",
-            "Binary digits (0s and 1s)",
-            "Light signals",
-            "Temperature readings"
-          ],
-          "correct_index": 1,
-          "feedback": [
-            "Magnetic waves were used in older analog tape recorders.",
-            "Correct! Binary digits (0s and 1s) are the fundamental units of digital data.",
-            "Light signals are used in fiber optics, not audio recording.",
-            "Temperature readings are not used in audio capture."
-          ],
-          "explanation": "Digital electronics represent all information as binary\u2014combinations of 0s and 1s. This is how modern recording devices store audio."
-        },
-        {
-          "question": "A broadcast control room uses a logic gate to ensure that the news feed can only go live when BOTH the video encoder AND audio encoder are active. What type of gate is this?",
-          "options": [
-            "OR gate",
-            "NOT gate",
-            "AND gate",
-            "XOR gate"
-          ],
-          "correct_index": 2,
-          "feedback": [
-            "An OR gate would activate if either input is true.",
-            "A NOT gate inverts a signal.",
-            "Correct! An AND gate requires both inputs to be true.",
-            "An XOR gate activates when inputs are different."
-          ],
-          "explanation": "AND gates are fundamental digital circuits that output true only when all inputs are true\u2014essential for safety interlocks in broadcast systems."
-        },
-        {
-          "question": "In a digital camera, each pixel's color information is stored as a byte. How many bits are in a byte, and why is this significant for image quality?",
-          "options": [
-            "4 bits; allows 16 color levels",
-            "8 bits; allows 256 color levels per channel",
-            "16 bits; allows 64K colors",
-            "32 bits; allows unlimited colors"
-          ],
-          "correct_index": 1,
-          "feedback": [
-            "4 bits is too small for quality images.",
-            "Correct! 8 bits = 256 levels per color channel, enabling 16.7 million colors total in RGB.",
-            "16 bits is used for high-end professional cameras.",
-            "32 bits is used for other data, not typically for color depth."
-          ],
-          "explanation": "Professional journalism cameras use 8-bit color depth per channel (24-bit RGB) to capture rich, publication-quality images."
-        }
-      ],
-      "pass_threshold": 70,
-      "success_target": "n2",
-      "failure_target": "n5"
+      "type": "content",
+      "title": "R in Forensic Science: A Data-Driven Approach to Evidence Analysis",
+      "content": "Forensic science increasingly relies on data analysis to extract meaningful patterns from evidence. R is a powerful statistical programming language that forensic laboratories use to analyze DNA profiles, ballistics patterns, chemical traces, and crime scene distributions. In this course, you'll learn R fundamentals through three critical forensic applications: genetic evidence analysis, projectile trajectory analysis, and statistical crime scene modeling. By mastering data import, manipulation, and visualization in R, you'll develop skills that forensic professionals use daily to strengthen their testimony and solve cases.",
+      "next": "n2"
     },
     {
       "id": "n2",
-      "type": "content",
-      "title": "Digital Signal Processing in Broadcast Journalism",
-      "content": "Modern broadcast journalism relies on sophisticated digital signal processing to transform raw analog signals from microphones and cameras into distributable formats. When a live news broadcast occurs, analog audio from a reporter's microphone is sampled at specific intervals (typically 48 kHz for professional audio), converting each sample to a digital number based on its voltage level. This digitized audio is then processed through various filters, amplified, compressed for transmission, and finally delivered to viewers. The sample rate and bit depth determine the quality: higher sample rates and bit depths capture more detail but require more storage and bandwidth. Similarly, video signals are digitized by sampling the image sensor's output, converting pixel brightness values to binary data. These digital signals can be manipulated, edited, combined with graphics and lower-thirds, and transmitted across multiple platforms simultaneously\u2014something impossible with analog signals.",
-      "next": "n3"
+      "type": "decision",
+      "title": "Choose Your Forensic Specialty",
+      "content": "Which area of forensic analysis interests you most? Each path teaches essential R skills through real-world forensic scenarios.",
+      "choices": [
+        {
+          "label": "DNA & Genetic Evidence Analysis",
+          "next": "n3"
+        },
+        {
+          "label": "Ballistics & Projectile Pattern Recognition",
+          "next": "n5"
+        },
+        {
+          "label": "Crime Scene Statistics & Spatial Analysis",
+          "next": "n7"
+        }
+      ]
     },
     {
       "id": "n3",
-      "type": "example",
-      "title": "Live Election Night Coverage Signal Flow",
-      "content": "During election night coverage, a news station handles video from three studio cameras (each sampled at 1920\u00d71080 at 30fps, 8-bit color) and four remote feeds from correspondents in different states. A digital video switcher (implementing complex logic gates and multiplexers) selects which camera or feed is active at any moment. Each feed passes through digital audio processors that remove background noise, adjust levels, and mix multiple microphone inputs using binary logic. The combined broadcast signal is encoded using H.264 compression and transmitted to transmitters. The control room's operator uses logic-based systems where specific conditions trigger automatic graphics: IF (election called) AND (network confirmed) THEN (display national map). This entire operation depends on reliable digital circuits and signal processing\u2014analog broadcasting could never achieve this complexity or flexibility.",
+      "type": "content",
+      "title": "DNA Profiling: R for Genetic Evidence Analysis",
+      "content": "DNA analysis produces large datasets of allelic profiles, genetic markers, and population frequency data. In forensic casework, analysts compare suspect DNA profiles against crime scene evidence using statistical calculations like match probabilities and likelihood ratios. R excels at importing genotype files from CODIS (Combined DNA Index System), computing allele frequencies from reference populations, and calculating the probability that a DNA profile came from a random, unrelated individual. You'll learn how to load DNA data into R, filter for the 13 core loci, and compute statistical measures that courts rely on to evaluate DNA evidence strength in criminal trials.",
       "next": "n4"
     },
     {
       "id": "n4",
-      "type": "end",
-      "title": "Advanced Track Complete: Master of Digital Broadcast Systems",
-      "content": "Congratulations! You've mastered digital signal processing and understand how digital systems transform, process, and deliver broadcast-quality journalism. You comprehend sample rates, bit depths, logic circuits, and the digital infrastructure that enables modern broadcast operations. You're ready to work with professional broadcast equipment and troubleshoot technical issues in live news environments."
+      "type": "example",
+      "title": "Worked Example: Calculating DNA Match Probability",
+      "content": "A forensic lab receives DNA evidence from a crime scene and a suspect. The evidence shows matching profiles at all 13 CODIS loci. The analyst uses R to import allele frequency data from the FBI's population database, calculate observed frequencies for each allele using dplyr, and compute the combined probability. Using the product rule (multiplying individual locus probabilities under Hardy-Weinberg equilibrium), they calculate: 1 in 50 billion. This calculation demonstrates how R transforms raw genetic data into a statistic that expert witnesses explain to juries, connecting data manipulation skills to real courtroom testimony.",
+      "next": "n9"
     },
     {
       "id": "n5",
       "type": "content",
-      "title": "Introduction to Digital Electronics in Journalism",
-      "content": "Digital electronics are the foundation of every modern newsroom. Unlike older analog systems that represented information as continuous waves, digital systems represent everything as sequences of 0s and 1s (binary). A digital audio recorder captures sound by sampling the microphone's output thousands of times per second and storing each sample as a number. A digital camera stores each pixel's brightness as a binary number. These 0s and 1s are processed by tiny electronic circuits called transistors, organized into logical units that make decisions and perform operations. The key advantage of digital systems is that they can be easily copied, edited, transmitted, and stored without quality loss\u2014your morning broadcast arrives on viewers' phones, tablets, and televisions simultaneously in perfect quality.",
+      "title": "Ballistics Analysis: R for Projectile & Trace Pattern Recognition",
+      "content": "Ballistic evidence\u2014bullet striations, cartridge case markings, and distance patterns\u2014generates spatial and morphological data that forensic examiners compare across cases. R can import 3D surface profiles from automated comparison microscopes, compute spatial correlations between bullet striations, analyze shot-pattern dispersions, and identify potential firearm matches across databases of thousands of recovered projectiles. Modern ballistics examination uses R to extract quantitative surface topology features, normalize them for comparison, and rank suspect firearms by match strength. This data-driven approach helps investigators prioritize leads and prosecutors strengthen firearms evidence, moving beyond subjective microscopy comparison to rigorous statistical evaluation.",
       "next": "n6"
     },
     {
       "id": "n6",
       "type": "example",
-      "title": "Recording a Breaking News Story",
-      "content": "When a reporter breaks an urgent story, they pull out their digital audio recorder. The microphone captures sound waves as continuous analog signals. The recorder's circuit converts this signal into numbers by sampling it 48,000 times per second, storing each sample as an 8-bit binary number (0-255). This transforms analog sound into digital data storable on a memory card. Because it's digital, the reporter instantly emails the file to the newsroom thousands of miles away without degradation. In the newsroom, editors import the file into editing software, trim unwanted parts, adjust volume, and add it to a news package\u2014all possible because the data is digital. If recorded on analog tape, physical tape would need mailing or expensive transmission, and quality would degrade with each copy. Digital recording enabled modern breaking news coverage.",
-      "next": "n7"
+      "title": "Worked Example: Matching Bullet Striations Across Crime Scenes",
+      "content": "Two armed robberies occur two months apart. The ballistics examiner uses R to import 3D confocal microscopy scans of the bullet lands and grooves from both crime scenes\u2014each scan containing 50,000+ topographic data points. Using R's correlation-based analysis, they overlay the profiles, compute cross-correlation scores at different rotation angles, and identify a peak correlation of 0.94. R's ggplot2 generates overlay visualization showing perfectly aligned striations. The analyst queries a regional firearms database of 12,000 previously recovered bullets using R, and the suspect firearm from robbery one ranks as the top match for robbery two bullets (correlation 0.91). This evidence links the cases and prioritizes suspect investigation.",
+      "next": "n9"
     },
     {
       "id": "n7",
-      "type": "practice",
-      "title": "Digital Electronics Essentials Practice",
-      "content": "Test your understanding of how digital electronics enable modern journalism through this practice assessment. These questions reinforce the fundamental concepts you've learned about digital systems in news operations.",
-      "questions": [
-        {
-          "question": "A digital video camera captures images 30 times per second (30 fps). Each pixel is stored as a byte containing brightness information. Why would a journalist prefer this digital approach over old film cameras?",
-          "options": [
-            "Digital is cheaper than film",
-            "Digital images can be instantly transmitted, edited, and stored without quality loss",
-            "Digital sensors are smaller",
-            "Digital cameras are easier to use"
-          ],
-          "correct_index": 1,
-          "feedback": [
-            "While sometimes cheaper, cost isn't the primary advantage.",
-            "Correct! Digital's key advantage is instant transmission, editability, and lossless copying.",
-            "True, but not the main journalistic advantage.",
-            "Ease of use alone doesn't explain digital's adoption."
-          ],
-          "explanation": "Digital electronics revolutionized journalism by enabling instant worldwide distribution, non-destructive editing, and multi-platform adaptation."
-        },
-        {
-          "question": "A newsroom's text ticker sends alerts to reporters' phones. The letter 'A' is stored as the binary number 01000001 (8 bits). What is this representation called?",
-          "options": [
-            "Analog encoding",
-            "Bit mapping",
-            "Binary encoding",
-            "Digital translation"
-          ],
-          "correct_index": 2,
-          "feedback": [
-            "Analog encoding is continuous, not discrete.",
-            "Bit mapping is used for images.",
-            "Correct! Binary encoding represents information as sequences of 0s and 1s.",
-            "Digital translation isn't a standard term for this."
-          ],
-          "explanation": "Binary encoding is the standard way digital systems represent all data\u2014text, images, audio, and video."
-        },
-        {
-          "question": "Why is a digital recording of an interview better than an analog tape recording for a news archive?",
-          "options": [
-            "It takes up less physical space",
-            "It can be copied unlimited times without quality loss",
-            "It's easier to catalog",
-            "It sounds better"
-          ],
-          "correct_index": 1,
-          "feedback": [
-            "Physical space is a minor benefit compared to other advantages.",
-            "Correct! Digital copies are perfect clones\u2014no quality degradation regardless of copy count.",
-            "Cataloging is easier, but that's not about the recording itself.",
-            "Quality depends on original sample rate, not medium."
-          ],
-          "explanation": "Digital's perfect copyability makes it ideal for archives\u2014journalists can create backup copies and distribute globally without any quality loss."
-        }
-      ],
-      "pass_threshold": 70,
-      "success_target": "n8",
-      "failure_target": "n8"
+      "type": "content",
+      "title": "Crime Scene Statistics: R for Spatial Analysis & Geographic Patterns",
+      "content": "Crime scene analysts document the precise location of evidence items\u2014blood spatters, fibers, trace evidence, tool marks\u2014in 2D and 3D coordinate systems. R can import spatial data from total station measurements or 3D photogrammetry, calculate distance metrics between evidence clusters, identify hotspots of activity using kernel density estimation, and model spatial relationships between evidence and critical locations like entry/exit points or areas of struggle. When crimes occur in series, R helps analysts compute the geographic distribution of incidents to reveal patterns, predict likely suspect residence or workplace using spatial statistics, and generate heat maps that guide investigative focus. This transforms crime scenes from descriptive photographs into quantitative spatial datasets.",
+      "next": "n8"
     },
     {
       "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Serial Burglary Geographic Profiling",
+      "content": "A police department experiences 23 residential burglaries over six months. The analyst uses R to import GPS coordinates of each burgled home, calculates pairwise distance matrices, and applies kernel density estimation to identify geographic clustering. R's ggplot2 mapping functions visualize the burglary hotspots, revealing a dense concentration in the northeast quadrant. The analyst overlays street networks, calculates distance to public transit, and models distance decay functions. Based on this spatial analysis using R's sp and sf packages, investigators hypothesize the burglar lives or works within the 2-mile radius where crime probability peaks. This geographic profile generates actionable investigative leads and dramatically narrows search area compared to random patrol.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Multiple Data Sources: The Complete Forensic Analysis Workflow",
+      "content": "Real forensic investigations combine multiple evidence types. A suspect may be linked to a crime scene through DNA match probability, ballistics correlation, and spatial proximity\u2014each providing independent evidence of association. R's strength lies in integrating these diverse data streams: genetic profiles, ballistic topographies, and crime scene coordinates can all be processed, visualized, and cross-referenced in a single analytical workflow. You've learned how R handles DNA frequencies, ballistic striations, and geographic distributions. Now you'll synthesize these skills to analyze a realistic scenario where an analyst must coordinate evidence from multiple forensic disciplines, produce integrated results, and create a coherent narrative for prosecution.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Integrated Forensic Case Analysis: Demonstrating Mastery",
+      "content": "You are a forensic analyst evaluating a complex burglary case with three evidence sources. DNA evidence from a broken window yields a match probability of 1 in 10 million. Bullets recovered from the residence match the suspect's registered firearm with a correlation of 0.92. The burglary location falls within 1.5 miles of the suspect's address, placing it in the top 5% of the geographic crime hotspot from kernel density mapping. Your task is to interpret each evidence type using your R knowledge and synthesize the findings into a coherent case narrative.",
+      "questions": [
+        {
+          "question": "A DNA match probability of 1 in 10 million means:",
+          "options": [
+            "The suspect definitely committed the crime",
+            "There's a 1 in 10 million chance the DNA came from an unrelated person in the population",
+            "The lab made an error in analysis",
+            "The DNA evidence cannot be used in court"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect\u2014match probability statistics measure likelihood, not certainty",
+            "Correct\u2014this is the technical definition of match probability used in forensic genetics",
+            "Incorrect\u2014quality DNA analysis produces reliable statistical measures",
+            "Incorrect\u2014this statistic is admissible and frequently used in judicial proceedings"
+          ],
+          "explanation": "Match probability quantifies how rare a DNA profile is in the population, helping courts understand evidence strength without claiming absolute certainty."
+        },
+        {
+          "question": "If ballistic correlation between the suspect's firearm and evidence bullets is 0.92:",
+          "options": [
+            "The correlation is too low to be meaningful in court",
+            "The comparison is inconclusive and requires more data",
+            "The striations are nearly identical, supporting a firearm match",
+            "Only DNA evidence matters; ballistic evidence is supplementary"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect\u20140.92 is an exceptionally high correlation on a 0\u20131 scale",
+            "Incorrect\u20140.92 indicates high confidence in a ballistic match",
+            "Correct\u2014this correlation suggests the suspect's firearm fired the evidence bullets",
+            "Incorrect\u2014ballistics provides independent evidence that strengthens the overall case"
+          ],
+          "explanation": "A correlation of 0.92 means the striations on evidence bullets align with the suspect's gun's characteristics with 92% similarity\u2014very strong evidence of a match."
+        },
+        {
+          "question": "The suspect's residence is in the top 5% of the geographic crime hotspot. Combined with DNA and ballistics, this suggests:",
+          "options": [
+            "Spatial analysis alone is sufficient to prove guilt",
+            "Each independent evidence source strengthens the overall case",
+            "The spatial evidence contradicts the DNA and ballistic findings",
+            "Geographic profiling is only useful in serial crime series"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect\u2014no single evidence type proves guilt independently",
+            "Correct\u2014multiple independent forensic sources converge to build a substantially stronger case",
+            "Incorrect\u2014the spatial location supports and reinforces the DNA and ballistic findings",
+            "Incorrect\u2014geographic analysis applies to both single incidents and series crimes"
+          ],
+          "explanation": "The convergence of DNA (1 in 10 million), ballistics (0.92 correlation), and geographic proximity (top 5% hotspot) creates powerful cumulative evidence that would be compelling to a jury."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
       "type": "end",
-      "title": "Foundation Complete: Ready for Journalism Technology",
-      "content": "Excellent! You've completed the foundational track and understand how digital electronics power modern journalism. You know how analog signals convert to digital data, how digital systems process and transmit information, and why digital technology is essential to modern news gathering and distribution. You're ready to explore specific journalism technologies and work confidently with digital equipment in newsrooms."
+      "title": "Case Closed: R in Forensic Science Mastery",
+      "content": "Congratulations! You've mastered the foundational R skills that forensic scientists use daily to analyze evidence. You understand how to manipulate genetic profiles, compare ballistic patterns, and model crime scene spatial distributions. These skills form the backbone of modern forensic analysis. As you advance, you'll explore more sophisticated statistical techniques, larger forensic databases, and integrated case management systems\u2014all built on the R fundamentals you've learned. Your ability to extract data-driven insights from evidence will strengthen investigations, support prosecution, and advance justice. Now go solve crimes with data!"
     }
   ],
   "connections": [
@@ -184,45 +164,81 @@
       "id": "c1",
       "source": "n1",
       "target": "n2",
-      "label": "Pass (\u226570%) - Advanced Path"
+      "label": "Next"
     },
     {
       "id": "c2",
-      "source": "n1",
-      "target": "n5",
-      "label": "Fail (<70%) - Foundational Path"
+      "source": "n2",
+      "target": "n3",
+      "label": "DNA & Genetic Evidence Analysis"
     },
     {
       "id": "c3",
       "source": "n2",
-      "target": "n3",
-      "label": "Next"
+      "target": "n5",
+      "label": "Ballistics & Projectile Pattern Recognition"
     },
     {
       "id": "c4",
-      "source": "n3",
-      "target": "n4",
-      "label": "Complete"
+      "source": "n2",
+      "target": "n7",
+      "label": "Crime Scene Statistics & Spatial Analysis"
     },
     {
       "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Next"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
       "source": "n5",
       "target": "n6",
       "label": "Next"
     },
     {
-      "id": "c6",
+      "id": "c8",
       "source": "n6",
-      "target": "n7",
-      "label": "Practice"
+      "target": "n9",
+      "label": "Continue"
     },
     {
-      "id": "c7",
+      "id": "c9",
       "source": "n7",
       "target": "n8",
-      "label": "Complete"
+      "label": "Next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Assessment"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Success"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "Retry"
     }
   ],
-  "generated_at": "2026-03-27T10:10:53.317549+00:00",
+  "generated_at": "2026-03-27T14:11:08.106734+00:00",
   "model": "claude-haiku-4-5"
 }

@@ -1,0 +1,951 @@
+{
+  "id": "complex-showcase",
+  "title": "Advanced Systems Architecture: A Branching Learning Journey",
+  "description": "A comprehensive, multi-path exploration of distributed systems architecture covering design principles, consistency models, database internals, security hardening, performance optimization, and networking. Learners navigate branching decisions, pass knowledge gates, face randomized scenarios, and take assessments that route them through personalized learning paths. This course exercises every node type in the branching course editor.",
+  "topic": "Systems Architecture",
+  "theme": "software engineering",
+  "difficulty": "advanced",
+  "estimated_minutes": 180,
+  "tags": ["systems design", "architecture", "distributed systems", "databases", "security", "networking", "CAP theorem", "consensus", "caching", "load balancing"],
+  "pages": [
+    {
+      "id": "page-1",
+      "title": "Foundations & Design Principles",
+      "nodes": [
+        {
+          "id": "p1-start",
+          "type": "content",
+          "title": "Welcome: The Architect's Challenge",
+          "content": "You have been hired as the principal systems architect for a rapidly growing fintech startup. The company processes 50,000 transactions per second, stores petabytes of financial data, and must comply with strict regulatory requirements across multiple jurisdictions. Your predecessor left behind a monolithic system that is cracking under load. Your mandate: redesign the entire platform from the ground up.\n\nThis course will take you through the fundamental decisions every architect faces. Your choices matter -- different architectural paths lead to different trade-offs, and you will need to defend your decisions with real engineering reasoning.\n\nLet's begin with the most fundamental question in distributed systems.",
+          "next": "p1-cap-intro",
+          "position": {"x": 400, "y": 50},
+          "attribute_effects": {"knowledge": 5, "experience": 0}
+        },
+        {
+          "id": "p1-cap-intro",
+          "type": "content",
+          "title": "The CAP Theorem: Foundation of Trade-offs",
+          "content": "The CAP theorem, proven by Seth Gilbert and Nancy Lynch in 2002 (based on Eric Brewer's 2000 conjecture), states that a distributed data store can provide at most two of three guarantees simultaneously:\n\n**Consistency (C):** Every read receives the most recent write or an error. All nodes see the same data at the same time.\n\n**Availability (A):** Every request receives a non-error response, without guarantee that it contains the most recent write.\n\n**Partition Tolerance (P):** The system continues to operate despite arbitrary message loss or failure of part of the network.\n\nSince network partitions are inevitable in any distributed system, you effectively choose between CP (consistency + partition tolerance) and AP (availability + partition tolerance). This is not merely academic -- it determines your entire data architecture.\n\nFor a financial platform, this choice has profound implications.",
+          "next": "p1-cap-decision",
+          "position": {"x": 400, "y": 200},
+          "attribute_effects": {"knowledge": 15, "experience": 0},
+          "layout": {
+            "blocks": [
+              {"type": "text", "content": "CAP Theorem Overview"},
+              {"type": "diagram", "content": "triangle: C-A-P with trade-off arrows"},
+              {"type": "text", "content": "Key insight: partition tolerance is non-negotiable in production distributed systems."}
+            ]
+          }
+        },
+        {
+          "id": "p1-cap-decision",
+          "type": "decision",
+          "title": "Choose Your Consistency Model",
+          "content": "Your fintech platform must handle both real-time payment processing and analytics dashboards. You cannot optimize for everything at once. Which consistency model will anchor your architecture?",
+          "choices": [
+            {
+              "label": "Strong Consistency (CP): Every read sees the latest write. Accept higher latency.",
+              "next": "p1-strong-consistency"
+            },
+            {
+              "label": "Eventual Consistency (AP): Maximize availability. Accept stale reads temporarily.",
+              "next": "p1-eventual-consistency"
+            },
+            {
+              "label": "Hybrid: Use strong consistency for payments, eventual for analytics.",
+              "next": "p1-hybrid-consistency"
+            }
+          ],
+          "position": {"x": 400, "y": 380}
+        },
+        {
+          "id": "p1-strong-consistency",
+          "type": "content",
+          "title": "Strong Consistency: The Consensus Path",
+          "content": "You choose strong consistency. Every transaction must be globally ordered and every read must reflect the latest committed state. This means implementing a consensus protocol.\n\n**Raft** (used by etcd, CockroachDB) elects a leader that serializes all writes. Reads go through the leader or require a quorum. Typical latency: 5-15ms for writes within a region.\n\n**Paxos** (used by Google Spanner, Chubby) is more general but harder to implement. Multi-Paxos amortizes leader election across many decisions.\n\n**ZAB** (ZooKeeper Atomic Broadcast) provides total ordering with a distinguished leader.\n\nFor your financial platform, strong consistency means no double-spending, no phantom reads, and ACID guarantees across distributed nodes. The cost: higher write latency and reduced availability during network partitions. If a quorum cannot be reached, writes block rather than proceed with stale data.\n\nYour payment processing will never show inconsistent balances.",
+          "next": "p1-consensus-gate",
+          "position": {"x": 100, "y": 550},
+          "attribute_effects": {"knowledge": 15, "experience": 5}
+        },
+        {
+          "id": "p1-eventual-consistency",
+          "type": "content",
+          "title": "Eventual Consistency: The Availability Path",
+          "content": "You choose eventual consistency. Every node can accept writes independently, and the system will converge to a consistent state given enough time without new updates. This is the model used by DynamoDB, Cassandra, and Riak.\n\n**How it works:** When a write arrives at any node, it is accepted immediately (low latency, high availability). The write is then asynchronously replicated to other nodes. During replication, different nodes may return different values for the same key -- this is the 'eventual' part.\n\n**Conflict resolution** becomes your core challenge. When two nodes accept conflicting writes, you need a strategy: Last-Writer-Wins (LWW) using timestamps, vector clocks for causal ordering, or CRDTs (Conflict-free Replicated Data Types) that merge automatically.\n\nFor a financial platform, this is risky. A user might see their balance as $1000 on one node and $950 on another. Double-spending becomes possible without additional safeguards.\n\nBut your system will never refuse a request. Uptime approaches 99.999%.",
+          "next": "p1-eventual-assessment",
+          "position": {"x": 400, "y": 550},
+          "attribute_effects": {"knowledge": 15, "experience": 5}
+        },
+        {
+          "id": "p1-hybrid-consistency",
+          "type": "content",
+          "title": "Hybrid Consistency: The Pragmatic Path",
+          "content": "You choose a hybrid approach -- arguably the most architecturally sophisticated option. Different subsystems get different consistency models based on their requirements.\n\n**Payment Processing (Strong Consistency):** Account balances, transaction ledgers, and fund transfers use linearizable reads and writes via a Raft-based consensus cluster. Every debit and credit is globally ordered. Latency budget: 50ms.\n\n**Analytics & Reporting (Eventual Consistency):** Dashboards, aggregate statistics, and historical reports read from eventually consistent replicas. A 5-second staleness window is acceptable. This allows horizontal read scaling without consensus overhead.\n\n**Session Data (Causal Consistency):** User sessions maintain causal ordering -- a user always sees their own writes, but may not immediately see other users' writes. This uses sticky sessions with read-your-writes guarantees.\n\nThis approach mirrors how Google Spanner, CockroachDB, and Amazon Aurora actually work in production. The complexity cost is a multi-model data layer that requires careful boundary management.",
+          "next": "p1-consensus-gate",
+          "position": {"x": 700, "y": 550},
+          "attribute_effects": {"knowledge": 20, "experience": 10}
+        },
+        {
+          "id": "p1-eventual-assessment",
+          "type": "assessment",
+          "title": "Eventual Consistency Knowledge Check",
+          "content": "Before proceeding with your eventually consistent design, demonstrate your understanding of the trade-offs.",
+          "questions": [
+            {
+              "id": "q1",
+              "type": "multiple-choice",
+              "prompt": "In an eventually consistent system, what guarantees does the system provide during a network partition?",
+              "options": [
+                {"id": "a", "label": "All reads return the most recent write"},
+                {"id": "b", "label": "All requests receive a non-error response, but data may be stale", "correct": true},
+                {"id": "c", "label": "No requests are processed until the partition heals"},
+                {"id": "d", "label": "Writes are accepted but reads are blocked"}
+              ],
+              "points": 25
+            },
+            {
+              "id": "q2",
+              "type": "multiple-choice",
+              "prompt": "Which conflict resolution strategy allows automatic merging without coordination?",
+              "options": [
+                {"id": "a", "label": "Last-Writer-Wins with wall-clock timestamps"},
+                {"id": "b", "label": "Two-phase locking"},
+                {"id": "c", "label": "CRDTs (Conflict-free Replicated Data Types)", "correct": true},
+                {"id": "d", "label": "Pessimistic concurrency control"}
+              ],
+              "points": 25
+            },
+            {
+              "id": "q3",
+              "type": "true-false",
+              "prompt": "Vector clocks can always determine a total ordering of all events in a distributed system.",
+              "correct_answer": false,
+              "points": 25
+            },
+            {
+              "id": "q4",
+              "type": "multiple-choice",
+              "prompt": "What is the primary risk of eventual consistency for a financial platform?",
+              "options": [
+                {"id": "a", "label": "Higher latency on writes"},
+                {"id": "b", "label": "Double-spending due to stale reads allowing concurrent withdrawals", "correct": true},
+                {"id": "c", "label": "Inability to scale horizontally"},
+                {"id": "d", "label": "Incompatibility with SQL databases"}
+              ],
+              "points": 25
+            }
+          ],
+          "passing_score": 75,
+          "success_target": "p1-consensus-gate",
+          "failure_target": "p1-eventual-retry",
+          "position": {"x": 400, "y": 720}
+        },
+        {
+          "id": "p1-eventual-retry",
+          "type": "content",
+          "title": "Review: Eventual Consistency Fundamentals",
+          "content": "Let's review the key concepts before you try again.\n\n**Availability during partitions:** AP systems guarantee responses, but the data may be stale. This is the core trade-off.\n\n**CRDTs** are data structures (counters, sets, registers) designed so that concurrent updates can always be merged without conflicts. G-Counters, PN-Counters, OR-Sets, and LWW-Registers are the most common types.\n\n**Vector clocks** establish causal (partial) ordering, not total ordering. They tell you if event A happened before event B, or if they are concurrent -- but concurrent events have no defined order.\n\n**Financial risk:** If two ATMs read the same balance simultaneously, both might approve withdrawals that together exceed the balance. This is the double-spending problem, and it is the fundamental reason financial systems typically require strong consistency for balance-critical operations.",
+          "next": "p1-eventual-assessment",
+          "position": {"x": 200, "y": 870},
+          "attribute_effects": {"knowledge": 10, "experience": 0}
+        },
+        {
+          "id": "p1-consensus-gate",
+          "type": "gate",
+          "title": "Architecture Foundation Gate",
+          "content": "Before proceeding to distributed systems design, ensure you have internalized the consistency model trade-offs. This gate verifies you have accumulated sufficient foundational knowledge.\n\nYou need a knowledge score of at least 25 to proceed.",
+          "gate_condition": "knowledge >= 25",
+          "default_target": "p1-architecture-style",
+          "position": {"x": 400, "y": 1000}
+        },
+        {
+          "id": "p1-architecture-style",
+          "type": "decision",
+          "title": "Choose Your Architecture Style",
+          "content": "With your consistency model chosen, you now need to decide the overall architecture pattern for the platform. Each style has different implications for team organization, deployment, and operational complexity.",
+          "choices": [
+            {
+              "label": "Microservices: Independent services communicating via APIs and message queues.",
+              "next": "p1-microservices"
+            },
+            {
+              "label": "Event-Driven/CQRS: Separate read and write models with event sourcing.",
+              "next": "p1-event-driven"
+            },
+            {
+              "label": "Modular Monolith: Single deployable with strong internal boundaries.",
+              "next": "p1-modular-monolith"
+            }
+          ],
+          "position": {"x": 400, "y": 1150}
+        },
+        {
+          "id": "p1-microservices",
+          "type": "content",
+          "title": "Microservices Architecture",
+          "content": "You decompose the platform into independently deployable services: PaymentService, AccountService, FraudDetectionService, NotificationService, ReportingService, and more.\n\n**Benefits:** Independent scaling (FraudDetection needs GPUs, Reporting needs memory), independent deployment (ship PaymentService without touching Reporting), technology diversity (Rust for the hot path, Python for ML models), and fault isolation (a Reporting crash doesn't take down payments).\n\n**Costs:** Distributed transactions become extremely difficult. A single 'transfer funds' operation now spans AccountService (debit), AccountService (credit), NotificationService (alerts), and AuditService (logging). You need saga patterns or two-phase commit. Network calls replace function calls, adding latency and failure modes. You need service discovery, circuit breakers, distributed tracing, and a service mesh.\n\n**Conway's Law applies:** Your org structure will mirror your service boundaries. Plan team ownership carefully.",
+          "next": "p1-converge-architecture",
+          "position": {"x": 100, "y": 1300},
+          "attribute_effects": {"knowledge": 10, "experience": 10}
+        },
+        {
+          "id": "p1-event-driven",
+          "type": "content",
+          "title": "Event-Driven Architecture with CQRS",
+          "content": "You adopt Command Query Responsibility Segregation (CQRS) with Event Sourcing. Instead of storing current state, you store an immutable log of every event that ever happened: AccountOpened, FundsDeposited, FundsWithdrawn, TransferInitiated, TransferCompleted.\n\n**The Write Side** accepts commands, validates business rules, and emits events to an append-only log (Kafka, EventStoreDB, or a custom WAL). Events are facts -- they never change.\n\n**The Read Side** consumes events and builds materialized views (projections) optimized for queries. Your dashboard projection aggregates balances. Your fraud projection builds behavioral profiles. Your regulatory projection generates compliance reports.\n\n**Benefits:** Complete audit trail for free (the event log IS the audit trail), temporal queries ('what was the balance at 3pm yesterday?'), and independent read/write scaling.\n\n**Costs:** Eventual consistency between write and read sides (event propagation delay), complexity in rebuilding projections, and the need for idempotent event handlers. Schema evolution of events is notoriously difficult.",
+          "next": "p1-converge-architecture",
+          "position": {"x": 400, "y": 1300},
+          "attribute_effects": {"knowledge": 15, "experience": 5}
+        },
+        {
+          "id": "p1-modular-monolith",
+          "type": "content",
+          "title": "Modular Monolith Architecture",
+          "content": "You choose the modular monolith: a single deployable artifact with strictly enforced internal module boundaries. Each module (Payments, Accounts, Fraud, Reporting) has its own database schema, its own public API surface, and communicates with other modules only through well-defined interfaces.\n\n**Why this works:** You get the conceptual clarity of microservices without the operational complexity. Function calls are nanoseconds, not milliseconds. Transactions can be local. Debugging is straightforward -- a single process with a single log stream. Deployment is atomic.\n\n**The discipline required:** Without network boundaries enforcing isolation, you must rely on code-level enforcement. Architecture fitness functions, dependency analysis tools (like ArchUnit), and strict code review prevent modules from reaching into each other's internals. The moment someone imports a class from another module's internal package, the architecture erodes.\n\n**Migration path:** A well-designed modular monolith can be decomposed into microservices later, one module at a time, when the operational complexity is justified by scale.",
+          "next": "p1-converge-architecture",
+          "position": {"x": 700, "y": 1300},
+          "attribute_effects": {"knowledge": 10, "experience": 15}
+        },
+        {
+          "id": "p1-converge-architecture",
+          "type": "content",
+          "title": "Architecture Decisions Recorded",
+          "content": "Regardless of the architectural style you chose, certain cross-cutting concerns must be addressed:\n\n1. **Observability:** Distributed tracing (OpenTelemetry), structured logging, metrics (Prometheus/Grafana), and alerting.\n2. **Resilience:** Circuit breakers, bulkheads, timeouts, retries with exponential backoff and jitter.\n3. **Security:** mTLS between services, OAuth2/OIDC for external APIs, secrets management (Vault), and encryption at rest.\n4. **Data Management:** Schema migrations, backward compatibility, data lineage tracking.\n\nYour Architecture Decision Records (ADRs) now document your consistency model and your architecture style. These are the two most consequential decisions in the entire system.\n\nIt's time to dive deeper into the distributed systems layer.",
+          "next": "p1-to-page2",
+          "position": {"x": 400, "y": 1500},
+          "attribute_effects": {"knowledge": 10, "experience": 5},
+          "layout": {
+            "blocks": [
+              {"type": "heading", "content": "Cross-Cutting Concerns Checklist"},
+              {"type": "list", "content": "Observability, Resilience, Security, Data Management"},
+              {"type": "callout", "content": "These concerns apply regardless of architecture style."}
+            ]
+          }
+        },
+        {
+          "id": "p1-to-page2",
+          "type": "page_link",
+          "title": "Proceed to Distributed Systems Deep Dive",
+          "content": "You have established the architectural foundations. Now let's explore the distributed systems internals that will make or break your platform.",
+          "target_page": "page-2",
+          "position": {"x": 400, "y": 1650}
+        }
+      ],
+      "connections": [
+        {"id": "c1-1", "source": "p1-start", "target": "p1-cap-intro", "label": ""},
+        {"id": "c1-2", "source": "p1-cap-intro", "target": "p1-cap-decision", "label": ""},
+        {"id": "c1-3", "source": "p1-cap-decision", "target": "p1-strong-consistency", "label": "Strong Consistency (CP)"},
+        {"id": "c1-4", "source": "p1-cap-decision", "target": "p1-eventual-consistency", "label": "Eventual Consistency (AP)"},
+        {"id": "c1-5", "source": "p1-cap-decision", "target": "p1-hybrid-consistency", "label": "Hybrid approach"},
+        {"id": "c1-6", "source": "p1-strong-consistency", "target": "p1-consensus-gate", "label": ""},
+        {"id": "c1-7", "source": "p1-eventual-consistency", "target": "p1-eventual-assessment", "label": ""},
+        {"id": "c1-8", "source": "p1-hybrid-consistency", "target": "p1-consensus-gate", "label": ""},
+        {"id": "c1-9", "source": "p1-eventual-assessment", "target": "p1-consensus-gate", "label": "Pass"},
+        {"id": "c1-10", "source": "p1-eventual-assessment", "target": "p1-eventual-retry", "label": "Fail"},
+        {"id": "c1-11", "source": "p1-eventual-retry", "target": "p1-eventual-assessment", "label": "Retry"},
+        {"id": "c1-12", "source": "p1-consensus-gate", "target": "p1-architecture-style", "label": "Gate passed"},
+        {"id": "c1-13", "source": "p1-architecture-style", "target": "p1-microservices", "label": "Microservices"},
+        {"id": "c1-14", "source": "p1-architecture-style", "target": "p1-event-driven", "label": "Event-Driven/CQRS"},
+        {"id": "c1-15", "source": "p1-architecture-style", "target": "p1-modular-monolith", "label": "Modular Monolith"},
+        {"id": "c1-16", "source": "p1-microservices", "target": "p1-converge-architecture", "label": ""},
+        {"id": "c1-17", "source": "p1-event-driven", "target": "p1-converge-architecture", "label": ""},
+        {"id": "c1-18", "source": "p1-modular-monolith", "target": "p1-converge-architecture", "label": ""},
+        {"id": "c1-19", "source": "p1-converge-architecture", "target": "p1-to-page2", "label": ""},
+        {"id": "c1-20", "source": "p1-to-page2", "target": "p2-intro", "label": "Navigate to Page 2"}
+      ]
+    },
+    {
+      "id": "page-2",
+      "title": "Distributed Systems Deep Dive",
+      "nodes": [
+        {
+          "id": "p2-intro",
+          "type": "content",
+          "title": "The Distributed Systems Layer",
+          "content": "Your architecture decisions are made. Now you must implement the distributed systems primitives that underpin everything: consensus, replication, partitioning, and failure handling.\n\nDistributed systems are fundamentally about managing uncertainty. Messages can be delayed, reordered, duplicated, or lost. Nodes can crash and restart with stale state. Clocks drift. Networks partition. Your job is to build correct systems atop these unreliable foundations.\n\nLet's start with how data is organized across your cluster.",
+          "next": "p2-partitioning-decision",
+          "position": {"x": 400, "y": 50},
+          "attribute_effects": {"knowledge": 5, "experience": 5}
+        },
+        {
+          "id": "p2-partitioning-decision",
+          "type": "decision",
+          "title": "Data Partitioning Strategy",
+          "content": "Your platform stores 500 million accounts. No single machine can hold them all. How do you distribute data across your cluster?",
+          "choices": [
+            {
+              "label": "Hash Partitioning: Distribute by hash(account_id) mod N for uniform spread.",
+              "next": "p2-hash-partition"
+            },
+            {
+              "label": "Range Partitioning: Distribute by account_id ranges for locality.",
+              "next": "p2-range-partition"
+            },
+            {
+              "label": "Consistent Hashing: Use a hash ring for minimal redistribution on node changes.",
+              "next": "p2-consistent-hashing"
+            }
+          ],
+          "position": {"x": 400, "y": 200}
+        },
+        {
+          "id": "p2-hash-partition",
+          "type": "content",
+          "title": "Hash Partitioning",
+          "content": "You implement hash partitioning: partition = hash(account_id) % num_partitions. This distributes data uniformly, preventing hot spots from sequential IDs.\n\n**Strengths:** Even data distribution, simple to implement, good for point queries (lookup by account_id).\n\n**Weaknesses:** Range queries become expensive -- 'find all accounts created today' must fan out to every partition. Adding or removing nodes requires rehashing and migrating a large fraction of data. If you go from 10 to 11 nodes, ~90% of keys change partitions.\n\nFor your financial platform, this means individual account lookups are fast (single partition), but generating regulatory reports that scan date ranges will be slow.",
+          "next": "p2-partition-converge",
+          "position": {"x": 100, "y": 380},
+          "attribute_effects": {"knowledge": 10, "experience": 5}
+        },
+        {
+          "id": "p2-range-partition",
+          "type": "content",
+          "title": "Range Partitioning",
+          "content": "You implement range partitioning: accounts A000000-A099999 on partition 1, A100000-A199999 on partition 2, and so on. This preserves data locality -- range scans are efficient because contiguous keys live on the same node.\n\n**Strengths:** Range queries are fast (scan within a single partition), natural ordering preserved, efficient for time-series data.\n\n**Weaknesses:** Hot spots. If new accounts are sequential, the last partition receives all writes while others idle. Celebrity accounts with high transaction volume create hot partitions. You need dynamic splitting: when a partition grows too large, split it and redistribute.\n\nGoogle Spanner and CockroachDB use range partitioning with automatic splitting. It requires more sophisticated infrastructure but enables powerful query patterns.",
+          "next": "p2-partition-converge",
+          "position": {"x": 400, "y": 380},
+          "attribute_effects": {"knowledge": 10, "experience": 5}
+        },
+        {
+          "id": "p2-consistent-hashing",
+          "type": "content",
+          "title": "Consistent Hashing with Virtual Nodes",
+          "content": "You implement consistent hashing: each node is mapped to multiple points (virtual nodes) on a hash ring. Keys are assigned to the first node encountered clockwise from their hash position.\n\n**How virtual nodes help:** Without virtual nodes, data distribution is uneven. With 150 virtual nodes per physical node, the standard deviation of load drops from 50% to under 5%. Amazon's DynamoDB paper (2007) demonstrated this approach at massive scale.\n\n**Adding/removing nodes:** When a node joins, it takes responsibility for a portion of the ring, migrating only keys from adjacent nodes (~1/N of total data). When a node leaves, its keys redistribute to adjacent nodes. This is far less disruptive than rehashing.\n\n**Replication:** Each key is replicated to the next K nodes on the ring, providing fault tolerance. Cassandra and Riak use this exact model.\n\nFor your platform, consistent hashing means smooth scaling operations with minimal data movement.",
+          "next": "p2-partition-converge",
+          "position": {"x": 700, "y": 380},
+          "attribute_effects": {"knowledge": 15, "experience": 5}
+        },
+        {
+          "id": "p2-partition-converge",
+          "type": "content",
+          "title": "Replication: Surviving Failures",
+          "content": "Regardless of partitioning strategy, every partition must be replicated for durability and availability. Your cluster replicates each partition to 3 nodes (one leader, two followers).\n\n**Synchronous replication:** The leader waits for all followers to acknowledge before confirming a write. Guarantees no data loss but increases write latency and blocks if any follower is slow or unreachable.\n\n**Asynchronous replication:** The leader confirms writes immediately and replicates in the background. Lower latency, but if the leader crashes before replication completes, data is lost.\n\n**Semi-synchronous:** The leader waits for at least one follower (a quorum of 2/3). Balances durability and latency. This is the most common production choice.\n\nYour financial platform uses semi-synchronous replication: writes are durable as long as any two of three replicas are alive. RPO (Recovery Point Objective) is zero for committed transactions.",
+          "next": "p2-failure-random",
+          "position": {"x": 400, "y": 560},
+          "attribute_effects": {"knowledge": 10, "experience": 10}
+        },
+        {
+          "id": "p2-failure-random",
+          "type": "random",
+          "title": "Production Incident: Random Failure Scenario",
+          "content": "Your platform has been running for 3 months. Suddenly, an alert fires. The on-call engineer investigates. What kind of failure has occurred?",
+          "position": {"x": 400, "y": 720}
+        },
+        {
+          "id": "p2-network-partition",
+          "type": "content",
+          "title": "Scenario: Network Partition Between Data Centers",
+          "content": "A fiber cut between your US-East and US-West data centers creates a network partition. Both sides are healthy internally, but they cannot communicate.\n\n**If you chose CP (strong consistency):** The minority side (fewer nodes) stops accepting writes to prevent split-brain. Your US-West users see errors for write operations until the partition heals. Read-only queries may still work if you allow stale reads.\n\n**If you chose AP (eventual consistency):** Both sides continue accepting writes independently. When the partition heals, you must reconcile conflicting writes. If user A transferred $500 from US-East while user B transferred $300 from the same account on US-West, you may have allowed $800 in transfers from a $600 balance.\n\n**The lesson:** Network partitions are not theoretical. AWS, Google Cloud, and Azure all experience them. Your consistency model determines whether a partition causes unavailability or data inconsistency.",
+          "next": "p2-failure-converge",
+          "position": {"x": 100, "y": 870},
+          "attribute_effects": {"knowledge": 10, "experience": 15}
+        },
+        {
+          "id": "p2-cascading-failure",
+          "type": "content",
+          "title": "Scenario: Cascading Failure from Connection Pool Exhaustion",
+          "content": "A slow database query causes connection pool exhaustion in AccountService. Threads waiting for connections pile up, consuming memory. AccountService becomes unresponsive. PaymentService, which depends on AccountService, starts timing out. Its connection pool fills up. FraudDetectionService, which depends on PaymentService, starts failing. Within 90 seconds, every service in the platform is down.\n\n**Root cause analysis:** No circuit breakers, no bulkheads, no timeout budgets. A single slow query propagated failure through the entire dependency graph.\n\n**The fix:** \n1. Circuit breakers (Hystrix pattern): After N failures, stop calling the downstream service and return a fallback immediately.\n2. Bulkheads: Isolate connection pools per downstream dependency so one slow service cannot exhaust resources meant for others.\n3. Timeout budgets: Each request gets a total time budget. If 80% is consumed by the first hop, remaining hops get fast-fail semantics.\n4. Backpressure: When a service is overwhelmed, it signals upstream to slow down (TCP flow control, HTTP 429, gRPC flow control).",
+          "next": "p2-failure-converge",
+          "position": {"x": 400, "y": 870},
+          "attribute_effects": {"knowledge": 15, "experience": 15}
+        },
+        {
+          "id": "p2-byzantine-failure",
+          "type": "content",
+          "title": "Scenario: Byzantine Fault -- Corrupted Node Sending Bad Data",
+          "content": "A hardware fault (bit flip in RAM not caught by ECC) causes one of your database replicas to silently return incorrect data. Account balances are wrong, but the node reports itself as healthy. No error is thrown -- the data is simply wrong.\n\n**Why this is terrifying:** Byzantine faults are the hardest class of distributed systems failures. The faulty node is not just slow or unresponsive -- it is actively sending incorrect information while appearing healthy.\n\n**Detection strategies:**\n1. Checksums on all data at rest and in transit (CRC32, SHA-256)\n2. Quorum reads: Read from multiple replicas and compare. If 2 of 3 agree, trust the majority.\n3. Merkle trees: Compare tree hashes between replicas to efficiently find divergent data ranges. This is how DynamoDB's anti-entropy repair works.\n4. Continuous background auditing: Periodically scan and compare replica data.\n\n**For your financial platform:** You implement read-repair with quorum reads. Every read fetches from 2 of 3 replicas. If they disagree, the minority is overwritten. The corrupted node is automatically healed.",
+          "next": "p2-failure-converge",
+          "position": {"x": 700, "y": 870},
+          "attribute_effects": {"knowledge": 15, "experience": 10}
+        },
+        {
+          "id": "p2-failure-converge",
+          "type": "content",
+          "title": "Failure Handling: Lessons Learned",
+          "content": "Every production system will experience failures. The question is not whether, but how gracefully you handle them. Your incident post-mortem reveals these principles:\n\n1. **Design for failure.** Assume every component will fail and build recovery into the architecture.\n2. **Blast radius containment.** Use bulkheads, circuit breakers, and isolation to prevent cascading failures.\n3. **Observability is not optional.** You cannot fix what you cannot see. Distributed tracing, structured logging, and real-time alerting are core infrastructure.\n4. **Chaos engineering.** Regularly inject failures in production to verify your resilience mechanisms work. Netflix's Chaos Monkey, Gremlin, and LitmusChaos are tools for this.\n5. **Runbooks and automation.** Documented recovery procedures reduce MTTR (Mean Time To Recovery).\n\nYour platform now has a comprehensive failure handling strategy. Time to tackle the database layer.",
+          "next": "p2-db-weighted",
+          "position": {"x": 400, "y": 1050},
+          "attribute_effects": {"knowledge": 5, "experience": 10}
+        },
+        {
+          "id": "p2-db-weighted",
+          "type": "weighted",
+          "title": "Database Technology Challenge",
+          "content": "Your team presents three database architectures for the core transaction store. Due to organizational dynamics, the choice is partially influenced by team expertise and vendor relationships. The probabilities reflect real-world decision-making biases.",
+          "position": {"x": 400, "y": 1200}
+        },
+        {
+          "id": "p2-db-relational",
+          "type": "content",
+          "title": "Path: Distributed SQL (NewSQL)",
+          "content": "You adopt a distributed SQL database like CockroachDB or YugabyteDB. These systems provide the SQL interface and ACID guarantees of PostgreSQL, but distribute data across a cluster using Raft consensus and automatic sharding.\n\n**How distributed SQL works:** The SQL layer parses and optimizes queries, then the distributed execution engine routes operations to the correct partitions. Multi-partition transactions use two-phase commit (2PC) coordinated by a transaction manager. Each partition is a Raft group with its own leader.\n\n**Performance characteristics:** Single-partition transactions: 2-5ms (local Raft consensus). Multi-partition transactions: 10-50ms (2PC + multiple Raft rounds). Cross-region transactions: 100-300ms (speed of light + consensus).\n\n**For your financial platform:** SQL is the natural language for financial data. Joins, aggregations, and complex queries work out of the box. ACID guarantees prevent the consistency issues that plague NoSQL in financial contexts. The trade-off is higher write latency compared to NoSQL alternatives.",
+          "next": "p2-db-converge",
+          "position": {"x": 100, "y": 1370},
+          "attribute_effects": {"knowledge": 10, "experience": 10}
+        },
+        {
+          "id": "p2-db-nosql",
+          "type": "content",
+          "title": "Path: Purpose-Built NoSQL",
+          "content": "You adopt a polyglot persistence strategy with purpose-built NoSQL databases: DynamoDB for account state (key-value with single-digit millisecond latency), Cassandra for time-series transaction logs (optimized for append-heavy workloads), and Redis for session state and caching.\n\n**DynamoDB internals:** Single-table design with composite keys. Partition key determines data distribution, sort key enables efficient range queries within a partition. Strongly consistent reads cost 2x the capacity units of eventually consistent reads. Global tables provide multi-region replication.\n\n**Cassandra internals:** Log-structured merge tree (LSM) storage. Writes go to an in-memory memtable + commit log (sequential disk write). Reads may need to check multiple SSTables on disk, making reads slower than writes. Tunable consistency: ONE, QUORUM, ALL.\n\n**The challenge:** Without SQL joins, you must denormalize aggressively. The same data may live in 5 different tables optimized for 5 different query patterns. Data consistency across these denormalized copies is your problem, not the database's.",
+          "next": "p2-db-converge",
+          "position": {"x": 400, "y": 1370},
+          "attribute_effects": {"knowledge": 10, "experience": 10}
+        },
+        {
+          "id": "p2-db-hybrid",
+          "type": "content",
+          "title": "Path: Event Store + Materialized Views",
+          "content": "You adopt event sourcing as the core data model. The source of truth is an immutable, append-only event log (Apache Kafka or EventStoreDB). All state is derived from replaying events.\n\n**The event store:** Each account is an event stream: AccountCreated -> FundsDeposited(500) -> FundsWithdrawn(100) -> FundsDeposited(200). Current balance = replay all events = $600. Kafka partitions by account_id, ensuring all events for an account are ordered.\n\n**Materialized views:** Consumers read events and build query-optimized projections: a PostgreSQL table for account balances, an Elasticsearch index for full-text search, a Redis cache for hot accounts, a data warehouse for analytics. Each projection is independently rebuildable from the event log.\n\n**Snapshotting:** Replaying millions of events per account is slow. Periodic snapshots capture state at a point in time. Reconstruction = last snapshot + events since snapshot.\n\n**For your platform:** You get a complete audit trail (every event is preserved), temporal queries, and the ability to build new projections retroactively. The cost is operational complexity and eventual consistency between the event log and its projections.",
+          "next": "p2-db-converge",
+          "position": {"x": 700, "y": 1370},
+          "attribute_effects": {"knowledge": 15, "experience": 5}
+        },
+        {
+          "id": "p2-db-converge",
+          "type": "condition",
+          "title": "Experience-Based Routing",
+          "content": "Based on the experience you have accumulated through your architectural decisions, the course adapts to your level.",
+          "condition": "experience",
+          "default_target": "p2-to-page3-standard",
+          "position": {"x": 400, "y": 1550}
+        },
+        {
+          "id": "p2-advanced-caching",
+          "type": "content",
+          "title": "Advanced Topic: Multi-Layer Caching Architecture",
+          "content": "Your experience level unlocks advanced content. Let's explore production caching architectures.\n\n**Layer 1 -- Client-side cache:** Browser/app caches with Cache-Control headers. TTL: seconds to hours. Hit rate: 40-60% for repeat requests.\n\n**Layer 2 -- CDN/Edge cache:** Cloudflare, CloudFront, or Fastly cache static and semi-static content at PoPs worldwide. Latency: 1-5ms. Hit rate: 80-95% for cacheable content.\n\n**Layer 3 -- Application cache:** In-process LRU cache (Caffeine, Guava) for hot objects. Latency: nanoseconds. Limited by process memory. Cache coherence across instances is unsolved -- each instance may have different data.\n\n**Layer 4 -- Distributed cache:** Redis Cluster or Memcached. Shared across all application instances. Latency: 0.5-2ms. Solves coherence but adds a network hop.\n\n**Layer 5 -- Database buffer pool:** InnoDB buffer pool, PostgreSQL shared_buffers. Caches frequently accessed pages in RAM. Invisible to the application.\n\n**Cache invalidation** remains one of the two hard problems in computer science. Strategies: TTL-based expiry, event-driven invalidation, write-through/write-behind, and cache-aside patterns. Each has different consistency and performance trade-offs.",
+          "next": "p2-to-page3-advanced",
+          "position": {"x": 200, "y": 1700},
+          "attribute_effects": {"knowledge": 15, "experience": 10},
+          "layout": {
+            "blocks": [
+              {"type": "heading", "content": "5-Layer Caching Architecture"},
+              {"type": "list", "content": "L1 Client, L2 CDN, L3 App, L4 Distributed, L5 DB Buffer"},
+              {"type": "callout", "content": "Cache invalidation is one of the two hard things in computer science -- Phil Karlton"}
+            ]
+          }
+        },
+        {
+          "id": "p2-to-page3-standard",
+          "type": "page_link",
+          "title": "Continue to Security & Performance",
+          "content": "Proceed to the final section covering security hardening and performance optimization.",
+          "target_page": "page-3",
+          "position": {"x": 500, "y": 1700}
+        },
+        {
+          "id": "p2-to-page3-advanced",
+          "type": "page_link",
+          "title": "Continue to Security & Performance (Advanced Track)",
+          "content": "With your deep caching knowledge, proceed to advanced security and performance topics.",
+          "target_page": "page-3",
+          "position": {"x": 200, "y": 1850}
+        }
+      ],
+      "connections": [
+        {"id": "c2-1", "source": "p2-intro", "target": "p2-partitioning-decision", "label": ""},
+        {"id": "c2-2", "source": "p2-partitioning-decision", "target": "p2-hash-partition", "label": "Hash partitioning"},
+        {"id": "c2-3", "source": "p2-partitioning-decision", "target": "p2-range-partition", "label": "Range partitioning"},
+        {"id": "c2-4", "source": "p2-partitioning-decision", "target": "p2-consistent-hashing", "label": "Consistent hashing"},
+        {"id": "c2-5", "source": "p2-hash-partition", "target": "p2-partition-converge", "label": ""},
+        {"id": "c2-6", "source": "p2-range-partition", "target": "p2-partition-converge", "label": ""},
+        {"id": "c2-7", "source": "p2-consistent-hashing", "target": "p2-partition-converge", "label": ""},
+        {"id": "c2-8", "source": "p2-partition-converge", "target": "p2-failure-random", "label": ""},
+        {"id": "c2-9", "source": "p2-failure-random", "target": "p2-network-partition", "label": "Network partition", "type": "random"},
+        {"id": "c2-10", "source": "p2-failure-random", "target": "p2-cascading-failure", "label": "Cascading failure", "type": "random"},
+        {"id": "c2-11", "source": "p2-failure-random", "target": "p2-byzantine-failure", "label": "Byzantine fault", "type": "random"},
+        {"id": "c2-12", "source": "p2-network-partition", "target": "p2-failure-converge", "label": ""},
+        {"id": "c2-13", "source": "p2-cascading-failure", "target": "p2-failure-converge", "label": ""},
+        {"id": "c2-14", "source": "p2-byzantine-failure", "target": "p2-failure-converge", "label": ""},
+        {"id": "c2-15", "source": "p2-failure-converge", "target": "p2-db-weighted", "label": ""},
+        {"id": "c2-16", "source": "p2-db-weighted", "target": "p2-db-relational", "label": "Distributed SQL", "weight": 50},
+        {"id": "c2-17", "source": "p2-db-weighted", "target": "p2-db-nosql", "label": "NoSQL", "weight": 30},
+        {"id": "c2-18", "source": "p2-db-weighted", "target": "p2-db-hybrid", "label": "Event Store", "weight": 20},
+        {"id": "c2-19", "source": "p2-db-relational", "target": "p2-db-converge", "label": ""},
+        {"id": "c2-20", "source": "p2-db-nosql", "target": "p2-db-converge", "label": ""},
+        {"id": "c2-21", "source": "p2-db-hybrid", "target": "p2-db-converge", "label": ""},
+        {"id": "c2-22", "source": "p2-db-converge", "target": "p2-advanced-caching", "label": "experience >= 40"},
+        {"id": "c2-23", "source": "p2-db-converge", "target": "p2-to-page3-standard", "label": "experience < 40"},
+        {"id": "c2-24", "source": "p2-advanced-caching", "target": "p2-to-page3-advanced", "label": ""},
+        {"id": "c2-25", "source": "p2-to-page3-standard", "target": "p3-intro", "label": "Navigate to Page 3"},
+        {"id": "c2-26", "source": "p2-to-page3-advanced", "target": "p3-intro", "label": "Navigate to Page 3 (Advanced)"}
+      ]
+    },
+    {
+      "id": "page-3",
+      "title": "Security & Performance",
+      "nodes": [
+        {
+          "id": "p3-intro",
+          "type": "content",
+          "title": "Security & Performance: The Final Pillars",
+          "content": "Your distributed architecture is designed. Your data layer is chosen. Now you must harden the system against attacks and optimize it for production performance targets.\n\nSecurity and performance are not afterthoughts -- they are architectural concerns that influence every layer of the system. A perfectly designed distributed system that is vulnerable to SQL injection or crumbles under load is a failed architecture.\n\nYour fintech platform has specific targets:\n- **Latency:** p99 < 100ms for payment processing\n- **Throughput:** 50,000 transactions per second sustained\n- **Security:** PCI-DSS Level 1 compliance, SOC 2 Type II\n- **Availability:** 99.99% uptime (52.6 minutes of downtime per year)\n\nLet's tackle these one at a time.",
+          "next": "p3-security-decision",
+          "position": {"x": 400, "y": 50},
+          "attribute_effects": {"knowledge": 5, "experience": 5}
+        },
+        {
+          "id": "p3-security-decision",
+          "type": "decision",
+          "title": "Security Focus Area",
+          "content": "Your security audit has identified three critical areas that need immediate attention. Which do you prioritize first?",
+          "choices": [
+            {
+              "label": "Authentication & Authorization: Secure identity and access control.",
+              "next": "p3-auth"
+            },
+            {
+              "label": "Data Protection: Encryption at rest, in transit, and in use.",
+              "next": "p3-encryption"
+            },
+            {
+              "label": "Network Security: Zero trust, mTLS, and API gateway hardening.",
+              "next": "p3-network-sec"
+            },
+            {
+              "label": "Threat Modeling: Systematic identification of attack surfaces.",
+              "next": "p3-threat-model"
+            }
+          ],
+          "position": {"x": 400, "y": 200}
+        },
+        {
+          "id": "p3-auth",
+          "type": "content",
+          "title": "Authentication & Authorization Architecture",
+          "content": "Your platform implements a layered identity architecture:\n\n**Authentication (Who are you?):**\n- External users: OAuth 2.0 + OIDC with PKCE flow. JWTs with short expiry (15 min) and refresh tokens (7 days). MFA required for financial operations.\n- Service-to-service: mTLS with X.509 certificates issued by an internal CA (HashiCorp Vault PKI). Certificates rotate every 24 hours automatically.\n- Internal operators: SSO via SAML 2.0 with hardware security keys (FIDO2/WebAuthn).\n\n**Authorization (What can you do?):**\n- RBAC (Role-Based Access Control) for coarse-grained permissions: admin, operator, auditor, user.\n- ABAC (Attribute-Based Access Control) for fine-grained policies: 'users can only view their own transactions' or 'operators in the EU region can only access EU data.'\n- Policy engine: Open Policy Agent (OPA) evaluates authorization decisions at the API gateway and within each service. Policies are version-controlled and audited.\n\n**Token architecture:** Access tokens are JWTs containing user ID, roles, and permissions. They are validated at the API gateway and passed downstream. Services never call the auth server for individual requests -- the JWT is self-contained.",
+          "next": "p3-security-converge",
+          "position": {"x": 50, "y": 400},
+          "attribute_effects": {"knowledge": 15, "experience": 10}
+        },
+        {
+          "id": "p3-encryption",
+          "type": "content",
+          "title": "Data Protection & Encryption Architecture",
+          "content": "Financial data requires defense in depth across three states:\n\n**Encryption in transit:** TLS 1.3 for all external connections. mTLS for all internal service-to-service communication. HTTP Strict Transport Security (HSTS) headers. Certificate transparency logs.\n\n**Encryption at rest:** AES-256-GCM for database encryption. Envelope encryption: data is encrypted with a Data Encryption Key (DEK), the DEK is encrypted with a Key Encryption Key (KEK) stored in a Hardware Security Module (HSM). Key rotation every 90 days without re-encrypting all data (rotate the KEK, re-wrap the DEK).\n\n**Encryption in use (emerging):** Homomorphic encryption for computing on encrypted data (still too slow for production). Secure enclaves (Intel SGX, ARM TrustZone) for processing sensitive data in isolated memory regions. Tokenization: replace sensitive values (card numbers, SSNs) with non-reversible tokens for non-critical processing paths.\n\n**Key management:** HashiCorp Vault with auto-unseal via AWS KMS. Transit secrets engine for application-level encryption. Dynamic secrets for database credentials (credentials issued on demand, revoked after use).",
+          "next": "p3-security-converge",
+          "position": {"x": 300, "y": 400},
+          "attribute_effects": {"knowledge": 15, "experience": 10}
+        },
+        {
+          "id": "p3-network-sec",
+          "type": "content",
+          "title": "Network Security: Zero Trust Architecture",
+          "content": "Your platform adopts a zero trust network model: no implicit trust based on network location. Every request is authenticated and authorized regardless of origin.\n\n**Service mesh (Istio/Linkerd):** A sidecar proxy (Envoy) is injected alongside every service pod. All traffic flows through the proxy, enabling automatic mTLS, traffic shaping, observability, and policy enforcement without application code changes.\n\n**API Gateway:** Kong or Envoy Gateway at the edge handles rate limiting (per-user, per-IP, per-endpoint), request validation (schema enforcement), bot detection, and geographic blocking. WAF rules block common attacks: SQL injection, XSS, path traversal.\n\n**Network policies:** Kubernetes NetworkPolicies enforce microsegmentation. PaymentService can only talk to AccountService and AuditService. ReportingService cannot reach PaymentService directly. Default deny -- all traffic is blocked unless explicitly allowed.\n\n**DDoS protection:** Cloudflare or AWS Shield absorbs volumetric attacks at the edge. Application-layer rate limiting handles sophisticated attacks. Automatic scaling absorbs legitimate traffic spikes.\n\n**DNS security:** DNSSEC prevents DNS spoofing. Internal service discovery via CoreDNS with RBAC on service name resolution.",
+          "next": "p3-security-converge",
+          "position": {"x": 550, "y": 400},
+          "attribute_effects": {"knowledge": 15, "experience": 10}
+        },
+        {
+          "id": "p3-threat-model",
+          "type": "content",
+          "title": "Threat Modeling with STRIDE",
+          "content": "Before implementing security controls, you systematically identify threats using the STRIDE framework:\n\n**Spoofing:** Can an attacker impersonate a user or service? Mitigation: strong authentication (MFA, mTLS), token validation.\n\n**Tampering:** Can data be modified in transit or at rest? Mitigation: TLS, digital signatures on transactions, immutable audit logs, checksums.\n\n**Repudiation:** Can a user deny performing an action? Mitigation: comprehensive audit logging, non-repudiation via digital signatures, tamper-evident logs (append-only, hash-chained).\n\n**Information Disclosure:** Can sensitive data leak? Mitigation: encryption (transit, rest, use), access control, data masking in logs, PII redaction.\n\n**Denial of Service:** Can the system be overwhelmed? Mitigation: rate limiting, auto-scaling, DDoS protection, circuit breakers.\n\n**Elevation of Privilege:** Can an attacker gain unauthorized access? Mitigation: principle of least privilege, RBAC/ABAC, container security (non-root, read-only filesystem, seccomp profiles).\n\nYou create a threat model diagram for each service boundary, identifying 47 potential threats and prioritizing them by risk score (likelihood x impact).",
+          "next": "p3-security-converge",
+          "position": {"x": 800, "y": 400},
+          "attribute_effects": {"knowledge": 15, "experience": 10},
+          "layout": {
+            "blocks": [
+              {"type": "heading", "content": "STRIDE Threat Categories"},
+              {"type": "list", "content": "Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege"},
+              {"type": "callout", "content": "Risk = Likelihood x Impact. Prioritize high-risk threats first."}
+            ]
+          }
+        },
+        {
+          "id": "p3-security-converge",
+          "type": "content",
+          "title": "Security Architecture Consolidated",
+          "content": "Your security architecture is now comprehensive. Let's summarize the defense-in-depth layers:\n\n**Perimeter:** DDoS protection, WAF, API gateway with rate limiting.\n**Network:** Zero trust, mTLS, microsegmentation, service mesh.\n**Identity:** OAuth2/OIDC, mTLS certificates, RBAC/ABAC, OPA policies.\n**Data:** Encryption at rest (AES-256) and in transit (TLS 1.3), tokenization, key management via Vault.\n**Application:** Input validation, parameterized queries, dependency scanning, SAST/DAST in CI/CD.\n**Monitoring:** SIEM integration, anomaly detection, incident response automation.\n\nSecurity is never 'done' -- it is a continuous process of threat modeling, control implementation, testing, and improvement. Your platform now meets PCI-DSS Level 1 requirements.\n\nLet's turn to the final challenge: performance optimization under load.",
+          "next": "p3-security-assessment",
+          "position": {"x": 400, "y": 620},
+          "attribute_effects": {"knowledge": 5, "experience": 5}
+        },
+        {
+          "id": "p3-security-assessment",
+          "type": "assessment",
+          "title": "Security Architecture Assessment",
+          "content": "Validate your understanding of security architecture before moving to performance optimization.",
+          "questions": [
+            {
+              "id": "sq1",
+              "type": "multiple-choice",
+              "prompt": "In a zero trust architecture, which statement is true?",
+              "options": [
+                {"id": "a", "label": "Internal network traffic is trusted by default"},
+                {"id": "b", "label": "Every request must be authenticated and authorized regardless of network location", "correct": true},
+                {"id": "c", "label": "Only external traffic requires authentication"},
+                {"id": "d", "label": "VPN connections are sufficient for trust establishment"}
+              ],
+              "points": 20
+            },
+            {
+              "id": "sq2",
+              "type": "multiple-choice",
+              "prompt": "What is the purpose of envelope encryption?",
+              "options": [
+                {"id": "a", "label": "Encrypting email attachments"},
+                {"id": "b", "label": "Using a KEK to encrypt DEKs, allowing key rotation without re-encrypting all data", "correct": true},
+                {"id": "c", "label": "Double-encrypting data for extra security"},
+                {"id": "d", "label": "Encrypting data only during network transit"}
+              ],
+              "points": 20
+            },
+            {
+              "id": "sq3",
+              "type": "true-false",
+              "prompt": "In STRIDE threat modeling, 'Repudiation' refers to an attacker being able to deny having performed an action.",
+              "correct_answer": true,
+              "points": 20
+            },
+            {
+              "id": "sq4",
+              "type": "multiple-choice",
+              "prompt": "Which component in a service mesh handles mTLS transparently for application code?",
+              "options": [
+                {"id": "a", "label": "The application's HTTP client library"},
+                {"id": "b", "label": "The sidecar proxy (e.g., Envoy)", "correct": true},
+                {"id": "c", "label": "The Kubernetes API server"},
+                {"id": "d", "label": "The container runtime (containerd)"}
+              ],
+              "points": 20
+            },
+            {
+              "id": "sq5",
+              "type": "multiple-choice",
+              "prompt": "What is the primary advantage of OPA (Open Policy Agent) for authorization?",
+              "options": [
+                {"id": "a", "label": "It replaces the need for authentication"},
+                {"id": "b", "label": "It provides a unified policy language (Rego) that decouples policy from application code", "correct": true},
+                {"id": "c", "label": "It automatically encrypts all API responses"},
+                {"id": "d", "label": "It eliminates the need for RBAC roles"}
+              ],
+              "points": 20
+            }
+          ],
+          "passing_score": 60,
+          "success_target": "p3-performance-intro",
+          "failure_target": "p3-security-review",
+          "position": {"x": 400, "y": 780}
+        },
+        {
+          "id": "p3-security-review",
+          "type": "content",
+          "title": "Security Concepts Review",
+          "content": "Let's review the key security concepts:\n\n**Zero Trust** means no implicit trust. Every request -- even from inside the network -- is verified. This is the opposite of the traditional castle-and-moat model.\n\n**Envelope encryption** uses two layers of keys. Data Encryption Keys (DEKs) encrypt the data. Key Encryption Keys (KEKs) encrypt the DEKs. To rotate keys, you only re-wrap the DEK with a new KEK -- the data itself is not re-encrypted. This makes rotation practical at scale.\n\n**STRIDE** is a threat modeling framework. The R stands for Repudiation -- the threat that someone performs a malicious action and denies it. Mitigated by tamper-evident audit logs and digital signatures.\n\n**Service mesh sidecars** (Envoy, Linkerd-proxy) handle mTLS, retries, circuit breaking, and observability transparently. The application code makes plain HTTP calls; the sidecar upgrades them to mTLS.\n\n**OPA** decouples authorization policy from code. Policies written in Rego can be version-controlled, tested, and deployed independently of applications.",
+          "next": "p3-security-assessment",
+          "position": {"x": 150, "y": 930},
+          "attribute_effects": {"knowledge": 10, "experience": 0}
+        },
+        {
+          "id": "p3-performance-intro",
+          "type": "content",
+          "title": "Performance Engineering at Scale",
+          "content": "Your target: 50,000 transactions per second with p99 latency under 100ms. Current baseline: 5,000 TPS with p99 at 400ms. You need a 10x throughput improvement and a 4x latency reduction.\n\nPerformance engineering is systematic. You do not guess -- you measure, identify bottlenecks, optimize the critical path, and measure again.\n\n**Amdahl's Law** governs your optimization ceiling: if 20% of your pipeline is inherently sequential (e.g., consensus), even infinite parallelism on the other 80% gives you at most a 5x speedup. You must optimize BOTH the parallel and sequential portions.\n\n**Little's Law** relates throughput, concurrency, and latency: L = lambda * W (concurrent requests = arrival rate * average latency). To handle 50,000 TPS at 100ms latency, you need capacity for 5,000 concurrent requests.\n\n**The Universal Scalability Law** adds a contention term and a coherence penalty term. As you add nodes, throughput increases sub-linearly (contention) and eventually decreases (coherence overhead of keeping nodes synchronized).\n\nLet's find your bottlenecks.",
+          "next": "p3-bottleneck-condition",
+          "position": {"x": 400, "y": 1050},
+          "attribute_effects": {"knowledge": 15, "experience": 5},
+          "layout": {
+            "blocks": [
+              {"type": "heading", "content": "Key Performance Laws"},
+              {"type": "text", "content": "Amdahl's Law: Speedup = 1 / (S + P/N) where S=serial fraction, P=parallel fraction, N=processors"},
+              {"type": "text", "content": "Little's Law: L = lambda * W"},
+              {"type": "callout", "content": "Always measure before optimizing. Intuition about bottlenecks is wrong more often than it is right."}
+            ]
+          }
+        },
+        {
+          "id": "p3-bottleneck-condition",
+          "type": "condition",
+          "title": "Bottleneck Analysis Router",
+          "content": "Your profiling data reveals the primary bottleneck. The routing depends on the architecture decisions you made earlier.",
+          "condition": "knowledge",
+          "default_target": "p3-bottleneck-db",
+          "position": {"x": 400, "y": 1200}
+        },
+        {
+          "id": "p3-bottleneck-db",
+          "type": "content",
+          "title": "Bottleneck: Database Layer",
+          "content": "Profiling reveals 70% of request latency is in the database layer. Your database is CPU-bound on query parsing and lock contention.\n\n**Optimization 1 -- Connection pooling:** Replace per-request connections with PgBouncer in transaction mode. Connection setup drops from 50ms to 0ms. Throughput doubles.\n\n**Optimization 2 -- Query optimization:** EXPLAIN ANALYZE reveals sequential scans on the transactions table. Add composite indexes on (account_id, created_at). Query time drops from 45ms to 2ms.\n\n**Optimization 3 -- Read replicas:** Route all read queries to replicas, keeping the primary for writes only. Read throughput scales horizontally. With 5 read replicas, you handle 10x more read queries.\n\n**Optimization 4 -- Prepared statements:** Eliminate query parsing overhead. The database caches the execution plan. Latency drops another 20%.\n\n**Optimization 5 -- Batch writes:** Instead of individual INSERTs, batch 100 transactions per round trip. Write throughput increases 50x for bulk operations.\n\nCombined effect: throughput goes from 5,000 to 60,000 TPS. p99 latency drops to 35ms.",
+          "next": "p3-perf-converge",
+          "position": {"x": 200, "y": 1380},
+          "attribute_effects": {"knowledge": 10, "experience": 15}
+        },
+        {
+          "id": "p3-bottleneck-network",
+          "type": "content",
+          "title": "Bottleneck: Network & Serialization",
+          "content": "Profiling reveals 60% of latency is in serialization and network round trips between services.\n\n**Optimization 1 -- Protocol Buffers:** Replace JSON serialization with protobuf. Serialization time drops from 5ms to 0.1ms. Payload size shrinks 60%, reducing network transfer time.\n\n**Optimization 2 -- gRPC streaming:** Replace request-response patterns with bidirectional streaming for high-throughput paths. Eliminates per-request connection setup and HTTP/2 multiplexing reduces head-of-line blocking.\n\n**Optimization 3 -- Reduce round trips:** Introduce a BFF (Backend for Frontend) that aggregates multiple service calls into a single response. The dashboard, which previously made 12 sequential API calls, now makes 1.\n\n**Optimization 4 -- Connection reuse:** HTTP/2 with persistent connections to all downstream services. TCP handshake overhead eliminated. Connection pooling at the gRPC channel level.\n\n**Optimization 5 -- Locality-aware routing:** Route requests to the nearest replica. Cross-region calls (100ms RTT) become same-region calls (1ms RTT) for 95% of traffic.\n\nCombined effect: throughput scales to 55,000 TPS. p99 latency drops to 45ms.",
+          "next": "p3-perf-converge",
+          "position": {"x": 600, "y": 1380},
+          "attribute_effects": {"knowledge": 10, "experience": 15}
+        },
+        {
+          "id": "p3-perf-converge",
+          "type": "content",
+          "title": "Performance Targets Achieved",
+          "content": "Through systematic performance engineering, your platform now meets its targets:\n\n- **Throughput:** 55,000+ TPS sustained (target: 50,000)\n- **Latency:** p50 = 8ms, p99 = 42ms (target: p99 < 100ms)\n- **Availability:** 99.995% over the first quarter (target: 99.99%)\n\n**The performance engineering process that got you here:**\n1. Establish baselines with production-like load testing (k6, Gatling, Locust)\n2. Profile under load to find actual bottlenecks (not guessed ones)\n3. Optimize the critical path first (Amdahl's Law)\n4. Measure the impact of each change in isolation\n5. Repeat until targets are met\n\n**Ongoing performance management:**\n- Continuous profiling in production (Pyroscope, Parca)\n- Performance budgets in CI/CD (fail the build if p99 regresses)\n- Capacity planning: model growth and pre-provision resources\n- Load shedding: gracefully degrade under extreme load rather than crashing\n\nYour architecture is complete. Let's take the final assessment.",
+          "next": "p3-final-gate",
+          "position": {"x": 400, "y": 1550},
+          "attribute_effects": {"knowledge": 5, "experience": 10}
+        },
+        {
+          "id": "p3-final-gate",
+          "type": "gate",
+          "title": "Final Knowledge Gate",
+          "content": "To access the final assessment, you must have accumulated significant knowledge and experience across all three sections of this course. This gate ensures you have engaged deeply with the material.\n\nRequired: knowledge >= 50 and experience >= 30.",
+          "gate_condition": "knowledge >= 50 and experience >= 30",
+          "default_target": "p3-final-assessment",
+          "position": {"x": 400, "y": 1700}
+        },
+        {
+          "id": "p3-final-assessment",
+          "type": "assessment",
+          "title": "Final Architecture Assessment",
+          "content": "This comprehensive assessment covers all three pillars of your systems architecture journey: design principles, distributed systems, and security/performance.",
+          "questions": [
+            {
+              "id": "fq1",
+              "type": "multiple-choice",
+              "prompt": "A distributed system experiences a network partition. Under the CAP theorem, which two properties can it maintain?",
+              "options": [
+                {"id": "a", "label": "Consistency and Availability"},
+                {"id": "b", "label": "Consistency and Partition Tolerance", "correct": true},
+                {"id": "c", "label": "Availability, Consistency, and Partition Tolerance simultaneously"},
+                {"id": "d", "label": "None -- all three are lost during a partition"}
+              ],
+              "points": 15
+            },
+            {
+              "id": "fq2",
+              "type": "multiple-choice",
+              "prompt": "In consistent hashing with virtual nodes, what happens when a new physical node joins the ring?",
+              "options": [
+                {"id": "a", "label": "All keys are rehashed and redistributed"},
+                {"id": "b", "label": "Only keys from adjacent virtual nodes on the ring are migrated", "correct": true},
+                {"id": "c", "label": "The ring must be rebuilt from scratch"},
+                {"id": "d", "label": "No data migration occurs -- new data is written to the new node only"}
+              ],
+              "points": 15
+            },
+            {
+              "id": "fq3",
+              "type": "true-false",
+              "prompt": "Amdahl's Law states that if 20% of a pipeline is sequential, the maximum possible speedup from parallelism is 5x.",
+              "correct_answer": true,
+              "points": 15
+            },
+            {
+              "id": "fq4",
+              "type": "multiple-choice",
+              "prompt": "Which conflict resolution strategy for eventually consistent systems allows automatic merging without any coordination between nodes?",
+              "options": [
+                {"id": "a", "label": "Two-Phase Commit (2PC)"},
+                {"id": "b", "label": "Paxos consensus"},
+                {"id": "c", "label": "CRDTs (Conflict-free Replicated Data Types)", "correct": true},
+                {"id": "d", "label": "Pessimistic locking"}
+              ],
+              "points": 15
+            },
+            {
+              "id": "fq5",
+              "type": "multiple-choice",
+              "prompt": "In a CQRS architecture with event sourcing, what is the source of truth?",
+              "options": [
+                {"id": "a", "label": "The materialized read-side projections"},
+                {"id": "b", "label": "The current state table in the database"},
+                {"id": "c", "label": "The immutable, append-only event log", "correct": true},
+                {"id": "d", "label": "The most recently cached value"}
+              ],
+              "points": 15
+            },
+            {
+              "id": "fq6",
+              "type": "multiple-choice",
+              "prompt": "What does Little's Law tell you about a system handling 50,000 TPS at 100ms average latency?",
+              "options": [
+                {"id": "a", "label": "The system needs 500 servers"},
+                {"id": "b", "label": "The system will have 5,000 concurrent requests in flight", "correct": true},
+                {"id": "c", "label": "The system will use 50GB of memory"},
+                {"id": "d", "label": "The system needs a 100Gbps network link"}
+              ],
+              "points": 15
+            }
+          ],
+          "passing_score": 70,
+          "success_target": "p3-end-success",
+          "failure_target": "p3-end-partial",
+          "position": {"x": 400, "y": 1850}
+        },
+        {
+          "id": "p3-end-success",
+          "type": "end",
+          "title": "Congratulations: Master Architect",
+          "content": "You have successfully designed a production-grade distributed financial platform from the ground up. Your architecture addresses:\n\n- **Consistency:** A well-reasoned consistency model balancing correctness and availability.\n- **Scalability:** Data partitioning and replication strategies that scale to 50,000+ TPS.\n- **Resilience:** Failure handling with circuit breakers, bulkheads, and chaos engineering.\n- **Security:** Defense in depth from perimeter to data layer, meeting PCI-DSS compliance.\n- **Performance:** Systematic bottleneck identification and optimization achieving sub-100ms p99 latency.\n\nThe principles you applied here -- CAP theorem reasoning, consensus protocols, zero trust security, and performance engineering laws -- are universal. They apply whether you are building a fintech platform, a social network, a gaming backend, or a healthcare system.\n\nYour Architecture Decision Records are your legacy. They capture not just what you decided, but why. The next architect who inherits this system will thank you.\n\nWell done, architect.",
+          "position": {"x": 200, "y": 2050},
+          "attribute_effects": {"knowledge": 10, "experience": 10}
+        },
+        {
+          "id": "p3-end-partial",
+          "type": "end",
+          "title": "Journey Complete: Growing Architect",
+          "content": "You have completed the systems architecture journey, though some concepts need further study. The areas where you struggled -- whether consistency models, security architecture, or performance engineering -- are the areas that distinguish senior architects from mid-level ones.\n\n**Recommended next steps:**\n1. Re-read Martin Kleppmann's 'Designing Data-Intensive Applications' -- it covers every topic in this course in depth.\n2. Build a small distributed system (even a 3-node key-value store with Raft) to internalize consensus.\n3. Set up a home lab with Kubernetes, Istio, and Vault to practice security architecture.\n4. Run load tests against your own projects and practice the measure-profile-optimize cycle.\n\nArchitecture is a skill built through experience. Every system you design makes you better. Keep building.",
+          "position": {"x": 600, "y": 2050},
+          "attribute_effects": {"knowledge": 5, "experience": 5}
+        }
+      ],
+      "connections": [
+        {"id": "c3-1", "source": "p3-intro", "target": "p3-security-decision", "label": ""},
+        {"id": "c3-2", "source": "p3-security-decision", "target": "p3-auth", "label": "Auth & AuthZ"},
+        {"id": "c3-3", "source": "p3-security-decision", "target": "p3-encryption", "label": "Data Protection"},
+        {"id": "c3-4", "source": "p3-security-decision", "target": "p3-network-sec", "label": "Network Security"},
+        {"id": "c3-5", "source": "p3-security-decision", "target": "p3-threat-model", "label": "Threat Modeling"},
+        {"id": "c3-6", "source": "p3-auth", "target": "p3-security-converge", "label": ""},
+        {"id": "c3-7", "source": "p3-encryption", "target": "p3-security-converge", "label": ""},
+        {"id": "c3-8", "source": "p3-network-sec", "target": "p3-security-converge", "label": ""},
+        {"id": "c3-9", "source": "p3-threat-model", "target": "p3-security-converge", "label": ""},
+        {"id": "c3-10", "source": "p3-security-converge", "target": "p3-security-assessment", "label": ""},
+        {"id": "c3-11", "source": "p3-security-assessment", "target": "p3-performance-intro", "label": "Pass"},
+        {"id": "c3-12", "source": "p3-security-assessment", "target": "p3-security-review", "label": "Fail"},
+        {"id": "c3-13", "source": "p3-security-review", "target": "p3-security-assessment", "label": "Retry"},
+        {"id": "c3-14", "source": "p3-performance-intro", "target": "p3-bottleneck-condition", "label": ""},
+        {"id": "c3-15", "source": "p3-bottleneck-condition", "target": "p3-bottleneck-db", "label": "knowledge >= 80"},
+        {"id": "c3-16", "source": "p3-bottleneck-condition", "target": "p3-bottleneck-network", "label": "knowledge < 80"},
+        {"id": "c3-17", "source": "p3-bottleneck-db", "target": "p3-perf-converge", "label": ""},
+        {"id": "c3-18", "source": "p3-bottleneck-network", "target": "p3-perf-converge", "label": ""},
+        {"id": "c3-19", "source": "p3-perf-converge", "target": "p3-final-gate", "label": ""},
+        {"id": "c3-20", "source": "p3-final-gate", "target": "p3-final-assessment", "label": "Gate passed"},
+        {"id": "c3-21", "source": "p3-final-assessment", "target": "p3-end-success", "label": "Pass"},
+        {"id": "c3-22", "source": "p3-final-assessment", "target": "p3-end-partial", "label": "Fail"}
+      ]
+    }
+  ],
+  "nodes": [
+    {"id": "p1-start", "type": "content", "title": "Welcome: The Architect's Challenge", "content": "Entry point -- see page-1 for full content.", "next": "p1-cap-intro", "position": {"x": 400, "y": 50}},
+    {"id": "p1-cap-intro", "type": "content", "title": "The CAP Theorem", "content": "See page-1.", "next": "p1-cap-decision", "position": {"x": 400, "y": 200}},
+    {"id": "p1-cap-decision", "type": "decision", "title": "Choose Your Consistency Model", "content": "See page-1.", "choices": [{"label": "Strong Consistency (CP)", "next": "p1-strong-consistency"}, {"label": "Eventual Consistency (AP)", "next": "p1-eventual-consistency"}, {"label": "Hybrid", "next": "p1-hybrid-consistency"}], "position": {"x": 400, "y": 380}},
+    {"id": "p1-strong-consistency", "type": "content", "title": "Strong Consistency", "content": "See page-1.", "next": "p1-consensus-gate", "position": {"x": 100, "y": 550}},
+    {"id": "p1-eventual-consistency", "type": "content", "title": "Eventual Consistency", "content": "See page-1.", "next": "p1-eventual-assessment", "position": {"x": 400, "y": 550}},
+    {"id": "p1-hybrid-consistency", "type": "content", "title": "Hybrid Consistency", "content": "See page-1.", "next": "p1-consensus-gate", "position": {"x": 700, "y": 550}},
+    {"id": "p1-eventual-assessment", "type": "assessment", "title": "Eventual Consistency Check", "content": "See page-1.", "questions": [], "passing_score": 75, "success_target": "p1-consensus-gate", "failure_target": "p1-eventual-retry", "position": {"x": 400, "y": 720}},
+    {"id": "p1-eventual-retry", "type": "content", "title": "Review: EC Fundamentals", "content": "See page-1.", "next": "p1-eventual-assessment", "position": {"x": 200, "y": 870}},
+    {"id": "p1-consensus-gate", "type": "gate", "title": "Architecture Foundation Gate", "content": "See page-1.", "gate_condition": "knowledge >= 25", "default_target": "p1-architecture-style", "position": {"x": 400, "y": 1000}},
+    {"id": "p1-architecture-style", "type": "decision", "title": "Choose Your Architecture Style", "content": "See page-1.", "choices": [{"label": "Microservices", "next": "p1-microservices"}, {"label": "Event-Driven/CQRS", "next": "p1-event-driven"}, {"label": "Modular Monolith", "next": "p1-modular-monolith"}], "position": {"x": 400, "y": 1150}},
+    {"id": "p1-microservices", "type": "content", "title": "Microservices", "content": "See page-1.", "next": "p1-converge-architecture", "position": {"x": 100, "y": 1300}},
+    {"id": "p1-event-driven", "type": "content", "title": "Event-Driven/CQRS", "content": "See page-1.", "next": "p1-converge-architecture", "position": {"x": 400, "y": 1300}},
+    {"id": "p1-modular-monolith", "type": "content", "title": "Modular Monolith", "content": "See page-1.", "next": "p1-converge-architecture", "position": {"x": 700, "y": 1300}},
+    {"id": "p1-converge-architecture", "type": "content", "title": "Architecture Decisions Recorded", "content": "See page-1.", "next": "p1-to-page2", "position": {"x": 400, "y": 1500}},
+    {"id": "p1-to-page2", "type": "page_link", "title": "Proceed to Page 2", "content": "See page-1.", "target_page": "page-2", "position": {"x": 400, "y": 1650}},
+    {"id": "p2-intro", "type": "content", "title": "Distributed Systems Layer", "content": "See page-2.", "next": "p2-partitioning-decision", "position": {"x": 400, "y": 50}},
+    {"id": "p2-partitioning-decision", "type": "decision", "title": "Data Partitioning Strategy", "content": "See page-2.", "choices": [{"label": "Hash", "next": "p2-hash-partition"}, {"label": "Range", "next": "p2-range-partition"}, {"label": "Consistent Hashing", "next": "p2-consistent-hashing"}], "position": {"x": 400, "y": 200}},
+    {"id": "p2-hash-partition", "type": "content", "title": "Hash Partitioning", "content": "See page-2.", "next": "p2-partition-converge", "position": {"x": 100, "y": 380}},
+    {"id": "p2-range-partition", "type": "content", "title": "Range Partitioning", "content": "See page-2.", "next": "p2-partition-converge", "position": {"x": 400, "y": 380}},
+    {"id": "p2-consistent-hashing", "type": "content", "title": "Consistent Hashing", "content": "See page-2.", "next": "p2-partition-converge", "position": {"x": 700, "y": 380}},
+    {"id": "p2-partition-converge", "type": "content", "title": "Replication", "content": "See page-2.", "next": "p2-failure-random", "position": {"x": 400, "y": 560}},
+    {"id": "p2-failure-random", "type": "random", "title": "Production Incident", "content": "See page-2.", "position": {"x": 400, "y": 720}},
+    {"id": "p2-network-partition", "type": "content", "title": "Network Partition Scenario", "content": "See page-2.", "next": "p2-failure-converge", "position": {"x": 100, "y": 870}},
+    {"id": "p2-cascading-failure", "type": "content", "title": "Cascading Failure Scenario", "content": "See page-2.", "next": "p2-failure-converge", "position": {"x": 400, "y": 870}},
+    {"id": "p2-byzantine-failure", "type": "content", "title": "Byzantine Fault Scenario", "content": "See page-2.", "next": "p2-failure-converge", "position": {"x": 700, "y": 870}},
+    {"id": "p2-failure-converge", "type": "content", "title": "Failure Handling Lessons", "content": "See page-2.", "next": "p2-db-weighted", "position": {"x": 400, "y": 1050}},
+    {"id": "p2-db-weighted", "type": "weighted", "title": "Database Technology", "content": "See page-2.", "position": {"x": 400, "y": 1200}},
+    {"id": "p2-db-relational", "type": "content", "title": "Distributed SQL", "content": "See page-2.", "next": "p2-db-converge", "position": {"x": 100, "y": 1370}},
+    {"id": "p2-db-nosql", "type": "content", "title": "NoSQL", "content": "See page-2.", "next": "p2-db-converge", "position": {"x": 400, "y": 1370}},
+    {"id": "p2-db-hybrid", "type": "content", "title": "Event Store", "content": "See page-2.", "next": "p2-db-converge", "position": {"x": 700, "y": 1370}},
+    {"id": "p2-db-converge", "type": "condition", "title": "Experience Router", "content": "See page-2.", "condition": "experience", "default_target": "p2-to-page3-standard", "position": {"x": 400, "y": 1550}},
+    {"id": "p2-advanced-caching", "type": "content", "title": "Advanced Caching", "content": "See page-2.", "next": "p2-to-page3-advanced", "position": {"x": 200, "y": 1700}},
+    {"id": "p2-to-page3-standard", "type": "page_link", "title": "To Page 3", "content": "See page-2.", "target_page": "page-3", "position": {"x": 500, "y": 1700}},
+    {"id": "p2-to-page3-advanced", "type": "page_link", "title": "To Page 3 (Advanced)", "content": "See page-2.", "target_page": "page-3", "position": {"x": 200, "y": 1850}},
+    {"id": "p3-intro", "type": "content", "title": "Security & Performance", "content": "See page-3.", "next": "p3-security-decision", "position": {"x": 400, "y": 50}},
+    {"id": "p3-security-decision", "type": "decision", "title": "Security Focus Area", "content": "See page-3.", "choices": [{"label": "Auth", "next": "p3-auth"}, {"label": "Encryption", "next": "p3-encryption"}, {"label": "Network", "next": "p3-network-sec"}, {"label": "Threat Model", "next": "p3-threat-model"}], "position": {"x": 400, "y": 200}},
+    {"id": "p3-auth", "type": "content", "title": "Auth & AuthZ", "content": "See page-3.", "next": "p3-security-converge", "position": {"x": 50, "y": 400}},
+    {"id": "p3-encryption", "type": "content", "title": "Encryption", "content": "See page-3.", "next": "p3-security-converge", "position": {"x": 300, "y": 400}},
+    {"id": "p3-network-sec", "type": "content", "title": "Network Security", "content": "See page-3.", "next": "p3-security-converge", "position": {"x": 550, "y": 400}},
+    {"id": "p3-threat-model", "type": "content", "title": "Threat Modeling", "content": "See page-3.", "next": "p3-security-converge", "position": {"x": 800, "y": 400}},
+    {"id": "p3-security-converge", "type": "content", "title": "Security Consolidated", "content": "See page-3.", "next": "p3-security-assessment", "position": {"x": 400, "y": 620}},
+    {"id": "p3-security-assessment", "type": "assessment", "title": "Security Assessment", "content": "See page-3.", "questions": [], "passing_score": 60, "success_target": "p3-performance-intro", "failure_target": "p3-security-review", "position": {"x": 400, "y": 780}},
+    {"id": "p3-security-review", "type": "content", "title": "Security Review", "content": "See page-3.", "next": "p3-security-assessment", "position": {"x": 150, "y": 930}},
+    {"id": "p3-performance-intro", "type": "content", "title": "Performance Engineering", "content": "See page-3.", "next": "p3-bottleneck-condition", "position": {"x": 400, "y": 1050}},
+    {"id": "p3-bottleneck-condition", "type": "condition", "title": "Bottleneck Router", "content": "See page-3.", "condition": "knowledge", "default_target": "p3-bottleneck-db", "position": {"x": 400, "y": 1200}},
+    {"id": "p3-bottleneck-db", "type": "content", "title": "DB Bottleneck", "content": "See page-3.", "next": "p3-perf-converge", "position": {"x": 200, "y": 1380}},
+    {"id": "p3-bottleneck-network", "type": "content", "title": "Network Bottleneck", "content": "See page-3.", "next": "p3-perf-converge", "position": {"x": 600, "y": 1380}},
+    {"id": "p3-perf-converge", "type": "content", "title": "Targets Achieved", "content": "See page-3.", "next": "p3-final-gate", "position": {"x": 400, "y": 1550}},
+    {"id": "p3-final-gate", "type": "gate", "title": "Final Gate", "content": "See page-3.", "gate_condition": "knowledge >= 50 and experience >= 30", "default_target": "p3-final-assessment", "position": {"x": 400, "y": 1700}},
+    {"id": "p3-final-assessment", "type": "assessment", "title": "Final Assessment", "content": "See page-3.", "questions": [], "passing_score": 70, "success_target": "p3-end-success", "failure_target": "p3-end-partial", "position": {"x": 400, "y": 1850}},
+    {"id": "p3-end-success", "type": "end", "title": "Master Architect", "content": "See page-3.", "position": {"x": 200, "y": 2050}},
+    {"id": "p3-end-partial", "type": "end", "title": "Growing Architect", "content": "See page-3.", "position": {"x": 600, "y": 2050}}
+  ],
+  "connections": [
+    {"id": "c1-1", "source": "p1-start", "target": "p1-cap-intro", "label": ""},
+    {"id": "c1-2", "source": "p1-cap-intro", "target": "p1-cap-decision", "label": ""},
+    {"id": "c1-3", "source": "p1-cap-decision", "target": "p1-strong-consistency", "label": "Strong Consistency"},
+    {"id": "c1-4", "source": "p1-cap-decision", "target": "p1-eventual-consistency", "label": "Eventual Consistency"},
+    {"id": "c1-5", "source": "p1-cap-decision", "target": "p1-hybrid-consistency", "label": "Hybrid"},
+    {"id": "c1-6", "source": "p1-strong-consistency", "target": "p1-consensus-gate", "label": ""},
+    {"id": "c1-7", "source": "p1-eventual-consistency", "target": "p1-eventual-assessment", "label": ""},
+    {"id": "c1-8", "source": "p1-hybrid-consistency", "target": "p1-consensus-gate", "label": ""},
+    {"id": "c1-9", "source": "p1-eventual-assessment", "target": "p1-consensus-gate", "label": "Pass"},
+    {"id": "c1-10", "source": "p1-eventual-assessment", "target": "p1-eventual-retry", "label": "Fail"},
+    {"id": "c1-11", "source": "p1-eventual-retry", "target": "p1-eventual-assessment", "label": "Retry"},
+    {"id": "c1-12", "source": "p1-consensus-gate", "target": "p1-architecture-style", "label": "Gate passed"},
+    {"id": "c1-13", "source": "p1-architecture-style", "target": "p1-microservices", "label": "Microservices"},
+    {"id": "c1-14", "source": "p1-architecture-style", "target": "p1-event-driven", "label": "Event-Driven"},
+    {"id": "c1-15", "source": "p1-architecture-style", "target": "p1-modular-monolith", "label": "Modular Monolith"},
+    {"id": "c1-16", "source": "p1-microservices", "target": "p1-converge-architecture", "label": ""},
+    {"id": "c1-17", "source": "p1-event-driven", "target": "p1-converge-architecture", "label": ""},
+    {"id": "c1-18", "source": "p1-modular-monolith", "target": "p1-converge-architecture", "label": ""},
+    {"id": "c1-19", "source": "p1-converge-architecture", "target": "p1-to-page2", "label": ""},
+    {"id": "c1-20", "source": "p1-to-page2", "target": "p2-intro", "label": "To Page 2"},
+    {"id": "c2-1", "source": "p2-intro", "target": "p2-partitioning-decision", "label": ""},
+    {"id": "c2-2", "source": "p2-partitioning-decision", "target": "p2-hash-partition", "label": "Hash"},
+    {"id": "c2-3", "source": "p2-partitioning-decision", "target": "p2-range-partition", "label": "Range"},
+    {"id": "c2-4", "source": "p2-partitioning-decision", "target": "p2-consistent-hashing", "label": "Consistent Hashing"},
+    {"id": "c2-5", "source": "p2-hash-partition", "target": "p2-partition-converge", "label": ""},
+    {"id": "c2-6", "source": "p2-range-partition", "target": "p2-partition-converge", "label": ""},
+    {"id": "c2-7", "source": "p2-consistent-hashing", "target": "p2-partition-converge", "label": ""},
+    {"id": "c2-8", "source": "p2-partition-converge", "target": "p2-failure-random", "label": ""},
+    {"id": "c2-9", "source": "p2-failure-random", "target": "p2-network-partition", "label": "Network partition"},
+    {"id": "c2-10", "source": "p2-failure-random", "target": "p2-cascading-failure", "label": "Cascading failure"},
+    {"id": "c2-11", "source": "p2-failure-random", "target": "p2-byzantine-failure", "label": "Byzantine fault"},
+    {"id": "c2-12", "source": "p2-network-partition", "target": "p2-failure-converge", "label": ""},
+    {"id": "c2-13", "source": "p2-cascading-failure", "target": "p2-failure-converge", "label": ""},
+    {"id": "c2-14", "source": "p2-byzantine-failure", "target": "p2-failure-converge", "label": ""},
+    {"id": "c2-15", "source": "p2-failure-converge", "target": "p2-db-weighted", "label": ""},
+    {"id": "c2-16", "source": "p2-db-weighted", "target": "p2-db-relational", "label": "Distributed SQL", "weight": 50},
+    {"id": "c2-17", "source": "p2-db-weighted", "target": "p2-db-nosql", "label": "NoSQL", "weight": 30},
+    {"id": "c2-18", "source": "p2-db-weighted", "target": "p2-db-hybrid", "label": "Event Store", "weight": 20},
+    {"id": "c2-19", "source": "p2-db-relational", "target": "p2-db-converge", "label": ""},
+    {"id": "c2-20", "source": "p2-db-nosql", "target": "p2-db-converge", "label": ""},
+    {"id": "c2-21", "source": "p2-db-hybrid", "target": "p2-db-converge", "label": ""},
+    {"id": "c2-22", "source": "p2-db-converge", "target": "p2-advanced-caching", "label": "experience >= 40"},
+    {"id": "c2-23", "source": "p2-db-converge", "target": "p2-to-page3-standard", "label": "experience < 40"},
+    {"id": "c2-24", "source": "p2-advanced-caching", "target": "p2-to-page3-advanced", "label": ""},
+    {"id": "c2-25", "source": "p2-to-page3-standard", "target": "p3-intro", "label": "To Page 3"},
+    {"id": "c2-26", "source": "p2-to-page3-advanced", "target": "p3-intro", "label": "To Page 3 (Advanced)"},
+    {"id": "c3-1", "source": "p3-intro", "target": "p3-security-decision", "label": ""},
+    {"id": "c3-2", "source": "p3-security-decision", "target": "p3-auth", "label": "Auth"},
+    {"id": "c3-3", "source": "p3-security-decision", "target": "p3-encryption", "label": "Encryption"},
+    {"id": "c3-4", "source": "p3-security-decision", "target": "p3-network-sec", "label": "Network Security"},
+    {"id": "c3-5", "source": "p3-security-decision", "target": "p3-threat-model", "label": "Threat Modeling"},
+    {"id": "c3-6", "source": "p3-auth", "target": "p3-security-converge", "label": ""},
+    {"id": "c3-7", "source": "p3-encryption", "target": "p3-security-converge", "label": ""},
+    {"id": "c3-8", "source": "p3-network-sec", "target": "p3-security-converge", "label": ""},
+    {"id": "c3-9", "source": "p3-threat-model", "target": "p3-security-converge", "label": ""},
+    {"id": "c3-10", "source": "p3-security-converge", "target": "p3-security-assessment", "label": ""},
+    {"id": "c3-11", "source": "p3-security-assessment", "target": "p3-performance-intro", "label": "Pass"},
+    {"id": "c3-12", "source": "p3-security-assessment", "target": "p3-security-review", "label": "Fail"},
+    {"id": "c3-13", "source": "p3-security-review", "target": "p3-security-assessment", "label": "Retry"},
+    {"id": "c3-14", "source": "p3-performance-intro", "target": "p3-bottleneck-condition", "label": ""},
+    {"id": "c3-15", "source": "p3-bottleneck-condition", "target": "p3-bottleneck-db", "label": "knowledge >= 80"},
+    {"id": "c3-16", "source": "p3-bottleneck-condition", "target": "p3-bottleneck-network", "label": "knowledge < 80"},
+    {"id": "c3-17", "source": "p3-bottleneck-db", "target": "p3-perf-converge", "label": ""},
+    {"id": "c3-18", "source": "p3-bottleneck-network", "target": "p3-perf-converge", "label": ""},
+    {"id": "c3-19", "source": "p3-perf-converge", "target": "p3-final-gate", "label": ""},
+    {"id": "c3-20", "source": "p3-final-gate", "target": "p3-final-assessment", "label": "Gate passed"},
+    {"id": "c3-21", "source": "p3-final-assessment", "target": "p3-end-success", "label": "Pass"},
+    {"id": "c3-22", "source": "p3-final-assessment", "target": "p3-end-partial", "label": "Fail"}
+  ],
+  "generated_at": "2026-03-27T18:00:00.000000+00:00",
+  "model": "claude-opus-4-6"
+}

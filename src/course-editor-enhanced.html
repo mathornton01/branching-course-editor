@@ -133,7 +133,13 @@
       80%  { transform: scale(1.005); }
       100% { transform: scale(1) rotate(0deg); }
     }
-    .connection-group.conn-jiggle { animation: connJiggle 0.38s ease-out; }
+    .connection-group { transform-box: fill-box; transform-origin: center; }
+    .connection-group.conn-jiggle .connection-vis {
+      animation: connStrokeJiggle 0.5s ease-out;
+    }
+    .connection-group.conn-jiggle .connection-vis[marker-end] {
+      animation: connStrokeJiggle 0.5s ease-out, connDashFlow 0.5s ease-out;
+    }
     /* Quick-toolbar collapse */
     #quick-toolbar { transition: opacity 0.3s, transform 0.35s cubic-bezier(0.4,0,0.2,1); }
     #quick-toolbar.qt-collapsed {
@@ -147,14 +153,18 @@
       padding: 3px 6px; border-radius: 16px; color: #64748b; line-height: 1;
     }
     .qt-collapse-btn:hover { background: #f1f5f9; }
-    @keyframes connJiggle {
-      0%   { transform: translate(0,0)      rotate(0deg);    }
-      15%  { transform: translate(-2px,-1px) rotate(0.5deg);  }
-      30%  { transform: translate(2px, 1px)  rotate(-0.5deg); }
-      45%  { transform: translate(-1px,-0.5px) rotate(0.25deg); }
-      60%  { transform: translate(1px, 0.5px) rotate(-0.15deg); }
-      75%  { transform: translate(-0.5px,0) rotate(0.08deg); }
-      100% { transform: translate(0,0)      rotate(0deg);    }
+    @keyframes connStrokeJiggle {
+      0%   { stroke-width: 2;   opacity: 1;   }
+      15%  { stroke-width: 4.5; opacity: 0.7; }
+      30%  { stroke-width: 1.5; opacity: 1;   }
+      45%  { stroke-width: 3.5; opacity: 0.8; }
+      60%  { stroke-width: 2.2; opacity: 1;   }
+      80%  { stroke-width: 1.8; opacity: 1;   }
+      100% { stroke-width: 2;   opacity: 1;   }
+    }
+    @keyframes connDashFlow {
+      0%   { stroke-dasharray: 8 4; stroke-dashoffset: 0;  }
+      100% { stroke-dasharray: 8 4; stroke-dashoffset: -48; }
     }
     .connection-group.conn-new { animation: connAppear 0.32s ease-out both; }
     @keyframes connAppear {
@@ -2495,6 +2505,8 @@ let _clipboard = null; // { nodes: [...], connections: [...] }
 
 // Animation state
 const _connPrevSides = {}; // connId -> { fromSide, toSide } — detects anchor flips for jiggle
+const _connJiggleUntil = {}; // connId -> timestamp when jiggle animation should end
+const JIGGLE_DURATION = 500; // ms — matches CSS animation duration
 let _pendingNewConnId = null; // newly added connection gets the conn-new class once
 
 // Connect state — module-level handlers so they can be removed
@@ -2804,7 +2816,26 @@ function attachNodeEvents(el, node) {
         const n = nodes.find(nn => nn.id === id);
         if (n) groupOffsets[id] = { dx: w.x - n.position.x, dy: w.y - n.position.y };
       });
-      dragState = { nodeId: node.id, offsetX: w.x - node.position.x, offsetY: w.y - node.position.y, groupOffsets };
+      const ds = { nodeId: node.id, offsetX: w.x - node.position.x, offsetY: w.y - node.position.y, groupOffsets };
+      // Rope physics for multi-select: capture rest lengths so non-selected connected nodes get pulled
+      if (editorSettings.linkedDrag) {
+        ds.ropeLengths = buildRopeLengths();
+      }
+      // Downstream rigid drag for multi-select: capture offsets for downstream nodes NOT in the selection
+      if (editorSettings.downstreamDrag) {
+        const downstream = new Set();
+        selectedNodeIds.forEach(sid => {
+          getDownstreamNodeIds(sid).forEach(did => { if (!selectedNodeIds.has(did)) downstream.add(did); });
+        });
+        if (downstream.size) {
+          ds.downstreamOffsets = {};
+          downstream.forEach(id => {
+            const n2 = nodes.find(nn => nn.id === id);
+            if (n2) ds.downstreamOffsets[id] = { dx: w.x - n2.position.x, dy: w.y - n2.position.y };
+          });
+        }
+      }
+      dragState = ds;
       document.querySelectorAll('.node.selected').forEach(el2 => el2.classList.add('dragging'));
     } else {
       const ds = { nodeId: node.id, offsetX: w.x - node.position.x, offsetY: w.y - node.position.y };
@@ -2996,15 +3027,17 @@ function renderConnections() {
     const d = _connPathD(f, conn, t);
     const isSel = conn.id === selectedConnId;
 
-    // Detect anchor-side flip for jiggle animation
+    // Detect anchor-side flip for jiggle animation (persists across re-renders via timestamp)
     const prev = _connPrevSides[conn.id];
     const sideFlipped = prev && (prev.fromSide !== conn._fromSide || prev.toSide !== conn._toSide);
     _connPrevSides[conn.id] = { fromSide: conn._fromSide, toSide: conn._toSide };
+    if (sideFlipped) _connJiggleUntil[conn.id] = Date.now() + JIGGLE_DURATION;
+    const isJiggling = _connJiggleUntil[conn.id] && Date.now() < _connJiggleUntil[conn.id];
 
     const g = document.createElementNS('http://www.w3.org/2000/svg','g');
     g.classList.add('connection-group');
     if (isSel) g.classList.add('selected');
-    if (sideFlipped) g.classList.add('conn-jiggle');
+    if (isJiggling) g.classList.add('conn-jiggle');
     if (conn.id === _pendingNewConnId) { g.classList.add('conn-new'); _pendingNewConnId = null; }
     g.dataset.connId = conn.id;
 
@@ -4123,7 +4156,7 @@ function toggleNodeRepulsion() {
   editorSettings.nodeRepulsion = !editorSettings.nodeRepulsion;
   applyEditorSetting('nodeRepulsion', editorSettings.nodeRepulsion);
   updateRepulsionBtn();
-  if (editorSettings.nodeRepulsion) applyNodeRepulsion();
+  if (editorSettings.nodeRepulsion) { startRepulsionLoop(); } else { stopRepulsionLoop(); }
 }
 function updateRepulsionBtn() {
   const btn = document.getElementById('repulsion-btn');
@@ -4224,9 +4257,10 @@ function applyRopeConstraints(draggedId, ropeLengths, movedSet) {
     });
     if (!anyMoved) break;
   }
-  // Update DOM positions for all moved nodes
+  // Update DOM positions for all moved nodes (skip nodes that are already positioned by group/single drag)
+  const skipSet = dragState && dragState.groupOffsets ? selectedNodeIds : new Set([draggedId]);
   movedSet.forEach(id => {
-    if (id === draggedId) return;
+    if (skipSet.has(id)) return;
     const n = nodes.find(nn => nn.id === id);
     if (!n) return;
     const el = document.querySelector(`.node[data-node-id="${id}"]`);
@@ -4248,7 +4282,7 @@ document.addEventListener('mousemove', e => {
   if (!dragState) return;
   const w = screenToWorld(e.clientX, e.clientY);
   if (dragState.groupOffsets) {
-    // Group drag — move all selected nodes
+    // Group drag — move all selected nodes rigidly
     const gs = editorSettings.snapToGrid ? (parseInt(editorSettings.gridSize)||40) : 0;
     selectedNodeIds.forEach(id => {
       const n = nodes.find(nn => nn.id === id);
@@ -4260,6 +4294,24 @@ document.addEventListener('mousemove', e => {
       const el = document.querySelector(`.node[data-node-id="${id}"]`);
       if (el) { el.style.left = nx+'px'; el.style.top = ny+'px'; }
     });
+    // Downstream rigid drag for non-selected downstream nodes
+    if (dragState.downstreamOffsets) {
+      const dgs = gs;
+      for (const [id, off] of Object.entries(dragState.downstreamOffsets)) {
+        const ln = nodes.find(nn => nn.id === id);
+        if (!ln) continue;
+        let lx = w.x - off.dx, ly = w.y - off.dy;
+        if (dgs) { lx = Math.round(lx/dgs)*dgs; ly = Math.round(ly/dgs)*dgs; }
+        ln.position.x = lx; ln.position.y = ly;
+        const lel = document.querySelector(`.node[data-node-id="${id}"]`);
+        if (lel) { lel.style.left = lx+'px'; lel.style.top = ly+'px'; }
+      }
+    }
+    // Rope physics: treat all selected nodes as anchors, pull non-selected connected nodes
+    if (dragState.ropeLengths) {
+      const movedSet = new Set(selectedNodeIds);
+      applyRopeConstraints(dragState.nodeId, dragState.ropeLengths, movedSet);
+    }
     renderConnections(); refreshCodePanel();
     return;
   }
@@ -4351,6 +4403,8 @@ document.addEventListener('mouseup', e => {
       }
     }
     dragState = null;
+    // Burst repulsion after drop to resolve any new overlaps
+    if (editorSettings.nodeRepulsion) applyNodeRepulsion(nodes, 20);
   }
 });
 
@@ -5585,39 +5639,49 @@ function treeLayout(nodeList, connList) {
 }
 
 // ── NODE REPULSION ─────────────────────────────────────────────────────────────
-// Simple iterative repulsion to push overlapping nodes apart.
-// Runs after layout; toggled via editorSettings.nodeRepulsion.
+// Continuous soft repulsion so overlapping nodes gently push apart.
+// Runs during drag and as an ambient animation loop when enabled.
+let _repulsionRAF = null;
+
 function applyNodeRepulsion(nodeList, iterations) {
-  if (!editorSettings.nodeRepulsion) return;
-  const iters = iterations || 30;
+  if (!editorSettings.nodeRepulsion) return false;
+  const nl = nodeList || nodes;
+  if (!nl || nl.length < 2) return false;
+  const iters = iterations || 5; // fewer iters per frame for smooth feel
   const NODE_W = parseInt(editorSettings.nodeWidth) || 220;
-  const NODE_H = 100; // approximate node height
-  const PAD_X = 40;   // minimum horizontal gap
-  const PAD_Y = 30;   // minimum vertical gap
+  const NODE_H = 100;
+  const PAD_X = 40;
+  const PAD_Y = 30;
   const minDistX = NODE_W + PAD_X;
   const minDistY = NODE_H + PAD_Y;
+  const STRENGTH = 0.3; // gentle push per frame
 
+  let anyMoved = false;
   for (let iter = 0; iter < iters; iter++) {
     let moved = false;
-    for (let i = 0; i < nodeList.length; i++) {
-      for (let j = i + 1; j < nodeList.length; j++) {
-        const a = nodeList[i], b = nodeList[j];
+    for (let i = 0; i < nl.length; i++) {
+      for (let j = i + 1; j < nl.length; j++) {
+        const a = nl[i], b = nl[j];
         if (!a.position || !b.position) continue;
+        // Skip if either node is currently being dragged (let user control it)
+        if (dragState && (dragState.nodeId === a.id || dragState.nodeId === b.id)) continue;
+        // Also skip nodes in a group drag
+        if (dragState && dragState.groupOffsets && (dragState.groupOffsets[a.id] || dragState.groupOffsets[b.id])) continue;
         const dx = b.position.x - a.position.x;
         const dy = b.position.y - a.position.y;
         const overlapX = minDistX - Math.abs(dx);
         const overlapY = minDistY - Math.abs(dy);
         if (overlapX > 0 && overlapY > 0) {
-          // Push apart along the axis with less overlap
           moved = true;
+          anyMoved = true;
           if (overlapX < overlapY) {
-            const push = (overlapX / 2) + 2;
-            const signX = dx >= 0 ? 1 : -1;
+            const push = Math.max(1, overlapX * STRENGTH);
+            const signX = dx >= 0 ? 1 : (dx < 0 ? -1 : (Math.random() > 0.5 ? 1 : -1));
             a.position.x -= signX * push;
             b.position.x += signX * push;
           } else {
-            const push = (overlapY / 2) + 2;
-            const signY = dy >= 0 ? 1 : -1;
+            const push = Math.max(1, overlapY * STRENGTH);
+            const signY = dy >= 0 ? 1 : (dy < 0 ? -1 : (Math.random() > 0.5 ? 1 : -1));
             a.position.y -= signY * push;
             b.position.y += signY * push;
           }
@@ -5626,6 +5690,30 @@ function applyNodeRepulsion(nodeList, iterations) {
     }
     if (!moved) break;
   }
+  // Update DOM positions for any nodes that moved
+  if (anyMoved) {
+    nl.forEach(n => {
+      if (!n.position) return;
+      const el = document.querySelector(`.node[data-node-id="${n.id}"]`);
+      if (el) { el.style.left = n.position.x + 'px'; el.style.top = n.position.y + 'px'; }
+    });
+    renderConnections();
+  }
+  return anyMoved;
+}
+
+// Ambient repulsion loop — runs continuously when enabled, stops when disabled
+function startRepulsionLoop() {
+  if (_repulsionRAF) return;
+  function tick() {
+    if (!editorSettings.nodeRepulsion) { _repulsionRAF = null; return; }
+    applyNodeRepulsion(nodes, 3);
+    _repulsionRAF = requestAnimationFrame(tick);
+  }
+  _repulsionRAF = requestAnimationFrame(tick);
+}
+function stopRepulsionLoop() {
+  if (_repulsionRAF) { cancelAnimationFrame(_repulsionRAF); _repulsionRAF = null; }
 }
 
 function flatToEditor(raw) {
@@ -6576,8 +6664,8 @@ function _applyEditorSettingToDOM(key, value) {
       break;
     }
     case 'nodeRepulsion': {
-      // Re-run layout with or without repulsion
-      renderAllNodes(); renderConnections();
+      if (editorSettings.nodeRepulsion) { startRepulsionLoop(); } else { stopRepulsionLoop(); }
+      updateRepulsionBtn();
       break;
     }
     case 'showConnLabels': {
@@ -7013,6 +7101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupQuickToolbar();
   updateLinkedDragBtn();
   updateRepulsionBtn();
+  if (editorSettings.nodeRepulsion) startRepulsionLoop();
   setupCanvasDrop();
   applyTransform();
 

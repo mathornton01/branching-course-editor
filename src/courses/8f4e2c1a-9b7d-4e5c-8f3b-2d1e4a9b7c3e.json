@@ -1,0 +1,229 @@
+{
+  "id": "8f4e2c1a-9b7d-4e5c-8f3b-2d1e4a9b7c3e",
+  "title": "Data Visualization with Python for Game Design",
+  "description": "Learn to visualize game data with Python through adaptive branching\u2014from basic charts to advanced interactive dashboards, guided by your diagnostic assessment.",
+  "topic": "Data Visualization with Python",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "python",
+    "data-visualization",
+    "game-design",
+    "matplotlib",
+    "seaborn",
+    "plotly"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Game Data Visualization Skills",
+      "content": "Answer these 3 questions to determine the right learning path. Your results will route you to either foundational concepts or advanced techniques.",
+      "questions": [
+        {
+          "question": "You're balancing a multiplayer game with 4 character classes performing across 5 difficulty levels. Which visualization best reveals class performance disparities?",
+          "options": [
+            "A single line chart showing all 20 data points",
+            "A grouped bar chart or heatmap comparing class \u00d7 difficulty",
+            "A pie chart for each class",
+            "Separate line charts, one per class"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Line charts obscure categorical comparisons and create spaghetti plots.",
+            "Correct! Grouped bars and heatmaps preserve multi-dimensional structure, letting designers spot imbalances instantly.",
+            "Pie charts hide quantitative differences and prevent comparison.",
+            "Separate charts fragment the narrative instead of showing relationships."
+          ],
+          "explanation": "When comparing multiple categories across conditions (classes vs. difficulties), grouped bars and heatmaps are superior because they preserve the comparison structure in a single, cohesive view."
+        },
+        {
+          "question": "Your mobile game tracks daily active users (DAU), average session length, and monetization per user over 30 days. Which Python library is best for creating publication-ready dashboards?",
+          "options": [
+            "Matplotlib alone (low-level control)",
+            "Seaborn (high-level, opinionated styling)",
+            "Pandas .plot() method",
+            "Spreadsheet software"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Matplotlib is powerful but verbose; production dashboards require many customization lines.",
+            "Correct! Seaborn provides elegant defaults, beautiful color palettes, and statistical plot types ideal for game metrics.",
+            "Pandas plotting is functional but lacks professional styling and interactivity.",
+            "This course teaches Python-based solutions for reproducible, version-controlled analytics."
+          ],
+          "explanation": "Seaborn abstracts matplotlib's verbosity while delivering production-quality output. For game analytics\u2014where iterative design decisions matter\u2014Seaborn's efficiency is essential."
+        },
+        {
+          "question": "Before writing any code to visualize your game's player retention curve across 8 monthly releases, what should you do first?",
+          "options": [
+            "Start coding; iterate until it looks right.",
+            "Define your data shape, identify your core question, and choose a viz type before coding.",
+            "Collect as much data as possible.",
+            "Use the default settings; customization is premature optimization."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Iterative coding without intent produces unclear, inefficient visualizations.",
+            "Correct! Planning (data structure, question, viz type) prevents rework and ensures clarity.",
+            "More data without a clear question amplifies confusion.",
+            "Defaults rarely match your specific story; intentional design is essential."
+          ],
+          "explanation": "Effective visualization is intentional: start by defining what question your data answers (e.g., 'Does player retention improve after balance patches?'), then choose a viz type that answers it (line chart over months)."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Interactive & Real-Time Game Analytics Dashboards",
+      "content": "Master multi-dimensional visualization for complex game metrics. Learn to architect interactive dashboards using Plotly and Seaborn subplots that show live player behavior in context: revenue funnels by region, matchmaking queue depth over time, skill-based rank distribution, and cosmetic sales by rarity. Build layered narratives\u2014combining time-series (trends), categorical (comparisons), and statistical (distributions) charts\u2014so live-ops teams answer questions like 'Why did retention spike after the cosmetics patch?' or 'Which regions are undermonetized?' in seconds.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced Example: Live-Ops Revenue Intelligence Dashboard",
+      "content": "A competitive game studio needs to understand battle pass monetization across 5 regions and 3 cosmetic tiers. Build a 4-subplot Plotly dashboard: (1) Line chart with cumulative revenue per region per season, showing trend and confidence bands to reveal momentum; (2) Heatmap of player tier distribution (free, basic, premium) \u00d7 region, exposing regional monetization gaps (e.g., Asia drives premium, EU prefers basic); (3) Scatter plot of playtime (hours) vs. tier reached (color-coded by rarity purchased), revealing the conversion funnel\u2014whale players emerge around 50-hour playtime; (4) Stacked area chart showing revenue composition by cosmetic rarity over time, guiding art production priorities. Plotly's interactive legend lets designers toggle regions and seasons, turning raw data into instant answers.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete",
+      "content": "You've mastered interactive, multi-dimensional visualization for live-ops analytics. Use these dashboard patterns to inform balance decisions, monetization strategies, and regional content localization."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundations: Clear & Purposeful Game Data Visualization",
+      "content": "Learn to transform raw game metrics into clear stories. Master bar charts, line charts, and basic subplots to answer essential design questions: 'Which quest do players skip?' 'Is this difficulty spike causing ragequits?' 'Do experienced players prefer this control scheme?' Start with Matplotlib and Seaborn fundamentals\u2014clean axes, meaningful colors, and strategic labels\u2014so your visualizations guide iteration, not confuse stakeholders.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Basic Example: Quest Engagement Analysis",
+      "content": "Your RPG has 15 side quests, and you suspect players abandon certain stories. Create a horizontal bar chart: quest titles on the y-axis, completion percentage on the x-axis, sorted by completion rate (lowest first). Use a single color for bars, add a vertical reference line at your 75% target completion rate, and label the top 3 underperforming quests with their percentages. This single chart reveals that 'Lost Artifact' has only 12% completion (vs. 85% for other quests), signaling a quest design problem. Within seconds, the design lead knows where to focus iteration.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: NPC Balance Visualization",
+      "content": "Apply fundamentals: Your action-RPG has combat data from 3 difficulty levels (Easy, Normal, Hard) showing win rates for 4 NPC types (Warrior, Mage, Archer, Rogue). Create a grouped bar chart where x-axis = difficulty level, y-axis = win rate (0\u2013100%), and groups = NPC types (different colors per type). Add a horizontal reference line at 50% (balanced). Include title, axis labels, and legend. This reveals whether any NPC is overpowered (e.g., Mage > 60% on Hard, requiring a nerf).",
+      "questions": [
+        {
+          "question": "You plot NPC win rates and notice Mages have 75% win rate on Hard difficulty vs. 50% target. How should you emphasize this imbalance in your chart?",
+          "options": [
+            "Use a bright red color for Mage bars only.",
+            "Add a horizontal reference line at 50% so deviations are visually obvious.",
+            "Make all bars the same size regardless of value.",
+            "Use 3D bars for emphasis."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Color alone doesn't quantify the problem.",
+            "Correct! Reference lines (matplotlib.axhline) highlight targets and deviations instantly, so designers act.",
+            "This removes the quantitative information entirely.",
+            "3D charts distort perception; 2D is always clearer."
+          ],
+          "explanation": "Reference lines create visual anchors. When the Mage bar towers above the 50% line on Hard, the balance problem is undeniable."
+        },
+        {
+          "question": "In Seaborn, how do you create a grouped bar chart with difficulty on the x-axis, win_rate on the y-axis, and npc_type coloring?",
+          "options": [
+            "sns.lineplot(x='difficulty', y='win_rate')",
+            "sns.barplot(x='difficulty', y='win_rate', hue='npc_type')",
+            "sns.scatterplot(x='difficulty', y='npc_type')",
+            "sns.histplot(data=df, bins=10)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "lineplot() shows lines, not bars, and has no hue parameter for groups.",
+            "Correct! hue='npc_type' creates grouped bars\u2014one bar per NPC type within each difficulty.",
+            "scatterplot() is for continuous variables, not categorical grouping.",
+            "histplot() shows distributions, not categorical comparisons."
+          ],
+          "explanation": "sns.barplot() with hue automatically groups bars. Each difficulty level gets 4 bars (one per NPC), making comparisons immediate."
+        },
+        {
+          "question": "After creating the chart, you want to add a horizontal line at y=50 to show the balance target. Which code achieves this?",
+          "options": [
+            "plt.target(50)",
+            "plt.axhline(y=50, color='red', linestyle='--', label='Target')",
+            "df['target'] = 50",
+            "plt.add_reference(50)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "plt.target() doesn't exist.",
+            "Correct! axhline() adds a horizontal line; the label appears in the legend.",
+            "Adding a column doesn't visualize it.",
+            "plt.add_reference() doesn't exist."
+          ],
+          "explanation": "matplotlib.pyplot.axhline(y=50) draws a reference line. linestyle='--' makes it dashed for distinction, and label= registers it in the legend."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundations Path Complete",
+      "content": "You've learned to create clear, intentional visualizations that reveal game design truths. Use bar charts, line charts, and reference lines to guide your team toward balance and player satisfaction."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Strong foundation (66%+)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Build from basics"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "See advanced patterns"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Complete"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Learn by example"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "Practice fundamentals"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T14:18:10.359512+00:00",
+  "model": "claude-haiku-4-5"
+}

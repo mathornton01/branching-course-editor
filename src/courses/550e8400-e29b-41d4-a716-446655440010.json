@@ -1,0 +1,533 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440010",
+  "title": "Database Design and SQL",
+  "description": "Learn database design and SQL query writing through the lens of marine biology research. Master table design, relationships, normalization, and SQL queries using real-world ocean research scenarios.",
+  "topic": "Database Design & SQL",
+  "theme": "marine biology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 120,
+  "tags": [
+    "database",
+    "SQL",
+    "data-management",
+    "marine-biology",
+    "normalization",
+    "queries"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Organizing Marine Life: Understanding Databases",
+      "content": "Just as marine biologists need to organize information about thousands of fish species, coral types, and ocean ecosystems, databases help us structure and store vast amounts of data. A database is an organized collection of related data about entities\u2014like fish species, researchers, or ocean locations. It uses tables (like spreadsheets) where each row is a record (e.g., one fish species) and each column is a field (e.g., species name, average depth, color). The key to good databases is relationships\u2014connecting data about different entities so we can understand how they relate to each other. For example, we might connect 'Fish Species' to 'Habitat Locations' to track where each species lives.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "A Marine Research Database Example",
+      "content": "Imagine a marine research center studies coral reefs. They create a database with these tables: (1) Coral_Species table with fields like species_id (primary key), scientific_name, color, depth_range. (2) Research_Sites table with fields like site_id (primary key), location_name, latitude, longitude. (3) Observations table linking these two tables with fields like observation_id, coral_species_id (foreign key), site_id (foreign key), observation_date, temperature. The primary key uniquely identifies each record, and foreign keys connect tables to show that specific coral species were observed at specific sites. This structure prevents data duplication and makes updates easy.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Test Your Database Knowledge",
+      "content": "Answer these questions to demonstrate your understanding of database fundamentals.",
+      "questions": [
+        {
+          "question": "In the coral reef database, what would be the primary key for the Coral_Species table?",
+          "options": [
+            "color",
+            "species_id",
+            "scientific_name",
+            "depth_range"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The color field could have duplicates (multiple species can be the same color).",
+            "Correct! The primary key uniquely identifies each record, and species_id is unique for each coral species.",
+            "Multiple species can have the same scientific name across different databases.",
+            "Depth range could be shared by many species."
+          ],
+          "explanation": "A primary key must be unique for each record. species_id uniquely identifies each coral species."
+        },
+        {
+          "question": "Why would we use a foreign key to link the Observations table to the Coral_Species table?",
+          "options": [
+            "To backup the data",
+            "To show which coral species were observed at which location",
+            "To prevent the database from being too large",
+            "To make the species table easier to read"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's not what foreign keys do in this context.",
+            "Correct! Foreign keys create relationships between tables.",
+            "No, that's not the primary purpose of foreign keys.",
+            "Foreign keys don't affect readability."
+          ],
+          "explanation": "Foreign keys establish relationships between tables, allowing us to connect related data and understand patterns in the observations."
+        },
+        {
+          "question": "A marine biologist is adding data about a new fish species. What is a disadvantage of storing all information in one large table instead of using multiple related tables?",
+          "options": [
+            "It's faster to search",
+            "It requires less storage space",
+            "Data duplication and difficulty updating information",
+            "It's easier to understand the data relationships"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Actually, one large table can be slower to search and harder to maintain.",
+            "No, it typically requires more storage due to duplication.",
+            "Correct! This is why we use normalized databases with multiple tables.",
+            "The opposite is true; multiple tables make relationships clearer."
+          ],
+          "explanation": "Using one large table leads to data duplication (storing the same habitat name repeatedly) and makes updates error-prone. Normalized databases with multiple related tables solve this problem."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Practice: Marine Database Design",
+      "content": "Practice identifying keys and table relationships in marine research scenarios.",
+      "questions": [
+        {
+          "question": "An oceanographic center tracks whale migration patterns. They have a table of Whale_Species with whale_id as primary key. They also have a Sightings table that records when and where whales are seen. What would be the foreign key in the Sightings table?",
+          "options": [
+            "sighting_id",
+            "whale_id",
+            "location_name",
+            "sighting_date"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's the primary key of the Sightings table, not the foreign key.",
+            "Correct! This foreign key references the Whale_Species table.",
+            "Location name could be stored in a separate table and referenced via foreign key.",
+            "Sighting date is an observation detail, not a relationship key."
+          ],
+          "explanation": "Foreign keys link records from one table to another. whale_id in Sightings references the Whale_Species table."
+        },
+        {
+          "question": "Why would you separate Fish_Species and Fish_Observations into two different tables rather than one?",
+          "options": [
+            "To make the database run faster",
+            "To avoid storing the same species information multiple times",
+            "To ensure the database looks more professional",
+            "It doesn't really matter"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Query speed is determined by many factors, not just table separation.",
+            "Correct! This is normalization\u2014reducing redundancy.",
+            "Professional appearance isn't the main goal of database design.",
+            "It definitely matters for efficiency and data integrity."
+          ],
+          "explanation": "Separating species metadata from observations prevents storing 'great white shark' thousands of times and makes updates efficient."
+        },
+        {
+          "question": "In a marine research database, the Researcher table has researcher_id as primary key. The Projects table has project_id as primary key. To show which researchers work on which projects, you would need a third table. What would this table primarily contain?",
+          "options": [
+            "Project descriptions",
+            "Researcher names",
+            "researcher_id and project_id as foreign keys",
+            "Funding amounts"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Project descriptions belong in the Projects table.",
+            "Researcher names belong in the Researcher table.",
+            "Correct! This junction table creates the many-to-many relationship.",
+            "Funding amounts belong in the Projects table."
+          ],
+          "explanation": "A junction table (like Researcher_Projects) uses foreign keys to connect the two tables, allowing many researchers to work on many projects."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Querying the Seas: Introduction to SQL",
+      "content": "SQL (Structured Query Language) is the universal language for retrieving and manipulating data in databases. The most common command is SELECT, which retrieves data. For example, 'SELECT species_name, depth_range FROM Coral_Species' retrieves the names and depth ranges of all coral species. The WHERE clause filters results: 'SELECT species_name FROM Fish_Species WHERE habitat = 'reef'' returns only fish that live on reefs. You can sort results with ORDER BY: 'SELECT species_name FROM Coral_Species ORDER BY depth_range DESC' lists corals from deepest to shallowest. COUNT, SUM, and AVG are aggregate functions that work with data, like 'SELECT COUNT(*) FROM Whale_Sightings WHERE year = 2024' counts whale sightings in 2024. These tools help marine biologists quickly find patterns in their vast datasets.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "SQL Query Worked Example: Researching Deep-Sea Fish",
+      "content": "A marine biologist wants to find all deep-sea fish species in their database that live deeper than 1000 meters. Here's the SQL query: 'SELECT species_name, typical_depth, bioluminescence FROM Fish_Species WHERE typical_depth > 1000 ORDER BY typical_depth DESC'. This query: (1) SELECT picks the columns we care about, (2) FROM specifies the table, (3) WHERE filters to only fish deeper than 1000m, (4) ORDER BY typical_depth DESC sorts from deepest to shallowest. The result is a list of deep-sea fish sorted by depth, making it easy to study pressure adaptations. Adding COUNT instead would give 'SELECT COUNT(*) FROM Fish_Species WHERE typical_depth > 1000' to find how many deep-sea species are recorded.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Test Your SQL Knowledge",
+      "content": "Answer these questions to demonstrate your understanding of SQL queries.",
+      "questions": [
+        {
+          "question": "What would this SQL query return? 'SELECT species_name FROM Coral_Species WHERE color = 'red' ORDER BY depth_range'",
+          "options": [
+            "All columns from all corals",
+            "Just the species names of red corals, sorted by depth",
+            "The color of all corals, sorted by depth",
+            "An error because the syntax is wrong"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This query specifically selects the species_name column, not all columns.",
+            "Correct! SELECT species_name retrieves that column. WHERE color = 'red' filters results. ORDER BY depth_range sorts the output.",
+            "The query filters by color, but returns species names, not colors.",
+            "The syntax is valid SQL."
+          ],
+          "explanation": "SELECT species_name retrieves that column. WHERE color = 'red' filters results. ORDER BY depth_range sorts the output."
+        },
+        {
+          "question": "How would you count how many different whale species have been observed in the Arctic region?",
+          "options": [
+            "'SELECT species_name FROM Whale_Species WHERE region = 'Arctic''",
+            "'SELECT COUNT(*) FROM Whale_Species WHERE region = 'Arctic''",
+            "'SELECT * FROM Whale_Sightings WHERE region = 'Arctic''",
+            "'COUNT Whale_Species WHERE region = 'Arctic''"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This lists species but doesn't count them.",
+            "Correct! COUNT(*) counts the number of records that match the condition.",
+            "This returns all sighting details, but doesn't count species.",
+            "COUNT must be preceded by SELECT."
+          ],
+          "explanation": "COUNT(*) is an aggregate function that counts the number of records matching your WHERE condition."
+        },
+        {
+          "question": "A researcher wants to list all fish species found in coral reef habitats, sorted alphabetically. Which query is correct?",
+          "options": [
+            "'SELECT species_name FROM Fish_Species WHERE habitat = 'coral reef' ORDER BY species_name'",
+            "'SELECT * FROM Fish_Species ORDER BY coral reef'",
+            "'SELECT species_name FROM Fish_Species habitat = 'coral reef''",
+            "'SELECT species_name Fish_Species WHERE habitat = 'coral reef''"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This uses SELECT, WHERE, and ORDER BY in the proper syntax.",
+            "ORDER BY requires a column name, and the WHERE clause is missing.",
+            "The WHERE clause is missing the operator (= or IN).",
+            "Missing the FROM keyword between columns and table name."
+          ],
+          "explanation": "The proper SQL syntax is SELECT column FROM table WHERE condition ORDER BY column."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Marine Database Queries",
+      "content": "Practice writing SQL queries for marine research scenarios.",
+      "questions": [
+        {
+          "question": "Write a query to find all sea turtle species that migrate more than 5000 kilometers",
+          "options": [
+            "'SELECT name FROM Sea_Turtles WHERE migration_distance > 5000'",
+            "'SELECT name FROM Sea_Turtles migration_distance = 5000'",
+            "'SELECT * FROM Sea_Turtles > 5000'",
+            "'WHERE migration_distance > 5000 FROM Sea_Turtles'"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This query has proper syntax with SELECT, FROM, and WHERE.",
+            "Missing the WHERE keyword and using = instead of >.",
+            "Missing both FROM and WHERE keywords; syntax is incorrect.",
+            "WHERE clause cannot come before FROM."
+          ],
+          "explanation": "SELECT specifies columns, FROM specifies the table, WHERE > 5000 filters for values greater than 5000."
+        },
+        {
+          "question": "How would you get the number of different fish species observed in kelp forests?",
+          "options": [
+            "'SELECT species_name FROM Fish_Observations WHERE habitat = 'kelp forest''",
+            "'COUNT FROM Fish_Species WHERE habitat = 'kelp forest''",
+            "'SELECT COUNT(DISTINCT species_id) FROM Fish_Observations WHERE habitat = 'kelp forest''",
+            "'SELECT species_name FROM Fish_Species WHERE COUNT > kelp forest'"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "This lists species names but doesn't count them or eliminate duplicates.",
+            "COUNT must follow SELECT; missing the FROM keyword.",
+            "Correct! COUNT(DISTINCT species_id) counts unique species in kelp forest observations.",
+            "COUNT goes before column names, not after the WHERE clause."
+          ],
+          "explanation": "COUNT(DISTINCT species_id) counts the unique species IDs, avoiding double-counting if one species was observed multiple times."
+        },
+        {
+          "question": "List all researchers who have published papers about coral bleaching, sorted by last name",
+          "options": [
+            "'SELECT researcher_name FROM Researchers WHERE topic = 'coral bleaching' ORDER BY last_name'",
+            "'SELECT researcher_name FROM Researchers coral bleaching'",
+            "'SELECT * FROM Researchers ORDER BY 'coral bleaching''",
+            "'SELECT topic FROM Researchers WHERE researcher_name ORDER BY last_name'"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! WHERE filters by topic, and ORDER BY last_name sorts the results.",
+            "Missing WHERE keyword and proper syntax.",
+            "This returns all researchers but doesn't filter by topic; you can't ORDER BY a string literal.",
+            "This selects topics instead of researcher names and doesn't filter properly."
+          ],
+          "explanation": "WHERE filters researchers who studied coral bleaching, and ORDER BY last_name sorts them alphabetically by last name."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Designing Ocean Databases: Relationships, Keys, and Normalization",
+      "content": "Now that you understand tables and basic queries, professional database design requires deeper thinking. Primary keys uniquely identify records, while foreign keys link tables together, creating relationships. One-to-many relationships (one species has many observations) are most common in marine data: one coral species might be observed at 100 different reef sites. Many-to-many relationships require junction tables: researchers might work on multiple projects, and each project has multiple researchers, so you'd need a Researcher_Projects junction table. Normalization prevents data redundancy and inconsistencies. First normal form (1NF) ensures no repeated groups of columns. Second normal form (2NF) ensures non-key fields depend on the entire primary key. Third normal form (3NF) ensures non-key fields don't depend on other non-key fields. For example, instead of storing 'researcher_name' and 'researcher_department' in an Observations table, you'd reference researcher_id and look up their info in the Researchers table. Good design makes databases efficient, maintainable, and scalable for growing research programs.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Designing a Marine Research Network Database",
+      "content": "A network of ocean research stations wants a database tracking species observations. The optimal design includes: (1) Species table (species_id PRIMARY KEY, scientific_name, common_name, average_depth). (2) Research_Station table (station_id PRIMARY KEY, station_name, latitude, longitude, country). (3) Observations table (observation_id PRIMARY KEY, species_id FOREIGN KEY, station_id FOREIGN KEY, observation_date, observer_name, water_temperature). This normalizes data\u2014species info and station info are stored once. If you discover a species scientific name is incorrect, you update one record in Species table, and all observations automatically reference the corrected information. To find which stations have observed a particular species, you'd JOIN the tables: 'SELECT station_name FROM Observations JOIN Research_Station ON Observations.station_id = Research_Station.station_id WHERE species_id = 42'. This design scales beautifully as new observations arrive daily.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Advanced: Database Design and Joins",
+      "content": "Demonstrate your mastery of database design, normalization, and SQL joins.",
+      "questions": [
+        {
+          "question": "A database tracks ocean temperature measurements at various depths. Temperature data arrives constantly (thousands of records per day). What approach best handles this volume?",
+          "options": [
+            "Store all data in one Temperature table with depth as a column",
+            "Normalize by creating separate Depth and Temperature tables with a foreign key relationship",
+            "Store depth and temperature in a junction table with researcher names",
+            "It doesn't matter; one flat table is simpler"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This works for small datasets but doesn't scale well with thousands of daily records.",
+            "Correct! Normalization prevents redundant depth information and scales efficiently.",
+            "Junction tables are for many-to-many relationships, not for depth/temperature pairs.",
+            "Scalability and maintenance become problems with massive flat tables."
+          ],
+          "explanation": "Normalized databases handle large, rapidly growing datasets more efficiently and allow easier updates when metadata changes."
+        },
+        {
+          "question": "You need to find all coral species observed at reef sites located in the Indian Ocean. You have Coral_Species, Research_Sites, and Observations tables. Which approach uses a JOIN?",
+          "options": [
+            "'SELECT species_name FROM Coral_Species, Research_Sites, Observations WHERE ocean = 'Indian''",
+            "'SELECT species_name FROM Coral_Species JOIN Observations ON Coral_Species.species_id = Observations.species_id JOIN Research_Sites ON Observations.site_id = Research_Sites.site_id WHERE Research_Sites.ocean = 'Indian''",
+            "'SELECT * FROM Coral_Species WHERE ocean = 'Indian''",
+            "The data can't be retrieved because it's spread across tables"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This uses a Cartesian product; it's not a proper JOIN and lacks the WHERE condition clarity.",
+            "Correct! This uses explicit JOINs to connect the three tables and filters by ocean.",
+            "The Coral_Species table doesn't have an ocean field; we need to join to Research_Sites.",
+            "Normalized data across tables is perfectly retrievable with proper JOINs."
+          ],
+          "explanation": "JOINs connect tables by matching their foreign keys, allowing you to query data spread across multiple normalized tables."
+        },
+        {
+          "question": "In a marine database, why would you NOT store researcher phone numbers directly in the Observations table?",
+          "options": [
+            "Phone numbers are too long",
+            "It's faster to search without phone numbers",
+            "Researchers change phone numbers frequently; storing it once in a Researchers table is more maintainable",
+            "Phone numbers can't be stored in databases"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Length is not a constraint for phone number storage.",
+            "Searching speed isn't affected by storing phone numbers in a separate table.",
+            "Correct! This is third normal form (3NF)\u2014avoiding non-key field dependencies.",
+            "Phone numbers are easily stored in databases."
+          ],
+          "explanation": "Storing mutable data like phone numbers once in a Researchers table and referencing via researcher_id prevents inconsistencies and update anomalies."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n13",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "practice",
+      "title": "Practice: Complex Database Design Scenarios",
+      "content": "Practice designing databases and writing complex queries for advanced marine research scenarios.",
+      "questions": [
+        {
+          "question": "A research institute has ocean temperature sensors that record readings every hour at different depths. The dataset will grow to millions of records. Which table structure is most efficient?",
+          "options": [
+            "One table with all data: Temperature, Depth, Time, SensorID",
+            "Separate Sensor and Reading tables, where Reading references Sensor via foreign key",
+            "Combine all depths into one record per sensor per hour",
+            "Use multiple unrelated tables with no connections"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A single flat table will become unwieldy with millions of records and is prone to redundancy.",
+            "Correct! This normalized approach stores sensor metadata once and links to many readings.",
+            "Combining depths creates complex fields and makes queries harder.",
+            "Tables need relationships to form a useful database."
+          ],
+          "explanation": "Separating Sensor (metadata stored once) from Reading (millions of records) prevents redundancy and scales efficiently."
+        },
+        {
+          "question": "How would you write a JOIN query to find the names of all researchers who have observed bioluminescent fish species?",
+          "options": [
+            "'SELECT researcher_name FROM Researchers WHERE bioluminescent = true'",
+            "'SELECT DISTINCT researcher_name FROM Researchers JOIN Observations ON Researchers.researcher_id = Observations.researcher_id JOIN Fish_Species ON Observations.species_id = Fish_Species.species_id WHERE Fish_Species.bioluminescent = true'",
+            "'SELECT researcher_name FROM Fish_Species WHERE bioluminescent = true'",
+            "'SELECT * FROM Researchers, Observations, Fish_Species'"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The Researchers table doesn't have a bioluminescent field; you need to join to Fish_Species.",
+            "Correct! This properly JOINs three tables and uses DISTINCT to avoid duplicates.",
+            "Fish_Species doesn't have researcher names; you need to join to the Researchers table.",
+            "This Cartesian product is inefficient and lacks proper filtering."
+          ],
+          "explanation": "DISTINCT eliminates duplicate researchers, and the JOINs connect Researchers \u2192 Observations \u2192 Fish_Species to filter for bioluminescent species."
+        },
+        {
+          "question": "A field researcher notices the same species observation is being entered with slightly different scientific names. What database design issue does this reveal?",
+          "options": [
+            "The database doesn't need validation",
+            "The species info should be in one Species table with a single correct spelling, and observations should reference species_id, not re-enter the name",
+            "The researcher made a typo and that's fine",
+            "The database needs more tables"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Data validation and consistency are crucial in databases.",
+            "Correct! This is third normal form\u2014storing species metadata in one place prevents inconsistencies.",
+            "Typos compound across thousands of records; normalization prevents this.",
+            "The issue isn't the number of tables but rather storing data in the wrong place."
+          ],
+          "explanation": "When species names are stored only in the Species table and referenced by ID in Observations, you can't have spelling inconsistencies."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n13",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Congratulations: Database Design & SQL Mastery",
+      "content": "You've completed the Database Design and SQL course! You now understand how to design normalized databases for marine research, from basic table structure to complex relationships. You can write queries using SELECT, WHERE, ORDER BY, and JOINs to extract meaningful insights from ocean data. These skills are foundational for managing any dataset\u2014from tracking whale populations to monitoring coral bleaching worldwide. Apply these concepts in your next project: identify the entities you need (species, locations, observations), design tables with appropriate keys and relationships, and write queries to answer research questions. The marine biologists using your databases will thank you for building systems that scale, stay consistent, and make their research more efficient!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n5",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c13",
+      "source": "n11",
+      "target": "n13",
+      "label": "pass"
+    },
+    {
+      "id": "c14",
+      "source": "n11",
+      "target": "n12",
+      "label": "fail"
+    },
+    {
+      "id": "c15",
+      "source": "n12",
+      "target": "n11",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T13:13:24.043775+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,227 @@
+{
+  "id": "urban-architecture-course",
+  "title": "Computer Architecture Through Urban Planning",
+  "description": "Learn how computer processors, memory, and data flow work by exploring a thriving city's administrative systems.",
+  "topic": "Computer Architecture",
+  "theme": "urban planning",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer architecture",
+    "urban planning",
+    "metaphor learning",
+    "systems design"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "City Systems Diagnostic: What's Your Current Knowledge?",
+      "content": "Before we explore how computer architecture mirrors a city's operations, let's assess your current understanding of how systems process information and manage resources. Think about how a city coordinates different departments, stores information, and manages workflows.",
+      "questions": [
+        {
+          "question": "In a city's administrative system, where would temporary information about today's work (like open permits, active cases, or current processing jobs) be stored to ensure fast access?",
+          "options": [
+            "In the City Hall archives building (permanent long-term records)",
+            "At each clerk's desk with filing cabinets for today's active work",
+            "In the mayor's personal office notes",
+            "In the inter-city communication network infrastructure"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite\u2014archives are for permanent storage, not fast daily access.",
+            "Exactly right! This mirrors RAM: fast access, but only holds today's active work.",
+            "Not how a system would scale across many departments.",
+            "Networks are for communication, not storage of working data."
+          ],
+          "explanation": "RAM is like a clerk's active workspace\u2014very fast to access, but limited in size and cleared when work ends. It holds only what's currently being processed."
+        },
+        {
+          "question": "A city notices permit processing is slow. It opens sub-offices in each district so multiple offices process applications simultaneously. In computer terms, what has the city implemented?",
+          "options": [
+            "Increased cache size",
+            "Added more RAM memory",
+            "Added multiple processor cores",
+            "Upgraded the data storage system"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Cache is a speed optimization, but doesn't enable true parallel processing.",
+            "RAM increases working memory, but doesn't create independent processors.",
+            "Correct! Multiple independent processing units working simultaneously is what cores do.",
+            "Storage doesn't help process requests faster in parallel."
+          ],
+          "explanation": "Multi-core processors work like multiple city offices processing in parallel. Each core handles different tasks independently, increasing throughput dramatically."
+        },
+        {
+          "question": "The city keeps copies of frequently-needed documents (zoning maps, building codes) at each sub-office rather than fetching from archives each time. What computer principle does this reflect?",
+          "options": [
+            "Virtualization",
+            "Locality of reference and caching",
+            "Cache coherence",
+            "Instruction pipelining"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Virtualization simulates resources, not about keeping data nearby.",
+            "Correct! Keeping frequently-needed data close to where it's used is caching.",
+            "Cache coherence keeps multiple caches synchronized\u2014a more advanced concept.",
+            "Pipelining overlaps processing steps, not data location strategy."
+          ],
+          "explanation": "This is locality of reference: programs (and cities) repeatedly access the same data, so keeping it close reduces access time. Cache layers exploit this principle for speed."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Multi-Core Cities & Modern Processor Architecture",
+      "content": "Excellent foundation! Now let's explore how modern processors handle complexity through parallel processing and hierarchical memory optimization. Modern cities like Singapore coordinate multiple district centers, each with their own local infrastructure and decision-making authority. Similarly, modern CPUs use multiple cores with private L1 caches and shared L2/L3 caches. Each core operates independently\u2014like a district office making decisions on permits, traffic management, or emergency response. The L1 cache (128 KB per core) is the district office's working files\u2014ultra-fast but tiny. L2 cache (256 KB) is a regional warehouse, and L3 cache (8-20 MB shared) is the city logistics hub. Main memory is the central archives, and disk storage is the permanent record library. The challenge: keeping all cores synchronized so they share consistent data without constant slow memory trips. Modern architects use cache coherence protocols and memory barriers to ensure data consistency, just as city governance enforces coordination through inter-district agreements and communication protocols.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Case Study: Multi-District Building Permit Processing at Scale",
+      "content": "Imagine a major city with four district offices processing building permits in parallel. District A is zoning variance review (zoning code resident in its L1 cache), District B checks structural codes (has codes in L2), District C verifies environmental impact (fetching from L3), and District D reviews applicant history (querying main archives). All four work simultaneously. District A completes in 0.5 milliseconds (cache hit). District B takes 2 milliseconds (L2 hit). District C waits 12 milliseconds (L3 miss, retrieves from main memory). District D waits 100 milliseconds (archive access). When District A's decision affects District B's judgment, they synchronize through shared memory (cache coherence). A modern city processes thousands of such workflows daily; a modern CPU processes billions of instruction sequences daily across cores. The bottleneck is always memory latency: how quickly can you fetch data from storage layers to executing cores. Good architecture minimizes cache misses through intelligent prefetching and data placement\u2014cities do the same with zoning that keeps related services near each other.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Mastery: You're a City Systems Architect",
+      "content": "You've mastered advanced computer architecture concepts: multi-core processing, cache hierarchies, memory synchronization, and parallel instruction execution. You understand how modern processors handle billions of operations by leveraging parallelism, spatial and temporal locality, and careful resource management\u2014the same principles that make great cities operate efficiently at scale. You're ready to explore real-world applications like operating system thread scheduling, database query optimization, and GPU compute patterns. Excellent work!"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Fundamentals: Understanding City Administration as Computer Architecture",
+      "content": "Let's build your foundation with the basics. A city's administrative system mirrors how computers process information. City Hall (the CPU) receives requests, processes them, executes decisions, and distributes results. Clerks' desks with today's active files (RAM) provide fast temporary storage for current work. The basement archives (disk storage) hold permanent records in massive volume but with slow access. The mail system connecting City Hall to departments is the bus\u2014the communication pathway carrying instructions and data. A processor's registers are like the mayor's priority list: the absolute fastest storage but holding only a few critical items. Understanding this hierarchy\u2014from registers (fastest, tiniest) through cache, RAM, and finally storage (slowest, largest)\u2014is fundamental. The fetch-execute cycle is how one clerk completes a task step-by-step: get instruction, understand it, execute it, store result, repeat. This sequential processing mirrors a single-core CPU before considering parallelism.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Worked Example: Processing a Building Permit Application",
+      "content": "A citizen submits a building permit for a commercial project. The clerk at City Hall (CPU) receives it. He checks the nearby zoning filing cabinet (L1 cache\u2014hits in 1 second). Zoning code says 'requires Council approval.' He doesn't have the Council rules in his cabinet, so he requests them from the larger district filing system (L2\u2014takes 3 seconds). Still not there, so his assistant fetches the complete municipal code from central archives (main memory\u2014takes 30 seconds). Now permitted and approved. Total time: 34 seconds. Next application for the same area? The zoning code is still in the nearby cabinet (cache hit!), taking just 2 seconds. This is temporal locality: recently-used data stays close. The next application is for an adjacent zone, using the same zoning map (spatial locality: related data nearby). Caching exploits both principles. Without these layers, every request would require a 30-second archive trip; the city would process one permit per hour instead of dozens. CPUs without cache suffer the same catastrophic slowdown.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: City Operations & Computer Architecture Fundamentals",
+      "content": "Test your understanding of how city operations map to computer systems. These questions reinforce the fundamental concepts of memory hierarchy, data movement, and the fetch-execute cycle.",
+      "questions": [
+        {
+          "question": "In our city model, the fetch-execute cycle (get task, understand it, do it, save result, repeat) is analogous to:",
+          "options": [
+            "A clerk working through a to-do list step-by-step, one task at a time",
+            "The mayor assigning all city decisions simultaneously to departments",
+            "Multiple departments independently prioritizing their own work",
+            "The archives automatically shipping historical records to each office"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Exactly! Sequential processing: one step at a time, in order.",
+            "That's centralized decision-making, not the cycle model.",
+            "That's multi-core parallelism, an advanced concept.",
+            "Archives don't execute cycles; they store historical data."
+          ],
+          "explanation": "The fetch-execute cycle is inherently sequential and repeating: fetch instruction \u2192 decode \u2192 execute \u2192 store result \u2192 fetch next instruction. Like a clerk methodically completing a prioritized to-do list."
+        },
+        {
+          "question": "Why does the city keep copies of commonly-needed documents (zoning maps, building codes) at each district office instead of requiring every request to go to the central archives?",
+          "options": [
+            "To create employment for clerical staff",
+            "Because it's cheaper to print multiple copies",
+            "To reduce latency and speed up common requests through locality of reference",
+            "Because the archives don't have enough physical space"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "That's not the architectural reason.",
+            "Not the primary reason in systems design.",
+            "Correct! Locality = keeping frequently-accessed data close to reduce access time.",
+            "Archives have sufficient capacity; speed, not space, drives caching."
+          ],
+          "explanation": "Caching exploits locality of reference: programs and cities repeatedly access the same small set of data. Keeping it nearby in faster storage (L1 cache, L2 cache, district files) dramatically improves performance compared to always fetching from slow central storage."
+        },
+        {
+          "question": "If a permit clerk needs a zoning document that's not in the district office filing cabinets, what does the system do?",
+          "options": [
+            "Reject the permit because the document isn't available locally",
+            "Fetch it from larger regional storage, then central archives if needed (each progressively slower)",
+            "Ask the citizen to provide a copy of the document",
+            "Automatically duplicate every document into every office's files"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Systems don't reject valid requests due to local storage limits.",
+            "Correct! This is the memory hierarchy cascade: L1 \u2192 L2 \u2192 L3 \u2192 RAM, each slower.",
+            "That's not how systems handle missing data in our architecture model.",
+            "Systems load on-demand, not preemptively duplicate everything."
+          ],
+          "explanation": "The memory hierarchy works as a cascade: check the fastest storage (L1) first. If miss, fetch from L2 (slower). If miss, fetch from L3. If miss, fetch from main memory. A cache miss at one level triggers a fetch from the next level down the hierarchy."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Fundamentals Complete: Welcome to Computer Architecture",
+      "content": "Congratulations! You've grasped the fundamental concepts of computer architecture through the lens of urban administration. You understand the memory hierarchy (registers through storage), the fetch-execute cycle, locality of reference, and how caching improves performance. These concepts form the foundation for understanding how computers process information. As you explore advanced topics\u2014multi-core processors, virtual memory, or advanced instruction sets\u2014remember this city model. The same organizational principles that make cities run efficiently make computers run fast. Well done on your learning journey!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Diagnostic Pass (advanced learner)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Diagnostic Fail (needs foundation)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T13:14:43.276522+00:00",
+  "model": "claude-haiku-4-5"
+}

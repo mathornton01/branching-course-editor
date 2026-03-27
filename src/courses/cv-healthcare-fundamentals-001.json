@@ -1,0 +1,171 @@
+{
+  "id": "cv-healthcare-fundamentals-001",
+  "title": "Computer Vision Fundamentals in Healthcare",
+  "description": "A scenario-based branching course exploring computer vision applications in medical imaging. Navigate clinical decisions that lead to different outcomes based on your choices in validation methodology and implementation strategy.",
+  "topic": "Computer Vision Fundamentals",
+  "theme": "healthcare",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer vision",
+    "healthcare",
+    "medical imaging",
+    "CNN",
+    "segmentation",
+    "classification",
+    "clinical AI",
+    "patient safety"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Medical Imaging Crisis at St. Grace Hospital",
+      "content": "St. Grace Hospital receives 8,000 medical images daily\u2014chest X-rays, MRI scans, CT images\u2014but radiologists can only review 6,000 before end of shift. Diagnoses are delayed, urgent cases missed, and patient care suffers. The hospital director recruits you as their computer vision consultant to implement an AI system for automated medical image analysis. The clinical need is urgent, but you must choose your focus carefully. Your decision between two imaging modalities will determine your technical approach, validation strategy, and ultimately patient outcomes."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Computer Vision Focus",
+      "content": "You have six months and resources for one major imaging analysis system. Both problems are critical, but you can build deep expertise in only one modality. Which clinical challenge will you prioritize?",
+      "choices": [
+        {
+          "label": "Brain Tumor Segmentation in MRI Scans",
+          "next": "n3"
+        },
+        {
+          "label": "Pneumonia Classification in Chest X-Rays",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Medical Image Segmentation: Identifying Tumor Boundaries",
+      "content": "Segmentation answers the surgical question: \"Where is the tumor and how large is it?\" Unlike classification (which just names the disease), segmentation uses convolutional neural networks to classify every pixel as either tumor or normal tissue, producing precise 3D boundaries. For brain tumor MRI analysis, neurosurgeons need exact boundaries to plan safe resection\u2014they must avoid damaging critical structures like motor cortex or language areas. The CNN learns texture, intensity, and shape patterns that distinguish pathological regions from healthy tissue across hundreds of training examples. Pixel-level accuracy is the difference between preserving patient function and permanent neurological damage."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Real Case: Brain Tumor Segmentation in Action",
+      "content": "A 48-year-old presents with focal seizures; MRI reveals a glioblastoma in the left temporal lobe adjacent to Broca's area (speech language center). Your segmentation model processes 150 MRI slices, generating probability heatmaps where each pixel scores 0-1 for tumor likelihood. Pixels exceeding 0.5 threshold form the tumor boundary. The model identifies a 3.2cm lesion within 0.8mm of language cortex\u2014information that shifts surgical strategy from aggressive resection to targeted biopsy, preserving speech ability. Manual segmentation takes 45 minutes per patient; the model delivers it in 6 seconds with reproducible consistency that eliminates inter-rater variability."
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "How Will You Validate Your Segmentation System?",
+      "content": "Your model is trained on 500 patient MRIs. Before deploying to neurosurgery, it must pass clinical validation\u2014a 2mm segmentation error could mean the difference between preserving speech ability and permanent aphasia. Patient safety demands rigorous proof. What validation strategy will you choose?",
+      "choices": [
+        {
+          "label": "Rigorous Multi-Rater Validation: Dice Coefficient + 3 Independent Radiologists",
+          "next": "n6"
+        },
+        {
+          "label": "Quick Approval: Show results to training radiologist and deploy immediately",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Validation Success: Rigorous Clinical Integration",
+      "content": "Your team implements gold-standard validation: model segmentations compared pixel-by-pixel against manual segmentations from 3 independent neuroradiologists using Dice Similarity Coefficient (0-1 scale, 1.0 = perfect match). You achieve 91% mean DSC across 100 held-out test cases\u2014exceeding the 90% clinical threshold. The hospital's ethics board and neurosurgery committee approve deployment. The system integrates as a decision-support tool (never replacing surgeon judgment). Surgeons report that AI-assisted segmentation is faster and more consistent. Within 6 months: operative time decreases 18%, complete tumor resection rates improve from 78% to 89%, and complication rates from healthy tissue damage drop 23%."
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Clinical Success: Lives Improved Through Responsible AI",
+      "content": "Your computer vision system is now part of St. Grace's standard neurosurgery workflow. Tumor boundaries are identified faster and more reliably. Five-year survival for glioblastoma improves 12%. Your work demonstrates that computer vision, when validated rigorously and integrated thoughtfully, directly enhances patient outcomes. This is what responsible AI in healthcare looks like\u2014measured, evidence-based, patient-centered."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Validation Failure: Clinical Consequences",
+      "content": "After only your training radiologist's review, the hospital deploys the system to neurosurgery. Within three weeks, problems emerge: the model overfits to your radiologist's particular interpretation style. It misses tumor boundaries in 4 cases, varying with MRI machine types. In one case, it underestimates a boundary by 3mm; the surgeon follows the AI boundary and performs incomplete resection. The tumor recurs aggressively within 6 months. The family discovers AI contributed to the poor outcome. The medical board halts the system and launches malpractice investigation. Regulatory scrutiny of clinical AI intensifies. Trust in AI systems at the hospital collapses."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Clinical Failure: Lessons in Patient Safety",
+      "content": "Rushing validation in healthcare is unacceptable. Patient safety cannot be compromised for speed. Rigorous multi-rater agreement, cross-scanner bias testing, and clinical governance review are non-negotiable in medical AI. The incident becomes a cautionary case study in healthcare AI. Regulators tighten oversight. Your reputation suffers, but the field learns: validation rigor is the price of responsible AI in medicine. No shortcuts."
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Image Classification for Rapid Disease Screening",
+      "content": "Classification answers a simpler but equally critical question: \"What disease is present?\" Unlike segmentation (which locates the problem), classification identifies it globally. A chest X-ray classification model analyzes the entire 2048\u00d72048 pixel image and outputs probability distribution: \"72% pneumonia, 18% normal, 10% other pathology.\" During COVID-19, hospitals needed rapid pneumonia detection for triage\u2014patients with high pneumonia probability moved to respiratory isolation immediately. Classification networks recognize visual patterns: COVID pneumonia shows bilateral infiltrates in lower lung lobes, bacterial pneumonia shows lobar consolidation, normal lungs show clear fields. Classification is computationally lighter than segmentation, enabling high-throughput analysis in busy emergency departments processing hundreds of images daily."
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Classification System Deployed: High-Volume Clinical Impact",
+      "content": "St. Grace's pneumonia classification system is deployed in the emergency department and urgent care clinic. It analyzes incoming chest X-rays in 2 seconds, flagging high-probability cases for priority radiologist review. Processing 600+ X-rays daily across the hospital network, results include: false negative rate drops from 8% to 1.2%, average time-to-diagnosis decreases from 4 hours to 1.2 hours, and pneumonia-related mortality in the ED decreases 34% over 12 months. The high-volume, time-sensitive nature of chest X-ray screening made classification the right computer vision choice for this clinical context\u2014fast, reliable, and globally impactful."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Tumor Segmentation Path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n10",
+      "label": "Pneumonia Classification Path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Rigorous Validation Choice"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n8",
+      "label": "Quick Deployment Choice"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T13:53:32.296527+00:00",
+  "model": "claude-haiku-4-5"
+}

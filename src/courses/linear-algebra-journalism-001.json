@@ -1,0 +1,494 @@
+{
+  "id": "linear-algebra-journalism-001",
+  "title": "Linear Algebra for Data Science: A Journalist's Approach",
+  "description": "Learn linear algebra concepts through the lens of journalism and news analytics. Explore vectors, matrices, and dimensionality reduction using real-world examples from newsrooms and story analysis.",
+  "topic": "Linear Algebra for Data Science",
+  "theme": "journalism",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "linear-algebra",
+    "data-science",
+    "journalism",
+    "vectors",
+    "matrices",
+    "pca"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Vectors: Building Blocks of Stories",
+      "content": "In journalism, every article can be represented as a vector\u2014a mathematical list of features that capture its essence. Imagine a news story represented by its word count (500), sentiment score (0.72 on a scale of -1 to 1), number of sources cited (8), and publication time (normalized to 0-24). This vector [500, 0.72, 8, 12] becomes a point in 4-dimensional space. Vectors let journalists and data analysts compare stories mathematically, identify similar articles across outlets, and track how coverage evolves. By converting stories into vectors, we can measure distances between articles, cluster similar stories, and automatically detect trending narratives.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Understanding Vectors in Article Analysis",
+      "content": "Test your understanding of how vectors represent news articles.",
+      "questions": [
+        {
+          "question": "A journalist analyzes articles across three dimensions: (word_count, sentiment_score, fact_checks). How many features does each article vector have?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "Unlimited"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Count the features listed.",
+            "Correct! Three dimensions means three features per article.",
+            "Incorrect. There are only three features mentioned.",
+            "Incorrect. The number of features is fixed."
+          ],
+          "explanation": "The vector has exactly 3 features. Each feature is one dimension."
+        },
+        {
+          "question": "Two articles have vectors: Article A = [400, 0.8, 5] and Article B = [410, 0.82, 6]. What does a small distance between these vectors indicate?",
+          "options": [
+            "They are from the same journalist",
+            "They cover similar topics with similar characteristics",
+            "They were published on the same day",
+            "They are both highly popular"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Vector distance doesn't depend on authorship.",
+            "Correct! Vectors close together represent stories with similar features.",
+            "Incorrect. Vector distance doesn't relate to publication date directly.",
+            "Incorrect. Vector distance measures feature similarity, not popularity."
+          ],
+          "explanation": "When article vectors are close in distance, their features are similar\u2014similar length, sentiment, and fact-checking patterns."
+        },
+        {
+          "question": "You want to represent a news article's vector with features: [word_count, sources_cited, image_count, sentiment]. If word_count = 600, sources = 10, images = 3, sentiment = 0.75, what is the article's vector?",
+          "options": [
+            "[600, 10, 3, 0.75]",
+            "[10, 3, 0.75, 600]",
+            "[600, 0.75]",
+            "[10, 3]"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is the article vector with all features in order.",
+            "Incorrect. The order of features matters.",
+            "Incorrect. You've omitted important features.",
+            "Incorrect. This doesn't include all features."
+          ],
+          "explanation": "The vector is [600, 10, 3, 0.75] following the feature order: word_count, sources_cited, image_count, sentiment."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Vectors in Journalism",
+      "content": "Let's practice working with article vectors.",
+      "questions": [
+        {
+          "question": "A political news story vector is [850, 0.65, 12, 2.5] representing [word_count, sentiment, sources, hours_to_break]. A competing outlet publishes a similar story: [830, 0.68, 11, 2.4]. In terms of vectors, what's similar about these two articles?",
+          "options": [
+            "They have identical vectors",
+            "Their feature values are very close, indicating similar coverage characteristics",
+            "One vector is longer than the other",
+            "The vectors cannot be compared"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. The vectors have different values.",
+            "Correct! The values are very close, showing similar story treatment.",
+            "Incorrect. Vector length (number of dimensions) is the same.",
+            "Incorrect. Any vectors with the same dimensions can be compared."
+          ],
+          "explanation": "Even though the values aren't identical, they're close enough that these articles have similar characteristics in length, tone, sourcing, and speed to publication."
+        },
+        {
+          "question": "You create a vector for each article in a 10-article dataset, with 5 features each (word_count, sentiment, sources, images, video). How many elements are in your complete dataset matrix before reshaping?",
+          "options": [
+            "5",
+            "10",
+            "50",
+            "15"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. That's only the number of features.",
+            "Incorrect. That's only the number of articles.",
+            "Correct! 10 articles \u00d7 5 features = 50 total elements.",
+            "Incorrect. 10 + 5 = 15, not 10 \u00d7 5."
+          ],
+          "explanation": "You have 10 articles, each with 5 features. The total number of elements is 10 \u00d7 5 = 50."
+        },
+        {
+          "question": "In vector space, an article about climate change and an article about sports will likely have vectors that are far apart. Why?",
+          "options": [
+            "One is longer than the other",
+            "They have different word counts",
+            "They likely have different feature values across dimensions like topic keywords, sources cited, and sentiment patterns",
+            "Vectors can't be compared across topics"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Length alone isn't the main reason.",
+            "Incorrect. Word count is just one dimension.",
+            "Correct! Different topics produce different feature signatures.",
+            "Incorrect. Vectors with the same dimensions can be compared regardless of topic."
+          ],
+          "explanation": "Different topics will have distinct patterns across features\u2014climate stories cite different sources, use different terminology, and may have different sentiment patterns than sports stories."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Matrices: Collections of Articles",
+      "content": "When you have multiple articles, you organize them into a matrix\u2014a table where each row is an article vector and each column is a feature. For example, a 100\u00d75 matrix represents 100 articles with 5 features each (word count, sentiment, fact-checks, sources, images). Matrices enable batch operations: finding the average article length across a newsroom, calculating correlation between sentiment and engagement, or identifying which features best predict viral stories. In data journalism, matrices store entire datasets\u2014a news outlet's coverage over a month, all stories from a breaking news event, or comparable stories across competing outlets. Matrix operations let you compare groups of articles, identify outliers, and transform raw features into insights about coverage patterns.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Understanding Matrices in News Analysis",
+      "content": "Test your understanding of matrices and their role in journalism data analysis.",
+      "questions": [
+        {
+          "question": "A newsroom analyzes 200 articles with 6 features each (word_count, sentiment, sources, images, publish_hour, shares). What are the dimensions of the article matrix?",
+          "options": [
+            "6\u00d7200",
+            "200\u00d76",
+            "200 + 6",
+            "200 \u00f7 6"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Rows represent articles, columns represent features.",
+            "Correct! 200 rows (articles) and 6 columns (features).",
+            "Incorrect. Matrix dimensions use multiplication, not addition.",
+            "Incorrect. Matrix dimensions use multiplication, not division."
+          ],
+          "explanation": "Matrices are denoted as rows \u00d7 columns. Here: 200 articles (rows) \u00d7 6 features (columns) = 200\u00d76 matrix."
+        },
+        {
+          "question": "You compute the mean of each column in your 200\u00d76 article matrix. What does this tell you about your news coverage?",
+          "options": [
+            "The most popular article",
+            "The average characteristics of articles in each feature",
+            "Which article was published first",
+            "Nothing meaningful"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Column means don't identify individual articles.",
+            "Correct! Column means show average word count, sentiment, sources, etc.",
+            "Incorrect. Column means don't tell us about publication order.",
+            "Incorrect. Column means provide valuable summary statistics."
+          ],
+          "explanation": "Taking the mean of each column gives you the average value for each feature, showing the typical article characteristics in your dataset."
+        },
+        {
+          "question": "Two competing news outlets each publish stories on the same breaking event. Outlet A has a 50\u00d74 matrix and Outlet B has a 75\u00d74 matrix. What do you know?",
+          "options": [
+            "Outlet A published fewer stories on the event",
+            "Outlet B published more stories on the event",
+            "Both outlets used 4 features to describe their articles",
+            "You cannot compare these matrices"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Partially correct, but incomplete.",
+            "Partially correct, but incomplete.",
+            "Correct! Both use the same 4 features, enabling comparison.",
+            "Incorrect. Matrices with different row counts but same column count can be compared."
+          ],
+          "explanation": "The fact that both matrices have 4 columns means they're measuring the same features, making the datasets comparable even though Outlet B published 25 more stories."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Matrices in News Coverage Analysis",
+      "content": "Practice working with article matrices to analyze news coverage.",
+      "questions": [
+        {
+          "question": "A local news outlet tracks 150 crime-related stories across 8 features (word_count, sources, sentiment, fact_checks, images, video_length, publication_hour, social_shares). What is the shape of this matrix, and how many total data points does it contain?",
+          "options": [
+            "8\u00d7150, total 1,200 points",
+            "150\u00d78, total 1,200 points",
+            "150\u00d78, total 158 points",
+            "8\u00d7150, total 23 points"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The row count comes first, and 8\u00d7150 = 1,200, but you have rows \u00d7 columns wrong.",
+            "Correct! 150\u00d78 matrix with 1,200 total data points.",
+            "Incorrect. You calculated 150+8, not 150\u00d78.",
+            "Incorrect. You calculated 8+15, which is neither rows nor total points."
+          ],
+          "explanation": "150 articles (rows) \u00d7 8 features (columns) = 150\u00d78 matrix. Total data points: 150 \u00d7 8 = 1,200."
+        },
+        {
+          "question": "You're comparing coverage of a presidential debate across 3 major news outlets. Each matrix has 120 articles and 7 shared features. You add all three matrices together. What is the resulting matrix shape?",
+          "options": [
+            "360\u00d77 (all articles combined)",
+            "120\u00d77 (same shape, summed values)",
+            "120\u00d721 (7 features \u00d7 3 outlets)",
+            "7\u00d7120 (features as rows)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Adding matrices doesn't concatenate their rows.",
+            "Correct! Addition requires same dimensions; result is 120\u00d77 with element-wise sums.",
+            "Incorrect. Adding matrices doesn't expand the feature space that way.",
+            "Incorrect. The shape doesn't flip to features\u00d7articles through addition."
+          ],
+          "explanation": "Matrix addition is element-wise. Three 120\u00d77 matrices added together produce a 120\u00d77 matrix where each element is the sum of the corresponding elements."
+        },
+        {
+          "question": "A columnist analyzes engagement metrics for her 30 articles as a 30\u00d75 matrix (word_count, sentiment, sources, publication_hour, engagement_score). She wants to identify which feature has the most variation across her articles. Which matrix operation would help?",
+          "options": [
+            "Calculate the determinant",
+            "Compute column standard deviations",
+            "Transpose the matrix",
+            "Multiply matrices together"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Determinants apply to square matrices and don't measure variation.",
+            "Correct! Column standard deviations show which features vary most across articles.",
+            "Incorrect. Transposing flips rows and columns but doesn't measure variation.",
+            "Incorrect. Matrix multiplication doesn't directly measure feature variation."
+          ],
+          "explanation": "Standard deviation for each column shows which features have the highest variability\u2014helping identify what made some articles different from others."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Dimensionality Reduction: Finding Key Themes",
+      "content": "Imagine analyzing a news website's 10,000 articles across 500 features\u2014word frequencies, topics, sentiment scores, source types, engagement metrics. That's a massive 10,000\u00d7500 matrix with half a million data points. Principal Component Analysis (PCA) reduces this complexity by finding the most important dimensions. PCA identifies 'principal components'\u2014linear combinations of original features that capture the most variance in your data. For journalists, this means discovering the main themes underlying diverse coverage: perhaps the first principal component represents 'story depth' (combining word count, sources, fact-checks), while the second represents 'emotional tone' (sentiment, language intensity). Instead of tracking 500 features, you focus on 10-20 principal components that explain 95% of the variance. This compression helps detect patterns, visualize high-dimensional data in 2D, and build faster predictive models for story performance.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Understanding Dimensionality Reduction",
+      "content": "Test your understanding of PCA and dimensionality reduction in news analytics.",
+      "questions": [
+        {
+          "question": "A news outlet has 500 articles with 100 word-frequency features. After PCA, they retain 15 principal components that explain 92% of the variance. What does this mean?",
+          "options": [
+            "8% of the articles are meaningless",
+            "15 topics are present in the data",
+            "92% of the information is preserved with only 15 features instead of 100",
+            "The analysis failed because 8% was lost"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Variance explained doesn't correlate with article quality.",
+            "Incorrect. Principal components are mathematical constructs, not topics.",
+            "Correct! PCA compresses 100 features to 15 while retaining 92% of information.",
+            "Incorrect. Losing 8% in exchange for 85% dimensionality reduction is a good trade-off."
+          ],
+          "explanation": "PCA lets you work with just 15 numbers instead of 100 while preserving 92% of the original variance. This makes analysis faster and visualization possible."
+        },
+        {
+          "question": "The first principal component of a political coverage dataset has a high positive loading on 'word_count', 'sources_cited', and 'fact_checks'. What might this component represent?",
+          "options": [
+            "Story publication time",
+            "Story credibility and depth",
+            "Social media engagement",
+            "Journalist experience level"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Publication time isn't related to word count, sources, and fact-checks.",
+            "Correct! These features together signal well-researched, credible coverage.",
+            "Incorrect. Social engagement isn't directly predicted by sources and fact-checks.",
+            "Incorrect. Journalist experience can't be inferred from article features."
+          ],
+          "explanation": "When multiple features are highly correlated in a principal component, they represent an underlying theme. Here: longer, well-sourced, fact-checked stories\u2014a credibility dimension."
+        },
+        {
+          "question": "You're analyzing breaking news coverage across 20 outlets with 250 features per outlet. PCA reduces this to 5 principal components explaining 88% of variance. Why is this useful for a journalist?",
+          "options": [
+            "It removes all outliers",
+            "It identifies the 5 most important outlets",
+            "It lets you visualize and compare coverage patterns using just 5 dimensions instead of 250",
+            "It guarantees your stories will go viral"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. PCA doesn't remove outliers.",
+            "Incorrect. Principal components aren't individual outlets.",
+            "Correct! Reduced dimensions enable visualization and pattern recognition.",
+            "Incorrect. PCA is a mathematical tool, not a success predictor."
+          ],
+          "explanation": "With 5 principal components instead of 250 features, you can create visualizations, spot clusters, and find patterns that would be impossible in 250-dimensional space."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Dimensionality Reduction in Journalism",
+      "content": "Practice applying dimensionality reduction to real journalism scenarios.",
+      "questions": [
+        {
+          "question": "An investigative journalism team collects 1,000 documents with 800 features (word frequencies, tone markers, named entities, temporal references). Their analysis computer is struggling. How could PCA help?",
+          "options": [
+            "Reduce the 800 features to perhaps 50-100 principal components",
+            "Delete the less important articles",
+            "Change the publication platform",
+            "Use only English articles"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! PCA can compress 800 dimensions down dramatically while preserving patterns.",
+            "Incorrect. Deleting articles loses information unnecessarily.",
+            "Incorrect. Platform doesn't affect computational complexity.",
+            "Incorrect. Language filtering doesn't address the dimensionality problem."
+          ],
+          "explanation": "PCA reduces computational burden by keeping only the principal components that explain most variance, making the problem tractable."
+        },
+        {
+          "question": "You perform PCA on social media engagement data for 5,000 news articles and find that the first 3 principal components explain 87% of variance. The 4th component adds only 2% more. What decision would you make?",
+          "options": [
+            "Always use all principal components",
+            "Use 4 components to explain 89% of variance, as every bit helps",
+            "Stick with 3 components\u2014the small gain from a 4th component isn't worth the added complexity",
+            "Use 2 components only"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. More components isn't always better.",
+            "Incorrect. The marginal gain of 2% may not justify computational cost.",
+            "Correct! Diminishing returns suggest stopping at 3 components.",
+            "Incorrect. 2 components only capture 85% (roughly)\u2014losing useful information."
+          ],
+          "explanation": "In PCA, you balance information retention against model simplicity. An 87% explained variance with 3 features is often better than 89% with 4 features."
+        },
+        {
+          "question": "After PCA on 10,000 crime beat articles with 300 original features, you get 2 principal components for visualization. PC1 highly correlates with 'severity language intensity, injury count, arrest count' and PC2 with 'location specificity, neighborhood details, community impact'. What are you seeing?",
+          "options": [
+            "Proof that all crime articles are the same",
+            "Two underlying dimensions of crime coverage: severity vs. community focus",
+            "Evidence of poor data quality",
+            "A statistical error"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Different loadings show variation in coverage approaches.",
+            "Correct! PC1 captures severity dimension, PC2 captures community focus.",
+            "Incorrect. Clear patterns suggest good data.",
+            "Incorrect. Interpretable components indicate successful PCA."
+          ],
+          "explanation": "These principal components reveal editorial patterns\u2014some coverage emphasizes crime severity, other coverage emphasizes community context. PCA made this structure visible."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mastering Linear Algebra for Journalism",
+      "content": "Congratulations! You've successfully learned linear algebra through the lens of journalism. You now understand how to represent articles as vectors, organize collections of articles into matrices, and reduce complexity through dimensionality reduction. These skills power modern data journalism: detecting trending narratives, predicting article engagement, analyzing coverage gaps across outlets, and discovering patterns in breaking news. Real newsrooms use these techniques to allocate reporting resources, fact-check at scale, and uncover stories hidden in data. Apply these concepts: represent your beat as vectors, analyze coverage patterns with matrices, and use dimensionality reduction to find the key themes driving your audience's interest. The intersection of linear algebra and journalism reveals insights no journalist alone could find."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T13:49:39.861183+00:00",
+  "model": "claude-haiku-4-5"
+}
