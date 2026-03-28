@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branching Course Editor - Interactive Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: { 900: '#0f172a', 800: '#1e293b', 700: '#334155', 600: '#475569' },
+                        accent: { 400: '#a78bfa', 500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9' },
+                        indigo: { 400: '#818cf8', 500: '#6366f1' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        code, pre, .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* Section expand/collapse */
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+        .section-content.expanded {
+            max-height: 12000px;
+            opacity: 1;
+            transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease 0.1s;
+        }
+
+        /* Section header chevron */
+        .section-chevron {
+            transition: transform 0.3s ease;
+        }
+        .section-header.active .section-chevron {
+            transform: rotate(90deg);
+        }
+
+        /* Progress bar animation */
+        .progress-fill {
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Sidebar progress dots */
+        .progress-dot {
+            transition: all 0.3s ease;
+        }
+        .progress-dot.complete {
+            background: #8b5cf6;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 8px rgba(139, 92, 246, 0.5);
+        }
+        .progress-dot.active {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Node type badges */
+        .node-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Mini canvas styles */
+        .mini-canvas {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+            user-select: none;
+        }
+
+        .mini-node {
+            position: absolute;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 2;
+        }
+        .mini-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .mini-port {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #475569;
+            border: 2px solid #64748b;
+            position: absolute;
+            cursor: crosshair;
+            transition: all 0.2s;
+            z-index: 3;
+        }
+        .mini-port:hover, .mini-port.active {
+            background: #8b5cf6;
+            border-color: #a78bfa;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
+        }
+        .mini-port.output { right: -5px; top: 50%; transform: translateY(-50%); }
+        .mini-port.input { left: -5px; top: 50%; transform: translateY(-50%); }
+
+        /* SVG diagram animations */
+        .flow-line {
+            stroke-dasharray: 8 4;
+            animation: flowDash 1.5s linear infinite;
+        }
+        @keyframes flowDash {
+            to { stroke-dashoffset: -12; }
+        }
+
+        .pulse-node {
+            animation: nodePulse 2s ease-in-out infinite;
+        }
+        @keyframes nodePulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .fade-in-node {
+            animation: fadeInUp 0.6s ease-out both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Callout boxes */
+        .callout {
+            border-left: 4px solid;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 16px 0;
+        }
+        .callout-tip { border-color: #10b981; background: rgba(16, 185, 129, 0.08); }
+        .callout-info { border-color: #6366f1; background: rgba(99, 102, 241, 0.08); }
+        .callout-warning { border-color: #f59e0b; background: rgba(245, 158, 11, 0.08); }
+
+        /* Keyboard shortcut badges */
+        kbd {
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Search highlight */
+        .search-highlight {
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 2px;
+            padding: 0 2px;
+        }
+
+        /* Reading time badge */
+        .reading-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            padding: 2px 10px;
+            background: rgba(148, 163, 184, 0.08);
+            border-radius: 9999px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .breadcrumb a:hover { color: #a78bfa; }
+
+        /* Sidebar responsive */
+        @media (max-width: 1023px) {
+            .sidebar-nav { display: none; }
+            .sidebar-nav.mobile-open {
+                display: flex;
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                z-index: 50;
+                background: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(8px);
+            }
+        }
+
+        /* Table of contents connector line */
+        .toc-line {
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            bottom: 0;
+            width: 2px;
+            background: #334155;
+        }
+
+        /* Interactive demo tooltip */
+        .demo-tooltip {
+            position: absolute;
+            background: #1e293b;
+            border: 1px solid #8b5cf6;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.75rem;
+            color: #e2e8f0;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+        .demo-tooltip.show { opacity: 1; }
+
+        /* Attribute bar visualization */
+        .attr-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: #334155;
+            overflow: hidden;
+        }
+        .attr-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        /* Toggle demo */
+        .toggle-demo {
+            width: 44px;
+            height: 24px;
+            border-radius: 12px;
+            background: #475569;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .toggle-demo.on { background: #8b5cf6; }
+        .toggle-demo .toggle-knob {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: left 0.3s;
+        }
+        .toggle-demo.on .toggle-knob { left: 23px; }
+
+        /* Code block */
+        .code-block {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            line-height: 1.6;
+        }
+        .code-block .key { color: #a78bfa; }
+        .code-block .string { color: #34d399; }
+        .code-block .number { color: #fbbf24; }
+        .code-block .comment { color: #64748b; }
+
+        /* Pattern cards */
+        .pattern-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            transition: border-color 0.3s, transform 0.2s;
+        }
+        .pattern-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top navigation bar -->
+<header class="fixed top-0 left-0 right-0 z-40 bg-dark-900/90 backdrop-blur-md border-b border-dark-700">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between h-14">
+            <!-- Left: breadcrumb -->
+            <div class="breadcrumb flex items-center gap-2 text-sm">
+                <a href="course-editor-enhanced.html" class="flex items-center gap-1.5">
+                    <svg class="w-5 h-5 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                    Branching Courses
+                </a>
+                <span class="text-dark-600">/</span>
+                <span class="text-accent-400 font-medium">Tutorial</span>
+            </div>
+
+            <!-- Center: search -->
+            <div class="hidden sm:flex flex-1 max-w-md mx-8">
+                <div class="relative w-full">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input id="searchInput" type="text" placeholder="Search tutorial topics..." class="w-full bg-dark-800 border border-dark-700 rounded-lg pl-10 pr-4 py-2 text-sm text-slate-200 placeholder-dark-600 focus:outline-none focus:border-accent-500 focus:ring-1 focus:ring-accent-500 transition">
+                    <div id="searchResults" class="absolute top-full left-0 right-0 mt-1 bg-dark-800 border border-dark-700 rounded-lg shadow-xl max-h-80 overflow-y-auto hidden z-50"></div>
+                </div>
+            </div>
+
+            <!-- Right: links -->
+            <div class="flex items-center gap-3">
+                <a href="manual.html" class="text-sm text-slate-400 hover:text-accent-400 transition hidden sm:block">Manual</a>
+                <a href="course-editor-enhanced.html" class="flex items-center gap-2 bg-accent-600 hover:bg-accent-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    Open Editor
+                </a>
+                <!-- Mobile menu toggle -->
+                <button id="mobileMenuBtn" class="lg:hidden p-2 text-slate-400 hover:text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="h-1 bg-dark-800">
+        <div id="globalProgress" class="progress-fill h-full bg-gradient-to-r from-accent-600 to-indigo-500" style="width: 0%"></div>
+    </div>
+</header>
+
+<!-- Layout: Sidebar + Main -->
+<div class="flex pt-[60px]">
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebarNav" class="sidebar-nav w-72 flex-shrink-0 fixed top-[60px] left-0 bottom-0 overflow-y-auto border-r border-dark-700 bg-dark-900/80 backdrop-blur-sm z-30">
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-dark-600">Tutorial Progress</h3>
+                <span id="progressPercent" class="text-xs font-mono text-accent-400">0%</span>
+            </div>
+
+            <nav id="tocNav" class="relative space-y-1">
+                <div class="toc-line"></div>
+                <!-- Populated by JS -->
+            </nav>
+
+            <div class="mt-8 pt-6 border-t border-dark-700">
+                <div class="flex items-center justify-between text-xs text-dark-600 mb-2">
+                    <span>Sections complete</span>
+                    <span id="sectionsComplete">0 / 9</span>
+                </div>
+                <div class="w-full h-2 bg-dark-700 rounded-full overflow-hidden">
+                    <div id="sidebarProgress" class="progress-fill h-full bg-accent-500 rounded-full" style="width: 0%"></div>
+                </div>
+                <button id="resetProgressBtn" class="mt-4 w-full text-xs text-slate-500 hover:text-accent-400 transition py-2">Reset Progress</button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 lg:ml-72 min-h-screen">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8 py-12">
+
+            <!-- Hero section -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 bg-accent-600/10 border border-accent-600/20 rounded-full px-4 py-1.5 text-sm text-accent-400 mb-6">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    Interactive Tutorial
+                </div>
+                <h1 class="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-white via-accent-400 to-indigo-400 bg-clip-text text-transparent mb-4">
+                    Branching Course Editor
+                </h1>
+                <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-8">
+                    Learn how to build adaptive, branching learning experiences. This tutorial covers everything from basic node placement to advanced attribute-driven personalization.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-4 text-sm text-slate-500">
+                    <span class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        ~35 min total
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                        9 sections
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        Interactive demos included
+                    </span>
+                </div>
+
+                <!-- Hero SVG diagram -->
+                <div class="mt-12 mb-4">
+                    <svg viewBox="0 0 800 200" class="w-full max-w-2xl mx-auto" style="filter: drop-shadow(0 4px 20px rgba(139, 92, 246, 0.15));">
+                        <!-- Flow lines -->
+                        <path d="M160 100 L260 60" class="flow-line" stroke="#8b5cf6" stroke-width="2" fill="none"/>
+                        <path d="M160 100 L260 140" class="flow-line" stroke="#8b5cf6" stroke-width="2" fill="none" style="animation-delay: 0.5s"/>
+                        <path d="M370 60 L470 100" class="flow-line" stroke="#6366f1" stroke-width="2" fill="none" style="animation-delay: 0.3s"/>
+                        <path d="M370 140 L470 100" class="flow-line" stroke="#6366f1" stroke-width="2" fill="none" style="animation-delay: 0.8s"/>
+                        <path d="M580 100 L660 100" class="flow-line" stroke="#8b5cf6" stroke-width="2" fill="none" style="animation-delay: 0.6s"/>
+                        <!-- Nodes -->
+                        <g class="fade-in-node" style="animation-delay: 0.1s">
+                            <rect x="60" y="75" width="100" height="50" rx="10" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+                            <text x="110" y="105" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="500">Content</text>
+                        </g>
+                        <g class="fade-in-node" style="animation-delay: 0.3s">
+                            <rect x="260" y="35" width="110" height="50" rx="10" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+                            <text x="315" y="65" text-anchor="middle" fill="#c4b5fd" font-size="12" font-weight="500">Decision A</text>
+                        </g>
+                        <g class="fade-in-node" style="animation-delay: 0.5s">
+                            <rect x="260" y="115" width="110" height="50" rx="10" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+                            <text x="315" y="145" text-anchor="middle" fill="#c4b5fd" font-size="12" font-weight="500">Decision B</text>
+                        </g>
+                        <g class="fade-in-node" style="animation-delay: 0.7s">
+                            <rect x="470" y="75" width="110" height="50" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+                            <text x="525" y="105" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="500">Assessment</text>
+                        </g>
+                        <g class="fade-in-node" style="animation-delay: 0.9s">
+                            <circle cx="695" cy="100" r="30" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="695" y="105" text-anchor="middle" fill="#fcd34d" font-size="12" font-weight="500">End</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Sections container -->
+            <div id="sectionsContainer" class="space-y-4">
+
+                <!-- ============================================ -->
+                <!-- SECTION 1: GETTING STARTED -->
+                <!-- ============================================ -->
+                <section class="tutorial-section rounded-xl border border-dark-700 overflow-hidden" data-section="0" data-title="Getting Started" data-reading-time="3" data-keywords="getting started introduction overview workspace canvas toolbar properties panel first course create new">
+                    <button class="section-header w-full flex items-center gap-4 p-6 text-left hover:bg-dark-800/50 transition group" onclick="toggleSection(0)">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                            <span class="text-blue-400 font-bold text-sm">1</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg font-semibold text-white group-hover:text-accent-400 transition">Getting Started</h2>
+                            <p class="text-sm text-slate-500 mt-0.5">What is the editor, workspace overview, and creating your first course</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            <span class="reading-time">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                3 min
+                            </span>
+                            <div class="section-check w-6 h-6 rounded-full border-2 border-dark-600 flex items-center justify-center transition">
+                                <svg class="w-3.5 h-3.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <svg class="section-chevron w-5 h-5 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </button>
+                    <div class="section-content">
+                        <div class="px-6 pb-8 space-y-8">
+
+                            <h3 class="text-xl font-semibold text-white pt-2">What is the Branching Course Editor?</h3>
+                            <p class="text-slate-300">The Branching Course Editor is a visual, node-based authoring tool for creating adaptive learning experiences. Unlike traditional linear courses, branching courses let learners take different paths based on their choices, performance, and attributes -- creating personalized journeys through your content.</p>
+
+                            <div class="callout callout-info">
+                                <p class="text-sm"><strong class="text-indigo-400">Think of it like a flowchart.</strong> Each node is a step in the learner's journey, and the connections between nodes define possible paths. Some paths are chosen by the learner (decisions), some by the system (conditions, gates), and some by chance (random, weighted).</p>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Overview of the Workspace</h3>
+                            <p class="text-slate-300">The editor has three main areas:</p>
+
+                            <!-- Workspace diagram -->
+                            <div class="rounded-xl border border-dark-700 overflow-hidden">
+                                <svg viewBox="0 0 800 400" class="w-full">
+                                    <!-- Background -->
+                                    <rect width="800" height="400" fill="#0f172a"/>
+                                    <!-- Toolbar -->
+                                    <rect x="0" y="0" width="800" height="50" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+                                    <text x="400" y="30" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="500">TOOLBAR - Add nodes, undo/redo, zoom, settings</text>
+                                    <!-- Canvas -->
+                                    <rect x="0" y="50" width="540" height="350" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+                                    <!-- Grid dots on canvas -->
+                                    <g fill="#1e293b">
+                                        <circle cx="40" cy="90" r="2"/><circle cx="80" cy="90" r="2"/><circle cx="120" cy="90" r="2"/><circle cx="160" cy="90" r="2"/><circle cx="200" cy="90" r="2"/><circle cx="240" cy="90" r="2"/><circle cx="280" cy="90" r="2"/><circle cx="320" cy="90" r="2"/><circle cx="360" cy="90" r="2"/><circle cx="400" cy="90" r="2"/><circle cx="440" cy="90" r="2"/><circle cx="480" cy="90" r="2"/><circle cx="520" cy="90" r="2"/>
+                                        <circle cx="40" cy="130" r="2"/><circle cx="80" cy="130" r="2"/><circle cx="120" cy="130" r="2"/><circle cx="160" cy="130" r="2"/><circle cx="200" cy="130" r="2"/><circle cx="240" cy="130" r="2"/><circle cx="280" cy="130" r="2"/><circle cx="320" cy="130" r="2"/><circle cx="360" cy="130" r="2"/><circle cx="400" cy="130" r="2"/><circle cx="440" cy="130" r="2"/><circle cx="480" cy="130" r="2"/><circle cx="520" cy="130" r="2"/>
+                                        <circle cx="40" cy="170" r="2"/><circle cx="80" cy="170" r="2"/><circle cx="120" cy="170" r="2"/><circle cx="160" cy="170" r="2"/><circle cx="200" cy="170" r="2"/><circle cx="240" cy="170" r="2"/><circle cx="280" cy="170" r="2"/><circle cx="320" cy="170" r="2"/><circle cx="360" cy="170" r="2"/><circle cx="400" cy="170" r="2"/><circle cx="440" cy="170" r="2"/><circle cx="480" cy="170" r="2"/><circle cx="520" cy="170" r="2"/>
+                                    </g>
+                                    <!-- Example nodes on canvas -->
+                                    <rect x="80" y="180" width="120" height="50" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+                                    <text x="140" y="210" text-anchor="middle" fill="#93c5fd" font-size="11">Welcome</text>
+                                    <path d="M200 205 L280 205" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6 3"/>
+                                    <rect x="280" y="180" width="120" height="50" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+                                    <text x="340" y="210" text-anchor="middle" fill="#c4b5fd" font-size="11">Choose Path</text>
+                                    <text x="270" y="340" text-anchor="middle" fill="#64748b" font-size="14" font-weight="500">CANVAS - Drag, connect, and arrange nodes</text>
+                                    <!-- Properties panel -->
+                                    <rect x="540" y="50" width="260" height="350" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+                                    <text x="670" y="80" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="600">PROPERTIES PANEL</text>
+                                    <rect x="560" y="100" width="220" height="30" rx="6" fill="#334155"/>
+                                    <text x="580" y="120" fill="#94a3b8" font-size="11">Title: Welcome</text>
+                                    <rect x="560" y="140" width="220" height="30" rx="6" fill="#334155"/>
+                                    <text x="580" y="160" fill="#94a3b8" font-size="11">Type: Content</text>
+                                    <rect x="560" y="180" width="220" height="30" rx="6" fill="#334155"/>
+                                    <text x="580" y="200" fill="#94a3b8" font-size="11">Body: Click to edit...</text>
+                                    <text x="670" y="350" text-anchor="middle" fill="#64748b" font-size="11">Edit selected node properties</text>
+                                </svg>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Creating Your First Course</h3>
+                            <ol class="space-y-4 text-slate-300">
+                                <li class="flex gap-3">
+                                    <span class="flex-shrink-0 w-7 h-7 rounded-full bg-accent-600/20 border border-accent-600/30 flex items-center justify-center text-accent-400 text-sm font-bold">1</span>
+                                    <div><strong class="text-white">Open the editor</strong> -- click "Open Editor" at the top of this page, or navigate to <code class="text-accent-400 bg-dark-800 px-1.5 py-0.5 rounded text-sm">course-editor-enhanced.html</code>.</div>
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="flex-shrink-0 w-7 h-7 rounded-full bg-accent-600/20 border border-accent-600/30 flex items-center justify-center text-accent-400 text-sm font-bold">2</span>
+                                    <div><strong class="text-white">Add a Content node</strong> -- click "Add Node" in the toolbar and select "Content". This is your starting point.</div>
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="flex-shrink-0 w-7 h-7 rounded-full bg-accent-600/20 border border-accent-600/30 flex items-center justify-center text-accent-400 text-sm font-bold">3</span>
+                                    <div><strong class="text-white">Edit the node</strong> -- click the node to select it. The properties panel on the right lets you set a title and body text.</div>
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="flex-shrink-0 w-7 h-7 rounded-full bg-accent-600/20 border border-accent-600/30 flex items-center justify-center text-accent-400 text-sm font-bold">4</span>
+                                    <div><strong class="text-white">Add a Decision node</strong> -- this gives the learner choices. Connect the Content node's output port to the Decision node's input.</div>
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="flex-shrink-0 w-7 h-7 rounded-full bg-accent-600/20 border border-accent-600/30 flex items-center justify-center text-accent-400 text-sm font-bold">5</span>
+                                    <div><strong class="text-white">Add End nodes</strong> -- every path needs to terminate. Add End nodes and connect them to your branches.</div>
+                                </li>
+                            </ol>
+
+                            <div class="callout callout-tip">
+                                <p class="text-sm"><strong class="text-emerald-400">Tip:</strong> Use <kbd>Ctrl</kbd>+<kbd>Z</kbd> to undo any mistakes. The editor auto-saves to your browser, so you will not lose work.</p>
+                            </div>
+
+                            <button class="mark-complete-btn mt-4 px-5 py-2.5 bg-accent-600/10 border border-accent-600/30 text-accent-400 rounded-lg text-sm font-medium hover:bg-accent-600/20 transition" onclick="markComplete(0)">Mark as Complete</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================ -->
+                <!-- SECTION 2: NODES -->
+                <!-- ============================================ -->
+                <section class="tutorial-section rounded-xl border border-dark-700 overflow-hidden" data-section="1" data-title="Nodes - The Building Blocks" data-reading-time="8" data-keywords="nodes content decision assessment example practice random weighted condition gate end page link building blocks types">
+                    <button class="section-header w-full flex items-center gap-4 p-6 text-left hover:bg-dark-800/50 transition group" onclick="toggleSection(1)">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
+                            <span class="text-purple-400 font-bold text-sm">2</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg font-semibold text-white group-hover:text-accent-400 transition">Nodes - The Building Blocks</h2>
+                            <p class="text-sm text-slate-500 mt-0.5">All 11 node types explained with visual examples</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            <span class="reading-time">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                8 min
+                            </span>
+                            <div class="section-check w-6 h-6 rounded-full border-2 border-dark-600 flex items-center justify-center transition">
+                                <svg class="w-3.5 h-3.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <svg class="section-chevron w-5 h-5 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </button>
+                    <div class="section-content">
+                        <div class="px-6 pb-8 space-y-8">
+
+                            <p class="text-slate-300 pt-2">Nodes are the fundamental units of your course. Each node represents a step, screen, or decision point that the learner encounters. There are 11 types, each serving a distinct purpose.</p>
+
+                            <!-- Node type: Content -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-blue-500/15 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">Content Node</h4>
+                                        <span class="node-badge bg-blue-500/10 text-blue-400 border border-blue-500/20 mt-1">Most Common</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Displays information to the learner. Supports markdown formatting, images, videos, and rich layout blocks. Content nodes are the backbone of any course -- use them for lessons, introductions, explanations, and summaries.</p>
+                                <div class="text-sm text-slate-400 space-y-1">
+                                    <p><strong class="text-slate-300">Outputs:</strong> 1 (continues to the next node)</p>
+                                    <p><strong class="text-slate-300">Special:</strong> Double-click to open the Layout Editor for rich content design</p>
+                                </div>
+                            </div>
+
+                            <!-- Node type: Decision -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-purple-500/15 border border-purple-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">Decision Node</h4>
+                                        <span class="node-badge bg-purple-500/10 text-purple-400 border border-purple-500/20 mt-1">Branching</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Presents the learner with choices that determine which path they follow. Each choice maps to a different output connection. This is the heart of branching -- it puts the learner in control.</p>
+                                <div class="text-sm text-slate-400 space-y-1">
+                                    <p><strong class="text-slate-300">Outputs:</strong> Multiple (one per choice option)</p>
+                                    <p><strong class="text-slate-300">Example:</strong> "Do you want to learn about A) Photosynthesis or B) Cell Division?"</p>
+                                </div>
+                                <!-- Mini decision diagram -->
+                                <svg viewBox="0 0 500 120" class="w-full mt-4 rounded-lg">
+                                    <rect width="500" height="120" fill="#0f172a" rx="8"/>
+                                    <rect x="30" y="35" width="140" height="50" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+                                    <text x="100" y="55" text-anchor="middle" fill="#c4b5fd" font-size="11" font-weight="500">Choose your path</text>
+                                    <text x="100" y="72" text-anchor="middle" fill="#94a3b8" font-size="9">Decision Node</text>
+                                    <path d="M170 50 L270 30" stroke="#8b5cf6" stroke-width="2" class="flow-line"/>
+                                    <path d="M170 70 L270 90" stroke="#8b5cf6" stroke-width="2" class="flow-line" style="animation-delay:0.5s"/>
+                                    <text x="215" y="40" fill="#a78bfa" font-size="9">Option A</text>
+                                    <text x="215" y="88" fill="#a78bfa" font-size="9">Option B</text>
+                                    <rect x="270" y="10" width="130" height="40" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                    <text x="335" y="35" text-anchor="middle" fill="#93c5fd" font-size="10">Photosynthesis</text>
+                                    <rect x="270" y="70" width="130" height="40" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                    <text x="335" y="95" text-anchor="middle" fill="#93c5fd" font-size="10">Cell Division</text>
+                                </svg>
+                            </div>
+
+                            <!-- Node type: Assessment -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">Assessment Node</h4>
+                                        <span class="node-badge bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mt-1">Evaluation</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Quizzes the learner with one or more questions. Routes to a "pass" or "fail" path based on a configurable threshold. Supports four question types:</p>
+                                <div class="grid grid-cols-2 gap-3 mb-4">
+                                    <div class="bg-dark-900 rounded-lg p-3 border border-dark-700">
+                                        <p class="text-sm font-medium text-emerald-400">Multiple Choice</p>
+                                        <p class="text-xs text-slate-500 mt-1">Select one correct answer from options</p>
+                                    </div>
+                                    <div class="bg-dark-900 rounded-lg p-3 border border-dark-700">
+                                        <p class="text-sm font-medium text-emerald-400">True / False</p>
+                                        <p class="text-xs text-slate-500 mt-1">Binary correct/incorrect statement</p>
+                                    </div>
+                                    <div class="bg-dark-900 rounded-lg p-3 border border-dark-700">
+                                        <p class="text-sm font-medium text-emerald-400">Short Answer</p>
+                                        <p class="text-xs text-slate-500 mt-1">Free text compared against accepted answers</p>
+                                    </div>
+                                    <div class="bg-dark-900 rounded-lg p-3 border border-dark-700">
+                                        <p class="text-sm font-medium text-emerald-400">Numeric</p>
+                                        <p class="text-xs text-slate-500 mt-1">Number with tolerance range</p>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-slate-400">
+                                    <p><strong class="text-slate-300">Outputs:</strong> 2 (pass path and fail path)</p>
+                                </div>
+                            </div>
+
+                            <!-- Node type: Example -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-amber-500/15 border border-amber-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">Example Node</h4>
+                                        <span class="node-badge bg-amber-500/10 text-amber-400 border border-amber-500/20 mt-1">Demonstration</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Presents worked examples with step-by-step walkthroughs. Ideal for showing how to solve a problem, demonstrating a process, or walking through a case study.</p>
+                                <div class="text-sm text-slate-400"><p><strong class="text-slate-300">Outputs:</strong> 1 (continues to next node)</p></div>
+                            </div>
+
+                            <!-- Node type: Practice -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">Practice Node</h4>
+                                        <span class="node-badge bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 mt-1">Remediation</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Provides remediation exercises for learners who need extra practice. Commonly connected to the "fail" output of an Assessment node, offering a second chance to master the material before re-testing.</p>
+                                <div class="text-sm text-slate-400"><p><strong class="text-slate-300">Outputs:</strong> 1 (typically routes back to assessment or forward)</p></div>
+                            </div>
+
+                            <!-- Node type: Random -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-rose-500/15 border border-rose-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">Random Node</h4>
+                                        <span class="node-badge bg-rose-500/10 text-rose-400 border border-rose-500/20 mt-1">Dice Roll</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Branches with equal probability across all connected outputs -- like rolling a dice. If there are 3 outputs, each has a 33.3% chance. Useful for randomizing content, creating variety, or A/B testing paths.</p>
+                                <div class="text-sm text-slate-400"><p><strong class="text-slate-300">Outputs:</strong> Multiple (equal probability)</p></div>
+                            </div>
+
+                            <!-- Node type: Weighted -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-orange-500/15 border border-orange-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">Weighted Node</h4>
+                                        <span class="node-badge bg-orange-500/10 text-orange-400 border border-orange-500/20 mt-1">Custom Probability</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Like Random, but with custom probability weights per output. For example, you could set 60% / 25% / 15% across three branches to make one path much more likely than others.</p>
+                                <div class="text-sm text-slate-400"><p><strong class="text-slate-300">Outputs:</strong> Multiple (custom probability weights)</p></div>
+                                <!-- Weight visualization -->
+                                <div class="mt-4 space-y-2">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs text-slate-500 w-16 text-right">Path A</span>
+                                        <div class="flex-1 h-5 bg-dark-900 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full" style="width:60%"></div></div>
+                                        <span class="text-xs text-orange-400 font-mono w-10">60%</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs text-slate-500 w-16 text-right">Path B</span>
+                                        <div class="flex-1 h-5 bg-dark-900 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full" style="width:25%"></div></div>
+                                        <span class="text-xs text-amber-400 font-mono w-10">25%</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-xs text-slate-500 w-16 text-right">Path C</span>
+                                        <div class="flex-1 h-5 bg-dark-900 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full" style="width:15%"></div></div>
+                                        <span class="text-xs text-yellow-400 font-mono w-10">15%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Node type: Condition -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">Condition Node</h4>
+                                        <span class="node-badge bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mt-1">Logic Gate</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Routes the learner based on attribute values. For example: "If <code class="text-indigo-400 bg-dark-900 px-1 rounded text-sm">knowledge >= 50</code>, go to the advanced path; otherwise, go to the beginner path." This is how you create adaptive, personalized experiences.</p>
+                                <div class="text-sm text-slate-400"><p><strong class="text-slate-300">Outputs:</strong> Multiple (one per condition, plus a default/else branch)</p></div>
+                            </div>
+
+                            <!-- Node type: Gate -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-red-500/15 border border-red-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">Gate Node</h4>
+                                        <span class="node-badge bg-red-500/10 text-red-400 border border-red-500/20 mt-1">Prerequisite Lock</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Blocks the learner's progression until a prerequisite condition is met. Unlike Condition nodes (which route silently), Gates show the learner that they are blocked and explain what they need to do to proceed.</p>
+                                <div class="text-sm text-slate-400"><p><strong class="text-slate-300">Outputs:</strong> 1 (unlocked when condition met)</p></div>
+                            </div>
+
+                            <!-- Node type: End -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-yellow-500/15 border border-yellow-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">End Node</h4>
+                                        <span class="node-badge bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 mt-1">Terminal</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Marks the completion of a course path. Every branch must terminate with an End node. You can have multiple End nodes for different outcomes (e.g., "Completed with distinction" vs "Completed").</p>
+                                <div class="text-sm text-slate-400"><p><strong class="text-slate-300">Outputs:</strong> None (terminal)</p></div>
+                            </div>
+
+                            <!-- Node type: Page Link -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <div class="flex items-start gap-4 mb-4">
+                                    <div class="w-12 h-12 rounded-lg bg-teal-500/15 border border-teal-500/30 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-white">Page Link Node</h4>
+                                        <span class="node-badge bg-teal-500/10 text-teal-400 border border-teal-500/20 mt-1">Navigation</span>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 mb-3">Navigates between pages in multi-page courses. When a course grows large, you can organize it across multiple pages and use Page Link nodes to jump between them, keeping each page clean and focused.</p>
+                                <div class="text-sm text-slate-400"><p><strong class="text-slate-300">Outputs:</strong> Targets a node on another page</p></div>
+                            </div>
+
+                            <button class="mark-complete-btn mt-4 px-5 py-2.5 bg-accent-600/10 border border-accent-600/30 text-accent-400 rounded-lg text-sm font-medium hover:bg-accent-600/20 transition" onclick="markComplete(1)">Mark as Complete</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================ -->
+                <!-- SECTION 3: CONNECTIONS -->
+                <!-- ============================================ -->
+                <section class="tutorial-section rounded-xl border border-dark-700 overflow-hidden" data-section="2" data-title="Connections" data-reading-time="4" data-keywords="connections drag port output input link wire conditional weighted random label edit delete">
+                    <button class="section-header w-full flex items-center gap-4 p-6 text-left hover:bg-dark-800/50 transition group" onclick="toggleSection(2)">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center">
+                            <span class="text-green-400 font-bold text-sm">3</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg font-semibold text-white group-hover:text-accent-400 transition">Connections</h2>
+                            <p class="text-sm text-slate-500 mt-0.5">Creating, labeling, and managing connections between nodes</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            <span class="reading-time">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                4 min
+                            </span>
+                            <div class="section-check w-6 h-6 rounded-full border-2 border-dark-600 flex items-center justify-center transition">
+                                <svg class="w-3.5 h-3.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <svg class="section-chevron w-5 h-5 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </button>
+                    <div class="section-content">
+                        <div class="px-6 pb-8 space-y-8">
+
+                            <h3 class="text-xl font-semibold text-white pt-2">Creating Connections</h3>
+                            <p class="text-slate-300">Connections are the arrows that link nodes together, defining the flow of your course. To create one:</p>
+                            <ol class="space-y-3 text-slate-300">
+                                <li class="flex gap-3">
+                                    <span class="flex-shrink-0 w-7 h-7 rounded-full bg-green-600/20 border border-green-600/30 flex items-center justify-center text-green-400 text-sm font-bold">1</span>
+                                    <span>Hover over a node's <strong class="text-white">output port</strong> (the small circle on the right side). It will glow purple.</span>
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="flex-shrink-0 w-7 h-7 rounded-full bg-green-600/20 border border-green-600/30 flex items-center justify-center text-green-400 text-sm font-bold">2</span>
+                                    <span><strong class="text-white">Click and drag</strong> from the output port. A line will follow your cursor.</span>
+                                </li>
+                                <li class="flex gap-3">
+                                    <span class="flex-shrink-0 w-7 h-7 rounded-full bg-green-600/20 border border-green-600/30 flex items-center justify-center text-green-400 text-sm font-bold">3</span>
+                                    <span>Drop the line onto another node's <strong class="text-white">input port</strong> (the circle on the left side). The connection is made.</span>
+                                </li>
+                            </ol>
+
+                            <!-- Interactive connection demo -->
+                            <div class="rounded-xl border border-dark-700 overflow-hidden">
+                                <div class="bg-dark-800 px-4 py-2 border-b border-dark-700 flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                    <span class="text-xs text-slate-400 font-medium">Interactive Demo - Drag from the output port to the input port</span>
+                                </div>
+                                <div id="connectionDemo" class="mini-canvas" style="height: 180px;">
+                                    <div class="mini-node" style="left: 40px; top: 65px; background: #1e293b; border: 2px solid #3b82f6; color: #93c5fd;">
+                                        Lesson Intro
+                                        <div class="mini-port output" data-port="out-1" id="demoPortOut"></div>
+                                    </div>
+                                    <div class="mini-node" style="left: 300px; top: 65px; background: #1e293b; border: 2px solid #8b5cf6; color: #c4b5fd;">
+                                        <div class="mini-port input" data-port="in-1" id="demoPortIn"></div>
+                                        Choose Path
+                                    </div>
+                                    <svg id="demoSvg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;"></svg>
+                                    <div id="demoTooltip" class="demo-tooltip">Drag me to the purple port!</div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Connection Types</h3>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-8 h-0.5 bg-slate-400"></div>
+                                        <span class="text-sm font-medium text-white">Default</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Simple connection. Learner always follows this path. Used with Content, Example, Practice nodes.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-8 h-0.5 bg-purple-400" style="border-bottom: 2px dashed #a78bfa; height:0;"></div>
+                                        <span class="text-sm font-medium text-white">Conditional</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Labeled with a condition (e.g., "Pass", "Option A"). Used with Decision, Assessment, Condition nodes.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-8 h-0.5 bg-orange-400"></div>
+                                        <span class="text-sm font-medium text-white">Weighted</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Labeled with a percentage (e.g., "60%"). Used with Weighted nodes. Probabilities must sum to 100%.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-8 h-0.5 bg-rose-400" style="border-bottom: 2px dotted #fb7185; height:0;"></div>
+                                        <span class="text-sm font-medium text-white">Random</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Equal probability, auto-labeled (e.g., "33.3%"). Used with Random nodes.</p>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Editing and Deleting Connections</h3>
+                            <ul class="space-y-2 text-slate-300 text-sm">
+                                <li class="flex gap-2"><span class="text-accent-400">--</span> <strong class="text-white">Click a connection</strong> to select it. The properties panel shows its label and type.</li>
+                                <li class="flex gap-2"><span class="text-accent-400">--</span> <strong class="text-white">Edit the label</strong> in the properties panel to change what the learner sees on decision branches.</li>
+                                <li class="flex gap-2"><span class="text-accent-400">--</span> Press <kbd>Delete</kbd> or <kbd>Backspace</kbd> to <strong class="text-white">remove</strong> a selected connection.</li>
+                                <li class="flex gap-2"><span class="text-accent-400">--</span> If <em>confirmDelete</em> is enabled in settings, you will be asked to confirm before deletion.</li>
+                            </ul>
+
+                            <button class="mark-complete-btn mt-4 px-5 py-2.5 bg-accent-600/10 border border-accent-600/30 text-accent-400 rounded-lg text-sm font-medium hover:bg-accent-600/20 transition" onclick="markComplete(2)">Mark as Complete</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================ -->
+                <!-- SECTION 4: ATTRIBUTE SYSTEM -->
+                <!-- ============================================ -->
+                <section class="tutorial-section rounded-xl border border-dark-700 overflow-hidden" data-section="3" data-title="The Attribute System" data-reading-time="5" data-keywords="attributes learner stats knowledge confidence defining default min max delta conditional effects conditions gates player display personalization">
+                    <button class="section-header w-full flex items-center gap-4 p-6 text-left hover:bg-dark-800/50 transition group" onclick="toggleSection(3)">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center">
+                            <span class="text-yellow-400 font-bold text-sm">4</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg font-semibold text-white group-hover:text-accent-400 transition">The Attribute System</h2>
+                            <p class="text-sm text-slate-500 mt-0.5">Learner stats, conditions, and personalization</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            <span class="reading-time">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                5 min
+                            </span>
+                            <div class="section-check w-6 h-6 rounded-full border-2 border-dark-600 flex items-center justify-center transition">
+                                <svg class="w-3.5 h-3.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <svg class="section-chevron w-5 h-5 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </button>
+                    <div class="section-content">
+                        <div class="px-6 pb-8 space-y-8">
+
+                            <h3 class="text-xl font-semibold text-white pt-2">What Are Attributes?</h3>
+                            <p class="text-slate-300">Attributes are numeric variables that track the learner's state throughout the course. Think of them as RPG-style stats: knowledge, confidence, skill level, or any custom metric you define. They change as the learner progresses and can influence which paths are available.</p>
+
+                            <!-- Attribute visualization -->
+                            <div class="bg-dark-800 rounded-xl border border-dark-700 p-6">
+                                <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Learner Attributes (Example)</h4>
+                                <div class="space-y-4" id="attrDemo">
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-white font-medium">Knowledge</span>
+                                            <span class="text-accent-400 font-mono" id="attrKnowledge">35</span>
+                                        </div>
+                                        <div class="attr-bar"><div class="attr-bar-fill bg-gradient-to-r from-accent-600 to-accent-400" id="attrKnowledgeBar" style="width:35%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-white font-medium">Confidence</span>
+                                            <span class="text-emerald-400 font-mono" id="attrConfidence">60</span>
+                                        </div>
+                                        <div class="attr-bar"><div class="attr-bar-fill bg-gradient-to-r from-emerald-600 to-emerald-400" id="attrConfidenceBar" style="width:60%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-white font-medium">Engagement</span>
+                                            <span class="text-amber-400 font-mono" id="attrEngagement">80</span>
+                                        </div>
+                                        <div class="attr-bar"><div class="attr-bar-fill bg-gradient-to-r from-amber-600 to-amber-400" id="attrEngagementBar" style="width:80%"></div></div>
+                                    </div>
+                                </div>
+                                <button onclick="simulateAttrChange()" class="mt-4 px-4 py-2 bg-accent-600/20 border border-accent-600/30 text-accent-400 rounded-lg text-xs font-medium hover:bg-accent-600/30 transition">Simulate: Learner Passes Quiz (+15 Knowledge, +10 Confidence)</button>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Defining Attributes</h3>
+                            <p class="text-slate-300">In the editor's settings, you define attributes with:</p>
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <p class="text-sm font-medium text-white mb-1">Name</p>
+                                    <p class="text-xs text-slate-400">Unique identifier, e.g., "knowledge"</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <p class="text-sm font-medium text-white mb-1">Default Value</p>
+                                    <p class="text-xs text-slate-400">Starting value, e.g., 0</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <p class="text-sm font-medium text-white mb-1">Minimum</p>
+                                    <p class="text-xs text-slate-400">Floor value (cannot go below), e.g., 0</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <p class="text-sm font-medium text-white mb-1">Maximum</p>
+                                    <p class="text-xs text-slate-400">Ceiling value (cannot exceed), e.g., 100</p>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Attribute Effects on Nodes</h3>
+                            <p class="text-slate-300">Each node can modify attributes when the learner visits it. Effects can be:</p>
+                            <ul class="space-y-2 text-slate-300 text-sm">
+                                <li class="flex gap-2"><span class="text-yellow-400">+</span> <strong class="text-white">Delta values:</strong> Add or subtract from an attribute. E.g., <code class="text-accent-400 bg-dark-800 px-1 rounded">knowledge +10</code></li>
+                                <li class="flex gap-2"><span class="text-yellow-400">?</span> <strong class="text-white">Conditional effects:</strong> Only apply if a condition is met. E.g., "If confidence > 50, knowledge +15; otherwise knowledge +5"</li>
+                            </ul>
+
+                            <h3 class="text-xl font-semibold text-white">Using Attributes in Conditions and Gates</h3>
+                            <p class="text-slate-300">Condition nodes evaluate attribute expressions to route learners. Gate nodes block until an expression is true. Supported operators: <code class="text-accent-400 bg-dark-800 px-1 rounded text-sm">>=</code> <code class="text-accent-400 bg-dark-800 px-1 rounded text-sm"><=</code> <code class="text-accent-400 bg-dark-800 px-1 rounded text-sm">==</code> <code class="text-accent-400 bg-dark-800 px-1 rounded text-sm">!=</code> <code class="text-accent-400 bg-dark-800 px-1 rounded text-sm">&gt;</code> <code class="text-accent-400 bg-dark-800 px-1 rounded text-sm">&lt;</code></p>
+
+                            <div class="callout callout-tip">
+                                <p class="text-sm"><strong class="text-emerald-400">Tip:</strong> Combine attributes creatively. A "mastery" attribute could combine quiz scores with practice completion, creating nuanced routing that reflects true understanding.</p>
+                            </div>
+
+                            <button class="mark-complete-btn mt-4 px-5 py-2.5 bg-accent-600/10 border border-accent-600/30 text-accent-400 rounded-lg text-sm font-medium hover:bg-accent-600/20 transition" onclick="markComplete(3)">Mark as Complete</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================ -->
+                <!-- SECTION 5: LAYOUT EDITOR -->
+                <!-- ============================================ -->
+                <section class="tutorial-section rounded-xl border border-dark-700 overflow-hidden" data-section="4" data-title="The Layout Editor" data-reading-time="5" data-keywords="layout editor double click content blocks heading text callout image video code columns divider quiz question nav button drag drop templates lesson intro media two columns canvas width">
+                    <button class="section-header w-full flex items-center gap-4 p-6 text-left hover:bg-dark-800/50 transition group" onclick="toggleSection(4)">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center">
+                            <span class="text-pink-400 font-bold text-sm">5</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg font-semibold text-white group-hover:text-accent-400 transition">The Layout Editor</h2>
+                            <p class="text-sm text-slate-500 mt-0.5">Rich content design with drag-and-drop blocks</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            <span class="reading-time">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                5 min
+                            </span>
+                            <div class="section-check w-6 h-6 rounded-full border-2 border-dark-600 flex items-center justify-center transition">
+                                <svg class="w-3.5 h-3.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <svg class="section-chevron w-5 h-5 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </button>
+                    <div class="section-content">
+                        <div class="px-6 pb-8 space-y-8">
+
+                            <h3 class="text-xl font-semibold text-white pt-2">Opening the Layout Editor</h3>
+                            <p class="text-slate-300"><strong class="text-white">Double-click any Content node</strong> to open its Layout Editor. This gives you a WYSIWYG canvas for designing rich, structured content with drag-and-drop blocks.</p>
+
+                            <h3 class="text-xl font-semibold text-white">Block Types</h3>
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 rounded bg-blue-500/15 flex items-center justify-center"><span class="text-blue-400 text-xs font-bold">H</span></div>
+                                        <span class="text-sm font-medium text-white">Heading</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Section titles. Supports H1-H4 levels.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 rounded bg-slate-500/15 flex items-center justify-center"><span class="text-slate-400 text-xs font-bold">T</span></div>
+                                        <span class="text-sm font-medium text-white">Text</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Paragraphs with markdown support.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 rounded bg-amber-500/15 flex items-center justify-center"><span class="text-amber-400 text-xs font-bold">!</span></div>
+                                        <span class="text-sm font-medium text-white">Callout</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Highlighted tip/warning/info boxes.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 rounded bg-green-500/15 flex items-center justify-center">
+                                            <svg class="w-3 h-3 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-white">Image</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Embed images with captions and alt text.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 rounded bg-red-500/15 flex items-center justify-center">
+                                            <svg class="w-3 h-3 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-white">Video</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Embed video players (URL-based).</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 rounded bg-violet-500/15 flex items-center justify-center"><span class="text-violet-400 text-xs font-mono font-bold">{}</span></div>
+                                        <span class="text-sm font-medium text-white">Code</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Syntax-highlighted code blocks.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 rounded bg-cyan-500/15 flex items-center justify-center">
+                                            <svg class="w-3 h-3 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-white">Columns</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Side-by-side content layout (2-4 cols).</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 rounded bg-slate-500/15 flex items-center justify-center"><span class="text-slate-400 text-xs">---</span></div>
+                                        <span class="text-sm font-medium text-white">Divider</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Visual separator between content sections.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 rounded bg-emerald-500/15 flex items-center justify-center"><span class="text-emerald-400 text-xs font-bold">?</span></div>
+                                        <span class="text-sm font-medium text-white">Quiz Question</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Inline quiz embedded in content.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <div class="w-6 h-6 rounded bg-indigo-500/15 flex items-center justify-center">
+                                            <svg class="w-3 h-3 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                                        </div>
+                                        <span class="text-sm font-medium text-white">Nav Button</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Navigation button to proceed or branch.</p>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Templates</h3>
+                            <p class="text-slate-300">The Layout Editor includes pre-built templates to speed up content creation:</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 hover:border-accent-500/30 transition cursor-default">
+                                    <p class="text-sm font-medium text-white mb-1">Lesson Intro</p>
+                                    <p class="text-xs text-slate-400">Heading + text + callout. Great starting template for new topics.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 hover:border-accent-500/30 transition cursor-default">
+                                    <p class="text-sm font-medium text-white mb-1">Media + Text</p>
+                                    <p class="text-xs text-slate-400">Two-column layout with image/video on one side, text on the other.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 hover:border-accent-500/30 transition cursor-default">
+                                    <p class="text-sm font-medium text-white mb-1">Quiz Section</p>
+                                    <p class="text-xs text-slate-400">Heading + quiz question + nav button. Ready-made assessment layout.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 hover:border-accent-500/30 transition cursor-default">
+                                    <p class="text-sm font-medium text-white mb-1">Two Columns</p>
+                                    <p class="text-xs text-slate-400">Side-by-side content blocks for comparisons or parallel information.</p>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Canvas Width Presets</h3>
+                            <p class="text-slate-300">Control the content width to match your target device: narrow (mobile), medium (tablet), or wide (desktop). This affects how blocks reflow and stack.</p>
+
+                            <button class="mark-complete-btn mt-4 px-5 py-2.5 bg-accent-600/10 border border-accent-600/30 text-accent-400 rounded-lg text-sm font-medium hover:bg-accent-600/20 transition" onclick="markComplete(4)">Mark as Complete</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================ -->
+                <!-- SECTION 6: IMPORT/EXPORT -->
+                <!-- ============================================ -->
+                <section class="tutorial-section rounded-xl border border-dark-700 overflow-hidden" data-section="5" data-title="Import/Export & File Format" data-reading-time="3" data-keywords="import export json yaml file format portable single auto save download upload structure">
+                    <button class="section-header w-full flex items-center gap-4 p-6 text-left hover:bg-dark-800/50 transition group" onclick="toggleSection(5)">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
+                            <span class="text-teal-400 font-bold text-sm">6</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg font-semibold text-white group-hover:text-accent-400 transition">Import/Export & File Format</h2>
+                            <p class="text-sm text-slate-500 mt-0.5">Saving, sharing, and the course file structure</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            <span class="reading-time">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                3 min
+                            </span>
+                            <div class="section-check w-6 h-6 rounded-full border-2 border-dark-600 flex items-center justify-center transition">
+                                <svg class="w-3.5 h-3.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <svg class="section-chevron w-5 h-5 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </button>
+                    <div class="section-content">
+                        <div class="px-6 pb-8 space-y-8">
+
+                            <h3 class="text-xl font-semibold text-white pt-2">Exporting Your Course</h3>
+                            <p class="text-slate-300">Click the <strong class="text-white">Export</strong> button in the toolbar. You can export as:</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <p class="text-sm font-medium text-white mb-1">JSON</p>
+                                    <p class="text-xs text-slate-400">Standard format. Use <em>prettyJson</em> setting for human-readable output, or compact for smaller file size.</p>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700">
+                                    <p class="text-sm font-medium text-white mb-1">YAML</p>
+                                    <p class="text-xs text-slate-400">More readable for hand-editing. Ideal for version control and collaborative authoring.</p>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Importing Courses</h3>
+                            <p class="text-slate-300">Click <strong class="text-white">Import</strong> in the toolbar and select a <code class="text-accent-400 bg-dark-800 px-1 rounded text-sm">.json</code> or <code class="text-accent-400 bg-dark-800 px-1 rounded text-sm">.yaml</code> file. The editor will parse it and load all nodes, connections, attributes, and settings.</p>
+
+                            <div class="callout callout-warning">
+                                <p class="text-sm"><strong class="text-amber-400">Warning:</strong> Importing replaces your current course. Export first if you have unsaved work.</p>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">The Course File Structure</h3>
+                            <p class="text-slate-300">Courses are saved as portable single-file documents containing everything:</p>
+
+                            <div class="code-block">
+<pre><span class="comment">// Simplified course structure</span>
+{
+  <span class="key">"meta"</span>: {
+    <span class="key">"title"</span>: <span class="string">"My Branching Course"</span>,
+    <span class="key">"version"</span>: <span class="string">"1.0"</span>,
+    <span class="key">"created"</span>: <span class="string">"2026-03-28"</span>
+  },
+  <span class="key">"attributes"</span>: [
+    { <span class="key">"name"</span>: <span class="string">"knowledge"</span>, <span class="key">"default"</span>: <span class="number">0</span>, <span class="key">"min"</span>: <span class="number">0</span>, <span class="key">"max"</span>: <span class="number">100</span> }
+  ],
+  <span class="key">"pages"</span>: [
+    {
+      <span class="key">"id"</span>: <span class="string">"page-1"</span>,
+      <span class="key">"nodes"</span>: [ ... ],
+      <span class="key">"connections"</span>: [ ... ]
+    }
+  ],
+  <span class="key">"settings"</span>: { ... }
+}</pre>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Auto-Save</h3>
+                            <p class="text-slate-300">The editor automatically saves your work to the browser's localStorage as you edit. This means you can close the tab and return later without losing progress. For permanent storage, always export to a file.</p>
+
+                            <button class="mark-complete-btn mt-4 px-5 py-2.5 bg-accent-600/10 border border-accent-600/30 text-accent-400 rounded-lg text-sm font-medium hover:bg-accent-600/20 transition" onclick="markComplete(5)">Mark as Complete</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================ -->
+                <!-- SECTION 7: CANVAS CONTROLS -->
+                <!-- ============================================ -->
+                <section class="tutorial-section rounded-xl border border-dark-700 overflow-hidden" data-section="6" data-title="Canvas Controls" data-reading-time="2" data-keywords="canvas controls pan space drag zoom scroll wheel fit all auto arrange grid snapping keyboard shortcuts navigation">
+                    <button class="section-header w-full flex items-center gap-4 p-6 text-left hover:bg-dark-800/50 transition group" onclick="toggleSection(6)">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center">
+                            <span class="text-sky-400 font-bold text-sm">7</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg font-semibold text-white group-hover:text-accent-400 transition">Canvas Controls</h2>
+                            <p class="text-sm text-slate-500 mt-0.5">Pan, zoom, fit, arrange, and snap</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            <span class="reading-time">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                2 min
+                            </span>
+                            <div class="section-check w-6 h-6 rounded-full border-2 border-dark-600 flex items-center justify-center transition">
+                                <svg class="w-3.5 h-3.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <svg class="section-chevron w-5 h-5 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </button>
+                    <div class="section-content">
+                        <div class="px-6 pb-8 space-y-8">
+
+                            <p class="text-slate-300 pt-2">The canvas is your infinite workspace. Here is how to navigate it efficiently:</p>
+
+                            <div class="grid gap-4">
+                                <div class="bg-dark-800 rounded-xl p-5 border border-dark-700 flex items-start gap-4">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <div class="flex gap-1">
+                                            <kbd>Space</kbd><span class="text-slate-500 text-sm">+ Drag</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Pan</p>
+                                        <p class="text-sm text-slate-400">Hold the spacebar and drag to move around the canvas. Release spacebar to return to selection mode.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-xl p-5 border border-dark-700 flex items-start gap-4">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <kbd>Scroll Wheel</kbd>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Zoom</p>
+                                        <p class="text-sm text-slate-400">Scroll up to zoom in, scroll down to zoom out. Zooms toward your cursor position.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-xl p-5 border border-dark-700 flex items-start gap-4">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <kbd>F</kbd>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Fit All</p>
+                                        <p class="text-sm text-slate-400">Zooms and pans to show all nodes on screen. Also available as a toolbar button.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-xl p-5 border border-dark-700 flex items-start gap-4">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <kbd>A</kbd>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Auto-Arrange</p>
+                                        <p class="text-sm text-slate-400">Automatically organizes nodes in a clean, left-to-right flow layout. Respects connection hierarchy.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-xl p-5 border border-dark-700 flex items-start gap-4">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <kbd>G</kbd>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Grid Snapping</p>
+                                        <p class="text-sm text-slate-400">Toggle grid snapping. When enabled, nodes align to a grid for cleaner layouts.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="callout callout-info">
+                                <p class="text-sm"><strong class="text-indigo-400">Keyboard shortcuts summary:</strong> <kbd>Ctrl</kbd>+<kbd>Z</kbd> Undo | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> Redo | <kbd>Delete</kbd> Remove selected | <kbd>Ctrl</kbd>+<kbd>A</kbd> Select all</p>
+                            </div>
+
+                            <button class="mark-complete-btn mt-4 px-5 py-2.5 bg-accent-600/10 border border-accent-600/30 text-accent-400 rounded-lg text-sm font-medium hover:bg-accent-600/20 transition" onclick="markComplete(6)">Mark as Complete</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================ -->
+                <!-- SECTION 8: EDITOR SETTINGS -->
+                <!-- ============================================ -->
+                <section class="tutorial-section rounded-xl border border-dark-700 overflow-hidden" data-section="7" data-title="Editor Settings" data-reading-time="3" data-keywords="settings toggles selectOnAdd confirmDelete showNodeIds propsOnSelect autoFit prettyJson exportMeta nodeRepulsion linkedDrag downstreamDrag preferences configuration">
+                    <button class="section-header w-full flex items-center gap-4 p-6 text-left hover:bg-dark-800/50 transition group" onclick="toggleSection(7)">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-500/10 border border-slate-500/20 flex items-center justify-center">
+                            <span class="text-slate-400 font-bold text-sm">8</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg font-semibold text-white group-hover:text-accent-400 transition">Editor Settings</h2>
+                            <p class="text-sm text-slate-500 mt-0.5">All toggles and preferences explained</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            <span class="reading-time">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                3 min
+                            </span>
+                            <div class="section-check w-6 h-6 rounded-full border-2 border-dark-600 flex items-center justify-center transition">
+                                <svg class="w-3.5 h-3.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <svg class="section-chevron w-5 h-5 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </button>
+                    <div class="section-content">
+                        <div class="px-6 pb-8 space-y-6">
+
+                            <p class="text-slate-300 pt-2">Open the settings panel via the gear icon in the toolbar. Each toggle customizes the editor experience:</p>
+
+                            <div class="space-y-4">
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex items-start gap-4">
+                                    <div class="toggle-demo on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">selectOnAdd</p>
+                                        <p class="text-xs text-slate-400">Automatically select and open properties for newly added nodes. Speeds up the authoring workflow.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex items-start gap-4">
+                                    <div class="toggle-demo on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">confirmDelete</p>
+                                        <p class="text-xs text-slate-400">Show a confirmation dialog before deleting nodes or connections. Prevents accidental deletions.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex items-start gap-4">
+                                    <div class="toggle-demo" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">showNodeIds</p>
+                                        <p class="text-xs text-slate-400">Display internal node IDs on the canvas. Useful for debugging and referencing specific nodes.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex items-start gap-4">
+                                    <div class="toggle-demo on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">propsOnSelect</p>
+                                        <p class="text-xs text-slate-400">Automatically open the properties panel when a node is selected.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex items-start gap-4">
+                                    <div class="toggle-demo" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">autoFit</p>
+                                        <p class="text-xs text-slate-400">Automatically fit the view to show all nodes after adding or arranging. Can be distracting on large courses.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex items-start gap-4">
+                                    <div class="toggle-demo on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">prettyJson</p>
+                                        <p class="text-xs text-slate-400">Export JSON with indentation for readability. Disable for smaller file sizes.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex items-start gap-4">
+                                    <div class="toggle-demo on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">exportMeta</p>
+                                        <p class="text-xs text-slate-400">Include metadata (title, author, timestamps) in exported files.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex items-start gap-4">
+                                    <div class="toggle-demo on" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">nodeRepulsion</p>
+                                        <p class="text-xs text-slate-400">Nodes push each other apart during auto-arrange to prevent overlap.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex items-start gap-4">
+                                    <div class="toggle-demo" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">linkedDrag</p>
+                                        <p class="text-xs text-slate-400">When dragging a node, connected nodes move with it to maintain relative positions.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-800 rounded-lg p-4 border border-dark-700 flex items-start gap-4">
+                                    <div class="toggle-demo" onclick="this.classList.toggle('on')"><div class="toggle-knob"></div></div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">downstreamDrag</p>
+                                        <p class="text-xs text-slate-400">When dragging a node, only its downstream (child) nodes follow. Useful for repositioning entire sub-trees.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="mark-complete-btn mt-4 px-5 py-2.5 bg-accent-600/10 border border-accent-600/30 text-accent-400 rounded-lg text-sm font-medium hover:bg-accent-600/20 transition" onclick="markComplete(7)">Mark as Complete</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================ -->
+                <!-- SECTION 9: TIPS & BEST PRACTICES -->
+                <!-- ============================================ -->
+                <section class="tutorial-section rounded-xl border border-dark-700 overflow-hidden" data-section="8" data-title="Tips & Best Practices" data-reading-time="4" data-keywords="tips best practices patterns linear branching assessment remediation gated progression flow diagram meaningful titles test player attributes personalized experiences common">
+                    <button class="section-header w-full flex items-center gap-4 p-6 text-left hover:bg-dark-800/50 transition group" onclick="toggleSection(8)">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                            <span class="text-emerald-400 font-bold text-sm">9</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg font-semibold text-white group-hover:text-accent-400 transition">Tips & Best Practices</h2>
+                            <p class="text-sm text-slate-500 mt-0.5">Design patterns, workflow tips, and common architectures</p>
+                        </div>
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            <span class="reading-time">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                4 min
+                            </span>
+                            <div class="section-check w-6 h-6 rounded-full border-2 border-dark-600 flex items-center justify-center transition">
+                                <svg class="w-3.5 h-3.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            </div>
+                            <svg class="section-chevron w-5 h-5 text-dark-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </div>
+                    </button>
+                    <div class="section-content">
+                        <div class="px-6 pb-8 space-y-8">
+
+                            <h3 class="text-xl font-semibold text-white pt-2">General Tips</h3>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Start with a flow diagram on paper</p>
+                                        <p class="text-sm text-slate-400">Sketch your course structure before building. Identify key decision points, assessment checkpoints, and desired outcomes. This prevents rework later.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Use meaningful node titles</p>
+                                        <p class="text-sm text-slate-400">Instead of "Node 1", use "Intro to Photosynthesis" or "Quiz: Cell Structure". This makes the canvas readable at a glance and helps collaborators understand your design.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Test in the player frequently</p>
+                                        <p class="text-sm text-slate-400">Do not wait until the course is "done" to preview it. Test early and often. Walk through each branch to ensure connections work and content flows naturally.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 items-start">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                                        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Use attributes to create personalized experiences</p>
+                                        <p class="text-sm text-slate-400">Even simple attributes like "knowledge" and "confidence" can dramatically improve the learning experience by adapting difficulty and content to each learner.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-semibold text-white">Common Course Patterns</h3>
+                            <div class="grid sm:grid-cols-2 gap-4">
+
+                                <!-- Pattern: Linear -->
+                                <div class="pattern-card">
+                                    <h4 class="text-white font-semibold mb-2">Linear</h4>
+                                    <p class="text-sm text-slate-400 mb-4">Simple start-to-finish path. Content flows in one direction without branches. Good for tutorials and guided walkthroughs.</p>
+                                    <svg viewBox="0 0 280 60" class="w-full">
+                                        <rect x="0" y="15" width="60" height="30" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                        <text x="30" y="35" text-anchor="middle" fill="#93c5fd" font-size="9">Start</text>
+                                        <path d="M60 30 L80 30" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+                                        <rect x="80" y="15" width="60" height="30" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                        <text x="110" y="35" text-anchor="middle" fill="#93c5fd" font-size="9">Lesson</text>
+                                        <path d="M140 30 L160 30" stroke="#475569" stroke-width="1.5"/>
+                                        <rect x="160" y="15" width="60" height="30" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                        <text x="190" y="35" text-anchor="middle" fill="#93c5fd" font-size="9">Quiz</text>
+                                        <path d="M220 30 L240 30" stroke="#475569" stroke-width="1.5"/>
+                                        <circle cx="260" cy="30" r="15" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+                                        <text x="260" y="34" text-anchor="middle" fill="#fcd34d" font-size="8">End</text>
+                                    </svg>
+                                </div>
+
+                                <!-- Pattern: Branching -->
+                                <div class="pattern-card">
+                                    <h4 class="text-white font-semibold mb-2">Branching</h4>
+                                    <p class="text-sm text-slate-400 mb-4">Learner chooses a path. Each branch has different content. Paths may reconverge later.</p>
+                                    <svg viewBox="0 0 280 90" class="w-full">
+                                        <rect x="0" y="30" width="60" height="30" rx="6" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5"/>
+                                        <text x="30" y="50" text-anchor="middle" fill="#c4b5fd" font-size="9">Choose</text>
+                                        <path d="M60 40 L90 15" stroke="#8b5cf6" stroke-width="1.5"/>
+                                        <path d="M60 50 L90 75" stroke="#8b5cf6" stroke-width="1.5"/>
+                                        <rect x="90" y="0" width="70" height="30" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                        <text x="125" y="20" text-anchor="middle" fill="#93c5fd" font-size="8">Path A</text>
+                                        <rect x="90" y="60" width="70" height="30" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                        <text x="125" y="80" text-anchor="middle" fill="#93c5fd" font-size="8">Path B</text>
+                                        <path d="M160 15 L200 40" stroke="#475569" stroke-width="1.5"/>
+                                        <path d="M160 75 L200 50" stroke="#475569" stroke-width="1.5"/>
+                                        <circle cx="260" cy="45" r="15" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+                                        <text x="260" y="49" text-anchor="middle" fill="#fcd34d" font-size="8">End</text>
+                                        <rect x="200" y="30" width="40" height="30" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                        <text x="220" y="49" text-anchor="middle" fill="#93c5fd" font-size="7">Merge</text>
+                                    </svg>
+                                </div>
+
+                                <!-- Pattern: Assessment + Remediation -->
+                                <div class="pattern-card">
+                                    <h4 class="text-white font-semibold mb-2">Assessment + Remediation</h4>
+                                    <p class="text-sm text-slate-400 mb-4">Quiz with a retry loop. Failing routes to practice, then back to the quiz for another attempt.</p>
+                                    <svg viewBox="0 0 280 100" class="w-full">
+                                        <rect x="0" y="25" width="65" height="30" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                        <text x="32" y="45" text-anchor="middle" fill="#93c5fd" font-size="8">Lesson</text>
+                                        <path d="M65 40 L90 40" stroke="#475569" stroke-width="1.5"/>
+                                        <rect x="90" y="25" width="65" height="30" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+                                        <text x="122" y="45" text-anchor="middle" fill="#6ee7b7" font-size="8">Quiz</text>
+                                        <path d="M155 35 L200 15" stroke="#10b981" stroke-width="1.5"/>
+                                        <text x="175" y="18" fill="#6ee7b7" font-size="7">Pass</text>
+                                        <path d="M155 50 L180 75" stroke="#ef4444" stroke-width="1.5"/>
+                                        <text x="175" y="65" fill="#f87171" font-size="7">Fail</text>
+                                        <circle cx="240" cy="15" r="15" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+                                        <text x="240" y="19" text-anchor="middle" fill="#fcd34d" font-size="8">End</text>
+                                        <rect x="180" y="60" width="70" height="30" rx="6" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5"/>
+                                        <text x="215" y="80" text-anchor="middle" fill="#67e8f9" font-size="8">Practice</text>
+                                        <path d="M215 60 L122 55" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="4 2"/>
+                                        <text x="165" y="52" fill="#67e8f9" font-size="7">Retry</text>
+                                    </svg>
+                                </div>
+
+                                <!-- Pattern: Gated Progression -->
+                                <div class="pattern-card">
+                                    <h4 class="text-white font-semibold mb-2">Gated Progression</h4>
+                                    <p class="text-sm text-slate-400 mb-4">Content is locked behind prerequisite gates. Learners must build attributes before advancing to harder material.</p>
+                                    <svg viewBox="0 0 280 60" class="w-full">
+                                        <rect x="0" y="15" width="55" height="30" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                        <text x="27" y="35" text-anchor="middle" fill="#93c5fd" font-size="8">Basics</text>
+                                        <path d="M55 30 L75 30" stroke="#475569" stroke-width="1.5"/>
+                                        <rect x="75" y="15" width="55" height="30" rx="6" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+                                        <text x="102" y="28" text-anchor="middle" fill="#f87171" font-size="7">Gate</text>
+                                        <text x="102" y="40" text-anchor="middle" fill="#94a3b8" font-size="6">k>=30</text>
+                                        <path d="M130 30 L150 30" stroke="#475569" stroke-width="1.5"/>
+                                        <rect x="150" y="15" width="55" height="30" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+                                        <text x="177" y="35" text-anchor="middle" fill="#93c5fd" font-size="8">Advanced</text>
+                                        <path d="M205 30 L225 30" stroke="#475569" stroke-width="1.5"/>
+                                        <circle cx="255" cy="30" r="15" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+                                        <text x="255" y="34" text-anchor="middle" fill="#fcd34d" font-size="8">End</text>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="callout callout-tip">
+                                <p class="text-sm"><strong class="text-emerald-400">Pro tip:</strong> Combine patterns! A real course might use linear sections for lessons, branching for learner choice, assessment loops for mastery, and gates for progression. The power is in composition.</p>
+                            </div>
+
+                            <button class="mark-complete-btn mt-4 px-5 py-2.5 bg-accent-600/10 border border-accent-600/30 text-accent-400 rounded-lg text-sm font-medium hover:bg-accent-600/20 transition" onclick="markComplete(8)">Mark as Complete</button>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- end sections container -->
+
+            <!-- Completion banner -->
+            <div id="completionBanner" class="hidden mt-12 text-center bg-gradient-to-r from-accent-600/10 via-indigo-600/10 to-accent-600/10 border border-accent-600/20 rounded-2xl p-10">
+                <div class="text-5xl mb-4">&#9733;</div>
+                <h2 class="text-2xl font-bold text-white mb-2">Tutorial Complete!</h2>
+                <p class="text-slate-400 mb-6">You have learned everything you need to build branching courses. Time to create something great.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="course-editor-enhanced.html" class="px-6 py-3 bg-accent-600 hover:bg-accent-700 text-white rounded-lg font-medium transition">Open the Editor</a>
+                    <a href="manual.html" class="px-6 py-3 bg-dark-800 hover:bg-dark-700 text-slate-300 rounded-lg font-medium border border-dark-700 transition">Read the Manual</a>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="mt-16 pt-8 border-t border-dark-700 text-center text-sm text-slate-500">
+                <p>Branching Course Editor Tutorial</p>
+                <p class="mt-1">Part of the <a href="course-editor-enhanced.html" class="text-accent-400 hover:underline">Branching Courses</a> platform</p>
+            </footer>
+
+        </div>
+    </main>
+</div>
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================ -->
+<script>
+(function() {
+    'use strict';
+
+    // ===========================================
+    // State
+    // ===========================================
+    const TOTAL_SECTIONS = 9;
+    let completedSections = new Set();
+    let openSections = new Set();
+
+    // Load saved progress
+    try {
+        const saved = JSON.parse(localStorage.getItem('tutorial_progress') || '[]');
+        saved.forEach(i => completedSections.add(i));
+    } catch(e) {}
+
+    // ===========================================
+    // Section Toggle
+    // ===========================================
+    window.toggleSection = function(index) {
+        const section = document.querySelectorAll('.tutorial-section')[index];
+        const content = section.querySelector('.section-content');
+        const header = section.querySelector('.section-header');
+
+        if (openSections.has(index)) {
+            openSections.delete(index);
+            content.classList.remove('expanded');
+            header.classList.remove('active');
+        } else {
+            openSections.add(index);
+            content.classList.add('expanded');
+            header.classList.add('active');
+        }
+        updateTocHighlight();
+    };
+
+    // ===========================================
+    // Mark Complete
+    // ===========================================
+    window.markComplete = function(index) {
+        completedSections.add(index);
+        localStorage.setItem('tutorial_progress', JSON.stringify([...completedSections]));
+        updateProgress();
+        updateSectionVisuals(index);
+
+        // If all done, show banner
+        if (completedSections.size >= TOTAL_SECTIONS) {
+            document.getElementById('completionBanner').classList.remove('hidden');
+            document.getElementById('completionBanner').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Auto-collapse and open next
+        const btn = document.querySelectorAll('.mark-complete-btn')[index];
+        if (btn) {
+            btn.textContent = 'Completed!';
+            btn.classList.remove('bg-accent-600/10', 'border-accent-600/30', 'text-accent-400', 'hover:bg-accent-600/20');
+            btn.classList.add('bg-emerald-600/10', 'border-emerald-600/30', 'text-emerald-400');
+            btn.disabled = true;
+        }
+    };
+
+    function updateSectionVisuals(index) {
+        const section = document.querySelectorAll('.tutorial-section')[index];
+        const check = section.querySelector('.section-check');
+        if (check) {
+            check.classList.remove('border-dark-600');
+            check.classList.add('border-emerald-500', 'bg-emerald-500');
+            check.querySelector('svg').classList.remove('hidden');
+        }
+    }
+
+    // ===========================================
+    // Progress Tracking
+    // ===========================================
+    function updateProgress() {
+        const pct = Math.round((completedSections.size / TOTAL_SECTIONS) * 100);
+        document.getElementById('globalProgress').style.width = pct + '%';
+        document.getElementById('sidebarProgress').style.width = pct + '%';
+        document.getElementById('progressPercent').textContent = pct + '%';
+        document.getElementById('sectionsComplete').textContent = completedSections.size + ' / ' + TOTAL_SECTIONS;
+
+        // Update TOC dots
+        document.querySelectorAll('.toc-dot').forEach((dot, i) => {
+            dot.classList.toggle('complete', completedSections.has(i));
+        });
+    }
+
+    // ===========================================
+    // Build TOC sidebar
+    // ===========================================
+    function buildToc() {
+        const nav = document.getElementById('tocNav');
+        const sections = document.querySelectorAll('.tutorial-section');
+        sections.forEach((section, i) => {
+            const title = section.dataset.title;
+            const time = section.dataset.readingTime;
+            const item = document.createElement('a');
+            item.href = '#';
+            item.className = 'toc-item relative flex items-start gap-3 py-2.5 pl-1 text-sm text-slate-400 hover:text-white transition rounded-lg group';
+            item.dataset.index = i;
+            item.onclick = function(e) {
+                e.preventDefault();
+                if (!openSections.has(i)) toggleSection(i);
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Close mobile menu
+                document.getElementById('sidebarNav').classList.remove('mobile-open');
+            };
+            item.innerHTML = `
+                <div class="toc-dot progress-dot flex-shrink-0 w-6 h-6 rounded-full border-2 border-dark-600 flex items-center justify-center mt-0 ${completedSections.has(i) ? 'complete' : ''}">
+                    <span class="text-[10px] font-bold">${i + 1}</span>
+                </div>
+                <div class="min-w-0">
+                    <div class="font-medium truncate">${title}</div>
+                    <div class="text-xs text-dark-600">${time} min</div>
+                </div>
+            `;
+            nav.appendChild(item);
+        });
+    }
+
+    function updateTocHighlight() {
+        document.querySelectorAll('.toc-item').forEach((item, i) => {
+            const dot = item.querySelector('.toc-dot');
+            if (openSections.has(i) && !completedSections.has(i)) {
+                dot.classList.add('active');
+                item.classList.add('text-white');
+            } else {
+                dot.classList.remove('active');
+                if (!completedSections.has(i)) item.classList.remove('text-white');
+            }
+        });
+    }
+
+    // ===========================================
+    // Search
+    // ===========================================
+    function initSearch() {
+        const input = document.getElementById('searchInput');
+        const results = document.getElementById('searchResults');
+        const sections = document.querySelectorAll('.tutorial-section');
+
+        const searchData = [];
+        sections.forEach((section, i) => {
+            searchData.push({
+                index: i,
+                title: section.dataset.title,
+                keywords: section.dataset.keywords,
+                time: section.dataset.readingTime
+            });
+        });
+
+        input.addEventListener('input', function() {
+            const q = this.value.toLowerCase().trim();
+            if (!q) {
+                results.classList.add('hidden');
+                return;
+            }
+            const matches = searchData.filter(s =>
+                s.title.toLowerCase().includes(q) || s.keywords.includes(q)
+            );
+            if (matches.length === 0) {
+                results.innerHTML = '<div class="p-4 text-sm text-slate-500">No results found</div>';
+            } else {
+                results.innerHTML = matches.map(m => `
+                    <a href="#" class="block px-4 py-3 hover:bg-dark-700 transition border-b border-dark-700 last:border-0" data-search-index="${m.index}">
+                        <div class="text-sm text-white font-medium">${m.title}</div>
+                        <div class="text-xs text-slate-500 mt-0.5">${m.time} min read</div>
+                    </a>
+                `).join('');
+            }
+            results.classList.remove('hidden');
+        });
+
+        results.addEventListener('click', function(e) {
+            const link = e.target.closest('[data-search-index]');
+            if (link) {
+                e.preventDefault();
+                const idx = parseInt(link.dataset.searchIndex);
+                if (!openSections.has(idx)) toggleSection(idx);
+                sections[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                results.classList.add('hidden');
+                input.value = '';
+            }
+        });
+
+        // Close on outside click
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#searchInput') && !e.target.closest('#searchResults')) {
+                results.classList.add('hidden');
+            }
+        });
+    }
+
+    // ===========================================
+    // Reset Progress
+    // ===========================================
+    document.getElementById('resetProgressBtn').addEventListener('click', function() {
+        if (confirm('Reset all tutorial progress?')) {
+            completedSections.clear();
+            localStorage.removeItem('tutorial_progress');
+            updateProgress();
+            document.querySelectorAll('.section-check').forEach(check => {
+                check.classList.remove('border-emerald-500', 'bg-emerald-500');
+                check.classList.add('border-dark-600');
+                check.querySelector('svg').classList.add('hidden');
+            });
+            document.querySelectorAll('.mark-complete-btn').forEach(btn => {
+                btn.textContent = 'Mark as Complete';
+                btn.classList.add('bg-accent-600/10', 'border-accent-600/30', 'text-accent-400', 'hover:bg-accent-600/20');
+                btn.classList.remove('bg-emerald-600/10', 'border-emerald-600/30', 'text-emerald-400');
+                btn.disabled = false;
+            });
+            document.getElementById('completionBanner').classList.add('hidden');
+            updateTocHighlight();
+        }
+    });
+
+    // ===========================================
+    // Mobile menu
+    // ===========================================
+    document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+        document.getElementById('sidebarNav').classList.toggle('mobile-open');
+    });
+
+    // ===========================================
+    // Attribute demo
+    // ===========================================
+    window.simulateAttrChange = function() {
+        const kEl = document.getElementById('attrKnowledge');
+        const cEl = document.getElementById('attrConfidence');
+        const kBar = document.getElementById('attrKnowledgeBar');
+        const cBar = document.getElementById('attrConfidenceBar');
+
+        let k = parseInt(kEl.textContent);
+        let c = parseInt(cEl.textContent);
+        k = Math.min(100, k + 15);
+        c = Math.min(100, c + 10);
+        kEl.textContent = k;
+        cEl.textContent = c;
+        kBar.style.width = k + '%';
+        cBar.style.width = c + '%';
+    };
+
+    // ===========================================
+    // Connection Demo (Interactive)
+    // ===========================================
+    function initConnectionDemo() {
+        const canvas = document.getElementById('connectionDemo');
+        const svg = document.getElementById('demoSvg');
+        const portOut = document.getElementById('demoPortOut');
+        const portIn = document.getElementById('demoPortIn');
+        const tooltip = document.getElementById('demoTooltip');
+
+        let dragging = false;
+        let tempLine = null;
+        let connected = false;
+
+        function getPortCenter(port) {
+            const canvasRect = canvas.getBoundingClientRect();
+            const portRect = port.getBoundingClientRect();
+            return {
+                x: portRect.left + portRect.width / 2 - canvasRect.left,
+                y: portRect.top + portRect.height / 2 - canvasRect.top
+            };
+        }
+
+        // Show tooltip near output port
+        const outPos = getPortCenter(portOut);
+        tooltip.style.left = (outPos.x + 15) + 'px';
+        tooltip.style.top = (outPos.y - 30) + 'px';
+        setTimeout(() => tooltip.classList.add('show'), 1000);
+
+        portOut.addEventListener('mousedown', function(e) {
+            if (connected) return;
+            e.preventDefault();
+            dragging = true;
+            portOut.classList.add('active');
+            tooltip.classList.remove('show');
+
+            const start = getPortCenter(portOut);
+            tempLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            tempLine.setAttribute('x1', start.x);
+            tempLine.setAttribute('y1', start.y);
+            tempLine.setAttribute('x2', start.x);
+            tempLine.setAttribute('y2', start.y);
+            tempLine.setAttribute('stroke', '#8b5cf6');
+            tempLine.setAttribute('stroke-width', '2');
+            tempLine.setAttribute('stroke-dasharray', '6 3');
+            svg.appendChild(tempLine);
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            if (!dragging || !tempLine) return;
+            const rect = canvas.getBoundingClientRect();
+            tempLine.setAttribute('x2', e.clientX - rect.left);
+            tempLine.setAttribute('y2', e.clientY - rect.top);
+
+            // Highlight input port on proximity
+            const inPos = getPortCenter(portIn);
+            const dx = (e.clientX - rect.left) - inPos.x;
+            const dy = (e.clientY - rect.top) - inPos.y;
+            if (Math.sqrt(dx*dx + dy*dy) < 20) {
+                portIn.classList.add('active');
+            } else {
+                portIn.classList.remove('active');
+            }
+        });
+
+        canvas.addEventListener('mouseup', function(e) {
+            if (!dragging) return;
+            dragging = false;
+            portOut.classList.remove('active');
+
+            const rect = canvas.getBoundingClientRect();
+            const inPos = getPortCenter(portIn);
+            const dx = (e.clientX - rect.left) - inPos.x;
+            const dy = (e.clientY - rect.top) - inPos.y;
+
+            if (Math.sqrt(dx*dx + dy*dy) < 25) {
+                // Snap to port
+                const start = getPortCenter(portOut);
+                tempLine.setAttribute('x1', start.x);
+                tempLine.setAttribute('y1', start.y);
+                tempLine.setAttribute('x2', inPos.x);
+                tempLine.setAttribute('y2', inPos.y);
+                tempLine.setAttribute('stroke-dasharray', '');
+                tempLine.setAttribute('stroke', '#8b5cf6');
+                tempLine.setAttribute('stroke-width', '2.5');
+                portIn.classList.add('active');
+                portOut.classList.add('active');
+                connected = true;
+
+                // Add arrow
+                const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                arrow.setAttribute('cx', inPos.x);
+                arrow.setAttribute('cy', inPos.y);
+                arrow.setAttribute('r', '4');
+                arrow.setAttribute('fill', '#8b5cf6');
+                svg.appendChild(arrow);
+
+                // Success message
+                const successDiv = document.createElement('div');
+                successDiv.className = 'absolute bottom-3 left-0 right-0 text-center text-xs text-emerald-400 font-medium';
+                successDiv.textContent = 'Connection created! Well done.';
+                canvas.appendChild(successDiv);
+            } else {
+                // Cancel
+                if (tempLine) svg.removeChild(tempLine);
+                tempLine = null;
+                portIn.classList.remove('active');
+            }
+        });
+
+        // Touch support
+        portOut.addEventListener('touchstart', function(e) {
+            if (connected) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            portOut.dispatchEvent(new MouseEvent('mousedown', {
+                clientX: touch.clientX, clientY: touch.clientY
+            }));
+        });
+        canvas.addEventListener('touchmove', function(e) {
+            if (!dragging) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            canvas.dispatchEvent(new MouseEvent('mousemove', {
+                clientX: touch.clientX, clientY: touch.clientY
+            }));
+        });
+        canvas.addEventListener('touchend', function(e) {
+            if (!dragging) return;
+            const touch = e.changedTouches[0];
+            canvas.dispatchEvent(new MouseEvent('mouseup', {
+                clientX: touch.clientX, clientY: touch.clientY
+            }));
+        });
+    }
+
+    // ===========================================
+    // Init
+    // ===========================================
+    function init() {
+        buildToc();
+        initSearch();
+        updateProgress();
+
+        // Restore completed section visuals
+        completedSections.forEach(i => {
+            updateSectionVisuals(i);
+            const btn = document.querySelectorAll('.mark-complete-btn')[i];
+            if (btn) {
+                btn.textContent = 'Completed!';
+                btn.classList.remove('bg-accent-600/10', 'border-accent-600/30', 'text-accent-400', 'hover:bg-accent-600/20');
+                btn.classList.add('bg-emerald-600/10', 'border-emerald-600/30', 'text-emerald-400');
+                btn.disabled = true;
+            }
+        });
+
+        if (completedSections.size >= TOTAL_SECTIONS) {
+            document.getElementById('completionBanner').classList.remove('hidden');
+        }
+
+        // Auto-expand first incomplete section
+        let firstIncomplete = 0;
+        for (let i = 0; i < TOTAL_SECTIONS; i++) {
+            if (!completedSections.has(i)) { firstIncomplete = i; break; }
+        }
+        toggleSection(firstIncomplete);
+
+        // Init interactive demos after a tick (DOM needs to settle)
+        setTimeout(initConnectionDemo, 300);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+})();
+</script>
+</body>
+</html>

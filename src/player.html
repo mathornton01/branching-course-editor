@@ -479,6 +479,7 @@
 <!-- PLAYER (hidden until course loaded) -->
 <div id="player" style="display:none; flex-direction:column; min-height:100dvh;">
   <header>
+    <a href="/" style="color:var(--muted);font-size:0.85rem;padding:4px 8px;border-radius:6px;flex-shrink:0;text-decoration:none;" title="Home">🏠</a>
     <button onclick="showLanding()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:4px;border-radius:6px;flex-shrink:0;" title="Back to catalog">←</button>
     <div id="hdr-icon" style="font-size:1.2rem">🎓</div>
     <h1 id="hdr-title">Course</h1>
@@ -1460,6 +1461,109 @@ async function loadRandomCourse() {
 
 // Auto-refresh catalog every 30s to show newly generated courses
 setInterval(fetchCatalog, 30000);
+
+// ── Progress Tracking ─────────────────────────────────────────────────────────
+const tracker = {
+  sessionId: null,
+  token: localStorage.getItem('auth_token'),
+
+  async startSession(courseId, startNodeId) {
+    try {
+      const headers = {'Content-Type': 'application/json'};
+      if (this.token) headers['Authorization'] = 'Bearer ' + this.token;
+      const r = await fetch('/api/progress/start', {
+        method: 'POST', headers,
+        body: JSON.stringify({course_id: courseId, start_node_id: startNodeId})
+      });
+      const data = await r.json();
+      this.sessionId = data.session_id;
+    } catch(e) { console.log('Tracking: start failed', e); }
+  },
+
+  async recordEvent(courseId, nodeId, nodeType, eventType, eventData) {
+    if (!this.sessionId) return;
+    try {
+      const headers = {'Content-Type': 'application/json'};
+      if (this.token) headers['Authorization'] = 'Bearer ' + this.token;
+      fetch('/api/progress/event', {
+        method: 'POST', headers,
+        body: JSON.stringify({
+          session_id: this.sessionId,
+          course_id: courseId,
+          node_id: nodeId,
+          node_type: nodeType || 'content',
+          event_type: eventType,
+          event_data: eventData || {},
+          attributes: {...state.attrs}
+        })
+      });
+    } catch(e) {}
+  },
+
+  async completeSession(finalAttrs, completionPct) {
+    if (!this.sessionId) return;
+    try {
+      const headers = {'Content-Type': 'application/json'};
+      if (this.token) headers['Authorization'] = 'Bearer ' + this.token;
+      fetch('/api/progress/complete', {
+        method: 'POST', headers,
+        body: JSON.stringify({
+          session_id: this.sessionId,
+          final_attributes: finalAttrs || state.attrs,
+          completion_pct: completionPct || Math.round((state.visited.size / Object.keys(nodeMap).length) * 100)
+        })
+      });
+    } catch(e) {}
+  }
+};
+
+// Hook into loadCourse to start tracking
+const _origLoadCourse = loadCourse;
+loadCourse = function(data) {
+  _origLoadCourse(data);
+  const courseId = data.id || data.course?.id || 'unknown';
+  const startNode = data.nodes?.find(n => n.type === 'start' || n.subtype === 'start') || data.nodes?.[0];
+  tracker.startSession(courseId, startNode?.id);
+};
+
+// Hook into goTo to record navigation events
+const _origGoTo = goTo;
+goTo = function(nodeId) {
+  _origGoTo(nodeId);
+  const node = nodeMap[nodeId];
+  if (node && course) {
+    const courseId = course.id || course.course?.id || 'unknown';
+    tracker.recordEvent(courseId, nodeId, node.type, 'visit', {title: node.title});
+    // Track end nodes
+    if (node.type === 'end') {
+      tracker.completeSession(state.attrs);
+    }
+  }
+};
+
+// Hook into decision choices
+const _origAdvance = advance;
+advance = function(nodeId, choiceLabel) {
+  if (course && state.nodeId) {
+    const courseId = course.id || course.course?.id || 'unknown';
+    const currentNode = nodeMap[state.nodeId];
+    if (currentNode && currentNode.type === 'decision') {
+      tracker.recordEvent(courseId, state.nodeId, 'decision', 'decision', {choice: choiceLabel || nodeId, next: nodeId});
+    }
+  }
+  _origAdvance(nodeId);
+};
+
+// ── Auth gate: require login to access courses ──────────────────────────────────
+(function() {
+  const _tok = localStorage.getItem('auth_token');
+  let _usr = null;
+  try { _usr = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+  if (!_tok || !_usr) {
+    const next = encodeURIComponent(location.pathname + location.search);
+    window.location.href = '/login.html?next=' + next + '&msg=signin';
+  }
+})();
 
 // ── URL param loading ──────────────────────────────────────────────────────────
 (async () => {

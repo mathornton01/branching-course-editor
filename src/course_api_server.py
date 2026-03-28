@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 """
 FastAPI server for branching courses project.
-Serves static files + REST API for course catalog.
+Serves static files + REST API for course catalog, store, auth, and analytics.
 """
 import json
 import shutil
 from pathlib import Path
-from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi import FastAPI, HTTPException, UploadFile, File, Header, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 import re
 import threading
 import time as _time
+import store_db as db
 
 SRC_DIR = Path(__file__).parent
 COURSES_DIR = SRC_DIR / "courses"
@@ -291,6 +292,330 @@ def _update_catalog(course_id: str, body: Dict[str, Any]):
     catalog["last_updated"] = datetime.datetime.utcnow().isoformat() + "Z"
     CATALOG_PATH.write_text(json.dumps(catalog, indent=2))
 
+
+# --- Auth helper ---
+
+def _get_user(authorization: str = Header(None)) -> dict | None:
+    if not authorization:
+        return None
+    token = authorization.replace("Bearer ", "")
+    return db.validate_token(token)
+
+def _require_user(authorization: str = Header(None)) -> dict:
+    user = _get_user(authorization)
+    if not user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    return user
+
+# --- Auth API ---
+
+class RegisterBody(BaseModel):
+    email: str
+    username: str
+    password: str
+    role: str = "student"
+    display_name: str = None
+
+class LoginBody(BaseModel):
+    login: str
+    password: str
+
+@app.post("/api/auth/register")
+def register(body: RegisterBody):
+    try:
+        # Normalize "professor" to "instructor" for consistent role storage
+        role = "instructor" if body.role == "professor" else body.role
+        if role not in ("student", "instructor", "admin"):
+            role = "student"
+        user = db.create_user(body.email, body.username, body.password, role, body.display_name)
+        token = db.create_token(user["id"])
+        return {"ok": True, "user": user, "token": token}
+    except Exception as e:
+        if "UNIQUE" in str(e):
+            raise HTTPException(status_code=409, detail="Email or username already exists")
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.post("/api/auth/login")
+def login(body: LoginBody):
+    user = db.authenticate(body.login, body.password)
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    token = db.create_token(user["id"])
+    return {"ok": True, "user": {"id": user["id"], "email": user["email"], "username": user["username"], "role": user["role"], "display_name": user["display_name"], "subscription_tier": user["subscription_tier"]}, "token": token}
+
+@app.get("/api/auth/me")
+def get_me(authorization: str = Header(None)):
+    user = _require_user(authorization)
+    full = db.get_user(user["user_id"])
+    if not full:
+        raise HTTPException(status_code=404, detail="User not found")
+    return full
+
+# --- Store API ---
+
+class PublishBody(BaseModel):
+    price_cents: int = 0
+    category: str = None
+    is_featured: bool = False
+    preview_nodes: int = 3
+
+@app.post("/api/store/publish/{course_id}")
+def publish_course(course_id: str, body: PublishBody, authorization: str = Header(None)):
+    user = _require_user(authorization)
+    if user["role"] not in ("instructor", "admin"):
+        raise HTTPException(status_code=403, detail="Only instructors can publish courses")
+    course_path = COURSES_DIR / f"{course_id}.json"
+    if not course_path.exists():
+        raise HTTPException(status_code=404, detail="Course not found")
+    db.set_course_store_info(course_id, user["user_id"], body.price_cents, body.category, True, body.is_featured, body.preview_nodes)
+    return {"ok": True, "course_id": course_id, "price_cents": body.price_cents}
+
+@app.get("/api/store/browse")
+def browse_store(category: str = None, search: str = None, sort: str = "popular", page: int = 1, per_page: int = 24):
+    result = db.get_store_courses(category, search, sort, page, per_page)
+    # Merge catalog metadata into store listings
+    catalog = {}
+    if CATALOG_PATH.exists():
+        cat_data = json.loads(CATALOG_PATH.read_text())
+        for c in cat_data.get("courses", []):
+            catalog[c["id"]] = c
+    for course in result["courses"]:
+        meta = catalog.get(course["course_id"], {})
+        course["title"] = meta.get("title", course["course_id"])
+        course["description"] = meta.get("description", "")
+        course["topic"] = meta.get("topic", "")
+        course["difficulty"] = meta.get("difficulty", "beginner")
+        course["tags"] = meta.get("tags", [])
+        course["node_count"] = meta.get("node_count", 0)
+        course["theme"] = meta.get("theme")
+    return result
+
+@app.get("/api/store/featured")
+def get_featured():
+    with db.get_db() as conn:
+        rows = conn.execute("SELECT * FROM courses_store WHERE is_featured=1 AND is_published=1 ORDER BY total_purchases DESC LIMIT 12").fetchall()
+    featured = [dict(r) for r in rows]
+    # Merge catalog data
+    catalog = {}
+    if CATALOG_PATH.exists():
+        cat_data = json.loads(CATALOG_PATH.read_text())
+        for c in cat_data.get("courses", []):
+            catalog[c["id"]] = c
+    for course in featured:
+        meta = catalog.get(course["course_id"], {})
+        course["title"] = meta.get("title", course["course_id"])
+        course["description"] = meta.get("description", "")
+        course["difficulty"] = meta.get("difficulty", "beginner")
+        course["topic"] = meta.get("topic", "")
+        course["tags"] = meta.get("tags", [])
+        course["node_count"] = meta.get("node_count", 0)
+    return {"featured": featured}
+
+@app.post("/api/store/purchase/{course_id}")
+def purchase(course_id: str, authorization: str = Header(None)):
+    user = _require_user(authorization)
+    if db.has_purchased(user["user_id"], course_id):
+        return {"ok": True, "already_owned": True}
+    with db.get_db() as conn:
+        store_info = conn.execute("SELECT * FROM courses_store WHERE course_id=? AND is_published=1", (course_id,)).fetchone()
+    if not store_info:
+        raise HTTPException(status_code=404, detail="Course not in store")
+    price = store_info["price_cents"]
+    if price == 0:
+        result = db.purchase_course(user["user_id"], course_id, 0, "free")
+    else:
+        result = db.purchase_course(user["user_id"], course_id, price, "card")
+    return {"ok": True, **result}
+
+@app.get("/api/store/my-purchases")
+def my_purchases(authorization: str = Header(None)):
+    user = _require_user(authorization)
+    return {"purchases": db.get_user_purchases(user["user_id"])}
+
+@app.get("/api/store/check-access/{course_id}")
+def check_access(course_id: str, authorization: str = Header(None)):
+    user = _get_user(authorization)
+    with db.get_db() as conn:
+        store_info = conn.execute("SELECT * FROM courses_store WHERE course_id=?", (course_id,)).fetchone()
+    if not store_info:
+        return {"has_access": True, "reason": "not_in_store"}
+    if store_info["price_cents"] == 0:
+        return {"has_access": True, "reason": "free"}
+    if not user:
+        return {"has_access": False, "reason": "login_required", "price_cents": store_info["price_cents"]}
+    if user.get("role") in ("instructor", "admin"):
+        return {"has_access": True, "reason": "instructor"}
+    if db.has_purchased(user["user_id"], course_id):
+        return {"has_access": True, "reason": "purchased"}
+    return {"has_access": False, "reason": "purchase_required", "price_cents": store_info["price_cents"]}
+
+# --- Reviews ---
+
+class ReviewBody(BaseModel):
+    rating: int
+    text: str = None
+
+@app.post("/api/store/review/{course_id}")
+def review_course(course_id: str, body: ReviewBody, authorization: str = Header(None)):
+    user = _require_user(authorization)
+    return db.add_review(user["user_id"], course_id, body.rating, body.text)
+
+@app.get("/api/store/reviews/{course_id}")
+def get_reviews(course_id: str):
+    with db.get_db() as conn:
+        rows = conn.execute("""
+            SELECT r.*, u.username, u.display_name FROM reviews r
+            JOIN users u ON r.user_id=u.id WHERE r.course_id=? ORDER BY r.created_at DESC
+        """, (course_id,)).fetchall()
+    return {"reviews": [dict(r) for r in rows]}
+
+# --- Progress Tracking API ---
+
+class StartSessionBody(BaseModel):
+    course_id: str
+    start_node_id: str = None
+
+class ProgressBody(BaseModel):
+    session_id: int
+    course_id: str
+    node_id: str
+    node_type: str = None
+    event_type: str
+    event_data: dict = None
+    attributes: dict = None
+
+class CompleteSessionBody(BaseModel):
+    session_id: int
+    final_attributes: dict = None
+    completion_pct: float = 100
+
+@app.post("/api/progress/start")
+def start_play_session(body: StartSessionBody, authorization: str = Header(None)):
+    user = _get_user(authorization)
+    user_id = user["user_id"] if user else 0
+    session_id = db.start_session(user_id, body.course_id, body.start_node_id)
+    return {"session_id": session_id}
+
+@app.post("/api/progress/event")
+def record_event(body: ProgressBody, authorization: str = Header(None)):
+    user = _get_user(authorization)
+    user_id = user["user_id"] if user else 0
+    db.record_progress(body.session_id, user_id, body.course_id, body.node_id, body.node_type, body.event_type, body.event_data, body.attributes)
+    return {"ok": True}
+
+@app.post("/api/progress/complete")
+def complete_play_session(body: CompleteSessionBody, authorization: str = Header(None)):
+    db.complete_session(body.session_id, body.final_attributes, body.completion_pct)
+    return {"ok": True}
+
+# --- Analytics API (for instructors) ---
+
+@app.get("/api/analytics/course/{course_id}")
+def course_analytics(course_id: str, authorization: str = Header(None)):
+    user = _require_user(authorization)
+    if user["role"] not in ("instructor", "admin"):
+        raise HTTPException(status_code=403, detail="Instructor access required")
+    return db.get_course_analytics(course_id)
+
+@app.get("/api/analytics/student/{student_id}")
+def student_analytics(student_id: int, authorization: str = Header(None)):
+    user = _require_user(authorization)
+    if user["role"] not in ("instructor", "admin") and user["user_id"] != student_id:
+        raise HTTPException(status_code=403, detail="Access denied")
+    return db.get_student_analytics(student_id)
+
+@app.get("/api/analytics/dashboard")
+def instructor_dashboard(authorization: str = Header(None)):
+    user = _require_user(authorization)
+    if user["role"] not in ("instructor", "admin"):
+        raise HTTPException(status_code=403, detail="Instructor access required")
+    return db.get_instructor_dashboard(user["user_id"])
+
+# --- Enrollment API ---
+
+class EnrollBody(BaseModel):
+    instructor_id: int
+
+@app.post("/api/enroll/{course_id}")
+def enroll(course_id: str, body: EnrollBody, authorization: str = Header(None)):
+    user = _require_user(authorization)
+    if user["role"] not in ("student",):
+        raise HTTPException(status_code=403, detail="Only students can enroll in courses")
+    result = db.enroll_student(user["user_id"], body.instructor_id, course_id)
+    return {"ok": True, **result}
+
+@app.delete("/api/enroll/{course_id}")
+def unenroll(course_id: str, authorization: str = Header(None)):
+    user = _require_user(authorization)
+    db.unenroll_student(user["user_id"], course_id)
+    return {"ok": True}
+
+@app.get("/api/my-enrollments")
+def my_enrollments(authorization: str = Header(None)):
+    user = _require_user(authorization)
+    return {"enrollments": db.get_student_enrollments(user["user_id"])}
+
+@app.get("/api/instructor/students")
+def instructor_students(authorization: str = Header(None)):
+    user = _require_user(authorization)
+    if user["role"] not in ("instructor", "admin"):
+        raise HTTPException(status_code=403, detail="Instructor access required")
+    return {"students": db.get_instructor_enrollments(user["user_id"])}
+
+@app.get("/api/courses/{course_id}/enrollment-count")
+def enrollment_count(course_id: str):
+    return {"course_id": course_id, "enrolled": db.get_course_enrollment_count(course_id)}
+
+# --- Enrollment Codes ---
+
+class GenerateCodeBody(BaseModel):
+    course_id: str
+    max_uses: int = 100
+
+@app.post("/api/enrollment-codes/generate")
+def generate_code(body: GenerateCodeBody, authorization: str = Header(None)):
+    user = _require_user(authorization)
+    if user["role"] not in ("instructor", "admin"):
+        raise HTTPException(status_code=403, detail="Instructor access required")
+    result = db.create_enrollment_code(user["user_id"], body.course_id, body.max_uses)
+    return {"ok": True, **result}
+
+class RedeemCodeBody(BaseModel):
+    code: str
+
+@app.post("/api/enrollment-codes/redeem")
+def redeem_code(body: RedeemCodeBody, authorization: str = Header(None)):
+    user = _require_user(authorization)
+    if user["role"] not in ("student",):
+        raise HTTPException(status_code=403, detail="Only students can redeem enrollment codes")
+    try:
+        result = db.redeem_enrollment_code(body.code, user["user_id"])
+        return {"ok": True, **result}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.get("/api/enrollment-codes")
+def list_codes(authorization: str = Header(None)):
+    user = _require_user(authorization)
+    if user["role"] not in ("instructor", "admin"):
+        raise HTTPException(status_code=403, detail="Instructor access required")
+    return {"codes": db.get_instructor_codes(user["user_id"])}
+
+# --- Bulk publish (admin) ---
+
+@app.post("/api/store/bulk-publish")
+def bulk_publish(authorization: str = Header(None), price_cents: int = 99, category: str = None):
+    user = _require_user(authorization)
+    if user["role"] not in ("instructor", "admin"):
+        raise HTTPException(status_code=403, detail="Instructor access required")
+    catalog = json.loads(CATALOG_PATH.read_text()) if CATALOG_PATH.exists() else {"courses": []}
+    count = 0
+    for c in catalog.get("courses", []):
+        cid = c["id"]
+        topic = c.get("topic", category or "general")
+        db.set_course_store_info(cid, user["user_id"], price_cents, topic, True, False, 3)
+        count += 1
+    return {"ok": True, "published": count}
 
 # --- Static files (after API routes) ---
 app.mount("/", StaticFiles(directory=str(SRC_DIR), html=True), name="static")

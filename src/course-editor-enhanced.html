@@ -1736,6 +1736,7 @@
   <!-- Menu Bar (desktop) -->
   <div id="menubar">
     <div class="menu-title-area">
+      <a href="/" title="Back to CourseForge Home" style="font-size:16px;text-decoration:none;opacity:0.7;transition:opacity 0.15s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">🏠</a>
       <span style="font-size:16px">📚</span>
       <input id="courseTitleInput" type="text" placeholder="Course title...">
     </div>
@@ -7113,6 +7114,23 @@ function syncPlayerThemeUI() {
 
 // ── INIT ───────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  // ── Auth guard: professor/instructor only ──────────────────────────────────
+  (function() {
+    const token = localStorage.getItem('auth_token');
+    let _user = null;
+    try { _user = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+    if (!token || !_user) {
+      window.location.href = '/login.html?next=/course-editor-enhanced.html&msg=signin';
+      return;
+    }
+    const role = _user.role || '';
+    if (role !== 'instructor' && role !== 'professor' && role !== 'admin') {
+      window.location.href = '/index.html?msg=instructor_only';
+      return;
+    }
+  })();
+  // ── End auth guard ─────────────────────────────────────────────────────────
+
   canvas        = document.getElementById('canvas');
   world         = document.getElementById('world');
   svg           = document.getElementById('connections-svg');

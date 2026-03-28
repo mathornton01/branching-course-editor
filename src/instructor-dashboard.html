@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructor Dashboard - CourseForge</title>
+<style>
+:root {
+  --bg: #0a0b10;
+  --surface: #13151e;
+  --surface2: #1c1f2e;
+  --surface3: #252840;
+  --border: #2a2d45;
+  --text: #e8eaf4;
+  --text2: #8890ab;
+  --accent: #6366f1;
+  --accent2: #818cf8;
+  --green: #34d399;
+  --orange: #fb923c;
+  --red: #f87171;
+  --purple: #a78bfa;
+  --gold: #fbbf24;
+  --radius: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif; min-height: 100vh; }
+
+.topnav {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 0 24px; height: 56px; display: flex; align-items: center; gap: 20px;
+  position: sticky; top: 0; z-index: 100;
+}
+.topnav .logo { font-size: 18px; font-weight: 700; }
+.topnav .logo span { background: linear-gradient(135deg, var(--accent), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.topnav a { color: var(--text2); font-size: 14px; text-decoration: none; padding: 6px 14px; border-radius: 8px; }
+.topnav a:hover { background: var(--surface2); color: var(--text); }
+.topnav .spacer { flex: 1; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+/* ── Stat Cards ── */
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; display: flex; flex-direction: column; gap: 4px;
+}
+.stat-card .label { font-size: 12px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-card .value { font-size: 28px; font-weight: 700; }
+.stat-card .sub { font-size: 12px; color: var(--text2); }
+.stat-green .value { color: var(--green); }
+.stat-purple .value { color: var(--purple); }
+.stat-gold .value { color: var(--gold); }
+.stat-accent .value { color: var(--accent2); }
+
+/* ── Tabs ── */
+.tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.tab {
+  padding: 8px 16px; border-radius: 8px 8px 0 0; font-size: 14px;
+  color: var(--text2); cursor: pointer; border: none; background: none;
+  transition: all 0.15s;
+}
+.tab:hover { color: var(--text); background: var(--surface2); }
+.tab.active { color: var(--accent2); border-bottom: 2px solid var(--accent2); }
+
+/* ── Course List ── */
+.course-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.course-table th {
+  text-align: left; padding: 10px 12px; background: var(--surface);
+  border-bottom: 2px solid var(--border); color: var(--text2); font-weight: 600;
+}
+.course-table td { padding: 12px; border-bottom: 1px solid var(--border); }
+.course-table tr:hover td { background: var(--surface); }
+.course-table .title-cell { color: var(--accent2); cursor: pointer; max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.course-table .title-cell:hover { text-decoration: underline; }
+.mini-bar { display: inline-block; height: 6px; border-radius: 3px; background: var(--border); min-width: 80px; position: relative; }
+.mini-bar .fill { height: 100%; border-radius: 3px; position: absolute; left: 0; top: 0; }
+
+/* ── Analytics Panel ── */
+.analytics-panel {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; margin-bottom: 20px;
+}
+.analytics-panel h3 { font-size: 16px; margin-bottom: 16px; }
+
+.chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+@media (max-width: 768px) { .chart-row { grid-template-columns: 1fr; } }
+
+.chart-card {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px;
+}
+.chart-card h4 { font-size: 14px; color: var(--text2); margin-bottom: 12px; }
+
+/* Bar chart (CSS) */
+.bar-chart { display: flex; flex-direction: column; gap: 6px; }
+.bar-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.bar-label { width: 120px; text-align: right; color: var(--text2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-track { flex: 1; height: 18px; background: var(--surface3); border-radius: 4px; overflow: hidden; position: relative; }
+.bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; display: flex; align-items: center; padding-left: 6px; font-size: 11px; color: white; }
+.bar-count { width: 40px; text-align: right; font-size: 11px; color: var(--text2); }
+
+/* Decision pie (CSS circles) */
+.decision-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.decision-node { background: var(--surface2); border-radius: 8px; padding: 12px; }
+.decision-node h5 { font-size: 12px; color: var(--accent2); margin-bottom: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.choice-row { display: flex; align-items: center; gap: 6px; font-size: 12px; margin-bottom: 4px; }
+.choice-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.choice-pct { color: var(--text2); margin-left: auto; }
+
+/* Students table */
+.student-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.student-table th { text-align: left; padding: 8px 10px; background: var(--surface2); color: var(--text2); font-weight: 600; border-bottom: 1px solid var(--border); }
+.student-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+
+/* Path visualization */
+.path-list { max-height: 300px; overflow-y: auto; }
+.path-item { padding: 8px; border-bottom: 1px solid var(--border); font-size: 12px; font-family: monospace; color: var(--text2); }
+.path-item:hover { background: var(--surface2); }
+
+.btn {
+  padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text); font-size: 13px; cursor: pointer;
+}
+.btn:hover { border-color: var(--accent); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: white; }
+
+.login-prompt { text-align: center; padding: 80px 24px; }
+.login-prompt h2 { margin-bottom: 12px; }
+.login-prompt p { color: var(--text2); margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/" class="logo" style="text-decoration:none;color:inherit;">🎓 <span>CourseForge</span></a>
+  <a href="/">Home</a>
+  <a href="store.html">Store</a>
+  <a href="course-database.html">Browse</a>
+  <a href="course-editor-enhanced.html">Editor</a>
+  <span class="spacer"></span>
+  <span id="userName" style="font-size:13px;color:var(--text2)"></span>
+</nav>
+
+<div class="container">
+  <div id="loginPrompt" class="login-prompt" style="display:none">
+    <h2>📊 Instructor Dashboard</h2>
+    <p>Sign in as an instructor to view your course analytics</p>
+    <button class="btn btn-primary" onclick="window.location='store.html'">Go to Store to Sign In</button>
+  </div>
+
+  <div id="dashboard" style="display:none">
+    <h1 style="font-size:24px;margin-bottom:20px">📊 Instructor Dashboard</h1>
+
+    <!-- Overview stats -->
+    <div class="stat-row" id="statsRow"></div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="courses" onclick="switchTab('courses', this)">My Courses</button>
+      <button class="tab" data-tab="analytics" onclick="switchTab('analytics', this)">Course Analytics</button>
+      <button class="tab" data-tab="students" onclick="switchTab('students', this)">Recent Students</button>
+    </div>
+
+    <!-- Courses tab -->
+    <div class="tab-content" id="tab-courses">
+      <table class="course-table" id="courseTable">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Price</th>
+            <th>Students</th>
+            <th>Revenue</th>
+            <th>Rating</th>
+            <th>Completion</th>
+            <th>Sessions</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="courseTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Analytics tab -->
+    <div class="tab-content" id="tab-analytics" style="display:none">
+      <div style="margin-bottom:16px">
+        <select id="analyticsCourseSelect" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-size:14px"></select>
+      </div>
+      <div id="analyticsContent"></div>
+    </div>
+
+    <!-- Students tab -->
+    <div class="tab-content" id="tab-students" style="display:none">
+      <div id="studentsContent"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = '';
+let authToken = localStorage.getItem('auth_token');
+let currentUser = null;
+let dashData = null;
+
+function switchTab(name, el) {
+  document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).style.display = 'block';
+  if (el) el.classList.add('active');
+}
+
+function formatPrice(cents) {
+  if (!cents) return 'Free';
+  return '$' + (cents / 100).toFixed(2);
+}
+
+const CHOICE_COLORS = ['#6366f1','#34d399','#fb923c','#f87171','#a78bfa','#fbbf24','#f472b6','#38bdf8'];
+
+async function loadDashboard() {
+  if (!authToken) { document.getElementById('loginPrompt').style.display = 'block'; return; }
+
+  try {
+    // Verify user
+    const meResp = await fetch(API + '/api/auth/me', {headers: {'Authorization': 'Bearer ' + authToken}});
+    if (!meResp.ok) { document.getElementById('loginPrompt').style.display = 'block'; return; }
+    currentUser = await meResp.json();
+    document.getElementById('userName').textContent = currentUser.display_name || currentUser.username;
+
+    if (currentUser.role !== 'instructor' && currentUser.role !== 'admin') {
+      document.getElementById('loginPrompt').innerHTML = '<h2>📊 Instructor Dashboard</h2><p>Your account is a student account. Switch to instructor to access analytics.</p>';
+      document.getElementById('loginPrompt').style.display = 'block';
+      return;
+    }
+
+    // Load dashboard data
+    const resp = await fetch(API + '/api/analytics/dashboard', {headers: {'Authorization': 'Bearer ' + authToken}});
+    dashData = await resp.json();
+
+    document.getElementById('dashboard').style.display = 'block';
+    renderStats();
+    renderCourseTable();
+    renderAnalyticsSelect();
+  } catch(e) {
+    document.getElementById('loginPrompt').innerHTML = '<h2>Error</h2><p>Failed to load dashboard</p>';
+    document.getElementById('loginPrompt').style.display = 'block';
+  }
+}
+
+function renderStats() {
+  const d = dashData;
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-card stat-accent">
+      <span class="label">Total Courses</span>
+      <span class="value">${d.total_courses}</span>
+    </div>
+    <div class="stat-card stat-green">
+      <span class="label">Total Revenue</span>
+      <span class="value">$${(d.total_revenue_cents / 100).toFixed(2)}</span>
+    </div>
+    <div class="stat-card stat-purple">
+      <span class="label">Total Students</span>
+      <span class="value">${d.total_purchases}</span>
+    </div>
+    <div class="stat-card stat-gold">
+      <span class="label">Published</span>
+      <span class="value">${d.courses.filter(c => c.is_published).length}</span>
+      <span class="sub">of ${d.total_courses} courses</span>
+    </div>
+  `;
+}
+
+function renderCourseTable() {
+  const tbody = document.getElementById('courseTableBody');
+  tbody.innerHTML = dashData.courses.map(c => {
+    const compPct = c.avg_completion || 0;
+    const compColor = compPct > 70 ? 'var(--green)' : compPct > 40 ? 'var(--orange)' : 'var(--red)';
+    return `
+      <tr>
+        <td class="title-cell" onclick="viewCourseAnalytics('${c.course_id}')">${c.course_id}</td>
+        <td>${formatPrice(c.price_cents)}</td>
+        <td>${c.total_purchases}</td>
+        <td>$${(c.total_revenue_cents / 100).toFixed(2)}</td>
+        <td>⭐ ${c.avg_rating ? c.avg_rating.toFixed(1) : 'N/A'}</td>
+        <td>
+          <div class="mini-bar" style="width:100px">
+            <div class="fill" style="width:${compPct}%;background:${compColor}"></div>
+          </div>
+          <span style="font-size:11px;color:var(--text2);margin-left:4px">${compPct}%</span>
+        </td>
+        <td>${c.total_sessions}</td>
+        <td>
+          <button class="btn" style="font-size:11px;padding:4px 8px" onclick="viewCourseAnalytics('${c.course_id}')">📊</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function renderAnalyticsSelect() {
+  const select = document.getElementById('analyticsCourseSelect');
+  select.innerHTML = '<option value="">Select a course...</option>' +
+    dashData.courses.map(c => `<option value="${c.course_id}">${c.course_id}</option>`).join('');
+  select.addEventListener('change', () => {
+    if (select.value) loadCourseAnalytics(select.value);
+  });
+}
+
+async function viewCourseAnalytics(courseId) {
+  switchTab('analytics', document.querySelector('[data-tab="analytics"]'));
+  document.getElementById('analyticsCourseSelect').value = courseId;
+  await loadCourseAnalytics(courseId);
+}
+
+async function loadCourseAnalytics(courseId) {
+  const container = document.getElementById('analyticsContent');
+  container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">Loading analytics...</div>';
+
+  try {
+    const resp = await fetch(API + '/api/analytics/course/' + courseId, {headers: {'Authorization': 'Bearer ' + authToken}});
+    const data = await resp.json();
+    renderCourseAnalytics(courseId, data);
+  } catch(e) {
+    container.innerHTML = '<div style="color:var(--red)">Failed to load analytics</div>';
+  }
+}
+
+function renderCourseAnalytics(courseId, data) {
+  const container = document.getElementById('analyticsContent');
+
+  // Stats row
+  const statsHtml = `
+    <div class="stat-row">
+      <div class="stat-card stat-accent"><span class="label">Total Sessions</span><span class="value">${data.total_sessions}</span></div>
+      <div class="stat-card stat-green"><span class="label">Completed</span><span class="value">${data.completed_sessions}</span><span class="sub">${data.completion_rate}% completion rate</span></div>
+      <div class="stat-card stat-purple"><span class="label">Avg Time</span><span class="value">${Math.round(data.avg_time_seconds/60)}m</span></div>
+      <div class="stat-card stat-gold"><span class="label">Avg Progress</span><span class="value">${data.avg_completion_pct}%</span></div>
+    </div>
+  `;
+
+  // Node visits chart
+  const maxVisits = Math.max(...data.node_visits.map(n => n.visits), 1);
+  const nodeChartHtml = data.node_visits.slice(0, 15).map(n => `
+    <div class="bar-row">
+      <span class="bar-label" title="${n.node_id}">${n.node_id}</span>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${(n.visits/maxVisits*100)}%;background:var(--accent)">${n.visits}</div>
+      </div>
+      <span class="bar-count">${n.unique_users} users</span>
+    </div>
+  `).join('');
+
+  // Decision distribution
+  let decisionHtml = '';
+  for (const [nodeId, choices] of Object.entries(data.decision_distribution || {})) {
+    const total = Object.values(choices).reduce((a,b) => a+b, 0);
+    const choiceEntries = Object.entries(choices).sort((a,b) => b[1]-a[1]);
+    decisionHtml += `
+      <div class="decision-node">
+        <h5>${nodeId}</h5>
+        ${choiceEntries.map(([choice, count], i) => `
+          <div class="choice-row">
+            <span class="choice-dot" style="background:${CHOICE_COLORS[i % CHOICE_COLORS.length]}"></span>
+            <span>${choice}</span>
+            <span class="choice-pct">${Math.round(count/total*100)}%</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  // Attribute outcomes
+  let attrHtml = '';
+  if (data.avg_final_attributes && Object.keys(data.avg_final_attributes).length > 0) {
+    const maxAttr = Math.max(...Object.values(data.avg_final_attributes), 1);
+    attrHtml = Object.entries(data.avg_final_attributes).map(([attr, val]) => `
+      <div class="bar-row">
+        <span class="bar-label">${attr}</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${(val/maxAttr*100)}%;background:var(--purple)">${val}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Path analysis
+  let pathHtml = data.common_paths.map(p => `<div class="path-item">${p.path}</div>`).join('');
+
+  // Recent students
+  let recentHtml = '';
+  if (data.recent_students.length > 0) {
+    recentHtml = `
+      <table class="student-table">
+        <thead><tr><th>Student</th><th>Started</th><th>Last Active</th><th>Nodes</th><th>Progress</th><th>Completed</th></tr></thead>
+        <tbody>
+          ${data.recent_students.map(s => `
+            <tr>
+              <td>${s.display_name || s.username || 'Anonymous'}</td>
+              <td>${new Date(s.started_at).toLocaleDateString()}</td>
+              <td>${new Date(s.last_active).toLocaleDateString()}</td>
+              <td>${s.nodes_visited}</td>
+              <td>${s.completion_pct}%</td>
+              <td>${s.completed_at ? '✅' : '⏳'}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  }
+
+  container.innerHTML = `
+    ${statsHtml}
+    <div class="chart-row">
+      <div class="chart-card">
+        <h4>🔥 Node Visit Frequency</h4>
+        <div class="bar-chart">${nodeChartHtml || '<p style="color:var(--text2)">No data yet</p>'}</div>
+      </div>
+      <div class="chart-card">
+        <h4>📊 Avg Final Attributes</h4>
+        <div class="bar-chart">${attrHtml || '<p style="color:var(--text2)">No data yet</p>'}</div>
+      </div>
+    </div>
+    ${Object.keys(data.decision_distribution || {}).length > 0 ? `
+      <div class="analytics-panel">
+        <h3>🔀 Decision Distribution</h3>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:12px">How students chose at each decision point</p>
+        <div class="decision-grid">${decisionHtml}</div>
+      </div>
+    ` : ''}
+    ${pathHtml ? `
+      <div class="analytics-panel">
+        <h3>🗺️ Student Paths</h3>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Most common paths through the course</p>
+        <div class="path-list">${pathHtml}</div>
+      </div>
+    ` : ''}
+    ${recentHtml ? `
+      <div class="analytics-panel">
+        <h3>👥 Recent Students</h3>
+        ${recentHtml}
+      </div>
+    ` : ''}
+  `;
+}
+
+loadDashboard();
+</script>
+</body>
+</html>
