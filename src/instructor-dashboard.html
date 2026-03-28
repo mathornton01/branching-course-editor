@@ -132,13 +132,14 @@ body { background: var(--bg); color: var(--text); font-family: -apple-system, Bl
 <body>
 
 <nav class="topnav">
-  <a href="/" class="logo" style="text-decoration:none;color:inherit;">🎓 <span>CourseForge</span></a>
-  <a href="/">Home</a>
+  <a href="index.html" class="logo" style="text-decoration:none;color:inherit;">🎓 <span>CourseForge</span></a>
+  <a href="index.html">Home</a>
   <a href="store.html">Store</a>
   <a href="course-database.html">Browse</a>
   <a href="course-editor-enhanced.html">Editor</a>
   <span class="spacer"></span>
   <span id="userName" style="font-size:13px;color:var(--text2)"></span>
+  <a href="#" id="logoutBtn" onclick="doLogout();return false;" style="display:none;color:var(--red);font-size:13px;">🚪 Sign Out</a>
 </nav>
 
 <div class="container">
@@ -224,6 +225,7 @@ async function loadDashboard() {
     if (!meResp.ok) { document.getElementById('loginPrompt').style.display = 'block'; return; }
     currentUser = await meResp.json();
     document.getElementById('userName').textContent = currentUser.display_name || currentUser.username;
+    document.getElementById('logoutBtn').style.display = 'inline';
 
     if (currentUser.role !== 'instructor' && currentUser.role !== 'admin') {
       document.getElementById('loginPrompt').innerHTML = '<h2>📊 Instructor Dashboard</h2><p>Your account is a student account. Switch to instructor to access analytics.</p>';
@@ -439,6 +441,12 @@ function renderCourseAnalytics(courseId, data) {
       </div>
     ` : ''}
   `;
+}
+
+function doLogout() {
+  localStorage.removeItem('auth_token');
+  localStorage.removeItem('auth_user');
+  window.location.href = 'login.html';
 }
 
 loadDashboard();

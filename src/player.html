@@ -1477,7 +1477,7 @@ const tracker = {
       });
       const data = await r.json();
       this.sessionId = data.session_id;
-    } catch(e) { console.log('Tracking: start failed', e); }
+    } catch(e) { /* tracking is best-effort, silently ignore */ }
   },
 
   async recordEvent(courseId, nodeId, nodeType, eventType, eventData) {

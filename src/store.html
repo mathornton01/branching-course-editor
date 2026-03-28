@@ -316,9 +316,9 @@ a:hover { text-decoration: underline; }
 
 <!-- Top Navigation -->
 <nav class="topnav">
-  <a href="/" class="logo" style="text-decoration:none;color:inherit;">🎓 <span>CourseForge</span></a>
+  <a href="index.html" class="logo" style="text-decoration:none;color:inherit;">🎓 <span>CourseForge</span></a>
   <div class="nav-links">
-    <a href="/">Home</a>
+    <a href="index.html">Home</a>
     <a href="store.html" class="active">Store</a>
     <a href="course-database.html">Browse All</a>
     <a href="player.html">Player</a>
@@ -507,11 +507,14 @@ function hideAuth() {
 }
 
 async function submitAuth() {
-  const email = document.getElementById('authEmail').value;
+  const email = document.getElementById('authEmail').value.trim();
   const password = document.getElementById('authPassword').value;
   const errEl = document.getElementById('authError');
+  const btn = document.getElementById('authSubmit');
   if (!email || !password) { errEl.textContent = 'Please fill in all fields'; errEl.style.display = 'block'; return; }
 
+  btn.disabled = true;
+  btn.textContent = authMode === 'login' ? 'Signing in…' : 'Creating account…';
   try {
     let resp;
     if (authMode === 'login') {
@@ -521,7 +524,7 @@ async function submitAuth() {
         body: JSON.stringify({login: email, password})
       });
     } else {
-      const username = document.getElementById('authUsername').value;
+      const username = document.getElementById('authUsername').value.trim();
       const role = document.getElementById('authRole').value;
       if (!username) { errEl.textContent = 'Username required'; errEl.style.display = 'block'; return; }
       resp = await fetch(API + '/api/auth/register', {
@@ -536,11 +539,19 @@ async function submitAuth() {
     currentUser = data.user;
     localStorage.setItem('auth_token', authToken);
     localStorage.setItem('auth_user', JSON.stringify(currentUser));
+    // Clear form fields
+    document.getElementById('authEmail').value = '';
+    document.getElementById('authPassword').value = '';
+    const un = document.getElementById('authUsername');
+    if (un) un.value = '';
     hideAuth();
     updateNav();
     showToast('Welcome, ' + currentUser.display_name + '!');
   } catch (e) {
     errEl.textContent = 'Network error'; errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = authMode === 'login' ? 'Sign In' : 'Create Account';
   }
 }
 
@@ -562,7 +573,7 @@ function updateNav() {
       <div class="user-avatar" onclick="this.querySelector('.user-menu').classList.toggle('show')">
         ${initial}
         <div class="user-menu">
-          <a href="/">🏠 Home</a>
+          <a href="index.html">🏠 Home</a>
           <a href="#" onclick="showMyPurchases();return false;">📚 My Courses</a>
           ${currentUser.role === 'instructor' ? '<a href="/course-editor-enhanced.html">✏️ Editor</a>' : ''}
           ${currentUser.role === 'instructor' ? '<a href="/instructor-dashboard.html">📊 Dashboard</a>' : ''}
@@ -817,6 +828,9 @@ function playCourse(courseId) {
 
 async function purchaseCourse(courseId, price) {
   if (!currentUser) { showAuth('login'); return; }
+  // Disable the purchase button to prevent double-clicks
+  const btn = document.querySelector(`button[onclick*="purchaseCourse('${courseId}'"]`);
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Processing…'; }
   try {
     const resp = await fetch(API + '/api/store/purchase/' + courseId, {
       method: 'POST',
@@ -828,25 +842,37 @@ async function purchaseCourse(courseId, price) {
       showDetail(courseId); // Refresh
     } else {
       showToast(data.detail || 'Purchase failed', 'error');
+      if (btn) { btn.disabled = false; btn.textContent = '🛒 Buy for ' + formatPrice(price); }
     }
   } catch(e) {
     showToast('Network error', 'error');
+    if (btn) { btn.disabled = false; btn.textContent = '🛒 Buy for ' + formatPrice(price); }
   }
 }
 
 async function submitReview(courseId) {
   const rating = parseInt(document.getElementById('reviewRating').value);
-  const text = document.getElementById('reviewText').value;
+  const text = document.getElementById('reviewText').value.trim();
+  if (!text) { showToast('Please write a review before submitting', 'error'); return; }
+  const btn = document.querySelector('.btn-small.btn-primary[onclick*="submitReview"]');
+  if (btn) { btn.disabled = true; btn.textContent = '⏳ Submitting…'; }
   try {
-    await fetch(API + '/api/store/review/' + courseId, {
+    const resp = await fetch(API + '/api/store/review/' + courseId, {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
       body: JSON.stringify({rating, text})
     });
+    if (!resp.ok) {
+      const data = await resp.json().catch(() => ({}));
+      showToast(data.detail || 'Failed to submit review', 'error');
+      if (btn) { btn.disabled = false; btn.textContent = 'Submit'; }
+      return;
+    }
     showToast('Review submitted!');
     showDetail(courseId);
   } catch(e) {
     showToast('Failed to submit review', 'error');
+    if (btn) { btn.disabled = false; btn.textContent = 'Submit'; }
   }
 }
 
