@@ -549,8 +549,8 @@ function logout() {
   currentUser = null;
   localStorage.removeItem('auth_token');
   localStorage.removeItem('auth_user');
-  updateNav();
   showToast('Signed out');
+  setTimeout(() => { window.location.href = 'login.html'; }, 800);
 }
 
 function updateNav() {
@@ -827,7 +827,7 @@ async function purchaseCourse(courseId, price) {
       showToast(data.already_owned ? 'You already own this course!' : 'Purchase complete! Enjoy the course.');
       showDetail(courseId); // Refresh
     } else {
-      showToast('Purchase failed', 'error');
+      showToast(data.detail || 'Purchase failed', 'error');
     }
   } catch(e) {
     showToast('Network error', 'error');
