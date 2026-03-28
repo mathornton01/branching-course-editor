@@ -78,9 +78,66 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 24px;
-      animation: fadeIn 0.25s ease;
+      animation: slideInRight 0.28s cubic-bezier(0.22,1,0.36,1);
     }
+    .node-card.slide-back {
+      animation: slideInLeft 0.28s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes slideInRight { from { opacity:0; transform:translateX(32px) scale(0.98); } to { opacity:1; transform:translateX(0) scale(1); } }
+    @keyframes slideInLeft  { from { opacity:0; transform:translateX(-32px) scale(0.98); } to { opacity:1; transform:translateX(0) scale(1); } }
     @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── Toast ── */
+    #toast-container {
+      position: fixed;
+      top: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 8px 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      animation: toastIn 0.3s cubic-bezier(0.22,1,0.36,1) forwards;
+      white-space: nowrap;
+    }
+    .toast.hide { animation: toastOut 0.3s ease forwards; }
+    @keyframes toastIn  { from { opacity:0; transform:translateY(-16px) scale(0.92); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes toastOut { from { opacity:1; transform:translateY(0) scale(1); } to { opacity:0; transform:translateY(-12px) scale(0.92); } }
+
+    /* ── Keyboard hint badges ── */
+    .kbd-hint {
+      font-size: 0.65rem;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: monospace;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* ── Reading time pill ── */
+    .read-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
 
     .node-type-badge {
       display: inline-flex;
@@ -506,6 +563,9 @@
   <button class="fab fab-restart" onclick="confirmRestart()" title="Restart">🔄</button>
 </div>
 
+<!-- Toast container -->
+<div id="toast-container"></div>
+
 <script>
 // ── Globals ─────────────────────────────────────────────────────────────────
 let course = null;
@@ -534,6 +594,101 @@ const $ = id => document.getElementById(id);
 function md(text) {
   if (!text) return '';
   return marked.parse(text, { breaks: true });
+}
+
+// ── Toast notifications ───────────────────────────────────────────────────────
+function showToast(msg, duration = 2800) {
+  const tc = $('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  tc.appendChild(t);
+  setTimeout(() => {
+    t.classList.add('hide');
+    setTimeout(() => t.remove(), 350);
+  }, duration);
+}
+
+// ── Milestone tracking ────────────────────────────────────────────────────────
+let milestonesShown = new Set();
+function checkMilestone(pct) {
+  const marks = [
+    [25,  '🔥 25% done — keep it up!'],
+    [50,  '⚡ Halfway there — great progress!'],
+    [75,  '🚀 75%! Almost at the finish line!'],
+  ];
+  for (const [m, msg] of marks) {
+    if (pct >= m && !milestonesShown.has(m)) {
+      milestonesShown.add(m);
+      showToast(msg, 3200);
+    }
+  }
+}
+
+// ── Confetti burst ────────────────────────────────────────────────────────────
+function launchConfetti() {
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+
+  const COLORS = ['#5b7cf6','#8b5cf6','#22c55e','#f59e0b','#ef4444','#06b6d4','#f43f5e','#a3e635'];
+  const particles = Array.from({length: 100}, () => ({
+    x: Math.random() * canvas.width,
+    y: canvas.height * 0.3 + Math.random() * -canvas.height,
+    w: 8 + Math.random() * 10,
+    h: 4 + Math.random() * 6,
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    rot: Math.random() * Math.PI * 2,
+    vx: (Math.random() - 0.5) * 5,
+    vy: 1.5 + Math.random() * 4.5,
+    vr: (Math.random() - 0.5) * 0.14,
+    alpha: 1
+  }));
+
+  let frame = 0;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      if (frame > 120) p.alpha = Math.max(0, p.alpha - 0.015);
+    });
+    frame++;
+    if (frame < 210) requestAnimationFrame(draw);
+    else canvas.remove();
+  }
+  requestAnimationFrame(draw);
+}
+
+// ── Animated counter ──────────────────────────────────────────────────────────
+function animateCounter(el, target, duration = 900) {
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / duration);
+    const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    el.textContent = Math.round(ease * target);
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// ── Reading time ──────────────────────────────────────────────────────────────
+function readingTime(text) {
+  if (!text) return '';
+  const words = text.replace(/<[^>]+>/g, '').split(/\s+/).filter(Boolean).length;
+  const mins = Math.max(1, Math.round(words / 200));
+  return `⏱ ${mins} min read`;
 }
 
 function getConns(nodeId) {
@@ -659,6 +814,7 @@ function loadCourse(data) {
   }
 
   state = { nodeId: start.id, score: 0, history: [], vars: {}, attrs: initAttrs, visited: new Set(), quizAnswers: {}, questionsAnswered: 0 };
+  milestonesShown = new Set(); // reset milestone tracking for new course
 
   // Reset attr bar — show immediately if course defines attributes
   if (Object.keys(initAttrs).length > 0) {
@@ -712,6 +868,9 @@ function updateHUD(node) {
   const totalNodes = Object.keys(nodeMap).length;
   const pct = Math.min(99, Math.round((state.visited.size / totalNodes) * 100));
   $('progress-fill').style.width = pct + '%';
+
+  // Milestone celebrations
+  checkMilestone(pct);
 }
 
 // ── Rendering ─────────────────────────────────────────────────────────────────
@@ -753,6 +912,24 @@ function renderNode(node) {
       break;
     case 'end':
       el.innerHTML = buildEndCard(node);
+      // Launch confetti and animate stat counters on course completion
+      requestAnimationFrame(() => {
+        launchConfetti();
+        el.querySelectorAll('.stat-val[data-target]').forEach(sv => {
+          const target = parseInt(sv.dataset.target) || 0;
+          const suffix = sv.dataset.suffix || '';
+          const start = performance.now();
+          const dur = 900;
+          function tick(now) {
+            const t = Math.min(1, (now - start) / dur);
+            const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+            sv.textContent = Math.round(ease * target) + suffix;
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+        showToast('🏆 Course complete! Well done!', 4000);
+      });
       break;
     default:
       el.innerHTML = buildContentCard(node, conns);
@@ -807,16 +984,20 @@ function breadcrumb() {
 // ── Content card ───────────────────────────────────────────────────────────────
 function buildContentCard(node, conns) {
   const hasNext = conns.length === 1;
+  const rt = readingTime(node.content);
   return `
     <div class="node-card">
       ${breadcrumb()}
       ${badge(node)}
       <div class="node-title">${node.title || ''}</div>
+      ${rt ? `<div class="read-time">${rt}</div>` : ''}
       <div class="node-content">${md(node.content)}</div>
       ${buildAttrEffectsHtml(node)}
       ${hasNext ? `
       <div class="action-row">
-        <button class="btn btn-primary" id="next-btn">Continue →</button>
+        <button class="btn btn-primary" id="next-btn" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+          <span>Continue →</span><span class="kbd-hint">Space</span>
+        </button>
       </div>` : conns.length === 0 ? '' : `
       <div class="choices">
         ${conns.map((c, i) => `<button class="choice-btn content-multi-btn" data-to="${c.to}"><span class="choice-letter">${'ABCDEFGHIJ'[i]||i+1}</span><span>${c.label || nodeMap[c.to]?.title || 'Option ' + (i+1)}</span></button>`).join('')}
@@ -853,7 +1034,8 @@ function buildDecisionCard(node, conns) {
   const choices = options.map((o, i) => `
     <button class="choice-btn" data-to="${o.to}" data-score="${o.score}" data-idx="${i}">
       <span class="choice-letter">${letters[i] || i + 1}</span>
-      <span>${o.label}</span>
+      <span style="flex:1">${o.label}</span>
+      ${i < 9 ? `<span class="kbd-hint">${i + 1}</span>` : ''}
     </button>`).join('');
 
   return `
@@ -1259,19 +1441,19 @@ function buildEndCard(node) {
       ${attrHtml}
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-val">${state.questionsAnswered || 0}</div>
+          <div class="stat-val" data-target="${state.questionsAnswered || 0}">0</div>
           <div class="stat-label">Questions Answered</div>
         </div>
         <div class="stat-card">
-          <div class="stat-val">${state.score}</div>
+          <div class="stat-val" data-target="${state.score}">0</div>
           <div class="stat-label">Correct Answers</div>
         </div>
         <div class="stat-card">
-          <div class="stat-val">${state.visited.size}</div>
+          <div class="stat-val" data-target="${state.visited.size}">0</div>
           <div class="stat-label">Sections Explored</div>
         </div>
         <div class="stat-card">
-          <div class="stat-val">${state.questionsAnswered > 0 ? Math.round((state.score / state.questionsAnswered) * 100) : 0}%</div>
+          <div class="stat-val" data-target="${state.questionsAnswered > 0 ? Math.round((state.score / state.questionsAnswered) * 100) : 0}" data-suffix="%">0%</div>
           <div class="stat-label">Accuracy</div>
         </div>
       </div>
@@ -1553,6 +1735,33 @@ advance = function(nodeId, choiceLabel) {
   }
   _origAdvance(nodeId);
 };
+
+// ── Keyboard shortcuts ────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if ($('player').style.display === 'none') return;
+  // Don't intercept when focus is in an input
+  if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)) return;
+
+  const main = $('main-content');
+
+  // Space / Enter → click the primary continue button
+  if (e.key === ' ' || e.key === 'Enter') {
+    const nextBtn = main.querySelector('#next-btn');
+    if (nextBtn && !nextBtn.disabled) { e.preventDefault(); nextBtn.click(); return; }
+    const gateBtn = main.querySelector('#gate-btn');
+    if (gateBtn && !gateBtn.disabled) { e.preventDefault(); gateBtn.click(); return; }
+  }
+
+  // 1-9 → click nth choice button (decision or content multi-btn)
+  const num = parseInt(e.key);
+  if (num >= 1 && num <= 9) {
+    const choices = [...main.querySelectorAll('.choice-btn')];
+    if (choices[num - 1] && !choices[num - 1].disabled) {
+      e.preventDefault();
+      choices[num - 1].click();
+    }
+  }
+});
 
 // ── Auth gate: require login to access courses ──────────────────────────────────
 (function() {
