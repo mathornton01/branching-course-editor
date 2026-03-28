@@ -463,12 +463,83 @@
       main { padding: 32px 24px 100px; }
       .node-title { font-size: 1.6rem; }
     }
+
+    /* ── Ripple effect ── */
+    .btn, .choice-btn { position: relative; overflow: hidden; }
+    .ripple-wave {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      background: rgba(255,255,255,0.22);
+      transform: scale(0);
+      animation: rippleGrow 0.55s ease-out forwards;
+    }
+    @keyframes rippleGrow { to { transform: scale(4); opacity: 0; } }
+
+    /* ── Streak badge ── */
+    .streak-badge {
+      display: inline-flex; align-items: center; gap: 3px;
+      font-size: 0.78rem; font-weight: 700;
+      padding: 2px 9px; border-radius: 12px;
+      background: linear-gradient(135deg, #7c2d12, #ea580c);
+      color: #fef3c7;
+      animation: streakPulse 0.4s ease;
+    }
+    @keyframes streakPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.18)} }
+
+    /* ── Staggered card cascade ── */
+    .cascade-child {
+      animation: cascadeIn 0.36s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes cascadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+
+    /* ── Trophy bounce on end screen ── */
+    .trophy-anim { display: inline-block; animation: trophyBounce 0.8s cubic-bezier(0.36,0.07,0.19,0.97) both; }
+    @keyframes trophyBounce {
+      0%  { transform: translateY(0) scale(0.5); opacity: 0; }
+      40% { transform: translateY(-28px) scale(1.2); opacity: 1; }
+      60% { transform: translateY(-14px) scale(1.05); }
+      80% { transform: translateY(-22px) scale(1.12); }
+      100%{ transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* ── Stat cards stagger in on end screen ── */
+    .stat-card { opacity: 0; animation: statSlideUp 0.4s cubic-bezier(0.22,1,0.36,1) forwards; }
+    .stat-card:nth-child(1) { animation-delay: 0.2s; }
+    .stat-card:nth-child(2) { animation-delay: 0.32s; }
+    .stat-card:nth-child(3) { animation-delay: 0.44s; }
+    .stat-card:nth-child(4) { animation-delay: 0.56s; }
+    @keyframes statSlideUp { from { opacity:0; transform:translateY(22px) scale(0.93); } to { opacity:1; transform:none; } }
+
+    /* ── End screen gradient glow ── */
+    .end-screen {
+      background: radial-gradient(ellipse at 50% 0%, rgba(91,124,246,0.12) 0%, transparent 65%),
+                  radial-gradient(ellipse at 80% 80%, rgba(139,92,246,0.1) 0%, transparent 50%),
+                  var(--surface);
+    }
+
+    /* ── Particle canvas on landing ── */
+    #particle-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+    #landing { position: relative; }
+    #landing > *:not(#particle-canvas) { position: relative; z-index: 1; }
+
+    /* ── Correct/incorrect flash on quiz options ── */
+    .quiz-option.correct  { animation: flashGreen 0.5s ease; }
+    .quiz-option.incorrect{ animation: flashRed 0.5s ease; }
+    @keyframes flashGreen { 0%,100%{} 30%{ box-shadow: 0 0 18px rgba(34,197,94,0.6); } }
+    @keyframes flashRed   { 0%,100%{} 30%{ box-shadow: 0 0 18px rgba(239,68,68,0.6); } }
+
+    /* ── Pulsing glow on continue btn ── */
+    .btn-primary.pulse-glow { animation: btnGlow 1.4s ease-in-out infinite; }
+    @keyframes btnGlow {
+      0%,100% { box-shadow: 0 0 0 0 rgba(91,124,246,0); }
+      50% { box-shadow: 0 0 0 6px rgba(91,124,246,0.25); }
+    }
   </style>
 </head>
 <body>
 
 <!-- LANDING / FILE PICKER -->
 <div id="landing">
+  <canvas id="particle-canvas"></canvas>
   <div>
     <div style="font-size:3rem;margin-bottom:12px;">🎓</div>
     <h2>Course Player</h2>
@@ -543,6 +614,7 @@
     <div class="hud">
       <span>⭐ <span id="hud-score">0</span></span>
       <span>❓ <span id="hud-node">0</span> answered</span>
+      <span id="hud-streak" style="display:none;"></span>
     </div>
   </header>
   <div id="progress-bar"><div id="progress-fill"></div></div>
@@ -621,6 +693,7 @@ function checkMilestone(pct) {
     if (pct >= m && !milestonesShown.has(m)) {
       milestonesShown.add(m);
       showToast(msg, 3200);
+      if (typeof SFX !== 'undefined') SFX.milestone();
     }
   }
 }
@@ -813,7 +886,7 @@ function loadCourse(data) {
     data.attributes.forEach(a => { initAttrs[a.id || a.name] = a.default || 0; });
   }
 
-  state = { nodeId: start.id, score: 0, history: [], vars: {}, attrs: initAttrs, visited: new Set(), quizAnswers: {}, questionsAnswered: 0 };
+  state = { nodeId: start.id, score: 0, history: [], vars: {}, attrs: initAttrs, visited: new Set(), quizAnswers: {}, questionsAnswered: 0, streak: 0, maxStreak: 0 };
   milestonesShown = new Set(); // reset milestone tracking for new course
 
   // Reset attr bar — show immediately if course defines attributes
@@ -857,6 +930,7 @@ function goTo(nodeId) {
 
 function advance(nodeId) {
   if (!nodeId) return;
+  if (typeof SFX !== 'undefined') SFX.advance();
   setTimeout(() => goTo(nodeId), 80); // brief delay for animation
 }
 
@@ -929,11 +1003,21 @@ function renderNode(node) {
           requestAnimationFrame(tick);
         });
         showToast('🏆 Course complete! Well done!', 4000);
+        if (typeof SFX !== 'undefined') SFX.complete();
       });
       break;
     default:
       el.innerHTML = buildContentCard(node, conns);
   }
+
+  // Cascade animate card children
+  requestAnimationFrame(() => {
+    const card = el.querySelector('.node-card');
+    if (card) cascadeCard(card);
+    // Add pulse glow to primary continue button
+    const nb = el.querySelector('#next-btn');
+    if (nb) setTimeout(() => nb.classList.add('pulse-glow'), 400);
+  });
 
   // Auto-attach "Continue" for content/start/example nodes
   if (node.type === 'content' || node.type === 'start' || node.type === 'example') {
@@ -1055,6 +1139,8 @@ function attachChoiceHandlers(el, node, conns) {
       const score = parseInt(btn.dataset.score) || 0;
       state.score += score;
       state.vars['last_choice'] = btn.dataset.idx;
+      if (score > 0) updateStreak(true);
+      else if (score < 0) updateStreak(false);
       advance(to);
     });
   });
@@ -1133,6 +1219,8 @@ function attachAssessmentHandlers(el, node, conns) {
       if (!ans) return;
       const isCorrect = ans.correct;
       if (isCorrect) correct++;
+      updateStreak(isCorrect);
+      if (isCorrect) SFX && SFX.correct(); else SFX && SFX.incorrect();
 
       // Mark chosen and show correct
       el.querySelectorAll(`.quiz-option[data-qi="${qi}"]`).forEach(o => {
@@ -1435,7 +1523,7 @@ function buildEndCard(node) {
 
   return `
     <div class="node-card end-screen">
-      <div class="trophy">🏆</div>
+      <div class="trophy"><span class="trophy-anim">🏆</span></div>
       <h2>${node.title || 'Course Complete!'}</h2>
       <div class="node-content" style="text-align:left;margin-bottom:16px;">${md(node.content || 'You have reached the end of this course.')}</div>
       ${attrHtml}
@@ -1512,7 +1600,7 @@ function confirmRestart() {
   if (confirm('Restart from the beginning?')) {
     const nodes = course.nodes || [];
     const start = nodes.find(n => n.type === 'start' || n.subtype === 'start') || nodes[0];
-    state = { nodeId: start.id, score: 0, history: [], vars: {}, attrs: {}, visited: new Set(), quizAnswers: {}, questionsAnswered: 0 };
+    state = { nodeId: start.id, score: 0, history: [], vars: {}, attrs: {}, visited: new Set(), quizAnswers: {}, questionsAnswered: 0, streak: 0, maxStreak: 0 };
     $('attr-bar').style.display = 'none';
     $('attr-bar').innerHTML = '';
     goTo(start.id);
@@ -1790,6 +1878,160 @@ document.addEventListener('keydown', e => {
   }
   // Load catalog on landing
   fetchCatalog();
+})();
+
+// ── Sound effects (Web Audio API) ────────────────────────────────────────────
+const SFX = (function() {
+  let ctx;
+  function ac() {
+    if (!ctx) {
+      try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return null; }
+    }
+    return ctx;
+  }
+  function tone(freq, type, duration, gain, delay) {
+    try {
+      const c = ac(); if (!c) return;
+      const osc = c.createOscillator();
+      const g = c.createGain();
+      osc.connect(g); g.connect(c.destination);
+      osc.type = type || 'sine';
+      osc.frequency.value = freq;
+      const t = c.currentTime + (delay || 0);
+      g.gain.setValueAtTime(gain || 0.12, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+      osc.start(t); osc.stop(t + duration + 0.01);
+    } catch(e) {}
+  }
+  return {
+    correct()   { tone(880,'sine',0.18,0.12); tone(1320,'sine',0.15,0.1,0.08); },
+    incorrect() { tone(196,'sawtooth',0.25,0.1); },
+    advance()   { tone(660,'sine',0.09,0.06); },
+    complete()  { [523,659,784,1047].forEach((f,i) => tone(f,'sine',0.4,0.14,i*0.12)); },
+    streak()    { tone(1046,'sine',0.12,0.1); tone(1319,'sine',0.12,0.1,0.09); tone(1567,'sine',0.2,0.1,0.18); },
+    milestone() { tone(784,'sine',0.18,0.08); tone(988,'sine',0.2,0.08,0.1); },
+  };
+})();
+
+// ── Streak counter ────────────────────────────────────────────────────────────
+function updateStreak(isCorrect) {
+  if (isCorrect) {
+    state.streak = (state.streak || 0) + 1;
+    state.maxStreak = Math.max(state.maxStreak || 0, state.streak);
+  } else {
+    state.streak = 0;
+  }
+  const el = $('hud-streak');
+  if (!el) return;
+  if (state.streak >= 3) {
+    el.style.display = '';
+    const fires = state.streak >= 10 ? '🔥🔥🔥' : state.streak >= 5 ? '🔥🔥' : '🔥';
+    el.innerHTML = `<span class="streak-badge">${fires} ${state.streak}</span>`;
+  } else {
+    el.style.display = 'none';
+  }
+  if (state.streak === 3)  { showToast('🔥 3 in a row!', 2200); SFX.streak(); }
+  else if (state.streak === 5)  { showToast('🔥🔥 5 streak — hot!', 2200); SFX.streak(); }
+  else if (state.streak === 10) { showToast('🔥🔥🔥 On fire! 10 streak!', 3000); SFX.streak(); }
+}
+
+// ── Cascade card children in ──────────────────────────────────────────────────
+function cascadeCard(card) {
+  const skip = ['CANVAS'];
+  const kids = [...card.children].filter(c => !skip.includes(c.tagName));
+  kids.forEach((child, i) => {
+    child.style.animationDelay = (i * 60) + 'ms';
+    child.classList.add('cascade-child');
+    child.addEventListener('animationend', () => {
+      child.classList.remove('cascade-child');
+      child.style.animationDelay = '';
+    }, { once: true });
+  });
+}
+
+// ── Ripple effect on buttons ──────────────────────────────────────────────────
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.btn, .choice-btn');
+  if (!btn) return;
+  const wave = document.createElement('span');
+  wave.className = 'ripple-wave';
+  const rect = btn.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height) * 2.6;
+  wave.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;`;
+  btn.appendChild(wave);
+  wave.addEventListener('animationend', () => wave.remove());
+}, true);
+
+// ── Particle canvas (landing background) ─────────────────────────────────────
+(function initParticles() {
+  const canvas = document.getElementById('particle-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w = 0, h = 0;
+  const COLORS = [
+    [91,124,246], [139,92,246], [34,197,94], [245,158,11], [6,182,212]
+  ];
+  let particles = [];
+
+  function resize() {
+    const p = canvas.parentElement;
+    w = canvas.width = p.offsetWidth;
+    h = canvas.height = p.offsetHeight;
+  }
+
+  function mkP() {
+    const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+    return {
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: 1.2 + Math.random() * 2.2,
+      alpha: 0.18 + Math.random() * 0.45,
+      c
+    };
+  }
+
+  function draw() {
+    if (!document.getElementById('landing') || document.getElementById('landing').style.display === 'none') {
+      requestAnimationFrame(draw); return;
+    }
+    ctx.clearRect(0, 0, w, h);
+
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 110) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(91,124,246,${0.12 * (1 - d / 110)})`;
+          ctx.lineWidth = 0.6;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${p.alpha})`;
+      ctx.fill();
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -5) p.x = w + 5;
+      else if (p.x > w + 5) p.x = -5;
+      if (p.y < -5) p.y = h + 5;
+      else if (p.y > h + 5) p.y = -5;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  particles = Array.from({ length: 55 }, mkP);
+  new ResizeObserver(resize).observe(canvas.parentElement);
+  draw();
 })();
 </script>
 </body>
