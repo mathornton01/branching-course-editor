@@ -72,87 +72,49 @@ a:hover { text-decoration: underline; }
   justify-content: center;
 }
 
-/* Forest background scene */
+/* Forest background - realistic photo */
 .forest-scene {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  background: url('https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80') center/cover no-repeat;
 }
 
-/* Sky gradient */
+/* Dark overlay for text readability */
 .forest-scene::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg,
-    #0a1a12 0%,
-    #0e2818 20%,
-    #102e1a 40%,
-    #0d2215 70%,
-    #0b1a0e 100%);
-  z-index: 0;
-}
-
-/* Ground layer */
-.ground {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(180deg, transparent, rgba(15, 34, 19, 0.95) 30%, #0b1a0e);
-  z-index: 2;
-}
-
-/* Trees */
-.tree {
-  position: absolute;
-  bottom: 40px;
+    rgba(11, 26, 14, 0.55) 0%,
+    rgba(11, 26, 14, 0.4) 40%,
+    rgba(11, 26, 14, 0.6) 70%,
+    rgba(11, 26, 14, 0.92) 100%);
   z-index: 1;
 }
-.tree .trunk {
-  width: 12px;
-  background: linear-gradient(90deg, #3d2a15, #5c3f22, #3d2a15);
-  margin: 0 auto;
-  border-radius: 2px;
-}
-.tree .canopy {
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 40% 40%, #1e5a30, #164520 50%, #0e3018);
-  position: relative;
-}
-.tree .canopy::after {
+
+/* Subtle animated light rays through trees */
+.forest-scene::after {
   content: '';
   position: absolute;
-  inset: 4px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 60% 30%, rgba(40, 120, 60, 0.3), transparent 70%);
+  top: -20%;
+  left: 30%;
+  width: 40%;
+  height: 120%;
+  background: linear-gradient(180deg,
+    rgba(212, 168, 67, 0.08) 0%,
+    rgba(94, 201, 123, 0.04) 50%,
+    transparent 100%);
+  transform: skewX(-15deg);
+  z-index: 2;
+  animation: lightRay 8s ease-in-out infinite alternate;
 }
 
-.tree-1 { left: 3%; }
-.tree-1 .trunk { height: 70px; }
-.tree-1 .canopy { width: 80px; height: 90px; margin-left: -34px; }
-
-.tree-2 { left: 12%; }
-.tree-2 .trunk { height: 90px; }
-.tree-2 .canopy { width: 100px; height: 110px; margin-left: -44px; }
-
-.tree-3 { left: 25%; }
-.tree-3 .trunk { height: 60px; }
-.tree-3 .canopy { width: 70px; height: 80px; margin-left: -29px; }
-
-.tree-4 { right: 3%; }
-.tree-4 .trunk { height: 80px; }
-.tree-4 .canopy { width: 90px; height: 100px; margin-left: -39px; }
-
-.tree-5 { right: 15%; }
-.tree-5 .trunk { height: 95px; }
-.tree-5 .canopy { width: 110px; height: 120px; margin-left: -49px; }
-
-.tree-6 { right: 28%; }
-.tree-6 .trunk { height: 55px; }
-.tree-6 .canopy { width: 65px; height: 75px; margin-left: -27px; }
+@keyframes lightRay {
+  0% { opacity: 0.4; transform: skewX(-15deg) translateX(-20px); }
+  100% { opacity: 0.8; transform: skewX(-12deg) translateX(20px); }
+}
 
 /* Fireflies / light particles */
 .firefly {
@@ -176,53 +138,6 @@ a:hover { text-decoration: underline; }
   25% { transform: translate(10px, -15px) scale(1.2); opacity: 1; }
   50% { transform: translate(-5px, -25px) scale(0.8); opacity: 0.6; }
   75% { transform: translate(15px, -10px) scale(1.1); opacity: 0.9; }
-}
-
-/* Birds */
-.bird {
-  position: absolute;
-  z-index: 4;
-  animation: fly 12s linear infinite;
-}
-.bird::before, .bird::after {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 3px;
-  background: #4a7a5a;
-  border-radius: 50%;
-}
-.bird::before { transform: rotate(-25deg); transform-origin: right center; animation: flap 0.6s ease-in-out infinite; }
-.bird::after { left: 16px; transform: rotate(25deg); transform-origin: left center; animation: flap 0.6s ease-in-out infinite reverse; }
-
-.bird-1 { top: 15%; left: -40px; animation-duration: 14s; }
-.bird-2 { top: 22%; left: -60px; animation-delay: 4s; animation-duration: 16s; }
-.bird-3 { top: 12%; left: -30px; animation-delay: 8s; animation-duration: 13s; }
-
-@keyframes fly { 0% { transform: translateX(0); } 100% { transform: translateX(calc(100vw + 80px)); } }
-@keyframes flap { 0%, 100% { transform: rotate(-25deg); } 50% { transform: rotate(-45deg); } }
-
-/* Leaves falling */
-.leaf {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: var(--leaf);
-  border-radius: 0 50% 50% 50%;
-  opacity: 0.4;
-  animation: fall 10s linear infinite;
-  z-index: 3;
-}
-.leaf:nth-child(1) { left: 15%; animation-delay: 0s; animation-duration: 12s; }
-.leaf:nth-child(2) { left: 40%; animation-delay: 3s; animation-duration: 10s; width: 8px; height: 8px; }
-.leaf:nth-child(3) { left: 65%; animation-delay: 6s; animation-duration: 14s; }
-.leaf:nth-child(4) { left: 85%; animation-delay: 2s; animation-duration: 11s; width: 7px; height: 7px; }
-
-@keyframes fall {
-  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.4; }
-  90% { opacity: 0.3; }
-  100% { transform: translateY(500px) rotate(360deg); opacity: 0; }
 }
 
 .hero-content {
@@ -468,24 +383,6 @@ function renderHero() {
       <div class="firefly"></div>
       <div class="firefly"></div>
       <div class="firefly"></div>
-
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-      <div class="leaf"></div>
-
-      <div class="bird bird-1"></div>
-      <div class="bird bird-2"></div>
-      <div class="bird bird-3"></div>
-
-      <div class="tree tree-1"><div class="canopy"></div><div class="trunk"></div></div>
-      <div class="tree tree-2"><div class="canopy"></div><div class="trunk"></div></div>
-      <div class="tree tree-3"><div class="canopy"></div><div class="trunk"></div></div>
-      <div class="tree tree-4"><div class="canopy"></div><div class="trunk"></div></div>
-      <div class="tree tree-5"><div class="canopy"></div><div class="trunk"></div></div>
-      <div class="tree tree-6"><div class="canopy"></div><div class="trunk"></div></div>
-
-      <div class="ground"></div>
     </div>
   `;
 
