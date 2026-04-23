@@ -588,7 +588,7 @@ async function loadMyCourses() {
       return;
     }
     list.innerHTML = courses.map(c => `
-      <a href="/player.html?id=${c.id}" class="enroll-item">
+      <a href="/player.html?course=${c.id}" class="enroll-item">
         <div class="enroll-icon">&gt;</div>
         <div class="enroll-info">
           <h4>${escHtml(c.title || c.id)}</h4>
@@ -610,7 +610,7 @@ async function loadFeaturedCourses() {
     const courses = (data.courses || []).slice(0, 8);
     if (!courses.length) { grid.innerHTML = '<div class="empty-state">No courses yet.</div>'; return; }
     grid.innerHTML = courses.map(c => `
-      <a href="/player.html?id=${c.id}" class="featured-course">
+      <a href="/player.html?course=${c.id}" class="featured-course">
         <div class="fc-tag">${c.topic || 'General'} &bull; ${c.difficulty || 'beginner'}</div>
         <h4>${escHtml(c.title)}</h4>
         <div class="fc-meta">
@@ -670,7 +670,7 @@ async function loadEnrollments() {
       return;
     }
     list.innerHTML = enrollments.map(e => `
-      <a href="/player.html?id=${e.course_id}" class="enroll-item">
+      <a href="/player.html?course=${e.course_id}" class="enroll-item">
         <div class="enroll-icon">&gt;</div>
         <div class="enroll-info">
           <h4>${escHtml(titleMap[e.course_id] || e.course_id)}</h4>

@@ -1887,7 +1887,8 @@ document.addEventListener('keydown', e => {
 (async () => {
   const params = new URLSearchParams(location.search);
   const url = params.get('url');
-  const courseId = params.get('course');
+  // Accept ?course=, ?id=, or ?courseId= for robustness
+  const courseId = params.get('course') || params.get('id') || params.get('courseId');
   if (courseId) {
     try { await playCourse(courseId); } catch {}
   } else if (url) {
