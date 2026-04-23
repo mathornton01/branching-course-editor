@@ -6,13 +6,16 @@ PUT    /api/courses/<id>   -> save/upsert course to Supabase course_content
 DELETE /api/courses/<id>   -> delete user course from Supabase
 
 Static seed courses (public/courses/*.json) are read-only fallbacks.
-User edits are always persisted to Supabase.
+User edits are always persisted to Supabase. If the request carries an
+Authorization: Bearer <token> header, the upsert is stamped with the
+authenticated user_id so /api/my-courses can list "your" courses.
 """
 
 from http.server import BaseHTTPRequestHandler
 import json
 import os
 import sys
+from datetime import datetime, timezone
 from urllib.parse import urlparse
 
 # Add the project root (two levels up from api/courses/) so lib/ is importable.
@@ -38,6 +41,35 @@ def _course_id_from_path(path):
     parsed = urlparse(path).path.rstrip("/")
     parts = parsed.split("/")
     return parts[-1] if parts else None
+
+
+def _bearer_token(handler):
+    auth = handler.headers.get("Authorization", "")
+    if auth.lower().startswith("bearer "):
+        return auth[7:].strip()
+    return None
+
+
+def _user_id_from_token(supabase, token):
+    if not token:
+        return None
+    try:
+        result = supabase.table("auth_tokens").select(
+            "user_id,expires_at"
+        ).eq("token", token).limit(1).execute()
+    except Exception:
+        return None
+    if not result.data:
+        return None
+    row = result.data[0]
+    exp = row.get("expires_at")
+    if exp:
+        try:
+            if datetime.fromisoformat(exp.replace("Z", "+00:00")) < datetime.now(timezone.utc):
+                return None
+        except Exception:
+            pass
+    return row.get("user_id")
 
 
 class handler(BaseHTTPRequestHandler):
@@ -79,10 +111,14 @@ class handler(BaseHTTPRequestHandler):
 
         # Ensure the body's id matches the URL
         body["id"] = cid
+        token = _bearer_token(self)
 
         try:
             from lib.supabase_client import get_supabase
             supabase = get_supabase()
+
+            # Stamp with authenticated user when available.
+            user_id = _user_id_from_token(supabase, token) or body.get("user_id")
 
             record = {
                 "id": cid,
@@ -95,11 +131,12 @@ class handler(BaseHTTPRequestHandler):
                 "tags": body.get("tags") or [],
                 "content": body,
             }
-            if body.get("user_id"):
-                record["user_id"] = body["user_id"]
+            if user_id:
+                record["user_id"] = user_id
+                body["user_id"] = user_id  # echo into the stored content too
 
             supabase.table("course_content").upsert(record).execute()
-            _json_response(self, 200, {"saved": True, "id": cid})
+            _json_response(self, 200, {"saved": True, "id": cid, "user_id": user_id})
         except RuntimeError:
             _json_response(self, 503, {"error": "Supabase not configured — cannot save"})
         except Exception as e:
@@ -110,10 +147,17 @@ class handler(BaseHTTPRequestHandler):
         if not cid:
             _json_response(self, 400, {"error": "missing course id"})
             return
+        token = _bearer_token(self)
         try:
             from lib.supabase_client import get_supabase
             supabase = get_supabase()
-            supabase.table("course_content").delete().eq("id", cid).execute()
+
+            # Only allow deletion of the caller's own courses (when authed).
+            user_id = _user_id_from_token(supabase, token)
+            q = supabase.table("course_content").delete().eq("id", cid)
+            if user_id:
+                q = q.eq("user_id", user_id)
+            q.execute()
             _json_response(self, 200, {"deleted": cid})
         except RuntimeError:
             _json_response(self, 503, {"error": "Supabase not configured"})

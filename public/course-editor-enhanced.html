@@ -1716,6 +1716,7 @@
     @page { size: landscape; margin: 0.4in; }
   }
   </style>
+<script src="/silva-common.js"></script>
 </head>
 <body class="bg-gray-100 h-screen flex flex-col overflow-hidden">
 
@@ -5627,15 +5628,23 @@ async function saveToServer() {
   const id = courseData.id || ('course-' + Date.now());
   courseData.id = id;
   const flat = editorToFlat();
+  // Stamp with authenticated user so /api/my-courses can return it.
+  if (window.Silva && Silva.auth.user) {
+    flat.user_id = Silva.auth.user.id;
+    flat.author = Silva.auth.user.display_name || Silva.auth.user.username;
+  }
   showSaveToast('Saving…', '💾', 5000);
   try {
+    const headers = { 'Content-Type': 'application/json' };
+    if (window.Silva) Object.assign(headers, Silva.auth.authHeader());
     const r = await fetch(API_BASE + '/api/courses/' + id, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify(flat)
     });
     if (!r.ok) throw new Error('HTTP ' + r.status);
     showSaveToast('Saved to server ✓', '✅', 2500);
+    if (window.Silva && Silva.toast) Silva.toast.success('Course saved — will appear in My Courses.');
   } catch(e) {
     showSaveToast('Save failed: ' + e.message, '❌', 4000);
   }

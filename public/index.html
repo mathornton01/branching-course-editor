@@ -309,71 +309,56 @@ footer a { color: var(--accent2); }
   <a href="/manual.html">Docs</a> &bull;
   <a href="/store.html">Store</a> &bull;
   <a href="/player.html">Player</a> &bull;
-  <a href="/login.html">Sign In</a>
+  <a href="#" id="footer-signin">Sign In</a> &bull;
+  <a href="#" onclick="Silva.showHelpOverlay();return false;">Shortcuts</a>
 </footer>
 
-<!-- Bird chirping ambient audio (loops quietly) -->
-<audio id="bird-audio" loop preload="none">
-  <source src="https://cdn.freesound.org/previews/531/531015_10779090-lq.mp3" type="audio/mpeg">
-</audio>
+<script src="/silva-common.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  Silva.injectNavWidget('#nav-right');
+  document.getElementById('footer-signin')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (Silva.auth.isAuthenticated) Silva.auth.logout();
+    else Silva.openSignInModal('login');
+  });
+});
+</script>
 
 <script>
-const user = (() => { try { return JSON.parse(localStorage.getItem('auth_user')); } catch(e) { return null; } })();
-const token = localStorage.getItem('auth_token');
-const isProf = user && (user.role === 'instructor' || user.role === 'professor' || user.role === 'admin');
-const isStudent = user && user.role === 'student';
+const user = Silva.auth.user;
+const token = Silva.auth.token;
+const isProf = Silva.auth.isInstructor;
+const isStudent = Silva.auth.isStudent;
 
 // ── Nav: update with user info ──
+// Nav chip / sign-in buttons are rendered by Silva.injectNavWidget().
+// This only extends the primary nav-links with role-specific items.
 function renderNav() {
-  const nr = document.getElementById('nav-right');
   if (!user) return;
-  const initials = (user.display_name || user.username || '?').slice(0,2).toUpperCase();
-  const roleLabel = isProf ? 'Professor' : 'Student';
-  const roleCls = isProf ? 'professor' : 'student';
-  nr.innerHTML = `
-    <div class="user-chip">
-      <div class="user-avatar">${initials}</div>
-      <span>${user.display_name || user.username}</span>
-      <span class="role-badge ${roleCls}">${roleLabel}</span>
-    </div>
-    <button class="btn" onclick="logout()">Sign Out</button>
-  `;
+  const links = document.querySelector('.nav-links');
+  if (!links) return;
   if (isProf) {
-    const links = document.querySelector('.nav-links');
-    links.innerHTML += `
+    links.insertAdjacentHTML('beforeend', `
       <a href="/course-editor-enhanced.html">Editor</a>
       <a href="/instructor-dashboard.html">Dashboard</a>
-    `;
+      <a href="#" onclick="scrollToMyCourses();return false;">My Courses</a>
+    `);
   } else if (isStudent) {
-    const links = document.querySelector('.nav-links');
-    links.innerHTML += `<a href="/store.html">My Courses</a>`;
+    links.insertAdjacentHTML('beforeend', `<a href="#" onclick="scrollToMyCourses();return false;">My Courses</a>`);
   }
 }
 
-function logout() {
-  localStorage.removeItem('auth_token');
-  localStorage.removeItem('auth_user');
-  window.location.href = 'login.html';
+function scrollToMyCourses() {
+  const el = document.getElementById('my-courses-section');
+  if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 }
+
+function logout() { Silva.auth.logout(); }
 
 // ── Audio toggle ──
-let audioPlaying = false;
-function toggleAudio() {
-  const audio = document.getElementById('bird-audio');
-  const btn = document.getElementById('audio-btn');
-  if (!audio) return;
-  if (audioPlaying) {
-    audio.pause();
-    btn.textContent = '\u266A';
-    btn.title = 'Play forest sounds';
-  } else {
-    audio.volume = 0.15;
-    audio.play().catch(() => {});
-    btn.textContent = '\u23F8';
-    btn.title = 'Pause forest sounds';
-  }
-  audioPlaying = !audioPlaying;
-}
+// Ambient sound now lives in Silva.radio (silva-common.js).
+function toggleAudio() { Silva.radio.toggle(); }
 
 // ── Hero section ──
 function renderHero() {
@@ -407,7 +392,7 @@ function renderHero() {
           </div>
         </div>
       </div>`;
-    fetch('/api/catalog').then(r=>r.json()).then(d=>{
+    fetch('/api/courses').then(r=>r.json()).then(d=>{
       const el = document.getElementById('stat-courses');
       if (el) el.textContent = d.generated || d.courses?.length || '--';
     }).catch(()=>{});
@@ -476,9 +461,9 @@ async function renderMain() {
   } else if (isStudent) {
     main.innerHTML = `
       <div class="two-col">
-        <div>
-          <div class="section-hd"><span>My Enrollments</span><a href="/store.html" class="see-all">Find more &rarr;</a></div>
-          <div class="enroll-list" id="enrollment-list"><div class="empty-state"><div class="big">...</div>Loading enrollments...</div></div>
+        <div id="my-courses-section">
+          <div class="section-hd"><span>My Courses</span><a href="/store.html" class="see-all">Find more &rarr;</a></div>
+          <div class="enroll-list" id="my-courses-list"><div class="empty-state"><div class="big">...</div>Loading your courses...</div></div>
         </div>
         <div>
           <div class="section-hd"><span>Quick Actions</span></div>
@@ -521,7 +506,7 @@ async function renderMain() {
       <div class="section-hd" style="margin-top:8px;"><span>Discover Courses</span><a href="/store.html" class="see-all">See all &rarr;</a></div>
       <div class="featured-grid" id="featured-grid"></div>
     `;
-    loadEnrollments();
+    loadMyCourses();
     loadFeaturedCourses();
 
   } else if (isProf) {
@@ -565,6 +550,8 @@ async function renderMain() {
           <span class="card-tag tag-all">Everyone</span>
         </a>
       </div>
+      <div class="section-hd" id="my-courses-section"><span>My Courses</span><a href="/course-editor-enhanced.html" class="see-all">+ New course &rarr;</a></div>
+      <div class="enroll-list" id="my-courses-list" style="margin-bottom:24px;"><div class="empty-state"><div class="big">...</div>Loading your courses...</div></div>
       <div class="section-hd"><span>Enrollment Codes</span><a href="/instructor-dashboard.html" class="see-all">Dashboard &rarr;</a></div>
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:24px;">
         <div style="font-size:13px;color:var(--text2);margin-bottom:12px;">Generate a code your students can use to enroll in one of your courses.</div>
@@ -585,6 +572,32 @@ async function renderMain() {
     `;
     loadStudentsPreview();
     loadProfCourses();
+    loadMyCourses();
+  }
+}
+
+async function loadMyCourses() {
+  const list = document.getElementById('my-courses-list');
+  if (!list) return;
+  try {
+    const res = await Silva.apiFetch('/api/my-courses');
+    const data = await res.json();
+    const courses = data.courses || [];
+    if (!courses.length) {
+      list.innerHTML = `<div class="empty-state"><div class="big">--</div>No courses yet.<br>${Silva.auth.isInstructor ? '<a href="/course-editor-enhanced.html">Create your first course</a>' : '<a href="/store.html">Browse the store</a> to get started.'}</div>`;
+      return;
+    }
+    list.innerHTML = courses.map(c => `
+      <a href="/player.html?id=${c.id}" class="enroll-item">
+        <div class="enroll-icon">&gt;</div>
+        <div class="enroll-info">
+          <h4>${escHtml(c.title || c.id)}</h4>
+          <p>${escHtml(c.topic || 'General')} &bull; ${escHtml(c.difficulty || 'beginner')} &bull; updated ${fmtDate(c.updated_at)}</p>
+        </div>
+        ${Silva.auth.isInstructor ? `<a class="enroll-arrow" href="/course-editor-enhanced.html?load=${c.id}" onclick="event.stopPropagation();" title="Edit">&#9998;</a>` : '<span class="enroll-arrow">&rsaquo;</span>'}
+      </a>`).join('');
+  } catch(e) {
+    list.innerHTML = `<div class="empty-state">Could not load your courses.</div>`;
   }
 }
 
@@ -592,7 +605,7 @@ async function loadFeaturedCourses() {
   const grid = document.getElementById('featured-grid');
   if (!grid) return;
   try {
-    const res = await fetch('/api/catalog');
+    const res = await fetch('/api/courses');
     const data = await res.json();
     const courses = (data.courses || []).slice(0, 8);
     if (!courses.length) { grid.innerHTML = '<div class="empty-state">No courses yet.</div>'; return; }
@@ -644,7 +657,7 @@ async function loadEnrollments() {
   try {
     const [enrollRes, catRes] = await Promise.all([
       fetch('/api/my-enrollments', { headers: { Authorization: 'Bearer ' + token } }),
-      fetch('/api/catalog')
+      fetch('/api/courses')
     ]);
     const enrollData = await enrollRes.json();
     const catData = catRes.ok ? await catRes.json() : { courses: [] };

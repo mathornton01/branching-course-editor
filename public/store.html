@@ -323,6 +323,7 @@ a:hover { text-decoration: underline; }
     }
   } catch(e) { console.warn('Supabase client not initialized:', e.message); }
 </script>
+<script src="/silva-common.js"></script>
 </head>
 <body>
 
@@ -388,6 +389,15 @@ a:hover { text-decoration: underline; }
     <div><strong id="statStudents">0</strong> students</div>
     <div><strong id="statTopics">0</strong> topics</div>
   </div>
+</div>
+
+<!-- My Courses (only shown when signed in) -->
+<div class="section" id="myCoursesSection" style="display:none;">
+  <div class="section-header">
+    <h2>My Courses</h2>
+    <a href="#" onclick="loadMyPurchasedList();return false;" style="font-size:13px;color:var(--accent2);text-decoration:none;">Refresh</a>
+  </div>
+  <div class="course-grid" id="myCoursesGrid"></div>
 </div>
 
 <!-- Categories -->
@@ -530,16 +540,16 @@ async function submitAuth() {
   try {
     let resp;
     if (authMode === 'login') {
-      resp = await fetch(API + '/api/auth/login', {
+      resp = await fetch(API + '/api/auth?action=login', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({login: email, password})
+        body: JSON.stringify({username: email, email, password})
       });
     } else {
       const username = document.getElementById('authUsername').value.trim();
       const role = document.getElementById('authRole').value;
       if (!username) { errEl.textContent = 'Username required'; errEl.style.display = 'block'; return; }
-      resp = await fetch(API + '/api/auth/register', {
+      resp = await fetch(API + '/api/auth?action=register', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({email, username, password, role})
@@ -577,29 +587,8 @@ function logout() {
 }
 
 function updateNav() {
-  const nav = document.getElementById('navRight');
-  if (currentUser) {
-    const initial = (currentUser.display_name || currentUser.username || '?')[0].toUpperCase();
-    nav.innerHTML = `
-      <span style="font-size:13px;color:var(--text2)">${currentUser.display_name}</span>
-      <div class="user-avatar" onclick="this.querySelector('.user-menu').classList.toggle('show')">
-        ${initial}
-        <div class="user-menu">
-          <a href="index.html">🏠 Home</a>
-          <a href="#" onclick="showMyPurchases();return false;">📚 My Courses</a>
-          ${currentUser.role === 'instructor' ? '<a href="/course-editor-enhanced.html">✏️ Editor</a>' : ''}
-          ${currentUser.role === 'instructor' ? '<a href="/instructor-dashboard.html">📊 Dashboard</a>' : ''}
-          ${currentUser.role === 'instructor' ? '<a href="#" onclick="bulkPublish();return false;">🚀 Publish All</a>' : ''}
-          <a href="#" onclick="logout();return false;">🚪 Sign Out</a>
-        </div>
-      </div>
-    `;
-  } else {
-    nav.innerHTML = `
-      <button class="btn" onclick="showAuth('login')">Sign In</button>
-      <button class="btn btn-primary" onclick="showAuth('register')">Sign Up</button>
-    `;
-  }
+  // Delegate to Silva — one chip, consistent across the site.
+  Silva.injectNavWidget('#navRight');
 }
 
 // ── Data Loading ──
@@ -746,20 +735,18 @@ async function showDetail(courseId) {
 
   // Load full course data (API first; fall back to static /courses/<id>.json)
   try {
-    const [courseResp, accessResp, reviewsResp] = await Promise.all([
-      fetch(API + '/api/courses/' + courseId),
-      fetch(API + '/api/store/check-access/' + courseId, { headers: authToken ? {'Authorization': 'Bearer ' + authToken} : {} }),
-      fetch(API + '/api/store/reviews/' + courseId)
-    ]);
     let course;
+    const courseResp = await fetch(API + '/api/courses/' + courseId);
     if (courseResp.ok) {
       course = await courseResp.json();
     } else {
       const staticResp = await fetch('/courses/' + courseId + '.json');
       course = staticResp.ok ? await staticResp.json() : { title: courseId, nodes: [] };
     }
-    const access = await accessResp.json();
-    const reviewsData = await reviewsResp.json();
+    // Access: everyone with an account can play anything for now.
+    //         Reviews: stubbed out until the review endpoint lands.
+    const access = { has_access: true, reason: currentUser ? 'enrolled' : 'public' };
+    const reviewsData = { reviews: [] };
     const store = storeData[courseId] || {};
 
     const icon = getIcon(course.topic);
@@ -910,13 +897,46 @@ async function bulkPublish() {
 }
 
 async function showMyPurchases() {
+  if (!currentUser) { showAuth('login'); return; }
+  // Jump to the My Courses section which is rendered on this page.
+  document.getElementById('myCoursesSection')?.scrollIntoView({behavior:'smooth'});
+  loadMyPurchasedList();
+}
+
+async function loadMyPurchasedList() {
+  const holder = document.getElementById('myCoursesGrid');
+  if (!holder) return;
+  if (!currentUser) { holder.innerHTML = ''; document.getElementById('myCoursesSection').style.display='none'; return; }
+  document.getElementById('myCoursesSection').style.display='block';
   try {
-    const resp = await fetch(API + '/api/store/my-purchases', {
-      headers: {'Authorization': 'Bearer ' + authToken}
-    });
-    const data = await resp.json();
-    showToast('You have ' + data.purchases.length + ' purchased courses');
-  } catch(e) {}
+    const res = await Silva.apiFetch(API + '/api/my-courses');
+    const data = await res.json();
+    const courses = data.courses || [];
+    if (!courses.length) {
+      holder.innerHTML = '<div class="empty-state"><div class="emoji">'+(Silva.auth.isInstructor?'✏️':'📚')+'</div><h3>No courses yet</h3><p>'+(Silva.auth.isInstructor?'Open the <a href="/course-editor-enhanced.html">editor</a> to create one.':'Browse the store below to find courses.')+'</p></div>';
+      return;
+    }
+    holder.innerHTML = courses.map((c, i) => `
+      <div class="course-card" onclick="showDetail('${c.id}')">
+        <div class="card-banner" style="background:${getColor(i)}">${getIcon(c.topic)}</div>
+        <div class="card-body">
+          <div class="card-title">${escHtml(c.title || c.id)}</div>
+          <div class="card-desc">${escHtml((c.description||'').slice(0,120))}</div>
+          <div class="card-meta">
+            <span class="tag tag-difficulty-${c.difficulty||'beginner'}">${c.difficulty||'beginner'}</span>
+            ${c.topic ? '<span class="tag">'+escHtml(c.topic)+'</span>' : ''}
+            <span class="tag" style="background:rgba(61,170,92,0.18);color:#5ec97b;">Yours</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="/player.html?id=${c.id}" onclick="event.stopPropagation();" style="color:#5ec97b;font-size:12px;text-decoration:none;">▶ Play</a>
+          ${Silva.auth.isInstructor ? '<a href="/course-editor-enhanced.html?load='+c.id+'" onclick="event.stopPropagation();" style="color:#d4a843;font-size:12px;text-decoration:none;">Edit</a>' : '<span></span>'}
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    holder.innerHTML = '<div class="empty-state">Could not load your courses.</div>';
+  }
 }
 
 function escHtml(s) {
@@ -948,27 +968,24 @@ document.addEventListener('keydown', e => {
 
 // ── Init ──
 (async function init() {
-  // Restore session
-  if (authToken) {
-    try {
-      const saved = localStorage.getItem('auth_user');
-      if (saved) currentUser = JSON.parse(saved);
-      const resp = await fetch(API + '/api/auth/me', {headers: {'Authorization': 'Bearer ' + authToken}});
-      if (resp.ok) {
-        const user = await resp.json();
-        currentUser = user;
-        localStorage.setItem('auth_user', JSON.stringify(user));
-      } else {
-        authToken = null;
-        currentUser = null;
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('auth_user');
-      }
-    } catch(e) {}
-  }
+  // Restore session via Silva shared auth
+  try {
+    await Silva.auth.validate();
+  } catch(e) {}
+  authToken = Silva.auth.token;
+  currentUser = Silva.auth.user;
+  // Keep the Silva widget in sync with this page's nav
+  window.addEventListener('silva:auth-changed', () => {
+    authToken = Silva.auth.token;
+    currentUser = Silva.auth.user;
+    updateNav();
+    loadFeatured();
+    loadMyPurchasedList();
+  });
   updateNav();
   loadCourses();
   loadFeatured();
+  loadMyPurchasedList();
 
   // Count students
   try {
