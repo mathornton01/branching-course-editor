@@ -23,7 +23,7 @@ def get_supabase() -> Client:
     global _client
     if _client is None:
         url = os.environ.get("SUPABASE_URL")
-        key = os.environ.get("SUPABASE_SERVICE_KEY")
+        key = os.environ.get("SUPABASE_SERVICE_KEY") or os.environ.get("SUPABASE_ANON_KEY")
         if not url or not key:
             raise RuntimeError(
                 "Missing SUPABASE_URL or SUPABASE_SERVICE_KEY environment variables. "
