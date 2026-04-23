@@ -349,16 +349,16 @@ async function doLogin(e) {
   btn.disabled = true;
   btn.textContent = 'Signing in...';
   try {
-    const res = await fetch('/api/auth/login', {
+    const res = await fetch('/api/auth?action=login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        login: document.getElementById('login-id').value.trim(),
+        username: document.getElementById('login-id').value.trim(),
         password: document.getElementById('login-pw').value
       })
     });
     const data = await res.json();
-    if (!res.ok) { showMsg(data.detail || 'Login failed', 'error'); return; }
+    if (!res.ok) { showMsg(data.error || 'Login failed', 'error'); return; }
     localStorage.setItem('auth_token', data.token);
     localStorage.setItem('auth_user', JSON.stringify(data.user));
     showMsg('Signed in! Redirecting...', 'success');
@@ -381,19 +381,19 @@ async function doRegister(e) {
   btn.disabled = true;
   btn.textContent = 'Creating account...';
   try {
-    const res = await fetch('/api/auth/register', {
+    const res = await fetch('/api/auth?action=register', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         email: document.getElementById('reg-email').value.trim(),
         username: document.getElementById('reg-user').value.trim(),
         password: document.getElementById('reg-pw').value,
-        role: selectedRole,
+        role: selectedRole === 'professor' ? 'instructor' : selectedRole,
         display_name: document.getElementById('reg-name').value.trim()
       })
     });
     const data = await res.json();
-    if (!res.ok) { showMsg(data.detail || 'Registration failed', 'error'); return; }
+    if (!res.ok) { showMsg(data.error || 'Registration failed', 'error'); return; }
     localStorage.setItem('auth_token', data.token);
     localStorage.setItem('auth_user', JSON.stringify(data.user));
     showMsg('Account created! Redirecting...', 'success');
