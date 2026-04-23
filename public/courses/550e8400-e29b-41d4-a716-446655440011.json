@@ -1,0 +1,170 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440011",
+  "title": "Parallel Computing in Healthcare",
+  "description": "Master parallel computing concepts through healthcare applications: GPU medical imaging, distributed health records, and real-time patient monitoring.",
+  "topic": "Parallel Computing",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "parallel-computing",
+    "healthcare",
+    "GPU",
+    "distributed-systems",
+    "multi-threading"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Parallel Computing Matters in Healthcare",
+      "content": "Modern healthcare generates data at unprecedented scale: hospitals process thousands of medical images daily, EHR systems manage millions of patient records, and patient monitoring devices stream continuous vital signs. Sequential processing can't handle this volume efficiently\u2014patients waiting for image analysis results, slow query times on lab data, and delayed alerts from monitoring systems all impact care quality. Parallel computing distributes this work across multiple processors, enabling faster processing without sacrificing accuracy. In healthcare, faster processing often means better patient outcomes. This course explores three critical parallel computing paradigms that power modern healthcare systems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Focus Area",
+      "content": "Parallel computing in healthcare takes different forms depending on the task. You'll explore three essential paradigms\u2014choose which to study first based on your interest. All paths will converge to show how they integrate into comprehensive healthcare systems.",
+      "choices": [
+        {
+          "label": "Medical Imaging at Scale (GPU Computing)",
+          "next": "n3"
+        },
+        {
+          "label": "Population Health Analytics (Distributed Systems)",
+          "next": "n5"
+        },
+        {
+          "label": "Real-time Patient Monitoring (Multi-threading)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "GPU-Accelerated Medical Imaging",
+      "content": "GPUs (graphics processing units) excel at parallel computation due to thousands of small cores designed for simultaneous processing. In medical imaging, this parallelism accelerates computationally intensive tasks: reconstructing 3D CT volumes from 2D slices, filtering and enhancing MRI images, and running AI algorithms for lesion detection. A single high-resolution CT scan can contain 500+ images; reconstructing all of them sequentially takes minutes, but a GPU processes them in seconds. GPUs also enable real-time 3D visualization during surgery, allowing surgeons to see updated reconstructions as they operate. By offloading these tasks to GPUs, hospital workstations free CPU resources for other clinical tasks, reducing bottlenecks across the entire healthcare IT ecosystem.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "CT Scan Batch Processing with GPUs",
+      "content": "Consider a radiology department processing 200 patient CT scans overnight. Each scan has 512 images requiring 3D reconstruction. Sequentially on a CPU, this takes ~4 hours; with GPU parallelization across the 512 slices simultaneously, it completes in 8 minutes. The GPU assigns each slice to a separate thread\u2014threads execute independently on thousands of cores, dividing the work. The radiologist receives results by morning rounds instead of afternoon, enabling faster diagnosis and treatment planning. This parallel approach scales: 500 scans that would take 10 hours sequentially complete in ~20 minutes on GPU, a 30x speedup that makes overnight batch processing practical.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Distributed Systems for Population Health",
+      "content": "Healthcare data is often siloed across multiple hospitals, clinics, and regional networks. A patient's full medical history may exist in three different EHR systems in three cities. Distributed computing connects these systems, allowing parallel queries across multiple databases simultaneously. When a researcher asks 'How many diabetic patients experienced complications last year?', instead of transferring gigabytes of data to a central server and running one query, distributed computing sends the query to each regional database in parallel, each processes locally and returns aggregated results, then combines findings. This approach preserves privacy (sensitive data stays local), improves speed (parallel processing across geographies), and handles failures gracefully (if one hospital's database is unavailable, others still provide results). Modern healthcare networks increasingly adopt this model to unlock insights from fragmented data.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Multi-Hospital Patient Data Query",
+      "content": "A clinical trial coordinator needs to identify 500 patients across three hospital systems matching specific criteria: age 50-70, hypertension diagnosis, and medication history. Sequentially, they'd request data from Hospital A (2 hours to extract and transfer), Hospital B (1.5 hours), Hospital C (2 hours) = 5.5 hours total. With distributed computing, the coordinator sends the same query to all three hospitals in parallel. Each hospital's database independently filters its patient records against the criteria while the user waits. Results arrive in ~15 minutes as parallel queries complete. Hospital A identifies 180 matching patients, Hospital B finds 210, Hospital C finds 190 (total 580, some overlaps handled by study staff). The 22x speedup enables same-day enrollment rather than multi-day coordination, and patients begin treatment faster.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Multi-threaded Real-time Patient Monitoring",
+      "content": "Hospital ICU monitoring systems simultaneously track dozens of patients\u2014each with heart rate, blood oxygen, blood pressure, respiration, and temperature. A multi-threaded approach assigns each patient's data stream to a separate thread; threads execute concurrently on the same processor, context-switching between them invisibly. When Patient A's oxygen drops dangerously, the thread processing A's data detects this and triggers an alert while threads handling Patients B and C continue uninterrupted. Without multi-threading, alerts would be sequential and delayed\u2014by the time the system checked Patient A after finishing Patient Z's data, precious minutes might have passed. Multi-threading ensures responsive, low-latency monitoring where abnormal readings trigger immediate alerts regardless of how many patients share the system. This is critical because in ICUs, every second counts.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Concurrent Vital Sign Processing",
+      "content": "An ICU ward with 12 monitored patients generates vital sign data every second. Without multi-threading, the system would serially check each patient: P1 (50ms), P2 (50ms)... P12 (50ms) = 600ms to complete one full cycle. If Patient P7 experiences dangerous arrhythmia during P1-P6 processing, the alert is delayed 300ms\u2014in cardiac emergencies, that delay risks patient safety. With 12 threads running concurrently, each processes its patient in parallel: all 12 streams execute simultaneously, completing a full cycle in ~50ms. P7's arrhythmia triggers an alert in <10ms after detection, enabling immediate nursing response. The system also remains responsive if one patient's data processing takes longer (e.g., calculating trend analysis) because other threads continue unblocked. This concurrency is why modern ICU systems are life-saving.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Parallel Computing in Healthcare Systems",
+      "content": "Real healthcare IT systems don't choose just one parallel paradigm\u2014they integrate all three. A comprehensive hospital system uses GPUs for imaging workloads (radiology department), distributed computing to query electronic health records across the network (population health research), and multi-threading to ensure responsive patient monitoring (clinical units). A patient arriving at the ED triggers parallel workflows: their image studies stream to GPUs for reconstruction, their medical history queries across distributed EHR databases, and their real-time monitors spawn new threads. These parallel processes run concurrently without interfering with each other. Understanding when to apply GPU acceleration, distributed queries, and multi-threading allows architects to design systems that are fast, scalable, and responsive to clinical needs. This integration of multiple parallel approaches maximizes healthcare system efficiency and patient safety.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Your Parallel Computing in Healthcare Journey Begins",
+      "content": "You've explored three essential parallel computing paradigms transforming modern healthcare: GPU acceleration for intensive computations like medical imaging, distributed systems for querying siloed patient data, and multi-threading for responsive real-time monitoring. Each solves different healthcare challenges and together they power next-generation clinical IT systems. As healthcare data continues growing exponentially, understanding these parallel approaches is essential for building systems that improve patient care. Whether you're designing imaging pipelines, analytics platforms, or monitoring systems, apply these concepts to unlock performance and responsiveness that clinical teams depend on."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Medical Imaging at Scale"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Population Health Analytics"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Real-time Patient Monitoring"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T13:15:34.598605+00:00",
+  "model": "claude-haiku-4-5"
+}

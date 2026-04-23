@@ -1,0 +1,616 @@
+{
+  "id": "d4e8f5a2-7b3c-4a9d-8e2f-5c1a7d9b3e4f",
+  "title": "Natural Language Processing Basics",
+  "description": "Master NLP fundamentals through real journalism workflows\u2014from identifying key entities and measuring sentiment to classifying stories and analyzing public opinion.",
+  "topic": "Natural Language Processing",
+  "theme": "journalism",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "NLP",
+    "journalism",
+    "data journalism",
+    "text analysis",
+    "sentiment analysis",
+    "named entity recognition",
+    "text classification"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Natural Language Processing?",
+      "content": "NLP is the technology that helps computers understand human language, enabling journalists to process and analyze vast amounts of text efficiently. In modern newsrooms, NLP powers tools that automatically extract key facts from social media, identify trending topics, and organize incoming news feeds. This skill is essential for data journalists, fact-checkers, and reporters handling breaking news across multiple sources. By learning NLP, you'll understand how machines parse language structure, extract meaning, and identify sentiment\u2014capabilities that revolutionize how news stories are discovered, verified, and told. Throughout this course, you'll apply NLP concepts directly to journalism workflows.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Do You Know What NLP Does?",
+      "content": "Test your understanding of basic NLP concepts and their applications in journalism.",
+      "questions": [
+        {
+          "question": "A journalist receives 1,000 tweets mentioning their publication. Which NLP task would help automatically identify which tweets contain complaints?",
+          "options": [
+            "Named Entity Recognition",
+            "Sentiment Analysis",
+            "Text Classification",
+            "Machine Translation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Named Entity Recognition identifies people, places, and organizations\u2014useful but not for identifying complaints.",
+            "\u2713 Correct! Sentiment Analysis determines if text is positive, negative, or neutral.",
+            "Text Classification sorts text into categories, but wouldn't identify complaints specifically.",
+            "Machine Translation converts between languages, not relevant here."
+          ],
+          "explanation": "Sentiment analysis is the NLP task that classifies emotional tone, making it perfect for identifying complaints in social media."
+        },
+        {
+          "question": "A news archive has 50,000 articles about different topics (politics, sports, entertainment). What NLP task would automatically sort these articles into categories?",
+          "options": [
+            "Sentiment Analysis",
+            "Named Entity Recognition",
+            "Text Classification",
+            "Language Detection"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Sentiment Analysis measures tone, not topic categories.",
+            "Named Entity Recognition identifies entities like people or places, not article topics.",
+            "\u2713 Correct! Text Classification groups text by category or topic.",
+            "Language Detection identifies what language text is in."
+          ],
+          "explanation": "Text Classification automatically sorts documents into predefined categories like 'politics,' 'sports,' and 'entertainment.'"
+        },
+        {
+          "question": "Which of the following is an example of Named Entity Recognition in journalism?",
+          "options": [
+            "Identifying if an article's tone is optimistic or pessimistic",
+            "Extracting all mentions of people, companies, and locations from a news story",
+            "Organizing articles into sports, politics, and entertainment sections",
+            "Translating foreign news articles into English"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's sentiment analysis, not entity recognition.",
+            "\u2713 Correct! NER extracts specific entities like people, organizations, and locations.",
+            "That's text classification.",
+            "That's machine translation."
+          ],
+          "explanation": "Named Entity Recognition identifies and extracts named entities\u2014proper nouns like 'Barack Obama,' 'The New York Times,' and 'Washington D.C.'"
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: NLP Task Identification",
+      "content": "Apply your understanding of NLP tasks to journalism scenarios.",
+      "questions": [
+        {
+          "question": "A reporter is fact-checking quotes in an article. She needs to quickly find all instances where specific people's names are mentioned. Which NLP task would help?",
+          "options": [
+            "Text Classification",
+            "Machine Translation",
+            "Named Entity Recognition",
+            "Sentiment Analysis"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Text Classification categorizes documents, not extracts names.",
+            "Machine Translation converts languages.",
+            "\u2713 Correct! Named Entity Recognition extracts names of people, places, and organizations.",
+            "Sentiment Analysis determines emotional tone."
+          ],
+          "explanation": "NER is perfect for extracting all mentions of specific entities like people's names from text."
+        },
+        {
+          "question": "Breaking news floods social media with posts about a corporate scandal. A news outlet wants to automatically identify which posts contain angry or critical reactions. What NLP task is this?",
+          "options": [
+            "Named Entity Recognition",
+            "Sentiment Analysis",
+            "Language Modeling",
+            "Part-of-speech Tagging"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "NER finds names and places, not emotional tone.",
+            "\u2713 Correct! Sentiment Analysis identifies positive, negative, or neutral emotional content.",
+            "Language Modeling predicts the next word, not sentiment.",
+            "POS Tagging identifies nouns, verbs, etc., not sentiment."
+          ],
+          "explanation": "Sentiment Analysis automatically classifies the emotional tone of text, which is essential for tracking public reaction to news."
+        },
+        {
+          "question": "A wire service receives news in French, Spanish, Portuguese, and English. The editor wants all articles translated to English before publication. What NLP task helps here?",
+          "options": [
+            "Text Classification",
+            "Named Entity Recognition",
+            "Machine Translation",
+            "Sentiment Analysis"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Text Classification sorts by topic.",
+            "NER extracts entities.",
+            "\u2713 Correct! Machine Translation automatically converts text between languages.",
+            "Sentiment Analysis measures tone."
+          ],
+          "explanation": "Machine Translation uses NLP to automatically translate text from one language to another, essential for international news operations."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Named Entity Recognition: Finding Key People and Places",
+      "content": "Named Entity Recognition (NER) automatically extracts important entities\u2014people, organizations, locations, and dates\u2014from news text. For journalists, NER is transformative: it instantly identifies all mentions of key figures in an investigation, tracks which companies appear across multiple stories, and maps geographic locations mentioned in a breaking news event. A political reporter analyzing campaign coverage can use NER to extract all mentions of politicians and their associated organizations. Search teams covering international crises can automatically tag all location names mentioned in reports, building a geographic picture of the story. NER speeds up research that would normally take hours of manual reading.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Can You Apply NER to Journalism?",
+      "content": "Demonstrate your understanding of Named Entity Recognition in journalism contexts.",
+      "questions": [
+        {
+          "question": "A data journalist investigating corruption wants to analyze 500 articles about a political scandal. She needs to track every time a specific company name appears across all articles. Which NER component directly helps her?",
+          "options": [
+            "Sentiment analyzer",
+            "Organization/Company entity extractor",
+            "Location entity extractor",
+            "Date/Time entity extractor"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sentiment analysis measures tone, not companies.",
+            "\u2713 Correct! The Organization entity type in NER specifically extracts company names.",
+            "Location extractors find places, not company names.",
+            "Date extractors find temporal references."
+          ],
+          "explanation": "NER's Organization entity type automatically identifies and extracts all mentions of companies and organizations from text."
+        },
+        {
+          "question": "A breaking news desk is covering a natural disaster. Reporters' initial observations mention affected areas like 'the Mississippi River valley,' 'Memphis,' and 'Tennessee.' The editor needs a quick geographic map of the story's scope. What NER entity type is most useful?",
+          "options": [
+            "Person entities",
+            "Organization entities",
+            "Location entities",
+            "Event entities"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Person entities find people's names.",
+            "Organization entities find company/group names.",
+            "\u2713 Correct! Location entities extract place names like cities, rivers, and regions.",
+            "Event entities (if they exist in the NER system) identify events, not places."
+          ],
+          "explanation": "Location entity extraction automatically identifies all geographic references, helping editors map a story's geographic scope."
+        },
+        {
+          "question": "A sports reporter is tracking player trades across the league. An NER system processes news articles and extracts mentions of players (Person entities), teams (Organization entities), and dates (Time entities). What is the reporter doing?",
+          "options": [
+            "Text Classification",
+            "Using NER to build a trade timeline",
+            "Sentiment Analysis",
+            "Machine Translation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Text Classification sorts articles by type.",
+            "\u2713 Correct! By combining Person, Organization, and Time entities, the reporter builds a timeline of trades.",
+            "Sentiment Analysis measures tone.",
+            "Machine Translation converts languages."
+          ],
+          "explanation": "NER entities can be combined to extract structured information\u2014in this case, creating a timeline of who moved where and when."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Using NER in Real Scenarios",
+      "content": "Apply Named Entity Recognition to investigative and archival journalism scenarios.",
+      "questions": [
+        {
+          "question": "An investigative journalist is researching shell companies used in a money laundering scheme. She has 1,000 documents to analyze. An NER system extracts all Organization entities and all Person entities (to find which people are associated with which companies). Why is this approach useful?",
+          "options": [
+            "It measures public opinion about the scheme.",
+            "It instantly reveals all company-person connections without manual reading.",
+            "It translates documents into English.",
+            "It categorizes documents by topic."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That would be sentiment analysis.",
+            "\u2713 Correct! NER extracts entities to reveal relationships quickly across many documents.",
+            "That's machine translation.",
+            "That's text classification."
+          ],
+          "explanation": "NER dramatically speeds up investigations by automatically extracting all mentions of key entities, letting journalists focus on analyzing connections."
+        },
+        {
+          "question": "A news archive contains 20 years of political coverage. A reporter wants to find all articles mentioning a specific city where elections are always competitive. Which NER entity type would find all these articles most efficiently?",
+          "options": [
+            "Organization entities (to find the news outlets)",
+            "Location entities (to find the city name)",
+            "Person entities (to find politicians)",
+            "Sentiment entities (to find favorable coverage)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Organization entities find news outlets or political organizations, not the city.",
+            "\u2713 Correct! Location entities extract place names, including the city.",
+            "Person entities find people, not places.",
+            "Sentiment isn't an NER entity type."
+          ],
+          "explanation": "Location entity extraction finds all mentions of a specific place, making it perfect for geographic or regional story research."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Sentiment Analysis: Understanding Public Opinion",
+      "content": "Sentiment Analysis uses NLP to automatically classify the emotional tone of text as positive, negative, or neutral. In journalism, this capability unlocks powerful insights: a reporter covering a corporate scandal can scan thousands of social media reactions to gauge public sentiment. A political correspondent analyzing campaign coverage can measure whether media mentions of a candidate are predominantly positive or critical. During crises, newsrooms use sentiment analysis to monitor trending public reactions in real-time across platforms. Sentiment analysis also helps journalists identify emerging controversies early\u2014when negative sentiment suddenly spikes around a topic, it signals a developing story. Rather than manually reading countless comments, journalists use sentiment analysis to extract the emotional pulse of public discourse.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Can You Apply Sentiment Analysis?",
+      "content": "Test your understanding of sentiment analysis in journalism.",
+      "questions": [
+        {
+          "question": "A news organization monitors public reaction to a new government policy by analyzing tweets mentioning the policy. They find that 67% of tweets contain negative sentiment, 20% are neutral, and 13% are positive. What can the editor conclude?",
+          "options": [
+            "The policy is definitely wrong.",
+            "Public sentiment strongly opposes the policy.",
+            "All tweets are from the same person.",
+            "Nobody cares about the policy."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sentiment doesn't determine right/wrong, just public opinion.",
+            "\u2713 Correct! A 67% negative sentiment clearly indicates public opposition.",
+            "That's a sampling question, not a sentiment analysis conclusion.",
+            "The high volume of tweets shows people care."
+          ],
+          "explanation": "Sentiment analysis reveals the dominant emotional tone of discourse. 67% negative sentiment indicates strong public opposition to the policy."
+        },
+        {
+          "question": "A business reporter writes a story about a company's quarterly earnings. She wants to understand whether financial analysts' comments about the company are positive or negative. What should she use sentiment analysis on?",
+          "options": [
+            "Analyst reports and financial commentary",
+            "The reporter's own article",
+            "The company's website",
+            "Competitor websites"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "\u2713 Correct! Sentiment analysis of analyst commentary reveals their professional assessment.",
+            "The reporter should be objective, not analyzing their own sentiment.",
+            "Companies present themselves positively; that's not neutral analysis.",
+            "Competitors' websites are biased."
+          ],
+          "explanation": "Sentiment analysis is most useful when applied to third-party commentary\u2014analyst reports, reviews, and social reactions\u2014that reveal genuine opinions."
+        },
+        {
+          "question": "During a crisis (like a product recall), sentiment analysis of social media trends shows negative sentiment suddenly increasing from 30% to 75% in one hour. What might this indicate?",
+          "options": [
+            "The crisis is resolved.",
+            "Positive sentiment is increasing.",
+            "Public awareness of the crisis is rapidly growing.",
+            "The sentiment analysis system is broken."
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A spike in negative sentiment indicates escalation, not resolution.",
+            "Negative sentiment increased, not positive.",
+            "\u2713 Correct! Sudden spikes in negative sentiment indicate rapid awareness and concern spread.",
+            "The system appears to be working\u2014detecting real sentiment shifts."
+          ],
+          "explanation": "Sentiment analysis enables journalists to detect early warning signs of breaking issues through sudden shifts in emotional tone across social platforms."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Applying Sentiment Analysis",
+      "content": "Work through scenarios using sentiment analysis in journalism.",
+      "questions": [
+        {
+          "question": "A film critic wants to analyze online reviews of a new movie. She uses sentiment analysis on 500 reviews from viewers. The results show: 45% positive, 40% negative, 15% neutral. What does this reveal?",
+          "options": [
+            "The film is definitely worth watching.",
+            "The film received mixed reviews with slightly more positive reactions.",
+            "Everyone disliked the film.",
+            "The reviews were impossible to classify."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Reviews are split; not definitively positive.",
+            "\u2713 Correct! 45% positive vs. 40% negative shows mixed reception with a slight positive lean.",
+            "45% positive contradicts this.",
+            "The system successfully classified 85% of reviews."
+          ],
+          "explanation": "Sentiment analysis quantifies opinion distribution. Mixed scores (not heavily skewed) indicate balanced, divided opinion."
+        },
+        {
+          "question": "A tech reporter covers a smartphone launch. Sentiment analysis shows that tweets mentioning the phone's design are 80% positive, but tweets about its price are 75% negative. What insight does this provide?",
+          "options": [
+            "The launch failed completely.",
+            "Customers love the design but consider the price unfair.",
+            "Sentiment analysis is unreliable.",
+            "The price doesn't matter to customers."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Positive design sentiment indicates some success.",
+            "\u2713 Correct! Different sentiments for different features reveal specific customer opinions.",
+            "The analysis correctly identified contrasting sentiments.",
+            "The 75% negative price sentiment shows price matters significantly."
+          ],
+          "explanation": "Comparing sentiment across different aspects of a story reveals nuanced public opinion\u2014what people love and what frustrates them."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Text Classification: Organizing News Stories",
+      "content": "Text Classification uses NLP to automatically sort documents into predefined categories or topics. For journalists and newsrooms, this means instantly organizing incoming stories: automated systems sort breaking news into 'Politics,' 'Sports,' 'Business,' or 'Health,' routing each to the appropriate section editor. Wire services use text classification to filter international stories by region. Social media monitoring tools classify trending posts by category to surface the most relevant stories for each beat. During high-volume news days, classification systems help editors manage information overload by automatically organizing content. Classification also enables smart content recommendation\u2014showing readers articles similar to ones they've already read. It's the backbone of modern news organization and personalization.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Mastery Check: NLP in Journalism",
+      "content": "Demonstrate comprehensive understanding of NLP applications across journalism.",
+      "questions": [
+        {
+          "question": "A breaking news desk needs to route 200 incoming social media posts about a hurricane to appropriate teams: meteorologists should review posts with location and weather details; community reporters should review posts with personal stories. Which two NLP tasks would the desk combine?",
+          "options": [
+            "Sentiment Analysis + Machine Translation",
+            "Named Entity Recognition + Text Classification",
+            "Text Classification + Sentiment Analysis",
+            "Machine Translation + Sentiment Analysis"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Translation and sentiment don't solve routing; NER does.",
+            "\u2713 Correct! NER extracts locations/entities, Classification routes by content type.",
+            "Classification sorts by topic, but NER better identifies weather details.",
+            "These don't address the routing challenge."
+          ],
+          "explanation": "Combining NER (to extract weather details and locations) with Classification (to separate weather reporting from personal stories) solves the routing challenge."
+        },
+        {
+          "question": "A publisher analyzing reader engagement finds that articles about technology receive the most clicks, but articles about financial markets receive the highest comment volume and most positive sentiment. What does this tell you?",
+          "options": [
+            "Financial coverage is more important than tech.",
+            "Sentiment analysis is unreliable.",
+            "Readers engage differently with different topics\u2014tech draws interest, finance draws discussion.",
+            "The publisher should publish only financial articles."
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Engagement type differs; importance is subjective.",
+            "Sentiment analysis successfully measured opinion.",
+            "\u2713 Correct! Different engagement patterns indicate different reader responses to different content.",
+            "Tech's high click volume suggests it's also valuable."
+          ],
+          "explanation": "Using NLP to measure both engagement metrics and sentiment reveals nuanced reader behavior across different topics."
+        },
+        {
+          "question": "A journalist investigating coverage fairness of two political candidates uses NLP to analyze articles mentioning each candidate, extracting: (1) all Person entities (candidate names and allies), (2) Sentiment of mentions, and (3) Topics covered via classification. What comprehensive picture does this create?",
+          "options": [
+            "A complete data-driven analysis showing where candidates are mentioned, what aspects are discussed, which people are involved, and the tone of coverage.",
+            "Just sentiment about the candidates.",
+            "Only information about which people are mentioned.",
+            "Proof that one candidate received unfair coverage."
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "\u2713 Correct! Using NER, Sentiment Analysis, and Text Classification together provides a complete picture.",
+            "Sentiment is part of it, but not the complete picture.",
+            "Entities are part of it, but not the complete picture.",
+            "Sentiment data reveals opinion patterns, not objective proof of unfairness."
+          ],
+          "explanation": "A thorough investigation combines multiple NLP techniques: NER to track entities and relationships, Sentiment to measure tone, and Classification to understand context and topics."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n13",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "practice",
+      "title": "Practice: Combining NLP Techniques",
+      "content": "Master integrated NLP application across complete journalism workflows.",
+      "questions": [
+        {
+          "question": "A newsroom receives 5,000 tweets about an upcoming election. The editor wants to: (1) identify all mentions of candidates and political organizations, (2) measure whether sentiment is positive or negative about the election, and (3) categorize tweets by topic (campaign issues, polling, endorsements). Which combination of NLP techniques is needed?",
+          "options": [
+            "Machine Translation + Sentiment Analysis",
+            "Named Entity Recognition + Sentiment Analysis + Text Classification",
+            "Only Sentiment Analysis",
+            "Named Entity Recognition only"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Machine Translation converts languages; doesn't solve these needs.",
+            "\u2713 Correct! NER identifies candidates, Sentiment measures tone, Classification categorizes by topic.",
+            "Sentiment alone doesn't extract entities or categorize topics.",
+            "NER alone doesn't measure sentiment or categorize topics."
+          ],
+          "explanation": "Real-world journalism problems often require combining multiple NLP techniques for a complete solution."
+        },
+        {
+          "question": "A sports reporter uses NLP on game coverage articles and finds sentiment analysis showing 55% positive mentions when analyzing opponent criticisms, but 72% positive mentions when analyzing your team's performance. Why is this useful despite seeming contradictory?",
+          "options": [
+            "It proves sentiment analysis doesn't work.",
+            "It shows both sentiments are actually neutral.",
+            "It reveals different attitudes toward different aspects of the story.",
+            "It means the reporter should use different tools."
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The tool works\u2014it correctly identifies different sentiments in different contexts.",
+            "72% positive and 55% positive both lean positive.",
+            "\u2713 Correct! Different sentiments for different entities/topics reveal nuanced public opinion.",
+            "NLP is working as designed."
+          ],
+          "explanation": "Sentiment analysis reveals context-specific opinions\u2014how people feel about different actors or aspects within the same story."
+        },
+        {
+          "question": "An environmental reporter investigating fracking uses NLP on 300 articles: NER extracts location names, organizations, and scientist names; Classification sorts articles into 'Environmental Impact,' 'Economic Impact,' and 'Policy/Regulation'; Sentiment Analysis measures tone toward fracking. What comprehensive picture does this create?",
+          "options": [
+            "A complete data-driven analysis showing where fracking occurs, key organizations and figures involved, topic focus, and the tone of coverage.",
+            "Just sentiment about fracking.",
+            "Only location data.",
+            "Proof that fracking is bad."
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "\u2713 Correct! The combination reveals locations, key players, topic focus, AND sentiment\u2014a complete picture.",
+            "Sentiment is part of it, but not the complete picture.",
+            "Location is part of it, but not the complete picture.",
+            "Sentiment data reveals opinion, not objective truth."
+          ],
+          "explanation": "Combining NER, Classification, and Sentiment Analysis creates a rich, multi-dimensional understanding of how a topic is covered."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n11",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Course Complete: You're Ready to Apply NLP to Journalism",
+      "content": "Congratulations! You've mastered the fundamentals of Natural Language Processing and learned how to apply them across journalism workflows. You now understand how Named Entity Recognition identifies key people, places, and organizations; how Sentiment Analysis reveals public opinion and emotional tone; and how Text Classification organizes vast amounts of information. These three techniques form the foundation of modern data journalism, crisis reporting, and investigative research. As you return to your newsroom or data journalism projects, you can now recognize where NLP adds value\u2014in monitoring social reaction, extracting key facts from documents, analyzing coverage patterns, and understanding your audience. The future of journalism is increasingly data-driven, and NLP is one of the most powerful tools in a journalist's arsenal. Keep exploring, stay curious, and apply these techniques to your own stories."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n11",
+      "label": "next"
+    },
+    {
+      "id": "c14",
+      "source": "n11",
+      "target": "n12",
+      "label": "fail"
+    },
+    {
+      "id": "c15",
+      "source": "n12",
+      "target": "n11",
+      "label": "retry"
+    },
+    {
+      "id": "c16",
+      "source": "n11",
+      "target": "n13",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T04:38:41.956045+00:00",
+  "model": "claude-haiku-4-5"
+}

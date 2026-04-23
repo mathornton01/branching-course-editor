@@ -1,0 +1,490 @@
+{
+  "id": "bayesian-film-prod",
+  "title": "Bayesian Statistics in Film Production",
+  "description": "Master Bayesian thinking by applying it to real film production decisions: casting, budget allocation, audience prediction, and post-production choices.",
+  "topic": "Bayesian Statistics",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "statistics",
+    "bayesian",
+    "decision-making",
+    "film production",
+    "probability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Prior Beliefs in Film Production",
+      "content": "In Bayesian statistics, a **prior** is your initial belief before seeing evidence. As a film director, you start with assumptions: a big-name actor increases box office success (your prior belief based on past films). But this belief should be *weighted* by uncertainty\u2014maybe their recent films flopped, weakening the prior. Bayesian thinking lets you formalize this: assign a probability to your belief, then update it as new evidence (test screenings, market data) arrives. Throughout production, you'll combine your prior knowledge with fresh evidence to make better decisions."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Priors & Posteriors in Casting",
+      "content": "You're casting a supporting role. You believe an unknown actor is more likely to give a 'risky' unconventional performance (your prior). After a strong audition, you're more confident. This shift from prior to posterior belief is the heart of Bayesian updating.",
+      "questions": [
+        {
+          "question": "Your prior belief: 70% chance this unknown actor will deliver an unconventional performance (risky but potentially brilliant). After an audition, you observe they nailed a subtle, emotionally complex scene. How does this evidence affect your posterior belief?",
+          "options": [
+            "A) Your posterior belief increases (maybe now 85%+)",
+            "B) Your posterior belief decreases (maybe now 50%)",
+            "C) Your posterior belief stays exactly 70%",
+            "D) Posteriors can't be computed without statistical data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The evidence (strong audition) supports the hypothesis (unconventional performance), so your posterior increases.",
+            "Incorrect. The audition evidence supports unconventional performance, so confidence should increase, not decrease.",
+            "Incorrect. Observing evidence should shift your belief; that's the update from prior to posterior.",
+            "Incorrect. Bayesian thinking works qualitatively (gut feeling) AND quantitatively; you've just done it intuitively."
+          ],
+          "explanation": "When evidence strongly aligns with your hypothesis, your posterior probability increases. You started at 70% and observed supporting evidence, moving you toward higher confidence. This is Bayesian updating in action."
+        },
+        {
+          "question": "A producer says: 'I have a strong prior that this budget will deliver ROI, so we don't need market research.' Why is this dangerous Bayesian thinking?",
+          "options": [
+            "A) Priors should always be ignored in favor of hard data",
+            "B) Strong priors are useful only if updated with evidence; ignoring evidence leaves you overconfident",
+            "C) Budgets are deterministic, not probabilistic",
+            "D) Bayesian methods don't apply to financial decisions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Priors are valuable\u2014they're your accumulated wisdom. The issue is ignoring evidence.",
+            "Correct! A strong prior is useful, but refusing to update it with market data (evidence) leads to overconfidence bias and poor decisions.",
+            "Incorrect. Budgets involve multiple uncertain factors (cast, locations, post-production), making them probabilistic.",
+            "Incorrect. Bayesian methods are excellent for financial decisions because they balance prior knowledge and evidence."
+          ],
+          "explanation": "Bayesian statistics thrives on combining priors and evidence. Ignoring evidence means your posterior beliefs remain stuck at your prior\u2014a recipe for bad decisions in dynamic industries like film."
+        },
+        {
+          "question": "You're scouting locations. Your prior: 'European locations are 60% likely to be over budget.' After three scouting trips, you find two locations that came in under budget. How should you think about your updated posterior belief?",
+          "options": [
+            "A) It should increase toward 70%+ (European locations are even riskier)",
+            "B) It should decrease toward 40%+ (evidence contradicts the prior)",
+            "C) It should stay at 60% (three data points are too small)",
+            "D) Priors don't apply to location budgeting"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The evidence shows cost management success, not increased risk.",
+            "Correct! You observed 2 successes out of 3 location scouts, which contradicts your prior risk assessment. Your posterior should shift downward\u2014maybe to 40-45%.",
+            "Incorrect. Sample size matters for statistical confidence, but even small samples update priors. Three scouting trips is real evidence.",
+            "Incorrect. Priors and posteriors are the foundation of location budgeting and risk management."
+          ],
+          "explanation": "Even small samples provide evidence. Two budget successes weaken your prior that European locations are risky. Your posterior drops below 60%, reflecting this new reality."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Updating Priors from Film Test Screenings",
+      "content": "Your prior belief: 65% of test audiences will connect with your film's protagonist. After a screening, 72% of the test group rated the protagonist as 'emotionally engaging.' This is evidence favoring your hypothesis. Refine your understanding: the real-world result (72%) vs. your prior (65%) shows that audiences engaged slightly more than expected. In Bayesian terms, this evidence pushes your posterior toward higher confidence in audience connection.",
+      "questions": [
+        {
+          "question": "Before production, you predict there's an 80% chance your lead actor will have 'star power' chemistry with the co-lead based on previous roles. During chemistry reads, you observe genuinely electric moments between them. What should your posterior belief be?",
+          "options": [
+            "A) Increase toward 90%+",
+            "B) Decrease toward 70%",
+            "C) Stay at exactly 80%",
+            "D) Become 100% certain (no uncertainty)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Electric chemistry reads are strong evidence supporting your hypothesis. Posterior increases.",
+            "Incorrect. Chemistry reads support the hypothesis, so confidence increases, not decreases.",
+            "Incorrect. Evidence requires updating from the prior.",
+            "Incorrect. No observation makes you 100% certain; always maintain some uncertainty."
+          ],
+          "explanation": "Chemistry reads provide direct evidence. They align with your prior hypothesis, so your posterior increases above 80%\u2014maybe to 85-90%."
+        },
+        {
+          "question": "Your prior: 75% chance the color grading will convey the emotional mood you intended. After test screenings, only 55% of viewers associated the color palette with your intended emotion. What does this tell you about your posterior?",
+          "options": [
+            "A) It should increase to 85%",
+            "B) It should decrease toward 55-60%",
+            "C) It's unrelated to the prior",
+            "D) Color grading is not a probabilistic decision"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The evidence contradicts your prior, so confidence decreases.",
+            "Correct! Only 55% of viewers got your intended mood\u2014this contradicts your 75% prior. Posterior drops to ~55-60%, reflecting the evidence.",
+            "Incorrect. Posterior is directly informed by comparing prior belief to observed evidence.",
+            "Incorrect. Color grading is a probabilistic decision about audience impact."
+          ],
+          "explanation": "When evidence contradicts your prior, your posterior shifts toward the evidence. 55% of viewers understood the mood, not 75%, so your posterior drops significantly."
+        },
+        {
+          "question": "Prior: 50% chance a experimental sound design will enhance the film's sci-fi atmosphere. Test audience feedback: 80% found the sound design 'immersive and futuristic.' Estimate your posterior belief about sound design effectiveness.",
+          "options": [
+            "A) ~40%",
+            "B) ~50% (unchanged)",
+            "C) ~70-75%",
+            "D) ~95%+"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Strong positive evidence should increase confidence above the prior.",
+            "Incorrect. Strong evidence requires updating from 50%.",
+            "Correct! 80% of test audiences confirmed effectiveness. Your posterior increases to ~70-75%, strongly favoring the sound design experiment.",
+            "Incorrect. Even with 80% audience approval, you maintain some uncertainty (not 95%+)."
+          ],
+          "explanation": "Strong supporting evidence (80% approval) moves your posterior well above your prior (50%). A reasonable estimate is 70-75%, reflecting high confidence while maintaining uncertainty."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n2"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Likelihood & Evidence in Film Decision-Making",
+      "content": "**Likelihood** answers: 'If my hypothesis is true, how likely is this evidence?' For example: if a lead actor genuinely has box-office appeal (hypothesis), how likely is it we'd see strong pre-release buzz on social media (evidence)? High likelihood. In film, you constantly weigh evidence: critic reviews, test screening scores, social media sentiment, advance ticket sales. Bayesian statistics formalizes this: stronger evidence that aligns with your hypothesis increases your posterior. Weaker evidence or misaligned evidence weakens it. As a producer, you'll use likelihood to decide which evidence matters most."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Likelihood in Box Office Predictions",
+      "content": "You're forecasting opening weekend box office. Your hypothesis: 'This film will exceed $50M opening weekend.' Evidence comes from: early ticket pre-sales, social media engagement, demographic surveys. Likelihood assessment: given strong pre-sales and positive demographics, how probable is $50M+ opening weekend? That's a likelihood question.",
+      "questions": [
+        {
+          "question": "You have two pieces of evidence: (1) 85% of surveyed target demographic say they'll 'definitely' see the film opening weekend, (2) Early ticket sales are tracking 40% above last year's comparable film. Which evidence has higher likelihood under the hypothesis 'this film will open at $60M+'?",
+          "options": [
+            "A) Survey data (1) is higher likelihood",
+            "B) Ticket sales data (2) is higher likelihood",
+            "C) Both have equal likelihood",
+            "D) Likelihood can't be compared between different evidence types"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Survey data is behavioral intent, not actual market action.",
+            "Correct! Early ticket sales (actual purchases, 40% above comparable) are a stronger likelihood signal than survey intent. Real money beats stated intentions.",
+            "Incorrect. Different evidence types have different likelihoods for predicting actual box office.",
+            "Incorrect. Bayesian analysis requires comparing likelihoods across evidence types."
+          ],
+          "explanation": "Likelihood prioritizes *actual behavior* (ticket sales) over *stated intent* (surveys). Real pre-sales are more likely to predict $60M+ opening than survey statements."
+        },
+        {
+          "question": "Your hypothesis: 'International audiences will account for 60% of opening weekend revenue.' Evidence: Marketing data shows your film resonates 35% stronger in international markets than typical Hollywood films. Under this hypothesis, what is the likelihood of seeing this marketing evidence?",
+          "options": [
+            "A) Very high likelihood\u2014stronger marketing resonance predicts higher international revenue share",
+            "B) Very low likelihood\u2014marketing strength doesn't guarantee revenue share",
+            "C) Moderate likelihood\u2014some correlation, but not deterministic",
+            "D) Zero likelihood\u2014international marketing is unrelated to revenue share"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. 'Very high' overstates the connection\u2014strong marketing doesn't guarantee 60% revenue share.",
+            "Incorrect. Marketing strength does correlate with international demand.",
+            "Correct! There's a positive but imperfect relationship. Strong marketing resonance makes the hypothesis more probable, but not certain\u2014moderate likelihood.",
+            "Incorrect. Marketing resonance and international revenue share are clearly related."
+          ],
+          "explanation": "Likelihood reflects correlation, not causation. Strong international marketing makes a 60% revenue share hypothesis more probable, but imperfectly\u2014hence moderate likelihood."
+        },
+        {
+          "question": "You predict 'Genre: Action films post-release will trend on social media.' Evidence: Your action film has 2M views on a viral clip in 48 hours, and the hashtag is #1 trending globally. What is the likelihood of observing this evidence if your hypothesis is true?",
+          "options": [
+            "A) Very low\u2014viral clips are rare",
+            "B) Low\u20142M views is modest for action films",
+            "C) High\u2014strong viral engagement aligns with action genre social media trends",
+            "D) Irrelevant\u2014hypothesis is about genre, not your film"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Relative to the hypothesis, this viral engagement is expected, not rare.",
+            "Incorrect. 2M views + #1 trending is substantial evidence for action genre social media success.",
+            "Correct! If action films trend on social media (hypothesis), observing 2M views + #1 hashtag is highly likely. Strong alignment.",
+            "Incorrect. Your film is the test case for the hypothesis."
+          ],
+          "explanation": "The evidence (viral engagement, #1 trend) is exactly what you'd expect to observe if action films post-release trend on social media. High likelihood."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Evaluating Evidence for Audience Appeal",
+      "content": "You're assessing whether your film's unique premise will appeal to mainstream audiences. Hypothesis: 'Mainstream audiences will embrace the unconventional narrative structure.' Evidence: Film festival acclaim (Sundance Best Narrative), critic reviews (85 Metascore), but limited mainstream demographic testing. Evaluate the likelihood: does festival acclaim and critical praise indicate mainstream appeal? Festival and critic success has moderate-to-high likelihood for mainstream appeal\u2014but it's not guaranteed. Mainstream audiences sometimes diverge from critics. Your posterior belief should increase from prior, but with caution.",
+      "questions": [
+        {
+          "question": "You have evidence: (1) 90% of film critics praise your unconventional narrative, (2) Only 62% of mainstream test audience find it 'engaging and original.' Under the hypothesis 'mainstream audiences will embrace unconventional narrative,' which evidence has higher likelihood?",
+          "options": [
+            "A) Critical praise (1) has higher likelihood",
+            "B) Test audience feedback (2) has higher likelihood",
+            "C) Both have equal likelihood",
+            "D) Mainstream test audiences are always right"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Critics may praise experimental narrative, but that's separate from mainstream appeal.",
+            "Correct! If mainstream audiences embrace it, you'd directly observe mainstream enthusiasm (62%). This is higher likelihood evidence than critic praise, which targets a different audience.",
+            "Incorrect. Different evidence types have different predictive power.",
+            "Incorrect. Mainstream audiences are important but not infallible."
+          ],
+          "explanation": "For a hypothesis about *mainstream* appeal, mainstream test audience data (62% engagement) is higher likelihood evidence than critic reviews (90% praise). Direct measurement beats proxy measurement."
+        },
+        {
+          "question": "Evidence: Your film's trailer has 50M YouTube views in 2 weeks. Your hypothesis: 'This unconventional narrative will attract a diverse age demographic (18-65).' Is this evidence high or low likelihood for the hypothesis?",
+          "options": [
+            "A) High likelihood\u201450M views means diverse appeal",
+            "B) Low likelihood\u2014views don't break down by age",
+            "C) Moderate likelihood\u2014views indicate interest, but demographic targeting is uncertain",
+            "D) Zero likelihood\u2014YouTube analytics are irrelevant"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. 50M views suggests interest, but views alone don't confirm age diversity.",
+            "Incorrect. Views do indicate interest, even if demographic detail is missing.",
+            "Correct! 50M views suggest broad engagement (moderate likelihood for age diversity), but without demographic breakdown, you can't confirm 18-65 spread. Reasonable but not definitive.",
+            "Incorrect. YouTube engagement is meaningful evidence for audience interest."
+          ],
+          "explanation": "High view counts suggest broad interest, but they lack demographic precision. Moderate likelihood: the evidence supports the hypothesis but isn't conclusive without age breakdowns."
+        },
+        {
+          "question": "Hypothesis: 'Social media discourse about your film's themes will drive opening weekend ticket sales.' Evidence: Film's hashtag has 5M mentions pre-release, 70% positive sentiment. Is this high or low likelihood evidence?",
+          "options": [
+            "A) High likelihood\u2014massive social media engagement predicts sales",
+            "B) Low likelihood\u2014social media chatter doesn't translate to ticket sales",
+            "C) Moderate-to-high likelihood\u2014positive sentiment and volume suggest audience interest, though social-to-sales conversion varies",
+            "D) Irrelevant\u2014themes don't drive sales"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. 'High' overstates\u2014social media engagement correlates with, but doesn't guarantee, sales.",
+            "Incorrect. Social media sentiment does correlate with ticket sales.",
+            "Correct! Massive engagement (5M) + positive sentiment (70%) suggest audience interest. Social-to-sales conversion is real but variable\u2014moderate-to-high likelihood is accurate.",
+            "Incorrect. Themes discussed on social media do influence purchasing decisions."
+          ],
+          "explanation": "Social media discourse is strong but imperfect evidence for sales. The positive sentiment and volume make it moderate-to-high likelihood for opening weekend performance."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Posterior: Updating Your Beliefs with Evidence",
+      "content": "Now we combine everything: prior belief + likelihood of evidence = posterior belief. This is Bayesian updating in action. Imagine you greenlit a $80M action film. Your prior: 70% confidence it will reach $100M+ opening weekend globally. Then you gather evidence: test screenings show 81% 'highly likely to recommend,' comparable films in the past 2 years averaged $95M+, but international market surveys show mixed sentiment (40% definite intent). You weight all this evidence through likelihood: test screening feedback (high likelihood for box office success), comparable data (high likelihood), international surveys (moderate likelihood, conflicting). Your posterior belief\u2014a weighted combination\u2014might move to 75%+. In film production, your posterior is your decision point: greenlighting principal photography, committing to marketing spend, adjusting budget. Bayesian thinking keeps you grounded in evidence while respecting your hard-won experience."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Comprehensive: Prior, Likelihood, Posterior in Post-Production",
+      "content": "You're in post-production, deciding on reshoots. Your prior belief: 55% chance reshoots will meaningfully improve the final film's audience score. Evidence arrives: test screening feedback shows the first act feels 'rushed' (60% of viewers), but your DP and lead actor both say reshoots aren't feasible within budget. Integrate prior, likelihood, and evidence to update your posterior belief.",
+      "questions": [
+        {
+          "question": "Prior: 55% chance reshoots improve audience score. Evidence: 60% of test viewers find first act rushed (suggests reshoots needed), but budget constraints make them impossible. What should your posterior belief be about reshoots improving the score?",
+          "options": [
+            "A) Increase to 75%+ (evidence strongly suggests reshoots needed)",
+            "B) Decrease to 35%- (budget constraints make reshoots unlikely to happen)",
+            "C) Shift to 55-60% (evidence is mixed: need is clear, feasibility is not)",
+            "D) Become 100% certain reshoots are necessary"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Evidence suggests reshoots would help, but feasibility reduces confidence.",
+            "Incorrect. You're conflating 'whether reshoots would help' (posterior about efficacy) with 'whether we'll do reshoots' (posterior about feasibility).",
+            "Correct! Evidence shows reshoots would improve the score (60% viewer feedback), but budget feasibility is a constraint. Posterior increases modestly to 55-60%\u2014slightly higher than prior, tempered by feasibility.",
+            "Incorrect. You have evidence they'd help, but certainty is unwarranted due to constraints."
+          ],
+          "explanation": "Your posterior reflects two competing pieces: strong evidence (viewer feedback) that reshoots would help, weak evidence (budget) that they're feasible. Posterior rises modestly above prior."
+        },
+        {
+          "question": "You predict: 'Color grading will elevate the film's perceived production value by 15%+.' Evidence: (1) Test audiences rate the graded cut 8.2/10 for 'cinematic quality,' (2) Previous films with similar grading budgets averaged 7.8/10, (3) Your colorist says achievable in timeline. Estimate your posterior confidence in the 15% uplift prediction.",
+          "options": [
+            "A) Very low (10-30%)\u2014test scores are modest",
+            "B) Low-to-moderate (40-50%)\u2014mixed evidence",
+            "C) Moderate-to-high (65-75%)\u2014aligned evidence supports hypothesis",
+            "D) Very high (85%+)\u2014all evidence supports it"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. 8.2/10 vs. typical 7.8/10 is solid evidence of uplift.",
+            "Incorrect. Evidence is mostly aligned, not mixed.",
+            "Correct! Test scores (8.2 vs. baseline 7.8), comparable data, and feasibility all support the 15% uplift hypothesis. Posterior is moderately-to-highly confident: 65-75%.",
+            "Incorrect. 85%+ is overconfident; maintain some uncertainty despite positive evidence."
+          ],
+          "explanation": "All three evidence pieces (audience perception, comparative data, technical feasibility) align with your hypothesis, pushing posterior to 65-75%\u2014strong confidence, not certainty."
+        },
+        {
+          "question": "Prior: You believed 70% chance a different ending (that you're considering in reshoots) would resonate better with audiences than the current ending. Evidence: Test screening data shows 58% prefer the current ending, 42% prefer the alternative. What should your posterior be?",
+          "options": [
+            "A) Increase to 80%+ (alternative ending is more innovative)",
+            "B) Decrease sharply to 35-40% (test data contradicts your prior)",
+            "C) Stay at 70% (42% for alternative is close to 50-50)",
+            "D) Become 0% certain (data is definitive proof)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Evidence shows audience preference opposes your hypothesis.",
+            "Correct! 58% prefer current ending vs. 42% for alternative. This directly contradicts your 70% prior. Posterior drops to 35-40%, reflecting audience preference.",
+            "Incorrect. 42% vs. 58% is a meaningful gap (16 points), not a tie.",
+            "Incorrect. Observational data (58% vs. 42%) doesn't reach 0% certainty; maintain some uncertainty."
+          ],
+          "explanation": "Your prior (70% for alternative ending) faced evidence (58% prefer current ending) that strongly contradicts it. Posterior drops sharply to 35-40%."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Real-World Bayesian Decision-Making in Film",
+      "content": "You're a line producer deciding between two post-production vendors: Vendor A (known for technical excellence, high cost) and Vendor B (newer, lower cost, unproven track record). Prior belief: 60% that Vendor A delivers superior final quality. Evidence: (1) Vendor B's portfolio shows strong work on similar projects (increasing confidence in quality), (2) Budget constraints are tight\u2014extra Vendor A cost delays marketing spend (decreasing confidence you can afford Vendor A's premium). Integrate all signals: your prior, the likelihood of the evidence, and compute your posterior to decide.",
+      "questions": [
+        {
+          "question": "Prior: 60% confidence Vendor A delivers superior quality. Evidence: Vendor B's portfolio shows strong prior work on 3 similar films (all well-reviewed). What is your posterior confidence in 'Vendor A is superior'?",
+          "options": [
+            "A) Increase to 75%+ (Vendor A's reputation is proven)",
+            "B) Decrease to 40-50% (Vendor B's evidence challenges Vendor A's monopoly on quality)",
+            "C) Increase to 90%+ (Vendor A remains obviously superior)",
+            "D) Stay at exactly 60% (portfolio reviews don't change priors)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Evidence of Vendor B's quality should decrease, not increase, confidence in Vendor A's exclusive superiority.",
+            "Correct! Vendor B's strong portfolio weakens your prior belief in Vendor A's exclusive advantage. Posterior drops to 40-50%, acknowledging Vendor B as a credible alternative.",
+            "Incorrect. Vendor B's positive evidence reduces certainty in Vendor A's superiority.",
+            "Incorrect. Concrete portfolio evidence requires updating from the prior."
+          ],
+          "explanation": "Vendor B's strong portfolio (likelihood of quality work) reduces your posterior confidence in Vendor A's exclusive advantage from 60% to 40-50%."
+        },
+        {
+          "question": "Evidence: (1) Vendor A costs $150K more than Vendor B, (2) Budget analysis shows marketing spend will drop 20% if you choose Vendor A, (3) Marketing spend directly correlates with opening weekend box office (your studio data shows this). Integrating all evidence, should your posterior belief in 'Vendor A is the right choice' increase, decrease, or stay the same?",
+          "options": [
+            "A) Increase\u2014quality justifies cost",
+            "B) Decrease\u2014opportunity cost (reduced marketing) may outweigh quality gain",
+            "C) Stay the same\u2014cost and marketing are separate from quality",
+            "D) Irrelevant\u2014post-production vendor choice doesn't affect box office"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Quality alone doesn't justify cost when it reduces marketing effectiveness.",
+            "Correct! Evidence of reduced marketing spend (a known box office driver) makes Vendor A's premium quality less attractive. Posterior decreases\u2014the full cost includes opportunity cost.",
+            "Incorrect. In Bayesian decision-making, all downstream effects matter.",
+            "Incorrect. Post-production quality and marketing reach both drive opening weekend success."
+          ],
+          "explanation": "Bayesian decision-making accounts for all consequences. Vendor A's quality gain is offset by reduced marketing, so your posterior belief in 'Vendor A is right' decreases."
+        },
+        {
+          "question": "Final integration: Prior was 60% for Vendor A. Evidence: Vendor B's portfolio is strong (reduces Vendor A confidence), but Vendor A has 20+ year track record with your studio (increases Vendor A confidence). Integrate these competing signals. Estimate posterior for 'Vendor A is superior choice.'",
+          "options": [
+            "A) 55-60% (positive and negative evidence roughly balance near the prior)",
+            "B) 35-45% (Vendor B's quality evidence dominates)",
+            "C) 75%+ (Vendor A's proven track record dominates)",
+            "D) 100% or 0% (one factor must dominate entirely)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Vendor B's quality portfolio weakens the Vendor A case, but Vendor A's 20-year partnership strengthens it. These compete, keeping posterior near the prior: 55-60%.",
+            "Incorrect. Vendor B's portfolio is strong, but Vendor A's proven track record with your studio carries weight.",
+            "Incorrect. Vendor B's portfolio is strong evidence, reducing Vendor A's dominance.",
+            "Incorrect. Bayesian thinking acknowledges competing evidence; posteriors are usually between extremes."
+          ],
+          "explanation": "Competing evidence (Vendor B's quality vs. Vendor A's track record) roughly cancel out, so posterior stays near the prior: 55-60%. This is a genuine toss-up, requiring other factors (timeline, personal preference) to decide."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mastery: You're a Bayesian Decision-Maker",
+      "content": "Congratulations! You've mastered Bayesian statistics through the lens of film production. You now understand: **(1) Priors**: your informed beliefs before evidence (70% chance an actor has star power). **(2) Likelihood**: how probable observed evidence is under your hypothesis (critic acclaim strongly aligns with audience appeal\u2014high likelihood). **(3) Posterior**: your updated belief after integrating prior and evidence (critic praise + test screening scores = higher posterior confidence). You can now apply this framework to casting decisions, budget allocation, audience prediction, vendor selection, and post-production choices. Bayesian thinking is iterative: as production continues, you'll gather more evidence, refine posteriors, and make better decisions. Go forth and make films grounded in data-driven belief updating."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T05:48:39.452923+00:00",
+  "model": "claude-haiku-4-5"
+}

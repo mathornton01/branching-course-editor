@@ -1,0 +1,187 @@
+{
+  "id": "roguelike-probability-mastery",
+  "title": "Probability Theory in Game Design: Mastering Randomness",
+  "description": "Learn probability theory and random variables through a branching narrative where you balance a roguelike dungeon crawler. Your choices about loot distribution and combat variance lead to success or failure based on understanding discrete and continuous random variables.",
+  "topic": "Probability Theory and Random Variables",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "probability",
+    "random variables",
+    "game balance",
+    "discrete distributions",
+    "continuous distributions"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Game Balance Crisis",
+      "content": "You're a game designer who just received critical feedback: your roguelike dungeon crawler feels unfair and broken. Players complain that some runs are trivially easy while others are impossibly hard. The problem is clear now\u2014you haven't properly understood probability and random variables. Your loot drops are chaotic, your combat damage feels random, and player progression is unpredictable. You need to master probability theory to fix these systems before launch.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Path to Mastery",
+      "content": "Two critical systems need fixing using probability concepts. Which will you tackle first to restore game balance?",
+      "choices": [
+        {
+          "label": "Master Loot Distribution (Discrete Random Variables)",
+          "next": "n3"
+        },
+        {
+          "label": "Master Damage Variance (Continuous Random Variables)",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Understanding Discrete Random Variables",
+      "content": "A discrete random variable represents distinct, countable outcomes. In your loot system, when an enemy dies, they drop exactly one of four items: gold coin, health potion, iron sword, or nothing. Each outcome is a specific, separate value. You describe these outcomes using a Probability Mass Function (PMF), which assigns a probability to each possible value. Your PMF might be: P(gold)=0.30, P(potion)=0.25, P(sword)=0.20, P(nothing)=0.25. This mathematical precision is crucial\u2014your choice of PMF determines whether players feel rewarded or frustrated.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Design Your Loot Probability Distribution",
+      "content": "You understand that discrete random variables need a PMF. Now: how should you assign probabilities to your four loot types?",
+      "choices": [
+        {
+          "label": "Equal Chances for All Items (Uniform Distribution: 25% each)",
+          "next": "n5"
+        },
+        {
+          "label": "Different Probabilities by Rarity (Custom Distribution)",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "The Uniform Approach",
+      "content": "You implement a uniform PMF: every item has exactly 25% drop chance. Mathematically perfect fairness. You run a beta with 100 players, each killing 50 enemies. Your data confirms the distribution is perfectly uniform\u2014exactly what the PMF predicted. But players report something is broken. Legendary swords appear as often as nothing. Gold coins feel worthless. Progression is invisible. Players quit after realizing there's no rarity hierarchy, no sense of working toward better loot.",
+      "next": "n7"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "The Weighted Distribution Approach",
+      "content": "You design a tiered PMF: 50% common (gold coin), 30% uncommon (health potion), 15% rare (iron sword), 5% legendary (diamond sword). This custom discrete distribution creates progression. Testing with 100 players confirms your math: legendary drops appear exactly 5-6 times per 100 kills, making them feel special. Uncommon items are common enough to feel regular but not trivial. Players report feeling genuine excitement at drops. The game economy feels alive.",
+      "next": "n8"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "The Failed Experiment",
+      "content": "Your uniform PMF proves that mathematical fairness doesn't create fun. Players abandon the game because there's no sense of progression or rarity. You've learned the hard way: understanding discrete random variables and PMFs is just step one. The real skill is designing a distribution that both respects probability mathematics AND creates engaging gameplay. Theory without application fails."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Probability-Driven Success",
+      "content": "Your custom PMF creates the perfect loot economy. Players feel progression, excitement at rare drops, and consistent rewards for common ones. Your game launches to critical acclaim\u2014players praise the 'perfect balance' of your loot system. You've mastered discrete random variables and proven that probability theory is essential to game design. The PMF you designed directly created player engagement."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Understanding Continuous Random Variables",
+      "content": "A continuous random variable can take any value within a range\u2014infinitely many possibilities. In your combat system, a player's sword deals between 8 and 12 damage, but not just integer values: it could be 9.3 damage, or 10.7, or 11.234. You describe continuous random variables using a Probability Density Function (PDF), which shows the relative likelihood across the entire range. The shape of your PDF determines whether combat feels fair (outcomes cluster around an expected value) or swingy (extreme values are common).",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Real Combat PDFs in Professional Games",
+      "content": "World of Warcraft uses a uniform PDF for weapon damage: if a sword does 8-12 damage, every value across that range is equally likely. Dark Souls uses normal distribution: hits cluster around 10 damage, with 8 and 12 being rare. Diablo uses exponential distribution for critical strikes. Each PDF choice creates different gameplay: uniform feels random and swingy, normal feels consistent and fair, exponential creates rare but dramatic moments. The PDF you choose directly shapes whether players love or hate your combat.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "content",
+      "title": "Applying Normal Distribution to Combat Balance",
+      "content": "You implement a normal distribution PDF for your sword damage: centered at \u03bc=10 damage with standard deviation \u03c3=1. This means most hits cluster tightly around 10 (roughly 68% fall between 9-11 damage), extreme hits near 8 or 12 are uncommon, and truly extreme values are extremely rare. Testing shows combat feels dramatically more balanced. Players no longer get one-shot by lucky crits or frustrated by unlucky misses. The continuous probability distribution creates the fairness players crave.",
+      "next": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "Combat Mastery Achieved",
+      "content": "By understanding continuous random variables and PDFs, you've transformed combat from chaotic to fair. Players report that difficulty feels earned, not random. Your combat system receives praise for perfect balance. You've learned that the PDF you choose\u2014uniform, normal, exponential, or custom\u2014is one of the most important design decisions in game development. Probability theory isn't abstract math; it's the foundation of engaging gameplay."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "start"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "loot path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n9",
+      "label": "combat path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "continue"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "uniform"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "weighted"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "failure"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n8",
+      "label": "success"
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": "continue"
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": "apply"
+    },
+    {
+      "id": "c11",
+      "source": "n11",
+      "target": "n12",
+      "label": "success"
+    }
+  ],
+  "generated_at": "2026-03-27T11:42:30.771925+00:00",
+  "model": "claude-haiku-4-5"
+}

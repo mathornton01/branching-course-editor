@@ -1,0 +1,228 @@
+{
+  "id": "nn-marine-course",
+  "title": "Neural Networks and Deep Learning: Marine Biology Edition",
+  "description": "Learn neural networks and deep learning through the lens of marine biology applications. This adaptive course routes you to either foundational or advanced content based on your diagnostic assessment.",
+  "topic": "Neural Networks and Deep Learning",
+  "theme": "marine biology",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "neural networks",
+    "deep learning",
+    "machine learning",
+    "marine biology",
+    "adaptive learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "What's Your Neural Network Knowledge Level?",
+      "content": "Let's assess your current understanding of neural networks and learning systems. This diagnostic will help us tailor your learning path. Answer honestly\u2014there are no wrong answers, just opportunities to learn!",
+      "questions": [
+        {
+          "question": "A marine research team wants to identify whale species from underwater acoustic recordings. What would a neural network learn to do in this scenario?",
+          "options": [
+            "Store all whale songs in its memory exactly",
+            "Recognize patterns in sound frequencies unique to each species",
+            "Generate new whale songs that don't exist",
+            "Count the number of whales in each recording"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This approach wouldn't scale to new data",
+            "Correct! Neural networks excel at pattern recognition in high-dimensional data like audio",
+            "That's not what neural networks do",
+            "Neural networks can do much more than counting"
+          ],
+          "explanation": "Neural networks learn representations of data. In this marine biology task, the network would learn to distinguish acoustic signatures between whale species\u2014like how a marine biologist learns to identify species by their calls."
+        },
+        {
+          "question": "In a neural network, why are neurons organized into multiple layers?",
+          "options": [
+            "To store more information in each layer",
+            "To build increasingly abstract representations of the input data",
+            "To make training slower and more thoughtful",
+            "To ensure every neuron learns independently"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Storage isn't the main purpose",
+            "Correct! Each layer builds on the previous one, creating a hierarchy of features",
+            "We want efficient training",
+            "Neurons learn interdependently through connections"
+          ],
+          "explanation": "Like how an ocean ecosystem has different levels\u2014phytoplankton, zooplankton, small fish, large fish\u2014neural networks have levels that each process information at different degrees of abstraction."
+        },
+        {
+          "question": "What does 'training' a neural network involve?",
+          "options": [
+            "Teaching the network facts about marine biology",
+            "Adjusting the network's internal parameters so it predicts data correctly",
+            "Memorizing training examples word-for-word",
+            "Deleting neurons that make mistakes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Networks don't learn facts\u2014they learn patterns",
+            "Exactly! Training adjusts weights and biases to minimize prediction error",
+            "That would cause overfitting",
+            "The network learns by adjusting all parameters, not deleting neurons"
+          ],
+          "explanation": "Training is iterative: show examples, measure error, adjust parameters slightly, repeat. It's like how marine animals learn through experience and feedback."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Deep Learning for Complex Marine Challenges",
+      "content": "Deep neural networks excel at solving the hardest problems in marine biology. Convolutional Neural Networks (CNNs) detect patterns in images\u2014like identifying coral reef health from satellite imagery. Recurrent Neural Networks (RNNs) track sequences\u2014like predicting migration routes from tagged fish movement data over weeks. Attention mechanisms let networks focus on relevant details, similar to how marine scientists zoom in on crucial data points. These architectures learn hierarchical representations: early layers detect edges and colors in fish photos, middle layers recognize fins and body shapes, and deep layers recognize entire species. Deep learning powers real conservation: networks identify endangered sea turtles from drone footage, predict harmful algal blooms before they devastate ecosystems, and classify acoustic calls from deep-sea creatures we've never directly observed.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Whale Species Identification from Acoustic Data",
+      "content": "Consider a marine research team collecting underwater recordings from the Pacific. They want to classify calls as blue whales, humpback whales, or sperm whales. A deep CNN processes spectrograms (visual representations of sound). The network's first layers learn to recognize basic frequency patterns\u2014low rumbles vs. clicking sounds. Middle layers combine these into meaningful features: the complex click-trains characteristic of sperm whale echolocation. Deep layers learn species-specific call patterns. After training on 10,000 labeled recordings, the network achieves 94% accuracy on new data\u2014exceeding human experts' 89% accuracy. The network has learned what takes marine biologists years of experience to recognize: subtle acoustic signatures that reveal both species identity and behavioral context.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete: Deep Learning Mastery",
+      "content": "You've demonstrated mastery of neural networks and are ready for advanced deep learning. You understand hierarchical feature learning, architectural choices (CNNs, RNNs, attention), and real-world marine conservation applications. Next challenge: implement networks on real ocean datasets, explore transfer learning for species recognition, or investigate graph neural networks for modeling ecosystem relationships."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Neural Networks: Building Blocks and How They Learn",
+      "content": "A neural network is inspired by how brains\u2014and ocean ecosystems\u2014process information through interconnected units. Individual neurons receive inputs, apply a simple transformation (adding them up and passing through an activation function), and output a signal. Neurons connect in layers: the input layer receives raw data like sensor readings of ocean temperature, hidden layers process information, and the output layer produces predictions like 'this reading suggests a storm forming.' During training, the network adjusts connection strengths\u2014called weights\u2014to reduce errors. This process, backpropagation, sends error signals backward through the network, telling each neuron how to adjust. Think of it like marine larvae finding their way: each organism adjusts its movement based on feedback from its environment (light, chemicals, currents). After seeing thousands of examples, a trained network captures patterns without memorizing.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Predicting Fish School Movement from Environmental Factors",
+      "content": "A fishing community wants to predict where schools of sardines will gather tomorrow. They record three measurements: water temperature (\u00b0C), salinity (ppt), and light level (lux). A simple neural network with one hidden layer of 8 neurons learns from 500 historical examples. Input neurons receive today's conditions. Hidden neurons learn combinations: 'cold + high salinity = deep water dwelling' and 'bright light + warm = surface feeding.' The output neuron predicts school location (depth in meters). The network trains in 2 minutes on a laptop. On test data, it predicts depth within \u00b15 meters, 80% of the time\u2014useful for guiding fishing efforts sustainably.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Neural Networks in Marine Contexts",
+      "content": "Test your understanding of neural network fundamentals through marine biology applications.",
+      "questions": [
+        {
+          "question": "A marine research team trains a neural network to identify whether seawater samples contain harmful algae blooms. The inputs are chlorophyll concentration, temperature, and nutrient levels. How many input neurons should this network have?",
+          "options": [
+            "1 neuron (representing all inputs combined)",
+            "3 neurons (one per measurement)",
+            "100 neurons (for better accuracy)",
+            "It depends on the water depth and location"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Information would be lost combining inputs",
+            "Correct! Input layer size matches the number of features/measurements",
+            "More neurons in the input layer don't improve accuracy",
+            "The number of input neurons is determined by your data features, not environmental variables"
+          ],
+          "explanation": "The input layer has one neuron per feature in your data. Three measurements = three input neurons. Additional complexity would be learned by hidden layers, not more input neurons."
+        },
+        {
+          "question": "During training, a neural network's error is high. What does backpropagation do?",
+          "options": [
+            "Delete the neurons causing high error",
+            "Adjust the weights of connections to reduce error in future predictions",
+            "Increase the number of hidden layers automatically",
+            "Add more training data to the dataset"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Backpropagation doesn't delete neurons\u2014it adjusts them",
+            "Exactly! Backpropagation calculates how to adjust each weight to reduce error",
+            "Hidden layers might help, but that's separate from backpropagation",
+            "Backpropagation works with existing data by adjusting weights"
+          ],
+          "explanation": "Backpropagation is the learning algorithm. It sends error signals backward through the network, computing how much each weight contributed to the error and adjusting weights to improve future predictions."
+        },
+        {
+          "question": "You're training a network to predict fish catch size from weather conditions. After 1000 iterations, the network predicts training data perfectly but fails on new data. What's this called?",
+          "options": [
+            "Underfitting",
+            "Overfitting",
+            "Backpropagation failure",
+            "Activation dysfunction"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Underfitting is poor performance on both\u2014the opposite",
+            "Correct! The network memorized training patterns instead of learning generalizable relationships",
+            "Backpropagation still works; the network just over-adapted",
+            "This is not an activation function issue"
+          ],
+          "explanation": "Overfitting occurs when a network memorizes training data instead of learning general patterns. Like a marine student memorizing a textbook without understanding\u2014they'd fail on exam questions they haven't seen."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundational Path Complete: Neural Network Fundamentals Mastered",
+      "content": "Congratulations! You've built a solid foundation in neural networks: how neurons organize into layers, how backpropagation trains networks, and how networks learn patterns from real marine data. You now understand the core principles driving both simple and complex applications in ocean science. With this foundation, you're ready to explore deeper architectures, implement networks yourself, or tackle real marine conservation challenges using machine learning."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T10:54:17.478232+00:00",
+  "model": "claude-haiku-4-5"
+}

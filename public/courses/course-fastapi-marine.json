@@ -1,0 +1,160 @@
+{
+  "id": "course-fastapi-marine",
+  "title": "Web Development with FastAPI: A Marine Biology Perspective",
+  "description": "Learn FastAPI through the lens of marine biology. Build real web APIs for ocean research, monitoring, and conservation projects.",
+  "topic": "",
+  "difficulty": "beginner",
+  "estimated_minutes": 60,
+  "tags": [
+    "fastapi",
+    "web development",
+    "rest api",
+    "python",
+    "marine biology"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "FastAPI Fundamentals Diagnostic",
+      "content": "This diagnostic quiz determines your starting level. We'll assess your understanding of HTTP basics, Python fundamentals, and API design principles. Your score will route you to the most appropriate learning path.",
+      "position": {
+        "x": 80,
+        "y": 80
+      },
+      "questions": [
+        {
+          "question": "What HTTP method is typically used to retrieve data without modifying it, such as fetching a list of marine species from an ocean database?",
+          "options": [
+            "POST",
+            "GET",
+            "PUT",
+            "DELETE"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "POST creates resources; GET is for retrieval.",
+            "Correct! GET retrieves data safely.",
+            "PUT updates existing resources.",
+            "DELETE removes resources."
+          ],
+          "explanation": "GET requests are idempotent and safe\u2014perfect for retrieving data like marine species catalogs without side effects."
+        },
+        {
+          "question": "In FastAPI, which decorator would you use to create a route that accepts a GET request at '/species/{species_id}'?",
+          "options": [
+            "@app.post",
+            "@app.get",
+            "@app.put",
+            "@app.delete"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "POST is for creating resources.",
+            "Correct! @app.get defines a GET endpoint.",
+            "PUT is for updating.",
+            "DELETE removes resources."
+          ],
+          "explanation": "The @app.get decorator binds a Python function to a GET route, allowing clients to fetch species data."
+        },
+        {
+          "question": "What is the primary purpose of request validation in a web API?",
+          "options": [
+            "To slow down hackers",
+            "To ensure data conforms to expected structure before processing",
+            "To replace database transactions",
+            "To automatically generate HTML pages"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Security is one benefit, but validation's main role is structural integrity.",
+            "Correct! Validation prevents malformed data from entering your system.",
+            "Validation doesn't replace transactions.",
+            "APIs don't generate HTML (though FastAPI can)."
+          ],
+          "explanation": "Validating incoming data ensures your marine research API receives correctly formatted observations, coordinates, and measurements."
+        }
+      ],
+      "passing_score": 80,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Building Production APIs with FastAPI",
+      "content": "FastAPI is a modern framework for building high-performance REST APIs in Python. At scale, production APIs demand careful attention to database optimization, authentication, error handling, and concurrent request handling. When designing an API for a global ocean monitoring network tracking whale migrations, you must consider how thousands of concurrent sensor readings will be processed, validated, and stored efficiently. FastAPI's async/await support handles these concurrent connections elegantly. Pydantic models provide automatic validation and serialization, while dependency injection ensures clean, testable code.",
+      "position": {
+        "x": 460,
+        "y": 80
+      },
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Production API Example: Global Whale Tracking Network",
+      "content": "A marine conservation organization manages a global API where research vessels report whale sightings in real-time. Their FastAPI server uses Pydantic models to validate position data (latitude, longitude, species, timestamp) before storing in PostgreSQL. They implemented request rate limiting to prevent data floods from sensors, added JWT authentication so only authorized vessels can submit observations, and used async functions to handle 500+ concurrent connections from distributed research teams. Error responses distinguish between validation errors (malformed coordinates) and business logic errors (duplicate sightings within 1 km radius). This architecture processes millions of observations yearly while maintaining data integrity.",
+      "position": {
+        "x": 840,
+        "y": 80
+      },
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete",
+      "content": "Congratulations! You've mastered production-grade FastAPI architecture. You understand async request handling, validation patterns, authentication, and scalability considerations essential for real-world systems like ocean monitoring networks. Continue exploring FastAPI's advanced features: background tasks for long-running processes (analyzing sonar data), WebSockets for real-time data streaming (live reef monitoring), and GraphQL integrations.",
+      "position": {
+        "x": 1220,
+        "y": 80
+      },
+      "next": null
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "FastAPI Basics and REST Principles",
+      "content": "FastAPI makes building web APIs simple and fast in Python. Think of a REST API like a coral reef ecosystem: different organisms occupy different ecological niches (endpoints), and they interact through specific mechanisms (HTTP methods). A GET endpoint for retrieving fish species is like observing what lives in a particular reef zone. A POST endpoint for creating conservation records is like adding a new habitat observation. FastAPI automatically validates data using Pydantic, handles routing, and serves responses with automatic JSON serialization. Start by understanding the four main HTTP methods: GET (retrieve), POST (create), PUT (update), DELETE (remove).",
+      "position": {
+        "x": 460,
+        "y": 310
+      },
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Beginner Example: Aquarium Management API",
+      "content": "A small aquarium built a simple API to track their marine specimens. Using FastAPI, they created a route GET /specimens that returns all fish in their tank, and POST /specimens that adds new fish observations (species name, tank number, health status). They used a Pydantic model to ensure every POST request includes required fields. When someone requests GET /specimens/1, the API returns data for fish with ID 1. If data is malformed, FastAPI automatically rejects it with a clear error message. This basic API powers their mobile app and website, letting visitors see what creatures are currently on display.",
+      "position": {
+        "x": 840,
+        "y": 310
+      },
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Practice: Design a Tidal Monitoring API",
+      "content": "Design an API for a tide prediction service. You need endpoints to retrieve tidal data for specific locations and times, and to submit new tidal observations from remote sensors.",
+      "position": {
+        "x": 1220,
+        "y": 310
+      },
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Fundamentals Path Complete",
+      "content": "Well done! You now understand FastAPI fundamentals: routing, HTTP methods, request validation, and basic API design. You can build simple but functional APIs like the aquarium system. To deepen your skills, explore database integration (connecting to ocean monitoring datasets), authentication (protecting sensitive marine research data), and error handling (gracefully managing sensor failures).",
+      "position": {
+        "x": 1600,
+        "y": 80
+      },
+      "next": null
+    }
+  ]
+}

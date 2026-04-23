@@ -1,0 +1,257 @@
+{
+  "id": "fp-space-exploration",
+  "title": "Functional Programming Concepts: A Space Odyssey",
+  "description": "Explore functional programming through the lens of space exploration missions",
+  "topic": "Functional Programming Concepts",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "functional programming",
+    "pure functions",
+    "immutability",
+    "higher-order functions",
+    "space"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Welcome Aboard: Functional Programming in Space",
+      "content": "Welcome, space explorer! Just as space missions require precise, predictable systems to succeed, functional programming provides a set of principles that make code more reliable and easier to reason about. In this course, you'll discover how three core functional programming concepts\u2014pure functions, immutability, and higher-order functions\u2014map directly to the challenges faced by NASA engineers designing life-support systems, navigation computers, and autonomous rovers. Each concept you learn is a tool in your toolkit for writing code that works as reliably as a spacecraft's backup systems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Mission Module",
+      "content": "Every space mission requires specialized expertise. Which functional programming concept would you like to master first?",
+      "choices": [
+        {
+          "label": "Pure Functions: Predictable Navigation Systems",
+          "next": "n3"
+        },
+        {
+          "label": "Immutability: Immutable Mission Records",
+          "next": "n5"
+        },
+        {
+          "label": "Higher-Order Functions: Reusable Command Protocols",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Pure Functions: The Principle of Orbital Consistency",
+      "content": "A pure function always produces the same output for the same input and has no side effects\u2014it doesn't modify external state or depend on it. Think of a spacecraft's navigation algorithm: if you give it the same coordinates, velocity vector, and gravitational parameters, it will always calculate the exact same trajectory. This predictability is essential. If your propulsion system's thrust calculation randomly returned different values, your mission would be uncontrollable. Pure functions are your spacecraft's navigation computer\u2014reliable, testable, and independent from the rest of your system. In functional programming, pure functions are the foundation of code you can trust.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Calculating Delta-V for Orbit Transfer",
+      "content": "Consider a function that calculates delta-v (change in velocity needed for an orbital maneuver). Given the current orbit radius, target orbit radius, and gravitational constant, it always returns the exact same delta-v value. This pure function has no dependencies on mission time, fuel levels, or solar activity. You can test it in isolation, use it in parallel across multiple trajectory simulations, and be 100% confident of its behavior. That's the power of purity in orbital mechanics\u2014and in your code.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Immutability: Preserving Your Mission Timeline",
+      "content": "In space missions, once data is recorded in the black box flight recorder, it's immutable\u2014unchangeable. Similarly, immutable data in programming means once created, it never changes. Instead of modifying existing data, you create new versions. This prevents bugs where one part of your code unexpectedly changes data another part depends on. Imagine your rover's navigation history being accidentally overwritten midway through a critical autonomous traversal\u2014disaster. By keeping mission records immutable, you ensure that every component can safely assume the data it reads hasn't been altered by something else. Immutability also makes concurrent operations safer: multiple threads can read the same data without synchronization headaches.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Immutable Spacecraft Telemetry Logs",
+      "content": "Instead of modifying a telemetry record with new sensor readings, you create a new record with the additional data. The original record remains unchanged\u2014a perfect historical record. When your analysis team later investigates a system anomaly, they can trust that historical data hasn't been retroactively altered. Similarly, if your autonomous rover needs to backtrack due to an obstacle, it can safely reference its previous telemetry records knowing they're frozen in time, unchanged by the new situation. This immutable approach scales beautifully: multiple systems can safely access the same mission data without expensive locks or coordination.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Higher-Order Functions: Composable Command Protocols",
+      "content": "A higher-order function takes another function as input or returns a function as output. In space missions, think of command protocols as a hierarchy: a master command might receive a sub-command function, execute it, then pass the results to another command function. For example, a mission controller might pass different sensor-calibration routines to a generic 'process telemetry' function. Higher-order functions let you create reusable, adaptable components. Instead of writing separate code for each sensor type, you write one flexible function that accepts different sensor-processing functions. This composition pattern is how space agencies build reliable, maintainable systems\u2014by combining small, tested functions in new ways.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: Mission Command Sequencer",
+      "content": "A command sequencer accepts a list of operations (functions) and executes them in order, collecting results. For a Mars rover powered by solar panels, one sequence might be: charge_batteries \u2192 calibrate_sensors \u2192 scan_terrain \u2192 move_forward. Each step is a function, and the sequencer composes them together. If you need a different sequence for a night operation or a dust-storm protocol, you just pass a different set of functions. This composability is what makes space missions flexible and adaptable to unexpected conditions\u2014and it's the same power higher-order functions bring to your code.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: Building Reliable Space Systems with Functional Principles",
+      "content": "Whether you focused on pure functions, immutability, or higher-order functions, you've learned the same lesson: functional programming is about building systems you can reason about and trust. Pure functions eliminate surprise side effects, immutability prevents accidental data corruption, and higher-order functions enable composition and reuse. Space agencies depend on these principles because the cost of failure in space is measured in billions of dollars and human lives. Your code might not navigate Mars rovers, but the same principles that make spacecraft reliable\u2014predictability, safety, composability\u2014will make your systems more robust. Combine all three: write pure functions, keep your data immutable, and compose functions into larger behaviors.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Mission Control: Functional Programming Mastery Check",
+      "content": "You've completed your training modules. Now, let's verify your understanding with a final assessment. This mission-critical evaluation ensures you're ready to apply functional programming principles in real space exploration scenarios.",
+      "questions": [
+        {
+          "question": "You're writing a fuel-consumption calculator for a spacecraft. The function receives fuel volume, burn rate, and engine type. For the same inputs, it must always return the same remaining fuel estimate. What principle does this follow?",
+          "options": [
+            "Pure Functions",
+            "Immutability",
+            "Higher-Order Functions",
+            "Side Effects"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is a pure function\u2014same inputs always produce the same output, no side effects.",
+            "Not quite. Immutability is about data that doesn't change, not functions that return consistent results.",
+            "Not this one. Higher-order functions work with other functions, not with predictable calculations.",
+            "Actually, we're specifically avoiding side effects by using pure functions."
+          ],
+          "explanation": "A pure function guarantees predictability\u2014critical for spacecraft systems where reliability is non-negotiable."
+        },
+        {
+          "question": "Your rover's mission log records temperature, pressure, and radiation readings at each waypoint. Once recorded, this data should never be overwritten\u2014only new readings appended. Which principle protects these critical historical records?",
+          "options": [
+            "Pure Functions",
+            "Higher-Order Functions",
+            "Immutability",
+            "Function Composition"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Not this one. Pure functions are about consistent outputs, not protecting data from changes.",
+            "Higher-order functions deal with function composition, not data protection.",
+            "Exactly! Immutability ensures mission records are permanent and can't be accidentally altered.",
+            "Function composition is related to higher-order functions, not data safety."
+          ],
+          "explanation": "Immutable data ensures historical mission records remain accurate and trustworthy\u2014like a black box flight recorder."
+        },
+        {
+          "question": "You need to create a telemetry processing system where different mission phases (launch, orbit insertion, EVA, return) use different sensor-validation functions, but the core processing pipeline remains the same. How would you design this using functional programming?",
+          "options": [
+            "Write a separate processing function for each mission phase",
+            "Use a higher-order function that accepts different validation functions as parameters",
+            "Create a new immutable data structure for each phase",
+            "Make the processing function pure by removing all dependencies"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That would create redundant code and maintenance nightmares. Better to use composition.",
+            "Perfect! This uses higher-order functions for reusable, adaptable components.",
+            "Immutability doesn't solve the problem of reusing the same pipeline with different validators.",
+            "Making functions pure doesn't address the flexibility challenge here."
+          ],
+          "explanation": "Higher-order functions enable elegant composition: pass different validators to the same processing function, keeping code DRY and adaptable."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n11",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Mission Success: You're Now a Functional Programming Pilot",
+      "content": "Congratulations, space explorer! You've successfully mastered functional programming concepts. You understand pure functions' predictability, immutability's data safety, and higher-order functions' composability. These principles will guide you toward writing code that's as reliable as a spacecraft's backup systems. The universe of functional programming awaits\u2014continue your journey by practicing these patterns in your own projects. Remember: the same principles that keep Mars rovers operating autonomously will keep your systems running smoothly. Safe travels through the cosmos of code!"
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Course Review Required: Recalibrating Your Understanding",
+      "content": "Your assessment indicates some concepts need review. Don't worry\u2014even NASA engineers practice orbital mechanics repeatedly. Let's revisit the core ideas: pure functions always return the same output for the same input, immutability prevents accidental data changes, and higher-order functions enable composition. Take a moment to reflect on each concept and how it maps to space mission reliability. You're ready for another attempt.",
+      "next": "n10"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin mission"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Navigate Pure Functions"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Explore Immutability"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Master Higher-Order Functions"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Study example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Converge"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Study example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Converge"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Study example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Converge"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Final challenge"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Pass"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n12",
+      "label": "Needs review"
+    },
+    {
+      "id": "c14",
+      "source": "n12",
+      "target": "n10",
+      "label": "Reassess"
+    }
+  ],
+  "generated_at": "2026-03-27T03:03:55.554585+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,238 @@
+{
+  "id": "bayes-env-sci",
+  "title": "Bayesian Statistics for Environmental Science",
+  "description": "Learn Bayesian reasoning through real environmental monitoring, species management, and climate science applications.",
+  "topic": "Bayesian Statistics",
+  "theme": "environmental science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "statistics",
+    "bayesian",
+    "environmental-science",
+    "probability",
+    "inference"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Bayesian Thinking Matters in Environmental Science",
+      "content": "Environmental scientists constantly update their beliefs with new data. When a river's pollution level changes, we don't just accept the measurement at face value\u2014we combine it with what we know about historical patterns, seasonal variations, and pollution sources. Bayesian statistics formalizes this reasoning: **Prior** (what we believed before), **Likelihood** (what the new data tells us), and **Posterior** (our updated belief). This course explores three essential environmental applications: air quality monitoring, species population estimation, and climate projections.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Path: Three Environmental Challenges",
+      "content": "Environmental scientists tackle different types of inference problems. Below are three real applications of Bayesian reasoning. You can explore them in any order\u2014each builds your intuition for a different aspect of Bayesian thinking.",
+      "choices": [
+        {
+          "label": "Air Quality Monitoring: Bayes' Theorem in Action",
+          "next": "n3"
+        },
+        {
+          "label": "Species Population Estimation: Priors and Data",
+          "next": "n5"
+        },
+        {
+          "label": "Climate Projections: Working with Uncertainty",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Bayes' Theorem: Air Quality Monitoring",
+      "content": "Air quality monitoring uses Bayes' Theorem to interpret sensor readings. Your **Prior**: Based on historical data, you expect PM2.5 levels around 35 \u00b5g/m\u00b3 on a typical day. Your **Likelihood**: A new sensor reading shows 55 \u00b5g/m\u00b3. But sensors have measurement error\u2014a true value of 50 \u00b5g/m\u00b3 would produce this reading with high probability, while a true value of 30 \u00b5g/m\u00b3 would be less likely. Your **Posterior**: Combining your prior belief (35 \u00b5g/m\u00b3 typical) with the likelihood (55 \u00b5g/m\u00b3 observed), you update to believe the true air quality is likely worse than usual\u2014perhaps around 48 \u00b5g/m\u00b3. This is Bayes' Theorem at work, turning raw data into informed decisions.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Detecting a Wildfire Smoke Event",
+      "content": "During fire season, a regional monitoring network detects a sudden spike in PM2.5: 120 \u00b5g/m\u00b3 (hazardous levels). Before this reading, your prior\u2014based on clean air days\u2014was P(high smoke | historical data) = 0.05. But you know that if a nearby wildfire exists, P(high sensor reading | wildfire) = 0.9. Using Bayes' Theorem, P(wildfire | high reading) = (0.9 \u00d7 0.05) / P(high reading) = roughly 0.45 after accounting for other pollution sources. This posterior probability (45%) justifies alerting the public and investigating wildfire activity. Without Bayesian reasoning, you'd either ignore the spike or over-react; Bayesian inference calibrates your response.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Priors and Likelihood: Species Population Estimation",
+      "content": "Conservation ecologists estimate endangered species populations by combining prior knowledge with field observations. Your **Prior**: From historical surveys and habitat models, you believe the northern spotted owl population in a forest region is distributed around 150\u2013200 birds. Your **Likelihood**: A team conducts a careful survey and records 45 owls across marked territories. This likelihood reflects the observation model: if the true population were 180, you'd expect to observe roughly 45 with the survey's detection probability. Your **Posterior**: Combining the prior (150\u2013200 likely) with the observation (45 owls seen), you update: perhaps 120\u2013140 birds total, accounting for missed detections. Priors prevent absurd estimates: if you saw 0 owls, the prior keeps you from concluding the species is extinct.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Estimating Coral Reef Fish Populations",
+      "content": "A marine biologist studies a coral reef's fish diversity. Prior knowledge from published studies suggests ~2000 small fish on healthy reefs. A new survey using underwater drones records 480 individuals. The likelihood depends on detection probability: drones detect roughly 35% of fish. Combining prior (2000 typical) and likelihood (480 observed at 35% detection), the posterior estimate is approximately 1,400 fish. If the scientist had ignored the prior and simply divided 480 by 0.35 (~1,370), they'd get a similar answer, but the Bayesian approach also quantifies uncertainty: the posterior distribution shows credible ranges (perhaps 1,200\u20131,600) rather than false certainty. This uncertainty is critical for management decisions.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Posterior Distributions: Climate Projections",
+      "content": "Climate scientists use Bayesian models to forecast future temperatures while honestly representing uncertainty. Rather than predicting a single value (e.g., \"2.3\u00b0C warming\"), they construct a **posterior distribution**\u2014a range of plausible outcomes with probabilities. Your **Prior**: Historical climate models suggest warming of 1.5\u20133\u00b0C by 2100 under current emissions. Your **Likelihood**: Observations of current CO\u2082 rise, ocean heat uptake, and feedback mechanisms update this. Your **Posterior**: A Bayesian climate model might conclude P(warming > 2\u00b0C) = 0.75, P(warming > 3\u00b0C) = 0.30. This distribution, not a single forecast, informs policy: leaders can ask \"What's the chance we exceed 2\u00b0C?\" and get an honest answer rooted in both model physics and observed data.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Projecting Rainfall Changes in Dryland Agriculture",
+      "content": "An agricultural scientist models rainfall in a semi-arid region using 40 years of historical precipitation and climate model outputs. Prior: Rainfall variability based on historical patterns. Likelihood: Climate models project a 10\u201315% decline by 2050, but models disagree\u2014some show 5%, others 20%. The posterior distribution synthesizes both sources of uncertainty, yielding: P(rainfall declines by > 10%) = 0.60. Farmers need this full distribution to plan; knowing there's a 60% chance of >10% decline helps them choose drought-resistant crops and irrigation strategies. A single forecast (\"expect 12% decline\") would hide the 40% chance of smaller changes or possible increases.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Bayesian Approaches: A Unified Environmental Monitoring System",
+      "content": "Real environmental management systems integrate all three Bayesian components. Consider a national water quality program: **Air Quality Networks** (Bayes' Theorem for sensor fusion) identify pollution sources and alert communities. **Biodiversity Monitoring** (priors and likelihoods) tracks species populations to guide conservation. **Climate Projections** (posterior distributions) plan infrastructure resilience. A Bayesian framework unifies these: you maintain beliefs that update with data, you quantify uncertainty honestly, and you make decisions under that uncertainty. The power of Bayesian statistics is that it formalizes the way expert environmental scientists already think\u2014but now with mathematical rigor, reproducibility, and transparency.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Bayesian Reasoning in Environmental Science",
+      "content": "Test your understanding of how Bayesian statistics applies to environmental challenges.",
+      "questions": [
+        {
+          "question": "A coastal city monitors sea level rise. Historical data (prior) suggests 3\u20134 mm rise per year. New satellite measurements (likelihood) show 5.2 mm this year. What does the posterior tell us?",
+          "options": [
+            "We should ignore the historical data and believe the satellite measurement completely.",
+            "We should ignore the satellite measurement and stick with the historical average.",
+            "The true rate is likely between the historical average and the satellite measurement, combining both sources of information.",
+            "Satellite measurements are always more accurate, so the posterior must be 5.2 mm."
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Bayesian reasoning combines both sources; we don't ignore either.",
+            "Incorrect. New data should influence our beliefs; ignoring it wastes information.",
+            "Correct! The posterior balances prior knowledge and new evidence. If the satellite is reliable, we might update to ~4.5 mm; if it's less reliable, we stay closer to 3.5 mm.",
+            "Incorrect. The posterior accounts for both the prior and likelihood; neither dominates alone."
+          ],
+          "explanation": "Bayesian inference synthesizes prior beliefs with new data. We don't choose one over the other; we weight them according to their reliability. A posterior of ~4.5 mm reflects both the historical 3\u20134 mm trend and the current satellite reading of 5.2 mm."
+        },
+        {
+          "question": "An endangered species has a prior population estimate of 500\u2013800 individuals. A new survey finds 120 animals, but surveys only detect 20% of the population. How do Bayesian approaches handle this discrepancy?",
+          "options": [
+            "The low detection rate means the survey is useless; ignore it and trust the prior.",
+            "The survey directly contradicts the prior, so the prior must be wrong.",
+            "The prior prevents us from concluding the population is only 120. The likelihood (120 observed at 20% detection) suggests ~600 animals, consistent with the prior range.",
+            "Bayesian methods cannot handle incomplete detection; we need 100% detection to use Bayes' Theorem."
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Even low-detection data is informative when we account for detection probability.",
+            "Incorrect. Good priors aren't overturned by a single survey; they're updated.",
+            "Correct! Bayesian inference accounts for detection probability. Observing 120 at 20% detection \u2248 600 true animals. The prior (500\u2013800) and likelihood align, so the posterior remains in that range.",
+            "Incorrect. Bayesian methods excel when detection is incomplete; that's precisely when priors are most valuable."
+          ],
+          "explanation": "When observation models are imperfect (e.g., low detection), priors become especially important. They anchor estimates and prevent absurd conclusions. A Bayesian approach adjusts the observed count by the detection rate and updates the prior accordingly."
+        },
+        {
+          "question": "A climate model shows a posterior distribution: P(global temperature rise > 2\u00b0C) = 0.65. Why is this distribution more useful than a single forecast like \"expect 2.1\u00b0C rise\"?",
+          "options": [
+            "Distributions are always better than point estimates, no matter the context.",
+            "A single forecast is clearer and easier to communicate to policymakers.",
+            "The distribution reveals the range of plausible outcomes and their probabilities, allowing decision-makers to assess risk and plan for multiple scenarios.",
+            "Distributions require less computational effort than point estimates."
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Context matters; sometimes point estimates are appropriate. But for climate policy, distributions are crucial.",
+            "Incorrect. Clarity is important, but honesty about uncertainty is more important. A single forecast hides the range of possibilities.",
+            "Correct! Distributions show P(>2\u00b0C) = 0.65 and P(<2\u00b0C) = 0.35, informing risk assessments. Policymakers can ask, 'What's the cost of 3\u00b0C rise versus 1.5\u00b0C?' and plan accordingly.",
+            "Incorrect. Distributions typically require more computation, not less."
+          ],
+          "explanation": "Posterior distributions are essential for environmental decision-making because they quantify uncertainty. They allow risk-conscious planning: if there's a 65% chance of exceeding 2\u00b0C, that's very different from a 20% chance. Policy depends on this full picture, not just a point forecast."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Mastering Bayesian Environmental Science",
+      "content": "Congratulations! You've learned how Bayesian statistics transforms environmental decision-making. You now understand how scientists combine prior knowledge with new observations to make honest, uncertainty-aware inferences about air quality, species populations, and climate. These principles\u2014formalizing belief updates, quantifying uncertainty, and making decisions under that uncertainty\u2014are at the heart of modern environmental monitoring and conservation. As you encounter environmental data in your work or studies, you'll recognize opportunities to think Bayesianly: What did we believe before? What does the new data tell us? How should we update our beliefs?"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Air Quality Path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Species Path"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Climate Path"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Assessment Passed"
+    }
+  ],
+  "generated_at": "2026-03-27T13:43:10.391580+00:00",
+  "model": "claude-haiku-4-5"
+}

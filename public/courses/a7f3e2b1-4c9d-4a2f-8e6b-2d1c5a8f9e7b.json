@@ -1,0 +1,136 @@
+{
+  "id": "a7f3e2b1-4c9d-4a2f-8e6b-2d1c5a8f9e7b",
+  "title": "Control Systems for Adaptive Learning Platforms",
+  "description": "Learn fundamental control systems concepts by designing an adaptive learning system for an education technology platform. Navigate real-world tradeoffs between feedback and feedforward control strategies, and discover how gain tuning and system stability affect learner outcomes.",
+  "topic": "Control Systems",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 25,
+  "tags": [
+    "control-systems",
+    "edtech",
+    "feedback-loops",
+    "adaptive-learning",
+    "system-design",
+    "stability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Adaptive Learning Challenge",
+      "content": "You're designing the control algorithm for EduFlow, a platform serving 500,000 students. The challenge: students vary wildly in learning pace and needs. Maria just scored 45% on Linear Regression\u2014a critical error signal. The system must automatically adjust her learning path within seconds. You face a fundamental decision: should your control system respond based on Maria's current struggles (real-time feedback), or should it predict and prevent struggles before they happen (feedforward prediction)? Your choice will determine how EduFlow balances reactivity with proactivity across its entire student base.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Control Philosophy: React or Predict?",
+      "content": "Your first strategic decision shapes the platform's entire philosophy. Reactive systems measure problems and correct them after they occur. Proactive systems predict problems and prevent them before they happen. Which approach should guide EduFlow's algorithm design?",
+      "choices": [
+        {
+          "label": "Real-Time Feedback Control - Respond to What We Measure",
+          "next": "n3"
+        },
+        {
+          "label": "Predictive Feedforward Control - Anticipate What Will Happen",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Feedback Control: The Error-Correction Loop",
+      "content": "In feedback control, you measure the output (Maria's test score: 45%), calculate error against your goal (100% mastery), and take corrective action: reducing difficulty, adding practice problems, providing scaffolded hints. Like a car's cruise control that adjusts throttle based on current speed, EduFlow adjusts difficulty based on measured performance. The power: real-time responsiveness to actual student struggles. The danger: unstable oscillations. If your \"gain\" (sensitivity to error) is too high, the system over-corrects repeatedly\u2014swinging between too-easy and too-hard content. Too low, and students plateau without progress. Control systems engineers call this the gain-stability tradeoff: aggressive response achieves fast error correction but risks oscillation; conservative response maintains stability but sacrifices speed.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Feedback Gain Selection: Tuning System Response",
+      "content": "Maria's 45% score is a clear error signal: -55% deviation from target. Your feedback controller must act, but how aggressively? High-gain feedback reduces error quickly but can overshoot and oscillate. Low-gain feedback avoids oscillation but leaves students stuck. The mathematical principle: system response depends on gain and damping. An underdamped system (high gain, low damping) oscillates. A critically damped system (balanced gain with proper damping) reaches steady-state smoothly. Which tuning strategy will you implement for Maria and thousands like her?",
+      "choices": [
+        {
+          "label": "High-Gain Response: Aggressive Difficulty Reduction (No Damping)",
+          "next": "n6"
+        },
+        {
+          "label": "Optimally-Tuned Response: Balanced Adjustment with Built-In Damping",
+          "next": "n5"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Optimal Tuning: Achieving Steady-State Mastery",
+      "content": ""
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Instability: The Oscillating Feedback Loop Trap",
+      "content": ""
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Feedforward Control: Predicting and Preventing Failure",
+      "content": "Rather than measuring error and reacting, feedforward control predicts what will go wrong and prevents it proactively. Before Maria attempts Linear Regression, your system analyzes her prerequisite knowledge: weak in matrix operations and linear algebra fundamentals. Instead of waiting for failure, your feedforward controller injects a targeted matrix fundamentals module into her path preemptively. By the time she reaches Regression, she's prepared. Unlike feedback (which reacts after failure with inherent delay), feedforward acts before the problem occurs. The mathematics: a well-designed feedforward controller compensates for known disturbances before they affect system output. The risk: prediction errors waste student time on irrelevant content. False positives reduce motivation; false negatives miss real gaps. Modern adaptive systems often combine both: feedforward for major gaps, feedback for fine-tuning.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Predictive Success: Proactive Adaptation at Scale",
+      "content": "You implement feedforward prediction using machine learning. Your model identifies Maria's matrix weakness with 87% confidence and preemptively assigns targeted fundamentals practice before Linear Regression. She completes it in 45 minutes\u2014confidence building, not damage control. She enters Linear Regression stronger and scores 82% on her first attempt. One week later: 94% mastery. No oscillation, no emotional turbulence, no wasted time in irrelevant remediation. Your feedforward system is 40% faster than feedback-only approaches for students with identifiable prerequisite gaps. Trade-off discovered: three students received unnecessary matrix instruction (model false positives). You refine the prediction threshold and retrain monthly. Over time, EduFlow's feedforward control becomes industry-legendary\u2014students progress smoothly, with struggles prevented rather than managed reactively. The insight: feedforward requires excellent predictive models and continuous refinement, but when properly calibrated, it outperforms reactive feedback control by preventing failures entirely rather than correcting them after the fact."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Real-Time Feedback Control"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Predictive Feedforward Control"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Balanced Tuning with Damping"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "High-Gain Aggressive Response"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T08:54:48.611654+00:00",
+  "model": "claude-haiku-4-5"
+}

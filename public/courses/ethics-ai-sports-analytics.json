@@ -1,0 +1,137 @@
+{
+  "id": "ethics-ai-sports-analytics",
+  "title": "Ethics in Artificial Intelligence: A Sports Analytics Case Study",
+  "description": "Learn how to build ethical AI systems through a realistic scenario in sports analytics. Navigate ethical dilemmas in building an injury-prediction AI system and see how your choices affect players, organizations, and society.",
+  "topic": "Ethics in AI",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 20,
+  "tags": [
+    "ethics",
+    "AI",
+    "bias",
+    "fairness",
+    "machine learning",
+    "responsible AI",
+    "sports analytics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Next Big Trade: Building AI for Injury Prevention",
+      "content": "Your professional sports organization just secured funding to build an AI system that predicts which players are at risk of serious injuries. The goal is to improve training programs, optimize recovery time, and keep your athletes healthy. Your data science team has access to 20+ years of player injury records, medical evaluations, performance metrics, and training logs from your league. But before you dive in, you need to make some crucial decisions about how to build this system responsibly.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Data Collection Philosophy",
+      "content": "As you plan your injury prediction AI, you face an important choice about your data strategy. Should you prioritize speed and accuracy by using all available historical data, or should you take time to audit and address potential biases in that data first?",
+      "choices": [
+        {
+          "label": "Use all historical data available (20+ years) for maximum predictive accuracy",
+          "next": "n3"
+        },
+        {
+          "label": "Audit and clean the data first to address potential biases, even if it takes more time",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Hidden Patterns: When Historical Data Amplifies Bias",
+      "content": "Your team builds the AI model using all available historical data. The system achieves impressive accuracy (94%). However, during internal testing, your ethics consultant raises concerns. The model predicts injury risk 40% higher for players from certain demographic groups, despite controlling for sport position and training intensity. Investigation reveals the bias: decades ago, the league had limited access to quality medical facilities for all players, and medical reporting standards varied widely. The algorithm learned these historical inequities and treats them as predictive features. Your team faces a difficult moment: the model is accurate on aggregate, but unfair for certain populations.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "The Accuracy vs. Fairness Dilemma",
+      "content": "Your data science team has identified a significant fairness issue in the model. The model works well overall, but makes biased predictions for certain player demographics. Now you must decide: do you deploy a highly accurate but unfair system, or do you pause to redesign it for fairness?",
+      "choices": [
+        {
+          "label": "Deploy the model as-is; overall accuracy is high and the bias is not intentional",
+          "next": "n5"
+        },
+        {
+          "label": "Pause deployment and redesign the model to address fairness",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Unforeseen Consequences",
+      "content": "Your organization deploys the injury-prediction AI. Within months, complaints emerge: players from underrepresented groups report being unfairly flagged for preventative measures they don't need, affecting their playing time and career prospects. The league faces a discrimination lawsuit. Your organization's reputation suffers, player trust erodes, and you're forced to retire the system. The painful lesson: optimizing for accuracy alone, without considering fairness, can create real-world harm\u2014even unintentionally. This case becomes a cautionary tale taught in ML ethics courses for years to come."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Ethical AI in Action",
+      "content": "Your team redesigns the model using fairness-aware techniques: they weight the training data to balance representation, add fairness constraints to the loss function, and validate that prediction error rates are similar across all player demographics. The new model achieves 91% accuracy\u2014only slightly lower\u2014but eliminates systematic bias. When deployed, players across all backgrounds receive fair, trustworthy injury assessments. Your organization becomes a league leader in responsible AI, attracting top talent who value ethical treatment. The lesson: taking time to build fair AI systems pays off in trust, reputation, and long-term success."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Designing Fair AI: Starting with Ethics",
+      "content": "Your team takes the ethical-first approach. Before building the model, you conduct a fairness audit of your data: reviewing historical reporting biases, ensuring diverse player representation, consulting with players and coaches about what factors actually matter for injury risk. You bring in domain experts from sports medicine and player advocacy groups. Your data science team uses fairness-aware machine learning techniques\u2014such as bias-reduction algorithms and fairness constraints\u2014from the start. You build multiple models and test each one to ensure prediction accuracy is similar across all player demographics. This deliberate process takes longer, but by the time you're ready to deploy, you have a system that is both accurate and trustworthy.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Trust and Success",
+      "content": "Your injury-prediction AI launches with player and coach confidence. Players trust the system because they've been involved in its development and can see it treats everyone fairly. Coaches use the insights to genuinely improve training and recovery. The system prevents injuries, extends player careers, and your organization becomes known for ethical AI leadership. New players want to join because they trust how they'll be treated. The outcome: responsible AI design isn't a constraint on performance\u2014it's a foundation for it."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "begin scenario"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "choose accuracy-first"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "choose ethics-first"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "discover bias"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "deploy with bias"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "fix bias"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "launch fair system"
+    }
+  ],
+  "generated_at": "2026-03-27T07:21:25.512761+00:00",
+  "model": "claude-haiku-4-5"
+}

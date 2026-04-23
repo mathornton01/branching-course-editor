@@ -1,0 +1,227 @@
+{
+  "id": "comp-arch-healthcare",
+  "title": "Computer Architecture in Healthcare",
+  "description": "Learn how computers are structured and operate through the lens of healthcare systems and medical technology.",
+  "topic": "Computer Architecture",
+  "theme": "healthcare",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer-architecture",
+    "healthcare",
+    "hardware",
+    "systems"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Computer Architecture Fundamentals Diagnostic",
+      "content": "Test your current understanding of how computers are structured and process healthcare data. Your answers will determine the best learning path for you.",
+      "questions": [
+        {
+          "question": "In a hospital's Electronic Health Record (EHR) system, where does patient data temporarily stay while the CPU actively processes it for display on a clinician's workstation?",
+          "options": [
+            "A) Hard drive storage",
+            "B) RAM (main memory)",
+            "C) Network cable",
+            "D) Printer output queue"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Hard drives store data permanently but are too slow for active processing.",
+            "Correct! RAM holds data being actively processed by the CPU. The CPU accesses RAM thousands of times per second.",
+            "Network cables transmit data but don't store it for processing.",
+            "Printers are output devices, not storage for processing."
+          ],
+          "explanation": "RAM (Random Access Memory) is where the CPU directly accesses and manipulates data. For an EHR system to display patient information, that data must be loaded from storage (disk) into RAM for the CPU to work with it."
+        },
+        {
+          "question": "A medical imaging workstation receives a large CT scan file from the hospital's network. What sequence describes how the computer processes it?",
+          "options": [
+            "A) Fetch scan from storage \u2192 Decode image data \u2192 Execute display operations",
+            "B) Display \u2192 Load \u2192 Decode",
+            "C) Store \u2192 Delete \u2192 Display",
+            "D) Process \u2192 Cache \u2192 Forget"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is the fetch-execute-decode cycle that's fundamental to how CPUs work.",
+            "The sequence is reversed\u2014you must fetch and decode before displaying.",
+            "You wouldn't delete medical data before displaying it!",
+            "The CPU doesn't forget critical patient data during processing."
+          ],
+          "explanation": "The CPU follows a fetch-execute cycle: it fetches instructions and data from memory, decodes them, executes operations, and stores results. For medical imaging, this means fetching the scan file, decoding the image format, and executing display commands."
+        },
+        {
+          "question": "What is the primary role of the CPU in a healthcare data processing system like a hospital's patient monitoring network?",
+          "options": [
+            "A) Store all patient records permanently in its own storage",
+            "B) Generate the images that appear on display screens",
+            "C) Fetch instructions and data from memory, then execute calculations and operations",
+            "D) Generate the electrical power for the network"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The CPU doesn't store data permanently\u2014that's what hard drives do. The CPU retrieves data from RAM to process it.",
+            "The CPU computes which pixels to display, but the GPU and display hardware handle the actual image generation.",
+            "Correct! This is the fundamental job of the CPU: the fetch-execute cycle. Everything else in a computer follows from this.",
+            "CPUs use electrical power; they don't generate it."
+          ],
+          "explanation": "The CPU (Central Processing Unit) is the 'brain' of the computer. It continuously fetches instructions and data from memory, executes operations, and stores results. In healthcare, this might mean fetching a patient's test result from RAM, executing a diagnostic algorithm, and storing the output."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2a",
+      "failure_target": "n2b"
+    },
+    {
+      "id": "n2a",
+      "type": "content",
+      "title": "Advanced Computer Architecture: Multi-Core Processing in Healthcare",
+      "content": "Modern healthcare systems rely on advanced multi-core CPU architectures to handle massive computational demands. Hospital networks, AI-powered diagnostic tools, and real-time patient monitoring systems all require parallel processing\u2014where multiple CPU cores work simultaneously on different tasks. For example, while one core processes a patient's MRI scan through an AI algorithm, another core handles vital sign monitoring for dozens of patients, and a third manages EHR database queries. Multi-core systems achieve this through shared L3 caches, advanced memory hierarchies, and sophisticated scheduling. In telemedicine platforms, multiple cores enable simultaneous video compression, encryption, and data transmission. Understanding cache optimization and memory bandwidth becomes critical when a radiologist workstation must display high-resolution images in under 200ms while also running background analysis. Healthcare's demand for low-latency, high-throughput processing has driven CPU evolution from single-core to 16+ core designs.",
+      "next": "n3a"
+    },
+    {
+      "id": "n3a",
+      "type": "example",
+      "title": "Case Study: Hospital PACS Architecture Under Load",
+      "content": "A radiology department's PACS (Picture Archiving and Communication System) receives a 5GB dataset of CT scans from the morning's procedures. A multi-core CPU architecture handles this elegantly: Core 1 reads the DICOM files from network storage into RAM, Core 2 simultaneously decompresses image data, Core 3 executes image enhancement algorithms (window/level adjustments, noise reduction), and Core 4 handles concurrent web requests from radiologists accessing studies. The CPU's L1 cache (per-core) holds the working set for each task, while the shared L3 cache coordinates data between cores. Without multi-core parallelism, a single core would serialize these operations, making radiologists wait 3-4 minutes to view studies. With multi-core architecture, studies load in under 30 seconds. The operating system scheduler intelligently assigns CPU threads to cores, preventing bottlenecks. This architecture also enables the hospital to process AI-assisted diagnosis models on the same workstation without slowing clinical workflows.",
+      "next": "n4a"
+    },
+    {
+      "id": "n4a",
+      "type": "end",
+      "title": "Advanced Computer Architecture Mastered",
+      "content": "Excellent work! You've mastered advanced computer architecture concepts. You understand multi-core processing, cache hierarchies, parallel execution, and how these enable modern healthcare systems to handle complex real-time demands. These concepts are the foundation for optimizing healthcare IT infrastructure, understanding performance bottlenecks, and designing efficient medical software systems. Continue exploring topics like distributed systems, GPU acceleration for medical imaging, and quantum computing's potential in drug discovery."
+    },
+    {
+      "id": "n2b",
+      "type": "content",
+      "title": "Computer Architecture Fundamentals: The von Neumann Model",
+      "content": "All modern computers, from hospital workstations to patient monitors, follow the von Neumann architecture: a CPU, memory, and storage connected by a bus. Here's how it works in healthcare: A patient monitor reads vital signs (heart rate, oxygen) from sensors and stores them temporarily in RAM. The CPU fetches these values from RAM (along with the instruction for how to process them), executes calculations (comparing current readings to normal ranges), and stores the result back in RAM for display. If the readings are abnormal, the CPU may execute an instruction to trigger an alarm. Storage devices (hard drives) hold historical data\u2014patient records, past test results, medication histories. The bus is the pathway connecting all components, allowing data to flow. This simple model has remained fundamentally unchanged since the 1940s because it works: separate areas for computation (CPU), fast temporary storage (RAM), and permanent storage (disk). Understanding this architecture helps you grasp why medical devices fail (a broken bus connection), how data security works (encryption protects data in RAM and storage), and why real-time monitoring systems require fast RAM.",
+      "next": "n3b"
+    },
+    {
+      "id": "n3b",
+      "type": "example",
+      "title": "Example: How a Patient Vital Signs Monitor Works",
+      "content": "A bedside patient monitor displays heart rate, blood pressure, and SpO2 (oxygen saturation). Here's the von Neumann architecture in action: Sensors continuously read the patient's vital signs and send electrical signals to an analog-to-digital converter (part of the input hardware). The CPU fetches a program instruction from RAM that says 'read heart rate sensor.' The CPU then fetches the current heart rate value from RAM, executes a comparison instruction (is heart rate > 100?), and stores the result in a specific RAM location. If abnormal, it stores a flag. Finally, the CPU fetches an instruction to 'send heart rate to display device,' and outputs it. This cycle repeats up to 100 times per second, creating real-time monitoring. Historical data (the patient's vital sign trends from the past 24 hours) lives on the monitor's storage. The RAM is fast (nanoseconds), the storage is slow (milliseconds) but has huge capacity, and the CPU coordinates everything. This is pure von Neumann architecture\u2014and it's been essential for saving lives in intensive care for decades.",
+      "next": "n4b"
+    },
+    {
+      "id": "n4b",
+      "type": "practice",
+      "title": "Practice: Computer Architecture Fundamentals",
+      "content": "Test your understanding of basic computer architecture with these scenarios. Apply the von Neumann model to real healthcare situations.",
+      "questions": [
+        {
+          "question": "A patient in the ICU is connected to a cardiac monitor. The monitor displays real-time heart rate on a screen and stores the data to a memory card for later review. Which component stores the actively-displayed reading while the CPU operates on it?",
+          "options": [
+            "A) Memory card",
+            "B) CPU registers and RAM",
+            "C) Display screen",
+            "D) Cardiac sensors"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The memory card stores historical data, not active readings being processed.",
+            "Correct! The CPU and RAM work together\u2014RAM holds the current reading, CPU processes it, and registers within the CPU briefly hold intermediate values.",
+            "The display is output, not where data is processed.",
+            "Sensors input the data, but don't store it for processing."
+          ],
+          "explanation": "Active data being processed must reside in fast-access storage (RAM) where the CPU can reach it thousands of times per second. The cardiac sensors provide the input, RAM provides working storage, and the display shows the output."
+        },
+        {
+          "question": "An Electronic Health Record system stores a patient's entire medical history (medications, diagnoses, test results, lab values) accumulated over 10 years. Where is this data primarily stored?",
+          "options": [
+            "A) In the CPU's registers",
+            "B) In RAM on every workstation",
+            "C) On the hospital server's hard drives",
+            "D) In the display monitor's memory"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "CPU registers are tiny (a few kilobytes total) and temporary\u2014nowhere near enough for 10 years of records.",
+            "RAM is volatile and cleared when power is off. For permanent storage, you need disk drives.",
+            "Correct! Hard drives provide the large permanent storage needed for comprehensive patient records that persist across time and power cycles.",
+            "Display monitors don't store data; they only show what they're sent."
+          ],
+          "explanation": "The von Neumann model uses storage (hard drives) for large permanent data and RAM for actively-processed data. A patient's long-term medical record must be stored on hard drives where it persists permanently."
+        },
+        {
+          "question": "When a doctor queries the EHR system to retrieve a patient's last lab result, which sequence of events happens according to the von Neumann model?",
+          "options": [
+            "A) CPU fetches 'retrieve lab' instruction from RAM \u2192 executes search on hard drive \u2192 stores result in RAM \u2192 sends to display",
+            "B) Hard drive automatically displays results",
+            "C) CPU erases the lab result after displaying it",
+            "D) Monitor requests data directly from the hard drive without CPU involvement"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is the fetch-execute cycle: the CPU fetches instructions and data, processes them, and manages all data movement.",
+            "Hard drives don't have display capabilities\u2014they just store data.",
+            "The CPU doesn't automatically erase patient data (that would be bad for healthcare!).",
+            "All data access goes through the CPU\u2014that's what makes it the 'central' processor."
+          ],
+          "explanation": "The CPU is the coordinator of all data movement. It fetches instructions, executes them (like 'search the hard drive'), and moves results through RAM to output devices. This is why CPU speed affects how responsive your hospital workstations feel."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n5b",
+      "failure_target": "n5b"
+    },
+    {
+      "id": "n5b",
+      "type": "end",
+      "title": "Computer Architecture Fundamentals Complete",
+      "content": "Great job! You now understand the von Neumann architecture and how computers process healthcare data. You know that CPUs fetch and execute instructions, RAM provides fast temporary storage, hard drives provide permanent storage, and buses connect everything together. These fundamentals apply to every hospital workstation, patient monitor, and medical device. As you continue, you might explore how operating systems manage multiple programs simultaneously, how networks let computers communicate, or how specialized hardware like GPUs accelerate medical imaging. You've built a solid foundation."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2a",
+      "label": "Passed (67%+)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n2b",
+      "label": "Needs review (<67%)"
+    },
+    {
+      "id": "c3",
+      "source": "n2a",
+      "target": "n3a",
+      "label": "Next"
+    },
+    {
+      "id": "c4",
+      "source": "n3a",
+      "target": "n4a",
+      "label": "Complete"
+    },
+    {
+      "id": "c5",
+      "source": "n2b",
+      "target": "n3b",
+      "label": "Next"
+    },
+    {
+      "id": "c6",
+      "source": "n3b",
+      "target": "n4b",
+      "label": "Next"
+    },
+    {
+      "id": "c7",
+      "source": "n4b",
+      "target": "n5b",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T14:26:07.262535+00:00",
+  "model": "claude-haiku-4-5"
+}

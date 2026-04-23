@@ -1,0 +1,423 @@
+{
+  "id": "ca-game-design-mastery",
+  "title": "Computer Architecture for Game Developers",
+  "description": "Master computer architecture concepts through the lens of game development, from understanding CPU performance to optimizing memory hierarchies.",
+  "topic": "Computer Architecture",
+  "theme": "game design",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer-architecture",
+    "game-development",
+    "performance",
+    "CPU",
+    "memory"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction: Computer Architecture in Game Engines",
+      "content": "Every modern game runs on a complex dance between hardware and software. Understanding computer architecture is essential for building performant games. Modern game engines like Unreal and Unity must work within the constraints of CPUs, GPUs, caches, and RAM. In this course, you'll learn how processors execute your game code, how memory hierarchies affect frame rates, and why some game optimizations exist. Whether you're aiming for 60 FPS on mobile or 120 FPS on high-end consoles, hardware architecture is your foundation.",
+      "next": null
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Foundation: Hardware and Game Performance",
+      "content": "Test your understanding of how computer hardware affects game development.",
+      "questions": [
+        {
+          "question": "You're developing a mobile game that targets 60 FPS. What's the primary bottleneck if your physics calculations take 25ms per frame?",
+          "options": [
+            "GPU rendering speed is insufficient",
+            "CPU processing time exceeds the available 16.67ms per frame (1000ms \u00f7 60)",
+            "RAM is too small for the game world",
+            "Storage read speed is limiting the asset pipeline"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While GPU can be a bottleneck, the math shows the CPU is the problem here.",
+            "Correct! At 60 FPS, you have only 16.67ms per frame. 25ms means frames are being dropped.",
+            "Memory size affects how many assets you can load, not frame time for physics.",
+            "Storage affects loading times, not real-time frame calculations."
+          ],
+          "explanation": "Frame budgets are critical in game development. At 60 FPS target, each frame must complete within ~16.67 milliseconds (1 second \u00f7 60 frames). Physics taking 25ms means you'll miss frames and cause stuttering."
+        },
+        {
+          "question": "In a game engine, why do we keep frequently accessed game objects in different memory locations than rarely accessed ones?",
+          "options": [
+            "To make debugging easier by organizing code logically",
+            "To take advantage of cache locality and reduce memory access latency",
+            "Because the CPU requires it for security reasons",
+            "To automatically balance the workload across multiple CPU cores"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Logical organization helps code readability, but that's not the hardware reason.",
+            "Correct! Modern CPUs use caches that benefit from locality of reference - keeping related data near each other.",
+            "Memory organization is a performance optimization, not a security requirement.",
+            "Core distribution is handled by the scheduler, not memory layout."
+          ],
+          "explanation": "CPUs fetch data from memory in cache lines. If frequently accessed data is scattered across memory, you'll cause cache misses, requiring expensive main memory accesses that stall the CPU."
+        },
+        {
+          "question": "A console game needs to hit 120 FPS. What's the maximum time budget for the entire frame (CPU rendering, physics, AI, etc.)?",
+          "options": [
+            "8.33 milliseconds",
+            "12.5 milliseconds",
+            "16.67 milliseconds",
+            "33.33 milliseconds"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! 1000ms \u00f7 120 FPS = 8.33ms per frame.",
+            "That's the budget for 80 FPS, not 120 FPS.",
+            "That's the budget for 60 FPS, a common target but not 120 FPS.",
+            "That's the budget for 30 FPS."
+          ],
+          "explanation": "Higher frame rates require tighter frame budgets. 120 FPS is increasingly common in competitive games and requires optimized code that respects hardware constraints."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Game Performance Bottlenecks",
+      "content": "Let's reinforce the fundamentals with hands-on scenarios.",
+      "questions": [
+        {
+          "question": "Your game runs at 30 FPS instead of the target 60 FPS. The frame time breakdown is: Physics (8ms), Rendering (14ms), AI (6ms), Other (8ms). Which system needs optimization first?",
+          "options": [
+            "Physics system - it's taking the most expensive calculations",
+            "Rendering system - it's consuming the most frame time (14ms)",
+            "AI system - pathfinding is always expensive",
+            "Other systems - there's too much unaccounted work"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Physics takes 8ms, but that's not the largest component. Look for the biggest slice.",
+            "Correct! Rendering uses 14ms of your 16.67ms budget. Cut it to ~10ms and you'll hit 60 FPS.",
+            "AI is 6ms. While important, it's not the critical path.",
+            "Other components use 8ms. Address the larger bottleneck first."
+          ],
+          "explanation": "Optimization is about addressing the bottleneck - the slowest part of the critical path. Rendering dominates this frame, so that's where to focus effort."
+        },
+        {
+          "question": "You're implementing a physics engine for a multiplayer game. You have 4ms budget for physics per frame. Should you use single-threaded physics or multi-threaded?",
+          "options": [
+            "Single-threaded to avoid synchronization overhead and cache coherency issues",
+            "Multi-threaded to parallelize across all CPU cores",
+            "Multi-threaded only if the target hardware has 8+ cores",
+            "It depends on physics complexity and the number of available CPU cores"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Synchronization has overhead, but modern physics engines handle it well. Context is important.",
+            "More cores sounds good, but synchronization overhead might outweigh benefits with a 4ms budget.",
+            "Core count is one factor, but not the only consideration.",
+            "Correct! The optimal choice depends on your specific workload and target hardware architecture."
+          ],
+          "explanation": "This is a real architectural tradeoff. Physics can parallelize well (rigid bodies, particles), but synchronization costs matter. Profile both approaches on your target hardware."
+        },
+        {
+          "question": "A sprite-based game has 1000 active game objects. Updating their positions takes 5ms. What hardware architecture concept would most improve performance?",
+          "options": [
+            "Upgrade to a faster GPU for better rendering",
+            "Improve memory layout so objects are contiguous in memory, improving cache performance",
+            "Increase RAM capacity so the OS can allocate more memory",
+            "Use more CPU cores to update objects in parallel"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The bottleneck is CPU-side position updates, not GPU rendering.",
+            "Correct! Contiguous memory layout improves cache hit rates significantly for iteration loops.",
+            "RAM capacity isn't the issue when you're updating existing objects.",
+            "Parallelizing small updates has overhead. Fixing the cache problem is better."
+          ],
+          "explanation": "This is the classic effect of cache locality. Objects scattered across memory cause cache misses on every access. Store them contiguously and you'll hit the cache, cutting update time substantially."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "CPU Architecture and Game Loops",
+      "content": "Modern CPUs are optimized for executing sequential instructions, and game engines are built around this reality. Every frame, the CPU executes a game loop: fetch input, update game state (physics, AI, logic), and prepare data for the GPU. Understanding CPU design\u2014instruction pipelines, branch prediction, instruction-level parallelism\u2014explains why certain optimizations matter. For example, mispredicted branches in AI decision-making or physics collision checks can stall your frame. Game engines like Unreal use data-oriented design to keep the CPU's execution units busy and the instruction cache hot. Performance profilers show you which functions waste CPU cycles; architectural knowledge tells you why.",
+      "next": null
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "CPU Performance: Optimization and Constraints",
+      "content": "Demonstrate your understanding of CPU architecture in game development context.",
+      "questions": [
+        {
+          "question": "In a game's pathfinding system, enemies check a complex condition every iteration: `if (distanceToPlayer < 50 && isPlayerVisible && playerHealth > 0)`. Assuming `isPlayerVisible` is true only 5% of the time, how should you optimize CPU execution?",
+          "options": [
+            "Move the distance check last because distance calculations are cheap",
+            "Move the visibility check last to minimize branch misprediction penalties",
+            "Reorder to check the most likely false condition first to short-circuit evaluation",
+            "Split the checks into separate if statements for clarity"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Distance checks are cheap but that's not the primary optimization concern.",
+            "Visibility is checked second currently, which is good. But that's not about misprediction.",
+            "Correct! Branch predictors struggle with the low 5% true rate. Restructure to fail fast.",
+            "Separate statements create more branches, making prediction harder."
+          ],
+          "explanation": "CPU branch predictors use history to guess the next branch direction. A branch that's true 5% causes constant misprediction penalties (~10-20 cycles each). Put the cheapest, most-often-false check first for short-circuiting."
+        },
+        {
+          "question": "You're optimizing a particle system with 10,000 particles. Should you store each particle as an object {x, y, vx, vy} or organize as: positions[], velocities[]?",
+          "options": [
+            "Objects are better because they group related data logically",
+            "Arrays are better for cache locality and SIMD processing efficiency",
+            "It depends on whether particles are created or destroyed frequently",
+            "Modern CPUs handle both equally well due to cache hierarchy"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Logical grouping helps readability, but CPU performance depends on memory layout.",
+            "Correct! Separating positions from velocities enables SIMD operations and better cache utilization.",
+            "Creation patterns don't affect the memory layout efficiency for iteration.",
+            "CPUs have caches, but memory layout still dramatically affects performance."
+          ],
+          "explanation": "This is data-oriented design (DOD). Separating arrays by component type keeps the CPU cache hot during iteration. Updating positions from a contiguous array loads fewer cache lines than bouncing between scattered objects."
+        },
+        {
+          "question": "A game's AI calculations show high CPU cache misses. The code loads enemy data from a large array: enemies[i].position, enemies[i].type, enemies[i].state. What's the likely cause?",
+          "options": [
+            "Enemy structs are too large to fit in the CPU cache",
+            "The random access pattern of the array causes unpredictable memory jumps",
+            "Enemy data is fragmented across non-contiguous memory, and CPU cache lines don't cover full structs",
+            "The CPU's instruction cache is full, leaving no room for data cache"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Cache size is limited, but the real issue is structure fragmentation.",
+            "Sequential iteration isn't random access. The pattern is predictable.",
+            "Correct! If an enemy struct spans multiple cache lines, each field access might miss.",
+            "Instruction and data caches are separate. This is a data cache issue."
+          ],
+          "explanation": "Modern cache lines are typically 64 bytes. If an enemy struct is 256 bytes, you'll miss the cache more often. Game engines optimize by packing data-heavy elements (like particle positions) tightly."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: CPU Optimization in Games",
+      "content": "Apply your CPU architecture knowledge to real game optimization challenges.",
+      "questions": [
+        {
+          "question": "A racing game updates 500 cars each frame. Lap times show bottleneck in tire physics calculations. The code processes cars in rendering order (left to right on screen), which is random relative to data layout. What's the problem?",
+          "options": [
+            "Random processing order makes the AI pathfinding inefficient",
+            "Processing in visual order causes cache misses; should process in memory order",
+            "The rendering and physics calculations conflict for GPU resources",
+            "Tire physics is too complex and needs algorithmic simplification"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "AI pathfinding isn't the bottleneck; physics calculations are.",
+            "Correct! Memory-order iteration keeps the CPU cache hot and avoids misses.",
+            "Physics is CPU-side; rendering is GPU. They don't directly conflict.",
+            "Algorithmic optimization matters, but memory access is the immediate bottleneck."
+          ],
+          "explanation": "CPU caches work best with sequential memory access. Jumping around in memory causes cache misses and forces expensive main memory fetches. Reorganize to process cars in memory order, not visual order."
+        },
+        {
+          "question": "An indie game engine has a main game loop running at 60 FPS. Profiler shows 'wasted cycles' even when CPU usage is low. What architectural condition causes wasted cycles?",
+          "options": [
+            "The CPU core is sleeping due to power management",
+            "Instruction pipeline bubbles from branch misprediction or data dependencies",
+            "The GPU is stalling the CPU waiting for previous frame rendering to complete",
+            "The operating system is context-switching between threads"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sleep states show as 0% usage, not low usage with wasted cycles.",
+            "Correct! Pipeline stalls waste cycles while the CPU waits for data or branches resolve.",
+            "GPU stalling is possible but would show differently in profilers.",
+            "Context switches cause overhead, but this describes a different issue."
+          ],
+          "explanation": "Even with low usage, CPUs can stall waiting for memory or branch resolution. Modern profilers track stall reasons: L3 cache misses, branch mispredictions, etc. Address these for true performance gains."
+        },
+        {
+          "question": "You're implementing a sorting algorithm to organize game entities by depth for rendering. Should you use quicksort or merge sort for 10,000 entities?",
+          "options": [
+            "Quicksort is faster due to better cache locality and in-place sorting",
+            "Merge sort is always faster for large datasets",
+            "It depends on CPU cache size and entity size",
+            "The GPU should handle sorting, not the CPU"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Quicksort has cache benefits, but merge sort's consistency matters too.",
+            "Merge sort is stable but uses extra memory and cache space.",
+            "Correct! Entity size, cache size, and CPU model determine the optimal choice.",
+            "GPUs can sort, but CPU sorting is often better for smaller datasets due to latency."
+          ],
+          "explanation": "This is a practical architectural decision. Large entities scattered in memory favor quicksort (less memory movement). Small, cacheable entities favor merge sort (consistent O(n log n) with good cache behavior). Profile both on your target hardware."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Memory Hierarchy and Game Performance",
+      "content": "CPUs don't directly access main RAM\u2014they use a hierarchy of caches (L1, L2, L3) and registers to hide memory latency. A main RAM access costs ~200 cycles; an L1 cache hit costs ~4 cycles. In games, this dramatically affects performance. A texture asset might live on disk, be loaded into RAM, cached in L3 when first accessed, then in L2, then L1 as the GPU processes it. Game engines stream textures and manage memory carefully to keep hot data (current game state, active physics) in fast caches. Understanding bandwidth limits\u2014main RAM can deliver ~100GB/s, but CPU-GPU transfer over PCIe bottlenecks at ~16GB/s\u2014explains design choices in multiplayer games and why assets must be optimized. This hierarchy is invisible in code but fundamental to frame rates.",
+      "next": null
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Memory Architecture: From Registers to Storage",
+      "content": "Master memory hierarchy concepts and their impact on game performance.",
+      "questions": [
+        {
+          "question": "A mobile game physics engine iterates over 5000 rigid bodies, updating positions. Memory layout: each body is 256 bytes, stored contiguously. L3 cache is 4MB. Approximately how many bodies fit in L3 cache?",
+          "options": [
+            "About 128 bodies (4MB \u00f7 256 bytes)",
+            "About 1024 bodies (4MB \u00f7 4KB per body)",
+            "All 5000 bodies fit because modern caches are huge",
+            "It depends on what else is in the cache (other game systems)"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Math is right but ignores that L3 must store other game data too.",
+            "Division is wrong; 4MB \u00f7 256 bytes = 16,384 bodies theoretically.",
+            "While 4MB is substantial, 5000 bodies * 256 bytes = 1.28MB, leaving room for other data.",
+            "Correct! The cache must hold physics data, AI, rendering data, and more. Everything competes."
+          ],
+          "explanation": "Simple math: 4MB \u00f7 256 bytes = ~16K bodies theoretically. But the L3 cache serves the entire game engine, not just physics. In practice, maybe 2-3MB is available for bodies, fitting ~8-10K of them, or your full 5K if they're the hottest data."
+        },
+        {
+          "question": "A battle game has 100 enemies in combat. Each enemy has 3KB of data (stats, position, animation state). Should this fit in CPU L2 cache (256KB) during the update phase?",
+          "options": [
+            "Yes, 100 * 3KB = 300KB, which barely exceeds L2",
+            "Yes, but only if you process enemies sequentially in memory order",
+            "No, because game code and other systems occupy the cache",
+            "No, because L2 is reserved for the GPU's calculations"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Math is right, but you're not accounting for the full cache usage of the game loop.",
+            "Memory order helps, but the full game loop uses multiple MB of cache.",
+            "Correct! While 300KB seems small, the game loop's total code and hot data exceeds L2.",
+            "L2 is CPU-side only. GPU has its own memory hierarchy."
+          ],
+          "explanation": "A single 256KB L2 cache serves the entire game loop: rendering code, physics code, AI, input, and data for all active systems. Enemy data is just one component. High-performance games carefully manage what stays hot in L2."
+        },
+        {
+          "question": "A game engine preloads textures into a staging buffer before GPU upload. Why is this better than direct disk-to-GPU transfer?",
+          "options": [
+            "The staging buffer is always faster than disk reads",
+            "It decouples I/O latency from the main game thread, preventing frame stutter",
+            "GPU memory is too small to hold all textures, so RAM acts as overflow",
+            "Direct disk reads to GPU are not technically possible in modern architectures"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed varies, but the real benefit is decoupling I/O from the frame loop.",
+            "Correct! Disk reads are slow (~10ms). Moving them off the game thread prevents frame hitches.",
+            "VRAM overflow is handled with streaming, but that's not why staging buffers exist.",
+            "Direct transfer is possible but introduces I/O stalls into the frame budget."
+          ],
+          "explanation": "A staging buffer lets you load assets asynchronously while the game frame executes uninterrupted. The GPU then copies from the buffer at its own pace. This decoupling is essential for smooth gameplay despite slow disk I/O."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Mastery: Computer Architecture for Games",
+      "content": "Congratulations! You've mastered computer architecture through the lens of game development. You understand how CPU design constrains frame rates, how memory hierarchy dictates optimization strategies, and why game engines make architectural decisions the way they do. From frame budgets to cache locality, from pipeline stalls to memory bandwidth limits, you can now reason about the hardware beneath your games. Apply this knowledge to profile your games, identify real bottlenecks, and make informed architectural decisions. The architecture is your constraint; understanding it is your advantage."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n3",
+      "label": "fail"
+    }
+  ],
+  "generated_at": "2026-03-27T11:03:03.539831+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,295 @@
+{
+  "id": "sports-analytics-digital-electronics",
+  "title": "Digital Electronics in Sports Analytics",
+  "description": "Master digital electronics concepts through real-world sports analytics applications, from fundamental signals to advanced logic systems",
+  "topic": "Digital Electronics",
+  "theme": "sports analytics",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "digital-electronics",
+    "logic-gates",
+    "sports-analytics",
+    "binary-logic",
+    "circuits"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Digital Signals in Sports: Diagnostic Quiz",
+      "content": "Test your understanding of basic digital signals and on/off states used in sports analytics systems. In modern sports, every event from a goal scored to a player location is represented as digital data. Let's see what you already know about how these systems work.",
+      "questions": [
+        {
+          "question": "In a sports analytics system tracking whether a goal was scored, a '1' represents success and a '0' represents no goal. What is this called?",
+          "options": [
+            "Analog signal",
+            "Digital signal",
+            "Boolean logic",
+            "Bit representation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Analog signals represent continuous range.",
+            "Correct! Digital signals use discrete 0s and 1s.",
+            "Incorrect. Boolean logic works with these signals but isn't the signal type.",
+            "Incorrect. A bit is the unit, but the signal type is digital."
+          ],
+          "explanation": "Digital signals are the foundation of all modern sports analytics systems. Every sensor and device transmits data as discrete 0s and 1s."
+        },
+        {
+          "question": "A proximity sensor in a soccer goal detects whether the ball crossed the line (1) or not (0). This is an example of what type of input?",
+          "options": [
+            "Continuous analog input",
+            "Discrete digital input",
+            "Variable resistive input",
+            "Electromagnetic wave"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The sensor outputs discrete values.",
+            "Correct! The sensor provides discrete digital inputs with two states.",
+            "Incorrect. Digital sensors use switching, not variable resistance.",
+            "Incorrect. Output is a discrete digital signal."
+          ],
+          "explanation": "Goal-line technology uses digital sensors with discrete outputs\u2014perfect for yes/no detection in sports."
+        },
+        {
+          "question": "In a sports scoreboard, each LED represents one bit. How many bits are needed to display a team score of 35 points?",
+          "options": [
+            "5 bits",
+            "6 bits",
+            "7 bits",
+            "8 bits"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. 5 bits represent 0-31.",
+            "Correct! 6 bits represent 0-63, sufficient for 35.",
+            "Correct! 7 bits represent 0-127, more than enough.",
+            "Incorrect. Too many for this range."
+          ],
+          "explanation": "Using 2^n formula: 6 bits = 0-63, perfect for typical sports scores."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Logic Gates in Sports Analytics Systems",
+      "content": "Professional sports use logic gates to validate plays, detect violations, and manage complex scenarios. Detecting offside requires combining signals from multiple positions. VAR systems use AND gates to validate goals. Let's test your understanding of how gates work in real sports contexts.",
+      "questions": [
+        {
+          "question": "In football VAR systems, a goal is validated only if BOTH the ball crosses the line (A=1) AND hasn't already gone out (B=1). Which logic gate?",
+          "options": [
+            "OR gate",
+            "AND gate",
+            "NOT gate",
+            "XOR gate"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. OR requires only one input true.",
+            "Correct! AND requires both inputs true.",
+            "Incorrect. NOT inverts a single input.",
+            "Incorrect. XOR triggers on different inputs."
+          ],
+          "explanation": "AND gates validate multi-condition requirements. Real VAR systems combine multiple signals with AND logic before confirming goals."
+        },
+        {
+          "question": "A basketball play flagged for review if it's NOT a clear basket (A=1). Which logic gate generates the flag?",
+          "options": [
+            "AND gate",
+            "OR gate",
+            "NOT gate",
+            "NAND gate"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. AND combines multiple signals.",
+            "Incorrect. OR checks if any condition is true.",
+            "Correct! NOT inverts: unclear=0 becomes flag=1.",
+            "Incorrect. NAND combines AND with NOT."
+          ],
+          "explanation": "NOT gates perform inversion. In sports, they identify situations requiring human review."
+        },
+        {
+          "question": "Offside detection: player flagged if ahead of ball (A=1) OR ahead of last defender (B=1). Which gate?",
+          "options": [
+            "AND gate only",
+            "OR gate with AND",
+            "OR gate only",
+            "Three NOT gates"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. AND requires both conditions.",
+            "Incorrect. You need just OR here.",
+            "Correct! OR outputs 1 if either condition is true.",
+            "Incorrect. NOT gates invert, not combine."
+          ],
+          "explanation": "OR gates combine independent conditions. Player is offside if ANY condition triggers."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Complex Digital Logic: State Machines in Live Sports",
+      "content": "Professional sports systems use sequential logic and state machines that remember previous inputs. A state machine has defined states (running, paused, stopped) and transitions based on signals. Basketball game timers use state machines\u2014they change behavior based on whistle signals and game state. Advanced systems combine combinational logic (gates) with memory elements like flip-flops to track temporal sequences. A traveling violation requires memory of consecutive dribble losses\u2014impossible with pure combinational logic. NBA and Premier League platforms use state machines to track play continuity, detect sequential fouls, and validate multi-event scenarios with sub-millisecond timing accuracy. These systems ensure events are recorded in proper sequence across thousands of synchronized cameras and sensors, building the complete digital representation of games.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Mastery Achieved: Advanced Digital Systems",
+      "content": "Excellent! You've mastered digital signals, logic gates, and advanced sequential logic systems. You understand the complete architecture powering professional sports analytics\u2014from simple binary sensors detecting goals to complex state machines validating plays across multiple data streams. These concepts drive the terabyte-scale systems processing live sports with sub-millisecond latency."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Practice: Mastering Logic Gates in Sports",
+      "content": "Strengthen your logic gate understanding with real sports scenarios. These practice questions show how professional systems apply digital logic.",
+      "questions": [
+        {
+          "question": "Tennis challenge system: ball is OUT (A=1), human called IN (C=0). Point overturned if A AND NOT C. Express the gate structure.",
+          "options": [
+            "A AND C with NOT on C",
+            "A OR B OR C",
+            "(A AND NOT C)",
+            "NOT A OR NOT C"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Close, but imprecise.",
+            "Incorrect. Too many points overturned.",
+            "Correct! AND signal A with NOT of C.",
+            "Incorrect. Wrong logic."
+          ],
+          "explanation": "Tennis systems use AND-NOT combinations. The key is AND for simultaneous requirements and NOT for negation."
+        },
+        {
+          "question": "Cricket LBW: ball hits batsman's leg (L=1) AND trajectory to stumps uninterrupted (T=1). Which gate?",
+          "options": [
+            "AND gate",
+            "OR gate",
+            "NAND gate",
+            "Multiple AND gates"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Both conditions must be true.",
+            "Incorrect. OR gives false positives.",
+            "Incorrect. NAND inverts output.",
+            "Unnecessary complexity."
+          ],
+          "explanation": "When all conditions must be true, use AND. Cricket's LBW is a textbook AND gate example."
+        },
+        {
+          "question": "Badminton scoring: points awarded if rally WON (W=1) OR opponent FAULTED (F=1). Output logic?",
+          "options": [
+            "W AND F",
+            "W OR F",
+            "NOT(W OR F)",
+            "W NAND F"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. AND requires both.",
+            "Correct! OR: either condition awards points.",
+            "Incorrect. Inverts the output.",
+            "Incorrect. NAND combines AND with NOT."
+          ],
+          "explanation": "OR logic triggers when ANY condition occurs. Badminton points score on rally win OR opponent fault."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Solid Intermediate Foundation",
+      "content": "Great progress! You've mastered core logic gates and their sports applications\u2014AND for multi-condition validation, OR for independent triggers, NOT for inversion. You understand goal validation, offside detection, and play review systems. While you haven't explored advanced state machines yet, you have solid combinational logic understanding that forms the foundation of professional sports analytics platforms."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Foundations: Digital Signals and Boolean Basics",
+      "content": "Every event in a game\u2014a goal, a fault, a player position\u2014is recorded using digital signals. A digital signal uses two states: 0 (off, false, no) or 1 (on, true, yes). A goal-line camera sends 1 when the ball crosses, 0 when it doesn't. This binary system is universal in sports analytics. Boolean logic is the mathematics for working with these signals. Boolean variables are true or false, matching our digital 0s and 1s. Three basic operations: AND means both conditions must be true; OR means at least one must be true; NOT flips the state. These operations combine to create every logic system from basketball shot detection to World Cup VAR validation. Modern sports capture every match detail as searchable digital data using these principles.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: A Simple Sports Sensor System",
+      "content": "A tennis serve detection system uses signal A (ball on court sensor) and signal B (racket motion detector). Valid serve = A AND B. When A=1 and B=1, output=1 (valid serve detected). When A=0 or B=0, output=0 (no serve). The system records 1 or 0 for each serve, building a complete digital match record. Professional analysts combine millions of such decisions: racket detection, ball position, court zones, and player location. This creates the complete digital representation searchable by analysts. Modern sports capture every detail in digitized format using these simple signal-and-logic combinations.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundation Complete: Ready for Core Concepts",
+      "content": "Excellent! You've mastered digital signals and Boolean logic using sports examples. You understand how on/off sensors and logic operations power sports analytics. Goal-detecting sensors, video-processing computers, and live-broadcast networks all rely on the digital and Boolean principles you've learned. You're ready to continue into logic gates and advanced systems."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T12:19:33.707185+00:00",
+  "model": "claude-haiku-4-5"
+}

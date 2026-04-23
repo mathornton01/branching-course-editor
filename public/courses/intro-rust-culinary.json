@@ -1,0 +1,132 @@
+{
+  "id": "intro-rust-culinary",
+  "title": "Introduction to Rust Programming: The Culinary Route",
+  "description": "Learn Rust through the lens of culinary arts and restaurant management. Navigate two learning paths and discover how Rust's safety guarantees are like a meticulous head chef's rules.",
+  "topic": "Introduction to Rust Programming",
+  "theme": "culinary arts",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "Rust",
+    "Programming",
+    "Memory Safety",
+    "Pattern Matching",
+    "Ownership"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Building the Digital Recipe Vault: Rust Awaits",
+      "content": "You're opening a high-tech restaurant and need to build a digital recipe management system. Your sous chef recommends Rust for its reliability. Rust acts like a meticulous head chef: it enforces strict rules about how ingredients (memory) are handled. This prevents costly mistakes like cross-contamination or double-using ingredients. Your first decision: do you master the philosophy of ingredient ownership first, or jump into building with pattern matching?"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Two approaches lie before you:",
+      "choices": [
+        {
+          "label": "Master Ownership & Borrowing - The Rigorous Way",
+          "next": "n3"
+        },
+        {
+          "label": "Learn Pattern Matching - The Practical Way",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Ownership: The Restaurant's Inventory System",
+      "content": "In Rust, ownership is like your kitchen's ingredient inventory. Each ingredient (value) has exactly one owner at a time\u2014just as no two chefs can claim ownership of the same jar of saffron. When you pass an ingredient to another station (borrow), you can either lend it temporarily (immutable borrow\u2014view only) or hand over temporary control (mutable borrow\u2014can modify). Understanding this prevents the disaster of two chefs independently modifying the same sauce. Rust's compiler is your safety inspector, catching these problems at compile time rather than letting them ruin service."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Recipe Vault Implementation: Safe or Expedient?",
+      "content": "You're implementing the recipe storage. The Rust compiler challenges you: 'Here, you can't clone this large recipe data into multiple parts of your system without explicit permission. Do you follow my safety rules, or try to trick me?'",
+      "choices": [
+        {
+          "label": "Follow Rust's borrowing rules\u2014references and lifetimes",
+          "next": "n5"
+        },
+        {
+          "label": "Use unsafe code and transmute to bypass the compiler",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "\ud83c\udf73 Success: The Safe Recipe Vault",
+      "content": "By respecting Rust's ownership system, you've built a recipe vault that never crashes due to memory corruption. During the restaurant's opening week, competitors' systems fail with data corruption. Yours runs flawlessly. The compiler's strictness paid off\u2014no undefined behavior, no race conditions, perfect consistency. You've won the trust of every head chef in the city. Your app becomes the industry standard."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "\u26a0\ufe0f Failure: The Corrupted Recipe Vault",
+      "content": "Your unsafe blocks and transmute calls temporarily worked, allowing you to bypass Rust's checks. But during the restaurant's opening week, a race condition emerges. Two threads simultaneously modify a recipe, corrupting the data. Customers receive recipes with mixed measurements, and meals are ruined. The system crashes during peak hours. You're forced to rewrite everything properly. This time, you'll listen to the compiler."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Pattern Matching: Recipes in All Their Variations",
+      "content": "Instead of wrestling with ownership, you focus on pattern matching\u2014Rust's powerful way to handle different data shapes like recipe variations. You use enums to represent recipe states (raw ingredients, prepared, cooking, served) and match on them to handle each scenario differently. Each branch of your match statement naturally addresses one variation, whether grilled, roasted, or braised. This approach gets you coding quickly with real functionality, building features immediately. Pattern matching proves to be your gateway into practical Rust programming."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "\u2705 Success: The Practical Recipe System",
+      "content": "Your pattern-matching-focused approach delivered a working recipe management system in record time. While you're still learning about borrowing and lifetimes in the background, the restaurant's staff uses your system daily. You handle recipe variations smoothly\u2014from dietary restrictions to ingredient substitutions. It's not perfect (you'll optimize later), but it works reliably. Your team celebrates the launch, proving Rust's pattern matching powers practical solutions."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Ownership path"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": "Safe approach"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n6",
+      "label": "Unsafe shortcuts"
+    },
+    {
+      "id": "c6",
+      "source": "n2",
+      "target": "n7",
+      "label": "Practical path"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T09:36:13.789444+00:00",
+  "model": "claude-haiku-4-5"
+}

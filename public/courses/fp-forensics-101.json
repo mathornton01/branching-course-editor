@@ -1,0 +1,171 @@
+{
+  "id": "fp-forensics-101",
+  "title": "Functional Programming in Forensic Science",
+  "description": "Learn functional programming concepts through the lens of forensic investigation. Master pure functions, immutability, and higher-order functions by solving real forensic challenges.",
+  "topic": "Functional Programming Concepts",
+  "theme": "forensic science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "functional programming",
+    "forensic science",
+    "software engineering",
+    "immutability",
+    "pure functions",
+    "higher-order functions"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Functional Programming: A Forensic Approach",
+      "content": "Just as forensic investigators require systematic, repeatable methods to ensure evidence integrity and case reliability, functional programming provides disciplined approaches to writing code that is predictable, maintainable, and trustworthy. In this course, we'll explore three pillars of functional programming\u2014pure functions, immutability, and higher-order functions\u2014through the lens of real forensic investigation challenges. You'll discover how these concepts mirror the rigorous standards forensic scientists apply to evidence handling, analysis, and reporting.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Investigation Focus",
+      "content": "Which functional programming concept would you like to master first? Select the path that resonates with your investigative interests.",
+      "choices": [
+        {
+          "label": "Master Pure Functions: Evidence Analysis Reliability",
+          "next": "n3"
+        },
+        {
+          "label": "Understand Immutability: Chain of Custody Integrity",
+          "next": "n5"
+        },
+        {
+          "label": "Explore Higher-Order Functions: Investigation Design",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Pure Functions: Reliable Evidence Analysis",
+      "content": "A pure function always produces the same output for the same input and has no side effects\u2014it doesn't modify external state or depend on it. This mirrors forensic analysis protocols: when a forensic chemist analyzes a blood sample, the toxicology results must be identical each time, regardless of external circumstances. Pure functions eliminate hidden dependencies and make code behavior predictable. In forensic software, pure functions ensure that DNA matching algorithms, fingerprint analysis tools, and ballistics comparison systems produce consistent, auditable results. They're the foundation of trustworthy forensic systems.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "DNA Match Probability Calculation",
+      "content": "Consider a pure function `calculateDNAMatchProbability(profileA, profileB)` that analyzes two DNA profiles. Given the same two profiles, it always returns the same probability (e.g., 1 in 1 billion). This function contains no logic that checks external databases or modifies global case files\u2014it operates purely on its inputs. A forensic analyst can trust that running this function 100 times on the same evidence produces identical results, ensuring the integrity of expert testimony. This predictability is non-negotiable in criminal justice.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Immutability: Maintaining Evidence Integrity",
+      "content": "Immutability means data cannot be changed once created; instead, you create new versions. This principle is fundamental to forensic science's chain of custody: evidence cannot be modified in place\u2014any change invalidates the evidence. In code, immutability prevents accidental corruption of evidence logs, witness statements, or analysis records. When you log a fingerprint finding, you don't alter the original record; you create a new, timestamped entry. This guarantees a complete audit trail and prevents catastrophic scenarios where key evidence data is unknowingly corrupted or overwritten during processing.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Evidence Log: Create, Don't Modify",
+      "content": "Instead of modifying an existing evidence log entry (which could be accidentally overwritten), forensic systems create new immutable records. For example, a case might have: `originalLog = [{evidence:'Knife A', tested:false}]`. Rather than updating `originalLog[0].tested = true`, you create: `updatedLog = [...originalLog, {evidence:'Knife A', tested:true, timestamp:'2026-03-27T14:23:00Z'}]`. The original log remains untouched. If the system crashes mid-update, no data is lost. Auditors see the complete history. This immutable-first approach is why forensic databases use append-only logs and versioning systems.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Higher-Order Functions: Flexible Investigation Workflows",
+      "content": "A higher-order function takes functions as arguments or returns functions. In forensic investigation, this enables flexible, composable workflows. Instead of writing rigid procedures, you compose modular functions: `analyzeEvidence(filterFunction, testFunction, reportFunction)(evidence)`. Different investigation teams might use different test functions (toxicology vs. serological) or different report formats (legal document vs. internal memo). Higher-order functions make investigation workflows adaptive without rewriting core logic. They embody the forensic principle of methodological consistency while accommodating case-specific needs.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Evidence Processing Pipeline",
+      "content": "Design an evidence processing pipeline: `const processEvidence = (filterFn, analyzeFn, reportFn) => (evidence) => reportFn(analyzeFn(filterFn(evidence)))`. For a drug case, `filterFn` selects substances, `analyzeFn` runs chromatography, `reportFn` formats findings. For a homicide, the same pipeline structure reuses `reportFn`, but swaps `analyzeFn` to DNA sequencing and `filterFn` for biological material. This compositional approach\u2014passing functions as arguments\u2014allows forensic labs to build once and adapt infinitely, ensuring consistent investigation standards across different case types without code duplication.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Convergence: Building Forensic Systems with Functional Principles",
+      "content": "Pure functions ensure analysis results are auditable and repeatable. Immutability guarantees evidence integrity and complete audit trails. Higher-order functions enable flexible, maintainable investigation workflows. Together, these principles form the backbone of reliable forensic software. A DNA analysis system built on pure functions, immutable evidence logs, and composable processing pipelines is resistant to data corruption, easy to test, and trustworthy in court. Real forensic labs (FBI, Scotland Yard, CDC) rely on systems built on these principles because human lives depend on the reliability of evidence.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Investigation Complete: Mastery Achieved",
+      "content": "You've completed your forensic programming investigation. You now understand how pure functions, immutability, and higher-order functions create reliable, trustworthy systems\u2014the same principles that forensic science relies on to serve justice. Continue applying these concepts in your code."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pure Functions Path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Immutability Path"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Higher-Order Functions Path"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:16:54.535456+00:00",
+  "model": "claude-haiku-4-5"
+}

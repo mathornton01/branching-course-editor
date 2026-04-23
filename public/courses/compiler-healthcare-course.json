@@ -1,0 +1,227 @@
+{
+  "id": "compiler-healthcare-course",
+  "title": "Compiler Design for Healthcare Systems",
+  "description": "Learn compiler design principles through the lens of healthcare data processing, diagnostic coding, and medical software systems. Adaptive branching routes you to appropriate depth based on your current knowledge.",
+  "topic": "Compiler Design",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "compiler design",
+    "healthcare",
+    "software engineering",
+    "programming languages"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Compiler Design Fundamentals Diagnostic",
+      "content": "Assess your understanding of core compiler concepts. This diagnostic will route you to either foundational or advanced material based on your responses.",
+      "questions": [
+        {
+          "question": "A compiler translates source code into executable machine code. In healthcare, what would be the equivalent input and output?",
+          "options": [
+            "A) Patient medical records input \u2192 Insurance billing codes output",
+            "B) Doctor's handwriting \u2192 Hospital database",
+            "C) Symptoms \u2192 Medications",
+            "D) Patient age \u2192 Treatment length"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Just as a compiler translates one language to another, healthcare billing compilers translate clinical notes into standardized insurance codes.",
+            "Incorrect. This is data storage, not compilation/translation.",
+            "Incorrect. This is clinical decision-making, not compilation.",
+            "Incorrect. This is not a language translation process."
+          ],
+          "explanation": "Compilation is fundamentally about translating from one symbolic representation to another. In healthcare, billing systems compile clinical narratives into standardized diagnostic and procedure codes for insurance and research."
+        },
+        {
+          "question": "Which compilation phase identifies whether a statement is grammatically correct before attempting to understand its meaning?",
+          "options": [
+            "A) Semantic analysis",
+            "B) Syntax analysis (parsing)",
+            "C) Code generation",
+            "D) Lexical analysis"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Semantic analysis checks meaning and type consistency, which happens after syntax validation.",
+            "Correct! Syntax analysis (parsing) verifies grammatical structure. In healthcare, this is like checking that a prescription follows proper formatting rules before checking if the drug interaction is safe.",
+            "Incorrect. Code generation produces the final output, not validates grammar.",
+            "Incorrect. Lexical analysis tokenizes input but doesn't validate grammar structure."
+          ],
+          "explanation": "Syntax analysis ensures the input follows the grammatical rules of a language. In a medical prescription compiler, it validates that the format is correct before checking safety interactions."
+        },
+        {
+          "question": "What does semantic analysis ensure during compilation?",
+          "options": [
+            "A) The input characters are recognized tokens",
+            "B) The program structure follows grammatical rules",
+            "C) Variables are properly declared and type-compatible; operations are valid for their types",
+            "D) The code runs as efficiently as possible"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. That's lexical analysis.",
+            "Incorrect. That's syntax analysis.",
+            "Correct! Semantic analysis validates meaning, type consistency, and logical validity. In diagnostic coding, this ensures selected codes are medically compatible and the patient history supports the diagnosis.",
+            "Incorrect. That's an optimization concern, not semantic validation."
+          ],
+          "explanation": "Semantic analysis validates the logical correctness of the program. In healthcare coding, this prevents contradictory diagnoses, incompatible procedures, and invalid medical logic."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Semantic Analysis and Type Checking in Healthcare Compilers",
+      "content": "Semantic analysis is where compilers validate the logical correctness of source code. In healthcare systems, this phase is critical for ensuring medical safety. When a billing compiler analyzes diagnostic codes, semantic analysis checks that procedures are valid for a given diagnosis, that drug interactions are safe, and that the clinical narrative aligns with coded conditions. Electronic health record (EHR) systems use semantic analysis to validate treatment plans\u2014checking drug allergies, contraindications, dosing appropriateness, and clinical consistency. This layer catches errors that syntax checking alone cannot detect, preventing costly billing mistakes and protecting patient safety through automated validation. Semantic analysis in healthcare must be particularly rigorous because errors directly impact clinical outcomes and patient wellbeing.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Real-World Example: ICD-10 Medical Coding Compiler",
+      "content": "Consider a patient with Type 2 Diabetes, diabetic kidney disease, and hypertension. A medical coding compiler translates clinical notes into ICD-10 codes (E11.22, N18.4, I10). The semantic analysis phase ensures these codes form a medically coherent set: kidney disease codes are appropriate for this diabetes type, hypertension is compatible with diabetic kidney disease, and the diagnostic sequence reflects clinical relationships between conditions. The compiler rejects invalid combinations like pediatric conditions for adults or incompatible procedure codes. This real-time validation prevents millions in billing denials while ensuring clinical data integrity. The compiler even cross-references against the patient's medication list to detect potential prescribing errors that could cause serious adverse events.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Compiler Concepts Mastered",
+      "content": "You've completed the advanced course. You understand how semantic analysis and type checking create robust healthcare systems that prevent errors before they reach clinical or financial systems. Apply these rigorous validation concepts to build medical software that is both logically sound and clinically safe."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Fundamentals: What Is a Compiler?",
+      "content": "A compiler is a program that translates code written in one language into another language\u2014usually a lower-level language computers can execute. Think of it like a medical translator: a doctor writes a diagnosis in natural language, and a billing compiler translates it into standardized medical codes that hospitals, insurance companies, and researchers can process uniformly. Compilers work in phases: lexical analysis (breaking input into tokens, like identifying words in a sentence), syntax analysis (verifying grammatical structure), and semantic analysis (validating meaning and consistency). Understanding compilers helps you build software that translates between different healthcare data representations\u2014a core skill where data must flow between electronic health records, insurance systems, research databases, and public health registries.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Simple Example: Prescription Compiler",
+      "content": "Imagine a hospital pharmacist writes: 'Give patient 500mg amoxicillin orally, twice daily for 10 days.' The prescription compiler translates this into a standardized format that pharmacy software understands: {drug: 'amoxicillin', dose: '500mg', route: 'oral', frequency: 'BID', duration: '10 days'}. The lexical phase tokenizes the input (identifying numbers, drug names, frequencies). The syntax phase checks that the prescription format is complete and properly structured. The semantic phase verifies the drug name is valid, the dose is within safe ranges, and the route is appropriate. If a prescriber tried to order amoxicillin IV but only had oral solution available, the compiler's semantic analysis would flag this incompatibility before it reaches the patient, preventing medication errors.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Compiler Phases in Healthcare",
+      "content": "Reinforce your understanding of compiler phases with healthcare scenarios.",
+      "questions": [
+        {
+          "question": "A patient's allergy record includes 'PENICLLIN' (misspelled). At which compiler phase would this typo be caught?",
+          "options": [
+            "A) Lexical analysis would tokenize it correctly despite the typo",
+            "B) Syntax analysis would reject it as malformed",
+            "C) Semantic analysis would reject it because 'PENICLLIN' is not a recognized drug name",
+            "D) It would pass all phases and cause an error when matching the allergy database"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Lexical analysis just breaks input into tokens; it doesn't validate against known drugs.",
+            "Incorrect. Syntax analysis checks structure, not whether specific drug names are real.",
+            "Correct! Semantic analysis validates that 'PENICLLIN' is not a recognized drug name, catching the typo before it causes a medication error.",
+            "Incorrect. A good compiler catches semantic errors before they cause runtime problems."
+          ],
+          "explanation": "This demonstrates the power of semantic analysis: it catches logical errors, not just structural ones. A drug allergy typo could be fatal in clinical practice if not caught by the compiler."
+        },
+        {
+          "question": "In a medical procedure ordering system, syntax analysis verifies format: {procedure_code, patient_id, surgeon_id}. What would semantic analysis additionally check?",
+          "options": [
+            "A) That each value is the correct data type (code is string, IDs are integers)",
+            "B) That the surgeon_id refers to an actual surgeon on staff who is credentialed for that procedure",
+            "C) That the procedure_code is valid and the patient isn't allergic to required materials",
+            "D) All of the above"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. While type checking is part of semantic analysis, it does much more in healthcare.",
+            "Incorrect. While staff credentialing is important, semantic analysis also validates procedure codes.",
+            "Incorrect. While allergy checking is crucial, semantic analysis also validates credentials.",
+            "Correct! Semantic analysis in healthcare ensures medical and operational safety: type validation, staff credentialing, procedure validity, and allergy screening."
+          ],
+          "explanation": "Healthcare compilers must be rigorous in semantic analysis because errors directly impact patient safety. This includes type checking, credential verification, and clinical safety validation."
+        },
+        {
+          "question": "Which best describes the relationship between syntax and semantic analysis?",
+          "options": [
+            "A) Syntax checks if code is well-formed; semantic checks if it's logically correct",
+            "B) Semantic analysis is more important because it finds real bugs",
+            "C) Syntax analysis is sufficient for most healthcare applications",
+            "D) They are interchangeable terms for the same phase"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Syntax is about form and structure; semantics is about meaning and logical validity. Both are necessary.",
+            "Incorrect. While semantic errors are subtle, both phases are essential for robust compilers.",
+            "Incorrect. In healthcare, both syntax and semantic analysis are crucial for safety and compliance.",
+            "Incorrect. These are distinct phases with different purposes and validation rules."
+          ],
+          "explanation": "A prescription could have perfect syntax but invalid semantics (correct format but prescribing a drug the patient is allergic to). Both phases are essential in healthcare systems."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Compiler Fundamentals Mastered",
+      "content": "You've completed the fundamentals of compiler design. You now understand how compilers translate between representations, validate structure and meaning, and prevent errors before they become problems. In healthcare, these concepts are literally lifesaving\u2014ensuring patient data accuracy, treatment order safety, and clinical system interoperability. Continue building on this foundation as you tackle more complex compiler and language design challenges."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (\u226567%)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Retry (<67%)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "continue"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "complete"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "practice"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-27T08:18:38.965519+00:00",
+  "model": "claude-haiku-4-5"
+}

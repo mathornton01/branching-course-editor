@@ -1,0 +1,295 @@
+{
+  "id": "dist-sys-forensics-pyramid",
+  "title": "Distributed Systems for Forensic Science",
+  "description": "Master distributed systems through forensic science scenarios. Learn consensus algorithms, fault tolerance, and multi-lab coordination using an adaptive assessment pyramid.",
+  "topic": "Distributed Systems",
+  "theme": "forensic science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed-systems",
+    "forensic-science",
+    "consensus",
+    "fault-tolerance",
+    "network-coordination"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Forensic Lab Network Basics",
+      "content": "In forensic science, multiple labs need to share evidence data, collaborate on case analysis, and maintain consistency. When three forensic labs in different cities investigate a related case, they must synchronize evidence reports, coordinate analysis, and ensure all have accurate information. This quiz tests your foundational understanding of distributed system challenges in a forensic context.",
+      "questions": [
+        {
+          "question": "What is the primary challenge when multiple forensic labs process evidence from the same crime scene?",
+          "options": [
+            "Labs have different amounts of funding",
+            "Ensuring all labs have consistent, up-to-date evidence information",
+            "Police officers don't understand lab procedures",
+            "Evidence degradation over time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect.",
+            "Correct! Consistency and coordination are key.",
+            "Incorrect.",
+            "Incorrect."
+          ],
+          "explanation": "Multiple labs need synchronized data and agreement on findings to maintain chain of custody and evidence integrity."
+        },
+        {
+          "question": "In a distributed forensic network, what does 'replication' mean?",
+          "options": [
+            "Creating fake evidence copies",
+            "Maintaining duplicate copies of evidence records across multiple labs",
+            "Repeating tests on the same sample",
+            "Making evidence public"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect.",
+            "Correct! Replication ensures resilience.",
+            "Incorrect.",
+            "Incorrect."
+          ],
+          "explanation": "Replication creates redundant copies of data across multiple locations to prevent data loss and improve availability."
+        },
+        {
+          "question": "When two forensic labs can't communicate due to network issues, what problem occurs?",
+          "options": [
+            "The case is immediately dismissed",
+            "Labs may operate with different versions of the evidence data",
+            "All evidence becomes invalid",
+            "The investigation must restart"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect.",
+            "Correct! Network partitions cause split-brain scenarios.",
+            "Incorrect.",
+            "Incorrect."
+          ],
+          "explanation": "Network failures can cause different nodes to hold different data versions, creating consistency problems."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Evidence Consensus & Coordination",
+      "content": "Forensic investigations often require multiple labs to reach agreement on findings. When labs disagree about results, they must use consensus protocols to verify evidence authenticity, coordinate witness statements, and ensure chain of custody is maintained across the network. Byzantine agreement problems arise when some labs might be compromised or sending false data. This assessment tests your understanding of consensus mechanisms under adversarial conditions.",
+      "questions": [
+        {
+          "question": "What consensus protocol would be most appropriate when one forensic lab might send corrupted data?",
+          "options": [
+            "Simple majority vote",
+            "Byzantine Fault Tolerant consensus",
+            "Single source of truth",
+            "Averaging results"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect.",
+            "Correct! BFT handles malicious nodes.",
+            "Incorrect.",
+            "Incorrect."
+          ],
+          "explanation": "Byzantine Fault Tolerance is designed specifically to reach consensus even when some nodes act maliciously or send corrupted data."
+        },
+        {
+          "question": "In a distributed forensic system with network partitions, what is the primary risk?",
+          "options": [
+            "Labs will run out of storage",
+            "Different lab groups may reach conflicting conclusions about evidence",
+            "Evidence will spontaneously degrade",
+            "All labs must shut down"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect.",
+            "Correct! Split-brain scenarios create conflicts.",
+            "Incorrect.",
+            "Incorrect."
+          ],
+          "explanation": "When networks partition, isolated groups may update data differently, creating split-brain conflicts that are hard to resolve."
+        },
+        {
+          "question": "What does 'eventual consistency' mean in a forensic context?",
+          "options": [
+            "Evidence will eventually be valid",
+            "All labs will eventually have the same evidence records, even if temporarily different",
+            "Only one lab can be trusted",
+            "The investigation must eventually end"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect.",
+            "Correct! Eventual consistency allows temporary divergence.",
+            "Incorrect.",
+            "Incorrect."
+          ],
+          "explanation": "Eventual consistency means all replicas will converge to the same state, but there may be a delay during which they differ."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Distributed Patterns in Forensics",
+      "content": "Enterprise forensic networks employ sophisticated patterns. **Sharding** partitions evidence by case ID across labs for scalability\u2014Lab A handles cases 1-1000, Lab B handles 1001-2000. The **CAP theorem** states you cannot simultaneously guarantee consistency, availability, and partition tolerance. Forensic networks typically choose strong consistency and partition tolerance (sacrificing availability during partitions) because evidence integrity is non-negotiable. **Microservices architecture** separates DNA analysis, toxicology, and ballistics into independent services that communicate via secure APIs. Watch for **cascading failures**: when the central evidence repository goes down, the entire network can become paralyzed. Implement **circuit breakers** to prevent requests to failed services, and **graceful degradation** so forensic staff can access cached evidence locally. In a real scenario, when FBI headquarters loses connection to regional labs, investigations continue using local cached evidence while update queues accumulate. When connectivity restores, batched updates synchronize across the network. This resilience is critical when investigating time-sensitive crimes.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Forensic Systems Architect",
+      "content": "Congratulations! You've mastered advanced distributed systems concepts in a forensic context. You understand consensus algorithms, Byzantine failures, the CAP theorem, sharding strategies, and can design resilient systems that maintain evidence integrity across multiple locations. You can architect enterprise forensic networks for large-scale investigations spanning multiple jurisdictions. You're prepared to handle cascading failures, network partitions, and implement sophisticated replication strategies. Exceptional work!"
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Consensus Techniques Practice",
+      "content": "Practice applying consensus algorithms to real forensic scenarios. These questions reinforce your understanding of how labs coordinate under challenging network conditions.",
+      "questions": [
+        {
+          "question": "A forensic network with 5 labs uses 3-of-5 Byzantine agreement. If one lab is offline, can the remaining 4 labs safely reach consensus?",
+          "options": [
+            "No, they need at least 4 honest labs",
+            "Yes, 3 out of 4 is sufficient",
+            "Only if they use a backup protocol",
+            "It depends on the network speed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Byzantine agreement requires 2f+1 honest nodes where f is the number of faulty nodes. With 1 faulty lab, you need 3 honest ones, which 4 remaining labs can provide.",
+            "Correct! Byzantine agreement is satisfied.",
+            "Incorrect.",
+            "Incorrect."
+          ],
+          "explanation": "With f=1 faulty node, you need 2f+1=3 honest nodes. With 4 remaining labs, you can achieve this."
+        },
+        {
+          "question": "In a forensic system using eventual consistency, is it safe to release a suspect if 4 out of 5 labs agree on evidence?",
+          "options": [
+            "Yes, always safe with majority",
+            "No, wait for all labs to have consistent data before releasing",
+            "Only if the suspect is dangerous",
+            "Yes, after 24 hours"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect.",
+            "Correct! Chain of custody requires strong consistency.",
+            "Incorrect.",
+            "Incorrect."
+          ],
+          "explanation": "Forensic evidence and legal decisions require strong consistency, not eventual consistency. You must wait for all labs to confirm."
+        },
+        {
+          "question": "What happens if a network partition splits your 6 forensic labs into two groups of 3?",
+          "options": [
+            "The larger group can proceed",
+            "All work must stop",
+            "Neither group can safely make binding decisions without additional verification",
+            "Flip a coin to decide"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect.",
+            "Incorrect.",
+            "Correct! Both partitions are equal size, creating split-brain.",
+            "Incorrect."
+          ],
+          "explanation": "With equal partition sizes, neither group has a clear majority. Both cannot safely claim consensus without verification."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Forensic Network Coordinator",
+      "content": "You've practiced consensus and coordination techniques in forensic networks. You understand the challenges of multi-lab collaboration, Byzantine failures, and can implement pragmatic solutions even when perfect consensus isn't possible. You're ready to coordinate forensic investigations across distributed lab networks, manage consensus protocols, and troubleshoot coordination failures. Excellent progress!"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Distributed Systems Fundamentals",
+      "content": "Distributed systems consist of multiple independent computers (nodes) that communicate over a network to achieve a common goal. In forensic science, imagine separate DNA labs, ballistics labs, and toxicology labs across different cities. Each lab is a node. They must share evidence data, so they're connected by networks. The fundamental challenges are: **Latency** \u2014 sending DNA results between cities takes time. **Fault tolerance** \u2014 if one lab loses power, others continue working. **Consistency** \u2014 all labs should have the same evidence record. **Scalability** \u2014 the system handles many cases and labs. Real example: the FBI's National Crime Information Center (NCIC) maintains evidence records across 50 states. When a new DNA match is entered in California, it must reliably reach all other state labs within minutes.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Multi-Lab Evidence Sharing Scenario",
+      "content": "Consider a murder investigation with evidence processed by three labs: Lab A (bloodwork), Lab B (DNA analysis), Lab C (fiber analysis). Lab A completes its analysis and sends results to a central repository. Lab B and Lab C do the same. In a distributed system, Lab A's results are immediately replicated to backup servers in Labs B and C's locations, though full replication takes a few seconds. If a network link fails momentarily, Lab B temporarily has slightly older data, but queued updates ensure it catches up when connectivity restores. Forensic investigators can still review partial results on their local systems even during brief network issues. This is resilience through redundancy. If replication fails, the lab manually verifies evidence through a secondary secure channel. The entire network is designed with forensic integrity in mind: never lose evidence, allow graceful degradation, and provide complete audit trails of all data changes.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Forensic Network Fundamentals",
+      "content": "You've learned the fundamentals of distributed systems applied to forensic science. You understand replication, latency, fault tolerance, consistency challenges, and why multiple labs need coordination. You can explain how the FBI's NCIC system works and why it's resilient. You've seen real scenarios of multi-lab evidence sharing. You're ready for intermediate and advanced topics. Great foundation!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T17:10:22.209865+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,227 @@
+{
+  "id": "dist-sys-marine",
+  "title": "Distributed Systems: A Marine Perspective",
+  "description": "Understand distributed systems through the lens of marine biology. Learn how ocean ecosystems maintain consistency, handle failures, and coordinate actions across vast distances.",
+  "topic": "Distributed Systems",
+  "theme": "marine biology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed-systems",
+    "marine-biology",
+    "systems-design",
+    "computer-science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Distributed Systems Diagnostic",
+      "content": "Test your understanding of distributed systems fundamentals before diving deeper.",
+      "questions": [
+        {
+          "question": "What is a key challenge in distributed systems where multiple nodes must agree on a single value?",
+          "options": [
+            "A) Latency",
+            "B) Consensus",
+            "C) Throughput",
+            "D) Storage"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Latency affects performance but isn't the core challenge of agreement.",
+            "Correct! Consensus is how distributed systems reach agreement despite failures and delays.",
+            "Throughput relates to capacity, not agreement.",
+            "Storage is important but not specifically about agreement."
+          ],
+          "explanation": "Consensus algorithms are fundamental to distributed systems. Nodes must agree on state even when some are slow or unreliable, much like how a coral reef ecosystem maintains balance despite environmental changes."
+        },
+        {
+          "question": "In the CAP theorem, what does 'Consistency' mean in a distributed system?",
+          "options": [
+            "A) All nodes stay online all the time",
+            "B) All readers see the same data at the same time",
+            "C) The system responds quickly",
+            "D) Backups are always updated"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Availability relates to uptime, not consistency.",
+            "Correct! Consistency ensures all clients read the same value, like how a school of fish all respond to the same signal.",
+            "That's related to Availability in CAP.",
+            "That's durability, a separate concern."
+          ],
+          "explanation": "CAP theorem shows the trade-offs: you can guarantee Consistency, Availability, or Partition tolerance, but not all three. Like ocean currents, organisms must choose whether to move together (consistency) or allow independent movement (availability)."
+        },
+        {
+          "question": "What mechanism allows a distributed system to recover from node failures?",
+          "options": [
+            "A) Increased latency",
+            "B) Replication across multiple nodes",
+            "C) Faster processors",
+            "D) More memory"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Latency doesn't prevent failure recovery.",
+            "Correct! Replication ensures data survives node failures, like how populations spread across reefs ensures species survival.",
+            "Processor speed doesn't help with failure recovery.",
+            "Memory capacity is unrelated to failure resilience."
+          ],
+          "explanation": "Replication is crucial for fault tolerance. When one node fails, other replicas continue serving requests. This mirrors how marine species survive\u2014by being distributed across multiple reefs and ocean regions."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Consensus & CAP Theorem in the Deep",
+      "content": "You've demonstrated strong foundational knowledge! Now explore advanced distributed systems concepts. The CAP theorem proves any distributed system can guarantee at most two of: Consistency, Availability, and Partition tolerance. Consider bioluminescent deep-sea organisms: synchronized light displays require strong consistency (all flash together), but if ocean currents separate the school (network partition), they choose between maintaining the flash pattern (consistency) or allowing independent flashing (availability). Consensus algorithms like Raft and Paxos solve distributed agreement through leader election and log replication. Think of a whale pod: the matriarch leads, other whales replicate decisions in their behavior\u2014if the leader becomes unreachable, the pod elects a new leader and continues.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Example: Whale Pod Migration as Raft Consensus",
+      "content": "A sperm whale pod migrating to feeding grounds models a distributed consensus system perfectly. The matriarch (leader) decides the route; all whales replicate this decision through synchronized movement, ensuring the pod moves as one coordinated unit. When the matriarch becomes unreachable due to separation or illness (node failure), the pod elects a new leader using distinctive click patterns and whale songs that propagate through the ocean. Every whale (node) acknowledges the new leader's route through specific vocalizations, implementing log replication in real-time. Even if turbulent waters (network delays) temporarily prevent some whales from receiving messages, the safety guarantees ensure convergence\u2014all whales eventually adopt the same route. This demonstrates Raft's core properties: elected leadership, replicated state, and eventual consistency across all nodes.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced: Mastery of Consensus Systems Complete",
+      "content": "Excellent! You've explored how distributed systems use consensus algorithms, the CAP theorem, and strategic trade-offs to solve real-world coordination challenges. These principles scale from whale pods to planetary cloud networks. Remember: consistency, availability, and partition tolerance cannot all be maximized simultaneously\u2014understand your constraints and design accordingly, just as evolution has shaped ocean life."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundations: Building Blocks of Distributed Systems",
+      "content": "Welcome to distributed systems! A distributed system is a collection of independent computers (nodes) that communicate via a network to achieve a common goal. Think of a coral reef: each coral polyp is an independent organism, but together they form a coordinated living structure. Similarly, distributed systems have multiple nodes that must coordinate despite network delays, failures, and incomplete information. Key concepts: Nodes are individual computers; Latency is communication time delay (like distance between reef sections); Replication means storing data copies on multiple nodes (like coral larvae spreading to new reefs); Fault Tolerance is the system's ability to continue working when nodes fail (like reefs surviving individual coral death through neighboring corals). Understanding these fundamentals helps you design systems as resilient as nature.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Coral Reef as a Distributed System",
+      "content": "A coral reef ecosystem beautifully demonstrates distributed systems principles. Individual coral colonies release chemical signals (messages) to neighbors about nutrient levels, algal threats, and environmental stress. Each colony stores information about neighboring conditions in its tissues (data replication). When a typhoon damages part of the reef (catastrophic node failure), surviving colonies continue exchanging signals and rebuild collaboratively\u2014the reef's resilience emerges from distributed knowledge and redundancy, not central planning. Signal propagation through water introduces latency, so colonies route messages through intermediate neighbors to spread information. The reef achieves robustness through local communication, distributed storage, and graceful degradation, not through a central authority. Like distributed databases, successful reefs prioritize availability (continued ecosystem function) over immediate global consistency (every coral knowing everything simultaneously).",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Reinforcing Distributed Systems Foundations",
+      "content": "Apply your learning to reinforce core concepts.",
+      "questions": [
+        {
+          "question": "A kelp forest has multiple kelp trees (nodes). Nutrients flow between trees through underwater currents (network messages). Which property allows the forest to survive if one tree dies?",
+          "options": [
+            "A) Latency management",
+            "B) Replication and redundancy",
+            "C) Faster photosynthesis",
+            "D) Deeper root systems"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Latency doesn't directly prevent failure impact.",
+            "Correct! Redundancy and replication ensure system survival when individual components fail.",
+            "Growth speed is unrelated to system resilience.",
+            "Individual root systems don't address system-level recovery."
+          ],
+          "explanation": "Replication is the fundamental technique for fault tolerance. By distributing copies of data or functionality across multiple nodes, the entire system continues operating even when individual nodes fail."
+        },
+        {
+          "question": "In a distributed system, what do we call the time it takes for a message to travel from one node to another?",
+          "options": [
+            "A) Bandwidth",
+            "B) Latency",
+            "C) Throughput",
+            "D) Jitter"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Bandwidth is data transmission capacity, not time.",
+            "Correct! Latency is delay in communication, like how long a whale song takes to reach another whale across the ocean.",
+            "Throughput is data volume transmitted per unit time.",
+            "Jitter is variation in latency over time."
+          ],
+          "explanation": "Latency is critical in distributed systems. High latencies make coordination harder, affect consistency guarantees, and require careful algorithm design\u2014much like how distance between ocean regions affects ecosystem coordination."
+        },
+        {
+          "question": "A school of bioluminescent fish coordinate perfectly synchronized light flashes despite being separated by distance. This models which distributed systems concept?",
+          "options": [
+            "A) Data replication",
+            "B) Consensus and coordination",
+            "C) Network routing",
+            "D) Data compression"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Replication is about duplicating data, not synchronized behavior.",
+            "Correct! The school achieving synchronized behavior despite delays models consensus\u2014all nodes agreeing on a common action.",
+            "Routing determines message paths, not group coordination.",
+            "Compression is unrelated to coordination."
+          ],
+          "explanation": "Consensus is how distributed systems achieve agreement on state or actions. Each node independently decides to participate in the flash, yet through message coordination, all flash in synchrony\u2014a powerful distributed computing principle."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundations Complete: Ocean to Cloud",
+      "content": "Congratulations! You've mastered distributed systems fundamentals through marine biology. You understand how independent nodes coordinate despite delays, how replication provides resilience, and why understanding latency matters. These principles govern everything from coral reefs to cloud databases to blockchain networks. As you design or encounter distributed systems, remember the ocean's lessons: systems must be resilient, nodes fail and recover, messages always take time, and beauty emerges from coordinated independent agents. Design accordingly, and you'll build systems as enduring as the sea itself."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass (strong knowledge)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "fail (needs foundations)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "continue"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "complete"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "practice"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-27T06:05:38.365021+00:00",
+  "model": "claude-haiku-4-5"
+}

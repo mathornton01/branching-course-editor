@@ -1,0 +1,303 @@
+{
+  "id": "graph-theory-games",
+  "title": "Graph Theory and Applications in Game Design",
+  "description": "Master graph theory through the lens of game design, from pathfinding to skill trees to multiplayer systems",
+  "topic": "Graph Theory and Game Design",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "graph theory",
+    "game design",
+    "algorithms",
+    "pathfinding"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Graphs: The Hidden Architecture of Games",
+      "content": "Graphs are everywhere in game design\u2014whether you're navigating a dungeon, managing a character's skill tree, or connecting players in a multiplayer network. A graph consists of nodes (vertices) connected by edges, representing relationships and pathways. In games, nodes might be locations on a map, skill points, or player instances, while edges represent connections like passages between rooms or prerequisites between skills. Understanding graphs helps designers create responsive, efficient, and engaging game systems."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Basic Graph Concepts Quiz",
+      "content": "Test your understanding of fundamental graph concepts through game design scenarios.",
+      "questions": [
+        {
+          "question": "In a game where a character can move between rooms (Room A connects to Rooms B and C, which both connect to Room D), what is Room A in graph terms?",
+          "options": [
+            "A node with degree 2",
+            "An edge",
+            "A directed graph",
+            "A path"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Room A is a node with degree 2 (connected to 2 other nodes)",
+            "Incorrect. An edge is a connection between nodes, not a room itself",
+            "Incorrect. Degree describes individual nodes, not whole graphs",
+            "Incorrect. A path is a sequence of connected nodes"
+          ],
+          "explanation": "In graph terminology, rooms are nodes, passages between them are edges, and degree measures how many connections a node has."
+        },
+        {
+          "question": "A skill tree where each skill unlocks prerequisites and opens new skills is what type of graph?",
+          "options": [
+            "Undirected graph",
+            "Directed acyclic graph (DAG)",
+            "Cyclic graph",
+            "Weighted graph"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Undirected means edges work both ways; skill prerequisites are one-way",
+            "Correct! Skill trees are DAGs\u2014directed (skills lead to unlocks) and acyclic (no circular dependencies)",
+            "Incorrect. Cyclic graphs have loops; you can't unlock a skill that depends on itself",
+            "Incorrect. While skills might have weighted values, the tree structure is primarily directed"
+          ],
+          "explanation": "Skill trees must be directed (prerequisites point to unlocks) and acyclic (no circular dependencies), making them classic directed acyclic graphs."
+        },
+        {
+          "question": "In a multiplayer game where any player can message any other player, what property describes the graph?",
+          "options": [
+            "Directed",
+            "Undirected",
+            "Sparse",
+            "Weighted"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. If any player can message any other, communication goes both ways",
+            "Correct! Undirected graphs have bidirectional connections\u2014if A connects to B, B connects to A",
+            "Incorrect. Sparse describes edge density, not directionality",
+            "Incorrect. Weighted applies to edge values, not the fundamental structure"
+          ],
+          "explanation": "Peer-to-peer multiplayer networks are undirected because the messaging relationship is bidirectional."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Applied Graph Problem-Solving",
+      "content": "Now apply your knowledge to real game design challenges. These scenarios require understanding connectivity, pathfinding, and optimization.",
+      "questions": [
+        {
+          "question": "In a dungeon, enemies need to find the shortest path to the player. The dungeon has corridors (edges) connecting rooms (nodes). Which algorithm efficiently finds this shortest path?",
+          "options": [
+            "Depth-first search",
+            "Dijkstra's algorithm",
+            "Breadth-first search (BFS)",
+            "Both B and C work equally well here"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. DFS explores deeply but doesn't guarantee shortest path",
+            "Correct! Dijkstra's works, especially if corridors have different lengths (weights)",
+            "Correct! BFS finds shortest path in unweighted graphs (equal corridor lengths)",
+            "Correct! For unweighted graphs, BFS is faster; for weighted, Dijkstra's is needed"
+          ],
+          "explanation": "BFS works perfectly for unweighted graphs (dungeons with uniform corridor lengths), while Dijkstra's handles variable corridor lengths. Both guarantee shortest path."
+        },
+        {
+          "question": "A game tracks item dependencies: sword requires iron ore, iron ore requires mining tools, which require a pickaxe. You want to identify if any item has a circular dependency that would break progression. What graph property are you checking?",
+          "options": [
+            "Connectivity",
+            "Cyclicity",
+            "Density",
+            "Planarity"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Connectivity means reachability, not circular dependencies",
+            "Correct! Acyclic means no cycles\u2014checking for cycles ensures valid progression",
+            "Incorrect. Density measures edge ratio, not dependency structure",
+            "Incorrect. Planarity means drawable without crossing edges"
+          ],
+          "explanation": "Detecting cycles ensures your dependency tree is acyclic, preventing impossible-to-satisfy prerequisites."
+        },
+        {
+          "question": "In a strategy game, you're designing a map with islands connected by bridges. You want every island reachable from every other island. Which property must the graph have?",
+          "options": [
+            "Be directed",
+            "Be fully connected (strongly connected or connected)",
+            "Have exactly one cycle",
+            "Be complete"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Directionality doesn't ensure reachability between all pairs",
+            "Correct! Connected graphs guarantee a path between any two nodes",
+            "Incorrect. You might have zero cycles (tree) or many\u2014cycles aren't required",
+            "Incorrect. Complete graphs require edges between every pair of nodes; connected graphs need fewer"
+          ],
+          "explanation": "A connected graph has a path between every pair of nodes, ensuring all islands are reachable."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Advanced Graph Algorithms: Building Intelligent Game Systems",
+      "content": "Master the algorithms that power modern game engines. Dijkstra's algorithm finds shortest paths efficiently in weighted graphs\u2014perfect for enemies navigating terrain with varying difficulties (swamps move slower than roads). A* improves Dijkstra's by adding heuristics (like distance to target), making pathfinding 10x faster. Graph coloring solves resource allocation: assign colors to nodes such that adjacent nodes have different colors (useful for assigning player team colors in competitive games). Network flow algorithms model multiplayer synchronization, ensuring data packets follow optimal routes. Spanning trees find minimal-cost connections for efficient game world design. These algorithms transform theoretical graphs into responsive, performant game systems."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Graph Design Pattern Practice",
+      "content": "Strengthen your skills by applying graph concepts to realistic game design scenarios.",
+      "questions": [
+        {
+          "question": "Design a simple dungeon with 5 rooms. Room A connects to B and C. B connects to D. C connects to D and E. Is there a room that must be visited to reach E from A?",
+          "options": [
+            "No room is mandatory",
+            "Room C is mandatory",
+            "Room D is mandatory",
+            "Room B is mandatory"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. There are paths that require specific nodes",
+            "Correct! All paths from A to E must pass through C\u2014it's an articulation point",
+            "Incorrect. D is reachable from both B and C, so you could skip D's path",
+            "Incorrect. You can skip B and go A\u2192C\u2192E"
+          ],
+          "explanation": "Node C is an articulation point (cut vertex)\u2014removing it disconnects A from E. Identifying these is crucial for dungeon design bottlenecks."
+        },
+        {
+          "question": "A game implements an NPC skill tree with 4 skills: FireBolt (no prerequisites), IceSpike (requires FireBolt), Meteor (requires FireBolt and IceSpike), and Inferno (requires Meteor). What's the maximum skill progression path length?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The longest path is longer than 2",
+            "Incorrect. The path is FireBolt\u2192IceSpike\u2192Meteor\u2192Inferno",
+            "Correct! The path length is 4 nodes (FireBolt\u2192IceSpike\u2192Meteor\u2192Inferno)",
+            "Incorrect. We only have 4 skills total"
+          ],
+          "explanation": "The longest path in a DAG represents maximum skill progression depth. This matters for balancing progression curves."
+        },
+        {
+          "question": "For a real-time strategy game, you need to route supply lines from HQ to 4 bases. HQ connects to Base1 and Base2. Base1 connects to Base3. Base2 connects to Base3 and Base4. What's the minimum number of routes (edges) needed to ensure all bases receive supplies?",
+          "options": [
+            "3 routes",
+            "4 routes",
+            "5 routes",
+            "6 routes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Three routes only connect some bases to HQ",
+            "Correct! 4 routes (HQ\u2192Base1, HQ\u2192Base2, Base1\u2192Base3, Base2\u2192Base4) reaches all bases",
+            "Incorrect. The problem doesn't require all-pairs connectivity, just reachability from HQ",
+            "Incorrect. You need fewer edges than that"
+          ],
+          "explanation": "A spanning tree of N nodes requires exactly N-1 edges. With 5 nodes (HQ + 4 bases), you need 4 edges minimum."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Graph Fundamentals Foundations",
+      "content": "Let's rebuild your graph intuition with concrete examples. Imagine a game map as a simple graph: each room or location is a node, and doors or passages between them are edges. If you can travel both directions (room A to B and B to A), it's an undirected edge. If travel is one-way (A to B but not back), it's directed. The degree of a node is simply how many edges connect to it\u2014a central hub location might have degree 5, connecting to five other locations. A path is a sequence of connected nodes: going from Room A to Room D via Rooms B and C. Understanding these basics is the foundation for everything else\u2014take your time and work through the example that follows."
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Worked Example: A Simple Game Map Graph",
+      "content": "Build a mental model with this step-by-step walkthrough. Consider a small puzzle game with 4 rooms: Entrance, ThroneRoom, Treasury, and Escape. Players start at Entrance (can go to ThroneRoom or Treasury). From ThroneRoom, they can go to Entrance or Escape. From Treasury, they can go to Entrance or Escape. From Escape, they win. Graph-wise: Entrance is node n1 (degree 2: connects to ThroneRoom and Treasury), ThroneRoom is n2, Treasury is n3, Escape is n4. Edges: Entrance\u2194ThroneRoom, Entrance\u2194Treasury, ThroneRoom\u2194Escape, Treasury\u2194Escape. This undirected graph has 4 nodes and 4 edges. Notice that all nodes are connected\u2014it's a connected graph\u2014so players can always reach Escape no matter which path they choose. This demonstrates how connectivity guarantees level accessibility."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Expert Achievement: Advanced Game Graph Systems Unlocked",
+      "content": "Congratulations! You've mastered graph theory through the lens of game design. You understand how graphs power pathfinding algorithms, skill trees, multiplayer networks, and dungeon connectivity. You can identify cyclic dependencies, optimize network flow, and design efficient game worlds using spanning trees and shortest-path algorithms. You're ready to tackle complex game systems\u2014from AI navigation to crafting systems to competitive matchmaking. Apply these concepts to build smarter, faster, more engaging games!"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Applied Success: Game Graph Mastery Achieved",
+      "content": "You've successfully applied graph theory to real game design challenges! You understand how to model game systems as graphs, solve connectivity and pathfinding problems, and recognize when graph algorithms improve game performance. Whether you're optimizing NPC routes, validating skill tree dependencies, or designing multiplayer networks, you now have the conceptual tools to think graph-first. Continue practicing these patterns in your own game projects!"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Foundational Achievement: Graph Basics Mastered",
+      "content": "Well done! You've solidified your understanding of graph fundamentals\u2014nodes, edges, connectivity, and basic graph properties. These concepts are the building blocks for understanding how game systems work under the hood. While advanced algorithms await, you now have the vocabulary and intuition to understand game architecture. Revisit these concepts as you work on game projects, and gradually explore the advanced algorithms that leverage these foundations!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n9",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n10",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T10:49:28.416365+00:00",
+  "model": "claude-haiku-4-5"
+}

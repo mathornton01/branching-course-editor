@@ -1,0 +1,282 @@
+{
+  "id": "6f3c2a1e-8b4d-47e9-9c5f-1a2b3c4d5e6f",
+  "title": "Git and Version Control in Forensic Science",
+  "description": "Master Git and version control through the lens of forensic evidence management. Learn to track changes, maintain chain of custody, and collaborate securely in investigations.",
+  "topic": "Git and Version Control",
+  "theme": "forensic science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "git",
+    "version-control",
+    "forensic-science",
+    "evidence-management",
+    "chain-of-custody"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Forensic Evidence: Building a Chain of Custody",
+      "content": "In forensic science, maintaining an accurate record of evidence changes is critical\u2014every modification must be documented and traceable. Version control systems like Git serve as the perfect tool for forensic labs: they track who changed what, when, and why. This course teaches you Git fundamentals through the lens of forensic evidence management, showing how version control prevents evidence tampering and ensures investigative integrity. You'll learn to manage evidence documentation, collaborate with team members, and maintain a complete audit trail.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "How Would You Like to Learn?",
+      "content": "Choose your path: Would you prefer to understand Git's underlying concepts first, or jump into real forensic scenarios and learn by doing?",
+      "choices": [
+        {
+          "label": "Start with Git fundamentals",
+          "next": "n3"
+        },
+        {
+          "label": "Learn through forensic scenarios",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Git Fundamentals: Commits, Branches, and Tags",
+      "content": "In forensic work, each piece of evidence must have documented history. Git's commit system mirrors this: each commit records a snapshot of your evidence files with metadata about who made the change and when. A commit is like a crime scene photograph with a timestamp and investigator signature. Branches allow forensic teams to work on different case leads simultaneously without affecting the main investigation file. Tags mark critical points\u2014like when evidence was admitted into court. Understanding these concepts helps you maintain integrity in multi-investigator cases where evidence handling must be transparent and auditable.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Tracking Evidence Changes: A Worked Example",
+      "content": "Detective Martinez works on a drug seizure case. The evidence file contains chemical analysis notes. She makes updates after the lab technician provides GC-MS results. Using Git: She commits the update with message 'Add GC-MS analysis, confirms presence of amphetamine.' Meanwhile, Detective Chen works on a separate lead, creating a branch 'lead-supplier-identity.' When Chen's lead pans out, the branches merge cleanly. The final commit log shows every change with timestamps and who made them\u2014exactly what prosecutors need. This audit trail would be impossible without version control, and it proves the evidence wasn't tampered with during investigation.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Git Fundamentals Quiz",
+      "content": "Test your understanding of Git concepts in forensic context.",
+      "questions": [
+        {
+          "question": "Why is committing changes with clear messages important in forensic evidence management?",
+          "options": [
+            "It makes files load faster",
+            "It creates an audit trail showing who changed evidence and when",
+            "It automatically backs up files",
+            "It encrypts sensitive data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Commit messages don't affect file loading speed.",
+            "Correct! Clear commits are essential for chain of custody documentation.",
+            "Incorrect. Backups happen, but that's not the primary purpose.",
+            "Incorrect. Git doesn't encrypt; audit trails do."
+          ],
+          "explanation": "In forensic work, the ability to prove no evidence tampering is critical. Commits with descriptive messages and author information create an official record."
+        },
+        {
+          "question": "In a forensic lab with multiple investigators, what is the benefit of using branches?",
+          "options": [
+            "They allow different investigators to work on different leads without interfering",
+            "They make the investigation faster",
+            "They hide sensitive information",
+            "They reduce the need for evidence documentation"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Branches enable parallel work while maintaining integrity.",
+            "Incorrect. Branches don't necessarily speed up investigations.",
+            "Incorrect. Branches don't provide security or hiding.",
+            "Incorrect. Documentation is still required on all branches."
+          ],
+          "explanation": "Multiple investigators can work on separate hypotheses or case leads using different branches, then merge findings when ready, without accidentally overwriting each other's work."
+        },
+        {
+          "question": "What does a Git tag represent in a forensic context?",
+          "options": [
+            "A temporary marker that disappears after merging",
+            "A permanent record marking a critical point (like evidence admission)",
+            "A way to delete old evidence files",
+            "A security password"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Tags are permanent and persistent.",
+            "Correct! Tags mark important milestones in the investigation.",
+            "Incorrect. Tags don't delete anything.",
+            "Incorrect. Tags are not passwords."
+          ],
+          "explanation": "Tags mark significant points like court admission, trial testimony, or case closure\u2014permanent markers in your evidence history that prove the timeline of events."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Setting Up a Forensic Evidence Repository",
+      "content": "A forensic lab needs a centralized repository for case files, evidence documentation, and analysis results. Git repositories are perfect for this\u2014they're like a digital evidence locker that anyone on the team can access, but only with proper authentication and authorization. You'll learn to initialize a repository, configure user information (so every change is attributed to the correct investigator), and establish workflows that ensure evidence integrity. A typical setup includes a main branch for court-ready final reports, development branches for ongoing analysis, and clear naming conventions so any team member can understand the case structure instantly. This prevents errors and ensures compliance with evidence handling protocols.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Real Scenario: Managing Evidence Across a Murder Investigation",
+      "content": "A homicide case has three investigators: Detective Johnson (analyzing crime scene photos), Dr. Patel (analyzing toxicology results), and Detective Kim (working on witness statements). They set up a shared evidence repository with: main (court-ready reports), scene-analysis (crime scene branch), toxicology-branch (toxicology analysis), witness-statements (statement compilation). Dr. Patel commits toxicology findings with message 'Initial tox screen: alcohol present, awaiting full panel results.' Two days later: 'Final tox panel complete, confirms benzodiazepines not reported by family.' Each commit is timestamped and attributed to her. The investigation progresses, branches merge into main, and prosecution has a complete, unbroken record of when each evidence piece was documented. No one can claim analysis was out of order or data was changed.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Evidence Repository Workflow Assessment",
+      "content": "Test your ability to manage forensic evidence using Git workflows.",
+      "questions": [
+        {
+          "question": "You're setting up a repository for a burglary case. What should your first commit be?",
+          "options": [
+            "The final police report",
+            "Initial case file with basic details, establishing the baseline",
+            "All evidence photos at once",
+            "Nothing\u2014just create the repository empty"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The final report comes much later.",
+            "Correct! Establish a baseline commit so all changes are tracked from the start.",
+            "Incorrect. Large media files should be committed individually with explanatory messages.",
+            "Incorrect. An empty repository provides no baseline for tracking changes."
+          ],
+          "explanation": "Your first meaningful commit should contain basic case information (date, location, initial details), creating a reference point. All subsequent changes build from this foundation."
+        },
+        {
+          "question": "Investigator A committed 'Add DNA analysis' but the file is incomplete. What should happen?",
+          "options": [
+            "Delete the commit immediately",
+            "Create a new commit that completes the analysis and explains the fix",
+            "Pretend the commit never happened",
+            "Overwrite the file without documenting it"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Deleting commits destroys the audit trail.",
+            "Correct! Document the additional work with a new commit.",
+            "Incorrect. All changes must be documented.",
+            "Incorrect. Undocumented changes violate chain of custody."
+          ],
+          "explanation": "Never delete or hide commits. Instead, create a follow-up commit documenting the completion. This preserves the complete history and proves work was done properly."
+        },
+        {
+          "question": "Two investigators are working on different evidence categories in separate branches. When should they merge?",
+          "options": [
+            "Immediately after creating branches",
+            "When both investigations are complete and ready for the final report",
+            "As soon as each has made one commit",
+            "Never\u2014keep everything separate"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. They need time to develop their work.",
+            "Correct! Merge when investigations are ready for integration.",
+            "Incorrect. Merge only when work is complete and ready.",
+            "Incorrect. Eventually findings must be integrated."
+          ],
+          "explanation": "Each investigator completes their analysis on their branch, then merges into main when that section of the investigation is finalized and documented, ensuring a coherent final report."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Forensic Version Control Best Practices",
+      "content": "Whether you started with theory or hands-on learning, the principles converge: every change is a commit with clear message and author; the main branch is always court-ready; investigations use branches for parallel work; tags mark critical milestones; and the complete history is immutable. Never force-push changes that others depend on\u2014it's like altering evidence. Use meaningful commit messages as if writing for a prosecutor: 'Fixed typo' is insufficient; 'Corrected toxicology interpretation: benzodiazepine concentration was 0.05 mg/L, not 0.005 mg/L' explains the forensic significance. Review others' commits before merging, just as you'd verify another investigator's chain of custody. Remember: in forensics, traceability and integrity aren't luxuries\u2014they're legal requirements. Git ensures both.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Your Forensic Repository is Ready",
+      "content": "Congratulations! You've mastered version control for forensic evidence management. You now understand commits, branches, tags, and the workflows that ensure investigative integrity. Your next step: apply these skills in your lab\u2014set up a repository for your current cases and teach your team. The chain of custody you maintain will be your strongest defense in court."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Proceed"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Start with Git fundamentals"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Learn through forensic scenarios"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Next"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Take assessment"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n3",
+      "label": "Fail\u2014retry"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Next"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Take assessment"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n6",
+      "label": "Fail\u2014retry"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n10",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T16:06:13.278261+00:00",
+  "model": "claude-haiku-4-5"
+}

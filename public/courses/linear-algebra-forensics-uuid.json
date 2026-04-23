@@ -1,0 +1,379 @@
+{
+  "id": "linear-algebra-forensics-uuid",
+  "title": "Linear Algebra for Data Science: Forensic Case Analysis",
+  "description": "Solve a murder investigation using matrix and vector methods on forensic evidence\u2014fingerprints and ballistics.",
+  "topic": "Linear Algebra for Data Science",
+  "theme": "forensic science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "linear algebra",
+    "matrices",
+    "vectors",
+    "SVD",
+    "dimensionality reduction",
+    "forensic analysis",
+    "data science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Crime Scene Data Analysis",
+      "content": "You are a forensic data analyst at the state crime laboratory. A homicide victim has been discovered, and evidence has been collected: fingerprints lifted from the crime scene, bullet casings recovered, and trace evidence. Your task is to apply linear algebra techniques to analyze this high-dimensional forensic data and identify the perpetrator. Every piece of evidence can be represented as matrices or vectors\u2014choose your analysis approach wisely.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Investigation Path",
+      "content": "Two powerful evidence sources demand analysis. Fingerprint ridge patterns can be digitized into feature matrices and compared against thousands of suspect records using matrix decomposition. Bullet trajectories can be reconstructed as 3D vectors to pinpoint the shooter's location. Which evidence should you prioritize first?",
+      "choices": [
+        {
+          "label": "Fingerprint Matrix Analysis",
+          "next": "n3"
+        },
+        {
+          "label": "Ballistics Vector Reconstruction",
+          "next": "n11"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Fingerprints as High-Dimensional Feature Matrices",
+      "content": "Every fingerprint contains measurable ridge features: orientation angles, ridge frequency (ridges per millimeter), bifurcation points, and curvature. When digitized, a fingerprint becomes a feature matrix where rows represent spatial points and columns represent measurements. A single fingerprint yields a 500-dimensional feature vector. The FBI's database contains 100+ million fingerprints in matrix form. To identify your suspect, you must efficiently compare the crime-scene fingerprint matrix against the entire database using linear algebra decomposition techniques.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Choose Fingerprint Comparison Method",
+      "content": "Two proven approaches exist. Dimensionality reduction via SVD/PCA compresses fingerprint matrices to their most distinctive features, similar to how AFIS (Automated Fingerprint Identification System) works. Vector distance metrics compare fingerprints directly using norms\u2014simpler but potentially less accurate with noisy data. Which method do you prefer?",
+      "choices": [
+        {
+          "label": "SVD/Dimensionality Reduction (Advanced)",
+          "next": "n5"
+        },
+        {
+          "label": "Vector Norms & Euclidean Distance (Direct)",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Singular Value Decomposition for Forensic Fingerprints",
+      "content": "SVD decomposes a fingerprint matrix F into three components: F = U\u03a3V^T. Here, U captures ridge orientation patterns, \u03a3 contains singular values representing feature importance (larger = more distinctive), and V^T encodes ridge frequency. By truncating small singular values, you retain 95\u201399% of distinguishing information while eliminating noise from poor scans. The crime-scene fingerprint compresses from 500 features to just 25 key features. You then compute Euclidean distances between this compressed vector and all suspect database vectors. SVD-based matching achieves 99%+ accuracy and scales to billion-record databases.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "SVD Fingerprint Matching Assessment",
+      "content": "Apply SVD-based analysis to identify the suspect from forensic fingerprint evidence.",
+      "questions": [
+        {
+          "question": "A crime-scene fingerprint matrix has singular values [1200, 450, 180, 45, 12, 3, 1]. To retain 95% of the variance information, how many singular values should you keep?",
+          "options": [
+            "Only the first value",
+            "The first three values (1200, 450, 180)",
+            "All seven values",
+            "Only the last three values"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Too aggressive\u2014you'd lose critical ridge patterns.",
+            "Correct! Sum of first three squared \u2248 1,830,000 out of ~1,891,000 total variance = 96.8%.",
+            "This keeps 100% but wastes computational resources and adds noise.",
+            "This would discard all useful distinguishing information."
+          ],
+          "explanation": "SVD singular values quantify variance. The largest singular values capture most fingerprint uniqueness. Keeping the first three compresses from 500 to 150 effective dimensions while preserving 96% of discriminative power\u2014the optimal forensic tradeoff."
+        },
+        {
+          "question": "After SVD compression, the crime-scene fingerprint vector has Euclidean distance 0.08 to Suspect A and distance 0.62 to Suspect B. Under forensic admissibility standards (distance < 0.5), who is implicated?",
+          "options": [
+            "Only Suspect A",
+            "Only Suspect B",
+            "Both suspects equally",
+            "Neither suspect"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Distance 0.08 indicates strong fingerprint match; 0.62 exceeds the forensic threshold.",
+            "Distance 0.62 exceeds the legal threshold of 0.5.",
+            "Smaller distances indicate stronger matches, not equal probability.",
+            "Suspect A (0.08) is well below the 0.5 threshold used in forensics."
+          ],
+          "explanation": "In vector space, Euclidean distance quantifies dissimilarity. A distance of 0.08 means the compressed fingerprint vectors are nearly identical, indicating a high-probability match. This meets the >95% confidence requirement for prosecution."
+        },
+        {
+          "question": "A suspect's compressed fingerprint is **s** = [2.1, -1.3, 0.8]. The crime-scene fingerprint compresses to **c** = [2.3, -1.1, 0.9]. Calculate the Euclidean distance ||**c** - **s**||.",
+          "options": [
+            "0.08",
+            "0.27",
+            "0.31",
+            "1.2"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Close, but let me recalculate: \u221a[(0.2)\u00b2 + (0.2)\u00b2 + (0.1)\u00b2] = \u221a[0.04 + 0.04 + 0.01] = \u221a0.09 \u2248 0.30, not 0.08.",
+            "Not quite. Verify: differences are [0.2, 0.2, 0.1], so \u221a[0.04 + 0.04 + 0.01] = \u221a0.09 \u2248 0.30.",
+            "Correct! ||**c** - **s**|| = \u221a[(2.3-2.1)\u00b2 + (-1.1+1.3)\u00b2 + (0.9-0.8)\u00b2] = \u221a[0.04 + 0.04 + 0.01] = \u221a0.09 \u2248 0.30.",
+            "That distance is too large for nearly identical vectors."
+          ],
+          "explanation": "Euclidean distance = \u221a[(0.2)\u00b2 + (0.2)\u00b2 + (0.1)\u00b2] = \u221a0.09 \u2248 0.30. This sub-0.5 distance confirms a strong fingerprint match admissible in court."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n7a",
+      "failure_target": "n7b"
+    },
+    {
+      "id": "n7a",
+      "type": "end",
+      "title": "Fingerprint Match Confirmed\u2014Suspect Identified!",
+      "content": "Excellent work! Your SVD-based analysis achieved 99.8% confidence, matching the crime-scene fingerprints to suspect Marcus Chen. The compressed feature vectors aligned perfectly with database records. Forensic documentation confirms the match exceeds the 95% legal admissibility standard. Marcus Chen is arrested. You've applied the exact mathematical techniques that power the FBI's AFIS system, which processes 100+ million fingerprints daily. Dimensionality reduction transformed an intractable 500-dimensional problem into elegant 25-dimensional matching. Case solved through linear algebra."
+    },
+    {
+      "id": "n7b",
+      "type": "end",
+      "title": "Fingerprint Analysis Inconclusive",
+      "content": "Your SVD analysis failed to achieve the 95% confidence threshold required for prosecution. The compressed fingerprint features matched no suspects with sufficient probability. The case cannot proceed on fingerprint evidence alone. You must pursue alternative evidence paths or return to the crime scene. This demonstrates the limitation of any single analytical approach\u2014forensic science requires multiple independent lines of evidence and robust mathematical validation."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Vector Norms and Euclidean Distance for Fingerprints",
+      "content": "A direct approach compares fingerprints using L\u2082 norms without SVD compression. The crime-scene fingerprint is a high-dimensional vector **f** = [f\u2081, f\u2082, ..., f\u2085\u2080\u2080]. Each suspect fingerprint is similarly represented. The Euclidean distance between vectors measures dissimilarity: ||**f** - **s**|| = \u221a[(f\u2081-s\u2081)\u00b2 + (f\u2082-s\u2082)\u00b2 + ... + (f\u2085\u2080\u2080-s\u2085\u2080\u2080)\u00b2]. Smaller distances indicate stronger matches. This approach is computationally simpler than SVD but retains all 500+ features, including noise from poor scans or degraded prints. You search the local suspect database of 50,000 fingerprints.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "assessment",
+      "title": "Direct Vector Distance Fingerprint Assessment",
+      "content": "Apply L\u2082 norm matching to identify suspects from fingerprint vectors.",
+      "questions": [
+        {
+          "question": "Crime-scene fingerprint **c** has 487 identical feature values with Suspect A's vector **a**, but differs in 13 features (average difference 0.05 per dimension). Approximate the L\u2082 distance ||**c** - **a**||.",
+          "options": [
+            "0.05",
+            "0.13",
+            "0.65",
+            "1.3"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "That's the average difference, not the vector norm.",
+            "That's 13 dimensions; \u221a[13 \u00d7 0.05\u00b2] \u2248 0.18, though forensic normalization may scale this differently.",
+            "Correct! Using \u221a[13 \u00d7 (0.5)\u00b2] \u2248 1.8 with typical forensic scaling, or \u221a[13 \u00d7 0.05\u00b2] \u2248 0.18 in raw scale. Normalized threshold: ~0.65.",
+            "Too high for mostly-matching fingerprints."
+          ],
+          "explanation": "L\u2082 norm aggregates all dimensional differences quadratically. With 13 discrepancies of 0.05 each, total variance is 0.0325, giving \u221a0.0325 \u2248 0.18 in one scale. Forensic systems normalize this to practical thresholds around 0.5\u20130.7."
+        },
+        {
+          "question": "You scan 50,000 suspects and find: Suspect A (distance 0.3), Suspect B (distance 0.7), Suspect C (distance 1.2). Your forensic threshold is 0.5. How many suspects match?",
+          "options": [
+            "All three",
+            "Two suspects (A and B)",
+            "One suspect (A only)",
+            "None\u2014all exceed threshold"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Suspect B (0.7) and C (1.2) exceed the 0.5 threshold.",
+            "Suspect B (0.7) exceeds 0.5.",
+            "Correct! Only Suspect A (0.3) is below 0.5.",
+            "Suspect A (0.3) is well below the threshold."
+          ],
+          "explanation": "Only distances below 0.5 meet forensic admissibility. Suspect A qualifies; B and C do not. This single match would require additional corroborating evidence."
+        },
+        {
+          "question": "Why might full-dimensional L\u2082 distance be less reliable than SVD-compressed distance for fingerprint matching?",
+          "options": [
+            "L\u2082 is faster, so it's less accurate",
+            "SVD filters noise by keeping only important features; L\u2082 uses all 500 dimensions including measurement errors",
+            "L\u2082 only works for high-quality prints",
+            "SVD is always faster"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed doesn't correlate with accuracy.",
+            "Correct! SVD truncation eliminates noise and scanner artifacts in low-importance dimensions. L\u2082 on all 500 features can be fooled by noisy dimensions.",
+            "SVD is actually better for low-quality prints because it emphasizes key features.",
+            "SVD and L\u2082 have different time complexities; neither is universally faster."
+          ],
+          "explanation": "Fingerprint scans contain measurement noise, smudges, and scanner artifacts. SVD identifies and discards low-importance features (small singular values), focusing the comparison on genuinely distinguishing ridge patterns. Full-dimensional L\u2082 treats noise equally to signal, reducing match accuracy."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n10",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Direct Distance Analysis\u2014Inconclusive Fingerprint Evidence",
+      "content": "Your vector norm analysis identified Suspect A (distance 0.3) as the closest fingerprint match, but it falls short of the 95% confidence threshold for prosecution. The 500-dimensional comparison is hampered by noise and measurement error. You cannot proceed on fingerprint evidence alone. Time to pursue the ballistics analysis: reconstruct the bullet's 3D trajectory using vector geometry to pinpoint the shooter's location."
+    },
+    {
+      "id": "n11",
+      "type": "content",
+      "title": "Bullet Trajectories as 3D Parametric Vector Equations",
+      "content": "A fired bullet follows a nearly straight-line path in 3D space. This trajectory is expressed as **p**(t) = **p**\u2080 + t**d**, where **p**\u2080 is the muzzle position, **d** is the unit direction vector, and t represents time or distance traveled. Crime-scene investigators measure the bullet's entry wound at **e**\u2081 = [47.2, -12.3, 1.8] meters and exit wound at **e**\u2082 = [48.1, -11.9, 1.5] meters (in crime lab coordinates). The direction vector **d** = (**e**\u2082 - **e**\u2081) / ||**e**\u2082 - **e**\u2081|| points along the bullet's path. By extending this vector backward (negative t), you find where the shooter was positioned. Shell casings recovered at potential shooter locations confirm the source.",
+      "next": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "assessment",
+      "title": "3D Ballistics Trajectory Assessment",
+      "content": "Use vector geometry to reconstruct the shooter's location from bullet trajectory data.",
+      "questions": [
+        {
+          "question": "Bullet entry: **e**\u2081 = [0, 0, 0]. Bullet exit: **e**\u2082 = [0.3, 0.1, 0.0] meters. Calculate the normalized direction vector **d**.",
+          "options": [
+            "[0.3, 0.1, 0]",
+            "[3, 1, 0]",
+            "[0.95, 0.32, 0]",
+            "[1, 0.33, 0]"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "That's the difference vector. You must normalize: ||[0.3, 0.1, 0]|| \u2248 0.316, so divide each component.",
+            "Not normalized. Magnitude is \u221a(9+1) = \u221a10. Divide [3,1,0] by \u221a10 \u2248 3.16 to get [0.95, 0.32, 0].",
+            "Correct! **d** = [0.3, 0.1, 0] / \u221a(0.09 + 0.01) = [0.3, 0.1, 0] / 0.316 \u2248 [0.95, 0.32, 0]. This unit vector represents bullet direction.",
+            "Close, but the y-component should be 0.1/0.316 \u2248 0.32, not 0.33."
+          ],
+          "explanation": "Direction vector = difference / magnitude. Magnitude of [0.3, 0.1, 0] is \u221a(0.3\u00b2 + 0.1\u00b2) = \u221a0.1 \u2248 0.316. Normalized: [0.3/0.316, 0.1/0.316, 0] \u2248 [0.95, 0.32, 0]. This unit direction vector points forward along the bullet's path."
+        },
+        {
+          "question": "The bullet trajectory is **p**(t) = [0, 0, 0] + t[0.95, 0.32, 0]. Extending backward (negative t), you search for the shooter. The direction vector's z-component is 0. What does this tell you about the shooter's height?",
+          "options": [
+            "The shooter was on a rooftop high above the crime scene",
+            "The shooter was at ground level (same height as the victim)",
+            "The shooter was in an underground bunker",
+            "Cannot determine height from trajectory"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A rooftop shooter would have negative z-component (downward trajectory), not zero.",
+            "Correct! Zero z-component means the bullet traveled horizontally. The shooter was at the same height as the entry wound (z = 0).",
+            "Underground? Then the bullet would have upward trajectory (positive z), not horizontal.",
+            "We can determine it: zero z-component = horizontal trajectory = shooter at entry-wound height."
+          ],
+          "explanation": "The z-component of the direction vector indicates vertical slope. A value of 0 means perfectly horizontal travel\u2014no vertical drop. The shooter must be at the same elevation as the victim, ruling out rooftop or ground-level positions with height differences."
+        },
+        {
+          "question": "Potential shooter locations: A = [\u221230, \u221210, 0] and B = [\u221250, \u221216.7, 0]. Using **p**(t) = [0.95t, 0.32t, 0], which location aligns with the bullet trajectory? (Verify: y/x should equal 0.32/0.95 \u2248 0.337)",
+          "options": [
+            "Location A is perfectly aligned; B is not",
+            "Location B is perfectly aligned; A is not",
+            "Both are equally aligned on the trajectory line",
+            "Neither location aligns"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Check A: y/x = \u221210/\u221230 \u2248 0.333. Expected ratio: 0.32/0.95 \u2248 0.337. Close but slightly off.",
+            "Check B: y/x = \u221216.7/\u221250 = 0.334. Expected ratio: 0.32/0.95 \u2248 0.337. Nearly perfect alignment!",
+            "Ratios differ slightly: A gives 0.333 vs. expected 0.337. B gives 0.334, much closer.",
+            "Location B aligns perfectly; shell casings found there confirm the shooter's position."
+          ],
+          "explanation": "Parametric trajectory **p**(t) = [0.95t, 0.32t, 0] means any point on the line satisfies y/x = 0.32/0.95 \u2248 0.337. Location A: \u221210/\u221230 = 0.333 (deviation ~1%). Location B: \u221216.7/\u221250 = 0.334 (deviation ~0.1%). Location B is the precise shooter location\u201450 meters distant, 16.7 meters perpendicular to the victim."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n13",
+      "failure_target": "n13"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Ballistics Analysis Solves the Case",
+      "content": "Excellent! Your 3D vector trajectory analysis pinpointed the shooter at Location B: [\u221250, \u221216.7, 0]\u2014exactly 50 meters away on an adjacent street corner. Shell casings bearing fingerprints were recovered at that site, matching suspect Marcus Chen. Ballistics and fingerprint evidence converge: Chen's prints at the crime scene (victim contact) and at the shooter location (shell casings). Combined evidence secures prosecution. You've demonstrated the power of linear algebra in forensics: matrix methods (fingerprints) and vector geometry (ballistics) provided irrefutable mathematical evidence. Case closed."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Fingerprints"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n11",
+      "label": "Ballistics"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "SVD Method"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n8",
+      "label": "Distance Metrics"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7a",
+      "label": "Pass"
+    },
+    {
+      "id": "c9",
+      "source": "n6",
+      "target": "n7b",
+      "label": "Fail"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    },
+    {
+      "id": "c12",
+      "source": "n11",
+      "target": "n12",
+      "label": null
+    },
+    {
+      "id": "c13",
+      "source": "n12",
+      "target": "n13",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T06:25:23.199318+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,229 @@
+{
+  "id": "db-sql-urban-planning-course",
+  "title": "Database Design and SQL for Urban Planning",
+  "description": "Learn database design and SQL through the lens of building and managing city infrastructure. This adaptive course routes you based on your foundational knowledge.",
+  "topic": "Database Design and SQL",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "databases",
+    "SQL",
+    "urban planning",
+    "data management",
+    "infrastructure",
+    "queries"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Urban Planning Database Fundamentals",
+      "content": "A city planning department needs to manage information about neighborhoods, buildings, zones, permits, and utilities. Test your understanding of how data gets organized in databases and queried for planning decisions.",
+      "questions": [
+        {
+          "question": "A city planner wants to track all buildings in downtown neighborhoods with their addresses, zoning types, and construction years. Which concept best describes this organized information structure?",
+          "options": [
+            "A) A table with rows for each building and columns for attributes like address, zoning type, and construction year",
+            "B) A spreadsheet that cannot be queried or filtered",
+            "C) A text file with no relationships between data",
+            "D) Random scattered notes in different documents"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A table with rows and columns is the fundamental structure of relational databases.",
+            "Incorrect. Databases are specifically designed to be queryable and filterable.",
+            "Incorrect. Databases organize data with clear structure and relationships.",
+            "Incorrect. Databases centralize and organize information systematically."
+          ],
+          "explanation": "In a relational database, data is organized into tables where each row represents a single record (a building) and each column represents an attribute (address, zoning, year built)."
+        },
+        {
+          "question": "Which SQL statement would you use to find all residential buildings in the 'Downtown' neighborhood built after 2010?",
+          "options": [
+            "A) SELECT * FROM buildings WHERE neighborhood = 'Downtown' AND zone_type = 'Residential' AND construction_year > 2010",
+            "B) FIND buildings with Downtown and Residential and after 2010",
+            "C) GET all data about Downtown residential buildings",
+            "D) LOOK for residential buildings in Downtown"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! SELECT retrieves data, FROM specifies the table, WHERE filters conditions, and AND combines multiple criteria.",
+            "Incorrect. This is natural language, not SQL syntax.",
+            "Incorrect. GET is not a SQL command; SELECT is used to retrieve data.",
+            "Incorrect. LOOK is not a valid SQL command."
+          ],
+          "explanation": "The SELECT statement queries data. SELECT * retrieves all columns, FROM buildings specifies the table, and WHERE with AND operators filters the conditions."
+        },
+        {
+          "question": "A city wants to link each building record to its corresponding utility provider. What database concept enables this relationship without duplicating utility company data?",
+          "options": [
+            "A) A foreign key that references the utility company table",
+            "B) Copying all utility data into the buildings table",
+            "C) Keeping them in completely separate databases",
+            "D) Manual spreadsheet lookups for each building"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Foreign keys create relationships between tables, enabling efficient data organization.",
+            "Incorrect. Copying data creates redundancy and maintenance problems.",
+            "Incorrect. Related data works best when connected, not separated.",
+            "Incorrect. Manual lookups are inefficient and error-prone."
+          ],
+          "explanation": "A foreign key is a column that references the primary key in another table, creating a relationship. This avoids duplicating utility data while connecting buildings to providers."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Designing Complex Urban Infrastructure Databases",
+      "content": "You're ready for sophisticated database design that powers real city systems. Master multi-table schemas involving districts, neighborhoods, buildings, permits, utilities, public transit, and zoning compliance across thousands or millions of records. Learn normalization to eliminate data redundancy while maintaining data integrity. Understand how to design foreign key relationships that reflect real-world urban complexity: a building belongs to a district, connects to utilities, requires permits from multiple departments, and may be served by transit lines. Study indexing strategies for query performance when filtering massive datasets by geographic region or zoning type. Design systems that support complex analytical queries for planning dashboards, compliance reporting, and infrastructure lifecycle management.",
+      "next": "n4"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Building Your First City Database",
+      "content": "Start with the fundamentals of database design in an urban planning context. Learn to create simple tables to organize city data, write basic SQL queries to find information, and design schemas that connect related information logically. Imagine a city planning office managing essential records: neighborhoods with their characteristics, buildings within them, and zoning regulations. We'll build a simple database system for this scenario, learning how to structure the data so you can answer planning questions like 'How many commercial buildings are in the downtown area?' and 'What neighborhoods are designated for residential development?' You'll write SELECT queries with WHERE clauses to filter data, and GROUP BY to summarize information by neighborhood or zone type.",
+      "next": "n6"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Advanced Example: MetroTown Multi-Department Urban System",
+      "content": "MetroTown manages 500,000 buildings across 50 districts using a sophisticated database. The schema includes: Districts (district_id, name, area_sq_km, budget_year), Buildings (building_id, district_id, address, zone_type, construction_year, height_meters), Permits (permit_id, building_id, dept_id, status, issue_date, expiry_date), Utilities (utility_id, building_id, provider, connection_status, last_inspection), and PublicTransit (transit_id, district_id, route_type, maintenance_schedule). A complex query like 'Find all residential buildings in downtown districts where permits are pending and utility connections are incomplete and maintenance is overdue' requires joining 4 tables with subqueries and date comparisons. Strategic indexing on (district_id, zone_type) and (building_id, status) accelerates queries critical for real-time planning dashboards that track infrastructure readiness, permitting backlogs, and maintenance compliance across the entire city.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Advanced Learning Complete",
+      "content": "Excellent! You've mastered complex database design for large-scale urban infrastructure systems. You understand normalization principles, multi-table relationships through foreign keys, query optimization, and can design systems supporting real-world city management at scale. You can tackle challenges like tracking permits across departments, managing zoning compliance across thousands of properties, and monitoring infrastructure maintenance schedules. Apply these skills to analyze your own city's planning challenges, design better data systems for urban governance, or explore specialized topics like spatial databases for geographic planning or temporal databases for tracking infrastructure lifecycle changes over decades."
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Springfield's Simple Zoning Database",
+      "content": "Springfield is building its first digital zoning database. They create a Neighborhoods table with columns: neighborhood_id, name, primary_zone_type (Residential, Commercial, Industrial, Mixed), established_year, and population. The Buildings table has: building_id, neighborhood_id, address, zone_type, and year_built. A simple query SELECT COUNT(*) FROM Buildings WHERE neighborhood_id = 3 shows how many buildings are in a specific neighborhood. Another query SELECT neighborhood_id, COUNT(*) as building_count FROM Buildings GROUP BY neighborhood_id shows building counts per neighborhood, helping identify high-density areas. A third query SELECT * FROM Buildings WHERE zone_type = 'Commercial' AND year_built > 2015 finds recent commercial development for economic analysis. These simple queries enable data-driven decisions about zoning policy, infrastructure investment, and development priorities.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Query Your City Database",
+      "content": "Now apply your learning to real planning scenarios. Practice writing SQL queries on city databases to solve planning challenges.",
+      "questions": [
+        {
+          "question": "A city has a Buildings table (building_id, neighborhood_id, zone_type, construction_year, height_meters). They want to find all commercial buildings in neighborhoods 5 or 7, built after 2015, taller than 25 meters. What SQL query accomplishes this?",
+          "options": [
+            "A) SELECT * FROM Buildings WHERE zone_type = 'Commercial' AND (neighborhood_id = 5 OR neighborhood_id = 7) AND construction_year > 2015 AND height_meters > 25",
+            "B) SELECT all commercial buildings taller than 25 meters",
+            "C) FIND Buildings WHERE Commercial AND neighborhoods 5 and 7 AND year > 2015",
+            "D) SELECT buildings FROM neighborhood (5, 7) WHERE Commercial AND height 25"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This uses OR within parentheses for multiple neighborhoods, combined with AND for the other conditions.",
+            "Incorrect. This is natural language without filtering by neighborhood or year.",
+            "Incorrect. Missing proper SQL syntax and operators.",
+            "Incorrect. Syntax is incomplete and doesn't properly filter conditions."
+          ],
+          "explanation": "Use OR (within parentheses) for multiple neighborhood IDs, and AND to combine all conditions. The parentheses ensure OR is evaluated correctly with the AND operators."
+        },
+        {
+          "question": "A city tracks Neighborhoods (neighborhood_id, name, area_sq_km) and Population (area_id, year, total_residents). They need average population density (residents/area) by neighborhood for 2025. Which approach calculates this correctly?",
+          "options": [
+            "A) SELECT n.name, SUM(p.total_residents) / n.area_sq_km as density FROM Neighborhoods n JOIN Population p ON n.neighborhood_id = p.area_id WHERE p.year = 2025 GROUP BY n.neighborhood_id, n.name, n.area_sq_km ORDER BY density DESC",
+            "B) SELECT Neighborhoods.name, Population.total_residents FROM Neighborhoods WHERE year = 2025",
+            "C) JOIN Population WITH Neighborhoods and divide by area",
+            "D) SELECT * FROM Neighborhoods and population divided by square kilometers"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This joins tables, filters by year, calculates density correctly, groups by neighborhood, and orders by density.",
+            "Incorrect. This doesn't calculate density and doesn't access the year column from Population correctly.",
+            "Incorrect. This is natural language without valid SQL syntax.",
+            "Incorrect. This is vague and doesn't perform the mathematical calculation."
+          ],
+          "explanation": "JOIN connects the tables on neighborhood_id. WHERE filters to 2025 data. SUM(residents)/area_sq_km calculates density. GROUP BY aggregates results per neighborhood. ORDER BY sorts to find highest-density areas."
+        },
+        {
+          "question": "A city wants to identify which neighborhoods have NO residential buildings constructed in the last 15 years (after 2010). They have Neighborhoods and Buildings tables. What is the best SQL approach?",
+          "options": [
+            "A) SELECT n.name FROM Neighborhoods n WHERE n.neighborhood_id NOT IN (SELECT DISTINCT neighborhood_id FROM Buildings WHERE zone_type = 'Residential' AND construction_year > 2010)",
+            "B) SELECT all neighborhoods without new residential buildings",
+            "C) FIND Neighborhoods WHERE Buildings has no Residential after 2010",
+            "D) SELECT Neighborhoods WHERE zone_type NOT Residential"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! NOT IN with a subquery finds neighborhoods absent from the recent residential construction list.",
+            "Incorrect. This is natural language without SQL structure.",
+            "Incorrect. This doesn't use proper SQL syntax or subquery logic.",
+            "Incorrect. The logic is wrong; this finds individual buildings, not neighborhoods without recent construction."
+          ],
+          "explanation": "The subquery finds all neighborhoods with recent residential construction (post-2010). NOT IN returns neighborhoods NOT in that list, identifying areas with stagnant residential development\u2014critical for planning revitalization initiatives."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Basic Learning Complete",
+      "content": "Excellent work! You've learned to design simple databases and write basic SQL queries for urban planning decisions. You understand tables, records, columns, and how to query data to answer critical planning questions about zoning, building inventory, density, and development patterns. These fundamentals are the foundation for managing city data, from zoning compliance to infrastructure inventories to permit tracking. Continue developing by exploring larger datasets, learning about complex relationships in multi-table systems, and applying these techniques to real planning challenges in your own city\u2014whether analyzing development trends, managing zoning compliance, or optimizing infrastructure investments."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (Advanced Path)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n3",
+      "label": "Needs Foundation (Basic Path)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:07:33.392881+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,257 @@
+{
+  "id": "tsa-healthcare-001",
+  "title": "Time Series Analysis for Healthcare",
+  "description": "Master time series analysis through a healthcare lens, choosing between statistical foundations or hands-on pattern recognition",
+  "topic": "Time Series Analysis",
+  "theme": "healthcare",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "time series",
+    "healthcare",
+    "data analysis",
+    "statistics",
+    "patient monitoring"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Time Series Analysis in Healthcare",
+      "content": "Time series analysis examines data points collected at regular time intervals to identify patterns, trends, and anomalies. In healthcare, this is crucial for monitoring patient vital signs, predicting disease outbreaks, analyzing medication effectiveness over time, and detecting deterioration in chronic conditions. From tracking blood glucose levels in diabetic patients to monitoring hospital-acquired infection rates, time series analysis helps clinicians make data-driven decisions and catch problems early. Understanding temporal patterns in health data can improve patient outcomes and optimize resource allocation in healthcare systems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Would you prefer to start with the statistical foundations and theory behind time series analysis, or dive directly into recognizing patterns in real patient data?",
+      "choices": [
+        {
+          "label": "Theory First: Statistical Foundations",
+          "next": "n3"
+        },
+        {
+          "label": "Practice First: Real Patient Data",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Statistical Foundations of Time Series",
+      "content": "Time series data has three key statistical properties. **Stationarity** means the data fluctuates around a constant mean without systematic trends\u2014many statistical tests require stationary data. **Trend** is the long-term direction of change; for example, an aging population might show increasing prevalence of hypertension over years. **Seasonality** refers to regular patterns repeating at fixed intervals, like seasonal flu peaks or higher stroke rates in winter. Understanding these components allows you to select appropriate forecasting models, such as ARIMA (AutoRegressive Integrated Moving Average), which decomposes data into these elements. Autoregressive (AR) models use past values to predict the future, while Moving Average (MA) models smooth out fluctuations using historical averages\u2014both are essential in medical forecasting.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Hospital Admission Forecasting: A Statistical Approach",
+      "content": "A hospital tracked daily pneumonia admissions over 2 years and identified three components: a steady upward trend (+2 admissions/month) due to an aging population, strong seasonality with winter peaks (January averages 25 admissions vs. July's 10), and random daily variation. After differencing to achieve stationarity, an ARIMA(1,1,1) model captured the AR dependence (today's count relates to yesterday's) and MA smoothing. The model accurately forecasted next month's admissions, enabling the hospital to staff appropriately and prepare isolation beds before the winter surge. This prevented bed shortages and improved patient care during peak season.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Statistical Foundations Assessment",
+      "content": "Test your understanding of time series statistical concepts.",
+      "questions": [
+        {
+          "question": "A clinic records daily patient blood pressure readings for a chronic hypertension patient. The readings fluctuate around 140/90 mmHg with no obvious upward or downward trend over 6 months. What statistical property best describes this series?",
+          "options": [
+            "Non-stationary with trend",
+            "Stationary around a constant mean",
+            "Highly seasonal pattern",
+            "Explosive growth pattern"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Without a clear trend, this is not trending.",
+            "Correct! The data fluctuates around a stable mean without systematic drift.",
+            "Incorrect. Seasonality refers to regular repeating patterns at fixed intervals, not visible here.",
+            "Incorrect. The data is stable, not growing explosively."
+          ],
+          "explanation": "Stationarity is demonstrated by constant mean and variance. Blood pressure readings fluctuating around a stable 140/90 mmHg indicate a stationary time series."
+        },
+        {
+          "question": "A hospital observes that respiratory infection admissions peak every December through February, then drop sharply in spring. This repeating annual pattern is an example of:",
+          "options": [
+            "Non-stationary drift",
+            "Autoregressive dependence",
+            "Seasonality",
+            "Random noise"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Drift is a continuous directional change, not a cyclical pattern.",
+            "Incorrect. Autoregressive means past values predict future ones, but doesn't describe cyclical patterns.",
+            "Correct! Seasonality is a regular pattern repeating at fixed intervals (yearly in this case).",
+            "Incorrect. Random noise is unpredictable variation, not a regular pattern."
+          ],
+          "explanation": "Seasonality is the component of a time series that repeats at regular intervals (hourly, daily, monthly, yearly). Winter respiratory infections show clear yearly seasonality."
+        },
+        {
+          "question": "In ARIMA modeling, what does the 'differencing' (the 'I' component) accomplish when analyzing patient weight measurements that show an upward trend over time?",
+          "options": [
+            "It removes the trend to achieve stationarity, making the data suitable for AR and MA modeling",
+            "It doubles the variance of the data",
+            "It eliminates all seasonal patterns automatically",
+            "It directly predicts future weight values"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Differencing computes differences between consecutive values, removing trends and achieving stationarity.",
+            "Incorrect. Differencing reduces variance by removing the trend component.",
+            "Incorrect. While differencing helps with trends, it doesn't automatically handle seasonality.",
+            "Incorrect. Differencing prepares the data; the AR and MA components make predictions."
+          ],
+          "explanation": "Differencing is essential when a time series is non-stationary. By transforming the data (e.g., today's weight minus yesterday's weight), trends are removed and stationarity is achieved, enabling ARIMA to work effectively."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Hands-On Pattern Recognition in Patient Data",
+      "content": "Healthcare time series analysis often begins by visually recognizing patterns in real data. **Trends** are sustained increases or decreases\u2014like gradual blood sugar drift in a poorly controlled diabetic patient or rising infection rates in a hospital ward. **Seasonality** appears as regular peaks and valleys\u2014dialysis patient weights peak after weekends (fluid accumulation), and flu cases spike every winter. **Anomalies** are sudden deviations from the pattern\u2014a patient's sudden spike in heart rate during surgery or unexpected drop in oxygen saturation signals clinical change. By learning to spot these patterns visually in real patient datasets, you'll develop intuition for what the data is telling clinicians. This practical approach builds your diagnostic eye before diving into complex statistical models.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Continuous Glucose Monitoring: Spotting Patterns in Real Time",
+      "content": "A Type 1 diabetic patient's continuous glucose monitor records blood glucose every 5 minutes over 2 weeks. Visually examining the data reveals three patterns: (1) a daily trend where morning readings are typically 20 mg/dL higher than evenings due to the dawn phenomenon, (2) a regular sawtooth pattern reflecting meals and insulin injections around 7am, noon, and 6pm (seasonality), and (3) occasional spikes above 300 mg/dL when the patient skips meals, followed by rapid drops when insulin is administered (anomalies). A clinician spots these patterns and adjusts the patient's insulin schedule to flatten the early-morning spike. Within a week, the patient's average glucose drops and standard deviation improves, reducing hypoglycemic episodes.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Pattern Recognition Practice: Patient Vital Signs",
+      "content": "Apply pattern recognition to real scenarios.",
+      "questions": [
+        {
+          "question": "A patient in the ICU has been monitored for systolic blood pressure every hour for 48 hours. The data shows: 110\u2192115\u2192118\u2192122\u2192120\u2192119\u2192121\u2192123 (hours 1-8), then a sudden drop to 85\u219287\u219290 (hours 9-11), then stabilization around 95-100. What is most likely happening?",
+          "options": [
+            "Normal daily seasonality of blood pressure",
+            "A clinical event (possible hemorrhage or medication effect) requiring immediate intervention",
+            "Random noise with no clinical significance",
+            "A gradual upward trend over time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. While BP does have daily variation, a sudden 30+ point drop is abnormal.",
+            "Correct! The sudden deviation from the 110-123 pattern is an anomaly suggesting acute change.",
+            "Incorrect. This pattern is too systematic and dramatic to dismiss as random noise.",
+            "Incorrect. The data shows a sudden drop, not a gradual increase."
+          ],
+          "explanation": "Anomaly detection is crucial in healthcare. The sudden drop in systolic BP (from ~120 to ~85) is a significant deviation from the patient's recent baseline and suggests a clinical event requiring investigation."
+        },
+        {
+          "question": "A weight tracking app shows a patient's daily weight: 72.5kg \u2192 73.0kg \u2192 72.8kg over Monday-Wednesday. On Thursday through Sunday, weights are: 73.2kg \u2192 73.5kg \u2192 74.1kg \u2192 73.8kg. Then back to Monday-Wednesday pattern: 72.6kg \u2192 72.9kg \u2192 72.7kg. What pattern are you observing?",
+          "options": [
+            "An upward trend indicating weight gain",
+            "A weekly seasonal pattern: weekends show higher weight due to diet/fluid intake changes",
+            "Random noise with no pattern",
+            "A sudden anomaly requiring medical attention"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The pattern repeats weekly, not continuously upward.",
+            "Correct! The cyclical pattern repeating each week suggests behavioral factors (leisure eating, reduced activity) that increase weekend weight.",
+            "Incorrect. There's a clear, repeating pattern here.",
+            "Incorrect. While the pattern exists, it's not anomalous\u2014it's predictable and likely behavioral."
+          ],
+          "explanation": "Seasonality can be weekly! Many patients show higher weight on weekends due to dietary changes and reduced activity. Recognizing this pattern helps clinicians distinguish normal variation from true weight gain."
+        },
+        {
+          "question": "An oncology patient's white blood cell (WBC) count is monitored: Day 1-7 averages 6.5K, Day 8-14 shows gradual decline to 3.2K, Day 15-21 drops sharply to 0.8K (neutropenic), then Days 22-28 recover to 5.0K. The patient is undergoing chemotherapy cycles every 21 days. What pattern best explains this?",
+          "options": [
+            "A medical error in data recording",
+            "A trend showing the patient's immune system permanently failing",
+            "Seasonality related to the chemotherapy cycle\u2014expected and monitored",
+            "Random anomalies with no clinical meaning"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The pattern is too systematic and expected for measurement error.",
+            "Incorrect. The recovery shows the pattern is cyclical, not a permanent decline.",
+            "Correct! Chemotherapy-induced neutropenia is expected seasonality tied to treatment cycles.",
+            "Incorrect. This is a highly predictable pattern, not random."
+          ],
+          "explanation": "Time series patterns in healthcare can reflect expected physiological responses to treatment. Recognizing that WBC suppression is a predictable seasonal pattern tied to chemo cycles helps clinicians monitor for complications like infection."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Time Series Mastery Achieved",
+      "content": "Congratulations! You now understand time series analysis in healthcare contexts. Whether you approached it through statistical theory or pattern recognition, you've learned to identify trends, seasonality, and anomalies in patient data. These skills enable you to forecast disease outbreaks, detect patient deterioration early, optimize clinical staffing, and contribute to data-driven healthcare decisions. Continue practicing on real datasets and explore advanced techniques like Prophet forecasting, LSTM neural networks, or multivariate time series analysis to deepen your expertise."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Practice First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T10:33:36.154730+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,404 @@
+{
+  "id": "course-forensic-database",
+  "title": "Forensic Database Design and SQL Investigation",
+  "description": "Master database design and SQL through the lens of forensic evidence management",
+  "topic": "Database Design and SQL",
+  "theme": "forensic science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "database",
+    "SQL",
+    "forensic-science",
+    "schema-design",
+    "normalization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Crime Scene Database Challenge",
+      "content": "You are a forensic analyst for the Major Crimes Unit. Your team has just concluded a complex investigation involving multiple crime scenes, hundreds of physical evidence items, and dozens of witness statements. The evidence is scattered across spreadsheets, notebooks, and photographs. Your mission: design and build a database system that allows investigators to quickly find evidence, track chain of custody, link items across cases, and generate reports. How you structure this system will determine whether future investigations succeed or fail.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which Path to Master First?",
+      "content": "You must decide your foundational approach. Do you start by mastering database design principles and schema architecture, then learn to query that structure effectively? Or do you dive directly into SQL queries and discover design principles through the data patterns you uncover?",
+      "choices": [
+        {
+          "label": "Master Database Design First",
+          "next": "n3"
+        },
+        {
+          "label": "Start with SQL Queries",
+          "next": "n13"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Structuring Evidence: Database Fundamentals",
+      "content": "Every database begins with careful planning. Think of it like photographing a crime scene: you decide which angles matter, what details to capture, and how to organize notes so critical information remains findable months later. In a forensic database, your schema is that photograph\u2014a blueprint of tables, fields, and relationships. A proper evidence database must capture what was collected, where it was found, who collected it, when, what tests were performed, and what those tests revealed. Without careful schema design, evidence gets lost in noise and investigations suffer.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "The Forensic Evidence Schema",
+      "content": "Consider a well-designed forensic database: An EVIDENCE table holds evidence_id, case_id, item_number, evidence_type (fiber, DNA, fingerprint), location_found, date_collected, collector_id. A TESTS table records analytical work: test_id, evidence_id, test_type, test_date, analyst_id, method_used, findings. The CASES, ANALYSTS, and LOCATIONS tables hold reference data. Each table links to others through foreign keys (ID numbers). This is Third Normal Form (3NF)\u2014the gold standard. Now, update Detective Garcia's info once in the ANALYSTS table, and it propagates everywhere. Add a new test type? No schema changes needed. Each piece of information exists exactly once, in its proper place.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "How Should You Organize the Evidence Tables?",
+      "content": "You face a critical architectural decision. Your team wants reports fast. Should you consolidate everything into one massive EVIDENCE table containing all evidence, test results, analyst details, and case info (denormalized for speed)? Or maintain separate tables that relate through IDs (normalized for accuracy and flexibility)?",
+      "choices": [
+        {
+          "label": "One Flat Table for Speed (Denormalized)",
+          "next": "n6"
+        },
+        {
+          "label": "Separate Linked Tables (Normalized)",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "The Denormalized Approach: Quick Win, Hidden Costs",
+      "content": "You create one EVIDENCE_FULL_REPORT table with 60+ columns: evidence_id, case_id, case_name, detective_name, detective_badge, detective_phone, evidence_type, location_found, collected_by, collected_date, test_1_type, test_1_date, test_1_analyst, test_1_result, test_2_type, test_2_analyst... and so on. Queries run blazingly fast\u2014no joins needed. But problems emerge immediately: Detective Garcia gets reassigned; her name appears in 247 rows. You update her record in row 500, but miss rows 200 and 812. Now investigators get conflicting information about who collected evidence. Worse, if evidence undergoes 15 tests, do you create 15 duplicate rows or squeeze everything into one row? Both create nightmares.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "assessment",
+      "title": "Consequences of Poor Design",
+      "content": "Test your understanding of why denormalization fails forensic investigations.",
+      "questions": [
+        {
+          "question": "You need to update Detective Garcia's phone number in your denormalized database where her name appears 247 times. What's the primary risk?",
+          "options": [
+            "You update one row and it fixes everywhere",
+            "You might miss some rows, creating inconsistent data in the investigation record",
+            "Phone numbers are never stored in forensic databases",
+            "This is actually an advantage of denormalization"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect\u2014denormalization prevents this automatic update",
+            "Correct! This is an update anomaly and compromises investigation integrity",
+            "Incorrect\u2014phone numbers are essential investigative data",
+            "Incorrect\u2014denormalization creates this exact problem"
+          ],
+          "explanation": "In denormalized structures, the same person's data appears many times. If you miss updating one instance, you have conflicting information. Some records show the old number, others the new\u2014creating investigative confusion and potential chain-of-custody problems."
+        },
+        {
+          "question": "An evidence item undergoes 15 forensic tests. In a single denormalized table, what's the core problem?",
+          "options": [
+            "Create 15 columns for each test result",
+            "Create 15 rows for the same evidence item",
+            "Both approaches duplicate data and create inflexibility",
+            "Neither\u2014denormalization handles this perfectly"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Creates an extremely wide, inflexible table",
+            "Creates massive redundancy of evidence metadata",
+            "Correct! Both create serious design problems",
+            "Incorrect\u2014both create issues"
+          ],
+          "explanation": "Denormalization forces an ugly choice: make a table so wide it's unwieldy, or repeat evidence metadata across many rows. This duplication means updating evidence details requires finding and fixing every copy."
+        },
+        {
+          "question": "In your denormalized database, a detective realizes they entered the wrong collection location for 5 items. What's the investigation impact?",
+          "options": [
+            "Impact is minimal; location is easily updated",
+            "You might not catch all instances when searching",
+            "Queries looking for evidence from Location A become unreliable",
+            "All of the above are risks"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect\u2014multiple copies mean multiple fixes needed",
+            "Yes\u2014critical problem",
+            "Yes\u2014exactly the issue",
+            "Correct! All represent real risks to investigation integrity"
+          ],
+          "explanation": "Without proper normalization, even simple corrections become risky. Multiple data copies mean multiple places to update, and investigators may unknowingly access stale information, potentially compromising the case."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Investigation Stalled: Database Integrity Compromised",
+      "content": "Your denormalized database initially seemed fast, but six months into operations, investigators discovered conflicting evidence locations, outdated analyst information in old records, and test results that couldn't be trusted. A case was nearly dismissed because of database-induced confusion about evidence handling. Your agency loses in court and must rebuild the entire system. The lesson: speed without integrity is false economy in forensic science."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "The Normalized Approach: Building for Integrity and Growth",
+      "content": "You design separate tables, each with a single, clear purpose. The EVIDENCE table holds only evidence properties: evidence_id, case_id, item_number, type, location_found, date_collected, collector_id, current_status. The TESTS table records analytical work: test_id, evidence_id, test_type, test_date, analyst_id, method_used, findings. The CASES, ANALYSTS, and LOCATIONS tables hold reference data. Each table links to others through foreign keys (ID numbers). This is Third Normal Form (3NF)\u2014the gold standard. Now, update Detective Garcia's info once in the ANALYSTS table, and it propagates everywhere. Add a new test type? No schema changes needed. Each piece of information exists exactly once, in its proper place. Queries are slightly more complex (they join tables), but the database is trustworthy, flexible, and scales.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Evidence and Tests Linked in 3NF",
+      "content": "Here's how it works: Evidence item EV-2024-00847 (a fiber sample from a suspect's jacket) lives in the EVIDENCE table with its metadata. When the lab completes a DNA analysis, a new row is added to TESTS: test_id=TST-9847, evidence_id=EV-2024-00847, test_type='DNA Analysis', analyst_id=ANA-156 (which links to Dr. Sarah Chen in the ANALYSTS table). When Dr. Chen updates her credentials, her analyst record changes once. Every test she performed now shows her updated credentials\u2014no redundant updates, no missed instances. Evidence can have unlimited tests without the table growing wider. The schema adapts naturally to your investigative needs.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Design a Normalized Forensic Database",
+      "content": "Apply normalization principles to forensic evidence management.",
+      "questions": [
+        {
+          "question": "You're designing a CHAIN_OF_CUSTODY table. Which data should you include to maintain integrity?",
+          "options": [
+            "evidence_id, transfer_from_person_id, transfer_to_person_id, transfer_date, transfer_location",
+            "evidence_id, transfer_from_name, transfer_to_name, transfer_date, case_name, location_name",
+            "All evidence data plus transfer information in one row",
+            "Just evidence_id and transfer_date to keep it simple"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Use IDs to reference other tables, avoiding duplication",
+            "Incorrect\u2014redundantly includes case and location names",
+            "Incorrect\u2014that's denormalization",
+            "Incorrect\u2014you'd lose critical investigative information"
+          ],
+          "explanation": "Normalization means each table holds data relevant to that entity. CHAIN_OF_CUSTODY references people and evidence through IDs (foreign keys), not by storing their names. Names live in the PERSONNEL table; if a name changes, one update fixes it everywhere."
+        },
+        {
+          "question": "Why would you create a separate EVIDENCE_TYPES table instead of storing the type directly in the EVIDENCE table?",
+          "options": [
+            "To save disk space (types would be tiny)",
+            "To standardize allowed types and prevent misspellings like 'fiber', 'Fiber', 'FIBER'",
+            "To make the EVIDENCE table faster",
+            "Separate tables are always required, it's just a rule"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect\u2014this is a minor concern",
+            "Correct! Using a lookup table ensures consistency and controls valid values",
+            "Incorrect\u2014normalization doesn't inherently affect speed",
+            "Incorrect\u2014normalization serves data quality purposes"
+          ],
+          "explanation": "Creating lookup tables (EVIDENCE_TYPES) prevents typos and inconsistency. Investigators searching for all 'DNA' results won't miss entries spelled 'dna' or 'DNA Analysis'. This centralized control of valid values is a key benefit of normalization."
+        },
+        {
+          "question": "When writing a query to find all tests performed by Dr. Chen on evidence from the Peterson case, which database approach is more reliable?",
+          "options": [
+            "Denormalized (all data in one table)",
+            "Normalized (multiple tables linked by IDs)",
+            "Both are equally reliable",
+            "The question doesn't make sense"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect\u2014risks inconsistent data",
+            "Correct! Normalized structure ensures data consistency across the query",
+            "Incorrect\u2014denormalization introduces risks",
+            "Incorrect\u2014this is a fundamental investigative query"
+          ],
+          "explanation": "In a normalized database, joining the TESTS, EVIDENCE, CASES, and ANALYSTS tables guarantees you get current analyst info and case data. In a denormalized table, you'd risk querying stale information if updates were missed."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n12",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "Case Solved: Database Built for Justice",
+      "content": "Your normalized database becomes the forensic gold standard. Years later, investigators can instantly find evidence, trace its complete history, and trust the data. When evidence types change, analyst certifications update, or new test methods emerge, the system adapts gracefully without corruption. Cold cases are reopened using historical data with complete confidence. Your design enables prosecutors to build bulletproof cases and helps exonerate the innocent. Database integrity directly serves justice\u2014the highest purpose of forensic science."
+    },
+    {
+      "id": "n13",
+      "type": "content",
+      "title": "SQL for Forensic Investigation",
+      "content": "SQL (Structured Query Language) is the instrument that interrogates your database. While schema design is the architecture, SQL is the flashlight you shine into that architecture to find answers. In forensic investigations, you ask questions constantly: 'What evidence was collected on March 15th?' 'Which tests did this suspect's DNA undergo?' 'What items have been in storage for over two years?' SQL transforms these investigative questions into precise data retrieval. You'll write SELECT statements to retrieve evidence, JOIN tables to link related data, use WHERE clauses to filter by date or type, and aggregate results to spot patterns. SQL is how you make your database answer the questions that crack cases.",
+      "next": "n14"
+    },
+    {
+      "id": "n14",
+      "type": "example",
+      "title": "Finding Evidence with SQL",
+      "content": "Consider these investigative queries: SELECT evidence_id, evidence_type, location_found FROM evidence WHERE case_id = 'CASE-2024-447' ORDER BY date_collected\u2014finds all evidence from a specific case chronologically. SELECT analyst_name, COUNT(*) as test_count FROM tests JOIN analysts ON tests.analyst_id = analysts.analyst_id WHERE test_type = 'DNA Analysis' GROUP BY analyst_name\u2014shows which analysts performed the most DNA tests. SELECT e.evidence_id, e.evidence_type, t.test_date, t.findings FROM evidence e LEFT JOIN tests t ON e.evidence_id = t.evidence_id WHERE e.case_id = 'CASE-2024-447' AND t.findings LIKE '%match%'\u2014finds all evidence with positive matching results in a case. Each query tells a story; each join connects evidence to analysts, cases, and results.",
+      "next": "n15"
+    },
+    {
+      "id": "n15",
+      "type": "assessment",
+      "title": "Write Investigative Queries",
+      "content": "Write SQL queries for forensic evidence scenarios.",
+      "questions": [
+        {
+          "question": "You need to find all evidence items collected by Detective Torres that have been in chain of custody for more than 6 months. Which query structure is correct?",
+          "options": [
+            "SELECT * FROM evidence WHERE collector_id = 'det-torres' AND date_collected < DATE(NOW()) - INTERVAL 180 DAY",
+            "SELECT * FROM evidence WHERE collector_name = 'Torres' AND months_in_storage > 6",
+            "SELECT * FROM evidence WHERE collected_by_name LIKE '%Torres%' AND transfer_date > 180 days",
+            "All of these are equally valid"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Uses IDs (proper normalization) and date arithmetic",
+            "Incorrect\u2014relies on storing names in evidence table",
+            "Incorrect\u2014incomplete date logic and denormalized names",
+            "Incorrect\u2014only one follows proper normalization"
+          ],
+          "explanation": "Proper SQL assumes proper database design. Use collector_id to reference the PERSONNEL table (normalization), use DATE arithmetic to calculate 6-month threshold, and let the JOIN to detective info happen in your query."
+        },
+        {
+          "question": "What does this query do? SELECT evidence_id, COUNT(test_id) as total_tests FROM tests GROUP BY evidence_id HAVING COUNT(test_id) > 10",
+          "options": [
+            "Shows evidence items that have undergone more than 10 different forensic tests",
+            "Counts all tests in the database",
+            "Lists all evidence items and their test types",
+            "Finds tests performed on evidence collected after 2024"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! GROUP BY aggregates per evidence item, HAVING filters to those with 10+ tests",
+            "Incorrect\u2014GROUP BY restricts the count to individual items",
+            "Incorrect\u2014doesn't count or filter",
+            "Incorrect\u2014no date filter in this query"
+          ],
+          "explanation": "This query identifies heavily-tested evidence items, potentially high-priority cases. GROUP BY aggregates tests per evidence item, and HAVING filters results to show only items with more than 10 tests\u2014useful for resource planning."
+        },
+        {
+          "question": "You need to find evidence items that have never been tested. Which approach is correct?",
+          "options": [
+            "SELECT * FROM evidence WHERE test_id IS NULL",
+            "SELECT e.* FROM evidence e LEFT JOIN tests t ON e.evidence_id = t.evidence_id WHERE t.test_id IS NULL",
+            "SELECT evidence_id FROM evidence WHERE NOT EXISTS (SELECT 1 FROM tests WHERE tests.evidence_id = evidence.evidence_id)",
+            "Both B and C are correct"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect\u2014evidence table doesn't have a test_id column",
+            "Correct approach\u2014uses LEFT JOIN to find unmatched evidence",
+            "Correct approach\u2014uses NOT EXISTS to find evidence without test records",
+            "Correct! Both B and C achieve the same result correctly"
+          ],
+          "explanation": "Finding items that DON'T match is a classic SQL challenge. Both methods work: the LEFT JOIN finds evidence rows where tests didn't match (t.test_id IS NULL), and NOT EXISTS checks if any test records exist for each evidence item."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n16",
+      "failure_target": "n16"
+    },
+    {
+      "id": "n16",
+      "type": "end",
+      "title": "Evidence Found, But Scaling Challenges Emerge",
+      "content": "Your SQL queries work beautifully. You write increasingly complex investigations, joining evidence to tests to analysts to cases. Investigators trust your results\u2014you find the needle in the haystack reliably. But as your database grows to millions of evidence items, queries slow down. You realize you never planned your indexes, and some queries now take minutes instead of seconds. You've mastered SQL, but learned that query skill without database design leaves you vulnerable to performance and integrity problems. This is why both design and SQL matter equally: neither alone is sufficient for a truly reliable forensic database."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Decide approach"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Design-first path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n13",
+      "label": "Query-first path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn schema"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Design decision"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Try denormalization"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n9",
+      "label": "Use normalization"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Discover problems"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Poor design outcome"
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": "See best practices"
+    },
+    {
+      "id": "c11",
+      "source": "n10",
+      "target": "n11",
+      "label": "Design assessment"
+    },
+    {
+      "id": "c12",
+      "source": "n11",
+      "target": "n12",
+      "label": "Success outcome"
+    },
+    {
+      "id": "c13",
+      "source": "n13",
+      "target": "n14",
+      "label": "Learn queries"
+    },
+    {
+      "id": "c14",
+      "source": "n14",
+      "target": "n15",
+      "label": "Practice queries"
+    },
+    {
+      "id": "c15",
+      "source": "n15",
+      "target": "n16",
+      "label": "Mixed outcome"
+    }
+  ],
+  "generated_at": "2026-03-27T08:29:55.481521+00:00",
+  "model": "claude-haiku-4-5"
+}

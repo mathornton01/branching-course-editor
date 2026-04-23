@@ -1,0 +1,170 @@
+{
+  "id": "rl-culinary-course",
+  "title": "Reinforcement Learning Through Culinary Arts",
+  "description": "Master reinforcement learning by exploring how chefs learn, refine recipes, and innovate. This branching course covers policy development, reward shaping, and the exploration-exploitation trade-off through culinary examples.",
+  "topic": "Reinforcement Learning",
+  "theme": "culinary arts",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "machine-learning",
+    "reinforcement-learning",
+    "culinary-arts",
+    "decision-making",
+    "learning-theory"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Reinforcement Learning in the Kitchen",
+      "content": "Reinforcement Learning (RL) is how machines learn through interaction with their environment\u2014much like how a chef masters their craft. Just as a chef tries techniques, receives feedback (taste, plating, customer satisfaction), and adjusts their approach, RL agents take actions, observe results, and learn what works best. This course explores three fundamental aspects of RL through the culinary arts: how agents decide which actions to take (Policy), how they evaluate their performance (Rewards), and how they balance trying new things versus repeating what works (Exploration vs Exploitation). By the end, you'll understand RL not as abstract mathematics but as the learning process behind every master chef.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Which aspect of reinforcement learning intrigues you most? Select one to explore deeply, and you'll encounter the others in our synthesis.",
+      "choices": [
+        {
+          "label": "Master Policy Development: How chefs decide which technique fits each situation",
+          "next": "n3"
+        },
+        {
+          "label": "Understand Reward Shaping: How feedback guides learning and improvement",
+          "next": "n5"
+        },
+        {
+          "label": "Balance Exploration vs Exploitation: Innovating while perfecting proven recipes",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "States, Actions, and Policies",
+      "content": "In RL, a state represents the current situation, and actions are the choices available. In cooking, the state includes your ingredients, equipment, time constraints, and guest preferences. Actions are the techniques you apply\u2014searing, emulsifying, fermenting, seasoning. A chef learns a policy: a mapping from states to actions. For example, 'When making risotto with mushrooms and you notice it's too dry after 15 minutes, stir and add broth gradually.' This state\u2192action mapping becomes automatic through experience. The Bellman equation in RL formalizes this: the value of taking an action in a state equals the immediate reward plus the discounted future value of the resulting next state. In culinary terms: choosing saffron for risotto gives immediate flavor reward and sets up for a beautiful golden color and aromatic depth later. Over time and trials, chefs internalize optimal policies without conscious calculation.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Pizza Crust Mastery: Learning Optimal Technique",
+      "content": "A Neapolitan pizza maker's journey demonstrates policy learning perfectly. Initial experiments: trying different hydration levels (60%, 65%, 70%, 75%), various rest times (12h, 18h, 24h, 36h), and fermentation temperatures (18\u00b0C, 22\u00b0C, 26\u00b0C). After 20 attempts, the policy emerges: 'If flour temperature is 24\u00b0C, ferment 24 hours; if room humidity is high, reduce hydration by 2%.' The state space includes flour type, ambient temperature, humidity, and desired crust style. The action space includes rest duration, fermentation temperature, and water ratio. Through repetition and observation, the baker's optimal policy becomes: [flour type, room conditions] \u2192 [specific hydration, rest time, temperature]. This is policy learning: discovering which actions (techniques) consistently lead to crispy, airy crusts in each situation (state).",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Reward Signals and Learning Feedback",
+      "content": "Rewards are the feedback signals that guide learning. In RL, rewards quantify success numerically. In the kitchen, feedback comes from multiple sources: taste (immediate, +/- points), plating aesthetics (visual score), guest satisfaction (delayed feedback), cost-effectiveness (practical constraint). Smart reward shaping is crucial\u2014rewarding the right behavior accelerates learning. A pastry chef designs rewards: +100 for perfect lamination layers, +50 for proper golden color, -30 for over-proofing, -10 for uneven sheets. Without clear rewards, learning is random. With poorly designed rewards, agents optimize the wrong things. For instance, rewarding only speed (-10 per minute) without quality metrics produces rushed, mediocre food. Effective reward structures decompose complex goals: total_reward = taste_quality\u00d70.5 + presentation\u00d70.3 + technique_efficiency\u00d70.2. This compound structure guides the agent toward well-rounded mastery rather than narrow optimization.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Sauce Refinement Through Structured Feedback",
+      "content": "A sauce master learns through carefully structured reward signals. Immediate rewards from taste testing: acidity balanced (+30 points), too sour (-20), consistency coats spoon correctly (+40), too thin (-15), color glossy (+25), dull appearance (-10). Delayed rewards emerge after plating: dish complements the protein (+50), sauce visually enhances the plate (+20), poor pairing (-30). After 30 iterations testing different reduction times and acid additions, the agent converges on: 'Reduce to 40% of original volume, then add 2 tsp vinegar per liter.' Reward history shows early trials with 50% reduction scored -20 on every taste test (over-concentrated), but discovering the 40% sweet spot yielded consistent +30 scores. This demonstrates temporal difference learning: using immediate feedback (taste) to refine predictions about future outcomes (guest satisfaction, plating success). The chef's brain encodes the value: this action in this state predicts positive future rewards.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Exploration vs Exploitation in the Kitchen",
+      "content": "The exploration-exploitation trade-off is fundamental to RL and critical in cooking. Exploitation means repeating known successful actions: making the reliable beef bourguignon that guests always love. Exploration means trying novel approaches: what if we sous-vide the beef first, then finish it in the oven? Pure exploitation means never discovering techniques that could be even better. Pure exploration means never perfecting anything\u2014constant chaos. Effective learning balances both. In kitchens, epsilon-greedy strategies emerge naturally: 90% of the time execute your best known recipes (exploit), 10% of the time experiment (explore). After 100 service cycles, chefs notice which experiments yielded positive feedback and gradually expand their exploitation set. More sophisticated approaches use upper confidence bounds: try actions with high uncertainty if they have potential high payoff. A Michelin-aspirant chef might exploit the proven duck confit (known to work) but explore molecular plating techniques where variance is high but potential payoff is substantial\u2014new recognition, distinction.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Seasonal Menu Strategy: Exploitation and Innovation",
+      "content": "A restaurant's seasonal menu demonstrates exploration-exploitation optimization beautifully. Spring menu planning: exploit winter classics (keep the beloved coq au vin braise and soup that built reputation); introduce 3 new experimental dishes (explore). After service data, reward signals arrive: new dish A receives 4.5-star reviews, ordered 42 times. New dish B receives 2-star reviews, ordered 3 times. New dish C receives 3.5-star reviews, ordered 18 times. Seasonal classic receives 4-star reviews, ordered 120 times. Summer menu decision: clearly exploit the seasonal classic and new A (high reward, high volume); investigate why B failed and try different applications (learning from exploration); introduce one new exploration item while harvesting proven winners. Across 3 years, this systematic balancing builds reputation and guest loyalty. Over-exploiting (never changing menus) leads to staleness; over-exploring (constant novelty) confuses the palate and brand. The optimal policy discovered: harvest proven high-reward patterns while systematically testing calculated innovations.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integration: The Complete Learning Cycle",
+      "content": "RL in culinary mastery unifies policy, rewards, and exploration-exploitation. A chef develops a policy (state\u2192action mapping from 'I have these ingredients and 20 minutes' to 'make pan-seared branzino') by receiving rewards (taste, presentation, feedback), while balancing exploration (trying yuzu instead of vinegar) and exploitation (reliable tarragon-based b\u00e9arnaise). The experienced chef has internalized millions of RL iterations: states, actions, rewards all condensed into intuition. Transfer learning applies: searing technique transfers from chicken to fish to scallops. Temporal difference learning means chefs don't wait until plating to evaluate\u2014they taste and adjust continuously. The brain acts as a value function: estimating whether this action will lead to delicious outcomes. The complete cycle is: observe current state \u2192 select action (using learned policy) \u2192 execute \u2192 receive reward signal (taste, feedback, success) \u2192 update value estimate \u2192 repeat. This is why expert cooks are RL agents: they've optimized the policy through thousands of trials, learning which states call for which actions and what rewards reliably follow.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "You've Mastered RL Through Culinary Arts",
+      "content": "Congratulations! You've explored reinforcement learning through the culinary lens. You've examined how policies map situations to actions, how reward signals guide learning, and how exploration and exploitation create mastery. These principles apply beyond cooking: game AI, robotics, resource optimization, medical treatment planning. Every expert\u2014chef, athlete, scientist\u2014started as a beginner iterating through states and actions, learning from rewards. The next time you cook or observe a master chef, notice the RL cycle: state awareness (ingredient quality, time, equipment) \u2192 intentional action (technique selection) \u2192 immediate feedback (taste, texture) \u2192 adjustment. That's reinforcement learning in action. Keep experimenting, keep tasting, keep learning."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin course"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Policy Development"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Reward Shaping"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Exploration vs Exploitation"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "See example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Synthesize"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "See example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Synthesize"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "See example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Synthesize"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Complete course"
+    }
+  ],
+  "generated_at": "2026-03-27T12:25:15.285731+00:00",
+  "model": "claude-haiku-4-5"
+}

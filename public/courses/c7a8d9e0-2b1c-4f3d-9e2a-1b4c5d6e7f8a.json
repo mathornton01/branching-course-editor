@@ -1,0 +1,494 @@
+{
+  "id": "c7a8d9e0-2b1c-4f3d-9e2a-1b4c5d6e7f8a",
+  "title": "Computer Architecture: A Forensic Science Perspective",
+  "description": "Master computer architecture by exploring how digital forensic labs operate. Learn CPU fundamentals, memory hierarchy, and I/O systems through real forensic examples and scenarios.",
+  "topic": "Computer Architecture",
+  "theme": "forensic science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer architecture",
+    "CPU",
+    "memory",
+    "I/O",
+    "forensic science",
+    "digital forensics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Computer Architecture: The Forensic Lab Perspective",
+      "content": "Computer architecture describes how a computer's hardware components work together, just as a forensic laboratory's infrastructure must carefully coordinate multiple analysis systems. A modern computer has a CPU (the lead investigator), memory systems (evidence storage), and I/O devices (communication channels). Understanding these components helps you comprehend how data flows through a system\u2014much like evidence flows through a forensic workflow. Just as a forensic lab optimizes its processes to handle cases efficiently, a computer's architecture is designed to maximize performance. This foundation will help you understand how digital evidence is processed and stored in computational systems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Understanding CPU and Instruction Execution",
+      "content": "Test your understanding of CPU fundamentals and how instruction execution relates to forensic analysis procedures.",
+      "questions": [
+        {
+          "question": "In a forensic digital analysis system, the CPU functions similarly to which component of a forensic lab?",
+          "options": [
+            "The evidence storage vault",
+            "The lead investigator directing and executing procedures",
+            "The evidence catalog database",
+            "The security cameras"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The storage vault is more like RAM/memory",
+            "CORRECT - The CPU executes instructions just as an investigator executes procedures",
+            "The catalog is database-like, not CPU-like",
+            "Cameras are input devices (I/O)"
+          ],
+          "explanation": "The CPU is the active processor that executes instructions (fetch-decode-execute cycle), analogous to an investigator carrying out analysis tasks. Other components support it but don't perform the core work."
+        },
+        {
+          "question": "During a digital forensics analysis, a computer processes evidence files in steps: read the file (fetch), understand its structure (decode), and extract relevant data (execute). What does this sequence represent?",
+          "options": [
+            "The memory hierarchy",
+            "The instruction execution cycle",
+            "Cache performance",
+            "I/O operations only"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The memory hierarchy refers to different storage levels",
+            "CORRECT - This is the fetch-decode-execute cycle",
+            "Cache performance is about access speed optimization",
+            "This involves the CPU, not just I/O"
+          ],
+          "explanation": "The fetch-decode-execute cycle is the fundamental operation of a CPU. In the analogy, fetching evidence = fetch, understanding its format = decode, and processing it = execute."
+        },
+        {
+          "question": "A forensic examiner needs to quickly access the most recently examined evidence from a case. Where should this data be stored for fastest access?",
+          "options": [
+            "On external hard drives in the archive room",
+            "In a database on the network drive",
+            "In the CPU's registers or L1 cache",
+            "In the secure evidence vault with limited access"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "External drives have high latency",
+            "Network drives are slower than local cache",
+            "CORRECT - CPU registers and L1 cache provide the fastest access",
+            "The vault has limited access for security, not speed"
+          ],
+          "explanation": "Registers and L1 cache are the closest to the CPU and provide immediate access to data, just as keeping frequently-used evidence on your examination table provides instant access."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: CPU Concepts in Forensic Analysis",
+      "content": "Reinforce your understanding of CPU fundamentals through these forensic-focused practice questions.",
+      "questions": [
+        {
+          "question": "In forensic digital analysis, what does the CPU's ALU (Arithmetic Logic Unit) do?",
+          "options": [
+            "Stores encrypted evidence files",
+            "Performs calculations and logical operations on data",
+            "Routes data between the CPU and memory",
+            "Manages the hard drive storage system"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's the role of storage devices",
+            "CORRECT - The ALU is where arithmetic and logical operations occur",
+            "That's the data bus's job",
+            "That's controlled by I/O controllers"
+          ],
+          "explanation": "The ALU performs all mathematical calculations and logical comparisons on forensic data, enabling the analysis of evidence properties."
+        },
+        {
+          "question": "Why does a forensic computer architecture need registers in the CPU?",
+          "options": [
+            "To permanently store evidence",
+            "To provide the fastest possible access to data being actively processed",
+            "To encrypt sensitive information",
+            "To back up the system"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Registers are too small and temporary for permanent storage",
+            "CORRECT - Registers provide nanosecond-level access to the data the CPU is currently working with",
+            "Encryption is a separate security function",
+            "Backup is a redundancy strategy"
+          ],
+          "explanation": "Registers are the fastest storage in a computer, holding data the CPU is actively working on during evidence analysis."
+        },
+        {
+          "question": "What is the primary advantage of dividing CPU work into fetch, decode, and execute stages?",
+          "options": [
+            "It reduces the power consumption of the computer",
+            "It allows the CPU to process multiple instructions concurrently through pipelining",
+            "It makes the CPU immune to security vulnerabilities",
+            "It allows forensic examiners to pause analysis at any time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Power reduction is a benefit but not the primary design advantage",
+            "CORRECT - Pipelining enables instruction-level parallelism, improving throughput",
+            "Security depends on implementation, not the instruction cycle",
+            "Pausing is an OS-level feature, not an architectural benefit"
+          ],
+          "explanation": "By dividing instruction processing into stages, multiple instructions can be in different stages simultaneously, multiplying the CPU's effective throughput."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Memory Hierarchy: The Forensic Evidence Storage System",
+      "content": "A forensic laboratory uses a memory hierarchy similar to how computer memory works: the most frequently accessed evidence is kept in the examiner's immediate workspace (like CPU cache), supporting materials are in nearby storage (like RAM), and archived case files are in the vault (like secondary storage). Modern computers implement a similar hierarchy with L1/L2/L3 caches (smallest, fastest), RAM (larger, medium-speed), and disk storage (largest, slowest). This hierarchy exists because memory follows a fundamental trade-off: speed versus capacity. Faster memory (closer to the CPU) is much more expensive and physically limited, while slower memory offers more space. In forensic systems, frequently accessed evidence metadata is cached for quick analysis, while complete raw data resides in larger storage. Understanding this hierarchy helps optimize how forensic software accesses evidence.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Memory Hierarchy in Forensic Systems",
+      "content": "Demonstrate your understanding of memory hierarchy, caching, and storage systems in the context of forensic analysis.",
+      "questions": [
+        {
+          "question": "A forensic examiner is analyzing a large disk image (100 GB). The entire image cannot fit in the computer's RAM (16 GB). Where is the image data primarily stored while being analyzed?",
+          "options": [
+            "In the CPU's L3 cache",
+            "In RAM, with frequently-accessed portions",
+            "On the hard drive (secondary storage), with portions loaded into RAM as needed",
+            "In the CPU registers"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Cache is too small for this",
+            "Only 16 GB can fit in RAM, not 100 GB",
+            "CORRECT - The OS loads portions as needed from storage",
+            "Registers are far too small"
+          ],
+          "explanation": "Secondary storage holds the entire image; the OS manages which portions are in RAM, implementing a virtual memory system that makes the hierarchy transparent."
+        },
+        {
+          "question": "In computer architecture, cache works because of a principle called locality. Which scenario best demonstrates temporal locality in forensic analysis?",
+          "options": [
+            "Accessing evidence files from the same case folder (spatial locality)",
+            "Re-examining the same evidence property multiple times in succession",
+            "Spreading evidence analysis across multiple computers",
+            "Storing encrypted backups separately"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's spatial locality (proximity in space)",
+            "CORRECT - Temporal locality means the same data is accessed repeatedly over time",
+            "That's distribution, not locality",
+            "That's backup strategy"
+          ],
+          "explanation": "Temporal locality is when the same data is accessed repeatedly in a short time frame. The cache 'remembers' recently-accessed data because it's likely to be accessed again soon."
+        },
+        {
+          "question": "A forensic system has: L1 cache (32 KB, 4 cycles), L2 cache (256 KB, 10 cycles), RAM (16 GB, 100 cycles), Disk (1 TB, 10,000,000 cycles). Where should frequently-accessed evidence metadata be stored for optimal performance?",
+          "options": [
+            "On the disk",
+            "In RAM",
+            "In L2 or L3 cache",
+            "Only in L1 cache"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Disk is too slow for frequently-accessed data",
+            "RAM is slower than cache, though practical given size",
+            "CORRECT - Cache provides the best speed-to-practicality ratio for frequent access",
+            "L1 is typically full with other processor operations"
+          ],
+          "explanation": "While L1 would be fastest, L2/L3 cache provides a good balance of speed and available capacity for evidence metadata that needs quick access."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Memory Hierarchies and Evidence Access",
+      "content": "Practice applying memory hierarchy concepts to forensic system design and optimization.",
+      "questions": [
+        {
+          "question": "Why does a forensic analysis system benefit from having multiple cache levels (L1, L2, L3)?",
+          "options": [
+            "To provide redundancy for data protection",
+            "To allow gradual fallback when searching for data, balancing speed and capacity",
+            "To encrypt data at different security levels",
+            "To distribute processing across multiple CPUs"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Redundancy is handled by separate backup systems",
+            "CORRECT - Each level is larger but slower, creating a fallback hierarchy",
+            "Caching and encryption are independent functions",
+            "Multiple caches don't distribute across CPUs"
+          ],
+          "explanation": "The multi-level cache hierarchy creates a tiered search: fast (L1), then larger (L2), then larger (L3), then RAM\u2014each step forward trades speed for capacity."
+        },
+        {
+          "question": "A forensic application analyzes a case repeatedly over several weeks. How does the memory hierarchy benefit this workload?",
+          "options": [
+            "The entire case becomes invalid and must be re-analyzed",
+            "Evidence files grow smaller with each access",
+            "Frequently-accessed evidence remains in cache, speeding up repeated analysis sessions",
+            "Memory must be cleared between sessions for security"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Cases don't become invalid from repeated access",
+            "File sizes don't change",
+            "CORRECT - Cache retains recently-used data for quick retrieval",
+            "While security matters, it doesn't affect the benefit of caching"
+          ],
+          "explanation": "The memory hierarchy's temporal locality means repeated access to the same evidence benefits from caching, making forensic workflows more efficient over time."
+        },
+        {
+          "question": "A forensic examiner has 500 small evidence files to analyze. Would it be more efficient to load all 500 files into RAM at once or to load them on-demand?",
+          "options": [
+            "Always load all 500 files at once for faster access",
+            "Always load on-demand to minimize RAM usage",
+            "Load on-demand unless they fit entirely in RAM; pre-loading 500 files might exceed RAM and force disk paging, negating the benefit",
+            "The choice doesn't matter for performance"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Excessive RAM loading can cause paging, which is slower than on-demand loading",
+            "On-demand loading is good, but if all files fit in RAM without paging, pre-loading saves load time",
+            "CORRECT - The decision depends on whether all files fit in RAM without forcing paging",
+            "The choice significantly affects performance"
+          ],
+          "explanation": "The memory hierarchy works best when you avoid crossing its thresholds unnecessarily. Loading all files is only beneficial if they fit entirely in RAM without forcing disk paging."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Data Buses and I/O: The Forensic Chain of Custody",
+      "content": "In computer architecture, data buses are the communication channels connecting the CPU, memory, and I/O devices\u2014much like the formal chain of custody in forensic science ensures evidence flows through proper channels while maintaining integrity. The system bus connects the CPU to memory, the expansion bus connects to devices like hard drives and network cards, and specialized buses handle specific functions. Just as a forensic chain of custody tracks who handled evidence and when, computer buses implement protocols that ensure data transfers between components are accurate and synchronized. I/O operations (input/output) handle communication with external devices: reading evidence from a forensic acquisition device, storing analyzed results to secure storage, or transmitting data to other systems. Understanding how data moves through these buses is critical for securing forensic systems against tampering or unintended data corruption.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Data Buses and I/O in Forensic Systems",
+      "content": "Assess your understanding of data buses, I/O controllers, and communication protocols in forensic computer systems.",
+      "questions": [
+        {
+          "question": "In forensic digital evidence handling, a computer's system bus functions like what aspect of the chain of custody?",
+          "options": [
+            "The physical location where evidence is stored",
+            "The formal record and pathway through which evidence must flow",
+            "The encryption applied to evidence",
+            "The documentation of the investigator's analysis"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's the evidence vault or storage room",
+            "CORRECT - Both the bus and chain of custody establish formal pathways and record every transfer",
+            "Encryption is a security layer, not a pathway",
+            "Analysis documentation is separate from data flow"
+          ],
+          "explanation": "The system bus is a formal pathway with rules and synchronization, just as the chain of custody is a formal pathway with documentation and oversight."
+        },
+        {
+          "question": "A forensic examiner is transferring a 2 TB disk image from an acquisition device to a forensic analysis workstation. Which component handles this I/O operation?",
+          "options": [
+            "The CPU directly reads and writes at full processing speed",
+            "The system bus connects all components",
+            "An I/O controller manages the transfer between the acquisition device and system memory",
+            "The hard drive decides when to accept data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The CPU can't directly handle all I/O; it would waste processing power",
+            "The bus is involved, but the controller is the active manager",
+            "CORRECT - I/O controllers handle device communication and buffer data transfers",
+            "The device receives data but doesn't decide the transfer timing"
+          ],
+          "explanation": "I/O controllers are intermediaries that manage the complex protocols and timing between different devices, freeing up the CPU for other work."
+        },
+        {
+          "question": "In a forensic system, why is it important that the I/O bus protocol is standardized and well-documented?",
+          "options": [
+            "To make computers easier to manufacture",
+            "To ensure data integrity during evidence transfers and to maintain the chain of custody's formal procedures",
+            "To make the system faster",
+            "To reduce the cost of components"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Manufacturing is one benefit, but not the primary forensic concern",
+            "CORRECT - Standardized protocols ensure reliable, auditable data transfers",
+            "While standards might help, the primary benefit is integrity and auditability",
+            "Cost reduction is secondary"
+          ],
+          "explanation": "In forensic systems, standardized I/O protocols ensure that evidence transfers are reproducible, auditable, and verifiable\u2014critical for maintaining chain of custody."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: I/O and Communication in Forensic Systems",
+      "content": "Practice applying I/O and bus concepts to forensic system challenges and scenarios.",
+      "questions": [
+        {
+          "question": "A forensic examiner connects a write-blocking device to acquire evidence from a suspect's phone. The write-blocker implements a protocol that prevents any data modification during transfer. Which computer architecture component is responsible for enforcing this protocol?",
+          "options": [
+            "The CPU cores",
+            "The main memory (RAM)",
+            "The I/O controller and the bus protocol",
+            "The hard drive's firmware"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The CPU doesn't enforce device-level protocols",
+            "RAM stores data but doesn't enforce transfer protocols",
+            "CORRECT - I/O controllers implement the protocols that govern device communication",
+            "The hard drive receives data but doesn't govern incoming transfers"
+          ],
+          "explanation": "I/O controllers are responsible for implementing communication protocols and ensuring data integrity during device transfers."
+        },
+        {
+          "question": "In a forensic lab, why is the speed of data buses (e.g., PCIe, USB 3.2) important when acquiring evidence?",
+          "options": [
+            "Faster buses always mean more accurate evidence acquisition",
+            "Faster buses reduce the time evidence is in an uncontrolled state and improve throughput for time-sensitive acquisitions",
+            "Bus speed has no impact on evidence integrity",
+            "Slower buses are more secure"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed and accuracy are independent",
+            "CORRECT - Faster acquisition means less time for interference and better efficiency",
+            "Bus speed affects performance significantly",
+            "Speed and security are separate concerns"
+          ],
+          "explanation": "While accuracy is ensured through protocols and verification, faster data transfer is operationally important for reducing risk windows and improving lab throughput."
+        },
+        {
+          "question": "A forensic system needs to acquire evidence from multiple devices simultaneously. How does the computer's I/O architecture enable this?",
+          "options": [
+            "By having multiple CPU cores process I/O in parallel",
+            "By using separate I/O controllers for each device, allowing concurrent transfers without overwhelming the system bus",
+            "By suspending all other computer operations",
+            "By connecting all devices to the same I/O port sequentially"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Parallel CPU cores help, but I/O controllers are the key enabler",
+            "CORRECT - Multiple I/O controllers allow concurrent device management",
+            "Suspending operations would make the system unusable",
+            "Sequential connection severely limits throughput"
+          ],
+          "explanation": "Modern computer architectures include multiple I/O controllers that can manage concurrent device transfers, allowing forensic labs to acquire from multiple sources simultaneously."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Computer Architecture for Forensic Professionals",
+      "content": "Congratulations! You have completed a comprehensive exploration of computer architecture through the lens of forensic science. You now understand how the CPU executes instructions like an investigator executes procedures, how the memory hierarchy optimizes evidence access just as a forensic lab optimizes its storage, and how data buses maintain the integrity of information flow much like the chain of custody maintains the integrity of evidence. These architectural principles underpin all digital forensic work\u2014from acquisition to analysis to reporting. As you advance in your forensic career, this knowledge will help you understand system behavior, optimize workflows, and ensure data integrity. Continue exploring how these principles apply to real-world forensic systems and challenges."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T06:20:17.758152+00:00",
+  "model": "claude-haiku-4-5"
+}

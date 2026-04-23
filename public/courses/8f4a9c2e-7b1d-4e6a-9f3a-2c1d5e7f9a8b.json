@@ -1,0 +1,315 @@
+{
+  "id": "8f4a9c2e-7b1d-4e6a-9f3a-2c1d5e7f9a8b",
+  "title": "Time Series Analysis in Music Therapy",
+  "description": "Learn to analyze patient progress in music therapy by studying time series data from real treatment scenarios",
+  "topic": "Time Series Analysis",
+  "theme": "music therapy",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "time-series",
+    "data-analysis",
+    "music-therapy",
+    "patient-outcomes",
+    "trend-detection",
+    "seasonality"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Music Therapy Challenge",
+      "content": "You are analyzing treatment outcomes for a patient with Parkinson's disease participating in rhythmic drumming therapy. Over 8 weeks, you've collected biometric data measuring tremor amplitude in millimeters, recorded daily. The therapeutic goal is to reduce involuntary tremors through synchronized rhythmic engagement. Your challenge: detect whether the therapy is genuinely reducing tremor severity, and identify any patterns in treatment response.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Analytical Approach",
+      "content": "Before diving into the data, you need to decide your analytical strategy. Time series analysis can be approached through statistical decomposition (understanding components) or visual pattern recognition. What resonates with your analytical style?",
+      "choices": [
+        {
+          "label": "Statistical decomposition\u2014break data into components",
+          "next": "n3"
+        },
+        {
+          "label": "Visual pattern recognition\u2014identify trends by sight",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Time Series Decomposition Fundamentals",
+      "content": "Every time series has three components. The **trend** shows long-term movement (whether tremor amplitude decreases over 8 weeks). The **seasonality** captures recurring patterns (tremors might worsen early-week and improve mid-week after therapy sessions). The **noise** is random day-to-day variation unrelated to therapy. In music therapy, isolating these components helps clinicians distinguish genuine therapeutic progress from random fluctuations or weekly response cycles.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Tremor Data: Week 1 vs Week 8",
+      "content": "Your patient's tremor amplitude starts at 8.2mm (Week 1, Monday) and falls to 2.1mm (Week 8, Monday)\u2014a 74% reduction. But the data is noisy: Week 1 ranges 7.8\u20139.1mm daily. Week 8 ranges 1.9\u20132.8mm. Therapy sessions occur every Friday. After each Friday session, the next few days show slightly larger tremors (post-session fatigue), then improvement mid-week (adaptation recovery). Extracting the true downward trend from weekly rhythm and noise is the decomposition challenge.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "Which Decomposition Method?",
+      "content": "You have two approaches. STL (Seasonal and Trend decomposition using Loess) uses flexible, local curve-fitting to separate trend and seasonality\u2014excellent for capturing non-linear therapeutic progress and subtle weekly patterns. Simple moving average smooths data uniformly\u2014faster but loses cyclical insight. For detecting nuanced therapy effects in music therapy, which method best serves your goal?",
+      "choices": [
+        {
+          "label": "STL\u2014capture flexible trends and weekly response patterns",
+          "next": "n6"
+        },
+        {
+          "label": "Moving average\u2014quick, straightforward smoothing",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "STL Decomposition Results",
+      "content": "STL decomposition of your tremor data reveals: (1) A strong downward trend component declining from 8.2mm to 2.1mm, confirming therapy efficacy. (2) A repeating weekly seasonal component with 3\u20134 day oscillation centered on therapy days, showing patient response rhythm. (3) Residual noise averaging \u00b10.3mm. This tells you the therapy IS working, patients show predictable fatigue-and-recovery cycles, and daily variation is minimal.",
+      "questions": [
+        {
+          "question": "According to STL decomposition, what does the seasonal component represent in your tremor data?",
+          "options": [
+            "The overall healing progress over 8 weeks",
+            "The repeating weekly tremor pattern tied to therapy session cycles",
+            "Random day-to-day fluctuations unrelated to therapy structure",
+            "Equipment measurement errors"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Seasonal components show recurring patterns, not overall trends.",
+            "Correct! Seasonality captures the weekly rhythm in patient response to therapy sessions.",
+            "Incorrect. That would be noise or residuals, not seasonality.",
+            "Incorrect. Noise represents random measurement variation, not seasonal patterns."
+          ],
+          "explanation": "The seasonal component in STL isolates repeating cycles. In music therapy biometrics, this reflects the weekly rhythm of sessions and predictable patient adaptation patterns."
+        },
+        {
+          "question": "Your STL residuals (noise) average \u00b10.3mm out of an 8.2mm starting tremor value. Is this a concern?",
+          "options": [
+            "Yes, noise above \u00b10.2mm invalidates the analysis",
+            "No, \u00b10.3mm represents just 3.7% of baseline, indicating clear signal",
+            "Yes, noise should always equal zero",
+            "No, but only if the trend is perfectly linear"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Low relative noise is actually acceptable and expected in real data.",
+            "Correct! Small noise relative to signal means the decomposition is reliable and trustworthy.",
+            "Incorrect. Real patient data always contains noise; zero noise indicates data problems.",
+            "Incorrect. Linear vs. nonlinear trends don't determine acceptable noise levels."
+          ],
+          "explanation": "In time series analysis, signal-to-noise ratio matters. When noise is <5% of baseline signal, the underlying therapeutic pattern is trustworthy enough for clinical decision-making."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n7",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Excellent Analysis! STL Reveals Clear Therapy Effect",
+      "content": "Your choice of STL decomposition has successfully isolated the tremor-reducing effect of music therapy. Clinicians can now confidently report: 'Tremor amplitude decreased 74% over 8 weeks, with improvement continuing week-to-week.' The weekly fatigue-recovery cycle is expected and normal. This data-driven insight validates the therapy protocol, optimizes session scheduling based on response patterns, and informs next-phase treatment decisions with confidence."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Moving Average Smoothing Analysis",
+      "content": "A 7-day moving average successfully smooths your tremor data, showing a clear downward trend from ~8mm to ~2mm. The smoothing effectively removes daily noise and reveals overall improvement. However, the weekly pattern beneath the trend becomes invisible\u2014you lose sight of post-therapy fatigue, mid-week improvement cycles, and patient response rhythms. Clinicians gain the headline ('therapy works') but miss the deeper story ('when patients respond best').",
+      "questions": [
+        {
+          "question": "What is the main limitation of using simple moving average instead of STL for music therapy outcome analysis?",
+          "options": [
+            "Moving average cannot detect downward trends",
+            "Moving average smooths away information about weekly patient response patterns",
+            "Moving average requires significantly more computational resources",
+            "Moving average only works reliably on linear data shapes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Moving average detects trends effectively.",
+            "Correct! Over-smoothing hides cyclical behavior and weekly response patterns.",
+            "Incorrect. Moving average is actually computationally simpler than STL.",
+            "Incorrect. Moving average works on any shape trend, linear or nonlinear."
+          ],
+          "explanation": "While moving averages effectively denoise time series, they trade granularity for simplicity. For music therapy analysis, losing weekly pattern information limits clinical insight into therapy optimization."
+        },
+        {
+          "question": "If you used moving average and saw overall tremor decline but missed the weekly pattern, what clinical opportunity would you overlook?",
+          "options": [
+            "You would incorrectly believe the patient was cured",
+            "You would fail to notice patients experience worse tremors early-week and improve mid-week",
+            "You would be unable to measure the patient's chronological age",
+            "You would not detect equipment calibration drift"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Overall trends are still visible with moving average.",
+            "Correct! Missing weekly patterns prevents optimization of therapy session timing and intensity.",
+            "Incorrect. Time series analysis doesn't measure patient age directly.",
+            "Incorrect. Equipment issues are detected through different quality control methods."
+          ],
+          "explanation": "Identifying weekly response patterns helps clinicians schedule sessions strategically and adjust treatment intensity based on observed patient rhythms."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Good Work\u2014But Missing Deeper Insights",
+      "content": "Your moving average analysis successfully confirmed that tremor amplitude declined over 8 weeks, validating therapy efficacy. However, by not decomposing the weekly pattern, you've provided clinicians the headline ('therapy works') without the full story ('patients respond in predictable cycles'). For comprehensive music therapy optimization, STL decomposition would be the logical next step to reveal patient-specific response rhythms."
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Time Series Pattern Recognition Through Visualization",
+      "content": "Skilled analysts learn to read time series charts directly without formal decomposition. A well-plotted line graph reveals trends (slope direction), cycles (repeating humps and dips), and anomalies (sudden spikes) at a glance. In music therapy, plotting tremor amplitude over 8 weeks with therapy session markers highlighted lets clinicians visually confirm: Is there persistent downward slope? Do tremors spike on specific days? Are patterns consistent? Visual analysis is fast, intuitive, and often precedes or complements statistical methods.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "example",
+      "title": "Reading the Tremor Chart: Visual Case Study",
+      "content": "Plot Week 1\u20138 tremor data with red vertical lines marking therapy days (Fridays). The chart immediately reveals: (1) Clear downward slope from upper-left to lower-right across the 8-week period. (2) Sawtooth oscillation: each week starts slightly elevated (Monday post-therapy fatigue response) and dips mid-week (patient adaptation). (3) The entire sawtooth pattern shifts progressively lower as weeks advance, showing trend improvement. (4) No sudden spikes, gaps, or anomalies\u2014data is clean. Clinicians instantly recognize: 'Therapy is working, patients show predictable weekly response cycles, treatment is stable.' This visual insight often precedes formal statistical analysis.",
+      "next": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "assessment",
+      "title": "Visual Pattern Interpretation",
+      "content": "You're examining a tremor time-series chart spanning 8 weeks. The shape shows consistent downward slope from start to finish. Within each week, there's a small repeating oscillation: elevated tremor values early week, improvement mid-week, then slight elevation again approaching the next Friday session.",
+      "questions": [
+        {
+          "question": "What does the consistent downward slope in the tremor chart most directly tell you?",
+          "options": [
+            "The patient is experiencing disease progression",
+            "The therapeutic intervention is producing measurable improvement in tremor amplitude",
+            "The measurement device is malfunctioning",
+            "Tremor changes are random and unpredictable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A downward slope means lower values, which for tremor indicates improvement.",
+            "Correct! A downward trend in tremor amplitude demonstrates real therapeutic progress over time.",
+            "Incorrect. Malfunctioning devices show jagged patterns or missing data, not smooth slopes.",
+            "Incorrect. A clear directional slope indicates pattern, not randomness."
+          ],
+          "explanation": "In time series analysis, trend direction is fundamental. For tremor data, downward slope means reduced involuntary movement\u2014the core goal of music therapy."
+        },
+        {
+          "question": "The tremor data shows a repeating oscillation every 7 days. What does this weekly pattern most likely indicate?",
+          "options": [
+            "The patient is inconsistent about therapy attendance",
+            "Therapy sessions create predictable impacts on the patient's tremor cycle",
+            "The measuring device recalibrates automatically weekly",
+            "Time series analysis is too unreliable for clinical use"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Cyclical patterns reflect process structure, not patient dishonesty.",
+            "Correct! Weekly oscillations directly reflect the patient's response rhythm to regular therapy sessions.",
+            "Incorrect. Equipment recalibration would appear as jumps or discontinuities, not smooth cycles.",
+            "Incorrect. Detecting and interpreting cycles is precisely what time series analysis does well."
+          ],
+          "explanation": "Seasonality in time series typically reflects the underlying process structure. Here, the weekly pattern mirrors the therapy schedule and patient's physiological response rhythm."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n13",
+      "failure_target": "n13"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Excellent Visual Time Series Interpretation!",
+      "content": "You've demonstrated the core skill of rapid time series analysis: identifying trend, seasonality, and stability directly from a chart. Your observation that tremor improves over 8 weeks while showing predictable weekly cycles gives clinicians actionable insights into therapy effectiveness and optimal response windows. This visual-first approach is often the clinician's entry point to outcome assessment and pairs powerfully with statistical decomposition for comprehensive analysis."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Statistical approach"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n10",
+      "label": "Visual approach"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "STL decomposition"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n8",
+      "label": "Moving average"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n11",
+      "target": "n12",
+      "label": null
+    },
+    {
+      "id": "c12",
+      "source": "n12",
+      "target": "n13",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T10:40:02.098888+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Course Player</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --border: #2e3347;
+      --text: #e8eaf0;
+      --muted: #7b82a0;
+      --accent: #5b7cf6;
+      --accent2: #8b5cf6;
+      --success: #22c55e;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+      --radius: 12px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 { font-size: 1rem; font-weight: 600; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .hud { display: flex; gap: 16px; font-size: 0.8rem; color: var(--muted); flex-shrink: 0; }
+    .hud span { display: flex; align-items: center; gap: 4px; }
+
+    /* ── Progress bar ── */
+    #progress-bar {
+      height: 3px;
+      background: var(--border);
+      position: sticky;
+      top: 53px;
+      z-index: 9;
+    }
+    #progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    /* ── Main ── */
+    main {
+      flex: 1;
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 16px 120px;
+    }
+
+    /* ── Node card ── */
+    .node-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      animation: slideInRight 0.28s cubic-bezier(0.22,1,0.36,1);
+    }
+    .node-card.slide-back {
+      animation: slideInLeft 0.28s cubic-bezier(0.22,1,0.36,1);
+    }
+    @keyframes slideInRight { from { opacity:0; transform:translateX(32px) scale(0.98); } to { opacity:1; transform:translateX(0) scale(1); } }
+    @keyframes slideInLeft  { from { opacity:0; transform:translateX(-32px) scale(0.98); } to { opacity:1; transform:translateX(0) scale(1); } }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── Toast ── */
+    #toast-container {
+      position: fixed;
+      top: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 8px 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      animation: toastIn 0.3s cubic-bezier(0.22,1,0.36,1) forwards;
+      white-space: nowrap;
+    }
+    .toast.hide { animation: toastOut 0.3s ease forwards; }
+    @keyframes toastIn  { from { opacity:0; transform:translateY(-16px) scale(0.92); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes toastOut { from { opacity:1; transform:translateY(0) scale(1); } to { opacity:0; transform:translateY(-12px) scale(0.92); } }
+
+    /* ── Keyboard hint badges ── */
+    .kbd-hint {
+      font-size: 0.65rem;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: monospace;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    /* ── Reading time pill ── */
+    .read-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .node-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+    }
+    .badge-content   { background: #1e3a5f; color: #60a5fa; }
+    .badge-example   { background: #2a3a1e; color: #a3e635; }
+    .badge-decision  { background: #2d1e5f; color: #a78bfa; }
+    .badge-assessment{ background: #1e4a2e; color: #4ade80; }
+    .badge-practice  { background: #3a2a1e; color: #fdba74; }
+    .badge-random    { background: #3d2a1e; color: #fb923c; }
+    .badge-weighted  { background: #3d2a1e; color: #fbbf24; }
+    .badge-condition { background: #1e3a3a; color: #22d3ee; }
+    .badge-gate      { background: #3d1e1e; color: #f87171; }
+    .badge-end       { background: #1e3d1e; color: #4ade80; }
+
+    .node-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    /* ── Markdown content ── */
+    .node-content {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #c8ccd8;
+    }
+    .node-content h1,.node-content h2,.node-content h3 { color: var(--text); margin: 16px 0 8px; }
+    .node-content p { margin-bottom: 12px; }
+    .node-content ul,.node-content ol { margin: 8px 0 12px 20px; }
+    .node-content code { background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    .node-content blockquote { border-left: 3px solid var(--accent); padding-left: 12px; color: var(--muted); margin: 12px 0; }
+    .node-content strong { color: var(--text); }
+
+    /* ── Choices ── */
+    .choices { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .choice-btn {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      color: var(--text);
+      font-size: 0.95rem;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .choice-btn:hover, .choice-btn:focus {
+      border-color: var(--accent);
+      background: #1d2440;
+      outline: none;
+    }
+    .choice-btn:active { transform: scale(0.98); }
+    .choice-btn .choice-letter {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+    .choice-btn.selected {
+      border-color: var(--accent2);
+      background: #1d1840;
+    }
+    .choice-btn.correct { border-color: var(--success); background: #0f2a1a; }
+    .choice-btn.incorrect { border-color: var(--danger); background: #2a0f0f; }
+
+    /* ── Assessment quiz ── */
+    .quiz-question {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .quiz-q-text { font-weight: 600; margin-bottom: 12px; }
+    .quiz-options { display: flex; flex-direction: column; gap: 7px; }
+    .quiz-option {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-size: 0.9rem;
+      display: flex; gap: 8px; align-items: flex-start;
+    }
+    .quiz-option:hover { border-color: var(--accent); }
+    .quiz-option.selected { border-color: var(--accent2); }
+    .quiz-option.correct { border-color: var(--success); background: #0f2a1a; }
+    .quiz-option.incorrect { border-color: var(--danger); background: #2a0f0f; }
+    .quiz-result { margin-top: 14px; padding: 12px; border-radius: 8px; font-weight: 600; text-align: center; }
+
+    /* ── Gate/Condition display ── */
+    .info-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 16px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .info-box code { color: var(--warn); }
+
+    /* ── Next/action buttons ── */
+    .action-row {
+      margin-top: 24px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      flex: 1;
+      min-width: 120px;
+      text-align: center;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── History breadcrumbs ── */
+    .breadcrumb {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center;
+    }
+    .bc-sep { color: var(--border); }
+
+    /* ── End screen ── */
+    .end-screen { text-align: center; padding: 32px 16px; }
+    .end-screen .trophy { font-size: 4rem; margin-bottom: 16px; }
+    .end-screen h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; }
+    .end-screen p { color: var(--muted); margin-bottom: 24px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+    .stat-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    .stat-val { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── File drop zone (landing) ── */
+    #landing {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+      text-align: center;
+      gap: 20px;
+    }
+    #landing h2 { font-size: 1.5rem; font-weight: 700; }
+    #landing p { color: var(--muted); max-width: 360px; }
+    .drop-zone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 48px 32px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      max-width: 400px;
+      width: 100%;
+    }
+    .drop-zone:hover, .drop-zone.drag-over { border-color: var(--accent); background: #1a1e2e; }
+    .drop-zone .icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .drop-zone label { cursor: pointer; color: var(--accent); }
+    #file-input { display: none; }
+
+    /* ── Scrollback history panel ── */
+    #history-panel {
+      position: fixed;
+      right: 0; top: 0; bottom: 0;
+      width: 280px;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      z-index: 20;
+      overflow-y: auto;
+      padding: 16px;
+    }
+    #history-panel.open { transform: translateX(0); }
+    #history-panel h3 { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .hist-item { font-size: 0.8rem; padding: 8px 10px; border-radius: 8px; margin-bottom: 6px; border-left: 3px solid var(--border); color: var(--muted); }
+    .hist-item.current { border-color: var(--accent); color: var(--text); background: var(--surface2); }
+
+    /* ── Floating controls ── */
+    #fab-area {
+      position: fixed;
+      bottom: 24px;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 15;
+    }
+    .fab {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      transition: transform 0.15s;
+    }
+    .fab:active { transform: scale(0.92); }
+    .fab-history { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+    .fab-restart { background: #2a1010; color: var(--danger); border: 1px solid #3d1515; }
+
+    /* ── Attributes HUD ── */
+    .attr-bar {
+      display: flex;
+      gap: 10px;
+      padding: 6px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      flex-wrap: wrap;
+    }
+    .attr-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      white-space: nowrap;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .attr-pill.flash-up {
+      animation: attrUp 0.6s ease;
+    }
+    .attr-pill.flash-down {
+      animation: attrDown 0.6s ease;
+    }
+    @keyframes attrUp {
+      0% { transform: scale(1); box-shadow: none; }
+      50% { transform: scale(1.15); box-shadow: 0 0 12px rgba(34,197,94,0.5); border-color: var(--success); }
+      100% { transform: scale(1); box-shadow: none; }
+    }
+    @keyframes attrDown {
+      0% { transform: scale(1); box-shadow: none; }
+      50% { transform: scale(1.15); box-shadow: 0 0 12px rgba(239,68,68,0.5); border-color: var(--danger); }
+      100% { transform: scale(1); box-shadow: none; }
+    }
+    .attr-icon { font-size: 0.85rem; }
+    .attr-name { color: var(--muted); text-transform: capitalize; }
+    .attr-val { font-weight: 700; color: var(--text); }
+    .attr-delta {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 4px;
+      animation: fadeIn 0.3s;
+    }
+    .attr-delta.positive { color: var(--success); background: #0f2a1a; }
+    .attr-delta.negative { color: var(--danger); background: #2a0f0f; }
+
+    /* ── Attribute effects notification ── */
+    .attr-effects-box {
+      background: linear-gradient(135deg, #1a2a1e 0%, #1a1e2a 100%);
+      border: 1px solid #2a4a3a;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .attr-effects-box .label { font-size: 0.75rem; color: var(--muted); margin-right: 4px; }
+    .attr-chip {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .attr-chip.positive { background: #0f2a1a; color: #4ade80; border: 1px solid #1a4a2a; }
+    .attr-chip.negative { background: #2a0f0f; color: #f87171; border: 1px solid #4a1a1a; }
+
+    /* ── Variable display ── */
+    .var-set-box {
+      background: #1a1e30;
+      border: 1px solid #2e3a5a;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .var-set-box code { color: var(--warn); }
+
+    /* ── Responsive ── */
+    @media (min-width: 480px) {
+      main { padding: 32px 24px 100px; }
+      .node-title { font-size: 1.6rem; }
+    }
+
+    /* ── Ripple effect ── */
+    .btn, .choice-btn { position: relative; overflow: hidden; }
+    .ripple-wave {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      background: rgba(255,255,255,0.22);
+      transform: scale(0);
+      animation: rippleGrow 0.55s ease-out forwards;
+    }
+    @keyframes rippleGrow { to { transform: scale(4); opacity: 0; } }
+
+    /* ── Streak badge ── */
+    .streak-badge {
+      display: inline-flex; align-items: center; gap: 3px;
+      font-size: 0.78rem; font-weight: 700;
+      padding: 2px 9px; border-radius: 12px;
+      background: linear-gradient(135deg, #7c2d12, #ea580c);
+      color: #fef3c7;
+      animation: streakPulse 0.4s ease;
+    }
+    @keyframes streakPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.18)} }
+
+    /* ── Staggered card cascade ── */
+    .cascade-child {
+      animation: cascadeIn 0.36s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes cascadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+
+    /* ── Trophy bounce on end screen ── */
+    .trophy-anim { display: inline-block; animation: trophyBounce 0.8s cubic-bezier(0.36,0.07,0.19,0.97) both; }
+    @keyframes trophyBounce {
+      0%  { transform: translateY(0) scale(0.5); opacity: 0; }
+      40% { transform: translateY(-28px) scale(1.2); opacity: 1; }
+      60% { transform: translateY(-14px) scale(1.05); }
+      80% { transform: translateY(-22px) scale(1.12); }
+      100%{ transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    /* ── Stat cards stagger in on end screen ── */
+    .stat-card { opacity: 0; animation: statSlideUp 0.4s cubic-bezier(0.22,1,0.36,1) forwards; }
+    .stat-card:nth-child(1) { animation-delay: 0.2s; }
+    .stat-card:nth-child(2) { animation-delay: 0.32s; }
+    .stat-card:nth-child(3) { animation-delay: 0.44s; }
+    .stat-card:nth-child(4) { animation-delay: 0.56s; }
+    @keyframes statSlideUp { from { opacity:0; transform:translateY(22px) scale(0.93); } to { opacity:1; transform:none; } }
+
+    /* ── End screen gradient glow ── */
+    .end-screen {
+      background: radial-gradient(ellipse at 50% 0%, rgba(91,124,246,0.12) 0%, transparent 65%),
+                  radial-gradient(ellipse at 80% 80%, rgba(139,92,246,0.1) 0%, transparent 50%),
+                  var(--surface);
+    }
+
+    /* ── Particle canvas on landing ── */
+    #particle-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+    #landing { position: relative; }
+    #landing > *:not(#particle-canvas) { position: relative; z-index: 1; }
+
+    /* ── Correct/incorrect flash on quiz options ── */
+    .quiz-option.correct  { animation: flashGreen 0.5s ease; }
+    .quiz-option.incorrect{ animation: flashRed 0.5s ease; }
+    @keyframes flashGreen { 0%,100%{} 30%{ box-shadow: 0 0 18px rgba(34,197,94,0.6); } }
+    @keyframes flashRed   { 0%,100%{} 30%{ box-shadow: 0 0 18px rgba(239,68,68,0.6); } }
+
+    /* ── Pulsing glow on continue btn ── */
+    .btn-primary.pulse-glow { animation: btnGlow 1.4s ease-in-out infinite; }
+    @keyframes btnGlow {
+      0%,100% { box-shadow: 0 0 0 0 rgba(91,124,246,0); }
+      50% { box-shadow: 0 0 0 6px rgba(91,124,246,0.25); }
+    }
+  </style>
+  <!-- Supabase JS Client (enhancement layer - does not break existing functionality) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = window.__SUPABASE_URL || 'YOUR_SUPABASE_URL';
+    const SUPABASE_ANON_KEY = window.__SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
+    let supabaseClient = null;
+    try {
+      if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+        supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch(e) { console.warn('Supabase client not initialized:', e.message); }
+  </script>
+</head>
+<body>
+
+<!-- LANDING / FILE PICKER -->
+<div id="landing">
+  <canvas id="particle-canvas"></canvas>
+  <div>
+    <div style="font-size:3rem;margin-bottom:12px;">🎓</div>
+    <h2>Course Player</h2>
+    <p>Browse AI-generated courses or upload your own.</p>
+  </div>
+
+  <!-- Featured Showcase -->
+  <div id="showcase-banner" style="width:100%;max-width:600px;margin:0 auto 16px;display:none;">
+    <div onclick="playCourse('showcase-master')" style="cursor:pointer;background:linear-gradient(135deg,#1a1040 0%,#0f2a3a 50%,#1a2a1e 100%);border:1.5px solid #7c3aed;border-radius:14px;padding:18px 20px;transition:transform .15s,box-shadow .15s;" onmouseover="this.style.transform='scale(1.01)';this.style.boxShadow='0 4px 24px rgba(124,58,237,0.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+        <span style="font-size:0.65rem;background:#7c3aed;color:#fff;padding:2px 8px;border-radius:4px;font-weight:700;letter-spacing:.05em;">⭐ FEATURED SHOWCASE</span>
+      </div>
+      <div style="font-weight:700;font-size:1.05rem;margin-bottom:4px;">The Science of Decision Making</div>
+      <div style="font-size:0.8rem;color:var(--muted);margin-bottom:8px;">A complete interactive experience demonstrating every feature — decisions, randomness, weighted outcomes, gates, conditions, attributes, assessments, and multiple endings.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span style="font-size:0.65rem;background:#1e3a5f;border:1px solid #3b82f6;border-radius:4px;padding:2px 6px;color:#60a5fa">🧠 25 nodes</span>
+        <span style="font-size:0.65rem;background:#2a3a1e;border:1px solid #65a30d;border-radius:4px;padding:2px 6px;color:#a3e635">🎲 Random events</span>
+        <span style="font-size:0.65rem;background:#3d2a1e;border:1px solid #d97706;border-radius:4px;padding:2px 6px;color:#fbbf24">⚖️ Weighted outcomes</span>
+        <span style="font-size:0.65rem;background:#3d1e1e;border:1px solid #dc2626;border-radius:4px;padding:2px 6px;color:#f87171">🚧 Gates</span>
+        <span style="font-size:0.65rem;background:#1e3a3a;border:1px solid #0891b2;border-radius:4px;padding:2px 6px;color:#22d3ee">⚡ Conditions</span>
+        <span style="font-size:0.65rem;background:#2d1e5f;border:1px solid #7c3aed;border-radius:4px;padding:2px 6px;color:#a78bfa">📊 6 attributes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Catalog Browser -->
+  <div id="catalog-section" style="width:100%;max-width:600px;margin:0 auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <span style="font-size:0.85rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Course Library</span>
+      <button class="btn btn-primary" onclick="loadRandomCourse()" style="font-size:0.8rem;padding:6px 14px;">🎲 Random</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <input id="catalog-search" type="search" placeholder="Search courses..." style="flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 12px;font-size:0.85rem;outline:none;" oninput="filterCatalog()">
+      <select id="catalog-theme-filter" onchange="filterCatalog()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 10px;font-size:0.85rem;outline:none;">
+        <option value="">All themes</option>
+        <option value="__none__">No theme</option>
+      </select>
+      <select id="catalog-filter" onchange="filterCatalog()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 10px;font-size:0.85rem;outline:none;">
+        <option value="">All levels</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+    </div>
+    <div id="catalog-list" style="display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;padding-right:4px;">
+      <div style="text-align:center;color:var(--muted);padding:24px;font-size:0.85rem;">Loading courses...</div>
+    </div>
+    <div id="catalog-status" style="text-align:center;font-size:0.75rem;color:var(--muted);margin-top:8px;"></div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:12px;width:100%;max-width:600px;margin:16px auto 0;">
+    <div style="flex:1;height:1px;background:var(--border)"></div>
+    <span style="font-size:0.75rem;color:var(--muted)">or upload your own</span>
+    <div style="flex:1;height:1px;background:var(--border)"></div>
+  </div>
+
+  <div class="drop-zone" id="drop-zone">
+    <div class="icon">📂</div>
+    <div>Drop course JSON here<br>or <label for="file-input">browse to open</label></div>
+    <input type="file" id="file-input" accept=".json,.yaml,.yml">
+  </div>
+  <p style="font-size:0.8rem; color:var(--muted)">Or paste a course URL in the address bar as <code>?url=…</code></p>
+</div>
+
+<!-- PLAYER (hidden until course loaded) -->
+<div id="player" style="display:none; flex-direction:column; min-height:100dvh;">
+  <header>
+    <a href="index.html" style="color:var(--muted);font-size:0.85rem;padding:4px 8px;border-radius:6px;flex-shrink:0;text-decoration:none;" title="Home">🏠</a>
+    <button onclick="showLanding()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;padding:4px;border-radius:6px;flex-shrink:0;" title="Back to catalog">←</button>
+    <div id="hdr-icon" style="font-size:1.2rem">🎓</div>
+    <h1 id="hdr-title">Course</h1>
+    <div class="hud">
+      <span>⭐ <span id="hud-score">0</span></span>
+      <span>❓ <span id="hud-node">0</span> answered</span>
+      <span id="hud-streak" style="display:none;"></span>
+    </div>
+  </header>
+  <div id="progress-bar"><div id="progress-fill"></div></div>
+  <div class="attr-bar" id="attr-bar" style="display:none;"></div>
+  <main id="main-content"></main>
+</div>
+
+<!-- History side panel -->
+<div id="history-panel">
+  <h3>History</h3>
+  <div id="hist-list"></div>
+</div>
+<div id="hist-overlay" onclick="closeHistory()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:19;"></div>
+
+<!-- FABs -->
+<div id="fab-area" style="display:none;">
+  <button class="fab fab-history" onclick="toggleHistory()" title="History">📋</button>
+  <button class="fab fab-restart" onclick="confirmRestart()" title="Restart">🔄</button>
+</div>
+
+<!-- Toast container -->
+<div id="toast-container"></div>
+
+<script>
+// ── Globals ─────────────────────────────────────────────────────────────────
+let course = null;
+let nodeMap = {};
+let connMap = {}; // from node id → [connections]
+let state = {
+  nodeId: null,
+  score: 0,
+  history: [],      // [{id, title}]
+  vars: {},         // learner variables
+  attrs: {},        // learner attributes (knowledge, confidence, etc.)
+  visited: new Set(),
+  quizAnswers: {},  // nodeId → {idx, correct}
+};
+
+const ATTR_ICONS = {
+  knowledge: '📚', confidence: '💪', experience: '⭐', skill_level: '🎯',
+  creativity: '🎨', critical_thinking: '🧠', intuition: '🔮', wisdom: '🦉',
+  speed: '⚡', accuracy: '🎯', research: '🔬', practical: '🔧',
+  communication: '💬', leadership: '👑', teamwork: '🤝', default: '📊'
+};
+
+// ── Utilities ────────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+
+function md(text) {
+  if (!text) return '';
+  return marked.parse(text, { breaks: true });
+}
+
+// ── Toast notifications ───────────────────────────────────────────────────────
+function showToast(msg, duration = 2800) {
+  const tc = $('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  tc.appendChild(t);
+  setTimeout(() => {
+    t.classList.add('hide');
+    setTimeout(() => t.remove(), 350);
+  }, duration);
+}
+
+// ── Milestone tracking ────────────────────────────────────────────────────────
+let milestonesShown = new Set();
+function checkMilestone(pct) {
+  const marks = [
+    [25,  '🔥 25% done — keep it up!'],
+    [50,  '⚡ Halfway there — great progress!'],
+    [75,  '🚀 75%! Almost at the finish line!'],
+  ];
+  for (const [m, msg] of marks) {
+    if (pct >= m && !milestonesShown.has(m)) {
+      milestonesShown.add(m);
+      showToast(msg, 3200);
+      if (typeof SFX !== 'undefined') SFX.milestone();
+    }
+  }
+}
+
+// ── Confetti burst ────────────────────────────────────────────────────────────
+function launchConfetti() {
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+
+  const COLORS = ['#5b7cf6','#8b5cf6','#22c55e','#f59e0b','#ef4444','#06b6d4','#f43f5e','#a3e635'];
+  const particles = Array.from({length: 100}, () => ({
+    x: Math.random() * canvas.width,
+    y: canvas.height * 0.3 + Math.random() * -canvas.height,
+    w: 8 + Math.random() * 10,
+    h: 4 + Math.random() * 6,
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    rot: Math.random() * Math.PI * 2,
+    vx: (Math.random() - 0.5) * 5,
+    vy: 1.5 + Math.random() * 4.5,
+    vr: (Math.random() - 0.5) * 0.14,
+    alpha: 1
+  }));
+
+  let frame = 0;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.vr;
+      if (frame > 120) p.alpha = Math.max(0, p.alpha - 0.015);
+    });
+    frame++;
+    if (frame < 210) requestAnimationFrame(draw);
+    else canvas.remove();
+  }
+  requestAnimationFrame(draw);
+}
+
+// ── Animated counter ──────────────────────────────────────────────────────────
+function animateCounter(el, target, duration = 900) {
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / duration);
+    const ease = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    el.textContent = Math.round(ease * target);
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// ── Reading time ──────────────────────────────────────────────────────────────
+function readingTime(text) {
+  if (!text) return '';
+  const words = text.replace(/<[^>]+>/g, '').split(/\s+/).filter(Boolean).length;
+  const mins = Math.max(1, Math.round(words / 200));
+  return `⏱ ${mins} min read`;
+}
+
+function getConns(nodeId) {
+  return connMap[nodeId] || [];
+}
+
+function evalCondition(expr) {
+  // Safe-ish eval with vars + attrs in scope
+  try {
+    const allVars = { ...state.vars, ...state.attrs, score: state.score,
+      completed_modules: state.history.filter(h => nodeMap[h.id]?.type === 'content').length,
+      attempts: state.visited.size,
+      questions_answered: state.questionsAnswered || 0 };
+    // eslint-disable-next-line no-new-func
+    return !!(new Function(...Object.keys(allVars), `return !!(${expr})`)(...Object.values(allVars)));
+  } catch { return false; }
+}
+
+function applyNodeEffects(node) {
+  const deltas = {};
+  // Apply attribute_effects
+  if (node.attribute_effects) {
+    for (const [attr, delta] of Object.entries(node.attribute_effects)) {
+      const numDelta = Number(delta) || 0;
+      if (numDelta === 0) continue;
+      state.attrs[attr] = (state.attrs[attr] || 0) + numDelta;
+      deltas[attr] = numDelta;
+    }
+  }
+  // Apply set_variables
+  if (node.set_variables) {
+    for (const [k, v] of Object.entries(node.set_variables)) {
+      state.vars[k] = v;
+    }
+  }
+  return deltas;
+}
+
+function renderAttrBar(deltas) {
+  const bar = $('attr-bar');
+  if (Object.keys(state.attrs).length === 0) { bar.style.display = 'none'; return; }
+  bar.style.display = 'flex';
+  bar.innerHTML = Object.entries(state.attrs).map(([attr, val]) => {
+    const icon = ATTR_ICONS[attr] || ATTR_ICONS.default;
+    const delta = deltas?.[attr];
+    const flashClass = delta > 0 ? 'flash-up' : delta < 0 ? 'flash-down' : '';
+    const deltaHtml = delta ? `<span class="attr-delta ${delta > 0 ? 'positive' : 'negative'}">${delta > 0 ? '+' : ''}${delta}</span>` : '';
+    return `<div class="attr-pill ${flashClass}">
+      <span class="attr-icon">${icon}</span>
+      <span class="attr-name">${attr.replace(/_/g, ' ')}</span>
+      <span class="attr-val">${val}</span>
+      ${deltaHtml}
+    </div>`;
+  }).join('');
+}
+
+function buildAttrEffectsHtml(node) {
+  if (!node.attribute_effects || Object.keys(node.attribute_effects).length === 0) return '';
+  const chips = Object.entries(node.attribute_effects).map(([attr, delta]) => {
+    const num = Number(delta) || 0;
+    if (num === 0) return '';
+    const icon = ATTR_ICONS[attr] || ATTR_ICONS.default;
+    return `<span class="attr-chip ${num > 0 ? 'positive' : 'negative'}">${icon} ${attr.replace(/_/g, ' ')} ${num > 0 ? '+' : ''}${num}</span>`;
+  }).filter(Boolean).join('');
+  if (!chips) return '';
+  return `<div class="attr-effects-box"><span class="label">Effects:</span>${chips}</div>`;
+}
+
+// ── Landing ────────────────────────────────────────────────────────────────────
+function showLanding() {
+  $('player').style.display = 'none';
+  $('fab-area').style.display = 'none';
+  $('attr-bar').style.display = 'none';
+  $('landing').style.display = '';
+  fetchCatalog();
+}
+
+// ── Course loading ────────────────────────────────────────────────────────────
+function loadCourse(data) {
+  course = data;
+
+  nodeMap = {};
+  connMap = {};
+
+  // Support both formats: {nodes, connections} (editor export) or {nodes} with next fields (sample_course.json)
+  const nodes = data.nodes || [];
+  const connections = data.connections || [];
+
+  nodes.forEach(n => { nodeMap[n.id] = n; });
+
+  if (connections.length > 0) {
+    // Editor/generated format: supports both {from,to} and {source,target}
+    connections.forEach(c => {
+      const fromKey = c.from || c.source;
+      const toKey   = c.to   || c.target;
+      if (!fromKey) return;
+      if (!connMap[fromKey]) connMap[fromKey] = [];
+      connMap[fromKey].push({ ...c, from: fromKey, to: toKey });
+    });
+  } else {
+    // Legacy format: build connections from node.next / node.options
+    nodes.forEach(n => {
+      connMap[n.id] = [];
+      if (n.next) {
+        connMap[n.id].push({ from: n.id, to: n.next, type: 'default' });
+      }
+      if (n.options) {
+        n.options.forEach(opt => {
+          connMap[n.id].push({ from: n.id, to: opt.next, type: 'default', label: opt.label, score: opt.score });
+        });
+      }
+    });
+  }
+
+  // Find start node
+  const start = nodes.find(n => n.type === 'start' || n.subtype === 'start') || nodes[0];
+  if (!start) { alert('No start node found.'); return; }
+
+  // Initialize attributes from course definition if provided
+  const initAttrs = {};
+  if (data.attributes && Array.isArray(data.attributes)) {
+    data.attributes.forEach(a => { initAttrs[a.id || a.name] = a.default || 0; });
+  }
+
+  state = { nodeId: start.id, score: 0, history: [], vars: {}, attrs: initAttrs, visited: new Set(), quizAnswers: {}, questionsAnswered: 0, streak: 0, maxStreak: 0 };
+  milestonesShown = new Set(); // reset milestone tracking for new course
+
+  // Reset attr bar — show immediately if course defines attributes
+  if (Object.keys(initAttrs).length > 0) {
+    renderAttrBar({});
+  } else {
+    $('attr-bar').style.display = 'none';
+    $('attr-bar').innerHTML = '';
+  }
+
+  // Show player
+  $('landing').style.display = 'none';
+  const p = $('player');
+  p.style.display = 'flex';
+  $('fab-area').style.display = 'flex';
+
+  const title = data.course?.title || data.title || 'Course';
+  $('hdr-title').textContent = title;
+  document.title = title;
+
+  goTo(start.id);
+}
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+function goTo(nodeId) {
+  const node = nodeMap[nodeId];
+  if (!node) { showError(`Node "${nodeId}" not found.`); return; }
+
+  state.nodeId = nodeId;
+  state.visited.add(nodeId);
+  state.history.push({ id: nodeId, title: node.title || nodeId });
+
+  // Apply attribute effects and variable changes
+  const deltas = applyNodeEffects(node);
+
+  updateHUD(node);
+  renderAttrBar(deltas);
+  renderHistory();
+  renderNode(node);
+}
+
+function advance(nodeId) {
+  if (!nodeId) return;
+  if (typeof SFX !== 'undefined') SFX.advance();
+  setTimeout(() => goTo(nodeId), 80); // brief delay for animation
+}
+
+function updateHUD(node) {
+  $('hud-score').textContent = state.score;
+  $('hud-node').textContent = state.questionsAnswered || 0;
+
+  // Progress: track visited nodes vs total
+  const totalNodes = Object.keys(nodeMap).length;
+  const pct = Math.min(99, Math.round((state.visited.size / totalNodes) * 100));
+  $('progress-fill').style.width = pct + '%';
+
+  // Milestone celebrations
+  checkMilestone(pct);
+}
+
+// ── Rendering ─────────────────────────────────────────────────────────────────
+function renderNode(node) {
+  const el = $('main-content');
+  el.innerHTML = '';
+
+  const conns = getConns(node.id);
+
+  switch (node.type) {
+    case 'start':
+    case 'content':
+      el.innerHTML = buildContentCard(node, conns);
+      break;
+    case 'example':
+      el.innerHTML = buildExampleCard(node, conns);
+      break;
+    case 'decision':
+      el.innerHTML = buildDecisionCard(node, conns);
+      attachChoiceHandlers(el, node, conns);
+      break;
+    case 'assessment':
+    case 'practice':
+      el.innerHTML = buildAssessmentCard(node, conns);
+      attachAssessmentHandlers(el, node, conns);
+      break;
+    case 'random':
+      renderRandomNode(node, conns);
+      return;
+    case 'weighted':
+      renderWeightedNode(node, conns);
+      return;
+    case 'condition':
+      renderConditionNode(node, conns);
+      return;
+    case 'gate':
+      el.innerHTML = buildGateCard(node, conns);
+      attachGateHandler(el, node, conns);
+      break;
+    case 'end':
+      el.innerHTML = buildEndCard(node);
+      // Launch confetti and animate stat counters on course completion
+      requestAnimationFrame(() => {
+        launchConfetti();
+        el.querySelectorAll('.stat-val[data-target]').forEach(sv => {
+          const target = parseInt(sv.dataset.target) || 0;
+          const suffix = sv.dataset.suffix || '';
+          const start = performance.now();
+          const dur = 900;
+          function tick(now) {
+            const t = Math.min(1, (now - start) / dur);
+            const ease = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+            sv.textContent = Math.round(ease * target) + suffix;
+            if (t < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        });
+        showToast('🏆 Course complete! Well done!', 4000);
+        if (typeof SFX !== 'undefined') SFX.complete();
+      });
+      break;
+    default:
+      el.innerHTML = buildContentCard(node, conns);
+  }
+
+  // Cascade animate card children
+  requestAnimationFrame(() => {
+    const card = el.querySelector('.node-card');
+    if (card) cascadeCard(card);
+    // Add pulse glow to primary continue button
+    const nb = el.querySelector('#next-btn');
+    if (nb) setTimeout(() => nb.classList.add('pulse-glow'), 400);
+  });
+
+  // Auto-attach "Continue" for content/start/example nodes
+  if (node.type === 'content' || node.type === 'start' || node.type === 'example') {
+    const nextBtn = el.querySelector('#next-btn');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const target = conns.length === 1 ? conns[0].to : null;
+        advance(target);
+      });
+    }
+    // Handle multi-connection content nodes
+    el.querySelectorAll('.content-multi-btn').forEach(btn => {
+      btn.addEventListener('click', () => advance(btn.dataset.to));
+    });
+  }
+}
+
+// ── Badge ──────────────────────────────────────────────────────────────────────
+function badge(node) {
+  const map = {
+    start:      ['badge-content',    '🚀 Start'],
+    content:    ['badge-content',    '📖 Content'],
+    example:    ['badge-example',    '💡 Worked Example'],
+    decision:   ['badge-decision',   '🔀 Decision'],
+    assessment: ['badge-assessment', '📝 Check Understanding'],
+    practice:   ['badge-practice',   '🔁 Practice'],
+    random:     ['badge-random',     '🎲 Random'],
+    weighted:   ['badge-weighted',   '⚖️ Weighted'],
+    condition:  ['badge-condition',  '⚡ Condition'],
+    gate:       ['badge-gate',       '🚧 Gate'],
+    end:        ['badge-end',        '🏁 End'],
+  };
+  const [cls, label] = map[node.type] || ['badge-content', node.type];
+  return `<span class="node-type-badge ${cls}">${label}</span>`;
+}
+
+function breadcrumb() {
+  const hist = state.history;
+  const show = hist.slice(-3);
+  const parts = show.map((h, i) =>
+    i === show.length - 1
+      ? `<span style="color:var(--text)">${h.title}</span>`
+      : `<span>${h.title}</span>`
+  );
+  return `<div class="breadcrumb">${parts.join('<span class="bc-sep">›</span>')}</div>`;
+}
+
+// ── Content card ───────────────────────────────────────────────────────────────
+function buildContentCard(node, conns) {
+  const hasNext = conns.length === 1;
+  const rt = readingTime(node.content);
+  return `
+    <div class="node-card">
+      ${breadcrumb()}
+      ${badge(node)}
+      <div class="node-title">${node.title || ''}</div>
+      ${rt ? `<div class="read-time">${rt}</div>` : ''}
+      <div class="node-content">${md(node.content)}</div>
+      ${buildAttrEffectsHtml(node)}
+      ${hasNext ? `
+      <div class="action-row">
+        <button class="btn btn-primary" id="next-btn" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+          <span>Continue →</span><span class="kbd-hint">Space</span>
+        </button>
+      </div>` : conns.length === 0 ? '' : `
+      <div class="choices">
+        ${conns.map((c, i) => `<button class="choice-btn content-multi-btn" data-to="${c.to}"><span class="choice-letter">${'ABCDEFGHIJ'[i]||i+1}</span><span>${c.label || nodeMap[c.to]?.title || 'Option ' + (i+1)}</span></button>`).join('')}
+      </div>`}
+    </div>`;
+}
+
+// ── Example card ───────────────────────────────────────────────────────────────
+function buildExampleCard(node, conns) {
+  const hasNext = conns.length === 1;
+  return `
+    <div class="node-card" style="border-color:#3a4a2a;">
+      ${breadcrumb()}
+      ${badge(node)}
+      <div class="node-title">${node.title || ''}</div>
+      <div class="node-content">${md(node.content)}</div>
+      ${buildAttrEffectsHtml(node)}
+      ${hasNext ? `
+      <div class="action-row">
+        <button class="btn btn-primary" id="next-btn" style="background:#4a7c3f;">Got it — continue →</button>
+      </div>` : ''}
+    </div>`;
+}
+
+// ── Decision card ──────────────────────────────────────────────────────────────
+function buildDecisionCard(node, conns) {
+  // Options come from node.options/node.choices (legacy) or connections
+  const nodeOpts = node.options || node.choices;
+  const options = nodeOpts && nodeOpts.length > 0
+    ? nodeOpts.map((o, i) => ({ label: o.label, to: o.next, score: o.score || 0, idx: i }))
+    : conns.map((c, i) => ({ label: c.label || `Option ${i + 1}`, to: c.to, score: c.score || 0, idx: i }));
+
+  const letters = 'ABCDEFGHIJ';
+  const choices = options.map((o, i) => `
+    <button class="choice-btn" data-to="${o.to}" data-score="${o.score}" data-idx="${i}">
+      <span class="choice-letter">${letters[i] || i + 1}</span>
+      <span style="flex:1">${o.label}</span>
+      ${i < 9 ? `<span class="kbd-hint">${i + 1}</span>` : ''}
+    </button>`).join('');
+
+  return `
+    <div class="node-card">
+      ${breadcrumb()}
+      ${badge(node)}
+      <div class="node-title">${node.title || ''}</div>
+      <div class="node-content">${md(node.content)}</div>
+      <div class="choices">${choices}</div>
+    </div>`;
+}
+
+function attachChoiceHandlers(el, node, conns) {
+  el.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const to = btn.dataset.to;
+      const score = parseInt(btn.dataset.score) || 0;
+      state.score += score;
+      state.vars['last_choice'] = btn.dataset.idx;
+      if (score > 0) updateStreak(true);
+      else if (score < 0) updateStreak(false);
+      advance(to);
+    });
+  });
+}
+
+// ── Assessment card ────────────────────────────────────────────────────────────
+function buildAssessmentCard(node, conns) {
+  const questions = node.questions || [];
+  const isPractice = node.type === 'practice';
+
+  const qHtml = questions.map((q, qi) => {
+    // Options can be array of strings (new format with separate correct_index)
+    // or array of objects {text, correct}
+    const rawOpts = q.options || [];
+    const correctIdx = (typeof q.correct_index === 'number') ? q.correct_index : -1;
+    const feedback = q.feedback || [];
+
+    const opts = rawOpts.map((opt, oi) => {
+      const isCorrect = correctIdx >= 0 ? (oi === correctIdx) : (opt.correct === true);
+      const optText = typeof opt === 'string' ? opt : (opt.text || opt.label || String(opt));
+      const fb = feedback[oi] || '';
+      return `
+        <div class="quiz-option" data-qi="${qi}" data-oi="${oi}" data-correct="${isCorrect ? '1' : '0'}" data-fb="${encodeURIComponent(fb)}">
+          <span style="flex-shrink:0;color:var(--muted)">${'ABCDEFGHIJ'[oi]}.</span>
+          <span>${optText}</span>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="quiz-question" id="q-${qi}">
+        <div class="quiz-q-text">${qi + 1}. ${q.text || q.question || ''}</div>
+        <div class="quiz-options">${opts}</div>
+        <div class="quiz-result" id="qr-${qi}" style="display:none"></div>
+        <div class="quiz-explanation" id="qe-${qi}" style="display:none"></div>
+      </div>`;
+  }).join('');
+
+  const headerNote = isPractice
+    ? `<div style="background:#2a200a;border:1px solid #5a3a0a;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:0.85rem;color:#fdba74;">🔁 Let's look at this from a different angle — same concept, fresh perspective.</div>`
+    : '';
+
+  return `
+    <div class="node-card">
+      ${breadcrumb()}
+      ${badge(node)}
+      <div class="node-title">${node.title || ''}</div>
+      ${headerNote}
+      <div class="node-content">${md(node.content)}</div>
+      ${qHtml}
+      <div class="action-row">
+        <button class="btn btn-primary" id="submit-quiz-btn" disabled>Submit Answers</button>
+      </div>
+    </div>`;
+}
+
+function attachAssessmentHandlers(el, node, conns) {
+  const questions = node.questions || [];
+  const answers = {}; // qi → {oi, correct}
+
+  el.querySelectorAll('.quiz-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const qi = parseInt(opt.dataset.qi);
+      el.querySelectorAll(`.quiz-option[data-qi="${qi}"]`).forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      answers[qi] = { oi: parseInt(opt.dataset.oi), correct: opt.dataset.correct === '1' };
+      if (Object.keys(answers).length === questions.length) {
+        el.querySelector('#submit-quiz-btn').disabled = false;
+      }
+    });
+  });
+
+  el.querySelector('#submit-quiz-btn').addEventListener('click', () => {
+    let correct = 0;
+    questions.forEach((q, qi) => {
+      const ans = answers[qi];
+      if (!ans) return;
+      const isCorrect = ans.correct;
+      if (isCorrect) correct++;
+      updateStreak(isCorrect);
+      if (isCorrect) SFX && SFX.correct(); else SFX && SFX.incorrect();
+
+      // Mark chosen and show correct
+      el.querySelectorAll(`.quiz-option[data-qi="${qi}"]`).forEach(o => {
+        const oi = parseInt(o.dataset.oi);
+        if (oi === ans.oi) o.classList.add(isCorrect ? 'correct' : 'incorrect');
+        if (o.dataset.correct === '1' && !isCorrect) o.classList.add('correct');
+      });
+
+      // Show per-choice feedback for the chosen answer
+      const chosenOpt = el.querySelector(`.quiz-option[data-qi="${qi}"][data-oi="${ans.oi}"]`);
+      const chosenFb = chosenOpt ? decodeURIComponent(chosenOpt.dataset.fb || '') : '';
+
+      const qr = $(`qr-${qi}`);
+      if (qr) {
+        qr.style.display = '';
+        qr.style.background = isCorrect ? '#0f2a1a' : '#2a0f0f';
+        qr.style.color = isCorrect ? '#4ade80' : '#f87171';
+        qr.textContent = isCorrect ? '✓ Correct' : '✗ Incorrect';
+        if (chosenFb) qr.textContent += ' — ' + chosenFb;
+      }
+
+      // Show explanation
+      const explanation = q.explanation || '';
+      const qe = $(`qe-${qi}`);
+      if (qe && explanation) {
+        qe.style.display = '';
+        qe.style.background = '#1a1e30';
+        qe.style.border = '1px solid #2e3347';
+        qe.style.borderRadius = '8px';
+        qe.style.padding = '10px 14px';
+        qe.style.fontSize = '0.85rem';
+        qe.style.color = '#a0a8c0';
+        qe.style.marginTop = '8px';
+        qe.innerHTML = `<strong style="color:#7b8ac0">Explanation:</strong> ${explanation}`;
+      }
+    });
+
+    const pct = questions.length > 0 ? Math.round((correct / questions.length) * 100) : 0;
+    const threshold = node.pass_threshold != null ? node.pass_threshold * 100 : (node.passing_score || 70);
+    const passed = pct >= threshold;
+
+    state.score += correct;
+    state.vars['quiz_score'] = pct;
+    state.vars['quiz_passed'] = passed ? 1 : 0;
+    state.questionsAnswered = (state.questionsAnswered || 0) + questions.length;
+
+    el.querySelector('#submit-quiz-btn').textContent = `${correct}/${questions.length} correct`;
+    el.querySelector('#submit-quiz-btn').disabled = true;
+
+    // Result summary bar
+    const summary = document.createElement('div');
+    summary.style.cssText = `margin-top:16px;padding:14px;border-radius:10px;text-align:center;font-weight:600;background:${passed?'#0f2a1a':'#1a1018'};border:1px solid ${passed?'#22c55e':'#6b21a8'};color:${passed?'#4ade80':'#c084fc'};`;
+    summary.textContent = passed
+      ? `✓ Solid understanding — moving forward`
+      : `📖 Let's explore this from another angle`;
+    el.querySelector('.action-row').before(summary);
+
+    // Determine target — prefer node fields, fall back to connections
+    const successConn = conns.find(c => c.label && c.label.toLowerCase().includes('pass')) || conns[0];
+    const failConn = conns.find(c => c.label && c.label.toLowerCase().includes('fail')) || conns[1] || conns[0];
+
+    const target = passed
+      ? (node.success_target || (successConn && successConn.to))
+      : (node.failure_target || (failConn && failConn.to));
+
+    const continueBtn = document.createElement('button');
+    continueBtn.className = 'btn btn-primary';
+    continueBtn.textContent = 'Continue →';
+    continueBtn.style.flex = '1';
+    continueBtn.addEventListener('click', () => advance(target));
+    el.querySelector('.action-row').appendChild(continueBtn);
+  });
+}
+
+// ── Random node ────────────────────────────────────────────────────────────────
+function renderRandomNode(node, conns) {
+  const el = $('main-content');
+  if (conns.length === 0) { showError('Random node has no connections.'); return; }
+
+  const pick = conns[Math.floor(Math.random() * conns.length)];
+  const pickLabel = pick.label || nodeMap[pick.to]?.title || 'unknown path';
+
+  el.innerHTML = `
+    <div class="node-card">
+      ${breadcrumb()}
+      ${badge(node)}
+      <div class="node-title">${node.title || 'Random Branch'}</div>
+      <div class="node-content">${md(node.content)}</div>
+      ${buildAttrEffectsHtml(node)}
+      <div class="info-box" id="random-info">
+        🎲 Rolling the dice across <strong>${conns.length}</strong> possible outcomes…
+        <div id="random-result" style="margin-top:8px;display:none;color:var(--accent);font-weight:600;"></div>
+      </div>
+    </div>`;
+
+  // Animate dice roll effect
+  let rolls = 0;
+  const maxRolls = 8;
+  const rollInterval = setInterval(() => {
+    const randConn = conns[Math.floor(Math.random() * conns.length)];
+    const label = randConn.label || nodeMap[randConn.to]?.title || 'Path ' + (conns.indexOf(randConn)+1);
+    $('random-result').style.display = '';
+    $('random-result').textContent = '→ ' + label;
+    rolls++;
+    if (rolls >= maxRolls) {
+      clearInterval(rollInterval);
+      $('random-result').textContent = '→ ' + pickLabel;
+      $('random-result').style.color = 'var(--success)';
+      setTimeout(() => advance(pick.to), 600);
+    }
+  }, 150);
+}
+
+// ── Weighted node ──────────────────────────────────────────────────────────────
+function renderWeightedNode(node, conns) {
+  const el = $('main-content');
+  if (conns.length === 0) { showError('Weighted node has no connections.'); return; }
+
+  // Normalize weights
+  const weights = conns.map(c => Math.max(0, parseFloat(c.weight) || 1));
+  const total = weights.reduce((a, b) => a + b, 0) || 1;
+
+  let r = Math.random() * total;
+  let pick = conns[conns.length - 1];
+  for (let i = 0; i < conns.length; i++) {
+    r -= weights[i];
+    if (r <= 0) { pick = conns[i]; break; }
+  }
+
+  const pickLabel = pick.label || nodeMap[pick.to]?.title || 'unknown';
+
+  // Show probability bars
+  const bars = conns.map((c, i) => {
+    const w = weights[i];
+    const pct = Math.round((w / total) * 100);
+    const label = c.label || nodeMap[c.to]?.title || `Path ${i+1}`;
+    const isChosen = c === pick;
+    return `<div style="display:flex;align-items:center;gap:8px;margin:4px 0;">
+      <span style="font-size:0.8rem;width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;${isChosen?'color:var(--success);font-weight:600':''}">${isChosen?'→ ':''}${label}</span>
+      <div style="flex:1;height:16px;background:var(--surface);border-radius:4px;overflow:hidden;">
+        <div id="wbar-${i}" style="height:100%;width:0%;background:${isChosen?'var(--success)':'var(--accent)'};border-radius:4px;transition:width 0.8s ease;"></div>
+      </div>
+      <span style="font-size:0.75rem;color:var(--muted);width:35px;text-align:right;">${pct}%</span>
+    </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="node-card">
+      ${breadcrumb()}
+      ${badge(node)}
+      <div class="node-title">${node.title || 'Weighted Branch'}</div>
+      <div class="node-content">${md(node.content)}</div>
+      ${buildAttrEffectsHtml(node)}
+      <div class="info-box">
+        ⚖️ Calculating probabilities…
+        <div style="margin-top:10px">${bars}</div>
+      </div>
+    </div>`;
+
+  // Animate bars
+  requestAnimationFrame(() => {
+    conns.forEach((c, i) => {
+      const bar = document.getElementById('wbar-' + i);
+      if (bar) bar.style.width = Math.round((weights[i] / total) * 100) + '%';
+    });
+  });
+
+  setTimeout(() => advance(pick.to), 2000);
+}
+
+// ── Condition node ─────────────────────────────────────────────────────────────
+function renderConditionNode(node, conns) {
+  // Evaluate each connection's condition or label; take first true; fall back to default_target
+  let target = node.default_target || (conns.length > 0 ? conns[0].to : null);
+  let matchedExpr = null;
+
+  for (const c of conns) {
+    const expr = c.condition || c.label;
+    if (expr && evalCondition(expr)) {
+      target = c.to;
+      matchedExpr = expr;
+      break;
+    }
+  }
+
+  // Also check node.condition as a simple routing expression
+  if (!matchedExpr && node.condition) {
+    const condConns = conns.filter(c => c.type === 'conditional' || c.condition);
+    for (const c of condConns) {
+      if (c.condition && evalCondition(c.condition)) {
+        target = c.to;
+        matchedExpr = c.condition;
+        break;
+      }
+    }
+  }
+
+  const targetTitle = nodeMap[target]?.title || target;
+
+  const el = $('main-content');
+  el.innerHTML = `
+    <div class="node-card">
+      ${breadcrumb()}
+      ${badge(node)}
+      <div class="node-title">${node.title || 'Condition Check'}</div>
+      <div class="node-content">${md(node.content)}</div>
+      ${buildAttrEffectsHtml(node)}
+      <div class="info-box">
+        ⚡ Evaluating: <code>${node.condition || matchedExpr || '…'}</code><br>
+        <div style="margin-top:6px;">
+          ${Object.keys(state.attrs).length > 0 ? '<span style="font-size:0.75rem;">Current stats: ' + Object.entries(state.attrs).map(([k,v]) => `${k}=${v}`).join(', ') + '</span><br>' : ''}
+          ${Object.keys(state.vars).length > 0 ? '<span style="font-size:0.75rem;">Variables: ' + Object.entries(state.vars).map(([k,v]) => `${k}=${JSON.stringify(v)}`).join(', ') + '</span><br>' : ''}
+        </div>
+        <div style="margin-top:6px;color:var(--success);font-weight:600;">→ Routing to: ${targetTitle}</div>
+      </div>
+    </div>`;
+
+  setTimeout(() => advance(target), 1500);
+}
+
+// ── Gate card ──────────────────────────────────────────────────────────────────
+function buildGateCard(node, conns) {
+  const open = node.condition ? evalCondition(node.condition) : true;
+  const target = open ? (node.default_target || (conns[0] && conns[0].to)) : null;
+
+  // Parse condition to show progress toward meeting it
+  let progressHtml = '';
+  if (node.condition && !open) {
+    const match = node.condition.match(/(\w+)\s*>=?\s*(\d+)/);
+    if (match) {
+      const attr = match[1];
+      const needed = parseInt(match[2]);
+      const current = state.attrs[attr] || state.vars[attr] || 0;
+      const pct = Math.min(100, Math.round((current / needed) * 100));
+      progressHtml = `
+        <div style="margin-top:10px;">
+          <div style="font-size:0.8rem;color:var(--muted);margin-bottom:4px;">${attr}: ${current} / ${needed} needed</div>
+          <div style="height:8px;background:var(--surface);border-radius:4px;overflow:hidden;">
+            <div style="height:100%;width:${pct}%;background:${pct>=100?'var(--success)':'var(--warn)'};border-radius:4px;transition:width 0.5s;"></div>
+          </div>
+        </div>`;
+    }
+  }
+
+  // If locked, find fallback connections (non-default paths)
+  const fallbackConns = !open ? conns.filter(c => c.to !== node.default_target && c.type !== 'default') : [];
+  const fallbackHtml = !open && fallbackConns.length > 0 ? `
+    <div class="action-row">
+      ${fallbackConns.map(c => `<button class="btn btn-secondary gate-fallback-btn" data-to="${c.to}">${c.label || 'Alternative path'}</button>`).join('')}
+    </div>` : !open ? `
+    <div style="margin-top:16px;text-align:center;color:var(--muted);font-size:0.85rem;">
+      🔒 You need more experience to proceed. Try exploring other paths first.
+    </div>` : '';
+
+  return `
+    <div class="node-card" style="border-color:${open ? 'var(--success)' : 'var(--warn)'};">
+      ${breadcrumb()}
+      ${badge(node)}
+      <div class="node-title">${node.title || 'Gate'}</div>
+      <div class="node-content">${md(node.content)}</div>
+      <div class="info-box" style="border-color:${open ? '#1a4a2a' : '#4a3a1a'};">
+        🚧 Gate condition: <code>${node.condition || '…'}</code><br>
+        Status: ${open ? '✅ Gate open — you may pass!' : '🔒 Locked — conditions not yet met.'}
+        ${progressHtml}
+      </div>
+      ${open ? `<div class="action-row"><button class="btn btn-primary" id="gate-btn">Continue →</button></div>` : fallbackHtml}
+    </div>`;
+}
+
+function attachGateHandler(el, node, conns) {
+  const btn = el.querySelector('#gate-btn');
+  if (btn) {
+    const target = node.default_target || (conns[0] && conns[0].to);
+    btn.addEventListener('click', () => advance(target));
+  }
+  // Handle fallback buttons for locked gates
+  el.querySelectorAll('.gate-fallback-btn').forEach(fb => {
+    fb.addEventListener('click', () => advance(fb.dataset.to));
+  });
+}
+
+// ── End card ───────────────────────────────────────────────────────────────────
+function buildEndCard(node) {
+  // Build attribute summary
+  const attrEntries = Object.entries(state.attrs).filter(([,v]) => v !== 0);
+  const attrHtml = attrEntries.length > 0 ? `
+    <div style="margin:20px 0;">
+      <div style="font-size:0.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Attributes Gained</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+        ${attrEntries.map(([attr, val]) => {
+          const icon = ATTR_ICONS[attr] || ATTR_ICONS.default;
+          return `<div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;min-width:100px;text-align:center;">
+            <div style="font-size:1.4rem;">${icon}</div>
+            <div style="font-size:1.2rem;font-weight:700;color:${val > 0 ? 'var(--success)' : 'var(--danger)'}">${val > 0 ? '+' : ''}${val}</div>
+            <div style="font-size:0.7rem;color:var(--muted);text-transform:capitalize;">${attr.replace(/_/g, ' ')}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>` : '';
+
+  return `
+    <div class="node-card end-screen">
+      <div class="trophy"><span class="trophy-anim">🏆</span></div>
+      <h2>${node.title || 'Course Complete!'}</h2>
+      <div class="node-content" style="text-align:left;margin-bottom:16px;">${md(node.content || 'You have reached the end of this course.')}</div>
+      ${attrHtml}
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-val" data-target="${state.questionsAnswered || 0}">0</div>
+          <div class="stat-label">Questions Answered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" data-target="${state.score}">0</div>
+          <div class="stat-label">Correct Answers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" data-target="${state.visited.size}">0</div>
+          <div class="stat-label">Sections Explored</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" data-target="${state.questionsAnswered > 0 ? Math.round((state.score / state.questionsAnswered) * 100) : 0}" data-suffix="%">0%</div>
+          <div class="stat-label">Accuracy</div>
+        </div>
+      </div>
+      ${Object.keys(state.vars).length > 0 ? `
+      <div style="margin:16px 0;">
+        <div style="font-size:0.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Your Journey</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
+          ${Object.entries(state.vars).filter(([k]) => !k.startsWith('quiz_') && k !== 'last_choice').map(([k,v]) =>
+            `<span style="font-size:0.75rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;"><span style="color:var(--muted)">${k.replace(/_/g,' ')}:</span> <span style="color:var(--accent);font-weight:600">${v}</span></span>`
+          ).join('')}
+        </div>
+      </div>` : ''}
+      <p style="font-size:0.82rem;color:var(--muted);max-width:320px;margin:0 auto;">You worked through your own path to mastery. Every path is equally valid.</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;">
+        <button class="btn btn-primary" onclick="confirmRestart()" style="max-width:200px;">
+          🔄 Play Again
+        </button>
+        <button class="btn btn-secondary" onclick="showLanding()" style="max-width:200px;">
+          📚 Browse More
+        </button>
+      </div>
+    </div>`;
+}
+
+// ── Error ──────────────────────────────────────────────────────────────────────
+function showError(msg) {
+  $('main-content').innerHTML = `
+    <div class="node-card" style="border-color:var(--danger)">
+      <div style="color:var(--danger);font-size:1.2rem;margin-bottom:8px;">⚠️ Error</div>
+      <p style="color:var(--muted)">${msg}</p>
+    </div>`;
+}
+
+// ── History panel ──────────────────────────────────────────────────────────────
+function renderHistory() {
+  const list = $('hist-list');
+  list.innerHTML = state.history.map((h, i) => `
+    <div class="hist-item${i === state.history.length - 1 ? ' current' : ''}">
+      <div style="font-weight:${i === state.history.length - 1 ? '600' : '400'}">${h.title}</div>
+      <div style="font-size:0.72rem;color:var(--border)">${h.id}</div>
+    </div>`).join('');
+  list.scrollTop = list.scrollHeight;
+}
+
+function toggleHistory() {
+  $('history-panel').classList.toggle('open');
+  $('hist-overlay').style.display = $('history-panel').classList.contains('open') ? 'block' : 'none';
+}
+function closeHistory() {
+  $('history-panel').classList.remove('open');
+  $('hist-overlay').style.display = 'none';
+}
+
+// ── Restart ────────────────────────────────────────────────────────────────────
+function confirmRestart() {
+  if (confirm('Restart from the beginning?')) {
+    const nodes = course.nodes || [];
+    const start = nodes.find(n => n.type === 'start' || n.subtype === 'start') || nodes[0];
+    state = { nodeId: start.id, score: 0, history: [], vars: {}, attrs: {}, visited: new Set(), quizAnswers: {}, questionsAnswered: 0, streak: 0, maxStreak: 0 };
+    $('attr-bar').style.display = 'none';
+    $('attr-bar').innerHTML = '';
+    goTo(start.id);
+  }
+}
+
+// ── File loading ───────────────────────────────────────────────────────────────
+function handleFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      loadCourse(data);
+    } catch (err) { alert('Could not parse file: ' + err.message); }
+  };
+  reader.readAsText(file);
+}
+
+$('file-input').addEventListener('change', e => {
+  if (e.target.files[0]) handleFile(e.target.files[0]);
+});
+
+const dz = $('drop-zone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e => {
+  e.preventDefault();
+  dz.classList.remove('drag-over');
+  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+});
+dz.addEventListener('click', () => $('file-input').click());
+
+// ── Course catalog ─────────────────────────────────────────────────────────────
+let allCatalogCourses = [];
+
+async function fetchCatalog() {
+  try {
+    const r = await fetch('/api/courses');
+    if (!r.ok) throw new Error('API unavailable');
+    const data = await r.json();
+    allCatalogCourses = data.courses || [];
+    const gen = data.generated || allCatalogCourses.length;
+    $('catalog-status').textContent = `${gen} course${gen !== 1 ? 's' : ''} in library · auto-generating more`;
+    // Show showcase banner if the showcase course exists
+    const hasShowcase = allCatalogCourses.some(c => c.id === 'showcase-master');
+    $('showcase-banner').style.display = hasShowcase ? '' : 'none';
+    populateThemeFilter();
+    renderCatalog(allCatalogCourses);
+  } catch {
+    $('catalog-list').innerHTML = '<div style="text-align:center;color:var(--muted);padding:24px;font-size:0.85rem;">No courses yet — generator is running in background</div>';
+    $('catalog-status').textContent = 'API not available — try uploading a file';
+    // Retry in 10s
+    setTimeout(fetchCatalog, 10000);
+  }
+}
+
+function renderCatalog(courses) {
+  const list = $('catalog-list');
+  if (!courses.length) {
+    list.innerHTML = '<div style="text-align:center;color:var(--muted);padding:24px;font-size:0.85rem;">No courses match your search</div>';
+    return;
+  }
+  list.innerHTML = courses.map(c => {
+    const diff = { beginner: '🟢', intermediate: '🟡', advanced: '🔴' }[c.difficulty] || '⚪';
+    const mins = c.estimated_minutes ? `${c.estimated_minutes}m` : '';
+    const nodes = c.node_count ? `${c.node_count} nodes` : '';
+    return `
+    <div class="catalog-card" onclick="playCourse('${c.id}')" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color .15s,transform .1s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="display:flex;align-items:flex-start;gap:8px;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-weight:600;font-size:0.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.title}</div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.description || c.topic || ''}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;">
+          <span style="font-size:0.7rem">${diff} ${c.difficulty || ''}</span>
+          <span style="font-size:0.7rem;color:var(--muted)">${[mins, nodes].filter(Boolean).join(' · ')}</span>
+        </div>
+      </div>
+      <div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap;">
+        ${c.theme ? `<span style="font-size:0.65rem;background:#3b1f6b;border:1px solid #7c3aed;border-radius:4px;padding:1px 6px;color:#c4b5fd">🎨 ${c.theme}</span>` : ''}
+        ${(c.tags||[]).slice(0,3).map(t => `<span style="font-size:0.65rem;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 6px;color:var(--muted)">${t}</span>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function populateThemeFilter() {
+  const sel = $('catalog-theme-filter');
+  const themes = [...new Set(allCatalogCourses.map(c => c.theme).filter(Boolean))].sort();
+  // keep first two options, replace rest
+  while (sel.options.length > 2) sel.remove(2);
+  themes.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; sel.appendChild(o); });
+}
+
+function filterCatalog() {
+  const q = $('catalog-search').value.toLowerCase();
+  const diff = $('catalog-filter').value;
+  const theme = $('catalog-theme-filter').value;
+  let filtered = allCatalogCourses;
+  if (q) filtered = filtered.filter(c => (c.title + c.description + c.topic + (c.theme||'') + (c.tags||[]).join(' ')).toLowerCase().includes(q));
+  if (diff) filtered = filtered.filter(c => c.difficulty === diff);
+  if (theme === '__none__') filtered = filtered.filter(c => !c.theme);
+  else if (theme) filtered = filtered.filter(c => c.theme === theme);
+  renderCatalog(filtered);
+}
+
+async function playCourse(courseId) {
+  try {
+    const r = await fetch(`/api/courses/${courseId}`);
+    if (!r.ok) throw new Error('Course not found');
+    const data = await r.json();
+    loadCourse(data);
+  } catch (err) {
+    alert('Could not load course: ' + err.message);
+  }
+}
+
+async function loadRandomCourse() {
+  try {
+    const r = await fetch('/api/random');
+    if (!r.ok) throw new Error('No courses available');
+    const data = await r.json();
+    loadCourse(data);
+  } catch (err) {
+    alert('No courses available yet — generator is still running.');
+  }
+}
+
+// Auto-refresh catalog every 30s to show newly generated courses
+setInterval(fetchCatalog, 30000);
+
+// ── Progress Tracking ─────────────────────────────────────────────────────────
+const tracker = {
+  sessionId: null,
+  token: localStorage.getItem('auth_token'),
+
+  async startSession(courseId, startNodeId) {
+    try {
+      const headers = {'Content-Type': 'application/json'};
+      if (this.token) headers['Authorization'] = 'Bearer ' + this.token;
+      const r = await fetch('/api/progress/start', {
+        method: 'POST', headers,
+        body: JSON.stringify({course_id: courseId, start_node_id: startNodeId})
+      });
+      const data = await r.json();
+      this.sessionId = data.session_id;
+    } catch(e) { /* tracking is best-effort, silently ignore */ }
+  },
+
+  async recordEvent(courseId, nodeId, nodeType, eventType, eventData) {
+    if (!this.sessionId) return;
+    try {
+      const headers = {'Content-Type': 'application/json'};
+      if (this.token) headers['Authorization'] = 'Bearer ' + this.token;
+      fetch('/api/progress/event', {
+        method: 'POST', headers,
+        body: JSON.stringify({
+          session_id: this.sessionId,
+          course_id: courseId,
+          node_id: nodeId,
+          node_type: nodeType || 'content',
+          event_type: eventType,
+          event_data: eventData || {},
+          attributes: {...state.attrs}
+        })
+      });
+    } catch(e) {}
+  },
+
+  async completeSession(finalAttrs, completionPct) {
+    if (!this.sessionId) return;
+    try {
+      const headers = {'Content-Type': 'application/json'};
+      if (this.token) headers['Authorization'] = 'Bearer ' + this.token;
+      fetch('/api/progress/complete', {
+        method: 'POST', headers,
+        body: JSON.stringify({
+          session_id: this.sessionId,
+          final_attributes: finalAttrs || state.attrs,
+          completion_pct: completionPct || Math.round((state.visited.size / Object.keys(nodeMap).length) * 100)
+        })
+      });
+    } catch(e) {}
+  }
+};
+
+// Hook into loadCourse to start tracking
+const _origLoadCourse = loadCourse;
+loadCourse = function(data) {
+  _origLoadCourse(data);
+  const courseId = data.id || data.course?.id || 'unknown';
+  const startNode = data.nodes?.find(n => n.type === 'start' || n.subtype === 'start') || data.nodes?.[0];
+  tracker.startSession(courseId, startNode?.id);
+};
+
+// Hook into goTo to record navigation events
+const _origGoTo = goTo;
+goTo = function(nodeId) {
+  _origGoTo(nodeId);
+  const node = nodeMap[nodeId];
+  if (node && course) {
+    const courseId = course.id || course.course?.id || 'unknown';
+    tracker.recordEvent(courseId, nodeId, node.type, 'visit', {title: node.title});
+    // Track end nodes
+    if (node.type === 'end') {
+      tracker.completeSession(state.attrs);
+    }
+  }
+};
+
+// Hook into decision choices
+const _origAdvance = advance;
+advance = function(nodeId, choiceLabel) {
+  if (course && state.nodeId) {
+    const courseId = course.id || course.course?.id || 'unknown';
+    const currentNode = nodeMap[state.nodeId];
+    if (currentNode && currentNode.type === 'decision') {
+      tracker.recordEvent(courseId, state.nodeId, 'decision', 'decision', {choice: choiceLabel || nodeId, next: nodeId});
+    }
+  }
+  _origAdvance(nodeId);
+};
+
+// ── Keyboard shortcuts ────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if ($('player').style.display === 'none') return;
+  // Don't intercept when focus is in an input
+  if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)) return;
+
+  const main = $('main-content');
+
+  // Space / Enter → click the primary continue button
+  if (e.key === ' ' || e.key === 'Enter') {
+    const nextBtn = main.querySelector('#next-btn');
+    if (nextBtn && !nextBtn.disabled) { e.preventDefault(); nextBtn.click(); return; }
+    const gateBtn = main.querySelector('#gate-btn');
+    if (gateBtn && !gateBtn.disabled) { e.preventDefault(); gateBtn.click(); return; }
+  }
+
+  // 1-9 → click nth choice button (decision or content multi-btn)
+  const num = parseInt(e.key);
+  if (num >= 1 && num <= 9) {
+    const choices = [...main.querySelectorAll('.choice-btn')];
+    if (choices[num - 1] && !choices[num - 1].disabled) {
+      e.preventDefault();
+      choices[num - 1].click();
+    }
+  }
+});
+
+// ── Auth gate: require login to access courses ──────────────────────────────────
+(function() {
+  const _tok = localStorage.getItem('auth_token');
+  let _usr = null;
+  try { _usr = JSON.parse(localStorage.getItem('auth_user')); } catch(e) {}
+  if (!_tok || !_usr) {
+    const next = encodeURIComponent(location.pathname + location.search);
+    window.location.href = '/login.html?next=' + next + '&msg=signin';
+  }
+})();
+
+// ── URL param loading ──────────────────────────────────────────────────────────
+(async () => {
+  const params = new URLSearchParams(location.search);
+  const url = params.get('url');
+  const courseId = params.get('course');
+  if (courseId) {
+    try { await playCourse(courseId); } catch {}
+  } else if (url) {
+    try {
+      const r = await fetch(url);
+      const data = await r.json();
+      loadCourse(data);
+    } catch (err) { /* stay on landing */ }
+  }
+  // Load catalog on landing
+  fetchCatalog();
+})();
+
+// ── Sound effects (Web Audio API) ────────────────────────────────────────────
+const SFX = (function() {
+  let ctx;
+  function ac() {
+    if (!ctx) {
+      try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return null; }
+    }
+    return ctx;
+  }
+  function tone(freq, type, duration, gain, delay) {
+    try {
+      const c = ac(); if (!c) return;
+      const osc = c.createOscillator();
+      const g = c.createGain();
+      osc.connect(g); g.connect(c.destination);
+      osc.type = type || 'sine';
+      osc.frequency.value = freq;
+      const t = c.currentTime + (delay || 0);
+      g.gain.setValueAtTime(gain || 0.12, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+      osc.start(t); osc.stop(t + duration + 0.01);
+    } catch(e) {}
+  }
+  return {
+    correct()   { tone(880,'sine',0.18,0.12); tone(1320,'sine',0.15,0.1,0.08); },
+    incorrect() { tone(196,'sawtooth',0.25,0.1); },
+    advance()   { tone(660,'sine',0.09,0.06); },
+    complete()  { [523,659,784,1047].forEach((f,i) => tone(f,'sine',0.4,0.14,i*0.12)); },
+    streak()    { tone(1046,'sine',0.12,0.1); tone(1319,'sine',0.12,0.1,0.09); tone(1567,'sine',0.2,0.1,0.18); },
+    milestone() { tone(784,'sine',0.18,0.08); tone(988,'sine',0.2,0.08,0.1); },
+  };
+})();
+
+// ── Streak counter ────────────────────────────────────────────────────────────
+function updateStreak(isCorrect) {
+  if (isCorrect) {
+    state.streak = (state.streak || 0) + 1;
+    state.maxStreak = Math.max(state.maxStreak || 0, state.streak);
+  } else {
+    state.streak = 0;
+  }
+  const el = $('hud-streak');
+  if (!el) return;
+  if (state.streak >= 3) {
+    el.style.display = '';
+    const fires = state.streak >= 10 ? '🔥🔥🔥' : state.streak >= 5 ? '🔥🔥' : '🔥';
+    el.innerHTML = `<span class="streak-badge">${fires} ${state.streak}</span>`;
+  } else {
+    el.style.display = 'none';
+  }
+  if (state.streak === 3)  { showToast('🔥 3 in a row!', 2200); SFX.streak(); }
+  else if (state.streak === 5)  { showToast('🔥🔥 5 streak — hot!', 2200); SFX.streak(); }
+  else if (state.streak === 10) { showToast('🔥🔥🔥 On fire! 10 streak!', 3000); SFX.streak(); }
+}
+
+// ── Cascade card children in ──────────────────────────────────────────────────
+function cascadeCard(card) {
+  const skip = ['CANVAS'];
+  const kids = [...card.children].filter(c => !skip.includes(c.tagName));
+  kids.forEach((child, i) => {
+    child.style.animationDelay = (i * 60) + 'ms';
+    child.classList.add('cascade-child');
+    child.addEventListener('animationend', () => {
+      child.classList.remove('cascade-child');
+      child.style.animationDelay = '';
+    }, { once: true });
+  });
+}
+
+// ── Ripple effect on buttons ──────────────────────────────────────────────────
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.btn, .choice-btn');
+  if (!btn) return;
+  const wave = document.createElement('span');
+  wave.className = 'ripple-wave';
+  const rect = btn.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height) * 2.6;
+  wave.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;`;
+  btn.appendChild(wave);
+  wave.addEventListener('animationend', () => wave.remove());
+}, true);
+
+// ── Particle canvas (landing background) ─────────────────────────────────────
+(function initParticles() {
+  const canvas = document.getElementById('particle-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w = 0, h = 0;
+  const COLORS = [
+    [91,124,246], [139,92,246], [34,197,94], [245,158,11], [6,182,212]
+  ];
+  let particles = [];
+
+  function resize() {
+    const p = canvas.parentElement;
+    w = canvas.width = p.offsetWidth;
+    h = canvas.height = p.offsetHeight;
+  }
+
+  function mkP() {
+    const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+    return {
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: 1.2 + Math.random() * 2.2,
+      alpha: 0.18 + Math.random() * 0.45,
+      c
+    };
+  }
+
+  function draw() {
+    if (!document.getElementById('landing') || document.getElementById('landing').style.display === 'none') {
+      requestAnimationFrame(draw); return;
+    }
+    ctx.clearRect(0, 0, w, h);
+
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 110) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(91,124,246,${0.12 * (1 - d / 110)})`;
+          ctx.lineWidth = 0.6;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${p.alpha})`;
+      ctx.fill();
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -5) p.x = w + 5;
+      else if (p.x > w + 5) p.x = -5;
+      if (p.y < -5) p.y = h + 5;
+      else if (p.y > h + 5) p.y = -5;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  particles = Array.from({ length: 55 }, mkP);
+  new ResizeObserver(resize).observe(canvas.parentElement);
+  draw();
+})();
+</script>
+</body>
+</html>

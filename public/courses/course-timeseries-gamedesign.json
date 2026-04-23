@@ -1,0 +1,291 @@
+{
+  "id": "course-timeseries-gamedesign",
+  "title": "Time Series Analysis for Game Designers",
+  "description": "Master time series analysis through the lens of game design. Learn to understand player patterns, forecast game economies, and detect anomalies in your playerbase.",
+  "topic": "Time Series Analysis",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "time-series",
+    "game-design",
+    "data-analysis",
+    "analytics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Time Series in Game Design",
+      "content": "Time series analysis helps game designers understand how game metrics evolve over time. Whether tracking player engagement curves, in-game economy prices, or server latency spikes, time series data reveals patterns that guide balance decisions and strategic updates. This course explores three essential applications: identifying temporal patterns in player behavior, forecasting economic trends, and detecting anomalous activities. Each approach equips you with tools to make data-informed decisions that improve player experience and game health.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Starting Topic",
+      "content": "Select one of three time series applications in game design to explore first. You'll have the opportunity to explore additional topics after completing your first.",
+      "choices": [
+        {
+          "label": "Temporal Patterns: Understanding Player Engagement Over Time",
+          "next": "n3"
+        },
+        {
+          "label": "Forecasting: Predicting Game Economy Trends",
+          "next": "n5"
+        },
+        {
+          "label": "Anomaly Detection: Spotting Unusual Player Behavior",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Temporal Patterns in Player Engagement",
+      "content": "Temporal patterns are the recurring shapes that metrics display over time. In game design, you'll often see daily cycles (peak hours), weekly rhythms (weekends vs. weekdays), and seasonal trends (new patch hype). These patterns emerge because player behavior is predictable in aggregate: new players engage more initially (onboarding curve), engaged players show consistent login patterns, and seasonal events create spikes. By decomposing time series data into trend, seasonality, and residuals, you can isolate meaningful signals from noise and predict when your player base will be most active.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Player Login Pattern Analysis",
+      "content": "Imagine tracking daily active users (DAU) for a mobile RPG over 90 days. The raw data shows peaks on Friday-Sunday and dips on Tuesday-Wednesday, with an overall upward trend from launch. Using time series decomposition, you separate this into: (1) Trend: users growing 3% per week, (2) Seasonality: 25% higher on weekends, (3) Residual: random noise \u00b15%. This decomposition lets you forecast next month's DAU reliably and know that a Tuesday dip isn't a crisis\u2014it's the weekly cycle. Game designers then use this insight to schedule events and content drops during downtime windows to smooth engagement.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Forecasting Game Economy Trends",
+      "content": "Forecasting uses historical time series to predict future values, essential for managing virtual economies. In-game item prices, crafting material supplies, and gold inflation all follow predictable trends that savvy players can exploit if left unchecked. Autoregressive models (ARIMA) and exponential smoothing capture recent momentum and mean-reversion patterns; they work well when the system has underlying equilibrium. Alternatively, machine learning models (LSTM, Prophet) handle non-linear relationships and multiple seasonal cycles (daily/weekly/monthly crafting surges). The goal is to predict next month's rare drop prices or commodity values so you can adjust quest rewards, drop rates, and sinks before market distortion occurs.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "In-Game Currency Supply Forecast",
+      "content": "Your fantasy game's crafting economy generates 50K gold per day from quest rewards, but players only spend 40K via vendor purchases. Without intervention, gold inflation grows 10K/day. Fitting an ARIMA(1,1,1) model to 6 weeks of daily gold supply data, you forecast next month's total supply and predict that item prices will inflate 15% if player spending remains flat. Using this forecast, the design team decides to introduce a cosmetic-only vendor that sinks 5K gold/day, re-balancing the economy. Weekly forecasts track whether the fix works; when they do, you shift focus to the next bottleneck.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Anomaly Detection in Player Behavior",
+      "content": "Anomalies are data points that deviate significantly from expected patterns\u2014a player's skill rating jumping 50% overnight, login times shifting from daytime to 4 AM, or a guild's resource gains 100x normal rate. Anomaly detection uses control limits (e.g., mean \u00b1 3 standard deviations), isolation forests, or autoencoders to flag outliers for human review. In games, anomalies often indicate cheating, exploited bugs, or legitimate (but rare) skill breakthroughs. By monitoring time series of individual and aggregate metrics, you detect problems fast\u2014a dupe exploit is caught in hours rather than months. Statistical baselines (the expected 'normal' for that player) make detection precise: a level-100 player's sudden jump is normal, but a level-5 player's is a red flag.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Detecting In-Game Exploit Activity",
+      "content": "Your MMO tracks player wealth (gold + items) as a time series per account. Normal progression shows 5-10% daily gains. One player's wealth jumps 300% in 2 hours\u2014a red flag beyond normal variance. Further investigation reveals they repeated a quest that granted rewards twice due to a backend bug. Anomaly detection algorithms flagged this account within minutes. The system logs a severity score based on how many standard deviations the player deviated; staff investigates tier-1 anomalies (99.9th percentile) first, then tier-2 (99th percentile). By catching exploits early via time series monitoring, you preserve game integrity and allow the balance team to patch bugs before they spread through the playerbase.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "decision",
+      "title": "Explore Another Topic or Continue",
+      "content": "You've completed one time series technique. You can explore another topic area to deepen your knowledge, or proceed directly to synthesize what you've learned.",
+      "choices": [
+        {
+          "label": "Explore Temporal Patterns",
+          "next": "n3"
+        },
+        {
+          "label": "Explore Forecasting",
+          "next": "n5"
+        },
+        {
+          "label": "Explore Anomaly Detection",
+          "next": "n7"
+        },
+        {
+          "label": "Continue to Synthesis",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Synthesis: Integrated Time Series Strategy",
+      "content": "The three time series techniques form an integrated toolkit: Temporal patterns answer 'what is normal?', forecasting answers 'what comes next?', and anomaly detection answers 'what's wrong?'. A complete data-driven game design practice combines all three. Monitor temporal patterns to baseline player behavior, use forecasting to plan economy adjustments and event timing proactively, and leverage anomaly detection to catch cheating and bugs reactively. Real-world game studios instrument their games with time series pipelines (e.g., Datadog, Grafana, Segment) that automatically surface insights. Your role as designer is to ask: Does this metric look normal? What should we prepare for next month? Who or what needs investigating?",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Time Series Analysis in Game Design",
+      "content": "Demonstrate your understanding by answering these questions about applying time series analysis to game design scenarios.",
+      "questions": [
+        {
+          "question": "Your game tracks player skill ratings as a time series. Over 2 weeks, the average rating stays stable (mean: 1500, std: 150), but one player's rating spikes from 1400 to 2800 in 48 hours. What is the most likely explanation?",
+          "options": [
+            "A) Normal variance; skilled players sometimes improve rapidly",
+            "B) A legitimate skill breakthrough within \u00b12 standard deviations",
+            "C) An anomaly requiring investigation, possibly a bug or exploit",
+            "D) Evidence the game is perfectly balanced"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. A 1400 rating spike is ~9 standard deviations from the mean.",
+            "Incorrect. This magnitude of change is statistically unprecedented.",
+            "Correct! This is a ~9\u03c3 anomaly warranting immediate investigation.",
+            "Incorrect. Anomalies indicate imbalances needing investigation."
+          ],
+          "explanation": "Anomalies are extreme deviations from expected patterns. A 1400-point jump is far outside normal variation and should be flagged for review by your anti-cheat or balance team."
+        },
+        {
+          "question": "You forecast your game's daily active users (DAU) for next month using 12 weeks of data. Your forecast predicts stable DAU at ~10K per day. Should you expect higher or lower DAU on weekends vs. weekdays?",
+          "options": [
+            "A) Much higher on weekends due to seasonal patterns",
+            "B) The forecast already captures seasonal patterns if they exist in historical data",
+            "C) No difference; DAU is constant across all days",
+            "D) Lower on weekends because weekday players spend more time in-game"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The forecast is an average; weekends show higher spikes.",
+            "Correct! Good forecasts (ARIMA, Prophet) decompose and model seasonality.",
+            "Incorrect. Most games show clear weekly cycles with weekend peaks.",
+            "Incorrect. The opposite is true; casual players engage more on weekends."
+          ],
+          "explanation": "Time series forecasts automatically capture seasonality from training data. A 10K DAU forecast is the average; expect peaks and troughs around that value. Understanding confidence intervals and seasonal components is crucial for planning content and server capacity."
+        },
+        {
+          "question": "Your in-game economy shows gold supply growing 10% per week while player spending stays flat. What time series technique should you apply first?",
+          "options": [
+            "A) Anomaly detection to flag overpowered NPCs",
+            "B) Forecasting to predict when inflation becomes critical",
+            "C) Temporal pattern analysis to understand the weekly cycle",
+            "D) All of the above equally"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Anomaly detection finds outliers; steady 10% growth is a trend.",
+            "Correct! Forecast gold supply to predict the inflation tipping point.",
+            "Partially useful, but doesn't address the 10% trend directly.",
+            "No; prioritize the technique answering your most urgent question first."
+          ],
+          "explanation": "When facing trend-based imbalance, forecasting predicts the critical point. Then use temporal patterns to find the root cause (which quests are generous) and anomaly detection to catch exploits accelerating it. Address the most impactful question first."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n12",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "Course Complete: You're a Time Series Game Analyst",
+      "content": "Congratulations! You've mastered temporal patterns, forecasting, and anomaly detection\u2014three essential skills for data-driven game design. You can now analyze player engagement rhythms, predict economy trends, and catch exploits early. Go forth and instrument your games with time series pipelines. Monitor what's normal, forecast what's next, and flag what's wrong. Good luck balancing your worlds!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Choose Topic A"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Choose Topic B"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Choose Topic C"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n3",
+      "label": "Explore Temporal Patterns"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n5",
+      "label": "Explore Forecasting"
+    },
+    {
+      "id": "c13",
+      "source": "n9",
+      "target": "n7",
+      "label": "Explore Anomaly Detection"
+    },
+    {
+      "id": "c14",
+      "source": "n9",
+      "target": "n10",
+      "label": "Continue to Synthesis"
+    },
+    {
+      "id": "c15",
+      "source": "n10",
+      "target": "n11",
+      "label": "Take Assessment"
+    },
+    {
+      "id": "c16",
+      "source": "n11",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c17",
+      "source": "n11",
+      "target": "n10",
+      "label": "Retry"
+    }
+  ],
+  "generated_at": "2026-03-27T14:46:59.650630+00:00",
+  "model": "claude-haiku-4-5"
+}

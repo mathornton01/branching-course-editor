@@ -1,0 +1,228 @@
+{
+  "id": "a2f8c5e0-7d3a-4a8b-9c2e-1b4d6f8a9e3c",
+  "title": "Git and Version Control: A Culinary Journey",
+  "description": "Master Git and version control concepts through the lens of professional kitchen management and recipe development.",
+  "topic": "Version Control & Git",
+  "theme": "culinary arts",
+  "difficulty": "intermediate",
+  "estimated_minutes": 35,
+  "tags": [
+    "git",
+    "version control",
+    "collaboration",
+    "culinary",
+    "branching"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Opening Service: Git Knowledge Check",
+      "content": "Welcome to the culinary Git master class! Just as a head chef needs to understand kitchen operations before managing a team, you need to demonstrate your familiarity with version control concepts. Let's assess where you are in your Git journey.",
+      "questions": [
+        {
+          "question": "Your kitchen has been developing recipes for 10 years, and multiple chefs have made improvements. Which of these best describes why version control is essential?",
+          "options": [
+            "To organize kitchen utensils alphabetically",
+            "To track who changed recipes when, preserve recipe history, and allow collaboration without losing work",
+            "To schedule employee shifts automatically",
+            "To calculate food costs per dish"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While organization matters, that's not what version control does.",
+            "Exactly! Version control preserves history and enables safe collaboration\u2014critical in both kitchens and code.",
+            "That's a scheduling tool, not version control.",
+            "That's inventory management, not version control."
+          ],
+          "explanation": "Version control systems track changes over time, showing who made what change and when. This is invaluable in collaborative environments, especially professional kitchens where recipe consistency is critical."
+        },
+        {
+          "question": "You're creating a new experimental dish and don't want it affecting your restaurant's standard menu. What Git concept lets you safely develop this variation?",
+          "options": [
+            "Committing directly to the main menu",
+            "Creating a new branch for your experimental dish",
+            "Deleting the original recipe",
+            "Keeping it only in your personal notebook"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That would immediately change what customers see\u2014too risky!",
+            "Perfect! A branch lets you work safely in isolation, then merge when ready.",
+            "You'd lose the original recipe\u2014disaster in a kitchen.",
+            "Then you'd have no version control and risk losing your work."
+          ],
+          "explanation": "Branching is Git's killer feature for experimentation. Just as a chef might test a new sauce on the side before serving it, a branch lets you develop features safely without touching the main version."
+        },
+        {
+          "question": "What is a 'commit' in Git?",
+          "options": [
+            "A chef's promise to arrive on time",
+            "A snapshot of your project at a specific moment, with a message describing what changed",
+            "A type of meat dish",
+            "The final plating of a dish"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's commitment to the job, but not a Git commit!",
+            "Correct! Each commit captures the state of your code/recipes and documents why.",
+            "While interesting, that's not a Git term.",
+            "Plating is part of cooking, but 'commit' in Git means something else."
+          ],
+          "explanation": "A commit is like taking a photo of your kitchen at a moment in time. It records every change and includes a message explaining what you did\u2014essential for tracking progress and understanding history."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced Version Control: Restaurant at Scale",
+      "content": "You've demonstrated solid Git fundamentals. Now let's explore enterprise-level version control in a high-pressure kitchen environment. In a Michelin-starred restaurant with multiple sous chefs, a pastry chef, and a sous vide specialist, you can't just commit to main whenever you feel like it. You need workflows like GitFlow: a main branch for production recipes (what customers receive), a develop branch where features integrate, and feature branches where each chef experiments. When a critical bug is found\u2014say, the b\u00e9arnaise breaks on Saturdays\u2014you cut a hotfix branch, fix it immediately, and merge it back to both main and develop. Meanwhile, your pastry chef is safely working on a new dessert menu on their own branch, and your sous vide specialist is experimenting with cooking times on a separate feature branch. Merge conflicts happen when two chefs edit the same recipe differently\u2014Git forces you to decide which version wins, teaching you communication and coordination. Understanding rebase versus merge, fast-forward merges, and conflict resolution turns you into a version control expert.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Real-World Workflow: The Michelin Star Kitchen",
+      "content": "It's Monday morning at La Cuisine Parfaite. The head chef (you) creates a feature branch for this week's special: `feature/truffle-risotto`. Your sous chef also creates `feature/new-sauce-reduction`. On Wednesday, your sous chef finishes first and opens a pull request (PR). You review the sauce recipe, suggest one small change (less salt), they update it, and you merge it to develop. Thursday morning, your risotto is ready. You merge `feature/truffle-risotto` to develop. Friday, you merge develop \u2192 main and the special debuts. Sunday, a customer reports the sauce is too salty on one specific batch. You create `hotfix/sauce-temperature-fix` from main, discover the stove temperature drifted mid-service, fix the recipe notes, and merge to both main (immediate fix) and develop (prevent it in future menus). By Monday, the issue is resolved and documented for your entire team. This workflow\u2014feature branches, PRs, code review (via tasting!), careful merging\u2014is how professional teams prevent chaos and maintain quality.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Welcome to Advanced Version Control",
+      "content": "You've completed the advanced track! You now understand professional Git workflows, how to manage complex kitchens (or code teams), and how to prevent disasters through careful branching and merging. You're ready to mentor others and architect large-scale collaborative projects. Bon app\u00e9tit!"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Fresh Ingredients: Git Basics",
+      "content": "Let's start from scratch, like a new commis chef learning the kitchen. Git is a version control system\u2014think of it as a detailed kitchen journal that tracks every change to your recipes. When you create a Git repository, you're opening a new kitchen. Every time you make a change (adjust seasoning, tweak cooking time, add a garnish), you save a snapshot called a commit. Each commit includes your changes and a message explaining what you did. Your main branch is your published menu\u2014what customers see. When you want to try something new without risking the menu, you create a branch. A branch is like a separate prep station where you can experiment freely. Once your experiment works, you merge it back to main. If you and another chef edit the same recipe differently, Git will ask you to resolve the conflict\u2014deciding which version is correct. This prevents accidents and ensures everyone is always on the same page.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Your First Recipe Repository",
+      "content": "You're opening a small bistro. You create a Git repository to store your 5 signature recipes. Day 1, you commit your beef bourguignon recipe. Day 2, you commit your coq au vin. On Day 3, you want to experiment with a vegan version of coq au vin, so you create a branch called `feature/vegan-coq-au-vin`. You modify the recipe (mushroom and walnut base instead of chicken), test it, and commit your changes. Your new vegan dish is delicious! You merge it back to main. Now main contains both the classic and vegan versions, tracked in history. Next week, a customer says the bourguignon is too salty. You look at the commit history, see that you added extra salt last Tuesday, and can roll back or adjust easily. Everyone always knows what's in the menu, when it changed, and why.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Building Your Kitchen Repository",
+      "content": "Test your understanding with real Git scenarios.",
+      "questions": [
+        {
+          "question": "You have three recipes in your main branch. A new line cook wants to experiment with a modernist take on your signature dish without affecting the menu. What should they do?",
+          "options": [
+            "Commit directly to main and hope for the best",
+            "Keep their experiments in a notebook outside the system",
+            "Create a new branch from main and work there",
+            "Delete the original recipe and rewrite it"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Too risky\u2014changes to main are live immediately!",
+            "Then you lose version control benefits and can't easily merge when ready.",
+            "Exactly! A branch is a safe place to experiment, and they can merge when happy.",
+            "You'd lose the original and have no way to compare or revert."
+          ],
+          "explanation": "Branching is Git's safety mechanism. It isolates experimental work from the published version, allowing risk-free exploration."
+        },
+        {
+          "question": "Your sous chef and another cook both modify the beurre blanc recipe separately on different branches, and now you're trying to merge both changes to main. What's happening?",
+          "options": [
+            "Git automatically picks the newest version and discards the old one",
+            "Git can't merge and deletes both changes",
+            "Git detects a merge conflict and asks you to decide which changes to keep",
+            "The kitchen automatically explodes"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "That would lose work and create inconsistency.",
+            "Git is smarter than that\u2014it preserves both branches for your review.",
+            "Correct! Conflicts are normal and healthy\u2014they force communication and careful decisions.",
+            "While it might feel that way, Git is designed to prevent this!"
+          ],
+          "explanation": "Merge conflicts happen when two branches edit the same lines. This is not a failure\u2014it's a feature that ensures you carefully review changes and maintain consistency."
+        },
+        {
+          "question": "You need to know when the garlic in your mirepoix recipe was changed and why. What Git feature helps you?",
+          "options": [
+            "The main branch",
+            "Commit history and messages\u2014you can see exactly who changed what and when",
+            "Creating a new branch",
+            "Deleting old recipes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Main shows current state, but not history.",
+            "Perfect! Every commit captures the change and includes a message explaining why.",
+            "Branches are for future work, not historical review.",
+            "Deletion loses information\u2014the opposite of what we want."
+          ],
+          "explanation": "Commit history is your kitchen journal. By writing clear commit messages, you create a searchable record of every decision and change."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Your Git Journey Begins",
+      "content": "Congratulations! You've mastered the basics of version control. You understand repositories, commits, branches, merging, and conflict resolution. You're ready to manage a small kitchen, collaborate safely with others, and keep your recipes organized and tracked. Start small\u2014create a repo, make commits with clear messages, experiment with branches, and practice merging. With these fundamentals, you'll never lose work, lose track of changes, or wonder why something changed. Welcome to the world of professional version control! Bon app\u00e9tit!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "strong (pass)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "developing (fail)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T04:59:43.852932+00:00",
+  "model": "claude-haiku-4-5"
+}

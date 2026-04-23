@@ -1,0 +1,170 @@
+{
+  "id": "parallel-computing-social-work",
+  "title": "Parallel Computing in Social Work",
+  "description": "Learn parallel computing concepts through real-world social work scenarios. Choose your learning path through data parallelism, task parallelism, or synchronization techniques.",
+  "topic": "Parallel Computing",
+  "theme": "social work",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "parallel-computing",
+    "concurrency",
+    "social-work",
+    "data-processing",
+    "team-coordination"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction: Why Parallel Computing Matters in Social Work",
+      "content": "Social work organizations handle massive client datasets, complex case management workflows, and time-sensitive interventions. A typical agency might manage thousands of active cases, each requiring coordinated assessment, service planning, and outcome tracking. Parallel computing\u2014processing multiple tasks simultaneously\u2014is the key to serving clients faster and more effectively. Just as a social work team divides responsibilities, parallel systems distribute computational work across multiple processors. Understanding these principles helps you design systems that support frontline workers and improve client outcomes.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Focus Area",
+      "content": "Select the aspect of parallel computing most relevant to your work. Each path explores how parallel principles solve real social work challenges.",
+      "choices": [
+        {
+          "label": "Data Parallelism: Processing Client Data at Scale",
+          "next": "n3"
+        },
+        {
+          "label": "Task Parallelism: Dividing Different Work Streams",
+          "next": "n5"
+        },
+        {
+          "label": "Synchronization: Coordinating Parallel Processes",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Data Parallelism: Processing Client Data at Scale",
+      "content": "Data parallelism distributes the same operation across multiple data chunks simultaneously. In social work, this applies when you need to process identical tasks on many client records. For example, calculating risk assessments for 5,000 active cases, updating service eligibility across a caseload, or generating outcome reports for all program participants. Instead of processing cases sequentially (one after another), data parallelism assigns batches to different processors. Each processor applies the same algorithm independently, then results combine. This approach dramatically reduces processing time\u2014computing risk for 5,000 cases might take seconds instead of hours.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Data Parallelism Example: Batch Risk Assessment",
+      "content": "A family services agency needs to recalculate safety risk scores for 10,000 cases using an updated assessment tool. Sequentially, this would take 8 hours. Using data parallelism: divide cases into 8 batches of 1,250 each, assign each to a processor core, run the risk algorithm on all batches simultaneously. All 10,000 assessments complete in 1 hour. Caseworkers can immediately identify high-risk cases needing urgent intervention. This real-time processing capability transforms how agencies respond to client needs and coordinate emergency interventions.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Task Parallelism: Dividing Different Work Streams",
+      "content": "Task parallelism assigns different tasks to different processors simultaneously. Unlike data parallelism (same task on many data), task parallelism handles diverse, independent activities. In social work, a comprehensive case review might involve: social worker documenting client history, supervisor reviewing risk factors, counselor assessing mental health needs, and administrator updating service plans. Sequentially, these happen one after another, delaying case closure. Task parallelism runs all four tasks concurrently\u2014each specialist works on their component simultaneously. The case review completes when all tasks finish, not when the last sequential step concludes.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Task Parallelism Example: Multi-Component Case Review",
+      "content": "A youth services program conducts comprehensive case reviews combining history documentation (2 hours), risk assessment (1.5 hours), educational needs evaluation (1.5 hours), and placement planning (1 hour). Sequential process: 6 hours total. Parallel process: assign each component to a team member or automated system simultaneously. All components complete in ~2 hours (the longest single task). This accelerates case planning, allows faster transitions to appropriate services, and improves outcomes by enabling quicker interventions. Different work types execute independently without waiting for previous steps.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Synchronization: Coordinating Parallel Processes",
+      "content": "When tasks run in parallel, they often need to share data or coordinate timing\u2014this requires synchronization. Without careful coordination, parallel processes can create conflicts: two caseworkers updating the same client record simultaneously, contradicting service notes, or services being offered twice. Synchronization mechanisms ensure parallel work doesn't create inconsistency. In social work systems, synchronization means: preventing simultaneous edits (locks), ensuring updates propagate correctly (barriers), managing shared queues (message passing), and maintaining consistent case status. Proper synchronization is critical for client safety, data integrity, and regulatory compliance.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Synchronization Example: Coordinated Case Updates",
+      "content": "Three team members work a complex case simultaneously: one conducts client interview, one coordinates housing, one processes benefits. Without synchronization, they might create conflicting service notes, double-book services, or miss critical updates. With synchronization: case record is locked during edits (only one writer at a time), status changes broadcast to all team members instantly, and decision points require explicit confirmation before proceeding. A caseworker can't close a case while another is still planning services. This coordination ensures the case record reflects ground truth and all team members act on current information, protecting client welfare.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Convergence: Integrating Parallel Approaches in Your Work",
+      "content": "Real-world social work systems combine all three parallel computing strategies. Data parallelism processes bulk client records (outcome reports, eligibility determinations). Task parallelism divides specialized work (assessment, planning, intervention). Synchronization coordinates shared resources (case records, service databases). A modern integrated system might: process eligibility for 20,000 clients in parallel (data parallelism), distribute case reviews across specialists simultaneously (task parallelism), and maintain consistency across concurrent updates (synchronization). Understanding these three pillars enables you to advocate for better technology infrastructure, identify bottlenecks, and propose solutions that serve clients faster without sacrificing safety or quality.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Parallel Computing for Social Work Systems",
+      "content": "You've learned how parallel computing accelerates social work operations. Data parallelism handles bulk processing, task parallelism distributes specialized work, and synchronization coordinates shared systems. These principles apply whether you're supporting direct services, managing data systems, or designing organizational processes. Effective parallel design means clients get faster assessments, safer coordinated care, and more timely interventions. As social work increasingly relies on technology, these computational concepts directly impact your ability to serve vulnerable populations effectively."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Data Parallelism: Processing Client Data at Scale"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n2",
+      "target": "n5",
+      "label": "Task Parallelism: Dividing Different Work Streams"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n2",
+      "target": "n7",
+      "label": "Synchronization: Coordinating Parallel Processes"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T05:08:53.931694+00:00",
+  "model": "claude-haiku-4-5"
+}

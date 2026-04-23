@@ -1,0 +1,442 @@
+{
+  "id": "cv-marine-fundamentals",
+  "title": "Computer Vision Fundamentals Through Marine Biology",
+  "description": "Master computer vision concepts through real-world applications in marine science, from underwater image processing to automated species recognition",
+  "topic": "Computer Vision",
+  "theme": "marine biology",
+  "difficulty": "beginner",
+  "estimated_minutes": 75,
+  "tags": [
+    "computer vision",
+    "machine learning",
+    "marine biology",
+    "image processing",
+    "underwater imaging"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Computer Vision in Marine Ecology",
+      "content": "Computer vision enables machines to interpret underwater images and video, revolutionizing marine science. Marine biologists use CV systems to automatically count fish in deep-sea footage, identify species from coral reef videos, and detect changes in bioluminescent patterns. Just as human eyes send signals to our brain for interpretation, computer vision algorithms process pixel data to extract meaningful information about marine ecosystems. These systems can analyze thousands of hours of underwater video in days, tasks that would take human researchers months or years. From monitoring kelp forest health to tracking whale migrations, CV has become indispensable to understanding our oceans.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Assessment: CV Fundamentals",
+      "content": "Test your understanding of computer vision basics and its role in marine research.",
+      "questions": [
+        {
+          "question": "A marine research team deploys underwater cameras to monitor a kelp forest ecosystem. What is the first step a computer vision system must perform on the recorded video?",
+          "options": [
+            "A) Convert video frames into pixel arrays for digital processing",
+            "B) Automatically classify all organisms in the video",
+            "C) Compress the video file size",
+            "D) Identify human divers in the footage"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Digital images must be represented as numerical pixel values before algorithms can process them.",
+            "Incorrect. Classification happens much later in the CV pipeline, after features are extracted and analyzed.",
+            "Incorrect. Compression is important for storage, but not the first step in computer vision processing.",
+            "Incorrect. While possible, organism classification is a more complex task than the foundational step."
+          ],
+          "explanation": "Computer vision begins by converting visual data (frames, images) into numerical arrays where each pixel has color/intensity values. Only then can algorithms analyze and interpret the data."
+        },
+        {
+          "question": "An underwater camera monitoring a coral reef produces low-contrast images due to water absorption of certain light wavelengths. How does this relate to a core challenge in computer vision?",
+          "options": [
+            "A) Images with poor contrast make it harder for algorithms to distinguish features and boundaries",
+            "B) Low contrast automatically means the image is corrupted and cannot be analyzed",
+            "C) Computer vision only works with high-quality, clear images from surface cameras",
+            "D) Contrast is unrelated to machine learning-based image analysis"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Feature extraction, a key CV task, relies on detecting contrasts and edges in images.",
+            "Incorrect. While challenging, low-contrast images can still be analyzed with appropriate preprocessing.",
+            "Incorrect. Underwater imaging and computer vision have matured significantly; many systems handle challenging conditions.",
+            "Incorrect. Contrast directly affects feature detection and recognition accuracy."
+          ],
+          "explanation": "Computer vision systems detect features (edges, corners, textures) through contrast differences. Poor contrast reduces the signal algorithms can use to identify important elements in the image."
+        },
+        {
+          "question": "Why is computer vision valuable for monitoring bioluminescent organisms in the deep ocean?",
+          "options": [
+            "A) It can detect and measure light emission patterns automatically, enabling 24/7 monitoring without human observation",
+            "B) It eliminates the need for submarines or remotely operated vehicles",
+            "C) It works better in darkness than in daylight",
+            "D) Bioluminescence is easier to process than other visual signals"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Automated monitoring of dynamic, low-light phenomena like bioluminescence is a key strength of CV systems.",
+            "Incorrect. CV complements but doesn't replace the need for direct observation and data collection tools.",
+            "Incorrect. While CV has advantages in low light, the value is in automation and scale, not inherent superiority.",
+            "Incorrect. Bioluminescent detection actually requires sophisticated algorithms due to weak signal and noise."
+          ],
+          "explanation": "Computer vision excels at automated, continuous monitoring of visual phenomena, making it ideal for observing rare bioluminescent events without requiring dedicated human observers around the clock."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: CV Fundamentals Reinforcement",
+      "content": "Reinforce your understanding of computer vision basics through marine-focused scenarios.",
+      "questions": [
+        {
+          "question": "A research vessel's AI system monitors underwater footage to detect whale sharks. What fundamental transformation must happen first?",
+          "options": [
+            "A) Convert video frames into numerical data representations",
+            "B) Train the model on whale shark images",
+            "C) Determine which whale sharks are endangered",
+            "D) Communicate with marine conservation organizations"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! All image processing begins with digital representation.",
+            "Incorrect. Training comes after the foundational setup.",
+            "Incorrect. This is a conservation decision, not a CV task.",
+            "Incorrect. This is an administrative task, not part of the CV pipeline."
+          ],
+          "explanation": "The foundation of computer vision is converting visual information into data that algorithms can process\u2014typically pixel arrays with numerical values."
+        },
+        {
+          "question": "Explain why a human marine biologist and a computer vision system might disagree on whether a blurry underwater image contains a particular species.",
+          "options": [
+            "A) The CV system relies on pixel patterns and features, which may be unclear in blurry images, while humans use contextual knowledge and experience",
+            "B) Computer vision is always more accurate than human observation",
+            "C) Blurry images should never be analyzed by either humans or algorithms",
+            "D) CV systems have no ability to recognize patterns in underwater imagery"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This highlights the fundamental difference between algorithmic feature detection and human reasoning.",
+            "Incorrect. Accuracy depends on image quality and training\u2014humans can be more flexible in poor conditions but may miss details.",
+            "Incorrect. Blurry images can be partially analyzed; they're just more challenging.",
+            "Incorrect. CV systems excel at finding patterns in diverse conditions, including underwater environments."
+          ],
+          "explanation": "Computer vision algorithms depend on clear features (edges, corners, textures) in pixel data. Humans can infer from context and prior knowledge even with unclear visual information\u2014a key difference in how we interpret the world."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Feature Detection and Extraction in Underwater Imaging",
+      "content": "Features are distinctive visual patterns that algorithms detect in images: edges (boundaries between objects), corners (sharp angle changes), and textures (repeating patterns). In marine imaging, edge detection helps identify fish body outlines, fin positions, and coral structure boundaries. Corner detection spots key points on fish heads or sea star arms, while texture analysis distinguishes between smooth fish scales and rough coral surfaces. Feature extraction converts raw pixel data into a smaller set of meaningful patterns that make classification faster and more reliable. For example, a system monitoring fish health learns that certain texture patterns indicate disease, allowing early detection before physical symptoms appear. By extracting features specific to marine organisms, researchers can process vast datasets efficiently and focus computational power on what matters most.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Feature Detection in Marine Imaging",
+      "content": "Evaluate your understanding of how features are detected and extracted from underwater images.",
+      "questions": [
+        {
+          "question": "A CV system analyzing seafloor images needs to identify individual sea urchins among rocks and sand. Which feature type would be most useful for locating the urchin's center?",
+          "options": [
+            "A) Corner detection on the urchin's sharp spine tips",
+            "B) Edge detection on the urchin-to-background boundary",
+            "C) Texture analysis of the urchin's bumpy surface",
+            "D) Color segmentation based on urchin pigmentation"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Corner detection excels at finding sharp points\u2014like urchin spines\u2014that create distinct angular features.",
+            "Incorrect. Edges help delineate boundaries, but corners are more distinctive for pointy structures.",
+            "Incorrect. Texture helps characterize surfaces, but corners better locate specific points.",
+            "Incorrect. Color segmentation could help, but isn't as precise for a spherical object with spines."
+          ],
+          "explanation": "Corner detection identifies sharp angle changes, making it ideal for locating the distinctive spine tips that characterize sea urchins."
+        },
+        {
+          "question": "Why is feature extraction valuable when a marine research team has thousands of hours of coral reef video to analyze for disease outbreaks?",
+          "options": [
+            "A) Features reduce data complexity, allowing faster analysis and pattern recognition without processing every pixel",
+            "B) Features eliminate the need for human expertise in marine biology",
+            "C) Feature extraction makes videos easier to watch for human researchers",
+            "D) Features allow the system to skip video frames and still maintain accuracy"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Feature extraction creates compact representations that algorithms can analyze efficiently at scale.",
+            "Incorrect. Features enhance analysis but don't replace biological expertise.",
+            "Incorrect. Features are for algorithmic processing, not for human viewing experience.",
+            "Incorrect. Systematic analysis requires processing frames consistently, not skipping them."
+          ],
+          "explanation": "By extracting relevant features (texture patterns indicating disease, color anomalies, structural changes), systems can process massive video datasets quickly, identifying patterns that would take humans weeks or months to spot manually."
+        },
+        {
+          "question": "A bioluminescent jellyfish appears as a glowing outline in darkness against a black ocean background. Which feature would be most reliable for detecting this jellyfish?",
+          "options": [
+            "A) Edge detection on the bright jellyfish-to-dark water boundary",
+            "B) Corner detection on the jellyfish's bell shape",
+            "C) Texture analysis of the water's granular noise",
+            "D) Scale detection of the jellyfish's overall size"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The strong contrast between the glowing jellyfish and dark water creates a clear edge\u2014a powerful signal for edge detection.",
+            "Incorrect. Corners would be weak on a smooth bell shape; edge detection is more reliable here.",
+            "Incorrect. Water noise is background clutter, not a useful feature for jellyfish detection.",
+            "Incorrect. While size helps, edges provide the most direct distinguishing feature."
+          ],
+          "explanation": "Edge detection thrives on contrast. A bright bioluminescent jellyfish against dark water provides excellent edge signals, making it highly detectable."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Feature Detection Reinforcement",
+      "content": "Strengthen your ability to identify appropriate features for various underwater imaging scenarios.",
+      "questions": [
+        {
+          "question": "A research team uses thermal imaging to detect heat-emitting hydrothermal vent fauna. What feature detection method would work best with thermal data?",
+          "options": [
+            "A) Edge detection on temperature boundaries between hot vents and cold water",
+            "B) Color detection based on visible light spectrum",
+            "C) Sonar feature analysis",
+            "D) Acoustic pattern recognition"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Temperature creates clear boundaries that edge detection can identify.",
+            "Incorrect. Thermal imaging doesn't use visible light colors.",
+            "Incorrect. Sonar is acoustic, not thermal.",
+            "Incorrect. This isn't about sound waves."
+          ],
+          "explanation": "Edge detection works on any data with boundaries\u2014thermal images have sharp temperature contrasts at vent edges, making edge detection ideal."
+        },
+        {
+          "question": "Describe why a pufferfish's distinctive spiny texture would help a CV system recognize it compared to a smooth ocean sunfish.",
+          "options": [
+            "A) Texture features capture the pufferfish's unique surface pattern, creating a distinctive fingerprint for recognition",
+            "B) Spines make objects easier to see with human eyes",
+            "C) Texture always indicates dangerous species",
+            "D) Smooth surfaces cannot be analyzed by computer vision"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Texture analysis creates unique signatures for species with distinctive surface patterns.",
+            "Incorrect. This is true but not the reason for CV analysis.",
+            "Incorrect. Texture indicates surface properties, not danger.",
+            "Incorrect. Smooth surfaces are analyzed regularly; texture simply provides less signal."
+          ],
+          "explanation": "Different species have characteristic textures\u2014pufferfish spines vs. sunfish smoothness. Texture features create unique 'fingerprints' that machine learning models use to distinguish species."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Image Classification and Species Recognition in Marine Research",
+      "content": "Image classification assigns images to categories based on extracted features. A marine CV system learns to classify underwater images as containing 'coral bleaching,' 'healthy coral,' 'kelp forest,' or 'barren seafloor' by analyzing patterns from thousands of training images. Species recognition\u2014a specialized form of classification\u2014identifies specific fish, shark, or whale species from video footage. Machine learning models train on labeled examples: showing the system images of healthy vs. diseased coral, or different fish species with their correct labels. Over time, the model learns which feature patterns correspond to each category. Modern systems achieve 95%+ accuracy on some marine species recognition tasks, matching or exceeding expert human identification, while working 24/7 without fatigue and across millions of images. The key is providing diverse training data that reflects real-world complexity: varying lighting, angles, water clarity, and natural variation within species.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Image Classification and Species Recognition",
+      "content": "Test your understanding of classification, training, and species recognition in marine CV applications.",
+      "questions": [
+        {
+          "question": "A research institute wants to build a CV system that automatically categorizes deep-sea fish videos into 'species A,' 'species B,' and 'species C.' How should they prepare training data?",
+          "options": [
+            "A) Manually label thousands of video frames with the correct species, covering diverse lighting and angles",
+            "B) Use only clear, perfect images of each species",
+            "C) Have the system learn from unlabeled video without human input",
+            "D) Take photos of specimens in a lab and assume they represent the same species in nature"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Machine learning requires diverse, labeled training examples to generalize well to real-world conditions.",
+            "Incorrect. Real-world data is messy; training on only perfect images causes poor performance on actual footage.",
+            "Incorrect. Unsupervised learning can work but requires clear labels for supervised classification like this.",
+            "Incorrect. Lab specimens don't capture the variability seen in natural underwater conditions."
+          ],
+          "explanation": "Supervised learning\u2014the foundation of most classification systems\u2014requires diverse labeled examples. The system learns to map feature patterns to correct labels, so it must see the variety it will encounter in deployment."
+        },
+        {
+          "question": "A marine sanctuary monitors coral using a classification model that previously achieved 90% accuracy in laboratory tests. In field deployment, accuracy drops to 65%. What could explain this performance gap?",
+          "options": [
+            "A) The model trained on lab images of pristine coral but field images include shadows, sediment, and varied lighting conditions",
+            "B) The deep-sea environment randomly corrupts the model's predictions",
+            "C) Coral in the wild is harder to classify than in labs because it thinks differently",
+            "D) Computer vision models cannot work in natural conditions"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is 'distribution shift'\u2014training and deployment data differ, causing performance degradation.",
+            "Incorrect. Algorithms don't make random decisions; poor performance has systematic causes.",
+            "Incorrect. Coral appearance varies systematically with environment, not due to intelligence.",
+            "Incorrect. Marine CV systems work well in the field when properly trained on diverse data."
+          ],
+          "explanation": "Models trained on controlled lab data often fail in the messy real world. This is why marine researchers collect training data that includes real-world variability: shadows, sediment, different coral health states, and varied camera angles."
+        },
+        {
+          "question": "Why would a fish species recognition system achieve different accuracy levels for different species, even when trained on the same number of images?",
+          "options": [
+            "A) Some species have distinctive features (bright coloration, unique fins) easier to recognize than similar-looking species",
+            "B) Some fish species are more intelligent than others",
+            "C) The system randomly performs differently regardless of data quality",
+            "D) All fish species require the same number of images for equal accuracy"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Feature distinctiveness affects classification difficulty. A bright orange fish is easier to distinguish than two similar-looking gray species.",
+            "Incorrect. Fish intelligence doesn't affect machine learning classification.",
+            "Incorrect. ML performance depends on data quality and feature distinctiveness, not randomness.",
+            "Incorrect. Some species are intrinsically easier to classify due to visual distinctiveness."
+          ],
+          "explanation": "A distinctive fish species with bright coloration and unique fin shapes is easier to classify than two cryptic species that look similar. Feature distinctiveness is a key factor in classification difficulty."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Classification and Recognition Reinforcement",
+      "content": "Consolidate your understanding of classification challenges and solutions in marine systems.",
+      "questions": [
+        {
+          "question": "A whale research team wants to identify individual humpback whales by analyzing their fluke (tail) patterns. Should their training data include flukes photographed from different angles and distances?",
+          "options": [
+            "A) Yes, diverse angles and distances in training ensure the model recognizes flukes regardless of observation conditions",
+            "B) No, training should only include standardized profile views",
+            "C) The angle doesn't matter for pattern recognition",
+            "D) Individual identification is impossible with computer vision"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Diverse training data improves generalization to real-world observation conditions.",
+            "Incorrect. Real-world observations don't follow a standard, so training should include variety.",
+            "Incorrect. Angle significantly affects visual appearance and feature extraction.",
+            "Incorrect. CV systems excel at individual identification based on distinctive patterns."
+          ],
+          "explanation": "Real-world observations happen at varied angles and distances. Training data should reflect this to ensure the deployed system works in actual field conditions."
+        },
+        {
+          "question": "A coral health monitoring system classifies images into 'bleached,' 'partially bleached,' and 'healthy.' Why might some images be difficult to classify correctly?",
+          "options": [
+            "A) Images at intermediate stages of bleaching have ambiguous features between categories, making classification challenging",
+            "B) Bleaching is not visible in images",
+            "C) The system simply guesses randomly on hard images",
+            "D) Intermediate stages don't actually exist in real coral bleaching"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Classification boundaries aren't always sharp; intermediate cases near decision boundaries are inherently ambiguous.",
+            "Incorrect. Bleaching is visually distinctive.",
+            "Incorrect. Systems don't guess randomly; uncertain cases reflect real ambiguity.",
+            "Incorrect. Coral bleaching is a gradual process with many intermediate states."
+          ],
+          "explanation": "Classification systems struggle most with edge cases: images that fall between categories. Partially bleached coral, being intermediate between healthy and fully bleached, naturally poses greater classification difficulty."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Computer Vision in Marine Biology",
+      "content": "Congratulations! You have mastered the fundamentals of computer vision through marine biology applications. You understand how CV systems process underwater images, detect distinctive features in complex marine environments, and classify species with high accuracy. These skills directly apply to real-world marine research: monitoring coral reef health, tracking endangered species, detecting ocean pollution, and understanding deep-sea ecosystems. Computer vision continues to revolutionize marine science, enabling researchers to observe and protect our oceans at unprecedented scale. Consider exploring advanced topics like real-time video analysis, deep learning architectures, or multi-modal fusion combining visual data with acoustic and thermal sensors for comprehensive ocean monitoring."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "Pass - continue"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Fail - practice"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Begin assessment"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "Pass - continue"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Fail - practice"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Begin assessment"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n10",
+      "label": "Pass - complete"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "Fail - practice"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "Retry assessment"
+    }
+  ],
+  "generated_at": "2026-03-27T13:03:41.318780+00:00",
+  "model": "claude-haiku-4-5"
+}

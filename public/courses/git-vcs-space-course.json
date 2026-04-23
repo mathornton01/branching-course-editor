@@ -1,0 +1,439 @@
+{
+  "id": "git-vcs-space-course",
+  "title": "Git and Version Control: Master the Mission Log",
+  "description": "Learn version control through the lens of space exploration. Understand commits, branches, merging, and collaboration\u2014all told through space mission scenarios.",
+  "topic": "Git and Version Control",
+  "theme": "space exploration",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "git",
+    "version-control",
+    "collaboration",
+    "software-development",
+    "space-exploration"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Mission Control: Why We Need Version Control",
+      "content": "Imagine controlling a space mission with hundreds of engineers. Each team member needs to contribute code to the spacecraft's navigation system, but if everyone works on the same file, changes get overwritten and critical systems fail mid-flight. Version control is like a mission log that records every change made to your code, who made it, and when. It lets teams work in parallel, track what changed and why, and restore earlier versions if something breaks. Without version control, space missions would crash."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Checkpoint 1: Version Control Fundamentals",
+      "content": "Test your understanding of why version control is essential for space missions.",
+      "questions": [
+        {
+          "question": "What is the primary purpose of version control in a space mission?",
+          "options": [
+            "To backup files automatically",
+            "To track who made what changes and enable collaboration",
+            "To encrypt sensitive mission data",
+            "To manage server hardware"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Backup is helpful but that's not the primary purpose",
+            "Correct! Version control is about tracking changes and enabling teams to work together safely.",
+            "Encryption is a security concern, not version control's role",
+            "Version control is about code management, not hardware"
+          ],
+          "explanation": "Version control enables teams to work safely on the same codebase while maintaining a complete history of all changes."
+        },
+        {
+          "question": "If multiple engineers modify the navigation code for the lunar lander simultaneously, what problem does version control solve?",
+          "options": [
+            "It prevents them from both working at once",
+            "It ensures all changes are merged safely and we can see what each person did",
+            "It deletes older versions to save space",
+            "It automatically picks the best version"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Version control enables parallel work, not prevents it",
+            "Correct! Version control allows parallel development with safe merging.",
+            "Version control keeps history; it doesn't delete",
+            "Version control records changes but requires human decisions"
+          ],
+          "explanation": "Version control systems enable multiple developers to work on the same project simultaneously while managing integration of their changes."
+        },
+        {
+          "question": "What can you do if a commit to the thruster system code introduces a critical bug?",
+          "options": [
+            "You can only delete the entire project",
+            "You can review the change and revert to the previous stable version",
+            "You cannot recover from any mistakes",
+            "You must manually rewrite all code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Version control allows selective changes, not full deletion",
+            "Correct! You can examine any commit and revert if needed.",
+            "Version control enables recovery from mistakes",
+            "Version control automates this process"
+          ],
+          "explanation": "One of version control's key benefits is the ability to view and revert any previous version of the code."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Simulation: Understanding Version Control",
+      "content": "Practice your understanding of version control concepts through space exploration scenarios.",
+      "questions": [
+        {
+          "question": "You're documenting a Mars rover's software with your team. Why would version control be better than email chains?",
+          "options": [
+            "Email is too slow",
+            "Version control keeps a complete history, shows who changed what, and prevents overwrites",
+            "Emails take up too much disk space",
+            "It's the official requirement of NASA"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed is one factor but not the core reason",
+            "Correct! Version control provides history, attribution, and prevents conflicts.",
+            "This is true but not the main benefit",
+            "While NASA uses it, that's not why it's technically better"
+          ],
+          "explanation": "Version control provides a permanent, traceable record of all changes with clear attribution to individuals."
+        },
+        {
+          "question": "A team member accidentally breaks the rover's wheel motor code. Where does version control help?",
+          "options": [
+            "It prevents the break from happening",
+            "It records the change so you can trace what happened and restore the previous working version",
+            "It automatically tests the code",
+            "It emails the team member"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Version control doesn't prevent bugs; it helps recover from them",
+            "Correct! You can identify the problematic change and revert it.",
+            "Testing is separate from version control",
+            "Version control is a code management tool, not a notification system"
+          ],
+          "explanation": "Version control's history enables you to identify when and where bugs were introduced, and revert to working code."
+        }
+      ],
+      "pass_threshold": 100,
+      "success_target": "n2",
+      "failure_target": null
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Branches and Commits: Parallel Mission Routes",
+      "content": "In space exploration, flight missions often prepare multiple contingency routes. In Git, a branch is like preparing a parallel mission path\u2014you can work on new features (like an upgraded thruster system) without affecting the main mission (the main branch). When you 'commit,' you record a checkpoint: 'I've tested the oxygen recycler and it works.' Each commit has a message explaining what changed and why. When your branch is ready and tested, you merge it back into main\u2014like confirming the new thruster system is safe and ready to use on the primary spacecraft. This way, teams can work on navigation, propulsion, and life support simultaneously, then combine their work safely."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Checkpoint 2: Git Branches and Commits",
+      "content": "Test your understanding of branches, commits, and merging in Git.",
+      "questions": [
+        {
+          "question": "You're developing a new attitude control system for a Mars orbiter. Your team lead says 'create a branch.' What does that mean?",
+          "options": [
+            "Copy the entire project into a new folder",
+            "Create an isolated version where you can work on new features without affecting the main codebase",
+            "Create a backup of the project",
+            "Duplicate the server"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's not how version control branches work",
+            "Correct! A branch is an isolated development environment.",
+            "Backups are separate from branches",
+            "Branches are code management, not server management"
+          ],
+          "explanation": "A branch in Git is a separate line of development that allows you to work independently without affecting the main codebase."
+        },
+        {
+          "question": "You've fixed a bug in the retro-rocket ignition sequence. You commit with the message 'Fixed retro-rocket timing bug that caused 0.3s delay.' What's the benefit of this detailed message?",
+          "options": [
+            "It makes the Git log harder to read",
+            "Future team members (or your future self) can understand what changed and why, and trace when issues were introduced",
+            "It takes up too much space",
+            "It's just a requirement with no practical benefit"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Clear messages actually make logs more useful",
+            "Correct! Detailed commit messages are essential for project history.",
+            "Storage is not a concern with commit messages",
+            "Commit messages are vital documentation"
+          ],
+          "explanation": "Commit messages document the 'why' behind changes, making it possible to understand the project's history and locate when issues were introduced."
+        },
+        {
+          "question": "After testing your new life-support branch, you want to add it to the main spacecraft system. What's the Git operation called?",
+          "options": [
+            "Commit",
+            "Push",
+            "Merge",
+            "Clone"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Commit records changes within a branch",
+            "Push uploads commits to a remote repository",
+            "Correct! Merge combines branches together.",
+            "Clone copies a repository"
+          ],
+          "explanation": "Merge is the Git operation that combines changes from one branch into another."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Simulation: Branches and Commits",
+      "content": "Practice working with branches and commits in space mission scenarios.",
+      "questions": [
+        {
+          "question": "Your team has three parallel modules: navigation (branch nav), propulsion (branch propulsion), and communications (branch comms). Why is this better than everyone committing to main?",
+          "options": [
+            "It prevents all developers from working simultaneously",
+            "It isolates work so broken code in one system doesn't crash another; teams can work independently",
+            "Branches use less disk space",
+            "There is no benefit"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Branches enable parallel work, not prevent it",
+            "Correct! Branches isolate work and enable safe parallel development.",
+            "Storage usage is not different",
+            "Branches provide significant organizational benefits"
+          ],
+          "explanation": "Parallel branches allow multiple teams to work independently, reducing the risk of one team's broken code affecting others."
+        },
+        {
+          "question": "You make three changes: update the solar panel arrays, fix the antenna calibration, and improve the thermal regulation. You make two commits: first with the solar panel update (message 'Updated solar panel efficiency calculations'), then with antenna and thermal changes. Why split commits instead of doing all three at once?",
+          "options": [
+            "To make the project take longer",
+            "So each logical change is documented separately; if the thermal fix needs to be reverted later, you don't lose the antenna fix",
+            "To slow down the project",
+            "Commits should always be combined"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Splitting commits doesn't waste time; it improves organization",
+            "Correct! Atomic commits make history cleaner and selective changes possible.",
+            "Commits improve efficiency, not reduce it",
+            "Logical separation of commits is a best practice"
+          ],
+          "explanation": "Atomic commits (one logical change per commit) make it easier to understand history, review changes, and selectively revert specific fixes."
+        }
+      ],
+      "pass_threshold": 100,
+      "success_target": "n5",
+      "failure_target": null
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Merging Missions: Collaboration and Conflict Resolution",
+      "content": "When two space missions dock\u2014like the lunar module meeting the command module\u2014flight controllers must synchronize both vessels. In Git, when two developers modify the same code section, Git detects a 'conflict.' This isn't a failure; it's a signal that human judgment is needed. Imagine: Developer A changed the fuel calculation in the propellant module to use metric tons, while Developer B independently changed it to use kilograms. Git will flag this conflict and ask: which version is correct? You'll resolve it by deciding which calculation is right, then test thoroughly. Pull requests (PRs) are like mission review boards\u2014before merging your branch to main, teammates review your changes to catch bugs and maintain quality. This is how real space programs work: no single person's code goes into the spacecraft without peer review."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Checkpoint 3: Collaboration and Conflicts",
+      "content": "Test your understanding of merge conflicts and collaborative development.",
+      "questions": [
+        {
+          "question": "Two astronauts are modifying the guidance computer code. Alice changed line 42 from 'velocity = distance / time' to 'velocity = distance / elapsed_seconds'. Bob independently changed it to 'velocity = distance / time_in_ms'. Git reports a merge conflict. What should happen?",
+          "options": [
+            "Git automatically picks the best one",
+            "Both changes are automatically combined",
+            "A human must review the conflict, understand which units the code expects, pick the correct version, test it, and resolve",
+            "The entire project is lost"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Git cannot automatically determine which calculation is correct",
+            "You cannot combine both versions without understanding the code's purpose",
+            "Correct! Human judgment is required to resolve semantic conflicts.",
+            "Version control enables recovery, not loss"
+          ],
+          "explanation": "Merge conflicts require human judgment because Git can detect overlapping edits but cannot understand semantic correctness."
+        },
+        {
+          "question": "Before merging your branch into main, a colleague reviews your 5 commits on a pull request (PR). She finds that commit #3 has a logic error in the solar sail deployment. What advantage does PR review provide?",
+          "options": [
+            "It slows down development",
+            "It catches errors before they reach the main codebase; this quality gate prevents bugs in production",
+            "It requires more meetings",
+            "It serves no purpose"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Review improves code quality without slowing progress",
+            "Correct! PR review is a critical quality gate.",
+            "Review happens asynchronously; it doesn't require synchronous meetings",
+            "PR review is essential for code quality"
+          ],
+          "explanation": "Pull request reviews enable peer review of changes before they enter production, catching bugs and improving code quality."
+        },
+        {
+          "question": "A conflict happens when:",
+          "options": [
+            "Two developers edit different files",
+            "Two developers commit to different branches",
+            "Two developers modify the same line/region of code and Git can't automatically merge them",
+            "The main branch is updated"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Different files merge cleanly",
+            "Different branches can merge without conflicts if they don't overlap",
+            "Correct! Conflicts occur when overlapping edits cannot be automatically merged.",
+            "Main updates don't cause conflicts by themselves"
+          ],
+          "explanation": "Merge conflicts occur only when two changes modify the same region of code and Git cannot determine the correct resolution."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Simulation: Handling Conflicts and Peer Review",
+      "content": "Practice resolving conflicts and conducting peer reviews in collaborative space missions.",
+      "questions": [
+        {
+          "question": "You and your teammate are building a communication system. You're on branch 'comms-encryption', she's on branch 'comms-routing'. Neither branch modifies the same files. Will there be a merge conflict?",
+          "options": [
+            "Yes, because you're both on different branches",
+            "No, because you modified different files; Git can merge cleanly",
+            "Yes, conflicts always happen",
+            "Maybe, depending on the folder structure"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Branches alone don't cause conflicts",
+            "Correct! Non-overlapping file changes merge automatically.",
+            "Conflicts only happen with overlapping edits",
+            "File structure doesn't affect merge logic"
+          ],
+          "explanation": "Git can automatically merge non-overlapping changes in different files, even when they come from different branches."
+        },
+        {
+          "question": "During a PR review, your reviewer comments: 'I don't understand why you're clearing the fuel tank before computing remaining fuel. Can you explain or add a comment?' This is good code review feedback because:",
+          "options": [
+            "It's just criticism with no value",
+            "Code clarity matters; if another engineer has to maintain this code, they won't understand your intent",
+            "Comments slow down execution",
+            "Code is self-explanatory and never needs explanation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Constructive feedback improves code quality",
+            "Correct! Code clarity is essential for maintainability.",
+            "Comments don't affect runtime performance",
+            "Complex logic always benefits from explanation"
+          ],
+          "explanation": "Code reviews ensure that not only does the code work, but it's clear enough for other engineers to understand and maintain."
+        }
+      ],
+      "pass_threshold": 100,
+      "success_target": "n8",
+      "failure_target": null
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mission Complete: You've Mastered Git",
+      "content": "Congratulations, astronaut! You've navigated the version control cosmos. You now understand how to track code changes (commits), work in parallel (branches), merge safely (managing conflicts), and collaborate securely (pull requests and peer review). These skills are essential for any space mission\u2014whether you're building a rover, a satellite, or a crewed spacecraft. Every successful space program uses version control to ensure reliability, traceability, and teamwork. You're ready to join the crew."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "proceed"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "proceed"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "proceed"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    }
+  ],
+  "generated_at": "2026-03-27T05:38:52.444669+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,244 @@
+{
+  "id": "ds-healthcare-course",
+  "title": "Distributed Systems in Healthcare",
+  "description": "Explore distributed systems fundamentals through healthcare scenarios. Learn how hospitals manage patient data consistency, handle peak demand, and survive critical failures.",
+  "topic": "Distributed Systems",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed-systems",
+    "healthcare",
+    "consistency",
+    "scalability",
+    "fault-tolerance"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Distributed Systems in Modern Healthcare",
+      "content": "Distributed systems are critical in healthcare, managing patient data across hospitals, handling thousands of concurrent appointments, and ensuring systems stay online even during failures. This course explores three pillars: keeping patient data consistent across locations, handling traffic spikes during crises, and surviving system failures that could impact patient care. Understanding these concepts helps us design resilient healthcare IT systems that practitioners and patients can trust.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which concept interests you most?",
+      "content": "We'll explore three core concepts in healthcare distributed systems. Choose one to focus on:",
+      "choices": [
+        {
+          "label": "Data Consistency & Replication (Patient Records)",
+          "next": "n3"
+        },
+        {
+          "label": "Scalability & Load Balancing (Peak Demand)",
+          "next": "n5"
+        },
+        {
+          "label": "Fault Tolerance & Resilience (System Failures)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Data Consistency: Managing Patient Records Across Hospitals",
+      "content": "When a patient visits multiple hospitals, their medical records must be identical across all systems to prevent dangerous prescriptions or missed diagnoses. In distributed systems, maintaining this consistency across multiple locations is challenging because networks can fail, servers can lag, and simultaneous updates can conflict. Healthcare systems use strategies like primary-backup replication (one hospital maintains the source record) and consensus algorithms (all hospitals must agree on updates) to ensure consistency while remaining available.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: The Multi-Hospital Patient Record",
+      "content": "A patient records an allergy to Penicillin at Hospital A. Hospital B and C have cached copies. Hospital A must immediately replicate this critical update to B and C before confirming to the patient's doctor. If one hospital is temporarily offline, the update queues for later transmission. Once B and C receive it, all three systems have identical data. A consensus approach (all 3 agree) is safer but slower; a primary-backup approach (A is source) is faster but risks divergence if A fails.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Scalability: Handling Peak Patient Loads",
+      "content": "Hospitals experience predictable spikes: flu season, major accidents, end-of-month appointment rushes. A single server can't handle 10,000 simultaneous patient portal logins. Distributed systems use load balancers to spread requests across multiple servers. However, scaling isn't free\u2014data must be split or replicated across servers, network traffic increases, and coordinating transactions becomes harder. Effective scaling requires choosing which components to replicate (read-heavy logs) vs. shard (patient data split by ID range).",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: ER Registration During Mass Casualty Event",
+      "content": "A major accident brings 500 injured patients to the ER. Without scaling, the registration system crashes, preventing triage and care coordination. A scalable system load-balances registration requests across 5 servers. Patient data is sharded: IDs 1\u2013100K go to Server 1, 100K\u2013200K to Server 2, etc. Servers also cache frequently accessed data (current patient list). When the incident ends and load drops, servers are deallocated. This approach scaled from 10 to 500 requests/sec elastically.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Fault Tolerance: System Resilience in Critical Care",
+      "content": "In healthcare, downtime can mean missed monitoring alerts, delayed treatments, or lost diagnostic data. Distributed systems achieve fault tolerance through redundancy: multiple copies of data across regions, backup servers that take over on primary failure, and replicating computation (two servers running the same calculation to compare results). However, redundancy increases complexity and cost. Healthcare systems often use a combination: critical components (patient vital signs) are highly redundant, while non-critical logs are single-copy.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: ICU Monitoring System Failover",
+      "content": "An ICU's vital-signs monitoring system runs on Server A and replicates data to Server B in real-time. Server A crashes. A health-check mechanism (heartbeat) detects the failure within 2 seconds and automatically routes new patient connections to Server B, which has all current vital signs from the continuous replication. Surgeons and nurses see no interruption. Server A's failure is logged, investigated, and rebuilt before being added back.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating All Three Concepts",
+      "content": "Real healthcare systems must balance all three concerns. A hospital network replicates patient records (consistency) across regions, load-balances portal requests (scalability) so thousands can log in simultaneously, and employs failover servers (fault tolerance) for outages. These aren't independent: strong consistency can limit scalability (every update must reach all servers); high availability through redundancy raises costs and complexity. Designers must negotiate trade-offs. For example, a non-critical lab-results portal can be \"eventually consistent\" and less redundant, while medication dispensing requires immediate consistency and high fault tolerance. Understanding these trade-offs is essential for building systems that serve patients reliably.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Healthcare Distributed Systems Assessment",
+      "content": "Test your understanding with these scenarios.",
+      "questions": [
+        {
+          "question": "A hospital network wants to deploy a shared patient record system. They need it to work even if one regional server fails, but also need fast global updates. What's the primary trade-off?",
+          "options": [
+            "Consistency vs. Availability",
+            "Replication vs. Sharding",
+            "Load balancing vs. Throughput",
+            "Bandwidth vs. Latency"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Strong consistency requires coordinating updates across all locations, which limits availability if a location is offline.",
+            "Availability is important, but this question's trade-off is about consistency strategies.",
+            "Replication vs. sharding is about scaling, not as directly related to fault tolerance here.",
+            "Bandwidth is part of the trade-off, but the fundamental tension is between consistency and availability."
+          ],
+          "explanation": "In the CAP theorem, a system can have at most 2 of 3: Consistency, Availability, Partition-tolerance. This scenario presses that trade-off."
+        },
+        {
+          "question": "During flu season, a hospital's patient portal sees load spike from 500 to 5,000 requests per second. Which distributed systems concept helps most?",
+          "options": [
+            "Replication",
+            "Load Balancing",
+            "Fault Tolerance",
+            "Consistency protocols"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Replication helps with fault tolerance and read scaling, not the sudden spike.",
+            "Correct! Load balancers distribute incoming requests across multiple servers, preventing any single server from being overwhelmed.",
+            "Fault tolerance helps with failures, not capacity under normal high load.",
+            "Consistency protocols ensure data correctness, not handle load spikes."
+          ],
+          "explanation": "Load balancing directly addresses sudden traffic spikes by distributing requests across resources."
+        },
+        {
+          "question": "An ICU monitoring system is down for 30 seconds due to a server crash. How should it have been designed?",
+          "options": [
+            "Strong replication & automatic failover",
+            "Better monitoring to predict failures",
+            "Single server with perfect uptime SLAs",
+            "Accept downtime as inevitable"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Real-time healthcare needs <1 second failover, achieved via replicating state and automatic detection/switching.",
+            "Monitoring can alert but doesn't prevent downtime.",
+            "No single server achieves 100% uptime; 30 seconds is unacceptable for ICU.",
+            "Downtime is never acceptable in critical care."
+          ],
+          "explanation": "Fault tolerance requires architectural redundancy, not just monitoring."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Course Complete",
+      "content": "You've explored how distributed systems concepts apply to healthcare. You understand the tensions between consistency, scalability, and fault tolerance, and how real systems balance these trade-offs to protect patients. These principles extend beyond healthcare to finance, transportation, and any system where reliability and correctness are paramount."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Data Consistency"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Scalability"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Fault Tolerance"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "pass"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "fail"
+    }
+  ],
+  "generated_at": "2026-03-27T04:04:20.763417+00:00",
+  "model": "claude-haiku-4-5"
+}

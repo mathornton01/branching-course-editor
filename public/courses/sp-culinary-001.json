@@ -1,0 +1,581 @@
+{
+  "id": "sp-culinary-001",
+  "title": "Signal Processing Fundamentals",
+  "description": "Master signal processing through culinary applications - learn how professional chefs intuitively apply Fourier analysis, filtering, and sampling theory to perfect their craft.",
+  "topic": "Signal Processing",
+  "theme": "culinary arts",
+  "difficulty": "intermediate",
+  "estimated_minutes": 75,
+  "tags": [
+    "signal-processing",
+    "culinary",
+    "fourier",
+    "filtering",
+    "sampling",
+    "food-science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Understanding Signals in Culinary Arts",
+      "content": "In cooking, signals are continuous variations that change over time. When you taste a sauce as it simmers, the flavor intensity rises and falls\u2014this is a signal. Similarly, temperature in your oven fluctuates, moisture in dough changes as you knead, and aroma evolves through preparation stages. Every sensory experience in cooking\u2014taste, temperature, texture\u2014can be represented as a signal. These signals carry critical information about dish development. By understanding signals, you predict when a sauce reaches perfect consistency, anticipate when flavors peak, and adjust technique accordingly.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Recognizing Culinary Signals",
+      "content": "Test your understanding of what constitutes a signal in cooking.",
+      "questions": [
+        {
+          "question": "Which of the following is best described as a signal in cooking?",
+          "options": [
+            "A list of ingredients",
+            "The changing temperature of a roasting chicken over 30 minutes",
+            "A recipe written in a cookbook",
+            "The name of a dish"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, a list is static data, not a changing signal.",
+            "Correct! Temperature changes over time as the chicken cooks\u2014this is a signal.",
+            "No, written instructions are static.",
+            "No, a name doesn't change over time."
+          ],
+          "explanation": "Signals must represent quantities that change over time. Static information is not a signal."
+        },
+        {
+          "question": "A baker notices that bread dough rise accelerates for 20 minutes, peaks, then slows. What property of this signal is most important for predicting when bread is ready to bake?",
+          "options": [
+            "Amplitude (how high it rises)",
+            "Frequency (how often it peaks)",
+            "The rate of change (acceleration/deceleration)",
+            "Phase (starting point)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Amplitude helps but doesn't tell you the timing.",
+            "This particular process isn't periodic.",
+            "Correct! The rate of change tells you when to bake.",
+            "Phase isn't directly relevant here."
+          ],
+          "explanation": "Understanding how quickly signals change helps you determine critical cooking moments."
+        },
+        {
+          "question": "In soup-making, what signal would you monitor to ensure your stock is developing properly?",
+          "options": [
+            "The color intensity of the liquid over time",
+            "The recipe book's recommendation",
+            "The pot's size",
+            "The brand of vegetables"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Color intensity changing over time is a signal of flavor development.",
+            "Guidelines are static, not signals.",
+            "Pot size is constant.",
+            "Brand doesn't represent a changing property."
+          ],
+          "explanation": "Observable properties that change during cooking are signals you can monitor and respond to."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Identifying Signals in Your Kitchen",
+      "content": "Practice recognizing different types of signals in real cooking scenarios.",
+      "questions": [
+        {
+          "question": "Which of the following best demonstrates a signal in your kitchen?",
+          "options": [
+            "Your oven temperature rising from 68\u00b0F to 450\u00b0F as you preheat",
+            "Your oven's maximum temperature rating",
+            "The number of oven racks",
+            "Your oven's color"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This shows a quantity changing over time.",
+            "This is a static specification.",
+            "This doesn't change during cooking.",
+            "Color is constant."
+          ],
+          "explanation": "Signals represent quantities that vary over time. Look for things that change, not static properties."
+        },
+        {
+          "question": "When caramelizing onions, the sweetness increases, peaks, then decreases as sugar burns. This behavior is an example of:",
+          "options": [
+            "A static property",
+            "A signal with peak amplitude that you must catch at the right moment",
+            "A frequency",
+            "A filter"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, it changes over time.",
+            "Correct! The peak is the critical moment you're monitoring.",
+            "This isn't about repetition.",
+            "You're not removing something, you're monitoring a change."
+          ],
+          "explanation": "Understanding signal peaks helps you know the perfect moment to stop cooking."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n2"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Frequency and Fourier Analysis in Flavor Profiles",
+      "content": "Every complex flavor is a combination of simpler flavor components, each with its own intensity and timescale. In signal processing, this is called frequency analysis. A sauce might have sweetness (slow-changing, low frequency), subtle umami (medium frequency), and a quick spicy kick (high frequency). The Fourier transform breaks complex signals into frequency components\u2014like how you taste different notes in fine wine. By understanding frequencies present in your dish, you enhance certain flavors or remove unwanted ones. Professional chefs balance flavors by intuitively analyzing frequency spectrum, creating layered, sophisticated dishes rather than one-dimensional tastes.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Understanding Flavor Frequencies",
+      "content": "Demonstrate your understanding of how flavors decompose into frequency components.",
+      "questions": [
+        {
+          "question": "A chef tastes a sauce and detects: lingering sweetness (slow), sharp acidity (quick), and deep umami (medium). In signal processing terms, these represent:",
+          "options": [
+            "Different amplitudes only",
+            "Different frequencies in the overall flavor signal",
+            "Different temperatures",
+            "Different ingredients"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, same flavors at different rates.",
+            "Correct! Each flavor component has its own timescale.",
+            "Temperature isn't about flavor complexity.",
+            "Frequency is about how fast signals change."
+          ],
+          "explanation": "Complex flavors decompose into multiple frequency components operating at different timescales."
+        },
+        {
+          "question": "When creating a spice blend combining cinnamon (warmth building slowly) with black pepper (immediate heat), from a frequency perspective this is:",
+          "options": [
+            "Using only one frequency",
+            "Combining multiple frequencies to create complexity",
+            "Reducing the total signal",
+            "Creating a filter"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, each spice has its own timescale.",
+            "Correct! Layering different timescales creates depth.",
+            "No, you're building richness.",
+            "You're combining, not removing."
+          ],
+          "explanation": "Professional cooking combines multiple frequencies to achieve sophisticated, layered flavors."
+        },
+        {
+          "question": "Why is understanding frequency important in cooking?",
+          "options": [
+            "To know how to mix ingredients",
+            "To predict how different flavor components will interact and at what speed",
+            "To measure recipe quantities",
+            "To determine cooking temperature"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Mixing is about technique.",
+            "Correct! Frequencies show you temporal dynamics of flavor development.",
+            "That's measurement.",
+            "Temperature is separate."
+          ],
+          "explanation": "Frequency analysis helps predict flavor development over time and when dishes will be ready."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Decomposing Culinary Flavors",
+      "content": "Practice identifying frequency components in various culinary contexts.",
+      "questions": [
+        {
+          "question": "In traditional French consomm\u00e9, you taste complex flavor that develops gradually. Which frequency components would you expect?",
+          "options": [
+            "Only high frequencies (quick sensations)",
+            "Only low frequencies (slow-developing)",
+            "A combination of low and medium frequencies reflecting gradual, evolving character",
+            "No frequencies (consomm\u00e9 is uniform)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "No, consomm\u00e9 is refined and slow.",
+            "While slow, it has medium-depth umami.",
+            "Correct! Careful preparation creates layered sensation.",
+            "Good consomm\u00e9 is complex."
+          ],
+          "explanation": "Traditional techniques deliberately layer multiple frequency components to create depth."
+        },
+        {
+          "question": "A molecular gastronomy foam uses rapid gelation. The resulting texture would be characterized by:",
+          "options": [
+            "Only slow frequencies",
+            "High frequencies dominated by rapidly changing sensations",
+            "No sensory variation",
+            "Purely temperature-based signals"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, modern technique emphasizes quick changes.",
+            "Correct! Rapid texture changes are high frequencies.",
+            "The whole point is variation.",
+            "Temperature isn't the main component."
+          ],
+          "explanation": "Different cooking techniques emphasize different frequency ranges in the final experience."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Filtering in Culinary Processing",
+      "content": "In signal processing, filtering removes unwanted frequencies while preserving desired ones. In cooking, you filter constantly. Straining pasta removes water (noise) while keeping pasta (signal). Clarifying stock through cheesecloth removes suspended solids while keeping deep flavor. A chinois strainer separates smooth texture from lumps. Whisking removes air bubbles while maintaining texture. Professional kitchens filter sauces for refinement and strain broths for clarity. Understanding filtering helps recognize what signals you want to keep\u2014rich umami, clean taste\u2014and what to remove: bitterness, impurities, off-flavors.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Applying Filters in Culinary Contexts",
+      "content": "Demonstrate how filtering principles apply to cooking problems.",
+      "questions": [
+        {
+          "question": "You detect metallic off-flavor from cookware in a finished sauce. Which filtering approach best removes this without losing intended sauce flavor?",
+          "options": [
+            "Heating it hotter",
+            "Straining through fine chinois, possibly with charcoal, removing high-frequency metallic while preserving base flavors",
+            "Diluting with water",
+            "Adding more salt"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Heat would worsen it.",
+            "Correct! Filtering removes unwanted frequencies while keeping desired signal.",
+            "Dilution loses flavor.",
+            "Salt doesn't address metallic taste."
+          ],
+          "explanation": "Filtering is selective\u2014it removes specific unwanted frequencies while preserving the signal you want."
+        },
+        {
+          "question": "In wine production, what does filtering accomplish in signal processing terms?",
+          "options": [
+            "Increases alcohol content",
+            "Removes suspended particles (noise) while preserving flavor compounds (signal)",
+            "Changes the wine's color",
+            "Adds tannins"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Filtering doesn't affect alcohol.",
+            "Correct! Particle removal clarifies while protecting aroma.",
+            "Color is separate.",
+            "Filtering doesn't add compounds."
+          ],
+          "explanation": "Filtering separates desirable flavor signals from unwanted particulate noise."
+        },
+        {
+          "question": "A pastry chef notices ganache has grainy texture from cocoa particles. Which filtering method refines it?",
+          "options": [
+            "Adding more chocolate",
+            "Heating and straining through fine mesh to remove particle aggregates",
+            "Cooling faster",
+            "Adding sugar"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "More chocolate might worsen it.",
+            "Correct! Filtering removes unwanted texture components.",
+            "Cooling would set the problem.",
+            "Sugar isn't relevant."
+          ],
+          "explanation": "Filtering removes unwanted high-frequency components like graininess from texture signals."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Designing Filters for Culinary Applications",
+      "content": "Practice designing filtering strategies for real kitchen challenges.",
+      "questions": [
+        {
+          "question": "A soup has unpleasant bitter taste from overcooked vegetables (high-frequency harsh note). You need to remove this without losing vegetable depth (low-frequency base). What approach uses filtering?",
+          "options": [
+            "Adding salt (masking)",
+            "Straining through cheesecloth, then fine sieve to remove bitter tannins while keeping nutrients",
+            "Boiling longer",
+            "Adding cream"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Masking isn't filtering.",
+            "Correct! Progressive filtering removes specific frequencies.",
+            "This would worsen bitterness.",
+            "Dilution doesn't filter."
+          ],
+          "explanation": "Proper filtering selectively removes unwanted components from specific frequency ranges."
+        },
+        {
+          "question": "In clarifying butter to make ghee, what is being filtered out?",
+          "options": [
+            "Fat (you want to keep this)",
+            "Milk solids and water (unwanted high-frequency noise)",
+            "Flavor",
+            "Color"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Fat is your desired signal.",
+            "Correct! You filter moisture and solids for pure, stable product.",
+            "Clarification preserves flavor.",
+            "Browning is intentional."
+          ],
+          "explanation": "Clarification filters by removing specific unwanted components while preserving the essential product."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Sampling Theory and Taste Testing",
+      "content": "In signal processing, sampling means measuring a continuous signal at specific points in time. You cannot continuously taste your dish, so you sample\u2014tasting small amounts at strategically chosen moments. The key insight: if you sample too infrequently, you miss critical information. A chef who tastes only at start and end might miss peak flavor development. If you sample too frequently, you waste product and disrupt the cooking process. The Nyquist theorem tells us there's a minimum sampling rate needed to capture all important signal information. In cooking, this means tasting often enough to catch when flavors peak, when salt dissolves, when sauce thickens\u2014but not so often that you disrupt the dish. Professional chefs know intuitively when to taste: when temperatures change, ingredients are added, or visual cues suggest transitions. Your palate becomes more sensitive with practice, extracting more information from each sample.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Optimizing Tasting Strategies",
+      "content": "Demonstrate your understanding of sampling theory applied to cooking.",
+      "questions": [
+        {
+          "question": "You're reducing a sauce that takes 20 minutes. How often should you taste to know when it reaches right consistency without wasting product?",
+          "options": [
+            "Every minute (over-sampling)",
+            "Only at the end (under-sampling)",
+            "At key moments: when color deepens, steam changes, and in last 5 minutes (adaptive sampling)",
+            "Never\u2014rely on time alone"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Too frequent, wastes product.",
+            "You'll miss the peak and over-reduce.",
+            "Correct! Sample based on signal changes, not rigid intervals.",
+            "You need feedback."
+          ],
+          "explanation": "Effective sampling responds to signal dynamics rather than fixed intervals."
+        },
+        {
+          "question": "A baker fermenting dough sees rise accelerate for a while, peak, then slow near completion. When should checking (sampling) happen?",
+          "options": [
+            "Only at the start",
+            "Equally spaced (every 30 minutes)",
+            "More frequently during acceleration phase when signal changes fastest",
+            "Randomly throughout"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "You'd miss the peak.",
+            "Fixed intervals miss transitions.",
+            "Correct! Higher sampling during rapid changes captures critical moments.",
+            "Random isn't strategic."
+          ],
+          "explanation": "Sampling should match the signal's rate of change for optimal information capture."
+        },
+        {
+          "question": "Why is understanding the Nyquist theorem (minimum sampling rate) important for a kitchen?",
+          "options": [
+            "To determine recipe quantities",
+            "To know minimum frequency of tasting needed to capture flavor evolution",
+            "To set oven temperatures",
+            "To design plating"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's ingredient measurement.",
+            "Correct! Insufficient sampling misses when dishes are ready.",
+            "Temperature is set independently.",
+            "Plating is visual."
+          ],
+          "explanation": "Sampling rate determines whether you capture critical cooking moments."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n13",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "practice",
+      "title": "Designing Optimal Sampling Plans",
+      "content": "Practice creating effective sampling strategies for various cooking processes.",
+      "questions": [
+        {
+          "question": "Making risotto: rice gradually absorbs liquid and softens slowly at first, then more rapidly. How should you sample (taste for doneness)?",
+          "options": [
+            "Taste at start and end",
+            "Taste every 30 seconds (constant sampling)",
+            "Taste less frequently early (slow changes), more frequently as signal accelerates (adaptive)",
+            "Never taste\u2014just time it"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "You'd miss readiness.",
+            "Inefficient and disruptive.",
+            "Correct! Match sampling to signal speed.",
+            "Rice texture can't be perfectly timed."
+          ],
+          "explanation": "Adaptive sampling prevents both under-sampling and over-sampling."
+        },
+        {
+          "question": "In molecular gastronomy, spherification requires precise timing\u2014too fast and sphere is liquid inside, too slow and rubbery. This requires:",
+          "options": [
+            "No sampling (times are fixed)",
+            "Very high sampling rate (test multiple spheres during critical phase)",
+            "Low sampling rate",
+            "Sample only failures"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "High-speed processes need monitoring.",
+            "Correct! Rapid change requires high sampling rate.",
+            "You'd miss perfect timing.",
+            "That's post-analysis."
+          ],
+          "explanation": "Fast-changing processes require high sampling rates to capture optimal moments."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Mastery of Signal Processing in Culinary Arts",
+      "content": "Congratulations! You've mastered signal processing by exploring how chefs think about their craft scientifically. You understand that cooking creates continuous signals (flavor, temperature, texture), that signals contain frequency components (layered tastes, varied textures), that unwanted components can be filtered away, and that strategic sampling captures critical moments. These are principles professional kitchens use daily\u2014every adjustment by a Michelin-starred chef is sampling, every strain is filtering, every wine description is discussing frequency content. Apply these concepts: taste strategically (sampling), remove unwanted flavors (filtering), recognize flavor complexity (frequencies), and understand timing (signal dynamics). Your kitchen is now a signal processing laboratory. Practice these principles in your cooking to develop the intuitive expertise separating good cooks from great ones. Bon app\u00e9tit!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Content complete"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Fail - Practice"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "Pass - Next module"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "Back to assessment"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Content complete"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Fail - Practice"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Pass - Next module"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "Back to assessment"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Content complete"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Fail - Practice"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "Pass - Next module"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "Back to assessment"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n11",
+      "label": "Content complete"
+    },
+    {
+      "id": "c14",
+      "source": "n11",
+      "target": "n12",
+      "label": "Fail - Practice"
+    },
+    {
+      "id": "c15",
+      "source": "n11",
+      "target": "n13",
+      "label": "Pass - Complete"
+    },
+    {
+      "id": "c16",
+      "source": "n12",
+      "target": "n11",
+      "label": "Back to assessment"
+    }
+  ],
+  "generated_at": "2026-03-27T11:39:12.926575+00:00",
+  "model": "claude-haiku-4-5"
+}

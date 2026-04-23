@@ -1,0 +1,238 @@
+{
+  "id": "linear-algebra-film-production",
+  "title": "Linear Algebra for Data Science: A Film Production Lens",
+  "description": "Master linear algebra through the exciting world of film production. Learn vectors, matrices, and eigenvalues by analyzing camera movements, color grading, and shot composition.",
+  "topic": "Linear Algebra for Data Science",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "linear algebra",
+    "data science",
+    "film production",
+    "mathematics",
+    "applied math"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Linear Algebra: The Mathematics Behind Film Production",
+      "content": "Did you know that every camera movement, color adjustment, and visual effect in modern film production relies on linear algebra? When a cinematographer pans the camera, composites two shots together, or applies color grading, they're using mathematical transformations based on vectors and matrices. In this course, we'll explore how linear algebra powers film production and learn the data science fundamentals along the way. You'll discover three key areas: vectors for motion and direction, matrices for transformations and effects, and eigenvalues for analyzing what matters most in visual data.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your First Focus Area",
+      "content": "The language of film can be expressed three ways in mathematics. Pick the aspect that excites you most, and we'll build your understanding from there. All three paths reconverge later, so you're free to choose based on your interests.",
+      "choices": [
+        {
+          "label": "Vectors: Motion, Direction & Camera Paths",
+          "next": "n3"
+        },
+        {
+          "label": "Matrices: Transformations, Filters & Color Grading",
+          "next": "n5"
+        },
+        {
+          "label": "Eigenvalues: What's Essential in Your Data?",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Vectors: Camera Movement and Motion Data",
+      "content": "A vector is a mathematical object with both magnitude and direction. In film production, every camera movement can be represented as a vector. When a steadicam operator moves the camera from point A to point B, they're tracing a vector in 3D space. For data science, vectors represent observations or features\u2014each element captures one dimension of your data. In a film production context, a vector might represent: (brightness=120, saturation=75, hue=45, contrast=80). Vectors allow us to perform calculations on direction and magnitude, making them essential for understanding motion and camera positioning in film.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Vector Example: Calculating Camera Drift",
+      "content": "Imagine a cinematographer wants to move a camera from (0, 0, 0) to (10, 15, 5) over 60 frames of footage. The motion vector is (10, 15, 5). To find the velocity per frame, we divide by 60: (0.167, 0.25, 0.083) units per frame. If the camera needs to move at constant velocity but reach a different endpoint\u2014say (20, 30, 10)\u2014the director calculates a new vector (20, 30, 10) and divides by frames to get (0.333, 0.5, 0.167) units per frame. Vector operations let cinematographers plan smooth, predictable motion that viewers experience as natural and intentional.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Matrices: Transformations, Rotations & Color Grading",
+      "content": "A matrix is a rectangular grid of numbers that can represent transformations. In film, matrices are everywhere. A color grading matrix can shift all hues, saturate colors, or adjust brightness across an entire frame. A rotation matrix spins the image, a scaling matrix zooms in or out, and a shear matrix creates perspective effects. In data science, matrices store datasets where rows are observations and columns are features. When analyzing film data\u2014shot length, color temperature, scene complexity\u2014each row is one shot, and columns are measurements. Matrix operations let us transform entire datasets at once, apply effects uniformly, or combine multiple transformations into a single calculation.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Matrix Example: Color Grading Transformation",
+      "content": "A colorist wants to warm up a scene by increasing reds and yellows while cooling blues slightly. They apply a transformation matrix to shift the RGB color space. Original pixel: [100, 80, 120] (RGB). The grading matrix multiplies this to produce [120, 90, 110]\u2014more red (100\u2192120), slightly more green (80\u219290), less blue (120\u2192110). When applied to thousands of pixels across 1000 frames, this single matrix operation transforms the entire scene's color palette consistently. This is matrix multiplication in action: one transformation rule applied to massive datasets, which is exactly how data scientists use matrices to clean, normalize, and transform datasets before analysis.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Eigenvalues: Finding What Matters in Visual Data",
+      "content": "Eigenvalues are special numbers that reveal hidden structure in data. When you have hundreds of measurements from a film shoot\u2014lighting angles, color values, shot duration, depth information\u2014eigenvalues help you identify which measurements matter most. In principal component analysis (PCA), a technique used in data science, eigenvalues rank the importance of different features. A high eigenvalue means that feature explains a lot of variance in the data. For a cinematographer analyzing 100 past films, eigenvalue analysis might reveal that shot length and lighting angle are the two most important factors explaining visual impact, while 50 other measurements are redundant. This lets you reduce complexity while keeping the essential information.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Eigenvalue Example: Key Factors in Shot Selection",
+      "content": "A production company analyzes 200 successful film scenes, measuring 15 variables: shot duration, camera angle, lighting intensity, actor position, background depth, color saturation, focus distance, motion speed, frame rate, and 6 others. PCA calculates eigenvalues and finds: the 1st eigenvalue (shot duration \u00d7 lighting) explains 40% of what makes scenes compelling, the 2nd eigenvalue (depth \u00d7 focus) explains 25%, and the remaining 13 measurements combined explain only 35%. The production team now focuses on optimizing shot duration and lighting first, knowing these drive the biggest impact. They've reduced a 15-dimensional problem to 2 key factors\u2014exactly what eigenvalues reveal.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integration: Building a Shot Recommendation Engine",
+      "content": "Now we bring it together. Imagine you're building a data science system to recommend camera movements and color grades for a new film based on historical data. Vectors store the camera position and direction. Matrices transform raw footage into standardized color space. Eigenvalues identify which 3-4 measurements\u2014out of 50 possible metrics\u2014truly predict viewer engagement. The system uses vector operations to calculate smooth camera paths, matrix operations to apply consistent color grading across scenes, and eigenvalue analysis to focus the recommendation engine on the most impactful variables. This integration shows how linear algebra, applied through a film production lens, becomes the foundation of real data science work.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Linear Algebra in Film: Final Assessment",
+      "content": "Test your understanding of vectors, matrices, and eigenvalues in the context of film production. Apply what you've learned to real production scenarios.",
+      "questions": [
+        {
+          "question": "A cinematographer wants to move a camera from position (5, 10, 3) to position (15, 25, 8) over 50 frames. What is the velocity vector per frame?",
+          "options": [
+            "(0.2, 0.3, 0.1) units/frame",
+            "(10, 15, 5) units/frame",
+            "(0.5, 0.3, 0.2) units/frame",
+            "(15, 25, 8) units/frame"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! You calculated (15-5)/50, (25-10)/50, (8-3)/50 = (0.2, 0.3, 0.1). This velocity per frame ensures smooth, constant motion.",
+            "Not quite. This is the total displacement vector, not the per-frame velocity. Divide by the number of frames to get velocity.",
+            "Not correct. Check your arithmetic on each component.",
+            "Not correct. This is the endpoint position, not the velocity needed to reach it."
+          ],
+          "explanation": "To find velocity per frame, subtract the start position from the end position to get the displacement vector, then divide each component by the number of frames."
+        },
+        {
+          "question": "A color grading matrix transforms a pixel from [80, 100, 120] to [90, 110, 100]. What does this transformation accomplish?",
+          "options": [
+            "It increases reds and greens while decreasing blues\u2014warming the image",
+            "It decreases reds and greens while increasing blues\u2014cooling the image",
+            "It inverts all color channels",
+            "It has no effect on the color balance"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The red increased (80\u219290), green increased (100\u2192110), and blue decreased (120\u2192100). This is a warming transformation, adding warmth to the scene.",
+            "Not quite. Look at the changes: red and green both increased, blue decreased. That's a warming, not cooling effect.",
+            "Not correct. Color inversion would produce very different results.",
+            "Not correct. All three channels changed, so the color balance definitely shifted."
+          ],
+          "explanation": "Matrix transformations shift color channels in specific ways. By increasing warm colors (red, green/yellow) and decreasing cool colors (blue), the matrix creates a warmer tone\u2014a common grading technique."
+        },
+        {
+          "question": "In a PCA analysis of 200 film scenes with 30 measured variables, the first eigenvalue explains 45% of variance and the second explains 20%. What does this tell a production team?",
+          "options": [
+            "The first two features are sufficient to capture most of the important variation in scene quality",
+            "All 30 variables are equally important and must be analyzed",
+            "The remaining 28 variables have no value",
+            "The analysis has failed because variance is not fully explained"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Together, the first two eigenvalues explain 65% of variance. This means these two principal components capture most of what differentiates scenes, allowing dimensionality reduction from 30 variables to 2-3 key factors.",
+            "Not quite. Eigenvalue analysis specifically reveals that some variables are much more important than others. That's the whole point of PCA.",
+            "Not correct. The remaining 28 variables together explain 35% of variance\u2014not insignificant, but less impactful than the first two.",
+            "Not correct. PCA always explains less than 100% of variance initially; that's normal. The goal is to capture most variance with fewer dimensions."
+          ],
+          "explanation": "Eigenvalues rank the importance of principal components. High early eigenvalues mean you can reduce dimensionality significantly while retaining most information\u2014a key goal in data science."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "You've Mastered Linear Algebra for Film Production!",
+      "content": "Congratulations! You now understand how vectors power camera motion, how matrices transform images and data, and how eigenvalues reveal what truly matters in complex datasets. You've seen these concepts applied to real film production challenges\u2014from planning smooth camera paths to optimizing color grading to building recommendation systems. This foundation applies far beyond filmmaking: in machine learning, computer vision, image processing, and data analysis across industries, these same linear algebra principles drive innovation. The film production lens has made these abstract concepts concrete and intuitive. You're ready to apply linear algebra to solve real data science problems!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Vectors"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Matrices"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Eigenvalues"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Learn"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Learn"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Assess"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Success"
+    }
+  ],
+  "generated_at": "2026-03-27T08:11:50.816796+00:00",
+  "model": "claude-haiku-4-5"
+}

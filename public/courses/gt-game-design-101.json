@@ -1,0 +1,296 @@
+{
+  "id": "gt-game-design-101",
+  "title": "Game Theory for Game Designers",
+  "description": "Master strategic balance and dominant strategies through game design examples and real-world mechanics",
+  "topic": "Game Theory",
+  "theme": "game design",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "game theory",
+    "game design",
+    "strategy",
+    "balance",
+    "mechanics",
+    "nash equilibrium"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Understanding Game Theory in Game Design",
+      "content": "Game theory is the study of strategic interactions between rational decision-makers. In game design, game theory helps you create mechanics where player choices matter and outcomes feel fair. Players compete or cooperate under defined rules with known payoffs and consequences. Understanding incentive structures ensures balanced, engaging gameplay. Game theory explains why certain mechanics create compelling, strategic experiences.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "The Prisoner's Dilemma in Tower Defense",
+      "content": "Imagine a co-op tower defense game where two players must independently decide: build expensive defenses or save resources. If both cooperate and build, enemies are blocked (mutual success). If one builds while the other doesn't, the non-cooperator saves resources but the defender fails alone (tempting but risky). If neither builds, enemies breach both bases (worst outcome). This scenario explains why reputation systems and visible cooperation mechanics are critical for team-based game design.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Prisoner's Dilemma Fundamentals",
+      "content": "Test your understanding of cooperative game dynamics and incentive design.",
+      "questions": [
+        {
+          "question": "In the tower defense scenario, what outcome occurs when neither player builds defenses?",
+          "options": [
+            "Both succeed with saved resources",
+            "Both fail as enemies breach their bases",
+            "One succeeds while one fails",
+            "They draw equally"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Watch out\u2014this seems tempting but leads to disaster!",
+            "Correct! This worst-case outcome demonstrates why cooperation design matters.",
+            "Only one player cannot fully defend alone.",
+            "The game creates clear wins and losses."
+          ],
+          "explanation": "When both players choose the non-cooperative strategy, they reach the worst outcome (mutual loss). This is the core problem the Prisoner's Dilemma highlights. In games like Sea of Thieves, players must decide whether to share loot with strangers\u2014many choose betrayal, leading to worse outcomes for everyone. Designers prevent this by creating reputation systems (matched crews), cosmetic rewards for trustworthy players, or game modes where betrayal directly harms you. Understanding this dynamic is essential for any social or cooperative game."
+        },
+        {
+          "question": "What game design mechanism best prevents players from always avoiding cooperation?",
+          "options": [
+            "Remove all resource systems",
+            "Switch to turn-based instead of real-time",
+            "Implement a reputation or ranking system rewarding cooperators",
+            "Make all outcomes identical"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "That removes strategic depth entirely.",
+            "That doesn't address the incentive problem.",
+            "Correct! Aligning individual and group incentives keeps players cooperative.",
+            "That eliminates meaningful choice."
+          ],
+          "explanation": "By rewarding consistent cooperation (cosmetics, matchmaking bonuses, exclusive unlocks), designers align personal incentives with group success. Dota 2's ranked matchmaking keeps cooperative players together while punishing abandoners. Overwatch's seasonal cosmetics reward players with high endorsement ratings. Even in PvP games like Counter-Strike, teams that communicate and cooperate\u2014despite individual skill variance\u2014win more consistently. The key principle: make cooperation more profitable than betrayal through long-term incentives."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n7",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Nash Equilibrium: The Heart of Game Balance",
+      "content": "A Nash Equilibrium exists when no player can improve their outcome by changing their strategy alone, assuming others stay the same. In game design, this is balance itself\u2014when one strategy clearly dominates, players feel forced to use it, killing diversity and fun. Great game designers create multiple viable Nash Equilibria. A balanced fighting game has rushdown, zoning, and grappling strategies where each counters others. Game balance is the art of ensuring no single dominant strategy emerges.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Rock-Paper-Scissors in RPG Combat",
+      "content": "Consider an RPG with three combat stances: Power (crushes Defensive but loses to Evasion), Defensive (blocks Power but Evasion slips through), and Evasion (dodges Defensive but falls to raw Power damage). None dominates\u2014each has a counter. This creates a Nash Equilibrium where predictable strategy fails. Designers balance this by adjusting damage numbers so every matchup feels equally important, keeping combat diverse and competitive.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Nash Equilibrium and Strategic Balance",
+      "content": "Analyze game balance through dominant strategies and counter-mechanics.",
+      "questions": [
+        {
+          "question": "Why doesn't every player in the RPG simply use the Power stance all the time?",
+          "options": [
+            "The game removes Power as a viable option",
+            "Defensive stances are specifically designed to counter Power",
+            "Power costs significantly more resources",
+            "Players are required to use all stances equally"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Power remains viable and rewarding.",
+            "Correct! Countermeasures prevent dominance.",
+            "Resource cost can help, but counter-mechanics are key.",
+            "Players freely choose their strategy."
+          ],
+          "explanation": "In rock-paper-scissors game dynamics, no strategy dominates because each has a specific counter. This diversity keeps the meta fresh and rewards strategic depth. In League of Legends, no single champion class dominates because assassins counter mages, mages counter tanks, and tanks counter assassins. Games with dominant strategies become stale\u2014everyone plays the same thing. Smash Bros. Melee became legendary precisely because multiple characters remain viable at competitive levels due to careful frame data and matchup design. The principle: every viable strategy must have a viable counter."
+        },
+        {
+          "question": "What would break the balance if Defensive stance blocked BOTH Power and Evasion?",
+          "options": [
+            "Defensive would become a dominant strategy everyone feels forced to use",
+            "The game would maintain balance with more options",
+            "Players would have more tactical freedom and choice",
+            "All stances would remain equally viable"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A dominant strategy kills diversity and competitive depth.",
+            "The balance would collapse into a single viable choice.",
+            "One strictly superior option limits meaningful freedom.",
+            "One style would clearly outperform all others."
+          ],
+          "explanation": "A dominant strategy forces players to use it, destroying metagame diversity. Look at early Magic: The Gathering formats where certain cards were so powerful that decks became cookie-cutter copies of the same archetype. Blizzard patches World of Warcraft constantly because a single talent build becomes dominant. Good design ensures counters exist so no single approach beats everything else. This is why professional fighting games patch monthly\u2014when one character becomes too strong, tournament attendees all pick it, killing character diversity."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n7",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Applying Game Theory: Design Challenges",
+      "content": "Strengthen your understanding by analyzing real design scenarios and balance problems. These questions ask you to diagnose what went wrong in actual games and propose fixes using the principles of dominant strategies, Nash Equilibrium, and incentive design.",
+      "questions": [
+        {
+          "question": "A puzzle game has three difficulties: Easy (boring), Hard (frustrating), and Normal (addictively balanced). Which represents a Nash Equilibrium for player retention?",
+          "options": [
+            "Easy difficulty",
+            "Hard difficulty",
+            "Normal difficulty",
+            "It varies entirely by individual player"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Players leave bored without engagement.",
+            "Players quit frustrated by the challenge.",
+            "Correct! Players naturally stay and replay from Normal.",
+            "Most players cluster around Normal equilibrium."
+          ],
+          "explanation": "A Nash Equilibrium in player experience occurs when the current state keeps players engaged. Normal difficulty is the stable point where the challenge-reward ratio feels fair. This applies to games like Elden Ring\u2014players don't dominate by farming Easy mobs forever, nor do they repeatedly bash their heads against impossibly hard bosses. They naturally gravitate toward bosses that are challenging but defeatable, creating a personal equilibrium. Good difficulty design creates this stable point where players stay engaged longest."
+        },
+        {
+          "question": "In a strategy game, players discover rushing with weak early units beats all defensive approaches consistently. What's the design flaw?",
+          "options": [
+            "Weak units shouldn't exist in the game",
+            "Defensive strategies lack a viable counter-strategy to early rushing",
+            "All strategies should win exactly equally",
+            "Rushing should be completely removed from play"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Weak units enable interesting tactical choices.",
+            "Correct! Every strategy needs viable counters.",
+            "That removes strategic depth and choice.",
+            "Rushing is valid if adequately balanced."
+          ],
+          "explanation": "When one strategy dominates, the meta collapses into one viable approach. StarCraft's meta shifts constantly because Blizzard ensures all three races remain viable\u2014when Terran becomes too strong, timely patches restore balance. Hearthstone's competitive scene dies when one deck becomes dominant because everyone plays the same thing and counterplay becomes rote. Designers must ensure counters exist\u2014fast defensive units, reactive abilities, or economic advantages for defenders. The fix might be: make defensive units cheaper, faster-to-build, or give defenders income bonuses that make early rushing less profitable."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n8",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Your Game Theory Mastery Path",
+      "content": "Congratulations\u2014you've mastered the foundational principles of game theory in game design! You now understand three critical concepts: the Prisoner's Dilemma teaches that incentive structures must encourage cooperation; Nash Equilibrium reveals that balance means no single strategy dominates; and dominant strategies show why some mechanics feel mandatory rather than optional. These aren't just mathematical abstractions\u2014they're the tools professionals use to diagnose balance problems in shipped games. You've learned to think like a game designer: to see beyond raw mechanics and ask \"What incentives exist? What strategy feels forced? What counters are missing?\" Now choose your direction:",
+      "choices": [
+        {
+          "label": "Master Advanced Topics",
+          "next": "n9"
+        },
+        {
+          "label": "Apply to Your Own Game",
+          "next": "n9"
+        },
+        {
+          "label": "Complete and Reflect",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Game Theory Mastery Unlocked!",
+      "content": "You've learned how game theory drives strategic, balanced gameplay. You understand the Prisoner's Dilemma, Nash Equilibrium, and dominant strategies\u2014the mathematical foundations of fair game design. Use these principles to detect unbalanced mechanics, ensure no single strategy dominates, and create games where every viable choice feels rewarding. Game theory isn't abstract philosophy\u2014it's the toolkit for designing compelling competitive experiences that respect player agency and choice.",
+      "next": "node-a1b2c3d4"
+    },
+    {
+      "id": "node-a1b2c3d4",
+      "type": "example",
+      "title": "Deep Dive: Diagnosing an FPS Balance Problem",
+      "content": "Let's walk through a detailed example of identifying and fixing a dominant strategy. Imagine a competitive FPS where sniper rifles have emerged as the dominant weapon\u2014nearly every high-rank player uses them because they one-shot eliminate opponents before any counterplay is possible. This is a dominant strategy problem: sniping requires less team coordination and punishes positional mistakes too severely.\n\nStep 1: Identify the dominance. Check win rates and pick rates in ranked. If snipers appear in 70%+ of winning teams, dominance is confirmed.\n\nStep 2: Diagnose why. Ask: What makes snipers dominant? (a) No damage falloff despite distance? (b) Instant kills remove counterplay? (c) Other weapons can't challenge from long range? (d) Sniper positions have too much cover?\n\nStep 3: Find the counter-gap. A balanced weapon triangle exists when: Snipers beat slow heavy weapons but lose to fast mobile units; fast units outmaneuver and close distance but lose to snipers at range; heavy weapons block sniper volleys and trade durability for speed. If fast units can't reach snipers, or heavy units offer no protection, the triangle is broken.\n\nStep 4: Propose fixes. Options: (a) Add movement abilities that close sniper distance quickly (jetpack, dash, grappling hook), (b) Reduce sniper damage so they can't one-shot (requiring two shots means counterplay exists), (c) Add maps with more cover/vertical movement to deny sniper sightlines, (d) Increase sniper weapon sway/recoil so landing shots is harder, reducing reliability.\n\nThe key principle: a dominant strategy isn't unbeatable\u2014it lacks viable counters. Restoring balance means making sure every strategy has a matchup where it struggles. Once counters exist, players must choose strategy based on what opponents use, creating skill expression and meta diversity."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "learn"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "test"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "learn"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "test"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "complete"
+    },
+    {
+      "id": "c11",
+      "source": "n4",
+      "target": "node-a1b2c3d4",
+      "label": "explore"
+    },
+    {
+      "id": "c12",
+      "source": "node-a1b2c3d4",
+      "target": "n5",
+      "label": "continue"
+    }
+  ],
+  "generated_at": "2026-03-26T02:06:34.677420+00:00",
+  "model": "claude-haiku-4-5",
+  "improved_at": "2026-03-26T02:11:55.626816+00:00",
+  "improved_by": "claude-haiku-4-5-20251001"
+}

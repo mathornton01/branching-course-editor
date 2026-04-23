@@ -1,0 +1,232 @@
+{
+  "id": "rust-enviro-course",
+  "title": "Introduction to Rust Programming: Environmental Science Edition",
+  "description": "Learn Rust fundamentals through environmental science applications and sustainability contexts",
+  "topic": "Rust Programming",
+  "theme": "environmental science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "Rust",
+    "Programming",
+    "Environmental Science",
+    "Ownership",
+    "Error Handling"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Ownership & Borrowing: Resource Stewardship in Rust",
+      "content": "Rust's ownership system mirrors environmental resource management. Just as a river can only have one primary steward at a time, a Rust value has one owner. Borrowing is like leasing water rights\u2014another party can use the resource temporarily without taking ownership. Mutable borrowing is exclusive (one exclusive lease), while immutable borrowing is shared (many read-only leases). This prevents data races, just as environmental regulations prevent conflicting resource claims.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "Watershed Data Ownership Example",
+      "content": "A climate monitoring system tracks water temperature across a watershed. The main function owns the sensor_data vector. It lends (borrows) this data to analyze_temperature() for reading without losing ownership, then to alert_on_anomaly() for checking thresholds. Later, transfer_to_database() takes ownership, consuming the data and moving it to permanent storage. This flow ensures data integrity\u2014no accidental overwrites or use-after-free bugs\u2014critical when managing environmental data.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Ownership & Borrowing Assessment",
+      "content": "Test your understanding of Rust ownership in environmental contexts.",
+      "questions": [
+        {
+          "question": "In a carbon credit trading system, a function receives a Vec<CarbonCredit> by immutable borrow. Which statement is true?",
+          "options": [
+            "A) The function can modify credits and the original vector retains the data",
+            "B) The function can only read credits; the caller still owns the vector",
+            "C) The function takes ownership; the original variable can't be used after the call",
+            "D) The function can create mutable references to the credits"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Immutable borrows don't allow modifications.",
+            "Correct! Immutable borrowing lets others read without taking ownership.",
+            "Incorrect. Immutable borrow doesn't transfer ownership.",
+            "Incorrect. Immutable borrows can't create mutable references."
+          ],
+          "explanation": "Immutable borrowing (&T) allows temporary read-only access. The original owner retains the variable, and the borrower cannot modify it. This is perfect for sharing environmental data for analysis without risking unintended changes."
+        },
+        {
+          "question": "A mutable reference to a pollution_level variable is passed to update_sensor(). While update_sensor() executes, how many other code paths can read pollution_level?",
+          "options": [
+            "A) Unlimited\u2014other code can read while a mutable reference is active",
+            "B) Zero\u2014mutable references are exclusive",
+            "C) One\u2014only the function with the mutable reference",
+            "D) It depends on the variable type"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Mutable references exclude all other access.",
+            "Correct! Mutable references are exclusive for data safety.",
+            "Incorrect. The owner could also read, violating exclusive access.",
+            "Incorrect. Rust's rules apply regardless of type."
+          ],
+          "explanation": "Rust enforces exclusive access during mutable borrows. This prevents data corruption scenarios like a sensor reading while another process updates it\u2014a critical safeguard in environmental monitoring."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Error Handling: Managing Environmental Uncertainty",
+      "content": "Real environmental systems fail\u2014sensors malfunction, networks drop, data corrupts. Rust's Result<T, E> and Option<T> types force explicit error handling, making failure modes visible in code. Unlike exceptions that silently propagate, Rust requires handling or explicitly unwrapping errors, preventing hidden bugs in critical systems. In environmental monitoring, knowing *why* a measurement failed (sensor calibration error vs. network timeout) is as important as the measurement itself.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "Pollution Sensor Error Handling",
+      "content": "A coastal monitoring station reads dissolved oxygen levels. The read_sensor() function returns Result<f64, SensorError>\u2014either a valid reading or an error variant like SensorOffline, CalibrationFailed, or NetworkTimeout. The main program uses match to handle each case: valid readings trigger alerts if below safe thresholds, CalibrationFailed logs a maintenance request, and NetworkTimeout implements retry logic. Option<Location> represents whether a reading's geographic origin is known. This granular error handling ensures no pollution event goes unnoticed due to sloppy error catching.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Error Handling Assessment",
+      "content": "Apply error handling to environmental monitoring scenarios.",
+      "questions": [
+        {
+          "question": "A carbon sequestration measurement returns Result<Metric, MeasurementError>. Which approach prevents silent failures?",
+          "options": [
+            "A) Using .unwrap() to extract the value, which panics on error",
+            "B) Using match to handle Ok and Err variants explicitly",
+            "C) Ignoring the Result and assuming success",
+            "D) Converting to an Option and ignoring None cases"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Partially correct but risky\u2014unwrap panics, which may crash production systems.",
+            "Correct! Match forces explicit handling of success and failure.",
+            "Incorrect. This causes silent failures\u2014unacceptable for environmental data.",
+            "Incorrect. Ignoring None cases recreates the original problem."
+          ],
+          "explanation": "Explicit error handling with match ensures every measurement failure is addressed. In environmental systems, unhandled errors could lead to misleading data and poor policy decisions."
+        },
+        {
+          "question": "Option<SpeciesHabitatLocation> is used to track where an endangered species was last observed. When the location is unknown, what should the code do?",
+          "options": [
+            "A) Use .unwrap() to force a location value",
+            "B) Use if let or match to handle Some and None cases appropriately",
+            "C) Treat None as an error and panic",
+            "D) Initialize a default location to avoid None"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Unwrap panics when None\u2014inappropriate for missing data.",
+            "Correct! if let and match handle optional data gracefully.",
+            "Incorrect. Unknown locations aren't errors\u2014they're expected.",
+            "Incorrect. Fabricating data introduces false information."
+          ],
+          "explanation": "Option represents data that may or may not exist. When a species location is unknown, the code should acknowledge this with Some() or None, not fake a default. Accurate uncertainty is critical for conservation decisions."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Reinforcement: Ownership & Error Handling Combined",
+      "content": "A renewable energy grid stores battery_level: Vec<f64>. The charge_battery() function borrows &mut battery_level and returns Result<(), ChargeError>. The read_levels() function borrows &battery_level and returns Option<f64>. Complete scenarios: (1) Safely charge batteries and handle charging errors. (2) Read levels without owning the vector. (3) Transfer ownership only when storing historical data in the database. These patterns are foundational\u2014master them to write safe environmental data systems.",
+      "next": "n9"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Next Steps in Your Rust Journey",
+      "content": "You've mastered ownership, borrowing, and error handling\u2014the pillars of Rust's safety guarantees. What would you like to explore next?",
+      "choices": [
+        {
+          "label": "Complete this course and review key concepts",
+          "next": "n9"
+        },
+        {
+          "label": "Advance to Rust Collections for environmental datasets",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete: Introduction to Rust for Environmental Science",
+      "content": "Congratulations! You've learned Rust's core concepts\u2014ownership, borrowing, and error handling\u2014through the lens of environmental science. These principles enable you to build reliable systems for climate monitoring, pollution tracking, species conservation, and sustainable resource management. Rust's safety guarantees mean fewer runtime crashes and data corruption bugs, crucial when environmental decisions depend on accurate, trustworthy data. Continue practicing with environmental datasets and real-world scenarios to deepen your expertise. The world's environmental challenges need robust, reliable code.",
+      "next": "n8"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn example"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Test knowledge"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "Pass \u2192 Next topic"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "Fail \u2192 Practice"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Learn example"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Test knowledge"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "Pass \u2192 Decision"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Fail \u2192 Practice"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": "Complete practice"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Finish course"
+    }
+  ],
+  "generated_at": "2026-03-26T09:28:06.405492+00:00",
+  "model": "claude-haiku-4-5"
+}

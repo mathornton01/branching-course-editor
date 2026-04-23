@@ -1,0 +1,270 @@
+{
+  "id": "parallel-computing-game-design",
+  "title": "Parallel Computing Fundamentals",
+  "description": "Learn parallel computing through the lens of game development. Explore multi-threading, synchronization, and performance optimization using game design scenarios.",
+  "topic": "Parallel Computing",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "parallel-computing",
+    "game-development",
+    "threading",
+    "performance",
+    "multi-core"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Games Need Parallel Computing",
+      "content": "Modern games juggle dozens of simultaneous tasks: rendering graphics, calculating physics for hundreds of objects, running AI for multiple enemies, handling player input, and updating audio\u2014all at 60+ frames per second. Parallel computing lets game engines distribute these tasks across multiple CPU cores, allowing each core to work on different systems simultaneously. Without parallelization, a single-core game would stall waiting for physics calculations to complete before starting the next frame. By splitting work intelligently across cores, game developers can maintain smooth frame rates and create richer, more complex worlds.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How would you like to learn parallel computing? Start with the foundational theory to understand the 'why' behind parallel programming, or dive into hands-on examples and see parallelism in action within real game systems.",
+      "choices": [
+        {
+          "label": "Explore the Theory First",
+          "next": "n3"
+        },
+        {
+          "label": "Jump into Hands-On Examples",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Fundamentals of Parallel Execution",
+      "content": "Parallel computing relies on multi-core processors where each core can execute instructions independently. In game development, this means spawning multiple threads\u2014lightweight processes that share the same memory space. Each thread can handle a separate task: one thread updates NPC behavior while another renders the scene. The challenge is **synchronization**: when two threads access the same data (like a player's position), race conditions can occur where one thread reads stale data. **Locks** (mutual exclusion) prevent this by ensuring only one thread modifies shared data at a time. A well-designed parallel game engine balances work across cores to maximize CPU utilization while minimizing lock contention, which occurs when threads frequently wait for access to shared resources.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Worked Example: Multi-Threaded Physics in a Racing Game",
+      "content": "In a racing game with 8 AI-controlled cars, the physics engine without parallelization would calculate each car's collision, acceleration, and position sequentially on a single core\u2014taking 8 time units. With 4 cores, you split the work: Core 1 processes cars 1-2, Core 2 processes cars 3-4, Core 3 processes cars 5-6, and Core 4 processes cars 7-8. Each core completes in roughly 2 time units, reducing total frame time by 4x. However, if all 8 cars share a 'world state' variable (track position, collision events), you need a lock to prevent two cores from simultaneously updating it. This synchronization overhead is minimal because position updates are fast, but in complex scenarios with hundreds of collisions, lock contention becomes a bottleneck.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Theory Assessment: Parallel Concepts",
+      "content": "Test your understanding of parallel computing fundamentals in game development.",
+      "questions": [
+        {
+          "question": "In a zombie survival game, the physics engine simulates collisions for 20 zombies on a quad-core (4-core) CPU. Roughly how much faster will physics calculations complete compared to a single-core approach?",
+          "options": [
+            "A) 2x faster (only 2 cores are effectively used)",
+            "B) 4x faster (work is evenly distributed across all 4 cores)",
+            "C) 20x faster (one per zombie, somehow)",
+            "D) No measurable improvement (physics can't be parallelized)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. With 4 cores and 20 zombies, you can distribute the work across all cores, not just 2.",
+            "Correct! Assuming work divides evenly and overhead is minimal, 4 cores can theoretically provide a 4x speedup. In practice, contention and overhead reduce this to ~3x.",
+            "Incorrect. You can't magically create 20 cores for 20 zombies\u2014you're limited by the hardware (4 cores).",
+            "Incorrect. Physics calculations are highly parallelizable\u2014different objects' physics can be computed independently."
+          ],
+          "explanation": "In parallel computing, speedup is bounded by the number of available cores. With 4 cores, you can achieve at most a 4x speedup if work is perfectly balanced and overhead is negligible. In practice, synchronization and load imbalance reduce this."
+        },
+        {
+          "question": "What problem does a mutex (lock) solve in a multiplayer game where two threads update a shared 'player health' variable?",
+          "options": [
+            "A) It makes the game run faster by reducing memory usage",
+            "B) It ensures only one thread modifies the health variable at a time, preventing data corruption",
+            "C) It allows both threads to write to health simultaneously without conflict",
+            "D) It eliminates the need for synchronization altogether"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Mutexes don't improve performance\u2014they add overhead by serializing access.",
+            "Correct! A mutex (mutual exclusion) ensures exclusive access, preventing race conditions where one thread reads while another writes.",
+            "Incorrect. That's the problem a mutex prevents\u2014simultaneous writes cause race conditions.",
+            "Incorrect. Mutexes are a synchronization mechanism; they don't eliminate the need for synchronization."
+          ],
+          "explanation": "Race conditions occur when two threads access shared data without coordination. A mutex enforces exclusive access: Thread A locks the variable, updates it, then releases the lock so Thread B can access it safely."
+        },
+        {
+          "question": "In an open-world RPG with dynamic weather and NPC schedules, which of these workloads is easiest to parallelize?",
+          "options": [
+            "A) Calculating tomorrow's weather at 100 independent map locations",
+            "B) Processing a single NPC's daily schedule (wake, walk, eat, sleep sequentially)",
+            "C) Rendering a single frame where the camera sees all objects",
+            "D) Running a turn-based combat sequence where actions depend on previous outcomes"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Weather at 100 locations is independent\u2014each can be calculated on a separate core with no synchronization needed.",
+            "Incorrect. A single NPC's schedule is inherently sequential: the NPC can't eat before waking up.",
+            "Incorrect. Rendering is parallelizable but more complex due to shared framebuffer access.",
+            "Incorrect. Turn-based combat has data dependencies\u2014each action depends on the previous one's outcome."
+          ],
+          "explanation": "Parallelization works best when tasks are independent. Weather at different locations doesn't interact, so multiple cores could calculate different locations simultaneously. Tasks with dependencies are harder to parallelize and require synchronization."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Parallel Processing in Modern Game Engines",
+      "content": "Popular game engines like Unity and Unreal Engine are built on parallel computing. The typical game loop uses multiple threads: a **render thread** handles graphics commands, a **physics thread** simulates collisions and movement, a **logic thread** runs game logic and AI, and a **job system** spawns short-lived worker threads for tasks like particle updates or vegetation culling. Rather than waiting for one system to finish (render, then physics, then logic), the engine stages these on different cores so that Core 1 renders frame N while Core 2 calculates physics for frame N, and Core 3 runs AI for frame N. This **pipelining** dramatically improves throughput. Modern engines also provide **job schedulers** (like Unity's Burst Compiler or Unreal's Task Graph) that automatically distribute work across cores based on availability, freeing developers from manual thread management.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Worked Example: A Frame in a Multiplayer Shooter",
+      "content": "In a competitive FPS with 64 players on a 16-core server, one frame (16.7ms at 60 FPS) is processed like this: Thread Pool 1 (4 cores) processes player inputs and movement for players 1-16, Thread Pool 2 (4 cores) handles players 17-32, Thread Pool 3 (4 cores) processes players 33-48, and Thread Pool 4 (4 cores) handles players 49-64. Meanwhile, a separate **physics thread** (2 cores) calculates all projectile trajectories and collision detection across pools. Once all cores finish and report results, a single **serialization thread** writes the frame state to a network packet. If player input takes 10ms and physics takes 8ms, total frame time is ~10ms (the longest task) rather than 10+8=18ms sequentially. This parallel approach allows the server to handle far more concurrent players than a single-threaded approach.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Applying Parallelism",
+      "content": "Apply your understanding of parallel game systems to real-world scenarios.",
+      "questions": [
+        {
+          "question": "You're optimizing a game for an 8-core console. The graphics team reports that rendering takes 8ms, physics takes 6ms, and AI takes 4ms. Currently, these run sequentially. If you parallelize them perfectly across cores, what's the new frame time?",
+          "options": [
+            "A) 18ms (no improvement\u2014still sequential)",
+            "B) 6ms (average of the three)",
+            "C) 8ms (bottleneck is rendering; AI and physics run in parallel)",
+            "D) 2.25ms (18ms \u00f7 8 cores)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. With 8 cores available, you can parallelize the work.",
+            "Incorrect. The frame time is determined by the longest task, not the average.",
+            "Correct! Rendering is the bottleneck (8ms). While rendering runs, physics (6ms) and AI (4ms) can run on separate cores. Total time is max(8, 6, 4) = 8ms.",
+            "Incorrect. Frame time is limited by the longest task (Amdahl's Law), not divided equally by cores."
+          ],
+          "explanation": "In parallel systems, frame time equals the longest running task. If rendering, physics, and AI run simultaneously on different cores, total time is determined by the slowest task\u2014rendering at 8ms."
+        },
+        {
+          "question": "A game engine uses a job scheduler to parallelize particle system updates across 4 cores. If 1000 particles take 40ms to update on a single core, and you perfectly distribute them across 4 cores, what's the expected speedup?",
+          "options": [
+            "A) 1x (no speedup; particles are inherently sequential)",
+            "B) 2x (due to overhead, you never achieve perfect speedup)",
+            "C) 4x (perfect distribution across 4 cores)",
+            "D) 10x (1000 particles \u00f7 100 particles per core)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Updating different particles is independent\u2014parallelization definitely helps.",
+            "Incorrect. With minimal overhead, job scheduling can achieve close to 4x speedup.",
+            "Correct! Particle updates are embarrassingly parallel\u2014each particle is independent. Perfect distribution across 4 cores yields ~4x speedup: 40ms \u00f7 4 = 10ms.",
+            "Incorrect. You divide time by cores, not particles."
+          ],
+          "explanation": "Embarrassingly parallel workloads (like updating independent particles) can achieve speedup equal to the number of cores. With 4 cores and perfect distribution, you get 4x speedup."
+        },
+        {
+          "question": "Which game system is the HARDEST to parallelize effectively?",
+          "options": [
+            "A) Particle effects (each particle is independent)",
+            "B) AI pathfinding for multiple enemies (each enemy computes independently)",
+            "C) Turn-based RPG combat (each action depends on the previous player/enemy choice)",
+            "D) LOD (level-of-detail) updates for distant objects (processed independently)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Particles are independent and trivial to parallelize.",
+            "Incorrect. Each enemy's pathfinding is independent\u2014easy to parallelize.",
+            "Correct! Turn-based combat is inherently sequential. Player attacks, enemy responds based on damage, player acts again\u2014each step depends on the previous. No parallelism possible.",
+            "Incorrect. LOD updates per object are independent and easily parallelized."
+          ],
+          "explanation": "Parallelism requires independent tasks. Turn-based combat is serial: each action triggers a response that determines the next action. These dependencies prevent parallelization. In contrast, particles, pathfinding, and LOD updates have no interdependencies."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Best Practices: Designing Parallel Games",
+      "content": "Whether you took the theory-first or hands-on path, key principles apply: **(1) Identify independent workloads**: Batch updates that don't depend on each other (particles, distant AI, weather). **(2) Minimize lock contention**: Avoid situations where multiple threads compete for the same resource\u2014instead, partition data so each core owns its own slice (e.g., Core 1 owns enemies 1-25, Core 2 owns 26-50). **(3) Balance work**: Distribute tasks so all cores finish roughly at the same time; an idle core wastes potential. **(4) Profile before optimizing**: Use profilers to identify actual bottlenecks; premature parallelization adds complexity without benefit. **(5) Use job schedulers**: Modern engines provide abstractions (jobs, tasks) that handle thread management; prefer these over manual threading. Real game studios iterate: they parallelize the 10% of code consuming 90% of frame time, not everything. A well-parallelized game can scale from 2 cores (mobile) to 32+ cores (high-end PCs and servers) with minimal code changes.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Congratulations!",
+      "content": "You've learned how parallel computing powers modern games. You understand cores, threads, synchronization, and how game engines distribute work across CPU cores to achieve 60+ FPS on complex worlds. Next steps: explore how specific engines (Unity, Unreal) implement parallelism, experiment with job systems in your own games, and profile real code to see bottlenecks. Parallel computing is not just for optimization\u2014it's fundamental to modern game design."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Explore the Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Jump into Hands-On Examples"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:04:50.136967+00:00",
+  "model": "claude-haiku-4-5"
+}

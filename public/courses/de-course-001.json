@@ -1,0 +1,171 @@
+{
+  "id": "de-course-001",
+  "title": "Digital Electronics Fundamentals",
+  "description": "Explore the three pillars of digital electronics: Boolean logic, logic gates, and binary systems. Choose your learning path and synthesize your understanding.",
+  "topic": "Digital Electronics",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "electronics",
+    "digital",
+    "boolean-logic",
+    "logic-gates",
+    "binary",
+    "circuits"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Digital Electronics",
+      "content": "Digital electronics forms the foundation of modern computing. This course explores how computers process information using binary signals. You'll learn about logic gates, Boolean algebra, and binary representation\u2014the three pillars that make digital systems work. Choose one topic to start, explore it deeply, then synthesize your knowledge.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Select a topic to begin your exploration of digital electronics:",
+      "choices": [
+        {
+          "label": "Boolean Logic & Truth Tables",
+          "next": "n3"
+        },
+        {
+          "label": "Logic Gates & Circuits",
+          "next": "n5"
+        },
+        {
+          "label": "Binary Number Systems",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Boolean Logic & Truth Tables",
+      "content": "Boolean logic is the mathematical framework behind all digital circuits. It uses binary variables (true/false, 1/0) and three fundamental operations: AND, OR, and NOT. Truth tables systematically show all possible input-output combinations, making complex logic predictable and analyzable. Understanding Boolean logic is essential for designing any digital system.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Boolean Logic Worked Example",
+      "content": "Consider a security system that triggers an alarm if (door sensor AND motion sensor) OR window sensor. Create a truth table: With door=1, motion=0, window=1: (1 AND 0) OR 1 = 0 OR 1 = 1, so alarm triggers. This shows how Boolean operations combine multiple conditions into a single output decision.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Logic Gates & Circuits",
+      "content": "Logic gates are physical implementations of Boolean operations, converting electrical signals into logical decisions. Each gate (AND, OR, NOT, XOR, NAND, NOR) has a specific truth table defining its behavior. By combining gates into circuits, engineers build everything from simple comparators to complex processors. Gates are the building blocks where theory meets hardware.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Logic Gates Worked Example",
+      "content": "To determine if a number is even, build a circuit: feed the last bit (LSB) and its NOT into an AND gate. If both are 0, output is 0 (even). For binary 1010 (10 decimal), LSB=0, output=0 (even). For binary 1011 (11 decimal), LSB=1, NOT LSB=0, output=0 (odd). This demonstrates how logic gates solve real computational problems elegantly.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Binary Number Systems",
+      "content": "Binary is the language of digital electronics\u2014computers understand only 1s and 0s. Each position represents a power of 2 (2^0, 2^1, 2^2...), so 1010 binary equals (1\u00d78)+(0\u00d74)+(1\u00d72)+(0\u00d71) = 10 decimal. Hexadecimal groups 4 bits for compact representation. Mastering binary conversion is crucial for debugging hardware and understanding memory organization in digital systems.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Binary Conversion Worked Example",
+      "content": "Convert decimal 157 to binary: Divide by 2 repeatedly, tracking remainders: 157\u00f72=78r1, 78\u00f72=39r0, 39\u00f72=19r1, 19\u00f72=9r1, 9\u00f72=4r1, 4\u00f72=2r0, 2\u00f72=1r0, 1\u00f72=0r1. Reading remainders bottom-to-top: 10011101. Verify: (1\u00d7128)+(0\u00d764)+(0\u00d732)+(1\u00d716)+(1\u00d78)+(1\u00d74)+(0\u00d72)+(1\u00d71)=157 \u2713",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesizing Digital Electronics",
+      "content": "You've explored Boolean logic, logic gates, and binary representation. These three concepts interconnect seamlessly: Boolean algebra describes what a circuit should do, logic gates implement it in hardware, and binary notation represents the data flowing through. A modern CPU combines millions of gates following Boolean rules to manipulate binary data at incredible speeds. Your next step: explore how these fundamentals enable microcontroller programming and digital system design.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've built a foundation in digital electronics. You now understand the logical principles, hardware implementations, and data representations that power modern computing. Use this knowledge to explore microcontrollers, FPGA programming, or digital signal processing."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Boolean Logic & Truth Tables"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Logic Gates & Circuits"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Binary Number Systems"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T02:56:43.465837+00:00",
+  "model": "claude-haiku-4-5"
+}

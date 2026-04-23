@@ -1,0 +1,243 @@
+{
+  "id": "fp-gamedev-course",
+  "title": "Functional Programming for Game Developers",
+  "description": "Master functional programming through game design examples: pure functions, higher-order functions, and function composition.",
+  "topic": "Functional Programming Concepts",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "functional programming",
+    "game development",
+    "code architecture",
+    "design patterns"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Functional Programming for Game Developers",
+      "content": "Functional programming builds software by composing pure functions rather than modifying state. For game developers, this approach delivers concrete benefits: predictable behavior simplifies debugging, pure functions are trivial to unit test, and immutable data enables performance optimization through caching and parallelization. This course explores three pillars\u2014pure functions with immutable data, higher-order functions for flexible architecture, and function composition for elegant pipelines. Each concept is taught through real game design examples that you'll recognize from commercial games.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Which functional programming concept speaks to you first? Select a starting point\u2014each path teaches the same core principles through different game systems.",
+      "choices": [
+        {
+          "label": "Pure Functions & Immutability",
+          "next": "n3"
+        },
+        {
+          "label": "Higher-Order Functions & Callbacks",
+          "next": "n5"
+        },
+        {
+          "label": "Function Composition & Pipelines",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Pure Functions & Immutable Data",
+      "content": "A pure function always produces the same output for identical inputs and causes no side effects\u2014it doesn't modify global variables, player objects, or game state. In RPGs, a pure damage function `calculateDamage(baseAttack, armorClass)` always returns the same result for the same inputs, making it testable, cacheable, and parallelizable. Immutable data means you never modify existing objects; instead, you create new ones with updated values. This eliminates entire classes of bugs caused by unexpected state mutations and makes features like instant save/load, frame-perfect replays, and networked multiplayer trivial to implement.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Pure Damage Calculation in RPGs",
+      "content": "Consider an RPG where a warrior (Attack 18, Strength 5) fights a dragon (Defense 12, Armor 8). A pure damage function: `const takeDamage = (attack, defense) => Math.max(1, attack - defense)` always returns 6 HP reduction. You can cache this result, run it on multiple CPU threads without synchronization, and replay it perfectly. Contrast this with an impure version that modifies global lastDamageDealt or randomSeed\u2014it breaks deterministic replay, multiplayer consistency, and threading. In a game with 500 damage calculations per frame, immutability means each frame is a snapshot, enabling instant quicksave and frame-step debugging.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Higher-Order Functions & Callbacks",
+      "content": "A higher-order function takes functions as arguments or returns functions. In games, this powers flexible event systems. When a player collects a health potion, the event system invokes registered handlers: `onItemPickup(restoreHealth)` passes the healing function to execute later. This decouples systems\u2014the inventory system never knows about health; it just invokes whatever callbacks are registered. Higher-order functions also enable animation easing curves (which functions define the motion shape), behavior trees (combining decision functions), and strategy patterns for AI where you swap different decision-making functions.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Collision Event System with Callbacks",
+      "content": "A game's physics engine uses higher-order functions: `registerCollision(object1, object2, handler)` accepts a callback fired when collision occurs. For player hitting enemy: `registerCollision(player, goblin, (p, e) => p.takeDamage(e.attackPower))`. For coin pickup: `registerCollision(player, coin, (p, c) => p.addGold(c.value))`. For explosion: `registerCollision(bomb, anything, (b, t) => t.knockBack(10))`. The collision system doesn't know what handlers do\u2014it just invokes them. This pattern scales: UI buttons with `onClick(callback)`, dialogue choices with `onSelect(callback)`, particle systems with `onEmit(callback)`. Each system becomes independently testable and reusable across different game features.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Function Composition & Pipelines",
+      "content": "Function composition chains small functions into larger ones. In games, this creates elegant processing pipelines: rather than one monolithic function, you compose: `const chooseAction = pipe(detectEnemies, filterByDistance, evaluateThreat, selectBehavior)`. Data flows through the pipeline\u2014raw sensor input becomes detected enemies, filtered to nearby threats, evaluated for danger level, mapped to appropriate behavior. Composition makes code modular (test each function in isolation), reusable (use detectEnemies for multiple AI types), and maintainable (change threat evaluation without touching behavior selection). A render pipeline naturally composes: updatePhysics | clipToFrustum | applyLighting | rasterize. An initialization pipeline composes: loadAssets | compileShaders | generateNavmesh | spawnPlayer.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: AI Behavior Pipeline via Composition",
+      "content": "A fantasy game's enemy AI uses composed functions: `const decide = pipe(scanNearby, filterByDistance(15), sortByThreat, selectAction, execute)`. The scanNearby function returns all visible targets. filterByDistance(15) keeps only those within engagement range. sortByThreat orders by player level and distance. selectAction picks Attack|Retreat|Cast Spell. execute performs the action. Each function is 4-6 lines, pure, and testable standalone. A dragon AI might compose: `scanPlayers | filterLineOfSight | nearestTarget | calculateFireballTrajectory | castSpell`. An NPC merchant might compose: `scanCustomers | filterAffinity | calculatePrice | showDialog`. Adding new behaviors means composing different functions\u2014no spaghetti code, no hidden dependencies.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integration: Three Concepts Working Together",
+      "content": "Production games integrate all three concepts seamlessly. A player progression system uses pure functions to calculate XP thresholds (no hidden state), composition to pipeline stat updates (applyLevelBonus | recalculateHealth | updateUI), and higher-order functions to handle level-up events. An enemy spawner uses composition to pipeline creation (instantiate | applyStats | placeInWorld), higher-order functions to wire damage callbacks, and pure functions for stat calculations. A multiplayer server relies on pure functions for game logic consistency (same input always produces same state), composition for request processing (parse | validate | process | respond), and higher-order functions for network message routing. This architecture provides testability, performance, correctness, and maintainability\u2014the hallmarks of professional game code.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "practice",
+      "title": "Apply Functional Concepts to Game Systems",
+      "content": "Demonstrate your understanding by applying functional programming principles to real game design scenarios.",
+      "questions": [
+        {
+          "question": "You're implementing an RPG inventory system where each item's weight affects movement speed. Why is a pure function crucial for calculating total weight?",
+          "options": [
+            "A) It enables caching\u2014same inventory composition always equals same weight; no recalculation needed",
+            "B) It automatically prevents players from carrying items exceeding the weight limit",
+            "C) It makes weight calculations faster than loops or other approaches",
+            "D) It tracks weight changes across multiple game sessions"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Pure functions with identical inputs always produce identical outputs, making them perfect for caching and optimization.",
+            "Incorrect. Pure functions calculate results; enforcing limits is a separate validation layer.",
+            "Incorrect. Implementation speed isn't why pure functions matter; determinism is.",
+            "Incorrect. Pure functions return the same value for the same input every time; they don't track history."
+          ],
+          "explanation": "Pure functions are deterministic. Once you know a specific inventory (Iron Sword + Health Potion + Gold) weighs 8kg, you never recalculate it unless the inventory changes. This caching is essential for performance in games updating hundreds of times per second."
+        },
+        {
+          "question": "Your game processes items through validation \u2192 stat calculation \u2192 UI display. Which pattern best handles this workflow?",
+          "options": [
+            "A) A single monolithic function handling all three steps sequentially",
+            "B) Function composition: pipe items through validate | computeStats | renderUI",
+            "C) Three independent programs that communicate via files or network",
+            "D) A higher-order function that wraps and processes all items at once"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Monolithic functions are hard to test, reuse, and extend.",
+            "Correct! Composition creates reusable, testable stages. Validate works server-side; computeStats updates tooltips; renderUI handles all item changes.",
+            "Incorrect. Separate programs can't share state cleanly or run in-game.",
+            "Incorrect. Higher-order functions wrap functions; composition chains them\u2014these serve different purposes."
+          ],
+          "explanation": "Function composition creates pipelines where each stage is independent and reusable. You can test validate() alone, use computeStats() in multiple contexts, and call renderUI() for any state change. This is how professional game engines structure complex workflows."
+        },
+        {
+          "question": "Your collision system allows game systems to register callbacks: `onCollision(player, enemy, (p, e) => p.takeDamage(e.power))`. This exemplifies which concept?",
+          "options": [
+            "A) Pure functions\u2014collision detection is purely mathematical",
+            "B) Function composition\u2014collision handlers are chained together",
+            "C) Higher-order functions\u2014the event system accepts and invokes callback functions",
+            "D) Immutability\u2014collision data is never modified"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. While collision detection can use pure functions, the event system itself isn't pure.",
+            "Incorrect. Composition chains outputs to inputs; collision callbacks fire independently, not in sequence.",
+            "Correct! The event system is a higher-order function that takes a callback and invokes it when the condition (collision) occurs.",
+            "Incorrect. Immutability might protect collision data, but it's not why the callback pattern works."
+          ],
+          "explanation": "Higher-order functions enable decoupled, flexible systems. The collision engine doesn't care what callbacks do\u2014it just invokes them when collisions happen. This lets damage, physics knockback, audio, and UI effects all react independently without coupling."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Functional Game Programming Mastered",
+      "content": "You've learned how pure functions create predictable, cacheable game logic; how higher-order functions enable decoupled, flexible systems; and how function composition builds complex behavior from simple reusable parts. These principles drive modern game engines\u2014Unreal Engine's Blueprint composition, Unity's event system, and Godot's callable system all use these patterns. Apply these concepts to your next project and watch your code become cleaner, faster, and easier to maintain. Your games are now architected for success."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pure Functions & Immutability"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Higher-Order Functions & Callbacks"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Function Composition & Pipelines"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Explore"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Reconverge"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Explore"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Reconverge"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Explore"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Reconverge"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Next"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Success"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "Review & Retry"
+    }
+  ],
+  "generated_at": "2026-03-27T03:11:18.026677+00:00",
+  "model": "claude-haiku-4-5"
+}

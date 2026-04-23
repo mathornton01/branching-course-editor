@@ -1,0 +1,404 @@
+{
+  "id": "ml-forensics-001",
+  "title": "Machine Learning Fundamentals: A Forensic Science Perspective",
+  "description": "Learn machine learning concepts through practical forensic science applications, including fingerprint analysis, DNA matching, and evidence classification.",
+  "topic": "Machine Learning Fundamentals",
+  "theme": "forensic science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "machine learning",
+    "forensic science",
+    "classification",
+    "supervised learning",
+    "data analysis"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "What is Machine Learning in Forensic Science?",
+      "content": "Machine learning is a computational method that learns patterns from existing forensic evidence to make predictions about new evidence. Instead of writing explicit rules (\"if fingerprint ridge count is X, it's a match\"), ML systems analyze thousands of known fingerprints, DNA profiles, and handwriting samples to discover the distinguishing patterns automatically. In forensic labs, ML accelerates evidence analysis: fingerprint systems can now match unknown prints against millions of reference samples in seconds, DNA analysis can identify degraded samples, and document examiners use ML to detect forged signatures. The key insight is that machines learn patterns from data rather than following programmed rules.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "ML Fundamentals Quiz",
+      "content": "Test your understanding of machine learning and its role in forensic analysis.",
+      "questions": [
+        {
+          "question": "What is the primary advantage of machine learning in forensic fingerprint analysis?",
+          "options": [
+            "A) It can match unknown fingerprints against millions of reference prints without human review",
+            "B) It eliminates the need for trained forensic examiners",
+            "C) It always produces 100% accurate matches with no false positives",
+            "D) It replaces the need for physical evidence at crime scenes"
+          ],
+          "correct_index": 0,
+          "feedback": {
+            "A": "Correct! ML systems can process and compare fingerprints at scale, vastly speeding up criminal database searches.",
+            "B": "Incorrect. Expert human examiners still validate matches\u2014ML assists their work, not replaces it.",
+            "C": "Incorrect. ML systems can produce false positives and false negatives, which is why human verification remains critical.",
+            "D": "Incorrect. Physical evidence is still the foundation; ML helps analyze it more efficiently."
+          },
+          "explanation": "Machine learning's primary value in forensics is processing speed and scale. A fingerprint database of millions can be searched in seconds, whereas manual comparison would take years."
+        },
+        {
+          "question": "A forensic DNA lab trains a machine learning model on 10,000 known DNA profiles from its database. What is this collection of 10,000 profiles called?",
+          "options": [
+            "A) The test set",
+            "B) The training data",
+            "C) The algorithm",
+            "D) The reference library"
+          ],
+          "correct_index": 1,
+          "feedback": {
+            "A": "Incorrect. The test set is used to evaluate the model after training.",
+            "B": "Correct! The examples the ML model learns from are called training data.",
+            "C": "Incorrect. The algorithm is the mathematical procedure; data is what it learns from.",
+            "D": "Incorrect. While this is also a reference library, in ML terminology it's training data."
+          },
+          "explanation": "In machine learning, the data used to teach the model is the training data. The lab's 10,000 known profiles are examples from which the model learns to recognize DNA patterns."
+        },
+        {
+          "question": "Why is machine learning particularly useful for analyzing degraded forensic samples (e.g., old bloodstains, damaged fingerprints)?",
+          "options": [
+            "A) Because rules-based systems struggle with the variability and noise in degraded samples, but ML can learn patterns from examples of degradation",
+            "B) Because it never makes mistakes on degraded samples",
+            "C) Because forensic examiners prefer automated analysis over manual review",
+            "D) Because degraded samples are easier to process computationally"
+          ],
+          "correct_index": 0,
+          "feedback": {
+            "A": "Correct! ML excels when data is messy or variable\u2014it can learn robust patterns from many examples of degradation.",
+            "B": "Incorrect. ML systems still make errors; they're just good at recognizing patterns despite noise.",
+            "C": "Incorrect. While ML may assist, this isn't the technical reason it's useful for degraded samples.",
+            "D": "Incorrect. Degraded samples are actually harder to process because they contain more noise."
+          },
+          "explanation": "Traditional rule-based systems often fail on degraded samples because the rules become invalid. ML systems learn from examples of how evidence degrades, allowing them to recognize patterns even in poor-quality data."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Supervised Learning in Forensic Evidence Classification",
+      "content": "Supervised learning is machine learning with labeled examples\u2014each training example comes with a known answer. In forensics, this means training on evidence samples where we already know the ground truth. For instance, fingerprint experts manually classified 50,000 fingerprints as either 'arches,' 'loops,' or 'whorls'\u2014these labeled examples become training data. A supervised learning system learns the visual patterns that distinguish each type, then classifies new fingerprints automatically. Similarly, signature verification systems train on pairs of handwriting samples labeled 'genuine' or 'forged,' learning the subtle differences in pressure, stroke angles, and timing. The supervised learning process: (1) collect labeled examples, (2) extract features the model will analyze, (3) train the model to map features to labels, (4) test on new evidence to measure accuracy.",
+      "next": "n5"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Practice: Supervised Learning Scenarios",
+      "content": "Work through these scenarios to deepen your understanding before retaking the assessment.",
+      "questions": [
+        {
+          "question": "A forensic lab has 1,000 glass fragments from known sources (car windows, beer bottles, etc.) and wants to classify unknown glass found at a crime scene. What would be the training data?",
+          "options": [
+            "A) The unknown glass fragments found at the crime scene",
+            "B) The 1,000 glass fragments with known sources",
+            "C) The classification predictions the model makes",
+            "D) The forensic examiner's personal experience"
+          ],
+          "correct_index": 1,
+          "feedback": {
+            "B": "Correct! The 1,000 samples with known sources are the labeled training data.",
+            "A": "Incorrect. Unknown fragments are what we're trying to classify, not what we train on.",
+            "C": "Incorrect. Predictions are outputs, not training data.",
+            "D": "Incorrect. While human expertise is valuable, training data must be labeled examples."
+          },
+          "explanation": "Training data must have known labels. The 1,000 fragments with known sources each have a label ('car window', 'beer bottle', etc.), making them perfect for training a supervised learning model."
+        },
+        {
+          "question": "In a document forensics system trained on 500 known signatures from a suspect, the model learns to distinguish the suspect's genuine signatures from forgeries. What is this learning process called?",
+          "options": [
+            "A) Unsupervised learning (because it doesn't need external labels)",
+            "B) Supervised learning (because each training signature is labeled 'genuine' or 'forged')",
+            "C) Transfer learning (because it transfers knowledge from one domain to another)",
+            "D) Reinforcement learning (because the model improves through feedback)"
+          ],
+          "correct_index": 1,
+          "feedback": {
+            "B": "Correct! Each training signature is labeled, making this supervised learning.",
+            "A": "Incorrect. Unsupervised learning finds patterns without labels; here, each signature is labeled genuine or forged.",
+            "C": "Incorrect. Transfer learning reuses models trained on other tasks; this is learning directly.",
+            "D": "Incorrect. Reinforcement learning uses reward signals; signature classification uses fixed labels."
+          },
+          "explanation": "Because each training signature has a known label (genuine or forged), this is supervised learning. The model learns to predict the correct label for new, unlabeled signatures."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Supervised Learning Quiz",
+      "content": "Test your understanding of supervised learning in forensic contexts.",
+      "questions": [
+        {
+          "question": "A blood type classification system is trained on 100,000 blood samples, each labeled with its correct type (A, B, AB, or O). After training, the model is tested on 10,000 new samples to measure accuracy. What are the 10,000 new samples called?",
+          "options": [
+            "A) Training data",
+            "B) Test data",
+            "C) Validation data (if used to tune the model during training)",
+            "D) B and C are both correct, depending on how they're used"
+          ],
+          "correct_index": 3,
+          "feedback": {
+            "D": "Correct! Depending on the workflow, held-out samples can be either test data (for final evaluation) or validation data (for tuning during training).",
+            "A": "Incorrect. Training data is what the model learns from; the 10,000 samples are held out.",
+            "B": "Partially correct, but incomplete.",
+            "C": "Partially correct, but incomplete."
+          },
+          "explanation": "In ML workflows, held-out data serves different purposes: validation data helps tune the model during development, test data gives a final accuracy measure. Both involve samples not used in training."
+        },
+        {
+          "question": "Which of the following is an example of a supervised learning problem in forensics?",
+          "options": [
+            "A) Finding clusters of similar bullet casings from crime scenes with no prior knowledge of how many clusters exist",
+            "B) Predicting whether a fingerprint found at a crime scene matches a known suspect, trained on thousands of labeled match/non-match pairs",
+            "C) Discovering hidden patterns in a database of anonymous crime statistics with no specific outcome to predict",
+            "D) Grouping unknown fiber samples into categories based on their chemical composition without pre-existing labels"
+          ],
+          "correct_index": 1,
+          "feedback": {
+            "B": "Correct! Training on labeled match/non-match pairs makes this supervised learning.",
+            "A": "Incorrect. Grouping without pre-existing cluster labels is unsupervised learning.",
+            "C": "Incorrect. Finding hidden patterns without a target variable is unsupervised learning.",
+            "D": "Incorrect. Grouping without pre-existing labels is unsupervised learning (clustering)."
+          },
+          "explanation": "Supervised learning requires labeled training examples with a known target outcome. Option B has matches and non-matches labeled in advance, making it ideal for supervised learning."
+        },
+        {
+          "question": "A forensic toxicology lab trains a model to predict drug type (opioid, stimulant, depressant, etc.) from blood chemical composition data. The model is trained on 5,000 samples with known drug types. What type of supervised learning problem is this?",
+          "options": [
+            "A) Regression (predicting a continuous number)",
+            "B) Classification (predicting a category from a fixed set)",
+            "C) Clustering (grouping similar samples)",
+            "D) Dimensionality reduction (simplifying high-dimensional data)"
+          ],
+          "correct_index": 1,
+          "feedback": {
+            "B": "Correct! The output is a category (one of 4 drug types), making this classification.",
+            "A": "Incorrect. Regression predicts continuous values like concentration levels, not categories.",
+            "C": "Incorrect. Clustering is unsupervised; here we have labeled training examples.",
+            "D": "Incorrect. Dimensionality reduction simplifies data representation, not classifies it."
+          },
+          "explanation": "When the target is a category from a fixed set (drug type \u2208 {opioid, stimulant, depressant, ...}), it's classification. If the target were a continuous value (e.g., drug concentration), it would be regression."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Feature Engineering & Model Evaluation in Forensic ML Systems",
+      "content": "Feature engineering is extracting relevant information from raw forensic data. Raw fingerprint images are millions of pixels; a feature engineer extracts meaningful measurements: ridge thickness, bifurcation count, and angle patterns. DNA sequences are strings of 3 billion letters; features might be k-mer frequencies (patterns of k consecutive letters). These engineered features become the model's input\u2014good features make learning efficient and accurate. Once a model is trained, evaluation metrics determine its fitness for forensic use. In forensics, false negatives (missing a real match) and false positives (incorrectly claiming a match) have asymmetric consequences. A false negative might let a criminal escape; a false positive could wrongly incriminate an innocent person. Therefore, forensic systems use precision (what fraction of predicted matches are real?) and recall (what fraction of real matches did we find?) as dual metrics. A fingerprint system might sacrifice perfect recall to achieve very high precision, because incorrectly matching prints is legally unacceptable.",
+      "next": "n8"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Features and Evaluation",
+      "content": "Apply your understanding of features and metrics before retaking the assessment.",
+      "questions": [
+        {
+          "question": "A forensic handwriting analyst extracts the following measurements from signatures: average stroke angle, pressure variation, writing speed, and slant angle. What are these measurements called?",
+          "options": [
+            "A) Labels",
+            "B) Features or feature vectors",
+            "C) Predictions",
+            "D) Training algorithms"
+          ],
+          "correct_index": 1,
+          "feedback": {
+            "B": "Correct! Extracted measurements representing the data are called features or feature vectors.",
+            "A": "Incorrect. Labels are the known correct answers (e.g., 'genuine' or 'forged'), not measurements.",
+            "C": "Incorrect. Predictions are model outputs; features are inputs.",
+            "D": "Incorrect. Algorithms are learning methods, not extracted measurements."
+          },
+          "explanation": "Features are the measurable characteristics extracted from raw data. In handwriting, these might be stroke properties. Good features capture discriminative information for the learning task."
+        },
+        {
+          "question": "A forensic blood type prediction model trained and tested on hospital samples works perfectly (100% accuracy) but fails in the field on degraded crime-scene samples. Why might this happen?",
+          "options": [
+            "A) The model was overfitted to the specific characteristics of the training samples",
+            "B) Crime-scene samples have different feature distributions than hospital samples (degradation, contamination, etc.)",
+            "C) The model needs more complex algorithms",
+            "D) A and B are both likely explanations"
+          ],
+          "correct_index": 3,
+          "feedback": {
+            "D": "Correct! Both overfitting (learned noise in clean hospital data) and distribution shift (field samples differ) explain the performance drop.",
+            "A": "Partially correct.",
+            "B": "Partially correct.",
+            "C": "Incorrect. Complexity is not the issue; the issue is mismatch between training and field conditions."
+          },
+          "explanation": "The model was trained on clean hospital data but deployed on degraded field evidence. The feature distributions differ (degradation introduces noise), and the model may have overfit to patterns present only in the training set. This is a crucial forensic ML lesson: test on realistic evidence."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Features & Evaluation Quiz",
+      "content": "Test your understanding of feature engineering and model evaluation metrics in forensic ML.",
+      "questions": [
+        {
+          "question": "A fingerprint matching system has precision 0.98 and recall 0.75. What does this mean?",
+          "options": [
+            "A) 98% of all fingerprints in the database match correctly, and 75% of the database was searched",
+            "B) When the system predicts a match, it's correct 98% of the time. Of all actual matches in the database, the system finds 75% of them.",
+            "C) The system is 98% accurate at rejection and 75% accurate at acceptance",
+            "D) 98 out of 100 fingerprints are genuine, and 75% have degradation"
+          ],
+          "correct_index": 1,
+          "feedback": {
+            "B": "Correct! Precision = true positives / (true positives + false positives). Recall = true positives / (true positives + false negatives).",
+            "A": "Incorrect. Precision and recall are not about database coverage or percentage of database.",
+            "C": "Incorrect. Precision/recall measure prediction accuracy on matches, not rejections separately.",
+            "D": "Incorrect. These are misunderstandings of the metrics."
+          },
+          "explanation": "Precision answers 'when we claim a match, how often are we right?' Recall answers 'of all true matches, how many do we find?' For forensics, both matter: high precision avoids wrongly incriminating innocents; high recall avoids missing evidence."
+        },
+        {
+          "question": "A DNA matching system is trained on features extracted from known DNA profiles. A feature engineer processes a crime-scene DNA sample to extract the same features. The extracted features are then fed into the trained model. What is the processed crime-scene data called at this stage?",
+          "options": [
+            "A) Training data",
+            "B) A feature vector or input data for the model",
+            "C) Test data",
+            "D) A label"
+          ],
+          "correct_index": 1,
+          "feedback": {
+            "B": "Correct! Once features are extracted from new evidence, it becomes a feature vector ready for model input.",
+            "A": "Incorrect. Training data was used to train the model; this is new data being predicted on.",
+            "C": "Incorrect. Test data is typically used for evaluation; this is real-world forensic data.",
+            "D": "Incorrect. A label is a known outcome; this is an input to the model."
+          },
+          "explanation": "The process is: raw evidence \u2192 feature extraction \u2192 feature vector \u2192 model prediction. The processed crime-scene data (feature vector) is the input to the model."
+        },
+        {
+          "question": "Why is feature engineering critical in forensic ML systems, especially for evidence that varies widely (e.g., degraded fingerprints, old bloodstains)?",
+          "options": [
+            "A) Good features compress data and reduce storage costs",
+            "B) Good features capture the essential patterns that remain consistent across variations, allowing the model to generalize from training to real-world evidence",
+            "C) Features are required by law in forensic testimony",
+            "D) Features eliminate the need for human expertise in forensic analysis"
+          ],
+          "correct_index": 1,
+          "feedback": {
+            "B": "Correct! Features should capture robust patterns that hold despite variations in image quality, degradation, or contamination.",
+            "A": "Incorrect. While compression is a benefit, it's not the primary reason.",
+            "C": "Incorrect. Features are not a legal requirement, though they may inform testimony.",
+            "D": "Incorrect. Features assist expert analysis but don't replace it."
+          },
+          "explanation": "Feature engineering is the bridge from raw, noisy forensic evidence to meaningful patterns. In fingerprints, ridge patterns matter more than image quality. In DNA, sequence composition matters more than read noise. Good features are invariant to variations that don't matter, allowing the model to generalize."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n9",
+      "type": "example",
+      "title": "Worked Example: Firearm Evidence Matching",
+      "content": "**Scenario:** The FBI's NIBIN (National Integrated Ballistic Information Network) uses ML to match bullet striations. A detective submits a bullet recovered from a crime scene. How does ML help? (1) **Data Preparation:** The crime-scene bullet image is scanned at high resolution. A feature engineer extracts measurements: striation frequency, angle variations, and surface texture descriptors. (2) **Feature Vector:** This becomes a numeric feature vector: [frequency=4.2mm\u207b\u00b9, angle_std=3.1\u00b0, texture_roughness=0.67, ...]. (3) **Model Lookup:** The trained model compares this vector against 500,000 known bullets in NIBIN's database, each with pre-computed features. (4) **Scoring:** The model assigns match scores to the top 1,000 candidates. (5) **Human Review:** A ballistics expert reviews the top 50 matches, examining high-resolution images for definitive matches. The ML system (high recall) identifies candidates; the expert (high precision) confirms them. **Key Takeaway:** ML excels at fast candidate generation; human expertise confirms identity. Neither alone suffices in forensics\u2014both are essential.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: ML Fundamentals in Forensic Science",
+      "content": "Congratulations! You've mastered the fundamentals of machine learning in forensic contexts. You now understand supervised learning, feature engineering, and evaluation metrics\u2014concepts that power modern forensic evidence analysis in fingerprints, DNA, ballistics, and document forensics. Remember: ML is a tool that augments forensic expertise, not a replacement for it. The next steps are exploring specific forensic applications (deep learning for fingerprints, NLP for forensic linguistics) or diving into model-building with real forensic datasets. Great work!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n6",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T05:06:58.566798+00:00",
+  "model": "claude-haiku-4-5"
+}

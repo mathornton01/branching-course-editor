@@ -1,0 +1,269 @@
+{
+  "id": "hci-game-design-course",
+  "title": "Human-Computer Interaction in Game Design",
+  "description": "Master HCI principles through the lens of game design, choosing between theoretical foundations or hands-on practical learning",
+  "topic": "Human-Computer Interaction",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "HCI",
+    "game design",
+    "UX",
+    "interaction design",
+    "accessibility"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction: Player Agency and Interaction",
+      "content": "Human-Computer Interaction (HCI) is the study of how people interact with digital systems. In game design, HCI is critical because the quality of player-game interaction directly determines whether a game feels responsive, intuitive, and fun. Every button press, menu navigation, and feedback loop is an HCI decision. From controller haptic feedback to camera sensitivity settings, mastering HCI means creating games that players love because they *feel* right to control.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Would you like to start with theoretical foundations before diving into practice, or jump directly into practical HCI implementation with real game examples?",
+      "choices": [
+        {
+          "label": "Theory First: Understand HCI Principles",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-On First: Learn Through Practice",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "HCI Foundations: Mental Models and Affordances",
+      "content": "HCI rests on three core principles. **Mental Models** are players' assumptions about how systems work\u2014if your inventory menu works differently than expected, it creates friction. **Affordances** are visual cues suggesting how to interact with something (a glowing button affords clicking). **Feedback Loops** confirm that actions were registered. In game UI, these work together: when a player presses a button, visual feedback (animation, sound, screen change) confirms their intention matched the system's response. Understanding these prevents mismatches where players think they failed to input a command when the game simply didn't communicate input was received.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Case Study: Dark Souls Control Clarity",
+      "content": "Dark Souls excels in HCI through consistent button mapping. Every attack, dodge, and item use follows an intuitive spatial layout: left-hand attacks on left bumper, right-hand on right bumper, dodge always the same button. This mental model consistency means experienced players execute complex combat blindfolded. FromSoftware later added remappable controls but maintained consistency *within* each scheme, understanding that affordance clarity prevents player deaths from input confusion rather than actual difficulty. The game's reputation for precision comes partly from this HCI excellence.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Theory Assessment: HCI Principles in Games",
+      "content": "Test your understanding of HCI principles applied to game design.",
+      "questions": [
+        {
+          "question": "In game UI, what does a player's 'mental model' refer to?",
+          "options": [
+            "The graphics processing unit's computational model",
+            "Players' assumptions about how game systems work and what they expect from interactions",
+            "The game engine's internal state management",
+            "The player's skill level"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The GPU is unrelated to HCI.",
+            "Correct! Mental models are players' expectations. Breaking these expectations (like putting 'quit' where players expect 'settings') creates friction.",
+            "Incorrect. Internal state management isn't about player interaction.",
+            "Incorrect. Mental models exist regardless of skill."
+          ],
+          "explanation": "Mental models describe the gap between player expectations and system behavior. A menu with 'quit' at the bottom when players expect it at the top violates the mental model and causes usability problems."
+        },
+        {
+          "question": "Which best exemplifies positive affordance in a game UI?",
+          "options": [
+            "A greyed-out button with no label",
+            "A glowing, elevated button labeled 'INTERACT' when near an interactive object",
+            "A text-only menu in small font",
+            "Hidden buttons that appear after 5 seconds"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Greyed buttons are unclear about their state.",
+            "Correct! Visual cues (glow, elevation) plus label communicate affordance clearly.",
+            "Incorrect. Text-only, small-font menus have poor affordance.",
+            "Incorrect. Hidden interactions violate discoverability."
+          ],
+          "explanation": "Affordances must communicate both *how* and *that* interaction is possible. The glowing button uses color, elevation, and text simultaneously."
+        },
+        {
+          "question": "Why is immediate feedback (sound, animation, response) critical in game HCI?",
+          "options": [
+            "It makes games graphically impressive",
+            "It confirms the player's input was registered, closing the feedback loop",
+            "It increases game file size",
+            "It distracts from gameplay"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Impression isn't the primary HCI function.",
+            "Correct! Players need confirmation their input was processed. Without it, they doubt button presses and input redundantly.",
+            "Incorrect. File size is a technical concern, not HCI.",
+            "Incorrect. Feedback loops are integral to engagement."
+          ],
+          "explanation": "Feedback closure is essential\u2014even 50ms of audio is enough to prevent players from second-guessing their inputs. Without it, frustration and redundant inputs multiply."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Practical HCI: User Testing and Iteration",
+      "content": "Real HCI work is empirical, not assumption-based. Game designers run user tests: watch players interact with a controller setup, menu system, or UI without guidance. Where do they struggle? What confuses them? This reveals gaps between designer and player mental models. Iteration follows observation. Accessibility testing exemplifies this\u2014designers initially treated accessibility as an afterthought, but testing with players using adaptive controllers or one-handed setups revealed that universal design benefits everyone. Toggle-able tutorials, remappable controls, and high-contrast modes improve experiences for all players, not just those with disabilities.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Case Study: Fortnite's Adaptive Input Design",
+      "content": "Fortnite demonstrates HCI best practice through iterative testing. Originally featuring a single default control scheme, user feedback revealed console players wanted different layouts than PC players, and accessibility testing showed one-handed play was impossible. Rather than assume, Fortnite's team conducted extensive testing with disabled players, iterating on button combinations balancing accessibility with competitive viability. The result: highly customizable schemes with one-handed presets and a thriving pro scene including adaptive controller users. This is empirical HCI\u2014the team tested, failed, iterated, and shipped when real users confirmed it worked, not when theory said it should work.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Practice: Applying HCI Testing to Game Design",
+      "content": "Apply HCI principles to real design scenarios.",
+      "questions": [
+        {
+          "question": "Your new pause menu gets feedback: 'I didn't know I could customize controls here.' Which HCI principle are you violating?",
+          "options": [
+            "Feedback loops",
+            "Affordance\u2014the control option isn't visually suggesting it's interactive",
+            "Mental models",
+            "All of the above"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Feedback loops confirm completed actions.",
+            "Correct! If players don't recognize 'Controls' as clickable, the affordance is broken. Add icons, color, or 'click to customize' labels.",
+            "Incorrect. The mental model is intact; they didn't recognize the option existed.",
+            "Incorrect. Only affordance is violated here."
+          ],
+          "explanation": "Missing affordance means players can't see something is interactive. Visual cues (icons, color, labels) solve this."
+        },
+        {
+          "question": "Playtests show players jump twice when they intend one jump. What's the HCI issue?",
+          "options": [
+            "The jump animation is too slow",
+            "Feedback latency is too long\u2014players doubt the first jump registered, so they input again",
+            "Players' mental models are wrong",
+            "Button mapping is unintuitive"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Animation speed doesn't affect input registration confirmation.",
+            "Correct! When visual feedback (animation, sound) isn't immediate, players doubt first jump registered.",
+            "Incorrect. This is about feedback, not mental models.",
+            "Incorrect. This is a feedback loop problem, not mapping."
+          ],
+          "explanation": "Feedback latency is classic HCI\u2014even 100ms delay between button press and visual feedback causes redundant inputs. Faster feedback prevents mistakes."
+        },
+        {
+          "question": "To test whether your inventory system is intuitive, what's the best approach?",
+          "options": [
+            "Ask your team if it looks good",
+            "Watch players use it without explanation; note where they struggle or look confused",
+            "Assume that if you find it intuitive, everyone will",
+            "A/B test two wildly different designs"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Team feedback is biased.",
+            "Correct! Observation reveals real usability issues your assumptions miss. Confusion and hesitation show exactly where design fails.",
+            "Incorrect. This common mistake leads to bad UX.",
+            "Incorrect. A/B testing helps, but qualitative data comes first."
+          ],
+          "explanation": "Empirical HCI requires watching real users. Confusion and failed interactions are invaluable\u2014they show where your design mismatched player mental models."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "You've Mastered HCI in Game Design",
+      "content": "Congratulations! You now understand both theoretical foundations and practical implementation of HCI in game design. Whether you started with theory or hands-on learning, you know that great games feel amazing to control because designers deeply understood player interaction. The next time you play a game with responsive controls (think polished action games with zero input lag), you'll recognize the HCI principles: clear affordances, consistent mental models, tight feedback loops. As a designer, apply these principles through real user testing, iterate based on observation, and remember that accessibility options benefit everyone. The best games don't guess how players expect to interact\u2014they observe, iterate, and ship when real users confirm it works."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-On First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n5",
+      "label": "Fail - Review & Retry"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n8",
+      "label": "Fail - Review & Retry"
+    }
+  ],
+  "generated_at": "2026-03-27T03:00:38.408185+00:00",
+  "model": "claude-haiku-4-5"
+}

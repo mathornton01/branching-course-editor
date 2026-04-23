@@ -1,0 +1,293 @@
+{
+  "id": "game-theory-sports-analytics",
+  "title": "Game Theory in Sports Analytics",
+  "description": "Master game theory concepts through real-world sports analytics scenarios, with adaptive difficulty progression.",
+  "topic": "Game Theory",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "game theory",
+    "sports analytics",
+    "strategy",
+    "nash equilibrium",
+    "decision making"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Game Theory Fundamentals",
+      "content": "Test your understanding of basic game theory concepts as they apply to sports. Game theory helps analyze strategic decisions where outcomes depend on choices made by multiple competitors.",
+      "questions": [
+        {
+          "question": "In a basketball playoff series, a coach must decide whether to play a suffocating man-to-man defense or a flexible zone defense. The opposing coach faces the same choice. Which game theory concept best describes this situation?",
+          "options": [
+            "Payoff matrix",
+            "Nash equilibrium",
+            "Competitive advantage",
+            "Regression analysis"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is a payoff matrix situation.",
+            "Not quite. While equilibrium may exist, first we identify the payoff structure.",
+            "Not the primary game theory concept here.",
+            "This is statistics, not game theory."
+          ],
+          "explanation": "A payoff matrix shows the outcomes for each possible combination of choices. Here, each defensive choice creates different outcomes based on what the opponent chooses."
+        },
+        {
+          "question": "A football team can either call a pass play or a run play. If both teams play their optimal strategy and neither wants to change, what have they reached?",
+          "options": [
+            "A dominant strategy",
+            "A Nash equilibrium",
+            "A zero-sum game",
+            "Perfect information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not necessarily\u2014Nash equilibrium is more general.",
+            "Correct! This is the core concept of Nash equilibrium.",
+            "This describes the game type, not the outcome.",
+            "This is about available information, not the outcome."
+          ],
+          "explanation": "Nash equilibrium is when each player's strategy is optimal given the opponent's strategy, so neither wants to unilaterally change. In sports, this is the 'settled' strategic state."
+        },
+        {
+          "question": "A baseball pitcher can throw a fastball or curveball. A batter can prepare for either pitch. The pitcher's payoff changes depending on what the batter expects. What does this illustrate?",
+          "options": [
+            "The importance of scouting reports",
+            "Interdependent decision-making",
+            "Home field advantage",
+            "Batting average correlation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While scouting helps, this illustrates a deeper concept.",
+            "Correct! Payoffs depend on the opponent's choice\u2014this is game theory.",
+            "Not relevant to this scenario.",
+            "Not the game theory concept being illustrated."
+          ],
+          "explanation": "Game theory is fundamentally about interdependent decisions. Each player's outcome depends on what others do, not just on their own choice."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Nash Equilibrium & Mixed Strategies",
+      "content": "Game theory often reveals that pure strategies (always doing the same thing) aren't optimal. In sports, mixed strategies\u2014randomizing between options\u2014create Nash equilibrium. Test your understanding of equilibrium and strategic randomization in sports analytics.",
+      "questions": [
+        {
+          "question": "An NFL quarterback averages 40% passing plays and 60% running plays. An opposing defensive coordinator knows this ratio. Why might the coach recommend the QB randomize more unpredictably?",
+          "options": [
+            "Predictable patterns are exploitable",
+            "The payoff matrix favors randomization",
+            "The defense can't defend both equally",
+            "Mixed strategy Nash equilibrium may require different probabilities"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Related, but not precise.",
+            "Oversimplified.",
+            "True, but not the game theory insight.",
+            "Correct! In a Nash equilibrium mixed strategy, the player randomizes at a rate that makes the opponent indifferent."
+          ],
+          "explanation": "In a mixed strategy Nash equilibrium, if the QB plays 40/60, the defense would specialize. For equilibrium, the QB's mixed strategy must be set so the defense is equally happy defending pass or run. The actual equilibrium might be 50/50 or some other ratio."
+        },
+        {
+          "question": "Two soccer teams are deciding whether to play offensively or defensively in the first half. In a Nash equilibrium with pure strategies, what's typically true?",
+          "options": [
+            "Both teams play defensively",
+            "One team plays offensively, the other defensively",
+            "The outcome changes each game",
+            "It depends on recent performance"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not necessarily\u2014consider the payoff structure.",
+            "Correct! Often one goes offensive (higher risk/reward) while the other plays defensive (conservative).",
+            "If pure strategy equilibrium exists, it's stable.",
+            "Game theory assumes strategic rationality, not momentum."
+          ],
+          "explanation": "In many sports scenarios, a pure strategy Nash equilibrium has one team taking an aggressive approach while the other plays cautiously, because this mutual unpredictability makes both sides' strategies optimal given the other."
+        },
+        {
+          "question": "In tennis, a server can aim for a first-serve to the forehand or backhand side. The receiver doesn't know which until the serve. If the server aims forehand 60% of the time and wins 55% when receiver guesses wrong, what's a sign the server isn't in mixed strategy equilibrium?",
+          "options": [
+            "The win rate differs between the two serve directions",
+            "The receiver can still break serve sometimes",
+            "The server hasn't won the match yet",
+            "The receiver can predict the pattern over a match"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Possible, but not necessarily an equilibrium indicator.",
+            "Both strategies existing doesn't mean equilibrium.",
+            "Irrelevant to equilibrium.",
+            "Correct! In equilibrium, the opponent is unable to exploit a predictable pattern."
+          ],
+          "explanation": "If the serve is only 60% forehand, the receiver can exploit this by preparing slightly more for forehand returns, lowering the server's 55% win rate. True equilibrium requires the server's probabilities to be set so the receiver is indifferent."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Game Theory Applications in Sports Analytics",
+      "content": "Modern sports analytics teams apply game theory to real decision-making. Coaches use game theory to optimize play-calling sequences, teams apply it to auction strategy in salary caps, and analysts use it to predict opponent behavior. In baseball, pitchers and batters engage in an evolutionary arms race modeled as a repeated game. In pricing, sports franchises use game theory to set ticket prices knowing competitors will respond. Advanced teams run simulations of strategic interactions to find Nash equilibria in complex multi-player scenarios like playoff bracket positioning. Understanding these applications transforms game theory from abstract math into actionable competitive intelligence.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Mastery Achieved",
+      "content": "Excellent! You've mastered game theory concepts including Nash equilibrium, mixed strategies, and advanced applications in sports analytics. You understand how competitive outcomes emerge from strategic interaction and how analytics teams model these dynamics. You're ready to apply these concepts to real-world coaching decisions, strategic forecasting, and competitive analysis."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Game Theory Practice: Mixed Strategies & Equilibrium",
+      "content": "Reinforce your understanding of Nash equilibrium with targeted practice. Focus on identifying equilibrium conditions and understanding why randomization is strategically valuable in sports.",
+      "questions": [
+        {
+          "question": "A hockey goalie faces a player with a breakaway. The player can shoot left or right. The goalie can commit to a side or stay center. If the goalie commits, they stop 80% of shots to that side but only 20% to the other. What's the player's incentive?",
+          "options": [
+            "Always go to the opposite side",
+            "Mix strategies unpredictably",
+            "Watch the goalie's positioning cues",
+            "Go to whichever side is further from the net"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's exploiting predictability, but equilibrium requires balance.",
+            "Correct! If the goalie commits, the player should randomize to keep the goalie honest.",
+            "This is real hockey, but not the game theory concept.",
+            "This doesn't relate to the strategic balance."
+          ],
+          "explanation": "In equilibrium, if the goalie commits to one side too often, the player exploits it by shooting the other way. So the goalie must randomize. Similarly, if the player always shoots one way, the goalie commits. Mixed strategy equilibrium requires both to randomize at rates that make the opponent indifferent."
+        },
+        {
+          "question": "In a repeated game like a season-long rivalry, why might rational teams choose different strategies than in a one-off game?",
+          "options": [
+            "Reputation and future retaliation matter",
+            "Teams get tired",
+            "Weather conditions change",
+            "Player salaries increase"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! In repeated games, the shadow of the future changes incentives.",
+            "Not a game theory factor.",
+            "Environmental, not strategic.",
+            "Economic, not strategic."
+          ],
+          "explanation": "In repeated games, if a team plays aggressively unfairly in one game, the opponent can retaliate in future games. This changes the payoff structure and often leads to cooperation or different equilibria than one-shot games."
+        },
+        {
+          "question": "A sports team decides to trade for an expensive player. The salary cap means they sacrifice depth elsewhere. If all teams face this same constraint, what's the likely market equilibrium?",
+          "options": [
+            "All teams will overpay for stars",
+            "Teams will evenly distribute spending across all players",
+            "Teams will specialize: some focus on one star, others on depth",
+            "Free agents will refuse to sign"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Possible outcome, but not the equilibrium.",
+            "This ignores competitive advantage incentives.",
+            "Correct! Differentiation is often an equilibrium outcome when all players face the same constraint.",
+            "Unrealistic given professional incentives."
+          ],
+          "explanation": "When all teams face identical constraints, equilibrium often involves differentiation (some teams go 'star-heavy,' others 'depth-heavy') because homogeneous strategies invite direct competition. Different strategies can coexist in equilibrium."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Level Complete",
+      "content": "Great job! You've solidified your understanding of Nash equilibrium and mixed strategies in sports contexts. You can now analyze strategic interactions in athletic competition and understand why teams randomize their strategies. This foundation prepares you for advanced applications in sports analytics."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Game Theory Basics Revisited",
+      "content": "Game theory studies strategic decision-making where the outcome for each player depends on choices made by others. In sports, it explains why a coach can't simply pick the 'best' play\u2014the opponent will adjust. A payoff matrix shows the outcomes for each combination of choices. For example, imagine a tennis server deciding between aiming for a wide serve or down-the-middle, while the receiver decides where to anticipate. Each choice combination creates a different outcome. Game theory reveals that without predictability, neither player can exploit the other. The key insight: in competitive sports, outcomes emerge from mutual strategy interaction, not individual skill alone."
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Baseball Pitcher vs Batter",
+      "content": "Consider a pitcher who throws either a fastball (hard to hit but predictable) or a curveball (easier to hit if expected, but deceiving if unexpected). The batter can sit on fastball or curveball. If the pitcher throws fastball every time, the batter sits on it and hits .400. If the pitcher throws curveball every time, the batter sits on it and hits .350. If they mix 50/50, the batter (unable to predict) hits around .250 on fastball and .280 on curveball, averaging .265. The pitcher's optimal strategy depends on the batter's expectations. In Nash equilibrium, the pitcher throws fastball and curveball at rates that make the batter indifferent\u2014equally likely to hit either one. This equilibrium makes it impossible for the batter to predict and exploit the pitcher's choice."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundational Understanding Complete",
+      "content": "Well done! You've built a solid foundation in game theory basics and can now recognize strategic interactions in sports. You understand payoff matrices, competitive scenarios, and why randomization matters. Continue exploring how these concepts apply to coaching decisions, player behavior, and team strategy."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "success"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "success"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T15:23:42.377997+00:00",
+  "model": "claude-haiku-4-5"
+}

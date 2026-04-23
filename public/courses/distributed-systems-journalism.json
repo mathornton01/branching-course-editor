@@ -1,0 +1,263 @@
+{
+  "id": "distributed-systems-journalism",
+  "title": "Distributed Systems Through a Journalism Lens",
+  "description": "Master distributed systems concepts using real-world journalism scenarios - from newsroom networks to fact-checking coordination",
+  "topic": "Distributed Systems",
+  "theme": "journalism",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed-systems",
+    "journalism",
+    "adaptive-learning",
+    "assessment-pyramid"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "News Distribution Basics",
+      "content": "A major news agency operates newsrooms in 5 cities that share stories. When a story breaks in one city, it needs to reach the others quickly. You need to understand the core challenges of keeping distributed systems synchronized.",
+      "questions": [
+        {
+          "question": "When multiple offices share the same story database, what's most critical to maintain?",
+          "options": [
+            "Speed of delivery",
+            "Consistency across all copies",
+            "Cost minimization",
+            "Story popularity"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed is important, but consistency ensures truth isn't fragmented.",
+            "Correct! All newsrooms must see the same version of reality.",
+            "Cost matters operationally, but isn't the core distributed systems challenge.",
+            "Popularity isn't a system architecture concern."
+          ],
+          "explanation": "In distributed systems, consistency (all nodes having the same data) is fundamental. Without it, different offices might publish contradictory information."
+        },
+        {
+          "question": "If the network connection between two newsrooms fails, what should the system do?",
+          "options": [
+            "Stop all publishing immediately",
+            "Allow each office to continue working independently",
+            "Delete all conflicting stories",
+            "Force a shutdown of the affected office"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Stopping everything defeats the purpose of distribution.",
+            "Correct! Fault tolerance means continuing operations despite failures.",
+            "Deleting stories causes data loss.",
+            "Shutting down wastes your infrastructure investment."
+          ],
+          "explanation": "Resilient distributed systems remain operational even when components fail. This is called fault tolerance - a key distributed systems principle."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Coordinating Multiple News Sources",
+      "content": "A global fact-checking network has 8 verification centers worldwide. They simultaneously verify claims using local sources and databases. Due to regional information differences, centers sometimes reach different conclusions about the same fact. The network must produce one authoritative verdict that users trust.",
+      "questions": [
+        {
+          "question": "When distributed verification centers reach different conclusions, how should they resolve disagreements?",
+          "options": [
+            "Publish the fastest answer",
+            "Wait for consensus or majority agreement",
+            "Use only the most experienced center's verdict",
+            "Publish all contradictions to users"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed over accuracy destroys journalistic credibility.",
+            "Correct! Consensus algorithms ensure correctness when individual nodes disagree.",
+            "Single points of authority defeat the distribution benefits.",
+            "Contradictions confuse readers and destroy trust."
+          ],
+          "explanation": "Consensus algorithms are distributed systems' answer to disagreement. They ensure that despite differences, the system converges on a shared truth - critical for journalism."
+        },
+        {
+          "question": "What's the biggest operational risk if verification centers work completely independently without coordination?",
+          "options": [
+            "Editorial staff get overwhelmed",
+            "Contradictory verdicts published for identical claims",
+            "Server hardware overheats",
+            "Network bandwidth exhausted"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Staff management isn't a systems architecture issue.",
+            "Correct! This is the consistency problem - different nodes producing different answers creates credibility disaster.",
+            "Hardware cooling isn't a coordination problem.",
+            "Bandwidth management is separate from coordination."
+          ],
+          "explanation": "This is the core distributed systems consistency challenge. The world sees one organization, but your systems gave contradictory answers. Users lose trust."
+        },
+        {
+          "question": "One verification center submits deliberately false data to damage your reputation. How should the network defend itself?",
+          "options": [
+            "Trust the malicious center equally",
+            "Trust the majority vote among all centers",
+            "Immediately ban that center without investigation",
+            "Disable the entire network for security"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That hands victory to the attacker.",
+            "Correct! Voting mechanisms handle Byzantine faults (malicious participants). The majority can't be wrong.",
+            "Banning without understanding the problem leaves you vulnerable.",
+            "Overreaction cripples your operations."
+          ],
+          "explanation": "Byzantine fault tolerance, named after the Byzantine general problem, handles malicious nodes. Voting ensures honest centers outvote the dishonest one. This protects journalism from coordinated misinformation."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced: The CAP Theorem & Real-World Trade-offs",
+      "content": "The CAP theorem states that distributed systems can guarantee only 2 of 3 properties: Consistency (all copies identical), Availability (system always responds), and Partition tolerance (system survives network splits). BBC News during the 2011 election chose Availability and Partition tolerance, sacrificing Consistency - readers on different devices briefly saw different headline counts. Reuters chose Consistency and Partition tolerance, sacrificing Availability - some pages temporarily went offline. Both made valid architectural choices. Beyond CAP, you'll architect Byzantine fault tolerance using reputation systems and consensus voting when aggregating stories from untrusted sources. Leader election algorithms determine which distributed node makes final editorial decisions. Exponential backoff with jitter prevents thundering herd problems when syncing millions of stories across regions. Understanding these patterns transforms you from implementing features to architecting resilient global news infrastructure.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Master of Distributed News Systems",
+      "content": "Congratulations! You've mastered distributed systems thinking in journalism. You understand CAP theorem trade-offs, Byzantine resilience, consensus algorithms, leader election, and can design systems that handle real-world failures gracefully. You're ready to architect news infrastructure for global media organizations, design fact-checking networks, and build systems that serve billions of users while maintaining journalistic integrity.",
+      "next": null
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Practice: Real-World Distributed Challenges",
+      "content": "Let's strengthen your understanding with realistic scenarios from major news organizations.",
+      "questions": [
+        {
+          "question": "The Associated Press syndicates stories to 1,200 newspapers. If AP headquarters goes down, what should happen?",
+          "options": [
+            "All newspapers stop receiving updates",
+            "Newspapers continue with cached stories until sync resumes",
+            "All stories get automatically deleted",
+            "The entire AP news system shuts down"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This defeats the distribution benefits.",
+            "Correct! Replication and caching enable operational continuity despite failures.",
+            "Data loss violates journalism principles.",
+            "Overreaction cripples the entire news ecosystem."
+          ],
+          "explanation": "Data replication across multiple locations lets systems survive component failures. This is why major news agencies maintain redundant systems in geographically separate data centers."
+        },
+        {
+          "question": "A real-time election coverage system has 3 data centers feeding results to 50 news websites. Data center #2 starts sending outdated vote counts. What's the best approach?",
+          "options": [
+            "Use fastest response from the 3 centers",
+            "Use majority voting from the 3 centers",
+            "Average all three values together",
+            "Trust only data center #1 exclusively"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Fastest often means most wrong in critical situations.",
+            "Correct! Voting lets good nodes outvote the bad one.",
+            "Averaging data obscures the real problem.",
+            "Single points of failure negate distribution benefits."
+          ],
+          "explanation": "Voting mechanisms handle faulty nodes elegantly. With 3 centers, 1 failure is tolerable - the 2 good ones agree and are trusted. This pattern scales to handle Byzantine faults."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Practitioner of Distributed News Systems",
+      "content": "You have solid practical knowledge of distributed systems applied to journalism. You can troubleshoot synchronization issues, understand replication strategies, design failover mechanisms, and apply these concepts to real newsroom and news platform challenges. You're ready for intermediate distributed systems projects in media technology.",
+      "next": null
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Distributed Systems Fundamentals",
+      "content": "Imagine you're a journalist at a wire service with newsrooms in New York and London. When a story breaks in New York, it's uploaded to a shared system. London journalists can then access it. This is a distributed system - information stored and processed in multiple locations that need to stay synchronized. The core challenge: keeping copies identical and handling when networks or servers fail. Key questions define your architecture: If the network dies between offices, should New York journalists keep filing stories? Should London journalists work offline with a local cache? Should both offices get copies instantly (strong consistency) or is acceptable slight delay (eventual consistency)? These decisions determine how resilient, responsive, and reliable your system becomes. Real distributed systems accept trade-offs: perfect synchronization is often impossible, so you choose which imperfections you'll tolerate.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: Reuters Global Newsroom Network",
+      "content": "Reuters operates newsrooms on 6 continents serving thousands of news outlets. Journalists file stories to local servers that automatically sync to a central database in London using eventual consistency - all offices eventually have the same stories, but with brief delays. If a London editor publishes a story while Tokyo is filing a correction, there's a brief window where they're out of sync. Reuters accepts this trade-off because journalists can keep working even if networks are slow. If they required perfect instant synchronization (strong consistency), a slow network between London and Sydney would freeze the entire operation - unacceptable for real-time news. This example shows distributed systems thinking: choosing which imperfections you'll accept to gain resilience and responsiveness. Reuters gains availability and partition tolerance (CAP theorem) at the cost of brief consistency gaps.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundations in Distributed Systems",
+      "content": "You now understand distributed systems fundamentals: multiple locations, synchronization challenges, fault tolerance, and reliability trade-offs. You grasp why instant consistency is expensive and how eventual consistency enables resilience. With this foundation, you're ready to explore practical applications like managing news APIs, building redundant systems, designing caches, and handling failures gracefully.",
+      "next": null
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T06:59:04.971479+00:00",
+  "model": "claude-haiku-4-5"
+}

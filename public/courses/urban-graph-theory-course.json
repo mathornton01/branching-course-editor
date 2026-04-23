@@ -1,0 +1,144 @@
+{
+  "id": "urban-graph-theory-course",
+  "title": "Graph Theory and Urban Planning: MetroCity Redesign",
+  "description": "Learn graph theory fundamentals by solving real urban planning challenges in MetroCity",
+  "topic": "Graph Theory and Applications",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "graph-theory",
+    "urban-planning",
+    "algorithms",
+    "networks",
+    "optimization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Welcome to MetroCity: A Network Challenge",
+      "content": "You're MetroCity's new Chief Urban Planner, inheriting a city with 15 districts and aging infrastructure. The city's transportation network has become congested, and some neighborhoods remain isolated from economic opportunities. Graph theory\u2014the mathematical study of networks\u2014is your analytical toolkit. In this framework, districts are nodes (vertices) and roads/transit lines are edges. Analyzing MetroCity as a graph reveals optimization opportunities. Your first decision: which urban challenge deserves your strategic focus?"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Strategic Focus",
+      "content": "MetroCity faces multiple interconnected problems. Your analytical approach will shape the entire redesign strategy.",
+      "choices": [
+        {
+          "label": "Focus on transportation efficiency: Optimize routes and reduce commute times using shortest-path algorithms",
+          "next": "n3"
+        },
+        {
+          "label": "Focus on equity: Connect isolated neighborhoods and ensure fair infrastructure access across all districts",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Shortest Paths and Traffic Optimization",
+      "content": "MetroCity's current traffic model reveals the problem: commuters take inefficient routes because intersection signaling is uncoordinated. You model the city as a weighted graph where districts are nodes, roads are edges, and weights represent travel time in minutes (accounting for congestion, distance, and terrain). Using Dijkstra's algorithm, you compute the shortest path from each district to major employment centers (Downtown Financial District, Harbor Innovation Hub, Airport Industrial Park). Your analysis reveals that 40% of commuters add 12+ minutes daily to their journeys by using suboptimal routes. The algorithm identifies that improving signal timing on the Harbor Bridge corridor and creating a dedicated bus lane on Commerce Avenue would reduce average commute time by 18%."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Implementation Strategy for Traffic Optimization",
+      "content": "Your shortest-path analysis shows where efficiency gains are possible. Now you must decide how to implement the improvements.",
+      "choices": [
+        {
+          "label": "Data-driven approach: Install real-time traffic monitoring and adaptive signal control based on Dijkstra optimization algorithms",
+          "next": "n5"
+        },
+        {
+          "label": "Quick-win approach: Install paid tolls on inefficient routes to force drivers onto optimal paths identified by the algorithm",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "MetroCity Thrives: Smart Transportation Network",
+      "content": "Your data-driven approach succeeds brilliantly. Real-time monitoring systems integrated with adaptive traffic lights keep MetroCity moving smoothly. Using Dijkstra's algorithm continuously, the system dynamically routes vehicles around congestion and incidents. Within 18 months, average commute times fall by 23%, and traffic-related emissions drop by 31%. The system creates a 'graph equilibrium' where network flows remain balanced. Businesses relocate to MetroCity for its livability, tax revenue increases 14%, and you're recruited to advise other cities. Graph theory didn't just optimize traffic\u2014it revitalized the entire metropolitan economy."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "MetroCity Faces Backlash: Equity Crisis",
+      "content": "Your toll strategy creates severe unintended consequences. While wealthy drivers in the north quickly adapt and use optimized routes, working-class drivers in the south\u2014already using longer routes due to historical infrastructure neglect\u2014face prohibitive toll costs. Instead of using shorter paths, they avoid the tolled areas entirely, causing congestion in peripheral neighborhoods. Community outrage erupts; the system feels unfair because graph optimization ignored the human dimension of accessibility. After 8 months of protests, the city removes tolls. Traffic actually worsens as drivers lose faith in the city's planning competence. You learn that algorithms must serve justice, not just efficiency."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Graph Connectivity and Equitable Access",
+      "content": "Your analysis reveals MetroCity's core problem: the East Side neighborhoods are poorly connected to the main city. Using graph connectivity analysis, you identify that several districts have limited bridges to opportunity\u2014just 2-3 connection points handle all traffic. These 'bottleneck edges' create vulnerabilities: a single accident paralyzes entire neighborhoods. You quantify the issue using betweenness centrality, measuring how often each intersection appears on shortest paths between all district pairs. Your findings show 3 intersections have dangerously high centrality (>40% of all shortest paths). You also discover that the Innovation Park district is nearly isolated\u2014reached by only one fragile road. Graph connectivity theory reveals that MetroCity isn't truly one connected city; it's isolated clusters separated by single-point-of-failure intersections."
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Case Study: The East Side Connection",
+      "content": "The East Side contains 3 districts (Riverside, Harbor View, and Innovation Park) with 240,000 residents but only one road connection to central MetroCity. Your graph analysis shows this is a 'cut vertex'\u2014removing it disconnects the entire eastern component. You propose building 2 new bridge connections: Harbor View to Downtown (2.5 km) and Innovation Park to the Finance District (1.8 km). These additions create redundancy\u2014now multiple paths exist between all districts, improving resilience. Using minimum spanning tree concepts, you ensure maximum connectivity with minimum infrastructure investment. The bridges cost $180M combined, but they unlock $2.3B in development value as businesses recognize reliable access to the East Side. Betweenness centrality decreases across the network, eliminating chokepoints."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "MetroCity Integrated: Thriving Connected Network",
+      "content": "Your graph connectivity strategy transforms MetroCity into a genuinely integrated city. By reducing bottlenecks and ensuring multiple paths between districts, you create redundancy that protects against disruptions. The East Side blooms economically once reliably connected. Your approach demonstrates that graph theory serves human flourishing\u2014when you model cities as networks, you identify where people are isolated and fix it systematically. Within 5 years, property values equalize across districts, unemployment rates converge, and MetroCity becomes a model of inclusive urban development. Your success shows that the most powerful graph algorithm is one ensuring every node has multiple pathways to opportunity."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin planning"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Transportation efficiency"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Equity and connectivity"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Choose implementation"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Data-driven adaptive signals"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Toll-based enforcement"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Analyze and implement"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Achieve integrated network"
+    }
+  ],
+  "generated_at": "2026-03-27T16:43:13.628526+00:00",
+  "model": "claude-haiku-4-5"
+}

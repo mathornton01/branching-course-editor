@@ -1,0 +1,238 @@
+{
+  "id": "ml-fundamentals-music-therapy",
+  "title": "Machine Learning Fundamentals in Music Therapy",
+  "description": "Explore ML concepts through music therapy applications. Learn supervised learning for outcome prediction, unsupervised learning for pattern discovery, and data engineering for building robust systems.",
+  "topic": "Machine Learning",
+  "theme": "music therapy",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "machine learning",
+    "music therapy",
+    "supervised learning",
+    "unsupervised learning",
+    "data science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "ML in Music Therapy: Unlocking Patient Outcomes",
+      "content": "Machine learning is revolutionizing music therapy by enabling data-driven personalization. Music therapists now analyze session recordings, patient feedback, physiological metrics, and behavioral responses to optimize care. ML helps identify which patients respond best to specific music genres, tempos, and therapeutic techniques. For example, a therapist can predict whether a particular client will benefit from upbeat percussion-based sessions or calming string-based interventions. This course explores three fundamental ML concepts\u2014supervised learning, unsupervised learning, and data engineering\u2014through real music therapy scenarios to help you build smarter, more effective therapeutic systems.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Which aspect of machine learning would you like to explore first? Each path teaches a core ML concept through a music therapy lens. Pick the topic that most interests you\u2014you'll explore all three before completing the course.",
+      "choices": [
+        {
+          "label": "Supervised Learning\u2014Predicting Treatment Success",
+          "next": "n3"
+        },
+        {
+          "label": "Unsupervised Learning\u2014Discovering Patient Patterns",
+          "next": "n5"
+        },
+        {
+          "label": "Data & Features\u2014Building Predictive Systems",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Supervised Learning: Learning from Labeled Outcomes",
+      "content": "Supervised learning trains models on labeled data\u2014you provide examples where you explicitly tell the model: 'This patient showed improvement; that one did not.' In music therapy, labeled data comes from documented patient progress notes, therapist assessments, and outcome measures. Imagine a therapist labels 100 past sessions: 'mood improved significantly' (30 sessions) versus 'mood remained stable' (70 sessions). The model identifies patterns: Which music elements (tempo, key, instrument type, session duration) consistently predict positive outcomes? Once trained, the model can predict whether a new patient receiving a specific music intervention will likely improve. This enables data-driven treatment planning and helps therapists allocate resources to highest-impact interventions.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Predicting Mood Improvement from Music Selection",
+      "content": "A music therapy clinic has 80 documented cognitive behavioral music therapy (CBMT) sessions with clear outcome labels. Each session is labeled: 'significant mood improvement' (30 sessions) or 'no measurable improvement' (50 sessions). Features captured include: session duration (30\u201360 minutes), primary music tempo (slow: <80 BPM vs. fast: >120 BPM), dominant instrument type (strings, percussion, wind, voice), patient age, and weeks into therapy program. A supervised learning model (logistic regression or decision tree) analyzes these patterns and learns: older patients (65+) combined with slow-tempo string instruments and 45-minute sessions show 85% improvement rate. The model achieves 82% accuracy on new test data. The therapist now confidently recommends this music combination to similar new patients, significantly improving treatment outcomes.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Unsupervised Learning: Discovering Hidden Patterns",
+      "content": "Unsupervised learning finds natural patterns in data without predefined labels. The model receives raw data\u2014patient demographic information, music preferences, session responses, engagement metrics\u2014and discovers inherent groupings. In music therapy, this might reveal unexpected patterns like: '8% of patients respond only to minor-key compositions; 42% show no tonal preference; 50% strongly prefer major keys.' Or the model might discover: 'Patients cluster into 4 engagement profiles\u2014Immediately Responsive, Gradual Responders, Slow-to-Warm-Up, and Resistant.' These discoveries inform therapist treatment decisions and enable personalization without requiring pre-labeled training data. Unsupervised learning is particularly valuable when outcomes aren't clearly documented but you have rich behavioral and response data.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Clustering Music Therapy Patients",
+      "content": "A clinic collects 9 months of data from 200 patients: session frequency per month, therapist-rated response speed (1\u201310 scale), average heart rate variability during sessions (in milliseconds), and music preference diversity (scale of 0\u2013100). An unsupervised clustering algorithm (k-means) organizes these 200 patients into 4 distinct groups: 'Rapid Responders' (35 patients, high response speed, prefer varied genres), 'Steady Improvers' (65 patients, moderate response speed, prefer consistency), 'Warm-Up Patients' (70 patients, initially low engagement then improvement), and 'Adaptive-Needs' (30 patients, slow initial response, require careful pacing). The clustering discovered these natural patient archetypes without therapist input. The clinic now tailors interventions: Rapid Responders receive dynamic, varied sessions; Warm-Up Patients start with familiar, low-pressure environments. Session outcomes improve significantly, and therapist satisfaction increases due to better-informed treatment planning.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Data & Features: Feeding the Machine",
+      "content": "A machine learning model's quality fundamentally depends on its input data. In music therapy, you must carefully decide what to measure: patient age, session duration, music tempo, therapist experience, baseline mood score, medication compliance, family involvement, attendance patterns, heart rate response, and more. Each measurable property is a 'feature.' Feature engineering\u2014thoughtfully selecting, creating, and refining features\u2014is crucial. Poor features (measuring only attendance frequency) lead to poor predictions. Rich, relevant features (baseline mood + music choice + biometric response + family engagement) enable accurate predictions. You also clean data: handle missing values (e.g., incomplete mood ratings), remove outliers (sessions interrupted by external events), normalize scales (so a 10-minute session and a 60-minute session are comparable). Without careful feature engineering, even sophisticated models fail.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Feature Selection for Predicting Therapy Completion",
+      "content": "A music therapy program wants to predict which patients will complete a challenging 12-week intervention. They start with 20 candidate features: age, gender, initial mood score (Beck Depression Inventory), medication type, session time-of-day, primary music genre preference, therapist ID, clinic location, prior therapy experience, family support level, baseline resting heart rate, music literacy, employment status, transportation access, and 6 others. Using feature importance analysis (tree-based feature importance and Pearson correlation), they identify top predictors: initial mood score (correlation: 0.72, strong predictor of sustained engagement), family support level (0.68), prior therapy experience (0.65), and baseline heart rate variability (0.58). Weak features (therapist ID, clinic location, employment status) show near-zero correlation with completion. The refined model uses 8 carefully selected features, improving prediction accuracy from 71% to 84% and reducing overfitting. The therapist now focuses intake screening on high-impact factors (mood, support systems, prior experience), improving patient selection and resource allocation.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating ML Concepts: Building Complete Systems",
+      "content": "Practical music therapy ML systems integrate all three concepts into a cohesive workflow. Here's how: A therapist wants to personalize care for new patients. (1) Supervised learning: A trained model predicts mood outcomes for each of 4 standard music interventions (upbeat percussion, calming strings, vocal improvisation, rhythmic entrainment). (2) Unsupervised learning: The system assigns the new patient to one of 4 response clusters (Rapid Responder, Steady Improver, Warm-Up, Adaptive-Needs), which informs pacing and intensity. (3) Data engineering: Rich features (baseline mood, family support, music literacy, heart rate response) feed the models. The system recommends: 'Upbeat percussion is predicted to improve mood by 15%; assign to Rapid Responder protocol; expect response within 2\u20133 sessions.' Over 20 patients, this integrated system achieves 75% significant improvement vs. 55% using intuition alone. The cycle repeats: collect outcomes, retrain models, refine clusters, improve features. ML becomes a feedback loop for continuous therapeutic improvement.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Music Therapy ML Integration Assessment",
+      "content": "Apply your understanding of supervised learning, unsupervised learning, and feature engineering to music therapy scenarios. Answer the following 3 questions. You must score at least 2 out of 3 to pass.",
+      "questions": [
+        {
+          "question": "A music therapist wants to predict whether clients will complete a 6-week intervention. They collect data from 150 past clients: completion status (yes/no), baseline motivation score, age, music preference, and therapist notes on engagement. Which ML paradigm is most appropriate?",
+          "options": [
+            "Unsupervised learning\u2014no labels available",
+            "Supervised learning\u2014completion status is a label; predict for new clients",
+            "Reinforcement learning\u2014clients learn therapy strategy",
+            "Data engineering\u2014only data cleaning is needed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Completion status (yes/no) is a clear, labeled outcome.",
+            "Correct. This is a classic supervised classification task: predict an outcome from labeled historical data.",
+            "Incorrect. Reinforcement learning models agents learning from rewards; this isn't an RL scenario.",
+            "Incorrect. While data engineering is part of the pipeline, this task fundamentally requires supervised learning."
+          ],
+          "explanation": "When you have labeled historical outcomes (completed vs. didn't complete), you train a supervised model to predict completion for new clients. Completion status is the label; other features help predict it."
+        },
+        {
+          "question": "A clinic runs unsupervised clustering on 300 music therapy sessions and discovers 4 distinct response patterns: fast responders, gradual improvers, plateau-and-wait, and non-responders. What is the most realistic next step?",
+          "options": [
+            "Stop here; the clustering has revealed all useful insights",
+            "Use these clusters to personalize therapy approaches for new clients",
+            "Label all 300 sessions with their cluster and train a supervised model",
+            "Both B and C are reasonable next steps"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. Clustering is a starting point; actionable insights require follow-up steps.",
+            "Correct. Personalizing care based on response clusters improves therapeutic outcomes immediately.",
+            "Correct. Converting clusters into labels enables a supervised model that assigns new clients to clusters automatically.",
+            "Correct. Both B (immediate personalization) and C (building a predictive model) advance the system in complementary ways."
+          ],
+          "explanation": "Clustering discovers patient archetypes. You can immediately tailor therapy approaches based on which cluster a client fits (actionable insight), and you can also build a supervised model that assigns new clients to clusters automatically (scalability)."
+        },
+        {
+          "question": "A music therapist wants to predict therapy success. They gather 18 features: age, baseline mood score, 6 music preference ratings, 4 physiological measurements (HR, HRV, breathing rate, cortisol), session duration, therapist experience, and 3 engagement metrics. Some features are highly correlated (e.g., two mood-related scales, HR and breathing rate). What is a key concern?",
+          "options": [
+            "Too many features; feature engineering is needed to reduce noise and improve generalization",
+            "More features always mean better predictions; no concern exists",
+            "Correlated features create redundancy and may cause overfitting; one from each correlated pair should be removed",
+            "Both A and C are valid concerns"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Correct. High-dimensional data without careful feature selection often leads to overfitting, especially on small datasets.",
+            "Incorrect. More features without quality control degrade model performance through noise and overfitting.",
+            "Correct. Correlated features are redundant; they don't add new information and can destabilize models.",
+            "Correct. Both managing feature count (A) and removing redundancy (C) are essential for robust ML systems."
+          ],
+          "explanation": "Feature engineering isn't just about quantity\u2014it's about quality. Too many features increase overfitting risk, and correlated features are redundant, adding noise. Prune correlated pairs (keep the more predictive or interpretable one) and eliminate weak features to improve model generalization."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Congratulations! ML Fundamentals Mastered",
+      "content": "You've successfully explored the three pillars of practical machine learning in music therapy: supervised learning (predicting patient outcomes), unsupervised learning (discovering response patterns and patient archetypes), and data engineering (building robust, high-quality feature sets). These foundational concepts enable you to design smarter music therapy systems that adapt to individual client needs and continuously improve through iterative refinement. Your next steps: apply these concepts to your own patient data, collaborate with colleagues to refine features, train and evaluate models, and measure real-world impact on therapy outcomes. Music therapy + ML = better care. Keep learning!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Supervised Learning"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Unsupervised Learning"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Data & Features"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T15:42:30.563717+00:00",
+  "model": "claude-haiku-4-5"
+}

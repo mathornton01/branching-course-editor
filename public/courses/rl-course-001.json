@@ -1,0 +1,134 @@
+{
+  "id": "rl-course-001",
+  "title": "Reinforcement Learning: Building Your First Agent",
+  "description": "Learn RL through a scenario-based approach where you design an agent to control a robot arm. Your choices lead to different learning outcomes.",
+  "topic": "Reinforcement Learning",
+  "theme": null,
+  "difficulty": "intermediate",
+  "estimated_minutes": 25,
+  "tags": [
+    "reinforcement-learning",
+    "machine-learning",
+    "q-learning",
+    "robotics",
+    "decision-making"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Robot Grasping Challenge",
+      "content": "You're tasked with training an RL agent to control a robot arm and grasp objects from a table. The robot receives visual input and must learn which actions (move left/right, up/down, grasp) work best through trial and error. You have two fundamental approaches: learn directly from interaction, or use human demonstrations. Which strategy maximizes learning quality given real-world constraints?",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Strategy",
+      "content": "Should your agent learn through direct interaction with the environment (Model-Free RL), or leverage human expertise to bootstrap faster?",
+      "choices": [
+        {
+          "label": "Pure Reinforcement Learning (learn from trial-and-error)",
+          "next": "n3"
+        },
+        {
+          "label": "Imitation Learning (learn from expert demonstrations)",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Q-Learning and Value-Based Methods",
+      "content": "You choose Q-learning, a model-free algorithm where your agent learns an action-value function Q(s,a) representing expected cumulative rewards for each state-action pair. The robot explores by trying actions, observing outcomes, and updating Q-values using: Q(s,a) \u2190 Q(s,a) + \u03b1[r + \u03b3 max Q(s',a') - Q(s,a)]. This requires the Bellman equation to bootstrap value estimates. The critical challenge: balancing exploration (discovering new solutions) versus exploitation (repeating known rewards). Poor balance means either wasted samples or local optima.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Configure Exploration Strategy",
+      "content": "Your exploration rate fundamentally determines whether the agent discovers optimal behaviors or gets trapped in local patterns.",
+      "choices": [
+        {
+          "label": "High exploration: \u03b5-greedy with \u03b5=0.3, decaying over time",
+          "next": "n5"
+        },
+        {
+          "label": "Low exploration: \u03b5=0.05 for rapid convergence",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Success: Robust Multi-Modal Grasp Policy",
+      "content": "Your high-exploration strategy succeeded. The agent thoroughly explored state space, discovered that approaching objects from multiple angles and varying grip pressure are crucial, and learned a 92% success rate. Training took 15,000 interactions, but the policy generalizes to novel objects and configurations. The agent discovered that early-stage exploration costs are worth discovering robust solutions."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Failure: Premature Convergence to Suboptimality",
+      "content": "The low-exploration strategy converged within 5,000 interactions to a narrow policy achieving only 65% success. The agent learned a single grasp technique and never discovered alternative approaches or environmental dynamics. This demonstrates a critical RL pitfall: low exploration causes premature convergence to locally-optimal behaviors when the true optimum requires diverse exploration."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Imitation Learning: Bootstrapping from Expert Demonstrations",
+      "content": "You collect 50 successful grasps performed by an expert operator and train a supervised model to map visual observations to actions. This behavioral cloning approach achieves 85% accuracy in just 1,000 interactions\u2014orders of magnitude faster than pure RL. The agent directly learns expert behaviors without dangerous exploration. However, it cannot exceed the expert's performance and struggles with situations not represented in the training data, creating a distribution shift problem."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Rapid Deployment, Limited Generalization",
+      "content": "Imitation learning delivered immediate results: trained to 85% success in one day using only 50 demonstrations. The robot safely executes familiar grasp patterns without exploration risk. However, it failed on objects with atypical shapes and never improved beyond expert level. This outcome illustrates why many real systems combine imitation learning for safe initialization with RL fine-tuning to unlock performance beyond human expert skill."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pure RL"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Imitation"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "High \u03b5"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Low \u03b5"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T03:47:51.628657+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,270 @@
+{
+  "id": "hci-space-2026",
+  "title": "Human-Computer Interaction in Space Exploration",
+  "description": "Learn HCI principles through designing interfaces for space missions. Choose to start with interface design theory or user testing practices.",
+  "topic": "Human-Computer Interaction",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "HCI",
+    "UI Design",
+    "User Research",
+    "Space",
+    "Interactive Design"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why HCI Matters in Space",
+      "content": "Human-Computer Interaction (HCI) is the study of designing systems where humans interact effectively with technology. In space exploration, HCI is literally critical\u2014astronauts rely on spacecraft interfaces to make split-second decisions during missions to the ISS, Moon, and beyond. Poor interface design contributed to the Three Mile Island incident on Earth; in space, where communication delays exceed 20 minutes to Mars, interface clarity determines mission success. Every button, screen, and readout must be intuitive, provide clear feedback, and prevent catastrophic errors. This course explores two complementary approaches: designing great interfaces and validating designs through user testing.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Path",
+      "content": "HCI combines two essential practices. Choose where to start: understanding the principles of good interface design, or learning how to research and validate designs with real users.",
+      "choices": [
+        {
+          "label": "UI Design First: Learn to design intuitive interfaces",
+          "next": "n3"
+        },
+        {
+          "label": "User Testing First: Learn to validate designs with users",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Core HCI Design Principles",
+      "content": "Great interfaces follow key principles: **Affordances** show what actions are possible (a red emergency button affords pressing); **Feedback** tells users what happened (screens light up when a command is received); **Constraints** prevent wrong actions (critical systems require two-hand activation); **Consistency** lets users apply knowledge across the system (all warning lights are red). In spacecraft design, the Apollo Lunar Module exemplified these\u2014every control had visible purpose, labels were clear, and critical functions were physically separated. Modern spacecraft like SpaceX's Dragon follow the same principles: touchscreens provide tactile feedback, emergency procedures are always visible, and redundancy prevents single points of failure.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Designing a Lunar Base Life Support Panel",
+      "content": "Imagine designing the oxygen regulation interface for a Moon base habitat. Following HCI principles: pressurized oxygen tanks have large green dials showing pressure (affordance); adjusting oxygen flow triggers an audible confirmation beep (feedback); the emergency vent button is recessed with a protective flip cover (constraint); all controls use the same labeling system as Earth-based equipment (consistency). This design prevents the critical error of accidentally venting breathable air\u2014demonstrating how HCI principles directly impact life-or-death systems. Every design decision maps to safety.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "UI Design Principles Assessment",
+      "content": "Apply HCI design principles to space scenarios.",
+      "questions": [
+        {
+          "question": "During a spacewalk, an astronaut needs to adjust their suit's oxygen regulator. Which design principle is most important to prevent a life-threatening error?",
+          "options": [
+            "A. Affordance\u2014the control should clearly indicate its function",
+            "B. Constraints\u2014the control should physically prevent accidental activation",
+            "C. Feedback\u2014the system should confirm the adjustment",
+            "D. Consistency\u2014the control should match other suit controls"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While affordance helps, preventing accidental activation is the primary concern.",
+            "Correct! Constraints (like a protective cover) directly prevent fatal errors in life support.",
+            "Feedback is important but happens after the action\u2014too late to prevent a mistake.",
+            "Consistency helps learning but doesn't prevent the dangerous action itself."
+          ],
+          "explanation": "In life-critical systems, preventing wrong actions through physical or logical constraints is the most important principle."
+        },
+        {
+          "question": "A spacecraft's navigation display shows multiple data streams (position, velocity, fuel, direction). What principle should guide how these are visually organized?",
+          "options": [
+            "A. Consistency\u2014use the same layout structure and color coding throughout",
+            "B. Affordance\u2014make each data element look like what it represents",
+            "C. Constraints\u2014limit the number of elements displayed",
+            "D. Feedback\u2014add animation to highlight changes"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Consistency allows mission-trained astronauts to quickly find and interpret information.",
+            "Affordance is less critical for trained users who already know the interface.",
+            "Constraints (hiding data) could make the interface less useful for mission decisions.",
+            "Feedback (animation) can be helpful but doesn't organize the information structure."
+          ],
+          "explanation": "For complex systems used by trained experts, consistency in layout and visual coding lets users rapidly scan dense information\u2014critical during high-stakes operations."
+        },
+        {
+          "question": "A Mars rover's arm controller rotates left to turn the arm clockwise (in the rover's view), not the controller's view. What design problem does this create?",
+          "options": [
+            "A. Poor affordance\u2014the dial doesn't suggest its function",
+            "B. Missing constraint\u2014the system should prevent incorrect movements",
+            "C. Inconsistency\u2014the mental model (turn left = turn left) conflicts with the system behavior",
+            "D. Lack of feedback\u2014the controller doesn't show the arm's position"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Affordance isn't the core issue\u2014the dial looks like a rotation control.",
+            "This isn't a safety constraint issue; the problem is usability and operator error.",
+            "Correct! The controller violates the operator's intuitive mental model, causing confusion and mistakes.",
+            "Feedback helps but doesn't fix the fundamental mental model mismatch."
+          ],
+          "explanation": "When a system's behavior contradicts the user's intuitive understanding, it violates consistency and creates cognitive load."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "User Research & Usability Testing",
+      "content": "Designing interfaces is only the first step; validating them with real users is essential. **Usability testing** observes users performing tasks to find design problems. **Think-aloud protocols** ask users to narrate their thoughts, revealing confusion and mental models. **Feedback collection** gathers user suggestions. In space programs, this is non-negotiable: NASA tests spacecraft interfaces with actual astronauts and engineers. During Orion spacecraft development, extensive testing revealed a multi-screen navigation system confused operators under stress\u2014leading to complete redesign. SpaceX validates every interface through iterative testing with crew members. User research prevents expensive (and potentially dangerous) design mistakes and ensures interfaces match how people actually think.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Testing an EVA Suit Communication Interface",
+      "content": "NASA designs a new heads-up display (HUD) for extravehicular activity suits showing real-time suit status (oxygen, CO\u2082, temperature) and navigation data. Six experienced EVA-trained astronauts and four trainers participate. Each wears the prototype suit in a neutral buoyancy pool, performs navigation and emergency tasks, and talks aloud. Observations reveal: three astronauts couldn't find the CO\u2082 alarm in visual clutter; two had to remove gloves to reset the display due to small buttons; all preferred the old emergency control layout. Findings lead to redesign: cleaner visual hierarchy, larger touch targets, retention of familiar emergency controls. This single testing round prevents mission-critical usability failures.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "User Testing & Research Assessment",
+      "content": "Apply user research principles to space scenarios.",
+      "questions": [
+        {
+          "question": "A mission control team designs a new alert system for Mars rover health monitoring. Before deployment, which research method most reliably reveals whether controllers will miss critical warnings?",
+          "options": [
+            "A. Collect written feedback from controllers after using a prototype",
+            "B. Have mission controllers perform real monitoring tasks with the new system while you observe",
+            "C. Ask engineers to predict what will confuse users",
+            "D. Test only with system designers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Written feedback comes after the fact and misses real-time mistakes.",
+            "Correct! Observing actual task performance reveals where users struggle, miss alerts, or fail under stress.",
+            "Designers' predictions don't match real user behavior\u2014that's why testing is necessary.",
+            "Testing only with designers introduces massive bias; real users behave differently."
+          ],
+          "explanation": "Real usability testing with actual users performing tasks is the most reliable way to find usability problems."
+        },
+        {
+          "question": "During EVA suit testing, an astronaut says, 'I keep looking for oxygen levels in the upper left, but you put it on the right.' What does this reveal?",
+          "options": [
+            "A. The astronaut needs better training",
+            "B. The interface violates the user's mental model based on past experience",
+            "C. The astronaut is unable to adapt to new designs",
+            "D. The location doesn't matter as long as the information is displayed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Training won't fix a design that contradicts learned patterns; design should adapt instead.",
+            "Correct! The astronaut's expectation reflects years of EVA suit experience. Moving critical elements increases cognitive load.",
+            "Users are adaptable, but good design builds on existing mental models rather than forcing re-learning.",
+            "In safety-critical systems, location absolutely matters. Unexpected positions delay response to emergencies."
+          ],
+          "explanation": "User feedback about location and layout reflects their mental models. Good design respects these models rather than forcing users to re-learn."
+        },
+        {
+          "question": "While testing a spacecraft docking interface, all four test participants try to rotate the 3D view using mouse movements instead of the designated control dial. What should you do?",
+          "options": [
+            "A. Continue without comment; if users failed, it's a training problem",
+            "B. Stop testing, revise the interface to match user expectations, and re-test",
+            "C. Tell participants how to use the dial correctly and continue testing",
+            "D. Note the confusion in your report but don't change the design"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Consistent failures across multiple users indicate a design problem, not a training problem.",
+            "Correct! When all test participants make the same assumption, it reveals a design flaw. Revise and re-test.",
+            "Coaching participants invalidates the rest of the test; they're no longer representative of real users.",
+            "Noting problems without fixing them misses the purpose of testing\u2014to improve the design."
+          ],
+          "explanation": "Consistent user behavior reveals intuitive expectations. A good interface accommodates intuitive interaction; if all users expect mouse control, the dial interface should be reconsidered."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Design & Testing into Practice",
+      "content": "The most effective HCI practices combine design principles with continuous user research. Design principles (affordances, feedback, constraints, consistency) create intuitive interfaces. User testing validates those designs and reveals missed flaws. In real space programs, this is iterative: design, test with astronauts, refine, test again. The SpaceX Dragon went through dozens of iterations based on astronaut feedback. NASA's Artemis program tests every interface element with actual crew members. This commitment to HCI\u2014treating the human as central to design, not an afterthought\u2014separates systems that work reliably in space's harsh environment from systems that fail when lives depend on them.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: HCI in Space",
+      "content": "You've learned essential Human-Computer Interaction principles through space exploration. Whether you focused on interface design or user research, you understand that great space systems succeed by placing human experience at the center of design. Every interface on spacecraft, rovers, and mission control systems is tested, refined, and validated by the people who depend on it. As you design systems in any domain\u2014aerospace, healthcare, consumer technology\u2014remember these HCI principles and involve real users in your design process."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "UI Design First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "User Testing First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T08:40:43.366263+00:00",
+  "model": "claude-haiku-4-5"
+}

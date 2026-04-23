@@ -1,0 +1,269 @@
+{
+  "id": "8f3e2c1a-7d4b-4e9f-b2a8-5c6d9e1f3a2b",
+  "title": "Git and Version Control Fundamentals",
+  "description": "Learn Git and version control through an adaptive learning path. Choose to start with foundational concepts or jump into hands-on practice.",
+  "topic": "Version Control",
+  "theme": null,
+  "difficulty": "beginner",
+  "estimated_minutes": 60,
+  "tags": [
+    "git",
+    "version control",
+    "development",
+    "collaboration"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Welcome to Version Control",
+      "content": "Version control systems track changes to your code over time, enabling collaboration and protecting against mistakes. Git is the industry standard, used by millions of developers worldwide. Whether you're building solo or with a team, understanding version control is essential. This course will teach you Git fundamentals and best practices through an adaptive learning path tailored to your learning style.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How do you prefer to learn? Start with foundational concepts and then apply them, or dive straight into hands-on practice?",
+      "choices": [
+        {
+          "label": "Concepts First - Build strong foundations before coding",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-On First - Learn by doing with guided examples",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Git Concepts and Architecture",
+      "content": "Git is a distributed version control system where every developer has a complete repository copy. Key concepts include commits (snapshots of code), branches (parallel development lines), and merges (combining changes). The staging area allows you to carefully curate which changes go into each commit. Understanding Git's object model\u2014commits, trees, and blobs\u2014helps you grasp how Git efficiently tracks changes.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Feature Development Workflow",
+      "content": "Imagine you're building a login feature. You create a branch from main: `git checkout -b feature/login`. After implementing and testing, you commit your changes: `git commit -m \"Add login validation\"`\u2014each commit creates a permanent record. When ready, you push to your remote repository: `git push origin feature/login`. A team member reviews your code, and once approved, the branch merges back to main. Your feature is now part of the project, with full history preserved.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Git Concepts",
+      "content": "Test your understanding of Git concepts by answering these questions about version control principles.",
+      "questions": [
+        {
+          "question": "What does a commit represent in Git?",
+          "options": [
+            "A snapshot of your entire repository at a specific point in time",
+            "A list of all files in your project",
+            "A temporary backup of your code",
+            "A request to merge code"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A commit is a snapshot that preserves the state of your code.",
+            "Not quite. A commit represents a specific state, not a list of all files.",
+            "Commits are permanent records, not temporary backups.",
+            "That describes a pull request, not a commit."
+          ],
+          "explanation": "Commits are the core of Git's version control. Each commit creates a historical record with a unique hash, allowing you to travel back to any previous state."
+        },
+        {
+          "question": "What is the purpose of branches in Git?",
+          "options": [
+            "To allow multiple developers to work in parallel on different features",
+            "To backup your code to the server",
+            "To permanently split your repository",
+            "To automatically test your code"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Branches enable parallel development without conflicts.",
+            "Branches are for parallel work, not backup.",
+            "Branches are lightweight and can be easily merged or deleted.",
+            "Testing requires separate tools and workflows."
+          ],
+          "explanation": "Branches are independent lines of development. They let teams work simultaneously on different features, which are later integrated through merges."
+        },
+        {
+          "question": "What does the staging area do?",
+          "options": [
+            "It prepares specific changes to be included in the next commit",
+            "It automatically uploads code to the server",
+            "It prevents errors from being committed",
+            "It compiles your code before committing"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The staging area lets you choose which changes go into each commit.",
+            "Uploading is handled by push, not staging.",
+            "The staging area is for organization, not error prevention.",
+            "Compilation is separate from version control."
+          ],
+          "explanation": "The staging area (also called the index) is a powerful feature that lets you craft meaningful commits by choosing exactly which changes to include."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Setting Up Git and Basic Commands",
+      "content": "Start with installation: download Git from git-scm.com and configure your identity with `git config --global user.name` and `git config --global user.email`. Create a repository with `git init` or clone an existing one with `git clone <url>`. The essential workflow includes `git add` (stage changes), `git commit -m \"message\"` (create a snapshot), and `git push` (send to remote). Learn these commands first, and Git's underlying concepts will become clear through practice.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Your First Git Workflow",
+      "content": "Initialize a project: `git init`. Create a file `echo \"Hello Git\" > hello.txt`. Stage it: `git add hello.txt`. Commit: `git commit -m \"Initial commit\"`. Now modify the file and check what changed: `git diff`. Stage the update: `git add hello.txt`. Commit again: `git commit -m \"Update greeting\"`. Run `git log` to see your commit history. You've just created a complete version-controlled project with traceable history.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Practical Git Skills",
+      "content": "Test your ability to use Git commands in practical scenarios.",
+      "questions": [
+        {
+          "question": "What command would you use to view the changes you've made but haven't staged yet?",
+          "options": [
+            "git diff",
+            "git status",
+            "git log",
+            "git show"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! git diff shows unstaged changes.",
+            "git status shows which files changed, but not the details.",
+            "git log shows commit history, not current changes.",
+            "git show displays a specific commit, not current changes."
+          ],
+          "explanation": "git diff is essential for reviewing your work before staging. It shows line-by-line differences between your working directory and the staged area."
+        },
+        {
+          "question": "You've committed code with a typo in the message. What's the safest way to fix it?",
+          "options": [
+            "Use git commit --amend to update the most recent commit message",
+            "Delete the commit and redo it",
+            "Create a new commit saying 'Fixed typo'",
+            "Force push to overwrite history"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! git commit --amend is the safe way to fix recent commits.",
+            "Deleting and redoing loses history unnecessarily.",
+            "This works but creates messy history for a typo fix.",
+            "Force push is risky and should be avoided."
+          ],
+          "explanation": "git commit --amend lets you update the most recent unpushed commit. Use it for message fixes or adding forgotten changes before sharing with others."
+        },
+        {
+          "question": "How do you create and switch to a new branch named 'feature/dark-mode'?",
+          "options": [
+            "git checkout -b feature/dark-mode",
+            "git branch feature/dark-mode && git switch feature/dark-mode",
+            "git branch feature/dark-mode",
+            "Both A and B are correct"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "This works! It's the traditional one-command approach.",
+            "This also works! Modern Git uses 'switch' for clarity.",
+            "This only creates the branch; you still need to switch to it.",
+            "Correct! Both approaches work equally well."
+          ],
+          "explanation": "You have flexibility with Git commands. The -b flag in checkout is traditional; newer Git versions offer git switch -c. Both create and switch to the branch."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Collaboration and Best Practices",
+      "content": "In team environments, establish conventions: use meaningful branch names (feature/x, bugfix/y), write clear commit messages explaining the 'why' not just 'what', and review code before merging. Handle conflicts when branches diverge: Git marks conflicts in files; resolve them manually and commit. Use `.gitignore` to exclude generated files and secrets. Learn to rebase for clean history or merge for explicit integration records. Finally, understand that Git is a safety net\u2014most mistakes can be undone with `git reflog`, so experiment confidently.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "You've Mastered Git Fundamentals!",
+      "content": "Congratulations! You've learned Git from your preferred starting point and converged on best practices. You can now initialize repositories, commit changes, create branches, and collaborate effectively. Continue practicing with real projects, explore advanced topics like rebasing and cherry-picking, and remember: Git's power comes from understanding not just the commands, but the philosophy of tracking change. Your next step is applying these skills in a team setting or contributing to open source."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Concepts First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-On First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Next"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Test Knowledge"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Next"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Test Skills"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T02:36:54.440602+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,351 @@
+{
+  "id": "course-r-ed-tech-001",
+  "title": "Introduction to R for Education Data Analysis",
+  "description": "Master R programming for analyzing student data, learning outcomes, and education technology metrics through hands-on practice in an adaptive learning path.",
+  "topic": "R Programming & Data Analysis",
+  "theme": "education technology",
+  "difficulty": "beginner",
+  "estimated_minutes": 90,
+  "tags": [
+    "R",
+    "data analysis",
+    "education technology",
+    "data visualization",
+    "student analytics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to R for Education Data Analysis",
+      "content": "R is a powerful programming language for analyzing student data and measuring education technology effectiveness. Whether you're evaluating learning management systems (LMS), tracking student engagement metrics, or assessing course completion rates, R provides tools to transform raw educational data into actionable insights. In this course, you'll learn R specifically through the lens of common education technology challenges: analyzing student performance across courses, identifying at-risk learners, and visualizing learning progression. We'll work with real-world scenarios like student test scores, course completion data, and engagement metrics.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "R Fundamentals Assessment",
+      "content": "Test your understanding of R basics as applied to education data. Answer questions about R syntax, data types, and how they relate to analyzing student information.",
+      "questions": [
+        {
+          "question": "You're loading student test score data into R. Which data structure is best for storing multiple columns (student ID, name, score, course name)?",
+          "options": [
+            "A vector",
+            "A data frame",
+            "A list",
+            "A matrix"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Vectors only store a single data type in one dimension.",
+            "Correct! Data frames organize education data in rows (students) and columns (attributes).",
+            "Lists work, but they're less efficient for tabular student data.",
+            "Matrices require all elements to be the same data type, unsuitable for mixed student data."
+          ],
+          "explanation": "In education analytics, student data is typically tabular: each row represents a student, each column represents an attribute (ID, name, score, course). Data frames are R's standard structure for this."
+        },
+        {
+          "question": "What does this R code do? `student_scores <- c(92, 87, 95, 88)`",
+          "options": [
+            "Creates a list of student ID numbers",
+            "Defines a function to calculate average scores",
+            "Creates a vector containing four student test scores",
+            "Filters students with scores above 90"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The c() function combines values into a vector, not just IDs.",
+            "This creates data, not a function.",
+            "Correct! The c() function concatenates these four numeric values into a vector.",
+            "Filtering requires conditional logic, not just data creation."
+          ],
+          "explanation": "The c() function in R combines values into a vector. Here, we're storing four student test scores (92, 87, 95, 88) for later analysis."
+        },
+        {
+          "question": "You have a data frame 'students' with columns: ID, name, score. How do you access a single column?",
+          "options": [
+            "students[1]",
+            "students$score",
+            "students[score]",
+            "students.score"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Actually, students[1] accesses the first row. Use students$score for a column.",
+            "Correct! The $ operator selects a column from a data frame.",
+            "This notation would look for a column with column name 'score', not the score column.",
+            "R uses $ for column access, not dot notation like some other languages."
+          ],
+          "explanation": "In R data frames, use the $ operator to access columns: students$score gets all student scores as a vector."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "R Fundamentals Practice",
+      "content": "Practice working with R data structures using education data scenarios. Complete these exercises to solidify your understanding before retaking the assessment.",
+      "questions": [
+        {
+          "question": "You're creating a dataset of student engagement scores (out of 10) for an online course: 8, 7, 9, 6, 8. Write the R code to create this as a vector named 'engagement'.",
+          "options": [
+            "engagement = [8, 7, 9, 6, 8]",
+            "engagement <- c(8, 7, 9, 6, 8)",
+            "engagement <- vector(8, 7, 9, 6, 8)",
+            "create(engagement, 8, 7, 9, 6, 8)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's Python syntax, not R. R uses <- and c() for this.",
+            "Correct! The <- operator assigns the vector (created with c()) to the variable name.",
+            "vector() function exists in R but doesn't work this way for combining values.",
+            "There is no create() function in base R for this purpose."
+          ],
+          "explanation": "In R, c() combines values into a vector, and <- assigns it to a variable. This creates a vector of five engagement scores."
+        },
+        {
+          "question": "Given a data frame 'courses' with columns 'name' and 'enrollment', what does this do? `courses$enrollment`",
+          "options": [
+            "Creates a new data frame",
+            "Returns all enrollment numbers as a vector",
+            "Adds a new column",
+            "Filters courses with enrollment above 0"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Correct! The $ operator extracts the enrollment column as a vector.",
+            "It returns a vector, yes, but doesn't create anything new.",
+            "To add a column, you'd use assignment like courses$new_col <- data.",
+            "Filtering requires conditional logic with subset() or dplyr functions."
+          ],
+          "explanation": "The $ operator extracts a single column from a data frame. courses$enrollment gives you all the enrollment numbers as a vector."
+        },
+        {
+          "question": "How would you create a data frame of three courses with their names and student counts?",
+          "options": [
+            "data.frame(course=c('Math', 'Science', 'English'), students=c(25, 30, 28))",
+            "df(c('Math', 'Science', 'English'), c(25, 30, 28))",
+            "data_frame(course=['Math', 'Science', 'English'], students=[25, 30, 28])",
+            "create.frame(course, students)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! data.frame() creates a data frame with named columns from vectors.",
+            "df() is not a standard R function.",
+            "R doesn't use bracket syntax for data.frame() arguments.",
+            "create.frame() is not a real R function."
+          ],
+          "explanation": "data.frame() combines named vectors into a table. Each vector becomes a column: 'course' names and 'students' counts."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Data Manipulation for Education Analytics",
+      "content": "Now that you understand R data structures, let's learn to manipulate student data to answer real questions. In education analytics, you'll often need to filter student records (e.g., find all students in a specific course), calculate summaries (e.g., average score by instructor), and transform raw data. R's dplyr package provides elegant functions for this: filter() selects rows based on conditions, select() chooses columns, mutate() creates new calculated columns, group_by() organizes data by categories, and summarize() computes statistics. For example, you might filter all students with attendance below 80%, group them by course, and calculate the average test score per course to identify which courses need intervention.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Data Manipulation Assessment",
+      "content": "Demonstrate your ability to filter, group, and summarize education data using R functions.",
+      "questions": [
+        {
+          "question": "You have a data frame 'students' with columns: student_id, course, grade, attendance. What does this do? `filter(students, attendance > 80)`",
+          "options": [
+            "Creates a new column for attendance percentage",
+            "Returns only rows where attendance is greater than 80%",
+            "Changes all attendance values above 80 to 100",
+            "Sorts students by attendance"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "filter() selects rows, not creates columns.",
+            "Correct! filter() returns rows matching the condition (attendance > 80).",
+            "filter() doesn't modify values, only selects rows.",
+            "To sort, you'd use arrange(). filter() only subsets rows."
+          ],
+          "explanation": "filter() is used to subset data by keeping only rows that meet a condition. This finds engaged students."
+        },
+        {
+          "question": "You want to calculate the average grade for each course. Which approach is correct?",
+          "options": [
+            "students$grade / nrow(students)",
+            "group_by(students, course) %>% summarize(avg_grade = mean(grade))",
+            "mean(students$grade[students$course])",
+            "average(students, grade, course)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That divides all grades by total students, not grouped by course.",
+            "Correct! group_by() organizes by course, summarize() calculates mean per group.",
+            "That syntax would try to use course names as indices.",
+            "There is no average() function in base R or dplyr."
+          ],
+          "explanation": "group_by() + summarize() is the dplyr pattern for calculating statistics per group (course). %>% is the pipe operator that chains operations."
+        },
+        {
+          "question": "A student's passing threshold is 70. Which code creates a new column indicating pass/fail status?",
+          "options": [
+            "mutate(students, status = if(grade >= 70, 'pass', 'fail'))",
+            "mutate(students, status = ifelse(grade >= 70, 'pass', 'fail'))",
+            "students$status <- if(grade >= 70) 'pass'",
+            "transform_status(students, 70)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "if() works for single conditions, not vectorized operations on data frames.",
+            "Correct! ifelse() is vectorized and works row-by-row on the grade column.",
+            "Missing 'else' clause and not vectorized properly.",
+            "transform_status() is not a standard function."
+          ],
+          "explanation": "mutate() creates new columns. ifelse() is vectorized, evaluating each row's grade and assigning 'pass' or 'fail'."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Data Manipulation Practice",
+      "content": "Work through realistic education data scenarios to master filtering, grouping, and summarizing.",
+      "questions": [
+        {
+          "question": "You have course enrollment data with columns: student_id, course_name, completion_status. Find the number of students who completed each course. Which code is correct?",
+          "options": [
+            "filter(enrollment, completion_status == 'completed') %>% group_by(course_name) %>% summarize(count = n())",
+            "group_by(enrollment, course_name) %>% filter(completion_status == 'completed') %>% summarize(n())",
+            "summarize(enrollment, count = n()) %>% group_by(course_name)",
+            "count(enrollment, course_name, completion_status == 'completed')"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! First filter for completed, group by course, then count with n().",
+            "This works but the order is slightly different; both A and B would produce similar results.",
+            "Summarize should come after grouping, not before.",
+            "count() has different syntax for conditional filtering."
+          ],
+          "explanation": "Filter \u2192 group \u2192 summarize is a common pattern. n() counts rows in each group."
+        },
+        {
+          "question": "You need to find students with grades below 60 in the 'Statistics' course. Which filter condition is correct?",
+          "options": [
+            "filter(students, course == 'Statistics' & grade < 60)",
+            "filter(students, course = 'Statistics', grade < 60)",
+            "filter(students, course == 'Statistics' | grade < 60)",
+            "students[students$course='Statistics' & students$grade<60,]"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! == checks equality (not =), & means 'and' (both conditions must be true).",
+            "filter() uses conditions, not = assignment. Use == for comparison.",
+            "| means 'or', which would include students with good grades in other courses.",
+            "That's base R syntax, but uses = instead of ==; also syntax is less clean."
+          ],
+          "explanation": "In filter(), use == for comparison and & for 'and'. This returns students with course='Statistics' AND grade<60."
+        },
+        {
+          "question": "Create a new column with letter grades (A=90+, B=80-89, C=70-79, F=<70). Which approach works?",
+          "options": [
+            "mutate(students, letter = case_when(grade >= 90 ~ 'A', grade >= 80 ~ 'B', grade >= 70 ~ 'C', TRUE ~ 'F'))",
+            "mutate(students, letter = if(grade >= 90, 'A', if(grade >= 80, 'B', 'F')))",
+            "mutate(students, letter = map(grade, function(x) if(x>=90) 'A'))",
+            "students$letter <- grade >= 90 ? 'A' : 'F'"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! case_when() handles multiple conditions clearly. TRUE ~ 'F' is the default.",
+            "Nested if() becomes hard to read for multiple conditions.",
+            "map() is for lists/vectors in specific contexts, not data frame columns.",
+            "R doesn't use ternary operator syntax like some languages."
+          ],
+          "explanation": "case_when() is dplyr's clean way to handle multiple conditional assignments. Each condition (~) maps to a value."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Visualizing Education Analytics with ggplot2",
+      "content": "Data tells a story, but visualizations help stakeholders understand it. ggplot2 is R's powerful visualization package, built on a grammar of graphics. For education analytics, you'll create charts that communicate student outcomes: bar charts showing course completion rates, line graphs tracking student performance over time, scatter plots revealing relationships between study hours and grades. ggplot2 works by layering: start with ggplot() specifying data and aesthetics (x/y axes), add a geometry (geom_point for scatter, geom_bar for bars, geom_line for trends), then customize with scales, themes, and labels. For example, visualizing how student engagement (x-axis) correlates with final grades (y-axis) across different courses reveals which courses need intervention.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "R Mastery Achieved: Ready for Education Analytics",
+      "content": "Congratulations! You've mastered R fundamentals, data manipulation, and visualization\u2014the core skills for education analytics. You can now load student data, filter and summarize it to answer real questions (e.g., which courses have the highest dropout rates?), and visualize findings for stakeholders. Next steps: explore real education technology datasets (student LMS activity, course completion metrics, assessment scores), practice cleaning messy data, and build dashboards to track learning outcomes. R is your tool for turning education data into insights that improve student success."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:22:51.183497+00:00",
+  "model": "claude-haiku-4-5"
+}

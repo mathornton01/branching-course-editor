@@ -1,0 +1,374 @@
+{
+  "id": "urban-data-viz-course",
+  "title": "Data Visualization with Python for Urban Planners",
+  "description": "Learn to create compelling statistical and interactive visualizations of urban data using Python. Understand which visualization technique fits your message, from matplotlib static charts to interactive plotly dashboards.",
+  "topic": "Data Visualization with Python",
+  "theme": "urban planning",
+  "difficulty": "beginner",
+  "estimated_minutes": 120,
+  "tags": [
+    "python",
+    "data visualization",
+    "matplotlib",
+    "plotly",
+    "seaborn",
+    "urban planning",
+    "data analysis",
+    "dashboards"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Visualizing Cities: Data Visualization in Urban Planning",
+      "content": "Python's visualization libraries\u2014matplotlib, seaborn, and plotly\u2014transform raw urban data into actionable insights. From analyzing traffic patterns and population demographics to monitoring air quality and planning green spaces, data visualization helps urban planners communicate complex findings to stakeholders and make evidence-based decisions. This course teaches you to create compelling visualizations that reveal hidden patterns in city data, whether you prefer building statistical charts first or jumping directly into interactive dashboards. By the end, you'll have the tools to turn spreadsheets of numbers into stories that drive action.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Which approach resonates with you? Statistical visualization builds your foundation with fundamental chart types and teaches you to extract meaning from data. Interactive visualization lets you create dynamic dashboards that stakeholders can explore themselves\u2014perfect for presenting zoning decisions or transit improvements to council members and residents.",
+      "choices": [
+        {
+          "label": "Master Statistical Methods First",
+          "next": "n3"
+        },
+        {
+          "label": "Build Interactive Dashboards First",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Creating Impact with Matplotlib & Static Charts",
+      "content": "Matplotlib is Python's foundational visualization library, ideal for exploratory analysis and publication-quality figures. For urban planning, static charts excel at showing historical trends, comparing neighborhoods, and revealing patterns in census data, crime statistics, and infrastructure metrics. You'll use matplotlib to create bar charts, line charts, scatter plots, and heatmaps\u2014the essential tools for understanding city systems. Seaborn builds on matplotlib, making charts beautiful by default while preserving full customization power. Master these fundamentals and you'll be able to persuade city councils with data-driven evidence.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Weekly Traffic Flow Analysis at Downtown Intersection",
+      "content": "An urban planner needs to convince the city council to widen a major intersection. She collects hourly traffic counts for one week and creates a matplotlib line chart showing peak hours and daily patterns. The code uses `plt.plot()` to draw lines for each day, `plt.xlabel()` and `plt.ylabel()` for clear labels, and `plt.legend()` to distinguish weekdays from weekends. The resulting visualization reveals that morning and evening rushes create dangerous bottlenecks, while weekend traffic is light\u2014perfect evidence for a widening proposal. The chart's simplicity and clarity make it ideal for a public presentation.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Test Your Understanding of Statistical Visualizations",
+      "content": "Show that you can choose appropriate chart types, read matplotlib code, and interpret urban data visualizations correctly.",
+      "questions": [
+        {
+          "question": "A city planner wants to show how neighborhood population has changed from 2000 to 2020. Which chart type is most appropriate?",
+          "options": [
+            "Bar chart comparing 2000 and 2020 only",
+            "Line chart showing year-by-year change",
+            "Pie chart showing percentage composition",
+            "Heatmap showing all neighborhoods"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Bar charts work for comparing snapshots, but lose the trend over 20 years.",
+            "Correct! Line charts excel at showing how a single metric changes over time.",
+            "Pie charts show composition (parts of a whole), not change over time.",
+            "Heatmaps are for comparing two variables across many observations."
+          ],
+          "explanation": "Line charts are ideal for temporal trends. A line from 2000 to 2020 clearly shows growth or decline."
+        },
+        {
+          "question": "What does plt.legend() do in a matplotlib visualization?",
+          "options": [
+            "Adds a title to the chart",
+            "Identifies and labels different data series in the plot",
+            "Exports the chart as an image",
+            "Increases font sizes for readability"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's plt.title(). plt.legend() serves a different purpose.",
+            "Correct! Legends map colors/markers to data series, essential when plotting multiple lines or categories.",
+            "That's plt.savefig(). plt.legend() is purely for labeling.",
+            "Font is controlled by fontsize parameter. plt.legend() handles labeling."
+          ],
+          "explanation": "When you plot multiple datasets (e.g., traffic on Monday vs. Friday), legend() tells viewers which color represents which day."
+        },
+        {
+          "question": "You're analyzing zoning violations across 15 neighborhoods. The values range from 2 to 87 violations. Which chart works best?",
+          "options": [
+            "Line chart with neighborhoods on x-axis",
+            "Bar chart with neighborhoods on x-axis",
+            "Scatter plot with neighborhoods on x-axis",
+            "Heatmap with neighborhoods as rows"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Line charts imply an ordering or trend. Neighborhoods have no natural order unless you sort them.",
+            "Correct! Bar charts excel at comparing values across discrete categories. Sort by violation count for maximum impact.",
+            "Scatter plots need two numerical variables (x and y). Neighborhoods and violation count work, but a bar chart is clearer.",
+            "Heatmaps compare two categorical variables. One variable (neighborhoods) isn't enough."
+          ],
+          "explanation": "Bar charts are the default for comparing a single metric across many categories. They're simple, clear, and persuasive in council presentations."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Visualize Neighborhood Population Changes",
+      "content": "In this exercise, you'll create visualizations of neighborhood population data using matplotlib. Create a bar chart comparing populations across 8 neighborhoods, and a line chart showing how one neighborhood's population changed from 2010 to 2020. Use appropriate labels, legends, and colors to make your charts clear and professional. After completing the practice, return to the assessment to verify your understanding.",
+      "questions": [
+        {
+          "question": "When creating a bar chart of neighborhood populations, what's the best way to highlight neighborhoods with the fastest growth?",
+          "options": [
+            "Use different colors for different neighborhoods",
+            "Sort neighborhoods by population (largest first) and use color gradient from oldest to newest neighborhood",
+            "Sort by growth rate and use color intensity to show growth magnitude",
+            "Make all bars the same color for consistency"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Different colors help distinguish neighborhoods, but don't emphasize growth.",
+            "Sorting by size helps readability, but doesn't highlight growth directly.",
+            "Correct! Sorting by growth rate and using color intensity makes growth patterns instantly visible.",
+            "Consistency is good, but sacrifices storytelling power. Use color strategically."
+          ],
+          "explanation": "Visual design should reinforce your message. If growth matters, sort by growth and use color to emphasize it. Viewers grasp the story instantly."
+        },
+        {
+          "question": "You're plotting 20 years of traffic data for one intersection. Should you use a line chart or bar chart?",
+          "options": [
+            "Bar chart\u2014easier to read",
+            "Line chart\u2014shows the trend clearly",
+            "It doesn't matter; both are equally effective",
+            "Pie chart\u2014shows proportions over time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Bar charts work for discrete categories, but 20 bars for 20 years is busy.",
+            "Correct! Line charts excel at showing trends over time. Each point is a year, and the line's shape tells the story.",
+            "Chart type absolutely matters. Line is better for time series.",
+            "Pie charts don't show trends\u2014they show composition."
+          ],
+          "explanation": "Time series data (x-axis is time) almost always calls for a line chart. It reveals patterns that bar charts hide."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Engaging Stakeholders with Plotly & Seaborn",
+      "content": "Interactive visualizations invite exploration. Plotly creates web-based dashboards where planners and stakeholders zoom, hover, filter, and drill down without needing to change code or regenerate static images. For urban planning, interactivity shines when presenting zoning changes, transit improvements, or environmental metrics\u2014stakeholders ask 'what if?' and your dashboard answers in real time. Seaborn provides beautiful default styling and seamless integration with pandas DataFrames, making complex visualizations accessible. This section teaches you to layer interactivity onto data storytelling, turning passive charts into tools for discovery and decision-making.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: Interactive Bus Fleet Monitoring Dashboard",
+      "content": "A transit authority wants to track bus locations, passenger loads, and delays in real time. Using plotly, an engineer builds an interactive map showing each bus route color-coded by average delay (green = on time, red = delayed 15+ minutes). Hovering over a bus reveals current load and last stop; clicking a route highlights all buses on that line. The code uses `plotly.graph_objects` to place bus markers on a map and `plotly.express` for filtering dropdown menus. Callback functions update the dashboard when a user selects a route. Stakeholders can now explore service quality without leaving their browser, and the authority can spot systemic delays and respond faster than ever before.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "assessment",
+      "title": "Test Your Understanding of Interactive Visualizations",
+      "content": "Demonstrate knowledge of plotly, interactivity patterns, and dashboard design for urban data.",
+      "questions": [
+        {
+          "question": "You're building a dashboard to let residents explore neighborhood air quality data across 50 zip codes over 12 months. Which interaction is most useful?",
+          "options": [
+            "Filtering by zip code and date range via dropdown menus",
+            "Showing all 50 zip codes and 12 months at once with no filters",
+            "Creating 50 separate static charts, one per zip code",
+            "Playing an animation showing changes month-by-month"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Dropdowns let users focus on data most relevant to them. Residents in one zip code see their neighborhood's trends first.",
+            "That's overwhelming. 50 \u00d7 12 = 600 data points clustered in one chart. Users can't extract meaning.",
+            "Static charts are fine for reports, but not for exploration. An interactive dashboard is more engaging and flexible.",
+            "Animations are engaging but hard to compare specific months. Filters + dropdowns let users compare any two months side-by-side."
+          ],
+          "explanation": "Interactivity succeeds when it focuses attention. Filters and menus let each user customize the view to their interests, making the dashboard feel personal."
+        },
+        {
+          "question": "What is a 'callback' in plotly dashboards?",
+          "options": [
+            "A way to store data between user sessions",
+            "A function that updates the visualization when a user interacts with a control (dropdown, button, etc.)",
+            "A security check to prevent unauthorized data access",
+            "A method to export data to CSV"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Callbacks don't store data. That's a database or session storage.",
+            "Correct! Callbacks connect user interactions to code. When a user clicks a filter, the callback runs and updates the dashboard in real time.",
+            "That's authentication/authorization. Callbacks handle logic, not security.",
+            "That's export functionality. Callbacks handle reactive updates, not downloads."
+          ],
+          "explanation": "Plotly callbacks make dashboards feel responsive. A user changes a filter, and the chart updates instantly\u2014that's a callback at work."
+        },
+        {
+          "question": "A planner creates an interactive choropleth map showing population density by neighborhood. Hovering over a neighborhood reveals the exact population. Is this a good use of interactivity?",
+          "options": [
+            "No\u2014show the exact population in the neighborhood label",
+            "Yes\u2014hover reveals detailed data without cluttering the map",
+            "No\u2014create a separate table with population data",
+            "Yes, but only if all neighborhoods have different colors"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Labels on every neighborhood clutters the map. Hover is elegant\u2014details appear on demand.",
+            "Correct! Hover tooltips show details on demand. The map stays clean, but detailed data is always one hover away.",
+            "A table is useful, but why hide the data in a separate view? Hover keeps map and details together.",
+            "Colors and hover are independent. Hover is useful regardless of color diversity."
+          ],
+          "explanation": "Interactive tooltips let maps stay clean and readable while making detailed data accessible to curious users. Hover is a staple of modern dashboards."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "practice",
+      "title": "Practice: Build an Air Quality Monitoring Dashboard",
+      "content": "Create an interactive plotly dashboard that monitors air quality (AQI) across 15 neighborhoods. Include a map-based visualization where neighborhoods are colored by AQI (green = good, yellow = moderate, red = poor), a dropdown filter to view specific date ranges, and a hover tooltip showing the detailed AQI value and pollution sources. This mirrors real-world dashboard requirements where stakeholders need to explore environmental data independently. Use callbacks to update the map when users change the date filter.",
+      "questions": [
+        {
+          "question": "When designing a dashboard for neighborhood AQI data, should you use a static color scale (e.g., AQI 0\u201350 always green) or a dynamic scale based on current data?",
+          "options": [
+            "Dynamic scale\u2014shows more variation in current data",
+            "Static scale\u2014users always know what colors mean",
+            "Either approach works equally well",
+            "Dynamic scale\u2014easier to code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Dynamic scales highlight variation but confuse viewers about what colors mean over time.",
+            "Correct! A static scale builds mental models. Green always means good air, red always means poor. Viewers instantly understand the health implications.",
+            "The choice matters. Consistency and clarity win.",
+            "Code complexity shouldn't drive design decisions."
+          ],
+          "explanation": "Consistency is a feature. If a user checks the dashboard on Monday (seeing green) and Thursday (also green), they should know the air quality level is the same."
+        },
+        {
+          "question": "Your dashboard has 5 pollution sources (PM2.5, PM10, NO2, Ozone, CO). Should you show all 5 in the hover tooltip?",
+          "options": [
+            "Yes\u2014more data is always better",
+            "Yes, but only if space permits",
+            "Show the top 2-3 sources; offer a link for detailed breakdown",
+            "No\u2014keep tooltips simple; show only AQI"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "More data can overwhelm users. Hover tooltips should answer the immediate question quickly.",
+            "Cramped tooltips frustrate users. Prioritize clarity.",
+            "Correct! Hover tooltips work best for quick answers. Link to detailed breakdowns for curious users who want to dig deeper.",
+            "AQI is important, but knowing why (sources) is crucial for planning."
+          ],
+          "explanation": "Tooltips are for 'at a glance' insights. Details should be a click away, not forced into every hover. Layer complexity\u2014simple first, detailed on demand."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Congratulations: You've Mastered Data Visualization for Urban Planning!",
+      "content": "You've completed the course and developed skills in both statistical and interactive visualization. Whether you started with matplotlib or plotly, you can now create compelling charts and dashboards that help urban planners communicate findings to stakeholders, from council presentations to real-time monitoring systems. Continue practicing by visualizing real city datasets\u2014public transit ridership, housing market data, infrastructure conditions\u2014and sharing your insights with your community. The best visualizations tell stories that drive action. Go forth and turn urban data into decisions."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Statistical path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Interactive path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n11",
+      "label": "Pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "After practice"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n11",
+      "label": "Pass"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n10",
+      "label": "Fail"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "After practice"
+    }
+  ],
+  "generated_at": "2026-03-27T05:45:44.684722+00:00",
+  "model": "claude-haiku-4-5"
+}

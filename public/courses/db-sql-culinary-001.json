@@ -1,0 +1,385 @@
+{
+  "id": "db-sql-culinary-001",
+  "title": "Database Design & SQL: The Restaurant Kitchen Approach",
+  "description": "Learn database design and SQL through the lens of culinary arts. Explore how restaurants organize, structure, and query their data.",
+  "topic": "Database Design and SQL",
+  "theme": "culinary arts",
+  "difficulty": "beginner",
+  "estimated_minutes": 50,
+  "tags": [
+    "database",
+    "SQL",
+    "data-modeling",
+    "schema-design",
+    "culinary",
+    "restaurant"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Restaurants Need Databases",
+      "content": "A successful restaurant manages thousands of pieces of information: recipe ingredients, supplier contacts, inventory levels, menu items, nutritional data, and customer preferences. Without a proper database, a head chef might store recipes in notebooks, have ingredients listed in multiple places, and spend hours searching for information. Databases solve this by organizing culinary knowledge in structured tables, eliminating duplication, and making information instantly accessible. Think of a database like a perfectly organized kitchen mise en place\u2014everything in its proper place, easy to find, and used efficiently."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Topic: Three Pillars of Restaurant Data Management",
+      "content": "Databases work through three interconnected concepts. Choose one to explore in depth.",
+      "choices": [
+        {
+          "label": "Data Modeling: Building Your Recipe & Menu Tables",
+          "next": "n3"
+        },
+        {
+          "label": "Relationships & Normalization: Connecting Ingredients to Recipes",
+          "next": "n6"
+        },
+        {
+          "label": "SQL Queries: Finding Recipes, Filtering Menus & Inventory",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Data Modeling: Designing Tables for Your Restaurant",
+      "content": "Data modeling is the art of designing tables that represent your restaurant's information. Each table stores one type of entity: recipes, ingredients, suppliers, menu items, or customers. Think of each table as a filing cabinet, and each row (record) as a folder inside. Every table needs columns (fields) that describe attributes. A Recipes table might have columns: RecipeID, RecipeName, CuisineType, PrepTime, Difficulty, Instructions, and CreatedDate. A Suppliers table might have: SupplierID, CompanyName, ContactEmail, Phone, Specialty. Good data modeling means choosing the right entities and columns so you can efficiently store and retrieve information without confusion or redundancy."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: A Fine Dining Restaurant's Schema",
+      "content": "Imagine Chef Laurent's upscale French bistro. She designs these core tables:\n\n**Recipes Table:** RecipeID (primary key), RecipeName, CuisineType, PrepTime (minutes), Difficulty (1-5), Instructions, CreatedBy (chef name), DateCreated. Example row: (001, 'Coq au Vin', 'French', 120, 3, '[detailed instructions...]', 'Chef Laurent', '2024-01-15').\n\n**Ingredients Table:** IngredientID, IngredientName, Unit (cups, grams, etc.), CostPerUnit, StorageLocation (pantry, freezer, walk-in), ReorderLevel. Example: (501, 'Burgundy Red Wine', 'bottle', 8.50, 'wine rack', 6).\n\n**Suppliers Table:** SupplierID, CompanyName, Specialty (produce, meat, seafood), ContactName, Phone, Email. Example: (1001, 'Loire Valley Farms', 'fresh produce', 'Marie Dubois', '+33-2-123456', 'marie@loirevalley.fr').\n\nThis structure lets Chef Laurent track recipes separately from ingredients, so one ingredient (wine) can be used across many recipes without duplicating its data."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Data Modeling Quiz",
+      "content": "Test your understanding of data modeling concepts in a restaurant context.",
+      "pass_threshold": 67,
+      "success_target": "n12",
+      "failure_target": "n4",
+      "questions": [
+        {
+          "question": "Which of the following is the best primary table design for a restaurant database?",
+          "options": [
+            "A) One giant table with RecipeID, RecipeName, IngredientName, IngredientQuantity, SupplierName, SupplierEmail all in one table",
+            "B) Separate tables: Recipes, Ingredients, and Suppliers, each storing their own specific attributes",
+            "C) Multiple copies of Recipes table, one for each supplier they use",
+            "D) Store all recipes in a text file instead of a database"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Storing everything in one table causes data duplication and makes updates difficult.",
+            "Correct! Separate, focused tables reduce duplication and make data management efficient.",
+            "Incorrect. Duplicating tables wastes storage and makes consistency harder.",
+            "Incorrect. Text files can't efficiently search or organize restaurant data."
+          ],
+          "explanation": "Good data modeling separates entities (Recipes, Ingredients, Suppliers) into distinct tables. This avoids storing the same ingredient data dozens of times and makes changes easy: update a supplier's contact once, and all recipes using that supplier reflect the change."
+        },
+        {
+          "question": "A restaurant wants to track which equipment (oven, stove, grill) is needed for each recipe. What is the best approach?",
+          "options": [
+            "A) Add an 'EquipmentNeeded' column to the Recipes table with all equipment names in one cell",
+            "B) Create a separate Equipment table and a RecipeEquipment junction table linking recipes to equipment",
+            "C) Create a new Recipes table for each piece of equipment",
+            "D) Only note equipment in the recipe's cooking instructions, don't track it separately"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Storing multiple values in one cell makes it hard to search and manage equipment.",
+            "Correct! Junction tables allow one recipe to link to many equipment pieces without duplication.",
+            "Incorrect. Creating multiple tables for the same entity is inefficient.",
+            "Incorrect. Embedding information makes it hard to query and manage equipment data."
+          ],
+          "explanation": "When a recipe uses multiple equipment items and equipment can be shared by many recipes, use a junction table. RecipeEquipment links them: RecipeID 001 \u2192 EquipmentID 5 (oven). Now queries can find 'all recipes using an oven' instantly."
+        },
+        {
+          "question": "What is a 'primary key' in a table?",
+          "options": [
+            "A) A password to access the database",
+            "B) A unique identifier for each row that distinguishes it from all other rows",
+            "C) The most important column when cooking a recipe",
+            "D) The first column in alphabetical order"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Primary keys aren't security credentials.",
+            "Correct! A primary key (like RecipeID) ensures each row is unique and findable.",
+            "Incorrect. That's a conceptual confusion between cooking and databases!",
+            "Incorrect. Column order doesn't define a primary key."
+          ],
+          "explanation": "A primary key is the column (or combination of columns) that uniquely identifies each record. RecipeID=001 only appears once in the Recipes table, making it a perfect primary key. Without it, you couldn't reliably look up a specific recipe."
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Relationships & Normalization: Eliminating Duplication",
+      "content": "In databases, relationships connect related tables. A recipe 'Beef Bourguignon' uses many ingredients (beef, wine, carrots, etc.), and each ingredient might be used in multiple recipes. Rather than storing the full ingredient data inside every recipe, you create a relationship table that links them. A RecipeIngredients table (junction table) has columns: RecipeID, IngredientID, and Quantity. This is called normalization\u2014breaking data into related tables to eliminate redundancy. The principle: every piece of information appears in only one place. A supplier's phone number lives in the Suppliers table, not duplicated in the Recipes table. If the supplier changes their number, you update it once, and all recipes using that supplier automatically reference the new number. This mirrors a well-run kitchen: one master inventory board, not scattered ingredient lists."
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Example: Normalized Recipe Relationships",
+      "content": "Chef Laurent's 'Beef Bourguignon' recipe (RecipeID 005) uses:\n- IngredientID 201 (beef chunks): 2 lbs\n- IngredientID 501 (Burgundy red wine): 2 bottles\n- IngredientID 302 (pearl onions): 1 lb\n- IngredientID 401 (carrots): 1.5 lbs\n\nInstead of storing all ingredient details inside the recipe, the RecipeIngredients table links them:\n| RecipeID | IngredientID | Quantity | Unit |\n| 005 | 201 | 2 | lbs |\n| 005 | 501 | 2 | bottles |\n| 005 | 302 | 1 | lbs |\n| 005 | 401 | 1.5 | lbs |\n\nNow, if the beef supplier 'Loire Valley Farms' updates their contact info in the Suppliers table, every recipe that uses their beef automatically has the correct supplier contact. No duplication, no stale data. It's like having one master mise en place station instead of separate ingredient lists at each cooking station."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Relationships & Normalization Quiz",
+      "content": "Test your understanding of database relationships and normalization.",
+      "pass_threshold": 67,
+      "success_target": "n12",
+      "failure_target": "n7",
+      "questions": [
+        {
+          "question": "Why do restaurants use a RecipeIngredients junction table instead of storing all ingredients directly in the Recipes table?",
+          "options": [
+            "A) To make the database more complicated and harder to understand",
+            "B) To allow one ingredient to be linked to many recipes without duplicating ingredient data",
+            "C) Because junction tables are required by all database software",
+            "D) To make recipes impossible to search"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Complexity should be minimized, not added intentionally.",
+            "Correct! Junction tables enable many-to-many relationships efficiently.",
+            "Incorrect. Junction tables are optional but highly recommended for good design.",
+            "Incorrect. Junction tables actually make searches more reliable."
+          ],
+          "explanation": "One ingredient (salt) might be used in 100 recipes. Storing it separately in each recipe wastes storage and causes problems when updating (change the salt price in one place, update 100 rows). A junction table links them: recipe 1 \u2192 salt, recipe 2 \u2192 salt, etc. Update salt once, all recipes reflect it."
+        },
+        {
+          "question": "If Chef Laurent's restaurant changes suppliers for beef, how many places in a normalized database need to be updated?",
+          "options": [
+            "A) Every recipe that uses beef must be updated individually",
+            "B) Only the Suppliers table entry needs to be updated",
+            "C) Both the Suppliers and RecipeIngredients tables",
+            "D) The entire database needs to be rebuilt"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. In a normalized database, this is inefficient and error-prone.",
+            "Correct! One update in the Suppliers table propagates everywhere.",
+            "Incorrect. RecipeIngredients doesn't store supplier info.",
+            "Incorrect. Good database design avoids wholesale rebuilds."
+          ],
+          "explanation": "Normalization means each fact lives in one place. The beef supplier's info is in the Suppliers table. Recipes link to suppliers through ingredients. Change one supplier record, and every recipe using that supplier's ingredients automatically sees the new info."
+        },
+        {
+          "question": "What is the main goal of normalization?",
+          "options": [
+            "A) To make databases as large as possible",
+            "B) To eliminate data duplication and ensure consistency",
+            "C) To make databases harder to query",
+            "D) To store each piece of data in multiple locations for safety"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Normalization minimizes database size and complexity.",
+            "Correct! Normalization ensures each fact is stored once, reducing errors and inconsistency.",
+            "Incorrect. Well-normalized databases are easier to query reliably.",
+            "Incorrect. That would be redundancy, the opposite of normalization."
+          ],
+          "explanation": "Normalization organizes data so each piece appears only once. This prevents inconsistencies (like two different prices for the same ingredient in different recipes) and makes updates easier. It's efficient and clean\u2014the mark of good database design."
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "SQL Queries: Finding Recipes, Inventory & Insights",
+      "content": "SQL (Structured Query Language) is the universal language for asking questions of your database. With SQL, a chef can ask: 'Show me all French recipes that take under 90 minutes,' or 'Which ingredients from Loire Valley Farms are low in stock?' or 'What recipes use chicken?' SQL uses SELECT to choose columns, FROM to specify tables, WHERE to filter rows, and JOIN to combine data from related tables. A simple query retrieves data: SELECT RecipeName, PrepTime FROM Recipes WHERE CuisineType = 'French' AND PrepTime < 90; This returns every French recipe that can be prepared in under 90 minutes\u2014useful for quick lunch service. More complex queries combine tables: SELECT RecipeName, IngredientName, Quantity FROM Recipes JOIN RecipeIngredients ON Recipes.RecipeID = RecipeIngredients.RecipeID WHERE RecipeName = 'Beef Bourguignon'. This shows all ingredients in that recipe with their quantities."
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Example: Real SQL Queries for Restaurant Operations",
+      "content": "Query 1 \u2013 Find all vegan appetizers:\nSELECT RecipeName, PrepTime FROM Recipes WHERE CourseType = 'appetizer' AND DietaryTag = 'vegan';\n\nQuery 2 \u2013 Check inventory for ingredients below reorder level:\nSELECT IngredientName, CurrentStock, ReorderLevel FROM Ingredients WHERE CurrentStock < ReorderLevel ORDER BY CurrentStock ASC;\n\nQuery 3 \u2013 List all recipes using expensive ingredients (cost > $5):\nSELECT DISTINCT Recipes.RecipeName FROM Recipes JOIN RecipeIngredients ON Recipes.RecipeID = RecipeIngredients.RecipeID JOIN Ingredients ON RecipeIngredients.IngredientID = Ingredients.IngredientID WHERE Ingredients.CostPerUnit > 5.00;\n\nQuery 4 \u2013 Get supplier contact info for recipes we're making today:\nSELECT DISTINCT Suppliers.CompanyName, Suppliers.ContactEmail FROM Suppliers JOIN Ingredients ON Suppliers.SupplierID = Ingredients.SupplierID JOIN RecipeIngredients ON Ingredients.IngredientID = RecipeIngredients.IngredientID WHERE RecipeIngredients.RecipeID IN (SELECT RecipeID FROM TodaysMenu);\n\nEach query answers a real operational question Chef Laurent faces daily."
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "SQL Queries Quiz",
+      "content": "Test your understanding of SQL queries and how to retrieve data from a restaurant database.",
+      "pass_threshold": 67,
+      "success_target": "n12",
+      "failure_target": "n10",
+      "questions": [
+        {
+          "question": "What does 'SELECT RecipeName FROM Recipes WHERE CuisineType = \"Italian\"' do?",
+          "options": [
+            "A) Deletes all Italian recipes from the database",
+            "B) Lists the names of all recipes tagged as Italian cuisine",
+            "C) Updates Italian recipes to have a different cuisine type",
+            "D) Creates a new Italian recipe in the database"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. SELECT retrieves data; it never deletes.",
+            "Correct! SELECT with WHERE filters and shows specific rows.",
+            "Incorrect. That would require an UPDATE statement.",
+            "Incorrect. That would require an INSERT statement."
+          ],
+          "explanation": "SELECT RecipeName retrieves the recipe names. FROM Recipes specifies the table. WHERE CuisineType = \"Italian\" filters to only Italian recipes. Together, this query shows a list of all Italian recipe names in the database."
+        },
+        {
+          "question": "Chef Laurent wants to find all recipes that use 'garlic' as an ingredient. Which SQL structure makes most sense?",
+          "options": [
+            "A) SELECT RecipeName FROM Recipes WHERE RecipeName LIKE 'garlic%'",
+            "B) SELECT RecipeName FROM Recipes WHERE CuisineType = 'garlic'",
+            "C) SELECT RecipeName FROM Recipes JOIN RecipeIngredients ON Recipes.RecipeID = RecipeIngredients.RecipeID JOIN Ingredients ON RecipeIngredients.IngredientID = Ingredients.IngredientID WHERE Ingredients.IngredientName = 'garlic'",
+            "D) SELECT * FROM Recipes"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. This searches recipe names, not ingredients used.",
+            "Incorrect. CuisineType won't contain ingredient names.",
+            "Correct! JOINing tables links recipes to their ingredients, letting you filter by ingredient name.",
+            "Incorrect. This returns all recipes and ingredients\u2014too much data and no filtering."
+          ],
+          "explanation": "Because ingredients are in a separate table, you need to JOIN Recipes to RecipeIngredients to Ingredients. This creates a path from recipes to the ingredients they use. Then WHERE filters for 'garlic'. This is why normalization and JOINs go hand-in-hand."
+        },
+        {
+          "question": "What does a WHERE clause do in an SQL query?",
+          "options": [
+            "A) It specifies the order results appear in (alphabetical, highest to lowest, etc.)",
+            "B) It filters rows to show only those that match certain conditions",
+            "C) It creates a new column with calculated values",
+            "D) It groups results by category"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's what ORDER BY does.",
+            "Correct! WHERE is the filter condition for queries.",
+            "Incorrect. That requires creating a new derived column.",
+            "Incorrect. That's what GROUP BY does."
+          ],
+          "explanation": "WHERE narrows down the rows returned. 'WHERE PrepTime < 60' shows only recipes taking less than an hour. 'WHERE CuisineType = \"French\"' shows only French recipes. It's the gatekeeper for your query results."
+        }
+      ]
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Synthesis: How It All Works Together in a Restaurant Database",
+      "content": "Data modeling, relationships, and SQL queries form a complete system. Chef Laurent starts by modeling her restaurant's entities (recipes, ingredients, suppliers, customers). She designs normalized tables where each piece of information lives in one place, connected by relationships. When she needs insight\u2014'What's the cost of ingredients for this week's menu?'\u2014SQL queries pull and combine data from multiple tables in seconds. The benefits compound: consistent data (no duplicate supplier info), efficient storage (one ingredient stored once, linked to many recipes), and flexible querying (answer new questions without redesigning tables). A well-designed database becomes the source of truth for the entire restaurant\u2014kitchen staff know ingredient inventory instantly, management can analyze food costs by cuisine type, servers can check dietary restrictions. This integrated system is what separates restaurants that scale smoothly from those that stumble as they grow. The techniques you've learned\u2014thoughtful data modeling, normalized relationships, and strategic queries\u2014work for any domain: hospitals, banks, libraries, or e-commerce platforms."
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Your Next Step: Build a Restaurant Database",
+      "content": "You've learned the three pillars of database design through a culinary lens. Now it's time to practice. Choose a cuisine or restaurant concept and design a small database: What entities matter (recipes, ingredients, suppliers)? What tables do you need? How would you normalize them? Write 3-5 SQL queries that answer real operational questions. This hands-on project will solidify your understanding and give you a portfolio piece showing database design skills. Happy cooking with data!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Data Modeling"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Relationships"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n9",
+      "label": "SQL Queries"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n12",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n4",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n12",
+      "label": "pass"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c13",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c14",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c15",
+      "source": "n11",
+      "target": "n12",
+      "label": "pass"
+    },
+    {
+      "id": "c16",
+      "source": "n11",
+      "target": "n10",
+      "label": "fail"
+    },
+    {
+      "id": "c17",
+      "source": "n12",
+      "target": "n13",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T07:54:13.208514+00:00",
+  "model": "claude-haiku-4-5"
+}

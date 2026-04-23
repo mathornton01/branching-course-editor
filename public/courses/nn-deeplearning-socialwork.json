@@ -1,0 +1,297 @@
+{
+  "id": "nn-deeplearning-socialwork",
+  "title": "Neural Networks and Deep Learning for Social Work",
+  "description": "Learn how neural networks and deep learning can enhance social work practice through predictive analytics, risk assessment, and client outcome optimization. This adaptive course routes learners based on their knowledge level.",
+  "topic": "Neural Networks and Deep Learning",
+  "theme": "social work",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "neural networks",
+    "deep learning",
+    "AI",
+    "social work",
+    "predictive analytics",
+    "machine learning",
+    "AI ethics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Foundation Check: Neural Networks in Social Work",
+      "content": "Let's assess your current understanding of neural networks and their potential applications in social work. This quick diagnostic will help us find the best learning path for you.",
+      "questions": [
+        {
+          "question": "What best describes a neural network in the context of AI and social work?",
+          "options": [
+            "A biological network of neurons in the brain",
+            "A computer system inspired by biological neurons that learns to recognize patterns in data",
+            "A type of database for storing client information",
+            "A social media platform for connecting professionals"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While neural networks are inspired by biology, in AI they're computational systems.",
+            "Correct! Neural networks learn patterns from data, which is valuable for social work applications.",
+            "That's a data storage system, not a learning algorithm.",
+            "Social networks are people-focused platforms, not machine learning systems."
+          ],
+          "explanation": "Neural networks are computational models that learn patterns from data by adjusting internal parameters (weights). In social work, they can identify patterns in client outcomes, predict risks, and support decision-making."
+        },
+        {
+          "question": "Which real-world social work scenario could benefit most from a neural network?",
+          "options": [
+            "Predicting which at-risk youth might disengage from mentorship programs using patterns from historical data",
+            "Storing and organizing client demographic information",
+            "Writing narrative case notes for documentation",
+            "Sending appointment reminder emails to clients"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Excellent! Pattern recognition in historical data is exactly what neural networks excel at.",
+            "That's data management, not pattern learning.",
+            "That's documentation, which requires human judgment.",
+            "That's routine scheduling, which doesn't require learning."
+          ],
+          "explanation": "Neural networks shine at finding hidden patterns in historical data. Predicting outcomes, identifying risk factors, and matching clients to services all leverage this strength."
+        },
+        {
+          "question": "How do neural networks learn from data?",
+          "options": [
+            "By being explicitly programmed with every decision rule",
+            "By recognizing patterns in data and automatically adjusting internal weights to improve predictions",
+            "By asking humans to label each example",
+            "By copying answers from a knowledge database"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Neural networks don't rely on hand-coded rules; they learn from examples.",
+            "Correct! This process is called training\u2014the network adjusts itself to fit the data patterns.",
+            "While humans do label training data initially, the network then learns patterns automatically.",
+            "Neural networks don't reference databases; they build internal patterns."
+          ],
+          "explanation": "Training involves feeding historical data into the network and letting it adjust its internal parameters (weights) to minimize prediction errors. Over time, this process reveals patterns humans might miss."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Deep Learning Concepts: Layers, Learning, and Ethics",
+      "content": "You've grasped the basics! Now let's explore deeper concepts: how multiple layers learn progressively complex patterns, why models sometimes fail in practice, and the ethical responsibilities when deploying AI in high-stakes social work decisions.",
+      "questions": [
+        {
+          "question": "A deep learning model trained to predict family crises uses multiple hidden layers. Why are multiple layers beneficial?",
+          "options": [
+            "More layers always make predictions faster and require less data",
+            "Each layer can learn progressively more complex patterns\u2014early layers detect simple features, later layers recognize high-level risk indicators",
+            "Multiple layers allow the model to memorize training data perfectly",
+            "Multiple layers make the model's predictions easier for social workers to understand"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "More layers actually increase computational cost and often require more data.",
+            "Correct! This hierarchical learning is what makes deep learning powerful.",
+            "Memorizing training data actually hurts performance on new cases\u2014that's overfitting.",
+            "In fact, deeper networks often become harder to interpret."
+          ],
+          "explanation": "Deep learning's power comes from stacking layers. Lower layers might learn to detect individual risk factors (isolation, job loss), while higher layers combine these into complex patterns (family crisis probability)."
+        },
+        {
+          "question": "Your neural network predicts homelessness risk using 5 years of historical case data. It achieves 96% accuracy on cases it was trained on, but only 68% accuracy on new clients from the same year. What does this suggest?",
+          "options": [
+            "The model is underfitting\u2014it hasn't learned enough patterns",
+            "The model is overfitting\u2014it memorized training data details but doesn't generalize to new situations",
+            "Neural networks cannot work with social work data",
+            "You need to train it on 10 times more data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Underfitting would show poor accuracy on both training and new data.",
+            "Correct! This gap suggests the model learned training data quirks rather than real patterns. Techniques like dropout and regularization help prevent this.",
+            "Neural networks can absolutely handle social work data when properly trained.",
+            "While more data sometimes helps, the real issue here is the model's generalization."
+          ],
+          "explanation": "Overfitting is a major challenge in real-world AI. The model becomes too tailored to historical data and struggles with genuinely new cases. This is why we must validate models on separate test sets and monitor their performance in production."
+        },
+        {
+          "question": "Before deploying a model to identify families needing intensive intervention, you audit its performance across demographic groups and find: 89% accuracy for families with prior documented services, 64% for families without prior documentation. What's the appropriate response?",
+          "options": [
+            "Deploy the model since overall accuracy is acceptable",
+            "Investigate whether the disparity reflects true differences in need or whether underserved communities are being systematically deprioritized; address the bias before deployment",
+            "Increase model complexity to improve predictions for underserved groups",
+            "Exclude underserved communities from the system"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Deploying a biased system harms already-vulnerable populations\u2014ethically unacceptable.",
+            "Correct! Algorithmic bias often reflects historical inequities in data. You must audit, address, and validate before deployment.",
+            "Complexity alone won't solve structural bias; you need to address data and fairness mechanisms.",
+            "Exclusion isn't ethical or legal. The goal is equitable performance across all groups."
+          ],
+          "explanation": "Algorithmic fairness in social work isn't optional\u2014it's a professional obligation. Models trained on biased data can amplify discrimination. Solutions include examining training data biases, removing proxy variables, and applying fairness constraints."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Deep Learning Architectures in Social Work",
+      "content": "You've demonstrated strong conceptual understanding. Let's explore cutting-edge architectures transforming social work practice.\n\n**Convolutional Neural Networks (CNNs)** analyze spatial and relational patterns. While traditionally used for images, social workers can apply CNNs to network diagrams\u2014visualizing family connections, community resources, and relationship patterns to identify isolated clients or bottlenecks in service delivery.\n\n**Recurrent Neural Networks and Transformers** excel at sequential data. An RNN can track how a client's housing stability, substance use, mental health, and social connection evolve month-by-month, learning temporal patterns that predict future crises. LSTM (Long Short-Term Memory) networks particularly shine, remembering important historical context while processing new information\u2014mirroring how experienced case managers intuitively hold clients' complex histories.\n\n**Natural Language Processing with Deep Learning** processes case narratives at scale. Instead of manually reading thousands of case notes, deep learning models identify emerging themes: which types of interventions precede successful reunification? What language patterns in intake assessments correlate with later housing stability? This augments social worker expertise with data-driven insights.\n\n**Transfer Learning** radically reduces data requirements. Rather than training from scratch, organizations adapt language models pretrained on millions of texts, requiring only moderate case note data to achieve strong performance. This democratizes AI in resource-limited agencies.\n\n**Ethical Deployment at Scale**: Advanced models demand advanced oversight. Techniques like SHAP values and LIME help interpret predictions\u2014explaining *why* the model recommended specific interventions. Continuous bias auditing across demographic groups is mandatory. Human-in-the-loop systems keep social workers as decision-makers, using AI as an augmentation tool. Regular retraining ensures models adapt as client populations and community resources evolve.\n\nThe frontier combines deep learning with social work expertise: models developed collaboratively with practitioners, validated on representative populations, monitored continuously for fairness, designed for transparency, and deployed with safeguards against harmful errors.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Path Complete",
+      "content": "You've journeyed from neural network fundamentals through deep learning architectures and ethical deployment in social work. You understand how multiple layers learn hierarchical patterns, the distinction between model accuracy and fairness, and the critical human oversight needed for responsible AI. You're ready to architect and evaluate AI systems in your social work practice. Next steps: explore research on algorithmic fairness in social services, engage with your organization about bias auditing, experiment with transfer learning on real case data, and lead conversations about responsible AI adoption. The field needs thoughtful practitioners like you. Congratulations on your expertise!"
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Practice: Mastering Deep Learning Concepts",
+      "content": "Let's reinforce your understanding of neural network concepts through practical scenarios. These questions reflect real challenges social work organizations face when deploying AI systems.",
+      "questions": [
+        {
+          "question": "Your agency wants to process intake assessment narratives (200+ case notes annually) to extract risk patterns. Using a transfer learning approach with a pretrained language model is beneficial because:",
+          "options": [
+            "It eliminates the need for any domain knowledge in social work",
+            "It requires significantly less labeled case data than training from scratch while achieving strong performance",
+            "It guarantees predictions will be unbiased",
+            "It makes the model much smaller and faster"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Transfer learning still benefits from social work expertise in validation and deployment.",
+            "Correct! Pretrained models have already learned language patterns; you adapt for social work specifics.",
+            "Transfer learning helps reduce bias but requires continued vigilance to ensure fairness.",
+            "Pretrained models are often large; the benefit is in data efficiency and faster deployment."
+          ],
+          "explanation": "Transfer learning is transformative for social work. Agencies without massive datasets can leverage models trained on broader data, then customize for their context. This democratizes AI access in under-resourced organizations."
+        },
+        {
+          "question": "You're designing an RNN to predict patterns in substance use recovery outcomes\u2014tracking whether clients sustain recovery after receiving intensive case management. The model needs to 'remember' previous months' data (treatment history, support network changes, housing stability) while processing current information. Why are RNNs suited for this?",
+          "options": [
+            "RNNs process each month completely independently, ignoring historical patterns",
+            "RNNs maintain internal state about previous months, using that context to inform predictions about future months",
+            "RNNs can only work with static, non-sequential data",
+            "RNNs require social workers to explicitly program rules about how months relate"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's the opposite of what makes RNNs useful for sequential data.",
+            "Exactly! RNNs have 'memory' of prior inputs, making them perfect for temporal social work data.",
+            "RNNs are specifically designed for sequential and temporal data.",
+            "RNNs learn temporal relationships from data rather than requiring hand-coded rules."
+          ],
+          "explanation": "RNNs process sequences by maintaining hidden state that captures information from previous time steps. For social work, this means understanding how client circumstances evolve\u2014a deteriorating housing situation might predict relapse risk. LSTMs improve RNNs by selectively remembering and forgetting information."
+        },
+        {
+          "question": "Before deploying a model across your city's child protective services system, you audit performance separately for each major demographic group and find: 85% accuracy for families previously known to the system, 61% for families with no prior contact. What's the concerning implication?",
+          "options": [
+            "Deploy the model since it performs well on experienced cases",
+            "The model may systematically under-identify at-risk families from underserved or historically under-reported communities, perpetuating inequity",
+            "The model is designed to favor families already in the system",
+            "Accuracy disparities are normal and expected"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Deploying a system that fails minorities perpetuates institutional harm.",
+            "Correct! This gap suggests the model learned patterns reflecting surveillance and reporting biases in historical data, not true risk differences.",
+            "While possible, the real issue is likely historical reporting inequities in training data.",
+            "Accuracy disparities in high-stakes decisions are not acceptable; they indicate systematic bias."
+          ],
+          "explanation": "Training data reflects historical inequities\u2014underserved communities have less documentation. The model learns to be 'confident' about documented families and 'uncertain' about others. Without addressing this, AI amplifies existing discrimination. The solution requires examining data collection practices, identifying and removing biases, and validating equitable performance before deployment."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Path Complete",
+      "content": "You've built a solid, nuanced understanding of neural networks\u2014from basic pattern recognition through the complexities of deep learning and the critical importance of ethical deployment. You're equipped to engage meaningfully with AI initiatives in social work, understanding both the powerful potential and the profound risks. Key takeaways: neural networks learn patterns from data, but require careful validation to ensure fairness and reliability; they augment social work practice but never replace human judgment; and ethical deployment demands continuous monitoring for bias. Consider exploring specific applications in your practice area\u2014whether outcome prediction, client matching, or narrative analysis. You're ready to advocate for responsible, equitable AI adoption in social services!"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Foundations: How Neural Networks Learn",
+      "content": "Let's build your understanding from the ground up with clear, practical examples from social work.\n\n**What's a Neural Network?**\nImagine a social worker seeing a new family for the first time. The worker observes many signals\u2014housing, caregiver stress, child development, social support\u2014and based on patterns from hundreds of previous cases, makes an intuitive judgment about needs and risks. A neural network does something similar: it learns patterns from historical data.\n\n**The Building Block: Neurons**\nA single artificial neuron takes inputs, weighs their importance, and produces an output. In social work terms: if assessing homelessness risk, a neuron might receive inputs like \"months unemployed\" (high weight) and \"has family nearby\" (low weight)\u2014then combine these to estimate risk. Neurons don't *decide*; they compute weighted combinations.\n\n**Connecting Layers**\nA neural network stacks neurons into layers. The first layer receives raw information (client age, family size, income, housing status). Hidden middle layers learn to recognize patterns (combinations indicating vulnerability). The final layer outputs a prediction (risk score, recommended service type). Each layer learns at a different level of abstraction\u2014just like how case managers build understanding from observations \u2192 patterns \u2192 decisions.\n\n**Learning Through Examples**\nWhen we show the network historical cases with known outcomes, it adjusts its weights. Make a wrong prediction? Adjust the weights slightly. Make a correct one? Reinforce those weights. Over hundreds of cases, the network learns which patterns reliably predict outcomes\u2014without anyone explicitly programming the rules.\n\n**Real Social Work Example**\nA foster care program uses a simple neural network: input features (child age, prior placement experiences, trauma history, placement family stability, community resources) flow through hidden layers that learn which feature combinations predict successful long-term placements. The output is a \"success probability\" helping case managers find optimal matches.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Predicting Foster Care Placement Success",
+      "content": "**The Problem**: A foster care agency has data on 500 previous placements (child characteristics, family characteristics, community factors) with documented outcomes (placement successful/unsuccessful after 2 years). They want an AI system to suggest optimal placements for new children.\n\n**The Neural Network Structure**: \n- *Input layer*: 12 features (child age, number of prior placements, behavioral history, trauma type, foster family income, foster family experience, community mental health services, school quality, sibling proximity, foster parent training level, cultural match, etc.)\n- *Hidden layer 1*: 8 neurons learn basic patterns (which individual features matter most for placement success)\n- *Hidden layer 2*: 4 neurons learn complex interactions (how factors combine\u2014experienced families with strong community support succeed with older children; newer families need younger, less traumatized children)\n- *Output layer*: 1 neuron outputs a probability (0-100%) predicting placement success\n\n**How It Learns**: \nThe network processes all 500 historical cases repeatedly, comparing its predicted outcomes to actual documented outcomes. When predictions are wrong, it adjusts weights in hidden layers\u2014slightly increasing weight on features that successful placements shared, decreasing weight on features that didn't matter. After 50 iterations through all cases, the network has learned statistical patterns about what predicts placement stability.\n\n**Real-World Use**:\nA case manager assesses a 9-year-old with attachment trauma for a new family. She inputs the child's and family's characteristics into the system. The network outputs \"74% success probability.\" The case manager combines this prediction with her clinical judgment: \"The family has strong training and stability, but they've never worked with trauma. I'll recommend a specialized preparation workshop and monthly coaching before and after placement.\" The AI informs but never replaces human expertise and relationship-building.\n\n**The Lesson**: Over time, tracking whether predictions matched reality, the agency continuously improves the model. If the model systematically over-predicts success for certain child demographics, the team audits for potential bias and retrains carefully. Responsible deployment means ongoing human oversight and willingness to question AI recommendations.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundations Path Complete",
+      "content": "You've learned how neural networks work\u2014as systems that learn patterns from historical data and make predictions by recognizing those patterns. You understand the building blocks (neurons, layers, weights) and the learning process (adjusting weights based on examples). This foundation unlocks understanding of real social work applications: predicting client outcomes, identifying at-risk populations, matching clients to services, and supporting case manager decision-making. Key insight: neural networks are powerful pattern-recognition tools, but they require human oversight and professional judgment. Next steps: explore how your organization might use predictive analytics responsibly, discuss AI adoption with colleagues, and keep learning as AI evolves. The field needs thoughtful practitioners. Congratulations on completing the foundations!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Passed foundation check"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Needs foundational review"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Passed deep learning check"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Review deep learning concepts"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Expert path complete"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Practice complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Foundations continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Foundations complete"
+    }
+  ],
+  "generated_at": "2026-03-27T14:06:11.955813+00:00",
+  "model": "claude-haiku-4-5"
+}

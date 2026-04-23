@@ -1,0 +1,647 @@
+{
+  "id": "fp-environmental-mastery",
+  "title": "Functional Programming Concepts",
+  "description": "Master functional programming through environmental science applications",
+  "topic": "Functional Programming",
+  "theme": "environmental science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "functional-programming",
+    "environmental-science",
+    "programming",
+    "mastery-ladder"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Functional Programming",
+      "content": "Functional Programming (FP) is a paradigm where computation is treated as the evaluation of mathematical functions. Imagine an environmental monitoring system: instead of changing the state of temperature readings, FP treats each measurement as immutable data flowing through pure transformations. This approach values predictability and makes programs easier to reason about\u2014critical when analyzing climate data where data integrity is essential. FP emphasizes first-class functions (functions as data), immutability (data never changes, new data is created), and pure functions (same input always produces same output).",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Functional Programming Fundamentals",
+      "content": "Test your understanding of core FP concepts and why they matter in data-intensive environmental applications.",
+      "questions": [
+        {
+          "question": "An environmental sensor logs CO2 levels. Which represents a pure function approach?",
+          "options": [
+            "A function that reads the current CO2 value, modifies a global variable, then prints the result",
+            "A function that takes a CO2 reading and returns a new standardized reading without side effects",
+            "A function that updates the database directly when called",
+            "A function that remembers previous readings to calculate trends"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This has side effects (modifying global state) and isn't pure.",
+            "Correct! Pure functions produce output from input only, with no side effects.",
+            "Direct database modification is a side effect.",
+            "Relying on external state violates function purity."
+          ],
+          "explanation": "Pure functions in environmental monitoring ensure consistent, reproducible analysis. Same CO2 measurement always produces same standardized value."
+        },
+        {
+          "question": "Why is immutability important in climate data analysis?",
+          "options": [
+            "It prevents accidental modification of historical records and ensures data audit trails",
+            "It makes programs run faster",
+            "It reduces the number of variables needed",
+            "It makes functions simpler to write"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Immutability prevents data corruption and maintains integrity of climate records.",
+            "Immutability can actually add overhead; the benefit is correctness.",
+            "It may increase variables (creating new data) but gains are in safety.",
+            "Functions may be more complex but more predictable."
+          ],
+          "explanation": "Historical climate data is irreplaceable. Immutability ensures no record is accidentally overwritten, maintaining scientific integrity."
+        },
+        {
+          "question": "In FP, what is a first-class function?",
+          "options": [
+            "A function defined at the top level of a program",
+            "A function that can be passed as argument, returned from functions, or stored in variables",
+            "A function with high priority in execution",
+            "A function used in environmental applications"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Location doesn't determine first-class status.",
+            "Correct! First-class functions can be treated like any other data.",
+            "Priority isn't defined by being first-class.",
+            "Domain doesn't matter for this property."
+          ],
+          "explanation": "First-class functions enable higher-order functions that are central to FP\u2014like map, filter, reduce for processing sensor data collections."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n3p"
+    },
+    {
+      "id": "n3p",
+      "type": "practice",
+      "title": "Pure Functions & Immutability Practice",
+      "content": "Reinforce your understanding of pure functions and immutability through environmental examples.",
+      "questions": [
+        {
+          "question": "A water quality monitoring system needs to process pH readings. Which operation follows functional principles?",
+          "options": [
+            "Read pH, modify global 'current_pH' variable, return old value",
+            "Take pH array, return new array with pH values adjusted to standard scale, don't modify original",
+            "Update database record in place with new pH reading",
+            "Calculate running average by maintaining internal counter state"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This mutates global state.",
+            "Correct! Creates new data, preserves original, no side effects.",
+            "This mutates external state.",
+            "This relies on internal state."
+          ],
+          "explanation": "FP principle: never change input data. Create new output."
+        },
+        {
+          "question": "Why can't a pure function call an impure function like a random number generator?",
+          "options": [
+            "Because random numbers are unscientific",
+            "Because same input would produce different outputs, violating function purity",
+            "Because random functions are inefficient",
+            "Because environmental data doesn't use randomness"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Randomness is useful in environmental modeling.",
+            "Correct! Randomness breaks determinism\u2014same CO2 input could yield different outputs.",
+            "Efficiency isn't the issue.",
+            "Environmental modeling uses randomness for uncertainty."
+          ],
+          "explanation": "In climate modeling, deterministic functions are essential for reproducible results. You want consistent outputs from consistent inputs."
+        },
+        {
+          "question": "A function processes historical temperature data. It should:",
+          "options": [
+            "Return a new array and leave original untouched",
+            "Modify the original array in-place for efficiency",
+            "Update a shared database of temperatures",
+            "Log all changes to a temporary file"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Immutability protects original data and supports composition.",
+            "'Efficiency' of mutating causes bugs and makes functions unpredictable.",
+            "External state modification causes unpredictability.",
+            "Logging is good, but mutating original data isn't."
+          ],
+          "explanation": "Returning new data (immutability) allows the same original data to be used by multiple functions safely\u2014critical for scientific reproducibility."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n3p"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Pure Functions & Immutability",
+      "content": "Pure functions form the foundation of FP: they always return the same output for the same input and have zero side effects. Consider an environmental sensor that measures carbon sequestration in forests. A pure function receives a forest inventory and returns a sequestration estimate\u2014always the same estimate for the same forest data, without modifying the original inventory or logging to files. Immutability means we never change data; instead, we create new data through transformations. When processing climate records, immutability ensures historical data remains pristine while analysis creates new, derived datasets. This practice prevents bugs where one part of an environmental system corrupts data another part depends on. Together, pure functions and immutability make environmental data pipelines predictable and auditable\u2014essential for scientific credibility.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "assessment",
+      "title": "Pure Functions & Immutability Assessment",
+      "content": "Demonstrate your mastery of pure functions and immutability concepts.",
+      "questions": [
+        {
+          "question": "An environmental data processing function takes a list of soil moisture readings and returns a new list with readings standardized to a 0-100 scale. The original readings are untouched. Is this pure and immutable?",
+          "options": [
+            "Pure and immutable\u2014no side effects, creates new data",
+            "Pure but not immutable\u2014functions are pure only if they modify input",
+            "Immutable but not pure\u2014it creates new data but has side effects",
+            "Neither\u2014standardizing readings modifies the meaning of data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This exhibits both purity (no side effects) and immutability (original data unchanged).",
+            "Purity is independent of immutability; pure functions don't need to modify input.",
+            "Creating new data doesn't indicate impurity.",
+            "Standardizing preserves meaning while changing scale."
+          ],
+          "explanation": "This is an ideal FP pattern: take data in, transform it, return new data. Original preserved for auditing."
+        },
+        {
+          "question": "A function processes ocean salinity samples. It receives an array, checks each reading, and inserts corrected values back into the original array. Why is this problematic?",
+          "options": [
+            "Modifying the original array breaks immutability and makes the function unpredictable",
+            "Salinity corrections are too complex for FP",
+            "Arrays can't be used in functional programming",
+            "It's not a problem\u2014FP requires modifying input data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Mutating the original array violates immutability and creates hidden dependencies.",
+            "Functional style actually excels at complex transformations.",
+            "Arrays are fine in FP; the issue is how you use them.",
+            "FP avoids in-place modification."
+          ],
+          "explanation": "If original data is modified, other parts of your system using that data may behave unexpectedly. Create a new corrected array instead."
+        },
+        {
+          "question": "A carbon footprint calculator function receives company energy use data and must: 1) Log the calculation to a file 2) Email a report 3) Return the calculated footprint. Which part violates purity?",
+          "options": [
+            "Only step 1 (logging)",
+            "Only step 2 (emailing)",
+            "Steps 1 and 2 are side effects; step 3 is the pure function's output",
+            "None\u2014all steps are necessary for a complete system"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Logging is a side effect, but emailing is too.",
+            "Emailing is a side effect, but logging is too.",
+            "Correct! Side effects (1 & 2) should be separated from pure calculation (3).",
+            "FP doesn't reject side effects; it isolates them from pure logic."
+          ],
+          "explanation": "In FP, separate pure logic from side effects. The pure function calculates footprint; a separate impure layer handles logging and emailing."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n4p"
+    },
+    {
+      "id": "n4p",
+      "type": "practice",
+      "title": "Pure Functions & Immutability Practice",
+      "content": "Apply pure and immutable patterns to environmental scenarios.",
+      "questions": [
+        {
+          "question": "You're writing a function to filter a list of bird migration events by month. In FP style, you should:",
+          "options": [
+            "Modify the original list, removing events not in the target month",
+            "Return a new list containing only events from the target month; leave original unchanged",
+            "Use a global counter to track which events pass the filter",
+            "Modify each event object to mark it as included or excluded"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Modifying original data breaks immutability.",
+            "Correct! FP creates new filtered list from original.",
+            "Global state breaks purity.",
+            "Modifying event objects breaks immutability."
+          ],
+          "explanation": "Immutable style: original data flows unchanged through transformations. Each function creates new output."
+        },
+        {
+          "question": "A weather station function receives temperature readings. Which is a pure transformation?",
+          "options": [
+            "Convert Celsius readings to Fahrenheit and return a new array",
+            "Receive readings, update the system database, and return a success code",
+            "Analyze readings and write results to a file",
+            "Calculate average and send an alert email if above threshold"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Pure transformation: input \u2192 output, no side effects.",
+            "Updating external database is a side effect.",
+            "Writing to file is a side effect.",
+            "Email sending is a side effect."
+          ],
+          "explanation": "Pure transformation: same input, same output, no changes to external world."
+        },
+        {
+          "question": "In a pollutant tracking system, instead of a function that modifies a reading object, you write one that returns a new object with corrections applied. Why is this better?",
+          "options": [
+            "Because it's more efficient",
+            "Because it makes the original data available for audit trails and prevents unexpected mutations elsewhere in the program",
+            "Because corrected data is always more accurate",
+            "Because environmental regulations require immutable data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Immutability can add memory overhead but gains are in safety.",
+            "Correct! Preserving original enables auditing and prevents hidden bugs.",
+            "Accuracy is independent of immutability.",
+            "While good practice, FP principles aren't regulatory."
+          ],
+          "explanation": "Original data preserved = traceability. If something goes wrong, you can see what corrected it. If other functions use the data, they get original, not accidentally modified version."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n4p"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Higher-Order Functions: Map, Filter, and Reduce",
+      "content": "Higher-order functions take functions as arguments or return functions as output. In environmental science, these are incredibly powerful. Map transforms every element: apply a function to each temperature reading to convert Celsius to Fahrenheit, or each CO2 measurement to add calibration offset. Filter selects elements: keep only pollution readings above regulatory thresholds, or only precipitation events from years with drought. Reduce combines elements into a single value: sum total carbon emissions, calculate average water quality across sites, or find the maximum temperature ever recorded. Together, map-filter-reduce handle 80% of data transformation needs in environmental analysis. They express intent clearly\u2014'map over sensors', 'filter for dangerous levels', 'reduce to total impact'\u2014making environmental data pipelines readable and maintainable.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Higher-Order Functions Assessment",
+      "content": "Test your understanding of map, filter, and reduce in environmental contexts.",
+      "questions": [
+        {
+          "question": "You have an array of daily solar irradiance readings (in W/m\u00b2). You want a new array with each reading converted to daily energy (multiply by 86400 seconds/day). Which operation is appropriate?",
+          "options": [
+            "Filter\u2014select only high-value readings",
+            "Map\u2014apply the conversion function to each element",
+            "Reduce\u2014sum all the converted values",
+            "Compose\u2014combine multiple functions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Filter selects; this transformation requires changing each element.",
+            "Correct! Map applies the conversion to every reading.",
+            "Reduce combines; here you want a transformed array.",
+            "Composition combines functions; map is the tool here."
+          ],
+          "explanation": "Map: same number of output elements as input, each transformed by the function."
+        },
+        {
+          "question": "An array contains 1000 air quality readings. You need only readings where PM2.5 exceeds 35 \u00b5g/m\u00b3 (unhealthy threshold). The best approach is:",
+          "options": [
+            "Reduce all readings to find those exceeding threshold",
+            "Map a threshold-checking function over all readings",
+            "Filter using a function that returns true if reading > 35",
+            "Compose multiple functions to detect thresholds"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Reduce combines values; you need selection, not combination.",
+            "Map transforms; you need to select a subset, not transform each.",
+            "Correct! Filter keeps only elements where the condition is true.",
+            "Composition would be overkill here."
+          ],
+          "explanation": "Filter: returns a new array with only elements matching the condition."
+        },
+        {
+          "question": "A dataset has 365 daily rainfall measurements. You need the total annual precipitation (sum). The appropriate operation is:",
+          "options": [
+            "Map to transform each reading",
+            "Filter to select valid readings",
+            "Reduce to combine all readings into a single total",
+            "First filter for valid data, then reduce to sum"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Map transforms individual elements; doesn't combine.",
+            "Filter selects elements; doesn't combine them.",
+            "Reduce works, but combining with filter first is safer.",
+            "Correct! Filter ensures you sum only valid readings, then reduce to total."
+          ],
+          "explanation": "For robust environmental data analysis: first filter out invalid/missing readings (quality control), then reduce to aggregate. This avoids summing errors."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6p"
+    },
+    {
+      "id": "n6p",
+      "type": "practice",
+      "title": "Higher-Order Functions Practice",
+      "content": "Practice using map, filter, and reduce on environmental datasets.",
+      "questions": [
+        {
+          "question": "Biodiversity survey: array of species counts per hectare. To find hectares with >50 species, use:",
+          "options": [
+            "Map with a counting function",
+            "Filter with condition count > 50",
+            "Reduce to find maximum",
+            "Compose map and filter"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Map doesn't filter.",
+            "Correct! Filter selects hectares with >50 species.",
+            "Reduce doesn't filter.",
+            "Composition is overkill here."
+          ],
+          "explanation": "Filter selects the subset you care about."
+        },
+        {
+          "question": "Forest inventory: array of tree diameters. To get crown area for each tree (area = \u03c0 \u00d7 radius\u00b2), use:",
+          "options": [
+            "Map to calculate area for each tree",
+            "Filter for large trees",
+            "Reduce to sum all areas",
+            "Both map and reduce"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Map transforms each diameter to its crown area.",
+            "Filter selects; you need transformation.",
+            "Reduce combines; you want transformed array.",
+            "This needs only map here (reduce later if you sum)."
+          ],
+          "explanation": "Map applies the calculation to every element."
+        },
+        {
+          "question": "Ocean dataset: array of salinity readings from multiple depths. To find average salinity, best approach is:",
+          "options": [
+            "Map depth to salinity",
+            "Filter for salinity > threshold",
+            "Reduce by summing all values and dividing by count",
+            "Map to validate, filter for quality, then reduce for average"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "This maps wrong direction.",
+            "Filter for thresholds, but doesn't average.",
+            "Works, but skips quality checking.",
+            "Correct! Validate (map), quality control (filter), then aggregate (reduce)."
+          ],
+          "explanation": "Professional approach: validate data, filter for quality, then compute statistics."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n6p"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Function Composition",
+      "content": "Function composition combines small, focused functions into larger operations. Instead of writing one complex function to filter pollutant readings and convert them to ppm, you write separate pure functions (filter + convert) and compose them. In environmental monitoring, you might compose: validate \u2192 standardize \u2192 filter \u2192 aggregate. Each function handles one responsibility: validation checks data quality, standardization handles unit conversions, filtering removes noise, aggregation computes statistics. Composition makes your code modular and testable\u2014you can test each function independently, then verify the pipeline works together. Real-world example: climate data from multiple weather stations arrives in different formats. A composed pipeline validates each reading, converts to standard units, filters out sensor errors, groups by region, then reduces to regional averages. This composable structure lets you reuse validation in other pipelines, swap standardization for different sensors, or change filtering thresholds\u2014all without rewriting the entire system.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Function Composition & Integration",
+      "content": "Demonstrate mastery of function composition and integration of all FP concepts.",
+      "questions": [
+        {
+          "question": "You have three pure functions: validate(reading)\u2192boolean, convertToStandard(reading)\u2192standardReading, and filterOutliers(readings)\u2192filteredArray. To process raw sensor data, the best composition order is:",
+          "options": [
+            "filter \u2192 validate \u2192 convert (filter first to reduce data)",
+            "validate \u2192 convert \u2192 filter (validate raw data, then transform, then filter)",
+            "convert \u2192 validate \u2192 filter (transformation before validation)",
+            "filter \u2192 convert \u2192 validate (filter, then transform, then check)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Filtering unvalidated data may remove good readings by mistake.",
+            "Correct! Validate raw data first, standardize it, then filter outliers in standardized units.",
+            "Validating before conversion loses context of raw values.",
+            "Validating at the end doesn't prevent bad data earlier."
+          ],
+          "explanation": "Data pipeline logic: quality gates first (validate), then transformation (convert), then refinement (filter)."
+        },
+        {
+          "question": "A forest carbon assessment system has: measureDBH(tree)\u2192diameter, calculateBiomass(diameter)\u2192biomass, and sumBiomass(biomassArray)\u2192total. For 10,000 trees, the correct composition is:",
+          "options": [
+            "measureDBH(all) \u2192 calculateBiomass(all) \u2192 sumBiomass",
+            "sumBiomass \u2192 calculateBiomass \u2192 measureDBH",
+            "calculateBiomass(measureDBH(all)) then sumBiomass",
+            "Measure one tree, calculate its biomass, sum\u2014repeat for all"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Measure all diameters, convert to biomass for all, then sum.",
+            "This order is backwards.",
+            "This works but doesn't show the pipeline structure clearly.",
+            "This is inefficient; compose operations on arrays first."
+          ],
+          "explanation": "Composable pipeline: measure \u2192 map to biomass \u2192 reduce to sum. Process all data at each stage before moving to the next."
+        },
+        {
+          "question": "An air quality system composes filter(readings, thresholdFn) and map(readings, convertToAQI). If filter returns readings where pollutant < threshold, and you want to convert only safe readings to AQI, the composition should be:",
+          "options": [
+            "map(all) then filter(result)",
+            "filter(all) then map(result)",
+            "Alternate map and filter reading by reading",
+            "Both approaches work identically"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Converting all first, then filtering, wastes effort on unsafe readings.",
+            "Correct! Filter first to get only safe readings, then convert those.",
+            "This would be inefficient.",
+            "Order matters when using map and filter together."
+          ],
+          "explanation": "Composition order affects efficiency: filter unsafe data out first, then spend computation on remaining safe readings."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n8p"
+    },
+    {
+      "id": "n8p",
+      "type": "practice",
+      "title": "Function Composition Practice",
+      "content": "Practice composing functions for complex environmental data pipelines.",
+      "questions": [
+        {
+          "question": "Sensor network: functions exist for readTemperature(), convertCelsiusToKelvin(), validateRange(). To ensure only valid temperature data is converted, compose as:",
+          "options": [
+            "convertCelsiusToKelvin(readTemperature(), validateRange())",
+            "validateRange(readTemperature()) then convertCelsiusToKelvin(valid)",
+            "readTemperature() \u2192 validate \u2192 convert",
+            "Options B and C are equivalent"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "This syntax doesn't express the pipeline.",
+            "Correct approach: read raw, validate it, then convert.",
+            "Correct approach: same as B.",
+            "Correct! Both B and C express the same pipeline clearly."
+          ],
+          "explanation": "Pipelines flow through functions: read source \u2192 validate \u2192 transform."
+        },
+        {
+          "question": "Biodiversity dataset: functions filterByHabitat(species), mapToConservationStatus(species), reduceToRiskSummary(species). The correct composition for threatened species assessment is:",
+          "options": [
+            "filter(all) \u2192 map(filtered) \u2192 reduce(mapped)",
+            "map(all) \u2192 filter(mapped) \u2192 reduce(filtered)",
+            "reduce(all) first to find trends, then filter and map",
+            "Any order works; composition is order-independent"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Select species by habitat, assess each, summarize risk.",
+            "Mapping before filtering would process unnecessary species.",
+            "Reducing first loses the structure needed for filtering/mapping.",
+            "Order matters significantly in composition."
+          ],
+          "explanation": "Pipeline logic: narrow down (filter) \u2192 analyze (map) \u2192 aggregate (reduce)."
+        },
+        {
+          "question": "Runoff quality monitoring: validateReading() ensures data integrity, standardizeUnits() converts to common units, filterForContaminants() identifies pollutants, categorizeRisk() labels each as low/medium/high. Correct composition order:",
+          "options": [
+            "validate \u2192 categorize \u2192 standardize \u2192 filter",
+            "validate \u2192 standardize \u2192 filter \u2192 categorize",
+            "filter \u2192 validate \u2192 standardize \u2192 categorize",
+            "standardize \u2192 validate \u2192 filter \u2192 categorize"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Categorizing before filtering skips contaminant focus.",
+            "Correct! Validate raw data, standardize units, filter for problems, categorize risk.",
+            "Filtering unvalidated data is risky.",
+            "Can't reliably validate pre-standardization."
+          ],
+          "explanation": "Quality gates \u2192 standardization \u2192 content filtering \u2192 analysis. This order ensures data integrity before decisions."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8p"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Functional Programming Mastery Complete",
+      "content": "Congratulations! You've mastered functional programming concepts through environmental science applications. You understand pure functions and immutability for data integrity, higher-order functions (map, filter, reduce) for data transformation, and function composition for building reliable pipelines. These principles scale from single sensor readings to processing terabytes of climate data. You can now write environmental data systems that are predictable, testable, and maintainable\u2014essential for scientific credibility. Apply these patterns in your projects: compose pure functions, avoid side effects in core logic, treat data as immutable, and use map/filter/reduce for transformation. Your next step is implementing these concepts in a real environmental dataset. Good luck!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "start assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3p",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3p",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "next content"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": "pass"
+    },
+    {
+      "id": "c7",
+      "source": "n4",
+      "target": "n4p",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n4p",
+      "target": "n4",
+      "label": "retry"
+    },
+    {
+      "id": "c9",
+      "source": "n5",
+      "target": "n6",
+      "label": "next content"
+    },
+    {
+      "id": "c10",
+      "source": "n6",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c11",
+      "source": "n6",
+      "target": "n6p",
+      "label": "fail"
+    },
+    {
+      "id": "c12",
+      "source": "n6p",
+      "target": "n6",
+      "label": "retry"
+    },
+    {
+      "id": "c13",
+      "source": "n7",
+      "target": "n8",
+      "label": "next content"
+    },
+    {
+      "id": "c14",
+      "source": "n8",
+      "target": "n9",
+      "label": "pass"
+    },
+    {
+      "id": "c15",
+      "source": "n8",
+      "target": "n8p",
+      "label": "fail"
+    },
+    {
+      "id": "c16",
+      "source": "n8p",
+      "target": "n8",
+      "label": "retry"
+    }
+  ],
+  "generated_at": "2026-03-27T12:40:54.879072+00:00",
+  "model": "claude-haiku-4-5"
+}

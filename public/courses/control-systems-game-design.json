@@ -1,0 +1,296 @@
+{
+  "id": "control-systems-game-design",
+  "title": "Control Systems in Game Design",
+  "description": "Master control systems through the lens of game design, from basic feedback loops to advanced PID controllers using the Assessment Pyramid approach",
+  "topic": "Control Systems",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "control-systems",
+    "game-design",
+    "feedback-loops",
+    "pid-control",
+    "game-development",
+    "adaptive-systems"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Game Feedback Foundations",
+      "content": "In this assessment, you'll test your understanding of how games use feedback to control player experience. We'll focus on basic feedback loop concepts that underpin everything from difficulty scaling to camera systems.",
+      "questions": [
+        {
+          "question": "In a game, what is a feedback loop?",
+          "options": [
+            "A cycle where the game detects player action, evaluates it, and adjusts the game state in response",
+            "The audio output from the speaker",
+            "A network connection between players",
+            "The visual effects displayed on screen"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is the foundation of all game control systems.",
+            "Incorrect. While audio is feedback, that's not what a control feedback loop is.",
+            "Incorrect. Feedback loops are internal control mechanisms, not network features.",
+            "Incorrect. Effects are output, but the loop includes sensing, evaluation, and response."
+          ],
+          "explanation": "A feedback loop in control systems is a circular process: the system measures output, compares it to desired state, and adjusts input accordingly. In games, this might be the difficulty system reading player death rate and adjusting enemy health."
+        },
+        {
+          "question": "A game adjusts NPC behavior based on how often the player uses a particular weapon. What control principle is this?",
+          "options": [
+            "Feedforward control",
+            "Feedback control",
+            "Open-loop control",
+            "Cascade control"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Feedforward tries to predict and prevent errors.",
+            "Correct! The system measures outcome (weapon usage) and adjusts response (NPC behavior).",
+            "Incorrect. Open-loop means no adjustment based on actual results.",
+            "Incorrect. Cascade control is multiple feedback loops together."
+          ],
+          "explanation": "Feedback control means the system measures the actual output and compares it to the desired state, then adjusts. This makes games responsive and adaptive to player behavior."
+        },
+        {
+          "question": "What happens in a game with an unstable feedback loop?",
+          "options": [
+            "The game difficulty stays constant",
+            "The game difficulty oscillates wildly, becoming unplayable",
+            "Players stop using feedback systems",
+            "The game becomes too easy"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Unstable loops don't maintain constant state.",
+            "Correct! Unstable feedback causes overcompensation and wild swings.",
+            "Incorrect. Instability is a control problem, not a player choice issue.",
+            "Incorrect. Unstable loops can make games too hard, too easy, or both unpredictably."
+          ],
+          "explanation": "In unstable control systems, small errors get amplified. Imagine a game that increases difficulty when you die, but increases it so much you die again, creating a doom spiral. That's instability."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "PID Control in Game Systems",
+      "content": "You've mastered feedback basics! Now we'll test your understanding of proportional-integral-derivative (PID) control, the backbone of responsive game mechanics. PID is used in camera controls, difficulty scaling, and aiming systems.",
+      "questions": [
+        {
+          "question": "In a camera system using PID control, the 'P' (Proportional) component makes the camera move proportional to how far the player is from center. What does this achieve?",
+          "options": [
+            "Instant, jerky camera movement",
+            "Camera movement proportional to error\u2014the further off-center, the faster the correction",
+            "Elimination of all camera lag",
+            "Prevention of the player moving off-camera"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. P creates responsive force, not jerkiness.",
+            "Correct! Proportional control creates responsive and smooth camera tracking.",
+            "Incorrect. No single component eliminates lag; it requires tuning.",
+            "Incorrect. P allows off-center movement; it just corrects it."
+          ],
+          "explanation": "The Proportional component creates a restoring force proportional to the error. If the player is 100 pixels off-center, the camera moves faster to correct it than if they're 10 pixels off. This creates natural, responsive movement."
+        },
+        {
+          "question": "A game's difficulty system uses PID control. What does the 'I' (Integral) component do?",
+          "options": [
+            "Accumulates past errors to correct persistent biases",
+            "Calculates the rate of change of errors",
+            "Resets the difficulty to default values",
+            "Increases difficulty linearly over time"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Integral accumulates historical error, eliminating steady-state offset.",
+            "Incorrect. That's the derivative (D) component.",
+            "Incorrect. Integral doesn't reset; it accumulates.",
+            "Incorrect. While integral can contribute to gradual increases, that's not its primary function."
+          ],
+          "explanation": "If a game's difficulty system consistently leaves players too comfortable, the Integral component accumulates this persistent error and pushes for larger corrections. This eliminates steady-state error."
+        },
+        {
+          "question": "A game uses D (Derivative) control in its weapon recoil system. What does this prevent?",
+          "options": [
+            "Overshoot\u2014the recoil doesn't kick back further than intended",
+            "The player from moving forward",
+            "Weapons from dealing damage",
+            "Animation playback"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Derivative adds damping, preventing overshoot and oscillation.",
+            "Incorrect. Derivative doesn't affect player movement.",
+            "Incorrect. Derivative is about motion control, not damage.",
+            "Incorrect. Derivative affects physics, not animation systems."
+          ],
+          "explanation": "Derivative control senses the rate of change and adds opposing force. In recoil, it prevents the gun from kicking back too far and then whipping forward. It's the damping that makes movement feel natural."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Control Systems: State Machines and Cascades",
+      "content": "Master-level control systems in games combine multiple feedback loops in hierarchies. State machines define discrete game states (menu, playing, pause), while cascaded PID controllers allow independent tuning of nested systems. Consider a complex action game: the main difficulty controller adjusts enemy AI aggression, which then has its own PID loop for aiming accuracy. Cascading prevents instability from accumulating up the chain. Advanced systems also use adaptive control\u2014the gains (P, I, D coefficients) change based on game state. A racing game might use aggressive proportional gain in tight corners but gentler gain on straightaways for smooth driving feel. Modern engines like Unreal employ sophisticated control systems for animation blending, physics-based character movement, and procedural animation that responds to environmental feedback. Understanding these principles enables you to design systems that feel responsive, fair, and deeply engaging.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Mastery Achieved",
+      "content": "You've reached expert-level understanding of control systems in game design. You can now design sophisticated feedback-driven systems, debug stability issues, and create responsive game mechanics that feel polished and professional."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Mastering PID Control in Games",
+      "content": "Let's solidify your understanding of PID control with practical scenarios from real game development.",
+      "questions": [
+        {
+          "question": "You're tuning a camera system and it lags slightly behind the player. Which PID adjustment reduces lag?",
+          "options": [
+            "Increase Proportional (P) gain",
+            "Increase Integral (I) gain",
+            "Increase Derivative (D) gain",
+            "Decrease all gains equally"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Higher P gain makes the camera more responsive to distance error.",
+            "Incorrect. I addresses steady-state lag, but P is more direct for responsiveness.",
+            "Incorrect. D adds damping; too much D increases lag.",
+            "Incorrect. That would make the system slower."
+          ],
+          "explanation": "Increasing P gain directly increases the camera's responsiveness to being off-center. This is the first adjustment to make for lag reduction in most games."
+        },
+        {
+          "question": "Your difficulty system causes the game to swing between too hard and too easy. What's likely happening?",
+          "options": [
+            "The I (Integral) gain is too high, causing overcorrection",
+            "The P (Proportional) gain is too low",
+            "The system is missing feedback entirely",
+            "Players are improving inconsistently"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! High integral gain causes the system to overcorrect accumulated errors, leading to oscillation.",
+            "Incorrect. Low P causes sluggish response, not oscillation.",
+            "Incorrect. Wild swings indicate too much feedback, not too little.",
+            "Incorrect. Player improvement is gradual, not oscillatory."
+          ],
+          "explanation": "Oscillation (swinging between extremes) is a classic sign of too much integral gain. The integral accumulates error and pushes too hard in one direction, overshooting past the target."
+        },
+        {
+          "question": "You're designing a steering assist for a racing game using PID. The car overshoots turns, drifting wide. What do you adjust?",
+          "options": [
+            "Increase D (Derivative) gain to add damping",
+            "Increase P (Proportional) gain",
+            "Disable feedback entirely",
+            "Add more turning speed"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Derivative adds damping, preventing the overshoot.",
+            "Incorrect. Higher P would make the overshoot worse.",
+            "Incorrect. Disabling feedback removes the assist entirely.",
+            "Incorrect. That's a separate physics parameter."
+          ],
+          "explanation": "Overshoot is prevented by derivative control, which adds a restoring force proportional to velocity. Higher D gain means smoother, less overshooting turns."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Mastery Complete",
+      "content": "You've solidified your understanding of PID control systems in game design. You can now diagnose control problems and make informed tuning decisions to create responsive, stable game mechanics."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Understanding Feedback Loops in Games",
+      "content": "Let's return to the fundamentals. A feedback loop is the core concept in all game control systems. In every responsive game, information flows in a cycle: the game reads input or state, compares actual output to desired output, and adjusts control signals. The simplest example is adaptive difficulty scaling. A game measures how often the player dies (output), compares it to a desired death rate like 15% (target), and if actual is higher, it reduces enemy health or increases healing (adjustment). This is negative feedback\u2014it counteracts deviation from the target, maintaining stability. Positive feedback amplifies deviation, like in combo systems where more hits increase hit bonus faster, encouraging longer combos. Both are essential: negative feedback maintains balance, positive feedback creates momentum and engagement. Games also use open-loop control where events happen on predetermined timelines regardless of player performance, but the most engaging games blend both approaches seamlessly.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Game Difficulty Control",
+      "content": "Imagine a puzzle game that wants players to solve each puzzle in roughly 3 minutes. The game measures solve time and adjusts puzzle complexity. If players solve in 1 minute (error = 2 minutes too fast), the game increases the next puzzle's complexity by 20%. If they solve in 4 minutes (error = 1 minute too slow), it decreases complexity by 10%. This is proportional control\u2014the adjustment is proportional to the error. If a player consistently takes 5 minutes despite adjustments, the game doesn't improve; it has steady-state error. Adding integral control (summing all past delays) would eventually push difficulty high enough to fix the persistent bias. This feedback loop keeps the game perfectly balanced across different player skill levels, making every player's experience appropriately challenging.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundational Understanding Achieved",
+      "content": "You now understand the basics of feedback loops and control systems in game design. You have the foundation to explore more advanced topics or apply these principles to optimize your own game projects."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T06:09:28.761212+00:00",
+  "model": "claude-haiku-4-5"
+}

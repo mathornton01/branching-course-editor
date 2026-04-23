@@ -1,0 +1,228 @@
+{
+  "id": "d8f7c3e2-9a4b-4f1e-8d2c-3b5e9f7a2d4e",
+  "title": "Compiler Design for Space Exploration",
+  "description": "Learn compiler design principles through the lens of building languages and tools for spacecraft systems, from the Deep Space Network to autonomous rovers.",
+  "topic": "Compiler Design",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "compilers",
+    "programming languages",
+    "space systems",
+    "code optimization",
+    "spacecraft"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Compiler Fundamentals in Space Systems",
+      "content": "You're designing the first automated language compiler for the Deep Space Network. Let's assess your current understanding of compiler concepts before we dive deeper.",
+      "questions": [
+        {
+          "question": "When compiling spacecraft navigation commands, which compiler phase directly converts human-readable source code into a stream of tokens (like IDENTIFIER, KEYWORD, OPERATOR)?",
+          "options": [
+            "Code generation",
+            "Lexical analysis (tokenization)",
+            "Semantic analysis",
+            "Optimization pass"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Code generation comes much later in the pipeline.",
+            "Correct! Lexical analysis breaks source into tokens.",
+            "Incorrect. Semantic analysis checks meaning, not tokenization.",
+            "Incorrect. Optimization is one of the final phases."
+          ],
+          "explanation": "The lexer (lexical analyzer) is the first phase of compilation. It reads the source code and produces tokens. In space applications, the lexer might convert 'FIRE_THRUSTER(MAIN, 5s)' into tokens like IDENTIFIER(FIRE_THRUSTER), LPAREN, IDENTIFIER(MAIN), etc."
+        },
+        {
+          "question": "A Mars rover mission uploads a fuel-burn optimization algorithm to its onboard computer. Which compiler phase checks that operations are semantically valid (e.g., you can't add a velocity to a temperature)?",
+          "options": [
+            "Lexical analysis",
+            "Syntax analysis (parsing)",
+            "Semantic analysis",
+            "Intermediate code generation"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Lexical analysis only breaks code into tokens.",
+            "Incorrect. Parsing checks grammar structure, not meaning.",
+            "Correct! Semantic analysis validates type correctness and operations.",
+            "Incorrect. That phase generates intermediate representation."
+          ],
+          "explanation": "Semantic analysis enforces type safety and logical correctness. For a spacecraft compiler, this ensures you can't mistakenly multiply a duration by a position vector, which would cause mission-critical errors."
+        },
+        {
+          "question": "After parsing a satellite command script, you have an abstract syntax tree (AST). What's the next critical phase when optimizing code for a power-constrained orbital platform?",
+          "options": [
+            "Lexical analysis",
+            "Token validation",
+            "Optimization and code generation",
+            "Runtime execution"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. That's the first phase, already completed.",
+            "Incorrect. Token validation isn't a standard compiler phase.",
+            "Correct! After creating the AST, we optimize and generate efficient machine code.",
+            "Incorrect. Execution happens at runtime, not during compilation."
+          ],
+          "explanation": "Once the AST is built and semantic checks pass, the compiler performs optimization passes to reduce energy consumption, improve latency, and then generates machine code tailored to the spacecraft's processor architecture."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Compiler Optimization for Deep Space Missions",
+      "content": "Welcome to advanced compiler optimization. Space missions face extreme constraints: limited power budgets, microsecond-critical latency, and radiation-hardened hardware. The compiler must optimize aggressively. Key optimization passes include constant folding (pre-computing values at compile-time rather than runtime), dead code elimination (removing unreachable code that wastes resources), loop unrolling (reducing loop overhead for tight control loops), and register allocation (fitting variables into precious CPU registers to minimize memory access\u2014critical on power-constrained platforms). For the Mars Perseverance rover's autonomous navigation system, aggressive optimization can mean the difference between completing a mission and running out of power. Modern space compilers like those used by SpaceX and NASA employ advanced techniques like superblock optimization and software pipelining to maximize throughput while minimizing energy consumption.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced Example: Optimizing the Orion Spacecraft's Trajectory Calculation",
+      "content": "Imagine you're compiling the autonomous guidance system for NASA's Orion spacecraft. The original source code includes a loop that calculates the spacecraft's position relative to the Moon every 100 milliseconds. The unoptimized code computes `const EARTH_DISTANCE = 384400.0 km` inside a time-critical loop, even though the distance never changes. A smart compiler recognizes this as a constant expression and hoists it outside the loop (constant folding). Similarly, error-handling code for 'lunar eclipse' scenarios is unreachable during a lunar orbit insertion\u2014dead code elimination removes it entirely, saving 2KB of mission-critical flash memory and reducing latency by 50 microseconds. After these optimizations, register allocation assigns the most-accessed variables (like current fuel and trajectory velocity) to the processor's limited registers, avoiding expensive memory lookups. The final compiled code executes 3x faster and uses 40% less energy than the unoptimized version.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete: You're Ready for Production Space Compilers",
+      "content": "Excellent! You've mastered advanced compiler concepts and optimization techniques for space systems. You understand how professional space-grade compilers handle extreme constraints and performance demands. You're ready to work on real flight software, contribute to open-source space tools, or build domain-specific languages (DSLs) for spacecraft. Next steps: explore the LLVM compiler infrastructure (used in embedded systems and aerospace), study NASA's coding standards for flight software, or dive into compiler research papers on power-aware optimization."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Compiler Fundamentals: Building the First Spacecraft Language",
+      "content": "A compiler is a program that translates human-readable source code into machine code (or bytecode) that computers can execute. For space systems, compilers are critical\u2014a mistake in compilation can cost a $10 billion mission. A typical compiler has five main phases: (1) Lexical analysis: breaks source code into tokens (keywords, identifiers, operators); (2) Syntax analysis (parsing): organizes tokens into a tree structure (abstract syntax tree); (3) Semantic analysis: checks that operations make logical sense (type checking); (4) Intermediate code generation: produces an architecture-independent representation; (5) Code generation and optimization: produces final machine code optimized for the target processor. Think of it like translating a mission briefing: first you break it into words (lexing), then organize the words into sentences (parsing), then ensure the commands make sense (semantic analysis), then translate to the spacecraft's native language, and finally optimize it for the specific propulsion system. Space compilers must be extremely reliable\u2014NASA's compilers undergo rigorous testing to ensure they produce correct code for rovers, orbiters, and deep-space probes.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Basic Example: The Mars Rover Command Language",
+      "content": "Let's trace a simple command through the compilation pipeline. Imagine you're controlling a Mars rover with this instruction: `MOVE_FORWARD 10 METERS`. Phase 1 (Lexical Analysis): The lexer breaks this into tokens: [KEYWORD(MOVE_FORWARD), NUMBER(10), KEYWORD(METERS)]. Phase 2 (Parsing): The parser arranges these into a tree: a COMMAND node with OPERATION=MOVE_FORWARD and ARGUMENT=10. Phase 3 (Semantic Analysis): The compiler checks that MOVE_FORWARD is a valid rover command and 10 is a valid distance in meters. Phase 4 (Intermediate Code): The compiler produces an abstract representation (e.g., `rover.move(distance=10, unit=METERS)`). Phase 5 (Code Generation): Finally, the compiler produces the actual ARM assembly code that the rover's processor executes, perhaps encoding it as `MOV R0, #10; CALL rover_move;`. The rover receives and executes this compiled instruction, moving 10 meters across the Martian surface.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Reinforcing Compiler Fundamentals",
+      "content": "Let's reinforce your understanding of the five compiler phases with practical scenarios from space missions.",
+      "questions": [
+        {
+          "question": "A spacecraft's attitude control system (orientation system) receives a command: `SET_ROLL_ANGLE 45 DEGREES`. Which phase of compilation first breaks this command string into individual tokens like SET_ROLL_ANGLE, 45, and DEGREES?",
+          "options": [
+            "Semantic analysis",
+            "Parsing",
+            "Lexical analysis",
+            "Code generation"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Semantic analysis comes later.",
+            "Incorrect. Parsing is phase 2, after tokenization.",
+            "Correct! Lexical analysis (the lexer) tokenizes the input.",
+            "Incorrect. Code generation is the final phase."
+          ],
+          "explanation": "Lexical analysis is always the first phase. It converts a stream of characters into a stream of meaningful tokens. For a spacecraft language, the lexer recognizes keywords like SET_ROLL_ANGLE and extracts numeric literals like 45."
+        },
+        {
+          "question": "After a satellite compiler parses a power management script, it detects that one line tries to `ADD(VOLTAGE, CURRENT)` (adding voltage to current). Which phase rejects this as invalid?",
+          "options": [
+            "Lexical analysis",
+            "Syntax analysis",
+            "Semantic analysis",
+            "Code generation"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The lexer only recognizes tokens, not meaning.",
+            "Incorrect. The parser checks grammar, not type safety.",
+            "Correct! Semantic analysis enforces type rules and validity.",
+            "Incorrect. Code generation assumes all previous checks passed."
+          ],
+          "explanation": "Semantic analysis ensures that operations are meaningful. For space systems, this is critical\u2014it prevents the compiler from generating code that would cause physical errors on the spacecraft."
+        },
+        {
+          "question": "An orbital platform's compiler successfully completes lexical analysis, parsing, and semantic analysis for a thermal control script. What are the next two phases to produce executable code?",
+          "options": [
+            "Optimization, then testing",
+            "Intermediate code generation, then code generation",
+            "Execution, then deployment",
+            "Memory allocation, then runtime checking"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Testing isn't a compiler phase.",
+            "Correct! Intermediate representation (IR) and then machine code generation follow.",
+            "Incorrect. Execution and deployment happen after compilation.",
+            "Incorrect. Memory allocation is done by the runtime or OS."
+          ],
+          "explanation": "After syntax and semantic checks pass, the compiler generates an intermediate representation (IR) that's architecture-neutral, then translates that IR to machine code optimized for the target spacecraft processor (ARM, PowerPC, etc.)."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Fundamentals Complete: Ready to Build Your First Space Compiler",
+      "content": "Congratulations! You've mastered the fundamentals of compiler design through the lens of space exploration. You understand the five phases of compilation, from tokenization through code generation, and can trace an example from source code to executable instructions. You're ready to explore compiler tools like lex and yacc, learn about language design for specific domains (like spacecraft control languages), or study how real aerospace software is compiled and verified. Whether you're interested in working on NASA's future missions, contributing to open-source spacecraft simulators, or building domain-specific languages for robotics, this foundation prepares you for the journey ahead."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Passed diagnostic"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Needs foundation"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T15:50:45.430454+00:00",
+  "model": "claude-haiku-4-5"
+}

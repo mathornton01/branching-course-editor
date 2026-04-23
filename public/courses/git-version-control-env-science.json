@@ -1,0 +1,422 @@
+{
+  "id": "git-version-control-env-science",
+  "title": "Git and Version Control for Environmental Scientists",
+  "description": "Master Git fundamentals through environmental research case studies. Learn version control by tracking climate data, coordinating between field researchers, and managing collaborative conservation projects.",
+  "topic": "Git and Version Control",
+  "theme": "environmental science",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "git",
+    "version control",
+    "collaboration",
+    "environmental science",
+    "research"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Version Control Matters for Environmental Science",
+      "content": "Imagine you're tracking climate temperature data collected across multiple monitoring stations. As your team makes updates\u2014correcting measurement errors, adding new sensor readings, or analyzing seasonal trends\u2014how do you ensure everyone is working with the latest data? Version control systems like Git solve this exact problem by maintaining a complete history of all changes, allowing your environmental research team to collaborate seamlessly while preserving every iteration of your work. Git lets you track *who* changed *what*, *when*, and *why*, which is essential for scientific reproducibility and accountability in environmental monitoring projects."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Understanding Version Control Fundamentals",
+      "content": "Test your understanding of the core concepts we've introduced.",
+      "questions": [
+        {
+          "question": "Your research team at a climate monitoring station needs to track changes to a biodiversity survey dataset. Multiple researchers are updating species counts, habitat classifications, and location coordinates. What is the primary benefit of using version control for this project?",
+          "options": [
+            "It creates automatic backups of the dataset every time someone opens it",
+            "It maintains a complete history of changes, showing who modified what and when, enabling reproducibility and collaboration",
+            "It prevents researchers from editing the same file at different times",
+            "It automatically fixes errors in the data without human review"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While backups are useful, version control offers much more than just redundancy.",
+            "Correct! Version control enables scientific reproducibility by tracking all changes.",
+            "Version control actually enables multiple people to work on the same project; it doesn't restrict access.",
+            "Version control tracks changes but doesn't automatically fix data quality issues."
+          ],
+          "explanation": "Version control systems are fundamental to scientific work because they create an auditable trail of every change, supporting reproducibility\u2014a cornerstone of environmental science research."
+        },
+        {
+          "question": "A conservation team is debating whether to use Git for their project managing endangered species population data across 15 protected areas. One team member argues the data changes too slowly to need version control. What would you tell them?",
+          "options": [
+            "They're right\u2014version control is only useful for rapidly changing files",
+            "Version control is valuable regardless of change frequency because it provides accountability, history, and the ability to safely experiment without losing data",
+            "They should wait until the dataset is larger before implementing version control",
+            "Version control works only for code, not for scientific datasets"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Actually, slow-changing files are exactly where version control shines for accountability and safety.",
+            "Correct! Version control is crucial for any project where data integrity, accountability, and collaboration matter\u2014that's every environmental research project.",
+            "Size doesn't determine the need for version control; the need for accountability and safety does.",
+            "Modern version control systems handle data files just as effectively as code."
+          ],
+          "explanation": "Version control benefits all projects by enabling safe collaboration, preventing accidental overwrites, and maintaining complete audit trails\u2014essential for environmental research credibility."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Version Control Fundamentals Review",
+      "content": "Let's reinforce the key concepts with practical scenarios.",
+      "questions": [
+        {
+          "question": "A wetland restoration team has been manually emailing spreadsheets of quarterly water quality measurements between team members, leading to confusion about which version is current. What problem does version control solve here?",
+          "options": [
+            "It eliminates the need for spreadsheets entirely",
+            "It provides a single source of truth with a clear history of all changes and who made them",
+            "It makes spreadsheets smaller in file size",
+            "It requires all team members to use the same software"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While version control works well with various formats, this isn't its primary problem-solving benefit.",
+            "Exactly! Version control eliminates email confusion by maintaining a single authoritative version with complete change history.",
+            "File size reduction isn't version control's purpose.",
+            "Modern version control works with any file type and various tools can access the same repository."
+          ],
+          "explanation": "Version control's core power is eliminating version confusion through a centralized, auditable system of record."
+        },
+        {
+          "question": "In an environmental data project, why would scientists care about seeing the 'history' or 'blame' of who made changes to a dataset?",
+          "options": [
+            "To punish researchers who make mistakes",
+            "To track down errors, understand reasoning for changes, and maintain scientific accountability and reproducibility",
+            "To prevent people from making changes in the future",
+            "It's only useful for software developers, not scientists"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Version control history isn't about blame\u2014it's about understanding and accountability.",
+            "Perfect! Understanding the evolution of data\u2014including who changed what and when\u2014is fundamental to scientific rigor and reproducibility.",
+            "History enables safe collaboration; it doesn't restrict change.",
+            "Scientific projects benefit equally from version control; environmental data is especially critical to track carefully."
+          ],
+          "explanation": "Change history is a scientific necessity. When someone requests a data adjustment, you can see exactly what changed and revisit the decision if needed."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Commits and Branches in Environmental Projects",
+      "content": "Now that you understand version control's purpose, let's explore how Git organizes work. A **commit** is like a checkpoint in your environmental research\u2014you save changes with a descriptive message: 'Added 2024 spring migration data for Monarch butterflies' or 'Corrected soil pH calibration errors from February measurements.' Each commit is immutable and tied to your name and a timestamp. **Branches** let you create parallel workstreams: your team's field researchers might work on a 'field-data-collection' branch while lab analysts work on a 'data-analysis' branch, with a main branch representing the official, verified dataset. This allows independent work without interfering with others, which is critical in environmental science where researchers often work on different aspects simultaneously."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Mastering Commits and Branches",
+      "content": "Test your understanding of commits and branches in environmental workflows.",
+      "questions": [
+        {
+          "question": "A coral reef monitoring team is tracking water temperature, pH, and coral health metrics. They want researchers collecting field data and researchers analyzing satellite imagery to work simultaneously without overwriting each other's work. Which Git concept best solves this?",
+          "options": [
+            "Creating multiple commits with different messages",
+            "Using separate branches for different teams that can be combined later",
+            "Storing files in different folders on a shared drive",
+            "Having only one person make changes at a time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Commits track changes but don't isolate parallel work streams.",
+            "Correct! Branches allow teams to work independently on the same project, keeping work organized and mergeable.",
+            "Folder organization doesn't provide version control, history, or merge capabilities.",
+            "Parallel branches enable simultaneous collaboration, which is far more efficient."
+          ],
+          "explanation": "Branches are Git's solution for parallel development. They're essential when multiple team members work on different aspects of an environmental project simultaneously."
+        },
+        {
+          "question": "A renewable energy analyst writes a commit message: 'Updated calculations.' A colleague questions this, saying 'Updated calculations' tells them nothing about what changed. What's the environmental research problem this creates?",
+          "options": [
+            "Other team members won't be able to understand the revision history",
+            "The commit will be much slower to process",
+            "Git will reject vague commit messages and refuse to save changes",
+            "File sizes will increase significantly"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Exactly! Clear commit messages are essential for scientific reproducibility. Future researchers (including yourself) need to understand the evolution of datasets.",
+            "Commit message clarity doesn't affect processing speed.",
+            "Git accepts any commit message; there's no technical restriction, but best practices require clarity.",
+            "Commit message quality doesn't affect file size."
+          ],
+          "explanation": "In environmental research, clear change documentation is non-negotiable. A commit message like 'Revised wind speed calculations to account for sensor calibration drift recorded on March 15' is far more useful than vague language."
+        },
+        {
+          "question": "Your forest carbon sequestration team has a 'main' branch with verified, published data and a 'data-processing' branch where raw sensor readings are being cleaned and validated. Before the processed data becomes official, what needs to happen?",
+          "options": [
+            "The 'data-processing' branch should delete the 'main' branch",
+            "Data from 'data-processing' should be reviewed and then merged into 'main' through a defined process",
+            "They should copy-paste the data manually to avoid any technical issues",
+            "The 'data-processing' branch should be abandoned once work is complete"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Deleting the main branch would destroy your official record\u2014the opposite of what we want.",
+            "Perfect! Merging with review ensures quality control and maintains a clear chain of custody for scientific data.",
+            "Manual copying defeats the purpose of version control and introduces human error.",
+            "Keeping history of your work process is valuable for reproducibility and understanding decisions."
+          ],
+          "explanation": "In environmental science, data governance is critical. Using branches with careful review before merging maintains scientific integrity and creates an auditable chain of custody."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Commits and Branches Practice",
+      "content": "Let's strengthen your understanding of how commits and branches work in real environmental scenarios.",
+      "questions": [
+        {
+          "question": "An ocean acidification research team creates a branch called 'pH-experiment-v2' to test new measurement protocols on historical data without affecting the official dataset. This is an example of which Git concept's primary purpose?",
+          "options": [
+            "Committing changes",
+            "Writing clear branch names",
+            "Creating isolated workspaces for experimentation without risking the main dataset",
+            "Deleting old data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Commits are part of the workflow, but creating a separate branch is the key here.",
+            "While naming conventions are good practice, the purpose goes deeper.",
+            "Exactly! Branches enable safe experimentation\u2014you can try new analysis methods without touching the verified data.",
+            "Branches preserve history; they don't delete data."
+          ],
+          "explanation": "Branches solve a critical research problem: how to safely experiment with data and methods without risking your primary dataset."
+        },
+        {
+          "question": "A biodiversity monitoring project has discovered an error in species classification that was introduced in commit 'Added initial species dataset.' The team wants to review exactly what that commit contains before deciding how to fix it. What Git information would be most helpful?",
+          "options": [
+            "The commit message alone",
+            "The full commit details: timestamp, author, specific lines added/removed, and the change summary",
+            "The size of the file after the commit",
+            "Only the number of commits that have happened since"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While the message provides context, you need the detailed change information to understand what happened.",
+            "Perfect! Complete commit information helps you understand exactly what changed, who made the change, and when\u2014essential for investigation and reproducibility.",
+            "File size doesn't explain what data changed or why.",
+            "The number of subsequent commits doesn't help you understand the original error."
+          ],
+          "explanation": "In scientific work, you often need to audit changes. Git provides complete commit details to help you understand the history and make informed decisions about corrections."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Collaboration and Merging in Research Teams",
+      "content": "When multiple researchers work on different branches, their work eventually needs to come together\u2014this is where **merging** comes in. Imagine a climate research consortium with three distributed teams: one in Norway studying glacier retreat, one in Kenya studying drought patterns, and one in Australia studying coral bleaching. Each team maintains their own branch, making commits independently. Git's merge feature combines these branches, intelligently reconciling changes. Sometimes merges are automatic\u2014if teams changed different parts of the dataset, Git handles it seamlessly. Other times, **merge conflicts** occur when two teams edited the same section differently (e.g., both adjusted a shared calibration constant). When conflicts arise, the teams review the differences, discuss the reasoning, and manually resolve which version is correct. This collaborative review process is actually a feature: it forces teams to communicate about data quality decisions, strengthening scientific integrity. **Pull requests** formalize this review: before merging, a team says 'Here's what we changed and why,' allowing others to review, suggest improvements, and discuss before integrating the work."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Version Control Mastery: Collaboration and Merging",
+      "content": "Test your complete understanding of Git collaboration in environmental research contexts.",
+      "questions": [
+        {
+          "question": "Two researchers on a climate model project both modify the 'precipitation-model' branch on the same lines to incorporate new satellite data. When they try to merge their work, Git reports a conflict. What does this mean?",
+          "options": [
+            "One researcher's work is automatically rejected",
+            "Git cannot merge and the entire project is corrupted",
+            "Git needs human decision-making to determine which changes to keep or how to combine them",
+            "The researchers must start over with a new branch"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Conflicts don't automatically reject work; they require human judgment.",
+            "Conflicts don't corrupt projects\u2014they're normal and manageable.",
+            "Correct! Conflicts arise when changes overlap and require human review to resolve thoughtfully.",
+            "You keep all your work; you just need to resolve the differences before merging."
+          ],
+          "explanation": "Merge conflicts are a valuable feature in collaborative environmental science. They force teams to review potentially conflicting interpretations of data or methods, ensuring careful decision-making."
+        },
+        {
+          "question": "A conservation organization uses Pull Requests to review all changes before they're merged into the official species population database. What's the scientific benefit of this process?",
+          "options": [
+            "It slows down work and adds unnecessary bureaucracy",
+            "It enables peer review of data changes, catching errors and ensuring quality before changes become official",
+            "It prevents anyone from making changes to their branches",
+            "It requires all team members to write lengthy documentation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While PRs add a step, that step provides critical quality control, especially for scientific data.",
+            "Exactly! Pull Requests institutionalize peer review, ensuring that data modifications maintain scientific rigor.",
+            "PRs enable parallel work; they don't restrict it.",
+            "PRs can support documentation, but they don't require it\u2014good practices do."
+          ],
+          "explanation": "Pull Requests are scientific quality gates. In research, peer review before publishing is standard; PRs bring that principle to version control itself."
+        },
+        {
+          "question": "An environmental monitoring network spans 12 countries, with each regional team maintaining their own branch of soil quality data. When they merge all branches quarterly into a 'global-assessment' branch, why would understanding Git's merge process be critical for this project?",
+          "options": [
+            "Because they need to combine geographically distributed data with clear traceability and accountability",
+            "Because merging is the only way to back up their data",
+            "Because it eliminates the need for data validation",
+            "Because all regions must use identical file names"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Perfect! With globally distributed data collection, merging with full historical tracking is essential for scientific integrity and accountability.",
+            "Backups are useful but aren't the merge process's primary purpose.",
+            "Merging doesn't replace validation; it enables it by providing clear change tracking.",
+            "While consistent naming helps, Git merging works regardless."
+          ],
+          "explanation": "In international environmental research, you need to prove how global datasets were assembled. Git merging creates that complete, auditable record."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Advanced Collaboration Scenarios",
+      "content": "Let's practice applying your Git knowledge to complex, realistic environmental collaboration scenarios.",
+      "questions": [
+        {
+          "question": "A international climate research project has 30 researchers across 8 countries, each working on different components of a global warming model in separate branches. Each researcher makes 20-30 commits per week documenting their methodology and analysis steps. Why is this high-frequency commit approach valuable for environmental science?",
+          "options": [
+            "More commits make the files download faster",
+            "It creates a detailed audit trail of research methodology, enabling reproducibility and helping others understand your reasoning",
+            "It eliminates the need for written research papers",
+            "Only software developers benefit from frequent commits"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Commit frequency doesn't affect download speed.",
+            "Excellent! In environmental science, understanding *how* researchers arrived at conclusions is as important as the conclusions themselves. Frequent, well-documented commits provide this transparency.",
+            "Commits complement papers; they don't replace them.",
+            "Environmental researchers benefit equally\u2014commits document the evolution of thought and methodology."
+          ],
+          "explanation": "Each commit with a thoughtful message ('Adjusted temperature scaling to match NOAA calibration standards', 'Applied vegetation index correction based on landsat-8 specs') becomes part of your research methodology documentation."
+        },
+        {
+          "question": "During a merge of two rainfall prediction model branches, a conflict occurs on the same equation used for evapotranspiration calculation. The two approaches give significantly different results. What's the most scientific way to resolve this conflict?",
+          "options": [
+            "Choose whichever version is shorter to minimize file size",
+            "Randomly pick one version to avoid delays",
+            "Convene the researchers to discuss the scientific merits of each approach, possibly creating a hybrid solution, then document the decision",
+            "Delete both versions and rewrite the equation from scratch"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Reducing file size isn't relevant to scientific accuracy.",
+            "Scientific decisions shouldn't be random.",
+            "Perfect! Merge conflicts are opportunities for scientific collaboration and peer review. The discussion itself advances the research.",
+            "Preserving prior work and understanding the differences is better than starting over."
+          ],
+          "explanation": "Merge conflicts in scientific projects are feature, not a bug. They force teams to critically examine different approaches and make informed decisions together."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mastery Complete: Git for Environmental Science",
+      "content": "Congratulations! You've mastered Git and version control through the lens of environmental science. You now understand how to use commits to document research methodology, how to use branches for safe parallel work, and how to merge and resolve conflicts collaboratively. These skills will enable you to work confidently in distributed research teams, maintain scientific reproducibility, and manage complex environmental datasets. Whether you're tracking climate data across monitoring stations, coordinating between field and lab teams, or collaborating internationally on conservation projects, Git provides the structure and accountability that modern environmental science demands. Your next step is to practice these skills on a real environmental research project\u2014start with a small local repository and gradually increase complexity as you and your team become more comfortable with workflows."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "needs review"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "proficient"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "needs review"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "proficient"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "needs review"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "mastered"
+    }
+  ],
+  "generated_at": "2026-03-27T04:10:21.862893+00:00",
+  "model": "claude-haiku-4-5"
+}

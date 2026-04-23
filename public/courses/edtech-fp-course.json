@@ -1,0 +1,171 @@
+{
+  "id": "edtech-fp-course",
+  "title": "Functional Programming Concepts for EdTech",
+  "description": "Master functional programming through the lens of education technology. Learn pure functions, higher-order functions, and composition by building real EdTech systems.",
+  "topic": "Functional Programming Concepts",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "functional-programming",
+    "education-technology",
+    "pure-functions",
+    "composition",
+    "higher-order-functions",
+    "immutability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Functional Programming in Education Technology",
+      "content": "Functional programming is a paradigm that treats computation as the evaluation of mathematical functions, emphasizing immutability and avoiding changing state. In education technology, functional programming principles help create predictable, maintainable systems for student tracking, course management, and personalized learning. By applying functions as first-class entities and composing them together, EdTech developers build robust platforms where student data flows through a series of pure transformations, reducing bugs and making systems easier to test and scale.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Journey",
+      "content": "Functional programming has three core pillars. Select which topics interest you most\u2014you'll explore 2-3 of them before learning how they work together in a complete EdTech system.",
+      "choices": [
+        {
+          "label": "Immutability & Pure Functions",
+          "next": "n3"
+        },
+        {
+          "label": "Higher-Order Functions & Callbacks",
+          "next": "n5"
+        },
+        {
+          "label": "Function Composition & Pipelines",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Pure Functions & Immutability",
+      "content": "Pure functions always return the same output for the same input and have no side effects\u2014they don't modify data beyond their return value. Immutability means data, once created, cannot be changed; instead, you create new versions with updates. In EdTech, imagine a student's grade record: instead of modifying it in place, a pure function returns a new grade object with updated scores. This approach prevents bugs where one part of your system accidentally changes student data that another part depends on, makes testing trivial (no mocking needed), and allows the platform to maintain an audit trail of all grade changes. Your course management system becomes predictable: the same student input always produces the same grade output.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Calculating Student GPA",
+      "content": "Consider an EdTech grading system with a pure function `calculateGPA(grades: number[]): number` that takes an array of grades and returns the GPA without updating the database or logging side effects. If you call it with [90, 85, 88], it always returns the same GPA; the original `grades` array is never modified, and new grades are added via a fresh array like `[...grades, 92]`. This purity enables 100 course managers to call this function simultaneously without data corruption. Unit tests become simple: just verify the function returns the expected number for known inputs.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Higher-Order Functions & Callbacks",
+      "content": "A higher-order function either takes other functions as arguments or returns a function as a result. In EdTech, higher-order functions enable flexible, reusable behavior without conditional logic. For example, instead of writing separate functions for each notification type (email, SMS, in-app), you write a generic function that accepts a notification method as a parameter. This pattern reduces code duplication, makes it easy to add new notification channels without modifying core logic, and turns conditional branching into elegant function selection.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Course Notification System",
+      "content": "An EdTech platform needs to notify students via email, SMS, or push notification about course deadlines. Instead of three separate functions, you write `notifyStudents(students, message, notificationFn)` and pass different functions like `sendEmail`, `sendSMS`, or `sendPush`. Adding a new channel (like Slack) requires only a new function; the notification system itself doesn't change. When a deadline approaches, the system filters students and passes the appropriate notification function\u2014all without if/else chains or core logic modification.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Function Composition & Pipelines",
+      "content": "Function composition is the act of combining simple functions to build more complex ones. Instead of nesting calls, you 'pipe' data through a chain where each step does one thing well. In EdTech, a student enrollment pipeline transforms data through validate \u2192 check prerequisites \u2192 assign cohort \u2192 create profile \u2192 notify instructor steps. Composition makes the flow explicit and readable, allows you to reuse steps in different pipelines, and makes testing trivial\u2014each step is independently verifiable.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: Student Enrollment Pipeline",
+      "content": "When a student enrolls in a course, the EdTech system processes them through a pipeline: validate enrollment data, check prerequisites against student records, assign to a cohort with peers, create a personalized learner profile, and notify the instructor. Instead of a tangled function with nested logic, you compose these steps: `pipe(enrollmentData, validate, checkPreqs, assignCohort, createProfile, notifyInstructor)`. If you need a bulk import pipeline, you reuse the same steps. Debugging is straightforward: each step's input and output are visible and testable.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: Building EdTech with Functional Principles",
+      "content": "You now have three powerful tools: pure functions & immutability ensure predictable, bug-free data handling; higher-order functions eliminate conditional logic and enable extensibility; composition makes complex workflows transparent and testable. In a complete EdTech platform, you combine all three: student grade transformations use pure functions (no side effects), notification systems accept pluggable notification functions (higher-order), and multi-step workflows like enrollment are composed pipelines (readable, reusable). A student's journey\u2014from signup to completion\u2014flows through a series of pure, composable transformations. This architecture makes your EdTech system resilient: changes in one module don't ripple unexpectedly, tests run fast without mocking databases, and adding features (new learning paths, notification types, grade formulas) requires writing small, focused functions that snap together elegantly. Functional programming turns complex EdTech into a clean, predictable flow.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Congratulations!",
+      "content": "You've mastered the core principles of functional programming in the context of education technology. You now understand how pure functions, higher-order functions, and composition work together to build robust, scalable EdTech systems. Your next step: apply these concepts to a real project\u2014refactor a feature to use pure functions, introduce a higher-order callback, or compose a new workflow. Happy coding!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Immutability & Pure Functions"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Higher-Order Functions & Callbacks"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Function Composition & Pipelines"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "next"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T05:41:08.721732+00:00",
+  "model": "claude-haiku-4-5"
+}

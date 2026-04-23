@@ -1,0 +1,349 @@
+{
+  "id": "dist-sys-game-001",
+  "title": "Distributed Systems through Game Design",
+  "description": "Master distributed systems concepts by architecting scalable multiplayer game servers, learning consistency models, and surviving failures through consensus and fault tolerance.",
+  "topic": "Distributed Systems",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed-systems",
+    "game-design",
+    "networking",
+    "scalability",
+    "consensus",
+    "fault-tolerance"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "From Single Server to Distributed Game Servers",
+      "content": "A simple game might start with one server handling all players\u2014perfect for small communities. But as your game grows to thousands of concurrent players across continents, a single server becomes a bottleneck: latency spikes for distant players, server overload crashes the game, and any maintenance takes everyone offline. Distributed systems solve this by splitting responsibility across multiple connected servers. Each region gets its own server cluster, players connect to their nearest server, and these servers coordinate with each other to maintain a unified game world."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Distributed Servers Fundamentals",
+      "content": "Test your understanding of why and how games use distributed architectures.",
+      "questions": [
+        {
+          "question": "Your game has players in Tokyo, London, and Los Angeles. You currently use one server in New York. What are two problems this causes?",
+          "options": [
+            "A) High latency for distant players and a single point of failure",
+            "B) Players can cheat more easily and servers are too cheap",
+            "C) Firewall issues and database corruption",
+            "D) Graphics rendering is too slow and player names conflict"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Distant players experience lag, and any outage affects everyone.",
+            "Incorrect. Distance and centralization are the real problems.",
+            "Incorrect. Firewalls and database corruption aren't the primary issues here.",
+            "Incorrect. Graphics are client-side and names are managed separately."
+          ],
+          "explanation": "Single-server architectures suffer from network latency proportional to geography and lack resilience if that one server fails."
+        },
+        {
+          "question": "In a distributed game system, what does the term 'region' typically refer to?",
+          "options": [
+            "A) An in-game map zone where players quests happen",
+            "B) A geographic area with its own server cluster to serve nearby players",
+            "C) A player's inventory category system",
+            "D) A virtual currency zone"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That's an in-game concept, not a distributed systems concept.",
+            "Correct! Regions are geographic server deployments optimized for latency.",
+            "Incorrect. Inventory is a game feature, not a distributed systems concept.",
+            "Incorrect. Currency zones are game mechanics, not architecture."
+          ],
+          "explanation": "Regions in distributed systems are geographic deployments where players in one area connect to nearby servers, reducing network latency."
+        },
+        {
+          "question": "A new region server crashes in Europe, but players in Asia and North America keep playing. What does this demonstrate?",
+          "options": [
+            "A) Distributed systems have no failures",
+            "B) Isolation and fault tolerance\u2014the system degrades gracefully",
+            "C) European players are not important to the game",
+            "D) All games should use distributed systems"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Failures still happen in distributed systems.",
+            "Correct! Fault isolation means one region's failure doesn't crash the entire game.",
+            "Incorrect. Player importance isn't the point; availability is.",
+            "Incorrect. Not all applications need distribution, but games often do."
+          ],
+          "explanation": "Distributed architectures provide fault isolation: if one server or region fails, others continue serving users, preventing total outages."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Distributed Fundamentals",
+      "content": "Reinforce your understanding of distributed game architecture basics.",
+      "questions": [
+        {
+          "question": "Why would a game company set up multiple servers instead of just buying a bigger, more powerful single server?",
+          "options": [
+            "A) Bigger servers are more expensive and there's a physical limit to how fast a single computer can process",
+            "B) It's just for show and looks more professional",
+            "C) Single servers cannot connect to the internet",
+            "D) Multiple servers confuse hackers"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Physics limits single computers, and cost-per-player improves with distribution.",
+            "Incorrect. There are real technical and economic reasons.",
+            "Incorrect. Single servers absolutely can use the internet.",
+            "Incorrect. Security isn't solved by quantity alone."
+          ],
+          "explanation": "Vertical scaling (bigger servers) has limits due to physics and cost. Horizontal scaling (more servers) distributes load and improves resilience."
+        },
+        {
+          "question": "If a raid boss fight requires precise timing from 20 players spread across the globe, what distributed systems challenge does this create?",
+          "options": [
+            "A) The boss might look different to different players",
+            "B) Network latency variations make simultaneous actions difficult",
+            "C) Player graphics cards are too slow",
+            "D) Boss mechanics are impossible to code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Visual rendering is handled client-side consistently.",
+            "Correct! Latency differences create synchronization challenges for coordinated gameplay.",
+            "Incorrect. Graphics are a client concern, not a distributed systems issue.",
+            "Incorrect. Boss mechanics are definitely possible; synchronization is the challenge."
+          ],
+          "explanation": "Distributed systems across continents introduce latency variations. Raid encounters require sophisticated synchronization mechanisms to keep all players in sync despite these delays."
+        },
+        {
+          "question": "A game developer is choosing between one server in North America vs. three regional servers (NA, EU, Asia). Which is likely true?",
+          "options": [
+            "A) Three servers cost less than one very powerful server",
+            "B) One server has lower operational complexity but higher latency and failure risk",
+            "C) Three servers eliminate all network problems",
+            "D) One server is always better because it's simpler"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Distributed systems often cost more initially despite better efficiency.",
+            "Correct! Centralization is simpler but less resilient and introduces latency for distant players.",
+            "Incorrect. No system eliminates all problems; distribution trades complexity for resilience.",
+            "Incorrect. Simplicity is valuable but insufficient for global gaming."
+          ],
+          "explanation": "Architectural decisions involve trade-offs: one server is simple but has poor geographic coverage and a single point of failure. Distribution is complex but resilient and low-latency."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n2"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Network Communication & Game State Consistency",
+      "content": "Once you have multiple servers, they must communicate constantly. When a player jumps on a platform in the Tokyo server, that action must be broadcast to other servers so a player in the London server sees the jump. The challenge: network latency and message ordering. Messages take milliseconds to arrive, and they might arrive out of order. Consistency models define rules: *eventual consistency* allows temporary divergence (my view may lag yours), *strong consistency* demands all servers agree immediately (slower), and *causal consistency* ensures related events stay ordered. Games usually blend these: position updates are eventually consistent (slight visual lag acceptable), but critical events like item pickups use stronger guarantees (can't both players pick up the same sword)."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Communication & Consistency in Distributed Games",
+      "content": "Evaluate your understanding of how distributed game servers coordinate state.",
+      "questions": [
+        {
+          "question": "Two players race to pick up a rare sword spawn. Both click at the same moment, but one is on Tokyo server and one on London server. What consistency challenge does this create?",
+          "options": [
+            "A) Servers must decide which player gets it; eventual consistency could let both think they won initially",
+            "B) The sword should disappear immediately for both players",
+            "C) Both players should get a copy of the sword",
+            "D) This is impossible and servers can never handle it"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is a classic distributed consensus problem. Eventual consistency risks brief divergence; strong consistency ensures one winner.",
+            "Incorrect. 'Immediately' is hard in distributed systems; coordination takes messages.",
+            "Incorrect. Duplicating the resource breaks game balance.",
+            "Incorrect. It's hard but solvable with consensus protocols."
+          ],
+          "explanation": "Resource contention in distributed systems requires consensus mechanisms. Without them, eventual consistency might temporarily show both players owning the item."
+        },
+        {
+          "question": "A player's position update packet takes 150ms to arrive, but their next update arrives in 50ms and says they're 10 meters back. The later update says they're 10 meters back. What should the server do?",
+          "options": [
+            "A) Teleport them back 10 meters because that message arrived most recently",
+            "B) Reject the out-of-order message and keep them moving forward",
+            "C) Use timestamps: apply updates in logical order, not arrival order",
+            "D) Crash because the system is broken"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Arrival order \u2260 send order. Applying out-of-order messages breaks gameplay.",
+            "Incorrect. Rejecting valid data creates glitches.",
+            "Correct! Timestamps let servers reorder messages logically, regardless of network delays.",
+            "Incorrect. Out-of-order arrivals are expected and normal in distributed systems."
+          ],
+          "explanation": "Latency variation means messages arrive out of order. Servers use logical timestamps or sequence numbers to reconstruct correct order."
+        },
+        {
+          "question": "In your game, position updates are *eventually consistent*, but item pickups require *strong consistency*. Why this difference?",
+          "options": [
+            "A) Strong consistency is always better",
+            "B) Items are valuable and can't have duplicates; position lag is visually acceptable",
+            "C) Positions don't matter; only items do",
+            "D) Strong consistency is cheaper"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Consistency levels involve speed-safety trade-offs; stronger isn't always better.",
+            "Correct! Items are scarce resources needing agreement; position approximation is fine.",
+            "Incorrect. Positions matter for gameplay, but their consistency requirements differ.",
+            "Incorrect. Strong consistency is actually more expensive computationally."
+          ],
+          "explanation": "Different data types need different consistency. Cosmetic or spatial data tolerates lag; scarce resources need consensus."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Communication & Consistency",
+      "content": "Strengthen your grasp of state consistency challenges across distributed game servers.",
+      "questions": [
+        {
+          "question": "A chat message is sent in a guild's region server but takes 200ms to propagate to other regions. Meanwhile, players in other regions continue chatting. What consistency model allows this?",
+          "options": [
+            "A) Strong consistency\u2014all regions see the message at the same time",
+            "B) Eventual consistency\u2014all regions eventually see the message in order, even if there's a lag",
+            "C) Causal consistency\u2014messages never arrive out of order",
+            "D) No consistency model describes this scenario"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Strong consistency would block chat until all regions sync.",
+            "Correct! Eventual consistency permits temporary divergence; lag is acceptable.",
+            "Incorrect. Causal consistency is stricter; chat doesn't require it.",
+            "Incorrect. This is a textbook eventual consistency scenario."
+          ],
+          "explanation": "Chat messages can use eventual consistency: regions temporarily see different message orders, but they converge quickly."
+        },
+        {
+          "question": "Your PvP game needs all players to see the same damage values when a spell hits. Which consistency model is best?",
+          "options": [
+            "A) Eventual consistency\u2014damage can differ briefly between regions",
+            "B) Strong consistency\u2014all servers must agree on damage before confirming",
+            "C) No consistency model matters for damage",
+            "D) Weak consistency is sufficient"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Players would complain if damage values diverge.",
+            "Correct! Combat requires immediate agreement. Strong consistency ensures fairness.",
+            "Incorrect. Consistency is critical for game integrity.",
+            "Incorrect. Weak consistency allows too much divergence for PvP."
+          ],
+          "explanation": "PvP combat is a critical resource allocation problem. It needs strong consistency or players exploit brief inconsistencies."
+        },
+        {
+          "question": "A player's avatar moves across continents: NA server \u2192 EU server. Messages about this move are delayed between servers. What problem could occur with no coordination?",
+          "options": [
+            "A) The player's inventory disappears",
+            "B) Both servers might show the player in two places simultaneously",
+            "C) Servers crash",
+            "D) Graphics glitch"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Inventory is handled separately.",
+            "Correct! Without coordination, old state from NA lingers while new state from EU arrives, creating a duplicate or teleport.",
+            "Incorrect. Servers don't crash over position disagreement.",
+            "Incorrect. Graphics glitches are a symptom, not the distributed systems problem."
+          ],
+          "explanation": "Cross-region movement requires careful handoff. Without consistency mechanisms, a player could appear in two regions temporarily."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Fault Tolerance & Consensus in Distributed Games",
+      "content": "Distributed systems fail: servers crash, network partitions isolate servers, and messages are lost. Games must survive these failures and maintain consistency. Consensus protocols like Raft or Paxos allow multiple servers to agree on a decision (e.g., 'Player A owns the sword') even if some servers are unreachable. Heartbeat messages keep servers aware of each other; if a server stops heartbeating, others assume it's down and rebalance. Replication (keeping copies of critical state on multiple servers) ensures data survives a single crash. Example: a guild's bank is replicated on three regional servers; if one crashes, the other two have backups and elect which state is authoritative. These mechanisms have costs: consensus decisions are slower, and network partitions force difficult choices\u2014serve stale data or reject requests. Games balance these trade-offs constantly."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "You've Mastered Distributed Game Systems!",
+      "content": "You now understand the core pillars of distributed systems applied to gaming: architecture across regions (reducing latency, improving resilience), consistency models (balancing speed and accuracy), and fault tolerance with consensus (surviving failures while maintaining agreement). These principles\u2014distribution, consistency, and consensus\u2014power not just games but databases, file systems, and any large-scale service. As you design or scale games, master these trade-offs and you'll architect systems that delight millions of players worldwide."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T04:01:19.881469+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,305 @@
+{
+  "id": "gametheo-env-001",
+  "title": "Game Theory in Environmental Science",
+  "description": "An adaptive branching course teaching game theory through environmental challenges. Start with foundational concepts and advance through competitive scenario analysis to expert-level mechanism design.",
+  "topic": "Game Theory & Environmental Science",
+  "theme": "environmental science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 60,
+  "tags": [
+    "game theory",
+    "environmental science",
+    "strategy",
+    "economics",
+    "conservation",
+    "climate"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Game Theory in Environmental Decision-Making",
+      "content": "Game theory is the mathematical study of strategic interactions where your outcome depends on both your choices and others' choices. In environmental contexts, this becomes critical because individual incentives often conflict with collective good. A Nash equilibrium is a stable outcome where no player can improve their position by unilaterally changing strategy. The tragedy of the commons describes how individual rational choices lead to collective harm\u2014like fishers over-harvesting shared stocks or nations emitting carbon without bearing full costs. Understanding these strategic dynamics is essential for designing environmental policies that make cooperation rational."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Foundations of Environmental Game Theory",
+      "content": "Test your understanding of basic game theory concepts through environmental scenarios.",
+      "questions": [
+        {
+          "question": "Two fishing communities share a river with 200 tons of fish annually. If both fish sustainably, each gets 100 tons/year indefinitely. If one over-fishes (150 tons) while the other conserves (50 tons), the over-fisher gets 150 tons but the river declines. Next year, both can only get 40 tons each because the stock is depleted. What game theory concept best describes this situation?",
+          "options": [
+            "Nash equilibrium where both communities fish sustainably",
+            "Prisoner's dilemma\u2014both have incentive to over-fish despite worse collective outcome",
+            "A perfectly cooperative scenario",
+            "A situation with no mathematical solution"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. With incentives to defect, this is not a stable equilibrium.",
+            "Correct! Each community is incentivized to over-fish (getting 150 tons while other gets 50) but both end up worse off (40 tons each).",
+            "Incorrect. The individual incentives push away from cooperation.",
+            "Incorrect. Game theory provides clear analysis of such situations."
+          ],
+          "explanation": "This is a classic prisoner's dilemma. Each player's best response to any strategy of the other is to over-fish, yet mutual over-fishing yields worse outcomes than mutual conservation. This explains why fishing stocks collapse despite harvesters' long-term interests."
+        },
+        {
+          "question": "Why is carbon emission reduction a prisoner's dilemma for nations?",
+          "options": [
+            "Countries receive no benefit from other nations reducing emissions",
+            "Each nation benefits from others reducing emissions but pays costs to reduce their own\u2014creating incentive to wait for others while polluting",
+            "Reducing emissions costs nothing but provides huge environmental benefits",
+            "Nations cannot communicate or make binding agreements about emissions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Nations do benefit from global emission reductions through avoided climate damage.",
+            "Correct! Each nation prefers others to bear reduction costs while it reaps benefits. Yet if all think this way, everyone keeps polluting.",
+            "Incorrect. Emission reduction has real costs to economies and industries.",
+            "Incorrect. International environmental treaties exist and are binding."
+          ],
+          "explanation": "Each nation's dominant strategy is to pollute (gaining competitive advantage, avoiding costs) while hoping others reduce. This mirrors the prisoner's dilemma perfectly\u2014mutual defection (all polluting) yields worse outcomes than mutual cooperation (all reducing)."
+        },
+        {
+          "question": "What is a Nash equilibrium in game theory?",
+          "options": [
+            "The outcome that maximizes total welfare for all players",
+            "A stable strategic situation where no player can improve their outcome by unilaterally changing their strategy",
+            "A strategy where one player dominates all others",
+            "A situation where cooperation is always the rational choice"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Nash equilibrium maximizes individual welfare given others' strategies, not necessarily total welfare.",
+            "Correct! In Nash equilibrium, each player's strategy is a best response to others' strategies.",
+            "Incorrect. Dominance and Nash equilibrium are different concepts.",
+            "Incorrect. In many environmental situations, Nash equilibrium involves mutual defection."
+          ],
+          "explanation": "Nash equilibrium is a solution concept\u2014a prediction of play. Unfortunately, in many environmental commons, the Nash equilibrium involves mutual over-exploitation, not cooperation. This is why institutions and enforcement matter."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n3",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Advanced Strategic Analysis in Environmental Systems",
+      "content": "Analyze complex multi-player scenarios, mixed strategies, and institutional design challenges.",
+      "questions": [
+        {
+          "question": "Three nations negotiate a climate agreement. If all ratify and reduce emissions: each saves $2 billion from avoided climate damage while paying $500 million reduction cost (net +$1.5B each). If one nation defects while others ratify: the defector saves $2B in avoided damage AND avoids the $500M cost (+$2B total), while others only get +$1B each. If all defect: no emission reductions occur, all get $0 benefit. What is the Nash equilibrium?",
+          "options": [
+            "All nations ratify the agreement",
+            "All nations defect from the agreement",
+            "Some nations cooperate while others defect",
+            "Nations randomly alternate between cooperation and defection"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Defection is dominant regardless of what others do.",
+            "Correct! Defection yields higher payoff against any other nation's strategy. This is a multi-player prisoner's dilemma.",
+            "Incorrect. Mixed outcomes are unstable in this payoff structure.",
+            "Incorrect. Random play is not an equilibrium."
+          ],
+          "explanation": "Defection dominates: a defector gets $2B while others get $1B. This is why international climate negotiations are difficult\u2014the strategic structure creates incentive to free-ride on others' reductions. Institutions (verification, enforcement, reputation costs) must change payoffs to make cooperation rational."
+        },
+        {
+          "question": "A regulator can inspect factories for pollution compliance (costs $10K per inspection) or ignore violations (costs $0). A factory can install pollution controls (costs $50K) or pollute (costs $0 but risks $150K fine if caught). What inspection rate makes a factory indifferent between polluting and compliance?",
+          "options": [
+            "25%",
+            "33%",
+            "50%",
+            "67%"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Set up indifference equation: fine \u00d7 inspection_rate = compliance_cost.",
+            "Correct! At 33% inspection rate, expected payoff from polluting ($150K \u00d7 0.33 = $50K penalty risk) equals compliance cost.",
+            "Incorrect. Need to recalculate the equilibrium rate.",
+            "Incorrect. The calculation yields a lower rate."
+          ],
+          "explanation": "Indifference occurs when: $150K \u00d7 r = $50K, so r = 33%. At this rate, the expected fine from polluting exactly equals the compliance cost, so the factory is indifferent. This is a mixed-strategy Nash equilibrium where the regulator randomizes to optimally deter pollution."
+        },
+        {
+          "question": "In a five-country fishing agreement where each benefits from others' conservation but prefers to over-fish, which structure best prevents tragedy of the commons?",
+          "options": [
+            "Voluntary agreement with honor system and no enforcement",
+            "Binding legal agreement with verification mechanisms and enforcement for violations",
+            "Each country independently manages its fishing fleet",
+            "Random rotation determining which country can fish each year"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Without enforcement, defection is profitable and Nash equilibrium is mutual over-fishing.",
+            "Correct! Binding agreements with verification and penalties change payoff structure so cooperation becomes the Nash equilibrium.",
+            "Incorrect. Independent management leaves no coordination to solve the commons problem.",
+            "Incorrect. Random allocation doesn't change the underlying strategic incentive to cheat."
+          ],
+          "explanation": "This reflects real international fisheries management. The Northwest Atlantic Fisheries Organization uses binding quotas, scientific monitoring, and enforcement because the game structure demands it. Voluntary agreements repeatedly fail because defection is rational."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n4",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Strategic Design for Environmental Cooperation",
+      "content": "The key insight is that we cannot solve environmental problems by appealing to altruism\u2014we must redesign the game itself. International environmental agreements succeed by changing payoff structures. The Montreal Protocol solved ozone depletion by phasing out CFCs because it included technology transfer and financial support, making compliance more profitable than defection for developing nations. Carbon markets attempt similar redesign by putting a price on emissions\u2014making pollution expensive and clean technology profitable. Mechanism design involves choosing institutional rules so that rational self-interested actors choose socially beneficial outcomes. Long-term relationships transform prisoner's dilemmas: the promise of cooperation next year makes defection today irrational. Tipping points matter\u2014once degradation becomes irreversible (extinction, climate threshold crossed), the game changes dramatically. Expert-level analysis recognizes that environmental governance isn't about finding the 'right answer'\u2014it's about engineering incentives so cooperation becomes each actor's best response."
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Expert Mastery: Game Theory's Role in Environmental Solutions",
+      "content": "Congratulations\u2014you've mastered advanced game theory applied to environmental challenges. You understand how strategic incentives create environmental crises (tragedy of the commons, prisoner's dilemmas in climate and conservation) and how institutions redesign those incentives to enable cooperation (binding agreements, enforcement, mechanism design, reputation effects). You're prepared to evaluate real environmental policy proposals, design conservation mechanisms, negotiate international environmental agreements, and contribute to solutions for humanity's most pressing environmental challenges. Game theory isn't just academic\u2014it's the language through which we understand and solve global environmental problems."
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Strategic Environmental Scenarios",
+      "content": "Reinforce your strategic analysis with realistic environmental dilemmas.",
+      "questions": [
+        {
+          "question": "Two adjacent nations share an aquifer with sufficient water for 20 units per nation annually if managed sustainably. If Nation A over-extracts (25 units) while Nation B conserves (15 units): A gets 25 units, B gets 15, but the aquifer declines. Next year with declined aquifer, both can only extract 12 units maximum. If both over-extract: each gets 20 units this year but next year only 8 units each. What is the Nash equilibrium?",
+          "options": [
+            "Both nations extract sustainably (20 each annually)",
+            "Both nations over-extract",
+            "Nation A over-extracts while Nation B conserves",
+            "Nations alternate extraction strategies"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Over-extraction is a dominant strategy.",
+            "Correct! Over-extraction is each nation's best response regardless of what the other does\u2014leading to mutual depletion.",
+            "Incorrect. If B anticipates A's strategy, B will also over-extract.",
+            "Incorrect. Alternation requires an unstable agreement."
+          ],
+          "explanation": "Over-extraction is dominant: against sustainable extraction you get 25 vs 20; against over-extraction you get 20 vs 8. Both prefer over-extraction, yet mutual over-extraction (8 units) beats mutual sustainability (20 units)\u2014classic tragedy. This requires international water treaties and dispute resolution."
+        },
+        {
+          "question": "In a shared forest commons with multiple harvesters: if all harvest sustainably, each gets 20 units of timber annually. If one harvests heavily (35 units) while others sustain: heavy harvester gets 35, others get 15 each (forest slightly damaged). If all harvest heavily: everyone gets only 8 units (forest crashes). What is the social optimum versus what rational individuals will choose?",
+          "options": [
+            "Optimum = all sustain (20 each); individuals also sustain because cooperation is stable",
+            "Optimum = all sustain (20 each); individuals will all harvest heavily (8 each) due to incentive to defect",
+            "Optimum = all harvest heavily (8 each); individuals will cooperate (20 each)",
+            "No difference between optimum and individual incentives"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Individual incentives don't naturally align with cooperation.",
+            "Correct! This is the core tragedy of the commons\u2014social optimum (sustainability) conflicts with Nash equilibrium (depletion).",
+            "Incorrect. Heavy harvesting is harmful, not optimal.",
+            "Incorrect. Environmental commons invariably have misaligned incentives."
+          ],
+          "explanation": "Each harvester prefers to exploit while others conserve (gets 35 vs 20). But mutual defection yields 8\u2014far worse than 20. This gap between optimum and equilibrium is why forest management requires permits, quotas, enforcement, and sometimes community ownership."
+        },
+        {
+          "question": "If an environmental dilemma is repeated across many seasons (iterated game), which strategy becomes viable and stable that cannot survive in a single-shot game?",
+          "options": [
+            "Always cooperate unconditionally",
+            "Always defect (free-ride)",
+            "Tit-for-tat: cooperate first, then mirror opponent's prior move",
+            "Random cooperation and defection"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Unconditional cooperation is exploited by defectors.",
+            "Incorrect. Defection is profitable in single-shot games but invites retaliation in repeated games.",
+            "Correct! Tit-for-tat punishes defection through retaliation while cooperating with cooperators. In repeated interactions, reputation and reciprocity become powerful motivators.",
+            "Incorrect. Randomness cannot sustain cooperation."
+          ],
+          "explanation": "Tit-for-tat is famously robust in iterated prisoner's dilemmas. Applied environmentally: if nations expect long-term relationships in climate negotiations or fishing agreements, defection today triggers retaliation tomorrow. This is why multi-year agreements and reputation are essential to solving environmental problems."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n7",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Competent Understanding: Applying Game Theory to Environmental Problems",
+      "content": "You've successfully mastered core game theory concepts and can apply them to real environmental challenges. You understand why environmental problems often take the form of prisoner's dilemmas (individuals incentivized to exploit while others conserve), how tragedy of the commons emerges from individual incentives conflicting with collective good, and can identify strategies that promote cooperation (binding agreements, enforcement, reputation, mechanism design). You're prepared to engage critically with environmental policy, understand the strategic barriers to climate action and conservation, and recognize why institutional design matters as much as technology."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Game Theory Fundamentals for Environmental Science",
+      "content": "Game theory is the study of strategic situations where your outcome depends on your choice AND others' choices. Imagine two polluting factories. Each could clean up (costs $100K) or keep polluting (costs $0 but harms shared environment). If both clean up, each spends $100K but environment is protected. If one cleans and one pollutes, the cleaner wastes money while the polluter gets free benefits. If both pollute, neither spends money but environment suffers. This creates a Prisoner's Dilemma: each factory prefers to pollute regardless of what the other does. Yet both polluting is worse for both than both cleaning. This same pattern explains why fishing stocks collapse, why carbon emissions keep rising, and why environmental protection often fails\u2014individual incentives drive toward bad collective outcomes. Nash equilibrium is the 'resting point' where no factory has reason to change strategy. Tragically, in environmental commons, the Nash equilibrium often means mutual exploitation. Understanding this helps us design institutions, regulations, and incentives to encourage cooperation when individual incentives fail."
+    },
+    {
+      "id": "n9",
+      "type": "example",
+      "title": "Example: Tragedy of the Commons in Commercial Fishing",
+      "content": "Two fishing companies share a river system. If both fish sustainably (catching exactly 50 tons/year each): the fish population recovers annually, profits remain stable indefinitely at $500K per company annually. If Company A fishes unsustainably (extracting 100 tons) while Company B conserves (50 tons): Company A earns $1M that year, but Company B earns only $250K. The river population declines 30%. Next year the damaged river can only support 70 tons total\u2014both earn $350K annually. If both fish unsustainably (100 tons each): they each get $800K that year, but the river crashes 50%. Within two years both can only catch 10 tons annually, earning $100K each\u2014economic collapse. The Nash equilibrium is mutual unsustainable fishing: each company knows that if they fish sustainably while competitors exploit, they lose economically. Yet this equilibrium destroys their long-term profitability. This explains real cases: North Atlantic cod fishery collapsed from over-exploitation despite fishers' knowledge of sustainability. Solution required: international quota agreements (like NAFO), monitoring boats, enforcement against violators, and side-payments to make compliance profitable."
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Foundational Understanding: Game Theory and Environmental Challenges",
+      "content": "You now understand a critical insight: environmental problems often arise not from lack of knowledge or good intentions, but from strategic conflicts where individual incentives lead away from the collective good. You can recognize prisoner's dilemmas (both actors prefer to exploit), tragedy of the commons (individual rational choices \u2192 collective harm), and understand why institutions, enforcement, and incentive design matter. You have the conceptual foundation to engage with real environmental policy debates, understand why conservation is hard, and recognize that solutions require changing incentive structures\u2014not just appeals to environmental responsibility."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "begin assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass (67%+)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n8",
+      "label": "fail (<67%)"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass (67%+)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n6",
+      "label": "fail (<67%)"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": "expert mastery"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "complete practice"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "learn fundamentals"
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": "foundation complete"
+    }
+  ],
+  "generated_at": "2026-03-27T10:59:41.870789+00:00",
+  "model": "claude-haiku-4-5"
+}

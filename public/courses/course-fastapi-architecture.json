@@ -1,0 +1,295 @@
+{
+  "id": "course-fastapi-architecture",
+  "title": "Web Development with FastAPI: An Architectural Approach",
+  "description": "Learn FastAPI by designing a real-world web platform for managing architectural projects, exploring different software architectures through the lens of building design.",
+  "topic": "Web Development with FastAPI",
+  "theme": "architecture",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "fastapi",
+    "web-development",
+    "architecture",
+    "microservices",
+    "api-design"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Designing Your Architectural Project Management Platform",
+      "content": "You lead a development team at a prestigious architecture firm. Your mission: build a web platform to manage complex building projects, collaborate with clients, and track design iterations. You'll need to authenticate users, store project files, manage client communications, and generate project reports. This platform must scale as your firm grows. How will you architect it?",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Architectural Foundation",
+      "content": "Every great building starts with a sound foundation. Your software platform needs one too. You face a critical architectural decision that will shape your entire platform for years to come.",
+      "choices": [
+        {
+          "label": "Build a Monolithic Foundation: One integrated FastAPI application housing all features",
+          "next": "n3"
+        },
+        {
+          "label": "Design a Modular Blueprint: Multiple specialized FastAPI services working together",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "The Single-Structure Approach: Monolithic FastAPI Architecture",
+      "content": "Like a traditional building with all functions under one roof, a monolithic FastAPI application contains all features in a single codebase. Your one FastAPI app handles user authentication, project management, client portals, file uploads, and reporting. A single database stores all data. All business logic lives in one place. This simplicity has appeal\u2014one deployment process, one database, one team managing one system. But like a massive building, it can become difficult to modify and extend.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "A Monolithic FastAPI Project Structure",
+      "content": "Your FastAPI app has routers for `/projects`, `/clients`, `/files`, and `/reports`. All endpoints connect to the same PostgreSQL database. When a project needs archival files, the project router calls the file-handling functions directly. When generating reports, the report router queries the projects and clients tables in one transaction. Each router contains endpoint logic, and they all share database models. Everything is tightly integrated initially, making the entire system easy to understand.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "How Will You Structure Your Database and API Logic?",
+      "content": "Within your monolithic app, you must decide: will your API endpoints directly query and modify the database, or will you introduce structured layers (repositories, services) to separate concerns?",
+      "choices": [
+        {
+          "label": "Direct Database Coupling: Endpoints directly use SQLAlchemy models and execute queries",
+          "next": "n6"
+        },
+        {
+          "label": "Layered Architecture: Separate repositories, services, and routers to isolate data access",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "The Structural Problem: Tightly Coupled Monolith",
+      "content": "Six months in, your firm wants to add real-time client notifications when project milestones are reached. But your endpoints directly access the database. Adding a notification queue requires modifying multiple routers. Then the database schema needs a notifications table\u2014migrations affect all code paths. Adding a caching layer? Now every endpoint must be retrofitted. Like a building where moving a wall affects electrical, plumbing, and HVAC simultaneously, your tight coupling means each feature addition risks breaking others. Your deployment cycle slows. Code reviews become painful.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "The Monolithic Trap: Technical Debt Building",
+      "content": "Your platform works initially, but technical debt accumulates. Refactoring becomes necessary but risky. New developers struggle to understand the maze of direct database interactions. This is a critical lesson: within a monolith, layered architecture (separating data access, business logic, and API concerns) is essential. A tightly coupled monolith is like a building where every structural change affects multiple systems\u2014sustainable only for small projects."
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Well-Structured Monolithic Architecture: Clean Separation",
+      "content": "Your monolith uses repositories to handle all database queries, services to contain business logic, and routers to define endpoints. A `ProjectRepository` provides data; a `ProjectService` orchestrates business logic; routers expose endpoints. When a project milestone is reached, `ProjectService.archive_project()` calls `NotificationService.send_milestone_alert()`. Services don't know about database details\u2014repositories provide data. Like a building with clear separation between structural, electrical, and mechanical systems, your layers allow modifications without cascading failures.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Successful Monolithic Platform: Room to Grow",
+      "content": "Your well-structured monolith grows healthily. Feature additions remain manageable. The team deploys weekly. Code reviews are focused because the layered architecture makes responsibilities clear. You've learned that monolithic applications scale reasonably well for teams up to ~15 developers and moderate feature complexity. However, you already see limits: CI/CD pipelines are growing slower; testing the entire monolith takes time. You know that if your architecture firm expands significantly, you'll need to evolve toward microservices."
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "The Urban Planning Approach: FastAPI Microservices Architecture",
+      "content": "Like a well-planned city with specialized districts\u2014office towers, residential zones, retail centers\u2014a microservices architecture separates your platform into independent FastAPI applications. A `ProjectService` handles all project-related operations. A `ClientService` manages client data. A `FileService` handles uploads. A `NotificationService` sends alerts. Each service is a complete FastAPI application with its own database, deployment pipeline, and team. They communicate via HTTP APIs or message queues (RabbitMQ, Redis). When creating a new project, `ProjectService` calls `ClientService` to verify the client exists. If `FileService` is unavailable, `ProjectService` handles the failure gracefully.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "example",
+      "title": "FastAPI Microservices in Practice: The Architecture Firm Platform",
+      "content": "Each service defines its own database schema optimized for its needs. `ProjectService` uses PostgreSQL for relational data; `FileService` uses S3-compatible storage. Each service has independent deployment\u2014you can upgrade the notification system without touching projects. Service-to-service communication uses HTTP with timeouts and retries. Circuit breakers prevent cascading failures: if `ClientService` is slow, `ProjectService` times out and uses cached data. This modularity is like having specialized contractors for each building system\u2014they work independently but coordinate when needed.",
+      "next": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "assessment",
+      "title": "Microservices Tradeoffs: Are You Ready?",
+      "content": "Microservices offer scalability and team autonomy, but introduce complexity: distributed tracing, eventual consistency, inter-service communication failures, and deployment coordination challenges. Evaluate whether microservices fit your situation.",
+      "questions": [
+        {
+          "question": "Your architecture firm hires a new developer. In a microservices system, where is the primary risk?",
+          "options": [
+            "A single poorly-designed ProjectService endpoint slows all other services",
+            "Misconfigured service-to-service communication could cause cascading failures",
+            "A monolithic database shared across services gets too large",
+            "The developer can't modify code because there are too many services"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Service isolation means one poor endpoint affects only that service.",
+            "Correct! In microservices, network failures or communication misconfigurations cascade. This is why circuit breakers and fallback strategies are critical.",
+            "Incorrect. Each microservice has its own database.",
+            "Incorrect. Microservices actually allow developers to work in parallel on different services."
+          ],
+          "explanation": "Microservices shift risk from monolithic coupling to distributed system complexity. You must design for failure\u2014what happens if ClientService is unavailable when ProjectService needs to verify a client?"
+        },
+        {
+          "question": "Your firm expands to 50 developers on 6 feature teams. Which architecture better supports this scaling?",
+          "options": [
+            "Monolithic FastAPI\u2014all developers work on the same codebase for coordination",
+            "Microservices\u2014each team owns a service, reducing coordination overhead and enabling parallel deployment",
+            "A hybrid where core features are monolithic and non-critical features are microservices",
+            "Architecture makes no difference in team scaling"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A monolithic codebase with 50 developers creates bottlenecks in CI/CD and testing.",
+            "Correct! Independent services allow teams to deploy independently. This reflects Conway's Law: your system architecture mirrors your organizational structure.",
+            "Partially true, but adds complexity managing two architecture styles. Better to commit to one.",
+            "Incorrect. Architecture profoundly impacts team productivity and scalability."
+          ],
+          "explanation": "Microservices shine when you have multiple independent teams. Each team owns a service end-to-end, making decisions about tech stack, deployment cadence, and feature priorities without broad coordination."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n13",
+      "failure_target": "n14"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Scalable Architecture Platform: Built for Growth",
+      "content": "You've chosen to build a modular, service-based platform. Each FastAPI service is independent, scalable, and deployable. Your architecture firm can grow its engineering team without the constraints of a monolithic codebase. Services communicate via well-defined APIs. You can upgrade the NotificationService without touching ProjectService. Feature teams own their services end-to-end. This is the architecture of modern, high-growth platforms\u2014Netflix, Uber, and Amazon all evolved to microservices as they scaled. You've learned that this requires discipline: service boundaries must be clear, communication patterns must be reliable, and testing must account for distributed failures."
+    },
+    {
+      "id": "n14",
+      "type": "practice",
+      "title": "Practice: Designing Service Boundaries",
+      "content": "Let's reinforce the concepts. For each scenario, decide whether it should be a separate microservice. Services should be independent enough that one team can modify it without coordinating with others. Think about: data ownership, independence of scaling, rate of change, and team boundaries.",
+      "questions": [
+        {
+          "question": "Should 'sending emails when projects are archived' be its own microservice?",
+          "options": [
+            "Yes, always separate background tasks",
+            "Only if email sending scales independently or multiple services need email functionality",
+            "No, keep it in ProjectService for simplicity",
+            "Only if email is used more than once a week"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Not all background tasks warrant separate services\u2014added complexity may not justify it.",
+            "Correct. If email is a cross-cutting concern used by many services, or if it scales differently, a separate NotificationService makes sense. But if only ProjectService uses it, embedding it might be simpler.",
+            "Partially true early on. But as complexity grows, this becomes a bottleneck.",
+            "Incorrect. Usage frequency alone doesn't determine service boundaries."
+          ],
+          "explanation": "Service creation should be driven by: (1) independent scaling needs, (2) team ownership boundaries, or (3) shared use across multiple services. Don't create services prematurely."
+        },
+        {
+          "question": "Your ClientService stores all client data. Your FileService stores architectural drawings. Should they share a database?",
+          "options": [
+            "Yes, one database is simpler and faster",
+            "No, each service should own its data schema independently",
+            "Only if they frequently query each other's data",
+            "Only for consistency\u2014eventual consistency is too risky"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Shared databases create tight coupling and prevent independent scaling.",
+            "Correct! Each microservice should own its data. ClientService owns the clients schema; FileService owns the files schema. They query each other via APIs, not shared tables. This enables independent changes.",
+            "Incorrect. If they need each other's data, they should use inter-service APIs, not shared tables.",
+            "Incorrect. Microservices use eventual consistency\u2014when FileService creates a file, ClientService eventually hears about it via events or APIs."
+          ],
+          "explanation": "Database-per-service is a cornerstone of microservices. Shared databases defeat the purpose by creating implicit coupling. Each service's database is its private implementation detail."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n13",
+      "failure_target": "n14"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Scenario presented"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Choose Monolithic"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n10",
+      "label": "Choose Microservices"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn the approach"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Understand basics"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Choose tight coupling"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n8",
+      "label": "Choose layered design"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Experience problems"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "Best practices"
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": "Learn the approach"
+    },
+    {
+      "id": "c11",
+      "source": "n11",
+      "target": "n12",
+      "label": "Understand tradeoffs"
+    },
+    {
+      "id": "c12",
+      "source": "n12",
+      "target": "n13",
+      "label": "Assessment passed"
+    },
+    {
+      "id": "c13",
+      "source": "n12",
+      "target": "n14",
+      "label": "Assessment failed"
+    },
+    {
+      "id": "c14",
+      "source": "n14",
+      "target": "n12",
+      "label": "Practice reinforcement"
+    }
+  ],
+  "generated_at": "2026-03-27T10:13:42.247562+00:00",
+  "model": "claude-haiku-4-5"
+}

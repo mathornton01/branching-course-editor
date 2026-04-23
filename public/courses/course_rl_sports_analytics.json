@@ -1,0 +1,301 @@
+{
+  "id": "course_rl_sports_analytics",
+  "title": "Reinforcement Learning for Sports Analytics",
+  "description": "Master reinforcement learning through adaptive coaching and sports optimization scenarios. This assessment-pyramid course routes you to appropriate depth based on diagnostic performance.",
+  "topic": "Reinforcement Learning",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "reinforcement-learning",
+    "sports-analytics",
+    "coaching-ai",
+    "optimization",
+    "machine-learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Coaching Strategy Fundamentals",
+      "content": "Test your understanding of reinforcement learning basics applied to sports. This diagnostic assessment determines the optimal learning path for your current skill level.",
+      "questions": [
+        {
+          "question": "An AI coach observes game states (score, time, player fatigue) and receives wins/losses as feedback to improve its play-calling strategy over thousands of simulated games. Which learning paradigm describes this process?",
+          "options": [
+            "A) Supervised learning with labeled game footage",
+            "B) An agent learning optimal actions through trial and error using reward signals",
+            "C) Unsupervised clustering of similar play patterns",
+            "D) Static analysis of historical statistics"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Supervised learning requires pre-labeled examples of correct decisions.",
+            "Correct! RL is fundamentally about learning through interaction\u2014the agent tries actions and adjusts based on rewards.",
+            "Incorrect. That's an unsupervised learning task, not learning agents that adapt.",
+            "Incorrect. That's descriptive analytics, not learning agents that adapt."
+          ],
+          "explanation": "RL differs from supervised learning because the agent learns from its own experience (trial and error) rather than from labeled training data. In sports, an RL agent receives rewards for wins and penalties for losses, gradually improving its decision-making."
+        },
+        {
+          "question": "A basketball positioning AI is trained by simulating 10,000 games where winning generates +1 reward and losing generates -1 reward. This numeric feedback is known as:",
+          "options": [
+            "A) Loss function",
+            "B) Reward signal",
+            "C) Evaluation metric",
+            "D) Action probability"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A loss function measures prediction error in supervised learning.",
+            "Correct! The reward signal is the key feedback mechanism in RL, guiding the agent toward better policies.",
+            "Incorrect. An evaluation metric measures system performance post-training.",
+            "Incorrect. Action probability is part of a policy, not a reward signal."
+          ],
+          "explanation": "In RL, the reward signal is the primary feedback that the agent uses to evaluate its actions. For a sports positioning AI, wins provide positive rewards and losses provide negative rewards, reinforcing successful tactics."
+        },
+        {
+          "question": "When training an RL agent to optimize a football team's defensive strategy, the current down-and-distance, defensive personnel on field, and opponent's recent play tendencies collectively represent what RL term?",
+          "options": [
+            "A) Action space",
+            "B) State representation",
+            "C) Policy function",
+            "D) Experience buffer"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The action space is the set of all possible decisions the agent can make.",
+            "Correct! The state is the agent's complete observation of the current situation.",
+            "Incorrect. A policy function maps states to action probabilities or values.",
+            "Incorrect. The experience buffer stores past (state, action, reward) tuples for training."
+          ],
+          "explanation": "In RL terminology, the state is the agent's complete observation of the environment at any moment. For a sports AI, the state includes all relevant game metrics (score, personnel, opponent patterns) that inform decision-making."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Advanced Agent Optimization",
+      "content": "Test your understanding of intermediate RL concepts including value functions, exploration-exploitation balance, and reward shaping in competitive sports contexts.",
+      "questions": [
+        {
+          "question": "An NBA draft AI must balance two strategies: (1) Draft proven college stars with known NBA success rates (exploiting known talent), or (2) Draft prospects from mid-major conferences where talent is unproven (exploring hidden gems). What RL concept describes this fundamental tension?",
+          "options": [
+            "A) Convergence problem",
+            "B) Exploration-exploitation tradeoff",
+            "C) Function approximation error",
+            "D) Temporal difference learning"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Convergence is about whether an algorithm reaches stability.",
+            "Correct! Exploration (trying unknowns) vs exploitation (using known good options) is central to RL agent design.",
+            "Incorrect. Function approximation is a technique for handling large state spaces.",
+            "Incorrect. Temporal difference is a learning algorithm, not a strategic tradeoff."
+          ],
+          "explanation": "Exploration-exploitation is central to RL. Purely exploiting (drafting only proven stars) misses high-upside talent. Purely exploring (drafting unknowns) ignores proven value. Optimal agents balance both dynamically\u2014more exploration early, more exploitation later."
+        },
+        {
+          "question": "A coach uses Q-learning to optimize play-calling over a 16-game season, adjusting decisions based on cumulative wins. After 1000 simulated seasons, the system consistently executes near-optimal play calls given any game situation. This indicates the agent has learned:",
+          "options": [
+            "A) A better reward function",
+            "B) Improved state feature engineering",
+            "C) High-quality Q-values and an optimal policy",
+            "D) Faster convergence dynamics"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The reward function (wins/losses) is fixed by the designer.",
+            "Incorrect. The state features are also fixed by domain experts.",
+            "Correct! Q-learning learns Q(state, action) values\u2014expected cumulative reward for each action in each state\u2014and derives an optimal policy from them.",
+            "Incorrect. Convergence speed is a separate property."
+          ],
+          "explanation": "Q-learning learns Q-values (expected future rewards for each action) and derives a policy by always taking the highest-valued action. Well-trained Q-values enable consistent near-optimal decision-making."
+        },
+        {
+          "question": "A designer trains a player-recruitment RL agent using: R(hire) = 5\u00d7player_contract_value + 10\u00d7years_in_league - 3\u00d7injury_risk. What is the primary risk of this reward composition?",
+          "options": [
+            "A) The linear combination will cause instability",
+            "B) The agent may pursue high contract value or seniority instead of actual winning performance",
+            "C) The dimensions don't align (mixing dollar amounts with years)",
+            "D) The agent will ignore injury risk entirely"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Linear reward combinations are stable.",
+            "Correct! If these proxy metrics don't align with winning, the agent optimizes the proxies instead of the true objective\u2014classic reward misalignment.",
+            "Incorrect. RL agents handle heterogeneous features fine with proper scaling.",
+            "Incorrect. The -3 coefficient ensures injury risk is considered."
+          ],
+          "explanation": "This is poorly designed reward shaping. Unless contract value and seniority strongly correlate with winning performance, the agent wastes resources pursuing these proxies. Effective reward shaping requires rigorous validation that auxiliary signals align with true objectives."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Meta-Learning for Competitive Advantage",
+      "content": "Expert RL practitioners combine policy gradient methods with meta-learning to build adaptive coaches that transfer learning across opponents and contexts. Policy gradient algorithms directly optimize the probability distribution of winning actions, enabling smoother learning curves than value-based methods. Meta-learning (learning to learn) allows systems to rapidly adapt to new opponents using minimal game data\u2014critical when competitors evolve their strategies mid-season. Multi-agent RL extends this framework: two competing RL agents simultaneously improve their strategies against an increasingly intelligent opponent, creating an arms race that mirrors championship dynamics. The frontier combines imitation learning (bootstrapping with elite coach playbooks) with self-play (competitive improvement), building hybrid systems that begin with expert knowledge and innovate beyond it. Organizations implementing these advanced techniques achieve 15-25% win-rate improvements over baseline heuristics.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Practitioner Status",
+      "content": "Congratulations! You've achieved expert-level understanding of reinforcement learning in sports analytics. You comprehend policy gradients, multi-agent RL dynamics, meta-learning for rapid adaptation, and the nuances of hybrid imitation-self-play systems. You're equipped to design and deploy cutting-edge RL systems for game-calling optimization, draft strategy, talent evaluation, and competitive preparation. Your next steps: implement policy gradient algorithms in your sports domain, experiment with self-play tournaments, and integrate meta-learning for adaptive opponent response. You are now qualified to lead RL initiatives in professional sports organizations."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Intermediate Practice: Debugging Real-World RL Systems",
+      "content": "Apply intermediate RL concepts by diagnosing and resolving common deployment issues in sports analytics systems.",
+      "questions": [
+        {
+          "question": "You train an RL agent for optimal football play-calling using a physics simulator for 5000 games. The agent performs excellently in simulation but fails during actual games, calling plays that seem inappropriate for real defensive formations. What is the most likely root cause?",
+          "options": [
+            "A) The agent overfitted to the training data",
+            "B) The state representation in simulation omitted important real-world variables (crowd noise, referee tendencies, grass conditions)",
+            "C) The reward signal decayed too quickly",
+            "D) The exploration rate didn't decay properly"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. RL agents generalize better than supervised models to new instances of the same domain.",
+            "Correct! This is the sim-to-real gap: if training omits important features, the learned policy is invalid in reality.",
+            "Incorrect. Reward signal strength affects learning speed, not real-world transfer.",
+            "Incorrect. Exploration-exploitation balance affects convergence, not domain transfer."
+          ],
+          "explanation": "Sim-to-real gap is RL's biggest practical challenge. If your simulator lacks weather, crowd psychology, referee bias, or grass quality, the agent optimizes for a world that doesn't exist. Solution: include all relevant observable features in your state representation."
+        },
+        {
+          "question": "An RL agent trained to optimize NBA lineups reaches high accuracy (wins 70% of simulated games) after 10,000 training episodes. However, it still occasionally selects suboptimal lineups in both training and deployment. Should this be fixed?",
+          "options": [
+            "A) Yes, the agent has clearly failed to converge to the optimal policy",
+            "B) No, continued exploration is necessary to hedge against missing better strategies and to adapt to changing game conditions",
+            "C) Only if the suboptimal selections happen more than 10% of the time",
+            "D) Yes, the learning rate is too high"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Exploration after convergence is intentional and beneficial.",
+            "Correct! Even optimal RL policies maintain tuned exploration to adapt as environments change (roster updates, rule changes, opponent evolution).",
+            "Incorrect. The threshold is arbitrary; the real question is whether exploration serves a purpose.",
+            "Incorrect. Learning rate affects convergence speed, not steady-state exploration."
+          ],
+          "explanation": "A mature RL system doesn't eliminate exploration; it transforms from random exploration to informed exploration. This robustness is essential in sports where conditions (injuries, trades, rule changes) constantly evolve."
+        },
+        {
+          "question": "You design a reward function for a draft AI: R = 3\u00d7(draft_year_career_PER) - 0.5\u00d7injury_history_severity + 0.1\u00d7market_buzz_score. After training, the agent prioritizes high-PER players but ignores injury history and rarely considers undervalued talent. What likely went wrong?",
+          "options": [
+            "A) The market_buzz_score term is too small to matter",
+            "B) The PER weight is too large, dominating the other signals and misaligning the agent with the true objective of building a winning roster",
+            "C) Injury history should use a positive coefficient, not negative",
+            "D) The agent needs more training data to learn the tradeoff"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A 0.1 coefficient makes market buzz meaningful (~3% of reward), but the real issue is elsewhere.",
+            "Correct! The 3\u00d7 weight on PER is so dominant that the agent treats injury history and market inefficiency as negligible. Unless PER perfectly predicts winning contribution, this is misaligned.",
+            "Incorrect. Negative coefficients penalize the behavior (low injury risk is rewarded).",
+            "Incorrect. More data won't fix a poorly designed reward function."
+          ],
+          "explanation": "Reward weight imbalance is a common RL failure mode. If one signal dominates the reward, the agent learns a distorted objective. Solution: normalize rewards to comparable magnitudes and validate that the learned policy matches your actual priorities through ablation studies."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Competent Practitioner Status",
+      "content": "Excellent work! You've developed solid, intermediate-level mastery of reinforcement learning in sports analytics. You understand core RL mechanics (agents, states, actions, rewards, policies), can design diagnostic assessments, and recognize common deployment pitfalls like sim-to-real gap and reward misalignment. You're ready to implement Q-learning agents, debug training issues in real systems, and contribute meaningfully to sports RL projects. Continue deepening your expertise by studying policy gradients, multi-agent systems, and meta-learning to unlock advanced capabilities."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Reinforcement Learning Foundations",
+      "content": "Reinforcement learning is fundamentally different from supervised learning. In supervised learning, you provide the correct answers upfront; in RL, an agent learns by interacting with an environment and receiving rewards or penalties as feedback. Think of it as coaching: you don't tell the AI coach which play to call in each situation. Instead, you let it simulate thousands of games, and it learns which play choices lead to wins (positive rewards) and which lead to losses (negative rewards). The agent gradually builds an intelligent strategy, called a policy, that maximizes cumulative wins. The core components are: (1) the agent\u2014the learning system making decisions, (2) the environment\u2014the sport or game simulator, (3) the state\u2014what the agent observes (score, time remaining, player conditions), (4) actions\u2014possible decisions (which play to run, which player to draft), and (5) the reward signal\u2014outcome feedback (win=+1, loss=-1). Over time, through repeated trial and error, the agent discovers which actions work best in which situations.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Case Study: Teaching an AI to Draft Elite Players",
+      "content": "A professional soccer club builds an RL agent to optimize their youth academy draft. The agent observes the state: current draft pick number, available players' attributes (speed, technique, tactical awareness), team needs (defense vs offense), and historical data on how similarly-drafted players performed. For each state, the agent chooses an action: select a specific prospect. After the simulated draft, the agent receives delayed rewards based on how those drafted players perform over their 5-year careers in the team's system: if a drafted player becomes a star, +100 reward; if transferred out due to weakness, -50 reward; if developed into solid contributors, +20 reward each season. Early in training (first 50 simulated drafts), the agent explores randomly, sometimes picking obscure prospects, sometimes overdrafting high-profile names. Over 500 simulated 10-pick drafts (5000 individual decisions), the agent learns a policy: 'In the first 3 picks, prioritize defenders with elite speed\u2014they develop into world-class fullbacks. In picks 4-7, draft technically-skilled midfielders from competitive leagues, even if undervalued by market consensus. In final picks, take calculated risks on athletic prospects with raw potential.' By year 5 of training, the agent's draft strategy significantly outperforms the club's historical performance and identifies undervalued prospects that other clubs overlooked. This exemplifies RL: the agent was never given explicit instructions; it learned an adaptive, nuanced strategy purely through millions of trial-and-error decisions guided by the reward signal."
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Case Study: Teaching an AI to Draft Elite Players",
+      "content": "A professional soccer club builds an RL agent to optimize their youth academy draft. The agent observes the state: current draft pick number, available players' attributes (speed, technique, tactical awareness), team needs (defense vs offense), and historical data on how similarly-drafted players performed. For each state, the agent chooses an action: select a specific prospect. After the simulated draft, the agent receives delayed rewards based on how those drafted players perform over their 5-year careers in the team's system: if a drafted player becomes a star, +100 reward; if transferred out due to weakness, -50 reward; if developed into solid contributors, +20 reward each season. Early in training (first 50 simulated drafts), the agent explores randomly, sometimes picking obscure prospects, sometimes overdrafting high-profile names. Over 500 simulated 10-pick drafts (5000 individual decisions), the agent learns a policy: 'In the first 3 picks, prioritize defenders with elite speed\u2014they develop into world-class fullbacks. In picks 4-7, draft technically-skilled midfielders from competitive leagues, even if undervalued by market consensus. In final picks, take calculated risks on athletic prospects with raw potential.' By year 5 of training, the agent's draft strategy significantly outperforms the club's historical performance and identifies undervalued prospects that other clubs overlooked. This exemplifies RL: the agent was never given explicit instructions; it learned an adaptive, nuanced strategy purely through millions of trial-and-error decisions guided by the reward signal.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundation Complete",
+      "content": "Congratulations on completing the foundational level of reinforcement learning in sports analytics! You now understand the essential concepts: agents, environments, states, actions, reward signals, and policies. You've seen how RL systems learn complex strategies (like draft optimization) through trial and error rather than explicit programming. You've also learned why RL is different from and more powerful than supervised learning for adaptive sports systems. Your next step: return to the fundamentals assessment and advance into intermediate territory. Build on this foundation by learning value functions, Q-learning, policy optimization methods, and how to overcome common RL deployment challenges in real sports organizations."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (66%+)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Fail (<66%)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass (66%+)"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fail (<66%)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Next"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Next"
+    }
+  ],
+  "generated_at": "2026-03-27T04:07:23.402884+00:00",
+  "model": "claude-haiku-4-5"
+}

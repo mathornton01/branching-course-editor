@@ -1,0 +1,295 @@
+{
+  "id": "film-digital-electronics-course",
+  "title": "Digital Electronics for Film Production",
+  "description": "Learn digital electronics through film production scenarios. Master logic gates, binary operations, and circuit design as applied to lighting, audio, and control systems in professional film sets.",
+  "topic": "Digital Electronics",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "digital-electronics",
+    "logic-gates",
+    "film-production",
+    "circuits",
+    "binary-logic"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Digital Logic Fundamentals in Film",
+      "content": "Test your understanding of logic gates and binary operations in film production contexts. These concepts are the foundation for controlling lighting systems, audio mixers, and camera equipment on professional sets.",
+      "questions": [
+        {
+          "question": "In a film lighting control system using digital logic, what is the primary function of a logic gate?",
+          "options": [
+            "Amplifies electrical signals for brighter lights",
+            "Makes binary decisions about signals based on input states",
+            "Converts analog video signals to digital format",
+            "Adjusts the color temperature of LEDs"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Logic gates don't amplify; that's an amplifier's job. Logic gates make decisions.",
+            "Correct! Logic gates process binary inputs to control binary outputs.",
+            "Video conversion is handled by separate circuits, not logic gates.",
+            "Color temperature adjustment uses different analog circuits."
+          ],
+          "explanation": "Logic gates are digital circuits that output a signal based on logical operations on input signals. In film production, they're used to control equipment based on multiple conditions."
+        },
+        {
+          "question": "You need to light the main subject OR fill the background (or both) from a single lighting control circuit. Which logic gate operation describes this?",
+          "options": [
+            "AND gate - requires both inputs",
+            "OR gate - accepts either or both inputs",
+            "NOT gate - inverts the input",
+            "NOR gate - opposite of OR"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "AND would require both lights to be controlled together.",
+            "Correct! OR gate activates when one OR both inputs are true.",
+            "NOT gate would invert the signal, not combine them.",
+            "NOR would block the outputs, opposite of what you need."
+          ],
+          "explanation": "The OR operation allows either condition to trigger an output. In film lighting, this lets you control lights independently but together when needed."
+        },
+        {
+          "question": "A camera's auto-focus system has a focused/not-focused signal, and it needs to send the opposite signal to a warning light. Which gate produces an inverted output?",
+          "options": [
+            "AND gate",
+            "OR gate",
+            "NOT gate",
+            "NAND gate"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "AND gate combines inputs, doesn't invert.",
+            "OR gate also doesn't invert.",
+            "Correct! NOT gate inverts the input signal.",
+            "NAND is AND followed by NOT, more complex than needed."
+          ],
+          "explanation": "The NOT gate is an inverter. When the input is true (focused), it outputs false (no warning). When input is false (not focused), it outputs true (warning light on)."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Advanced Logic Circuit Design for Film",
+      "content": "You've mastered basic gates. Now apply your knowledge to complex film production scenarios. Design circuits that control professional equipment under multiple conditions, combining gates to create sophisticated control systems.",
+      "questions": [
+        {
+          "question": "In your film studio, a spotlight should only activate when BOTH the power switch is ON AND the dimmer intensity is above 50%. What single gate implements this logic?",
+          "options": [
+            "OR gate - either condition is sufficient",
+            "AND gate - both conditions must be met",
+            "NOT gate - inverts the signal",
+            "XOR gate - exclusive OR operation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "OR would activate if either is true, but you need both.",
+            "Correct! AND gate requires both inputs to be true.",
+            "NOT inverts signals, doesn't combine them.",
+            "XOR is used for different conditional logic."
+          ],
+          "explanation": "AND gates are used when ALL conditions must be satisfied. In film lighting, this ensures equipment only operates when all safety and functional conditions are met."
+        },
+        {
+          "question": "Your color grading workstation processes three RGB channels simultaneously. You need to detect when ALL three channels have valid signal levels. How would you implement this with logic gates?",
+          "options": [
+            "Three OR gates connected in series",
+            "Three AND gates to verify each channel, then AND their outputs",
+            "Three NOT gates to invert each channel",
+            "Use only one AND gate for all three channels"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "OR gates would activate if ANY channel is valid, not all.",
+            "Correct! This cascaded AND approach ensures all channels are valid before proceeding.",
+            "NOT gates invert signals; they don't verify validity.",
+            "Standard AND gates accept only 2 inputs; you need multiple gates for 3 channels."
+          ],
+          "explanation": "Complex logic often requires cascading gates. By using AND gates in series, you verify each condition independently before confirming all are satisfied."
+        },
+        {
+          "question": "In your film's audio mixing system, you want audio from the main microphone AND (either backup speaker 1 OR backup speaker 2). Write the logic expression, then identify the gate arrangement needed.",
+          "options": [
+            "Main OR (Backup1 AND Backup2) - use one OR and one AND",
+            "Main AND (Backup1 OR Backup2) - use one AND and one OR",
+            "(Main AND Backup1) AND Backup2 - use three AND gates",
+            "NOT (Main OR Backup1) - use one NOT and one OR"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This would require both backups, and the main separately.",
+            "Correct! Main must be true, and at least one backup must be true.",
+            "This requires all three to be true, too restrictive.",
+            "This would invert the logic entirely, blocking outputs."
+          ],
+          "explanation": "Complex circuits require combining gates strategically. The OR gate evaluates the backup options, then the AND gate ensures the main input is also present."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Expert Applications: Digital Systems in Film Production",
+      "content": "Master digital electronics by understanding real-world film production systems. Modern film sets use complex digital circuits for camera synchronization, controlling multiple lights based on scene conditions, real-time audio level detection and mixing, and automated color correction. Advanced productions employ Field-Programmable Gate Arrays (FPGAs) to create custom logic circuits that adapt to specific production needs\u2014imagine programming a lighting rig to automatically adjust based on actor position, time of day, and scene requirements. Professional digital video mixers use cascaded logic gates to switch between multiple camera feeds, apply effects only when specific conditions are met, and synchronize audio-visual elements across an entire production. Understanding these systems puts you at the frontier of technical filmmaking.",
+      "next": "n8"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Logic Circuit Practice for Film Control Systems",
+      "content": "You're almost there! Practice combining logic gates to solve realistic film production challenges. These questions will reinforce your understanding of when to use AND, OR, and NOT gates in complex scenarios.",
+      "questions": [
+        {
+          "question": "A film lighting rig has three spotlights. You need to activate a cooling fan when ANY spotlight is on. What gate implementation is correct?",
+          "options": [
+            "Use one AND gate with all three lights as inputs",
+            "Use OR gates to combine all light signals into one output",
+            "Use NOT gates on each light signal",
+            "Use NAND gates exclusively"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "AND would require all three lights to be on before cooling activates.",
+            "Correct! OR gate activates when any input is true.",
+            "NOT gates would invert the signals, not combine them.",
+            "NAND gates are AND gates inverted, opposite of what you need."
+          ],
+          "explanation": "When any condition can trigger an action, use OR logic. The cooling fan should activate as soon as any spotlight generates heat."
+        },
+        {
+          "question": "Your camera control system needs to record only when the camera is powered ON AND the recording format is set to DCI 4K (a special DCI 4K signal is available). The format signal defaults to 0 when NOT in DCI 4K mode. Which gate is appropriate?",
+          "options": [
+            "OR gate",
+            "AND gate",
+            "NOT gate",
+            "XOR gate"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "OR would start recording if either condition existed.",
+            "Correct! AND ensures both power AND format conditions are met.",
+            "NOT inverts signals, doesn't combine conditions.",
+            "XOR is for different conditional logic patterns."
+          ],
+          "explanation": "Safety-critical systems use AND gates. Recording should only begin when all required conditions are definitively met."
+        },
+        {
+          "question": "In your production's audio monitoring system, headphone monitoring should be DISABLED when the main speaker output is active. What gate implements this inverse relationship?",
+          "options": [
+            "AND gate",
+            "OR gate",
+            "NOT gate",
+            "NAND gate"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "AND combines conditions in an additive way.",
+            "OR also doesn't invert.",
+            "Correct! NOT gate inverts the main speaker signal.",
+            "NAND is AND followed by NOT, more complex here."
+          ],
+          "explanation": "When you need an output that is the opposite of an input, the NOT gate (inverter) is your solution. This prevents audio feedback in professional productions."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Logic Gates Fundamentals",
+      "content": "Let's build your foundation in digital logic. In film production, digital control systems rely on logic gates\u2014simple circuits that make yes/no decisions. The AND gate outputs true only when ALL inputs are true; imagine a spotlight that requires power AND a valid dimmer signal. The OR gate outputs true when ANY input is true; like a warning system that alerts if temperature is high OR humidity is excessive. The NOT gate is an inverter that flips true to false and vice versa; used in safety systems to disable backups when primary systems are active. These three gates are the building blocks of all digital electronics, from camera controls to audio mixers.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Worked Example: Film Lighting Control System",
+      "content": "Consider a simple film set with two key lights: Key Light (main actor) and Fill Light (reducing shadows). You want to implement a safety system: \"Turn on the cooling fan if the Key Light is ON, OR if the Fill Light is ON, OR if the set temperature exceeds 85\u00b0F.\" This uses an OR gate with three inputs: Key Light signal, Fill Light signal, and Temperature Sensor output. When any of these inputs is true (high voltage), the OR gate outputs true (high voltage), activating the cooling fan. Real productions use this exact logic\u2014multiple monitoring inputs feeding into OR gates to trigger protective equipment. The beauty is simplicity: one gate solves the entire problem.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Foundation Complete",
+      "content": "Excellent work! You've learned the fundamentals of digital logic gates and how they apply to film production. You now understand AND, OR, and NOT gates, and can recognize when each is appropriate. Continue your journey by practicing more complex circuits and exploring how professional productions use these building blocks to control cameras, lighting rigs, and audio systems. Your next step: apply these gates to multi-input scenarios and real production challenges."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Advanced Mastery Achieved",
+      "content": "Congratulations! You've achieved expert-level understanding of digital electronics in film production. You can design complex circuits combining multiple gates, understand cascading logic, and apply these principles to professional-grade production equipment. You're ready to work with advanced systems like FPGAs, real-time control systems, and custom digital solutions. Continue learning about microcontrollers, digital signal processing, and the latest technologies reshaping modern filmmaking. Your expertise positions you at the cutting edge of technical cinema."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Ready to Move Forward",
+      "content": "Great effort! You've practiced applying logic gates to film production scenarios. You now have a solid grasp of when to use AND, OR, and NOT gates in real equipment control systems. Review the examples and continue practicing with more complex circuits. As you work on actual film sets or in production facilities, you'll recognize these logic patterns everywhere\u2014in lighting control systems, camera synchronization, and audio mixing. Keep building your skills!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "Fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n8",
+      "label": "Complete"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Next"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Next"
+    }
+  ],
+  "generated_at": "2026-03-27T16:34:18.295382+00:00",
+  "model": "claude-haiku-4-5"
+}

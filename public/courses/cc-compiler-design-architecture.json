@@ -1,0 +1,294 @@
+{
+  "id": "cc-compiler-design-architecture",
+  "title": "Compiler Design Through Architecture",
+  "description": "Master compiler design by learning it through the lens of building architecture. Progress from material classification (lexical analysis) through blueprint creation (parsing) to final construction (code generation).",
+  "topic": "Compiler Design",
+  "theme": "architecture",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "compiler-design",
+    "programming-languages",
+    "architecture",
+    "adaptive-learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Lexical Analysis Fundamentals",
+      "content": "Lexical analysis is the compiler's first phase, where it breaks source code into tokens\u2014the basic building blocks of the program. Just as an architect inventories building materials before construction, the compiler identifies keywords, identifiers, operators, and literals. Understanding token recognition is crucial for grasping how compilers transform human-readable code into executable instructions.",
+      "questions": [
+        {
+          "question": "In the source code `int count = 0;`, what tokens does the lexer produce?",
+          "options": [
+            "int count = 0 ; (5 separate tokens)",
+            "int count = 0; (single token)",
+            "intcount=0 (single token)",
+            "int, count, =, 0, ; (only keywords as tokens)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Each element is a distinct token.",
+            "Incorrect. The lexer breaks this into 5 tokens.",
+            "Incorrect. The lexer doesn't remove spaces; it uses them to delimit tokens.",
+            "Incorrect. The lexer recognizes all token types, not just keywords."
+          ],
+          "explanation": "The lexer scans the source code character-by-character, grouping characters into tokens. Like sorting building materials into labeled bins, it creates tokens for the keyword `int`, identifier `count`, operator `=`, literal `0`, and punctuation `;`."
+        },
+        {
+          "question": "Which of these is NOT a token type that a typical lexer recognizes?",
+          "options": [
+            "Keyword (like 'if', 'while', 'return')",
+            "Identifier (variable names like 'x', 'myVar')",
+            "Semantic meaning (whether a variable is used correctly)",
+            "Literal (like '42', '3.14', 'hello')"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Keywords are recognized tokens.",
+            "Incorrect. Identifiers are recognized tokens.",
+            "Correct! Semantic analysis happens later; lexers only recognize token types.",
+            "Incorrect. Literals are recognized tokens."
+          ],
+          "explanation": "The lexer works purely on pattern recognition, like identifying material types visually. Semantic meaning\u2014whether that variable is actually used correctly\u2014is determined in later compiler phases. The lexer doesn't check if `myVar` is defined; it just recognizes it as an identifier token."
+        },
+        {
+          "question": "Whitespace and comments are removed by the lexer. What does this mean?",
+          "options": [
+            "They don't appear in the source code",
+            "They're important for readability but converted to tokens that the parser ignores",
+            "The parser needs them to function correctly",
+            "They're converted into operator tokens"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. They still exist in source; the lexer just removes them from the token stream.",
+            "Correct! They guide the lexer but don't produce tokens the parser needs.",
+            "Incorrect. The parser works fine without them; they're purely for human readability.",
+            "Incorrect. Whitespace isn't converted to operators."
+          ],
+          "explanation": "Think of whitespace and comments as construction notes on architectural plans. The architect reads them for clarity, then removes them from the final specification. Similarly, the lexer uses whitespace to separate tokens and reads comments for documentation, but neither produces tokens for the parser. The parser only sees the essential tokens\u2014like a construction crew that gets only the final, clean blueprints."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Parsing and Syntax Trees",
+      "content": "Parsing is the second phase, where the compiler builds a syntax tree from tokens. If lexical analysis is like sorting building materials, parsing is like verifying that materials are arranged according to architectural rules. The parser checks that tokens follow the language's grammar rules and creates a tree structure representing the program's hierarchy.",
+      "questions": [
+        {
+          "question": "Given tokens: `if`, `(`, `x`, `>`, `5`, `)`, `{`, ... what does the parser do?",
+          "options": [
+            "Converts them back to source code",
+            "Checks they follow grammar rules and builds a syntax tree structure",
+            "Optimizes them for faster execution",
+            "Translates them directly to machine code"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The parser doesn't reverse lexical analysis.",
+            "Correct! The parser validates grammar and structures tokens hierarchically.",
+            "Incorrect. Optimization happens in later phases.",
+            "Incorrect. Code generation comes after parsing."
+          ],
+          "explanation": "Like a building inspector verifying that materials are used according to blueprints, the parser verifies that tokens follow the language's grammar. It doesn't optimize or generate code; it just ensures structural correctness and organizes tokens into a tree where the `if` statement is the root, the condition `(x > 5)` is one branch, and the body is another."
+        },
+        {
+          "question": "In a syntax tree for `x = y + z;`, what is the root node?",
+          "options": [
+            "Assignment (=)",
+            "Variable x",
+            "Addition (+)",
+            "Variable z"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The root is the top-level operation.",
+            "Incorrect. Variables appear as leaves, not roots.",
+            "Incorrect. Addition is nested within the assignment.",
+            "Incorrect. This is a leaf node, not the root."
+          ],
+          "explanation": "In an architecture analogy: the assignment is the main load-bearing wall (the primary structure), while the addition expression is a structural detail supporting it. The tree structure reflects the hierarchy of operations: assignment is the outermost, addition is nested within it, and variables are the leaf nodes\u2014like the foundation materials at the bottom of the architecture."
+        },
+        {
+          "question": "What happens if the parser encounters tokens that don't follow grammar rules?",
+          "options": [
+            "It skips them and continues parsing",
+            "It generates an error message and stops parsing",
+            "It rearranges tokens to fit the grammar",
+            "It converts them to different token types"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Invalid grammar causes compilation to fail.",
+            "Correct! Parse errors halt compilation.",
+            "Incorrect. The parser doesn't modify tokens; it validates them.",
+            "Incorrect. The parser doesn't change token types."
+          ],
+          "explanation": "Like a building inspector rejecting construction that violates building codes, the parser rejects syntax violations. If the code has mismatched braces or missing semicolons, the parser reports an error\u2014just like an architect would flag structural problems before construction proceeds. This prevents invalid code from advancing to later compilation stages."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Code Generation and Optimization",
+      "content": "When a master architect designs a building, they ensure every structural element serves a purpose. Similarly, in code generation and optimization, the compiler transforms an abstract syntax tree into efficient machine instructions. Modern compilers apply techniques like dead code elimination (removing unnecessary walls), register allocation (optimally placing structural elements), and loop unrolling (expanding repeated patterns for efficiency). Consider a skyscraper: the architect initially designs it with full detail, but then optimizes for material usage, load distribution, and construction speed. The compiler does the same with code\u2014starting from a complete semantic model and progressively optimizing for speed, memory usage, and energy efficiency. Advanced compilers even apply architectural principles like modularity and layering to code generation, ensuring that different parts of the program don't interfere with each other.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete",
+      "content": "Congratulations! You've mastered compiler design from the perspective of building architecture. You understand how lexical analysis sorts materials, parsing creates blueprints, and code generation constructs the final building. You're ready to explore advanced topics like intermediate representations, dataflow analysis, and machine-specific optimizations. Your knowledge of compiler phases mirrors the full architectural design-to-construction lifecycle."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Parsing Practice: Building Syntax Trees",
+      "content": "Let's reinforce parsing concepts by working through syntax tree construction. Just as an architect creates multiple drawings to verify structural integrity, we'll practice building parse trees for different code structures.",
+      "questions": [
+        {
+          "question": "For the code `while (count < 10) { count++; }`, which statement is correct about the parse tree?",
+          "options": [
+            "The while loop is the root; the condition and body are subtrees",
+            "The condition `count < 10` is the root node",
+            "The increment `count++` is the root node",
+            "All elements are at the same tree level"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The while loop structure dominates the tree.",
+            "Incorrect. The condition is a child of the while loop node.",
+            "Incorrect. The increment is a child of the while loop body.",
+            "Incorrect. Parse trees are hierarchical, reflecting code structure."
+          ],
+          "explanation": "Think of it as architectural hierarchy: the main wall (while loop) is the primary structure, with attached components for the condition and the body. The tree reflects how the code is structured, not the order it executes."
+        },
+        {
+          "question": "A parser encounters `if (x == 5 { ... }` (missing closing parenthesis). What occurs?",
+          "options": [
+            "It creates a valid parse tree by ignoring the error",
+            "It reports a syntax error because the grammar rules are violated",
+            "It treats the brace as a closing parenthesis",
+            "It automatically inserts the missing parenthesis"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Parsers are strict about grammar violations.",
+            "Correct! Missing tokens cause parse errors.",
+            "Incorrect. Different tokens have different grammatical roles.",
+            "Incorrect. Modern parsers don't auto-fix syntax errors."
+          ],
+          "explanation": "Like a building code inspector rejecting a blueprint with a missing load-bearing column, the parser rejects code with missing tokens. The parenthesis isn't optional\u2014it's required by the grammar, just as load-bearing elements are required for structural integrity."
+        },
+        {
+          "question": "Why is the parse tree called 'abstract' rather than 'concrete'?",
+          "options": [
+            "It includes unimportant details like whitespace and comments",
+            "It removes formatting details while preserving the program's logical structure",
+            "It's more complicated than concrete representations",
+            "It can only represent some programming languages"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Abstract syntax removes these details.",
+            "Correct! It focuses on logical structure, not formatting.",
+            "Incorrect. Abstractness refers to level of detail, not complexity.",
+            "Incorrect. ASTs work for most programming languages."
+          ],
+          "explanation": "An architectural blueprint shows only essential elements\u2014walls, doors, windows\u2014without scratches, coffee stains, or revision notes. Similarly, an abstract syntax tree captures the program's logical structure without cosmetic details like whitespace or comments. It's the essential building specification."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Path Complete",
+      "content": "Well done! You've solidified your understanding of parsing and syntax trees. You now grasp how the compiler validates code structure and builds a hierarchical representation of your program. This foundation prepares you for understanding semantic analysis and code generation. You've climbed the intermediate tier of compiler architecture."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Understanding Tokens and Lexemes",
+      "content": "In architecture, before constructing a building, architects classify materials: steel beams, concrete blocks, glass panels, etc. Similarly, compilers begin by breaking source code into tokens. A token is like a classified building material\u2014it has a type (keyword, identifier, operator) and a value. Just as an architect reads 'load-bearing steel beam, 20 meters' as a single logical unit, the lexer reads 'for' as a single KEYWORD token, not four separate characters. Think of tokenization as the material inspection phase: raw source code is the pile of supplies, and tokens are the organized, labeled materials ready for the next phase of construction. The lexer groups characters into tokens using rules called 'regular expressions.' For example, an identifier token is defined as 'any letter followed by any number of letters or digits.' This is like classifying a piece of material: if it has these characteristics, it gets this label.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: Tokenizing an Architectural Specification",
+      "content": "Imagine an architect's specification: `load_bearing_wall height=10m material=steel`. The lexer reads this as: (1) Token: `load_bearing_wall` (IDENTIFIER), (2) Token: `height` (IDENTIFIER), (3) Token: `=` (OPERATOR), (4) Token: `10` (LITERAL), (5) Token: `m` (IDENTIFIER, the unit), (6) Token: `material` (IDENTIFIER), (7) Token: `=` (OPERATOR), (8) Token: `steel` (IDENTIFIER). Just as this specification is broken into labeled components, source code is tokenized into typed components. Each token carries its type and value, ready for the parser to verify that they're arranged correctly. Without proper tokenization, the parser couldn't even begin to check if the specification is architecturally valid.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Beginner Path Complete",
+      "content": "Excellent! You've grasped the fundamentals of lexical analysis and tokenization. You now understand how the compiler's first phase breaks code into recognizable units, much like how materials are organized before construction. While you've completed the beginner tier, consider returning to challenge the parsing assessment to advance further in your compiler design journey. Every architect master began by understanding their materials!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass (67%+)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "fail (<67%)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass (67%+)"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail (<67%)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "continue"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "continue"
+    }
+  ],
+  "generated_at": "2026-03-27T09:03:24.771556+00:00",
+  "model": "claude-haiku-4-5"
+}

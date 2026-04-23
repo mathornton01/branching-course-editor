@@ -1,0 +1,305 @@
+{
+  "id": "algo-complexity-culinary",
+  "title": "Algorithm Design and Complexity: A Culinary Journey",
+  "description": "Master the principles of algorithm design and Big O complexity analysis through real-world restaurant kitchen scenarios and culinary challenges.",
+  "topic": "Algorithm Design and Complexity",
+  "theme": "culinary arts",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "algorithms",
+    "complexity",
+    "time-complexity",
+    "space-complexity",
+    "culinary",
+    "scenario-based",
+    "design-paradigms"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Gala Challenge",
+      "content": "You've just become executive chef at Michelin-starred Le Moderne. The restaurant has received a last-minute catering order: 200 plates of a complex multi-course dish must be plated perfectly in exactly 90 minutes. Your kitchen staff is experienced but your current workflow was designed for 50 covers per service. The critical question: how do you redesign your kitchen algorithm to scale from 50 to 200 plates while maintaining quality? This is the essence of algorithm design\u2014choosing the right approach to solve problems efficiently as scale increases. Your decision will determine success or failure.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Optimization Strategy",
+      "content": "You gather your sous chefs to discuss the core challenge. Your head line cook proposes: 'We should design everything around speed\u2014parallel processing of multiple dishes simultaneously across stations.' Your head pastry chef counters: 'No, we should optimize for ingredient space and prep efficiency\u2014minimize storage, maximize elegance.' Which principle should guide your algorithmic redesign for the gala?",
+      "choices": [
+        {
+          "label": "Optimize for time complexity (parallel processing, speed)",
+          "next": "n3"
+        },
+        {
+          "label": "Optimize for space complexity (efficient resource management)",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Time Complexity: The Parallel Kitchen",
+      "content": "Time complexity measures how an algorithm's running time grows as input size increases. In your kitchen, cooking 1 plate takes 3 minutes (prep: 1 min, cook: 1.5 min, plate: 0.5 min). With one person working sequentially, 200 plates = 600 minutes\u2014impossible! But if you organize into parallel stations (prep station, cooking station, plating station), each handling dishes simultaneously, you achieve O(n/k) complexity where k is the number of parallel processors. This is divide-and-conquer thinking: divide the 200 plates across multiple independent stations and conquer in parallel. The key insight is architectural: you don't work faster on individual items, you restructure to use parallelization effectively. More stations = faster completion for the same total work. This is professional complexity optimization.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Parallel Cooking Example: Mise en Place Pipeline",
+      "content": "Example: Coq au Vin for 200 guests requires (1) brunoise vegetables to fine dice, (2) sear chicken until golden, (3) braise everything together for 90 minutes. Naive approach: Chef A spends 40 minutes prepping all 200 brunoise sets, then 45 minutes searing all chicken, then 75 minutes braising (each batch of 20). Total: 160 minutes\u2014too slow! Smart approach: Set up 5 independent prep stations. Station 1 begins brunoise while Station 2 starts searing and Station 3 preps sauce. After initial setup, finished brunoise flows directly into Station 2's searing pan just as it finishes the previous batch, and that flows to Station 3. With this mergesort-like pipeline, dishes complete every 12 seconds. Total: 45 minutes with parallelism. This demonstrates O(n/k) complexity\u2014same steps, same total work, but architecture changes the scaling. This is algorithmic redesign in practice.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Time Complexity Mastery Check",
+      "content": "Demonstrate your understanding of time complexity and parallel processing in culinary contexts.",
+      "questions": [
+        {
+          "question": "Your kitchen can handle one 5-minute plate at a time. With 3 independent parallel cooking stations, how many 5-minute plates can you complete in 100 minutes?",
+          "options": [
+            "20 plates (parallelization doesn't improve scaling)",
+            "60 plates (approximately 3\u00d7 faster due to parallel processing)",
+            "100 plates (5-minute plates \u00d7 20 iterations)",
+            "300 plates (3 stations \u00d7 100 minutes)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Parallelization absolutely helps when designing algorithms correctly.",
+            "Correct! With 3 parallel stations, each taking 5 minutes per plate, you can pipeline so that approximately 3 plates complete every 5 minutes. In 100 minutes: ~60 plates total. This is O(n/k) scaling where k=3.",
+            "Incorrect. Each station can only complete one 5-minute plate per iteration, not every plate in 5 minutes total.",
+            "Incorrect. This ignores that each plate still takes 5 minutes at its station."
+          ],
+          "explanation": "Parallel processing reduces effective complexity from O(n) to O(n/k) by distributing work across k independent processors. With 3 stations, you achieve roughly 3\u00d7 throughput."
+        },
+        {
+          "question": "Which cooking process best demonstrates divide-and-conquer algorithm design?",
+          "options": [
+            "One chef cooking all 100 dishes alone, one after another",
+            "Splitting vegetable prep, protein preparation, and sauce-building into separate workstations that feed a central assembly area",
+            "Using the same recipe for all dishes without modification",
+            "Cooking all dishes in a single batch without separation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Sequential processing by one person is O(n) complexity, not divide-and-conquer.",
+            "Correct! Dividing prep into parallel workstations (vegetables, proteins, sauces) that independently feed a central assembly (conquer step) is textbook divide-and-conquer. Work happens in parallel, reducing overall time complexity.",
+            "Incorrect. Recipe consistency has nothing to do with algorithmic design patterns.",
+            "Incorrect. Batch cooking without separation remains sequential thinking."
+          ],
+          "explanation": "Divide-and-conquer means breaking a problem into independent subproblems (multiple prep stations), solving them in parallel, and combining results efficiently. This architecture directly reduces time complexity."
+        },
+        {
+          "question": "You're preparing pasta carbonara for 100 guests. Boiling 1 pot of pasta takes 10 minutes. How does using 5 pots simultaneously change the time complexity?",
+          "options": [
+            "From O(n) to O(1)\u2014time becomes independent of number of guests",
+            "From O(n) to O(n/5)\u2014time grows slower with more parallel processors",
+            "From O(n) to O(n\u00b2)\u2014parallelization actually makes it worse",
+            "It doesn't change complexity, just increases throughput"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Time still scales with the number of guests; complexity doesn't drop to O(1).",
+            "Correct! Using 5 parallel pots allows you to complete approximately 5\u00d7 more pasta in the same time window. Complexity improves from O(n) sequential to O(n/5) parallel. This is the essence of scaling algorithms.",
+            "Incorrect. Parallel resources improve efficiency, not degrade it.",
+            "Incorrect. Throughput and time complexity are directly related in this context."
+          ],
+          "explanation": "Increasing parallel resources changes algorithmic complexity from O(n) sequential to O(n/k) parallel. The scaling factor k (number of processors) directly affects how completion time grows with input size."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n6",
+      "type": "decision",
+      "title": "Final Kitchen Strategy Decision",
+      "content": "You've mastered time complexity theory. Now your team debates the implementation: Approach A uses full parallel choreography\u20143 prep stations, 2 cooking stations, 3 plating stations\u2014each stage starts as the previous finishes in perfect rhythm. Plates flow through like an assembly line in automotive manufacturing. Approach B is simpler: run prep and cooking in parallel, but plating waits until a batch finishes. It's less coordination but creates queuing delays and idle time. Which approach implements true O(n/k) complexity?",
+      "choices": [
+        {
+          "label": "Full parallel pipeline with careful choreography (true O(n/k) complexity)",
+          "next": "n7"
+        },
+        {
+          "label": "Partial parallelism with bottlenecks at plating (suboptimal, creates queues)",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Success: The Gala Triumph",
+      "content": "Your meticulously orchestrated parallel kitchen executed flawlessly. At minute 87, the final plate left the kitchen. All 200 guests received their coq au vin simultaneously, each plate perfect\u2014garnish positioned identically, sauce temperature precise, protein cooked to specification. The restaurant received standing ovations and secured a Michelin star. Your head sous chef remarked: 'That was machine-like efficiency.' You understood: algorithmic design isn't about individual speed\u2014it's about intelligent architecture and coordination. You applied O(n/k) complexity principles in real time. By distributing work across parallel stations without bottlenecks, you achieved linear scaling: doubling stations roughly halves completion time. This is professional-level algorithm design. Your kitchen became a case study in complexity optimization."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Failure: The Bottleneck Disaster",
+      "content": "Despite rapid prep work, the plating station became a catastrophic bottleneck. After 90 minutes, only 140 plates were finished and cooling. Guests waited 45+ minutes for entr\u00e9es. Food quality degraded (temperature, sauce separation). Customers complained publicly. The restaurant lost its reputation and eventually closed. Your failure illuminates a critical principle: partial parallelism with bottlenecks doesn't improve time complexity\u2014it still approximates O(n) because the critical path remains linear. You optimized prep and cooking but ignored the bottleneck at plating. Algorithm design requires optimizing the entire pipeline, not individual segments. True O(n/k) complexity demands that ALL stages run in parallel with balanced throughput. Your failure was an expensive education: bottlenecks destroy complexity gains. Professional chefs and software engineers both learn this hard lesson."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Space Complexity: The Efficient Pantry",
+      "content": "Space complexity measures how much storage (memory) an algorithm requires relative to input size. In your kitchen, this means ingredient staging, working surface space, and refrigerator allocation. A naive recipe uses O(n) space: store every intermediate result in bins and containers. All 200 brunoise sets in trays, all 200 seared chicken portions on sheet pans, all 200 sauce portions in containers\u2014all waiting simultaneously before final assembly. This requires 40+ square feet of staging space. But dynamic programming-inspired chefs use just-in-time methodology: ingredients flow directly from prep into the cooking pot; finished sauces never sit in containers because they're used immediately. This reduces space to O(1) or O(log n)\u2014constant working space regardless of portion count. The stock reduction principle mirrors this: instead of storing individual stock components, you build a unified demi-glace that encodes previous reduction results. Space-optimized algorithms are elegant, require less infrastructure, and reduce waste.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Space Complexity Example: Just-In-Time Assembly",
+      "content": "Example: Beef Wellington for 200 guests. Inefficient approach (O(n) space): Sear all 200 beef tenderloin portions and store on sheet trays (8 sq ft of cooling space). Prepare all 200 duxelle fillings and store in containers (6 sq ft refrigerator space). Wrap all 200 beef in duxelle and let them rest (12 sq ft staging space). Wrap all 200 in pastry sheet and store unbaked (15 sq ft refrigerator space). Bake in batches. Total dedicated space: 40+ sq ft for 90 minutes. Efficient approach (O(1) space): Sear beef portion \u2192 immediately wrap in duxelle \u2192 immediately wrap in pastry \u2192 immediately bake. One compact workstation (3 sq ft), continuous flow. Finished Wellingtons go directly to plating. The same 200 guests' meals require only 3 sq ft and zero storage buffers. This is O(1) space complexity\u2014constant working space regardless of input size. Professional chefs use this daily: mise en place feeds directly into cooking; ingredients arrive just-in-time. This is the difference between O(n) buffering and O(1) streaming\u2014both are valid, but constraints determine which applies.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Space Complexity Mastery Check",
+      "content": "Demonstrate your understanding of space complexity and efficient resource management.",
+      "questions": [
+        {
+          "question": "You're making 100 portions of Coq au Vin. Approach A: prep all vegetables in bins (4 trays storage), prep all chicken and store separately (3 trays), cook in batches using all storage (8 trays active during cooking). Total: 15 trays at peak. Approach B: prep vegetables \u2192 add directly to pot \u2192 add chicken \u2192 braise one batch completely before starting next. What is Approach B's space complexity?",
+          "options": [
+            "O(n)\u2014still requires storage proportional to number of portions",
+            "O(1) or O(log n)\u2014minimal working space, minimal storage buffers",
+            "O(n\u00b2)\u2014exponentially worse",
+            "O(\u221an)\u2014square root scaling"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Approach B doesn't scale linearly with portions; it reuses the same pots.",
+            "Correct! Just-in-time assembly in Approach B requires only 1-2 active pots (constant) regardless of whether you make 100 or 1000 portions. This is O(1) space complexity\u2014the working space doesn't grow with input.",
+            "Incorrect. Approach B is more efficient, not worse.",
+            "Incorrect. Approach B uses constant space, not square-root scaling."
+          ],
+          "explanation": "Just-in-time ingredient flow reduces space from O(n) buffering to O(1) constant workspace. The same infrastructure scales to any number of portions without additional storage."
+        },
+        {
+          "question": "Which kitchen approach best demonstrates O(n) space complexity?",
+          "options": [
+            "A single chef with one cutting board, washing and reusing it continuously",
+            "Prepping all 200 portions of a dish simultaneously and storing each in individual containers before cooking begins",
+            "Using shared equipment that processes one batch at a time",
+            "Making small, simple portions that require minimal space"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A single reused cutting board requires O(1) space, not O(n).",
+            "Correct! Prepping all 200 portions and storing them individually means storage grows linearly with input. 100 portions = 100 containers; 200 portions = 200 containers. This is O(n) space.",
+            "Incorrect. Batch processing with reuse doesn't necessarily consume O(n) space.",
+            "Incorrect. Portion size doesn't define space complexity."
+          ],
+          "explanation": "O(n) space means storage or working memory grows linearly with input size. Prepping and buffering all portions before use is a classic O(n) space pattern."
+        },
+        {
+          "question": "You redesign a recipe using dynamic programming principles: instead of storing 50 intermediate demi-glace reductions separately, you build one master stock that encodes all previous reduction results. What space complexity improvement do you achieve?",
+          "options": [
+            "From O(n) to O(n\u00b2)\u2014space grows exponentially worse",
+            "From O(n) to O(1) or O(log n)\u2014dramatic space reduction by encoding results",
+            "From O(1) to O(n)\u2014space actually increases",
+            "No change\u2014complexity remains the same"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Dynamic programming improves efficiency; it doesn't worsen it.",
+            "Correct! Building a single master stock instead of storing n intermediate results reduces space from O(n) to O(1) or O(log n). This is dynamic programming's key advantage: reuse previous computational results, minimize storage.",
+            "Incorrect. Dynamic programming specifically reduces space requirements.",
+            "Incorrect. Dynamic programming provides measurable space improvements by eliminating redundant storage."
+          ],
+          "explanation": "Dynamic programming reduces space by reusing previous computational results. Instead of storing all intermediate states (n containers of sauce), you maintain one encoded state (master stock) that contains essential information from all previous steps."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n12",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "Success: The Efficient Kitchen",
+      "content": "You chose the space-optimized approach. Your kitchen's counter space shrunk by 40% while handling the 200-plate gala. Using just-in-time ingredient flow and dynamic programming-inspired stock building, you created an elegant, lean system. Setup took 15 minutes instead of 45. Your prep team operated calmly without fighting for space. Collisions and accidents dropped to zero. Storage costs fell. The restaurant thrived and expanded to a second location. Key learning: Algorithm design isn't always about raw speed\u2014it's about understanding trade-offs. Sometimes space-optimized algorithms are marginally slower but vastly more elegant and sustainable. You learned that O(n) buffering and O(1) streaming are both valid strategies; professionals choose based on constraints (capital, space, waste tolerance). Your kitchen became a model of algorithmic efficiency. You've now mastered both dimensions of complexity analysis: time (parallel scaling via O(n/k)) and space (streaming via O(1)). You think like a computer scientist. Congratulations."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Time optimization path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n9",
+      "label": "Space optimization path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6a",
+      "source": "n5",
+      "target": "n6",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c6b",
+      "source": "n5",
+      "target": "n8",
+      "label": "Fail (<2 correct)"
+    },
+    {
+      "id": "c7a",
+      "source": "n6",
+      "target": "n7",
+      "label": "Full parallel pipeline"
+    },
+    {
+      "id": "c7b",
+      "source": "n6",
+      "target": "n8",
+      "label": "Partial parallelism"
+    },
+    {
+      "id": "c8",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n11",
+      "target": "n12",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T07:14:13.127765+00:00",
+  "model": "claude-haiku-4-5"
+}

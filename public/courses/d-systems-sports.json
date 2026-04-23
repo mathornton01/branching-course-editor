@@ -1,0 +1,374 @@
+{
+  "id": "d-systems-sports",
+  "title": "Distributed Systems in Sports Analytics",
+  "description": "Master the three pillars of distributed systems\u2014consistency, fault tolerance, and scalability\u2014through real-world sports analytics scenarios. Choose your learning path and explore how platforms serve billions of fans during major sporting events.",
+  "topic": "Distributed Systems",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed-systems",
+    "sports-analytics",
+    "scalability",
+    "reliability",
+    "data-consistency"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Distributed Systems in Sports Analytics: An Overview",
+      "content": "Modern sports platforms handle real-time data from multiple sources\u2014stadiums, sensors, fans\u2014across global infrastructure. A distributed system breaks this problem into multiple computers working together seamlessly. In sports analytics, you're managing live game scores, player statistics, injury reports, and fan engagement across regions worldwide. This course explores three critical pillars: ensuring data consistency when updates happen simultaneously across continents, maintaining reliability when parts fail without going dark, and scaling to millions of concurrent users during major events like the Super Bowl or World Cup final. Each pillar involves tradeoffs that you'll learn to navigate.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Select which aspect of distributed systems resonates most with your role in sports analytics. Each path explores a critical challenge and how distributed systems solve it.",
+      "choices": [
+        {
+          "label": "Data Consistency & Replication",
+          "next": "n3"
+        },
+        {
+          "label": "Fault Tolerance & Reliability",
+          "next": "n6"
+        },
+        {
+          "label": "Scalability & Load Balancing",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Data Consistency & Replication",
+      "content": "In live sports, multiple data centers must report identical game scores. When a basketball player scores, that event must propagate instantly to all systems\u2014fan apps, broadcast graphics, betting platforms, and league databases. However, network delays mean different systems see the update at different times. Consistency strategies like eventual consistency (all systems agree eventually) or strong consistency (all systems agree immediately) each have tradeoffs in speed and complexity. Sports platforms often use techniques like write-ahead logs, quorum reads, and event sourcing to balance speed and accuracy. Understanding these tradeoffs is essential for building trustworthy analytics platforms that maintain data integrity across continents.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Live Score Propagation Example",
+      "content": "During an NFL game, a touchdown occurs at the primary data center in New York (3:00:00.000 PM EST). The event is written to a distributed transaction log and replicated asynchronously. The Los Angeles data center receives and processes this update at 3:00:00.100 PM PST (3 seconds after the touchdown), while the London data center at 3:00:05 PM GMT (8 seconds after). Fans in each region see the score update within 500ms of receiving it, though London users see the touchdown 5 seconds after New York. By using eventual consistency and a reliable log-replication protocol, the system ensures no conflicting versions exist\u2014all systems eventually see the same score. This example shows how accepting brief inconsistencies allows the system to remain fast and responsive globally without complex synchronization.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Consistency & Replication Assessment",
+      "content": "Test your understanding of consistency models and replication strategies in distributed sports analytics systems.",
+      "questions": [
+        {
+          "question": "In a multi-region sports analytics platform, a player injury is reported in New York at 3:00 PM. The LA data center updates at 3:00:02 PM, and London at 3:00:05 PM. What consistency model allows this scenario?",
+          "options": [
+            "Strong consistency (all data centers update simultaneously)",
+            "Eventual consistency (all agree eventually, but not immediately)",
+            "Causal consistency (updates follow a specific order)",
+            "No consistency model; this is a system failure"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Strong consistency would synchronize all updates before responding to clients.",
+            "Correct! Eventual consistency accepts temporary differences as an acceptable tradeoff.",
+            "While causal consistency could apply, eventual consistency is the primary model here.",
+            "This is normal and expected in distributed systems\u2014not a failure at all."
+          ],
+          "explanation": "Eventual consistency is a practical choice for global sports platforms where brief delays are acceptable and speed matters more than instantaneous synchronization across all regions."
+        },
+        {
+          "question": "What is the main benefit of write-ahead logging in replicating game statistics across data centers?",
+          "options": [
+            "It speeds up database queries on historical stats",
+            "It prevents data loss by recording updates before they're applied",
+            "It encrypts sensitive player information during transmission",
+            "It compresses large video files from games"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Write-ahead logs improve safety and durability, not query speed.",
+            "Correct! Write-ahead logs ensure durability\u2014no update is lost even if a replica crashes.",
+            "Encryption is handled through separate TLS/SSL mechanisms.",
+            "Compression is unrelated to replication and logging."
+          ],
+          "explanation": "Write-ahead logs are a core durability mechanism: if a replica crashes after receiving an update but before applying it to its local database, the log allows the replica to recover without losing data."
+        },
+        {
+          "question": "You're designing a system for live betting odds during a game. Should you use strong consistency or eventual consistency?",
+          "options": [
+            "Strong consistency\u2014all bettors must see the exact same odds",
+            "Eventual consistency\u2014bettors accept seeing slightly stale odds",
+            "Causal consistency\u2014bets depend on prior game events",
+            "Strong consistency is always better regardless of use case"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Betting systems require strong consistency to prevent fraud and disputes.",
+            "Stale odds could allow arbitrage exploitation\u2014unacceptable in betting systems.",
+            "While game events matter, the primary need is consistent odds to prevent disputes.",
+            "This is false\u2014consistency requirements depend on the application domain."
+          ],
+          "explanation": "Betting platforms enforce strong consistency so all users see identical odds at the same moment, preventing bettors from exploiting temporary inconsistencies across regions."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n12",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Fault Tolerance & Reliability",
+      "content": "Live sports broadcasts cannot afford downtime\u2014fans expect 24/7 access to stats, replays, and commentary. Fault tolerance means the system continues operating correctly when individual components fail. Techniques include redundancy (multiple copies of critical services), automatic failover (switching to backups instantly), and health checks (detecting failures early). In sports analytics, a critical game event\u2014like determining if a goal was scored in soccer\u2014cannot be lost or delayed due to a server crash. By distributing this logic across multiple servers with heartbeat monitoring and continuous replication, the platform ensures that a single failure doesn't cascade into platform-wide outages. Understanding failure modes and recovery strategies is crucial for mission-critical systems that fans depend on.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Broadcast Failure Recovery Example",
+      "content": "During a playoff game, the primary streaming server in the Americas region fails catastrophically at 8:47 PM EDT. Within 2 seconds, a health-check service detects the missing heartbeat from the primary and immediately triggers failover to a secondary server. This secondary server had been receiving a continuous stream of game events from the primary through log replication, so it has data current to within 100ms and can resume serving fans. Additionally, the system broadcasts game events to a tertiary server in a different geographic location, providing a second backup. Fans experience brief buffering (2-3 seconds) as their connections are redirected to the secondary server, but the game statistics continue flowing without gaps. This redundancy and automatic failover is why major sporting events rarely go dark\u2014multiple layers of fault tolerance protect the critical path.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Fault Tolerance & Reliability Assessment",
+      "content": "Evaluate your understanding of fault tolerance mechanisms and system reliability in sports analytics.",
+      "questions": [
+        {
+          "question": "What is the primary purpose of a heartbeat message in fault-tolerant systems?",
+          "options": [
+            "To synchronize clocks across servers for accurate timestamps",
+            "To periodically confirm a server is alive and responsive",
+            "To authenticate user sessions and validate tokens",
+            "To compress network traffic between data centers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Heartbeats are not designed for clock synchronization\u2014that's a separate concern.",
+            "Correct! Heartbeats detect failures\u2014if a monitor doesn't receive one within a timeout, the server is assumed dead.",
+            "Authentication is handled through separate security mechanisms.",
+            "Heartbeats are small control messages; compression is not their purpose."
+          ],
+          "explanation": "In distributed systems, a heartbeat is a regular 'I'm alive and healthy' message sent by each server. If the health monitor doesn't receive one within a timeout period, it assumes the server failed and triggers failover."
+        },
+        {
+          "question": "A sports analytics platform has a primary database and a hot standby that continuously receives updates. If the primary fails, how long is recovery?",
+          "options": [
+            "Seconds to minutes (automatic failover to the already-synchronized standby)",
+            "Hours (need to restore from backup snapshots)",
+            "Days (must rebuild the database from transaction logs)",
+            "Immediate (no recovery needed; system continues)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A hot standby is already synchronized and ready to take over instantly.",
+            "That's for a cold standby; hot standbys fail over in seconds without data loss.",
+            "Rebuilding from logs takes much longer and is less reliable than failover.",
+            "While 'continued operation' is the goal, brief failover delays are typical."
+          ],
+          "explanation": "A hot standby continuously receives all updates from the primary. When the primary fails, it becomes the new primary\u2014failover is automatic and nearly instantaneous, with minimal data loss."
+        },
+        {
+          "question": "During the World Cup final, a critical game-event service processes goal scoring. Why run this service on 5 servers instead of 1 powerful server?",
+          "options": [
+            "To serve requests faster through parallel processing of each request",
+            "To survive failures\u2014if one server crashes, the other four continue serving",
+            "To reduce operational costs and server expenses",
+            "To improve user experience through response caching"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Parallelism helps but isn't the primary reason for redundancy during a single critical service.",
+            "Correct! Redundancy ensures service continuity\u2014you can tolerate N-1 failures.",
+            "Five servers actually cost more than one; redundancy is a tradeoff cost.",
+            "Caching is a separate optimization, distinct from fault tolerance."
+          ],
+          "explanation": "For critical systems, redundancy (running the same service on multiple servers) is the primary fault-tolerance strategy. With 5 servers, you survive up to 4 failures, ensuring fans never miss a goal."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n12",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Scalability & Load Balancing",
+      "content": "When 100 million fans watch the Olympics opening ceremony, a single server cannot handle the traffic. Scalability means adding more computers to handle more users and requests. A load balancer distributes incoming requests across multiple servers so no single server becomes overwhelmed. In sports analytics, this could mean 1,000 servers handling real-time stat requests during the Super Bowl. However, scaling introduces new challenges: how do you route requests consistently so a user always talks to the same cache? How do you coordinate state across so many machines? Techniques like consistent hashing, database sharding, and distributed caching solve these problems. Understanding how to scale horizontally (adding more servers) versus vertically (making servers more powerful) is essential for handling traffic spikes in live sports.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Championship Event Load Balancing Example",
+      "content": "During NBA Finals Game 7, traffic spikes to 10 million concurrent requests per second for live play-by-play stats. A load balancer distributes these across 500 servers using least-connections routing\u2014new requests go to the least-busy server, not round-robin. Additionally, the platform uses database sharding: requests for Team A stats go to one database cluster, Team B stats to another, preventing any single database from becoming a bottleneck. A caching layer (Redis) sits in front of the databases to serve popular queries (current score, top scorer) from memory in microseconds\u2014these queries never touch the database. Game metadata is geo-distributed so users in Asia, Europe, and the Americas retrieve it from nearby servers, not a single origin. This multi-layered approach allows the platform to scale from thousands to millions of concurrent users by distributing load across multiple dimensions.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Scalability & Load Balancing Assessment",
+      "content": "Test your grasp of scalability techniques and load-balancing strategies in distributed sports systems.",
+      "questions": [
+        {
+          "question": "During the Super Bowl, 100 million fans request live play-by-play stats. Why use a load balancer instead of one extremely powerful server?",
+          "options": [
+            "A single server, no matter how powerful, has hardware limits and cannot process 100 million concurrent requests",
+            "Load balancers are cheaper than one powerful server",
+            "Load balancers improve latency through built-in caching",
+            "Single servers are always less reliable than distributed systems"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Even the most powerful server has CPU, memory, and network bandwidth limits.",
+            "Cost is a secondary benefit; capability and performance are primary.",
+            "Caching is separate from load balancing; they're complementary techniques.",
+            "This is true but it's not the main reason for choosing load balancing."
+          ],
+          "explanation": "Scalability has hard limits\u2014no single machine can handle arbitrary load regardless of cost or design. Distributing requests across multiple machines is the fundamental approach to scaling."
+        },
+        {
+          "question": "Database sharding divides data: Player A stats on Database 1, Player B on Database 2. What problem does this solve?",
+          "options": [
+            "It reduces latency by geographically distributing databases to users",
+            "It prevents any single database from becoming a bottleneck by parallelizing queries",
+            "It automatically encrypts sensitive player performance data",
+            "It creates automatic backups across multiple shards"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sharding is logically partitioned data, not necessarily geographic distribution.",
+            "Correct! Sharding distributes data so queries can run in parallel across shards.",
+            "Encryption is handled through separate security mechanisms, not sharding.",
+            "Backups happen through replication and snapshots, not sharding."
+          ],
+          "explanation": "Sharding partitions a large dataset so queries can run in parallel. Without sharding, all queries hit one database; with sharding, they're distributed, increasing throughput."
+        },
+        {
+          "question": "A caching layer stores frequently accessed queries like current score and top scorer. How does this improve scalability?",
+          "options": [
+            "It reduces requests hitting the database by serving popular data from fast memory",
+            "It increases server count automatically based on load",
+            "It distributes traffic geographically across data centers",
+            "It guarantees all users see consistent data without stale values"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Caching absorbs repeated requests, reducing database load by 80-90%.",
+            "Auto-scaling is a separate mechanism; caching reduces load to prevent needing it.",
+            "Caching can be geo-distributed, but geographic distribution is a separate benefit.",
+            "Caching can introduce temporary inconsistencies\u2014it's a tradeoff."
+          ],
+          "explanation": "Caching is a powerful scaling technique because 80% of requests often target 20% of data. Serving that 20% from fast memory prevents database overload and reduces latency."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n12",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Integrating Consistency, Reliability, and Scalability",
+      "content": "A complete sports analytics platform must balance all three principles. During the World Cup final with 1 billion concurrent viewers, you need eventual consistency for global score propagation (accept brief delays for speed), fault tolerance to ensure zero downtime (multiple backups and failover), and massive scalability (load balancing and sharding). These goals sometimes conflict: strong consistency is slower, redundancy costs more servers, and caching introduces temporary inconsistencies. Expert distributed systems designers make deliberate tradeoffs based on requirements. For high-stakes betting platforms, strong consistency and high availability matter most\u2014you cannot afford odds disagreements or downtime. For fan engagement apps, scalability and eventual consistency are priorities\u2014brief delays are acceptable. For broadcast systems, reliability is paramount\u2014missing a goal is unacceptable. By understanding each pillar\u2014consistency, fault tolerance, and scalability\u2014you can design systems that meet your specific sports analytics requirements effectively.",
+      "next": "n13"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Course Complete: Distributed Systems Master",
+      "content": "You've completed a comprehensive exploration of distributed systems through the lens of sports analytics. You've learned how real-time data consistency is maintained globally across stadiums and data centers, how systems survive component failures without going dark during critical games, and how platforms scale to serve billions of concurrent fans during championship events. These principles apply far beyond sports\u2014cloud platforms, financial trading systems, social networks, and messaging apps all rely on identical fundamental ideas. You're now equipped to design, understand, and troubleshoot distributed systems that power the digital sports ecosystem."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin learning path selection"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Data Consistency & Replication"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Fault Tolerance & Reliability"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n9",
+      "label": "Scalability & Load Balancing"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn through example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": "Test your knowledge"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n12",
+      "label": "Pass assessment"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Learn through example"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Test your knowledge"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n12",
+      "label": "Pass assessment"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Learn through example"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Test your knowledge"
+    },
+    {
+      "id": "c13",
+      "source": "n11",
+      "target": "n12",
+      "label": "Pass assessment"
+    },
+    {
+      "id": "c14",
+      "source": "n12",
+      "target": "n13",
+      "label": "Complete course"
+    }
+  ],
+  "generated_at": "2026-03-27T15:52:47.071110+00:00",
+  "model": "claude-haiku-4-5"
+}

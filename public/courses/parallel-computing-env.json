@@ -1,0 +1,304 @@
+{
+  "id": "parallel-computing-env",
+  "title": "Parallel Computing for Environmental Science",
+  "description": "Learn parallel computing fundamentals through real-world environmental applications: climate modeling, global monitoring networks, and satellite data analysis.",
+  "topic": "Parallel Computing",
+  "theme": "environmental science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "parallel-computing",
+    "environmental-science",
+    "distributed-systems",
+    "hpc"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Parallel Computing: Why Environmental Science Needs Speed",
+      "content": "Environmental science deals with vast amounts of data\u2014from millions of weather stations, satellite imagery, and climate models. A single computer core cannot process all this data quickly enough. Parallel computing allows us to process multiple pieces of data simultaneously using multiple cores or machines, dramatically reducing analysis time. In this course, we'll explore three key approaches to parallel computing through the lens of real environmental challenges.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Parallel Computing Path",
+      "content": "Which parallel computing approach would you like to explore first? You can learn one in depth now, and later review how they all interconnect.",
+      "choices": [
+        {
+          "label": "Multi-core Processing: Climate Modeling",
+          "next": "n3"
+        },
+        {
+          "label": "Distributed Systems: Global Environmental Monitoring",
+          "next": "n5"
+        },
+        {
+          "label": "GPU Computing: Satellite Data Analysis",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Multi-core Processing in Climate Modeling",
+      "content": "Climate models simulate the Earth's atmosphere, oceans, and land surface to predict future climate patterns. These models divide the globe into a grid with millions of cells. Modern climate models use multi-core processors to simulate different regions simultaneously\u2014one core handles North America, another handles Europe, another handles the Pacific Ocean. After each simulated time step, cores exchange boundary data. This parallelization accelerates climate predictions from months of computation to days.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Simulating a Global Temperature Increase",
+      "content": "Imagine a climate model using 16 cores. The model divides Earth into 16 regions. Each core simulates regional weather patterns simultaneously for one day. After each simulated day, cores exchange data at regional boundaries (e.g., air flow from North America to Atlantic). With this 16-way parallelization, the model simulates one year of climate in 23 days of wall-clock time, instead of 368 days on a single core.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Distributed Systems for Environmental Monitoring",
+      "content": "Environmental scientists monitor planetary health through thousands of instruments: weather stations, ocean buoys, air quality sensors, and river gauges. Each instrument generates continuous data streams. A distributed system connects these sensors across continents via networks, with local processing nodes aggregating and analyzing data in real-time. For example, thousands of weather stations feed data to regional servers, which feed data to continental servers, which feed data to a global analysis center. This hierarchy prevents any single bottleneck and enables timely environmental alerts.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Global Rainfall Monitoring Network",
+      "content": "Consider monitoring rainfall across 50,000 weather stations worldwide. Instead of sending all data to one central server (impossible\u2014the network would saturate), data flows through a hierarchy: Local stations send 1-minute data to 500 regional nodes, regional nodes process and send hourly summaries to 50 continental nodes, continental nodes send daily summaries to the global center. This distributed approach processes data as it flows through the network, enabling real-time drought warnings and flood alerts while reducing network traffic by 99%.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "GPU Computing for Environmental Data Processing",
+      "content": "Satellites generate petabytes of environmental imagery daily\u2014visible light, infrared, synthetic aperture radar. Processing this data requires analyzing billions of pixels, a task perfectly suited to GPUs. GPUs are specialized processors with thousands of tiny cores, each executing the same operation on different data points in parallel. Environmental scientists use GPUs to classify satellite pixels (forest, ocean, urban, agricultural), track deforestation in real-time, monitor algal blooms, and predict wildfire spread. A GPU can process a satellite image in seconds instead of hours.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: Real-time Biodiversity Monitoring via Satellite",
+      "content": "Satellite imagery of the Amazon Rainforest generates 100 million pixels per image, with images arriving every 10 days. Using GPU computing, scientists classify each pixel as forest, water, or cleared land in under 30 seconds using parallel processing on 2,000 GPU cores. A single GPU processes the entire image faster than a CPU could process a 1,000-pixel patch. This enables near-real-time deforestation alerts, allowing authorities to respond to illegal logging within days instead of weeks.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Parallel Computing in Environmental Science: Integrated Practice",
+      "content": "Now let's synthesize what we've learned. Parallel computing manifests in three complementary ways: multi-core processors for intensive calculations, distributed systems for geographically dispersed data, and GPUs for massive data processing. A real environmental system often uses all three. For instance, a global climate-monitoring system uses distributed sensors (gathering data), GPU processing (analyzing satellite imagery), and multi-core simulations (predicting future climate). Let's test your understanding.",
+      "questions": [
+        {
+          "question": "A research center monitors 10,000 air quality sensors across a continent and needs to detect pollution events within minutes. Which parallel computing approach is most critical to avoid data bottlenecks?",
+          "options": [
+            "A) Multi-core processors at the central server",
+            "B) Distributed systems with hierarchical data aggregation",
+            "C) GPU computing for pixel-level analysis",
+            "D) Single high-speed server"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Multi-core processors help with local computation but don't solve the network bottleneck of millions of sensors.",
+            "Correct! Distributed systems with regional nodes prevent network saturation and enable real-time processing.",
+            "Incorrect. GPUs excel at image processing, not the network aggregation challenge here.",
+            "Incorrect. A single server would create a critical bottleneck with 10,000 data streams."
+          ],
+          "explanation": "Distributed systems solve the geographic and network challenges of monitoring vast sensor networks. Data flows through hierarchical nodes that aggregate and process locally, preventing bottlenecks."
+        },
+        {
+          "question": "A climate model simulates Earth's 6 ocean basins. If each basin simulation takes 10 hours on a single core and basins can be simulated independently (with periodic boundary exchanges), what's the maximum realistic speedup with 6-core parallelization?",
+          "options": [
+            "A) 6x speedup (all basins in parallel = 10 hours total)",
+            "B) Less than 6x due to communication overhead and synchronization",
+            "C) More than 6x due to cache benefits",
+            "D) Exactly 1.67x speedup"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Partially correct in concept, but realistic gains are lower due to synchronization overhead.",
+            "Correct! Parallel systems always have communication overhead (cores exchanging boundary data) and synchronization delays.",
+            "Incorrect. While there are cache benefits, they don't overcome the communication costs.",
+            "Incorrect. With 6 cores, we'd expect far more than a 1.67x speedup."
+          ],
+          "explanation": "Real parallel systems achieve less than ideal speedup (6x in this case) because cores must pause to synchronize and exchange boundary data. Typical efficiency is 80-90%, giving ~5x actual speedup."
+        },
+        {
+          "question": "You're designing a real-time forest monitoring system using satellite data (imagery), ground sensors (networks), and future climate predictions (simulations). Which combination of parallel approaches makes sense?",
+          "options": [
+            "A) Only GPU for satellite analysis",
+            "B) GPUs for imagery + Distributed systems for sensors + Multi-core for climate simulations",
+            "C) Only distributed systems for all tasks",
+            "D) Only multi-core processors for everything"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incomplete. Satellites are only one data source in a monitoring system.",
+            "Correct! This combination leverages each approach's strength: GPUs for massive image data, distributed systems for geographically spread sensors, multi-core for simulation.",
+            "Incorrect. Distributed systems work for sensors, but GPUs are far faster for image analysis.",
+            "Incorrect. Multi-core processors alone are inefficient for both image processing and distributed sensor networks."
+          ],
+          "explanation": "Modern environmental systems integrate multiple parallel approaches. Each addresses a different computational challenge: data volume (GPU), geographic scale (distributed), and computational intensity (multi-core)."
+        }
+      ],
+      "pass_threshold": 65,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Final Assessment: Parallel Computing for Environmental Solutions",
+      "content": "Let's assess your overall understanding of parallel computing in environmental science contexts.",
+      "questions": [
+        {
+          "question": "Why do environmental scientists prefer distributed systems over a single powerful central server for global monitoring?",
+          "options": [
+            "A) Distributed systems are cheaper",
+            "B) They distribute network load, process data locally, and provide redundancy if one node fails",
+            "C) Because GPUs are not available",
+            "D) Distributed systems use less electricity"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Cost is a factor but not the primary technical reason.",
+            "Correct! Distributed systems prevent network bottlenecks, enable local real-time processing, and provide fault tolerance.",
+            "Incorrect. This is unrelated to the core advantage of distributed systems.",
+            "Not the primary benefit, though distributed systems can be energy-efficient."
+          ],
+          "explanation": "Distributed systems are ideal for environmental monitoring because they handle geographic scale, reduce latency through local processing, and ensure that one node's failure doesn't collapse the entire system."
+        },
+        {
+          "question": "A GPU has 2,000 cores and a CPU has 16 cores. Does this mean the GPU is 125x faster than the CPU for all tasks?",
+          "options": [
+            "A) Yes, simple arithmetic shows 2000/16 = 125",
+            "B) No. GPUs excel at massively parallel tasks but struggle with sequential operations; CPUs are better for branching logic",
+            "C) GPU is only 12x faster due to clock speed differences",
+            "D) CPU is actually faster for most environmental tasks"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Core count alone doesn't determine speedup; it depends on the task type.",
+            "Correct! GPUs achieve massive speedup for data-parallel tasks (every pixel processed identically) but CPUs are better for sequential or logic-heavy work.",
+            "Incorrect. Clock speed is relevant, but the fundamental difference is in architectural fit.",
+            "Incorrect. For data-parallel environmental tasks like satellite processing, GPUs dramatically outperform CPUs."
+          ],
+          "explanation": "Parallel speedup depends on algorithmic fit, not just core count. GPUs are 100-1000x faster than CPUs for embarrassingly parallel tasks (like processing satellite imagery pixel-by-pixel) but may be slower for sequential work."
+        },
+        {
+          "question": "In a distributed environmental monitoring system, why must regional processing nodes 'aggregate' data before sending upstream rather than sending all raw data to a central server?",
+          "options": [
+            "A) Aggregation saves electricity at remote sites",
+            "B) Raw data is less accurate than aggregated data",
+            "C) Aggregation reduces network bandwidth demand by orders of magnitude and enables local real-time alerts",
+            "D) Central servers are not capable of storing raw data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Not the primary reason, though there are minor energy benefits.",
+            "Incorrect. Raw data is actually more accurate; aggregation involves summaries and averages.",
+            "Correct! A regional node aggregating 1,000 sensors' data from every minute to hourly summaries reduces bandwidth 60x and enables faster local responses.",
+            "Incorrect. Central servers have massive storage, but bandwidth is the real constraint."
+          ],
+          "explanation": "Aggregation is a hierarchical strategy to prevent network saturation. Processing data locally (reducing noise, summarizing, detecting anomalies) before sending upstream is far more efficient than sending terabytes of raw data."
+        }
+      ],
+      "pass_threshold": 70,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Congratulations! You've Mastered Parallel Computing for Environmental Science",
+      "content": "You've successfully learned how environmental scientists harness parallel computing to tackle planetary-scale challenges. You understand multi-core processing for simulations, distributed systems for global monitoring, and GPU acceleration for data analysis. Modern environmental science would be impossible without these techniques\u2014climate predictions, real-time pollution alerts, and biodiversity monitoring all depend on parallel computation. Apply these concepts to environmental problems you care about!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Start"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Multi-core Processing"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Distributed Systems"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "GPU Computing"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Pass"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n9",
+      "label": "Retry"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n11",
+      "label": "Pass"
+    },
+    {
+      "id": "c14",
+      "source": "n10",
+      "target": "n9",
+      "label": "Review"
+    }
+  ],
+  "generated_at": "2026-03-27T11:15:26.201427+00:00",
+  "model": "claude-haiku-4-5"
+}

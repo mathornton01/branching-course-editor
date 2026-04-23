@@ -1,0 +1,228 @@
+{
+  "id": "uuid-fastapi-culinary-course",
+  "title": "Web Development with FastAPI: The Culinary Kitchen",
+  "description": "Learn FastAPI through the lens of culinary arts, building restaurant APIs from diagnostic assessment through adaptive learning paths.",
+  "topic": "Web Development with FastAPI",
+  "theme": "culinary arts",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "FastAPI",
+    "web development",
+    "REST API",
+    "culinary",
+    "Python"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Your FastAPI Kitchen Experience",
+      "content": "Before we start building your restaurant API kitchen, let's assess your current knowledge of web development and FastAPI. This quick diagnostic will help us create a personalized learning path suited to your experience level.",
+      "questions": [
+        {
+          "question": "In FastAPI, what does a route decorator like @app.get('/menu') do?",
+          "options": [
+            "A) Creates a kitchen order ticket system",
+            "B) Defines an HTTP endpoint that responds to GET requests at the /menu path",
+            "C) Specifies ingredient inventory levels",
+            "D) Manages kitchen staff scheduling"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite\u2014decorators don't manage kitchen systems directly.",
+            "Correct! Route decorators in FastAPI map HTTP methods and paths to Python functions.",
+            "That's a different concept\u2014routes are about web endpoints.",
+            "Routes don't handle scheduling; they handle HTTP requests."
+          ],
+          "explanation": "Route decorators in FastAPI bind HTTP methods (GET, POST, etc.) and URL paths to functions that process requests, much like how a kitchen assigns specific stations to chefs."
+        },
+        {
+          "question": "What is the primary purpose of path parameters in FastAPI (e.g., /recipes/{recipe_id})?",
+          "options": [
+            "A) To store encrypted passwords",
+            "B) To capture variable parts of the URL that become function parameters",
+            "C) To define database column names",
+            "D) To compress API responses"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Path parameters aren't for security storage.",
+            "Exactly! Path parameters let you capture dynamic values from URLs.",
+            "That's for database schemas, not URL routing.",
+            "Compression is a different concern."
+          ],
+          "explanation": "Path parameters like {recipe_id} capture values from the URL and pass them to your function, allowing the API to serve different data based on the request\u2014like how a chef retrieves a specific recipe from the cookbook based on the dish name."
+        },
+        {
+          "question": "In FastAPI, what does async/await allow you to do in a handler function?",
+          "options": [
+            "A) Cook multiple dishes simultaneously without blocking",
+            "B) Pause execution and wait for I/O operations (database, external APIs) without blocking other requests",
+            "C) Automatically scale your restaurant",
+            "D) Guarantee faster API response times"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While a good metaphor, this isn't the technical definition.",
+            "Correct! Async/await lets handlers pause for I/O operations while serving other requests concurrently.",
+            "Scaling requires infrastructure choices, not async.",
+            "Async improves throughput, but speed depends on many factors."
+          ],
+          "explanation": "Async/await in FastAPI allows your API to handle many requests concurrently by not blocking while waiting for slow operations, much like how a restaurant kitchen can serve multiple tables by having chefs work on different orders in parallel."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Building Your FastAPI Restaurant Enterprise",
+      "content": "You've demonstrated solid foundation knowledge. Now let's build a sophisticated multi-course API system. Advanced FastAPI features include dependency injection for reusable components (like kitchen prep stations shared across recipes), middleware for cross-cutting concerns (like health inspections applied to all orders), async database operations (handling thousands of orders simultaneously), and structured error handling (knowing exactly which course failed and why). A real restaurant API might authenticate users, validate complex JSON payloads for menu updates, stream real-time kitchen status, and integrate with payment and inventory systems. Your goal is to architect a robust, scalable system that serves concurrent requests without dropping dishes.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced Example: Multi-Location Restaurant Chain API",
+      "content": "Imagine you're building the backend for a 50-restaurant chain. Your API uses dependency injection to share a database connection pool across endpoints (like a central prep kitchen supplying all locations). You implement middleware that logs every order to an audit trail and checks authentication. Async handlers fetch menu items, pricing, and ingredient costs from separate databases simultaneously while processing an order. Request/response validation ensures each dish object has required fields (name, price, cuisine_type, allergens). Error handling distinguishes between 'menu item not found' (404), 'ingredients unavailable' (503), and 'invalid order format' (400). With async operations, your API serves 1000+ concurrent orders\u2014each location can run its own FastAPI instance or hit a central endpoint that routes requests by location_id path parameter.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete: Chef's Certification",
+      "content": "Excellent work! You've mastered advanced FastAPI concepts applied to enterprise-scale restaurant operations. You now understand dependency injection patterns, middleware architecture, async request handling, and production-grade error handling. Your next steps: implement authentication using OAuth2 with FastAPI's built-in security utilities, deploy to cloud platforms, set up monitoring for API health, and explore WebSocket support for real-time kitchen communication. You're ready to build complex, scalable web services."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundational: Building Your First FastAPI Kitchen",
+      "content": "Let's start with the basics. FastAPI is a modern Python web framework for building APIs quickly and safely. An API (Application Programming Interface) is like a restaurant's order window\u2014customers can't see the kitchen, but they submit orders and receive dishes through the window. In FastAPI, you create routes (like 'POST /orders' or 'GET /menu/pasta') that handle HTTP requests. Each route is a Python function that processes data and returns a response. FastAPI automatically validates request data, generates documentation, and handles common web tasks. You'll learn to define data structures with Pydantic (which checks that ingredients are exactly what the recipe requires), create endpoints that respond to HTTP verbs (GET for retrieving, POST for creating, PUT for updating), and understand how clients interact with your API. Think of your FastAPI app as a restaurant receiving and fulfilling orders.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Basic Example: Simple Recipe API",
+      "content": "Let's build a basic recipe API. You define a Recipe data model: {name: 'Coq au Vin', prep_time: 180, difficulty: 'intermediate'}. You create a route @app.get('/recipes/{recipe_name}') that takes a recipe name from the URL. When someone requests GET /recipes/Coq%20au%20Vin, FastAPI calls your function, which looks up the recipe and returns it as JSON. You create another route @app.post('/recipes') that accepts a new recipe in the request body, validates it matches your Recipe model, stores it, and returns a confirmation. A third route @app.put('/recipes/{recipe_name}') updates an existing recipe's prep_time or difficulty. Each route is a simple Python function\u2014FastAPI handles converting Python dictionaries to JSON, checking that incoming data is valid, and serving documentation at /docs automatically.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Master Basic FastAPI Patterns",
+      "content": "Apply your foundational knowledge to restaurant scenarios.",
+      "questions": [
+        {
+          "question": "You need to create an endpoint that returns a menu item by its ID. Which route definition is correct?",
+          "options": [
+            "A) @app.get('/menu') def get_menu():",
+            "B) @app.get('/menu/{item_id}') def get_menu_item(item_id: int):",
+            "C) @app.post('/menu') def post_menu(item_id: int):",
+            "D) @app.delete('/menu/item_id') def delete_item():"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This doesn't capture the specific item ID from the URL.",
+            "Perfect! Path parameters in curly braces capture URL values as function parameters.",
+            "POST is for creating, not retrieving.",
+            "DELETE removes items; this would be wrong for retrieval."
+          ],
+          "explanation": "Path parameters {item_id} in the route pattern capture the value from the URL and pass it to your function. GET retrieves data, and the parameter type hint (int) tells FastAPI to validate the input is a number."
+        },
+        {
+          "question": "Your API needs to accept a new recipe with fields: name, ingredients (list), cooking_time (minutes). What's the correct way to define the incoming data structure?",
+          "options": [
+            "A) def add_recipe(name: str, ingredients: str, cooking_time: str):",
+            "B) class Recipe(BaseModel): name: str; ingredients: list; cooking_time: int",
+            "C) recipe = {'name': None, 'ingredients': None, 'cooking_time': None}",
+            "D) @app.post('/recipe') def add_recipe(request):"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This doesn't validate structure or allow lists.",
+            "Correct! Pydantic BaseModel defines schemas with validation.",
+            "This doesn't validate or use FastAPI's automatic schema generation.",
+            "Without Pydantic, you lose validation and documentation."
+          ],
+          "explanation": "In FastAPI, you define data schemas using Pydantic's BaseModel. This automatically validates incoming JSON, checks field types, generates API documentation, and makes your code cleaner and safer."
+        },
+        {
+          "question": "Which HTTP method should you use to retrieve a list of all recipes from your API?",
+          "options": [
+            "A) PUT /recipes",
+            "B) DELETE /recipes",
+            "C) GET /recipes",
+            "D) POST /recipes/list"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "PUT is for updating existing resources.",
+            "DELETE removes resources.",
+            "Correct! GET retrieves data, and /recipes retrieves all items in the collection.",
+            "GET is the standard for retrieval; POST typically creates."
+          ],
+          "explanation": "HTTP methods have standard meanings: GET retrieves (no side effects), POST creates, PUT updates, DELETE removes. For fetching all recipes, use GET with a collection endpoint."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundational Path Complete: Kitchen Apprentice Certified",
+      "content": "Great job! You've learned foundational FastAPI concepts through the culinary lens. You now understand routes, path parameters, HTTP methods, request validation with Pydantic, and the basics of building web APIs. Your next steps: practice building a small API locally (a recipes database, a restaurant reservation system, or an ingredient inventory), explore query parameters (?search=pasta), learn to handle different request/response formats, and discover error handling. You've got the fundamentals\u2014keep cooking and building!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass (\u22652 correct)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "fail (<2 correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "continue"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "continue"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "continue"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "continue"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "continue"
+    }
+  ],
+  "generated_at": "2026-03-27T07:51:06.486179+00:00",
+  "model": "claude-haiku-4-5"
+}

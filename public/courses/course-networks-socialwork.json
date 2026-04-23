@@ -1,0 +1,252 @@
+{
+  "id": "course-networks-socialwork",
+  "title": "Computer Networks and Protocols for Social Work",
+  "description": "Master computer networks and protocols through the lens of social work. Learn how data flows between agencies, how to secure client information, and design communication systems that protect vulnerable populations.",
+  "topic": "Computer Networks and Protocols",
+  "theme": "social work",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "networks",
+    "protocols",
+    "data-security",
+    "social-work",
+    "case-management"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Networks Matter in Social Work",
+      "content": "In social work, we manage sensitive client information across multiple agencies, schools, hospitals, and community partners. Computer networks enable secure communication between these organizations\u2014allowing case files to be shared instantly, protecting client privacy through encrypted connections, and ensuring social workers can coordinate care effectively. Understanding how networks and protocols work is essential for safeguarding vulnerable populations and delivering quality services. When you understand the layers of communication, you can better assess whether your agency's systems are truly secure and compliant with regulations like HIPAA and the Family Educational Rights and Privacy Act (FERPA)."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "How Do You Learn Best?",
+      "content": "Choose the learning path that works best for you.",
+      "choices": [
+        {
+          "label": "Theory First: Learn the foundations (OSI model, protocols) before applying them",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-on First: Start with real social work scenarios, then learn the principles",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "The OSI Model and Communication Protocols",
+      "content": "The OSI (Open Systems Interconnection) model breaks down network communication into 7 layers, from physical cables (Layer 1) to applications like email (Layer 7). In social work, think of this like a secure delivery system: the physical layer is the courier's vehicle, the transport layer (TCP/UDP) ensures the package arrives reliably, and the application layer (HTTPS) encrypts sensitive documents so only the intended recipient can read them. TCP (Transmission Control Protocol) guarantees every packet of data arrives in order, while UDP is faster but less reliable\u2014useful for video calls where losing one frame won't break communication. HTTPS encrypts data in transit, ensuring client records can't be intercepted. Understanding these layers helps you verify that your agency's data systems meet security standards and protect client confidentiality."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Case Study: Secure Case File Transfer",
+      "content": "Sarah, a social worker at a child welfare agency, needs to send a sensitive case file about a family to a mental health clinic. At Layer 7 (Application), she uses her agency's case management system. At Layer 4 (Transport), TCP ensures every page of the 50-page file arrives intact. At Layer 3 (Network), the data is routed across the internet to the clinic using IP addresses. Layer 2 (Data Link) and Layer 1 (Physical) handle the actual copper wires and switches. Throughout the journey, HTTPS encryption (Layer 6) scrambles the file into unreadable code\u2014a 256-bit key that only the clinic's system can decrypt. If a hacker intercepts the packets mid-transit, they see only encrypted gibberish. Sarah can be confident the family's private information is protected."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: OSI Model and Protocols",
+      "content": "Test your understanding of network layers and secure communication protocols.",
+      "questions": [
+        {
+          "question": "At which OSI layer does encryption for HTTPS occur?",
+          "options": [
+            "Layer 1 (Physical)",
+            "Layer 3 (Network)",
+            "Layer 6 (Presentation)",
+            "Layer 7 (Application)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Layer 1 is about physical cables, not encryption.",
+            "Incorrect. Layer 3 routes data but doesn't encrypt it.",
+            "Correct! Layer 6 (Presentation) handles encryption and decryption of data.",
+            "Incorrect. Layer 7 is the application interface, but encryption happens at Layer 6."
+          ],
+          "explanation": "The Presentation layer (Layer 6) is responsible for encryption, decryption, compression, and translation of data formats. This is why HTTPS connections are secure\u2014the data is encrypted at this layer before being passed down to the Transport layer."
+        },
+        {
+          "question": "A social worker is streaming a video counseling session with a remote client. The connection can tolerate losing a few frames without breaking. Which transport protocol is most appropriate?",
+          "options": [
+            "TCP (Transmission Control Protocol)",
+            "UDP (User Datagram Protocol)",
+            "HTTPS",
+            "DNS"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. TCP guarantees delivery of every packet, making it slower\u2014not ideal for real-time video.",
+            "Correct! UDP prioritizes speed over reliability, perfect for video/audio where slight data loss is acceptable.",
+            "Incorrect. HTTPS is an encryption protocol at the application layer, not a transport protocol.",
+            "Incorrect. DNS is for translating domain names to IP addresses, not for data transport."
+          ],
+          "explanation": "UDP is faster because it doesn't wait for confirmation that each packet arrived. For video calls, a few dropped frames are better than the latency that TCP's error-checking would introduce. However, the video connection should still use HTTPS/TLS encryption for security."
+        },
+        {
+          "question": "Why is encryption important when transmitting client case files between social work agencies?",
+          "options": [
+            "It makes data transfer faster",
+            "It ensures only authorized recipients can read the data, protecting client privacy and complying with HIPAA",
+            "It reduces the file size",
+            "It prevents the data from being routed through the internet"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Encryption actually adds slight overhead and can make transfer slightly slower.",
+            "Correct! Encryption scrambles data so only parties with the decryption key can read it, ensuring confidentiality and legal compliance.",
+            "Incorrect. Encryption doesn't compress data; it typically adds a small amount of overhead.",
+            "Incorrect. All internet data travels through the internet. Encryption protects it by making it unreadable to unauthorized parties."
+          ],
+          "explanation": "Encryption is the primary method for protecting sensitive information during transmission. Even if a hacker intercepts encrypted data, they cannot read it without the decryption key. This is essential for maintaining client confidentiality and meeting healthcare privacy regulations."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "How Data Flows in Social Work Networks",
+      "content": "Imagine a social work data network as a city with roads, intersections, and delivery routes. Your agency's computers are homes, the internet is the highway system, and routers are traffic signals that direct data to the right destination. When a case manager inputs a client note into the case management system, that data gets broken into small packets (like mail going into a postal truck). Each packet contains the data plus a destination address\u2014the IP address of the receiving agency's server. Routers along the internet examine each packet's destination and forward it along the fastest available path. Unlike the postal system, each packet in a single message might take a different route, then reassemble at the destination. Network administrators design the topology\u2014how agencies and systems are connected\u2014to ensure redundancy: if one route fails, data automatically reroutes. This resilience is critical in social work, where missing information can delay lifesaving interventions."
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Case Study: Multi-Agency Data Sharing Network",
+      "content": "Child Protective Services (CPS), the Health Department, and the School District in a city need to share information about at-risk children. They establish a secure network where each agency has a server connected to a central hub (like a star topology). When CPS identifies a child with suspected abuse, their social worker enters the case into their system. The data is broken into packets, each labeled with the destination IP address: the Health Department's server. The packets travel from CPS's office, through their local area network to the internet gateway, across the public internet through multiple routers, arrive at the Health Department's gateway, and reassemble into the complete record. The Health Department's pediatrician can now see CPS's observations along with medical history. Later, the School District pulls the same information. If the central hub router fails, the network has a backup path, so critical data still flows. This interconnected system enables coordinated care and faster identification of vulnerable children."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Practice: Network Design and Data Flow",
+      "content": "Apply your understanding of network topology and data routing to social work scenarios.",
+      "questions": [
+        {
+          "question": "A social work agency's main server goes offline due to a hardware failure. In a well-designed network with redundancy, what happens to data that needs to be transmitted to partner agencies?",
+          "options": [
+            "All data transmission stops until the server is repaired",
+            "Data is automatically rerouted through backup servers and alternative paths",
+            "Data can only be sent via email, which is much slower",
+            "The partner agencies lose all access to shared client information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A redundant network is designed to keep functioning even when one component fails.",
+            "Correct! Redundancy means backup servers and alternative network paths ensure data continues to flow even if the primary route fails.",
+            "Incorrect. Email is not the primary routing solution in a modern network; backup systems handle rerouting automatically.",
+            "Incorrect. With proper redundancy design, partner agencies maintain access through backup servers."
+          ],
+          "explanation": "Resilient network design includes redundant paths and backup servers. When one component fails, traffic is automatically rerouted. This is critical in social work, where a network outage could delay emergency response to a child in danger."
+        },
+        {
+          "question": "What is the primary function of a router in a social work agency network?",
+          "options": [
+            "To store backup copies of all case files",
+            "To examine data packets and forward them to their destination address based on IP routing",
+            "To encrypt all data before transmission",
+            "To prevent unauthorized users from accessing the network"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Routers forward data; backup storage is handled by dedicated servers.",
+            "Correct! Routers examine the destination IP address on each packet and forward it along the best path to reach that address.",
+            "Incorrect. Encryption happens at higher layers (Layer 6); routers operate at Layer 3 (Network layer).",
+            "Incorrect. Firewalls handle access control; routers handle forwarding decisions."
+          ],
+          "explanation": "A router is a Layer 3 (Network layer) device that makes forwarding decisions based on IP addresses. It's like a postal sorting facility: examining the destination address and routing each piece of mail along the appropriate path."
+        },
+        {
+          "question": "An agency designs a network where all inter-agency communication goes through a single, central connection point. What is the main risk of this design?",
+          "options": [
+            "Data will be encrypted, making it harder to read",
+            "If the central point fails, all inter-agency communication stops (single point of failure)",
+            "Multiple social workers won't be able to access data simultaneously",
+            "The network will become too fast and overwhelm the receiving systems"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Encryption is a security feature, not a risk from this topology.",
+            "Correct! A single point of failure is a critical vulnerability. If the central connection point goes down, no inter-agency data can flow.",
+            "Incorrect. Modern networks can handle concurrent access; this isn't a risk from centralized topology.",
+            "Incorrect. A centralized point doesn't cause data to move faster; if anything, it could become a bottleneck."
+          ],
+          "explanation": "Centralized network designs (star topology) create a single point of failure. If the central hub fails, all communication stops. Resilient designs use mesh or hybrid topologies with multiple paths, ensuring that if one connection fails, data can still reach its destination."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Congratulations!",
+      "content": "You've completed the Computer Networks and Protocols course for social work professionals. You now understand how data flows between agencies, how protocols ensure reliable communication, how encryption protects client privacy, and why resilient network design is critical for uninterrupted service to vulnerable populations. Use this knowledge to assess your agency's security practices, advocate for improvements that protect client data, and collaborate more effectively with partner organizations. Great work!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-on First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:47:19.541099+00:00",
+  "model": "claude-haiku-4-5"
+}

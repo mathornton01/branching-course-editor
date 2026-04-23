@@ -1,0 +1,494 @@
+{
+  "id": "c5e2f8a1-b3d9-4e7f-a2c6-1d8f3b9e5c4a",
+  "title": "Operating Systems Fundamentals: Music Therapy Edition",
+  "description": "A mastery ladder course teaching OS fundamentals through the lens of music therapy applications, with adaptive practice loops for deep learning.",
+  "topic": "Operating Systems",
+  "theme": "music therapy",
+  "difficulty": "intermediate",
+  "estimated_minutes": 120,
+  "tags": [
+    "operating-systems",
+    "processes",
+    "memory-management",
+    "file-systems",
+    "music-therapy",
+    "adaptive-learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Orchestrating Digital Harmony: OS Processes in Music Therapy",
+      "content": "In music therapy clinical settings, an operating system acts like a highly skilled clinic director managing multiple patient sessions simultaneously. Just as a music therapist ensures each patient gets undivided attention during their session time while other patients wait, the OS allocates CPU time to different processes. A process is an instance of a program in execution\u2014think of it as one patient's complete therapy session including their audio input, real-time music analysis, and output. Each process has its own isolated memory space and resources. When your music therapy app handles multiple concurrent sessions (patient A's rhythm assessment, patient B's neurological music therapy, and the system's audio daemon), the OS orchestrates them through processes, ensuring they don't interfere with each other while maximizing the CPU's utilization.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Process Fundamentals Quiz",
+      "content": "Test your understanding of OS processes and how they apply to managing multiple music therapy sessions.",
+      "questions": [
+        {
+          "question": "In a music therapy clinic using a scheduling application to manage multiple concurrent patient sessions, what OS abstraction represents each independent patient's active therapy session?",
+          "options": [
+            "A) Thread",
+            "B) Process",
+            "C) Processor core",
+            "D) Socket"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Threads are lighter-weight execution units that exist within a process, but not the primary abstraction here.",
+            "Correct! Each patient session runs as a separate process with its own address space and resources.",
+            "Processor cores are hardware components, not OS abstractions.",
+            "Sockets are for network communication."
+          ],
+          "explanation": "In operating systems, a process is the fundamental unit of execution. In music therapy applications, each patient's therapy session with its own audio streams, therapeutic data, and I/O requirements naturally maps to a separate process with isolated memory and controlled inter-process communication."
+        },
+        {
+          "question": "During a music therapy session involving real-time biofeedback, the OS needs to rapidly switch CPU attention between the patient's biofeedback analysis process and the therapist's documentation process. What is this mechanism called?",
+          "options": [
+            "A) Process scheduling",
+            "B) Context switching",
+            "C) Process migration",
+            "D) Resource allocation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Scheduling is related but refers to deciding which process runs next.",
+            "Correct! Context switching saves one process's state and restores another's to enable time-sharing.",
+            "Migration typically refers to moving processes between machines.",
+            "Resource allocation is broader than this specific CPU-switching mechanism."
+          ],
+          "explanation": "Context switching is how a single CPU provides the illusion of simultaneous execution. The OS saves the complete state (registers, program counter) of the biofeedback process and loads the therapist's documentation process, giving each fair CPU time while maintaining isolation."
+        },
+        {
+          "question": "A music therapy clinic's application is experiencing data corruption when multiple patient therapy sessions try to simultaneously write music analysis results to the same log file. Which OS capability would prevent this conflict?",
+          "options": [
+            "A) CPU scheduling",
+            "B) Virtual memory",
+            "C) Process isolation with synchronization mechanisms",
+            "D) File compression"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "CPU scheduling determines process execution order but doesn't prevent concurrent write conflicts.",
+            "Virtual memory manages address spaces but doesn't control file access.",
+            "Correct! Process isolation prevents direct interference, and synchronization (locks, mutexes) coordinate shared resource access.",
+            "File compression is unrelated to concurrent access control."
+          ],
+          "explanation": "The OS provides process isolation so processes can't directly corrupt each other's memory, but coordinated file access requires synchronization primitives like mutexes and locks. These ensure only one process writes at a time, preventing corruption of the shared therapy log file."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Process Management Practice Scenarios",
+      "content": "Work through realistic music therapy scenarios to deepen your understanding of process management.",
+      "questions": [
+        {
+          "question": "A music therapy application has three concurrent processes: one processing real-time instrument audio (Process_Audio), one managing patient assessment data (Process_Data), and one streaming music from a cloud database (Process_Stream). If Process_Audio crashes due to a buffer overflow, what should happen to the other processes?",
+          "options": [
+            "A) All three processes crash together",
+            "B) Only Process_Audio crashes; the others continue running independently",
+            "C) Process_Audio and Process_Stream crash, but Process_Data survives",
+            "D) The OS forces all processes to restart"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Without process isolation, this might happen, but modern OSes provide better protection.",
+            "Correct! Process isolation means one process's fault doesn't directly crash others.",
+            "Only Process_Audio should crash due to process isolation.",
+            "The OS doesn't force blanket restarts; that's application-level recovery."
+          ],
+          "explanation": "Operating systems enforce process isolation so that a crash in one process doesn't cascade to others. In this scenario, Process_Audio crashes due to its own memory error, but Process_Data and Process_Stream continue, allowing the therapist to switch to a different patient or recover the session."
+        },
+        {
+          "question": "During a group music therapy session with four patients using the same application, one patient's process enters an infinite loop consuming 95% of CPU. The therapist notices the application is unresponsive. Which OS feature allows the therapist to regain responsiveness?",
+          "options": [
+            "A) Process termination via task manager",
+            "B) Process scheduling with time slices",
+            "C) Virtual memory expansion",
+            "D) Increasing the system RAM"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "While terminating the runaway process would help, the fundamental feature preventing total lock-up is time-slicing.",
+            "Correct! Even with one process consuming 95%, the scheduler ensures other processes get small time slices, maintaining responsiveness.",
+            "Virtual memory doesn't address CPU-heavy processes.",
+            "More RAM won't help a CPU-bound infinite loop."
+          ],
+          "explanation": "Process scheduling with time slices (preemption) ensures that even when one process is heavily CPU-intensive, the OS periodically interrupts it to give other processes execution time. This is why the application remains somewhat responsive even when one patient's session process is stuck in a loop."
+        },
+        {
+          "question": "In a telehealth music therapy platform, Patient A's therapy session process needs to securely send assessment results to Patient B's process in the same application. The OS should provide which mechanism for this controlled communication?",
+          "options": [
+            "A) Direct memory sharing between the processes",
+            "B) Inter-Process Communication (IPC) mechanisms like pipes or message queues",
+            "C) A shared file with no access controls",
+            "D) Combining both processes into a single large process"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Direct memory sharing violates process isolation and is insecure.",
+            "Correct! IPC (pipes, sockets, message queues) allows secure controlled communication while maintaining isolation.",
+            "Shared files without controls allow unintended access and data corruption.",
+            "Combining processes defeats the purpose of isolation and error containment."
+          ],
+          "explanation": "Operating systems provide IPC mechanisms (Inter-Process Communication) like pipes, sockets, and message queues that allow processes to communicate securely while maintaining isolation. This enables one therapy session to safely share results with another without compromising either process's integrity or security."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Memory Management: Managing the Brain of Your Music Therapy Application",
+      "content": "Just as a therapist manages cognitive and emotional resources during a session, the operating system must carefully manage memory resources among all running processes. Every process needs memory for its code, data, and runtime state. A music therapy application processing real-time audio streams, storing patient assessments, and maintaining session history requires careful memory allocation. The OS provides virtual memory, allowing each process to believe it has a large, continuous address space (like each patient thinking they have the therapist's full attention), while the OS actually distributes physical RAM among all processes. Modern systems use paging and swapping: when RAM fills up, the OS moves less-frequently-used data to disk, freeing space for active processes. The heap allows dynamic allocation for therapy session data, while the stack manages local function calls during music analysis. Understanding memory management prevents crashes, data loss, and the sluggish performance that frustrated therapists notice when too many sessions run simultaneously.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Memory Management Concepts Quiz",
+      "content": "Assess your understanding of how operating systems manage memory for multi-process applications like music therapy systems.",
+      "questions": [
+        {
+          "question": "A music therapy clinic's application runs on a system with 8GB of physical RAM, but a patient session process believes it has access to a much larger address space. Which OS feature creates this illusion?",
+          "options": [
+            "A) CPU caching",
+            "B) Virtual memory",
+            "C) Process scheduling",
+            "D) File system buffering"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "CPU caching improves speed but doesn't create large address spaces.",
+            "Correct! Virtual memory abstracts physical memory and provides each process a large, isolated address space.",
+            "Process scheduling determines execution order, not address space.",
+            "File system buffering is for disk I/O, not process memory."
+          ],
+          "explanation": "Virtual memory is a cornerstone of modern OS memory management. It maps each process's virtual address space (which can be 32-bit, 64-bit, or larger) to the actual physical RAM available. This allows a music therapy application to work with gigabytes of virtual memory even on systems with smaller physical RAM, with the OS transparently managing the mapping."
+        },
+        {
+          "question": "During a long music therapy group session, physical RAM fills up as multiple patient processes allocate memory for audio buffers and assessment data. To prevent the application from crashing, the OS implements paging. What happens with data that doesn't fit in RAM?",
+          "options": [
+            "A) The application is immediately terminated",
+            "B) New memory allocation requests are denied",
+            "C) Data is moved to disk (swap space) temporarily",
+            "D) The system automatically restarts"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Modern OSes don't crash due to memory; they manage it dynamically.",
+            "If memory were denied, the application would crash anyway.",
+            "Correct! Paging moves less-used pages to disk, freeing RAM for active processes.",
+            "Unnecessary restart would interrupt therapy sessions."
+          ],
+          "explanation": "When physical RAM is exhausted, paging transfers data to disk storage (swap space). Though disk is slower than RAM, this allows more data than physical RAM to be managed. In a music therapy app, less-frequently accessed patient history might be paged to disk while active real-time audio processing stays in RAM."
+        },
+        {
+          "question": "A music therapy application's real-time audio processing thread allocates memory for a circular audio buffer using malloc(). This memory comes from which region of the process's memory layout?",
+          "options": [
+            "A) The stack",
+            "B) The heap",
+            "C) The code segment",
+            "D) The kernel space"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The stack is for automatic local variables and function parameters, not dynamic allocation.",
+            "Correct! malloc() allocates from the heap, which supports dynamic allocation for runtime-determined sizes.",
+            "The code segment contains executable instructions.",
+            "Kernel space is reserved for OS operations."
+          ],
+          "explanation": "Memory in a process is organized into segments: code (program instructions), data (global variables), heap (dynamic allocation via malloc), and stack (automatic function local variables). For a circular audio buffer whose size might depend on configuration, the heap is appropriate since its size must be determined at runtime and adjustable."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Memory Management Practice Scenarios",
+      "content": "Deepen your understanding of memory management through realistic music therapy application scenarios.",
+      "questions": [
+        {
+          "question": "A music therapy clinician's computer has 16GB of RAM and is running several applications: a browser with 10 tabs (3GB), patient database software (2GB), music therapy analysis tool (4GB), and email client (0.5GB). When the therapist opens a 4GB video file for therapeutic music, the system slows dramatically. Based on memory management principles, what is happening?",
+          "options": [
+            "A) The CPU is overloaded",
+            "B) Virtual memory paging is occurring, swapping data to disk",
+            "C) The file system has no space left",
+            "D) All processes are forcibly terminated"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The CPU might be busy but isn't the bottleneck here.",
+            "Correct! With ~19.5GB needed but only 16GB available, paging to disk occurs, causing slowdown.",
+            "The SSD might have space; the issue is RAM shortage.",
+            "Modern systems don't terminate processes due to memory pressure."
+          ],
+          "explanation": "When total demand for memory exceeds physical RAM, the OS activates paging (swapping). Less-frequently used pages move to disk storage. Since disk access is 100-1000x slower than RAM, excessive paging causes the system slowdown the therapist experiences. The solution might be closing unnecessary applications or upgrading RAM."
+        },
+        {
+          "question": "A music therapy application crashes with an \"out of memory\" error even though the system shows available RAM. What is most likely the problem?",
+          "options": [
+            "A) The operating system is not managing memory correctly",
+            "B) The specific process has exhausted its per-process memory limit or virtual address space limit",
+            "C) The hard drive is full",
+            "D) The CPU cache is corrupted"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "If the OS were failing, many processes would crash, not just one.",
+            "Correct! 32-bit processes have 2-3GB virtual address space limits; even with available system RAM, a single process can't exceed its limit.",
+            "Hard drive full affects disk I/O, not process memory allocation.",
+            "CPU cache issues cause performance degradation, not allocation errors."
+          ],
+          "explanation": "Each process has its own virtual address space with a maximum size (typically 3GB for 32-bit processes, much larger for 64-bit). Even if the system has free RAM, a single process can't allocate beyond its space limit. The music therapy app might need to be recompiled as 64-bit or refactored to reduce memory per process."
+        },
+        {
+          "question": "A memory leak occurs in a music therapy application when allocated memory is never freed after each therapy session ends. Over weeks of operation, what will eventually happen?",
+          "options": [
+            "A) The leak will automatically correct itself",
+            "B) Available memory decreases until the system becomes slow, then crashes, until the process is restarted",
+            "C) The operating system will automatically relocate the leaked memory",
+            "D) The leak only affects that single process, leaving the system stable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Memory leaks don't self-correct without intervention.",
+            "Correct! Leaked memory accumulates, causing gradual performance degradation and eventual system failure or process termination.",
+            "The OS can't relocate unreferenced memory\u2014that's why it's a leak.",
+            "Eventually, even system stability is affected as virtual memory thrashing occurs."
+          ],
+          "explanation": "A memory leak occurs when a program allocates memory but fails to deallocate it through free() or similar calls. Over time, leaked memory accumulates. Initially, the application slows down (paging increases as free RAM diminishes). Eventually, either the application crashes from memory exhaustion, or the entire system becomes unusably slow from excessive paging. Regular process restarts temporarily free the memory until the leak repeats."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "File Systems and I/O: Preserving the Music Therapy Experience",
+      "content": "A music therapy session generates valuable data: patient assessments, therapeutic music recordings, progress notes, and biofeedback measurements. These must persist beyond the session's end, stored reliably on disk. The file system is the OS layer that organizes, stores, and retrieves data from disk storage. A typical hierarchical file system like ext4 or NTFS organizes files into directories, manages free space, handles crashes gracefully with journaling, and controls access permissions. Input/Output (I/O) management orchestrates communication between processes and devices: audio input from microphones, output to speakers, network communication for telehealth, and disk read/write for patient records. The OS abstracts these devices behind standard interfaces, so your music therapy application uses the same file operations for a local hard drive, a networked storage system, or cloud storage. Buffering and caching optimize I/O performance, since disk and network operations are thousands of times slower than CPU operations. Synchronous I/O waits for completion (simple but potentially slow), while asynchronous I/O allows processes to continue while the OS handles the operation in the background.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "File Systems and I/O Concepts Quiz",
+      "content": "Test your understanding of how operating systems manage persistent storage and device communication for music therapy data.",
+      "questions": [
+        {
+          "question": "A music therapy application saves a patient's assessment file to '/home/therapist/sessions/patient123_2026-03-15.json'. Which OS component interprets this path and locates the file on disk?",
+          "options": [
+            "A) Process scheduler",
+            "B) Virtual memory manager",
+            "C) File system",
+            "D) Device driver"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The scheduler determines process execution, not file lookup.",
+            "Virtual memory manages process memory, not disk files.",
+            "Correct! The file system translates paths into disk locations and retrieves file data.",
+            "Device drivers handle hardware communication but rely on the file system."
+          ],
+          "explanation": "The file system is the OS subsystem responsible for managing persistent storage. It maintains the directory hierarchy, tracks which disk sectors store which files, and handles the translation from human-readable paths like '/home/therapist/sessions/patient123_2026-03-15.json' to the actual disk locations where the data resides. It also manages file permissions, timestamps, and metadata."
+        },
+        {
+          "question": "During a music therapy session, real-time audio data is continuously written to disk at 48kHz (48,000 samples per second). If the application called write() synchronously for each sample, what performance problem would result?",
+          "options": [
+            "A) The audio would become too loud",
+            "B) Process would block waiting for slow disk I/O, causing audio stuttering and latency",
+            "C) The file system would become corrupted",
+            "D) The audio quality would improve due to more frequent writes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Volume is unrelated to I/O synchronicity.",
+            "Correct! Synchronous writes block the process until disk writes complete (milliseconds), missing real-time audio deadlines.",
+            "Proper file system design handles concurrent writes safely.",
+            "Frequent I/O doesn't improve audio quality and causes severe latency."
+          ],
+          "explanation": "Real-time audio processing requires low latency (typically under 10ms). Synchronous I/O operations block the process while the slow disk completes the write (taking milliseconds). For 48,000 samples per second, synchronous writes would cause unacceptable delays. Music therapy applications typically use asynchronous I/O (non-blocking writes) with buffering, where the application writes to memory buffers and the OS handles disk I/O in the background."
+        },
+        {
+          "question": "A music therapy clinic's server loses power during a patient assessment save operation. After restart, the assessment file is corrupted (partially written), losing the data. Which file system feature would have prevented this data loss?",
+          "options": [
+            "A) File compression",
+            "B) File encryption",
+            "C) Journaling",
+            "D) Access control permissions"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Compression reduces size but doesn't protect against incomplete writes.",
+            "Encryption protects against unauthorized access but not against incomplete writes.",
+            "Correct! Journaling records operations before applying them, enabling crash recovery and data integrity.",
+            "Permissions control who accesses files, not data integrity."
+          ],
+          "explanation": "Journaling (used by ext4, NTFS) maintains a log of file system operations. Before modifying the actual file data, the OS writes the operation to the journal. If a crash occurs mid-operation, on restart the OS can detect incomplete operations in the journal and either complete them or roll them back, ensuring data integrity. Without journaling, a power loss during write could leave files partially updated and corrupted."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "File Systems and I/O Practice Scenarios",
+      "content": "Master file systems and I/O concepts through realistic music therapy data management scenarios.",
+      "questions": [
+        {
+          "question": "A music therapy telehealth application stores session recordings (large audio files) on a remote cloud server. The therapist's client application reads these files for playback during review sessions. What I/O abstraction allows the application to access cloud files using the same interface as local files?",
+          "options": [
+            "A) Device drivers",
+            "B) Virtual file systems and network protocols mounted as file systems",
+            "C) Process inter-communication",
+            "D) Virtual memory paging"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Device drivers handle hardware but not network file abstraction.",
+            "Correct! Virtual file systems (like FUSE) or network file systems (NFS, SMB) mount remote storage as local directories.",
+            "IPC is for process communication, not storage access.",
+            "Virtual memory is for process memory, not file access."
+          ],
+          "explanation": "Modern operating systems support virtual file systems and network file system protocols (NFS, SMB, SFTP) that present remote cloud storage as if it were local directories. When the therapist's application opens '/mnt/cloud/session_123.wav', the OS transparently handles network communication with the cloud server, caching, and transferring data, while the application code remains simple."
+        },
+        {
+          "question": "A music therapy application needs to simultaneously handle: (1) writing patient assessment scores to disk, (2) recording live audio input, and (3) playing back therapeutic music. Using synchronous I/O for all three would cause severe performance issues. What I/O strategy allows the application to remain responsive?",
+          "options": [
+            "A) Increasing the CPU clock speed",
+            "B) Using asynchronous I/O with callbacks or async/await, buffering data in memory",
+            "C) Writing data only weekly instead of continuously",
+            "D) Running each I/O operation on a separate disk"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "CPU speed doesn't address I/O wait times.",
+            "Correct! Asynchronous I/O allows processes to continue while the OS handles I/O in background, with memory buffering preventing data loss.",
+            "Reducing write frequency loses assessment data granularity.",
+            "Multiple disks help but don't address the fundamental blocking issue."
+          ],
+          "explanation": "Asynchronous I/O (non-blocking) allows a process to initiate an I/O operation and continue executing rather than waiting for completion. The OS handles the slow operation in the background, notifying the process when done via callbacks or checked status. Coupled with buffering (intermediate memory storage), asynchronous I/O allows a music therapy application to responsively record audio, play music, and save assessments simultaneously without any single operation blocking the others."
+        },
+        {
+          "question": "A music therapy clinic's backup system copies patient session files to an external hard drive. To ensure no data loss if the backup process is interrupted, which file system or backup feature should be used?",
+          "options": [
+            "A) Faster copy speed",
+            "B) File compression during backup",
+            "C) Atomic operations or backup transactions that complete fully or not at all",
+            "D) Storing backup on an SSD instead of a hard drive"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Speed alone doesn't prevent partial backups.",
+            "Compression reduces size but doesn't ensure complete backups.",
+            "Correct! Atomic operations mean the backup either completes fully or is recognized as incomplete, preventing partial backups from being trusted.",
+            "Media type doesn't address the atomic completion problem."
+          ],
+          "explanation": "Backup systems must ensure atomicity: either the backup completes fully or fails entirely. If a power loss occurs mid-backup, you don't want a partial backup that's indistinguishable from a complete one. File systems with transaction support or backup software using atomic operations (create in temporary location, then atomic rename) prevent this problem. For a music therapy clinic, incomplete patient data backups could be catastrophic."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Operating Systems Fundamentals Mastery",
+      "content": "Congratulations! You've successfully mastered Operating Systems Fundamentals through the lens of music therapy. You now understand how processes create isolation and enable multitasking in therapy applications, how memory management allows multiple sessions to share hardware resources efficiently, and how file systems preserve the vital therapeutic data that transforms lives. These concepts\u2014processes, memory management, and I/O\u2014are foundational to every application, from mobile therapy clients to cloud-based assessment systems. You're ready to design scalable music therapy applications that run reliably and efficiently. Continue exploring topics like networking for telehealth, real-time audio processing kernels, and distributed systems for multi-clinic platforms. The operating system is the silent orchestra conductor making everything possible."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "begin assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail - practice"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry assessment"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass - continue"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "begin assessment"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail - practice"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry assessment"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass - continue"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "begin assessment"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail - practice"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry assessment"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass - mastery"
+    }
+  ],
+  "generated_at": "2026-03-27T17:05:32.488608+00:00",
+  "model": "claude-haiku-4-5"
+}

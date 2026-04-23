@@ -1,0 +1,257 @@
+{
+  "id": "ts-env-001",
+  "title": "Time Series Analysis in Environmental Science",
+  "description": "Learn time series analysis through the lens of environmental monitoring, climate data, and ecological trends.",
+  "topic": "Time Series Analysis",
+  "theme": "environmental science",
+  "difficulty": "beginner",
+  "estimated_minutes": 50,
+  "tags": [
+    "time series",
+    "data analysis",
+    "environmental science",
+    "climate",
+    "forecasting"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Understanding Time Series in Environmental Science",
+      "content": "Time series data is a sequence of observations recorded at regular intervals over time. In environmental science, we constantly work with time series: daily temperature readings, monthly rainfall measurements, atmospheric CO\u2082 levels tracked hourly, and soil moisture monitored weekly. These temporal patterns reveal trends, cycles, and anomalies crucial for understanding environmental change. Time series analysis helps us predict future conditions, detect climate shifts, and make informed conservation decisions.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How would you prefer to learn about time series analysis? Would you like to start with theoretical foundations and statistical concepts, or dive directly into practical techniques with real environmental data?",
+      "choices": [
+        {
+          "label": "Theory First: Build foundational concepts",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-on First: Learn by analyzing real data",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Time Series Components and Statistical Foundations",
+      "content": "Every environmental time series has four key components: trend (long-term directional change), seasonality (recurring patterns within fixed periods like annual cycles), cyclicity (irregular oscillations such as El Ni\u00f1o or multi-year droughts), and noise (random daily fluctuations). Global temperature exhibits an upward trend, strong seasonal cycles, decadal variations, and measurement noise. Decomposing these components mathematically isolates what's truly changing from what's predictable. Understanding these foundations enables selection of appropriate statistical methods like moving averages, exponential smoothing, ARIMA, and autoregressive models for accurate environmental forecasting.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Decomposing Amazon River Flow Data",
+      "content": "Consider 24 months of daily discharge measurements from the Amazon River. The trend shows gradual increase reflecting climate-driven intensification of the water cycle. Seasonality reveals pronounced wet season peaks (June-August, 200,000 m\u00b3/s) and dry season lows (November-February, 80,000 m\u00b3/s). Cyclicity reflects multi-year droughts linked to Pacific Ocean temperatures. Noise includes daily weather perturbations (\u00b15%). By decomposing this series, hydrologists separated the concerning upward trend from expected seasonal swings, revealing that flood risk is genuinely increasing beyond natural variation.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Components and Fundamentals",
+      "content": "Test your understanding of time series components and their importance in environmental monitoring.",
+      "questions": [
+        {
+          "question": "A monitoring station records daily air quality (PM2.5 concentration in \u03bcg/m\u00b3) for three years. The data shows higher pollution in winter months and lower in summer every year. Which time series component does this pattern represent?",
+          "options": [
+            "A) Trend",
+            "B) Seasonality",
+            "C) Cyclicity",
+            "D) Noise"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) Incorrect. Trend represents long-term directional change over years.",
+            "B) Correct! This annual pattern repeating predictably every year is seasonality.",
+            "C) Incorrect. Cyclicity is irregular oscillation, not fixed-interval repetition.",
+            "D) Incorrect. Noise is random daily fluctuation, not systematic patterns."
+          ],
+          "explanation": "Seasonality is the repeating pattern at fixed, known intervals (here: annually). Winter pollution spikes occur predictably due to temperature inversions and increased heating emissions."
+        },
+        {
+          "question": "You analyze 20 years of coral reef water temperature. The average temperature rose 0.8\u00b0C over the period, with annual fluctuations of \u00b12\u00b0C. What does the 0.8\u00b0C increase represent?",
+          "options": [
+            "A) Seasonality",
+            "B) Noise",
+            "C) Trend",
+            "D) Cyclicity"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A) Incorrect. Seasonality is the \u00b12\u00b0C annual fluctuation within each year.",
+            "B) Incorrect. Noise is random daily/weekly variation.",
+            "C) Correct! The sustained directional change over 20 years is trend.",
+            "D) Incorrect. Cyclicity refers to irregular, non-fixed oscillations."
+          ],
+          "explanation": "Trend is the persistent directional movement over the long term. The 0.8\u00b0C warming is the underlying trend; the \u00b12\u00b0C swings are seasonality superimposed on it."
+        },
+        {
+          "question": "Why is decomposing a time series crucial for environmental decision-making?",
+          "options": [
+            "A) It makes data easier to store in databases",
+            "B) It separates true change from predictable variation, enabling accurate forecasts and science-based policy",
+            "C) It eliminates the need for further statistical analysis",
+            "D) It reduces computational requirements for data storage"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) Incorrect. Decomposition is fundamentally about understanding patterns, not storage efficiency.",
+            "B) Correct! Isolating trend from seasonality reveals true shifts and enables reliable forecasting.",
+            "C) Incorrect. Decomposition is the first step; sophisticated analysis follows.",
+            "D) Incorrect. Computational efficiency is a side benefit, not the primary purpose."
+          ],
+          "explanation": "Decomposition reveals signal beneath noise. For climate policy, we distinguish seasonal temperature swings from underlying warming trends\u2014decomposition makes this distinction scientifically rigorous."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Practical Time Series Techniques and Real Data Applications",
+      "content": "Environmental scientists employ three primary practical approaches: moving averages (smoothing noise to reveal underlying patterns in noisy sensor data), exponential smoothing (weighting recent observations more heavily to track rapid environmental changes like pollution spikes), and autoregressive methods (using past values to predict future conditions, essential for rainfall and streamflow forecasting). These techniques detect regime shifts\u2014when a forest transitions from net carbon sink to carbon source, ocean productivity declines, or species populations collapse. These methods are applied daily in climate services, air quality forecasting, wildfire prediction, and wildlife management to guide actionable decisions and emergency response.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Forecasting Urban Air Quality with Exponential Smoothing",
+      "content": "A city air quality network measures hourly PM2.5 concentrations. Recent readings show: 35, 38, 40, 42, 44 \u03bcg/m\u00b3 (rising trend over 5 hours from morning rush traffic). Simple moving average would delay trend detection. Exponential smoothing with high weight on recent observations (\u03b1=0.7) predicts the next hour at approximately 45 \u03bcg/m\u00b3. This forecast triggers public health alerts advising sensitive populations to remain indoors and prompts traffic management to reduce vehicle flow. Within two hours, wind direction changes and levels drop to 28 \u03bcg/m\u00b3\u2014the time series forecast provided a 2-hour window for people to adjust behavior and protect respiratory health.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Practical Techniques and Environmental Applications",
+      "content": "Demonstrate your understanding of time series techniques and their real-world environmental applications.",
+      "questions": [
+        {
+          "question": "A watershed monitoring station measures soil moisture every 6 hours in a semi-arid region. Values oscillate rapidly: 25%, 45%, 22%, 48%, 20% due to sensor noise and rapid infiltration/evaporation cycles. Which technique best reduces noise while preserving genuine moisture trends?",
+          "options": [
+            "A) Simple moving average (3-4 hour window)",
+            "B) Exponential smoothing with low \u03b1 value",
+            "C) Autoregressive forecasting model",
+            "D) Remove all variation to show true values"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "A) Correct! A 3-4 point moving average smooths sensor noise while preserving real moisture trends.",
+            "B) Incorrect. Low \u03b1 emphasizes old data; better for stable systems.",
+            "C) Incorrect. Autoregressive models forecast future values, not noise reduction.",
+            "D) Incorrect. We must preserve genuine moisture changes for water management."
+          ],
+          "explanation": "Moving averages average neighboring values without assumptions, ideal for noise reduction in environmental sensor networks. This reveals true soil moisture patterns for irrigation and drought monitoring."
+        },
+        {
+          "question": "You forecast ocean temperature for the next month using exponential smoothing with high weight on recent weeks (\u03b1=0.7). Last month's average was 18.2\u00b0C and rising. Why is this approach effective for marine forecasting?",
+          "options": [
+            "A) Ocean temperature never changes, so historical data is unnecessary",
+            "B) Recent temperature trends persist short-term due to ocean thermal inertia and water mass momentum",
+            "C) Exponential smoothing is always superior to other statistical methods",
+            "D) This method requires no historical data or computational resources"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) Incorrect. Ocean temperature changes constantly with currents and seasons.",
+            "B) Correct! Ocean water has enormous thermal inertia; recent warming trends persist for weeks.",
+            "C) Incorrect. Method choice depends on the environmental system's characteristics.",
+            "D) Incorrect. Exponential smoothing benefits greatly from historical baseline data."
+          ],
+          "explanation": "High \u03b1 values make exponential smoothing responsive to recent changes\u2014ideal when conditions persist short-term due to physical properties like thermal inertia in water systems. Recent warming of a current will likely continue short-term."
+        },
+        {
+          "question": "A watershed manager must forecast next week's river discharge to optimize dam releases for flood control and hydropower. Historical data shows strong weekly patterns, seasonal variation, and occasional storm-driven spikes. What integrated approach is most appropriate?",
+          "options": [
+            "A) Simple moving average of the last 7 days only",
+            "B) Exponential smoothing alone without seasonal adjustment",
+            "C) Autoregressive model fitting only the most recent 30 days",
+            "D) Decompose the series first, then apply ARIMA to residuals"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "A) Incorrect. Moving average ignores seasonal and multi-year patterns critical to dam operations.",
+            "B) Incorrect. Exponential smoothing cannot capture strong seasonal cycles effectively.",
+            "C) Incorrect. Recent data alone misses seasonal and long-term patterns.",
+            "D) Correct! Decomposition isolates seasonality and trend; ARIMA models unexpected variations."
+          ],
+          "explanation": "Complex environmental systems with multiple patterns (weekly, seasonal, irregular storms) require decomposition followed by advanced modeling. This separates known patterns from anomalies, enabling predictions that support both flood safety and power generation."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Time Series Analysis Mastery: Environmental Applications",
+      "content": "Congratulations! You've mastered time series analysis through the lens of environmental science. You now understand decomposing complex temporal patterns, forecasting environmental conditions, and extracting actionable insights from data. Whether you began with theory or hands-on practice, you're equipped to analyze climate trends, predict air quality degradation, model species population dynamics, and support data-driven conservation decisions. Apply these skills monitoring local ecosystems, contributing to climate science, guiding water resource management, or supporting evidence-based environmental policy."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "proceed"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First: Build foundational concepts"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-on First: Learn by analyzing real data"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "proceed"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "proceed"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "complete branch A"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "proceed"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "proceed"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "complete branch B"
+    }
+  ],
+  "generated_at": "2026-03-27T13:47:54.823525+00:00",
+  "model": "claude-haiku-4-5"
+}

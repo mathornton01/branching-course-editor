@@ -1,0 +1,526 @@
+{
+  "id": "alg-complexity-game-design",
+  "title": "Algorithm Design and Complexity: A Game Developer's Guide",
+  "description": "Learn algorithm design and computational complexity through interactive game design examples. Master time and space complexity, implement efficient algorithms, and optimize game performance.",
+  "topic": "Algorithm Design and Complexity",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "algorithms",
+    "complexity",
+    "game development",
+    "Big O",
+    "optimization",
+    "data structures"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Understanding Time Complexity: The FPS Frame Budget",
+      "content": "In game development, every frame must complete within ~16.67ms (for 60 FPS) to maintain smooth gameplay. This is your \"frame budget.\" As a game grows, we must understand how our algorithms scale with input size. Big O notation describes how an algorithm's runtime grows as the input increases. An O(n) algorithm takes twice as long when input doubles; O(n\u00b2) takes four times as long. Knowing complexity helps you predict frame drops before they happen and design scalable game systems."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Time Complexity Assessment",
+      "content": "Test your understanding of Big O notation in game contexts.",
+      "questions": [
+        {
+          "question": "Your game has 1,000 enemies. Each frame, you check every enemy against every other enemy for collision (O(n\u00b2)). If this takes 10ms with 1,000 enemies, approximately how long will it take with 2,000 enemies?",
+          "options": [
+            "20ms",
+            "40ms",
+            "80ms",
+            "200ms"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. With O(n\u00b2), doubling input doesn't double time.",
+            "Correct! O(n\u00b2): (2000/1000)\u00b2 = 4\u00d7, so 10ms \u00d7 4 = 40ms. This is why spatial hashing or quadtrees are crucial for collision detection.",
+            "Incorrect. That would be 8\u00d7 scaling, not 4\u00d7.",
+            "Incorrect. That would be O(n\u00b3) scaling."
+          ],
+          "explanation": "With O(n\u00b2) complexity, when you double the input size (1000 \u2192 2000), the time grows by 2\u00b2 = 4\u00d7. So 10ms \u00d7 4 = 40ms. This is why spatial hashing or quadtrees are crucial for collision detection in games with many entities."
+        },
+        {
+          "question": "Your pathfinding algorithm for NPCs searches a graph with linear search: O(n). A map with 50 waypoints takes 5ms. You expand to 200 waypoints. How much time should you budget?",
+          "options": [
+            "5ms",
+            "10ms",
+            "20ms",
+            "25ms"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Linear time grows proportionally with input size.",
+            "Incorrect. 200/50 = 4\u00d7, not 2\u00d7.",
+            "Correct! O(n) means time scales linearly. 200/50 = 4\u00d7, so 5ms \u00d7 4 = 20ms.",
+            "Incorrect. That ignores the 4\u00d7 scaling factor."
+          ],
+          "explanation": "With O(n) complexity, runtime grows linearly with input. Doubling waypoints to 4\u00d7 requires 4\u00d7 the time. For large maps, you'd use spatial indexing (quadtrees) or binary search on sorted waypoints to reduce this to O(log n)."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Time Complexity in Games",
+      "content": "Strengthen your Big O intuition with game scenarios.",
+      "questions": [
+        {
+          "question": "Your inventory system sorts items by name each time a player picks up an item. Sorting 50 items with quicksort (O(n log n)) takes 2ms. Approximately how long to sort 100 items?",
+          "options": [
+            "2ms",
+            "3ms",
+            "4ms",
+            "6ms"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. O(n log n) scales faster than you think.",
+            "Incorrect. You're underestimating the scaling factor.",
+            "Correct! 100 log(100) / (50 log(50)) \u2248 2.1\u00d7, so 2ms \u00d7 2.1 \u2248 4ms.",
+            "Incorrect. That would be closer to O(n\u00b2) scaling."
+          ],
+          "explanation": "O(n log n) grows slower than O(n\u00b2) but faster than O(n). As n doubles, the factor is roughly 2 \u00d7 log(100)/log(50) \u2248 2.1\u00d7. For game UI responsiveness, O(n log n) is usually acceptable even for hundreds of items."
+        },
+        {
+          "question": "You use a hash table to store player positions in a multiplayer game: O(1) average lookup. With 100 players, position lookup takes <1ms. How long with 10,000 players?",
+          "options": [
+            "10ms",
+            "1ms",
+            "<1ms",
+            "100ms"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Hash table lookups don't scale with input size.",
+            "Incorrect. O(1) is constant time, not linear.",
+            "Correct! O(1) means constant time regardless of input size. Even 10,000 players remain <1ms per lookup.",
+            "Incorrect. That would be O(n) scaling."
+          ],
+          "explanation": "Hash tables have O(1) average-case lookup, making them perfect for storing player data, cached textures, or game object references. This is why they're a staple in high-performance game engines."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Space Complexity: Managing Game Memory",
+      "content": "While your CPU is computing, your GPU and RAM store game data: textures, meshes, particle effects, game state. As your game scales, memory usage can balloon. Space complexity describes how memory requirements grow with input. An O(1) algorithm uses constant memory regardless of input\u2014ideal. O(n) uses memory proportional to input (storing an array of N enemies). O(n\u00b2) is dangerous (storing all pairwise distances between N enemies). Modern games use techniques like streaming (loading/unloading level chunks), level-of-detail (LOD) systems, and object pooling to keep memory footprints manageable even with thousands of entities."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Space Complexity Assessment",
+      "content": "Evaluate memory usage patterns in game systems.",
+      "questions": [
+        {
+          "question": "Your game stores precomputed distances between all pairs of waypoints: O(n\u00b2) space. With 100 waypoints, this uses 40 MB. How much space for 200 waypoints?",
+          "options": [
+            "40 MB",
+            "80 MB",
+            "160 MB",
+            "320 MB"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Space doesn't scale linearly.",
+            "Incorrect. That would be O(n) scaling.",
+            "Correct! O(n\u00b2) space: (200/100)\u00b2 = 4\u00d7, so 40 MB \u00d7 4 = 160 MB.",
+            "Incorrect. That assumes even more aggressive scaling."
+          ],
+          "explanation": "O(n\u00b2) space scales quadratically. Doubling waypoints requires 4\u00d7 memory. This is why most games compute distances on-the-fly (O(1) space per query) rather than precomputing. A more efficient approach: store only adjacent waypoints in a graph (O(n) space)."
+        },
+        {
+          "question": "Your particle system stores each active particle (position, velocity, lifetime). With 10,000 particles active, this uses 2 MB. In a big explosion, 30,000 particles spawn. How much space?",
+          "options": [
+            "2 MB",
+            "4 MB",
+            "6 MB",
+            "20 MB"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Space scales with particle count.",
+            "Incorrect. 30,000 is 3\u00d7, not 2\u00d7.",
+            "Correct! O(n) space: 30,000/10,000 = 3\u00d7, so 2 MB \u00d7 3 = 6 MB.",
+            "Incorrect. That scales incorrectly."
+          ],
+          "explanation": "Particle data is O(n) space\u2014proportional to active particles. Most games use object pooling: pre-allocate a max particle buffer (e.g., 50,000 particles) and reuse them, keeping memory constant and avoiding allocation stalls."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Space Complexity in Games",
+      "content": "Apply space complexity reasoning to game memory scenarios.",
+      "questions": [
+        {
+          "question": "You cache the result of a pathfinding search: store the path (list of waypoints). With an average path of 20 waypoints, storing 500 paths uses 1 MB. How much for 1,000 paths with the same average length?",
+          "options": [
+            "1 MB",
+            "2 MB",
+            "4 MB",
+            "1.5 MB"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Memory scales with the number of paths.",
+            "Correct! O(n) space: 1,000/500 = 2\u00d7, so 1 MB \u00d7 2 = 2 MB.",
+            "Incorrect. That would be O(n\u00b2) scaling.",
+            "Incorrect. The scaling factor is 2, not 1.5."
+          ],
+          "explanation": "Storing paths is O(n) space relative to the number of paths. Doubling paths doubles memory. However, caches have limits\u2014many games use LRU (Least Recently Used) caches to evict old paths and cap memory usage."
+        },
+        {
+          "question": "Your level uses a spatial hash to track colliders: O(n) space where n = number of colliders. With 5,000 colliders, it uses 3 MB. What about 5,000 colliders but with 2 MB hash table size per cell?",
+          "options": [
+            "1.2 MB",
+            "3 MB",
+            "6 MB",
+            "Not enough info"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. The grid size is independent of collider count.",
+            "Incorrect. 2 MB per cell \u00d7 some grid cells can exceed 3 MB total.",
+            "Incorrect. Space depends on both grid cells and colliders.",
+            "Correct! Space is O(grid_cells + n). You need to know the grid resolution."
+          ],
+          "explanation": "Spatial hashing space complexity is O(grid_cells + n), where grid_cells is fixed and n = colliders. A uniform grid with fixed resolution uses constant space for the grid structure plus O(n) for storing references to colliders."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Common Algorithms in Games: Pathfinding & Sorting",
+      "content": "Game developers rely on a handful of canonical algorithms. **Pathfinding (A*)**: An NPC needs to navigate a game world. A* combines heuristic search with distance estimation\u2014O(b^d) in worst case but typically much faster in practice. It's far more efficient than checking every square. **Sorting (Quicksort/Mergesort)**: Sorting a leaderboard by score, rendering objects from back-to-front (painter's algorithm), or sorting inventory items\u2014all use O(n log n) algorithms. **Spatial Search (Quadtree/Octree)**: Instead of checking all N enemies against all M objects (O(N\u00d7M)), partition space into a tree structure. Queries become O(log N), crucial for collision detection and spatial queries. Choosing the right algorithm is often the difference between 60 FPS and 15 FPS."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Algorithms Assessment",
+      "content": "Test your knowledge of game algorithms and their complexity.",
+      "questions": [
+        {
+          "question": "Your game renders 10,000 objects every frame. Using painter's algorithm (back-to-front sorting with mergesort: O(n log n)), how does performance scale to 20,000 objects?",
+          "options": [
+            "2\u00d7 slower",
+            "4\u00d7 slower",
+            "2.2\u00d7 slower",
+            "10\u00d7 slower"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. O(n log n) scales faster than linearly.",
+            "Incorrect. That's O(n\u00b2) scaling.",
+            "Correct! O(n log n): (20000 log 20000) / (10000 log 10000) \u2248 2 \u00d7 1.1 \u2248 2.2\u00d7.",
+            "Incorrect. That's worse than O(n log n)."
+          ],
+          "explanation": "Mergesort is O(n log n). When input doubles, time \u2248 2 \u00d7 (log(2n) / log(n)) \u2248 2 \u00d7 1.1 \u2248 2.2\u00d7. This is acceptable for modern GPUs; you could render 40,000 objects with only ~2.4\u00d7 cost."
+        },
+        {
+          "question": "Your pathfinding uses a naive approach: check every single tile on a 100\u00d7100 map for the shortest path (O(n) where n = 10,000 tiles). It takes 8ms per path. You upgrade to A* (practical complexity roughly 4-8\u00d7 faster). Expect roughly how long per path?",
+          "options": [
+            "8ms",
+            "1-2ms",
+            "4ms",
+            "0.8ms"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A* is much faster than naive search.",
+            "Correct! A* is 4-8\u00d7 faster than brute-force. 8ms / 4 = 2ms to 8ms / 8 = 1ms. Expect 1-2ms.",
+            "Incorrect. That's not aggressive enough; A* provides larger speedups.",
+            "Incorrect. That assumes a speedup beyond typical A* performance."
+          ],
+          "explanation": "A* is dramatically faster than brute-force tile search because it uses a heuristic (distance to goal) to prune impossible paths. On a 100\u00d7100 map, you explore ~100-200 tiles instead of 10,000. This is why A* is the gold standard for game pathfinding."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Game Algorithms",
+      "content": "Solidify your understanding of algorithm choice and complexity in game contexts.",
+      "questions": [
+        {
+          "question": "Your quadtree for collision detection partitions space recursively. With 1,000 moving objects, spatial queries average O(log n) \u2248 10 operations per object per frame. Roughly 100,000 total queries. What's the cost per frame?",
+          "options": [
+            "1M ops",
+            "100K ops",
+            "1B ops",
+            "10K ops"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! 100,000 queries \u00d7 10 ops per query = 1,000,000 ops per frame. On modern CPUs (1+ billion ops/sec), this is < 1ms.",
+            "Incorrect. That's the number of queries, not total operations.",
+            "Incorrect. That assumes O(n\u00b2) collision checking.",
+            "Incorrect. You're underestimating the operation count."
+          ],
+          "explanation": "Quadtrees enable collision detection in O(log n) per query. With 1,000 objects, you do 1,000 insertion queries + spatial lookups \u2248 100,000 ops total. Without a quadtree, it's O(n\u00b2) = 1,000,000 pairs = crash. This is why spatial partitioning is mandatory for many-body simulations."
+        },
+        {
+          "question": "Your game sorts a player's inventory (50 items) when they pick up or drop an item. Using insertion sort (O(n\u00b2) worst case), how long to sort on pickup?",
+          "options": [
+            "<1ms",
+            "1-10ms",
+            "10-100ms",
+            "100ms+"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! O(n\u00b2): 50\u00b2 = 2,500 operations. On modern CPUs, < 0.1ms.",
+            "Incorrect. Insertion sort on 50 items is very fast.",
+            "Incorrect. That assumes much larger input or slower CPU.",
+            "Incorrect. Way too pessimistic for 50 items."
+          ],
+          "explanation": "For small datasets (< 100 items), even O(n\u00b2) is acceptable (< 1ms). Insertion sort is also good because if the list is mostly sorted, it's O(n) on average. This is why games often use simple sorts for UI\u2014pick the right algorithm for your input size."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Optimization Strategies: From Code to Experience",
+      "content": "Understanding complexity is half the battle; optimization is the art. **Caching**: Precompute results and reuse them. A game might cache pathfinding results, texture filtering, or audio mixing to avoid recomputing every frame. **Data Structures**: Choose the right structure for the job. Hash tables for O(1) lookups, balanced trees for sorted data, spatial grids for spatial queries. **Early Exit**: If checking 100 colliders and you find one collision, stop\u2014you don't need to check the rest. Use bounding volumes (spheres, boxes) before expensive mesh tests. **Memoization**: Store function results so repeated calls are instant. **Level of Detail (LOD)**: Render distant NPCs with fewer polygons, low-resolution textures, or simplified AI. **Asynchronous Processing**: Off-load pathfinding, physics, or pathtracing to background threads or even previous frames. These techniques often yield 2-10\u00d7 performance gains, turning 30 FPS into 60+ FPS."
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Final Assessment: Design & Optimization",
+      "content": "Apply all concepts to a final game design challenge.",
+      "questions": [
+        {
+          "question": "Your game has 500 enemies. Naive collision check: O(n\u00b2) = 250,000 pair tests. Using a spatial hash with O(log n) cell lookups, you reduce it to 5,000 checks per frame. At 60 FPS, you save ~15M checks/sec. If each check costs minimal CPU, what's the biggest win?",
+          "options": [
+            "CPU speed only",
+            "Memory efficiency only",
+            "Reducing garbage collection (GC) pauses",
+            "Culling unnecessary checks before expensive tests"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. Spatial hashing benefits both CPU and memory.",
+            "Incorrect. Spatial hashing benefits both CPU and memory.",
+            "Incorrect. While GC is important, the primary benefit here is algorithmic.",
+            "Correct! Spatial hashing uses broad-phase filtering\u2014bounding checks eliminate most pairs before expensive narrow-phase testing."
+          ],
+          "explanation": "Spatial hashing is a broad-phase optimization: you quickly discard impossible collision pairs (5,000 instead of 250,000). Then you run expensive mesh tests only on the remaining candidates. This layered approach is why games can simulate hundreds of physics bodies in real-time."
+        },
+        {
+          "question": "You implement memoization for pathfinding: store computed paths in a cache (key = start/goal, value = path). First query (cache miss): 8ms. Subsequent identical queries (cache hit): <0.1ms. If 80% of queries are cache hits, what's the average time per query?",
+          "options": [
+            "1.6ms",
+            "4.0ms",
+            "6.4ms",
+            "8.0ms"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! 80% \u00d7 0.1ms + 20% \u00d7 8ms = 0.08ms + 1.6ms = 1.68ms \u2248 1.6ms.",
+            "Incorrect. That assumes 50% hits.",
+            "Incorrect. That's weighted too heavily toward cache misses.",
+            "Incorrect. You're ignoring cache hits."
+          ],
+          "explanation": "Memoization trades memory for speed. With 80% hit rate, average query time drops from 8ms to ~1.6ms\u20145\u00d7 faster. Cache hit rates often exceed 80% in games because players and NPCs frequently navigate similar routes. This is a classic speed-vs-space tradeoff."
+        },
+        {
+          "question": "Your game spawns particle effects: 1,000 particles per explosion. Naive approach allocates new particles each time (O(n) per spawn, fragmented memory). You switch to object pooling: pre-allocate 100,000 particles, reuse them (O(1) per spawn, contiguous memory). What's the biggest benefit?",
+          "options": [
+            "CPU speed only",
+            "Memory efficiency only",
+            "Reducing garbage collection (GC) pauses",
+            "Better cache locality"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Object pooling benefits both CPU and memory.",
+            "Incorrect. Object pooling benefits both CPU and memory.",
+            "Correct! Pre-allocation avoids new/delete cycles. GC pauses (freeze the game 10-100ms) are eliminated, smoothing framerate.",
+            "Incorrect. That's a secondary benefit; the main win is GC elimination."
+          ],
+          "explanation": "Object pooling is a cornerstone of game optimization. Allocating 1,000 particles per frame triggers garbage collection, causing frame stalls (\"garbage spike\" = 60 FPS drop to 15 FPS for 100ms). Pooling eliminates allocation entirely, keeping frames smooth. Memory is contiguous, improving cache efficiency too."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n13",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "practice",
+      "title": "Practice: Optimization in Real Games",
+      "content": "Reinforce optimization concepts with practical game examples.",
+      "questions": [
+        {
+          "question": "Your game uses bounding sphere checks before expensive mesh collision tests. Bounding sphere: O(1), mesh collision: O(m) where m = triangles. With 1,000 colliders (m=100 triangles each), naive mesh checks = 100,000 ops. With bounding sphere filtering, you reject 95% without mesh test (50 mesh tests instead). New cost: 1,000 sphere checks + 50 mesh tests \u2248 6,000 ops. What's the speedup?",
+          "options": [
+            "6\u00d7",
+            "16\u00d7",
+            "10\u00d7",
+            "2\u00d7"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. 100,000 / 6,000 \u2248 16.7\u00d7, not 6\u00d7.",
+            "Correct! 100,000 / 6,000 \u2248 16.7\u00d7, so roughly 16\u00d7 speedup.",
+            "Incorrect. That's less aggressive than the actual speedup.",
+            "Incorrect. That underestimates the benefit of broad-phase filtering."
+          ],
+          "explanation": "Broad-phase collision detection (bounding volumes) is a classic optimization. Testing 1,000 cheap bounding checks + 50 expensive mesh tests beats 100,000 mesh tests. This layered approach is why games can simulate hundreds of physics bodies in real-time."
+        },
+        {
+          "question": "Your rendering pipeline currently sorts all 500 on-screen objects per frame (O(n log n) \u2248 500 \u00d7 log(500) \u2248 4,500 ops). You implement a spatial grid: objects grid-sorted as they move (O(1) amortized). Overhead: 50 grid cells to manage. New cost: ~550 ops. Speedup: roughly how much?",
+          "options": [
+            "1.2\u00d7",
+            "4\u00d7",
+            "8\u00d7",
+            "100\u00d7"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. 4,500 / 550 \u2248 8\u00d7, not 1.2\u00d7.",
+            "Incorrect. 4,500 / 550 \u2248 8\u00d7, not 4\u00d7.",
+            "Correct! 4,500 ops / 550 ops \u2248 8\u00d7 speedup.",
+            "Incorrect. That's too aggressive; real overhead isn't negligible."
+          ],
+          "explanation": "Spatial grids eliminate per-frame sorting by keeping objects grid-sorted during movement. This trades dynamic sort cost for static grid maintenance. With 500 objects, the savings compound: fewer sorts per frame \u00d7 more frames = significant wins. Many games use this for rendering and culling."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n11",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Course Complete: You're Ready to Optimize Games",
+      "content": "Congratulations! You've mastered algorithm design and complexity through a game development lens. You now understand Big O notation, space vs. time tradeoffs, classic algorithms (pathfinding, sorting, spatial search), and optimization strategies (caching, data structures, early exit, LOD, pooling). These concepts will directly improve your ability to ship performant games. Remember: the best algorithm for a game is the fastest one that fits your constraints. Profile first (use CPU/memory profilers), identify bottlenecks, apply the right algorithm, and measure the impact. Go forth and build fast games!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c14",
+      "source": "n11",
+      "target": "n12",
+      "label": "fail"
+    },
+    {
+      "id": "c15",
+      "source": "n12",
+      "target": "n11",
+      "label": "retry"
+    },
+    {
+      "id": "c16",
+      "source": "n11",
+      "target": "n13",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T13:40:37.473542+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,188 @@
+{
+  "id": "culinary-digital-electronics-001",
+  "title": "Digital Electronics in Culinary Innovation",
+  "description": "Learn digital electronics and logic gates by designing automated control systems for a high-end restaurant kitchen",
+  "topic": "Digital Electronics",
+  "theme": "culinary arts",
+  "difficulty": "intermediate",
+  "estimated_minutes": 25,
+  "tags": [
+    "digital-electronics",
+    "logic-gates",
+    "binary",
+    "automation",
+    "culinary",
+    "control-systems"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Smart Restaurant System",
+      "content": "You've been hired as a digital systems architect for 'Precision Kitchen,' a new molecular gastronomy restaurant. The head chef needs automated control systems to maintain exact temperatures, timing, and plating consistency across multiple dishes. Every decision you make will affect the restaurant's ability to deliver consistent, high-quality dining experiences. Your first challenge: determine which system to build first\u2014precision temperature control for cooking, or automated plating for presentation.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "System Priority",
+      "content": "The head chef needs both systems, but you have limited time and resources. Which system should you design and implement first? Your choice will determine which digital electronics concepts you dive into.",
+      "choices": [
+        {
+          "label": "Build the Precision Temperature Control System",
+          "next": "n3"
+        },
+        {
+          "label": "Build the Automated Plating System",
+          "next": "n10"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Precision Temperature Control Basics",
+      "content": "The head chef needs sous-vide cookers, chocolate temperers, and sauce warmers that maintain exact temperatures. Temperature sensors convert continuous heat levels into digital signals: above target or below? This binary state (1 or 0, true or false) is the foundation of digital systems. You realize you need multiple sensors for safety and redundancy: one for the water bath, one for the core of the food, one for backup. But how do these sensors communicate, and how do you decide when to activate the heating element based on multiple inputs?",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Multi-Sensor Logic Design",
+      "content": "Your kitchen has three temperature sensors measuring different points in the cooking process. When multiple sensors report their status (cold or hot), how should your system decide to heat or stop heating?",
+      "choices": [
+        {
+          "label": "Heat only if ALL sensors confirm the temperature is safe (AND logic)",
+          "next": "n5"
+        },
+        {
+          "label": "Use only the main sensor and ignore the others (Single sensor)",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "AND/OR Logic Gates for Safety",
+      "content": "You architect a system using AND logic: the heating element only activates when BOTH the water temperature AND the food core temperature are below target. This is identical to a digital AND gate where all inputs must be true for output to be true. For emergency shutdown, you use OR logic: 'stop heating if water is too hot OR food is too hot OR backup sensor detects malfunction.' This redundancy prevents overcooked dishes and equipment damage. These binary gates\u2014AND, OR, NOT\u2014are the building blocks of all digital circuits, combining binary inputs to produce binary outputs using rules of Boolean algebra.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Sous-Vide Automation in Action",
+      "content": "Imagine cooking an egg at 45\u00b0C for 45 minutes. Water temperature sensor reads 40\u00b0C (cold) \u2192 binary 1. Egg core reads 42\u00b0C (cold) \u2192 binary 1. AND gate logic: 1 AND 1 = 1 \u2192 heating element ON. After 20 minutes, egg core reaches 44\u00b0C (approaching target) \u2192 binary 0. AND gate: 1 AND 0 = 0 \u2192 heating element OFF. The system cycles perfectly, maintaining temperature within 0.1\u00b0C. No human intervention. Perfect dishes emerge every time\u2014this is digital logic solving a real culinary problem through binary signals and gate operations.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Perfect Precision Achieved",
+      "content": "Success! Your temperature control system launches with redundant sensors and intelligent AND/OR gate logic. Sous-vide dishes emerge with perfect doneness, chocolate tempers to crystal perfection, and sauces hold consistent texture. The restaurant becomes famous for unmatched consistency. Other chefs request your design. You've proven that digital electronics directly translates to culinary excellence\u2014binary gates controlling real-world heat, ensuring both safety and quality."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "The Single-Sensor Gamble",
+      "content": "To simplify and save costs, you decide to use only one temperature sensor and ignore redundancy. You wire the heating element to turn on if the sensor reads 'cold' (true/1) and off if it reads 'hot' (false/0). It seems logical. But you've overlooked something critical: single sensors can fail, drift, or stick. Without backup verification (no AND gates to cross-check inputs), your system has no way to detect sensor failure or handle edge cases. You've created a system with a single point of failure\u2014exactly what safety-critical applications must never have.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Culinary Catastrophe",
+      "content": "Failure. On opening night, the temperature sensor fails silently and gives a stuck reading. The system defaults to heating indefinitely. Dozens of dishes are ruined\u2014sous-vide eggs cook to 72\u00b0C instead of 45\u00b0C (rubbery, overcooked), chocolate sauce separates and breaks, sauces become gels. The restaurant loses its opening service, receives scathing reviews, and cancels future bookings. You learn an expensive lesson: digital systems must use redundancy, verification through logic gates, and failsafe design. A single binary sensor without gate logic is insufficient for any critical application."
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Automated Plating System Foundations",
+      "content": "Molecular gastronomy demands precision presentation. The head chef wants a robotic arm to place plates, arrange ingredients, and apply garnishes with millimeter accuracy. The arm's movements are controlled entirely by digital signals: stepper motors receive binary commands (move or don't move), solenoid valves controlling sauce dispensing receive binary signals (open or close), and proximity sensors send binary readings (ingredient detected or not detected). Every motion is a sequence of binary decisions\u2014this is digital control at work.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "example",
+      "title": "Robotic Plating Workflow",
+      "content": "A clean plate arrives at position 1. Proximity sensor reads plate present \u2192 binary 1 (true). Arm receives 30 move-step commands \u2192 stepper motor advances 30 positions. Arm reaches sauce station (position sensor \u2192 binary 1). Solenoid receives 'open' command \u2192 sauce dispenses for 1000ms. Timer triggers 'close' \u2192 solenoid closes. Arm moves to garnish station, gripper closes on a microgreen. Gripper pressure sensor reads 'load detected' \u2192 binary 1. Arm positions the garnish with algorithmic precision. Every movement is a digital decision made via binary signals and logic gates. The result is identical, artistic, and perfectly repeatable every service.",
+      "next": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "Culinary Theater Achieved",
+      "content": "Your automated plating system launches successfully. Diners watch in fascination as the robotic arm creates edible art with impossible precision\u2014consistent, beautiful, and magical. The restaurant becomes an experience. Plates are shared across social media. Bookings are solid for months ahead. You've turned binary digital logic into culinary theater. The head chef stands at the opening ceremony and thanks you: digital electronics didn't just automate the kitchen, it elevated the entire dining experience."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2a",
+      "source": "n2",
+      "target": "n3",
+      "label": "Temperature Control"
+    },
+    {
+      "id": "c2b",
+      "source": "n2",
+      "target": "n10",
+      "label": "Plating"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c4a",
+      "source": "n4",
+      "target": "n5",
+      "label": "AND/OR Logic"
+    },
+    {
+      "id": "c4b",
+      "source": "n4",
+      "target": "n8",
+      "label": "Single Sensor"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6a",
+      "source": "n6",
+      "target": "n7",
+      "label": "Success"
+    },
+    {
+      "id": "c6b",
+      "source": "n8",
+      "target": "n9",
+      "label": "Failure"
+    },
+    {
+      "id": "c7",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n11",
+      "target": "n12",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:44:53.133423+00:00",
+  "model": "claude-haiku-4-5"
+}

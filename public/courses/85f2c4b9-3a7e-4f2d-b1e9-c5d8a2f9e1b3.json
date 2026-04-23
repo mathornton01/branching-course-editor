@@ -1,0 +1,530 @@
+{
+  "id": "85f2c4b9-3a7e-4f2d-b1e9-c5d8a2f9e1b3",
+  "title": "Web Development with FastAPI",
+  "description": "Learn to build modern news platforms and publishing APIs using FastAPI, with real journalism use cases throughout.",
+  "topic": "FastAPI Web Development for Journalism",
+  "theme": "journalism",
+  "difficulty": "beginner",
+  "estimated_minutes": 120,
+  "tags": [
+    "FastAPI",
+    "Python",
+    "Web Development",
+    "API Design",
+    "Journalism",
+    "Publishing"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why FastAPI for Modern News Platforms",
+      "content": "FastAPI is a modern Python framework perfect for building high-performance news APIs and publishing platforms. Major news organizations rely on fast, reliable APIs to deliver content across web and mobile. FastAPI's automatic documentation, type checking, and async support make it ideal for handling thousands of concurrent readers requesting breaking news, archives, and personalized feeds. By learning FastAPI, you'll build the backend that powers digital journalism.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "FastAPI Fundamentals Quiz",
+      "content": "Test your understanding of FastAPI's core concepts for building news platforms.",
+      "questions": [
+        {
+          "question": "A major news organization needs to build an API that serves breaking news to millions of readers simultaneously. What is FastAPI's primary advantage for this use case?",
+          "options": [
+            "A) FastAPI supports async operations, allowing it to handle many concurrent requests efficiently",
+            "B) FastAPI requires less code than other frameworks",
+            "C) FastAPI is only available for news websites",
+            "D) FastAPI doesn't need a database"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Async support is crucial for news platforms handling traffic spikes during breaking news.",
+            "While FastAPI is concise, this isn't the main advantage for handling concurrent readers.",
+            "FastAPI is a general-purpose framework, not limited to news.",
+            "FastAPI works with any database, so this is incorrect."
+          ],
+          "explanation": "Async support lets FastAPI handle multiple simultaneous requests without blocking\u2014essential for news APIs receiving thousands of concurrent readers."
+        },
+        {
+          "question": "You're building an API endpoint for a news article. What does FastAPI's automatic documentation feature provide?",
+          "options": [
+            "A) A Swagger UI interface showing all endpoints automatically from your code",
+            "B) It writes documentation files for you",
+            "C) It prevents you from making mistakes",
+            "D) It stores articles in the database automatically"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! FastAPI auto-generates interactive Swagger documentation, crucial for newsroom teams coordinating across platforms.",
+            "FastAPI generates interactive documentation, but doesn't write markdown files.",
+            "Type hints help prevent errors, but that's not automatic documentation.",
+            "Documentation doesn't handle database operations."
+          ],
+          "explanation": "FastAPI creates interactive API docs automatically from your code\u2014letting journalists and developers test endpoints without manual documentation."
+        },
+        {
+          "question": "When building a news feed API, why would you use type hints in FastAPI?",
+          "options": [
+            "A) They're optional and don't affect the code",
+            "B) FastAPI uses them for validation, serialization, and automatic documentation",
+            "C) They're only required for large projects",
+            "D) Type hints are a Python requirement, not FastAPI-specific"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Type hints are actually essential in FastAPI for validation.",
+            "Correct! FastAPI leverages type hints to validate incoming requests, serialize responses, and generate docs automatically.",
+            "Type hints are valuable in any FastAPI project, not just large ones.",
+            "While type hints are a Python feature, FastAPI specifically uses them for powerful functionality."
+          ],
+          "explanation": "FastAPI's strength comes from using type hints to automatically validate API requests, serialize JSON responses, and create documentation\u2014saving time when building newsroom APIs."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Building Your First News API Endpoint",
+      "content": "Create a basic FastAPI application that serves a single news article. Define a simple Article model with title, author, and content fields. Create a GET endpoint at /article/{article_id} that returns a mock article. Practice writing type hints and returning JSON. Imagine you're building the backend for a breaking news website that needs to serve articles via API.",
+      "questions": [
+        {
+          "question": "What is the correct way to define a GET endpoint in FastAPI that returns a specific article?",
+          "options": [
+            "A) @app.get('/article/{article_id}') \n    def get_article(article_id: int): return article",
+            "B) @app.post('/article/{article_id}') \n    def get_article(article_id): return article",
+            "C) @app.fetch('/article/{article_id}') \n    def article(): return article",
+            "D) @app.article(article_id: int)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is the proper FastAPI syntax with type hint for path parameters.",
+            "GET retrieves data; POST sends data. For fetching articles, use GET.",
+            "FastAPI uses @app.get, not @app.fetch.",
+            "This syntax is incomplete and won't define a proper endpoint."
+          ],
+          "explanation": "FastAPI uses @app.get() decorator with path parameters in curly braces. Type hints (article_id: int) tell FastAPI to validate the input."
+        },
+        {
+          "question": "You want to return article data as JSON from your endpoint. What should your function return?",
+          "options": [
+            "A) A Python dictionary or Pydantic model instance",
+            "B) A JSON string created with json.dumps()",
+            "C) Raw HTML text",
+            "D) Nothing; FastAPI handles it automatically"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! FastAPI automatically converts Python objects to JSON in the response.",
+            "json.dumps() is unnecessary\u2014FastAPI handles JSON serialization for you.",
+            "APIs return JSON, not HTML. HTML is for web pages.",
+            "You must return the data; FastAPI serializes it to JSON automatically."
+          ],
+          "explanation": "FastAPI automatically serializes Python dictionaries and Pydantic model instances to JSON\u2014no manual serialization needed."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Routing and Building News Endpoints",
+      "content": "Master the art of designing RESTful API endpoints for news platforms. Learn how to structure routes for articles, authors, categories, and comments. Understand path parameters (GET /articles/{article_id}), query parameters (GET /articles?category=politics), and request bodies for creating articles. Real journalism platforms like newsrooms and online publications use these patterns to organize thousands of articles, manage multiple authors, and serve content efficiently to different audiences. Design endpoints that journalists and mobile apps can easily consume.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "News API Design Assessment",
+      "content": "Test your understanding of building professional news API endpoints.",
+      "questions": [
+        {
+          "question": "A news organization wants to filter articles by category (politics, sports, entertainment). Which query parameter approach is correct?",
+          "options": [
+            "A) GET /articles?category=politics",
+            "B) GET /articles/politics",
+            "C) POST /articles/filter?category=politics",
+            "D) GET /articles-politics"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Query parameters are ideal for filtering. This is RESTful and allows multiple filters.",
+            "While this works, it's less flexible for combining filters and doesn't allow pagination.",
+            "GET requests shouldn't have request bodies; use query parameters for filtering.",
+            "This violates REST conventions and isn't standard API design."
+          ],
+          "explanation": "Query parameters (?category=politics) are the standard REST approach for filtering. They allow combining multiple filters like ?category=politics&author=John&date=2024."
+        },
+        {
+          "question": "When a journalist submits a new article via API, which endpoint method should handle it?",
+          "options": [
+            "A) POST /articles with the article data in the request body",
+            "B) GET /articles/new?title=...&content=...",
+            "C) PUT /articles/{article_id}",
+            "D) DELETE /articles"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! POST creates new resources. Putting data in the body is secure and follows REST standards.",
+            "GET is for retrieving data, not creating. Query parameters are insecure for sensitive content.",
+            "PUT is for updating existing resources, not creating new ones.",
+            "DELETE removes resources; it doesn't create them."
+          ],
+          "explanation": "POST /articles with article data in the request body is the REST standard for creating new articles. The server returns the created article with an ID."
+        },
+        {
+          "question": "You want to define separate endpoints for getting all articles vs. getting one article. What's the best design?",
+          "options": [
+            "A) GET /articles and GET /articles/{article_id}",
+            "B) GET /articles and GET /article",
+            "C) GET /all-articles and GET /single-article/{article_id}",
+            "D) GET /articles-list and GET /articles-detail/{article_id}"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is RESTful design\u2014same resource path, with/without ID for plural/singular operations.",
+            "Inconsistent naming makes the API confusing for mobile app developers.",
+            "Overly verbose endpoint names reduce clarity.",
+            "Unnecessarily long names violate REST conventions and confuse API consumers."
+          ],
+          "explanation": "RESTful design uses consistent resource names (/articles) with path parameters (/articles/{article_id}) to distinguish single vs. bulk operations."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Building a News API",
+      "content": "Build a small FastAPI application with multiple endpoints for a news platform. Create routes for: GET /articles (list all), GET /articles/{article_id} (get one), POST /articles (create new), and GET /articles?category=X (filter). Use a Pydantic model to define article structure with title, author, category, and content. Test each endpoint to ensure it returns the correct data. Pretend you're building the backend for a daily news publication that serves articles to web and mobile apps.",
+      "questions": [
+        {
+          "question": "You're using Pydantic to define an Article model. What's the benefit for your news API?",
+          "options": [
+            "A) Pydantic validates incoming data and generates JSON schemas automatically",
+            "B) It makes code slower but more readable",
+            "C) It's only needed for databases",
+            "D) It replaces the need for a web server"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Pydantic validates and documents article structure, ensuring journalists send properly formatted articles.",
+            "Pydantic has minimal performance overhead and improves clarity.",
+            "Pydantic is useful at API boundaries, not just databases.",
+            "Pydantic is a data validation library, not a server."
+          ],
+          "explanation": "Pydantic validates incoming article submissions, ensures required fields are present, and auto-generates OpenAPI documentation for journalists using your API."
+        },
+        {
+          "question": "When implementing GET /articles?category=sports, how do you access the category query parameter in FastAPI?",
+          "options": [
+            "A) def list_articles(category: str = None): ...",
+            "B) def list_articles(): request.args['category']",
+            "C) def list_articles(category): ...",
+            "D) def list_articles(): app.query_params['category']"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! FastAPI automatically extracts query parameters as function arguments with optional defaults.",
+            "That's Flask syntax, not FastAPI.",
+            "Without a default, FastAPI will require the parameter.",
+            "FastAPI doesn't use app.query_params; it uses function parameters."
+          ],
+          "explanation": "FastAPI automatically binds query parameters to function arguments. Using a default (= None) makes the parameter optional."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Database Integration for Article Management",
+      "content": "Learn how to connect FastAPI to databases for persistent article storage and retrieval. Real news platforms store thousands of articles, author information, and reader comments in databases. Understand ORM concepts (Object-Relational Mapping) using SQLAlchemy to map Python objects to database tables. Learn how to write queries to fetch articles by author, date, or category\u2014critical for newsroom operations. Connect your API to a real database so articles survive server restarts and multiple journalists can access the same content archive simultaneously.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Database Queries and ORM Assessment",
+      "content": "Test your understanding of connecting FastAPI to databases and writing queries for news content.",
+      "questions": [
+        {
+          "question": "You need to retrieve all articles by a specific author from the database. What's the SQLAlchemy ORM query pattern?",
+          "options": [
+            "A) session.query(Article).filter(Article.author_id == author_id).all()",
+            "B) SELECT * FROM articles WHERE author = author_id",
+            "C) database.articles.find_by_author(author_id)",
+            "D) Article.filter(author_id=author_id)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is SQLAlchemy ORM syntax. It's type-safe and works across databases.",
+            "This is raw SQL; SQLAlchemy ORM is cleaner and more maintainable.",
+            "This isn't standard SQLAlchemy syntax.",
+            "This is a simplified syntax that doesn't exist in SQLAlchemy."
+          ],
+          "explanation": "SQLAlchemy ORM lets you write queries using Python objects instead of raw SQL, making code safer and more maintainable across databases."
+        },
+        {
+          "question": "When a journalist needs to find articles published between two dates. What ORM query approach works best?",
+          "options": [
+            "A) session.query(Article).filter((Article.published_date >= start) & (Article.published_date <= end)).all()",
+            "B) SELECT * FROM articles BETWEEN start_date AND end_date",
+            "C) Article.where(date_range=[start, end])",
+            "D) database.articles.date_search(start, end)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! SQLAlchemy's filter with comparison operators handles date range queries elegantly.",
+            "Raw SQL BETWEEN works but loses type safety and ORM benefits.",
+            "This syntax doesn't exist in SQLAlchemy.",
+            "This isn't standard SQLAlchemy API."
+          ],
+          "explanation": "SQLAlchemy allows combining filters with & (and) and | (or) operators for complex queries like date ranges\u2014essential for article archives."
+        },
+        {
+          "question": "You want to efficiently fetch articles with their author information in one query. What's the issue with multiple separate queries?",
+          "options": [
+            "A) Multiple queries cause the N+1 problem, slowing down requests for readers waiting for article lists",
+            "B) Multiple queries use more database memory",
+            "C) FastAPI doesn't support multiple queries",
+            "D) Multiple queries are always faster"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The N+1 problem causes one query per article, devastating for news feeds with thousands of articles.",
+            "Memory usage isn't significantly affected by query count.",
+            "FastAPI supports multiple queries, but it's inefficient.",
+            "Fewer, optimized queries are always preferable to many small ones."
+          ],
+          "explanation": "The N+1 problem: fetching 100 articles then 100 separate author queries = 101 database calls. Use .joinedload() in SQLAlchemy to fetch related data in one query."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Database Queries for News Archives",
+      "content": "Set up SQLAlchemy models for articles, authors, and categories. Write queries to: fetch articles by author, retrieve articles from the last 7 days, find articles in a specific category, and get articles with pagination (limit and offset). Test these queries to retrieve data efficiently. Build a mock newsroom database that could serve a real publication's archive.",
+      "questions": [
+        {
+          "question": "When implementing pagination for a news feed (showing 20 articles per page), what SQLAlchemy methods do you use?",
+          "options": [
+            "A) .limit(20).offset((page-1)*20)",
+            "B) .paginate(page=page, per_page=20)",
+            "C) .slice(start, end)",
+            "D) .fetch_rows(page, 20)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! limit() and offset() control which articles to return, essential for efficient pagination.",
+            "Flask-SQLAlchemy uses .paginate(), but raw SQLAlchemy uses limit/offset.",
+            "slice() exists but is less commonly used than limit/offset.",
+            "This method doesn't exist in SQLAlchemy."
+          ],
+          "explanation": "limit(20) returns 20 articles, and offset((page-1)*20) skips articles from previous pages\u2014perfect for loading news feeds on mobile apps."
+        },
+        {
+          "question": "You need to filter articles by a date range and category. How do you combine these filters?",
+          "options": [
+            "A) .filter((Article.date >= start) & (Article.date <= end) & (Article.category == cat))",
+            "B) .filter(Article.date >= start).filter(Article.date <= end).filter(Article.category == cat)",
+            "C) Both A and B are equivalent",
+            "D) You must use raw SQL for complex filters"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Both approaches work; this option shows the other approach.",
+            "Chaining filters is equivalent and often more readable.",
+            "Correct! Both syntaxes produce the same result. Choose based on readability.",
+            "SQLAlchemy ORM handles complex filters without raw SQL."
+          ],
+          "explanation": "You can combine filters with & (and) in one call or chain .filter() calls. Both are equivalent; choose the most readable."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Authentication and Securing Your News Platform",
+      "content": "Protect your news API with authentication so only journalists can post articles and readers can access content appropriately. Learn JWT (JSON Web Tokens) for secure, stateless authentication. Understand how to hash passwords, validate credentials, and issue tokens that mobile apps and newsroom tools can use. Modern news organizations require secure login for reporters, editors, and contributors. Implement role-based access control to distinguish between readers (read-only), journalists (post articles), and editors (moderate and delete). This protects the integrity of published news and prevents unauthorized access.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Authentication and Security Assessment",
+      "content": "Demonstrate your understanding of securing FastAPI news platforms with authentication.",
+      "questions": [
+        {
+          "question": "A journalist logs into your news platform and you need to issue a token for subsequent requests. What's the secure approach?",
+          "options": [
+            "A) Create a JWT token with user information, set an expiration time, and return it to the client",
+            "B) Store the password in a cookie and send it with every request",
+            "C) Give the user a simple token like 'user123'",
+            "D) Don't use authentication; make all endpoints public"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! JWTs are stateless, secure tokens with expiration. Perfect for mobile apps and distributed newsrooms.",
+            "Sending passwords with requests is insecure; use tokens instead.",
+            "Simple tokens are predictable and insecure. JWTs are cryptographically signed.",
+            "No authentication means anyone can post fake articles\u2014a nightmare for news credibility."
+          ],
+          "explanation": "JWTs contain user information, are cryptographically signed, and expire after a set time. A reporter logs in once, receives a token, and uses it until it expires."
+        },
+        {
+          "question": "Before issuing a login token, how should you handle the journalist's password?",
+          "options": [
+            "A) Hash the password with bcrypt, compare the hash with the stored hash in the database",
+            "B) Store the password in plaintext and compare directly",
+            "C) Encrypt the password with a simple cipher",
+            "D) Don't store passwords; ask for them every time"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Hashing with bcrypt is the standard. Even if the database is breached, passwords are protected.",
+            "Plaintext passwords are catastrophic if the database is compromised.",
+            "Custom encryption is weaker than battle-tested bcrypt.",
+            "Asking for passwords every time is insecure and poor UX."
+          ],
+          "explanation": "Hash passwords with bcrypt so you never store plaintext. When a journalist logs in, hash their input and compare with the stored hash."
+        },
+        {
+          "question": "Your newsroom has editors, journalists, and readers. How do you implement role-based access?",
+          "options": [
+            "A) Store a role field in the user model (admin, editor, journalist, reader) and check it before allowing operations",
+            "B) Create separate tables for each role",
+            "C) Use the user's ID to determine permissions",
+            "D) Make all users have the same permissions"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Role-based access control (RBAC) stores roles per user and checks them at endpoints.",
+            "Separate tables are inefficient and hard to maintain.",
+            "User IDs don't encode role information.",
+            "Different users need different permissions. Readers shouldn't delete articles."
+          ],
+          "explanation": "Store a role in the user model, then check it at protected endpoints: @app.post('/articles') requires journalist or editor role."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n12",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "Your News Platform is Live",
+      "content": "Congratulations! You've built a complete FastAPI news platform with routing, databases, and authentication. You now understand how real news organizations power their digital presence with fast, reliable APIs. You can build APIs for articles, manage multiple journalists, secure reader access, and serve content to millions. From breaking news alerts to archived stories, your platform can handle it. Continue exploring advanced topics like caching, WebSockets for real-time updates, testing, and deployment. The journalism industry needs developers like you to keep news flowing freely and securely."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "Pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "Retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "Pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "Retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n10",
+      "label": "Pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "Fail"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "Retry"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c14",
+      "source": "n11",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c15",
+      "source": "n11",
+      "target": "n12",
+      "label": "Fail/Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T15:58:26.489343+00:00",
+  "model": "claude-haiku-4-5"
+}

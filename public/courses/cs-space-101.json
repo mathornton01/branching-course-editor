@@ -1,0 +1,270 @@
+{
+  "id": "cs-space-101",
+  "title": "Control Systems in Space Exploration",
+  "description": "Learn control systems through real space mission examples, choosing between mathematical theory and practical applications",
+  "topic": "Control Systems",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "control-systems",
+    "space-exploration",
+    "engineering",
+    "feedback-loops",
+    "spacecraft"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Control Systems in Space Exploration",
+      "content": "Control systems are fundamental to space exploration, managing everything from spacecraft orientation to rocket thrust. In this course, you'll learn how satellites stay pointed at Earth, how rovers navigate Mars terrain, and how the International Space Station maintains its position. A control system uses feedback from sensors to automatically adjust outputs and maintain desired states\u2014much like how a spacecraft's thrusters constantly fine-tune orientation. Whether you prefer starting with mathematical foundations or jumping into practical applications, this course adapts to your learning style.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "How Would You Like to Learn?",
+      "content": "Choose the path that matches your learning style. Theory-first learners will master the mathematical foundations before seeing applications. Hands-on learners will explore real space missions first, then understand the theory behind them.",
+      "choices": [
+        {
+          "label": "Theory First: Master the math behind control systems",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-On First: See real space applications, then learn the theory",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Mathematical Foundations of Control Systems",
+      "content": "Understanding control systems requires knowing how feedback loops work mathematically. A control system has a desired setpoint (e.g., spacecraft roll angle = 0\u00b0), a measured actual value from sensors, and an error signal (setpoint minus actual). Controllers use transfer functions\u2014mathematical descriptions of how a system responds\u2014to calculate control inputs. For spacecraft, this means computing thruster firing sequences based on error magnitudes and rates. Key concepts include: proportional control (error \u00d7 gain), derivative control (error rate \u00d7 gain), and integral control (accumulated error). Together as PID (Proportional-Integral-Derivative), these create robust control systems for maintaining spacecraft stability despite environmental disturbances.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Mars Rover Velocity Control",
+      "content": "Imagine Curiosity driving toward Gale Crater at a setpoint velocity of 1 m/s. A wheel encoder measures actual speed: 0.8 m/s due to uneven terrain and sand resistance. The error is 0.2 m/s. A proportional controller multiplies this error by gain K=5, commanding +1V to the drive motors. As the rover accelerates, error decreases, reducing the control signal proportionally. This simple feedback maintains stable velocity despite terrain variations. Engineers tuned K by analyzing the motor's transfer function and testing on Mars-simulated regolith. A spacecraft attitude controller might use K=10 for angular velocity to achieve smooth pointing without oscillation.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Control Theory Fundamentals",
+      "content": "Test your understanding of control system theory applied to space missions by answering questions about feedback, setpoints, and control gains.",
+      "questions": [
+        {
+          "question": "In a spacecraft attitude control system, what does 'setpoint' refer to?",
+          "options": [
+            "A. The current spacecraft orientation angle measured by sensors",
+            "B. The desired spacecraft orientation angle that the system tries to maintain",
+            "C. The maximum angle the spacecraft can rotate in one second",
+            "D. The physical mount point of the reaction wheel"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This is the measured value, not the desired target.",
+            "Correct! The setpoint is the target value the control system aims to achieve.",
+            "Incorrect. This relates to angular velocity limits, not setpoints.",
+            "Incorrect. This is a physical component, not a control concept."
+          ],
+          "explanation": "In control systems, the setpoint (or reference) is the desired value you want to maintain\u2014for a spacecraft, this might be 0\u00b0 roll angle. The controller continuously adjusts actuators to drive the measured value toward this setpoint."
+        },
+        {
+          "question": "How does a proportional controller respond when the error between setpoint and measured value increases?",
+          "options": [
+            "A. The control output stays constant regardless of error size",
+            "B. The control output increases proportionally to the error",
+            "C. The control output decreases when error increases",
+            "D. The control output only activates once the error exceeds a threshold"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Proportional control changes output based on error.",
+            "Correct! Proportional control output = gain \u00d7 error, so larger errors produce larger control actions.",
+            "Incorrect. Proportional control produces bigger responses to bigger errors, not smaller ones.",
+            "Incorrect. Proportional controllers respond continuously to any error, not just when thresholds are exceeded."
+          ],
+          "explanation": "Proportional control multiplies the error signal by a gain constant. Larger errors produce larger control outputs, allowing fast response to disturbances. This is why tuning the gain K is critical\u2014too high and the system oscillates; too low and it responds sluggishly."
+        },
+        {
+          "question": "Why do spacecraft attitude controllers often use derivative control in addition to proportional control?",
+          "options": [
+            "A. To prevent the spacecraft from rotating too fast",
+            "B. To dampen oscillations by responding to the rate of error change",
+            "C. To measure the spacecraft's position relative to Earth",
+            "D. To increase the amount of fuel consumed by thrusters"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Velocity limits are enforced differently; derivative control has another purpose.",
+            "Correct! Derivative control adds damping, reducing overshoot and oscillations by responding to how fast the error is changing.",
+            "Incorrect. Position measurement comes from sensors like star trackers, not the controller.",
+            "Incorrect. Good control actually minimizes fuel use by avoiding excessive corrective actions."
+          ],
+          "explanation": "Derivative control (rate of error change \u00d7 gain) adds damping to a system. Without it, a proportional-only controller might overshoot its setpoint and oscillate. For spacecraft attitude control, derivative control smooths out the response, keeping the spacecraft stable and preventing unwanted tumbling."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Practical Control Systems in Space Missions",
+      "content": "Real space missions employ sophisticated control systems under extreme constraints. The International Space Station uses Control Moment Gyroscopes (CMGs) to adjust orientation without expending thrusters, conserving precious propellant. Curiosity on Mars implements closed-loop velocity control with PID adjustments for wheel slip and soil resistance. Satellite attitude determination and control systems (ADCS) use star trackers and reaction wheels to maintain Earth observation angles. Rocket engines have throttle control systems that maintain constant chamber pressure ratios during ascent. Each system measures feedback\u2014spacecraft orientation from gyroscopes, wheel encoder readings, engine pressure sensors\u2014and adjusts actuators (reaction wheels, thruster magnitude, fuel flow) to maintain mission constraints while optimizing fuel efficiency and component lifespan.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "International Space Station Orientation Control",
+      "content": "The ISS orbits at 28,000 km/h while constantly experiencing torques from atmospheric drag and solar radiation pressure. Its control system measures angular velocity using gyroscopes and compares actual attitude (from star trackers reading constellations) against desired orientation (solar panels toward sun, radiators facing away, experiment windows pointing down). The controller activates Control Moment Gyroscopes\u2014spinning wheels with variable momentum axes\u2014to generate counteracting torque. When CMGs approach saturation, thrusters briefly fire to 'desaturate' them. Without this active feedback every second, the ISS would tumble unpredictably within hours. Mission Control engineers tuned gains on orbit; initial parameters caused oscillations, demonstrating how theory meets practice in real spaceflight operations.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Practical Control Applications",
+      "content": "Apply your knowledge to real space mission scenarios. Answer questions about how control systems solve challenges in actual space missions.",
+      "questions": [
+        {
+          "question": "Why does the International Space Station need continuous attitude control instead of maintaining orientation with a single initial adjustment?",
+          "options": [
+            "A. Attitude control is required by international law",
+            "B. To comply with NASA communication protocols",
+            "C. External torques from atmospheric drag and solar radiation constantly perturb the ISS orientation",
+            "D. The ISS rotates slowly and needs regular position updates from Ground Control"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. This is not a legal or regulatory requirement.",
+            "Incorrect. Attitude control solves physical problems, not bureaucratic ones.",
+            "Correct! Continuous environmental torques mean the ISS would drift without active feedback control to compensate.",
+            "Incorrect. The ISS doesn't rotate to gain height; it maintains stable orbital altitude."
+          ],
+          "explanation": "In space, objects experience perturbations\u2014atmospheric drag (despite thin air at ISS altitude), solar radiation pressure, and gravitational anomalies. These produce unwanted torques. A control system must measure these disturbances via sensors and continuously adjust actuators to counteract them, maintaining the desired orientation."
+        },
+        {
+          "question": "What advantage do Control Moment Gyroscopes (CMGs) provide over thruster-only attitude control?",
+          "options": [
+            "A. CMGs cost less to manufacture than thrusters",
+            "B. CMGs provide precise attitude control without expending propellant, extending mission life",
+            "C. CMGs work better in the vacuum of space than thrusters",
+            "D. CMGs can steer the spacecraft toward new orbits more efficiently"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. CMGs are actually expensive, but valuable for other reasons.",
+            "Correct! CMGs conserve propellant by exchanging momentum with spinning wheels instead of expending fuel\u2014critical for long-duration missions.",
+            "Incorrect. Thrusters work excellently in vacuum; this isn't an advantage of CMGs.",
+            "Incorrect. Orbital maneuvers require thrusters; CMGs only adjust orientation."
+          ],
+          "explanation": "CMGs store angular momentum in spinning wheels. By adjusting their spin axes, they transfer momentum to the spacecraft, creating torque without consuming propellant. For the ISS's 20+ year mission, this propellant savings is invaluable. Thrusters are reserved for orbital maneuvers and CMG desaturation."
+        },
+        {
+          "question": "If a Mars rover's wheel encoder sensor fails (unable to report actual wheel speed), how would the closed-loop velocity control system degrade?",
+          "options": [
+            "A. The rover would immediately stop and require human intervention to restart",
+            "B. The controller would continue commanding wheel motors with no feedback, unable to detect wheel slip or terrain resistance",
+            "C. The rover would automatically switch to a backup sensor and continue with full control authority",
+            "D. The system would measure velocity using the rover's inertial measurement unit instead"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Loss of one sensor doesn't stop the rover; it degrades control quality.",
+            "Correct! Without feedback, the controller cannot measure actual velocity and becomes open-loop, losing ability to compensate for slip and terrain variation.",
+            "Incorrect. Rovers typically have limited redundancy; backup sensors for every function are too heavy for Mars payload constraints.",
+            "Incorrect. IMUs measure acceleration for drift detection, not velocity; they don't replace wheel encoder function."
+          ],
+          "explanation": "Feedback is the foundation of closed-loop control. Without encoder feedback, the rover's speed controller cannot compare setpoint to actual speed. It reverts to open-loop: just commanding motors without correction. If terrain is soft or wheels slip, the rover won't know and cannot adjust\u2014demonstrating why redundancy in critical sensors is essential for robust space missions."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Theory and Practice in Space Control Systems",
+      "content": "Theory and practice are inseparable in space exploration. A rocket engine controller must understand differential equations (theory) to model thrust response, but also account for fuel sloshing, sensor delays, and hardware saturation limits (practice). Satellite operators use Bode plots and root-locus analysis (theory) to predict whether designs will oscillate or diverge before launch. Mars rovers use adaptive control algorithms that adjust gains based on soil properties sensed in real-time (theory applied dynamically). The most successful space systems integrate mathematical rigor with engineering pragmatism\u2014understanding both why a design works theoretically and how real hardware behaves under extreme conditions. From ISS orientation to lunar lander descent, every control system represents the marriage of mathematics and spaceflight realities.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Control Systems Master",
+      "content": "Congratulations! You've completed the Control Systems in Space Exploration course. You now understand how feedback loops, setpoints, proportional-integral-derivative controllers, and adaptive strategies enable spacecraft to perform precise maneuvers, maintain orientation in hostile environments, and navigate the challenges of the cosmos. These principles power current missions to Mars, the Moon, and beyond\u2014and will drive humanity's deep space exploration for decades to come. Whether you started with theory or practice, you've integrated both perspectives into a robust understanding of how mathematics enables spaceflight."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-On First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T14:51:05.107935+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,228 @@
+{
+  "id": "pc-film-production-course",
+  "title": "Parallel Computing in Film Production",
+  "description": "Master parallel computing principles through the lens of film production workflows, from multi-camera shoots to distributed rendering farms.",
+  "topic": "Parallel Computing",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "parallel-computing",
+    "film-production",
+    "distributed-systems",
+    "rendering",
+    "post-production"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Understanding Parallel Workflows",
+      "content": "Before we dive into parallel computing in film production, let's assess your current understanding of parallel work, coordination challenges, and performance concepts.",
+      "questions": [
+        {
+          "question": "Your film production company is scheduling camera work for a music video. Director wants to film 3 different scenes simultaneously in different locations with separate camera crews. What type of parallelism does this represent?",
+          "options": [
+            "A) Sequential processing - scenes must be filmed one after another",
+            "B) Task-level parallelism - independent tasks (scenes) execute simultaneously",
+            "C) Data parallelism - the same scene is processed multiple times",
+            "D) Pipeline parallelism - one scene depends on the previous scene being complete"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. The scenes can be filmed at the same time in different locations.",
+            "Correct! Each camera crew is an independent task running in parallel.",
+            "Data parallelism processes the same data differently, not independent tasks.",
+            "Pipeline parallelism processes different stages of one data stream; here scenes are independent."
+          ],
+          "explanation": "When multiple camera crews film different scenes simultaneously in different locations, each crew is performing the same type of work (filming) on different data (different scenes). This is task-level parallelism - independent tasks that can be executed concurrently without waiting for each other."
+        },
+        {
+          "question": "During post-production, your studio renders 1000 VFX shots. A single render server takes 2 hours per shot, making total time 2000 hours sequentially. You have 10 identical render servers. What's the maximum time reduction if perfectly parallelized?",
+          "options": [
+            "A) Reduced from 2000 hours to 200 hours (10x speedup)",
+            "B) Reduced from 2000 hours to 1999 hours (minimal improvement)",
+            "C) Reduced from 2000 hours to 100 hours (20x speedup)",
+            "D) Reduced from 2000 hours to 2 hours (1000x speedup)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! With 10 servers rendering in parallel, you get approximately 10x speedup.",
+            "With proper parallelization, you get much better than this.",
+            "You can't exceed the number of parallel workers without other optimization.",
+            "Even with unlimited servers, you're limited by the number of tasks (1000 shots)."
+          ],
+          "explanation": "With 10 servers rendering independent shots in parallel, you achieve approximately 10x speedup (Amdahl's Law consideration: speedup \u2264 number of processors). This reduces total time from 2000 hours to roughly 200 hours, assuming perfect load distribution and no overhead."
+        },
+        {
+          "question": "When color grading parallel streams from different cameras in real-time, why is synchronization important?",
+          "options": [
+            "A) To ensure all color grades are identical",
+            "B) To maintain frame-accurate timing across cameras so the final video displays the right frame from each camera at the right time",
+            "C) To prevent the color grading software from crashing",
+            "D) To ensure the fastest possible rendering"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Color grades don't need to be identical; they just need to be synchronized in time.",
+            "Correct! Frame synchronization ensures temporal alignment - critical for multi-camera seamless editing.",
+            "Modern software handles this automatically; synchronization has a different purpose.",
+            "Synchronization enables correct timing, not necessarily the fastest speed."
+          ],
+          "explanation": "In multi-camera film work, synchronization ensures that the final video displays frames from different cameras at the correct temporal positions. Without frame-accurate synchronization, the edited footage would have temporal misalignment, making transitions jarring and unnatural."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Parallel Architecture in Film Production Pipelines",
+      "content": "Film production pipelines leverage sophisticated parallel computing architectures. In VFX rendering, distributed rendering systems split a frame or sequence across hundreds of machines using task-level parallelism, where each machine renders a portion of pixels or a complete frame. Load balancing is critical\u2014if one machine finishes early, it takes more frames from the queue, maximizing throughput. Communication overhead (network transmission of scene data and result collection) and synchronization points (waiting for all frames to complete before the next scene) introduce latency that Amdahl's Law predicts will limit speedup below the theoretical maximum. Modern render farms use adaptive scheduling to optimize CPU utilization across heterogeneous hardware, managing these bottlenecks to achieve 90%+ parallelization efficiency.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Example: Distributed Rendering Farm for VFX Sequences",
+      "content": "Imagine rendering a 100-frame explosion sequence for a feature film. A single GPU takes 30 minutes per frame. With a 32-GPU render farm, the job is distributed: frame 1 goes to GPU-1, frame 2 to GPU-2, etc. After 3 minutes, all 32 frames are rendering in parallel. At 30-minute completion, 32 frames are ready. By frame 97, the pipeline is at maximum throughput\u2014new frames complete every 56 seconds (30 min \u00f7 32 GPUs). Total time: ~100 minutes instead of 3000 minutes. However, 10% of frames need re-rendering after director feedback. The synchronization cost\u2014waiting for all frames before finalizing\u2014and the overhead of distributing scene files causes actual speedup to be 28x instead of the theoretical 32x, illustrating Amdahl's Law in practice.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete",
+      "content": "You've mastered parallel computing architecture in film production! You understand task scheduling, load balancing, communication overhead, and how real-world constraints limit speedup. These principles apply across distributed rendering, multi-machine encoding, and GPU acceleration in post-production. Use this knowledge to architect efficient parallel pipelines for large-scale projects."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Fundamentals: Introduction to Parallel Computing in Film",
+      "content": "Parallel computing means doing multiple tasks at the same time instead of one after another. In film production, this is everywhere: multiple camera crews shooting different scenes, sound engineers recording dialogue while cinematographers capture visuals, and post-production teams color-grading, editing, and creating VFX simultaneously. Instead of a single powerful processor (like one camera operator filming everything), we use multiple processors (multiple crews) to speed up the overall workflow. A single CPU core is like one person editing a film frame-by-frame. Modern multi-core CPUs and GPU render farms are like teams of editors working on different sequences in parallel. The key benefit: finish work faster. The key challenge: coordinating all these parallel workers so their results fit together correctly.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Multi-Camera Film Shoot",
+      "content": "A commercial production shoots a 30-second spot with 3 cameras simultaneously filming from different angles in the same location. Camera 1 captures the wide shot, Camera 2 gets the close-up of the actor's face, and Camera 3 records the detail of the product. All three operate in parallel, each recording the same 30 seconds independently. With one camera, you'd need 90 seconds of shoot time. With three parallel cameras, you're done in 30 seconds. After shooting, the footage streams to three separate storage drives simultaneously\u2014that's data parallelism. In editing, you then synchronize these three streams so viewers see the right angles at the right moments. This real-world parallel workflow is the foundation of parallel computing concepts.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Parallel Concepts in Post-Production",
+      "content": "Test your understanding of parallel computing in film production with these practical scenarios.",
+      "questions": [
+        {
+          "question": "Your editing team has 4 editors working on different scenes of a documentary simultaneously. Each editor works on their scene for 2 hours independently. How much total wall-clock time does this take?",
+          "options": [
+            "A) 8 hours - same as doing all scenes sequentially",
+            "B) 2 hours - all editors work in parallel",
+            "C) 4 hours - time for 4 editors to each work",
+            "D) 1 hour - dividing work by number of editors"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. Parallel work means you don't wait for them one-by-one.",
+            "Exactly! If they work in true parallel, completion time matches the longest individual task.",
+            "This would be the case if they worked sequentially.",
+            "Time doesn't divide evenly like this in practice."
+          ],
+          "explanation": "With 4 independent editors working in parallel on separate scenes, the total wall-clock time is determined by whoever takes the longest\u2014in this case, 2 hours. They all start at time 0 and finish around time 2. This is the benefit of parallelism: elapsed time depends on the longest task, not the sum of all tasks."
+        },
+        {
+          "question": "A color grader is adjusting footage from 10 camera angles. She has software that can process 3 angles simultaneously on her multi-core CPU. How many processing rounds does she need to color-grade all 10 angles?",
+          "options": [
+            "A) 3 rounds (10 \u00f7 3 = 3.33, rounded up)",
+            "B) 10 rounds (one angle per round)",
+            "C) 4 rounds (10 \u00f7 3 = 3.33, rounded up to 4)",
+            "D) 1 round (all at once)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Close, but you need to round up properly for the last batch.",
+            "Without parallelism, yes, but she can do 3 at a time.",
+            "Correct! Rounds 1-3 have 3 angles each (9 angles), and round 4 has the remaining 1 angle.",
+            "She can only process 3 at once, so this would require multiple rounds."
+          ],
+          "explanation": "With 3-angle parallel processing capacity and 10 total angles: Round 1 processes angles 1-3, Round 2 processes angles 4-6, Round 3 processes angles 7-9, and Round 4 processes angle 10. Total: 4 rounds (ceiling of 10\u00f73)."
+        },
+        {
+          "question": "Which of the following is an example of task-level parallelism in film production?",
+          "options": [
+            "A) A single camera operator filming multiple angles sequentially",
+            "B) Multiple camera operators each filming a different scene simultaneously",
+            "C) A single color grader working on one scene for hours",
+            "D) Rendering one frame on 10 GPUs by splitting pixels across them"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sequential filming is not parallelism.",
+            "Correct! Each camera operator is a parallel task working independently.",
+            "This is sequential work by one person, not parallelism.",
+            "While this is parallelism, it's data parallelism (splitting one task), not task-level."
+          ],
+          "explanation": "Task-level parallelism means multiple independent tasks execute simultaneously. Multiple camera operators each filming different scenes are independent tasks running in parallel. They don't depend on each other's output, so they can truly execute concurrently."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundational Path Complete",
+      "content": "You've learned the fundamentals of parallel computing through film production! You understand that parallelism means doing multiple tasks simultaneously, how film workflows naturally employ parallel processes, and the benefits of coordinating parallel work. These concepts scale from multi-camera shoots to render farms to multi-threaded software. Continue exploring parallel computing by studying how real-world constraints like communication overhead and synchronization affect speedup in larger systems."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "diagnostic: strong understanding"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "diagnostic: needs foundation"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T14:09:51.103805+00:00",
+  "model": "claude-haiku-4-5"
+}

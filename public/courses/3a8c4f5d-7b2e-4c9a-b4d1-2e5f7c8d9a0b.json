@@ -1,0 +1,284 @@
+{
+  "id": "3a8c4f5d-7b2e-4c9a-b4d1-2e5f7c8d9a0b",
+  "title": "Cryptography Fundamentals for Music Therapy",
+  "description": "Learn cryptographic concepts and their applications in protecting patient privacy and securing communications in music therapy practice through an adaptive assessment pyramid.",
+  "topic": "Cryptography",
+  "theme": "music therapy",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "cryptography",
+    "security",
+    "privacy",
+    "music therapy",
+    "healthcare",
+    "HIPAA"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Music Therapy Security Basics Check",
+      "content": "In this assessment, we'll check your understanding of basic cryptographic concepts as they apply to protecting patient data and communications in music therapy practice.",
+      "questions": [
+        {
+          "question": "Why is encryption important in a music therapy practice?",
+          "options": [
+            "To make therapy sessions more interesting",
+            "To protect patient privacy and confidential therapy records",
+            "To speed up digital music therapy systems",
+            "To improve the quality of music played during sessions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - encryption's purpose is security, not entertainment",
+            "Correct! Encryption protects sensitive patient information from unauthorized access",
+            "Incorrect - encryption may slightly slow systems, not speed them up",
+            "Incorrect - encryption doesn't affect audio quality"
+          ],
+          "explanation": "Encryption is essential in healthcare settings, including music therapy, to protect patient privacy. HIPAA regulations require healthcare providers to encrypt sensitive patient information. In music therapy, this includes therapy notes, progress reports, and any communication about patient sessions."
+        },
+        {
+          "question": "What does 'authentication' mean in music therapy digital systems?",
+          "options": [
+            "Verifying that a therapist is who they claim to be",
+            "Creating background music for therapy",
+            "Rating patient improvement",
+            "Documenting therapy sessions"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Authentication verifies identity using cryptographic methods",
+            "Incorrect - that would be music composition or curation",
+            "Incorrect - that's assessment, not authentication",
+            "Incorrect - that's documentation, not authentication"
+          ],
+          "explanation": "Authentication uses cryptography to prove that a user is who they claim to be. In a music therapy practice, a therapist might authenticate with a password or biometric method to access patient records. This ensures only authorized personnel can access sensitive information."
+        },
+        {
+          "question": "What is a 'key' in cryptography?",
+          "options": [
+            "A physical key to the therapy room",
+            "A secret string of characters used to encrypt and decrypt data",
+            "An important therapy concept",
+            "A musical scale used in sessions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - this is a physical object, not a cryptographic concept",
+            "Correct! Cryptographic keys are secrets that control encryption and decryption",
+            "Incorrect - while therapy has important concepts, this refers to cryptography",
+            "Incorrect - musical scales are different from cryptographic keys"
+          ],
+          "explanation": "A cryptographic key is a secret piece of information that controls how data is encrypted and decrypted. Without the correct key, encrypted data appears as meaningless random characters. Keys are like the combination to a safe - only someone who knows it can open it."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Advanced Encryption Applications",
+      "content": "Now let's explore how different encryption methods protect various aspects of music therapy practice. This assessment tests your understanding of how to apply encryption techniques to real scenarios.",
+      "questions": [
+        {
+          "question": "In music therapy, why would a therapist use end-to-end encryption for communicating with a patient?",
+          "options": [
+            "To make messages faster",
+            "To ensure only the therapist and patient can read sensitive therapy progress discussions",
+            "To track the patient's location",
+            "To automatically generate music recommendations"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - encryption may slightly impact speed for better security",
+            "Correct! End-to-end encryption ensures only the intended parties can read messages",
+            "Incorrect - encryption doesn't track location",
+            "Incorrect - encryption doesn't generate music"
+          ],
+          "explanation": "End-to-end encryption means messages are encrypted on one device and can only be decrypted on the receiving device. Even if an email server or communication platform is compromised, intercepted messages remain unreadable. This is crucial for therapist-patient communications about sensitive therapeutic progress."
+        },
+        {
+          "question": "What is the advantage of using public-key cryptography for a music therapy platform?",
+          "options": [
+            "It allows patients to securely send messages using only the therapist's public key, while the therapist uses a private key to decrypt",
+            "It eliminates the need for passwords",
+            "It makes music playback higher quality",
+            "It reduces the amount of data stored"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Public-key cryptography enables secure communication without pre-sharing secrets",
+            "Incorrect - passwords are still needed for authentication",
+            "Incorrect - encryption doesn't affect audio quality",
+            "Incorrect - encryption may increase data size"
+          ],
+          "explanation": "Public-key cryptography uses two related keys: a public key (which can be shared openly) and a private key (which must remain secret). A patient can encrypt a message with the therapist's public key, but only the therapist's private key can decrypt it. This solves the problem of sharing encryption keys securely."
+        },
+        {
+          "question": "Why would a music therapy app use hashing for storing patient passwords?",
+          "options": [
+            "Hashing makes passwords easier to remember",
+            "Hashing verifies passwords without storing the original password, protecting patient accounts",
+            "Hashing makes the app run faster",
+            "Hashing generates better music selections"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - hashing doesn't make passwords easier to remember",
+            "Correct! Hashing is a one-way function that protects passwords",
+            "Incorrect - hashing may slightly impact performance",
+            "Incorrect - hashing doesn't affect music functionality"
+          ],
+          "explanation": "Hashing is different from encryption - it's a one-way function. When a patient creates a password, the app stores the hash of the password, not the password itself. When the patient logs in, the app hashes their input and compares it to the stored hash. If a hacker steals the password database, they get useless hashes, not actual passwords."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Expert: Cryptographic Protocols in Music Therapy",
+      "content": "Advanced music therapy systems use sophisticated cryptographic protocols to create comprehensive security infrastructure. Consider how a modern music therapy clinic manages patient data: therapist notes are encrypted with AES-256 (Advanced Encryption Standard) to meet HIPAA requirements, ensuring that even if a database is breached, the notes remain unreadable. Patient data synchronization between clinic devices uses TLS 1.3 (Transport Layer Security), which establishes encrypted communication channels so no one can intercept therapy progress information in transit. Biometric authentication combined with encrypted key storage protects access to sensitive session recordings - a therapist must be verified as themselves before the system decrypts their access keys. OAuth 2.0 protocols enable secure third-party integration, allowing patients to connect their music streaming service for therapeutic music without ever sharing their login credentials with the therapy application. Digital signatures cryptographically verify that therapy session documents haven't been tampered with, maintaining legal integrity of clinical records. These protocols work together in layers, creating defense-in-depth security - if one layer is compromised, others continue protecting patient privacy and data integrity. This multi-layered approach is essential for maintaining the trust that patients place in music therapy practice.",
+      "next": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Intermediate Practice: Applying Encryption Concepts",
+      "content": "Practice applying encryption concepts to music therapy scenarios. Complete these problems to reinforce your understanding of how different encryption methods protect patient data and communications in music therapy practice.",
+      "questions": [
+        {
+          "question": "A music therapy clinic needs to store 5 years of patient therapy session notes. What encryption method would be most appropriate for long-term storage?",
+          "options": [
+            "No encryption - it's just for internal use",
+            "Symmetric encryption (like AES) for secure, efficient storage",
+            "Only hashing, since they'll never need to retrieve the data",
+            "ROT13, since it's simple"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - HIPAA regulations require encryption for all healthcare data storage",
+            "Correct! Symmetric encryption like AES-256 is ideal for storing large volumes of sensitive data",
+            "Incorrect - hashing is one-way; you couldn't retrieve the original notes when needed",
+            "Incorrect - ROT13 is a simple cipher, not considered secure encryption by modern standards"
+          ],
+          "explanation": "Symmetric encryption like AES-256 is the best choice for storing large amounts of sensitive data because it's fast, efficient, and provides strong security. While public-key encryption is useful for communication, symmetric encryption is preferred for storage due to its performance with large files. The notes need to remain retrievable by authorized therapists."
+        },
+        {
+          "question": "A patient wants to receive encrypted progress reports via email from their therapist. What would be the best approach?",
+          "options": [
+            "Email the unencrypted reports - email is safe enough",
+            "Use the patient's public key to encrypt the report, and the patient uses their private key to decrypt it",
+            "Just write the reports in a secret code instead of using cryptography",
+            "Store reports on a public server instead"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - email travels through multiple servers; healthcare communications must be encrypted",
+            "Correct! Public-key cryptography enables secure email communication without pre-sharing keys",
+            "Incorrect - ad-hoc secret codes are unreliable and not cryptographically sound",
+            "Incorrect - public storage would make the data accessible to anyone with internet access"
+          ],
+          "explanation": "Public-key cryptography is perfect for this scenario. The therapist uses the patient's public key (which the patient can safely share) to encrypt the report. Only the patient's private key (which they keep secret) can decrypt it. This ensures that even if the email is intercepted, only the intended recipient can read the sensitive information."
+        },
+        {
+          "question": "How would you verify that therapy session audio files haven't been altered since they were recorded?",
+          "options": [
+            "Trust that they haven't changed",
+            "Use a cryptographic hash function to create a fingerprint of each file, then verify the hash later",
+            "Play the files and listen carefully",
+            "Store multiple copies and compare them"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect - verification requires cryptographic proof, not trust",
+            "Correct! Hashing creates a unique fingerprint; any change produces a different hash",
+            "Incorrect - auditory comparison isn't reliable for detecting tampering or small changes",
+            "Incorrect - multiple copies don't guarantee the original hasn't been altered"
+          ],
+          "explanation": "Cryptographic hashing is perfect for integrity verification. You compute the hash of an audio file immediately after recording and store it securely. If someone tries to alter even a single byte of the file, the hash will be completely different. This cryptographically proves the file hasn't been tampered with - important for maintaining legal and clinical records in music therapy."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundations: Encryption Basics for Music Therapy",
+      "content": "Let's start with the fundamentals. In music therapy, patient privacy is essential. When a therapist documents session notes or communicates with a patient about their therapeutic progress, this sensitive information needs protection. Encryption is the process of converting readable information (called plaintext) into unreadable code (called ciphertext) using a secret key. Only someone with the correct key can decrypt it back into readable form. This is similar to how a therapist might use a confidential filing system - only authorized people have keys to access it. Cryptography protects patient privacy by ensuring that even if someone intercepts digital communications or accesses stored files, they cannot read the sensitive information without the proper key. Think of a cryptographic key as the only key that opens a locked cabinet - without it, the encrypted files are inaccessible.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: A Day in Secure Music Therapy",
+      "content": "Here's how cryptography works in a real music therapy scenario: Dr. Chen, a board-certified music therapist, completes a session with Marcus, a patient who uses music therapy for emotional regulation. She documents the session notes, describing how Marcus responded to a specific therapeutic composition and made progress on his emotional regulation goals. She types the note into her encrypted therapy management system. The system uses a symmetric key (AES-256) to encrypt the note before storing it on her computer. When Marcus later requests a copy of his progress report, Dr. Chen generates a summary and encrypts it using Marcus's public key, then emails it to him. Marcus receives the email, uses his private key to decrypt it, reads his personalized progress report showing his therapeutic improvements, and feels empowered knowing his therapist is protecting his privacy. If a hacker tried to intercept the email or access Dr. Chen's computer files, they would see only random encrypted characters - the ciphertext - completely unreadable without the proper keys. This combination of encryption methods protects Marcus's privacy at every step: in storage, in transit, and in use.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Cryptography in Music Therapy - Complete",
+      "content": "Congratulations! You've completed the cryptography fundamentals course designed for music therapy professionals. You now understand how encryption protects patient privacy, how different cryptographic methods serve different purposes, and how to apply these concepts to real music therapy scenarios. Whether you're a therapist documenting sensitive sessions, a developer building secure music therapy applications, an administrator protecting patient data, or a student preparing for roles in music therapy, you have the foundational knowledge to implement and understand secure practices in music therapy. You understand symmetric encryption (like AES) for protecting stored data, public-key encryption for secure communication, hashing for password security and file integrity verification, and authentication protocols for verifying identities. These skills will help you maintain the trust that patients place in music therapy practice."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "Fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n7",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n7",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Continue"
+    }
+  ],
+  "generated_at": "2026-03-27T13:09:04.787613+00:00",
+  "model": "claude-haiku-4-5"
+}

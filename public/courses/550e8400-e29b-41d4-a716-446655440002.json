@@ -1,0 +1,171 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440002",
+  "title": "Introduction to R for Data Analysis: Film Production Edition",
+  "description": "Learn R through the lens of film production analytics. Choose your learning path\u2014data fundamentals, visualization, or statistics\u2014and master all three by the end. Apply R to real film industry challenges: analyzing budgets, predicting box office, and discovering audience trends.",
+  "topic": "Introduction to R for Data Analysis",
+  "theme": "film production",
+  "difficulty": "beginner",
+  "estimated_minutes": 50,
+  "tags": [
+    "R",
+    "data analysis",
+    "film production",
+    "beginner",
+    "analytics",
+    "branching course"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "R for Film Production Analytics",
+      "content": "Film production generates vast amounts of data\u2014from box office numbers and audience demographics to production budgets and shooting schedules. R is a powerful tool for analyzing this data and uncovering insights. In this course, you'll learn how to use R to work with film production datasets, create visualizations, and perform statistical analyses. Whether you're interested in understanding audience trends, budget optimization, or production metrics, R can help you make data-driven decisions in the film industry.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Which aspect of film analytics interests you most? You can dive deep into any area and will master all three by the end.",
+      "choices": [
+        {
+          "label": "Data Fundamentals: Loading & Structuring",
+          "next": "n3"
+        },
+        {
+          "label": "Visual Storytelling: Creating Charts & Dashboards",
+          "next": "n5"
+        },
+        {
+          "label": "Performance Analysis: Statistics & Prediction",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Data Structures and Importing Film Data",
+      "content": "Before analyzing film production data, you need to understand R's fundamental data structures. Vectors store single-type data (like a list of box office earnings), data frames organize data in rows and columns (perfect for actor names, character names, and scene lengths), and lists group diverse data together. The read.csv() function imports spreadsheet data, while packages like readxl handle Excel files. Most film production data starts in spreadsheets\u2014budgets, crew schedules, dailies reports\u2014and R can load them instantly for analysis.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Loading a Film Budget Dataset",
+      "content": "Imagine you have a spreadsheet with 150 films tracking production budgets, release years, and box office earnings. Using read.csv(\"film_budgets.csv\"), R loads all 150 films into a data frame with columns for budget, year, and revenue. You can inspect it with head(df) to see the first few rows and str(df) to understand data types. Vectors like df$budget extract individual columns for further analysis. This simple workflow\u2014import, inspect, extract\u2014is the foundation for all R analysis work in film production.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Data Wrangling and Visualization for Film Metrics",
+      "content": "Raw data is messy. Films might have missing box office numbers, budget data in different currencies, or inconsistent genres. R's dplyr package makes cleaning easy: filter() removes incomplete records, mutate() creates new columns (like calculating profit margins), and arrange() sorts by any metric. Once clean, ggplot2 transforms data into insights. Scatter plots reveal relationships between budget and revenue, histograms show genre distributions, and line plots track box office performance over time. Visualization is the storyteller's tool\u2014it reveals patterns numbers alone hide.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Visualizing Box Office Trends by Genre",
+      "content": "You have box office data for 50 films across five genres. Using dplyr's group_by() and summarize(), you calculate the average revenue by genre. Then ggplot2 creates a bar chart: ggplot(data, aes(x=genre, y=avg_revenue, fill=genre)) + geom_bar(stat=\"identity\"). The result instantly shows which genres earn the most. Add a line plot tracking quarterly releases, and producers see market trends. In 5 lines of code, R transforms a spreadsheet into actionable visuals that guide production decisions.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Statistical Analysis for Film Performance",
+      "content": "Numbers need context. Is a $500M box office \"good\"? Depends on the budget, genre, and market. Statistics answer the \"why\"\u2014correlation analysis reveals whether big budgets guarantee big returns, regression models predict future revenue based on past data, and hypothesis testing determines if audience demographics truly affect viewing habits. R's built-in functions (cor(), lm(), t.test()) make these analyses simple. The result is evidence-based storytelling: data that supports creative and financial decisions in film production.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Predicting Film Revenue from Budget",
+      "content": "You want to predict box office revenue from production budget. Using lm(revenue ~ budget, data=films), R fits a linear regression model. The output shows: predicted revenue = 1.5 \u00d7 budget + 50 million. For a $100M film, the model predicts $200M revenue. Test assumptions with plot(model) to ensure validity. Visualize with ggplot2's geom_smooth(method=\"lm\") to show the fitted line and confidence bands. Producers can now estimate returns before greenlight, grounded in historical data.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "From Data to Decisions in Film Production",
+      "content": "You've explored three pillars of R for film analytics: structuring data, visualizing it, and analyzing it statistically. Together, they form a workflow: import budgets and box office data, clean it with dplyr, visualize trends with ggplot2, and model relationships with regression. This integrated approach turns spreadsheets into strategic insights. A producer can ask \"Which genres are most profitable?\" and answer it with clean visualization and supporting statistics. R isn't just a tool\u2014it's a language for data-driven storytelling in film.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Ready to Analyze Film Data",
+      "content": "Congratulations! You've mastered the essentials of R for film production analytics. You can import datasets, wrangle messy data, create compelling visualizations, and run statistical analyses. Whether you're optimizing budgets, predicting box office performance, or discovering audience trends, you have the foundational skills. Download a real film dataset (like IMDb or The Numbers), load it into R, and start exploring. Your data-driven insights could shape the next blockbuster decision."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn more"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Data Fundamentals"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Visual Storytelling"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Performance Analysis"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "See example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "See example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "See example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T17:32:30.871020+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,295 @@
+{
+  "id": "ds-edtech-course",
+  "title": "Distributed Systems in Education Technology",
+  "description": "Master distributed systems design patterns through the lens of building scalable education platforms. Adaptive course that tailors content to your current understanding.",
+  "topic": "Distributed Systems",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "distributed-systems",
+    "education-technology",
+    "system-design",
+    "scalability",
+    "architecture"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Distributed Systems Foundation Check",
+      "content": "Let's assess your foundational understanding of distributed systems in the context of education technology. A distributed system is one where multiple computers work together to provide a service. In EdTech, this means having student data replicated across servers in different regions so learners in Tokyo and Toronto both get fast access to their courses.",
+      "questions": [
+        {
+          "question": "Why would an education platform like Coursera or Canvas choose to distribute their system across multiple data centers?",
+          "options": [
+            "A) To increase redundancy so the platform stays available if one data center fails",
+            "B) To reduce latency for students worldwide by placing servers closer to them",
+            "C) To enable millions of concurrent learners to access the platform simultaneously",
+            "D) All of the above"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Redundancy is important, but there are other key reasons.",
+            "Reducing latency is one benefit, but there are others.",
+            "Concurrent users can be handled, but distribution serves multiple purposes.",
+            "Correct! Distributed systems in EdTech solve multiple problems: availability, performance, and scale."
+          ],
+          "explanation": "Modern education platforms serve learners globally and must support millions of concurrent users. Distribution addresses availability (if one server fails, others continue), latency (servers near users respond faster), and scale (load is spread across many machines)."
+        },
+        {
+          "question": "A distributed learning platform stores student quiz results in multiple locations. When a student retakes a quiz, both servers receive the submission. This is an example of which challenge?",
+          "options": [
+            "A) Network Partition \u2014 servers are disconnected",
+            "B) Consistency \u2014 ensuring all servers have the same view of the quiz scores",
+            "C) Fault Tolerance \u2014 system continuing despite failures",
+            "D) Latency \u2014 response time to the student"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This isn't about servers being disconnected.",
+            "Correct! Consistency ensures all replicas agree on the quiz results.",
+            "Fault tolerance is important, but this scenario focuses on data agreement.",
+            "Latency isn't the primary concern here."
+          ],
+          "explanation": "When data is replicated across multiple servers, keeping them in sync (consistent) is a core challenge. In the quiz example, both servers must agree on the final score to avoid the student seeing conflicting results."
+        },
+        {
+          "question": "Which of these is NOT a fundamental trade-off in distributed systems design?",
+          "options": [
+            "A) Consistency vs. Availability (CAP theorem)",
+            "B) Latency vs. Throughput",
+            "C) Redundancy vs. Storage Cost",
+            "D) Color vs. Functionality"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Consistency vs. Availability is a real trade-off.",
+            "Latency vs. Throughput is a genuine engineering trade-off.",
+            "Redundancy vs. Storage Cost is a real constraint.",
+            "Correct! Color is not a fundamental distributed systems trade-off."
+          ],
+          "explanation": "Distributed systems involve trade-offs between competing properties. CAP theorem, latency/throughput, and cost/redundancy are all real concerns. UI color choices don't involve distributed systems trade-offs."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Advanced Distributed Systems Challenges",
+      "content": "You've demonstrated foundational knowledge. Now let's explore deeper challenges that EdTech architects face when designing distributed systems at scale. These include managing data consistency across replicas, handling network failures gracefully, and making trade-offs between strong consistency and high availability.",
+      "questions": [
+        {
+          "question": "A major online university's LMS uses eventual consistency for course roster updates. Students might see their enrollment in a class for 30 seconds before the change appears everywhere. This reflects which design choice?",
+          "options": [
+            "A) The system prioritizes Consistency and Availability, sacrificing Partition Tolerance",
+            "B) The system prioritizes Availability and Partition Tolerance, accepting Eventual Consistency",
+            "C) The system is using synchronous replication, guaranteeing immediate consistency",
+            "D) The system has no distributed components and operates on a single server"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This describes eventual consistency, not strong consistency.",
+            "Correct! By accepting a brief delay, the system maintains high availability even if data centers disagree temporarily.",
+            "Synchronous replication would have prevented the delay entirely.",
+            "A system experiencing eventual consistency is definitely distributed."
+          ],
+          "explanation": "The 30-second delay is the price of eventual consistency. The system chose to remain available to all users (high availability) even if data centers become disconnected (partition tolerance), which means briefly accepting inconsistent views of enrollment."
+        },
+        {
+          "question": "An EdTech company's global platform experiences a network split: the Europe data center becomes isolated from the US data center. Students in both regions continue to submit homework. Which is the safest approach?",
+          "options": [
+            "A) Stop accepting submissions in one region until the network heals",
+            "B) Accept all submissions and log which data center each came from, then resolve conflicts when networks rejoin",
+            "C) Have one data center become 'read-only' while the other continues accepting writes",
+            "D) Use a blockchain to automatically resolve conflicts"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Blocking submissions reduces availability during the partition.",
+            "Correct! This approach maximizes availability during the partition and enables intelligent conflict resolution later.",
+            "Read-only mode sacrifices availability for one region.",
+            "Blockchains introduce significant complexity without solving this specific problem."
+          ],
+          "explanation": "During a partition, logging writes per data center and deferring conflict resolution is pragmatic. This ensures no student's homework is lost and allows the system to recover once the network heals. Version vectors or timestamps help identify which submission should win if there's a conflict."
+        },
+        {
+          "question": "A video streaming feature in an online course platform must support 10,000 concurrent streams with sub-2-second latency. Which distributed pattern is MOST appropriate?",
+          "options": [
+            "A) Centralized architecture with strong consistency on a single server",
+            "B) Content Delivery Network (CDN) with geographically distributed edge servers caching video content",
+            "C) Eventual consistency with server-side rendering",
+            "D) Synchronous replication of all video data across all servers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A single server cannot handle 10,000 concurrent streams with sub-2-second latency.",
+            "Correct! CDNs are purpose-built for this: they cache content near end-users, reducing latency and distributing load.",
+            "Eventual consistency doesn't directly solve the latency problem for video streaming.",
+            "Synchronous replication of entire video libraries is impractical and slow."
+          ],
+          "explanation": "CDNs solve this by placing copies of video content on edge servers worldwide. A student in Singapore requests a video and gets it from the nearest CDN edge server rather than from a central data center, achieving sub-2-second latency and enabling scale to thousands of concurrent streams."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Patterns: Microservices, Event Streaming, and Consensus",
+      "content": "You've mastered the core challenges. Let's explore advanced patterns used by sophisticated EdTech platforms like Udemy and 2U. **Microservices** break a monolithic LMS into independent services (User Service, Course Service, Grading Service) that communicate asynchronously, enabling teams to scale and deploy independently. **Event Streaming** using systems like Kafka captures every student action\u2014enrollment, quiz submission, assignment turn-in\u2014allowing services to stay synchronized without direct coupling. **Consensus algorithms** (Raft, Paxos) ensure distributed databases reach agreement even during failures, critical for preserving grade integrity. These patterns enable platforms serving millions of learners with sub-100ms response times and 99.99% uptime.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Complete: You're Ready for System Design",
+      "content": "Excellent! You've mastered distributed systems at an expert level. You understand consistency models, partition tolerance, advanced patterns like event streaming and microservices, and how to architect systems for scale. You're equipped to design the next generation of global education platforms serving billions of learners reliably. Next steps: explore how companies like Google Classroom, Canvas, and Coursera implement these patterns in production, and consider how edge computing might further transform EdTech infrastructure."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Practice: Designing for Distributed Scenarios",
+      "content": "Let's reinforce your understanding with practical scenarios. You'll work through real-world decisions that EdTech architects face when designing distributed systems. These exercises will strengthen your intuition about trade-offs and help you internalize the patterns you've learned.",
+      "questions": [
+        {
+          "question": "Your online course platform has student progress data stored in two data centers. A network cable is cut, isolating one data center. A student submits an assignment to the isolated data center. What is the best action?",
+          "options": [
+            "A) Reject the submission and ask the student to wait for network recovery",
+            "B) Accept the submission locally, then synchronize it to the other data center when the network heals",
+            "C) Only allow the non-isolated data center to accept submissions",
+            "D) Manually merge the data using a database administrator"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Rejecting submissions hurts availability.",
+            "Correct! This maximizes availability during outages and enables reconciliation later.",
+            "This reduces availability for the isolated region.",
+            "Manual intervention doesn't scale."
+          ],
+          "explanation": "Accept the submission locally to maximize availability. When the network heals, automated conflict resolution (timestamped or version-based) reconciles the data. This is the principle behind partition-tolerant systems."
+        },
+        {
+          "question": "You're designing a feature where teachers can view real-time student enrollment across 3 global data centers. Consistency is critical (no double-counting). Latency must be under 500ms. What approach is most suitable?",
+          "options": [
+            "A) Use strong consistency with synchronous replication; accept that latency may exceed 500ms during network issues",
+            "B) Use eventual consistency and cache queries; accept brief staleness but guarantee sub-500ms latency",
+            "C) Replicate all data to a single master in the US; accept that teachers in Asia experience high latency",
+            "D) Use a local cache at each data center with manual reconciliation by teachers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Strong consistency may violate the 500ms latency SLA.",
+            "Correct! Eventual consistency with caching allows fast reads and eventual accuracy.",
+            "This sacrifices latency for teachers outside the US.",
+            "Manual reconciliation is error-prone and doesn't scale."
+          ],
+          "explanation": "With a 500ms latency requirement, you can't afford to wait for synchronous replication across continents (which incurs ~100ms latency each direction). Instead, cache enrollment counts at each data center and accept brief inconsistency (5-10 seconds stale), acceptable for reporting."
+        },
+        {
+          "question": "Your platform uses a message queue (Kafka) to capture student events: enrollments, quiz submissions, grades. Multiple services subscribe to these events. Why is this better than direct database-to-database synchronization?",
+          "options": [
+            "A) Message queues are faster than databases",
+            "B) Services are loosely coupled; new services can subscribe without changing existing code; events are durable",
+            "C) Message queues eliminate network partitions",
+            "D) It reduces the number of servers needed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Message queues aren't inherently faster, though they can reduce load.",
+            "Correct! Event streams enable independent scaling, easier feature additions, and ensure events are never lost.",
+            "Message queues don't prevent partitions, but they handle them gracefully.",
+            "Queue brokers do consume resources, but that's not the main benefit."
+          ],
+          "explanation": "Event streams decouple services: the Notification Service subscribes to enrollment events without the enrollment service knowing about it. If a new Analytics service is added later, it just subscribes\u2014no code changes needed. Events are logged persistently, so no message is lost even if a service is temporarily down."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Complete: Solid Foundations",
+      "content": "Great work! You've successfully applied distributed systems principles to practical EdTech scenarios. You understand how to balance consistency, availability, and partition tolerance, and can make informed trade-offs for real-world constraints. You're ready to implement distributed systems in production EdTech platforms. Focus next on learning specific technologies: Kafka for event streaming, Redis for caching, and Kubernetes for managing microservices at scale."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Foundations: What Are Distributed Systems?",
+      "content": "Let's start with the basics. A **distributed system** is a collection of independent computers that work together to solve a problem, appearing as a single coherent system to users. In education technology, think of it this way: when a student logs into Coursera, they're not connecting to one computer\u2014they're connecting to dozens working in concert. One server handles authentication, another serves course videos, a third records quiz answers, and yet another sends completion certificates. These machines must coordinate without being in the same place or country. **Why does EdTech need distribution?** Because millions of students worldwide use these platforms simultaneously, and no single machine can handle that load. Distribution also ensures that if one server fails, the platform stays online. Core reasons: **Scale** (handle millions of users), **Reliability** (keep the system running), and **Latency** (serve users fast no matter where they are).",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: How LinkedIn Learning Distributes Millions of Video Streams",
+      "content": "LinkedIn Learning serves millions of students globally with instant access to video courses. Here's how they do it: **Layer 1 (CDN):** Videos are stored on a global Content Delivery Network (Akamai or Cloudflare). When a student in Berlin clicks 'Play,' the video stream comes from a server in Frankfurt, not LinkedIn's US data center\u2014reducing latency from 150ms to 20ms. **Layer 2 (Metadata Servers):** Course metadata (titles, descriptions, instructor info) is cached in regional data centers. When a student searches for 'Python for Data Science,' the query hits a nearby server, not the central database. **Layer 3 (Event Log):** Every interaction\u2014play, pause, seek, completion\u2014is logged to a distributed event stream (Kafka), allowing LinkedIn to track engagement and personalize recommendations without slowing down the user experience. The system is **eventually consistent**: a student's 'course completed' flag might take a few seconds to update across all servers, but it eventually does. This trade-off allows LinkedIn to maintain 99.99% availability globally.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Beginner Complete: Ready for Advanced Concepts",
+      "content": "Excellent foundation! You now understand what distributed systems are, why education platforms need them, and how real-world EdTech companies like LinkedIn Learning architect their infrastructure. You've seen concrete examples of how distribution solves the challenges of scale, reliability, and latency. You're ready to advance: learn about consistency models (strong vs. eventual), the CAP theorem, and how to design systems that remain available during network failures. Well done!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (\u226567%)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Fail (<67%)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass (\u226567%)"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fail (<67%)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T12:46:18.051547+00:00",
+  "model": "claude-haiku-4-5"
+}

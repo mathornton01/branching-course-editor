@@ -1,0 +1,170 @@
+{
+  "id": "parallel-computing-sports-analytics",
+  "title": "Parallel Computing for Sports Analytics",
+  "description": "Master parallel computing through real sports analytics problems: decompose work, choose concurrency models, and optimize for speed.",
+  "topic": "Parallel Computing",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "parallel computing",
+    "concurrency",
+    "decomposition",
+    "sports analytics",
+    "optimization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Parallel Computing Powers Modern Sports Analytics",
+      "content": "Modern sports analytics processes massive datasets\u2014NBA tracking generates 300,000 data points per game, fantasy sports platforms calculate points for millions of users simultaneously, and real-time dashboards must compute statistics across dozens of leagues. Sequential processing is too slow. Parallel computing lets you divide work across multiple processors, calculating offensive stats, defensive metrics, and position analysis at the same time. But three decisions determine success: how to decompose the problem, which concurrency model to use, and how to eliminate bottlenecks.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which parallel computing challenge interests you most?",
+      "content": "Choose a learning path based on your biggest parallelization question.",
+      "choices": [
+        {
+          "label": "How do I divide the work efficiently?",
+          "next": "n3"
+        },
+        {
+          "label": "Should I use threads, processes, or async?",
+          "next": "n5"
+        },
+        {
+          "label": "How do I actually make it fast?",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Decomposition: Breaking Problems Into Parallel Pieces",
+      "content": "Decomposition is dividing your problem so independent processors can work simultaneously without waiting for each other. Task decomposition splits by function: CPU-1 calculates shooting efficiency, CPU-2 computes ball tracking, CPU-3 analyzes player positioning\u2014all at once. Data decomposition partitions by dataset: each processor handles different players or games\u2014every processor executes the same calculation on different data. Pipeline decomposition arranges work in stages where output from one feeds into the next. In sports analytics, decomposing by sport (NBA games on processors 1-4, NFL on 5-8, MLB on 9-12) minimizes dependencies. The key rule: minimize synchronization points where processors wait for each other.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Decomposing a Real-Time Multi-Sport Stats Dashboard",
+      "content": "Your system processes NBA, NFL, and MLB games simultaneously. Using data decomposition: assign each sport to a processor\u2014NBA processor calculates player efficiency rating and true shooting percentage, NFL processor computes completion percentage and yards per attempt, MLB processor determines batting average and on-base plus slugging. Each processor works independently; the only shared resource is the output dashboard. Calculation time: each metric takes 10 seconds sequentially, so all three would need 30 seconds total. With decomposition across 3 processors: 10 seconds total. You've achieved 3x speedup because work is truly independent\u2014NBA processor doesn't wait for NFL results.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Concurrency Models: How Parallelism Actually Executes",
+      "content": "Decomposition answers 'what to split'\u2014concurrency model answers 'how does it run?' Threads share a single process and memory space, making communication fast but requiring locks to prevent race conditions when multiple threads access the same variable. Processes are isolated with separate memory, eliminating race conditions but adding communication overhead. Asynchronous programming uses callbacks or futures\u2014when one operation blocks (network I/O, disk read), others execute instead, no threads or processes needed. In sports analytics, threads work well for parallel camera processing where all feeds update shared position data; processes isolate league computations to prevent interference; async fetches live stats from multiple APIs without blocking.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Multi-Threaded Multi-Camera Player Tracking",
+      "content": "A basketball arena has 20 overhead cameras tracking player positions. Sequential processing (camera 1, then 2, then 3...) takes 200ms. Parallel threading: create one thread per camera, each processing its feed simultaneously, writing results into a shared player position buffer. Thread 1 identifies players in camera 1's view, Thread 2 does camera 2, etc.\u2014all 20 threads run on 20 CPU cores at the same time. Each camera takes 10ms independently, so all 20 complete in 10ms. Tradeoff: a mutex lock synchronizes writes to the shared buffer (1ms overhead \u00d7 20 cameras = 20ms). Total time: 30ms instead of 200ms. Threading was correct here because shared memory access (write position data) is fast with locks, and thread creation overhead is negligible.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Optimization: Turning Parallel Code Into Speed",
+      "content": "Writing parallel code doesn't guarantee fast code. Amdahl's Law: if 20% of your work must run serially (unavoidably single-threaded), maximum speedup is 5x regardless of how many processors you add. Load balancing ensures all processors stay busy\u2014if processor 1 finishes at 50ms while processor 4 works until 500ms, three-quarters of capacity was wasted. Synchronization overhead (locks, atomic operations) is invisible until scaled; 1ms per sync operation \u00d7 1 million operations = 17 minutes lost. Cache coherency (false sharing) causes performance cliffs when two cores modify nearby memory on different cache lines. Optimization means measuring real bottlenecks, not guessing.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Scaling Fantasy Points Across Millions of Users",
+      "content": "A fantasy sports platform calculates points for 5 million users when games conclude. Na\u00efve approach: divide users equally (64 processors \u00d7 78k users each). Problem: users have different lineup sizes\u2014some have 8 players, others 50. Processor A finishes in 200ms, processors B-Z finish in 2s\u2014huge imbalance. Optimized approach: work queue with dynamic load balancing. Each idle processor pulls the next user from a shared queue instead of pre-assigned blocks. Users with small lineups finish first, freeing processors to help with large lineups. Additional optimization: cache live stats locally (reducing lock contention), pipeline stat fetches while point calculation runs. Results: na\u00efve version averages 2 seconds, optimized version averages 400ms\u20145x faster through better decomposition and reduced synchronization.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Decomposition, Concurrency, and Optimization",
+      "content": "Great parallel systems integrate all three elements strategically. Multi-sport dashboards use data decomposition (split by sport) with processes (isolation prevents interference) and load balancing (all leagues finish simultaneously). Camera tracking uses task decomposition (camera 1, 2, 3 are independent tasks) with threads (shared memory is fast) and minimal locks (synchronization is tiny). Fantasy points use load-balanced decomposition (users pulled from queue) with threads (shared stat cache) and pipelined operations (fetch while calculating). Diagnosis comes first: Is your bottleneck computation (use decomposition), I/O (use async or separate processes), or contention (reduce locks and synchronization)? In sports analytics with live data and millions of users, even small optimizations compound. Measure with profilers, not intuition\u2014parallel performance is often counterintuitive.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "You've Mastered Parallel Computing for Sports Analytics",
+      "content": "You've learned three foundations: decomposition (break work into independent pieces), concurrency models (choose threads, processes, or async), and optimization (eliminate bottlenecks). From real-time stat dashboards to multi-camera player tracking to scaled fantasy sports systems, these principles unlock performance sequential systems cannot match. Your next step: identify bottlenecks in your own analytics systems, choose decomposition strategy, select the right concurrency model, and profile relentlessly. Apply these concepts and watch your sports analytics platform scale."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Choose learning path"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Decomposition"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Concurrency"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Optimization"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "See example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Reconverge"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "See example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Reconverge"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "See example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Reconverge"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T06:06:46.527767+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,135 @@
+{
+  "id": "it-film-prod-001",
+  "title": "Information Theory in Film Production",
+  "description": "Learn information theory concepts through the lens of film production challenges: compression, entropy, channel capacity, and distribution strategies.",
+  "topic": "Information Theory",
+  "theme": "film production",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "information theory",
+    "film production",
+    "data compression",
+    "entropy",
+    "channel capacity"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Final Cut Challenge",
+      "content": "You've just finished principal photography on your feature film. Your 4K color-graded master file is 2.5 TB. Your distributor needs to deliver it to 10,000 theaters worldwide, but bandwidth is expensive and storage is limited. You realize you need to understand how to efficiently encode, transmit, and store your film while preserving its artistic intent. This is where information theory becomes essential\u2014it tells us the fundamental limits and optimal strategies for data representation.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Strategy",
+      "content": "How will you approach this challenge?",
+      "choices": [
+        {
+          "label": "Deep dive into compression\u2014how to shrink file sizes intelligently",
+          "next": "n3"
+        },
+        {
+          "label": "Focus on distribution\u2014understanding channel capacity and bandwidth limits",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Entropy and Compression",
+      "content": "Claude Shannon's entropy formula measures the average information content in your data. In film, this means: how much 'uniqueness' is actually in each frame? A static shot of a black screen has low entropy (many identical pixels), while a complex action sequence has high entropy (many different pixel values). Your video codec exploits this by removing redundancy. Lossy compression (H.264, H.265) throws away imperceptible information\u2014details humans can't see. Lossless compression preserves everything. The trade-off is file size versus visual fidelity. Your 2.5 TB file contains tremendous redundancy you can safely remove without degrading the viewer's experience.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Compression Method Decision",
+      "content": "Which compression approach best fits your theatrical distribution needs?",
+      "choices": [
+        {
+          "label": "Use H.265 lossy compression\u2014smaller files, imperceptible quality loss",
+          "next": "n5"
+        },
+        {
+          "label": "Use lossless compression\u2014preserve every pixel, accept larger files",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Success: Optimized Distribution",
+      "content": "Excellent choice. By using H.265 with adaptive bitrate encoding, you reduce your master from 2.5 TB to 50 GB for theatrical DCP and 2 GB for streaming platforms. The entropy-based algorithm intelligently removes imperceptible redundancy: repeated background patterns, color gradations humans can't distinguish, and temporal redundancy between frames. Theater networks stream 4K video at 25 Mbps, a bandwidth-friendly solution. You've applied Shannon's entropy principle to maximize distribution efficiency while maintaining the artistic vision. Your film reaches theaters on schedule and within budget. Information theory transformed a logistical nightmare into an elegant technical solution."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Challenge: Distribution Bottleneck",
+      "content": "You opted for lossless compression, preserving 100% fidelity but maintaining your file at 800 GB\u2014still massive. Theater chains reject it due to delivery infrastructure costs. Your film sits in post-production limbo while you negotiate with distributors. You've learned that information theory isn't just about perfect preservation; it's about intelligent trade-offs. A theoretically 'perfect' signal becomes practically useless if the channel can't carry it. You realize you needed to understand both entropy and channel capacity before making your compression decision. A crucial lesson in applied information theory."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Channel Capacity and Bandwidth",
+      "content": "Shannon's channel capacity theorem defines the maximum amount of information that can be reliably transmitted through a communication channel. For your film distribution, the 'channel' is the internet connection to theaters, and 'capacity' is measured in megabits per second. A typical theater multiplex network has 100 Mbps capacity. A 4K video stream requires roughly 25 Mbps. Your 2.5 TB master must be encoded to respect this constraint. You can't exceed channel capacity, but you can use error-correcting codes and intelligent redundancy to ensure reliable delivery even when network packets are lost. Netflix uses this principle\u2014the player adapts video quality based on real-time available bandwidth. Your film needs the same approach: encode at multiple bitrates so delivery adapts to network conditions.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Successful Adaptive Distribution Strategy",
+      "content": "You've designed an adaptive bitrate encoding scheme: 4K at 25 Mbps for theaters with excellent connectivity, 1080p at 8 Mbps for backup streams, and 480p at 3 Mbps for development screenings. You add forward error correction codes (10% overhead) to protect against packet loss during transmission. Theater networks dynamically switch between streams based on real-time bandwidth availability. You've applied Shannon's channel capacity theorem to create a resilient, scalable distribution system. Your film reaches 10,000 theaters worldwide on schedule and within budget. You've learned that maximizing channel utilization isn't brute force\u2014it's intelligent encoding matched to available bandwidth, with redundancy strategically placed to ensure reliability."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Compression path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Distribution path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Lossy"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Lossless"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T13:34:34.680945+00:00",
+  "model": "claude-haiku-4-5"
+}

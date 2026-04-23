@@ -1,0 +1,271 @@
+{
+  "id": "course-digital-electronics-game-design",
+  "title": "Digital Electronics for Game Design",
+  "description": "Master digital electronics by exploring how game hardware and AI logic work. Learn Boolean gates, circuits, and power management through the lens of video game design.",
+  "topic": "Digital Electronics",
+  "theme": "game design",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "digital electronics",
+    "game design",
+    "Boolean logic",
+    "circuits",
+    "hardware",
+    "game development"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Hidden Logic Behind Your Favorite Games",
+      "content": "Digital electronics power every video game you play. From the Boolean logic that drives AI decision-making to the circuits that manage power distribution in gaming consoles, digital electronics form the foundation of interactive entertainment. In this course, you'll learn how game designers and engineers use bits, logic gates, and circuits to create responsive, intelligent game worlds. We'll explore how a simple 0 or 1 can cascade into complex gameplay mechanics, and how hardware limitations shape the games we love.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Different people learn differently! Would you prefer to start by understanding the fundamental logic principles that power game AI, or dive straight into the hardware that runs the game? Both paths teach the same material\u2014just in different orders.",
+      "choices": [
+        {
+          "label": "Master Boolean Logic First",
+          "next": "n3"
+        },
+        {
+          "label": "Explore Game Hardware First",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Boolean Logic: The Language of Game AI",
+      "content": "Every decision a game makes\u2014whether an enemy attacks, whether a player passed a checkpoint, whether a power-up is active\u2014is rooted in Boolean logic. Boolean values (true/false, 1/0) and logical operations (AND, OR, NOT) form the foundation of game state management. When a game checks \"is the player grounded AND is jump button pressed?\", it's using Boolean AND logic. Understanding these operations is key to grasping how game engines evaluate millions of conditions per second to create responsive, intelligent gameplay. Logic gates are the physical circuits that implement these operations at the hardware level.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Enemy AI Decision Tree",
+      "content": "Consider a simple enemy in an RPG. The enemy attacks when: (player within range) AND (enemy has stamina). This is a two-input AND gate. Meanwhile, the enemy flees when: (health < 30%) OR (is confused). That's an OR gate. In Zelda-like games, the torch lights when (inventory has torch) AND (not in water). These are literal logic gates implemented in game code and hardware. Each gate takes digital inputs (0 or 1) and produces outputs that drive gameplay behavior. By combining multiple gates, game designers create complex decision trees that make NPCs feel intelligent and responsive.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Test Your Logic Gates Knowledge",
+      "content": "Apply logic gates to game design scenarios",
+      "questions": [
+        {
+          "question": "A game's \"power shield activates\" rule: NOT(no mana) AND (shield button pressed). What happens if mana is available but shield button isn't pressed?",
+          "options": [
+            "Shield activates",
+            "Shield doesn't activate",
+            "Shield flickers on and off",
+            "Game freezes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect\u2014both conditions must be true",
+            "Correct\u2014AND requires both inputs to be 1",
+            "Incorrect\u2014no flicker in digital logic",
+            "Incorrect\u2014this is a simple logic operation"
+          ],
+          "explanation": "The AND gate requires BOTH inputs to be true. Shield button isn't pressed (0), so output is 0\u2014shield off."
+        },
+        {
+          "question": "A checkpoint saves when: (area cleared) OR (timer expired). Which scenario triggers the save?",
+          "options": [
+            "Area cleared but timer still running",
+            "Timer expired but area not cleared",
+            "Both conditions true",
+            "A, B, and C all trigger it"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect\u2014OR needs only one input true",
+            "Incorrect\u2014OR needs only one input true",
+            "Incorrect\u2014OR needs only one input true",
+            "Correct\u2014OR means \"either or both\" conditions work"
+          ],
+          "explanation": "OR gates output 1 if ANY input is 1. So the checkpoint saves in all three scenarios."
+        },
+        {
+          "question": "In a stealth game, you're detected when: (player in sight cone) AND (no light below value 50). If you're in the sight cone but light level is 60, are you detected?",
+          "options": [
+            "Yes, immediately",
+            "No, the light is too bright",
+            "Partially detected",
+            "Depends on player color"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect\u2014AND needs both conditions true",
+            "Correct\u2014light (60) is NOT below 50, so second input is 0",
+            "Incorrect\u2014digital logic has no \"partial\" state",
+            "Incorrect\u2014stealth detection uses hardcoded thresholds"
+          ],
+          "explanation": "AND requires both inputs true. Light=60 is NOT less than 50, so that input is false. Detection fails."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Game Hardware: From Transistors to Consoles",
+      "content": "While logic gates are the brains of gaming, circuits are the heart. A circuit is a path for electrical current, and every component\u2014transistors, resistors, capacitors\u2014plays a role in controlling how power and signals flow. In a PlayStation 5, billions of transistors form logic gates, which combine into circuits, which form the CPU and GPU. Game developers must understand power distribution, signal timing, and heat management because these directly affect performance. A circuit that's inefficiently designed can cause frame drops, overheating, or crashes. Modern game consoles use carefully designed power delivery circuits to ensure stable, consistent performance even during demanding scenes with thousands of physics objects and particle effects.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Example: Console Power Management",
+      "content": "The Nintendo Switch has a clever power delivery circuit. When docked, it draws power from a wall adapter; when undocked, it switches to battery. The circuit board has logic gates that detect the dock connection state and route power appropriately. If the dock isn't connected, a multiplexer circuit (made of logic gates) selects the battery; if docked, it selects AC power. This switching must be seamless\u2014no glitches, no power loss. Too much current to the GPU when a demanding game launches? A voltage regulator circuit (using transistors) compensates by adjusting voltage to maintain stable performance. Thermal sensors feed back to power management circuits, which throttle CPU/GPU if temperature exceeds safe limits. All of this happens in microseconds, every frame.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Test Your Circuits Knowledge",
+      "content": "Apply circuit concepts to real game hardware",
+      "questions": [
+        {
+          "question": "In a gaming PC, the power supply delivers 12V to the GPU. A voltage regulator circuit steps this down to 1.2V for the processor core. Why is this step-down necessary?",
+          "options": [
+            "To reduce energy consumption",
+            "To match the processor's operational voltage requirement",
+            "To prevent overheating",
+            "To improve gaming performance"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect\u2014stepping down voltage doesn't reduce consumption",
+            "Correct\u2014semiconductor chips require specific voltages to function",
+            "Incorrect\u2014voltage regulation helps stability, not directly temperature",
+            "Incorrect\u2014performance depends on frequency, not voltage alone"
+          ],
+          "explanation": "Modern processors operate at very low voltages (around 1V) for efficiency. The voltage regulator converts high PSU voltage to chip-safe levels."
+        },
+        {
+          "question": "A game console's cooling system includes thermal sensors that feed into control circuits. When temp exceeds 85\u00b0C, the circuit reduces GPU clock speed. This is an example of:",
+          "options": [
+            "Negative feedback control",
+            "Power amplification",
+            "Signal multiplication",
+            "Impedance matching"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct\u2014the system detects a high value and reduces the input to bring it down",
+            "Incorrect\u2014amplification isn't involved here",
+            "Incorrect\u2014we're not multiplying signals",
+            "Incorrect\u2014impedance is about resistance, not thermal control"
+          ],
+          "explanation": "Feedback control adjusts inputs based on outputs. High temp triggers throttling, which reduces temp. This is negative feedback\u2014it maintains system stability."
+        },
+        {
+          "question": "A gaming laptop has a power delivery circuit rated for 150W to the CPU. During a demanding game, the circuit needs to supply 120W steadily. What is the circuit's safety margin?",
+          "options": [
+            "30W or 20%",
+            "120W or 80%",
+            "150W or 100%",
+            "0W or 0%"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct\u2014150 - 120 = 30W remaining capacity",
+            "Incorrect\u2014that's demand, not margin",
+            "Incorrect\u2014that's max capacity, not margin",
+            "Incorrect\u2014there's clearly headroom"
+          ],
+          "explanation": "Safety margin = max capacity - current load = 150 - 120 = 30W. This headroom prevents crashes during power spikes."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Putting It All Together: Logic in Circuits",
+      "content": "Now you understand both sides: the Boolean logic that makes decisions, and the circuits that implement them in hardware. Here's how they connect: A logic gate (AND, OR, NOT) is a circuit pattern made of transistors. Millions of these gates, combined intelligently, form a processor's instruction set. When a game checks \"is the player jumping?\", that's a logic operation. The processor executes it by sending voltages through transistor circuits. Frame rate, responsiveness, and AI intelligence all depend on how efficiently these circuit-level logic operations execute. Game developers who understand digital electronics can optimize for target hardware\u2014knowing when to use bit operations for speed, when to parallelize logic across multiple cores, and how to respect thermal and power constraints. This knowledge separates games that run beautifully from games that stutter and overheat.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "You've Mastered Digital Electronics for Game Design",
+      "content": "You now understand how Boolean logic and circuits work together to power interactive entertainment. From the logic gates that evaluate AI decisions to the power circuits that keep consoles running smoothly, you can see the digital electronics foundation beneath every game you play. Whether you're a designer optimizing for target hardware, a programmer implementing efficient game logic, or an engineer designing gaming systems, this knowledge is your toolkit. Continue exploring\u2014dive into processor architecture, power management, signal integrity\u2014and you'll unlock even deeper insights into what makes games tick."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Master Boolean Logic First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Explore Game Hardware First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T04:08:32.972045+00:00",
+  "model": "claude-haiku-4-5"
+}

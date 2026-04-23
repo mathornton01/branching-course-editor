@@ -1,0 +1,163 @@
+{
+  "id": "course-biostat-space",
+  "title": "Biostatistics for Clinical Research: Space Mission Edition",
+  "description": "Master biostatistical principles through the lens of space exploration clinical trials and mission analysis.",
+  "topic": "Biostatistics for Clinical Research",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "biostatistics",
+    "clinical research",
+    "study design",
+    "hypothesis testing",
+    "data analysis",
+    "space exploration"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Biostatistics in Space: Clinical Trials Beyond Earth",
+      "content": "Clinical research in space presents unique challenges. When astronauts conduct long-duration missions, researchers must design rigorous studies to assess physiological changes, medication efficacy in microgravity, and health outcomes. Biostatistics is the mathematical framework ensuring our space medicine conclusions are valid and generalizable. Just as mission success depends on careful planning and data verification, clinical research requires thoughtful study design, appropriate statistical analysis, and rigorous evidence evaluation. This course explores three pillars of biostatistical practice through the adventures of space medicine research."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Research Pathway",
+      "content": "Space medicine researchers face multiple challenges. Which aspect of biostatistical practice will you explore first?",
+      "choices": [
+        {
+          "label": "Study Design & Sampling: Crew Selection & Mission Planning",
+          "next": "n3"
+        },
+        {
+          "label": "Hypothesis Testing & P-values: Verifying Mission Outcomes",
+          "next": "n5"
+        },
+        {
+          "label": "Data Analysis & Effect Sizes: Measuring Mission Impact",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Study Design & Sampling: Architecting Space Research",
+      "content": "Effective space research begins with careful study design. Researchers must decide between randomized controlled trials (RCTs) where some astronauts receive an intervention (e.g., bone-loss medication) while others receive placebo, or observational cohort studies tracking astronauts over time. Sample size matters critically\u2014too small and random variation masks real effects; too large wastes resources. Stratified random sampling ensures representation across mission types (orbital, lunar, deep space). Selection bias is dangerous: if healthier astronauts self-select into long missions, we'll overestimate astronaut fitness. Randomization protects against this by distributing unmeasured confounders equally between groups, ensuring any difference reflects the treatment, not healthier volunteers."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Case Study: The ISS Bone-Loss Intervention Trial",
+      "content": "NASA researchers studied whether a new medication prevents bone density loss during 6-month ISS missions. They randomly assigned 48 astronauts to receive either the medication or placebo before launch, stratifying by mission type and gender. Random assignment distributed genetics, training intensity, and diet compliance equally between groups. Sample size calculation showed 48 astronauts provided 80% power to detect a clinically meaningful 5% difference in bone density change. Post-mission DEXA scans measured bone mineral density. This design isolated the medication's true effect because randomization eliminated selection bias\u2014any difference between groups reflects the treatment, not healthier astronauts choosing medication."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Hypothesis Testing & P-values: Confirming Mission Results",
+      "content": "After collecting data, we test hypotheses using p-values. The null hypothesis (H\u2080) assumes no difference\u2014the medication has no effect, or mission duration doesn't affect cognition. The alternative hypothesis (H\u2081) proposes a real effect exists. A p-value is the probability of observing our data if H\u2080 is true. A small p-value (p < 0.05) suggests H\u2080 is unlikely\u2014we reject it and conclude an effect exists. However, p-values don't measure effect magnitude or practical importance; a massive study might yield p < 0.05 for a clinically trivial effect. Type I errors (false positives: declaring effects that don't exist) occur at frequency alpha (typically 5%). Type II errors (false negatives: missing real effects) occur at frequency beta. Statistical power (1-beta) is the probability of correctly detecting a true effect when it exists."
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Case Study: The Radiation Exposure Hypothesis Test",
+      "content": "Deep space missions expose astronauts to cosmic radiation. Researchers hypothesized radiation increases cancer incidence, tracking 100 lunar mission astronauts versus 100 LEO astronauts over 20 years. Lunar crew experienced 15 cancers versus 8 in LEO (p = 0.04). They rejected H\u2080 and concluded radiation increases risk. However, they conducted 50 statistical tests on various outcomes\u2014with alpha = 0.05, one false positive is expected by chance alone. Confidence intervals (95% CI: 1.2-fold to 3.1-fold increased risk) reveal the plausible range of true effects better than p-values. Practical significance matters: if cancer risk increased from 0.5% to 0.75%, the statistical finding might not justify mission cancellation. Effect sizes communicate whether differences are clinically meaningful, not just statistically detectable."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Data Analysis & Effect Sizes: Quantifying Mission Impact",
+      "content": "Effect sizes measure the magnitude of a difference or relationship, independent of sample size. Common measures include Cohen's d (standardized mean difference), odds ratios (comparing event rates between groups), and correlation coefficients (relationship strength). Unlike p-values, effect sizes communicate practical importance. A tiny p-value from a massive study might represent an effect too small to matter clinically. Confidence intervals (95% CI) estimate the range containing the true population parameter with 95% probability, incorporating uncertainty and sample size. Large studies yield narrow CIs (precise estimates), while small studies yield wide CIs. Reporting effect sizes and CIs transforms analysis from binary (significant/not) to nuanced: the effect likely lies here with this precision."
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Case Study: Muscle Atrophy During Long-Duration Spaceflight",
+      "content": "A 12-month ISS study measured leg muscle mass via MRI in 30 astronauts at baseline, 6 months, and 12 months. Mean loss was 8.2% (SD = 3.1%). Effect size: Cohen's d = 8.2 / 3.1 = 2.65\u2014a very large effect. The 95% confidence interval for mean loss: [6.9%, 9.5%], meaning we're 95% confident true population loss lies in this range. Compared to ground-based aging (1% loss/year), space-induced loss is dramatically larger. The effect size (d = 2.65) and CI convey that muscle loss is both statistically significant AND clinically substantial, justifying resistance training countermeasures. A large study showing d = 0.15 would be statistically significant but negligible\u2014effect sizes reveal practical stories that p-values alone obscure."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integration: Designing Robust Space Medicine Research",
+      "content": "Effective space medicine research weaves together study design, hypothesis testing, and effect quantification. Start with thoughtful design: randomize to eliminate selection bias, use stratification to balance confounders, and calculate sample size for adequate power. During analysis, report p-values for signal strength, but anchor conclusions in effect sizes and confidence intervals\u2014these communicate magnitude and precision. Interpret findings cautiously: p < 0.05 doesn't guarantee clinical importance, and non-significant results don't prove absence of effect. When designing the next deep space mission, biostatistics ensures we learn reliably from available data, make evidence-based decisions about astronaut health, and advance space medicine with scientific rigor."
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: You Are a Space Medicine Biostatistician",
+      "content": "Congratulations! You've mastered biostatistical foundations for clinical research in space environments. You can now design rigorous studies, interpret hypothesis tests thoughtfully, and quantify effect sizes with confidence. These tools enable evidence-based decisions in space medicine, ensuring astronaut safety and mission success."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "begin"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Study Design & Sampling"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Hypothesis Testing & P-values"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Data Analysis & Effect Sizes"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "continue"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "continue"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "continue"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-27T09:44:23.837894+00:00",
+  "model": "claude-haiku-4-5"
+}

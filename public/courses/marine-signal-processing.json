@@ -1,0 +1,295 @@
+{
+  "id": "marine-signal-processing",
+  "title": "Signal Processing Fundamentals: A Marine Biology Journey",
+  "description": "Learn signal processing through the lens of marine biology, from ocean acoustics to whale communication analysis",
+  "topic": "Signal Processing",
+  "theme": "marine biology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "signal-processing",
+    "marine-biology",
+    "acoustics",
+    "data-analysis",
+    "adaptive-learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Ocean Signals and Noise: Diagnostic Assessment",
+      "content": "Test your foundational understanding of signals and noise in marine monitoring systems. This assessment will determine the best learning path for you.",
+      "questions": [
+        {
+          "question": "Marine biologists use hydrophones to record whale vocalizations for research. In this scenario, which is the 'signal' they want to detect?",
+          "options": [
+            "The whale's calls at specific frequencies",
+            "Water turbulence and ambient ocean noise",
+            "Equipment electrical hum",
+            "Boat engine sounds passing nearby"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The whale's vocalizations are the desired signal.",
+            "This is noise that masks the whale calls.",
+            "This is a common noise source in recordings.",
+            "This is environmental noise interfering with the recording."
+          ],
+          "explanation": "In signal processing, the 'signal' is the information you want to extract, while 'noise' is everything else that interferes. Whale calls are the target signal; everything else is noise."
+        },
+        {
+          "question": "A researcher monitoring dolphin echolocation clicks detects repetitive clicking patterns at ~40 Hz, but also hears continuous low-frequency rumbling from ship traffic at ~10 Hz. Why is this problematic?",
+          "options": [
+            "The ship noise is at a different frequency, making it easy to separate",
+            "The ship noise will mask the dolphin clicks if the signal-to-noise ratio is poor",
+            "Dolphins cannot produce sounds above 30 Hz",
+            "Different frequencies cannot coexist in the same recording"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Different frequencies can still overlap in their effects and power.",
+            "Correct! Poor signal-to-noise ratio makes detection difficult.",
+            "Dolphins can produce very high frequencies.",
+            "Multiple frequencies naturally coexist in audio recordings."
+          ],
+          "explanation": "Even if signals and noise occupy different frequency bands, if the noise amplitude is large compared to the signal, the signal becomes undetectable. The signal-to-noise ratio (SNR) must be high enough for the signal to 'stand out' from the noise."
+        },
+        {
+          "question": "In acoustic monitoring of coral reefs, which of these represents a 'periodic signal' that a marine biologist would want to detect?",
+          "options": [
+            "Random crackling sounds from snapping shrimp",
+            "The rhythmic calling pattern of a specific fish species",
+            "Electronic noise from underwater equipment",
+            "Water temperature fluctuations"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This is random noise, not periodic.",
+            "Correct! Repetitive biological patterns are periodic signals.",
+            "This is instrumental noise.",
+            "Temperature is not an acoustic signal."
+          ],
+          "explanation": "A periodic signal repeats at regular intervals. Many marine organisms produce periodic calls or signals\u2014fish courtship calls, whale songs, shrimp snaps\u2014making them detectable in noisy ocean environments."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Frequency Domain Analysis: Intermediate Mastery",
+      "content": "Assess your understanding of the frequency domain and Fourier analysis. Can you analyze marine signals using spectral methods?",
+      "questions": [
+        {
+          "question": "A marine biologist transforms a whale song recording from time domain into frequency domain using Fourier analysis. What valuable information does this reveal that wasn't obvious in the time-domain waveform?",
+          "options": [
+            "The exact moment the whale started singing",
+            "The distribution of energy across different frequencies (which frequencies are loudest)",
+            "How many whales are in the ocean",
+            "The water temperature during recording"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Time domain analysis shows timing; frequency domain shows something different.",
+            "Correct! Frequency domain reveals which frequencies contain the most energy.",
+            "The number of whales requires additional data.",
+            "Frequency analysis doesn't measure temperature."
+          ],
+          "explanation": "The frequency domain (obtained via FFT - Fast Fourier Transform) shows the spectral composition: which frequencies are present and their relative power. This helps identify species, separate signals, and detect patterns invisible in raw time-domain data."
+        },
+        {
+          "question": "When analyzing sonar returns from a deep-sea hydrothermal vent system, a researcher notices energy concentrated at 5 kHz and 15 kHz. What does this frequency spacing suggest?",
+          "options": [
+            "Harmonic content from a single source (fundamental and overtones)",
+            "Two completely unrelated biological sources",
+            "Equipment malfunction",
+            "Natural random noise in the water column"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! 15 kHz is a harmonic multiple of 5 kHz, suggesting a single source.",
+            "Related frequencies with harmonic spacing typically indicate one source.",
+            "Equipment issues would produce different patterns.",
+            "Harmonic structure indicates biological or physical process, not random noise."
+          ],
+          "explanation": "Harmonic relationships (where frequencies are integer multiples of a fundamental frequency) are common in biological signals\u2014many marine creatures produce calls with harmonic structure. Detecting harmonics helps identify specific species or sound sources."
+        },
+        {
+          "question": "Why do marine acoustic researchers apply a 'window function' (like Hanning window) before computing the FFT of a whale vocalization recording?",
+          "options": [
+            "To amplify quiet whale calls",
+            "To reduce spectral leakage caused by the finite length of the data segment",
+            "To eliminate all background noise",
+            "To change the sampling rate of the recording"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Windowing doesn't amplify signals.",
+            "Correct! Windowing reduces artifacts (spectral leakage) at segment boundaries.",
+            "Windowing helps but doesn't eliminate noise\u2014filtering does.",
+            "Windowing doesn't change the sampling rate."
+          ],
+          "explanation": "When computing an FFT, the signal appears 'cut off' at the edges of your time segment, causing artificial frequency spreading called spectral leakage. Window functions smoothly taper the signal to zero at the edges, reducing this artifact and improving spectral clarity."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Spectral Analysis and Real-World Marine Applications",
+      "content": "You've demonstrated strong understanding of frequency-domain analysis. Now explore advanced applications in marine research. Advanced marine acoustics uses techniques like spectrograms (time-frequency representations), adaptive filtering to track moving sound sources like migrating whales, and coherence analysis to detect communication patterns between dolphins. Wavelet analysis reveals how frequencies change over time\u2014essential for analyzing the complex chirping calls of marine mammals. Machine learning models trained on spectrograms can classify fish species by their calls or detect whale presence automatically. These techniques enable remote monitoring of ocean health: understanding fish spawning aggregations by their acoustic signatures, detecting illegal fishing by vessel noise, and monitoring the recovery of marine ecosystems by changes in soundscape composition.",
+      "next": "n5"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Intermediate Frequency Analysis Practice",
+      "content": "Strengthen your grasp of frequency domain concepts with targeted practice problems focused on marine applications.",
+      "questions": [
+        {
+          "question": "A marine research team records the clicking sounds of sperm whales diving to hunt giant squid. The clicks repeat at approximately 1 click per second. In the frequency domain, where would you expect to see energy concentrated?",
+          "options": [
+            "At exactly 1 Hz",
+            "Near 1 Hz and its harmonics, plus the high-frequency energy of the click itself (~10-15 kHz)",
+            "Only at very high frequencies (>50 kHz)",
+            "Evenly distributed across all frequencies"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Partially correct\u20141 Hz is involved, but there's more structure.",
+            "Correct! The repetition rate produces energy at harmonics; the click itself has high-frequency content.",
+            "Clicks have structure across multiple frequency bands.",
+            "Biological signals are not white noise."
+          ],
+          "explanation": "The click repetition creates spectral lines at 1 Hz and multiples (2 Hz, 3 Hz, etc.), while the individual click waveform contributes broadband energy around 10-15 kHz. The spectrum reveals both the temporal rhythm and the acoustic structure of the signal."
+        },
+        {
+          "question": "Two marine biologists analyze recordings from the same coral reef, but one uses a 10-second FFT window and the other uses a 1-second FFT window. How will their frequency resolutions differ?",
+          "options": [
+            "Both achieve the same frequency resolution regardless of window length",
+            "The 10-second window provides better frequency resolution (finer detail)",
+            "The 1-second window provides better frequency resolution",
+            "Window length affects only the noise level, not frequency resolution"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Window length directly affects frequency resolution.",
+            "Correct! Longer data segments yield finer frequency resolution.",
+            "Shorter windows have coarser resolution.",
+            "Window length affects resolution and spectral leakage, not just noise."
+          ],
+          "explanation": "Frequency resolution improves with longer observation periods. A 10-second window can distinguish frequencies separated by ~0.1 Hz, while a 1-second window only resolves frequencies ~1 Hz apart. For detecting subtle frequency shifts in whale songs, longer windows are better\u2014but you lose time resolution of when frequencies change."
+        },
+        {
+          "question": "A researcher studying acoustic communication between dolphins observes that when dolphins are silent, the spectrogram shows only diffuse, low-power noise. When dolphins click, bright vertical lines appear in the spectrogram at specific frequencies. What does this pattern indicate?",
+          "options": [
+            "The dolphin signals are buried under environmental noise",
+            "The dolphin clicks have high energy concentrated at discrete frequencies, emerging above the noise floor",
+            "The spectrogram is broken",
+            "Dolphins only produce one frequency of sound"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Discrete lines indicate clear signal separation from noise.",
+            "Correct! High-energy signals appear as bright features above the noise.",
+            "This is normal spectrogram behavior.",
+            "Marine mammals produce complex vocalizations with multiple frequencies."
+          ],
+          "explanation": "A spectrogram displays time on the x-axis, frequency on the y-axis, and power/intensity as color/brightness. Clear, bright lines indicate concentrated energy at specific frequencies\u2014a hallmark of purposeful biological signals. Diffuse noise appears as low-level, scattered color everywhere."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Mastery: Advanced Signal Processing in Marine Science",
+      "content": "Excellent work! You've achieved mastery of advanced signal processing concepts. You now understand spectral analysis, frequency domain transformations, harmonic structure, windowing, and how these tools apply to real marine research\u2014from whale acoustics to automated species identification. You're ready to tackle complex problems in marine bioacoustics, apply advanced filtering techniques, and develop novel signal processing approaches for ocean monitoring. Your expertise positions you to contribute to cutting-edge marine science research."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Proficiency: Signal Processing for Marine Research",
+      "content": "Great work! You've achieved solid proficiency in signal processing fundamentals and intermediate frequency-domain analysis. You understand how to transform signals into the frequency domain, interpret spectrograms, recognize harmonic patterns, and apply these techniques to marine monitoring challenges. With this foundation, you can analyze real marine acoustics data, identify species by their calls, and contribute to ocean health monitoring projects. Continue exploring advanced applications like machine learning or specialized filtering techniques to deepen your expertise further."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Foundations: Signals, Noise, and Marine Monitoring",
+      "content": "Let's build a strong foundation in signal processing basics. Every measurement in marine science contains both desired information and unwanted interference. A signal is the information you want\u2014the whale call, the fish vocalization, the dolphin echolocation click. Noise is everything else: water turbulence, shipping traffic, equipment hum. The quality of signal detection depends on the signal-to-noise ratio (SNR): if your target signal's amplitude is much larger than the noise, you'll detect it easily; if they're similar in size, detection becomes difficult or impossible. The frequency content of a signal\u2014which frequencies are present\u2014determines how effectively you can use filtering to separate signals from noise. For example, whale calls (0.1-10 kHz) can be separated from ship noise (peaks below 200 Hz) using frequency-selective filtering. This is the foundation on which all advanced signal processing is built.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Detecting Fish Spawning Aggregations",
+      "content": "Marine biologists at a coastal research station deployed hydrophones to detect goliath grouper spawning aggregations. During spawning, thousands of fish gather and produce loud, synchronized grunting sounds at ~40-100 Hz. The challenge: separating this signal from ambient reef noise and fishing boat traffic. By examining the acoustic data, they found that spawning grunts have high energy concentrated at 60-80 Hz (their characteristic frequency), while boat engines dominate below 20 Hz and ambient reef snapping shrimp noise is broadband. Using a band-pass filter centered at 70 Hz, they effectively isolated the spawning signal, achieving a signal-to-noise ratio high enough for automated detection. By timing these acoustic events across multiple hydrophones, they tracked when and where aggregations formed\u2014valuable information for conservation planning.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundation: Signal Processing Basics in Marine Biology",
+      "content": "Well done! You've established a solid foundation in signal processing fundamentals. You understand what signals and noise are, how they affect measurement quality, and why frequency content matters for marine monitoring. With this groundwork, you're ready to explore more advanced topics like Fourier analysis, spectrograms, and automated signal detection. Review the concepts of signal-to-noise ratio and frequency filtering before progressing\u2014these ideas underpin all advanced signal processing techniques."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n5",
+      "label": "complete"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "complete"
+    }
+  ],
+  "generated_at": "2026-03-27T11:36:10.516617+00:00",
+  "model": "claude-haiku-4-5"
+}

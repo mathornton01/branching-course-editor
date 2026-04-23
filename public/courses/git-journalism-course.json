@@ -1,0 +1,443 @@
+{
+  "id": "git-journalism-course",
+  "title": "Git and Version Control for Newsrooms",
+  "description": "Master version control in a journalism context\u2014track story drafts, collaborate safely, and manage breaking news with confidence.",
+  "topic": "Git and Version Control",
+  "theme": "journalism",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "git",
+    "version-control",
+    "collaboration",
+    "journalism",
+    "branching",
+    "merging"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Version Control Matters in the Newsroom",
+      "content": "In a newsroom, multiple journalists often work on the same story simultaneously. A photographer uploads images, the reporter revises text, the editor adds headlines\u2014and suddenly no one remembers which version is current. Git solves this by creating a complete history of every change. Each edit is recorded with who made it and why, letting your team revert to any previous version instantly if a story takes a wrong turn or a source disputes a fact. This is especially critical when breaking news demands rapid iteration and collaboration across bureaus.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Git Fundamentals Assessment",
+      "content": "Test your understanding of Git's core concepts and why version control is essential for journalism teams.",
+      "questions": [
+        {
+          "question": "You're covering an election night story with two other reporters. All three of you need to update the same article file simultaneously without overwriting each other's work. What does Git help you do?",
+          "options": [
+            "Merge everyone's changes safely and keep a complete history",
+            "Lock the file so only one person can edit at a time",
+            "Automatically publish all changes to the website",
+            "Send email notifications every time someone edits"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Git tracks every change and merges edits intelligently.",
+            "That's not how Git works\u2014it enables parallel editing with safe merging.",
+            "Git is for version control, not publishing.",
+            "Git can enable notifications, but that's not its main purpose."
+          ],
+          "explanation": "Git's core strength is tracking parallel work and merging changes without conflict. This is essential when multiple journalists contribute simultaneously to breaking news."
+        },
+        {
+          "question": "A story you published yesterday contains a factual error. Your editor wants to see exactly what changed between today's version and yesterday's. What Git feature helps most?",
+          "options": [
+            "Stashing uncommitted changes",
+            "Viewing the diff (differences) between commits",
+            "Creating a new branch",
+            "Pushing to a remote repository"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Stashing is for temporary storage, not comparison.",
+            "Correct! Diffs show exactly what changed line-by-line.",
+            "Branching creates new parallel versions, not historical comparison.",
+            "Pushing sends code to a server; it doesn't show differences."
+          ],
+          "explanation": "The diff command (or viewing commits in Git GUIs) shows precisely what text was added, removed, or modified\u2014critical for auditing stories and understanding editorial changes."
+        },
+        {
+          "question": "Your intern wrote a long commit message: 'Changed stuff on the article about the city council meeting, fixed some typos and updated the background section with new quotes.' Why might this be a problem?",
+          "options": [
+            "Git doesn't allow long messages",
+            "It's unclear and won't help future readers quickly understand what changed",
+            "It will break the collaboration workflow",
+            "It wastes storage space on the server"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Git supports messages of any length.",
+            "Correct! Clear, concise commit messages are essential for historical documentation.",
+            "Message quality doesn't break collaboration.",
+            "Commit message size is negligible."
+          ],
+          "explanation": "A good commit message (like 'Fix typos in city council piece' or 'Add new quotes to background section') helps teammates and future-you understand *why* a change was made and find relevant edits quickly."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Git Fundamentals Practice",
+      "content": "Reinforce your understanding of core Git concepts with focused practice.",
+      "questions": [
+        {
+          "question": "Imagine your sports reporter commits a draft with the message 'story wip' (work in progress). Six months later, your editor needs to find that draft version. Why will the vague message cause problems?",
+          "options": [
+            "The file will be deleted automatically",
+            "It won't show up in the Git history",
+            "Searching through 50 commits with unclear messages makes it hard to find the one she needs",
+            "Git will throw an error message"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Files are never auto-deleted by commit messages.",
+            "It will show up, but will be hard to find.",
+            "Correct! Vague messages turn the commit history into an unsearchable mess.",
+            "Git accepts any message."
+          ],
+          "explanation": "Good commit messages create a searchable, readable history. In a busy newsroom with thousands of changes, clarity is survival."
+        },
+        {
+          "question": "Your breaking news team needs to work on an election results story. Three people are updating different parts of the same markdown file. What's the benefit of version control here?",
+          "options": [
+            "Only one person can edit at a time, so it prevents chaos",
+            "Git automatically publishes changes to your news website",
+            "Each person's edits are tracked separately and can be merged together",
+            "It prevents the file from ever having errors"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Version control enables parallel work, not locks.",
+            "Version control tracks changes; publishing is a separate step.",
+            "Correct! Each journalist's edits are preserved and intelligently merged.",
+            "Version control helps catch and track errors, not prevent them."
+          ],
+          "explanation": "Git's distributed model lets everyone edit simultaneously. The magic happens in the merge\u2014Git combines changes automatically when they don't conflict, and alerts you to conflicts that need human judgment."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Branching and Merging: Managing Story Variants",
+      "content": "In a newsroom, you often need multiple versions of a story. A reporter might draft a full investigative piece while an editor creates a shorter version for the homepage. In Git, this is called branching\u2014you create an independent timeline where changes don't affect the main story until you explicitly merge them. When the assignment editor okays both versions, you merge the branches back together. Branches are also essential for managing breaking news: while one reporter updates a developing story, another can safely work on a related explainer article without interfering. Main branches (often called 'main' or 'master') hold only reviewed, verified content, while feature branches are sandboxes for drafting and experimentation. Understanding branching prevents accidental publication of unfinished work and keeps your team organized during chaotic deadline moments.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Branching and Merging Assessment",
+      "content": "Evaluate your understanding of Git branching strategies and how they apply to journalism workflows.",
+      "questions": [
+        {
+          "question": "Your main news site has a published investigation. A reporter discovers a factual error deep in the article and needs to fix it, while simultaneously another reporter is working on an unrelated breaking news story. What's the best Git workflow?",
+          "options": [
+            "Both work on the main branch so they can see each other's changes",
+            "Create a hotfix branch for the error correction and let the breaking news reporter use a separate branch; merge hotfix first",
+            "Stop all work until the error is fixed",
+            "Have both reporters email their changes and manually merge them"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Working directly on main is risky and uncontrolled.",
+            "Correct! This isolates critical fixes and allows parallel work with controlled merges.",
+            "Unnecessary blocking in fast-paced newsrooms.",
+            "Email merging is error-prone and defeats the purpose of Git."
+          ],
+          "explanation": "Creating separate branches for hotfixes and feature work lets you prioritize urgent corrections without halting other progress. Merging the hotfix first ensures critical fixes reach production quickly."
+        },
+        {
+          "question": "You're merging a feature branch back to main and Git shows a merge conflict in the headline. Both the main branch and your feature branch changed the same sentence. What must happen?",
+          "options": [
+            "Git automatically deletes the conflicting line to resolve it",
+            "You or an editor must manually review the conflict and decide which version (or a combined version) is correct",
+            "The merge automatically picks the version from main",
+            "The file is locked and neither version can be used"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Git doesn't auto-delete content.",
+            "Correct! Humans must resolve conflicts\u2014Git alerts you and waits for a decision.",
+            "Git doesn't automatically pick one side in a conflict.",
+            "Conflicts are resolved, not ignored."
+          ],
+          "explanation": "Merge conflicts are human editorial moments. Git is smart enough to auto-merge non-overlapping changes, but when two people edit the same sentence, a journalist (not a robot) must decide which version is accurate or combine them thoughtfully."
+        },
+        {
+          "question": "Your newsroom policy is that all code/stories must be reviewed before merging to main. What Git workflow enforces this?",
+          "options": [
+            "Require commit messages",
+            "Use feature branches + pull requests (PRs) with required code review before merge",
+            "Frequently merge small changes to main",
+            "Avoid branching altogether"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Commit messages help clarity but don't enforce review.",
+            "Correct! PRs create a review checkpoint\u2014no merge without approval.",
+            "Frequent merges can bypass review.",
+            "No branching means no safety net for review."
+          ],
+          "explanation": "Pull requests (PRs) or merge requests are the safety mechanism. They pause the merge, notify reviewers, and provide a space for discussion before changes reach the main story."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Branching and Merging Practice",
+      "content": "Solidify your ability to think through branching strategies and conflict scenarios.",
+      "questions": [
+        {
+          "question": "Your investigative team is working on three different aspects of a corruption story: budget analysis, interview transcripts, and public records analysis. All three will eventually be part of one published article. What's a good branching strategy?",
+          "options": [
+            "Everyone works on the same main branch",
+            "Create three separate feature branches (budget, interviews, records), work independently, then merge all three to main when ready",
+            "One person works while the other two wait",
+            "Create one shared feature branch for everyone"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Direct main work risks chaos.",
+            "Correct! Separate branches keep work organized and mergeable without interference.",
+            "Unnecessary serial workflow.",
+            "A shared branch is better than main but still risks conflicts between all three."
+          ],
+          "explanation": "Separate feature branches per module let the team work in parallel. When the time comes to assemble the full article, you merge all three branches thoughtfully."
+        },
+        {
+          "question": "You're reviewing a colleague's pull request on a corrections branch. The diff shows they fixed the typo ('congressmen' vs 'congresspeople') and updated the byline date, but also changed the lede (opening sentence) of the story\u2014which wasn't in the original request. What should you do?",
+          "options": [
+            "Approve the PR immediately to merge quickly",
+            "Request changes: ask them to remove the lede edit and resubmit (since it's outside scope)",
+            "Manually edit the merged file after approval",
+            "Reject the entire PR and start over"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Scope creep ruins workflow\u2014challenge it.",
+            "Correct! PR review is the moment to enforce scope and catch scope creep.",
+            "Post-merge manual edits undermine the Git workflow.",
+            "Too harsh\u2014request changes and iterate."
+          ],
+          "explanation": "Pull request review is where editorial discipline lives. Each PR should do one thing well. If the PR author includes extra changes, the reviewer (you) should ask them to revert the out-of-scope edits before merging."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Collaboration, Conflict Resolution, and Team Workflow",
+      "content": "A newsroom's power comes from its people, and Git scales collaboration from a two-person reporting team to a 100-person international bureau. Best practices include: always pull the latest changes before starting work (prevents stale branches), write clear commit messages and PR descriptions so teammates understand your intent, and communicate asynchronously through PR comments rather than over-the-shoulder. When merge conflicts arise, resist the temptation to ignore them or take 'their' version blindly\u2014instead, talk to your co-author. A conflict in a breaking story means you both changed the same fact; the human conversation is more valuable than the Git resolution. Use protected main branches to prevent accidental publication of broken drafts. Establish code/story review standards: how many reviewers? What must change pass before merging? Should hotfixes skip review or require expedited review? These policies turn Git from a technical tool into a trust framework that makes ambitious collaborative projects possible.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Collaboration and Workflow Assessment",
+      "content": "Demonstrate your mastery of team-based Git workflows and best practices for newsroom collaboration.",
+      "questions": [
+        {
+          "question": "Your newsroom's main branch is protected: it requires one approval and passes all tests before any PR can merge. A reporter submits a PR with a single-line typo fix (very low risk). They ask you to approve it immediately. How should you respond?",
+          "options": [
+            "Approve immediately since it's a small change",
+            "Suggest enforcing the policy anyway\u2014it ensures consistency even for small changes, and reviewer time is minimal",
+            "Merge without approval to save time",
+            "Reject the PR and ask them to do something else"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Bypassing process for small changes starts a dangerous habit.",
+            "Correct! Policies without exceptions are clearer and build trust across the team.",
+            "Bypassing process defeats the protection.",
+            "Too harsh\u2014the process is fine, just enforce it consistently."
+          ],
+          "explanation": "Protected branches work because everyone follows the same rules. Even small changes get review. This consistency prevents 'just this once' exceptions from snowballing into chaos."
+        },
+        {
+          "question": "You're reviewing a PR from your colleague on a data investigation. The code/story looks great, but you see they pushed at 11 PM and the PR description just says 'updates.' You ask them for a better description. Why?",
+          "options": [
+            "You're being pedantic about documentation",
+            "It helps future readers (and you in 6 months) understand what changed and why, enables better code review, and creates a searchable record",
+            "Better descriptions are required by Git itself",
+            "You're slowing down the merge"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No\u2014this is professional standards, not pedantry.",
+            "Correct! PR descriptions are how asynchronous teams communicate intent and create institutional memory.",
+            "Git accepts any description; this is team culture.",
+            "A few minutes for a good description prevents confusion later."
+          ],
+          "explanation": "In asynchronous, distributed newsrooms, the PR description is the primary communication tool. A clear description ('Pulled Census data from 2020 API, filtered to state-level education stats, added error handling for network timeouts') enables smarter, faster review and documents the 'why' for future readers."
+        },
+        {
+          "question": "Two reporters on your team created a merge conflict while updating a story's sourcing section. Reporter A believes one source is more credible; Reporter B trusts another. Before you merge, what's most important?",
+          "options": [
+            "Quickly pick one version to resolve the conflict fast",
+            "Have the two reporters discuss the source credibility and agree on the final version together",
+            "Ask a third person to decide",
+            "Publish both sources and let readers judge"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Ignoring the editorial judgment leads to poor journalism.",
+            "Correct! Merge conflicts in sourcing are editorial discussions, not technical problems.",
+            "Unnecessary delegation.",
+            "Hedging isn't journalism."
+          ],
+          "explanation": "Git detects conflicts but can't resolve editorial disagreements. The conflict is a gift\u2014it forces the conversation about source credibility before publication. Let the reporters talk, agree on the best version, and merge with confidence."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Advanced Workflow Practice",
+      "content": "Test your ability to handle complex collaboration scenarios and make principled decisions about branching and review.",
+      "questions": [
+        {
+          "question": "Your newsroom has 5 reporters working on an election night live blog. They all need to update a shared markdown file with new results, quotes, and analysis as the night unfolds. One reporter suggests everyone commits directly to main for speed. What's the risk?",
+          "options": [
+            "The main branch will become too large",
+            "Five people pushing simultaneously risks merge chaos, accidental reverts, and hard-to-trace errors at the worst possible moment (deadline!)",
+            "It will slow down the workflow",
+            "Git won't allow it"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Size isn't the issue.",
+            "Correct! Election night is too chaotic for uncontrolled main-branch commits. Use a live-blog branch or short review cycles.",
+            "Actually, clear process is faster.",
+            "Git allows it, but that doesn't make it wise."
+          ],
+          "explanation": "Even with tight deadlines, one protocol prevents disaster: use a dedicated live-blog branch, commit frequently, and do ultra-fast reviews (maybe 'any one person OK's it') rather than direct main commits. This keeps the history clean and prevents accidental overwrites."
+        },
+        {
+          "question": "You're auditing your newsroom's Git practices and notice that the main branch has commits like 'fix', 'stuff', and 'oops.' What's the long-term impact of poor commit messages?",
+          "options": [
+            "None\u2014the code works regardless",
+            "It makes the history unsearchable, wastes time when trying to understand old changes or revert a bug, and fails to document the 'why'",
+            "It causes merge conflicts",
+            "It breaks Git functionality"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Code may work, but understanding suffers.",
+            "Correct! Commit history is your team's institutional memory. Poor messages destroy it.",
+            "Message quality doesn't cause conflicts.",
+            "Poor messages don't break Git; they break transparency."
+          ],
+          "explanation": "Six months later, when you need to revert a broken change or understand why a decision was made, you'll search the commit history. Vague messages make that impossible. Invest in clarity upfront."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "You've Mastered Git for Journalism!",
+      "content": "Congratulations! You now understand Git's core concepts\u2014repositories, commits, branches, merging, and conflict resolution\u2014and can apply them in a fast-paced newsroom. You know how to protect your main publication branch, review others' work, resolve conflicts collaboratively, and communicate intent through commits and pull requests. You're ready to lead your team's version control practices, mentor colleagues, and build workflows that scale from a small bureau to a global newsroom. Remember: Git is a tool for trust, transparency, and parallelism. Use it wisely, and your team will ship better journalism faster."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Learn"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Needs practice"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "Passed"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Learn"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Needs practice"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "Passed"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Learn"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Needs practice"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "Retry assessment"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "Passed"
+    }
+  ],
+  "generated_at": "2026-03-27T14:42:51.722267+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,297 @@
+{
+  "id": "biostat-film-adaptive",
+  "title": "Biostatistics for Clinical Research in Film Production",
+  "description": "Master biostatistical principles for clinical research through the lens of film production. This adaptive course escalates in difficulty, routing learners based on assessment performance.",
+  "topic": "Biostatistics",
+  "theme": "film production",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "biostatistics",
+    "clinical research",
+    "statistics",
+    "film production",
+    "hypothesis testing",
+    "p-values",
+    "confidence intervals"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Film Production Statistics Fundamentals",
+      "content": "Let's test your understanding of basic statistical concepts used in analyzing film production data. These principles help film producers and researchers make data-driven decisions about budgets, schedules, and outcomes.",
+      "questions": [
+        {
+          "question": "A film studio tracks the box office revenue for 10 recent films. The values are: $100M, $120M, $95M, $110M, $105M, $98M, $115M, $108M, $102M, $90M. What is the median revenue?",
+          "options": [
+            "$103.5M",
+            "$104.3M",
+            "$105.5M",
+            "$107M"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! With 10 values, the median is the average of the 5th and 6th values when sorted.",
+            "That's closer to the mean\u2014you're averaging all values rather than finding the middle.",
+            "Not quite\u2014this is above the actual median value.",
+            "Too high\u2014check your sorting and middle-value calculation."
+          ],
+          "explanation": "Sort the 10 revenues in order: 90, 95, 98, 100, 102, 105, 108, 110, 115, 120. With 10 values (even count), the median is the average of the 5th and 6th values: (102 + 105) / 2 = 103.5M. The median is the middle value, resistant to extreme outliers, unlike the mean."
+        },
+        {
+          "question": "A researcher studies how camera techniques affect viewer engagement by analyzing 50 recent films. Is this 50 the sample or the population?",
+          "options": [
+            "Sample\u2014it represents all films",
+            "Population\u2014these are the only films we care about",
+            "Neither",
+            "Both equally"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The 50 films are a sample used to draw conclusions about all films.",
+            "Not quite\u2014if we studied all films ever made, that would be the population.",
+            "Actually, it is one of these two.",
+            "No\u2014a set of data is either a sample or population, not both."
+          ],
+          "explanation": "A sample is a subset of the population. The researcher studied 50 films to generalize findings to the broader population of all films. This distinction is foundational: we rarely study entire populations, so we use samples to make inferences."
+        },
+        {
+          "question": "What does a hypothesis in clinical film research typically propose?",
+          "options": [
+            "A testable relationship between variables we're examining",
+            "The final results we hope to find",
+            "The film's genre or budget",
+            "The optimal filming location"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A hypothesis is a testable prediction about a relationship.",
+            "No\u2014a hypothesis is proposed before seeing results; results confirm or refute it.",
+            "Not quite\u2014hypotheses focus on relationships between variables, not classifications.",
+            "Incorrect\u2014hypotheses concern effects and relationships, not logistics."
+          ],
+          "explanation": "A hypothesis proposes a testable relationship. Examples: 'Films with higher production budgets receive higher critic ratings' or 'Actors receiving communication training deliver better emotional performances.' Hypotheses guide data collection and direct our analysis strategy."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Statistical Significance in Film Clinical Trials",
+      "content": "When comparing treatment outcomes in film production studies, we use statistical tests to determine if observed differences are real effects or due to random chance. A clinical trial comparing a new directing technique's effectiveness requires understanding p-values, confidence intervals, and Type I/II errors.",
+      "questions": [
+        {
+          "question": "A film studio tests a new directing method on 200 actors in one production vs. 200 actors using traditional methods. The improvement in performance scores has p-value = 0.02. What does this p-value mean?",
+          "options": [
+            "There is a 2% chance the observed difference is due to random variation (assuming no real effect)",
+            "The new method is 98% effective",
+            "Only 2% of actors improved with the new method",
+            "The results are definitely real and not random"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The p-value is the probability of observing results this extreme if the null hypothesis (no difference) were true.",
+            "No\u2014p-value is not the same as effect size or success rate.",
+            "Incorrect\u2014p-value is about probability of the test result, not percentage of individuals affected.",
+            "P-values tell us probability, not certainty; 0.02 is strong evidence, but not proof."
+          ],
+          "explanation": "P-value is foundational in clinical research. A small p-value (typically < 0.05) suggests the observed difference is unlikely under the null hypothesis, providing evidence for a real effect. It's the probability of the data given the null hypothesis, not the probability the hypothesis is true."
+        },
+        {
+          "question": "A 95% confidence interval for improvement in editing speed is (2.3 to 4.7 seconds). What does this mean?",
+          "options": [
+            "95% of films will improve by this amount",
+            "We're 95% confident the true effect lies somewhere in this range",
+            "The result is statistically significant at p < 0.05",
+            "95% of editors improved by this amount"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite\u2014not all individual results fall in the CI.",
+            "Correct! A 95% CI provides a range of plausible values for the true population effect.",
+            "While often related, CIs and p-values are different concepts.",
+            "Incorrect\u2014CI is about the effect estimate, not about proportions of individuals."
+          ],
+          "explanation": "Confidence intervals complement p-values. A 95% CI of (2.3, 4.7) seconds means: if we repeated the study many times and calculated a CI each time, 95% of those intervals would contain the true effect. This film editing improvement is likely between 2.3 and 4.7 seconds larger than baseline."
+        },
+        {
+          "question": "In comparing two cinematography techniques for viewer engagement, what would a Type II error mean?",
+          "options": [
+            "Claiming Technique A is superior when it's actually not better",
+            "Concluding techniques are equally effective when Technique A is actually superior",
+            "Using the wrong equipment or camera",
+            "Both techniques produce identical results"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's a Type I error\u2014a false positive.",
+            "Correct! A Type II error (false negative) means failing to detect a real effect.",
+            "That's not a statistical error.",
+            "If true, we wouldn't make errors; but they might appear equal despite a real difference."
+          ],
+          "explanation": "Type I error: rejecting a true null hypothesis (false positive\u2014claiming difference when none exists). Type II error: failing to reject a false null hypothesis (false negative\u2014missing a real difference). In film research, Type II means the superior technique goes undetected\u2014a costly miss."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Biostatistical Methods in Film Research",
+      "content": "Advanced film production research employs sophisticated statistical techniques to understand complex relationships between multiple production factors and outcomes. **Meta-analysis** combines results across multiple film studies to estimate overall effects\u2014for example, synthesizing findings from 15 studies on how director experience impacts box office success. **Regression analysis** identifies which production variables (director experience, budget, shoot duration, cast diversity) most strongly predict outcomes like box office revenue or critical acclaim. **Multivariate methods** isolate individual effects when many factors vary together; logistic regression might predict commercial success based on simultaneously accounting for genre, release timing, marketing spend, star power, and production quality. **Stratified analysis** examines whether effects differ across film subgroups (indie vs. studio films, different genres, seasonal releases). Understanding **effect sizes**, **interaction terms** (where one variable's effect depends on another), and the **assumptions** underlying each approach is essential. These advanced methods transform raw production data into actionable insights for studio executives and filmmakers making strategic decisions.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Biostatistician Path Complete",
+      "content": "Congratulations! You've mastered advanced biostatistical methods for clinical film research. You understand complex study designs, meta-analytic approaches, multivariate techniques, and how to handle real-world film production data with multiple interacting factors. You're equipped to lead sophisticated research projects analyzing film production effectiveness across multiple studies and contexts, translating data into strategic decisions."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Intermediate Biostatistics Practice",
+      "content": "Let's reinforce your understanding of statistical significance, confidence intervals, and effect sizes through realistic film production scenarios. These practice questions strengthen your grasp of concepts needed for advanced research.",
+      "questions": [
+        {
+          "question": "A film's post-production uses a new color grading technique. In 100 test screenings, viewers rated the film 8.2/10 with the new technique vs. 7.5/10 with traditional grading (standard error of the difference = 0.35). Calculate the approximate 95% confidence interval for the difference.",
+          "options": [
+            "(0.3 to 1.3) points",
+            "(0.1 to 1.5) points",
+            "(-0.1 to 1.7) points",
+            "(0.5 to 1.1) points"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! CI = (8.2 - 7.5) \u00b1 1.96(0.35) = 0.7 \u00b1 0.686 \u2248 (0.01 to 1.39), closest to (0.3 to 1.3).",
+            "Close but slightly off\u2014verify your z-value for 95% confidence (use 1.96).",
+            "This includes zero, suggesting no difference; but our estimate is 0.7 points positive.",
+            "Too narrow\u2014you may have underestimated the standard error contribution."
+          ],
+          "explanation": "For a 95% CI, use z = 1.96. Difference = 8.2 - 7.5 = 0.7. CI = 0.7 \u00b1 1.96(0.35) = 0.7 \u00b1 0.686 = (0.014 to 1.386). This suggests new color grading improves ratings by roughly 0.3 to 1.3 points with 95% confidence, a meaningful improvement in viewer experience."
+        },
+        {
+          "question": "When designing a study comparing director communication styles on crew satisfaction, what's the most important sample size consideration?",
+          "options": [
+            "Use however many films are conveniently available",
+            "Always use 10 films\u2014that's a standard number",
+            "Conduct a power analysis to ensure adequate sensitivity to detect meaningful effects",
+            "More films is always better regardless of cost or feasibility"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Convenience sampling risks bias and inadequate statistical power.",
+            "Arbitrary numbers ignore study design and effect size considerations.",
+            "Correct! Power analysis ensures your study can reliably detect effects you care about.",
+            "While larger samples are generally better, practical constraints matter; power analysis optimizes the balance."
+          ],
+          "explanation": "Power analysis calculates the minimum sample size needed to detect a meaningful effect with acceptable probability (typically 80% power, meaning 20% Type II error tolerance). For film research, this ensures you study enough productions to detect real differences in crew satisfaction based on director communication style, avoiding costly false negatives."
+        },
+        {
+          "question": "You analyze 20 films and find camera technique A produces engagement scores 1.2 points higher than technique B (95% CI: -0.1 to 2.5). Should you conclude A is superior?",
+          "options": [
+            "Yes, because the difference is numerically positive",
+            "No, because the confidence interval includes zero",
+            "Yes, because 20 films is an adequate sample",
+            "Maybe\u2014more research is needed"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Numerically positive doesn't mean statistically significant.",
+            "Correct! When CI includes zero, we can't exclude the possibility of no difference.",
+            "Sample size alone doesn't determine statistical significance; precision matters most.",
+            "Close reasoning, but the more definitive answer is 'no' based on the CI including zero."
+          ],
+          "explanation": "A confidence interval that includes zero means the true effect might be zero (no difference), null, or even negative. While the point estimate favors A (1.2 higher), the uncertainty is too large to conclude superiority. This demonstrates why confidence matters\u2014statistical thinking requires considering uncertainty, not just point estimates."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Film Production Research Path Complete",
+      "content": "Well done! You've strengthened your understanding of statistical significance, confidence intervals, and practical sample size considerations through power analysis. You can now design and interpret intermediate-complexity film production studies comparing techniques and measuring outcomes. While advanced multivariate methods remain ahead, you have a solid foundation in hypothesis testing and effect estimation ready for real-world research."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Statistical Foundations for Film Research",
+      "content": "Let's build from the ground up. In film production research, statistics helps answer practical questions: Does a new lighting setup improve visual quality ratings? Does actor coaching improve performance scores? Does music selection affect emotional engagement? We compare groups, measure central tendencies (averages and medians), understand variation (spread of scores), and determine whether observed differences reflect real effects or random fluctuation. A **population** includes every unit we care about (all films ever made). A **sample** is a subset we actually study (50 specific films selected for analysis). **Parameters** describe populations (true population mean); **statistics** describe samples (sample mean from our data). **Descriptive statistics** summarize what we observed (mean, median, standard deviation). **Inferential statistics** let us generalize beyond our sample to make conclusions about populations\u2014the core of clinical research. Understanding these fundamentals creates the foundation for all research comparisons and is essential before tackling intermediate and advanced techniques.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Film Production Quality Analysis Example",
+      "content": "Imagine a studio analyzing whether films shot on location have different production quality ratings than studio films. They compare 30 on-location films (mean quality rating = 7.8/10, standard deviation = 1.2) versus 30 studio-filmed productions (mean quality rating = 7.1/10, standard deviation = 1.5). The observed difference is 0.7 points. Is this a real location effect or random variation? **Descriptive statistics** summarize: location films averaged 7.8; studio films 7.1; location films show less variation (sd=1.2 vs. 1.5), suggesting more consistent quality. **Inferential statistics** answer whether this 0.7-point difference likely occurs by chance if location truly made no difference. We compute probability (p-value) and confidence intervals for the true difference. Sampling variability means different 30-film samples show slightly different differences, but if true effects exist, patterns repeat consistently. This illustrates why descriptive and inferential work together: description summarizes observed data; inference generalizes to broader conclusions about all films.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundational Film Statistics Path Complete",
+      "content": "Excellent! You've established core statistical concepts essential for clinical research. You understand populations vs. samples, how to describe data with measures of central tendency and spread, why inferential statistics matter, and how film production data reveals meaningful patterns. You have a solid foundation in statistical thinking. Build on this with intermediate and advanced concepts as you deepen your biostatistics expertise for film production research."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T11:18:46.824323+00:00",
+  "model": "claude-haiku-4-5"
+}

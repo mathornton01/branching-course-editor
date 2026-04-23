@@ -1,0 +1,325 @@
+{
+  "id": "linear-algebra-data-science-space",
+  "title": "Linear Algebra for Data Science: The Asteroid Crisis",
+  "description": "An interactive branching course on linear algebra fundamentals for data science through the lens of planetary defense. Learn vectors and matrices by solving a real asteroid threat prediction problem.",
+  "topic": "Linear Algebra for Data Science",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "linear-algebra",
+    "data-science",
+    "space-exploration",
+    "vectors",
+    "matrices",
+    "eigenvalues",
+    "svd"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Asteroid Predicament: Emergency Data Analysis Required",
+      "content": "You're a data scientist at NASA's Planetary Defense Coordination Office. An unprecedented discovery: a newly detected near-Earth asteroid is on a trajectory that could threaten populated areas in 72 hours. The observation data from 5 satellites contains thousands of position measurements over time. Your analysis will determine Earth's fate. The chief scientist presents two analytical approaches: use vector mathematics to trace the asteroid's precise trajectory, or use matrix mathematics to process and transform the vast sensor data from all satellites simultaneously. Each approach has different trade-offs in accuracy, speed, and depth of insight. Which methodology will you choose?",
+      "next": null
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Select Your Primary Analytical Framework",
+      "content": "Two approaches stand before you. Choose the methodology that best matches your analytical style and the demands of this crisis.",
+      "choices": [
+        {
+          "label": "Vector Analysis Path: Track individual object motions through space",
+          "next": "n3"
+        },
+        {
+          "label": "Matrix Methods Path: Process multi-satellite sensor data simultaneously",
+          "next": "n11"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Vectors in Space: Understanding Directional Motion and Forces",
+      "content": "Vectors are quantities with both magnitude (size) and direction. In space exploration, vectors represent critical quantities: position (where the asteroid is), velocity (how fast and in what direction), and acceleration (how gravitational forces change motion). In 3D space, we represent vectors as ordered triples (x, y, z). For the asteroid problem, you need: vector addition (combining forces), dot products (measuring angles between trajectories), and magnitudes (calculating distances). The dot product is crucial\u2014it reveals whether objects are converging or diverging. The cross product describes orbital angular momentum. Vector projections isolate motion components in specific directions. These operations form the mathematical foundation for orbital mechanics and collision prediction.",
+      "next": null
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Tracking Position and Velocity: Satellite vs. Asteroid",
+      "content": "NASA's WISE satellite observes the asteroid at t=0: position vector P_asteroid = (4500, 3200, 1800) km relative to Earth. The satellite is at P_satellite = (2000, 1500, 3000) km. The relative position vector: R = P_asteroid - P_satellite = (2500, 1700, -1200) km. The magnitude (distance): ||R|| = \u221a(2500\u00b2 + 1700\u00b2 + 1200\u00b2) = \u221a10,580,000 \u2248 3253 km. The asteroid's velocity vector: V = (15, 8, -3) km/s. Computing the dot product V \u00b7 R = 15(2500) + 8(1700) + (-3)(-1200) = 37,500 + 13,600 + 3,600 = 54,700. The positive value indicates the asteroid is moving generally toward the satellite\u2014a critical warning sign requiring immediate analysis of stability and long-term behavior.",
+      "next": null
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Vector Concepts in Asteroid Tracking",
+      "content": "Test your understanding of vectors in space navigation.",
+      "questions": [
+        {
+          "question": "An asteroid has position A = (1000, 2000, 3000) km and velocity V = (10, 5, -2) km/s. After 10 seconds, what is the approximate new position?",
+          "options": [
+            "(1100, 2050, 2980) km",
+            "(1100, 2050, 3020) km",
+            "(1100, 2100, 2980) km",
+            "(1000, 2000, 3000) km"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This ignores velocity.",
+            "Correct! Position(t) = A + V\u00b7t = (1000+100, 2000+50, 3000-20)",
+            "This assumes incorrect scaling.",
+            "This ignores all motion."
+          ],
+          "explanation": "Future position = current position + velocity \u00d7 time. This is the fundamental equation for orbital prediction."
+        },
+        {
+          "question": "The dot product of velocity V and relative position R is negative. What does this tell about the asteroid and satellite?",
+          "options": [
+            "They are accelerating toward each other",
+            "They are moving away from each other",
+            "They have the same orbital speed",
+            "The asteroid is gravitationally stable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Acceleration requires second derivatives.",
+            "Correct! Negative dot product means angle > 90\u00b0\u2014they're separating.",
+            "Dot product measures direction alignment, not speed.",
+            "Use eigenvalues for stability analysis."
+          ],
+          "explanation": "A negative dot product between velocity and position vectors indicates the objects are diverging\u2014good news for collision avoidance."
+        },
+        {
+          "question": "Earth is at origin (0,0,0). An asteroid is at (10000, 5000, 2000) km. What is its distance? ||A|| = ?",
+          "options": [
+            "15000 km",
+            "11358 km",
+            "10300 km",
+            "7071 km"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This is simple addition, not distance.",
+            "Correct! \u221a(10000\u00b2 + 5000\u00b2 + 2000\u00b2) \u2248 11358 km",
+            "Underestimates the distance.",
+            "This is too small."
+          ],
+          "explanation": "Magnitude: ||A|| = \u221a(x\u00b2 + y\u00b2 + z\u00b2). This gives the 3D distance from origin to the asteroid."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "decision",
+      "title": "Proceed with Analysis: Choose Your Depth",
+      "content": "Your vector foundation is solid. Now choose: pursue advanced eigenvalue analysis for long-term stability, or practice fundamentals to ensure absolute mastery.",
+      "choices": [
+        {
+          "label": "Advanced eigenvalue analysis for long-term trajectory modeling",
+          "next": "n7"
+        },
+        {
+          "label": "Additional practice with vector fundamentals before proceeding",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Eigenvalues and Eigenvectors: Long-Term Orbital Stability",
+      "content": "To predict whether the asteroid's trajectory remains stable or becomes chaotic, model the motion as a system of differential equations. Behavior is determined by eigenvalues and eigenvectors where A\u00b7v = \u03bb\u00b7v. For orbital dynamics: if eigenvalues have negative real parts, perturbations decay exponentially (stable orbit). If positive real parts, perturbations grow exponentially (chaotic, dangerous). For a 2-body system (Earth + asteroid), eigenvalues encode orbital period and eccentricity. Computing eigenvalues of the gravitational force matrix reveals not just whether the asteroid is safe, but why. This deep analysis distinguishes between 'safe by accident' and 'safe by design,' crucial for mission planning and building confidence in long-term predictions.",
+      "next": null
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "MISSION SUCCESS: Stable Trajectory Confirmed",
+      "content": "Your eigenvalue analysis reveals orbital perturbations with negative real parts (\u03bb \u2248 -0.05 \u00b1 0.02i). Small gravitational influences cause deviations to decay exponentially. Computing Earth's gravitational influence precisely, you calculate with high confidence: the asteroid passes at 18,200 km\u2014safely beyond the 10,000 km danger zone. Your mathematical rigor prevents both catastrophe and unnecessary intervention. Mission Control broadcasts the all-clear globally. Governments cancel emergency preparations. Your eigenvalue method becomes the gold standard for long-term orbital stability assessment. You're promoted to lead data scientist for the Planetary Defense Initiative, recognized for mathematical excellence under extreme pressure."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Vector Fundamentals: Practice and Application",
+      "content": "You work through comprehensive practice problems: calculating magnitudes for asteroid positions at different times, computing dot products to understand relative motion between multiple spacecraft, finding unit vectors to standardize directions, and decomposing vectors to separate motion components. You study superposition\u2014how forces combine (asteroid feels Earth's AND Moon's gravity; total force = sum of individual force vectors). You practice relative velocity calculations for orbital rendezvous, understanding velocity is reference-frame dependent. You work orbital problems where one spacecraft must intercept another. This practice cements the conceptual foundation needed for advanced eigenvalue techniques. You develop deep intuition for when vectors point toward or away from each other, what magnitudes mean physically, and how direction changes relate to danger.",
+      "next": null
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "MISSION SUCCESS: Thorough and Conservative Analysis",
+      "content": "With reinforced fundamentals, you carefully analyze the asteroid's trajectory point-by-point: computing position vectors at multiple time points spanning hours, calculating velocity vectors from position differences, examining each component's behavior. Your methodical, transparent approach builds mission control's confidence\u2014crucial when stakes are maximum. You determine the asteroid misses Earth by 22,500 km with a confidence interval of \u00b13,000 km based on sensor error analysis. Your clear reporting prioritizes transparency over sophistication. This practical methodology becomes the template for future planetary defense assessments where time is critical and advanced analysis isn't feasible. You're recognized for delivering reliable results under severe pressure. Your systematic approach prevents analysis errors that could cost lives."
+    },
+    {
+      "id": "n11",
+      "type": "content",
+      "title": "Matrices in Space Data: Multi-Dimensional Sensor Processing",
+      "content": "A matrix is a rectangular array of numbers in rows and columns. In space data analysis, rows represent different satellites/sensors; columns represent measurements (position, velocity, acceleration components). Five satellites tracking the asteroid provide 5,000+ measurements across observation windows. Rather than analyzing each satellite separately, matrices process all data simultaneously through elegant operations. Key operations: multiplication (combining transformations), transpose (switching perspectives), determinant (checking solution uniqueness), inverse (solving for unknowns). Singular Value Decomposition (SVD) is most powerful: it decomposes measurement matrices into principal components, identifying dominant patterns while filtering instrument noise. SVD reveals which patterns matter and which are measurement artifacts\u2014essential for extracting truth from imperfect real-world data.",
+      "next": null
+    },
+    {
+      "id": "n12",
+      "type": "example",
+      "title": "Satellite Sensor Data Matrix and Transformation",
+      "content": "Create matrix M with 5 satellites (rows) and 3 position components (columns): M = [[2000, 1500, 3000], [2100, 1450, 3050], [1950, 1520, 2980], [2050, 1480, 3020], [2020, 1510, 3010]]. To find consensus position across all observations, compute column means: centroid = [2024, 1492, 3012]. This filtered position is more reliable than any single satellite. To transform from Earth-centered to Sun-centered coordinates, multiply by transformation matrix T: M_new = M \u00b7 T. To identify outlier measurements and correlations, compute covariance: C = M^T \u00b7 M / n. These operations extract signal from noisy data. For asteroid tracking from 5 different viewing angles, matrix methods combine perspectives in ways vector analysis cannot\u2014processing all data holistically rather than piecemeal.",
+      "next": null
+    },
+    {
+      "id": "n13",
+      "type": "assessment",
+      "title": "Matrix Operations in Asteroid Tracking",
+      "content": "Test your understanding of matrices in space data processing.",
+      "questions": [
+        {
+          "question": "You have a 5\u00d73 matrix M (5 satellites, 3 coordinates). What is the dimension of M^T?",
+          "options": [
+            "5\u00d75",
+            "3\u00d75",
+            "3\u00d73",
+            "Cannot be determined"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Transpose flips both dimensions.",
+            "Correct! Transpose of 5\u00d73 is 3\u00d75.",
+            "This would be M^T \u00d7 M.",
+            "Transpose is always well-defined."
+          ],
+          "explanation": "Transposing flips rows and columns: a 5\u00d73 matrix becomes 3\u00d75. Each coordinate becomes a row; each satellite becomes a column."
+        },
+        {
+          "question": "Multiplying matrix M (5\u00d73) by vector v (3\u00d71) transforms coordinates. What is the result dimension?",
+          "options": [
+            "5\u00d73",
+            "3\u00d71",
+            "5\u00d71",
+            "Cannot be computed"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Output size matches input rows.",
+            "This is the input vector size.",
+            "Correct! (5\u00d73) \u00d7 (3\u00d71) = (5\u00d71).",
+            "Inner dimensions must match for multiplication."
+          ],
+          "explanation": "Matrix-vector multiplication: (m\u00d7n) \u00d7 (n\u00d7p) = (m\u00d7p). So (5\u00d73) \u00d7 (3\u00d71) = (5\u00d71)\u2014one transformed value per satellite."
+        },
+        {
+          "question": "SVD on your sensor matrix gives singular values \u03c3\u2081=1000, \u03c3\u2082=45, \u03c3\u2083=2. What does this reveal?",
+          "options": [
+            "Three equally important patterns",
+            "Most information in the first singular value",
+            "Perfect data conditioning",
+            "All measurements equally reliable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Ratios show \u03c3\u2081 dominates dramatically.",
+            "Correct! \u03c3\u2081 is ~22\u00d7 \u03c3\u2082 and ~500\u00d7 \u03c3\u2083. Most signal is first component.",
+            "Poor conditioning would show large ratio, which we have.",
+            "Unequal singular values mean unequal importance."
+          ],
+          "explanation": "The first singular value contains ~95% of information. \u03c3\u2082 and \u03c3\u2083 are mostly noise. Reconstructing with only \u03c3\u2081 and \u03c3\u2082 filters noise while preserving true signal."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n14",
+      "failure_target": "n13"
+    },
+    {
+      "id": "n14",
+      "type": "end",
+      "title": "MISSION SUCCESS: Advanced Data Extraction and Precision",
+      "content": "Using SVD, you decompose the measurement matrix: M = U \u00b7 \u03a3 \u00b7 V^T. Analysis reveals the asteroid's trajectory is contained in a 2D plane (two large singular values, one tiny noise component). Reconstructing with only the two dominant components: M_clean = U[:,:2] \u00b7 \u03a3[:2,:2] \u00b7 V^T[:2,:]. This filters instrument error while preserving true motion. Your cleaned trajectory is dramatically more precise than any individual satellite observation. You predict closest approach at 16,500 km from Earth, with confidence interval \u00b1500 km. Mission Control authorizes a targeted gravitational deflection maneuver nudging the asteroid into completely safe trajectory. Your SVD-based approach becomes the new standard for planetary defense worldwide. You're appointed chief data scientist for the Planetary Defense Initiative, advancing humanity's capability to protect itself from cosmic threats through mathematical insight and data science excellence."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Vector Analysis"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n11",
+      "label": "Matrix Methods"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "View Example"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Test Knowledge"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Passed"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Advanced"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Practice"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Complete"
+    },
+    {
+      "id": "c10",
+      "source": "n9",
+      "target": "n10",
+      "label": "Complete"
+    },
+    {
+      "id": "c11",
+      "source": "n11",
+      "target": "n12",
+      "label": "View Example"
+    },
+    {
+      "id": "c12",
+      "source": "n12",
+      "target": "n13",
+      "label": "Test Knowledge"
+    },
+    {
+      "id": "c13",
+      "source": "n13",
+      "target": "n14",
+      "label": "Passed"
+    }
+  ],
+  "generated_at": "2026-03-27T13:45:24.514191+00:00",
+  "model": "claude-haiku-4-5"
+}

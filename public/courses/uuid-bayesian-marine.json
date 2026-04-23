@@ -1,0 +1,145 @@
+{
+  "id": "uuid-bayesian-marine",
+  "title": "Bayesian Statistics Through Marine Biology",
+  "description": "Learn Bayesian statistical reasoning through realistic marine biology scenarios and conservation decisions",
+  "topic": "Bayesian Statistics",
+  "theme": "marine biology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 28,
+  "tags": [
+    "bayesian",
+    "statistics",
+    "marine-biology",
+    "decision-making",
+    "probability",
+    "conservation"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Coral Reef Mystery: An Unexpected Discovery",
+      "content": "You are a marine biologist conducting a survey of a coastal coral reef off the Great Barrier Reef. During a routine dive, you observe an unusual species of damselfish that you've never documented before. You conduct 15 underwater surveys and observe this species in 8 locations. Now you must estimate the true prevalence of this species across the entire reef system. The stakes are high: if the species is rare and endemic, this reef may qualify for expanded protected status. How should you approach this estimation problem?"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which statistical framework should you use?",
+      "content": "You have two fundamentally different approaches available to analyze your damselfish observation data.",
+      "choices": [
+        {
+          "label": "Bayesian: Incorporate expert knowledge from similar species",
+          "next": "n3"
+        },
+        {
+          "label": "Frequentist: Analyze only this dataset objectively",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Bayesian Thinking: Priors in Marine Biology",
+      "content": "The Bayesian approach begins with a prior distribution\u2014your existing knowledge before seeing the new data. Research on damselfish populations in other coral reef systems suggests endemic species typically occur at low prevalence (2\u20138% of reef sections). This prior reflects ecological reality: most reef fish species have limited geographical ranges due to habitat specialization and dispersal constraints. When you combine this prior knowledge with your observation data (8 out of 15 sightings = 53%), you get a posterior distribution representing your updated, rational belief. This posterior is more statistically powerful and realistic than either your prior or the raw data alone, because it honors both historical knowledge and new evidence."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Case Study: Great White Shark Population Estimation",
+      "content": "Marine biologists estimating great white shark populations off South Africa had decades of prior knowledge from tagging studies suggesting sharks spend 60\u201370% of time in deep water. When new satellite tracking data emerged showing some individuals in shallow coastal areas 40% of the time, researchers didn't discard the prior\u2014they combined it with new data using Bayesian reasoning. The resulting posterior estimate of 50\u201365% deep-water time reflects both historical knowledge and contemporary evidence. This is how Bayesian methods work: neither data nor prior alone, but a rational synthesis of expertise and observation."
+    },
+    {
+      "id": "n5",
+      "type": "decision",
+      "title": "How confident are you in the prior from similar species research?",
+      "content": "The damselfish prevalence studies were conducted on nearby reefs using standardized survey methods. However, your reef has unique bathymetry, water temperature, and currents. Should you trust the prior heavily, or view it with skepticism?",
+      "choices": [
+        {
+          "label": "Very confident: Reef ecology is fundamentally consistent; prior is reliable",
+          "next": "n6"
+        },
+        {
+          "label": "Less confident: This location's unique conditions might differ significantly",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Success: Data-Informed Conservation Strategy",
+      "content": "Your strong prior (2\u20138% prevalence) combined with your observation (53% in sample) creates a posterior estimate of 15\u201325% true prevalence\u2014high enough to warrant protection but grounded in ecological reality rather than sample noise alone. The marine protection authority approves expanded protected status based on this well-reasoned estimate. You've demonstrated core Bayesian principles: integrating scientific expertise with empirical data to produce decisions that are rigorous, transparent, and defensible for real-world conservation policy."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Caution: Weak Prior Creates Indecision",
+      "content": "By heavily discounting the prior, your posterior is driven almost entirely by your small sample (8/15). Your 95% credible interval ranges from 20% to 75% prevalence\u2014too wide for the protection authority to act. They defer decision-making pending more data. While your epistemically honest, cautious approach respects genuine uncertainty, the practical outcome is delayed conservation. This illustrates a critical Bayesian insight: the value of Bayesian analysis depends fundamentally on reliable prior information. Without trustworthy priors, Bayesian methods collapse toward frequentism."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Frequentist Hypothesis Testing",
+      "content": "The frequentist framework ignores prior knowledge and tests fixed hypotheses against data. You could test H\u2080: prevalence = 5% (the global average for rare reef fish) using your sample of 8/15. The p-value represents the probability of observing data this extreme if the null hypothesis were true. A p-value of 0.047 means only a 4.7% chance you'd see this result if true prevalence were 5%. Frequentist methods are objective and require no prior assumptions. However, frequentism cannot directly answer the question conservation managers desperately need: 'What is the probability this species is truly endemic, given all available evidence?' It can only test whether specific hypotheses are consistent with data."
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Objective But Limited: The Frequentist Conclusion",
+      "content": "Your frequentist test shows p = 0.047 for the null hypothesis\u2014statistically significant at the conventional 0.05 threshold. However, you cannot conclude 'there is a 95% probability this species is endemic.' Frequentism assigns no probabilities to hypotheses themselves; it only evaluates consistency between data and pre-specified nulls. The conservation authority finds your analysis mathematically rigorous but operationally unhelpful. They ask: 'Based on all available evidence and expertise, what should we do?' Frequentism cannot directly answer this decision-making question. This scenario illustrates why Bayesian methods have become dominant in conservation biology\u2014they address the actual probability questions that practitioners need answered for policy decisions."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2a",
+      "source": "n2",
+      "target": "n3",
+      "label": "Bayesian approach"
+    },
+    {
+      "id": "c2b",
+      "source": "n2",
+      "target": "n7",
+      "label": "Frequentist approach"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c5a",
+      "source": "n5",
+      "target": "n6",
+      "label": "Strong prior"
+    },
+    {
+      "id": "c5b",
+      "source": "n5",
+      "target": "n8",
+      "label": "Weak prior"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n9",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T12:59:04.853661+00:00",
+  "model": "claude-haiku-4-5"
+}

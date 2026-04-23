@@ -1,0 +1,133 @@
+{
+  "id": "ml-fundamentals-space",
+  "title": "Machine Learning Fundamentals: Space Exploration Mission",
+  "description": "Learn core ML concepts through an interactive space exploration scenario where you must predict asteroid threats using different machine learning approaches",
+  "topic": "Machine Learning Fundamentals",
+  "theme": "space exploration",
+  "difficulty": "beginner",
+  "estimated_minutes": 25,
+  "tags": [
+    "machine learning",
+    "supervised learning",
+    "unsupervised learning",
+    "model selection",
+    "overfitting",
+    "space exploration"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Incoming Signal: The ML Problem",
+      "content": "Mission Control has detected an unusual signal\u2014a massive asteroid field is heading toward an inhabited space station in 48 hours. You have 10 years of historical asteroid trajectory data, but the incoming asteroids behave differently than anything on record. Machine Learning is your solution: building systems that improve through experience with data to predict which asteroids will impact the station. This classic ML problem asks: how can past patterns help us predict the future? Your decision will determine whether the crew survives."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Approach",
+      "content": "Two competing strategies stand before you. The data science team awaits your authorization. Which learning approach will you deploy?",
+      "choices": [
+        {
+          "label": "Supervised Learning: Train a model on labeled historical asteroid impact data",
+          "next": "n3"
+        },
+        {
+          "label": "Unsupervised Learning: Discover hidden patterns in asteroid behavior without labels",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Training Data Protocol: Supervised Learning",
+      "content": "You authorize supervised learning. Your team assembles 1,000 past asteroids, each labeled 'IMPACT' or 'MISS'. Each asteroid has features: velocity (km/s), trajectory angle (degrees), composition density (g/cm\u00b3), and solar wind interference (Tesla). In supervised learning, the algorithm learns the relationship between input features and output labels by identifying patterns in labeled data. Your model discovers: asteroids with velocity > 45 km/s AND density > 3.2 g/cm\u00b3 impact 89% of the time. But the team warns you about overfitting\u2014when a model memorizes training data so precisely it fails on new asteroids. Now comes the critical choice: deploy a simple, transparent model that generalizes well, or a complex model that achieves 98% accuracy on training data?"
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "Model Complexity: The Bias-Variance Tradeoff",
+      "content": "Your data scientist explains the fundamental ML tradeoff: simple models have high bias (might miss subtle patterns) but low variance (generalize better to new data). Complex models have low bias (capture subtleties) but high variance (overfit to training quirks). Since these asteroids are genuinely novel, which approach do you choose?",
+      "choices": [
+        {
+          "label": "Deploy SIMPLE model: transparent decision rules, slightly less training accuracy but safer generalization",
+          "next": "n5"
+        },
+        {
+          "label": "Deploy COMPLEX model: deep neural network with 98% training accuracy, more sophisticated but riskier",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Threat Averted: Precision Success",
+      "content": "Your simple model identifies 47 high-threat asteroids with transparent reasoning: 'This asteroid has velocity 52 km/s and density 3.4 g/cm\u00b3\u2014matches IMPACT profile.' The station evacuates safely. Final results: 94% accuracy on the actual asteroid field. You've learned the critical ML principle: the best model rarely is the most complex one. By choosing a model that generalizes rather than memorizes, you prioritized real-world performance over training-set accuracy. This embodies the bias-variance tradeoff\u2014accepting slightly higher bias for dramatically lower variance. The space station is saved, and your protocol becomes the new early-warning standard. Mission: Success. \u2713"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "System Malfunction: Overfitting Crisis",
+      "content": "Your neural network achieved 98% accuracy on historical data, so you deploy it confidently. But when the new asteroids arrive, it makes chaotic predictions\u2014flagging harmless asteroids as threats, missing real dangers. The problem: the network memorized quirks specific to your 10-year dataset ('Tuesday asteroids rarely impact') that don't apply to this field. Overfitting destroyed generalization. Real accuracy on unseen asteroids: 61%. Two unexpected impacts strike the station. Emergency evacuation saves most crew, but you've learned an expensive lesson: **model complexity must match your data quality and size**. Complex models require more training examples and validation techniques (cross-validation, regularization) to prevent overfitting. This failure becomes a landmark case study in ML hazards. Mission: Failed. \u2717"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Pattern Recognition Mode: Unsupervised Learning",
+      "content": "You authorize unsupervised learning. Unlike supervised learning, you have no 'IMPACT' or 'MISS' labels for new asteroids. Instead, your team applies clustering\u2014an unsupervised algorithm that discovers natural groupings in unlabeled data. The algorithm groups 500 incoming asteroids into 5 clusters based on velocity, trajectory, and composition. Cluster A: 80 asteroids with high velocity + dense composition. Cluster B: 120 slow-moving asteroids. Cluster C: 75 medium-velocity asteroids with anomalous magnetic signatures. Clusters D & E: smaller, mixed-signature groups. Domain experts examine each cluster and recognize that Clusters A and C match the physical signatures of known impactors, while B, D, and E match safe-passage patterns. Unsupervised learning discovered meaningful structure without requiring labeled training data\u2014critical when your new problem is genuinely different from historical patterns."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "New Horizon: Discovery Success",
+      "content": "Using unsupervised clustering, you flag 155 high-risk asteroids in Clusters A and C for immediate evasion. The station evacuates preemptively. Final results: all actual impacts match your cluster predictions perfectly. Zero casualties. You've discovered a key ML principle: **unsupervised learning is powerful when you lack labeled data or when your problem is discovery rather than prediction**. Clustering found novel patterns your team never explicitly labeled. While less precise than supervised learning on known problems, it excels at finding truly new insights. You've pioneered a breakthrough early-warning system for the space exploration program that works even when data looks nothing like the past. Mission: Success. \u2713"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Problem recognized"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Supervised approach"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "Unsupervised approach"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Model trained"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Simple model deployed"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "Complex model deployed"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Clusters analyzed"
+    }
+  ],
+  "generated_at": "2026-03-27T07:05:07.015046+00:00",
+  "model": "claude-haiku-4-5"
+}

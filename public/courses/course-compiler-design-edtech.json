@@ -1,0 +1,643 @@
+{
+  "id": "course-compiler-design-edtech",
+  "title": "Compiler Design for Education Technology",
+  "description": "Master compiler design principles by building systems that process and execute educational content in learning platforms",
+  "topic": "Compiler Design",
+  "theme": "education technology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 90,
+  "tags": [
+    "compilers",
+    "education-tech",
+    "course-scripting",
+    "systems-programming"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Compilers Matter in EdTech",
+      "content": "Learning Management Systems like Canvas and Moodle process course definitions written in structured formats\u2014similar to how compilers process source code. When instructors create branching courses with conditional logic and adaptive pathways, those course scripts must be compiled into executable learning experiences. Understanding compiler design helps you build systems that efficiently transform human-readable course definitions into performant, adaptive learning journeys that respond to student progress in real time."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Compiler Fundamentals Quiz",
+      "content": "Test your understanding of basic compiler concepts and their application to educational systems.",
+      "questions": [
+        {
+          "question": "In an educational context, what is the primary purpose of a compiler?",
+          "options": [
+            "To store course content in a database",
+            "To transform a course definition (source) into an executable learning system (object)",
+            "To display content on student screens",
+            "To track student attendance"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Storage is handled by databases, not compilers.",
+            "Correct! Compilers transform high-level course definitions into executable systems.",
+            "Display is a rendering concern, not compilation.",
+            "Tracking is a separate system function."
+          ],
+          "explanation": "A compiler's core job is translation: from human-readable source code (or course definitions) to machine-executable form (learning engine logic)."
+        },
+        {
+          "question": "Which of these is NOT a typical compiler phase?",
+          "options": [
+            "Lexical analysis (tokenization)",
+            "Syntax analysis (parsing)",
+            "Student grading",
+            "Code generation"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Lexical analysis is a key compiler phase.",
+            "Syntax analysis is a key compiler phase.",
+            "Correct! Student grading happens at runtime in the learning system, not during compilation.",
+            "Code generation is a key compiler phase."
+          ],
+          "explanation": "Compilation happens before execution. Grading occurs when students interact with the compiled course system."
+        },
+        {
+          "question": "What does semantic analysis check in a course compiler?",
+          "options": [
+            "Whether the course uses pretty colors",
+            "Whether variables and assignments make sense (e.g., prerequisites are met before content appears)",
+            "Whether the instructor is qualified",
+            "The file size of the course definition"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Aesthetics are not a compiler concern.",
+            "Correct! Semantics ensure logical consistency\u2014e.g., students can't access quiz results before taking the quiz.",
+            "Instructor qualification is an administrative concern.",
+            "File size is not a semantic concern."
+          ],
+          "explanation": "Semantic analysis validates that the course makes logical sense, not just syntactic sense."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Compiler Fundamentals Practice",
+      "content": "Reinforce your understanding with practical scenarios from educational systems.",
+      "questions": [
+        {
+          "question": "An LMS receives this course rule: 'If student_score > 80, unlock_advanced_module'. What compiler phase tokenizes this into meaningful parts?",
+          "options": [
+            "Code generation",
+            "Lexical analysis",
+            "Optimization",
+            "Linking"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Code generation produces output; it doesn't tokenize input.",
+            "Correct! Lexical analysis breaks the rule into tokens: 'student_score', '>', '80', etc.",
+            "Optimization refines already-parsed code.",
+            "Linking combines compiled modules\u2014not relevant here."
+          ],
+          "explanation": "Lexical analysis is the first phase: breaking input into recognizable tokens."
+        },
+        {
+          "question": "During syntax analysis, a course compiler detects: 'IF student passed quiz THEN show_badge ELSE'. What error is caught?",
+          "options": [
+            "The student might not deserve the badge",
+            "Missing closing clause\u2014the ELSE has no action",
+            "The quiz might not be difficult",
+            "The badge name is too long"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Fairness is a policy concern, not a syntax error.",
+            "Correct! Syntax analysis ensures grammatical completeness\u2014ELSE needs a body.",
+            "Difficulty is content design, not a syntax issue.",
+            "Length is not a syntax constraint."
+          ],
+          "explanation": "Syntax analysis checks grammar and structure before the system tries to run the logic."
+        },
+        {
+          "question": "A semantic analyzer in a course compiler would reject which rule?",
+          "options": [
+            "'If student opens module, increment_opens_counter'",
+            "'If student_age < 13, show_content_marked_COPPA_compliant'",
+            "'If lesson_difficulty is \"advanced\", require_prerequisite_lesson_X which_teaches_basics_of_Y'",
+            "'If quiz_score == 100, unlock_next_quiz'"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "This is semantically valid\u2014opens are legitimate events to track.",
+            "This is semantically valid\u2014age-based content control makes sense.",
+            "Correct! This is circular logic: you need Y basics to take X, but X teaches Y basics.",
+            "This is semantically valid\u2014perfect scores unlock challenges."
+          ],
+          "explanation": "Semantic analysis catches logical inconsistencies and impossible prerequisites."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Lexical Analysis: Tokenizing Course Definitions",
+      "content": "Lexical analysis is the first phase where a course compiler reads raw course definition text and breaks it into meaningful tokens. In an educational context, imagine an instructor writes: 'If student_score >= 75 AND completed_prerequisites, unlock_module_B'. The lexer recognizes tokens like 'If', 'student_score', '>=', '75', 'AND', etc. Modern LMS platforms use similar tokenization to parse course branching rules, quiz logic, and adaptive pathway conditions. The lexer also handles comments, whitespace, and special characters so the next phase (parsing) can focus on grammar, not raw text."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Lexical Analysis Assessment",
+      "content": "Test your ability to identify and apply lexical analysis concepts in educational systems.",
+      "questions": [
+        {
+          "question": "A course compiler encounters: 'show_badge(\"completion\") # Award for finishing'. What does the lexer recognize as a token?",
+          "options": [
+            "The entire line is one token",
+            "'show_badge', '(', '\"completion\"', ')', and the lexer ignores the comment",
+            "Only 'show_badge' is a token; everything else is noise",
+            "'completion' and the comment are two tokens"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Lines are not tokens; the lexer breaks them apart.",
+            "Correct! The lexer tokenizes meaningful units and discards comments (whitespace/documentation).",
+            "Punctuation, strings, and function names are all relevant tokens.",
+            "Comments are ignored; 'completion' is one token inside string delimiters."
+          ],
+          "explanation": "Lexical analysis produces a stream of tokens, where each token is a meaningful unit. Comments and whitespace are stripped out."
+        },
+        {
+          "question": "In an LMS course script, which sequence is BEST tokenized by a course compiler's lexer?",
+          "options": [
+            "'if(score>80){unlock()}' \u2192 ['if', '(', 'score', '>', '80', ')', '{', 'unlock', '(', ')'}",
+            "'if(score>80){unlock()}' \u2192 ['if', 'score>80', 'unlock']",
+            "'if(score>80){unlock()}' \u2192 one token representing the whole rule",
+            "'if(score>80){unlock()}' \u2192 ['ifscore', '>', 80, 'unlock']"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Each meaningful element\u2014keyword, operator, identifier, delimiter\u2014is its own token.",
+            "This loses important structure (operators, delimiters).",
+            "This is underspecified; the parser needs fine-grained tokens.",
+            "'ifscore' is not a real token; 'if' and 'score' are separate."
+          ],
+          "explanation": "Lexical analysis produces atomic, unambiguous tokens so the parser can enforce grammar rules."
+        },
+        {
+          "question": "A course script has an error: 'studentScore = \"high\" // Wrong: can't assign string to numeric variable'. At what phase is this caught?",
+          "options": [
+            "Lexical analysis",
+            "Syntax analysis",
+            "Semantic analysis",
+            "Runtime (during student interaction)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Lexical analysis only tokenizes; it doesn't check types.",
+            "Syntax analysis checks grammar, not type compatibility.",
+            "Correct! Semantic analysis validates type consistency and variable usage.",
+            "Type errors should be caught at compile time, not runtime."
+          ],
+          "explanation": "Semantic analysis checks that tokens and syntax make logical sense\u2014including type safety."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Lexical Analysis Practice",
+      "content": "Apply lexical analysis skills to real educational scenarios.",
+      "questions": [
+        {
+          "question": "Tokenize this course rule: 'WHEN student_completed_module_1 THEN add_points(50)'. Identify which is NOT a token:",
+          "options": [
+            "'WHEN'",
+            "'student_completed_module_1'",
+            "'THEN add_points' (combined)",
+            "'50'"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "'WHEN' is a keyword token.",
+            "'student_completed_module_1' is an identifier token.",
+            "Correct! 'THEN' and 'add_points' are separate tokens, not combined.",
+            "'50' is a numeric literal token."
+          ],
+          "explanation": "Lexical analysis respects syntax boundaries. Keywords, identifiers, and function calls are distinct tokens."
+        },
+        {
+          "question": "In a quiz branching system, the lexer processes: 'IF quiz_attempt == 3 OR quiz_score > 90 THEN show_certificate'. How many tokens are there (count operators, keywords, identifiers)?",
+          "options": [
+            "8 tokens",
+            "12 tokens",
+            "15 tokens",
+            "6 tokens"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "You're undercounting operators and literals.",
+            "Correct! IF, quiz_attempt, ==, 3, OR, quiz_score, >, 90, THEN, show_certificate, (, ) = 12 tokens.",
+            "You're overcounting; some whitespace doesn't create tokens.",
+            "You're undercounting operators and identifiers."
+          ],
+          "explanation": "Every keyword, identifier, operator, parenthesis, and literal is a token."
+        },
+        {
+          "question": "A course compiler encounters: 'unlock_if_gpa>=3.5'. Which lexer design would be MOST robust?",
+          "options": [
+            "Tokenize as ['unlock_if_gpa', '>=', '3', '.', '5'] (split on every non-alphanumeric)",
+            "Tokenize as ['unlock_if', '_gpa', '>=', '3.5'] (recognizing identifiers and decimals)",
+            "Tokenize as ['unlock', '_if', '_gpa', '>=', '3.5'] (treating underscores as separators)",
+            "Tokenize as ['unlock_if_gpa>=3.5'] (the whole thing is one token)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This breaks decimals and combines unrelated identifiers.",
+            "Correct! A robust lexer recognizes underscores as part of identifiers and decimals as atomic literals.",
+            "Underscores are typically part of identifiers, not separators.",
+            "This discards structure and prevents parsing."
+          ],
+          "explanation": "Lexical analysis must recognize domain conventions: identifiers (including underscores), numbers (including decimals), operators, and keywords."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Syntax & Semantic Analysis: Parsing Course Logic Trees",
+      "content": "After tokenization, syntax analysis (parsing) checks that tokens follow the grammar rules of a course definition language. For example, a course compiler expects rules like 'IF condition THEN action', not 'IF action THEN condition'. Semantic analysis goes deeper: it validates that the parsed rules make logical sense. Can a student unlock a quiz before it's created? Can a prerequisite module appear after the dependent content? In education technology, semantic analysis catches logical impossibilities\u2014circular dependencies, missing content, type mismatches\u2014before the course is deployed to thousands of students. Together, parsing and semantic validation transform raw course scripts into certified-correct learning pathways."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Syntax & Semantic Analysis Assessment",
+      "content": "Evaluate your ability to identify syntax errors and semantic inconsistencies in course definitions.",
+      "questions": [
+        {
+          "question": "A course definition has: 'IF completed_module_A SHOW module_B'. What type of error is this?",
+          "options": [
+            "Semantic error\u2014module_A might not exist",
+            "Syntax error\u2014missing THEN keyword",
+            "Runtime error\u2014will crash when executed",
+            "Optimization error\u2014inefficient condition"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Even if module_A exists, the grammar is broken.",
+            "Correct! The syntax is 'IF condition THEN action'; 'SHOW' is missing 'THEN'.",
+            "This is a parsing error, caught before runtime.",
+            "Optimization is not relevant to this grammar violation."
+          ],
+          "explanation": "Syntax analysis catches grammatical violations. The parser expects 'IF ... THEN ...' structure."
+        },
+        {
+          "question": "A semantic analyzer would REJECT which course definition?",
+          "options": [
+            "'IF student_opened_module THEN log_event' (logging actions that occurred)",
+            "'IF lesson_difficulty == \"advanced\" THEN require_prerequisite_lesson which teaches the basics of this lesson'",
+            "'IF quiz_attempts > 5 THEN disable_quiz' (prevent endless retesting)",
+            "'IF badge_earned THEN unlock_related_content'"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Logging is valid; observing user actions is appropriate.",
+            "Correct! This is circular: you can't require a lesson as a prerequisite for itself.",
+            "Preventing spam is a valid safeguard.",
+            "Rewards for achievements are standard course logic."
+          ],
+          "explanation": "Semantic analysis catches logical impossibilities and circular dependencies."
+        },
+        {
+          "question": "Which statement BEST describes the relationship between parsing and semantic analysis in course compilation?",
+          "options": [
+            "Parsing catches all errors; semantic analysis is optional.",
+            "Parsing ensures grammar is valid; semantic analysis ensures logic is valid.",
+            "Semantic analysis happens first, then parsing.",
+            "They are the same phase with different names."
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Parsing alone can't catch type errors or logical inconsistencies.",
+            "Correct! Parsing = syntax validation; semantic analysis = logic validation. Both are needed.",
+            "Parsing must happen first; you can't analyze meaning without valid syntax.",
+            "They are distinct phases with different goals."
+          ],
+          "explanation": "Parsing checks structure; semantic analysis checks consistency and correctness. Both matter."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Parsing and Semantics Practice",
+      "content": "Practice identifying syntax and semantic issues in educational course scripts.",
+      "questions": [
+        {
+          "question": "Analyze: 'WHILE student_score < 100 THEN show_hint()'. What error type(s) exist?",
+          "options": [
+            "Only syntax error (WHILE and THEN don't mix)",
+            "Only semantic error (infinite loop risk)",
+            "Both syntax and semantic errors",
+            "No error; this is valid course logic"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The semantic issue is just as important.",
+            "The syntax is wrong too; WHILE uses different keywords.",
+            "Correct! WHILE/THEN mismatch (syntax) + infinite loop (semantic).",
+            "Both errors exist; this would break the course."
+          ],
+          "explanation": "Real errors often involve both syntactic and semantic violations."
+        },
+        {
+          "question": "A parser validates: 'IF student_passed_quiz_A AND student_passed_quiz_B THEN unlock_final_project'. What does the semantic analyzer then check?",
+          "options": [
+            "That quiz_A and quiz_B have unique names",
+            "That quiz_A and quiz_B are actually defined and appear before this rule in the course",
+            "That the student has a name",
+            "The color of the final project icon"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Uniqueness is not a strict requirement here.",
+            "Correct! Semantic analysis verifies references exist and are consistent (quizzes must be defined before use).",
+            "Student identity is not a course logic concern.",
+            "Presentation details are not semantic concerns."
+          ],
+          "explanation": "Semantic analysis checks that references are valid and dependencies are satisfied."
+        },
+        {
+          "question": "A course script says: 'module_B requires module_A as prerequisite' AND 'module_A requires module_B as prerequisite'. What phase catches this?",
+          "options": [
+            "Lexical analysis (tokenization)",
+            "Syntax analysis (parsing)",
+            "Semantic analysis (during dependency validation)",
+            "Code generation (when building the learning system)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Lexical just tokenizes; it doesn't understand dependencies.",
+            "Syntax checks grammar, not circular logic.",
+            "Correct! Semantic analysis detects circular/impossible dependencies.",
+            "By code generation, it's too late; the course is broken."
+          ],
+          "explanation": "Dependency cycles must be caught during semantic validation, before deployment."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "content",
+      "title": "Code Generation & Optimization: Building Executable Learning Systems",
+      "content": "Code generation transforms validated course definitions into executable code that a learning engine can run. In education technology, this means converting parsed course rules into JavaScript, Python, or bytecode that the LMS executes. For example, a rule like 'IF student_score >= 80 THEN unlock_module_B' becomes actual function calls in the learning engine: `if (studentScore >= 80) { unlockModule('module_B'); }`. Optimization happens here too: the compiler can recognize redundant condition checks, cache frequently accessed data (like student profiles), and generate code that minimizes latency for students. The result is a lean, fast, verified course system ready for deployment."
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Code Generation & Optimization Assessment",
+      "content": "Demonstrate your ability to translate course logic into optimized executable code.",
+      "questions": [
+        {
+          "question": "A course rule is: 'IF student_gpa >= 3.5 AND completed_intro_course AND current_semester == \"Spring\" THEN enroll_honors_track'. How should a code generator structure this?",
+          "options": [
+            "One conditional checking all conditions: if (gpa >= 3.5 && completed_intro && semester == 'Spring') enrollHonors();",
+            "Separate checks: if (gpa >= 3.5) if (completed_intro) if (semester == 'Spring') enrollHonors();",
+            "Combine semester check with others using a switch statement",
+            "Evaluate each condition in a separate function call, no optimization"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Combine conditions in a single efficient if-statement using logical operators.",
+            "Nested ifs work but are less efficient and harder to read.",
+            "Switch statements are for multiple discrete values, not logical combinations.",
+            "Splitting conditions across functions adds unnecessary overhead."
+          ],
+          "explanation": "Code generation should produce efficient, readable conditionals that combine multiple checks into a single test."
+        },
+        {
+          "question": "Which optimization would a course compiler apply to: 'IF quiz_completed AND quiz_completed AND quiz_score > 75 THEN show_result'?",
+          "options": [
+            "Replace duplicate 'quiz_completed' check with a single check",
+            "Keep both checks for safety (redundancy prevents bugs)",
+            "Move the entire conditional to a separate module",
+            "Nothing; this is optimal as-is"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Redundant conditions waste CPU; a good compiler removes duplicates.",
+            "Redundancy doesn't prevent bugs; it wastes resources.",
+            "Modularity is good design, but doesn't address the redundancy here.",
+            "This contains unnecessary duplication."
+          ],
+          "explanation": "Compiler optimizations eliminate dead code and redundant operations to improve performance."
+        },
+        {
+          "question": "In an education system, what is a KEY performance optimization during code generation?",
+          "options": [
+            "Caching student profiles so repeated score checks don't re-fetch from the database",
+            "Making all conditions more complex to be extra safe",
+            "Logging every intermediate step for auditing",
+            "Adding random delays to prevent students from gaming the system"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Caching reduces database round trips and speeds up course responsiveness.",
+            "Complexity doesn't improve safety; clear code is safer.",
+            "Excessive logging slows the system; strategic logging is better.",
+            "Random delays degrade user experience and aren't a security measure."
+          ],
+          "explanation": "Performance optimization in education systems means reducing latency so students get instant feedback."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n13",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "practice",
+      "title": "Code Generation & Optimization Practice",
+      "content": "Apply code generation and optimization principles to educational scenarios.",
+      "questions": [
+        {
+          "question": "A course compiler must generate code for: 'Award bronze badge if score >= 60, silver if >= 80, gold if >= 95'. Which approach is BEST?",
+          "options": [
+            "Three separate if statements: if (score >= 60) award('bronze'); if (score >= 80) award('silver'); if (score >= 95) award('gold');",
+            "A switch on score ranges, or cascading if-else: if (score >= 95) gold; else if (score >= 80) silver; else if (score >= 60) bronze;",
+            "Separate function calls for each badge type without combining logic",
+            "Combine all conditions into one huge boolean expression"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This awards multiple badges to the same student (wrong). If score is 95, student gets bronze AND silver AND gold.",
+            "Correct! Use if-else to award exactly one badge. A score of 95 triggers only the gold award.",
+            "Separate functions are fine, but the conditional logic must be optimized.",
+            "Complex boolean expressions are hard to read and error-prone."
+          ],
+          "explanation": "Proper code generation matches the intent: one badge per score range. If-else prevents duplicate awards."
+        },
+        {
+          "question": "A course system evaluates: 'IF student_enrolled AND course_active AND enrollment_deadline_not_passed THEN allow_access'. Where should the optimizer focus?",
+          "options": [
+            "Making the variable names shorter to save memory",
+            "Checking the fastest condition first (e.g., course_active is a simple flag check vs. enrollment_deadline requires date arithmetic)",
+            "Splitting the condition into three separate database queries",
+            "Adding comments to explain the logic"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Variable name length is negligible; readability matters more.",
+            "Correct! Order conditions by cost: cheap checks first (course_active flag) before expensive ones (date math).",
+            "Three queries are slower than one combined check.",
+            "Comments are good practice but not performance optimization."
+          ],
+          "explanation": "Short-circuit evaluation: fast checks should come before slow ones. If course_active is false, skip the expensive date check."
+        },
+        {
+          "question": "During code generation, the compiler detects: 'IF student_completed_lesson_1 THEN unlock_lesson_2' appears 50 times in a large course. What optimization is appropriate?",
+          "options": [
+            "Remove 49 duplicates and keep only one check (deduplication)",
+            "Keep all 50 checks for extra safety",
+            "Combine all 50 into one massive if statement",
+            "Move the logic to a shared function that's called 50 times"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Deduplication removes redundant checks; the logic runs once, not 50 times.",
+            "Duplication wastes CPU cycles.",
+            "Massive statements are unreadable and don't solve the problem.",
+            "A shared function helps, but deduplication at compile time is better."
+          ],
+          "explanation": "Compiler optimization removes duplicate code. Repeated conditions should be consolidated into a single check or data structure."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Mastery: Compiler Design for EdTech",
+      "content": "Congratulations! You've completed a comprehensive journey through compiler design applied to education technology. You now understand how course definitions are tokenized into meaningful units, parsed and validated for logical consistency, and compiled into optimized executable code. From lexical analysis to semantic validation to code generation, you've learned how modern learning systems transform instructor-authored content into responsive, scalable learning experiences. You're equipped to design course compilation systems, optimize educational pathways, and build the infrastructure that powers adaptive learning platforms."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Fail: Practice"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "Loop back"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "Pass: Continue"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Fail: Practice"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "Loop back"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "Pass: Continue"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Fail: Practice"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "Loop back"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "Pass: Continue"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c14",
+      "source": "n11",
+      "target": "n12",
+      "label": "Fail: Practice"
+    },
+    {
+      "id": "c15",
+      "source": "n12",
+      "target": "n11",
+      "label": "Loop back"
+    },
+    {
+      "id": "c16",
+      "source": "n11",
+      "target": "n13",
+      "label": "Pass: Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T05:31:38.870051+00:00",
+  "model": "claude-haiku-4-5"
+}

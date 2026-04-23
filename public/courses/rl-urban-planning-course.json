@@ -1,0 +1,314 @@
+{
+  "id": "rl-urban-planning-course",
+  "title": "Reinforcement Learning for Urban Planning",
+  "description": "Master reinforcement learning through practical urban planning applications and challenges",
+  "topic": "Reinforcement Learning",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "reinforcement learning",
+    "urban planning",
+    "machine learning",
+    "decision making",
+    "optimization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Reinforcement Learning: The City Planner's Dilemma",
+      "content": "Imagine you're a city planner making daily decisions about bus routes, traffic light timing, and parking zones. Reinforcement Learning (RL) is exactly how you could improve these decisions over time. An RL agent (like an automated city management system) learns by taking actions in its environment (the city), receiving feedback (rewards like reduced congestion or improved air quality), and adjusting its strategy to maximize long-term success. Unlike supervised learning which requires labeled examples, RL learns through trial and error, making it perfect for complex urban systems where the optimal solution isn't always obvious upfront."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Assessment: Understanding RL Fundamentals",
+      "content": "Test your understanding of the core concepts of reinforcement learning and how they apply to urban planning scenarios.",
+      "questions": [
+        {
+          "question": "In an RL system managing bus routes in a city, what would be the 'agent'?",
+          "options": [
+            "A) The city's buses and drivers",
+            "B) The decision-making system (algorithm) controlling route allocation",
+            "C) The passengers waiting at bus stops",
+            "D) The traffic congestion in the city"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The buses are part of the environment, not the agent making decisions.",
+            "Correct! The agent is the entity that makes decisions and takes actions.",
+            "Passengers provide feedback but don't make strategic decisions.",
+            "Congestion is part of the environment the agent must navigate."
+          ],
+          "explanation": "The agent is the decision-making entity. In this case, it's the system that decides which routes to optimize, not the components operating within those routes."
+        },
+        {
+          "question": "When a city implements RL to optimize traffic lights and sees reduced average commute times, what aspect of RL is most directly demonstrated?",
+          "options": [
+            "A) The agent receiving a positive reward",
+            "B) The environment responding to the agent's action",
+            "C) The policy being improved through feedback",
+            "D) All of the above"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "This is true, but it's not the complete picture.",
+            "This is true, but it's not the complete picture.",
+            "This is true, but it's not the complete picture.",
+            "Correct! All three elements work together: the action gets a reward, the environment responds, and the policy improves."
+          ],
+          "explanation": "RL is a cycle: the agent takes an action, the environment responds, the agent receives a reward, and this feedback updates the policy."
+        },
+        {
+          "question": "What is the key advantage of using RL for urban planning instead of traditional rule-based systems?",
+          "options": [
+            "A) RL systems never make mistakes",
+            "B) RL systems can adapt and improve by learning from real-world outcomes",
+            "C) RL systems are guaranteed to find the global optimum immediately",
+            "D) RL systems don't require any initial data or programming"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No system is perfect; RL systems can fail too.",
+            "Correct! RL's strength is adaptation through continuous feedback from the environment.",
+            "RL finds better solutions over time, but optimality isn't guaranteed immediately.",
+            "RL systems still need initial setup, data, and careful design."
+          ],
+          "explanation": "RL's core advantage for urban planning is its ability to continuously learn and adapt to changing city conditions without being explicitly programmed for every scenario."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Identifying RL Components in Urban Systems",
+      "content": "Strengthen your understanding by identifying the key components of RL in various urban planning scenarios.",
+      "questions": [
+        {
+          "question": "A city uses RL to manage parking availability. When a driver finds a parking spot through the system, the algorithm learns this was a good decision. Which RL component is being demonstrated?",
+          "options": [
+            "A) The agent learning a new policy",
+            "B) The environment providing feedback",
+            "C) The reward signal indicating success",
+            "D) The agent's exploration strategy"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The agent will learn, but this isn't the immediate mechanism shown.",
+            "The environment does respond, but this isn't the key feedback here.",
+            "Correct! Finding a parking spot is a positive reward that reinforces good decisions.",
+            "Exploration is part of RL, but not the main point here."
+          ],
+          "explanation": "The reward signal is the feedback mechanism that tells the RL system whether a decision was good. Successfully finding parking is a positive reward."
+        },
+        {
+          "question": "In an autonomous traffic management system, the system can choose to extend a green light, shorten it, or keep it at normal timing. What is this set of options called in RL?",
+          "options": [
+            "A) The policy",
+            "B) The action space",
+            "C) The reward function",
+            "D) The value function"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Policy is what the system learns, not the available options.",
+            "Correct! The action space is all possible choices the agent can make.",
+            "The reward function evaluates outcomes, not describes available actions.",
+            "Value function estimates long-term rewards, not immediate options."
+          ],
+          "explanation": "The action space is the set of all possible actions the agent can take. Here, adjusting traffic light timing in different ways represents the agent's action space."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Advanced RL: Rewards, Policies, and Value Functions",
+      "content": "Now that you understand RL basics, let's explore its three core mechanisms. First, the reward function: how does a city system know when it's succeeding? For traffic optimization, rewards might include reduced congestion, lower emissions, and faster emergency response times\u2014but balancing these is challenging. Second, the policy: this is the learned 'decision rule' that tells the system what action to take in any situation (e.g., 'when traffic at intersection X exceeds 80 cars per minute, activate the advanced signal timing'). Third, value functions: these estimate how good a particular state is long-term. For urban planning, a seemingly clear street might have low value if it leads to bottlenecks later. Professional RL systems spend significant effort engineering good reward functions and value function approximations because small errors compound over thousands of decisions."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Advanced RL Concepts",
+      "content": "Evaluate your mastery of reward design, policy learning, and value estimation in urban planning contexts.",
+      "questions": [
+        {
+          "question": "A city wants to design an RL system for bike lane placement. If the reward is only 'increase bike usage,' but doesn't penalize increased collisions, what problem might occur?",
+          "options": [
+            "A) The agent will learn incorrect policies",
+            "B) The reward function is poorly designed and the agent may prioritize unsafe lanes",
+            "C) The environment won't respond to the agent's actions",
+            "D) The city will run out of data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The agent will learn based on the rewards given, even if imperfectly designed.",
+            "Correct! A poorly designed reward that ignores safety could lead to unsafe infrastructure.",
+            "The environment will respond regardless of reward design quality.",
+            "Reward design doesn't affect data availability."
+          ],
+          "explanation": "Reward design is critical in RL. An incomplete reward function can cause the agent to optimize for the wrong objective. Here, ignoring safety consequences could lead to high-usage but dangerous bike lanes."
+        },
+        {
+          "question": "A policy for congestion management says: 'If average vehicle speed < 15 mph at a corridor, activate dynamic pricing for car entries.' Why is this considered a learned policy rather than a hard-coded rule?",
+          "options": [
+            "A) Because it uses speed as a metric",
+            "B) Because RL algorithms discovered this rule increases overall city flow and satisfaction",
+            "C) Because it involves pricing mechanisms",
+            "D) Because it's written in English"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Using speed metrics doesn't make something a learned policy.",
+            "Correct! The distinction is that RL learned this rule works well through experimentation.",
+            "Pricing mechanisms exist in both hard-coded and learned systems.",
+            "The language used doesn't determine if something is learned via RL."
+          ],
+          "explanation": "A learned policy is one discovered through the RL process\u2014the system learned that this condition-action pair leads to good outcomes. A hard-coded rule would be implemented by humans without learning."
+        },
+        {
+          "question": "When evaluating potential parking garage locations, an RL system estimates that Location A has a value of 85 and Location B has a value of 72. In RL terms, what does this value represent?",
+          "options": [
+            "A) The dollar revenue each location will generate",
+            "B) The expected long-term cumulative reward from developing each location",
+            "C) A simple ranking score with no mathematical meaning",
+            "D) The current occupancy percentage"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Value reflects long-term rewards, not just direct revenue.",
+            "Correct! Value functions estimate expected cumulative future rewards from a state.",
+            "Value functions have precise mathematical meanings in RL theory.",
+            "Current occupancy is an observation, not a value estimate."
+          ],
+          "explanation": "In RL, value represents the expected sum of future rewards from a given state. Location A having higher value means the system predicts better long-term outcomes from developing there."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Designing Rewards and Policies for Urban Systems",
+      "content": "Apply your knowledge by designing reward functions and interpreting policies for complex urban planning scenarios.",
+      "questions": [
+        {
+          "question": "You're designing an RL system for public transit optimization. List three components of a good reward function for this system.",
+          "options": [
+            "A) Only maximizing ridership numbers",
+            "B) Ridership + cost efficiency + environmental impact + equity of access",
+            "C) Only minimizing operational costs",
+            "D) Passenger satisfaction surveys only"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Single-metric rewards often lead to unwanted side effects.",
+            "Correct! Multi-faceted rewards better reflect real city goals.",
+            "Cost alone ignores public service objectives.",
+            "Surveys are useful but incomplete without operational metrics."
+          ],
+          "explanation": "Effective reward functions for urban systems balance multiple objectives: ridership shows demand, efficiency shows feasibility, environmental impact shows sustainability, and equity ensures fair access."
+        },
+        {
+          "question": "An RL system learned this policy for emergency vehicle routing: 'During peak hours, avoid main downtown streets even if they're shortest, instead use secondary routes for predictable timing.' Why might this policy have emerged from RL training?",
+          "options": [
+            "A) RL prefers complicated routes",
+            "B) The reward function probably penalized unpredictability or delays, making reliable secondary routes more valuable than potentially-blocked main streets",
+            "C) RL algorithms can't handle main streets",
+            "D) This is clearly a mistake in the RL system"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "RL selects efficient paths, not complicated ones.",
+            "Correct! Predictability and reliability matter hugely in emergency services.",
+            "RL can handle any type of route.",
+            "This is actually a reasonable policy if delays are heavily penalized."
+          ],
+          "explanation": "This learned policy reflects a sophisticated understanding: predictable arrival times matter more than theoretical shortest paths. The RL system learned that reliability has high value in emergency contexts."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Real-World Applications: RL Transforming Cities",
+      "content": "RL is already reshaping urban planning across the globe. Seoul's Adaptive Traffic Control System uses RL-like learning to adjust signal timing based on real-time traffic flow, reducing commute times by up to 20%. Singapore's intelligent transportation network applies reinforcement learning to coordinate traffic across 550+ signalized intersections, dynamically routing vehicles to optimize throughput and reduce congestion. In parking management, cities increasingly deploy RL systems that learn which neighborhoods and times see high demand, adjusting dynamic pricing to encourage turnover and reduce cruising-for-parking (which causes 30% of urban congestion). The most sophisticated implementations combine multiple RL techniques: Q-learning for discrete decisions (e.g., turn restriction policies), policy gradient methods for continuous control (e.g., traffic light timing), and actor-critic methods for faster learning in complex environments. Challenges remain: real-world cities have delayed feedback (today's planning affects traffic for months), competing stakeholders with different objectives, and data privacy concerns. Yet RL's adaptability makes it uniquely suited for the dynamic, complex systems that modern cities represent."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Course Complete: You Are an RL Urban Planner",
+      "content": "Congratulations! You've mastered the fundamentals and advanced concepts of Reinforcement Learning through the lens of urban planning. You understand how agents learn through interaction, how to design reward functions that reflect real city goals, and how RL is already transforming transportation, parking, and resource management in cities worldwide. You're ready to explore RL applications in your own domain or dive deeper into specific algorithms like Q-learning, policy gradients, and actor-critic methods. Remember: the best city systems balance multiple objectives, learn from real-world feedback, and adapt continuously. That's exactly what RL does."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Take Assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n4",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Fail (<2 correct)"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "Retry Assessment"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Take Assessment"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n7",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Fail (<2 correct)"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "Retry Assessment"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T12:14:42.509664+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,229 @@
+{
+  "id": "4a7f3b2e-9c1d-4f6a-a2e8-5d7c1b9e3f4a",
+  "title": "Data Visualization with Python: Forensic Science Applications",
+  "description": "Master data visualization techniques using Python through forensic science case studies. Adaptive branching paths allow you to start at your current level\u2014from foundational graphing to advanced multi-dimensional analysis.",
+  "topic": "Data Visualization with Python",
+  "theme": "forensic science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "python",
+    "matplotlib",
+    "seaborn",
+    "data-visualization",
+    "forensic-science",
+    "forensics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic Assessment: Your Visualization Experience",
+      "content": "Answer these questions to determine your starting level. This assessment will route you to a path tailored to your experience with Python visualization libraries and statistical plots.",
+      "questions": [
+        {
+          "question": "Which Python library is the foundation for most statistical data visualizations in forensic analysis workflows?",
+          "options": [
+            "NumPy",
+            "Matplotlib",
+            "Pandas I/O",
+            "Requests"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "NumPy is for numerical computing, not visualization.",
+            "Correct! Matplotlib is the core visualization library.",
+            "Pandas I/O is for data import/export.",
+            "Requests is for HTTP."
+          ],
+          "explanation": "Matplotlib is the fundamental Python visualization library. Seaborn and other tools build on top of it. For forensic data viz, you'll use matplotlib extensively."
+        },
+        {
+          "question": "You're analyzing crime scene evidence timestamps (arrest date, processing date, DNA match date). Which plot best reveals temporal patterns?",
+          "options": [
+            "Pie chart",
+            "Line plot",
+            "Box plot",
+            "Heatmap"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Pie charts are for proportions, not time series.",
+            "Correct! Line plots show trends over time.",
+            "Box plots compare distributions, not temporal order.",
+            "Heatmaps need a second variable to be meaningful here."
+          ],
+          "explanation": "Time series data (evidential processing timelines) are best shown with line plots to reveal delays, clustering, or patterns in the investigation workflow."
+        },
+        {
+          "question": "In toxicology, you're comparing blood alcohol levels (BAL) across 50 suspects. Which single visualization summarizes the full distribution and detects outliers?",
+          "options": [
+            "Scatter plot",
+            "Box plot",
+            "Bar chart",
+            "Line plot"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Scatter plots show two variables, not distributions.",
+            "Correct! Box plots show median, quartiles, and outliers in one view.",
+            "Bar charts are for categories, not continuous distributions.",
+            "Line plots are for trends."
+          ],
+          "explanation": "Box plots efficiently display distribution shape, central tendency, variability, and outliers\u2014critical for identifying anomalous toxicology results."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced Forensic Data Visualization: Multi-dimensional Analysis",
+      "content": "Now that you've demonstrated visualization fluency, we'll explore advanced techniques for complex forensic datasets. In real cases, investigators often juggle multiple variables simultaneously: suspect profiles, timeline data, chemical analysis results, and spatial evidence. **Seaborn** extends Matplotlib with intuitive statistical plotting that handles these scenarios elegantly. You'll learn to create faceted plots (comparing evidence across multiple scenes), heatmaps (showing correlation in toxicology panels or DNA markers), and pair plots (exploring relationships between suspect characteristics and evidence types). These visualizations are publication-ready and suitable for expert testimony\u2014clarity and accuracy matter when lives are on the line.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced Example: Ballistic Trajectory Reconstruction Visualization",
+      "content": "A crime scene has five bullet casings recovered at different positions. Each casing was photographed with 3D coordinates (x, y, z) and a timestamp (order found). Using Matplotlib and Seaborn, create a 3D scatter plot with color coding by discovery order and size encoding by impact velocity. The code uses `mpl_toolkits.mplot3d` for three-dimensional rendering and Seaborn's `color_palette()` for forensically meaningful colors. A follow-up heatmap correlates ballistic striations (microscopic grooves on the bullet) with firing distance, revealing whether all bullets came from the same weapon. These visualizations help investigators communicate trajectory hypothesis to juries and rule out alternative shooter positions.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Forensic Data Visualization Mastered",
+      "content": "Congratulations! You've completed the Advanced Forensic Data Visualization track. You now have the skills to visualize complex, multi-dimensional forensic datasets using Seaborn and Matplotlib\u2014from 3D crime scene reconstructions to statistical correlations in forensic evidence. You're ready to create visualizations that withstand cross-examination and clearly communicate investigative findings. Next steps: explore interactive visualizations with Plotly for real-time case management dashboards, or dive deeper into statistical graphics for expert witness preparation."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Introduction to Data Visualization for Forensic Science",
+      "content": "Welcome! This module covers the **essentials** of visualizing forensic data with Python's Matplotlib library. In forensic investigations, data visualization serves a critical purpose: converting raw evidence (DNA sequences, toxicology assays, fingerprint minutiae) into clear, defensible graphics. We'll start with basic plot types: histograms (distribution of evidence measurements), bar charts (suspect counts by location), and scatter plots (evidence relationships). You'll learn how to label axes properly for court presentation, choose appropriate scales to avoid misrepresenting data, and color-code information meaningfully. Proper visualization can close cases; misleading graphics can derail investigations or lead to wrongful convictions. Mastering the fundamentals ensures your forensic conclusions rest on clear, honest visual communication.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Basic Example: Visualizing Fiber Evidence Across Scenes",
+      "content": "You're analyzing fiber samples collected from five crime scenes. Each sample has a measured refractive index (a property used to identify fiber type). Using Matplotlib, create a simple bar chart showing fiber counts by scene, then overlay a histogram showing the distribution of refractive indices across all scenes combined. The code is straightforward: `plt.bar(scenes, counts)` and `plt.hist(indices, bins=10)`. A legend identifies which bars correspond to which scenes. This visualization quickly reveals whether Scene 3 (the suspected primary scene) has fiber characteristics consistent with the suspect's clothing, helping investigators prioritize follow-up testing.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Visualizing Forensic Datasets",
+      "content": "Apply what you've learned to new scenarios. These questions test your ability to choose and create appropriate visualizations for forensic evidence.",
+      "questions": [
+        {
+          "question": "A forensic lab has DNA profile data from suspects: allele frequencies at 13 loci (genetic markers). Which visualization would best show whether a suspect matches the crime scene profile?",
+          "options": [
+            "Pie chart of allele counts",
+            "Bar chart comparing allele values side-by-side at each locus",
+            "Scatter plot of locus numbers",
+            "Line plot of frequency trends"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Pie charts obscure numerical comparison.",
+            "Correct! Grouped or side-by-side bar charts clearly show match/mismatch at each locus.",
+            "Scatter plots don't organize categorical locus data effectively.",
+            "Line plots imply false continuity across genetic markers."
+          ],
+          "explanation": "DNA profiles are categorical at each locus. Side-by-side bar charts make it visually obvious where a suspect's profile matches or diverges from the crime scene profile\u2014critical for expert testimony."
+        },
+        {
+          "question": "You're creating a courtroom exhibit showing the timeline of a suspect's alibi. You have seven timestamps (surveillance footage, witness statements, cell tower pings). What's the most honest way to visualize this?",
+          "options": [
+            "Scatter plot with time on x-axis and event type on y-axis",
+            "Line plot connecting the timestamps in order",
+            "Histogram of hours of the day",
+            "Pie chart of event types"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Scatter plots on a timeline clearly show events without implying false continuity.",
+            "Line plots connect discrete events as if they're continuous data.",
+            "Histograms obscure the specific timeline.",
+            "Pie charts don't convey temporal information."
+          ],
+          "explanation": "Alibi timelines are discrete events, not continuous data. Scatter plots (or point plots) on a timeline honestly represent the evidence without visual misrepresentation."
+        },
+        {
+          "question": "Toxicology results: 15 blood samples from a DUI case, each with BAC (blood alcohol content) and THC (cannabis) measurements. You need one visual that shows both variables for all samples. Best choice?",
+          "options": [
+            "Two separate histograms",
+            "Scatter plot with BAC on x-axis, THC on y-axis",
+            "Bar chart stacking BAC and THC",
+            "Pie chart"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Two histograms don't show correlation between variables.",
+            "Correct! Scatter plots reveal the relationship between two continuous variables.",
+            "Stacked bars are misleading for independent measurements.",
+            "Pie charts don't apply to continuous data."
+          ],
+          "explanation": "Scatter plots efficiently display the relationship between two continuous measurements, allowing the court to see whether samples with high BAC also have high THC\u2014critical context for DUI prosecution."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Forensic Data Visualization Fundamentals Complete",
+      "content": "Excellent work! You've mastered the fundamentals of data visualization for forensic science. You now understand how to create clear, honest graphics that accurately represent evidence and communicate investigative findings\u2014whether for case reports, courtroom presentations, or peer review. Your visualizations can make the difference between clarity and confusion in high-stakes cases. As you continue your forensic practice, remember: every axis label, color choice, and scale decision communicates a message. Choose them intentionally and ethically."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "passed diagnostic (strong)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "needs foundations"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T17:31:33.635111+00:00",
+  "model": "claude-haiku-4-5"
+}

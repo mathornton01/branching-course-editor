@@ -1,0 +1,491 @@
+{
+  "id": "de-healthcare-mastery",
+  "title": "Digital Electronics in Healthcare",
+  "description": "Master digital circuits and logic fundamentals through healthcare applications. Learn how medical devices use digital signals, logic gates, combinational circuits, and sequential circuits to monitor and support patient care.",
+  "topic": "Digital Electronics",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "digital-electronics",
+    "healthcare",
+    "logic-gates",
+    "circuits",
+    "medical-devices",
+    "biomedical-engineering"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Digital Signals and Logic Gates in Healthcare",
+      "content": "Medical devices use digital signals\u2014voltage levels representing ON/OFF or 1/0 states. A pulse oximeter measures oxygen saturation as a series of digital pulses; an ECG amplifier converts heartbeats into digital data streams. Logic gates (AND, OR, NOT, NAND, NOR) combine these digital inputs to make critical decisions. For example, a ventilator's safety circuit uses an AND gate: it only delivers oxygen if BOTH the power is ON AND the patient trigger is detected. Understanding these gates is essential for reading medical device schematics and troubleshooting digital health systems."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Digital Signals and Logic Gates Assessment",
+      "content": "Test your understanding of digital signals and logic gates in medical device applications.",
+      "questions": [
+        {
+          "question": "In a blood pressure monitor, a sensor outputs 1 (HIGH) when systolic pressure > 140 mmHg and 0 otherwise. You need to trigger a warning ONLY when BOTH systolic pressure is high AND diastolic pressure is > 90 mmHg. Which logic gate should you use?",
+          "options": [
+            "OR gate\u2014activates if either input is high",
+            "AND gate\u2014activates only when both inputs are high",
+            "NOT gate\u2014inverts the input signal",
+            "XOR gate\u2014activates if inputs are different"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. OR gates activate if ANY input is 1, but you need BOTH conditions true.",
+            "Correct! AND gates output 1 only when all inputs are 1\u2014exactly what you need for dual-threshold alerting.",
+            "Incorrect. NOT gates invert signals; they don't combine multiple inputs.",
+            "Incorrect. XOR gates activate when inputs differ; they don't check both conditions being true."
+          ],
+          "explanation": "Medical safety circuits often require multiple conditions to be met before triggering alarms. The AND gate is the logical choice when you need ALL inputs to be true."
+        },
+        {
+          "question": "An ECG monitor needs to trigger an alarm if the heart rate is abnormal\u2014too fast (>120 bpm) OR too slow (<50 bpm). The monitor outputs 1 for fast and 1 for slow. Which gate outputs 1 if either input is 1?",
+          "options": [
+            "AND gate",
+            "NAND gate",
+            "OR gate",
+            "NOR gate"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. AND gates require both inputs to be 1.",
+            "Incorrect. NAND is NOT(AND)\u2014it outputs 0 when both inputs are 1.",
+            "Correct! OR gates output 1 if ANY input is 1\u2014perfect for detecting either abnormal condition.",
+            "Incorrect. NOR is NOT(OR)\u2014it outputs 1 only when both inputs are 0."
+          ],
+          "explanation": "When you want to detect ANY condition from multiple sensors, use an OR gate. This enables rapid detection of abnormalities in multi-parameter monitoring."
+        },
+        {
+          "question": "A dialysis machine's water pump should NOT run when the safety check fails (input = 0 means PASS, input = 1 means FAIL). What does a NOT gate do to invert the safety logic?",
+          "options": [
+            "Outputs 1 only when all inputs are 1",
+            "Inverts the input\u2014turns 1 to 0 and 0 to 1",
+            "Outputs 1 if any input is 1",
+            "Delays the signal by one clock cycle"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. That describes AND logic.",
+            "Correct! The NOT gate inverts signals. When the check FAILs (1), NOT outputs 0 to disable the pump; when it PASSes (0), NOT outputs 1 to enable it.",
+            "Incorrect. That describes OR logic.",
+            "Incorrect. That describes a delay element, not a logic gate."
+          ],
+          "explanation": "NOT gates are critical for safety interlocks in medical devices\u2014they invert logic to ensure harmful states are prevented."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Digital Signals and Logic Gates Practice",
+      "content": "Practice applying logic gates to healthcare scenarios. These questions match the assessment difficulty.",
+      "questions": [
+        {
+          "question": "A patient monitor combines oxygen saturation (SpO2) < 95% and heart rate (HR) > 100 bpm to detect respiratory stress. Should it use AND or OR logic?",
+          "options": [
+            "OR\u2014because we want to detect either condition",
+            "AND\u2014because BOTH conditions indicate respiratory stress",
+            "NOT\u2014because we're monitoring negative conditions",
+            "XOR\u2014because the conditions are opposite"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. OR detects ANY condition; here we need both together.",
+            "Correct! When BOTH low oxygen AND elevated heart rate occur, it indicates respiratory distress. AND gates combine these into a single 'stress detected' signal.",
+            "Incorrect. NOT gates don't combine multiple inputs.",
+            "Incorrect. XOR gates aren't used in this medical scenario."
+          ],
+          "explanation": "Clinical alerts often require multiple parameters to match a condition pattern. AND logic prevents false alarms from single anomalies."
+        },
+        {
+          "question": "An insulin pump's safety circuit must NOT deliver insulin if the battery is LOW (input = 1) OR if the occlusion alarm is ACTIVE (input = 1). Which gate arrangement prevents delivery in either fault state?",
+          "options": [
+            "OR gate followed by NOT gate",
+            "AND gate alone",
+            "NAND gate alone",
+            "NOT gate alone"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Correct if you meant this allows delivery unless EITHER fault exists. If you're preventing delivery when faults exist, use NAND directly (outputs 0 when either input is 1).",
+            "Incorrect. AND outputs 1 only if both are 1; it wouldn't catch single faults.",
+            "Correct! NAND is the logical choice: it outputs 0 if EITHER input is 1, immediately stopping insulin delivery. This is a common safety pattern in medical devices.",
+            "Incorrect. A single NOT gate can't combine multiple inputs."
+          ],
+          "explanation": "Safety-critical medical devices use NAND gates as 'kill switches'\u2014they disable harmful outputs when ANY fault condition exists."
+        },
+        {
+          "question": "In an ICU ventilator, a digital signal tracks whether each breath was triggered by the patient (1) or the machine (0). To display this on a status light, the logic must match the input. Which gate is needed?",
+          "options": [
+            "AND gate",
+            "OR gate",
+            "NOT gate",
+            "A buffer\u2014no logic gate needed"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. AND gates combine signals; they'd distort a single input.",
+            "Incorrect. OR gates also combine; they'd change the signal.",
+            "Incorrect. NOT inverts the signal; the question asks to match (not invert) the input.",
+            "Correct! When you need to pass a signal unchanged (just buffer/amplify it), no logic gate is needed\u2014a buffer simply retransmits the digital signal."
+          ],
+          "explanation": "Not every connection requires a gate. Buffers retransmit signals when you need amplification or isolation, common in medical device signal chains."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Combinational Circuits in Medical Diagnostics",
+      "content": "Combinational circuits process multiple digital inputs simultaneously without memory. In a multi-parameter patient monitor, combinational logic combines heart rate (input 1), blood oxygen (input 2), and temperature (input 3) to classify the patient's condition and route alerts appropriately. A multiplexer (MUX) selects which sensor data appears on the output\u2014critical for bandwidth-limited wireless patient monitors that can't transmit all signals at once. A decoder converts a 3-bit patient priority code into 8 different alert channels to route critical alerts to different nurses. Adders sum vital readings (e.g., total inspiratory/expiratory cycles). These circuits enable rapid, parallel processing of life-critical data without latency from sequential processing."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Combinational Circuits Assessment",
+      "content": "Demonstrate your understanding of multiplexers, decoders, adders, and other combinational circuits in medical applications.",
+      "questions": [
+        {
+          "question": "A wireless patient monitor has 4 vital sign sensors (HR, BP, SpO2, Temp) but only one wireless channel. A 2-to-4 multiplexer is used to select which sensor's data to transmit each second. How many selection lines (binary inputs) does this multiplexer need?",
+          "options": [
+            "1 line\u2014not enough to select 4 options",
+            "2 lines\u2014can represent 2\u00b2 = 4 unique combinations",
+            "3 lines\u2014one for each vital sign",
+            "4 lines\u2014one per sensor"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. 1 line can only represent 2 states (0 or 1).",
+            "Correct! 2 binary lines create 4 combinations: 00, 01, 10, 11. Each combination selects one of the 4 sensors. This is why multiplexers are so efficient for data routing.",
+            "Incorrect. 3 lines would allow 8 selections\u2014more than needed for 4 sensors.",
+            "Incorrect. 4 selection lines would allow 16 selections, which is wasteful."
+          ],
+          "explanation": "Multiplexers are sized by the formula: n selection lines handle 2^n inputs. In medical telemetry, this allows single-channel wireless transmission of multiple vital signs sequentially."
+        },
+        {
+          "question": "A critical care alarm system uses a 3-to-8 decoder. The input is a 3-bit priority code (000 to 111). Output line 5 is high when the input is 101 (binary). In a hospital with 8 nurse stations, how many alarms can this decoder route?",
+          "options": [
+            "5 alarms\u2014numbered 0 to 4",
+            "8 alarms\u2014one per output line",
+            "16 alarms\u2014since 2\u00b3 = 8 and we have multiple decoders",
+            "3 alarms\u2014one per input bit"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The decoder has 8 outputs (2\u00b3), not 5.",
+            "Correct! A 3-to-8 decoder has 8 output lines. One high output is selected based on the 3-bit input. This allows a single 3-bit signal to route alerts to any of 8 destinations.",
+            "Incorrect. A single 3-to-8 decoder produces 8 unique outputs; 16 would need a 4-to-16 decoder.",
+            "Incorrect. The decoder uses all 3 inputs as a code; each combination selects a different output."
+          ],
+          "explanation": "Decoders are essential in medical alert systems\u2014they convert a compact binary code into one of many possible alarm destinations, reducing routing complexity."
+        },
+        {
+          "question": "A ventilator counts inspiratory and expiratory cycles using a 4-bit adder. Currently, it has recorded 0111 (7 cycles). After 5 more breaths, the output should be 1100 (12 cycles). Does this adder work with the standard binary addition rule?",
+          "options": [
+            "No\u2014medical adders use special algorithms",
+            "Yes\u2014standard binary addition: 0111 + 0101 = 1100",
+            "No\u2014this requires a special medical counter, not an adder",
+            "Yes\u2014but only if the adder has error-correction features"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Medical adders use standard binary arithmetic.",
+            "Correct! 0111 (7) + 0101 (5) = 1100 (12) using standard binary addition. Medical devices use these circuits to track cumulative breath cycles, medication doses, and other running totals.",
+            "Incorrect. A standard binary adder handles this perfectly.",
+            "Incorrect. Standard binary addition works; error correction is a separate feature."
+          ],
+          "explanation": "Adders in medical devices accumulate vital statistics. Binary addition circuits are used for dose calculations, cycle counting, and other cumulative metrics."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Combinational Circuits Practice",
+      "content": "Apply your knowledge of multiplexers, decoders, and adders to additional healthcare scenarios.",
+      "questions": [
+        {
+          "question": "A hospital ICU has 32 patient beds, and each bed's alarm status (1 = alarm active, 0 = normal) feeds into a monitoring station. How many selection lines are needed in a multiplexer to display one bed's status at a time on a central monitor?",
+          "options": [
+            "5 lines\u2014since 2\u2075 = 32 beds",
+            "32 lines\u2014one per bed",
+            "4 lines\u2014too few; 2\u2074 = 16",
+            "6 lines\u2014one too many; 2\u2076 = 64"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A 5-to-32 multiplexer has 5 selection lines and can route any of 32 inputs. Entering 00000 to 11111 selects beds 1 through 32.",
+            "Incorrect. That would make an enormous, impractical multiplexer.",
+            "Incorrect. 4 lines only give 16 combinations\u2014not enough for 32 beds.",
+            "Incorrect. 6 lines would select 64 options\u2014wasteful for 32 beds."
+          ],
+          "explanation": "Hospital-scale systems use multiplexers to efficiently monitor many patient stations. The 5-bit address allows nurses to select any of 32 beds on a central display."
+        },
+        {
+          "question": "A medication IV pump delivers drugs in discrete pulses. A 4-bit binary counter tracks pulses: 0000 (0 pulses) \u2192 0001 (1) \u2192 0010 (2) \u2192 ... up to 1111 (15 pulses). What happens after the 16th pulse?",
+          "options": [
+            "It rolls over to 0000 (wraps around)",
+            "It stops at 1111 (maximum)",
+            "It switches to 5-bit counting",
+            "It adds an overflow alarm and pauses"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A 4-bit counter can only count 0-15. On the 16th pulse, it wraps: 1111 + 1 = 10000, but the extra bit overflows, leaving 0000. Many IV pumps use this predictable wrap-around to manage dosing cycles.",
+            "Incorrect. Counters wrap around when they reach maximum capacity.",
+            "Incorrect. The hardware doesn't change; it's designed for 4 bits.",
+            "Incorrect. Wrap-around is normal operation; sophisticated pumps detect overflow and flag it in software."
+          ],
+          "explanation": "Combinational counting circuits in medical pumps must account for wrap-around. Designers use overflow flags or secondary logic to detect when dosing cycles complete."
+        },
+        {
+          "question": "A surgical suite alarm system needs to route alerts from 10 different monitors to 10 specific surgeons' pagers. Is a 3-to-8 decoder sufficient?",
+          "options": [
+            "Yes\u2014it has 8 outputs, which is close enough",
+            "No\u2014a 3-to-8 decoder has only 8 outputs; you need at least 4-to-16",
+            "No\u2014you need two 3-to-8 decoders combined (16 outputs total)",
+            "Yes\u2014if you cascade multiple decoders"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Having 'close' outputs isn't sufficient in healthcare; you need exactly 10.",
+            "Correct! A 3-to-8 decoder only produces 8 unique outputs, but you need 10 (one per surgeon). A 4-to-16 decoder would provide 16 outputs, more than enough.",
+            "Incorrect. Two 3-to-8 decoders don't work together this way\u2014each independently selects 1 of 8 outputs.",
+            "Incorrect. This might work but requires more complex logic than a single 4-to-16 decoder."
+          ],
+          "explanation": "Healthcare systems require right-sizing of routing logic. A 4-to-16 decoder is the minimum standard solution for 10 destinations, with room for future expansion."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Sequential Circuits in Patient Monitoring Systems",
+      "content": "Unlike combinational circuits, sequential circuits have memory\u2014they remember past states and respond to sequences of events. Flip-flops (the fundamental memory elements) are used in ECG monitors to count heartbeats and detect arrhythmias, in ventilators to track breathing cycles and enforce timing constraints, and in pacemakers to maintain precise timing intervals. A finite state machine (FSM) in a cardiac monitor might have states: [idle waiting] \u2192 [beat detected] \u2192 [measuring interval] \u2192 [checking if normal] \u2192 [back to idle]. Shift registers in blood gas analyzers process sensor data bit-by-bit. Counters accumulate events: total breaths delivered by a ventilator, total compressions in CPR feedback devices. These memory-based circuits enable devices to recognize patterns, detect life-threatening arrhythmias, and trigger appropriate interventions based on sequences rather than single values."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Sequential Circuits Assessment",
+      "content": "Test your understanding of flip-flops, state machines, counters, and shift registers in medical device applications.",
+      "questions": [
+        {
+          "question": "An ECG monitor uses flip-flops to detect when a heartbeat occurs. After detecting a beat, a flip-flop is SET (output = 1). The monitor then measures the time until the next beat. Which type of flip-flop is best for this application\u2014one that can be set and reset independently?",
+          "options": [
+            "SR (Set-Reset) flip-flop",
+            "JK flip-flop",
+            "T (Toggle) flip-flop",
+            "D (Data) flip-flop"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! An SR flip-flop can be SET (output = 1) when a beat is detected and RESET (output = 0) when the next measurement begins. This matches the two-phase detection cycle perfectly.",
+            "Incorrect. JK flip-flops are more complex and not needed here; SR is simpler and sufficient.",
+            "Incorrect. Toggle flip-flops switch state on each clock; that's not what we need for beat detection.",
+            "Incorrect. D flip-flops capture and hold one data bit; they're not ideal for this two-state signaling."
+          ],
+          "explanation": "SR flip-flops are fundamental in medical device timing circuits. They directly implement the 'detect event, wait for next event' pattern used in cardiac monitoring."
+        },
+        {
+          "question": "A pacemaker uses a counter to track time between electrical pulses. If the counter counts up from 0 to 59 (milliseconds) and then rolls back to 0, what bit-width counter is needed?",
+          "options": [
+            "4 bits\u2014can count 0-15",
+            "5 bits\u2014can count 0-31",
+            "6 bits\u2014can count 0-63, which covers 0-59",
+            "7 bits\u2014to ensure safety margin"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. 4 bits only go up to 15.",
+            "Incorrect. 5 bits go up to 31\u2014not enough for counting to 59.",
+            "Correct! 6 bits provide a range of 0-63, which covers the needed 0-59 millisecond range. This is the minimum bit-width for this timing requirement.",
+            "Incorrect. While 7 bits would work, it's wasteful; 6 bits is sufficient and more efficient."
+          ],
+          "explanation": "Pacemakers use precise binary counters for timing. A 6-bit counter is standard for millisecond-scale timing in cardiac rhythm management."
+        },
+        {
+          "question": "A ventilator's state machine has three states: [INHALE] \u2192 [PAUSE] \u2192 [EXHALE] \u2192 [INHALE]. To distinguish three states, how many flip-flops are minimally needed?",
+          "options": [
+            "1 flip-flop\u2014not enough; 2\u00b9 = 2 states",
+            "2 flip-flops\u2014can represent 2\u00b2 = 4 states (00, 01, 10, 11)",
+            "3 flip-flops\u2014one per state",
+            "4 flip-flops\u2014for safety redundancy"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. 1 flip-flop creates only 2 distinct states.",
+            "Correct! With 2 flip-flops, you have 4 possible states (00, 01, 10, 11). You only need 3 for the breathing cycle, so 2 flip-flops is the minimum. State 11 would be unused.",
+            "Incorrect. You don't need one flip-flop per state; binary encoding is more efficient.",
+            "Incorrect. Redundancy is handled differently; standard design uses the minimum necessary bits."
+          ],
+          "explanation": "Finite state machines in ventilators use binary-encoded states. Two flip-flops enable three-state cycles (inhale-pause-exhale) with one unused state combination."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Sequential Circuits Practice",
+      "content": "Apply your knowledge of sequential circuits to additional healthcare monitoring and control scenarios.",
+      "questions": [
+        {
+          "question": "A heart rate variability (HRV) monitor uses a shift register to analyze 8 consecutive R-R intervals (time between heartbeats). After recording 8 intervals, new data shifts in from the left while old data shifts out on the right. How many flip-flops does this shift register contain?",
+          "options": [
+            "1 flip-flop\u2014not enough",
+            "4 flip-flops\u2014for 4 intervals",
+            "8 flip-flops\u2014one per interval value",
+            "16 flip-flops\u2014for two bytes of data"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. 1 flip-flop can only hold 1 bit.",
+            "Incorrect. 4 flip-flops would hold 4 bits of data per interval\u2014not the full intervals.",
+            "Correct! Each of the 8 intervals is stored in one flip-flop. When a new interval arrives, it shifts in and the oldest shifts out, maintaining a 8-interval sliding window for HRV analysis.",
+            "Incorrect. While 16 bits might be used if each interval requires 2 bytes, the shift register itself has 8 flip-flops for the 8-stage shift chain."
+          ],
+          "explanation": "Shift registers in cardiac analysis enable algorithms that detect arrhythmia patterns by comparing recent intervals. This is how ECG systems distinguish normal sinus rhythm from dangerous rhythms like atrial fibrillation."
+        },
+        {
+          "question": "A CPR feedback device counts chest compressions using a 4-bit counter. It starts at 0 and counts up. After how many compressions will the counter overflow (wrap around to 0)?",
+          "options": [
+            "8 compressions",
+            "15 compressions",
+            "16 compressions",
+            "32 compressions"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. 4 bits count beyond 8 (up to 15).",
+            "Incorrect. After the 15th compression (1111), the next count would overflow.",
+            "Correct! A 4-bit counter goes from 0 to 15 (16 total values). On the 16th compression, it overflows: 1111 + 1 = 10000, wrapping back to 0000.",
+            "Incorrect. 4 bits only count to 15, not 32."
+          ],
+          "explanation": "CPR devices track compression count to provide feedback on frequency. Designers using 4-bit counters must account for wrap-around every 16 compressions\u2014a timing consideration for real CPR feedback algorithms."
+        },
+        {
+          "question": "A blood glucose monitor's state machine has four states: [wait for sample] \u2192 [sample detected] \u2192 [analyzing] \u2192 [display result] \u2192 [wait for sample]. How many flip-flops are minimally required to encode these four states?",
+          "options": [
+            "2 flip-flops\u20142\u00b2 = 4 states",
+            "3 flip-flops\u2014one per transition",
+            "4 flip-flops\u2014one per state",
+            "1 flip-flop\u2014just toggle between modes"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! 2 flip-flops create exactly 4 possible states: 00, 01, 10, 11. Each state encodes one phase of the glucose testing cycle.",
+            "Incorrect. Flip-flops encode states, not transitions.",
+            "Incorrect. You need fewer flip-flops when you use binary encoding. One flip-flop per state is wasteful.",
+            "Incorrect. 1 flip-flop is only 2 states; you need 4 states for the full glucose-testing cycle."
+          ],
+          "explanation": "Glucose monitors use efficient state machines with minimal flip-flops. Binary encoding allows 4 unique states from just 2 flip-flops\u2014a design pattern used across medical diagnostic devices."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Digital Electronics Mastery in Healthcare",
+      "content": "Congratulations! You've mastered the foundations of digital electronics in healthcare. You now understand how digital signals flow through logic gates, how combinational circuits process multi-sensor data from pulse oximeters and blood pressure monitors, and how sequential circuits with memory enable ECG machines to detect arrhythmias, ventilators to manage breathing cycles, and pacemakers to maintain life-critical timing. These principles are at the heart of every modern medical device. From the humble logic gate making decisions in a safety interlock to complex state machines orchestrating a dialysis treatment, digital electronics keeps patients safe and informed. Armed with this knowledge, you can troubleshoot device failures, understand safety interlocks, appreciate the elegant engineering behind life-saving technology, and contribute to advancing medical device design and innovation. Your next step: explore analog-to-digital conversion, signal processing, and embedded systems design in healthcare."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin assessment"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Needs practice"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "Pass \u2014 advance"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "Ready to retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Begin assessment"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Needs practice"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "Pass \u2014 advance"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "Ready to retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Begin assessment"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Needs practice"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "Pass \u2014 complete"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "Ready to retry"
+    }
+  ],
+  "generated_at": "2026-03-27T04:58:39.569040+00:00",
+  "model": "claude-haiku-4-5"
+}

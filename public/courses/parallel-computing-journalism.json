@@ -1,0 +1,170 @@
+{
+  "id": "parallel-computing-journalism",
+  "title": "Parallel Computing in Newsroom Operations",
+  "description": "Explore how newsrooms use parallel computing\u2014from reporters handling multiple stories to analyzing audience data and managing editorial pipelines. Choose which parallelization approach interests you most.",
+  "topic": "Parallel Computing",
+  "theme": "journalism",
+  "difficulty": "intermediate",
+  "estimated_minutes": 25,
+  "tags": [
+    "parallel computing",
+    "concurrency",
+    "newsroom operations",
+    "scalability",
+    "journalism"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "How Newsrooms Work in Parallel",
+      "content": "Parallel computing means doing multiple tasks simultaneously to work faster. In journalism, this is essential\u2014newsrooms need to report multiple stories, analyze audience data, and manage editorial workflows all at once. Just as a newspaper prints different sections simultaneously, parallel computing lets computers process information in multiple ways at the same time, speeding up everything from breaking news analysis to audience insights. Understanding parallel approaches helps journalism operations scale efficiently.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Parallelization Focus",
+      "content": "Which aspect of parallel computing in newsroom operations interests you most?",
+      "choices": [
+        {
+          "label": "Task Parallelization: Multiple reporters on different stories",
+          "next": "n3"
+        },
+        {
+          "label": "Data Parallelization: Processing massive datasets from audiences",
+          "next": "n5"
+        },
+        {
+          "label": "Pipeline Parallelization: Editorial stages working simultaneously",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Understanding Task Parallelization",
+      "content": "Task parallelization means breaking work into independent tasks that can run simultaneously. In a newsroom, reporters working on different stories are an example\u2014a political reporter can investigate one story while a tech reporter covers another. Each task has minimal dependencies on others. The key insight is that independent work units can execute on different processors (or different reporters) without blocking each other. This works best when tasks are truly independent and take similar amounts of time to balance the load.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Election Night Coverage in Parallel",
+      "content": "Imagine election night at a major newspaper. Four reporters are assigned to cover four key swing states: Ohio, Pennsylvania, Arizona, and Georgia. Each works independently, gathering data and writing stories in parallel. Once all four finish around midnight, their stories are compiled into a master election results package. If they worked sequentially, results would be hours late\u2014parallelizing the work means publishing comprehensive coverage the same night.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Understanding Data Parallelization",
+      "content": "Data parallelization processes large datasets by dividing them across multiple processors. Rather than one computer analyzing all reader comments sequentially, data parallelization splits the dataset\u2014Processor 1 analyzes comments 1-1,000, Processor 2 handles 1,001-2,000, and so on. Each processes its chunk independently, and results are combined. In journalism, this matters when analyzing sentiment on social media after a story breaks, processing subscriber data for audience insights, or searching through archived articles. The same calculation runs on different data subsets in parallel, dramatically reducing analysis time.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Analyzing Viral Story Sentiment",
+      "content": "A news organization publishes an investigation into corporate misconduct and the story goes viral\u2014500,000 social media comments accumulate within hours. The newsroom needs sentiment analysis quickly. Sequential processing would take hours, but data parallelization divides the dataset across 5 processors, each analyzing its chunk simultaneously. Results return in minutes instead of hours, enabling a rapid follow-up story about public reaction before competitors finish analysis.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Understanding Pipeline Parallelization",
+      "content": "Pipeline parallelization overlaps different stages of a process. In manufacturing, assembly line workers each perform one step\u2014worker 1 assembles while worker 2 installs. Similarly, in editorial workflows, while one article is being edited, another is being fact-checked, and a third is being researched. Instead of editing finishing before fact-checking starts, these stages happen simultaneously on different articles. This requires coordination\u2014each stage must take roughly the same time to avoid bottlenecks. Pipeline parallelization doesn't make a single article faster, but it accelerates throughput of the entire publication.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Editorial Pipeline in Action",
+      "content": "A news desk manages 8 articles through research \u2192 writing \u2192 editing \u2192 publishing. At 10 AM, reporters start research. At 10:30 AM, the first reporter finishes research and starts writing while the second continues researching. By 11 AM, editing begins on the first article while writing continues on others and research begins on new pieces. Overlapping these stages lets the desk publish all 8 articles in 2 hours instead of 4 hours if done sequentially.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Bringing It Together: Three Forms of Parallelization",
+      "content": "Parallel computing takes three main forms in journalism operations. Task parallelization assigns independent work to different people or processors (reporters covering different stories, team members handling different tasks). Data parallelization divides large datasets across processors to analyze them faster (sentiment on millions of comments, subscriber analytics). Pipeline parallelization overlaps workflow stages so editorial processes flow continuously (research, writing, editing happening simultaneously on different articles). Real newsrooms use all three, and understanding when to apply each is key to building efficient, scalable operations.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Master Parallel Computing in Journalism",
+      "content": "You've explored how parallel computing powers modern journalism. From reporters collaborating on independent investigations to analyzing audience data at scale to managing editorial pipelines, parallelization is essential for competitive newsrooms. As journalism operations scale, these principles\u2014recognizing independent work, dividing large problems, and orchestrating overlapping processes\u2014become increasingly valuable for any newsroom competing in the digital news landscape."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Explore task parallelization"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Explore data parallelization"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Explore pipeline parallelization"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "See an example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Bring it together"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "See an example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Bring it together"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "See an example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Bring it together"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Complete course"
+    }
+  ],
+  "generated_at": "2026-03-27T10:38:32.916195+00:00",
+  "model": "claude-haiku-4-5"
+}

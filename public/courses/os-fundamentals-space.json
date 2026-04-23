@@ -1,0 +1,228 @@
+{
+  "id": "os-fundamentals-space",
+  "title": "Operating Systems Fundamentals: Mission Control Edition",
+  "description": "Learn operating systems concepts through space exploration analogies and scenarios",
+  "topic": "Operating Systems",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "operating systems",
+    "processes",
+    "memory",
+    "scheduling",
+    "space exploration"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Mission Control Diagnostic Assessment",
+      "content": "Welcome to NASA Mission Control! Before we dive into managing your fleet of spacecraft, let's assess your current knowledge of how complex systems coordinate multiple operations simultaneously.",
+      "questions": [
+        {
+          "question": "When Mission Control manages 5 spacecraft simultaneously executing different tasks (communications, course corrections, experiments), what is this capability called?",
+          "options": [
+            "A) Serial execution",
+            "B) Multitasking/multithreading",
+            "C) Memory allocation",
+            "D) File indexing"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Serial execution means handling one task at a time.",
+            "Correct! This is multitasking\u2014handling multiple processes concurrently.",
+            "Incorrect. Memory allocation is how we manage resources, not task management.",
+            "Incorrect. File indexing is about organizing data, not running tasks."
+          ],
+          "explanation": "Operating systems use multitasking to manage multiple processes simultaneously. In Mission Control, this means managing several spacecraft operations in parallel."
+        },
+        {
+          "question": "When a spacecraft's computer needs to store mission data, telemetry logs, and navigation algorithms, the OS must manage where each piece of data lives in storage. What is this called?",
+          "options": [
+            "A) Process scheduling",
+            "B) CPU cache optimization",
+            "C) File system management",
+            "D) Interrupt handling"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Process scheduling manages which tasks run when, not where data lives.",
+            "Incorrect. Cache optimization improves data access speed but doesn't organize storage.",
+            "Correct! The file system organizes and manages all stored data.",
+            "Incorrect. Interrupt handling manages when the CPU responds to events."
+          ],
+          "explanation": "File systems are the OS component that organizes, stores, and retrieves data. In our space scenario, this is how we manage mission logs and payload data."
+        },
+        {
+          "question": "At Mission Control, when two teams need to access the same database simultaneously (communication logs), a mechanism must prevent conflicts. What prevents data corruption in this scenario?",
+          "options": [
+            "A) CPU scheduling",
+            "B) Synchronization/mutual exclusion",
+            "C) Virtual memory",
+            "D) Interrupt vectors"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. CPU scheduling manages processor time, not data access conflicts.",
+            "Correct! Synchronization ensures only one process accesses shared data at a time.",
+            "Incorrect. Virtual memory manages memory space, not data access conflicts.",
+            "Incorrect. Interrupt vectors direct the CPU to respond to events."
+          ],
+          "explanation": "Synchronization mechanisms ensure data integrity when multiple processes access shared resources. This prevents the confusion that would occur if both Mission Control teams modified the same log simultaneously."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: OS Architecture - The Mission Control Hub",
+      "content": "You've demonstrated solid foundational knowledge! Now let's explore the sophisticated architecture that powers modern operating systems. Think of an OS as NASA's Mission Control: it coordinates multiple missions (processes), allocates finite resources (memory, CPU), manages communication (I/O), and ensures nothing crashes. Advanced topics include kernel-level concepts, process management hierarchies, memory paging and segmentation, interrupt handling, and deadlock prevention. Each component plays a critical role in the orchestration\u2014just as at Mission Control, where flight dynamics officers, capsule communicators, and power engineers must work in perfect harmony.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced Example: Multi-Mission Coordination",
+      "content": "Consider a complex Mars mission scenario: The International Space Station orbits Earth running experiments (Process A), a Mars rover navigates the surface (Process B), and a deep-space probe collects data (Process C). All three need CPU time, memory for their computations, and I/O for transmitting telemetry. An advanced OS uses preemptive scheduling to allocate CPU cycles fairly\u2014Mars rover gets 30ms, ISS gets 40ms, probe gets 20ms. Memory protection ensures if the rover's navigation algorithm crashes, it doesn't corrupt the ISS's life support data. Interrupts (solar flares, unexpected signals) force immediate context switches. Semaphores prevent both the rover and ISS from writing mission logs to the same file simultaneously. This layered coordination is what keeps a distributed space program functioning.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Mission Accomplished: Advanced Knowledge",
+      "content": "Excellent work! You've mastered advanced OS concepts and understand the sophisticated orchestration required in complex systems. You now recognize how operating systems handle concurrency, resource management, and synchronization at a professional level. Whether designing spacecraft software or managing Earth-based systems, you have the architectural knowledge to solve real-world coordination challenges. Your next step: explore kernel design, device drivers, or real-time OS specializations!"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundations: Operating System Basics",
+      "content": "Let's build a strong foundation! An operating system is like Mission Control for a spacecraft. Just as Mission Control manages multiple tasks (communications, life support checks, course corrections), an OS manages multiple programs running on your computer. The OS acts as a traffic cop\u2014it decides which program gets to use the processor, when it gets to use it, and how long it has. It's also a librarian, keeping track of all files and data. Most importantly, it's a security guard, making sure one program doesn't interfere with another. We'll explore how processes (like different spacecraft missions), memory (like fuel and storage), and scheduling (like runway assignments) all work together.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Foundational Example: Simple Mission Launch",
+      "content": "Imagine a simple spacecraft launch at Kennedy Space Center. Mission Control has three jobs: (1) Managing the launch sequence program\u2014it's running the countdown timer (Process A). (2) Monitoring ground telemetry\u2014reading sensor data (Process B). (3) Communicating with the crew\u2014managing radio transmissions (Process C). A basic OS gives each program a turn at the CPU. First, the countdown runs for 100 milliseconds. Then telemetry gets its turn for 100ms. Then communications for 100ms. The OS switches between them so fast it feels simultaneous. The OS also allocates memory: countdown needs 512MB, telemetry needs 256MB, communications needs 128MB. If one program crashes (telemetry), the others keep running\u2014that's the power of isolation. This simple round-robin scheduling and memory partitioning is the foundation of modern operating systems.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Space Mission Scheduling",
+      "content": "Test your understanding with real scenarios you might encounter at Mission Control.",
+      "questions": [
+        {
+          "question": "At Mission Control, you're managing three simultaneous spacecraft: Earth-Observation (EO) satellite, Lunar-Lander (LL), and Deep-Space-Explorer (DSE). The scheduler currently gives each 100ms of CPU time per second (round-robin). EO is doing science observations and can tolerate occasional pauses. LL is in a critical descent phase and cannot tolerate interruptions. Which scheduling adjustment would be most appropriate?",
+          "options": [
+            "A) Give all three equal time\u2014this is fairest",
+            "B) Use preemptive scheduling but reduce LL's quantum to 20ms (more frequent switches)",
+            "C) Use priority-based scheduling: LL gets 400ms per second, EO gets 300ms, DSE gets 300ms",
+            "D) Stop EO's observations to dedicate all resources to LL"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Equal time is fair but ignores critical requirements.",
+            "Incorrect. More frequent switches actually increase latency, which is dangerous for descent.",
+            "Correct! Assigning higher priority and more CPU time to critical operations is essential.",
+            "Incorrect. This wastes EO resources and violates efficiency principles."
+          ],
+          "explanation": "Real operating systems support priority-based scheduling to handle critical tasks. Just as a space mission must prioritize active descents over routine observations, OSes must prioritize urgent processes. This is why modern systems support priority levels."
+        },
+        {
+          "question": "During a spacewalk repair mission, the spacesuit computer runs a Life Support Monitor process that needs 2GB of memory. Ground control launches a Video Recording process that also needs 2GB. The total available memory is 3GB. What prevents a crash?",
+          "options": [
+            "A) The OS allocates 1.5GB to each process",
+            "B) The OS grants Life Support the 2GB it needs and refuses Video Recording",
+            "C) Video Recording starts, and if Life Support is needed, Video Recording is swapped to disk",
+            "D) Both processes share the same 2GB of memory simultaneously"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Limiting both processes causes both to malfunction.",
+            "Incorrect. While this preserves Life Support, it's wasteful of available resources.",
+            "Correct! Virtual memory allows the OS to swap less critical processes to disk temporarily.",
+            "Incorrect. Shared memory causes both processes to corrupt each other's data."
+          ],
+          "explanation": "Virtual memory is an OS feature that allows more processes than physical memory can hold. Less critical processes (like video) can be temporarily moved to disk, freeing physical RAM for critical processes (like life support). This is how modern systems run dozens of programs simultaneously with limited RAM."
+        },
+        {
+          "question": "At the International Space Station, the Thermal Control System and Power Management System both need to log data to the Mission Log file simultaneously. Without proper coordination, what could happen?",
+          "options": [
+            "A) Both processes write sequentially\u2014no problem, files append automatically",
+            "B) Data gets corrupted because writes interleave: 'Temp=45\u00b0C' + 'Power=500W' becomes 'Temp=P45ow\u00b0Ce=r=5W0'",
+            "C) The OS prevents both from writing simultaneously (mutual exclusion)",
+            "D) The second process waits until the first finishes (synchronization)"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. Files don't auto-sequence writes; simultaneous writes cause interleaving.",
+            "Correct conceptually\u2014this shows the problem! But this isn't the answer.",
+            "Correct! However, 'C' and 'D' are essentially the same\u2014both describe the solution.",
+            "Correct! The OS synchronizes access so one process finishes before the other starts."
+          ],
+          "explanation": "Synchronization prevents race conditions. The OS uses locks (mutexes) to ensure only one process writes to a shared resource at a time. This is critical for data integrity in any system with concurrent access."
+        }
+      ],
+      "pass_threshold": 60,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Mission Complete: OS Fundamentals Achieved",
+      "content": "Congratulations! You've successfully mastered the fundamentals of operating systems. You understand how OSes manage multiple processes, allocate memory, handle scheduling, and ensure data integrity. You've seen how these principles apply to real mission-critical systems like spacecraft and space stations. These foundational concepts are the building blocks for everything in computing\u2014from smartphones to supercomputers. Keep exploring: dive deeper into specific scheduling algorithms, learn about virtual memory, or explore real operating systems like Linux, Windows, or specialized space-rated OSes. You're now ready for more advanced topics!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (67%+)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Needs Review (<67%)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": null
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T05:08:08.800157+00:00",
+  "model": "claude-haiku-4-5"
+}

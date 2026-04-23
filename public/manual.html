@@ -1,0 +1,2477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Branching Course Editor - Reference Manual</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ── BASE THEME ── */
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface2: #283548;
+      --border: #334155;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #818cf8;
+      --accent2: #6366f1;
+      --accent-bg: rgba(129,140,248,0.08);
+      --accent-border: rgba(129,140,248,0.25);
+      --success: #34d399;
+      --warn: #fbbf24;
+      --danger: #f87171;
+      --code-bg: #0d1321;
+      --sidebar-w: 280px;
+      --header-h: 56px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 24px); }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    #top-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: rgba(15,23,42,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      z-index: 100;
+      gap: 16px;
+    }
+    #top-header .logo {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+    #top-header .subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    #search-box {
+      margin-left: auto;
+      position: relative;
+      max-width: 320px;
+      flex: 1;
+    }
+    #search-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 7px 12px 7px 34px;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    #search-input:focus { border-color: var(--accent); }
+    #search-input::placeholder { color: var(--muted); }
+    #search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 14px;
+      pointer-events: none;
+    }
+    #search-results {
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-top: 4px;
+      max-height: 400px;
+      overflow-y: auto;
+      display: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      z-index: 200;
+    }
+    #search-results.open { display: block; }
+    .search-result-item {
+      padding: 10px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+    }
+    .search-result-item:hover { background: var(--accent-bg); }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item .sr-section { color: var(--accent); font-weight: 600; font-size: 12px; }
+    .search-result-item .sr-title { color: var(--text); }
+    .search-result-item mark { background: rgba(129,140,248,0.3); color: var(--text); border-radius: 2px; padding: 0 2px; }
+    .header-links { display: flex; gap: 12px; flex-shrink: 0; }
+    .header-links a {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .header-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── SIDEBAR ── */
+    #sidebar {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-w);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      z-index: 90;
+      padding: 16px 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    #sidebar::-webkit-scrollbar { width: 6px; }
+    #sidebar::-webkit-scrollbar-track { background: transparent; }
+    #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .toc-section {
+      padding: 0 16px;
+      margin-bottom: 4px;
+    }
+    .toc-heading {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      padding: 8px 0 4px;
+    }
+    .toc-link {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: color 0.12s, background 0.12s, border-color 0.12s;
+      line-height: 1.5;
+    }
+    .toc-link:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+    .toc-link.active {
+      color: var(--accent);
+      background: var(--accent-bg);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+    .toc-link.sub { padding-left: 24px; font-size: 12px; }
+    .toc-link.sub2 { padding-left: 36px; font-size: 11px; }
+
+    /* ── MAIN CONTENT ── */
+    #main-content {
+      margin-left: var(--sidebar-w);
+      margin-top: var(--header-h);
+      padding: 40px 48px 120px;
+      max-width: 960px;
+    }
+
+    /* Sections */
+    .section { margin-bottom: 64px; }
+    .section-anchor { scroll-margin-top: calc(var(--header-h) + 24px); }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--accent), #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+    h5 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+
+    p { margin-bottom: 14px; color: #cbd5e1; }
+    strong { color: var(--text); }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+    .card-accent {
+      border-left: 3px solid var(--accent);
+    }
+    .card-warn {
+      border-left: 3px solid var(--warn);
+      background: rgba(251,191,36,0.04);
+    }
+    .card-success {
+      border-left: 3px solid var(--success);
+      background: rgba(52,211,153,0.04);
+    }
+    .card-danger {
+      border-left: 3px solid var(--danger);
+      background: rgba(248,113,113,0.04);
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+    thead th {
+      background: var(--surface);
+      color: var(--accent);
+      font-weight: 700;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(51,65,85,0.5);
+      vertical-align: top;
+    }
+    tbody tr:hover { background: rgba(255,255,255,0.02); }
+    td code {
+      background: var(--code-bg);
+      color: var(--warn);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+    }
+
+    /* Code blocks */
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      overflow-x: auto;
+      margin: 14px 0;
+      font-size: 13px;
+      line-height: 1.6;
+      font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+      position: relative;
+    }
+    pre .lang-tag {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      user-select: none;
+    }
+    code {
+      font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+    }
+    .json-key { color: #7dd3fc; }
+    .json-str { color: #86efac; }
+    .json-num { color: #fbbf24; }
+    .json-bool { color: #c084fc; }
+    .json-null { color: #94a3b8; }
+    .json-comment { color: #64748b; font-style: italic; }
+    .yaml-key { color: #7dd3fc; }
+    .yaml-str { color: #86efac; }
+    .yaml-num { color: #fbbf24; }
+    .yaml-comment { color: #64748b; font-style: italic; }
+
+    /* Inline code */
+    p code, li code, td code, .inline-code {
+      background: var(--code-bg);
+      color: var(--warn);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.88em;
+    }
+
+    /* Lists */
+    ul, ol { margin: 8px 0 16px 24px; }
+    li { margin-bottom: 6px; color: #cbd5e1; }
+    li::marker { color: var(--accent); }
+
+    /* Keyboard shortcuts */
+    kbd {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 2px 8px;
+      font-size: 12px;
+      font-family: inherit;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      min-width: 24px;
+      text-align: center;
+    }
+
+    /* SVG diagrams */
+    .diagram-container {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      margin: 16px 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+    .diagram-container svg { max-width: 100%; }
+    .diagram-caption {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Node color pills */
+    .node-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pill-content    { background: rgba(59,130,246,0.15); color: #60a5fa; }
+    .pill-decision   { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    .pill-assessment { background: rgba(16,185,129,0.15); color: #34d399; }
+    .pill-random     { background: rgba(139,92,246,0.15); color: #a78bfa; }
+    .pill-weighted   { background: rgba(249,115,22,0.15); color: #fb923c; }
+    .pill-condition  { background: rgba(8,145,178,0.15);  color: #22d3ee; }
+    .pill-gate       { background: rgba(244,63,94,0.15);  color: #fb7185; }
+    .pill-page_link  { background: rgba(124,58,237,0.15); color: #a78bfa; }
+    .pill-end        { background: rgba(107,114,128,0.15); color: #9ca3af; }
+    .pill-example    { background: rgba(163,230,53,0.15);  color: #a3e635; }
+    .pill-practice   { background: rgba(253,186,116,0.15); color: #fdba74; }
+
+    /* Back to top */
+    #back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent2);
+      color: white;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(99,102,241,0.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #back-to-top.visible { opacity: 1; transform: translateY(0); }
+    #back-to-top:hover { background: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      #sidebar { display: none; }
+      #main-content { margin-left: 0; padding: 32px 20px 100px; }
+      :root { --sidebar-w: 0px; }
+    }
+    @media (max-width: 640px) {
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.3rem; }
+      #top-header { padding: 0 12px; gap: 10px; }
+      #search-box { max-width: 180px; }
+      .header-links { display: none; }
+      pre { font-size: 11px; padding: 12px 14px; }
+      table { font-size: 11px; }
+      thead th, tbody td { padding: 6px 8px; }
+    }
+
+    /* Print */
+    @media print {
+      #sidebar, #top-header, #back-to-top, #search-box, .header-links { display: none !important; }
+      #main-content { margin-left: 0; margin-top: 0; padding: 20px; max-width: 100%; }
+      body { background: white; color: #111; font-size: 12px; }
+      .card { border: 1px solid #ddd; background: #f9fafb; page-break-inside: avoid; }
+      pre { background: #f1f5f9; border: 1px solid #ddd; page-break-inside: avoid; }
+      h2 { page-break-after: avoid; }
+      table { page-break-inside: avoid; }
+      a { color: #4338ca; }
+      .json-key, .yaml-key { color: #0369a1; }
+      .json-str, .yaml-str { color: #15803d; }
+      .json-num, .yaml-num { color: #b45309; }
+      .json-bool { color: #7e22ce; }
+      thead th { background: #f1f5f9; color: #374151; }
+      tbody td { border-color: #e5e7eb; }
+      .node-pill { border: 1px solid #ddd; }
+      .diagram-container { background: #fff; border: 1px solid #ddd; }
+    }
+
+    /* Scrollbar for main */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* Cross-reference links */
+    .xref { color: var(--accent); font-weight: 500; }
+    .xref:hover { text-decoration: underline; }
+
+    /* Version badge */
+    .version-badge {
+      display: inline-block;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    /* Tip/Note/Warning boxes */
+    .tip-box {
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .tip-box.tip { background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.2); }
+    .tip-box.warn { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.2); }
+    .tip-box.danger { background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.2); }
+    .tip-box .tip-label { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .tip-box.tip .tip-label { color: var(--accent); }
+    .tip-box.warn .tip-label { color: var(--warn); }
+    .tip-box.danger .tip-label { color: var(--danger); }
+
+    /* Hamburger menu for mobile TOC */
+    #mobile-toc-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 22px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    @media (max-width: 1024px) {
+      #mobile-toc-btn { display: flex; }
+    }
+    #mobile-toc-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 199;
+    }
+    #mobile-toc-overlay.open { display: block; }
+    #mobile-sidebar {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      width: 280px;
+      background: var(--surface);
+      z-index: 200;
+      overflow-y: auto;
+      padding: 60px 0 24px;
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+    }
+    #mobile-sidebar.open { display: block; transform: translateX(0); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<header id="top-header">
+  <button id="mobile-toc-btn" onclick="toggleMobileTOC()" aria-label="Table of contents">&#9776;</button>
+  <div>
+    <div class="logo">Branching Course Editor</div>
+    <div class="subtitle">Reference Manual <span class="version-badge">v6.0</span></div>
+  </div>
+  <div id="search-box">
+    <span id="search-icon">&#128269;</span>
+    <input id="search-input" type="search" placeholder="Search manual... (Ctrl+K)" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <div class="header-links">
+    <a href="tutorial.html">Tutorial</a>
+    <a href="course-editor-enhanced.html">Open Editor</a>
+    <a href="player.html">Player</a>
+  </div>
+</header>
+
+<!-- ═══════════════════ MOBILE TOC OVERLAY ═══════════════════ -->
+<div id="mobile-toc-overlay" onclick="toggleMobileTOC()"></div>
+<nav id="mobile-sidebar"></nav>
+
+<!-- ═══════════════════ SIDEBAR ═══════════════════ -->
+<nav id="sidebar">
+  <div class="toc-section">
+    <div class="toc-heading">Getting Started</div>
+    <a class="toc-link" href="#overview">Overview</a>
+    <a class="toc-link sub" href="#key-concepts">Key Concepts</a>
+    <a class="toc-link sub" href="#system-requirements">System Requirements</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Interface</div>
+    <a class="toc-link" href="#interface">Interface Reference</a>
+    <a class="toc-link sub" href="#canvas">Canvas</a>
+    <a class="toc-link sub" href="#toolbar">Toolbar</a>
+    <a class="toc-link sub" href="#properties-panel">Properties Panel</a>
+    <a class="toc-link sub" href="#mobile-interface">Mobile Interface</a>
+    <a class="toc-link sub" href="#keyboard-shortcuts">Keyboard Shortcuts</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Node Types</div>
+    <a class="toc-link" href="#node-types">Node Types Reference</a>
+    <a class="toc-link sub" href="#node-content">Content</a>
+    <a class="toc-link sub" href="#node-decision">Decision</a>
+    <a class="toc-link sub" href="#node-assessment">Assessment</a>
+    <a class="toc-link sub" href="#node-example">Example</a>
+    <a class="toc-link sub" href="#node-practice">Practice</a>
+    <a class="toc-link sub" href="#node-random">Random</a>
+    <a class="toc-link sub" href="#node-weighted">Weighted</a>
+    <a class="toc-link sub" href="#node-condition">Condition</a>
+    <a class="toc-link sub" href="#node-gate">Gate</a>
+    <a class="toc-link sub" href="#node-page-link">Page Link</a>
+    <a class="toc-link sub" href="#node-end">End</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Connections</div>
+    <a class="toc-link" href="#connections">Connection Reference</a>
+    <a class="toc-link sub" href="#conn-types">Connection Types</a>
+    <a class="toc-link sub" href="#conn-create">Creating Connections</a>
+    <a class="toc-link sub" href="#conn-validation">Validation Rules</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Attributes</div>
+    <a class="toc-link" href="#attributes">Attribute System</a>
+    <a class="toc-link sub" href="#attr-definitions">Definitions</a>
+    <a class="toc-link sub" href="#attr-effects">Effects</a>
+    <a class="toc-link sub" href="#attr-expressions">Expressions</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Layout Editor</div>
+    <a class="toc-link" href="#layout-editor">Layout Editor</a>
+    <a class="toc-link sub" href="#layout-blocks">Block Types</a>
+    <a class="toc-link sub" href="#layout-templates">Templates</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">File Format</div>
+    <a class="toc-link" href="#file-format">Course File Format</a>
+    <a class="toc-link sub" href="#format-single">Single-Page</a>
+    <a class="toc-link sub" href="#format-multi">Multi-Page</a>
+    <a class="toc-link sub" href="#format-examples">Examples</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Import / Export</div>
+    <a class="toc-link" href="#import-export">Import &amp; Export</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Settings</div>
+    <a class="toc-link" href="#settings">Editor Settings</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Player</div>
+    <a class="toc-link" href="#player">Player Reference</a>
+    <a class="toc-link sub" href="#player-state">State Variables</a>
+    <a class="toc-link sub" href="#player-hud">Attribute HUD</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Validation</div>
+    <a class="toc-link" href="#validation">Validation Rules</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Patterns</div>
+    <a class="toc-link" href="#patterns">Common Patterns</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Expressions</div>
+    <a class="toc-link" href="#expressions">Expression Language</a>
+  </div>
+  <div class="toc-section">
+    <div class="toc-heading">Troubleshooting</div>
+    <a class="toc-link" href="#troubleshooting">FAQ &amp; Troubleshooting</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════ MAIN CONTENT ═══════════════════ -->
+<main id="main-content">
+
+<!-- ======================================================================== -->
+<!-- SECTION 1: OVERVIEW                                                      -->
+<!-- ======================================================================== -->
+<div class="section" id="overview">
+  <h1 class="section-anchor">Branching Course Editor</h1>
+  <p>Reference Manual &mdash; <span class="version-badge">v6.0</span></p>
+
+  <div class="card card-accent">
+    <p style="margin-bottom:0"><strong>What is it?</strong> The Branching Course Editor is a visual, node-based authoring tool for creating interactive, non-linear learning experiences. Authors design courses as directed graphs where each node represents a content screen, a decision point, a quiz, or a flow-control mechanism. Connections between nodes define the paths learners can take, enabling deterministic, probabilistic, conditional, and gated branching.</p>
+  </div>
+
+  <p>The editor runs entirely in the browser as a single-page application. Courses are exported as portable JSON or YAML files and can be played back in the companion <a href="player.html">Course Player</a>.</p>
+
+  <h3 id="key-concepts" class="section-anchor">Key Concepts</h3>
+
+  <table>
+    <thead><tr><th>Concept</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Node</strong></td><td>A single screen or logic point in the course. Each node has a type (content, decision, assessment, etc.), a title, optional body content, and a position on the canvas.</td></tr>
+      <tr><td><strong>Connection</strong></td><td>A directed edge from one node to another. Connections have a type (default, conditional, weighted, random), an optional label, and may carry conditions or weights.</td></tr>
+      <tr><td><strong>Attribute</strong></td><td>A named numeric variable that tracks learner progress (e.g., knowledge, confidence). Attributes are defined at the course level and modified by attribute effects on individual nodes.</td></tr>
+      <tr><td><strong>Page</strong></td><td>A self-contained sub-graph within a course. Multi-page courses group related nodes together and use <code>page_link</code> nodes to navigate between pages.</td></tr>
+      <tr><td><strong>Layout</strong></td><td>Each node can have a custom visual layout made of content blocks (headings, text, images, callouts, quizzes). The layout editor controls how nodes appear to learners at runtime.</td></tr>
+      <tr><td><strong>Start Node</strong></td><td>The designated entry point of the course. Exactly one node per page should be marked as the start node.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="system-requirements" class="section-anchor">System Requirements</h3>
+  <ul>
+    <li><strong>Browser:</strong> Any modern browser &mdash; Chrome 90+, Firefox 90+, Safari 15+, Edge 90+</li>
+    <li><strong>JavaScript:</strong> Must be enabled</li>
+    <li><strong>Screen:</strong> Minimum 360px width (mobile-optimized). Desktop experience recommended at 1280px+.</li>
+    <li><strong>Network:</strong> CDN access required for Tailwind CSS, js-yaml, marked.js, and KaTeX. No backend server is required for core editing (server features are optional).</li>
+    <li><strong>Storage:</strong> LocalStorage used for auto-save and settings persistence</li>
+  </ul>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 2: INTERFACE REFERENCE                                           -->
+<!-- ======================================================================== -->
+<div class="section" id="interface">
+  <h2 class="section-anchor">2. Interface Reference</h2>
+
+  <h3 id="canvas" class="section-anchor">2.1 Canvas</h3>
+  <p>The canvas is the central work area where nodes are placed and connections are drawn. It is an infinite, pannable, zoomable surface with a dot-grid background.</p>
+
+  <table>
+    <thead><tr><th>Feature</th><th>Interaction</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grid</strong></td><td>40px dot grid (configurable). Provides visual alignment reference. Can be hidden via settings.</td></tr>
+      <tr><td><strong>Pan</strong></td><td>Middle-click drag, <kbd>Alt</kbd>+click drag, <kbd>Space</kbd>+drag, or two-finger trackpad scroll.</td></tr>
+      <tr><td><strong>Zoom</strong></td><td><kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+scroll wheel or pinch gesture. Zoom range configurable (default 10% to 500%). Zoom percentage displayed in the menu bar.</td></tr>
+      <tr><td><strong>Fit All</strong></td><td>Click the fit button in the zoom controls, or use <strong>View &gt; Fit all nodes</strong>. Automatically adjusts pan and zoom to show all nodes.</td></tr>
+      <tr><td><strong>Select</strong></td><td>Click a node to select it. Click empty canvas to deselect. <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>+click to add/remove nodes from multi-selection.</td></tr>
+      <tr><td><strong>Rectangle Select</strong></td><td>Click and drag on empty canvas to draw a selection rectangle. All nodes within the rectangle are selected.</td></tr>
+      <tr><td><strong>Empty Canvas Hint</strong></td><td>When no nodes exist, a centered hint with instructions is displayed.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="diagram-container">
+    <svg width="600" height="200" viewBox="0 0 600 200">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="0.8" fill="rgba(148,163,184,0.25)"/>
+        </pattern>
+      </defs>
+      <rect width="600" height="200" fill="#0f172a" rx="8"/>
+      <rect width="600" height="200" fill="url(#grid)" rx="8"/>
+      <!-- Sample nodes -->
+      <rect x="40" y="40" width="140" height="60" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+      <rect x="40" y="40" width="140" height="20" rx="6" fill="#3b82f6"/>
+      <text x="110" y="54" fill="white" font-size="10" font-weight="600" text-anchor="middle">CONTENT</text>
+      <text x="110" y="82" fill="#94a3b8" font-size="10" text-anchor="middle">Introduction</text>
+
+      <rect x="240" y="40" width="140" height="60" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+      <rect x="240" y="40" width="140" height="20" rx="6" fill="#f59e0b"/>
+      <text x="310" y="54" fill="white" font-size="10" font-weight="600" text-anchor="middle">DECISION</text>
+      <text x="310" y="82" fill="#94a3b8" font-size="10" text-anchor="middle">Which path?</text>
+
+      <rect x="440" y="20" width="140" height="60" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+      <rect x="440" y="20" width="140" height="20" rx="6" fill="#10b981"/>
+      <text x="510" y="34" fill="white" font-size="10" font-weight="600" text-anchor="middle">ASSESSMENT</text>
+      <text x="510" y="62" fill="#94a3b8" font-size="10" text-anchor="middle">Quiz</text>
+
+      <rect x="440" y="120" width="140" height="60" rx="6" fill="#1e293b" stroke="#6b7280" stroke-width="2"/>
+      <rect x="440" y="120" width="140" height="20" rx="6" fill="#6b7280"/>
+      <text x="510" y="134" fill="white" font-size="10" font-weight="600" text-anchor="middle">END</text>
+      <text x="510" y="162" fill="#94a3b8" font-size="10" text-anchor="middle">Complete</text>
+
+      <!-- Connections -->
+      <line x1="180" y1="70" x2="240" y2="70" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <path d="M380,55 Q410,20 440,50" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+      <path d="M380,75 Q410,120 440,150" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+      <defs>
+        <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/>
+        </marker>
+      </defs>
+
+      <text x="395" y="32" fill="#86efac" font-size="9">Pass</text>
+      <text x="395" y="110" fill="#f87171" font-size="9">Fail</text>
+    </svg>
+    <div class="diagram-caption">A simple branching flow: Content &rarr; Decision &rarr; Assessment or End</div>
+  </div>
+
+  <h3 id="toolbar" class="section-anchor">2.2 Toolbar &amp; Menu Bar</h3>
+  <p>The desktop interface uses a macOS-style menu bar across the top of the editor. Below the menu bar is a pages tab bar and a floating quick-add toolbar on the canvas.</p>
+
+  <h4>Menu Bar</h4>
+  <table>
+    <thead><tr><th>Menu</th><th>Items</th></tr></thead>
+    <tbody>
+      <tr><td><strong>File</strong></td><td>Course Database, Load from server, Save to server, New page, Import file, Export YAML, Export JSON, Print diagram, Clear canvas</td></tr>
+      <tr><td><strong>Add Node</strong></td><td>Content, Decision, Assessment, End, Random, Weighted, Condition, Gate, Page Link. All items are draggable to the canvas.</td></tr>
+      <tr><td><strong>View</strong></td><td>Fit all nodes, Auto-arrange nodes, Read/Storyboard view, Horizontal layout, Vertical layout</td></tr>
+      <tr><td><strong>Themes</strong></td><td>Domain theme configuration</td></tr>
+      <tr><td><strong>Settings</strong></td><td>Dark mode, System themes (Default, Midnight, Ocean, Warm, Slate, Forest, Rose, Violet), All settings...</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Quick-Add Toolbar</h4>
+  <p>A floating pill-shaped toolbar centered at the top of the canvas. Contains the most common node types as colored buttons. Each button can be clicked to add at the center of the viewport, or dragged directly to a position on the canvas. The toolbar can be collapsed to a small "Add" stub.</p>
+  <p>Quick-add buttons: <span class="node-pill pill-content">Content</span> <span class="node-pill pill-decision">Decision</span> <span class="node-pill pill-assessment">Quiz</span> <span class="node-pill pill-condition">Condition</span> <span class="node-pill pill-page_link">Page Link</span> <span class="node-pill pill-end">End</span></p>
+  <p>Additionally, the toolbar includes toggle buttons for <strong>Link Drag</strong> and <strong>Downstream Drag</strong> physics modes, and a <strong>Node Repulsion</strong> toggle.</p>
+
+  <h4>Zoom Controls</h4>
+  <p>Located at the right end of the menu bar: zoom out (<strong>&minus;</strong>), zoom percentage display, zoom in (<strong>+</strong>), and fit-all (<strong>&#8865;</strong>) buttons.</p>
+
+  <h3 id="properties-panel" class="section-anchor">2.3 Properties Panel</h3>
+  <p>The right sidebar (default 288px wide) shows contextual property editors. It is organized into tabs:</p>
+
+  <table>
+    <thead><tr><th>Tab</th><th>Contents</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Properties</strong></td><td>When a node is selected: node ID (read-only), type selector, title, content (Markdown), options (for decision), questions (for assessment), condition/default_target (for condition/gate), target_page/target_node (for page_link), passing score (for assessment), success/failure targets (for assessment), attribute effects, media attachments, "Set as Start" button. When a connection is selected: from/to node IDs, type, label, condition, weight. When nothing is selected: course title, description, version, tags, metadata.</td></tr>
+      <tr><td><strong>Code</strong></td><td>Raw JSON/YAML view of the selected node, connection, or entire course data. Syntax-highlighted and read-only preview with copy button.</td></tr>
+      <tr><td><strong>Attributes</strong></td><td>Course-level attribute definitions. Each attribute has: name, description, default value, min, max. Below definitions: a Progression Map showing which nodes affect each attribute with visual bar charts.</td></tr>
+      <tr><td><strong>Settings</strong></td><td>All editor configuration options organized into categories. See <a href="#settings" class="xref">Section 9: Editor Settings</a>.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="mobile-interface" class="section-anchor">2.4 Mobile Interface</h3>
+  <p>On screens narrower than 768px, the interface adapts:</p>
+  <ul>
+    <li><strong>Menu bar</strong> collapses to a simple title bar with the course name input.</li>
+    <li><strong>Properties panel</strong> becomes a bottom drawer (60vh height) that slides up from the bottom. A drag handle at the top allows manual dismiss. A backdrop overlay appears behind the drawer.</li>
+    <li><strong>Three FABs (Floating Action Buttons)</strong> replace the desktop toolbar, stacked at the bottom-right:
+      <ul>
+        <li><strong>Properties FAB</strong> (blue, bottom) &mdash; opens the properties drawer</li>
+        <li><strong>Add Node FAB</strong> (green, middle) &mdash; opens a bottom sheet with all node types</li>
+        <li><strong>More FAB</strong> (gray, top) &mdash; opens a bottom sheet with File actions (export, import, clear, etc.)</li>
+      </ul>
+    </li>
+    <li><strong>Bottom sheets</strong> appear with a drag handle and list items. The Add Node sheet lists all node types with icons. The More sheet provides export/import/server actions.</li>
+    <li><strong>Touch-friendly connection points</strong> are enlarged to 24px diameter for easier tapping.</li>
+    <li><strong>Nodes</strong> are slightly narrower (185px instead of 220px).</li>
+  </ul>
+
+  <h3 id="keyboard-shortcuts" class="section-anchor">2.5 Keyboard Shortcuts</h3>
+  <table>
+    <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><kbd>Escape</kbd></td><td>Cancel current connection, deselect all nodes and connections</td></tr>
+      <tr><td><kbd>Delete</kbd> / <kbd>Backspace</kbd></td><td>Delete selected node(s) or connection (with confirmation if enabled)</td></tr>
+      <tr><td><kbd>Space</kbd> (hold)</td><td>Enter pan mode &mdash; click and drag to pan the canvas</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+click / <kbd>Cmd</kbd>+click</td><td>Toggle node in multi-selection</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+scroll / <kbd>Cmd</kbd>+scroll</td><td>Zoom in/out at cursor position</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Save to server</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>E</kbd></td><td>Export YAML</td></tr>
+      <tr><td><kbd>Ctrl</kbd>+<kbd>K</kbd></td><td>Focus search (in this manual)</td></tr>
+      <tr><td><kbd>Alt</kbd>+click drag</td><td>Pan the canvas</td></tr>
+      <tr><td>Middle-click drag</td><td>Pan the canvas</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box tip">
+    <div class="tip-label">Tip</div>
+    Keyboard shortcuts for Delete and Space only activate when focus is not in a text input or textarea field.
+  </div>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 3: NODE TYPES REFERENCE                                          -->
+<!-- ======================================================================== -->
+<div class="section" id="node-types">
+  <h2 class="section-anchor">3. Node Types Reference</h2>
+  <p>The editor supports 11 node types. Each type serves a distinct purpose in branching course design.</p>
+
+  <div class="diagram-container">
+    <svg width="700" height="100" viewBox="0 0 700 100">
+      <rect width="700" height="100" fill="#0f172a" rx="8"/>
+      <rect x="10" y="30" width="55" height="40" rx="4" fill="#3b82f6" opacity="0.8"/><text x="37" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">Content</text>
+      <rect x="72" y="30" width="55" height="40" rx="4" fill="#f59e0b" opacity="0.8"/><text x="99" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">Decision</text>
+      <rect x="134" y="30" width="62" height="40" rx="4" fill="#10b981" opacity="0.8"/><text x="165" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">Assessment</text>
+      <rect x="203" y="30" width="55" height="40" rx="4" fill="#65a30d" opacity="0.8"/><text x="230" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">Example</text>
+      <rect x="265" y="30" width="55" height="40" rx="4" fill="#d97706" opacity="0.8"/><text x="292" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">Practice</text>
+      <rect x="327" y="30" width="55" height="40" rx="4" fill="#8b5cf6" opacity="0.8"/><text x="354" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">Random</text>
+      <rect x="389" y="30" width="58" height="40" rx="4" fill="#f97316" opacity="0.8"/><text x="418" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">Weighted</text>
+      <rect x="454" y="30" width="60" height="40" rx="4" fill="#0891b2" opacity="0.8"/><text x="484" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">Condition</text>
+      <rect x="521" y="30" width="45" height="40" rx="4" fill="#f43f5e" opacity="0.8"/><text x="543" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">Gate</text>
+      <rect x="573" y="30" width="58" height="40" rx="4" fill="#7c3aed" opacity="0.8"/><text x="602" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">Page Link</text>
+      <rect x="638" y="30" width="45" height="40" rx="4" fill="#6b7280" opacity="0.8"/><text x="660" y="55" fill="white" font-size="8" text-anchor="middle" font-weight="600">End</text>
+    </svg>
+    <div class="diagram-caption">All 11 node types with their signature colors</div>
+  </div>
+
+  <!-- ──────── CONTENT ──────── -->
+  <h3 id="node-content" class="section-anchor"><span class="node-pill pill-content">Content</span> Content Node</h3>
+  <p><strong>Purpose:</strong> Displays information to the learner. The most basic and commonly used node type. Content is displayed as Markdown with support for LaTeX math, tables, and images.</p>
+
+  <h5>Properties</h5>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>auto-generated</td><td>Unique identifier</td></tr>
+      <tr><td><code>type</code></td><td>string</td><td><code>"content"</code></td><td>Fixed type identifier</td></tr>
+      <tr><td><code>title</code></td><td>string</td><td><code>"New Content"</code></td><td>Display title</td></tr>
+      <tr><td><code>content</code></td><td>string</td><td><code>""</code></td><td>Markdown body text</td></tr>
+      <tr><td><code>position</code></td><td>object</td><td><code>{x:0, y:0}</code></td><td>Canvas position <code>{x, y}</code></td></tr>
+      <tr><td><code>isStart</code></td><td>boolean</td><td><code>false</code></td><td>Whether this is the start node</td></tr>
+      <tr><td><code>attribute_effects</code></td><td>array</td><td><code>[]</code></td><td>Attribute modifications applied when visited</td></tr>
+      <tr><td><code>attachments</code></td><td>array</td><td><code>[]</code></td><td>Media file attachments</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> Exactly 0 or 1 (single output type). The connection is always <code>default</code>.</li>
+    <li><strong>Incoming:</strong> Unlimited</li>
+  </ul>
+
+  <h5>Validation</h5>
+  <ul>
+    <li>Warning if more than 1 outgoing connection</li>
+    <li>No outgoing connection is valid (can be a dead end, though not recommended)</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>Renders the Markdown content with a "Next" or "Continue" button that follows the single outgoing <code>default</code> connection. Attribute effects are applied on node entry. If a layout is defined, it renders the layout blocks instead of raw Markdown.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"intro"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"content"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Introduction"</span>,
+  <span class="json-key">"content"</span>: <span class="json-str">"Welcome to the course! This is **Markdown** content.\n\nYou can use:\n- Lists\n- `code`\n- Math: $E = mc^2$"</span>,
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">100</span>, <span class="json-key">"y"</span>: <span class="json-num">100</span> },
+  <span class="json-key">"attribute_effects"</span>: [
+    { <span class="json-key">"attr_id"</span>: <span class="json-str">"knowledge"</span>, <span class="json-key">"delta"</span>: <span class="json-num">5</span>, <span class="json-key">"when"</span>: <span class="json-str">"always"</span> }
+  ]
+}</pre>
+
+  <div class="tip-box tip">
+    <div class="tip-label">Common Pattern</div>
+    Use content nodes for introductions, explanations, narrative passages, summaries, and transitions between sections. Chain them in sequence for linear progressions.
+  </div>
+
+  <!-- ──────── DECISION ──────── -->
+  <h3 id="node-decision" class="section-anchor"><span class="node-pill pill-decision">Decision</span> Decision Node</h3>
+  <p><strong>Purpose:</strong> Presents the learner with explicit choices. Each option maps to an outgoing connection. The learner's selection determines which path is taken.</p>
+
+  <h5>Properties</h5>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>auto-generated</td><td>Unique identifier</td></tr>
+      <tr><td><code>type</code></td><td>string</td><td><code>"decision"</code></td><td>Fixed type identifier</td></tr>
+      <tr><td><code>title</code></td><td>string</td><td><code>"New Decision"</code></td><td>Display title / question</td></tr>
+      <tr><td><code>content</code></td><td>string</td><td><code>""</code></td><td>Markdown body text above the options</td></tr>
+      <tr><td><code>options</code></td><td>array</td><td><code>[{id:"opt-a", label:"Option A"}, {id:"opt-b", label:"Option B"}]</code></td><td>Choice options. Each has <code>id</code>, <code>label</code>, and optional <code>description</code>.</td></tr>
+      <tr><td><code>position</code></td><td>object</td><td><code>{x:0, y:0}</code></td><td>Canvas position</td></tr>
+      <tr><td><code>attribute_effects</code></td><td>array</td><td><code>[]</code></td><td>Attribute modifications</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> 1 or more (multi-output). Each outgoing connection should have a label matching an option label. Connections use <code>conditional</code> type.</li>
+    <li><strong>Incoming:</strong> Unlimited</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>Renders content followed by a list of clickable choice buttons (labeled A, B, C...). When the learner selects an option, the player finds the outgoing connection whose label matches the option label and navigates to that node. If no match is found, the first connection is used as a fallback.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"fork-1"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"decision"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Which path?"</span>,
+  <span class="json-key">"content"</span>: <span class="json-str">"Choose your direction:"</span>,
+  <span class="json-key">"options"</span>: [
+    { <span class="json-key">"id"</span>: <span class="json-str">"opt-a"</span>, <span class="json-key">"label"</span>: <span class="json-str">"Beginner Path"</span>, <span class="json-key">"description"</span>: <span class="json-str">"Start from basics"</span> },
+    { <span class="json-key">"id"</span>: <span class="json-str">"opt-b"</span>, <span class="json-key">"label"</span>: <span class="json-str">"Advanced Path"</span>, <span class="json-key">"description"</span>: <span class="json-str">"Jump to the deep end"</span> }
+  ],
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">300</span>, <span class="json-key">"y"</span>: <span class="json-num">100</span> }
+}</pre>
+
+  <!-- ──────── ASSESSMENT ──────── -->
+  <h3 id="node-assessment" class="section-anchor"><span class="node-pill pill-assessment">Assessment</span> Assessment Node</h3>
+  <p><strong>Purpose:</strong> Tests learner knowledge with one or more questions. Routes to different paths based on whether the learner passes or fails (score vs. passing threshold).</p>
+
+  <h5>Properties</h5>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>auto-generated</td><td>Unique identifier</td></tr>
+      <tr><td><code>type</code></td><td>string</td><td><code>"assessment"</code></td><td>Fixed type identifier</td></tr>
+      <tr><td><code>title</code></td><td>string</td><td><code>"New Assessment"</code></td><td>Display title</td></tr>
+      <tr><td><code>content</code></td><td>string</td><td><code>""</code></td><td>Instructions shown before questions</td></tr>
+      <tr><td><code>questions</code></td><td>array</td><td><code>[]</code></td><td>Array of question objects</td></tr>
+      <tr><td><code>passing_score</code></td><td>number</td><td><code>80</code></td><td>Percentage required to pass (0-100)</td></tr>
+      <tr><td><code>success_target</code></td><td>string</td><td><code>""</code></td><td>Node ID to navigate to on pass</td></tr>
+      <tr><td><code>failure_target</code></td><td>string</td><td><code>""</code></td><td>Node ID to navigate to on fail</td></tr>
+      <tr><td><code>attribute_effects</code></td><td>array</td><td><code>[]</code></td><td>Effects with <code>when</code>: "always", "pass", or "fail"</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Question Types</h5>
+  <table>
+    <thead><tr><th>Type</th><th>Properties</th></tr></thead>
+    <tbody>
+      <tr><td><code>multiple-choice</code></td><td><code>prompt</code>, <code>options</code> (array of <code>{id, label, correct:bool}</code>), <code>points</code></td></tr>
+      <tr><td><code>true-false</code></td><td><code>prompt</code>, <code>correct_answer</code> (boolean), <code>points</code></td></tr>
+      <tr><td><code>short-answer</code></td><td><code>prompt</code>, <code>correct_answer</code> (string), <code>points</code></td></tr>
+      <tr><td><code>numeric</code></td><td><code>prompt</code>, <code>correct_answer</code> (number), <code>tolerance</code>, <code>points</code></td></tr>
+    </tbody>
+  </table>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> Typically 2 (pass and fail paths) specified via <code>success_target</code> and <code>failure_target</code>. Can also use standard connections.</li>
+    <li><strong>Incoming:</strong> Unlimited</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>All questions are presented at once. The learner answers each, then clicks "Submit". The player calculates the percentage score, compares to <code>passing_score</code>, shows a pass/fail result with score breakdown, then navigates to <code>success_target</code> or <code>failure_target</code>. Attribute effects with <code>when: "pass"</code> or <code>when: "fail"</code> only apply for the corresponding outcome.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"quiz-1"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"assessment"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Knowledge Check"</span>,
+  <span class="json-key">"passing_score"</span>: <span class="json-num">80</span>,
+  <span class="json-key">"questions"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"q1"</span>,
+      <span class="json-key">"type"</span>: <span class="json-str">"multiple-choice"</span>,
+      <span class="json-key">"prompt"</span>: <span class="json-str">"What is 2+2?"</span>,
+      <span class="json-key">"options"</span>: [
+        { <span class="json-key">"id"</span>: <span class="json-str">"a"</span>, <span class="json-key">"label"</span>: <span class="json-str">"3"</span> },
+        { <span class="json-key">"id"</span>: <span class="json-str">"b"</span>, <span class="json-key">"label"</span>: <span class="json-str">"4"</span>, <span class="json-key">"correct"</span>: <span class="json-bool">true</span> },
+        { <span class="json-key">"id"</span>: <span class="json-str">"c"</span>, <span class="json-key">"label"</span>: <span class="json-str">"5"</span> }
+      ],
+      <span class="json-key">"points"</span>: <span class="json-num">10</span>
+    }
+  ],
+  <span class="json-key">"success_target"</span>: <span class="json-str">"module-2"</span>,
+  <span class="json-key">"failure_target"</span>: <span class="json-str">"review-1"</span>,
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">600</span>, <span class="json-key">"y"</span>: <span class="json-num">100</span> }
+}</pre>
+
+  <!-- ──────── EXAMPLE ──────── -->
+  <h3 id="node-example" class="section-anchor"><span class="node-pill pill-example">Example</span> Example Node</h3>
+  <p><strong>Purpose:</strong> Displays a worked example, demonstration, or case study. Functionally similar to a content node but visually distinct to indicate its pedagogical role. Domain themes can automatically flavor example content.</p>
+
+  <h5>Properties</h5>
+  <p>Same as <a href="#node-content" class="xref">Content node</a> with <code>type: "example"</code>.</p>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> 0 or 1 (<code>default</code> connection). Same as content.</li>
+    <li><strong>Incoming:</strong> Unlimited</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>Renders identically to content with a green "Example" badge. In the player, a distinct badge style (green background) distinguishes it from standard content. When a domain theme is set, the layout editor can auto-generate domain-specific example content.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"ex-1"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"example"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Worked Example: Quadratic Formula"</span>,
+  <span class="json-key">"content"</span>: <span class="json-str">"Solve $x^2 + 5x + 6 = 0$..."</span>,
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">200</span>, <span class="json-key">"y"</span>: <span class="json-num">300</span> }
+}</pre>
+
+  <div class="tip-box tip">
+    <div class="tip-label">Tip</div>
+    If the editor encounters an unknown node type during import (such as "lesson" or "slide"), it maps them to content nodes automatically.
+  </div>
+
+  <!-- ──────── PRACTICE ──────── -->
+  <h3 id="node-practice" class="section-anchor"><span class="node-pill pill-practice">Practice</span> Practice Node</h3>
+  <p><strong>Purpose:</strong> Provides an interactive practice exercise or hands-on activity. Like example, this is functionally a content node with distinct visual identity for instructional design clarity.</p>
+
+  <h5>Properties</h5>
+  <p>Same as <a href="#node-content" class="xref">Content node</a> with <code>type: "practice"</code>.</p>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> 0 or 1 (<code>default</code> connection)</li>
+    <li><strong>Incoming:</strong> Unlimited</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>Renders with an orange "Practice" badge. Content is displayed as Markdown with a "Continue" button.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"practice-1"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"practice"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Try It Yourself"</span>,
+  <span class="json-key">"content"</span>: <span class="json-str">"Using the formula above, solve the following problems..."</span>,
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">400</span>, <span class="json-key">"y"</span>: <span class="json-num">300</span> }
+}</pre>
+
+  <!-- ──────── RANDOM ──────── -->
+  <h3 id="node-random" class="section-anchor"><span class="node-pill pill-random">Random</span> Random Node</h3>
+  <p><strong>Purpose:</strong> Introduces controlled randomness. The runtime picks one of the outgoing connections completely at random (uniform probability). Useful for randomized practice sets, unpredictable narrative branches, or A/B testing scenarios.</p>
+
+  <h5>Properties</h5>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>auto-generated</td><td>Unique identifier</td></tr>
+      <tr><td><code>type</code></td><td>string</td><td><code>"random"</code></td><td>Fixed type identifier</td></tr>
+      <tr><td><code>title</code></td><td>string</td><td><code>"New Random"</code></td><td>Display title</td></tr>
+      <tr><td><code>content</code></td><td>string</td><td><code>""</code></td><td>Optional text shown before branching</td></tr>
+      <tr><td><code>position</code></td><td>object</td><td><code>{x:0, y:0}</code></td><td>Canvas position</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> 2 or more recommended. All connections use <code>random</code> type. Each has equal probability.</li>
+    <li><strong>Incoming:</strong> Unlimited</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>Briefly displays the node content (if any), then automatically picks one outgoing connection uniformly at random and navigates to its target. The learner does not make a choice &mdash; the system decides.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"random-event"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"random"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Random Encounter"</span>,
+  <span class="json-key">"content"</span>: <span class="json-str">"Something unexpected happens..."</span>,
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">400</span>, <span class="json-key">"y"</span>: <span class="json-num">200</span> }
+}</pre>
+
+  <!-- ──────── WEIGHTED ──────── -->
+  <h3 id="node-weighted" class="section-anchor"><span class="node-pill pill-weighted">Weighted</span> Weighted Node</h3>
+  <p><strong>Purpose:</strong> Similar to random, but each outgoing connection carries a probability weight (0-100). The runtime samples proportionally. Useful for scenarios where some outcomes are more likely than others.</p>
+
+  <h5>Properties</h5>
+  <p>Same base properties as Random. Weights are stored on the <em>connections</em>, not the node itself.</p>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> 2 or more recommended. All connections use <code>weighted</code> type and <strong>must</strong> include a <code>weight</code> field (0-100). Weights should sum to 100; if they do not, the runtime normalizes automatically.</li>
+    <li><strong>Incoming:</strong> Unlimited</li>
+  </ul>
+
+  <h5>Validation</h5>
+  <ul>
+    <li>Warning if weights do not sum to 100</li>
+    <li>Warning if any connection is missing a weight</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>Displays content briefly, then samples one outgoing connection proportionally to its weight. Probability chips are shown on the node in the editor to visualize the distribution.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"weighted-fork"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"weighted"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Scenario Draw"</span>,
+  <span class="json-key">"content"</span>: <span class="json-str">"The outcome depends on probability."</span>,
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">500</span>, <span class="json-key">"y"</span>: <span class="json-num">200</span> }
+}
+<span class="json-comment">// Connections from this node:</span>
+<span class="json-comment">// { from: "weighted-fork", to: "easy-path", type: "weighted", label: "Easy", weight: 70 }</span>
+<span class="json-comment">// { from: "weighted-fork", to: "hard-path", type: "weighted", label: "Hard", weight: 30 }</span></pre>
+
+  <!-- ──────── CONDITION ──────── -->
+  <h3 id="node-condition" class="section-anchor"><span class="node-pill pill-condition">Condition</span> Condition Node</h3>
+  <p><strong>Purpose:</strong> Evaluates a runtime expression and routes the learner to the matching outgoing connection. Works like a programmatic switch/case statement. Used for adaptive routing based on scores, attributes, or custom variables.</p>
+
+  <h5>Properties</h5>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>auto-generated</td><td>Unique identifier</td></tr>
+      <tr><td><code>type</code></td><td>string</td><td><code>"condition"</code></td><td>Fixed type identifier</td></tr>
+      <tr><td><code>title</code></td><td>string</td><td><code>"New Condition"</code></td><td>Display title</td></tr>
+      <tr><td><code>condition</code></td><td>string</td><td><code>""</code></td><td>The variable or expression to evaluate</td></tr>
+      <tr><td><code>default_target</code></td><td>string</td><td><code>""</code></td><td>Fallback node ID if no condition matches</td></tr>
+      <tr><td><code>position</code></td><td>object</td><td><code>{x:0, y:0}</code></td><td>Canvas position</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> 1 or more. All connections use <code>conditional</code> type. Each connection's <code>label</code> carries the condition expression that must evaluate to true for that path to be taken. Connections are evaluated in order; the first match wins.</li>
+    <li><strong>Incoming:</strong> Unlimited</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>Evaluates each outgoing connection's condition expression against the current state (score, attributes, variables). Navigates to the first matching connection. If none match, navigates to <code>default_target</code>. See <a href="#expressions" class="xref">Expression Language Reference</a> for syntax.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"score-router"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"condition"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Score Router"</span>,
+  <span class="json-key">"condition"</span>: <span class="json-str">"score"</span>,
+  <span class="json-key">"default_target"</span>: <span class="json-str">"review-1"</span>,
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">700</span>, <span class="json-key">"y"</span>: <span class="json-num">150</span> }
+}</pre>
+
+  <!-- ──────── GATE ──────── -->
+  <h3 id="node-gate" class="section-anchor"><span class="node-pill pill-gate">Gate</span> Gate Node</h3>
+  <p><strong>Purpose:</strong> Blocks the learner at this point until a condition becomes true. Acts as a prerequisite check or conditional barrier. Once the condition is satisfied, the learner proceeds.</p>
+
+  <h5>Properties</h5>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>auto-generated</td><td>Unique identifier</td></tr>
+      <tr><td><code>type</code></td><td>string</td><td><code>"gate"</code></td><td>Fixed type identifier</td></tr>
+      <tr><td><code>title</code></td><td>string</td><td><code>"New Gate"</code></td><td>Display title</td></tr>
+      <tr><td><code>content</code></td><td>string</td><td><code>""</code></td><td>Message shown while gate is locked</td></tr>
+      <tr><td><code>condition</code></td><td>string</td><td><code>""</code></td><td>Expression that must be true to pass. Empty string = always pass.</td></tr>
+      <tr><td><code>default_target</code></td><td>string</td><td><code>""</code></td><td>Node ID to proceed to when gate opens</td></tr>
+      <tr><td><code>position</code></td><td>object</td><td><code>{x:0, y:0}</code></td><td>Canvas position</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> Exactly 0 or 1 (single output type). Uses <code>default</code> connection or <code>default_target</code>.</li>
+    <li><strong>Incoming:</strong> Unlimited</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>When a learner arrives at a gate node, the condition is evaluated. If true, the learner passes through immediately. If false, the gate displays the content/message and a locked state. The runtime periodically re-evaluates the condition. A gate with an empty condition always passes immediately.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"prereq-gate"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"gate"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Prerequisite Check"</span>,
+  <span class="json-key">"content"</span>: <span class="json-str">"Complete Module 1 before continuing."</span>,
+  <span class="json-key">"condition"</span>: <span class="json-str">"completed_modules >= 1"</span>,
+  <span class="json-key">"default_target"</span>: <span class="json-str">"module-2-intro"</span>,
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">800</span>, <span class="json-key">"y"</span>: <span class="json-num">150</span> }
+}</pre>
+
+  <!-- ──────── PAGE LINK ──────── -->
+  <h3 id="node-page-link" class="section-anchor"><span class="node-pill pill-page_link">Page Link</span> Page Link Node</h3>
+  <p><strong>Purpose:</strong> Navigates to another page in a multi-page course. Acts as a portal between sub-graphs. The target can be a specific page and optionally a specific node within that page.</p>
+
+  <h5>Properties</h5>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>auto-generated</td><td>Unique identifier</td></tr>
+      <tr><td><code>type</code></td><td>string</td><td><code>"page_link"</code></td><td>Fixed type identifier</td></tr>
+      <tr><td><code>title</code></td><td>string</td><td><code>"New Page Link"</code></td><td>Display title</td></tr>
+      <tr><td><code>target_page</code></td><td>string</td><td><code>""</code></td><td>ID of the target page</td></tr>
+      <tr><td><code>target_node</code></td><td>string</td><td><code>""</code></td><td>Optional: specific node ID within the target page</td></tr>
+      <tr><td><code>position</code></td><td>object</td><td><code>{x:0, y:0}</code></td><td>Canvas position</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> 0 or 1 (single output type). The outgoing connection is a fallback; the primary navigation is via <code>target_page</code>.</li>
+    <li><strong>Incoming:</strong> Unlimited</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>When reached, the player switches to the target page and navigates to either the <code>target_node</code> or the start node of that page. Learner state (attributes, variables, score) is preserved across page transitions.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"go-to-page-2"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"page_link"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Continue to Module 2"</span>,
+  <span class="json-key">"target_page"</span>: <span class="json-str">"page-2"</span>,
+  <span class="json-key">"target_node"</span>: <span class="json-str">"module-2-intro"</span>,
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">1000</span>, <span class="json-key">"y"</span>: <span class="json-num">200</span> }
+}</pre>
+
+  <!-- ──────── END ──────── -->
+  <h3 id="node-end" class="section-anchor"><span class="node-pill pill-end">End</span> End Node</h3>
+  <p><strong>Purpose:</strong> Marks the terminal point of a course path. No outgoing connections. Displays a completion screen with final statistics.</p>
+
+  <h5>Properties</h5>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>auto-generated</td><td>Unique identifier</td></tr>
+      <tr><td><code>type</code></td><td>string</td><td><code>"end"</code></td><td>Fixed type identifier</td></tr>
+      <tr><td><code>title</code></td><td>string</td><td><code>"New End"</code></td><td>Display title</td></tr>
+      <tr><td><code>content</code></td><td>string</td><td><code>""</code></td><td>Optional completion message</td></tr>
+      <tr><td><code>attribute_effects</code></td><td>array</td><td><code>[]</code></td><td>Final attribute modifications</td></tr>
+      <tr><td><code>position</code></td><td>object</td><td><code>{x:0, y:0}</code></td><td>Canvas position</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Connection Rules</h5>
+  <ul>
+    <li><strong>Outgoing:</strong> Exactly 0 (zero output type). Any outgoing connections produce a validation error.</li>
+    <li><strong>Incoming:</strong> Unlimited (but at least 1 recommended)</li>
+  </ul>
+
+  <h5>Player Behavior</h5>
+  <p>Displays a completion screen with a trophy icon, the node title, optional content, and a statistics grid showing: final score, nodes visited, questions answered, and final attribute values. A "Restart" button allows the learner to begin the course again.</p>
+
+  <h5>Example JSON</h5>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"id"</span>: <span class="json-str">"finish"</span>,
+  <span class="json-key">"type"</span>: <span class="json-str">"end"</span>,
+  <span class="json-key">"title"</span>: <span class="json-str">"Course Complete"</span>,
+  <span class="json-key">"content"</span>: <span class="json-str">"Congratulations! You have completed the course."</span>,
+  <span class="json-key">"position"</span>: { <span class="json-key">"x"</span>: <span class="json-num">1200</span>, <span class="json-key">"y"</span>: <span class="json-num">150</span> }
+}</pre>
+
+  <!-- Node type summary table -->
+  <h3>Node Type Summary</h3>
+  <table>
+    <thead><tr><th>Type</th><th>Color</th><th>Icon</th><th>Max Out</th><th>Conn Type</th><th>Has Options</th><th>Has Condition</th></tr></thead>
+    <tbody>
+      <tr><td><code>content</code></td><td style="color:#3b82f6">Blue</td><td>&#128196;</td><td>1</td><td>default</td><td>No</td><td>No</td></tr>
+      <tr><td><code>decision</code></td><td style="color:#f59e0b">Amber</td><td>&#128256;</td><td>Unlimited</td><td>conditional</td><td>Yes</td><td>No</td></tr>
+      <tr><td><code>assessment</code></td><td style="color:#10b981">Emerald</td><td>&#128221;</td><td>2*</td><td>default</td><td>No</td><td>No</td></tr>
+      <tr><td><code>example</code></td><td style="color:#65a30d">Lime</td><td>&#128218;</td><td>1</td><td>default</td><td>No</td><td>No</td></tr>
+      <tr><td><code>practice</code></td><td style="color:#d97706">Orange</td><td>&#128295;</td><td>1</td><td>default</td><td>No</td><td>No</td></tr>
+      <tr><td><code>random</code></td><td style="color:#8b5cf6">Violet</td><td>&#127922;</td><td>Unlimited</td><td>random</td><td>No</td><td>No</td></tr>
+      <tr><td><code>weighted</code></td><td style="color:#f97316">Orange</td><td>&#9878;&#65039;</td><td>Unlimited</td><td>weighted</td><td>No</td><td>No</td></tr>
+      <tr><td><code>condition</code></td><td style="color:#0891b2">Cyan</td><td>&#9889;</td><td>Unlimited</td><td>conditional</td><td>No</td><td>Yes</td></tr>
+      <tr><td><code>gate</code></td><td style="color:#f43f5e">Rose</td><td>&#128679;</td><td>1</td><td>default</td><td>No</td><td>Yes</td></tr>
+      <tr><td><code>page_link</code></td><td style="color:#7c3aed">Purple</td><td>&#128209;</td><td>1</td><td>default</td><td>No</td><td>No</td></tr>
+      <tr><td><code>end</code></td><td style="color:#6b7280">Gray</td><td>&#127937;</td><td>0</td><td>N/A</td><td>No</td><td>No</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px;color:var(--muted)">* Assessment routing uses <code>success_target</code> / <code>failure_target</code> properties rather than standard connections.</p>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 4: CONNECTION REFERENCE                                          -->
+<!-- ======================================================================== -->
+<div class="section" id="connections">
+  <h2 class="section-anchor">4. Connection Reference</h2>
+
+  <h3>Connection Properties</h3>
+  <table>
+    <thead><tr><th>Property</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>Auto</td><td>Unique connection identifier (auto-generated: <code>conn-{timestamp}</code>)</td></tr>
+      <tr><td><code>from</code></td><td>string</td><td>Yes</td><td>Source node ID</td></tr>
+      <tr><td><code>to</code></td><td>string</td><td>Yes</td><td>Target node ID</td></tr>
+      <tr><td><code>type</code></td><td>string</td><td>Yes</td><td>Connection type: <code>default</code>, <code>conditional</code>, <code>weighted</code>, or <code>random</code></td></tr>
+      <tr><td><code>label</code></td><td>string</td><td>No</td><td>Display label on the edge. For decision nodes, matches option labels. For condition nodes, carries the condition expression.</td></tr>
+      <tr><td><code>condition</code></td><td>string</td><td>No</td><td>Condition expression (for <code>conditional</code> type)</td></tr>
+      <tr><td><code>weight</code></td><td>number</td><td>No*</td><td>Probability weight 0-100 (required for <code>weighted</code> type)</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="conn-types" class="section-anchor">Connection Types</h3>
+  <table>
+    <thead><tr><th>Type</th><th>Used With</th><th>Behavior</th><th>Extra Fields</th></tr></thead>
+    <tbody>
+      <tr><td><code>default</code></td><td>content, gate, page_link, end, assessment</td><td>Taken automatically when the source node completes. Unconditional.</td><td>None</td></tr>
+      <tr><td><code>conditional</code></td><td>decision, condition</td><td>Taken only when the label/condition evaluates to true. For decision nodes, the label matches the selected option. For condition nodes, the label is an expression.</td><td><code>label</code>, <code>condition</code></td></tr>
+      <tr><td><code>weighted</code></td><td>weighted</td><td>Sampled by probability. The runtime generates a random number and selects a connection proportional to its weight.</td><td><code>weight</code> (0-100), <code>label</code></td></tr>
+      <tr><td><code>random</code></td><td>random</td><td>One connection is selected uniformly at random. All connections have equal probability.</td><td><code>label</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="conn-create" class="section-anchor">Creating Connections</h3>
+  <ol>
+    <li>Hover over a node to reveal <strong>connection points</strong> &mdash; small circles on the left (input) and right (output) sides of the node.</li>
+    <li>Click and drag from an <strong>output point</strong> (blue circle, right side).</li>
+    <li>A temporary line follows your cursor. Release on another node's <strong>input point</strong> (left side) to complete the connection.</li>
+    <li>Press <kbd>Escape</kbd> to cancel an in-progress connection.</li>
+  </ol>
+  <p><strong>Editing:</strong> Click a connection line to select it (turns red). Edit its properties in the Properties panel. Click elsewhere to deselect.</p>
+  <p><strong>Deleting:</strong> Select a connection and press <kbd>Delete</kbd>/<kbd>Backspace</kbd>, or use the delete button in the properties panel.</p>
+
+  <h3 id="conn-validation" class="section-anchor">Connection Validation Rules</h3>
+  <ul>
+    <li>Self-connections (same source and target) are rejected</li>
+    <li>Duplicate connections (same from/to pair) are rejected</li>
+    <li>Connections <em>into</em> end nodes are rejected (end nodes are terminal)</li>
+    <li>Single-output node types (content, gate, page_link) warn when more than one outgoing connection exists</li>
+    <li>Connection type is automatically inferred from the source node type (condition &rarr; conditional, weighted &rarr; weighted, random &rarr; random, others &rarr; default)</li>
+  </ul>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 5: ATTRIBUTE SYSTEM REFERENCE                                    -->
+<!-- ======================================================================== -->
+<div class="section" id="attributes">
+  <h2 class="section-anchor">5. Attribute System Reference</h2>
+  <p>Attributes are named numeric variables that represent learner characteristics (knowledge, confidence, skill level, etc.). They are defined at the course level, modified by node effects, displayed in the player's HUD, and can be used in condition/gate expressions.</p>
+
+  <h3 id="attr-definitions" class="section-anchor">Attribute Definitions</h3>
+  <p>Defined in the <strong>Attributes</strong> tab of the properties panel. Each attribute has:</p>
+  <table>
+    <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>Unique identifier (auto-generated: <code>attr-{timestamp}</code>)</td></tr>
+      <tr><td><code>name</code></td><td>string</td><td>Display name (e.g., "Courage", "Knowledge")</td></tr>
+      <tr><td><code>description</code></td><td>string</td><td>Optional description of what this attribute represents</td></tr>
+      <tr><td><code>default</code></td><td>number</td><td>Starting value (default: 0)</td></tr>
+      <tr><td><code>min</code></td><td>number|null</td><td>Minimum value (null = no minimum)</td></tr>
+      <tr><td><code>max</code></td><td>number|null</td><td>Maximum value (null = no maximum)</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="attr-effects" class="section-anchor">Attribute Effects</h3>
+  <p>Individual nodes can modify attributes when the learner visits them. Effects are configured in the Properties tab when a node is selected.</p>
+  <table>
+    <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>attr_id</code></td><td>string</td><td>ID of the attribute to modify</td></tr>
+      <tr><td><code>delta</code></td><td>number</td><td>Amount to add (positive) or subtract (negative)</td></tr>
+      <tr><td><code>when</code></td><td>string</td><td><code>"always"</code>, <code>"pass"</code>, or <code>"fail"</code>. For assessment nodes, "pass"/"fail" triggers only apply for the corresponding outcome.</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Progression Map</h5>
+  <p>The Attributes tab displays a visual Progression Map showing which nodes affect each attribute, with bar charts indicating the magnitude and direction of each effect. Click a node in the map to select it and jump to its properties.</p>
+
+  <h3 id="attr-expressions" class="section-anchor">Using Attributes in Expressions</h3>
+  <p>Attributes are available as variables in condition and gate expressions. Reference them by their name (lowercase, underscores for spaces):</p>
+  <pre><span class="lang-tag">Expression</span>
+<span class="json-comment">// In a condition node's outgoing connection:</span>
+<span class="json-str">knowledge >= 50</span>
+
+<span class="json-comment">// In a gate node's condition:</span>
+<span class="json-str">confidence > 30 && skill_level >= 2</span>
+
+<span class="json-comment">// Compound conditions:</span>
+<span class="json-str">(knowledge >= 80 || experience >= 5) && attempts < 3</span></pre>
+
+  <h5>Player HUD Display</h5>
+  <p>When a course has attributes defined, the player shows an <strong>Attribute Bar</strong> below the header. Each attribute appears as a pill with an icon, name, and current value. When an attribute changes, a delta indicator (+N / -N) flashes with a green (increase) or red (decrease) animation.</p>
+
+  <p>Built-in icon mappings:</p>
+  <table>
+    <thead><tr><th>Attribute Name</th><th>Icon</th></tr></thead>
+    <tbody>
+      <tr><td>knowledge</td><td>&#128218;</td></tr>
+      <tr><td>confidence</td><td>&#128170;</td></tr>
+      <tr><td>experience</td><td>&#11088;</td></tr>
+      <tr><td>skill_level</td><td>&#127919;</td></tr>
+      <tr><td>creativity</td><td>&#127912;</td></tr>
+      <tr><td>critical_thinking</td><td>&#129504;</td></tr>
+      <tr><td>intuition</td><td>&#128302;</td></tr>
+      <tr><td>wisdom</td><td>&#129417;</td></tr>
+      <tr><td>speed</td><td>&#9889;</td></tr>
+      <tr><td>accuracy</td><td>&#127919;</td></tr>
+      <tr><td>research</td><td>&#128300;</td></tr>
+      <tr><td>practical</td><td>&#128295;</td></tr>
+      <tr><td>communication</td><td>&#128172;</td></tr>
+      <tr><td>leadership</td><td>&#128081;</td></tr>
+      <tr><td>teamwork</td><td>&#129309;</td></tr>
+      <tr><td><em>default</em></td><td>&#128202;</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 6: LAYOUT EDITOR REFERENCE                                       -->
+<!-- ======================================================================== -->
+<div class="section" id="layout-editor">
+  <h2 class="section-anchor">6. Layout Editor Reference</h2>
+  <p>Each node can have a custom visual layout that controls how it appears to learners at runtime. The layout editor is a full-screen modal with a block-based WYSIWYG canvas.</p>
+
+  <h3>Opening the Layout Editor</h3>
+  <p>Select a node, then click the <strong>"Edit Layout"</strong> button in the Properties panel. The editor opens as a full-screen overlay with three areas:</p>
+  <ol>
+    <li><strong>Block Palette</strong> (left sidebar, 192px) &mdash; lists all available block types. Click or drag to add.</li>
+    <li><strong>Page Canvas</strong> (center, 900px default) &mdash; a positioned canvas with a dot-grid background where blocks are placed.</li>
+    <li><strong>Header Bar</strong> (top) &mdash; shows node name, canvas width presets, template menu, and close/save buttons.</li>
+  </ol>
+
+  <h3 id="layout-blocks" class="section-anchor">Block Types</h3>
+  <table>
+    <thead><tr><th>Block</th><th>Icon</th><th>Default Size</th><th>Properties</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>heading</strong></td>
+        <td>&#128292;</td>
+        <td>660 x 90</td>
+        <td><code>level</code> (1-6), <code>text</code> (string), <code>align</code> (left/center/right)</td>
+      </tr>
+      <tr>
+        <td><strong>text</strong></td>
+        <td>&#128221;</td>
+        <td>640 x 200</td>
+        <td><code>content</code> (Markdown string), <code>align</code> (left/center/right)</td>
+      </tr>
+      <tr>
+        <td><strong>callout</strong></td>
+        <td>&#128161;</td>
+        <td>640 x 140</td>
+        <td><code>style</code> (info/warning/success), <code>content</code> (Markdown string)</td>
+      </tr>
+      <tr>
+        <td><strong>image</strong></td>
+        <td>&#128444;&#65039;</td>
+        <td>500 x 320</td>
+        <td><code>url</code> (image URL), <code>alt</code> (alt text), <code>caption</code> (optional). Supports upload via media endpoint.</td>
+      </tr>
+      <tr>
+        <td><strong>video</strong></td>
+        <td>&#127916;</td>
+        <td>640 x 160</td>
+        <td><code>url</code> (embed URL or direct video URL), <code>caption</code> (optional). YouTube/Vimeo embeds auto-detected.</td>
+      </tr>
+      <tr>
+        <td><strong>code</strong></td>
+        <td>&#128187;</td>
+        <td>660 x 240</td>
+        <td><code>language</code> (string, e.g. "python", "javascript"), <code>content</code> (code string). Syntax highlighting via marked.js code blocks.</td>
+      </tr>
+      <tr>
+        <td><strong>columns</strong></td>
+        <td>&#11036;</td>
+        <td>780 x 240</td>
+        <td><code>columns</code> (array of 2 column objects). Each column can contain text content. Renders as a side-by-side grid.</td>
+      </tr>
+      <tr>
+        <td><strong>divider</strong></td>
+        <td>&#9472;&#9472;</td>
+        <td>640 x 48</td>
+        <td>No properties. Renders as a horizontal line separator.</td>
+      </tr>
+      <tr>
+        <td><strong>quiz_question</strong></td>
+        <td>&#10067;</td>
+        <td>660 x 340</td>
+        <td><code>question</code> (string), <code>choices</code> (array of strings), <code>answer_idx</code> (number, 0-based correct choice index), <code>explanation</code> (optional string shown after answer)</td>
+      </tr>
+      <tr>
+        <td><strong>nav_button</strong></td>
+        <td>&#9654;</td>
+        <td>260 x 80</td>
+        <td><code>label</code> (button text, e.g. "Next"), <code>style</code> (primary/secondary), <code>_optId</code> (optional: binds to a decision option for routing)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h5>Positioning and Sizing</h5>
+  <p>Each block has absolute positioning on the canvas with properties <code>x</code>, <code>y</code>, <code>w</code> (width), and <code>h</code> (height). Blocks can be:</p>
+  <ul>
+    <li><strong>Moved</strong> by dragging the header bar (cursor: move)</li>
+    <li><strong>Resized</strong> by dragging the resize handle in the bottom-right corner</li>
+    <li><strong>Precisely positioned</strong> using the geometry bar at the bottom of each block (X, Y, W, H numeric inputs)</li>
+    <li><strong>Aligned</strong> using alignment buttons (left/center/right) in the geometry bar</li>
+  </ul>
+
+  <h5>Canvas Width Presets</h5>
+  <p>The header bar provides width presets for the page canvas: common options include 640px (mobile), 900px (default), and wider options for desktop-first designs.</p>
+
+  <h3 id="layout-templates" class="section-anchor">Templates</h3>
+  <p>The layout editor includes pre-built templates accessible from the header menu:</p>
+  <table>
+    <thead><tr><th>Template</th><th>Contents</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Lesson Intro</strong></td><td>Heading (H1), info callout (learning objectives), text block, primary nav button</td></tr>
+      <tr><td><strong>Content Section</strong></td><td>Heading (H2), text block, image, divider</td></tr>
+      <tr><td><strong>Quiz Section</strong></td><td>Heading (H2), quiz_question block, primary nav button ("Submit")</td></tr>
+      <tr><td><strong>Two-Column</strong></td><td>Heading (H2), columns block with side-by-side content</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Auto-Generated Layouts</h5>
+  <p>When opening the layout editor for a node that has no layout, the editor auto-generates one based on the node type:</p>
+  <ul>
+    <li><strong>Content/Example/Practice:</strong> Heading + text block with the node's content</li>
+    <li><strong>Decision:</strong> Heading + nav_button for each option</li>
+    <li><strong>Assessment:</strong> Heading + quiz_question for each question + submit button</li>
+    <li><strong>Condition/Gate:</strong> Info/warning callout with condition details</li>
+    <li><strong>End:</strong> Centered "The End" heading</li>
+    <li><strong>Random/Weighted:</strong> Callout explaining the branching behavior</li>
+    <li><strong>Page Link:</strong> Callout explaining the page navigation</li>
+  </ul>
+
+  <div class="tip-box tip">
+    <div class="tip-label">Tip</div>
+    Hover over a node on the main canvas to see a miniature preview tooltip of its layout, showing a scaled-down rendering of all layout blocks.
+  </div>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 7: COURSE FILE FORMAT SPECIFICATION                              -->
+<!-- ======================================================================== -->
+<div class="section" id="file-format">
+  <h2 class="section-anchor">7. Course File Format Specification</h2>
+  <p>Courses are stored as JSON or YAML files. The format supports both single-page and multi-page structures.</p>
+
+  <h3>Top-Level Structure</h3>
+  <table>
+    <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>course</code></td><td>object</td><td>Yes</td><td>Course metadata</td></tr>
+      <tr><td><code>nodes</code></td><td>array</td><td>Yes*</td><td>Node list (single-page format)</td></tr>
+      <tr><td><code>connections</code></td><td>array</td><td>Yes*</td><td>Connection list (single-page format)</td></tr>
+      <tr><td><code>pages</code></td><td>array</td><td>Yes*</td><td>Page list (multi-page format)</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px;color:var(--muted)">* Either <code>nodes</code>+<code>connections</code> (single-page) or <code>pages</code> (multi-page) must be present.</p>
+
+  <h4>Course Metadata Object</h4>
+  <table>
+    <thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>id</code></td><td>string</td><td>auto</td><td>Unique course identifier</td></tr>
+      <tr><td><code>title</code></td><td>string</td><td><code>"Untitled Course"</code></td><td>Course title</td></tr>
+      <tr><td><code>description</code></td><td>string</td><td><code>""</code></td><td>Course description</td></tr>
+      <tr><td><code>version</code></td><td>string</td><td><code>"1.0.0"</code></td><td>Semantic version string</td></tr>
+      <tr><td><code>tags</code></td><td>array</td><td><code>[]</code></td><td>String tags for categorization</td></tr>
+      <tr><td><code>metadata</code></td><td>object</td><td><code>{}</code></td><td>Free-form metadata: <code>author</code>, <code>created</code>, <code>estimated_time</code>, etc.</td></tr>
+      <tr><td><code>attributes</code></td><td>array</td><td><code>[]</code></td><td>Attribute definitions (see <a href="#attr-definitions" class="xref">Section 5</a>)</td></tr>
+      <tr><td><code>themes</code></td><td>array</td><td><code>[]</code></td><td>Visual theme definitions</td></tr>
+      <tr><td><code>default_theme_id</code></td><td>string</td><td><code>"theme-scholar"</code></td><td>Active theme identifier</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="format-single" class="section-anchor">Single-Page Format</h3>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"course"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"my-course"</span>,
+    <span class="json-key">"title"</span>: <span class="json-str">"My Course"</span>,
+    <span class="json-key">"version"</span>: <span class="json-str">"1.0.0"</span>,
+    <span class="json-key">"attributes"</span>: []
+  },
+  <span class="json-key">"nodes"</span>: [
+    { <span class="json-key">"id"</span>: <span class="json-str">"start"</span>, <span class="json-key">"type"</span>: <span class="json-str">"content"</span>, <span class="json-key">"title"</span>: <span class="json-str">"Start"</span>, <span class="json-key">"content"</span>: <span class="json-str">"..."</span>, <span class="json-key">"position"</span>: {<span class="json-key">"x"</span>:<span class="json-num">100</span>,<span class="json-key">"y"</span>:<span class="json-num">100</span>} },
+    { <span class="json-key">"id"</span>: <span class="json-str">"end"</span>, <span class="json-key">"type"</span>: <span class="json-str">"end"</span>, <span class="json-key">"title"</span>: <span class="json-str">"Done"</span>, <span class="json-key">"position"</span>: {<span class="json-key">"x"</span>:<span class="json-num">400</span>,<span class="json-key">"y"</span>:<span class="json-num">100</span>} }
+  ],
+  <span class="json-key">"connections"</span>: [
+    { <span class="json-key">"from"</span>: <span class="json-str">"start"</span>, <span class="json-key">"to"</span>: <span class="json-str">"end"</span>, <span class="json-key">"type"</span>: <span class="json-str">"default"</span> }
+  ]
+}</pre>
+
+  <h3 id="format-multi" class="section-anchor">Multi-Page Format</h3>
+  <pre><span class="lang-tag">JSON</span>
+{
+  <span class="json-key">"course"</span>: {
+    <span class="json-key">"id"</span>: <span class="json-str">"multi-page-course"</span>,
+    <span class="json-key">"title"</span>: <span class="json-str">"Multi-Page Course"</span>,
+    <span class="json-key">"version"</span>: <span class="json-str">"1.0.0"</span>
+  },
+  <span class="json-key">"pages"</span>: [
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"page-1"</span>,
+      <span class="json-key">"title"</span>: <span class="json-str">"Module 1"</span>,
+      <span class="json-key">"nodes"</span>: [ <span class="json-comment">/* ... */</span> ],
+      <span class="json-key">"connections"</span>: [ <span class="json-comment">/* ... */</span> ]
+    },
+    {
+      <span class="json-key">"id"</span>: <span class="json-str">"page-2"</span>,
+      <span class="json-key">"title"</span>: <span class="json-str">"Module 2"</span>,
+      <span class="json-key">"nodes"</span>: [ <span class="json-comment">/* ... */</span> ],
+      <span class="json-key">"connections"</span>: [ <span class="json-comment">/* ... */</span> ]
+    }
+  ]
+}</pre>
+
+  <h3 id="format-examples" class="section-anchor">Complete Example: Mixed Branching Course</h3>
+  <pre><span class="lang-tag">YAML</span>
+<span class="yaml-key">course</span>:
+  <span class="yaml-key">id</span>: <span class="yaml-str">"adventure-1"</span>
+  <span class="yaml-key">title</span>: <span class="yaml-str">"The Forest Adventure"</span>
+  <span class="yaml-key">version</span>: <span class="yaml-str">"1.0.0"</span>
+  <span class="yaml-key">attributes</span>:
+    - <span class="yaml-key">id</span>: <span class="yaml-str">courage</span>
+      <span class="yaml-key">name</span>: <span class="yaml-str">Courage</span>
+      <span class="yaml-key">default</span>: <span class="yaml-num">0</span>
+      <span class="yaml-key">min</span>: <span class="yaml-num">0</span>
+      <span class="yaml-key">max</span>: <span class="yaml-num">100</span>
+
+<span class="yaml-key">nodes</span>:
+  - <span class="yaml-key">id</span>: <span class="yaml-str">"start"</span>
+    <span class="yaml-key">type</span>: <span class="yaml-str">"content"</span>
+    <span class="yaml-key">title</span>: <span class="yaml-str">"Forest Edge"</span>
+    <span class="yaml-key">content</span>: <span class="yaml-str">"You stand at the forest edge."</span>
+    <span class="yaml-key">position</span>: {<span class="yaml-key">x</span>: <span class="yaml-num">80</span>, <span class="yaml-key">y</span>: <span class="yaml-num">200</span>}
+  - <span class="yaml-key">id</span>: <span class="yaml-str">"fork"</span>
+    <span class="yaml-key">type</span>: <span class="yaml-str">"decision"</span>
+    <span class="yaml-key">title</span>: <span class="yaml-str">"Which way?"</span>
+    <span class="yaml-key">options</span>:
+      - {<span class="yaml-key">id</span>: <span class="yaml-str">left</span>, <span class="yaml-key">label</span>: <span class="yaml-str">"Go left"</span>}
+      - {<span class="yaml-key">id</span>: <span class="yaml-str">right</span>, <span class="yaml-key">label</span>: <span class="yaml-str">"Go right"</span>}
+    <span class="yaml-key">position</span>: {<span class="yaml-key">x</span>: <span class="yaml-num">320</span>, <span class="yaml-key">y</span>: <span class="yaml-num">200</span>}
+  - <span class="yaml-key">id</span>: <span class="yaml-str">"encounter"</span>
+    <span class="yaml-key">type</span>: <span class="yaml-str">"weighted"</span>
+    <span class="yaml-key">title</span>: <span class="yaml-str">"Random Encounter"</span>
+    <span class="yaml-key">position</span>: {<span class="yaml-key">x</span>: <span class="yaml-num">800</span>, <span class="yaml-key">y</span>: <span class="yaml-num">200</span>}
+  - <span class="yaml-key">id</span>: <span class="yaml-str">"quiz"</span>
+    <span class="yaml-key">type</span>: <span class="yaml-str">"assessment"</span>
+    <span class="yaml-key">title</span>: <span class="yaml-str">"Quick Check"</span>
+    <span class="yaml-key">passing_score</span>: <span class="yaml-num">70</span>
+    <span class="yaml-key">success_target</span>: <span class="yaml-str">"win"</span>
+    <span class="yaml-key">failure_target</span>: <span class="yaml-str">"retry"</span>
+    <span class="yaml-key">position</span>: {<span class="yaml-key">x</span>: <span class="yaml-num">1280</span>, <span class="yaml-key">y</span>: <span class="yaml-num">200</span>}
+  - <span class="yaml-key">id</span>: <span class="yaml-str">"retry"</span>
+    <span class="yaml-key">type</span>: <span class="yaml-str">"gate"</span>
+    <span class="yaml-key">title</span>: <span class="yaml-str">"Retry Gate"</span>
+    <span class="yaml-key">condition</span>: <span class="yaml-str">"attempts < 3"</span>
+    <span class="yaml-key">default_target</span>: <span class="yaml-str">"quiz"</span>
+    <span class="yaml-key">position</span>: {<span class="yaml-key">x</span>: <span class="yaml-num">1280</span>, <span class="yaml-key">y</span>: <span class="yaml-num">380</span>}
+  - <span class="yaml-key">id</span>: <span class="yaml-str">"win"</span>
+    <span class="yaml-key">type</span>: <span class="yaml-str">"end"</span>
+    <span class="yaml-key">title</span>: <span class="yaml-str">"Victory"</span>
+    <span class="yaml-key">position</span>: {<span class="yaml-key">x</span>: <span class="yaml-num">1520</span>, <span class="yaml-key">y</span>: <span class="yaml-num">200</span>}
+
+<span class="yaml-key">connections</span>:
+  - {<span class="yaml-key">from</span>: <span class="yaml-str">"start"</span>, <span class="yaml-key">to</span>: <span class="yaml-str">"fork"</span>, <span class="yaml-key">type</span>: <span class="yaml-str">"default"</span>}
+  - {<span class="yaml-key">from</span>: <span class="yaml-str">"fork"</span>, <span class="yaml-key">to</span>: <span class="yaml-str">"encounter"</span>, <span class="yaml-key">type</span>: <span class="yaml-str">"conditional"</span>, <span class="yaml-key">label</span>: <span class="yaml-str">"Go left"</span>}
+  - {<span class="yaml-key">from</span>: <span class="yaml-str">"encounter"</span>, <span class="yaml-key">to</span>: <span class="yaml-str">"quiz"</span>, <span class="yaml-key">type</span>: <span class="yaml-str">"weighted"</span>, <span class="yaml-key">label</span>: <span class="yaml-str">"Friendly"</span>, <span class="yaml-key">weight</span>: <span class="yaml-num">70</span>}
+  - {<span class="yaml-key">from</span>: <span class="yaml-str">"retry"</span>, <span class="yaml-key">to</span>: <span class="yaml-str">"quiz"</span>, <span class="yaml-key">type</span>: <span class="yaml-str">"default"</span>}</pre>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 8: IMPORT/EXPORT                                                 -->
+<!-- ======================================================================== -->
+<div class="section" id="import-export">
+  <h2 class="section-anchor">8. Import &amp; Export</h2>
+
+  <h3>Exporting</h3>
+  <table>
+    <thead><tr><th>Format</th><th>How</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td><strong>YAML</strong></td><td>File &gt; Export YAML</td><td>Produces a <code>.yaml</code> file using <code>js-yaml</code>. Human-readable, ideal for version control.</td></tr>
+      <tr><td><strong>JSON</strong></td><td>File &gt; Export JSON</td><td>Produces a <code>.json</code> file. Indentation controlled by the <code>prettyJson</code> setting (default: 2-space indent). Set to false for compact output.</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Export Options (controlled by settings)</h5>
+  <ul>
+    <li><code>prettyJson</code> &mdash; When true, JSON is pretty-printed with 2-space indentation. When false, compact single-line output.</li>
+    <li><code>exportMeta</code> &mdash; When false, the <code>metadata</code> field is stripped from the exported course object.</li>
+  </ul>
+
+  <h5>Export Behavior</h5>
+  <ul>
+    <li>Single-page courses export with <code>nodes</code> and <code>connections</code> at the top level (backward-compatible format).</li>
+    <li>Multi-page courses export with a <code>pages</code> array, each containing its own <code>nodes</code> and <code>connections</code>.</li>
+    <li>Connection types are automatically inferred from the source node type during export.</li>
+    <li>Only populated optional fields are included (e.g., <code>attribute_effects</code> is only present if non-empty).</li>
+  </ul>
+
+  <h3>Importing</h3>
+  <p><strong>How:</strong> File &gt; Import file, or the mobile More sheet "Import" button. Accepts <code>.json</code>, <code>.yaml</code>, and <code>.yml</code> files.</p>
+
+  <h5>Format Detection</h5>
+  <ul>
+    <li>Files ending in <code>.json</code> are parsed as JSON</li>
+    <li>Files ending in <code>.yaml</code> or <code>.yml</code> are parsed as YAML</li>
+  </ul>
+
+  <h5>Import Handling</h5>
+  <ul>
+    <li>The file must contain either <code>nodes</code> (single-page) or <code>pages</code> (multi-page) at the top level.</li>
+    <li>Course metadata is extracted from the <code>course</code> object.</li>
+    <li>Connection IDs are regenerated to avoid collisions.</li>
+    <li>Missing positions default to <code>{x:100, y:100}</code>.</li>
+    <li><strong>Auto-layout:</strong> If all nodes share the same position (indicating they lack stored positions), the tree layout algorithm automatically arranges them.</li>
+    <li>If <code>autoFit</code> is enabled, the view fits all nodes after import.</li>
+  </ul>
+
+  <h5>Legacy Format Support</h5>
+  <p>Unknown node types encountered during import (e.g., "lesson", "slide", "info") are automatically mapped to the <code>content</code> type.</p>
+
+  <h3>Print</h3>
+  <p>File &gt; Print diagram opens the browser's print dialog. The canvas is rendered without the grid, toolbar, sidebar, and status bar. Nodes retain their visual styling. Uses landscape orientation by default.</p>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 9: EDITOR SETTINGS REFERENCE                                     -->
+<!-- ======================================================================== -->
+<div class="section" id="settings">
+  <h2 class="section-anchor">9. Editor Settings Reference</h2>
+  <p>All settings are persisted to <code>localStorage</code>. Access via Settings menu &gt; All settings, or the Settings tab in the properties panel.</p>
+
+  <h4>Appearance</h4>
+  <table>
+    <thead><tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>showGrid</code></td><td>boolean</td><td><code>true</code></td><td>Show the dot-grid background on the canvas</td></tr>
+      <tr><td><code>gridSize</code></td><td>number</td><td><code>40</code></td><td>Grid spacing in pixels</td></tr>
+      <tr><td><code>nodeShadows</code></td><td>boolean</td><td><code>true</code></td><td>Show box shadows on nodes</td></tr>
+      <tr><td><code>animations</code></td><td>boolean</td><td><code>true</code></td><td>Enable CSS transitions and animations</td></tr>
+      <tr><td><code>fontSize</code></td><td>number</td><td><code>13</code></td><td>Base font size in pixels</td></tr>
+      <tr><td><code>sidebarWidth</code></td><td>number</td><td><code>288</code></td><td>Properties panel width in pixels</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Canvas</h4>
+  <table>
+    <thead><tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>snapToGrid</code></td><td>boolean</td><td><code>false</code></td><td>Snap node positions to grid</td></tr>
+      <tr><td><code>zoomSpeed</code></td><td>number</td><td><code>0.10</code></td><td>Zoom step per scroll increment</td></tr>
+      <tr><td><code>zoomMin</code></td><td>number</td><td><code>0.10</code></td><td>Minimum zoom level (10%)</td></tr>
+      <tr><td><code>zoomMax</code></td><td>number</td><td><code>5</code></td><td>Maximum zoom level (500%)</td></tr>
+      <tr><td><code>autoFit</code></td><td>boolean</td><td><code>true</code></td><td>Auto-fit view after import/load</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Nodes</h4>
+  <table>
+    <thead><tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>defaultNodeType</code></td><td>string</td><td><code>"content"</code></td><td>Default type for new nodes</td></tr>
+      <tr><td><code>nodeWidth</code></td><td>number</td><td><code>220</code></td><td>Node width in pixels</td></tr>
+      <tr><td><code>showTypeLabels</code></td><td>boolean</td><td><code>true</code></td><td>Show type label badge on nodes</td></tr>
+      <tr><td><code>showContentPreview</code></td><td>boolean</td><td><code>true</code></td><td>Show content preview text on nodes</td></tr>
+      <tr><td><code>showOptionChips</code></td><td>boolean</td><td><code>true</code></td><td>Show option chips on decision nodes</td></tr>
+      <tr><td><code>showNodeIds</code></td><td>boolean</td><td><code>false</code></td><td>Display node IDs on the canvas</td></tr>
+      <tr><td><code>nodeRadius</code></td><td>number</td><td><code>8</code></td><td>Node border radius in pixels</td></tr>
+      <tr><td><code>compactNodes</code></td><td>boolean</td><td><code>false</code></td><td>Use compact node rendering</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Connections</h4>
+  <table>
+    <thead><tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>connStyle</code></td><td>string</td><td><code>"curve"</code></td><td>Connection line style (curve or straight)</td></tr>
+      <tr><td><code>arrowStyle</code></td><td>string</td><td><code>"arrow"</code></td><td>Arrow head style</td></tr>
+      <tr><td><code>connColor</code></td><td>string</td><td><code>"default"</code></td><td>Connection color scheme</td></tr>
+      <tr><td><code>connHover</code></td><td>boolean</td><td><code>true</code></td><td>Highlight connections on hover</td></tr>
+      <tr><td><code>showConnLabels</code></td><td>boolean</td><td><code>true</code></td><td>Show labels on connection edges</td></tr>
+      <tr><td><code>edgeThickness</code></td><td>number</td><td><code>2</code></td><td>Connection line thickness in pixels</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Behavior</h4>
+  <table>
+    <thead><tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>selectOnAdd</code></td><td>boolean</td><td><code>true</code></td><td>Automatically select newly added nodes</td></tr>
+      <tr><td><code>confirmDelete</code></td><td>boolean</td><td><code>true</code></td><td>Show confirmation dialog before deleting nodes/connections</td></tr>
+      <tr><td><code>confirmClear</code></td><td>boolean</td><td><code>true</code></td><td>Show confirmation before clearing the canvas</td></tr>
+      <tr><td><code>propsOnSelect</code></td><td>boolean</td><td><code>true</code></td><td>Auto-switch to Properties tab when a node is selected</td></tr>
+      <tr><td><code>layoutDir</code></td><td>string</td><td><code>"horizontal"</code></td><td>Auto-arrange layout direction (horizontal or vertical)</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Physics</h4>
+  <table>
+    <thead><tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>nodeRepulsion</code></td><td>boolean</td><td><code>true</code></td><td>Enable node repulsion physics (nodes push away from each other to avoid overlap)</td></tr>
+      <tr><td><code>linkedDrag</code></td><td>boolean</td><td><code>true</code></td><td>When dragging a node, connected nodes are pulled along as if connected by elastic ropes</td></tr>
+      <tr><td><code>downstreamDrag</code></td><td>boolean</td><td><code>false</code></td><td>When dragging a node, all downstream (connected-forward) nodes move rigidly with it</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Export</h4>
+  <table>
+    <thead><tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>exportFormat</code></td><td>string</td><td><code>"yaml"</code></td><td>Default export format</td></tr>
+      <tr><td><code>prettyJson</code></td><td>boolean</td><td><code>true</code></td><td>Pretty-print JSON exports with 2-space indentation</td></tr>
+      <tr><td><code>exportMeta</code></td><td>boolean</td><td><code>true</code></td><td>Include metadata in exports</td></tr>
+    </tbody>
+  </table>
+
+  <h4>API / Server</h4>
+  <table>
+    <thead><tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>apiBaseUrl</code></td><td>string</td><td><code>"http://localhost:8001"</code></td><td>Base URL for the course API server</td></tr>
+      <tr><td><code>autoLoad</code></td><td>boolean</td><td><code>false</code></td><td>Auto-load last course from localStorage on startup</td></tr>
+      <tr><td><code>showServerErrors</code></td><td>boolean</td><td><code>true</code></td><td>Display server error messages</td></tr>
+      <tr><td><code>autoSave</code></td><td>boolean</td><td><code>true</code></td><td>Auto-save to server periodically</td></tr>
+      <tr><td><code>autoSaveInterval</code></td><td>number</td><td><code>30</code></td><td>Auto-save interval in seconds</td></tr>
+      <tr><td><code>saveIndicator</code></td><td>boolean</td><td><code>true</code></td><td>Show save toast notifications</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Rich Content</h4>
+  <table>
+    <thead><tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>renderMarkdown</code></td><td>boolean</td><td><code>true</code></td><td>Render Markdown in node content previews</td></tr>
+      <tr><td><code>renderLatex</code></td><td>boolean</td><td><code>true</code></td><td>Render LaTeX math expressions</td></tr>
+      <tr><td><code>renderTables</code></td><td>boolean</td><td><code>true</code></td><td>Render Markdown tables</td></tr>
+      <tr><td><code>allowImages</code></td><td>boolean</td><td><code>true</code></td><td>Allow inline images in content</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Accessibility</h4>
+  <table>
+    <thead><tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>highContrast</code></td><td>boolean</td><td><code>false</code></td><td>Enable high-contrast mode</td></tr>
+      <tr><td><code>focusRing</code></td><td>boolean</td><td><code>false</code></td><td>Show visible focus rings on interactive elements</td></tr>
+      <tr><td><code>reduceMotion</code></td><td>boolean</td><td><code>false</code></td><td>Disable animations for motion sensitivity</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 10: PLAYER REFERENCE                                             -->
+<!-- ======================================================================== -->
+<div class="section" id="player">
+  <h2 class="section-anchor">10. Player Reference</h2>
+  <p>The <a href="player.html">Course Player</a> renders branching courses for learners. It supports file upload, URL loading, and a built-in course catalog with server integration.</p>
+
+  <h3 id="player-state" class="section-anchor">State Variables</h3>
+  <p>The player maintains these state variables throughout a session:</p>
+  <table>
+    <thead><tr><th>Variable</th><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>nodeId</code></td><td>string</td><td>Current node ID</td></tr>
+      <tr><td><code>score</code></td><td>number</td><td>Accumulated score (from assessments)</td></tr>
+      <tr><td><code>history</code></td><td>array</td><td>Ordered list of visited nodes: <code>[{id, title}]</code></td></tr>
+      <tr><td><code>vars</code></td><td>object</td><td>Custom variables set by <code>set_variables</code> blocks on nodes</td></tr>
+      <tr><td><code>attrs</code></td><td>object</td><td>Current attribute values (from attribute_effects)</td></tr>
+      <tr><td><code>visited</code></td><td>Set</td><td>Set of all node IDs that have been visited</td></tr>
+      <tr><td><code>quizAnswers</code></td><td>object</td><td>Map of node ID to quiz response data</td></tr>
+    </tbody>
+  </table>
+
+  <h5>Built-in Variables Available in Expressions</h5>
+  <table>
+    <thead><tr><th>Variable</th><th>Type</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><code>score</code></td><td>number</td><td>Current accumulated score</td></tr>
+      <tr><td><code>completed_modules</code></td><td>number</td><td>Count of visited content-type nodes</td></tr>
+      <tr><td><code>attempts</code></td><td>number</td><td>Total number of unique nodes visited</td></tr>
+      <tr><td><code>questions_answered</code></td><td>number</td><td>Number of quiz questions answered</td></tr>
+      <tr><td>All custom <code>vars</code></td><td>varies</td><td>Any variable set via <code>set_variables</code></td></tr>
+      <tr><td>All <code>attrs</code></td><td>number</td><td>Current value of each defined attribute</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Runtime Behavior by Node Type</h3>
+  <table>
+    <thead><tr><th>Node Type</th><th>Player Rendering</th><th>Navigation</th></tr></thead>
+    <tbody>
+      <tr><td><code>content</code></td><td>Markdown content with "Next" button</td><td>Follows single default connection</td></tr>
+      <tr><td><code>example</code></td><td>Same as content, green badge</td><td>Follows single default connection</td></tr>
+      <tr><td><code>practice</code></td><td>Same as content, orange badge</td><td>Follows single default connection</td></tr>
+      <tr><td><code>decision</code></td><td>Content + choice buttons</td><td>Follows connection matching selected option</td></tr>
+      <tr><td><code>assessment</code></td><td>Quiz questions + submit button</td><td>Routes to success_target or failure_target based on score</td></tr>
+      <tr><td><code>random</code></td><td>Brief content display (auto-advance)</td><td>Randomly selects one outgoing connection</td></tr>
+      <tr><td><code>weighted</code></td><td>Brief content display (auto-advance)</td><td>Weighted random selection of outgoing connection</td></tr>
+      <tr><td><code>condition</code></td><td>Transparent (auto-advance)</td><td>First matching condition expression, or default_target</td></tr>
+      <tr><td><code>gate</code></td><td>Shows locked message if condition is false</td><td>Proceeds when condition becomes true</td></tr>
+      <tr><td><code>page_link</code></td><td>Transparent (auto-advance)</td><td>Switches to target page</td></tr>
+      <tr><td><code>end</code></td><td>Completion screen with stats</td><td>None (terminal). Restart button available.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 id="player-hud" class="section-anchor">Attribute HUD</h3>
+  <p>When a course defines attributes, the player displays an attribute bar below the header. Each attribute shows as a pill with icon, name, and current value. Changes animate with flash effects (green pulse for increases, red pulse for decreases) and show delta indicators.</p>
+
+  <h3>History / Breadcrumb Trail</h3>
+  <p>A breadcrumb trail at the top of the content area shows the path taken: each visited node's title is listed, separated by arrows. The current node is highlighted. A floating history FAB opens a slide-out panel listing all visited nodes.</p>
+
+  <h3>Restart Behavior</h3>
+  <p>Clicking the restart FAB (or the restart button on the end screen) resets all state: score, history, vars, attrs, visited, and quizAnswers return to their initial values. The player navigates back to the start node.</p>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 11: VALIDATION RULES                                             -->
+<!-- ======================================================================== -->
+<div class="section" id="validation">
+  <h2 class="section-anchor">11. Validation Rules</h2>
+  <p>The editor continuously validates the course and shows issue counts in the status bar. Nodes with issues display a warning badge.</p>
+
+  <h3>Node-Type Specific Rules</h3>
+  <table>
+    <thead><tr><th>Rule</th><th>Severity</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>Single-output overflow</td><td>Warning</td><td>Content, gate, and page_link nodes can only have 1 outgoing connection. Additional connections trigger this warning.</td></tr>
+      <tr><td>End node has outgoing</td><td>Error</td><td>End nodes must be terminal. Any outgoing connections are invalid.</td></tr>
+      <tr><td>No start node</td><td>Warning</td><td>If the course has nodes but none are marked as the start node, a course-level warning appears.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Connection Rules</h3>
+  <table>
+    <thead><tr><th>Rule</th><th>Behavior</th></tr></thead>
+    <tbody>
+      <tr><td>Self-connection</td><td>Silently rejected (connection is not created)</td></tr>
+      <tr><td>Duplicate connection</td><td>Silently rejected</td></tr>
+      <tr><td>Connection to end node</td><td>Rejected with hint message</td></tr>
+      <tr><td>Excess connection on single-output</td><td>Allowed but warning displayed</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Course-Level Rules</h3>
+  <ul>
+    <li><strong>No start node:</strong> At least one node per page should be designated as the start node</li>
+    <li><strong>Orphan nodes:</strong> Nodes with no incoming or outgoing connections may indicate incomplete wiring (not currently flagged as errors, but visible on the canvas)</li>
+    <li><strong>Unreachable nodes:</strong> Nodes that cannot be reached from the start node (not currently auto-detected)</li>
+  </ul>
+
+  <h3>Status Bar</h3>
+  <p>The bottom status bar displays: node count, connection count, and issue count. Clicking the issue indicator can reveal details about each validation problem with the option to navigate to the affected node.</p>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 12: COMMON PATTERNS & RECIPES                                    -->
+<!-- ======================================================================== -->
+<div class="section" id="patterns">
+  <h2 class="section-anchor">12. Common Patterns &amp; Recipes</h2>
+
+  <h3>Linear Progression</h3>
+  <div class="card">
+    <p>The simplest pattern. Chain content nodes in sequence.</p>
+    <pre>Content A &rarr; Content B &rarr; Content C &rarr; End</pre>
+    <p><strong>Use:</strong> Tutorials, presentations, guided walkthroughs.</p>
+  </div>
+
+  <h3>Binary Choice</h3>
+  <div class="card">
+    <p>A decision node with exactly two options leading to different paths.</p>
+    <pre>Content &rarr; Decision (A / B) &rarr; Path A &rarr; End
+                                &rarr; Path B &rarr; End</pre>
+    <p><strong>Use:</strong> Choose-your-own-adventure, A/B scenarios, beginner vs. advanced tracks.</p>
+  </div>
+
+  <h3>Multi-Path Scenario</h3>
+  <div class="card">
+    <p>A decision with 3+ options, each leading to unique content, eventually converging back to a common node.</p>
+    <pre>Decision (A/B/C) &rarr; Path A &rarr;
+                   &rarr; Path B &rarr; Merge Point &rarr; Continue
+                   &rarr; Path C &rarr;</pre>
+    <p><strong>Use:</strong> Role-play scenarios, case studies with multiple approaches.</p>
+  </div>
+
+  <h3>Assessment with Remediation Loop</h3>
+  <div class="card">
+    <p>Assessment routes failures back through review content, then re-tests. A gate limits retry attempts.</p>
+    <pre>Content &rarr; Assessment -(pass)&rarr; Next Module
+                       -(fail)&rarr; Review Content &rarr; Gate (attempts &lt; 3) &rarr; Assessment</pre>
+    <p><strong>Use:</strong> Certification courses, mastery learning, skill verification.</p>
+  </div>
+
+  <h3>Probabilistic Outcomes</h3>
+  <div class="card">
+    <p>A weighted node distributes learners across paths by probability.</p>
+    <pre>Content &rarr; Weighted (70%/30%) &rarr; Easy Scenario (70%)
+                                &rarr; Hard Scenario (30%)</pre>
+    <p><strong>Use:</strong> Simulated real-world variance, randomized case studies, gamification.</p>
+  </div>
+
+  <h3>Attribute-Gated Progression</h3>
+  <div class="card">
+    <p>Use attributes and gate/condition nodes to create adaptive paths based on accumulated learner traits.</p>
+    <pre>Content (+5 knowledge) &rarr; Content (+5 knowledge) &rarr; Gate (knowledge &ge; 10) &rarr; Advanced Topic</pre>
+    <p><strong>Use:</strong> Adaptive learning paths, RPG-style skill trees, prerequisite enforcement.</p>
+  </div>
+
+  <h3>Multi-Page Course</h3>
+  <div class="card">
+    <p>Organize a large course into pages (chapters/modules). Use page_link nodes to navigate between them.</p>
+    <pre>Page 1: Intro &rarr; Content &rarr; Page Link (to Page 2)
+Page 2: Content &rarr; Assessment &rarr; Page Link (to Page 3)
+Page 3: Content &rarr; End</pre>
+    <p><strong>Use:</strong> Large courses, multi-chapter textbooks, modular curricula.</p>
+  </div>
+
+  <h3>Adaptive Difficulty</h3>
+  <div class="card">
+    <p>Combine assessments with condition nodes to route learners based on their performance.</p>
+    <pre>Assessment &rarr; Condition (score) -(score &ge; 90)&rarr; Advanced Track
+                                  -(score &ge; 60)&rarr; Standard Track
+                                  -(score &lt; 60)&rarr; Remediation Track</pre>
+    <p><strong>Use:</strong> Differentiated instruction, placement testing, scaffolded difficulty.</p>
+  </div>
+
+  <div class="diagram-container">
+    <svg width="680" height="280" viewBox="0 0 680 280">
+      <rect width="680" height="280" fill="#0f172a" rx="8"/>
+      <!-- Assessment node -->
+      <rect x="40" y="110" width="120" height="50" rx="6" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+      <text x="100" y="140" fill="#34d399" font-size="11" text-anchor="middle" font-weight="600">Assessment</text>
+      <!-- Condition node -->
+      <rect x="220" y="110" width="120" height="50" rx="6" fill="#1e293b" stroke="#0891b2" stroke-width="2"/>
+      <text x="280" y="140" fill="#22d3ee" font-size="11" text-anchor="middle" font-weight="600">Condition</text>
+      <!-- Advanced -->
+      <rect x="420" y="20" width="120" height="45" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+      <text x="480" y="48" fill="#60a5fa" font-size="10" text-anchor="middle">Advanced</text>
+      <!-- Standard -->
+      <rect x="420" y="110" width="120" height="45" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+      <text x="480" y="138" fill="#60a5fa" font-size="10" text-anchor="middle">Standard</text>
+      <!-- Remediation -->
+      <rect x="420" y="200" width="120" height="45" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+      <text x="480" y="228" fill="#fbbf24" font-size="10" text-anchor="middle">Remediation</text>
+      <!-- End -->
+      <rect x="600" y="110" width="60" height="45" rx="6" fill="#1e293b" stroke="#6b7280" stroke-width="2"/>
+      <text x="630" y="138" fill="#9ca3af" font-size="10" text-anchor="middle">End</text>
+      <!-- Connections -->
+      <line x1="160" y1="135" x2="220" y2="135" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#ah2)"/>
+      <path d="M340,120 Q380,42 420,42" fill="none" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#ah2)"/>
+      <line x1="340" y1="135" x2="420" y2="135" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#ah2)"/>
+      <path d="M340,150 Q380,222 420,222" fill="none" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#ah2)"/>
+      <line x1="540" y1="42" x2="600" y2="125" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="540" y1="135" x2="600" y2="135" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="540" y1="222" x2="600" y2="145" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+      <!-- Labels -->
+      <text x="370" y="65" fill="#86efac" font-size="9">&ge;90</text>
+      <text x="370" y="128" fill="#fbbf24" font-size="9">&ge;60</text>
+      <text x="370" y="208" fill="#f87171" font-size="9">&lt;60</text>
+      <defs>
+        <marker id="ah2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/>
+        </marker>
+      </defs>
+    </svg>
+    <div class="diagram-caption">Adaptive difficulty pattern: Assessment &rarr; Condition &rarr; three tracks</div>
+  </div>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 13: EXPRESSION LANGUAGE REFERENCE                                -->
+<!-- ======================================================================== -->
+<div class="section" id="expressions">
+  <h2 class="section-anchor">13. Expression Language Reference</h2>
+  <p>Expressions are used in <a href="#node-condition" class="xref">condition nodes</a> (outgoing connection labels) and <a href="#node-gate" class="xref">gate nodes</a> (condition field). They are evaluated at runtime using JavaScript semantics.</p>
+
+  <h3>Operators</h3>
+  <table>
+    <thead><tr><th>Operator</th><th>Meaning</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><code>==</code></td><td>Equality (loose)</td><td><code>path == "scenic"</code></td></tr>
+      <tr><td><code>===</code></td><td>Strict equality</td><td><code>score === 100</code></td></tr>
+      <tr><td><code>!=</code></td><td>Inequality</td><td><code>attempts != 0</code></td></tr>
+      <tr><td><code>&lt;</code></td><td>Less than</td><td><code>score &lt; 50</code></td></tr>
+      <tr><td><code>&lt;=</code></td><td>Less than or equal</td><td><code>knowledge &lt;= 30</code></td></tr>
+      <tr><td><code>&gt;</code></td><td>Greater than</td><td><code>confidence &gt; 80</code></td></tr>
+      <tr><td><code>&gt;=</code></td><td>Greater than or equal</td><td><code>score &gt;= 90</code></td></tr>
+      <tr><td><code>&amp;&amp;</code></td><td>Logical AND</td><td><code>score &gt;= 70 &amp;&amp; attempts &lt; 3</code></td></tr>
+      <tr><td><code>||</code></td><td>Logical OR</td><td><code>knowledge &gt; 50 || experience &gt; 5</code></td></tr>
+      <tr><td><code>!</code></td><td>Logical NOT</td><td><code>!visited_scenic</code></td></tr>
+      <tr><td><code>+</code> <code>-</code> <code>*</code> <code>/</code></td><td>Arithmetic</td><td><code>score + bonus &gt;= 100</code></td></tr>
+      <tr><td><code>%</code></td><td>Modulo</td><td><code>attempts % 2 == 0</code></td></tr>
+      <tr><td><code>()</code></td><td>Grouping</td><td><code>(a || b) &amp;&amp; c</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Available Variables</h3>
+  <table>
+    <thead><tr><th>Source</th><th>Variables</th></tr></thead>
+    <tbody>
+      <tr><td>Built-in</td><td><code>score</code>, <code>completed_modules</code>, <code>attempts</code>, <code>questions_answered</code></td></tr>
+      <tr><td>Custom vars</td><td>Any key set via <code>set_variables</code> on nodes (e.g., <code>path</code>, <code>visited_scenic</code>)</td></tr>
+      <tr><td>Attributes</td><td>All defined attributes by name (e.g., <code>knowledge</code>, <code>confidence</code>, <code>courage</code>)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Example Expressions</h3>
+  <pre><span class="lang-tag">Expressions</span>
+<span class="json-comment">// Simple threshold</span>
+<span class="json-str">score >= 80</span>
+
+<span class="json-comment">// Attribute check</span>
+<span class="json-str">knowledge >= 50 && confidence > 20</span>
+
+<span class="json-comment">// Custom variable check</span>
+<span class="json-str">path == "scenic" && visited_scenic</span>
+
+<span class="json-comment">// Compound with grouping</span>
+<span class="json-str">(score >= 90 || (knowledge >= 80 && experience > 3)) && attempts < 5</span>
+
+<span class="json-comment">// Arithmetic in condition</span>
+<span class="json-str">score + bonus >= 100</span>
+
+<span class="json-comment">// Negation</span>
+<span class="json-str">!completed_intro</span></pre>
+
+  <h3>Evaluation Order</h3>
+  <ol>
+    <li>All current state variables are collected: <code>vars</code> + <code>attrs</code> + built-in variables.</li>
+    <li>The expression string is evaluated as a JavaScript expression with variables injected as function parameters.</li>
+    <li>The result is coerced to a boolean.</li>
+    <li>If evaluation throws an error (e.g., undefined variable), the result defaults to <code>false</code>.</li>
+  </ol>
+
+  <div class="tip-box warn">
+    <div class="tip-label">Warning</div>
+    Expressions are evaluated using <code>new Function()</code>. Avoid injecting user-controlled strings into expressions in production environments. For authored courses, this is safe as the course author controls all expression content.
+  </div>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- SECTION 14: TROUBLESHOOTING / FAQ                                        -->
+<!-- ======================================================================== -->
+<div class="section" id="troubleshooting">
+  <h2 class="section-anchor">14. Troubleshooting &amp; FAQ</h2>
+
+  <div class="card card-warn">
+    <h4 style="margin-top:0">"My connections are not showing"</h4>
+    <ul>
+      <li>Ensure you are dragging from the <strong>output port</strong> (right side, blue circle) to the <strong>input port</strong> (left side) of another node.</li>
+      <li>Self-connections (same source and target) are silently rejected.</li>
+      <li>Duplicate connections (same from/to pair already exists) are silently rejected.</li>
+      <li>Connections into <code>end</code> nodes are blocked.</li>
+      <li>Check the zoom level &mdash; at very low zoom, thin connection lines may be hard to see.</li>
+      <li>Verify the <code>showConnLabels</code> and <code>edgeThickness</code> settings.</li>
+    </ul>
+  </div>
+
+  <div class="card card-warn">
+    <h4 style="margin-top:0">"Assessment is not routing correctly"</h4>
+    <ul>
+      <li>Verify that <code>success_target</code> and <code>failure_target</code> contain valid node IDs that exist in the course.</li>
+      <li>Check <code>passing_score</code> &mdash; it is a percentage (0-100). A score of 80 means the learner needs 80% correct.</li>
+      <li>Ensure your questions have <code>correct: true</code> marked on the right option, or <code>correct_answer</code> set for true-false questions.</li>
+      <li>If using attribute effects with <code>when: "pass"</code>/<code>"fail"</code>, make sure the <code>when</code> field is set correctly.</li>
+    </ul>
+  </div>
+
+  <div class="card card-warn">
+    <h4 style="margin-top:0">"Gate node is stuck / learner cannot proceed"</h4>
+    <ul>
+      <li>Check the gate's <code>condition</code> expression. Use the expression reference to ensure syntax is correct.</li>
+      <li>Verify that the variables referenced in the condition are actually being set by earlier nodes (via <code>set_variables</code> or <code>attribute_effects</code>).</li>
+      <li>An empty condition always passes immediately. If the gate should be open, clear the condition field.</li>
+      <li>Ensure <code>default_target</code> points to a valid node ID.</li>
+      <li>Check that the gate has an outgoing connection or a <code>default_target</code>.</li>
+    </ul>
+  </div>
+
+  <div class="card card-warn">
+    <h4 style="margin-top:0">"Attributes not updating in the player"</h4>
+    <ul>
+      <li>Attributes must be defined at the course level (Attributes tab) before they can be referenced in effects.</li>
+      <li>Attribute effects on nodes must reference the correct <code>attr_id</code> matching a defined attribute.</li>
+      <li>Check the <code>delta</code> value &mdash; a delta of 0 has no effect.</li>
+      <li>For assessment nodes, check the <code>when</code> field &mdash; effects with <code>when: "pass"</code> only apply when the learner passes.</li>
+      <li>Verify that the learner actually visits the node (check history in the player).</li>
+    </ul>
+  </div>
+
+  <div class="card card-warn">
+    <h4 style="margin-top:0">"Import failed"</h4>
+    <ul>
+      <li>Ensure the file is valid JSON or YAML. Use a validator tool to check syntax.</li>
+      <li>The file must contain either a <code>nodes</code> array (single-page) or a <code>pages</code> array (multi-page) at the top level.</li>
+      <li>The <code>course</code> object is optional but recommended. If missing, defaults are applied.</li>
+      <li>Check for trailing commas (invalid in JSON) or incorrect YAML indentation.</li>
+      <li>If the file was exported from an older version, unknown node types are mapped to <code>content</code> automatically.</li>
+    </ul>
+  </div>
+
+  <div class="card card-warn">
+    <h4 style="margin-top:0">"Nodes overlap / cluttered layout"</h4>
+    <ul>
+      <li>Use <strong>View &gt; Auto-arrange nodes</strong> to apply the tree layout algorithm.</li>
+      <li>Enable <strong>Node Repulsion</strong> in settings or the quick toolbar to have nodes push apart automatically.</li>
+      <li>Use <strong>View &gt; Fit all nodes</strong> to adjust zoom and pan to see all nodes.</li>
+      <li>Try switching between horizontal and vertical layout directions.</li>
+    </ul>
+  </div>
+
+  <div class="card card-warn">
+    <h4 style="margin-top:0">"Weighted node probabilities seem wrong"</h4>
+    <ul>
+      <li>Verify that all outgoing connections from the weighted node have a <code>weight</code> value set.</li>
+      <li>Weights should ideally sum to 100. If they do not, the runtime normalizes them proportionally.</li>
+      <li>Remember: probability does not guarantee specific outcomes in small sample sizes. A 70/30 split may not produce exactly 7 and 3 results in 10 runs.</li>
+    </ul>
+  </div>
+
+  <div class="card card-warn">
+    <h4 style="margin-top:0">"Condition node always takes the default path"</h4>
+    <ul>
+      <li>Check that each outgoing connection's label contains a valid expression.</li>
+      <li>Connections are evaluated in order; ensure the most specific conditions come first.</li>
+      <li>Undefined variables evaluate to <code>undefined</code>, causing comparisons to fail. Make sure variables are set before the condition node is reached.</li>
+      <li>Use the Code tab to inspect the raw condition expressions.</li>
+    </ul>
+  </div>
+
+  <div class="card card-warn">
+    <h4 style="margin-top:0">"Auto-save is not working"</h4>
+    <ul>
+      <li>Auto-save requires a running API server at the configured <code>apiBaseUrl</code>.</li>
+      <li>Check that <code>autoSave</code> is enabled in settings.</li>
+      <li>Verify the server is accessible (check browser DevTools console for CORS or network errors).</li>
+      <li>The course must have been saved to the server at least once (via File &gt; Save to server) before auto-save activates.</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ======================================================================== -->
+<!-- FOOTER                                                                   -->
+<!-- ======================================================================== -->
+<div style="border-top:1px solid var(--border);padding-top:32px;margin-top:64px;">
+  <p style="font-size:12px;color:var(--muted);text-align:center;">
+    Branching Course Editor Reference Manual &mdash; Version 6.0<br>
+    Last updated: March 2026<br>
+    <a href="tutorial.html">Tutorial</a> &middot; <a href="course-editor-enhanced.html">Open Editor</a> &middot; <a href="player.html">Course Player</a> &middot; <a href="course-database.html">Course Database</a>
+  </p>
+</div>
+
+</main>
+
+<!-- ═══════════════════ BACK TO TOP ═══════════════════ -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&uarr;</button>
+
+<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+<script>
+// ── Search ────────────────────────────────────────────────────────────────────
+const searchIndex = [];
+
+function buildSearchIndex() {
+  const sections = document.querySelectorAll('#main-content .section');
+  sections.forEach(sec => {
+    const headings = sec.querySelectorAll('h1, h2, h3, h4');
+    headings.forEach(h => {
+      const id = h.id || h.closest('[id]')?.id || '';
+      if (!id) return;
+      const sectionTitle = sec.querySelector('h2, h1')?.textContent || '';
+      searchIndex.push({
+        id,
+        title: h.textContent.trim(),
+        section: sectionTitle.trim(),
+        text: h.closest('.section')?.textContent?.substring(0, 600) || ''
+      });
+    });
+    // Index table rows
+    sec.querySelectorAll('table tbody tr').forEach(tr => {
+      const cells = Array.from(tr.querySelectorAll('td')).map(td => td.textContent.trim());
+      if (cells.length > 0) {
+        const nearestH = tr.closest('.section')?.querySelector('h2, h3');
+        const id = nearestH?.id || sec.id || '';
+        searchIndex.push({
+          id,
+          title: cells[0],
+          section: nearestH?.textContent?.trim() || '',
+          text: cells.join(' ')
+        });
+      }
+    });
+  });
+}
+
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (q.length < 2) {
+    searchResults.classList.remove('open');
+    searchResults.innerHTML = '';
+    return;
+  }
+  const matches = searchIndex.filter(item =>
+    item.title.toLowerCase().includes(q) ||
+    item.text.toLowerCase().includes(q)
+  ).slice(0, 15);
+
+  if (matches.length === 0) {
+    searchResults.innerHTML = '<div style="padding:14px;color:var(--muted);font-size:13px;">No results found</div>';
+    searchResults.classList.add('open');
+    return;
+  }
+
+  searchResults.innerHTML = matches.map(m => {
+    const titleHl = m.title.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<mark>$1</mark>');
+    return `<div class="search-result-item" onclick="goToResult('${m.id}')">
+      <div class="sr-section">${m.section}</div>
+      <div class="sr-title">${titleHl}</div>
+    </div>`;
+  }).join('');
+  searchResults.classList.add('open');
+});
+
+function goToResult(id) {
+  searchResults.classList.remove('open');
+  searchInput.value = '';
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.style.transition = 'background 0.3s';
+    el.style.background = 'rgba(129,140,248,0.15)';
+    setTimeout(() => { el.style.background = ''; }, 2000);
+  }
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('#search-box')) searchResults.classList.remove('open');
+});
+
+// Ctrl+K to focus search
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    searchInput.focus();
+  }
+  if (e.key === 'Escape' && document.activeElement === searchInput) {
+    searchInput.blur();
+    searchResults.classList.remove('open');
+  }
+});
+
+// ── Scroll Spy ────────────────────────────────────────────────────────────────
+const tocLinks = document.querySelectorAll('#sidebar .toc-link');
+const sectionAnchors = [];
+
+function buildSectionAnchors() {
+  tocLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const el = document.getElementById(href.slice(1));
+      if (el) sectionAnchors.push({ el, link });
+    }
+  });
+}
+
+function updateScrollSpy() {
+  const scrollY = window.scrollY + 100;
+  let current = null;
+  for (let i = sectionAnchors.length - 1; i >= 0; i--) {
+    if (sectionAnchors[i].el.offsetTop <= scrollY) {
+      current = sectionAnchors[i];
+      break;
+    }
+  }
+  tocLinks.forEach(l => l.classList.remove('active'));
+  if (current) current.link.classList.add('active');
+}
+
+// ── Back to Top ───────────────────────────────────────────────────────────────
+const backToTop = document.getElementById('back-to-top');
+function updateBackToTop() {
+  if (window.scrollY > 400) backToTop.classList.add('visible');
+  else backToTop.classList.remove('visible');
+}
+
+// ── Mobile TOC ────────────────────────────────────────────────────────────────
+function toggleMobileTOC() {
+  const overlay = document.getElementById('mobile-toc-overlay');
+  const sidebar = document.getElementById('mobile-sidebar');
+  const isOpen = sidebar.classList.contains('open');
+  if (isOpen) {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+  } else {
+    // Clone desktop sidebar content
+    sidebar.innerHTML = document.getElementById('sidebar').innerHTML;
+    sidebar.querySelectorAll('.toc-link').forEach(link => {
+      link.addEventListener('click', () => toggleMobileTOC());
+    });
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+  }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  buildSearchIndex();
+  buildSectionAnchors();
+  updateScrollSpy();
+  updateBackToTop();
+});
+
+window.addEventListener('scroll', () => {
+  updateScrollSpy();
+  updateBackToTop();
+}, { passive: true });
+</script>
+
+</body>
+</html>

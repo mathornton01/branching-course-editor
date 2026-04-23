@@ -1,0 +1,493 @@
+{
+  "id": "info-theory-env",
+  "title": "Information Theory Through Environmental Science",
+  "description": "Master information theory concepts using real-world environmental science examples and applications. Progress through foundational, intermediate, and advanced modules with adaptive learning paths.",
+  "topic": "Information Theory",
+  "theme": "environmental science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 120,
+  "tags": [
+    "information-theory",
+    "environmental-science",
+    "shannon-entropy",
+    "channel-capacity",
+    "data-compression"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Information and Environmental Monitoring",
+      "content": "Environmental monitoring systems constantly collect information from thousands of sensors\u2014measuring temperature, CO2 levels, species presence, water quality, and more. Information theory helps us understand what makes data valuable: information reduces uncertainty. A temperature reading of 25\u00b0C \u00b1 0.5\u00b0C tells us much more than 'somewhere between 0\u201350\u00b0C.' In information theory, we quantify how much a measurement reduces uncertainty using bits. For example, knowing whether a specific forest contains an endangered species is valuable information that helps conservation decisions. This module explores how information concepts apply to environmental challenges: Should a farmer irrigate? Is a glacier retreating dangerously? Is a water source safe? These questions are answered by carefully collected and transmitted information.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Assessment: Information Fundamentals",
+      "content": "Test your understanding of information and uncertainty in environmental contexts.",
+      "questions": [
+        {
+          "question": "In environmental monitoring, a sensor records 'soil moisture is 45% \u00b1 2%' instead of 'soil moisture is between 0\u2013100%'. Why is the first measurement more informative?",
+          "options": [
+            "It uses more precise language",
+            "It reduces uncertainty about the actual soil moisture level",
+            "It comes from a more expensive sensor",
+            "It is always perfectly accurate"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Precise language alone doesn't make data informative.",
+            "Correct! Information is gained when uncertainty decreases. The narrower range provides much more useful information for irrigation decisions.",
+            "Sensor cost doesn't determine information content.",
+            "Perfect accuracy would mean no uncertainty, but even approximate measurements with reduced uncertainty provide valuable information."
+          ],
+          "explanation": "Information is defined by how much it reduces uncertainty. The specific reading (45% \u00b1 2%) eliminates uncertainty about whether soil is saturated, dry, or moderate\u2014valuable for irrigation decisions."
+        },
+        {
+          "question": "A biodiversity survey identifies 12 bird species in a forest. What information has been gained?",
+          "options": [
+            "The exact population size of each species",
+            "The uncertainty about species diversity has been reduced",
+            "That the forest is healthy",
+            "The migration patterns of these species"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This identifies species, not population sizes.",
+            "Correct! Knowing species presence reduces our uncertainty about the ecosystem's biodiversity composition.",
+            "Species list doesn't directly determine health, though diversity helps.",
+            "Species presence doesn't tell us migration patterns\u2014we'd need tracking data."
+          ],
+          "explanation": "Information reduces uncertainty. Before the survey, we didn't know which species were present. After, we know the species composition, reducing our uncertainty about biodiversity."
+        },
+        {
+          "question": "A climate model predicts 2050 warming as '1.5\u20133\u00b0C'. New satellite data constrains this to '2.0 \u00b1 0.3\u00b0C'. Which contains more information?",
+          "options": [
+            "The first prediction\u2014larger ranges are more informative",
+            "The second\u2014it reduces uncertainty from 1.5\u00b0C down to 0.6\u00b0C",
+            "Both have equal information",
+            "Information cannot be quantified for climate predictions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Larger ranges actually contain less information because uncertainty is greater.",
+            "Correct! The tighter range dramatically reduces uncertainty, making it much more informative for planning adaptation strategies.",
+            "Different ranges mean different levels of uncertainty.",
+            "Information is absolutely quantifiable, especially for predictive data."
+          ],
+          "explanation": "The satellite data provides much more information because it narrows the range from 1.5\u00b0C to 0.6\u00b0C, substantially reducing uncertainty about future warming\u2014crucial for environmental policy decisions."
+        }
+      ],
+      "pass_threshold": 66.67,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Information in Environmental Decisions",
+      "content": "Work through these scenarios to deepen your understanding of how information reduces uncertainty in environmental monitoring. For each case, identify what information is gained and why it matters.",
+      "questions": [
+        {
+          "question": "A conservation team is deciding whether a river is safe for local communities. They can either (A) do a water test for 15 pollutants and their concentrations, or (B) check if the water 'looks clean.' Which provides more information and why?",
+          "options": [
+            "Looking at clarity provides more information because it's faster",
+            "The water test reduces uncertainty by identifying specific pollutants and levels",
+            "Both provide equal information about safety",
+            "Neither provides useful information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed doesn't correlate with information content.",
+            "Correct! Specific measurements reduce uncertainty far more than subjective observation.",
+            "Visual appearance doesn't capture chemical composition.",
+            "Both methods provide some information, but one is much more detailed."
+          ],
+          "explanation": "The water test dramatically reduces uncertainty by identifying exactly what's present and at what levels, enabling informed safety decisions. Visual inspection leaves uncertainty about hidden contaminants."
+        },
+        {
+          "question": "A wildlife tracker wants to know if a mountain lion is present in a region. They can either (A) set camera traps that record all wildlife, or (B) interview locals about 'big cat' sightings. Rank the information value.",
+          "options": [
+            "Interviews are more informative because they're based on direct experience",
+            "Camera traps provide more concrete information because they reduce uncertainty about what species visited",
+            "Both are equally informative for detecting big cats",
+            "Neither method provides reliable information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Experience is subjective and leaves uncertainty about what was actually seen.",
+            "Correct! Objective recordings reduce uncertainty: you know exactly which species appeared, when, and how often.",
+            "Interviews introduce bias and uncertainty about identification.",
+            "Both methods are useful, but one is far more informative."
+          ],
+          "explanation": "Camera traps provide concrete visual evidence, reducing uncertainty about species presence and behavior. Interviews leave ambiguity about what was actually observed."
+        },
+        {
+          "question": "A farmer must decide whether to irrigate a field. Which information source most reduces uncertainty about soil moisture needs?",
+          "options": [
+            "Historical weather patterns from 5 years ago",
+            "A soil moisture sensor reading current water content",
+            "Observing how wet the ground appears",
+            "Asking a neighboring farmer what they did last week"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Past patterns don't reflect current conditions, so uncertainty remains high.",
+            "Correct! Real-time sensor data directly measures current soil moisture, maximally reducing uncertainty for today's decision.",
+            "Visual appearance is subjective and inaccurate.",
+            "Neighbors' decisions depend on their different conditions."
+          ],
+          "explanation": "Current, objective measurement reduces maximum uncertainty about 'right now' conditions. Historical averages, appearances, and others' choices leave substantial uncertainty about what today's field actually needs."
+        }
+      ],
+      "pass_threshold": 66.67,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Entropy and Biodiversity: Measuring Ecosystem Complexity",
+      "content": "Shannon entropy quantifies diversity: how much unpredictability or complexity exists in a system. In ecosystems, entropy measures biodiversity. A rainforest with many equally-common species has high entropy. A plantation with one dominant crop species has low entropy. Why does this matter? High-entropy ecosystems (high diversity) are resilient\u2014they can absorb shocks (disease, drought) because the system doesn't depend on one species. The mathematical entropy formula considers both richness (how many species) and evenness (how evenly they're distributed). A forest with 100 species split equally is higher entropy than 100 trees with 99 of one species and 1 of another. In climate science, entropy helps us understand system stability: a diverse ocean ecosystem resists single-species collapses better than a monoculture. Even a simple pond with 4 fish species demonstrates entropy: if all species equally abundant, uncertainty about which fish you'll catch is maximized. This module teaches how Shannon's information theory framework quantifies the diversity that conservation values.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Entropy and Ecosystem Diversity",
+      "content": "Apply Shannon entropy concepts to environmental scenarios.",
+      "questions": [
+        {
+          "question": "Two wetlands both have 500 plants total. Wetland A: 450 cattails, 30 reeds, 20 bulrushes. Wetland B: 250 cattails, 150 reeds, 100 bulrushes. Which has higher Shannon entropy?",
+          "options": [
+            "Wetland A has higher entropy because it has one dominant species",
+            "Wetland B has higher entropy because the species are more evenly distributed",
+            "Both have equal entropy since they have the same plant count",
+            "Neither has measurable entropy because they're wetlands, not forests"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Dominance actually lowers entropy.",
+            "Correct! More even distribution of species means higher entropy\u2014more unpredictability about which species you'll encounter.",
+            "Same total count doesn't mean equal diversity distribution.",
+            "Entropy applies to any biological system with multiple species."
+          ],
+          "explanation": "Entropy increases with evenness. Wetland B's uniform distribution is more even than A's skewed distribution, so it has higher entropy. Wetland B's greater diversity makes it more resilient."
+        },
+        {
+          "question": "A forest changes from 60% oak, 40% maple to 50% oak, 50% maple (same 200 trees). The entropy has:",
+          "options": [
+            "Decreased because maples are less common now",
+            "Increased because the distribution is more even",
+            "Stayed constant\u2014species percentages are what matter",
+            "Become negative"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Rarer species don't decrease entropy.",
+            "Correct! More even distribution increases entropy\u2014more uncertainty about which species you'll randomly encounter.",
+            "Distribution absolutely affects entropy.",
+            "Entropy is always non-negative."
+          ],
+          "explanation": "Perfect evenness (50-50) has higher entropy than uneven (60-40). In the even case, you're equally likely to encounter either species. In the uneven case, oaks are more probable, reducing uncertainty\u2014lower entropy."
+        },
+        {
+          "question": "Why is ecosystem entropy ecologically important for conservation?",
+          "options": [
+            "Higher entropy means prettier ecosystems",
+            "Higher entropy (more diversity) makes ecosystems more resilient to disturbances",
+            "Entropy has no conservation relevance",
+            "Low entropy indicates a healthy forest"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Beauty and resilience aren't the same.",
+            "Correct! Diverse ecosystems (high entropy) can absorb losses of single species without collapse\u2014critical for surviving climate change, disease, or invasive species.",
+            "Entropy is fundamental to understanding ecosystem stability.",
+            "Low entropy indicates vulnerability to single-species dependence."
+          ],
+          "explanation": "High-entropy ecosystems have many species and backup functions. If one species declines, others fill its role. Low-entropy systems depend heavily on few species\u2014one loss can trigger collapse."
+        }
+      ],
+      "pass_threshold": 66.67,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Calculating and Interpreting Entropy",
+      "content": "Deepen your entropy intuition with realistic calculations. For each ecosystem, determine species distribution and compare entropy. Remember: evenness matters as much as species count.",
+      "questions": [
+        {
+          "question": "A stream has fish populations: 200 trout, 100 bass, 50 sunfish, 50 perch (400 total). If a dam blocks passage and populations become 300 trout, 50 bass, 30 sunfish, 20 perch, what happened to ecosystem entropy?",
+          "options": [
+            "Entropy stayed the same\u2014total fish count is close",
+            "Entropy increased because the ecosystem is more stable",
+            "Entropy decreased because the distribution became less even (more trout dominance)",
+            "Entropy went negative due to species loss"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Distribution matters more than total count.",
+            "Less diversity typically decreases stability.",
+            "Correct! The dam favors trout (75% vs. 50%), making the distribution less even and entropy lower\u2014reduced diversity and resilience.",
+            "Entropy is always non-negative."
+          ],
+          "explanation": "Before: fairly even distribution. After: highly skewed toward trout. The loss of evenness decreased entropy, indicating reduced ecosystem stability from species imbalance."
+        },
+        {
+          "question": "Compare two coral reefs: Reef A has 100 species each at 1% abundance. Reef B has 10 species each at 10% abundance. Which has higher entropy?",
+          "options": [
+            "Reef A\u2014it has more species",
+            "Reef B\u2014it has more evenly distributed species",
+            "They're equal because each species is equally abundant within their ecosystem",
+            "Neither has meaningful entropy for conservation"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Species count alone doesn't determine entropy alone.",
+            "Both have perfect evenness; richness differs.",
+            "Correct! Both have perfect evenness (100% even in both cases). But Reef A with 100 equally-abundant species has higher entropy overall due to greater richness.",
+            "Both systems have quantifiable, conservation-relevant entropy."
+          ],
+          "explanation": "When evenness is identical, entropy depends on richness. Reef A with 100 equally-abundant species has higher entropy than Reef B with 10 equally-abundant species, indicating greater resilience."
+        },
+        {
+          "question": "A tropical forest before logging had 300 species, roughly evenly distributed. After logging: 50 species remain, very uneven (10 species dominant). Describe the entropy change.",
+          "options": [
+            "Entropy increased because fewer species means simpler systems",
+            "Entropy decreased drastically due to both richness loss and evenness loss\u2014the ecosystem is now far less resilient",
+            "Entropy stayed the same because it's based on proportions, not absolute numbers",
+            "Entropy cannot be measured after habitat disturbance"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Simpler systems have lower entropy.",
+            "Correct! Losing 250 species and having remaining species dominated by a few both reduce entropy\u2014the ecosystem is now extremely vulnerable.",
+            "Absolute numbers absolutely affect entropy when richness changes.",
+            "Entropy is measurable and quantifies the damage."
+          ],
+          "explanation": "The logged forest lost entropy through two mechanisms: (1) fewer total species, (2) remaining species imbalanced. Result: a fragile ecosystem dependent on just a few species."
+        }
+      ],
+      "pass_threshold": 66.67,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Noisy Channels and Environmental Data Transmission",
+      "content": "Environmental monitoring networks transmit data through imperfect channels: radio waves through atmospheric interference, satellite signals degraded by clouds, underwater acoustic sensors compromised by whale songs and equipment noise. Shannon's channel capacity theorem tells us: reliable communication is possible up to a maximum rate, even with noise, if we use error-correction codes. Consider GPS for tracking endangered animal migrations: satellites transmit location data through the ionosphere, where solar activity introduces errors. Without redundancy, some bits flip randomly, corrupting coordinates. With error-correction codes, redundant bits allow receivers to detect and fix errors\u2014at the cost of transmitting more total bits. Another example: real-time climate data from ocean buoys faces bandwidth limits. Compression algorithms remove redundancy (storing '100 consecutive pixels same color' instead of 100 color codes), allowing more observations to transmit through limited bandwidth. This module shows how information theory enables us to overcome real-world channel limitations: ensuring endangered species are tracked accurately despite noisy satellite links, compressing climate data to fit satellite bandwidth, and designing monitoring networks that balance accuracy against transmission costs.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Channel Capacity and Data Transmission",
+      "content": "Apply information theory to environmental data transmission challenges.",
+      "questions": [
+        {
+          "question": "A wildlife tracking collar sends GPS locations via satellite at 1000 bits/second. Atmospheric interference causes random bit errors at 5% rate. To ensure reliable transmission, the system adds redundancy (1.25\u00d7 overhead). What is the effective data rate for useful information?",
+          "options": [
+            "1250 bits/second\u2014the full transmission with redundancy",
+            "~800 bits/second\u2014accounting for overhead, error rates, and error correction",
+            "1000 bits/second\u2014errors don't affect the data rate",
+            "50 bits/second\u2014the error rate directly limits transmission"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Transmission rate \u2260 useful data rate; redundancy reduces efficiency.",
+            "Correct! Accounting for error-correction overhead and errors, ~800 bits/second of useful location data survives.",
+            "Errors do reduce effective data rate through correction needs.",
+            "Error rate is part of calculation; Shannon shows we can still transmit reliably."
+          ],
+          "explanation": "With 5% error rate and error correction overhead, the effective useful data rate drops below the raw transmission rate, but reliable transmission remains possible through proper coding."
+        },
+        {
+          "question": "A climate satellite captures 1 million pixels of ocean temperature data per pass. Transmitting all pixels takes 10 hours of bandwidth. If the team compresses the data (10% of original size), transmission time becomes:",
+          "options": [
+            "1 hour\u2014less data means less transmission time",
+            "9 hours\u2014compression is less efficient than advertised",
+            "10 minutes\u2014compression removes unnecessary information redundancy",
+            "1 month\u2014compression introduces delays"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! If data is compressed to 10% size, transmission time becomes 10 \u00d7 10% = 1 hour.",
+            "Compression is efficient; transmission time scales with data size.",
+            "1 hour is correct; 10 minutes underestimates compression benefit.",
+            "Compression doesn't introduce delays."
+          ],
+          "explanation": "Compression removes redundant information without losing essential temperature data. Same channel capacity, much less data means proportionally less transmission time."
+        },
+        {
+          "question": "An ocean monitoring network must choose between: (A) high-bandwidth real-time data with no error correction, risking data loss, or (B) lower bandwidth with error correction ensuring reliability. For environmental decisions, which is better?",
+          "options": [
+            "Option A\u2014real-time data is always better, even if corrupted",
+            "Option B\u2014reliable data is worth the bandwidth cost because environmental decisions require accuracy",
+            "Both are equally good as long as data transmits",
+            "Neither is viable for ocean monitoring"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Environmental decisions demand accurate data.",
+            "Correct! Corrupted readings could trigger false alarms or miss real dangers. Reliability is worth the bandwidth cost.",
+            "Accuracy and timeliness both matter; accuracy is non-negotiable.",
+            "Ocean monitoring requires reliable transmission."
+          ],
+          "explanation": "Environmental decisions depend on trustworthy data. A few corrupted readings could derail policy. Error-correction overhead ensures data integrity, which is more valuable than barely-faster transmission."
+        }
+      ],
+      "pass_threshold": 66.67,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Designing Resilient Environmental Monitoring Networks",
+      "content": "Apply information theory to real environmental monitoring challenges. Consider data transmission rates, noise, error correction, and compression. Your goal: design systems that balance accuracy, speed, and bandwidth constraints.",
+      "questions": [
+        {
+          "question": "A conservation team tracks 100 endangered tigers across a forest using GPS collars. Each collar transmits every 30 minutes via a satellite link with 256 kbps bandwidth and 1% error rate. Should they increase transmission frequency to every 15 minutes? Why or why not?",
+          "options": [
+            "Yes, more frequent updates help track movements better",
+            "No, the channel cannot handle doubled frequency with current error rate; they'd need error correction that reduces useful bandwidth further",
+            "Yes, satellite bandwidth is unlimited so frequency doesn't matter",
+            "No reason exists; 30-minute intervals are arbitrary"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Frequency matters, but bandwidth and error rate limit what's possible.",
+            "Correct! Doubling frequency doubles data volume. With 1% error rate requiring error correction, doubled frequency would exceed channel capacity.",
+            "Satellite bandwidth is limited and shared.",
+            "Tiger tracking is critical, but physical constraints limit frequency."
+          ],
+          "explanation": "Doubling frequency doubles data volume (100 collars \u00d7 2 transmissions). With 1% error rate requiring error correction, doubled frequency would exceed channel capacity, causing data loss."
+        },
+        {
+          "question": "A water quality monitoring network has 50 sensor stations along a river, each sampling 10 parameters (pH, temperature, dissolved oxygen, etc.) every hour. Raw data: ~5 MB/hour from all stations. Bandwidth available: 1 MB/hour. How can information theory solve this?",
+          "options": [
+            "Reduce sampling frequency to weekly",
+            "Compress data by removing redundancy (e.g., encoding changes instead of absolute values) and transmit diagnostics only when parameters exceed safe ranges",
+            "Measure fewer parameters\u2014only pH matters",
+            "Accept 80% data loss"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Weekly sampling misses acute pollution events.",
+            "Correct! Data compression (storing changes instead of absolute values) shrinks files. Transmitting alerts only when bounds are exceeded conserves bandwidth while preserving critical information.",
+            "All parameters are important.",
+            "Data loss undermines decision-making."
+          ],
+          "explanation": "Information theory: compress redundancy, transmit anomalies. In stable conditions, water parameters change little\u2014encoding changes is more compact. Only transmit alerts when parameters deviate. This 'exception-based reporting' fits the 1 MB/hour constraint."
+        },
+        {
+          "question": "A climate model produces 100 GB of daily output (temperature, precipitation, humidity at 1 km resolution). Scientists need trends, not all pixel data. Design an efficient transmission strategy.",
+          "options": [
+            "Transmit all 100 GB daily\u2014scientists need complete data",
+            "Transmit derived metrics: regional averages, anomalies relative to baseline, and flagged extreme events instead of full grids",
+            "Reduce model resolution to 10 km to shrink data 100\u00d7",
+            "Compress data and transmit everything at lower quality"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Full transmission is impractical.",
+            "Correct! Averages, anomalies, and alerts distill 100 GB into MB while preserving decision-relevant information.",
+            "Resolution reduction sacrifices useful spatial detail.",
+            "Quality loss undermines climate projections."
+          ],
+          "explanation": "100 GB is highly redundant: millions of pixels have nearly identical values. Extract what matters (regional averages, anomalies, extremes) and discard pixel-level redundancy. Scientists care about patterns, not every pixel value."
+        }
+      ],
+      "pass_threshold": 66.67,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Synthesis Project: Design an Environmental Monitoring System",
+      "content": "You are tasked with designing a comprehensive monitoring network for a biosphere reserve spanning 5,000 km\u00b2 with diverse ecosystems: tropical forest, wetlands, grasslands, and freshwater systems. Your system must integrate weather stations, biodiversity cameras, water quality monitors, and satellite imagery. Your project deliverable: (1) Identify key information for conservation decision-making. What reduces uncertainty about ecosystem health? (2) Analyze entropy/diversity: What ecosystem features have high entropy? Which have low entropy? How does this shape monitoring priorities? (3) Design the transmission network: Each field station has limited bandwidth (10 Mbps). Satellite uplinks are expensive. You must choose: How frequently do you sample? Which data do you compress? Where do you use error correction? How do you prioritize critical information? (4) Apply all three modules: Information fundamentals (reducing uncertainty), entropy (quantifying diversity), channel capacity (managing bandwidth constraints). This is the reality of environmental monitoring: information theory guides every decision about what to measure, how to transmit it, and how to make decisions despite uncertainty and channel limitations."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T08:09:45.805158+00:00",
+  "model": "claude-haiku-4-5"
+}

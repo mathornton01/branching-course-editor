@@ -1,0 +1,199 @@
+{
+  "id": "comp-arch-journalism-course",
+  "title": "Computer Architecture Through Journalism",
+  "description": "Master computer architecture fundamentals by investigating and reporting on processor technology from a journalist's perspective",
+  "topic": "Computer Architecture",
+  "theme": "journalism",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer-architecture",
+    "CPU",
+    "memory",
+    "power-efficiency",
+    "journalism",
+    "tech-reporting"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Your First Major Tech Story",
+      "content": "You're a technology correspondent at a major news outlet, and your editor has just assigned you to cover TechCorp's announcement of a revolutionary new chip. The industry is buzzing\u2014this processor promises to change everything. But you realize you don't fully understand computer architecture, and without that knowledge, you'll miss the real story. You have three possible angles to investigate. Which one will you pursue?",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "What's the core of your investigation?",
+      "content": "Computer architecture underpins everything in technology. You can approach it from different angles. Which one resonates with your reporting style?",
+      "choices": [
+        {
+          "label": "Investigate the CPU: Why is raw processing power such a big deal?",
+          "next": "n3a"
+        },
+        {
+          "label": "Investigate Memory & Security: How do data breaches happen at the hardware level?",
+          "next": "n3b"
+        },
+        {
+          "label": "Investigate Power & Efficiency: Why is energy consumption becoming the story?",
+          "next": "n3c"
+        }
+      ]
+    },
+    {
+      "id": "n3a",
+      "type": "content",
+      "title": "The CPU: The Brain of Computer Architecture",
+      "content": "The CPU (Central Processing Unit) is like the editor-in-chief of a newsroom. It interprets instructions, processes data, and makes decisions in milliseconds. Modern CPUs have multiple cores\u2014think of them as parallel editors working simultaneously on different stories. Clock speed (measured in GHz) determines how many instructions execute per second. Cache memory acts like a journalist's quick-reference notes, storing frequently accessed data nearby for instant recall. The new TechCorp chip has 16 cores running at 5.2 GHz with 36 MB of L3 cache, but understanding what these numbers mean is crucial for explaining the real-world impact to your readers.",
+      "next": "n4a"
+    },
+    {
+      "id": "n4a",
+      "type": "decision",
+      "title": "How should you frame this processor story?",
+      "content": "You've learned how CPUs work. Now you need to decide: do you emphasize the record-breaking technical specifications, or focus on what users actually experience?",
+      "choices": [
+        {
+          "label": "The Speed Story: Lead with how it breaks performance records and dominates competitors",
+          "next": "n5a"
+        },
+        {
+          "label": "The Practical Story: Explain how it transforms user experience\u2014faster gaming, smoother video editing, better AI",
+          "next": "n6a"
+        }
+      ]
+    },
+    {
+      "id": "n5a",
+      "type": "end",
+      "title": "Published: TechCorp Shatters Speed Records with 16-Core Processor",
+      "content": "Your article focuses on the raw benchmarks: 40% faster than the previous generation, outperforming competitors by significant margins. You explain instruction-level parallelism and how TechCorp achieved higher instructions-per-cycle (IPC) through architectural innovations. The piece resonates with tech enthusiasts and engineers. Readers appreciate the detailed performance comparisons and understand why this matters in the competitive chip market. Your byline establishes you as someone who understands the technical depth of processor architecture."
+    },
+    {
+      "id": "n6a",
+      "type": "end",
+      "title": "Published: This Chip Will Transform How You Work",
+      "content": "Your article focuses on tangible benefits: video editing renders 50% faster, AI image processing happens in real-time, gaming experiences unprecedented smoothness. You explain CPU architecture in accessible terms\u2014using analogies of parallel editors and fast decision-making. Your readers, mostly everyday tech users, finally understand why processor upgrades matter. The piece gets shared widely because it makes complex architecture concepts relatable. You've established yourself as a translator between technical innovation and human impact."
+    },
+    {
+      "id": "n3b",
+      "type": "content",
+      "title": "Memory Architecture: The Data Vault",
+      "content": "Computer memory isn't a single entity\u2014it's a hierarchy. Registers are the fastest but smallest (like a single fact memorized). L1/L2/L3 caches are progressively larger but slower (like reference desks with increasingly distant locations). RAM is much larger but significantly slower. Storage (SSD/HDD) is huge but very slow. The catch: data must travel through this hierarchy, and slowdowns cascade. When the CPU requests data not in cache, it triggers a 'cache miss,' requiring retrieval from slower memory\u2014a massive performance penalty. Recently, security researchers discovered vulnerabilities like Spectre and Meltdown: by measuring memory access timing, attackers can trick the CPU into revealing data that should be private, exploiting cache mechanisms.",
+      "next": "n4b"
+    },
+    {
+      "id": "n4b",
+      "type": "decision",
+      "title": "How should you position the memory story?",
+      "content": "You understand memory architecture and its security implications. Should you focus on the threat, or on how the solution protects people?",
+      "choices": [
+        {
+          "label": "The Danger Story: Explain the vulnerability\u2014how hackers exploit memory timing to steal data",
+          "next": "n5b"
+        },
+        {
+          "label": "The Protection Story: Explain how the new design prevents attacks while maintaining speed",
+          "next": "n6b"
+        }
+      ]
+    },
+    {
+      "id": "n5b",
+      "type": "end",
+      "title": "Published: Chip Vulnerability Exposes Billions of Computers to Hackers",
+      "content": "Your investigative piece explains how memory architecture vulnerabilities like Spectre work\u2014using the cache mechanism against itself. You describe how researchers could extract passwords and encryption keys by measuring microsecond timing differences. The article traces the vulnerability back to CPU design choices made decades ago, showing how architectural assumptions about security proved dangerously naive. You interview security researchers and corporate security chiefs. The piece drives industry discussion and reader awareness of hardware-level threats."
+    },
+    {
+      "id": "n6b",
+      "type": "end",
+      "title": "Published: TechCorp's New Chip Closes the Door on Memory Hackers",
+      "content": "Your feature explains the architectural solution: new memory isolation techniques prevent speculative execution attacks while maintaining performance. You describe how CPU design teams had to balance security and speed\u2014the core engineering tradeoff. Readers understand that this isn't a simple patch but a fundamental redesign. You frame it as reassuring news rather than alarming, showing how engineers responded to vulnerabilities with thoughtful architecture. The piece positions TechCorp as a leader in security-by-design."
+    },
+    {
+      "id": "n3c",
+      "type": "content",
+      "title": "Power Architecture: The Efficiency Revolution",
+      "content": "For decades, processor design chased speed above all else. Today, power consumption drives architecture. Every transistor that switches consumes energy and generates heat. Modern chip design optimizes power efficiency through heterogeneous processors\u2014combining high-performance cores for demanding tasks with energy-efficient cores for background work. The new TechCorp chip dynamically shifts workloads between performance and efficiency cores, extending battery life from 8 to 20 hours on the same charge. Supply voltages operate at lower levels, memory access patterns are optimized to reduce data movement, and thermal design carefully manages heat.",
+      "next": "n4c"
+    },
+    {
+      "id": "n4c",
+      "type": "end",
+      "title": "Published: The Chip Revolution That Doubled Your Battery Life",
+      "content": "Your article explains the power-centric architecture shift: why modern design prioritizes efficiency over raw speed. You describe heterogeneous processors using a newsroom analogy\u2014assigning breaking-news tasks to high-energy reporters, routine work to part-time staff. You explain thermal management innovations and how software works with hardware to optimize power use. The piece resonates especially with environmental-conscious readers and professionals who rely on day-long battery life. Industry analysts cite your piece as clarifying the sector's direction."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3a",
+      "label": "CPU angle"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3b",
+      "label": "Memory angle"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n3c",
+      "label": "Efficiency angle"
+    },
+    {
+      "id": "c5",
+      "source": "n3a",
+      "target": "n4a",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4a",
+      "target": "n5a",
+      "label": "Speed focus"
+    },
+    {
+      "id": "c7",
+      "source": "n4a",
+      "target": "n6a",
+      "label": "Practical focus"
+    },
+    {
+      "id": "c8",
+      "source": "n3b",
+      "target": "n4b",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n4b",
+      "target": "n5b",
+      "label": "Threat focus"
+    },
+    {
+      "id": "c10",
+      "source": "n4b",
+      "target": "n6b",
+      "label": "Solution focus"
+    },
+    {
+      "id": "c11",
+      "source": "n3c",
+      "target": "n4c",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T10:57:24.653468+00:00",
+  "model": "claude-haiku-4-5"
+}

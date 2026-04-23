@@ -1,0 +1,170 @@
+{
+  "id": "cybersec-sports-basics",
+  "title": "Cybersecurity Basics for Sports Analytics",
+  "description": "Learn cybersecurity fundamentals through the lens of sports analytics. Explore authentication, data protection, and threat detection to safeguard your competitive advantage.",
+  "topic": "Cybersecurity",
+  "theme": "sports analytics",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "cybersecurity",
+    "sports analytics",
+    "data protection",
+    "authentication",
+    "incident response"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Protecting Your Sports Analytics Intelligence",
+      "content": "In modern sports, data is as valuable as talent. Teams collect thousands of data points daily\u2014player biometrics, opponent statistics, strategic playbooks, and performance models. This data fuels competitive advantage, making it a prime target for theft or tampering. Cybersecurity isn't just IT's job; it's everyone's responsibility. In this course, you'll explore three critical security domains: authentication (who accesses data), data protection (keeping data safe), and threat detection (spotting attacks). These pillars protect your analytics infrastructure from competitors, hackers, and accidental breaches.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Security Focus",
+      "content": "Which aspect of sports analytics security interests you most?",
+      "choices": [
+        {
+          "label": "Authentication & Access Control",
+          "next": "n3"
+        },
+        {
+          "label": "Data Protection & Encryption",
+          "next": "n5"
+        },
+        {
+          "label": "Threat Detection & Incident Response",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Authentication & Access Control in Sports Analytics",
+      "content": "Authentication verifies that users are who they claim to be\u2014critical for sports analytics teams. A coach's login should grant access to game film and player stats, but not accounting data. Role-based access control (RBAC) ensures each team member sees only what they need. Imagine a sports data analyst and a video coordinator both accessing the team's analytics platform. The analyst needs access to databases and modeling tools; the videographer needs only highlight footage and coaching notes. Without proper access controls, curious staff members might peek at trade targets' evaluations, or worse, a hacked account could expose everything. Multi-factor authentication (MFA)\u2014combining passwords with verification codes\u2014adds a security layer. Even if a password is stolen, the attacker can't login without the second factor.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Authentication Example: Securing Scout Reports",
+      "content": "Consider a Major League Baseball team's analytics system. A scout logs in with username and password (something you know), then receives a 6-digit code on their phone (something you have). The system grants them access to scouting reports for players in their territory, but not the financial data or strategic trade recommendations visible to the GM. When the scout tries to access the trade database anyway, the system denies it based on their role. This prevents accidental leaks and protects proprietary valuations. If the scout's laptop is stolen, the thief can't access the analytics platform without the second authentication factor\u2014buying time for the team to revoke the account.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Data Protection & Encryption",
+      "content": "Data at rest (stored on servers) and data in transit (sent over networks) must both be protected. Encryption scrambles data into unreadable form without the correct key. Imagine a sports analytics database containing proprietary player performance models worth millions. If competitors steal this database, encryption renders it useless gibberish. HTTPS (secure web connections) encrypts data traveling between an analyst's laptop and the team's servers, preventing eavesdropping on networks. End-to-end encryption ensures only the sender and recipient can read messages. Backup redundancy\u2014storing encrypted copies in secure locations\u2014protects against ransomware attacks where criminals encrypt your data and demand payment. Proper data handling also means securely deleting old data, not leaving draft playbooks or evaluation notes on forgotten USB drives.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Data Protection Example: Transmitting Game Plans",
+      "content": "An NFL team sends next week's game plan to coaches via encrypted email. The attachment is encrypted with a 256-bit key (essentially unbreakable with current technology). Even if a competitor's network sniffer intercepts the message, they see only random characters. The coaches download the plan and it's stored on their devices encrypted. When a coach retires and returns their laptop, IT securely wipes the drive using multi-pass overwrite, ensuring old plans are unrecoverable. The team also maintains encrypted backup copies in a secure cloud vault. If ransomware hit the primary server, they could restore from the unencrypted backups instead of paying the criminal ransom.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Threat Detection & Incident Response",
+      "content": "Even with strong defenses, threats slip through. Detection systems monitor for suspicious activity: unusual login times, access from new locations, large data downloads, or failed authentication attempts. A baseline of normal activity helps identify anomalies. Response procedures activate when threats are detected, minimizing damage. After a breach, a team must isolate affected systems, determine what was accessed, notify affected parties, and patch vulnerabilities. Log analysis reveals who did what when. A sports analytics team might discover that a disgruntled former employee still had access and downloaded all player evaluations the night before joining a rival team. Quick response\u2014revoking access, resetting passwords, and legal action\u2014mitigates losses. Incident response isn't punishment; it's damage control and learning.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Threat Detection Example: Catching the Unauthorized Access",
+      "content": "A basketball team's security team receives an alert: an analyst's account accessed data at 3 AM from an IP address in a different country. This is anomalous\u2014the analyst typically works 9-5 from the team facility. The security team immediately isolates the account and reviews logs. They discover 47 downloads of proprietary player rankings, draft models, and contract evaluations over 4 hours. Investigation reveals the analyst's password was compromised in a breach of a public website they reused. Quick response\u2014resetting credentials, securing the device\u2014prevents further damage. Legal review determines trade deadline conversations and prospect evaluations were potentially compromised. The team adjusts their draft strategy and notifies affected organizations. A proper incident response plan meant minutes of damage instead of weeks of undetected theft.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrated Security Strategy for Sports Analytics",
+      "content": "Authentication, encryption, and detection aren't separate silos\u2014they work together. Strong authentication prevents unauthorized access; encryption protects data that does get accessed; detection catches breaches early. A security-aware culture amplifies these technical controls. Analysts should understand why they can't share passwords, why USB drives aren't appropriate for sensitive data, and how to report suspicious activity. Regular training, clear policies, and accessible incident reporting channels make security everyone's job. As sports analytics becomes more sophisticated and competitive, investment in security protects years of research, millions in player valuations, and your team's strategic edge. The most sophisticated model is worthless if competitors steal it or ransomware wipes it out.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "You've Protected Your Analytics Edge",
+      "content": "You've explored authentication, data protection, and threat detection\u2014the three pillars of cybersecurity in sports analytics. You understand how these domains protect your team's competitive advantage and how they interconnect. Security is ongoing: threats evolve, new vulnerabilities emerge, and teams must adapt. Continue learning, stay curious about emerging threats, and remember: in sports and security, preparation wins games."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Authentication & Access Control"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Data Protection & Encryption"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Threat Detection & Incident Response"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": null
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": null
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T06:56:42.095622+00:00",
+  "model": "claude-haiku-4-5"
+}

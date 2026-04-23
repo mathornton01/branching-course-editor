@@ -1,0 +1,230 @@
+{
+  "id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+  "title": "Linear Algebra for Data Science",
+  "description": "Master the foundational linear algebra concepts used in sports analytics, from vectors representing player movement to matrices aggregating team data to dimensionality reduction revealing hidden performance patterns.",
+  "topic": "Linear Algebra",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "linear algebra",
+    "data science",
+    "sports analytics",
+    "vectors",
+    "matrices",
+    "PCA",
+    "eigenvalues"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Linear Algebra Powers Sports Analytics",
+      "content": "Sports analytics relies on linear algebra to make sense of massive amounts of player and team data. From tracking player movements to optimizing team strategy, the mathematical tools of linear algebra transform raw numbers into actionable insights. In this course, you'll explore three core areas of linear algebra through the lens of actual sports analytics challenges. Whether you're analyzing basketball court positioning, predicting soccer team performance, or identifying the key factors that separate elite athletes from good ones, linear algebra is your foundation."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "This course covers three interconnected areas of linear algebra. Select a topic to start with based on your interests\u2014all paths will reconverge, so the order doesn't matter.",
+      "choices": [
+        {
+          "label": "Vectors & Player Motion",
+          "next": "n3"
+        },
+        {
+          "label": "Matrices & Team Stats",
+          "next": "n5"
+        },
+        {
+          "label": "Dimensionality Reduction & Key Factors",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Vectors in Sports Analytics",
+      "content": "A vector is an ordered list of numbers representing magnitude and direction. In sports, vectors model player positions (x, y coordinates on court), velocity vectors (speed and direction), and performance metrics (shooting accuracy, defensive rating, sprint speed). For example, a basketball player's position can be represented as (x=15, y=20), meaning 15 feet from the baseline and 20 feet from the sideline. Multiple vectors combined reveal movement patterns, teammate spacing, and spatial advantages. Understanding vectors is essential for analyzing positioning strategies and player motion in any sport."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Calculating Distance Between Players",
+      "content": "Imagine two basketball players: Player A at position (10, 15) and Player B at position (16, 22). To find the straight-line distance between them, we use the Euclidean distance formula: distance = \u221a[(16-10)\u00b2 + (22-15)\u00b2] = \u221a[36 + 49] = \u221a85 \u2248 9.2 feet. This calculation, rooted in vector geometry, tells coaches whether players are properly spaced for defense or if someone is out of position. Teams use this constantly during game analysis to verify players maintain optimal court spacing during plays."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Matrices in Team Analytics",
+      "content": "A matrix is a rectangular array of numbers\u2014think of it as a data table. In sports, matrices elegantly represent complex datasets: a player stats matrix might have rows for each player and columns for points, rebounds, assists, and steals. A team roster matrix could have 15 rows (players) and 20 columns (performance metrics). Matrix operations like multiplication allow you to aggregate data quickly\u2014multiply a stats matrix by a weights matrix to calculate a composite player rating. Matrices scale to large datasets, making them perfect for analyzing entire leagues or multiple seasons at once."
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Matrix Multiplication for Team Ratings",
+      "content": "Suppose you have a 5\u00d73 player stats matrix (5 players, 3 stats: points, rebounds, assists) and a 3\u00d71 weights matrix emphasizing priorities: [2, 1, 1.5] for [points weight, rebounds weight, assists weight]. Multiplying these gives a 5\u00d71 result: each player's composite rating. Player A with (20 points, 8 rebounds, 5 assists) gets rating = 20\u00d72 + 8\u00d71 + 5\u00d71.5 = 40 + 8 + 7.5 = 55.5. This single operation instantly rates all five players using your chosen weighting scheme, a task that would be tedious manually but elegant with matrix multiplication."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Dimensionality Reduction: Finding What Matters",
+      "content": "Modern sports analytics collects 50+ metrics per player. Too many dimensions overwhelm coaches and hide patterns. Principal Component Analysis (PCA) uses eigenvalues and eigenvectors to find the directions in data where the most variation occurs\u2014the \"most important\" factors. In basketball, PCA might compress 30 stats into 3\u20135 principal components that explain 90% of the variation. These components often map to interpretable concepts: one might capture \"offensive impact,\" another \"defensive prowess,\" a third \"ball handling.\" Dimensionality reduction reveals the hidden structure of sports performance."
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: PCA in Player Ranking",
+      "content": "A team tracks 25 player metrics (shooting %, field goal attempts, steals, blocks, etc.). Raw comparison is overwhelming. PCA identifies that the first two principal components explain 75% of all variance\u2014one strongly correlates with \"offensive impact,\" the other with \"defensive impact.\" By plotting players on this 2D space instead of 25D, coaches instantly see clusters: elite two-way players in the top-right, defensive specialists in the bottom-right, bench role players clustered elsewhere. This 2D visualization, derived from 25 dimensions via eigenvalue analysis, transforms confusion into clarity."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Linear Algebra in Sports Analytics",
+      "content": "You've explored vectors (player positions and movement), matrices (team and player data aggregation), and dimensionality reduction (finding key performance patterns). These concepts interweave in real applications: a scouting model might compute vectors for each player's strengths, organize them in a matrix, apply PCA to isolate the top predictors, then use eigenvalues to weight which factors matter most for team fit. Modern sports analytics suites (used by NBA, Premier League, and other professional organizations) build on exactly these linear algebra foundations. Now let's test your integrated understanding with a practical scenario."
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Final Assessment: Building a Scout's Decision Tool",
+      "content": "A soccer club is building a model to evaluate striker prospects. They have 20 candidate players with 12 performance metrics (goals, assists, dribbling success %, pass completion %, sprint distance, etc.). They want coaches to see\u2014at a glance\u2014how each striker ranks on the two most important hidden factors in their data.",
+      "questions": [
+        {
+          "question": "Why would the club use PCA on the 12 metrics rather than just examining all 12 one by one?",
+          "options": [
+            "A) PCA guarantees all strikers will score the same rating",
+            "B) PCA finds 2-3 latent factors that explain most variance, revealing hidden structure coaches can't see in 12 dimensions",
+            "C) PCA requires fewer computational resources than storing 12 metrics",
+            "D) PCA is the only way to ensure mathematical correctness"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A) Incorrect. PCA doesn't equalize ratings; it reveals variation structure.",
+            "B) Correct! PCA compresses 12 dimensions into 2-3 principal components, each interpretable and capturing most variance.",
+            "C) Partially true, but the main reason is conceptual clarity.",
+            "D) Incorrect. Multiple approaches work; PCA is chosen for dimensionality reduction."
+          ],
+          "explanation": "PCA's power lies in dimensionality reduction\u2014it identifies the 'directions' in your data where the most important variation happens, letting scouts focus on the 2-3 hidden factors that truly differentiate strikers."
+        },
+        {
+          "question": "The club represents each striker as a row and each metric as a column. What is the structure of this data representation?",
+          "options": [
+            "A) A vector",
+            "B) A scalar",
+            "C) A matrix",
+            "D) An eigenvalue"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "A) Incorrect. A vector is a single row or column; this is a 2D table.",
+            "B) Incorrect. A scalar is a single number.",
+            "C) Correct! A matrix is a rectangular array of numbers: 20 strikers (rows) \u00d7 12 metrics (columns).",
+            "D) Incorrect. Eigenvalues emerge from matrix analysis, not the data representation itself."
+          ],
+          "explanation": "This 20\u00d712 array is a matrix. Rows represent entities (strikers), columns represent features (metrics). All our matrix operations\u2014multiplication for scoring, decomposition for PCA\u2014work on structures like this."
+        },
+        {
+          "question": "If the club wants to weight metrics (e.g., 'goals' is 3\u00d7 as important as 'pass completion %'), they multiply the striker matrix by a weight matrix. What are the dimensions of the weight matrix?",
+          "options": [
+            "A) 12\u00d71 (one weight per metric)",
+            "B) 20\u00d71 (one weight per striker)",
+            "C) 12\u00d712 (one weight per pair of metrics)",
+            "D) 1\u00d720 (one weight per outcome)"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "A) Correct! A 12\u00d71 weights matrix has one entry per metric. Multiplying the 20\u00d712 striker matrix by this 12\u00d71 weights matrix yields a 20\u00d71 result: each striker's weighted score.",
+            "B) Incorrect. Weights are per metric, not per striker.",
+            "C) Incorrect. Pair-wise weights would make a larger structure.",
+            "D) Incorrect. This doesn't match the matrix multiplication dimensions."
+          ],
+          "explanation": "Matrix multiplication rule: if A is m\u00d7n and B is n\u00d7p, the product is m\u00d7p. Here, 20\u00d712 \u00d7 12\u00d71 = 20\u00d71. The 12\u00d71 weight matrix applies one scalar weight to each of the 12 metrics."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "You've Mastered Linear Algebra for Sports Analytics",
+      "content": "You now understand how vectors model player movement and positioning, how matrices organize and transform team data, and how dimensionality reduction (via eigenvalues and PCA) reveals the hidden factors that drive athletic performance. These foundations are used daily by real sports organizations to scout talent, predict game outcomes, optimize lineups, and gain competitive advantage. Linear algebra connects raw numbers to strategic insight. Congratulations\u2014you've unlocked a powerful lens through which to understand sports!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Vectors & Player Motion"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Matrices & Team Stats"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Dimensionality Reduction & Key Factors"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Pass"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "Retry"
+    }
+  ],
+  "generated_at": "2026-03-27T09:27:16.699539+00:00",
+  "model": "claude-haiku-4-5"
+}

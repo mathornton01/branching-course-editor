@@ -1,0 +1,229 @@
+{
+  "id": "course-networks-journalism-001",
+  "title": "Networks & Protocols: A Journalist's Guide",
+  "description": "Learn how computer networks and communication protocols power modern journalism through real-world scenarios",
+  "topic": "Computer Networks and Protocols",
+  "theme": "journalism",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "networking",
+    "protocols",
+    "journalism",
+    "security",
+    "performance"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Launching Your News Network",
+      "content": "A breaking news story has just happened in your city. You need to publish it to readers across the country in minutes. But how does your article actually travel through the internet to reach millions of people? In this course, you'll learn how computer networks and communication protocols power modern journalism\u2014from the moment you hit publish to when readers see your story on their phones across the world. You're about to make a critical choice about your news platform's priorities.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Your News Website Goes Live",
+      "content": "Your investigative team has uncovered important information about local government corruption. You're about to publish when you face a critical decision: protect your sources' identity and your readers' data through secure encrypted protocols, or ensure the story reaches as many people as fast as possible using optimized, high-speed protocols?",
+      "choices": [
+        {
+          "label": "Prioritize security and source protection",
+          "next": "n3"
+        },
+        {
+          "label": "Prioritize speed and instant delivery",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Protecting Sources: Encryption & Secure Protocols",
+      "content": "Journalists have a sacred responsibility to protect their sources. That's where protocols like HTTPS and encryption come in. HTTPS (HTTP Secure) uses TLS/SSL to encrypt data traveling between your news server and readers' browsers\u2014attackers can't intercept it. Your investigative sources send you tips through encrypted channels that use similar principles. Public-key cryptography uses two keys: a public key (like your byline\u2014everyone knows it) and a private key (like your source's identity\u2014only you know it). Understanding these protocols means understanding how to keep sources safe in the digital age.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "A Journalist's Encryption Workflow",
+      "content": "Consider an investigative journalist exposing corporate fraud. She uses PGP encryption to communicate with her whistleblower source: she obtains his public key, encrypts her questions, and only he (with his private key) can decrypt them. Meanwhile, her news organization's website uses HTTPS, so when readers access the investigation, their browsers establish a secure handshake with the server using TLS. Attackers can see data flowing but can't read it\u2014protecting both sources and readers.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Secure Protocol Knowledge Check",
+      "content": "Test your understanding of encryption and secure protocols in journalism.",
+      "questions": [
+        {
+          "question": "What does HTTPS protect when a reader accesses your news article?",
+          "options": [
+            "Only the article title",
+            "All data between the reader's browser and your news server, preventing eavesdropping",
+            "The physical cables carrying the internet",
+            "Nothing\u2014it's just for show"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. HTTPS protects more than just the title.",
+            "Correct! HTTPS encrypts the entire connection.",
+            "Incorrect. Encryption doesn't protect physical infrastructure.",
+            "Incorrect. HTTPS provides real security."
+          ],
+          "explanation": "HTTPS establishes an encrypted connection using TLS/SSL, ensuring that all data between the reader and server is protected from eavesdropping and man-in-the-middle attacks."
+        },
+        {
+          "question": "In public-key cryptography, how does a journalist securely receive tips from a source?",
+          "options": [
+            "She uses the same password with the source",
+            "She obtains the source's public key to encrypt messages, and the source uses their private key to decrypt",
+            "She asks the source to write the tip on paper",
+            "She uses her private key to encrypt and the source uses their public key to decrypt"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Shared passwords aren't secure.",
+            "Correct! Public keys encrypt, private keys decrypt.",
+            "While paper can be secure, that's not how digital encryption works.",
+            "Incorrect. Private keys are used for decryption, not encryption by others."
+          ],
+          "explanation": "In public-key cryptography, anyone can encrypt with a public key, but only the holder of the corresponding private key can decrypt. The source keeps their private key secret."
+        },
+        {
+          "question": "Why is encryption particularly important for journalistic communication?",
+          "options": [
+            "It makes articles more interesting to read",
+            "It protects sources' identities and sensitive information, which is fundamental to free press",
+            "It prevents other journalists from reading the news",
+            "It speeds up internet connections"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Encryption is about security, not content quality.",
+            "Correct! Protecting sources is a cornerstone of journalism.",
+            "Incorrect. Encryption shouldn't block legitimate readership.",
+            "Incorrect. Encryption typically adds minimal overhead, not speed."
+          ],
+          "explanation": "Free press depends on journalists' ability to protect sources. Without encryption, whistleblowers and vulnerable sources are exposed to retaliation, effectively silencing important stories."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "decision",
+      "title": "Your Investigation Goes Viral\u2014Now What?",
+      "content": "Your expos\u00e9 has reached thousands of readers through secure encrypted channels. Media networks are asking for interviews. But you've just learned that a powerful organization you criticized is attempting distributed denial-of-service attacks on your news site to silence your reporting. You have limited resources.",
+      "choices": [
+        {
+          "label": "Invest in stronger security, redundancy, and DDoS protection",
+          "next": "n7"
+        },
+        {
+          "label": "Ignore the threats and focus on the next story",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "The Truth Prevails: Secure Independent Journalism",
+      "content": "Because you prioritized secure protocols and encrypted communications, whistleblowers trust your outlet with their most sensitive information. Your redundant servers and DDoS protection withstand the attacks. Your platform becomes known as the most secure place to expose corruption. Readers trust you with their data. Your sources remain protected. In the digital age, security infrastructure isn't optional for journalism\u2014it's the foundation of free press and accountability."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "The Story Gets Suppressed",
+      "content": "Without proper security infrastructure, your news site falls victim to a sustained denial-of-service attack that crashes your servers for critical hours. As attackers gain access, your sources' identities are exposed when unencrypted databases are breached. Trust in your outlet collapses overnight. Whistleblowers stop submitting tips. This tragic outcome demonstrates why understanding network security isn't just technical\u2014it's a journalistic responsibility with real consequences."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Breaking News Speed: UDP, TCP, and Protocol Selection",
+      "content": "Breaking news waits for no one. When your newsroom breaks a story, every second counts. TCP (Transmission Control Protocol) guarantees all data arrives in order\u2014perfect for articles, where every word must be accurate. UDP (User Datagram Protocol) prioritizes speed over perfect delivery\u2014ideal for live video streaming where a single lost frame is better than buffering delays. Your website uses HTTP over TCP for article delivery, ensuring reliability. Your livestream uses UDP-based protocols like RTP (Real-time Transport Protocol) to reach viewers instantly during developing stories. Understanding which protocol serves which purpose is the difference between reporting the story first or being scooped.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Live Election Night Coverage",
+      "content": "It's election night, and three news organizations are covering results. Organization A streams everything using TCP\u2014crystal clear visuals and text, but delayed by 5-7 seconds due to retransmission checks and buffering. Organization B uses UDP-based streaming\u2014raw, occasionally glitchy but live and instant, reflecting real-time results. Organization C uses a hybrid approach: TCP for critical electoral data and text updates (accurate vote counts matter), UDP for live video feeds (seeing the reporter's reaction is less critical than timeliness). Organization C wins the viewership battle and becomes the trusted source because they engineered their network protocols intelligently.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "First to Report, Every Time",
+      "content": "By mastering network protocols and understanding when to prioritize speed versus reliability, your newsroom becomes known for breaking news first. Your platform handles millions of concurrent viewers during major events without collapsing. Readers turn to you for live updates because you consistently deliver fast, engaging coverage. Your competitive advantage isn't just journalistic talent\u2014it's technical understanding of the network layer. You've proven that understanding how data flows is as important as understanding how stories flow."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Security path"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n9",
+      "label": "Speed path"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn example"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Test knowledge"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Next scenario"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Invest in security"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n8",
+      "label": "Ignore threats"
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": "See example"
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": "Finish course"
+    }
+  ],
+  "generated_at": "2026-03-27T04:53:26.436307+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,131 @@
+{
+  "id": "cybersec-arch-scenario",
+  "title": "Cybersecurity Basics: Protecting Your Architectural Practice",
+  "description": "Learn cybersecurity fundamentals through the lens of protecting an architectural firm's designs, client data, and intellectual property. Navigate real-world security decisions and discover how defense strategies can be implemented at every layer.",
+  "topic": "Cybersecurity Basics",
+  "theme": "architecture",
+  "difficulty": "beginner",
+  "estimated_minutes": 25,
+  "tags": [
+    "cybersecurity",
+    "data protection",
+    "security awareness",
+    "architecture"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Architects Under Pressure",
+      "content": "You lead a growing architectural firm that just landed a high-value project: designing a mixed-use complex for a major developer. To move forward, you must share detailed blueprints with contractors, engineers, and the client, and store sensitive project budgets and client information digitally. You realize your current informal practices\u2014email attachments, shared USB drives, open cloud folders\u2014put your intellectual property and client data at risk. The question is not whether to secure your practice, but how to do it without slowing down the project."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choosing Your Security Strategy",
+      "content": "You have two approaches. One requires investment in security controls; the other prioritizes speed. Which path will you take?",
+      "choices": [
+        {
+          "label": "Establish comprehensive security controls (defense in depth)",
+          "next": "n3"
+        },
+        {
+          "label": "Prioritize speed\u2014use informal methods with basic caution",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Building a Security Foundation",
+      "content": "You implement defense in depth\u2014layers of security like a medieval fortress. First: authentication, requiring everyone to prove their identity before accessing designs, like showing credentials at the building entrance. Second: access control, where junior staff see only their project sections, contractors see only required blueprints, and clients cannot access budgets. Third: encryption of files at rest and in transit\u2014designs stored in vaults and transported through secure channels. Fourth: comprehensive logging of all access attempts so unauthorized activity triggers alerts immediately. This multi-layered approach protects your firm's perimeter and creates checkpoints at every level."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "The Urgent Contractor Request",
+      "content": "A structural engineer from the consulting firm needs foundation designs urgently. They email personally asking you to 'just send the file to my email'\u2014the contractor is waiting. How do you respond?",
+      "choices": [
+        {
+          "label": "Verify through official channels, use your secure system, grant temporary access with logging",
+          "next": "n5"
+        },
+        {
+          "label": "Trust the urgency; email the file directly to their personal email",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Secure Practice, Thriving Firm",
+      "content": "Verification confirmed the request was legitimate. The design was delivered securely and the project succeeded. Over six months, your logging system caught two suspicious access attempts using old credentials\u2014someone tried but failed to exploit a former employee's account. Because your layers of security were in place, no breach occurred. The client praised your professionalism and security standards. Your defense-in-depth strategy protected intellectual property, client confidentiality, and your reputation, bringing three new clients specifically impressed by your security practices."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Breach: A Costly Lesson",
+      "content": "The engineer's personal email had been compromised by hackers running a phishing campaign. Your unencrypted designs, now in criminal hands, could be sold to competitors who would undercut your firm on future bids. Worse, the email contained client financial details. A breach notification letter went to your client, triggering regulatory review, legal fees, and potential fines. Your reputation suffered\u2014three prospective clients chose other firms. The project completed but the damage was severe. The cost of that one shortcut far exceeded what proper security infrastructure would have cost."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "The Quick Path",
+      "content": "You decide speed matters most. You continue emailing blueprints, use a shared folder with a simple password, and trust that most people are honest. Staff work remotely on unsecured WiFi. No formal access logs. No identity verification beyond knowing someone's name. You reason your firm is too small to be a real target and that security is expensive and bureaucratic. The project moves forward without authentication systems, encryption, or monitoring."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "System Failure and Crisis Response",
+      "content": "The shared folder password was guessed quickly. Design files leaked to online forums. A social engineering attack\u2014someone impersonating a client via email\u2014tricked a staff member into sending a spreadsheet with all client contacts, budgets, and project timelines. Your firm spent two months in breach response: notifying clients, investigating the incident, changing credentials, and implementing emergency security. Reputation damage lingered for months. You eventually implemented comprehensive security, but at double the cost and with permanent loss of client trust. The 'quick path' became the most expensive choice."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "defense in depth"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n7",
+      "label": "speed first"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "secure response"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n6",
+      "label": "risky shortcut"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T08:04:11.022453+00:00",
+  "model": "claude-haiku-4-5"
+}

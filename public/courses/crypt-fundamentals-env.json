@@ -1,0 +1,227 @@
+{
+  "id": "crypt-fundamentals-env",
+  "title": "Cryptography Fundamentals for Environmental Science",
+  "description": "Master cryptography concepts through real-world environmental applications including climate monitoring, wildlife tracking, and sustainable resource management.",
+  "topic": "Cryptography",
+  "theme": "environmental science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "cryptography",
+    "environmental science",
+    "security",
+    "data protection"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Cryptography Knowledge Diagnostic",
+      "content": "This brief assessment will determine your current understanding of cryptography concepts. Your results will guide you to content tailored to your level.",
+      "questions": [
+        {
+          "question": "What is the primary purpose of cryptography in environmental monitoring systems?",
+          "options": [
+            "To make data transfer faster",
+            "To protect sensitive environmental data from unauthorized access",
+            "To improve the accuracy of climate sensors",
+            "To reduce the power consumption of IoT devices"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Speed is a network function, not cryptography's purpose.",
+            "Correct! Cryptography protects confidentiality and integrity of sensitive data.",
+            "Accuracy is determined by sensor calibration, not encryption.",
+            "While cryptography has overhead, that's not its primary purpose."
+          ],
+          "explanation": "Cryptography's main role is to ensure that sensitive environmental data\u2014like climate measurements or endangered species locations\u2014cannot be read or tampered with by unauthorized parties."
+        },
+        {
+          "question": "Which type of encryption uses the same key for both encryption and decryption?",
+          "options": [
+            "Public key encryption",
+            "Asymmetric encryption",
+            "Symmetric encryption",
+            "Hash-based encryption"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Public key encryption uses different keys.",
+            "Asymmetric is another name for public key encryption.",
+            "Correct! Symmetric encryption uses a shared secret key.",
+            "Hashing is not encryption; it's a one-way transformation."
+          ],
+          "explanation": "Symmetric encryption uses a single shared key, like a lock that uses the same key for opening and closing. Environmental teams use AES-256 to secure climate datasets."
+        },
+        {
+          "question": "In a carbon credit trading platform, why might asymmetric encryption be preferable to symmetric encryption?",
+          "options": [
+            "It's faster than symmetric encryption",
+            "It allows verification of transactions without sharing the private key",
+            "It uses less computational power",
+            "It doesn't require secure key distribution"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Asymmetric encryption is actually slower.",
+            "Correct! The public key can verify signatures without exposing the private key\u2014crucial for trusted trading.",
+            "Asymmetric uses more power.",
+            "Key distribution is still necessary, though less vulnerable."
+          ],
+          "explanation": "Asymmetric encryption enables digital signatures, allowing participants to verify transaction authenticity and integrity\u2014essential for carbon credit validity in international climate initiatives."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Public Key Cryptography and Digital Signatures in Environmental Systems",
+      "content": "Public key cryptography uses two mathematically linked keys: a public key (shared openly) and a private key (kept secret). This enables secure communication and digital signatures without pre-sharing secrets. In environmental science, digital signatures authenticate climate data from field stations, verify authenticity of wildlife tracking data, and validate transactions in blockchain-based carbon credit systems. The sender signs with their private key, and anyone can verify with the public key\u2014proving origin and integrity. This approach powers international climate initiatives, where organizations must prove compliance without revealing sensitive operational details.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Example: Digital Signatures in Carbon Credit Verification",
+      "content": "The International Carbon Trading Network issues carbon credits to companies reducing emissions. When a renewable energy company submits verification data (solar generation records, emissions offsets), they digitally sign the data using their private key. Regulators verify the signature using the company's public key, confirming authenticity without needing a pre-shared secret. This prevents tampering: if data is altered even slightly, the signature becomes invalid. All parties trust the mathematical proof, not the intermediary, enabling global climate agreements to function securely at scale.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Path Complete",
+      "content": "You've mastered public key cryptography and digital signatures\u2014the foundation of trust in modern environmental systems. You're ready to explore blockchain in carbon markets, IoT sensor authentication in climate networks, and cryptographic protocols in international environmental data sharing initiatives."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Fundamentals: What is Cryptography and Symmetric Encryption",
+      "content": "Cryptography is the science of transforming readable data (plaintext) into scrambled form (ciphertext) to protect it from unauthorized access. Symmetric encryption uses a single secret key shared between sender and receiver\u2014like a physical lock where the same key opens and closes the door. The sender encrypts data with the key, and the receiver decrypts using the identical key. Environmental science teams use symmetric encryption (like AES-256) to protect sensitive climate datasets, wildlife telemetry coordinates, and field research notes from competitors and unauthorized access. The challenge: both parties must securely exchange the key beforehand.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Protecting Climate Research with Symmetric Encryption",
+      "content": "A climate research team deployed temperature and CO\u2082 sensors across the Arctic to study ice melt rates. The sensors collect data hourly and transmit encrypted readings to the lab. Using AES-256 symmetric encryption, both the sensor firmware and lab server use the same secret key. A sensor encrypts 'temperature=\u221242\u00b0C, time=14:30' into unreadable bytes that travel over the internet. The lab decrypts using the shared key, recovering the original reading. Without the key, an interceptor sees only gibberish. However, when deploying 1,000 sensors globally, securely sharing keys becomes logistically challenging\u2014a limitation of symmetric systems.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Symmetric Encryption in Environmental Scenarios",
+      "content": "Test your understanding of symmetric encryption with scenarios from environmental monitoring and conservation work.",
+      "questions": [
+        {
+          "question": "A conservation group tags polar bears with GPS collars. The GPS location data is encrypted with AES-256. Where would the collars and the receiving station store the symmetric encryption key?",
+          "options": [
+            "Only on the GPS collar; the receiving station should not have it",
+            "Both the collar (embedded in firmware) and the receiving station must have the identical key",
+            "Only on the receiving station; collars transmit unencrypted",
+            "In a public database accessible to all environmental teams"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Both parties need the key for encryption/decryption.",
+            "Correct! Symmetric encryption requires both sides to possess the identical secret key.",
+            "That defeats the purpose of encryption.",
+            "Public keys expose the secret, breaking encryption."
+          ],
+          "explanation": "For symmetric encryption to work, sender and receiver must both possess the same secret key. In wildlife monitoring, the collar encrypts before transmission, and the station decrypts using the matching key."
+        },
+        {
+          "question": "An environmental audit team uses a symmetric key to encrypt sensitive forest inventory data (species counts, logging permits) before emailing it. What is a vulnerability of this approach?",
+          "options": [
+            "The data is encrypted, so it cannot be read",
+            "Symmetric encryption is slower than asymmetric encryption",
+            "The audit team must securely share the symmetric key with the recipient, potentially exposing it during transmission",
+            "Symmetric encryption doesn't work over the internet"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Encryption protects it, but key exchange is the weakness.",
+            "Speed is not the main vulnerability in this scenario.",
+            "Correct! The key distribution problem is symmetric encryption's primary challenge.",
+            "Symmetric encryption works anywhere, but key exchange is the issue."
+          ],
+          "explanation": "Symmetric encryption's main weakness is secure key distribution. Both parties need the key, but how do they safely share it? If transmitted insecurely, an attacker might intercept it."
+        },
+        {
+          "question": "A marine research station encrypts daily ocean temperature and pH data with a symmetric key. After 6 months, a researcher discovers the key was written on a sticky note on a lab monitor. What went wrong?",
+          "options": [
+            "Symmetric encryption is inherently insecure",
+            "Key management was poor; the secret key must be protected like a physical safe",
+            "The researchers should have used asymmetric encryption instead",
+            "The data should not have been encrypted at all"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Symmetric encryption is secure if keys are protected properly.",
+            "Correct! The key's security depends on human discipline and organizational procedures.",
+            "Asymmetric would solve key distribution, but this is a key protection issue.",
+            "Encryption was appropriate; the problem was key management."
+          ],
+          "explanation": "Symmetric encryption is only as secure as the key's protection. Keys must be stored securely (hardware security modules, vaults, restricted access), not written down or shared carelessly."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Fundamentals Path Complete",
+      "content": "You've learned the core of symmetric encryption and how it protects environmental data at rest and in transit. You understand the key distribution challenge that symmetric systems face. Next steps: explore how public key cryptography solves key exchange problems, understand hash functions for data integrity verification, and learn how blockchain combines cryptography with distributed consensus for transparent environmental monitoring."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass_advanced"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "fail_basic"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "next"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T15:41:01.774735+00:00",
+  "model": "claude-haiku-4-5"
+}

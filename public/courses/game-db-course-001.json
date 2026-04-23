@@ -1,0 +1,295 @@
+{
+  "id": "game-db-course-001",
+  "title": "Database Design and SQL for Game Development",
+  "description": "Master database design and SQL through the lens of game development. Learn to design, query, and optimize databases that power game systems like player profiles, inventories, leaderboards, and guilds.",
+  "topic": "Database Design and SQL",
+  "theme": "game design",
+  "difficulty": "beginner",
+  "estimated_minutes": 50,
+  "tags": [
+    "database",
+    "sql",
+    "game-dev",
+    "data-design",
+    "relational-databases"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Game Database Foundations Check",
+      "content": "Test your understanding of basic database concepts in the context of game development. This assessment covers tables, primary keys, basic SELECT queries, and simple relationships between game entities.",
+      "questions": [
+        {
+          "question": "You're building a game with players who each have a unique ID, username, and level. Which column should be the PRIMARY KEY for your Players table?",
+          "options": [
+            "A) Username",
+            "B) Level",
+            "C) Player ID",
+            "D) Email"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Usernames can change and aren't guaranteed to be unique.",
+            "Level is not unique and changes as players progress.",
+            "Correct! A player ID uniquely identifies each player.",
+            "Email wasn't mentioned in the game requirements."
+          ],
+          "explanation": "In game databases, player IDs are typically auto-incrementing integers that uniquely identify each player. Other attributes like username can change, but the ID remains constant for maintaining relationships."
+        },
+        {
+          "question": "In your game database, you have a Players table and a Quests table. Each quest can be completed by multiple players, and each player can complete multiple quests. What relationship type exists?",
+          "options": [
+            "A) One-to-One",
+            "B) One-to-Many",
+            "C) Many-to-Many",
+            "D) No relationship"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "One-to-One means each player can only complete one quest, which isn't true in MMOs.",
+            "This is incomplete\u2014it ignores that many players can do the same quest.",
+            "Correct! This is Many-to-Many, requiring a junction table like PlayerQuests.",
+            "These tables are clearly related in any game system."
+          ],
+          "explanation": "Many-to-Many relationships require a junction table. For example, PlayerQuests(player_id, quest_id) links the two tables, allowing you to track which players completed which quests."
+        },
+        {
+          "question": "You want to find all players with level 10 or higher. Which SQL statement is correct?",
+          "options": [
+            "A) SELECT * FROM Players WHERE level > 10;",
+            "B) SELECT * FROM Players WHERE level >= 10;",
+            "C) SELECT * FROM Players WHERE level = 10;",
+            "D) SELECT Players WHERE level >= 10;"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "This gets players above level 10 but excludes level 10 exactly.",
+            "Correct! >= means 'greater than or equal to', so this includes level 10 and higher.",
+            "This only gets players at exactly level 10, missing higher-level players.",
+            "SQL syntax requires FROM before the table name."
+          ],
+          "explanation": "The >= operator includes the boundary value. Use > for 'greater than', >= for 'greater than or equal to', < for 'less than', and <= for 'less than or equal to'."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Advanced SQL Challenge",
+      "content": "Tackle complex queries involving multiple tables, aggregations, and filtering logic. These questions simulate real game scenarios: calculating guild leaderboards, analyzing player behavior across realms, and managing complex inventory systems.",
+      "questions": [
+        {
+          "question": "You need to find the average level of players in each guild, but only show guilds with an average level above 20. Which SQL statement is correct?",
+          "options": [
+            "A) SELECT guild_id, AVG(level) FROM Players GROUP BY guild_id WHERE AVG(level) > 20;",
+            "B) SELECT guild_id, AVG(level) FROM Players GROUP BY guild_id HAVING AVG(level) > 20;",
+            "C) SELECT guild_id, AVG(level) FROM Players WHERE AVG(level) > 20 GROUP BY guild_id;",
+            "D) SELECT guild_id FROM Players GROUP BY guild_id HAVING AVG(level) > 20;"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "WHERE filters rows before grouping; HAVING filters groups after aggregation.",
+            "Correct! HAVING filters grouped results after the aggregate function is calculated.",
+            "WHERE cannot contain aggregate functions like AVG().",
+            "This returns guild_id but not the average level\u2014incomplete for a leaderboard."
+          ],
+          "explanation": "Use WHERE for row-level filtering before GROUP BY, and HAVING for group-level filtering after aggregation. This distinction is crucial for guild leaderboards and stats calculations."
+        },
+        {
+          "question": "You want a report showing each player's name, their equipped weapon, and the weapon's damage value. Tables: Players (player_id, name), Equipment (equipment_id, player_id, item_name, damage). Which type of join is needed?",
+          "options": [
+            "A) CROSS JOIN",
+            "B) LEFT JOIN",
+            "C) INNER JOIN",
+            "D) Self-join"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "CROSS JOIN creates a Cartesian product\u2014every player with every weapon item, which is incorrect.",
+            "LEFT JOIN includes all players even those with no equipped weapon, not what we want here.",
+            "Correct! INNER JOIN returns only players who have equipped weapons.",
+            "Self-joins compare a table to itself, not applicable here."
+          ],
+          "explanation": "INNER JOIN returns only matching rows. Since you want players paired with their equipment, an INNER JOIN ensures you get only players with weapons. LEFT JOIN would include players without weapons."
+        },
+        {
+          "question": "A player can own multiple items. You want to show: player_name, item_count per player, and total_gold_value, but keep item-level detail visible. Which approach best avoids collapsing rows?",
+          "options": [
+            "A) SELECT player_id, COUNT(*) OVER (PARTITION BY player_id) FROM Items;",
+            "B) SELECT player_id, COUNT(*) FROM Items GROUP BY player_id;",
+            "C) SELECT player_id, ROW_NUMBER() OVER (PARTITION BY player_id) FROM Items;",
+            "D) SELECT DISTINCT player_id, COUNT(*) FROM Items;"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Window functions add aggregate data to each row without collapsing the result set.",
+            "GROUP BY works but collapses to one row per player\u2014you lose item-level detail.",
+            "ROW_NUMBER assigns sequence numbers, not item counts.",
+            "DISTINCT doesn't provide count aggregation."
+          ],
+          "explanation": "Window functions like COUNT() OVER (PARTITION BY) let you add aggregate stats to each row while maintaining item-level detail. Perfect for inventory systems where you want per-item info plus player-level totals."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Expert Game Database Architecture",
+      "content": "Advanced game database design goes beyond basic queries to optimize for millions of players. Database normalization eliminates redundancy: instead of storing player level in both the Players and Statistics tables, store it once and join when needed. Indexing is critical\u2014indexing player_id and timestamp on a PlaySessions table makes \"get all sessions for player 12345\" queries instant instead of table scans. Design for common game queries: quick lookups by player_id, time-range queries for recent activity logs, and efficient joins for guild wealth calculations. Understand transaction handling in multiplayer games where simultaneous updates must maintain consistency\u2014wrap related updates in ACID transactions. Consider caching patterns: Redis for leaderboards updated frequently, database for permanent records. When player counts explode, implement sharding by region or guild to distribute load across database clusters. Monitor slow queries with EXPLAIN plans. Proper architecture means your servers respond in milliseconds, not seconds, even at scale. This is where database design separates responsive games from laggy ones.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Game Database Architect",
+      "content": "Congratulations! You've mastered advanced database design and SQL for game development. You understand schema optimization, complex queries, indexing strategies, and scaling considerations. You can architect efficient databases for complex game systems supporting millions of concurrent players. Your next step is hands-on: build real game databases, run EXPLAIN ANALYZE on your queries, and monitor production performance metrics. You're ready to lead data architecture for ambitious game projects."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "SQL Practice for Game Systems",
+      "content": "Practice advanced SQL with realistic game scenarios. These questions reinforce complex queries, multi-table joins, and aggregations used in production game databases. Work through each scenario to strengthen your understanding before advancing.",
+      "questions": [
+        {
+          "question": "Your guild system tracks treasury transactions. Tables: Guilds (guild_id, name), GuildTransactions (transaction_id, guild_id, amount, timestamp). Find the top 5 guilds by total gold earned in the last 30 days. Which query is correct?",
+          "options": [
+            "A) SELECT g.name, SUM(gt.amount) FROM Guilds g JOIN GuildTransactions gt ON g.guild_id = gt.guild_id WHERE gt.timestamp > CURRENT_DATE - INTERVAL '30 days' GROUP BY g.guild_id, g.name ORDER BY SUM(gt.amount) DESC LIMIT 5;",
+            "B) SELECT guild_id, SUM(amount) FROM GuildTransactions WHERE timestamp > CURRENT_DATE - INTERVAL '30 days' ORDER BY SUM(amount) DESC LIMIT 5;",
+            "C) SELECT name, SUM(amount) FROM Guilds WHERE timestamp > CURRENT_DATE - INTERVAL '30 days' GROUP BY name;",
+            "D) SELECT * FROM Guilds ORDER BY gold DESC LIMIT 5;"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Explicit JOIN, proper WHERE filtering on date, GROUP BY all non-aggregated columns, and ORDER BY DESC LIMIT 5.",
+            "This returns guild_id instead of name, less useful for admin displays.",
+            "Guilds table doesn't have a timestamp column; logic error.",
+            "Assumes a gold column on Guilds\u2014modern design stores transactions separately."
+          ],
+          "explanation": "Real leaderboards require explicit JOINs, date filtering for time-windows, proper GROUP BY clauses, and efficient LIMIT to get top results. This pattern powers guild leaderboards in MMOs."
+        },
+        {
+          "question": "Players have multiple characters across different realms. Create a report: realm_name, character_count per realm, average_level per realm. Tables: Realms (realm_id, name), Characters (character_id, realm_id, level). Which is correct?",
+          "options": [
+            "A) SELECT r.name, COUNT(c.character_id), AVG(c.level) FROM Realms r LEFT JOIN Characters c ON r.realm_id = c.realm_id GROUP BY r.realm_id;",
+            "B) SELECT r.name, COUNT(c.character_id), AVG(c.level) FROM Realms r LEFT JOIN Characters c ON r.realm_id = c.realm_id GROUP BY r.realm_id, r.name ORDER BY r.name;",
+            "C) SELECT realm_id, COUNT(*), AVG(level) FROM Characters GROUP BY realm_id;",
+            "D) SELECT r.name, c.character_id, c.level FROM Realms r JOIN Characters c ON r.realm_id = c.realm_id;"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Missing r.name in GROUP BY; causes errors in strict SQL mode.",
+            "Correct! LEFT JOIN includes realms with no characters yet, COUNT is explicit, GROUP BY includes all non-aggregated columns.",
+            "Missing realm names; less useful without the realm context.",
+            "Returns character-level rows, not aggregated realm statistics."
+          ],
+          "explanation": "Always include all non-aggregated SELECT columns in GROUP BY. LEFT JOIN ensures you see all realms even newly-created ones with no characters. Explicit COUNT and AVG make intent clear."
+        },
+        {
+          "question": "Analyze player engagement: get player_name, total_hours_played, last_login, and whether they're in the top 10% by playtime. Which is most efficient?",
+          "options": [
+            "A) SELECT p.name, p.total_hours, p.last_login, PERCENT_RANK() OVER (ORDER BY p.total_hours DESC) AS percentile_rank FROM Players p;",
+            "B) SELECT * FROM Players WHERE total_hours > (SELECT PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY total_hours) FROM Players);",
+            "C) Fetch all players, compute percentile ranks in application code",
+            "D) Query top 10% as subquery, then check membership with IN clause"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Window functions assign percentiles to every row in one efficient query.",
+            "Works but requires two queries and is less elegant than window functions.",
+            "Poor performance: unnecessary data transfer and client-side processing overhead.",
+            "Inefficient: requires multiple queries and complex application logic."
+          ],
+          "explanation": "Window functions like PERCENT_RANK() are ideal for adding rank/percentile data to each row without collapsing results. One query gets full player details plus their engagement percentile\u2014perfect for VIP systems and engagement dashboards."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Continuing Your SQL Mastery",
+      "content": "Solid work on these challenging scenarios! You've practiced realistic game database queries and strengthened your understanding of joins, aggregations, and window functions. Continue building real game databases and experimenting with optimization. Study production game database schemas, analyze slow queries with EXPLAIN, and tackle increasingly complex game system designs. Hands-on practice with real data is the path to expert-level database architecture."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Database Basics for Game Developers",
+      "content": "Let's start with fundamentals. A database is organized storage for game data\u2014think of it as your game's brain, storing player profiles, inventories, achievements, and world state. Data lives in tables, which are like spreadsheets with columns (player_id, username, level) and rows (each row is one player). A primary key uniquely identifies each row; in Players, player_id is the primary key. Foreign keys link tables: an Inventory table has player_id that references Players, connecting each item to its owner. Basic SELECT retrieves data: 'SELECT * FROM Players' gets all players; 'SELECT username FROM Players WHERE level > 10' filters to high-level players. ORDER BY sorts: 'SELECT * FROM Players ORDER BY level DESC' shows highest-level players first. These fundamentals form the foundation for any game database: character data, inventory systems, quest logs, leaderboards, and world persistence.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Building a Player Inventory System",
+      "content": "Here's a complete worked example: Your RPG needs player inventories. Design two tables: Players (player_id, username, level) and InventoryItems (item_id, player_id, item_name, rarity, quantity). The player_id in InventoryItems is a foreign key linking to Players. To get all items for player 5: 'SELECT * FROM InventoryItems WHERE player_id = 5'. To get player name with their items: 'SELECT p.username, i.item_name, i.rarity FROM Players p JOIN InventoryItems i ON p.player_id = i.player_id WHERE p.player_id = 5'. The JOIN combines data from both tables where player_id matches. For item count: 'SELECT COUNT(*) FROM InventoryItems WHERE player_id = 5'. Real games use this pattern everywhere: inventories, quest logs, equipped items, learned spells\u2014all linked via foreign keys and JOINs. This single example\u2014a player and their items\u2014demonstrates the core pattern used in every game database.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Ready to Build Game Databases",
+      "content": "You've mastered database fundamentals! You understand tables, primary and foreign keys, SELECT queries with WHERE filtering, ORDER BY sorting, and JOIN operations. You can design a simple inventory system and query it correctly. Now practice with other game systems: leaderboards (ranking players), chat systems (storing messages), quest tracking (quests and completions), or player statistics. Build real databases using PostgreSQL or MySQL, write queries against them, and see results. Each system you design builds your intuition. With consistent practice, you'll advance to optimization, complex queries, and scaling. Your game database foundation is solid\u2014your next project awaits!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Review Basics"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Practice More"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Complete"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Continue"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Learn by Example"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T08:31:30.004976+00:00",
+  "model": "claude-haiku-4-5"
+}

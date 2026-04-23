@@ -1,0 +1,269 @@
+{
+  "id": "bayesian-sports",
+  "title": "Bayesian Statistics in Sports Analytics",
+  "description": "Learn Bayesian Statistics through the lens of sports analytics, from Bayes' Theorem fundamentals to applying priors and posteriors in real sports scenarios.",
+  "topic": "Bayesian Statistics",
+  "theme": "sports analytics",
+  "difficulty": "beginner",
+  "estimated_minutes": 30,
+  "tags": [
+    "statistics",
+    "bayesian",
+    "sports analytics",
+    "probability"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Bayes' Theorem: The Foundation",
+      "content": "Bayes' Theorem is a mathematical formula that helps us update our beliefs based on new evidence. It answers the question: 'Given what we just observed, what should we believe now?' The formula is P(A|B) = P(B|A) \u00d7 P(A) / P(B), where P(A|B) is the probability of A given B has occurred. In sports analytics, this is incredibly powerful\u2014for example, if a player tests positive for an injury, we use Bayes' Theorem to calculate the true probability they're injured, considering the test's accuracy and how common that injury is in the population.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "example",
+      "title": "NBA Injury Test Example",
+      "content": "A starting NBA player takes a muscle strain test. The test is 95% accurate at detecting actual strains and 90% accurate at correctly identifying when someone is healthy. Muscle strains affect about 10% of players in a season. The player tests positive. Using Bayes' Theorem: P(Strain|Positive) = (0.95 \u00d7 0.10) / (0.95 \u00d7 0.10 + 0.05 \u00d7 0.90) \u2248 0.68. So despite the positive test, there's only about a 68% chance the player actually has a strain\u2014much lower than the test accuracy alone would suggest!",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Assessment: Bayes' Theorem",
+      "content": "Test your understanding of Bayes' Theorem and its application in sports scenarios.",
+      "questions": [
+        {
+          "question": "A baseball player has a 30% prior probability of hitting a home run in their next at-bat (based on season stats). You observe that the pitcher is a known home-run yielder (85% of batters hit HRs against them), while only 5% of batters hit HRs against other pitchers. What is the posterior probability this player hits a home run?",
+          "options": [
+            "45%",
+            "64%",
+            "86%",
+            "95%"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. You may have not accounted for the pitcher effect properly.",
+            "Incorrect. Check your calculation of the denominator in Bayes' formula.",
+            "Correct! Using Bayes: P(HR|vs this pitcher) = (0.85 \u00d7 0.30) / (0.85 \u00d7 0.30 + 0.05 \u00d7 0.70) = 0.255 / 0.295 \u2248 0.86 or 86%.",
+            "Incorrect. This doesn't account for the base rate of home runs against other pitchers."
+          ],
+          "explanation": "This problem requires applying Bayes' Theorem with a pitcher matchup. The prior is 30%, the likelihood of facing this pitcher is 85%, and we need to weight it against the alternative."
+        },
+        {
+          "question": "In Bayes' Theorem, P(A|B) = P(B|A) \u00d7 P(A) / P(B), which component represents our initial belief before seeing new evidence?",
+          "options": [
+            "P(A|B)",
+            "P(B|A)",
+            "P(A)",
+            "P(B)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "No, P(A|B) is the posterior\u2014our updated belief after evidence.",
+            "No, P(B|A) is the likelihood\u2014how likely the evidence is given our hypothesis.",
+            "Correct! P(A) is the prior probability\u2014our initial belief before any new evidence.",
+            "No, P(B) is the marginal likelihood\u2014the total probability of the evidence."
+          ],
+          "explanation": "The prior probability P(A) represents what we believed before observing new data. In sports, this might be a player's historical performance before the current season's games."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n4",
+      "failure_target": "n7",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Priors and Posteriors in Sports Decision Making",
+      "content": "A prior is your initial belief about a probability before you gather new data. In sports analytics, priors often come from historical data, league averages, or expert judgment. A posterior is your updated belief after you observe new evidence. For example, a team might have a prior belief that a free-agent quarterback has a 60% chance of playing at an elite level based on his career history. After watching him play in preseason games, they update this to a posterior of 45%\u2014lower based on disappointing performance. This constant updating is how teams make better decisions about player contracts, draft picks, and lineups.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "example",
+      "title": "MLB Pitcher Evaluation Over a Season",
+      "content": "A baseball team drafts a young pitcher with an estimated 70% chance of becoming a #1 starter (prior belief based on college performance). After throwing 5 games in the major leagues with an ERA of 5.20, they update their belief to 35% chance of becoming elite (posterior belief). The new games provided strong evidence against elite status. By mid-season, after 15 games showing more consistent 3.50 ERA, they revise upward to 55%. Each batch of games provides new evidence that Bayesian thinking helps analysts incorporate rationally into their evolving assessment.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "assessment",
+      "title": "Assessment: Priors, Posteriors, and Updates",
+      "content": "Demonstrate your understanding of how priors and posteriors work in sports analytics.",
+      "questions": [
+        {
+          "question": "A soccer team believes their goalkeeper has an 80% probability of making a successful penalty save (prior, based on his career record). In the last 5 games, he failed to save 4 out of 5 penalties. What would you expect to happen to your posterior belief?",
+          "options": [
+            "Increase significantly above 80%",
+            "Decrease significantly below 80%",
+            "Stay exactly at 80%",
+            "Become 0%"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, the new evidence (4 failures out of 5) contradicts the high prior.",
+            "Correct! The recent poor performance is strong evidence that his true save probability is lower than 80%, so the posterior should decrease substantially.",
+            "No, we should update our belief based on the new evidence.",
+            "No, he did save 1 out of 5, so it's not zero, but it's still significantly lower than 80%."
+          ],
+          "explanation": "When new evidence contradicts our prior, we should update downward. This is how teams recognize declining performance and make lineup changes."
+        },
+        {
+          "question": "Why might a sports analyst use historical data (like a player's 5-year average stats) as a prior before evaluating their current season performance?",
+          "options": [
+            "To make the analysis more complicated",
+            "To ignore recent data",
+            "To provide a principled starting point that accounts for typical player performance, making the posterior more robust",
+            "Because current season data is always wrong"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "No, using priors actually simplifies decision-making by providing a principled framework.",
+            "No, Bayesian analysis explicitly combines priors with new data.",
+            "Correct! Historical priors provide a solid foundation and prevent overreacting to small samples of recent data.",
+            "No, current season data is valuable; priors and current data work together."
+          ],
+          "explanation": "Priors stabilize our estimates, especially when recent data is limited. A player with 2 great games doesn't deserve a massive projection bump without considering their historical pattern."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n7",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Bayesian Thinking in Sports",
+      "content": "Apply what you've learned to these practice scenarios combining Bayes' Theorem, priors, and posteriors.",
+      "questions": [
+        {
+          "question": "An NFL team has a prior belief that a draft pick will be a starting-caliber player with 55% probability (based on college film). After his first preseason game, he plays exceptionally well. Should the team immediately jump to 90% confidence that he'll be a starter?",
+          "options": [
+            "Yes, one great game proves he's starter material",
+            "No, one game is weak evidence; the posterior should increase modestly but stay influenced by the prior (perhaps to 65-70%)",
+            "No, preseason games are completely irrelevant",
+            "Yes, college scouts were wrong so we should ignore the prior entirely"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, one game is limited evidence.",
+            "Correct! Bayesian updating means the posterior is influenced by both the prior and new evidence\u2014one good preseason game suggests improvement but doesn't overturn the prior entirely.",
+            "No, preseason performance is relevant data worth incorporating.",
+            "No, the prior provides valuable context; we incorporate it alongside new evidence."
+          ],
+          "explanation": "Bayesian thinking prevents overreaction to small samples while still allowing belief updates based on evidence."
+        },
+        {
+          "question": "After 10 games, you observe a basketball player shooting 35% from three-point range. His career average is 38%. Which Bayesian concept best explains why you might still believe his true three-point percentage is closer to 38% than the observed 35%?",
+          "options": [
+            "The likelihood of his shooting form",
+            "The prior probability from his career history acting as a stabilizing force",
+            "The posterior has no relationship to the prior",
+            "Random variation in small samples"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Likelihood describes the data, not why we weight the prior.",
+            "Correct! His career prior (38%) provides evidence that his true ability is likely higher than the 10-game sample (35%), which is statistically small.",
+            "No, posteriors in Bayesian thinking are always influenced by priors.",
+            "While variance is part of the issue, the Bayesian concept at play is the prior's stabilizing effect."
+          ],
+          "explanation": "Small samples are noisy. Priors help us regularize estimates by incorporating more data (career history), which is why Bayesian approaches are so valuable in sports analytics."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n9",
+      "failure_target": "n9",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "decision",
+      "title": "Next Steps in Your Analytics Journey",
+      "content": "You've mastered the foundations of Bayesian Statistics in sports analytics! Now, consider which application interests you most for deeper exploration.",
+      "choices": [
+        {
+          "label": "Player Performance Prediction & Valuation",
+          "next": "n9"
+        },
+        {
+          "label": "Injury Risk Assessment & Prevention",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Course Complete!",
+      "content": "Congratulations! You've learned how Bayesian Statistics applies to sports analytics. You understand Bayes' Theorem, how priors and posteriors guide decision-making, and how evidence updates beliefs rationally. These tools are used by professional sports organizations to evaluate players, predict performance, assess injuries, and make million-dollar personnel decisions. Keep exploring how data and probability shape the games we love!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n8",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-26T09:47:20.880481+00:00",
+  "model": "claude-haiku-4-5"
+}

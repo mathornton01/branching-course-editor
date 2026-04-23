@@ -1,0 +1,282 @@
+{
+  "id": "algo-design-space-2026",
+  "title": "Algorithm Design and Complexity: Space Exploration Edition",
+  "description": "Master algorithm design and complexity analysis through the lens of space exploration. Choose your learning path and explore how real space missions depend on efficient algorithms.",
+  "topic": "Algorithm Design and Complexity",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 90,
+  "tags": [
+    "algorithms",
+    "complexity",
+    "space",
+    "big-o",
+    "optimization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Algorithm Design in Space: The Challenge",
+      "content": "Every space mission depends on algorithms. From calculating trajectories for Mars rovers to optimizing data transmission from deep space probes, efficient algorithms are critical. NASA's Curiosity rover must plan its route daily within energy constraints. SpaceX needs to compute optimal fuel burn schedules. Missions like Voyager required compression algorithms to send data across billions of miles. In this course, you'll learn why algorithm efficiency matters and how to analyze and design algorithms that power modern space exploration.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "You can master algorithm design in two ways. Path A focuses on theory: learning to analyze and compare algorithm efficiency using Big O notation\u2014essential for understanding why some solutions work better than others. Path B focuses on practice: learning to design algorithms for real space problems, then analyzing them. Both paths are valuable; choose based on your learning style.",
+      "choices": [
+        {
+          "label": "Theory First: Master Big O & Complexity Analysis",
+          "next": "n3"
+        },
+        {
+          "label": "Hands-on First: Design Algorithms for Space Problems",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Big O Notation: Analyzing Cosmic Complexity",
+      "content": "Big O notation measures how an algorithm's running time grows as input size increases. It's your tool for comparing solutions. O(1) means constant time\u2014like accessing a star's catalog entry by ID. O(log n) is efficient searching, like binary search through 1 million star coordinates. O(n) is linear: processing each sensor reading once. O(n\u00b2) is slower: comparing every pair of orbits. O(2^n) is exponential: trying all possible route combinations. Understanding Big O lets mission planners choose the right algorithm before coding. For space missions, a slow algorithm might mean missing a launch window or exceeding power budgets.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Pathfinding Through Asteroid Fields: A Complexity Analysis",
+      "content": "Imagine a spacecraft navigating an asteroid field toward a distant moon. Naive approach: check every possible path combination (2^n complexity\u2014millions of combinations for 20 asteroids). Better approach: Dijkstra's algorithm marks visited asteroids and greedily picks the shortest remaining path (O(n\u00b2) with simple implementation, O(n log n) with optimization). Best approach: A* algorithm uses heuristics about asteroid positions to reach the goal faster (O(n log n) with much lower constants in practice). For a 1,000-asteroid field, naive might need 10^301 steps. Dijkstra needs ~1 million steps. A* might need just 10,000. The mission succeeds or fails based on which algorithm you choose.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assess Your Complexity Knowledge",
+      "content": "Test your understanding of Big O notation and algorithm complexity through space mission scenarios.",
+      "questions": [
+        {
+          "question": "A space station needs to find a specific satellite among 10,000 in its catalog. Using a direct ID lookup takes the same time regardless of how many satellites exist. What is the Big O complexity?",
+          "options": [
+            "O(1) - constant time",
+            "O(log n) - logarithmic",
+            "O(n) - linear",
+            "O(n\u00b2) - quadratic"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Direct lookup by ID is constant time.",
+            "Incorrect. Logarithmic would require sorting/searching.",
+            "Incorrect. Linear would mean checking each satellite.",
+            "Incorrect. Quadratic would compare pairs."
+          ],
+          "explanation": "When you access an item by a unique identifier (like a hashtable or direct memory address), the time is independent of dataset size. This is O(1)."
+        },
+        {
+          "question": "A rover on Mars plans its daily route by checking each possible next position to find the one nearest to a target (greedy approach). If the rover evaluates 100 positions and this happens for each step in a 50-step journey, what's the complexity?",
+          "options": [
+            "O(n) - linear",
+            "O(n\u00b2) - quadratic",
+            "O(n log n) - linearithmic",
+            "O(2^n) - exponential"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Linear would be 150 total operations.",
+            "Correct! 100 checks \u00d7 50 steps \u2248 O(n\u00b2).",
+            "Incorrect. Linearithmic is more efficient.",
+            "Incorrect. Exponential is much slower."
+          ],
+          "explanation": "You have two nested loops: 50 journey steps, each evaluating 100 positions. This gives roughly 5,000 operations, which scales quadratically with input size."
+        },
+        {
+          "question": "A mission control center compresses satellite imagery using an algorithm that recursively splits data in half and processes each piece. This happens log\u2082(n) times for n pixels. What complexity class is this?",
+          "options": [
+            "O(n) - linear",
+            "O(log n) - logarithmic",
+            "O(n log n) - linearithmic",
+            "O(n\u00b2) - quadratic"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Linear would process all pixels once.",
+            "Incorrect. This is log(n) times more work per level.",
+            "Correct! Divide-and-conquer with O(n) work per level is O(n log n).",
+            "Incorrect. Quadratic is much slower."
+          ],
+          "explanation": "Divide-and-conquer algorithms like merge sort do O(n) work to recombine data across O(log n) levels of recursion, resulting in O(n log n) total complexity."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Designing Efficient Space Algorithms",
+      "content": "Algorithm design is about choosing the right approach for your problem. Greedy algorithms make locally optimal choices\u2014like a fuel-management system that always burns the least fuel at each moment. Divide-and-conquer breaks hard problems into smaller ones\u2014like processing terabytes of sensor data by splitting it across multiple processors. Dynamic programming remembers previous solutions\u2014like mission planning that reuses safe trajectory segments. Each approach has tradeoffs. Greedy is fast but sometimes suboptimal. Divide-and-conquer is elegant but memory-intensive. Dynamic programming is powerful but slow for huge problems. Space missions face real constraints: power budgets, processing limits, and transmission windows. Your choice of algorithm design pattern directly impacts mission success.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Building an Optimal Satellite Network: Algorithm Design in Action",
+      "content": "Design a satellite constellation covering Earth continuously. Naive approach: place satellites randomly\u2014wasteful. Greedy approach: position satellites to maximize coverage at each step (fast, reasonable result). Divide-and-conquer: divide Earth into regions, solve each region optimally, then combine (more complex but better results). For covering Earth with 24 satellites, greedy might use 26, while divide-and-conquer uses exactly 24. The greedy algorithm runs in O(n log n) time (sort positions, then place greedily). Divide-and-conquer takes O(n\u00b2) but gives better coverage. Real constellation design (like Starlink) uses advanced algorithms combining these ideas with graph optimization. Your algorithm choice affects how many satellites you need\u2014and each satellite costs tens of millions of dollars.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Design Your Own Space Algorithm",
+      "content": "Apply algorithm design patterns to real space exploration challenges.",
+      "questions": [
+        {
+          "question": "You're designing a fuel-allocation system for a spacecraft with 10 destinations and 1000 liters of fuel. You must visit all destinations with minimal total distance. Which algorithm design pattern is most appropriate?",
+          "options": [
+            "Greedy algorithm",
+            "Divide-and-conquer",
+            "Dynamic programming",
+            "Brute force search"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Greedy might visit destinations inefficiently.",
+            "Incorrect. Divide-and-conquer doesn't handle dependencies well here.",
+            "Correct! Dynamic programming solves the traveling salesman problem optimally by remembering partial solutions.",
+            "Incorrect. Brute force tries 10! = 3.6 million combinations\u2014too slow."
+          ],
+          "explanation": "The traveling salesman problem (visiting all locations with minimum distance) is a classic dynamic programming problem. DP builds up solutions for smaller subsets of destinations to find the global optimum."
+        },
+        {
+          "question": "A rover's vision system must process 1 GB of images daily. The imaging team proposes: Algorithm A processes images linearly (O(n)), taking 2 hours. Algorithm B uses divide-and-conquer (O(n log n)), taking 30 minutes. If data increases to 10 GB next month, what will happen?",
+          "options": [
+            "Algorithm A still takes 2 hours, B takes 30 minutes",
+            "Algorithm A takes 20 hours, B takes 5 hours",
+            "Algorithm A takes 20 hours, B takes ~5 hours",
+            "Cannot be determined without knowing n"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Complexity increases with larger datasets.",
+            "Incorrect. Linear A takes 20 hours (10\u00d7), but this doesn't capture B's improvement.",
+            "Correct! Algorithm A scales linearly (20 hours for 10\u00d7 data). Algorithm B scales as n log n (~5 hours for 10 GB).",
+            "Incorrect. We know how each algorithm scales."
+          ],
+          "explanation": "With linear complexity, 10\u00d7 more data means 10\u00d7 more time. With n log n, 10\u00d7 data means roughly 10 \u00d7 log(10) \u2248 33\u00d7 more operations, but the constant factors in divide-and-conquer implementation provide real speedup."
+        },
+        {
+          "question": "A communications satellite has 5 seconds to decide which ground stations receive high-priority mission data. There are 100 ground stations worldwide. Which approach makes sense?",
+          "options": [
+            "Dynamic programming - find optimal station selection",
+            "Greedy algorithm - pick nearest available stations first",
+            "Brute force - test all 100! combinations",
+            "Divide-and-conquer - split stations by continent"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Dynamic programming is too slow for 5 seconds.",
+            "Correct! Greedy picks the best stations instantly and gives good results for this real-time problem.",
+            "Incorrect. 100! combinations are impossible to compute.",
+            "Incorrect. Slower than needed for real-time constraints."
+          ],
+          "explanation": "Real-time systems like satellite communications need fast solutions. Greedy algorithms trade optimality for speed\u2014and often give excellent results in practice. A 5-second timeout makes greedy the only viable choice here."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n9",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integrating Theory and Practice: Real Space Mission Algorithms",
+      "content": "The world's greatest space missions combine theory and practice. NASA's Curiosity rover uses a hierarchical planner: first, a high-level algorithm (divide-and-conquer) divides the day into exploration, drilling, and return phases. Then, for each phase, a lower-level pathfinder uses optimized A* search (analyzing complexity to ensure it finishes in seconds). SpaceX's launch sequencing uses dynamic programming to schedule rocket engines optimally given fuel and temperature constraints. Voyager's deep-space transmitter used Huffman coding (greedy algorithm for optimal compression). JWST's data analysis pipeline uses linearithmic sorting and n log n search algorithms to process terabytes of cosmic data. Every successful space mission reflects careful algorithm design and complexity analysis. You now understand both the \"why\" (complexity analysis guides choices) and the \"how\" (design patterns solve real problems). This combination is what separates working systems from failed missions.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mission Complete: You're an Algorithm Designer",
+      "content": "Congratulations! You've mastered algorithm design and complexity analysis through space exploration. You understand Big O notation, can compare algorithm efficiency, and know how to apply design patterns to real problems. Whether you're optimizing rover paths, compressing satellite data, or scheduling launch sequences, you have the tools to succeed. The next time you hear about a space mission, you'll recognize the algorithms working behind the scenes. Keep exploring\u2014the universe is vast, and so are the algorithmic challenges that help us understand it."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Introduction complete"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Hands-on First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn via example"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Ready to assess"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Assessment passed"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n4",
+      "label": "Review and retry"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Learn via example"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Ready to practice"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Practice passed"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n7",
+      "label": "Review and retry"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n10",
+      "label": "Integration complete"
+    }
+  ],
+  "generated_at": "2026-03-27T17:20:48.182595+00:00",
+  "model": "claude-haiku-4-5"
+}

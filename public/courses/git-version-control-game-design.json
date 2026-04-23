@@ -1,0 +1,295 @@
+{
+  "id": "git-version-control-game-design",
+  "title": "Git and Version Control for Game Developers",
+  "description": "Learn version control through the lens of game development. Master Git workflows from fundamental concepts to advanced strategies used in professional game studios.",
+  "topic": "Git and Version Control",
+  "theme": "game design",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "Git",
+    "Version Control",
+    "Game Development",
+    "Team Workflow",
+    "Branching"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Git Fundamentals for Game Teams",
+      "content": "Your indie game studio just finished pre-production on a multiplayer RPG. The team includes a programmer, artist, and level designer. You need to choose a version control system to manage code, art assets, and level files. Let's test your understanding of Git and why it matters in game development.",
+      "questions": [
+        {
+          "question": "Your game has three developers working on different features. Without version control, which problem would be MOST likely to occur?",
+          "options": [
+            "Two developers accidentally overwrite each other's code changes",
+            "The game runs slower on some computers",
+            "The engine becomes incompatible with the graphics card",
+            "The game file size becomes too large"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Version control prevents overwriting changes and lets multiple developers work simultaneously.",
+            "Incorrect. Performance issues aren't solved by version control.",
+            "Incorrect. Version control manages code, not hardware compatibility.",
+            "Incorrect. File size compression is a separate concern."
+          ],
+          "explanation": "Version control systems like Git track changes and allow merging work from multiple developers without losing anyone's contributions."
+        },
+        {
+          "question": "In Git, what is a 'commit' in game development terms?",
+          "options": [
+            "A message telling the team about your progress",
+            "A snapshot of your project's code at a specific moment in time",
+            "A request to add new features to the game",
+            "A backup of your entire game directory"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A commit includes a message, but that's not its primary purpose.",
+            "Correct! A commit is a snapshot with a message describing what changed\u2014like saving a version of your game at a milestone.",
+            "Incorrect. That's a feature request, not a commit.",
+            "Incorrect. A commit is much more granular than a full backup."
+          ],
+          "explanation": "A commit records exactly what changed in your code and when. It's like creating a save point in your game that you can return to or share."
+        },
+        {
+          "question": "Your artist pushes new character models, but the programmer pushed conflicting shader code at the same time. What tool helps resolve this in Git?",
+          "options": [
+            "A merge\u2014combining both changes intelligently",
+            "A rebase\u2014replaying changes in order",
+            "A stash\u2014hiding changes temporarily",
+            "A tag\u2014marking important versions"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A merge integrates changes from different branches or developers.",
+            "Incorrect. Rebase is for reorganizing history, not for combining simultaneous work.",
+            "Incorrect. Stash is for saving uncommitted work, not combining it.",
+            "Incorrect. Tags mark versions but don't resolve conflicts."
+          ],
+          "explanation": "Merging is Git's core feature for combining work from multiple developers\u2014essential for any game team."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Advanced Git Strategies in Game Development",
+      "content": "Your game studio is scaling up. You now have 20 developers split across gameplay, graphics, AI, and physics teams. Each team needs to work independently without blocking others. You're planning branching strategies and merge workflows. Let's see if you can handle this complexity.",
+      "questions": [
+        {
+          "question": "Your physics team is rewriting the collision system (3-week project), but the gameplay team needs daily updates from main. Which Git strategy is BEST?",
+          "options": [
+            "Have the physics team commit directly to main, testing as they go",
+            "Create a separate 'physics-overhaul' branch that occasionally merges main's changes back in",
+            "Stop gameplay development until physics is done",
+            "Have both teams use the same personal branch and merge manually"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Direct commits to main risk breaking the game mid-development.",
+            "Correct! Isolated branches protect main, while regular syncs prevent painful merges later.",
+            "Incorrect. Blocking teams kills productivity.",
+            "Incorrect. Shared personal branches cause conflicts."
+          ],
+          "explanation": "Feature branches isolate experimental work. Regular syncs with main prevent 'merge hell' where one branch drifts too far from the mainline."
+        },
+        {
+          "question": "Two team leads accidentally create conflicting changes in the player animation system. The conflict affects 15 lines across 3 files. What should they do?",
+          "options": [
+            "Manually edit the files to combine all changes",
+            "Ask Git to automatically choose one version",
+            "Have one developer redo their entire work",
+            "Coordinate with the team, understand each change, and carefully merge them"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Incorrect. Manual edits without understanding can break the game.",
+            "Incorrect. Git can mark conflicts, but a human must resolve them intelligently.",
+            "Incorrect. Redoing work wastes time and loses contributions.",
+            "Correct! Understanding the intent behind each change is crucial for a working merge in game development."
+          ],
+          "explanation": "Merge conflicts are communication moments. They show where two changes competed for the same code. Understanding why each change was made prevents introducing bugs."
+        },
+        {
+          "question": "You need to apply a critical bugfix (one commit) from the bugfix branch to both main and the active development branch without including other experimental commits from bugfix. What Git operation is this?",
+          "options": [
+            "Merge the entire bugfix branch",
+            "Cherry-pick the specific commit",
+            "Rebase the development branch onto bugfix",
+            "Create a new branch from main"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Merging the entire branch brings in all commits, including unfinished experiments.",
+            "Correct! Cherry-picking applies just the commit you need, leaving other work on the bugfix branch.",
+            "Incorrect. Rebase reorganizes history but still applies all bugfix commits.",
+            "Incorrect. Creating a new branch doesn't apply the fix."
+          ],
+          "explanation": "Cherry-picking is surgical\u2014it takes exactly the commit you need and applies it elsewhere. Perfect for hotfixes in game development."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Mastering Advanced Git Workflows for Large Game Projects",
+      "content": "You're now ready for enterprise-level Git strategies used by major game studios. Git-flow workflow (main for releases, develop for integration, feature branches for work) mirrors how large game projects manage stable builds and continuous development. In studios like Rockstar or Ubisoft, teams use trunk-based development with short-lived feature branches to minimize merge pain. Interactive rebasing lets you reorganize commits before pushing\u2014keeping history clean. You'll learn to balance flexibility with discipline: powerful tools require clear team agreements on branching, commit messages, and merge reviews to prevent chaos.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Git Master: Ready for AAA Game Development",
+      "content": "You've mastered Git at the level used in professional game studios with dozens of developers. You understand branching strategies, conflict resolution, and advanced workflows. You're ready to architect version control for any game project. Your next steps: document your team's Git conventions, set up code review processes, and practice handling merge conflicts in realistic scenarios. The principles you've learned scale from indie teams to AAA studios."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Resolving Merge Conflicts in Game Development",
+      "content": "Merge conflicts happen when two developers edit the same part of the code. In game development, this is common: physics and animation both touch the player controller, networking and gameplay both modify game state. Let's practice identifying and resolving conflicts correctly.",
+      "questions": [
+        {
+          "question": "Your graphics programmer and gameplay programmer both edited the Player class constructor. Git shows a conflict with these markers: <<<<<<< HEAD, =======, >>>>>>>. What does '=======' represent?",
+          "options": [
+            "A broken merge that can't be fixed",
+            "The boundary between the incoming change and the current branch",
+            "The start of the file",
+            "A comment left by Git"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Conflicts are always resolvable with communication.",
+            "Correct! The ======= separates your current work (above) from the incoming change (below).",
+            "Incorrect. Conflict markers appear in the middle of files.",
+            "Incorrect. They're not comments\u2014they're structural markers."
+          ],
+          "explanation": "Reading conflict markers: HEAD = your current branch, incoming = the branch being merged in. You choose which to keep, both, or a combination."
+        },
+        {
+          "question": "During a merge, the physics engine change and the animation system change both modified health_update(). Rather than choosing one, you need code from BOTH. What's the best approach?",
+          "options": [
+            "Copy both versions into the file and let the compiler figure it out",
+            "Manually edit to combine the logic from both versions logically",
+            "Revert the merge and have one developer redo their work",
+            "Keep the larger change and discard the smaller one"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The compiler will reject this as invalid syntax.",
+            "Correct! Merge conflicts are solved by understanding both changes and combining them intelligently.",
+            "Incorrect. Reverting wastes work\u2014conflicts are meant to be resolved.",
+            "Incorrect. Discarding code loses functionality and data."
+          ],
+          "explanation": "The best merges happen when you understand both changes deeply. Talk to both developers if needed. Combine their logic so the game benefits from both improvements."
+        },
+        {
+          "question": "You're merging the 'ai-overhaul' branch into main when you realize the conflict is complex and you don't fully understand the AI changes. What should you do?",
+          "options": [
+            "Guess at the merge and test afterward",
+            "Abort the merge, discuss with the AI programmer, then try again",
+            "Keep your current code (main) and discard the AI changes",
+            "Ask Git to automatically resolve it"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Guessing at merges introduces bugs.",
+            "Correct! Understanding both sides of a conflict is worth the conversation time.",
+            "Incorrect. This loses the AI improvements.",
+            "Incorrect. Git can't automatically understand intent."
+          ],
+          "explanation": "In game development, a conversation about a merge conflict is an investment in code quality. The 30 minutes to talk beats the hours debugging subtle AI bugs."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Git Practitioner: Ready for Team Game Development",
+      "content": "You've practiced resolving merge conflicts and understand Git's core workflows. You're ready to work in a small-to-medium game team (5-20 developers) where you'll encounter real conflicts and learn to handle them. Your next steps: set up your Git workflow with your team, create a branching strategy that works for your project, and practice merging daily. You've built the foundation for collaborative game development."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Introduction to Version Control in Game Development",
+      "content": "Version control is how game teams track changes over time. Imagine developing a multiplayer game with an artist and a programmer. Without version control, you'd email files back and forth, manually merge changes, and risk losing work. Git solves this: it's a system that records every change, lets multiple people work simultaneously, and lets you revert to any previous version. Think of it as a 'save system' for your entire project. Game studios use Git to manage code, art assets, and level files. Every 'commit' (save point) includes who made it, when, and why. This prevents chaos and lets teams of any size work together effectively.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "A Simple Game Development Workflow",
+      "content": "Meet Alex, a solo game developer working on a 2D platformer. Alex starts by initializing Git in the project folder (git init), then makes initial commits of sprites, code, and level files. Over the next week, Alex creates a feature branch called 'dash-ability' to add a dash move without breaking the main game. Alex commits regularly with clear messages: 'Implement dash input detection,' 'Add dash animation,' 'Balance dash cooldown.' After testing, Alex merges dash-ability back into main. Later, Alex realizes the balance was wrong, so Alex uses git revert to undo just the balance commit while keeping the feature. This workflow\u2014branching for features, committing often with clear messages, merging when done, reverting when needed\u2014scales from solo dev to 100-person studios. The tools are the same; only team agreements change.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Git Beginner: Ready to Start Your Game Project",
+      "content": "You now understand version control basics: commits, branches, merging, and reverting. You're ready to initialize Git in your game project and start building. Practice with a small personal project first: make commits regularly, create branches, and try merging. Once you're comfortable, invite a teammate and experience collaborative workflow. Git will become second nature\u2014a tool so essential you won't imagine developing games without it."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Fail (< 2 correct)"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass (2+ correct)"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fail (< 2 correct)"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Complete"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T10:32:30.187948+00:00",
+  "model": "claude-haiku-4-5"
+}

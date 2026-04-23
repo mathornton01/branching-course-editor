@@ -1,0 +1,229 @@
+{
+  "id": "course-networks-healthcare",
+  "title": "Computer Networks and Protocols in Healthcare",
+  "description": "Learn how computer networks and communication protocols work through the lens of healthcare systems, from basic networking concepts to advanced OSI model implementation in hospital environments.",
+  "topic": "Computer Networks and Protocols",
+  "theme": "healthcare",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "networking",
+    "protocols",
+    "healthcare",
+    "OSI model",
+    "TCP/IP",
+    "healthcare IT"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Network Fundamentals Diagnostic",
+      "content": "Test your understanding of basic networking concepts and communication protocols before diving deeper.",
+      "questions": [
+        {
+          "question": "A hospital needs to transmit patient vital signs from 50 different bedside monitors to a central nursing station simultaneously. Which protocol would you choose to ensure every packet reaches its destination, even if it takes slightly longer?",
+          "options": [
+            "UDP (User Datagram Protocol)",
+            "TCP (Transmission Control Protocol)",
+            "IP (Internet Protocol)",
+            "HTTP (Hypertext Transfer Protocol)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "UDP prioritizes speed over reliability\u2014not suitable for critical health data.",
+            "Correct! TCP ensures reliable delivery, essential for patient safety data.",
+            "IP handles routing but doesn't guarantee delivery.",
+            "HTTP is an application layer protocol, not the transport solution here."
+          ],
+          "explanation": "TCP's reliability guarantees are critical in healthcare where lost patient data could have serious consequences. Hospital vital signs monitoring demands guaranteed delivery."
+        },
+        {
+          "question": "In an Electronic Health Records (EHR) system connecting multiple clinic branches across a city, what device would you need at each branch to send patient data to the main hospital server located elsewhere?",
+          "options": [
+            "Network Switch",
+            "Router",
+            "Network Hub",
+            "Firewall only"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A switch connects devices within a local network, not between networks.",
+            "Correct! A router connects different networks and directs traffic between them.",
+            "A hub is an older device that doesn't intelligently route traffic.",
+            "Firewalls protect networks but don't route between them."
+          ],
+          "explanation": "Routers are essential network infrastructure that connects separate networks (like clinic locations) and makes intelligent decisions about where to send data based on IP addresses."
+        },
+        {
+          "question": "Which layer of the OSI model is responsible for ensuring that encrypted patient data is properly formatted and encrypted before transmission?",
+          "options": [
+            "Physical Layer",
+            "Transport Layer",
+            "Application Layer",
+            "Data Link Layer"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "The Physical layer deals with cables and signals, not encryption.",
+            "The Transport layer manages delivery, not encryption format.",
+            "Correct! The Application layer handles protocols like HTTPS which encrypt data for transmission.",
+            "The Data Link layer handles MAC addresses, not encryption."
+          ],
+          "explanation": "Healthcare systems use Application layer protocols like HTTPS and SFTP to encrypt sensitive patient information. This encryption protects HIPAA-regulated data during transmission."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: OSI Model and TCP/IP in Healthcare Systems",
+      "content": "Healthcare networks operate on the 7-layer OSI model, with each layer playing a critical role in secure patient data transmission. The TCP/IP protocol stack is the foundation for modern hospital IT infrastructure, enabling reliable communication between EHR systems, PACS (Picture Archiving and Communication Systems), and IoT medical devices. Understanding how data flows through each layer\u2014from physical cables carrying electrical signals, through network routing, to application-level encryption for HIPAA compliance\u2014is essential for healthcare IT professionals. Modern hospitals must implement secure protocols at every layer to protect patient privacy while maintaining the real-time responsiveness required for clinical care and emergency situations.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Case Study: Multi-Hospital EHR Network",
+      "content": "A patient arrives at a clinic with a referral to a specialist at a regional hospital. The clinic initiates a secure EHR data transfer: (1) Application layer: SFTP protocol encrypts the patient record using TLS encryption. (2) Transport layer: TCP establishes a reliable connection, breaking data into segments with sequence numbers\u2014if any segment is lost, TCP requests retransmission. (3) Network layer: IP adds destination hospital server address (routing). (4) Data link layer: Ethernet frames wrap the data with MAC addresses for the hospital's gateway router. (5) Physical layer: Data travels through fiber optic cables as light pulses. At the destination, the hospital's firewall validates the connection, TCP reassembles segments, TLS decrypts the data, and the EHR system displays the patient record. Total latency: under 2 seconds\u2014fast enough for clinical use, yet secure enough for regulatory compliance.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced Mastery: Hospital Network Architecture",
+      "content": "You've mastered the advanced concepts of computer networks in healthcare. You now understand how TCP/IP and the OSI model form the backbone of modern hospital systems, securing patient data while enabling real-time clinical communication. You're ready to design, troubleshoot, or audit healthcare network infrastructure."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Fundamentals: What Are Computer Networks?",
+      "content": "A computer network is a collection of devices connected together to share information and resources. In a hospital, a network might include desktop computers in offices, bedside monitors in patient rooms, printers, servers storing patient records, and medical imaging machines. Each device is called a 'node,' and they communicate by sending small chunks of data called 'packets.' Every device on a network has a unique address (IP address) so packets reach the right destination. Networks can be local (connecting devices in one building, like a clinic) or wide-area (connecting multiple hospital locations across a city or country). Understanding networks is essential because hospitals depend on them to share patient information, coordinate care, and operate life-saving equipment.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Simple Example: Clinic Network Setup",
+      "content": "Imagine a small rural clinic with 3 computers: the reception desk, the doctor's office, and the nurse's station, plus a printer in the supply closet. They're all connected with cables to a device called a 'network switch' that sits in the closet. When the doctor's computer sends a patient record to the printer, it breaks the file into packets (like mailing a letter in multiple envelopes). Each packet has a label showing where it came from (doctor's computer) and where it's going (printer). The switch reads these labels and delivers each packet to the correct port leading to the printer. When all packets arrive, the printer reassembles them and prints the patient record. This simple setup allows the clinic to share one printer, back up patient data to a central computer, and coordinate patient care across the three workstations.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Network Basics Reinforcement",
+      "content": "Apply your understanding of basic networking concepts to healthcare scenarios.",
+      "questions": [
+        {
+          "question": "A rural hospital wants to connect its three satellite clinics (10, 15, and 20 miles away) to the main hospital's patient database. The clinics are in separate buildings across town. What device is needed at each clinic location to connect to the main hospital?",
+          "options": [
+            "Network Switch",
+            "Router",
+            "Network Hub",
+            "Ethernet Cable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A switch connects devices within the same location, not distant networks.",
+            "Correct! A router connects different networks and routes data between the main hospital and distant clinics.",
+            "A hub doesn't intelligently route between networks.",
+            "A cable is just the connection medium."
+          ],
+          "explanation": "Routers are specialized network devices that connect separate networks together. In this case, each clinic needs a router to connect its local network to the main hospital's network."
+        },
+        {
+          "question": "In a hospital network, what is the unique identifier that allows a computer to find another computer on the same network?",
+          "options": [
+            "Device hostname",
+            "IP address",
+            "MAC address",
+            "Serial number"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Hostname is a name, but it needs to be translated to an address.",
+            "IP addresses work for internet, but MAC addresses are used for local network.",
+            "Correct! MAC (Media Access Control) addresses uniquely identify devices on the local network.",
+            "Serial numbers don't work for network communication."
+          ],
+          "explanation": "Each network device has a unique MAC address (like 00:1A:2B:3C:4D:5E). On a local network like within a hospital floor, devices use MAC addresses to find each other and deliver packets."
+        },
+        {
+          "question": "A bedside patient monitor needs to send vital signs data to a central nursing station. The monitor breaks the data into small units called '___________' before transmission.",
+          "options": [
+            "Segments",
+            "Packets",
+            "Frames",
+            "Messages"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Segments are created at the transport layer, but 'packets' is the general term.",
+            "Correct! Packets are the basic units of data transmitted across networks.",
+            "Frames are specific to the data link layer.",
+            "Messages is too vague for network terminology."
+          ],
+          "explanation": "Networks break large files into small 'packets' (typically 1,500 bytes or less). Each packet includes the source address, destination address, and a portion of the data. This allows efficient transmission and error recovery."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundational Understanding: Healthcare Networks Basics",
+      "content": "You've completed the foundational module on computer networks in healthcare. You understand how devices connect, how data travels in packets, and why networks are essential for modern medical care. You're ready to explore more advanced concepts like security protocols, network management, and healthcare IT infrastructure."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T07:02:31.194342+00:00",
+  "model": "claude-haiku-4-5"
+}

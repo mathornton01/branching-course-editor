@@ -1,0 +1,228 @@
+{
+  "id": "fastapi-sports-analytics",
+  "title": "Web Development with FastAPI for Sports Analytics",
+  "description": "Master FastAPI by building sports analytics APIs. Diagnostic assessment adapts the learning path to your skill level, routing you through either advanced or foundational content.",
+  "topic": "Web Development, FastAPI, Python, Sports Analytics",
+  "theme": "sports analytics",
+  "difficulty": "beginner",
+  "estimated_minutes": 75,
+  "tags": [
+    "fastapi",
+    "web-development",
+    "python",
+    "api",
+    "sports-analytics"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "FastAPI & Web API Readiness Diagnostic",
+      "content": "Assess your current knowledge of web APIs, HTTP concepts, and Python fundamentals. This diagnostic quiz determines whether you'll follow the advanced or foundational learning track. Your answers will help us tailor the content to match your skill level and prior experience.",
+      "questions": [
+        {
+          "question": "A sports analytics platform needs to retrieve player statistics from its database. Which HTTP method should be used?",
+          "options": [
+            "A) POST - to create new statistics",
+            "B) GET - to retrieve existing data",
+            "C) DELETE - to remove outdated stats",
+            "D) PUT - to replace all stats"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. POST creates new data, not retrieves it.",
+            "Correct! GET requests retrieve player statistics and other data from the server.",
+            "Incorrect. DELETE removes data, not retrieves it.",
+            "Incorrect. PUT modifies existing data, not retrieves it."
+          ],
+          "explanation": "In sports analytics APIs, GET is fundamental for fetching player stats, game results, team standings, and other analytical data."
+        },
+        {
+          "question": "In Python, what does this code do? `team_data = {'name': 'Lakers', 'wins': 45, 'losses': 37}`",
+          "options": [
+            "A) Creates a list of teams",
+            "B) Defines a dictionary storing team information",
+            "C) Declares a function",
+            "D) Creates a tuple of numbers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This creates a dictionary, not a list.",
+            "Correct! This dictionary structure stores team data with name, wins, and losses - exactly what APIs return.",
+            "Incorrect. No function is defined here.",
+            "Incorrect. This is a dictionary, not a tuple."
+          ],
+          "explanation": "Dictionaries are essential in FastAPI for representing JSON responses containing team records, player stats, and game information."
+        },
+        {
+          "question": "A modern sports analytics API returns player performance data to a mobile app. What is the standard format for this data?",
+          "options": [
+            "A) XML documents",
+            "B) CSV spreadsheets",
+            "C) JSON",
+            "D) Plain text files"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. JSON is more standard for modern APIs than XML.",
+            "Incorrect. CSV is for tabular data, not API responses.",
+            "Correct! JSON is the standard format for modern APIs, including sports analytics platforms.",
+            "Incorrect. APIs require structured, machine-readable data."
+          ],
+          "explanation": "FastAPI automatically converts Python data structures to JSON, making it ideal for building sports analytics APIs that work with web and mobile clients."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced FastAPI: Production Sports Analytics APIs",
+      "content": "You're ready for advanced concepts. Build production-grade APIs powering professional sports analytics platforms. Master Pydantic models for validating complex sports data (player profiles, game statistics, injury reports), implement authentication to protect sensitive league information, integrate relational databases for historical performance data, and optimize endpoints for handling thousands of concurrent analytics queries. FastAPI's automatic API documentation and async support make it perfect for real-time sports data systems serving millions of users.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced: Building a Player Performance Metrics Endpoint",
+      "content": "Create a production endpoint `/players/{player_id}/season-metrics` for a major sports league's analytics platform. This endpoint returns advanced statistics (shooting percentages, defensive metrics, injury history), calculates derived metrics (player efficiency rating, win shares), includes response metadata (last updated timestamp, data quality score), and handles edge cases (retired players, missing data). The implementation uses async database queries for performance, Pydantic models for strict validation, custom response classes for complex data, and comprehensive error handling. This pattern scales to analytics systems managing thousands of player profiles across multiple seasons.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Advanced FastAPI Mastery: Ready for Production",
+      "content": "You've completed the advanced FastAPI track! You can now build scalable, production-ready APIs for sophisticated sports analytics systems. You understand data validation with Pydantic, security implementation, database integration, and performance optimization. Your next challenges: implement real-time websocket endpoints for live game statistics, build caching layers for popular player queries, add comprehensive logging for analytics tracking, and deploy to cloud platforms handling enterprise-scale sports data pipelines."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "FastAPI Fundamentals: Building Sports Analytics APIs",
+      "content": "Welcome to FastAPI! Think of it as a Python framework for creating web APIs\u2014the bridge between a sports analytics application and its data. When a sports dashboard requests player statistics or a mobile app fetches game results, FastAPI handles these requests and delivers responses. You'll learn core concepts: routes (URLs that handle specific requests), parameters (ways to filter data like player names or teams), HTTP methods (GET for retrieval, POST for creation), and JSON responses (the data format that applications understand). FastAPI automatically documents your API and validates incoming data, making development faster and APIs more reliable.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Your First Endpoint: Team Statistics API",
+      "content": "Let's build a simple but realistic endpoint: `/teams/{team_id}/stats` that returns a team's season record. A request like `/teams/lakers/stats` returns JSON with wins, losses, and average points. This demonstrates the fundamental pattern used in all sports analytics APIs: receive a request (which team?), look up the data, return it as JSON. The same pattern powers complex endpoints\u2014just add more logic. We'll define the route using `@app.get()`, capture the team ID from the URL, and return a Python dictionary that FastAPI automatically converts to JSON for the client.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Fundamentals of FastAPI Endpoints",
+      "content": "Reinforce your understanding of FastAPI basics with practice questions focused on routes, parameters, and JSON responses. These scenarios reflect real work in sports analytics API development.",
+      "questions": [
+        {
+          "question": "You're building an endpoint to fetch a player's career statistics. Which route definition is correct?",
+          "options": [
+            "A) app.route('/players')",
+            "B) @app.get('/players/{player_id}')",
+            "C) app.post('/players')",
+            "D) @app.fetch(player_data)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This syntax is incomplete and doesn't define a path parameter.",
+            "Correct! @app.get() with {player_id} creates an endpoint to retrieve specific player data.",
+            "Incorrect. POST creates new data, but we're retrieving existing player information.",
+            "Incorrect. FastAPI uses @app.get(), not @app.fetch()."
+          ],
+          "explanation": "@app.get() is the FastAPI decorator for GET requests. Path parameters in curly braces like {player_id} become function arguments, letting you build dynamic endpoints."
+        },
+        {
+          "question": "A request arrives at `/teams/celtics/recent-games`. How do you access 'celtics' in your FastAPI endpoint function?",
+          "options": [
+            "A) request.url_param('team')",
+            "B) Declare a team_id parameter in the function",
+            "C) Extract from the query string",
+            "D) Read from request headers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. FastAPI automatically extracts path parameters without manual parsing.",
+            "Correct! When you define @app.get('/teams/{team_id}/...'), the team_id parameter is automatically provided to your function.",
+            "Incorrect. Query strings are separate from path parameters.",
+            "Incorrect. Path data isn't stored in headers."
+          ],
+          "explanation": "FastAPI automatically matches URL path parameters to function arguments, making it simple to build endpoints that accept variable data like team names."
+        },
+        {
+          "question": "Your sports analytics endpoint successfully processes a player lookup and generates a response. What format should be returned to the client?",
+          "options": [
+            "A) A Python dictionary only",
+            "B) HTML markup for display",
+            "C) JSON (FastAPI handles conversion)",
+            "D) Binary image files"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. FastAPI automatically converts Python data to JSON.",
+            "Incorrect. APIs return data, not presentation markup.",
+            "Correct! FastAPI serializes your Python data structures to JSON automatically.",
+            "Incorrect. Most sports APIs return structured data, not binary files."
+          ],
+          "explanation": "FastAPI's automatic JSON serialization means you can return Python dictionaries and Pydantic models, and they'll automatically be converted to JSON for clients."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "FastAPI Fundamentals: Next Steps",
+      "content": "Excellent! You've mastered FastAPI fundamentals and can build basic endpoints for sports analytics APIs. You understand routes, parameters, and JSON responses\u2014the core building blocks. Your foundation is solid. Next: explore Pydantic models for validating complex sports data structures, learn query parameters for flexible filtering (sort by team, filter by position), implement basic authentication to protect league data, and practice connecting to databases for persistent statistics storage. With continued practice, you'll quickly advance to building sophisticated analytics systems."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Diagnostic Pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Diagnostic Fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Next"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Next"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Next"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "Next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Next"
+    }
+  ],
+  "generated_at": "2026-03-27T05:39:51.955615+00:00",
+  "model": "claude-haiku-4-5"
+}

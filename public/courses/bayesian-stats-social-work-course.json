@@ -1,0 +1,295 @@
+{
+  "id": "bayesian-stats-social-work-course",
+  "title": "Bayesian Statistics in Social Work Practice",
+  "description": "Master Bayesian reasoning to improve evidence-based decision-making in social work settings through adaptive branching that matches your expertise level.",
+  "topic": "Bayesian Statistics",
+  "theme": "social work",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "statistics",
+    "bayesian",
+    "evidence-based practice",
+    "social work",
+    "decision-making"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Bayesian Basics in Social Work",
+      "content": "This brief assessment determines whether you need foundational review or are ready for intermediate concepts. Bayesian reasoning is essential for social workers who use evidence to update their beliefs about clients based on new information.",
+      "questions": [
+        {
+          "question": "A social worker meets with a family for the first time. Based on intake referral data, she believes there's a 25% chance the family is experiencing housing instability. What is this initial belief called?",
+          "options": [
+            "Likelihood estimate",
+            "Prior probability",
+            "Posterior probability",
+            "Confidence interval"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Likelihood is how probable the evidence is given a hypothesis.",
+            "Correct! Prior probability is your initial belief before seeing new evidence.",
+            "Incorrect. Posterior probability comes after updating with new evidence.",
+            "Incorrect. Confidence intervals are used in frequentist statistics, not Bayesian."
+          ],
+          "explanation": "In Bayesian thinking, your initial belief before gathering case information is called the prior probability. As a social worker gathers assessment data, they will update this belief to get a posterior probability."
+        },
+        {
+          "question": "During the assessment, the worker observes the family mentions missing rent payments twice and wearing worn clothing. This new information is called the:",
+          "options": [
+            "Prior",
+            "Posterior",
+            "Evidence (or likelihood)",
+            "Threshold"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Prior is the belief before this observation.",
+            "Incorrect. Posterior comes after combining prior with this evidence.",
+            "Correct! The observations are the evidence that will update your prior belief.",
+            "Incorrect. Threshold is used in screening tools, not Bayesian updating."
+          ],
+          "explanation": "The new observations\u2014rent payment issues and appearance\u2014comprise the evidence. In Bayesian terms, this evidence has a likelihood: how probable it is to see these signs if housing instability is present, and how probable it is if it's not present."
+        },
+        {
+          "question": "The worker now combines her initial belief (25% chance of housing instability) with the observed evidence (missed rent, worn clothing) to conclude there's a 70% chance the family faces housing instability. This updated belief is the:",
+          "options": [
+            "Prior probability",
+            "Posterior probability",
+            "Diagnostic accuracy",
+            "Sensitivity"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Prior is the starting belief, not the updated one.",
+            "Correct! Posterior probability is your updated belief after combining prior and evidence.",
+            "Incorrect. Diagnostic accuracy is not a Bayesian term.",
+            "Incorrect. Sensitivity measures a test's ability to detect true positives."
+          ],
+          "explanation": "The posterior probability (70%) is the updated belief after Bayesian updating. The worker moved from 25% certainty to 70% certainty by incorporating the evidence observed during assessment."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Intermediate Bayesian Analysis: Real-World Application",
+      "content": "You've demonstrated foundational understanding. Now apply Bayesian reasoning to complex social work scenarios. These questions require integrating prior knowledge, evaluating evidence strength, and making defensible decisions.",
+      "questions": [
+        {
+          "question": "A substance abuse treatment program has a 40% historical success rate. A new client reports having supportive family involvement and maintained employment. Research shows 85% of successful clients have both factors, while 25% of unsuccessful clients have both. Using Bayesian reasoning, what is the approximate posterior probability this client will succeed?",
+          "options": [
+            "About 40% (unchanged)",
+            "About 60-65%",
+            "About 75-80%",
+            "About 90-95%"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. The strong evidence should substantially increase the prior.",
+            "Incorrect. While in the right direction, the likelihood ratio (85%/25%=3.4) suggests a larger shift.",
+            "Correct! Using Bayes' theorem with these likelihoods produces roughly 75-80% posterior probability.",
+            "Incorrect. While favorable, 90%+ would require even stronger evidence."
+          ],
+          "explanation": "The Bayesian calculation: P(Success|Evidence) = P(Evidence|Success)\u00d7P(Success)/P(Evidence). With a strong likelihood ratio (3.4:1) and reasonable prior (40%), the posterior rises significantly to approximately 75-80%."
+        },
+        {
+          "question": "Two child protective services workers assess the same case. Worker A (skeptical of reunification) has a prior of 20% for safe reunification. Worker B (believing in preservation) has a prior of 70%. Both review identical evidence. How should their recommendations compare?",
+          "options": [
+            "They should reach identical conclusions",
+            "Their conclusions will differ, but both are updating Bayesianly",
+            "Worker B is correct because she has a higher prior",
+            "The evidence cannot align such different starting points"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Bayesian updating preserves some influence of priors.",
+            "Correct! Both apply Bayes' theorem from different priors. Identical evidence produces different posteriors\u2014both rational.",
+            "Incorrect. Prior height doesn't determine correctness; evidence quality does.",
+            "Incorrect. Strong evidence can converge divergent priors toward similar conclusions."
+          ],
+          "explanation": "This illustrates Bayesian reasoning's transparency: different reasonable priors lead to different conclusions from the same evidence. With sufficient evidence, posteriors converge. This is why CPS agencies must make priors explicit and gather strong evidence."
+        },
+        {
+          "question": "A mental health screener has 90% sensitivity (correctly identifies 90% with depression) and 85% specificity. In a population where 10% have depression, what does Bayes' theorem tell you about interpreting a positive result?",
+          "options": [
+            "Client almost certainly has depression (>95%)",
+            "Positive predictive value is moderate (~43%)\u2014many false positives",
+            "The screen is too unreliable to use",
+            "Specificity is more important than sensitivity"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Low prevalence creates many false positives.",
+            "Correct! PPV=(0.90\u00d70.10)/[(0.90\u00d70.10)+(0.15\u00d70.90)]\u224843%.",
+            "Incorrect. The test is reasonably reliable, but needs additional assessment.",
+            "Incorrect. Both matter; low prevalence makes specificity critical."
+          ],
+          "explanation": "A positive screen doesn't guarantee depression when the condition is uncommon. Bayes' theorem shows posterior probability rises from 10% to ~43%. Clinicians must gather additional evidence before diagnosing."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Advanced Bayesian Methods in Evidence-Based Social Work",
+      "content": "You've mastered Bayesian fundamentals. Advanced methods\u2014hierarchical modeling, sensitivity analysis, and predictive inference\u2014enable deeper insights from complex data. Hierarchical models handle nested structures (clients within programs within agencies). Sensitivity analysis tests whether conclusions hold under different reasonable priors. Predictive inference forecasts outcomes for new clients. These support rigorous program evaluation and personalized intervention planning in social work.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Practitioner: Advanced Bayesian Reasoning",
+      "content": "Congratulations! You now understand Bayesian statistics at an expert level and can apply advanced methods to complex social work challenges. You're prepared to lead evidence-based decision-making in your agency, mentor colleagues in Bayesian thinking, and contribute to rigorous program evaluation and outcome research."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Practice: Building Intermediate Bayesian Reasoning",
+      "content": "Reinforce your learning with additional practice scenarios. These exercises mirror real social work decisions and help you develop intuition for Bayesian updating and evidence integration.",
+      "questions": [
+        {
+          "question": "A probation officer knows 30% of offenders complete rehabilitation successfully. She observes 80% of successful completers attended all group sessions, while 40% of unsuccessful clients did. A new client attends all first-month sessions. What is the posterior probability they succeed?",
+          "options": [
+            "50%",
+            "55-60%",
+            "70-75%",
+            "80%"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Perfect attendance provides stronger evidence.",
+            "Incorrect. The likelihood ratio (80%/40%=2:1) should shift 30% prior more.",
+            "Correct! [0.80\u00d70.30]/[(0.80\u00d70.30)+(0.40\u00d70.70)]\u224846%.",
+            "Incorrect. While positive, 80% requires even stronger indicators."
+          ],
+          "explanation": "The 2:1 likelihood ratio doubles the odds of success, moving from 30% prior to approximately 46% posterior. This is meaningful but not conclusive evidence\u2014combine with employment status, housing, family support."
+        },
+        {
+          "question": "A trauma screener has 75% sensitivity and 80% specificity. In a population where 20% experienced trauma, what is the posterior probability for a positive screen?",
+          "options": [
+            "75% (equals sensitivity)",
+            "Approximately 50%",
+            "Approximately 60%",
+            "80% (equals specificity)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Sensitivity alone doesn't determine posterior.",
+            "Incorrect. With 20% prevalence, posterior is higher.",
+            "Correct! PPV=(0.75\u00d70.20)/[(0.75\u00d70.20)+(0.20\u00d70.80)]\u224860%.",
+            "Incorrect. Specificity relates to negative results."
+          ],
+          "explanation": "Even with good test characteristics, when trauma prevalence is moderate (20%), a positive screen means ~60% probability of actual trauma. This prevents over-diagnosis: test results must be interpreted through prior probability."
+        },
+        {
+          "question": "A program claims its intervention improves housing stability. Baseline: 35% achieve stability. Preliminary data: 60% of n=15 intervention clients succeeded. How should a Bayesian evaluator approach this?",
+          "options": [
+            "Accept 60%\u2014the intervention works",
+            "Reject it; sample too small",
+            "Update toward 60%, but recognize small samples produce wider uncertainty",
+            "Demand larger sample before deciding"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Small samples create uncertainty.",
+            "Incorrect. Bayesian analysis doesn't require minimum sample sizes.",
+            "Correct! Bayesian updating incorporates the observed rate and precision (low due to small n).",
+            "Incorrect. Bayesian inference handles small samples via wider credible intervals."
+          ],
+          "explanation": "Bayesian analysis produces wider credible intervals for small samples. With n=15, posterior updates toward 60% but with substantial uncertainty\u2014perhaps 95% credible interval of 35-80%. This honestly reflects available evidence."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Proficient Practitioner: Intermediate Mastery",
+      "content": "You've deepened your understanding of Bayesian methods through practice. You now confidently apply Bayesian reasoning to intermediate social work challenges: interpreting assessment data, evaluating screening results, and making evidence-informed decisions about client care and program effectiveness."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Foundations: Understanding Bayesian Thinking",
+      "content": "Bayesian statistics is grounded in a simple but powerful idea: start with an initial belief (prior), observe evidence, and update your belief proportionally. Reverend Thomas Bayes showed mathematically how to do this updating fairly. In social work, Bayesian thinking means starting with reasonable assumptions (e.g., '30% of families in substance abuse treatment will complete it'), then as you gather case information, you refine that belief. If a client has strong family support and employment, that evidence should increase your optimism. If a client reports failed attempts and current stress, remain cautious. Bayesian reasoning prevents two errors: ignoring prior knowledge and over-confident decisions based on limited information.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Using Bayesian Logic in Child Welfare Assessment",
+      "content": "A social worker receives a neglect allegation. Starting point: 40% of similar referrals substantiate neglect (prior). Home visit observations: children appear clean and well-nourished, home is adequately heated with functioning utilities, school attendance shows only 2 absences this term. Each observation is evidence against neglect. The worker asks: 'How probable are these signs if neglect were truly occurring?' Very unlikely\u2014perhaps 10% of genuinely neglectful homes show all three. If the family is not neglectful? Likely\u2014perhaps 70% show these signs. Using Bayes' theorem: posterior probability of substantiated neglect drops from 40% to roughly 12%. The worker concludes: 'While investigation was warranted, observed evidence does not support substantiation.' This Bayesian logic ensures decisions rest on proportional reasoning, not hunches.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Foundational Understanding Complete",
+      "content": "You've mastered the foundations of Bayesian thinking and can apply this framework to social work assessments. You understand how to combine prior knowledge with new evidence to make more defensible, less biased decisions. This is your foundation for becoming a truly evidence-based practitioner."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "Fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "Fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Complete"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "Complete"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T14:13:28.614506+00:00",
+  "model": "claude-haiku-4-5"
+}

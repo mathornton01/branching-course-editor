@@ -1,0 +1,269 @@
+{
+  "id": "stat-inference-sports-001",
+  "title": "Statistical Inference and Hypothesis Testing in Sports Analytics",
+  "description": "Master the fundamental concepts of statistical inference and hypothesis testing through real-world sports analytics scenarios. Choose between learning theory first or diving into practical applications.",
+  "topic": "Statistical Methods",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "statistics",
+    "hypothesis testing",
+    "inference",
+    "sports analytics",
+    "data science"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Statistical Inference in Sports",
+      "content": "Statistical inference is the process of drawing conclusions about an entire population (all possible games, all player performances) based on a sample (the games already played, the shots already taken). In sports analytics, we constantly ask: Is this player's hot streak real talent or just random luck? Did our team's new strategy actually improve our win rate? These questions require statistical inference. Hypothesis testing is our tool for answering them\u2014we start with a null hypothesis (the status quo) and test whether evidence contradicts it. Let's explore how professional sports teams use these methods to gain competitive advantages.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How would you prefer to learn statistical inference? Start with the theoretical foundations to understand why these methods work, or jump into practical hypothesis testing with real sports examples?",
+      "choices": [
+        {
+          "label": "Theory First: Build Understanding from Concepts",
+          "next": "n3"
+        },
+        {
+          "label": "Practice First: Learn by Testing Hypotheses",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Foundations of Statistical Inference: Population, Sample, and Distribution",
+      "content": "Understanding populations and samples is foundational. A population is every possible instance you could measure\u2014all possible NBA games ever could be played, all possible three-pointers Stephen Curry could attempt. A sample is what you actually observe\u2014the 82 games in an NBA season, the 600 three-pointers Curry attempted last year. The Central Limit Theorem tells us something powerful: if you repeatedly sample from a population, the averages of those samples form a normal distribution, even if the population itself isn't normal. For example, individual game scores might be widely scattered, but the average score across many games clusters around a predictable value. This allows us to estimate population parameters (like true team strength) from sample statistics (like this season's win percentage). The standard error measures how much our sample average varies\u2014smaller samples have larger standard errors, meaning more uncertainty.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Inferring True Team Win Probability from a Season",
+      "content": "A basketball team wins 56 of 82 games (68% win rate). But is their true win probability 68%, or does this sample overestimate? Using the Central Limit Theorem, we model the sampling distribution: the standard error is \u221a[p(1-p)/n] = \u221a[0.68\u00d70.32/82] \u2248 0.051. A 95% confidence interval for the true win probability is 0.68 \u00b1 1.96\u00d70.051, or [57.6%, 78.4%]. This means we're 95% confident the team's true win probability falls between these bounds. Note the interval is wide because the sample (one season) is relatively small. If the team maintained this rate over 5 seasons (410 games), the interval would narrow, reflecting greater certainty about their true strength.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Test Your Understanding of Statistical Inference Foundations",
+      "content": "Answer these questions to verify your grasp of populations, samples, and the Central Limit Theorem in sports contexts.",
+      "questions": [
+        {
+          "question": "A pitcher throws 200 pitches in a season with a 65% strike rate. You want to estimate their true strike rate. What is the 'population' in this scenario?",
+          "options": [
+            "The 200 pitches thrown in this season",
+            "All possible pitches this pitcher could throw across their entire career",
+            "The strike rate of 65%",
+            "The pitcher's favorite pitch type"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That's the sample, not the population.",
+            "Correct! The population is the theoretical universe of all possible pitches.",
+            "That's a statistic, not the population.",
+            "That's not relevant to inferential statistics."
+          ],
+          "explanation": "In inferential statistics, the population is the entire set of potential outcomes you want to draw conclusions about. The sample is the subset you actually observe. The population here is all possible pitches the pitcher could throw under similar conditions."
+        },
+        {
+          "question": "Why does the Central Limit Theorem matter for sports analytics?",
+          "options": [
+            "It proves that all sports data are normally distributed",
+            "It allows us to use sample averages (like average points per game) to estimate population parameters, even if individual games are not normally distributed",
+            "It guarantees that a team's performance next year will match this year",
+            "It eliminates the need for large sample sizes"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The theorem doesn't require the underlying data to be normal.",
+            "Exactly! The CLT is why we can make inferences from sample data.",
+            "The CLT makes no claims about future performance.",
+            "Ironically, the CLT shows why larger samples are better."
+          ],
+          "explanation": "The Central Limit Theorem is powerful because the sampling distribution of means is approximately normal regardless of the original data's distribution. This lets sports analysts use sample statistics (one season's win rate) to estimate true population parameters (the team's true strength) with confidence."
+        },
+        {
+          "question": "A football team has a sample standard error for their average points scored per game of 2.1 points. What does this tell you?",
+          "options": [
+            "The team scores exactly 2.1 points per game",
+            "The team's average points per game varies by about 2.1 points from season to season due to sampling variation",
+            "The team will score 2.1 fewer points next game",
+            "This standard error is always too large"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, the standard error isn't an observed value\u2014it's a measure of uncertainty.",
+            "Correct! Standard error quantifies how much the sample mean would vary across repeated samples.",
+            "Standard error doesn't predict future games; it describes variability in your estimate.",
+            "Standard error size depends on sample size and variability\u2014no fixed threshold."
+          ],
+          "explanation": "Standard error measures how much the sample average (e.g., this season's average points per game) would fluctuate if you repeated the sampling process many times. A smaller standard error means more precision; larger means more uncertainty in your estimate."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Hypothesis Testing in Practice: Asking and Answering Questions with Data",
+      "content": "Hypothesis testing is a structured method for evaluating claims using data. You start with the null hypothesis (H\u2080): the status quo assumption, usually 'no effect' or 'no difference.' For sports, H\u2080 might be 'this player's true three-point percentage is 35%' or 'the rule change had no effect on scoring.' The alternative hypothesis (H\u2081) is what you're testing for: 'the player's true percentage is higher than 35%' or 'scoring increased after the rule change.' You then calculate a test statistic from your sample and find its p-value: the probability of seeing data this extreme (or more) if H\u2080 is true. If the p-value is small (usually below 0.05, called the significance level \u03b1), you reject H\u2080 and conclude the alternative is supported. Type I error: rejecting H\u2080 when it's actually true (false positive). Type II error: failing to reject H\u2080 when it's false (false negative). In sports, Type I errors might claim a rookie's success is real when it's just luck; Type II errors might dismiss a promising strategy as ineffective.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Testing If a Player's Hot Streak is Real",
+      "content": "A baseball player typically hits .280 (28% success). Over the last 20 at-bats, they're 8-for-20 (.400). Is this a real improvement or just luck? H\u2080: their true batting average is still .280. H\u2081: it's higher. Assuming binomial distribution: if H\u2080 is true, the expected number of hits in 20 at-bats is 5.6, with standard error \u221a[20\u00d70.28\u00d70.72] \u2248 1.27. Getting 8 hits is about (8-5.6)/1.27 \u2248 1.89 standard deviations above the mean. The p-value for this is approximately 0.029 (one-tailed). Since 0.029 < 0.05, we reject H\u2080: the hot streak is statistically significant at \u03b1=0.05. Conclusion: evidence suggests the player's true average has improved. However, this doesn't prove they'll maintain it\u2014regression to the mean often occurs as sample size grows.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "practice",
+      "title": "Apply Hypothesis Testing to Sports Scenarios",
+      "content": "Test your ability to formulate hypotheses, interpret p-values, and understand errors in sports contexts.",
+      "questions": [
+        {
+          "question": "A soccer team's penalty kick success rate historically is 78%. They recently implemented a new training method. In the next 50 penalty kicks, they score on 42 (84% success). What is the null hypothesis for testing whether training improved their rate?",
+          "options": [
+            "H\u2080: The new training method improves the success rate to 84%",
+            "H\u2080: The team's true success rate is still 78%",
+            "H\u2080: The team will score on exactly 42 of the next 50 kicks",
+            "H\u2080: The training method is ineffective"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "The null hypothesis is the status quo, not the hypothesized effect.",
+            "Correct! H\u2080 represents no change from the baseline rate.",
+            "H\u2080 states population parameters, not specific sample outcomes.",
+            "This phrasing is imprecise; better to state it in terms of the success rate."
+          ],
+          "explanation": "The null hypothesis always represents the status quo or 'no effect.' Here, H\u2080 is that the true success rate remains 78%, unchanged by training. If evidence contradicts this, you reject H\u2080 in favor of the alternative that training improved performance."
+        },
+        {
+          "question": "You conduct a hypothesis test on a basketball team's three-point percentage and get a p-value of 0.12. If your significance level is \u03b1=0.05, what do you conclude?",
+          "options": [
+            "Reject H\u2080; the new shooting technique significantly improved their three-point percentage",
+            "Fail to reject H\u2080; there is insufficient evidence that the technique improved their percentage",
+            "The technique has no effect at all",
+            "Accept H\u2080; the technique definitely didn't work"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "A p-value of 0.12 is above 0.05, so we do not have sufficient evidence to reject H\u2080.",
+            "Correct! A p-value of 0.12 > 0.05 means the data is not extreme enough to conclude an effect.",
+            "Fail to reject H\u2080 doesn't prove the null; it just means we lack evidence against it.",
+            "'Accept H\u2080' is incorrect language\u2014we can only 'fail to reject' it."
+          ],
+          "explanation": "When p-value > \u03b1, you fail to reject H\u2080. This doesn't prove H\u2080 is true; it means the observed data isn't unusual enough to conclude an effect exists. With more data or a larger effect, you might detect significance later."
+        },
+        {
+          "question": "A coach claims a new strength program reduces injury rates. You test this and incorrectly reject H\u2080 (the program has no effect), when in reality the program doesn't reduce injuries. What type of error is this?",
+          "options": [
+            "Type I error (false positive)",
+            "Type II error (false negative)",
+            "Sampling error",
+            "Bias in the hypothesis test"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! You rejected H\u2080 incorrectly, falsely claiming an effect exists.",
+            "Type II is failing to reject H\u2080 when it's false (missing a real effect).",
+            "This is specifically a hypothesis testing error, not general sampling error.",
+            "While possible, the specific error here is Type I."
+          ],
+          "explanation": "Type I error: rejecting H\u2080 when it's actually true (false positive\u2014claiming an effect when none exists). Type II error: failing to reject H\u2080 when it's false (false negative\u2014missing a real effect). In the scenario, you claimed the program works when it doesn't\u2014that's Type I."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Mastery Complete: Statistical Inference in Sports Analytics",
+      "content": "Congratulations! You now understand how to use statistical inference and hypothesis testing to answer critical questions in sports: Is a player's performance real or luck? Did a rule change actually impact the game? Does a new training method work? These skills let you distinguish signal from noise in sports data. Whether you started with theory or practice, you've built a foundation for deeper analytics work. Next steps: explore confidence intervals, regression analysis, and multivariate testing. Keep asking data-driven questions in your favorite sports!"
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Practice First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Continue"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Continue"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n3",
+      "label": "Retry"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Continue"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Continue"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n6",
+      "label": "Retry"
+    }
+  ],
+  "generated_at": "2026-03-27T15:24:57.192537+00:00",
+  "model": "claude-haiku-4-5"
+}

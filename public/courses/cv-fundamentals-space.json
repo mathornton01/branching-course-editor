@@ -1,0 +1,294 @@
+{
+  "id": "cv-fundamentals-space",
+  "title": "Computer Vision Fundamentals: Space Exploration Edition",
+  "description": "Master computer vision principles through space exploration applications, from satellite imagery analysis to autonomous rover navigation.",
+  "topic": "Computer Vision",
+  "theme": "space exploration",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "computer vision",
+    "image processing",
+    "space exploration",
+    "machine learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Space Image Basics",
+      "content": "Begin your journey through computer vision as applied to space exploration. This diagnostic assessment will determine your starting path. You'll face scenarios involving satellite imagery, rover cameras, and space telescope data\u2014the types of visual information that guide space missions.",
+      "questions": [
+        {
+          "question": "A Mars rover's camera captures images at 1920\u00d71080 resolution. What does each individual unit of color data in this image represent?",
+          "options": [
+            "A pixel (picture element)",
+            "A megapixel",
+            "A color channel",
+            "A sensor filter"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Pixels are the building blocks of digital images, and understanding pixel-level operations is foundational for all computer vision in space missions.",
+            "Not quite. A megapixel is 1 million pixels\u2014a measure of total resolution, not the individual units.",
+            "Close, but a color channel (like Red, Green, Blue) is one component of a pixel, not the pixel itself.",
+            "Filters affect how pixels are captured, but don't define the individual data units."
+          ],
+          "explanation": "In space exploration, rovers and satellites generate massive amounts of image data. Each image is composed of millions of pixels, and analyzing pixel patterns is how we detect craters, identify terrain, and navigate autonomous spacecraft."
+        },
+        {
+          "question": "A satellite observes Earth's surface, but atmospheric interference creates noise in the images. Which computer vision technique is most useful for cleaning up this noisy data?",
+          "options": [
+            "Image filtering (blur, median, Gaussian)",
+            "Semantic segmentation",
+            "3D point cloud generation",
+            "Optical flow estimation"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Exactly! Filtering removes noise while preserving important features, a critical first step in processing satellite and space telescope imagery.",
+            "Semantic segmentation identifies what objects are in an image, but doesn't specifically address noise.",
+            "3D reconstruction is valuable but comes after noise reduction and feature detection.",
+            "Optical flow tracks motion between frames, not noise reduction."
+          ],
+          "explanation": "Space imagery often contains artifacts from atmospheric distortion, sensor noise, and cosmic radiation. Filters like Gaussian blur or median filtering are preprocessing staples that allow downstream computer vision algorithms to work more effectively."
+        },
+        {
+          "question": "Why do autonomous Mars rovers convert color rover-camera images to grayscale before processing them for obstacle detection?",
+          "options": [
+            "Color information is irrelevant for detecting obstacles",
+            "Grayscale processing requires less computational power and faster response time",
+            "Grayscale images are easier to transmit back to Earth",
+            "Color filters interfere with rover navigation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Color can be useful, but for real-time obstacle avoidance, the rover prioritizes speed and efficiency.",
+            "Perfect! Rovers have limited computational resources and must react quickly. Grayscale images (one channel instead of three RGB) are faster to process, critical for autonomous navigation in harsh terrain.",
+            "While bandwidth is a consideration, the main reason is computational efficiency.",
+            "Color filters don't interfere; grayscale just strips down to essential information."
+          ],
+          "explanation": "Mars rovers operate with significant communication delays (up to 22 minutes each way) and limited onboard computing. Grayscale conversion reduces computational load, enabling real-time hazard detection during autonomous traversal\u2014a matter of mission safety."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n7"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Intermediate: Space Vision Challenges",
+      "content": "You've grasped the basics. Now test your understanding of more complex computer vision tasks that space missions rely on. These challenges involve feature detection, pattern recognition, and autonomous analysis\u2014the techniques that enable rovers to explore and telescopes to catalog distant worlds.",
+      "questions": [
+        {
+          "question": "A lunar lander uses edge detection to identify crater boundaries for safe landing site selection. Which computer vision principle does this represent?",
+          "options": [
+            "Semantic segmentation",
+            "Feature detection and localization",
+            "Optical flow tracking",
+            "Depth estimation from stereo"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Not quite. Edge detection is about finding boundaries and transitions, not classifying what the objects are.",
+            "Correct! Edge detection locates features (crater rims, cliff edges) within the image\u2014essential for autonomous decision-making.",
+            "Optical flow tracks motion across frames, not static feature locations.",
+            "Depth estimation is valuable but comes after feature detection."
+          ],
+          "explanation": "Lunar and asteroid landing systems use edge detection (Canny, Sobel) to identify geological features. These detected edges help the autonomous guidance system distinguish safe flat terrain from hazardous slopes and boulders."
+        },
+        {
+          "question": "A space telescope generates multi-spectral images (infrared, visible, ultraviolet channels) of a distant galaxy. To classify different regions as 'star-forming', 'dust', or 'dark matter', which technique would be most appropriate?",
+          "options": [
+            "Histogram equalization",
+            "Semantic segmentation using deep learning",
+            "Boundary box detection",
+            "Homography transformation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Histogram equalization improves contrast but doesn't classify regions.",
+            "Perfect! Semantic segmentation assigns each pixel or region a class label\u2014exactly what's needed to map out the structural composition of galaxies.",
+            "Boundary boxes detect discrete objects, not continuous region classification.",
+            "Homography is used for image alignment, not region classification."
+          ],
+          "explanation": "Modern space telescopes feed multi-spectral data to deep learning models trained to perform semantic segmentation. This allows astronomers to create detailed maps of galaxy composition, revealing star formation histories and dark matter distribution."
+        },
+        {
+          "question": "A spacecraft approaching an asteroid wants to identify and track its rotation over time. Which computer vision task combines feature detection, frame-to-frame matching, and 3D estimation?",
+          "options": [
+            "Image restoration",
+            "Structure from Motion (SfM) with optical flow",
+            "Texture synthesis",
+            "Morphological operations"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Image restoration cleans up images but doesn't track 3D structure.",
+            "Correct! Structure from Motion reconstructs 3D shape from image sequences, while optical flow tracks feature movements\u2014together, they reveal asteroid rotation and shape.",
+            "Texture synthesis creates new images, not analyzes existing ones.",
+            "Morphological operations modify binary images but don't estimate 3D geometry."
+          ],
+          "explanation": "As a spacecraft spirals inward to an asteroid, it captures a sequence of images. Combining optical flow (which tracks feature movement) with SfM (which reconstructs 3D structure from motion) lets engineers compute the asteroid's rotation rate, size, and center of mass\u2014all critical for rendezvous and landing."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n3",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Expert: Deep Learning and 3D Vision for Space Missions",
+      "content": "Congratulations\u2014you're ready for the cutting edge. At this level, space agencies and research institutions deploy convolutional neural networks (CNNs) for crater detection, recurrent networks for tracking celestial objects, and 3D vision pipelines for terrain reconstruction. Modern Mars rovers use ResNet-based models to classify rocks and soil in real time. Space telescopes employ transformer architectures to detect exoplanets hidden in noise. This is where computer vision transforms from signal processing into artificial intelligence, enabling spacecraft to see, understand, and make autonomous decisions in environments millions of kilometers from human operators. The future of space exploration depends on these systems\u2014rovers that navigate uncharted surfaces, telescopes that discover new worlds, and spacecraft that dock autonomously in microgravity.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Expert Path Complete: You are a Space Vision Specialist",
+      "content": "You have mastered the advanced computer vision techniques that enable autonomous space exploration. From deep learning-driven crater detection to 3D structure-from-motion pipelines, you understand the systems that guide rovers across Mars, help telescopes discover exoplanets, and enable spacecraft to navigate and dock in space. These are the skills of cutting-edge roboticists, mission planners, and AI researchers at NASA, ESA, and SpaceX. Your next step: apply these concepts to real mission data, or dive into specialized domains like autonomous rendezvous, real-time hazard avoidance, or large-scale astronomical surveys."
+    },
+    {
+      "id": "n5",
+      "type": "practice",
+      "title": "Practice: Intermediate Space Vision Scenarios",
+      "content": "You're close to mastery but need more practice. Work through these intermediate-level scenarios to solidify your understanding of feature detection, image segmentation, and autonomous vision systems in space contexts.",
+      "questions": [
+        {
+          "question": "You're training a CNN to detect ice deposits on Mars from satellite imagery. The model achieves 85% accuracy on training data but only 70% on validation data. What does this indicate, and what should you do?",
+          "options": [
+            "The model is underfitting; increase model complexity",
+            "The model is overfitting; reduce complexity or add regularization and more diverse training data",
+            "The model is perfect; deploy it immediately",
+            "The model needs different activation functions"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That would make overfitting worse.",
+            "Correct! The gap between training and validation accuracy signals overfitting. For mission-critical applications like ice detection, you need better generalization.",
+            "The performance gap suggests the model won't generalize to unseen martian regions.",
+            "Activation functions aren't the primary issue here; overfitting is the problem."
+          ],
+          "explanation": "Space missions can't afford poor generalization. A model that works on training data but fails on new terrain is useless. Use techniques like dropout, L2 regularization, data augmentation, or ensemble methods to improve robustness."
+        },
+        {
+          "question": "A spacecraft's stereo-vision system captures two images of the same scene from slightly different angles (baseline separation 50cm). To compute 3D depth, what's the critical preprocessing step?",
+          "options": [
+            "Convert to grayscale and apply Gaussian blur",
+            "Rectify the images so corresponding points lie on the same horizontal scan line",
+            "Apply histogram equalization to both images",
+            "Resample both images to half resolution"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Grayscale and blur help, but rectification is essential for stereo matching.",
+            "Exactly! Stereo rectification aligns the image planes so matching is efficient and accurate\u2014fundamental for 3D reconstruction from stereo pairs.",
+            "Histogram equalization helps with contrast but doesn't address stereo geometry.",
+            "Resampling loses information needed for accurate depth estimation."
+          ],
+          "explanation": "Stereo vision is how spacecraft perceive depth. Rectification transforms both images so that corresponding points appear on the same horizontal line, enabling simple and fast stereo matching algorithms that compute disparity (and thus depth) for every pixel."
+        },
+        {
+          "question": "You're developing real-time obstacle detection for a lunar rover. Should you prioritize: (A) Maximum accuracy at the cost of high latency, or (B) Lower accuracy but sub-100ms response time?",
+          "options": [
+            "A\u2014safety always comes first, even if the rover moves slowly",
+            "B\u2014the rover must react faster than obstacles appear; low latency is critical",
+            "Either works equally well in space",
+            "Accuracy and latency are independent of the application"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "On Earth, yes. But on the Moon with 1.3 second round-trip communication delay, the rover must autonomously avoid hazards in real time.",
+            "Absolutely right! A rover moving at 1 m/s can travel 10 cm in 100ms. Latency matters more than marginal accuracy gains.",
+            "The lunar environment makes this a critical design choice.",
+            "In space robotics, they're tightly coupled\u2014you must balance both."
+          ],
+          "explanation": "Space missions prioritize real-time autonomy. Controllers on Earth cannot teleoperate rovers due to communication delays. A slightly less accurate but fast detector that reacts in 50ms is far more valuable than a perfect detector with 500ms latency\u2014the rover would crash before the answer arrives."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Intermediate Path Complete: Proficient in Space Vision",
+      "content": "You've completed intermediate training in computer vision for space exploration. You understand feature detection, image segmentation, autonomous analysis, and the tradeoffs between accuracy and latency in real-time systems. This knowledge applies to satellite image analysis, rover autonomy, and telescope data processing. Next steps: pursue specialized training in 3D vision, deep learning architectures, or domain-specific applications like exoplanet detection or asteroid analysis."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Remedial: Foundations of Space Image Processing",
+      "content": "Let's strengthen your foundation. Computer vision begins with understanding how images are represented and manipulated. In space exploration, every mission depends on these basics: satellites and rovers capture images as grids of pixels, where each pixel has color values (RGB) or intensity (grayscale). To extract meaning\u2014to detect craters, identify rocks, find safe landing sites\u2014we apply image processing techniques. We filter images to reduce noise from cosmic radiation and atmospheric interference. We threshold images to isolate features against backgrounds. We resize and normalize images so algorithms can process them consistently. These humble operations underpin everything from Mars rover navigation to exoplanet discovery. Master the fundamentals, and advanced techniques will make sense.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Worked Example: Detecting Galaxies in Hubble Deep Field Images",
+      "content": "Imagine the Hubble Space Telescope captures an image of a distant galaxy cluster. The image is 4096\u00d74096 pixels, with intensity values from 0\u2013255. Step 1: Apply Gaussian blur (kernel size 5\u00d75) to reduce sensor noise from cosmic radiation without losing the galaxy. Step 2: Apply Canny edge detection to find sharp transitions\u2014the galaxy's bright core and spiral arms. Step 3: Use morphological dilation to connect fragmented edges. Step 4: Apply connected-component labeling to identify each distinct galaxy. Step 5: Filter components by size and circularity to eliminate noise and cosmic-ray artifacts. The result: clean, separated galaxy outlines, ready for classification and study. This pipeline takes milliseconds and requires minimal memory\u2014essential for processing terabytes of telescope data.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Beginner Path Complete: Foundation in Space Image Processing",
+      "content": "You've built a solid foundation in computer vision fundamentals through the lens of space exploration. You understand pixels, filters, edge detection, and how images are processed to extract meaning from space missions. This foundation is essential\u2014without it, advanced techniques like deep learning and 3D vision would be incomprehensible. Your next step: strengthen your intermediate skills by learning feature detection, segmentation, and autonomous analysis. With more practice, you'll be ready to tackle the advanced systems that push the boundaries of space exploration."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n7",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T06:01:10.100849+00:00",
+  "model": "claude-haiku-4-5"
+}

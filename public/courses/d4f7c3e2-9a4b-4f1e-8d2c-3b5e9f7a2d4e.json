@@ -1,0 +1,308 @@
+{
+  "id": "d4f7c3e2-9a4b-4f1e-8d2c-3b5e9f7a2d4e",
+  "title": "Information Theory for Space Exploration",
+  "description": "Master the mathematics of cosmic communication. Learn how information theory enables deep space missions, from Mars rovers to the James Webb Space Telescope.",
+  "topic": "Information Theory",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "information-theory",
+    "space-exploration",
+    "communication-systems",
+    "data-transmission",
+    "shannon-theory"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Cosmic Signals: Why Information Theory Matters",
+      "content": "When NASA's Perseverance rover sends images from Mars\u201424 light-minutes away\u2014every bit of data is precious. Information theory, developed by Claude Shannon in 1948, quantifies exactly how much information we can transmit reliably through noisy channels. From Voyager 1's 160-bit-per-second transmissions across 24 billion kilometers to the James Webb Space Telescope's complex error-corrected streams, information theory is the mathematical foundation enabling all deep space exploration. This course teaches you how cosmic communication systems work.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Quick Check: Information Fundamentals",
+      "content": "Test your grasp of core information theory concepts.",
+      "pass_threshold": 67,
+      "success_target": "n3",
+      "failure_target": "n8",
+      "questions": [
+        {
+          "question": "The Voyager 1 probe transmits at approximately 160 bits per second due to its 24-billion-kilometer distance from Earth. Which principle explains why we need error correction despite such slow transmission?",
+          "options": [
+            "A) Cosmic radiation and signal degradation introduce noise that corrupts bits during transmission",
+            "B) Faster transmissions carry less information",
+            "C) Distance directly reduces the number of bits we can send",
+            "D) Error correction is only needed for fast communications"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Noise is the fundamental reason error correction is essential.",
+            "Incorrect. Transmission speed and information content are independent properties.",
+            "Incorrect. Distance affects signal strength but not bit capacity\u2014we compensate with error correction.",
+            "Incorrect. Error correction is critical for ALL long-distance space communications."
+          ],
+          "explanation": "The cosmic communication channel is inherently noisy. Radiation, antenna imperfections, and atmospheric effects cause bit errors. Information theory tells us we can still transmit reliably by adding redundancy through error-correcting codes."
+        },
+        {
+          "question": "If a Mars rover's status signal has only 2 equally likely states\u2014'systems nominal' or 'alert condition'\u2014how many bits of information does one status transmission contain?",
+          "options": [
+            "A) 0 bits",
+            "B) 1 bit",
+            "C) 2 bits",
+            "D) It depends on how important the message is"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Two equally likely states do contain information.",
+            "Correct! Log\u2082(2) = 1 bit. Each equally likely state contributes 1 bit.",
+            "Incorrect. Two states require 1 bit to distinguish, not 2 bits.",
+            "Incorrect. Information content is a mathematical property, not dependent on importance."
+          ],
+          "explanation": "Information is measured by the logarithm (base 2) of possible states. Two equally likely outcomes = log\u2082(2) = 1 bit. This principle, called entropy, is central to Shannon's information theory."
+        },
+        {
+          "question": "NASA's Deep Space Network can receive Voyager's 160 bps transmission only because they use sophisticated filtering and error correction. Without error correction, the noise would make perfect transmission impossible. What does Shannon's theorem tell us about achieving reliable communication through a noisy channel?",
+          "options": [
+            "A) We must transmit faster than the noise rate",
+            "B) We can transmit reliably by using redundancy; the channel capacity depends on signal-to-noise ratio",
+            "C) Noise cannot be overcome; all deep space communication will have errors",
+            "D) We need larger antennas to eliminate noise completely"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Speed doesn't help us overcome fundamental noise limitations.",
+            "Correct! Shannon proved reliable communication is possible through noisy channels if we use redundancy. The maximum reliable rate is the channel capacity: C = B log\u2082(1 + S/N).",
+            "Incorrect. Shannon's theorem proves we CAN achieve arbitrarily low error rates with proper codes.",
+            "Incorrect. Larger antennas help signal strength but the fundamental limit is set by channel capacity."
+          ],
+          "explanation": "Shannon's Channel Coding Theorem (1948) proved that reliable communication through noise is possible if we transmit below the channel capacity. This capacity depends on bandwidth and signal-to-noise ratio. Deep space missions exploit this principle with sophisticated codes."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "assessment",
+      "title": "Advanced: Channel Capacity and Error Correction",
+      "content": "Demonstrate understanding of channel capacity, entropy, and coding theory applications.",
+      "pass_threshold": 67,
+      "success_target": "n4",
+      "failure_target": "n6",
+      "questions": [
+        {
+          "question": "The James Webb Space Telescope's downlink operates at 28 megabits per second but uses Reed-Solomon error-correcting codes that add 50% redundancy. If the channel has inherent noise, what advantage does this redundancy provide?",
+          "options": [
+            "A) The redundancy slows transmission to avoid thermal noise",
+            "B) The redundancy allows reconstruction of corrupted data; we can recover the original 28 Mbps despite transmission errors",
+            "C) The redundancy increases the signal strength to eliminate all noise",
+            "D) The redundancy creates a backup channel if the main channel fails"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Redundancy doesn't slow useful information; it adds protection.",
+            "Correct! Redundant bits create parity checks. Even if some transmitted bits are corrupted, error-correcting codes can detect and fix errors, maintaining data integrity.",
+            "Incorrect. Redundancy is a mathematical technique, not a physical amplifier.",
+            "Incorrect. Error correction works within a single channel through mathematical redundancy."
+          ],
+          "explanation": "Error-correcting codes like Reed-Solomon add redundant information. While total transmission is slowed (28 Mbps becomes 42 Mbps), the original 28 Mbps of scientific data survives corruption. This is essential for space telescopes."
+        },
+        {
+          "question": "A communication link between Earth and the Curiosity rover on Mars has a bandwidth of 1 MHz and a signal-to-noise ratio of 10:1. Using Shannon's channel capacity formula C = B log\u2082(1 + S/N), what is the theoretical maximum reliable information rate?",
+          "options": [
+            "A) Approximately 3.3 megabits per second",
+            "B) 10 megabits per second",
+            "C) 1 megabit per second",
+            "D) Approximately 13.3 megabits per second"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! C = 1 MHz \u00d7 log\u2082(1 + 10) = 1 MHz \u00d7 log\u2082(11) \u2248 1 MHz \u00d7 3.3 \u2248 3.3 Mbps",
+            "Incorrect. The S/N ratio is 10:1, not 10 Mbps; this confuses rate with ratio.",
+            "Incorrect. Channel capacity exceeds the bandwidth when S/N is positive.",
+            "Incorrect. This result comes from log\u2082(1 + 100), not log\u2082(1 + 10)."
+          ],
+          "explanation": "Shannon's formula shows that channel capacity depends on both bandwidth and signal quality (S/N). Better signal conditions allow higher information rates. This is why deep space missions optimize antenna gain."
+        },
+        {
+          "question": "The International Space Station's telemetry system must transmit vital life-support data (temperature, pressure, oxygen levels) continuously. If each parameter has very low entropy (values change slowly, are predictable), how should the transmission system be optimized?",
+          "options": [
+            "A) Transmit all data at the same rate regardless of entropy",
+            "B) Use data compression and variable-rate coding; predictable (low-entropy) data requires fewer bits",
+            "C) Increase transmission power to send unchanged parameters faster",
+            "D) Send each parameter separately to maximize channel utilization"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Entropy should guide optimization; wasting bits on predictable data is inefficient.",
+            "Correct! Low-entropy data is predictable. We can compress it: instead of resending identical values, send only deltas or run-length encode. This saves bandwidth for critical changes.",
+            "Incorrect. Power increases signal strength but not efficiency; entropy-based compression is the answer.",
+            "Incorrect. Channel efficiency comes from entropy optimization, not multiplexing strategy."
+          ],
+          "explanation": "Entropy quantifies information content. Redundant or predictable data has low entropy. Data compression exploits this by encoding predictable data more efficiently, freeing bandwidth for unexpected changes\u2014critical for life support systems."
+        }
+      ]
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Expert Topics: Quantum Information and Next-Generation Protocols",
+      "content": "Modern space exploration faces fundamental limits from classical information theory. Quantum information theory offers revolutionary possibilities: quantum error correction maintains information integrity against decoherence over interplanetary distances; quantum key distribution enables unbreakable encryption for Mars colony communications; quantum teleportation protocols optimize bandwidth usage for bandwidth-critical missions. NASA's Quantum Internet Alliance explores these technologies for deep space networks. The future of exploration depends on mastering both classical Shannon theory and quantum information principles to achieve efficient, secure, reliable communication across the solar system.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "end",
+      "title": "Expert Mission: Information Theory Master",
+      "content": "You've mastered information theory at the expert level. You understand Shannon's theorems, channel capacity optimization, error-correcting codes, and emerging quantum protocols. You can design communication systems for deep space missions, optimize bandwidth for Mars colonies, and architect next-generation space networks. You're ready to lead innovation in cosmic communications."
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Communication System Design",
+      "content": "Reinforce your understanding with realistic scenarios.",
+      "pass_threshold": 67,
+      "success_target": "n7",
+      "failure_target": "n7",
+      "questions": [
+        {
+          "question": "A future lunar base needs real-time video streaming to Earth (380,000 km away). The 1-second light delay makes two-way communication impractical. What information theory principle should guide the design of the transmission system?",
+          "options": [
+            "A) Maximize bandwidth to send all data simultaneously",
+            "B) Use predictive compression and error correction to maximize information per unit bandwidth",
+            "C) Send uncompressed data to avoid losing information",
+            "D) Synchronize the video feed to match the light delay"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Bandwidth is limited and expensive; efficiency matters more than maximum speed.",
+            "Correct! Given fixed bandwidth, information theory tells us to compress predictable data (lower entropy \u2192 fewer bits) and use channel-optimized error correction codes.",
+            "Incorrect. Uncompressed data wastes bandwidth; compression extracts useful information efficiently.",
+            "Incorrect. We cannot synchronize away the physical light delay; we optimize information rate instead."
+          ],
+          "explanation": "The lunar base faces fixed bandwidth constraints and distance. Entropy-based compression removes redundancy; error correction codes add just enough redundancy to survive the channel's noise. Together, they maximize scientific information delivered."
+        },
+        {
+          "question": "The New Horizons probe is now 50+ AU from Earth, receiving only 16 bits per second. A transmission of a single 16-kilobit image would take 1,000 seconds. Engineers must choose: send the full image or a compressed 1-kilobit version. Using information theory, what should they prioritize?",
+          "options": [
+            "A) Send the full image because more data is always better",
+            "B) Choose based on information content: if the compressed version retains all scientifically important information, it's superior",
+            "C) Send both versions in sequence to preserve all data",
+            "D) Send neither; the bandwidth is too limited to be practical"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. More data doesn't mean more information; redundancy adds bulk without value.",
+            "Correct! Information theory asks: what information matters? If compression preserves that information, fewer bits are better. At 16 bps, information density is critical.",
+            "Incorrect. Sending both wastes 16,000 seconds; efficiency demands choosing the best option.",
+            "Incorrect. Deep space missions routinely work with ultra-low bandwidth; transmission IS possible with smart coding."
+          ],
+          "explanation": "Information \u2260 data. A high-resolution image full of sky background contains less information than a compressed version showing key features. At extreme bandwidth limits, information density drives decisions."
+        },
+        {
+          "question": "SpaceX's Starlink network connects Earth to future Mars missions. Each satellite has limited power for transmissions. How should the system's entropy-aware design balance bandwidth and power efficiency?",
+          "options": [
+            "A) Use maximum power on all transmissions to ensure signal reaches",
+            "B) Modulate power based on data entropy; send high-entropy (unexpected) data with higher power; compress low-entropy data to save power",
+            "C) Use the same power for all data regardless of importance",
+            "D) Alternate between high and low power randomly"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Excessive power wastes energy and generates heat in space\u2014critical limitations.",
+            "Correct! Low-entropy predictable data (like 'rover still at coordinates X,Y') can be sent with less power and more compression. High-entropy anomalies (sensor failure) need robust transmission.",
+            "Incorrect. Energy efficiency demands optimization; constant power is wasteful.",
+            "Incorrect. Random power modulation achieves nothing; strategy must be entropy-based."
+          ],
+          "explanation": "Space systems are power-limited. Information theory guides allocation: allocate power according to information value. Predictable status (low entropy) gets efficient compression and low power; critical anomalies (high entropy) get robust, higher-power transmission."
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Competent Mission: Information Theory Practitioner",
+      "content": "You've developed solid understanding of information theory and its crucial role in space exploration. You can analyze communication systems, understand Shannon's channel capacity, apply error correction principles to real missions, and optimize transmission for bandwidth-limited deep space scenarios. You're ready to contribute to spacecraft communication system design."
+    },
+    {
+      "id": "n8",
+      "type": "content",
+      "title": "Foundations: What is Information?",
+      "content": "Let's build from the ground up. Information measures surprise or uncertainty. When a Mars rover's status light flashes, is the message 'all systems green' (expected) or 'emergency shutdown' (unexpected)? The unexpected message contains more information\u2014it tells you something changed. Claude Shannon, inventing information theory in 1948, proved that information can be measured mathematically in 'bits' (binary digits). A coin flip has 1 bit of information (two equally likely outcomes). If we know Mars is 99% sunny, a weather report of 'sunny' has nearly zero information\u2014no surprise. But 'dust storm incoming' has high information\u2014it's unexpected. This idea\u2014information = surprise\u2014revolutionized communications, data compression, and deep space missions. Every byte transmitted to Earth from Curiosity exploits Shannon's theory.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "example",
+      "title": "Example: Measuring Information on the ISS",
+      "content": "Imagine the International Space Station's pressurization system with one sensor. Without information theory, we might think each pressure reading is equally important. But with information theory: if pressure normally stays at 101.3 kPa with tiny variations, that's low-entropy data\u2014very predictable. A reading of '101.31 kPa' adds little information (expected). But '95 kPa' is shocking\u2014high information content (cabin leak!). NASA's telemetry system exploits this: it sends frequent routine readings compressed into a tiny packet (low entropy \u2192 fewer bytes) but allocates full bandwidth to anomalies (high entropy \u2192 detailed data). When the ISS experiences a micrometeorite strike, the pressure alarm gets priority transmission. Information theory makes this smart prioritization possible by quantifying information content and guiding efficient encoding.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Foundational Mission: Information Theory Basics",
+      "content": "You've learned the fundamental concept of information\u2014it's measurable, surprising events contain more of it, and predictable data contains less. You understand why deep space missions care about information theory: distance creates noise, bandwidth is precious, and power is limited. These constraints make information efficiency vital for exploring the cosmos. You're ready to build on these foundations."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": null
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n8",
+      "label": "fail"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": null
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": null
+    },
+    {
+      "id": "c8",
+      "source": "n8",
+      "target": "n9",
+      "label": null
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": null
+    }
+  ],
+  "generated_at": "2026-03-27T17:01:22.951626+00:00",
+  "model": "claude-haiku-4-5"
+}

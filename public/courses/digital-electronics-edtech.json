@@ -1,0 +1,289 @@
+{
+  "id": "digital-electronics-edtech",
+  "title": "Digital Electronics for EdTech Professionals",
+  "description": "Master digital electronics fundamentals through real-world education technology applications. Learn how logic gates, binary systems, and digital circuits power modern learning platforms.",
+  "topic": "Digital Electronics",
+  "theme": "education technology",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "digital-electronics",
+    "education-technology",
+    "binary-systems",
+    "logic-gates",
+    "adaptive-learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Fundamentals Assessment: Binary in Learning Platforms",
+      "content": "Before we dive deeper, let's assess your understanding of how digital electronics powers education technology. Learning Management Systems (LMS) like Canvas and Blackboard rely on binary systems to store student data, track progress, and manage course content. Think about how a student's grade (pass/fail), attendance (present/absent), or completion status (done/not done) are represented digitally.",
+      "questions": [
+        {
+          "question": "In a student attendance system, how many bits are needed to represent whether a student is 'present' or 'absent' for a single class?",
+          "options": [
+            "1 bit",
+            "2 bits",
+            "4 bits",
+            "8 bits"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "\u2713 Correct! One bit can represent two states (0=absent, 1=present).",
+            "Not quite. We only need to represent two states, not four.",
+            "Too many bits for just two states.",
+            "That's a full byte\u2014way more than we need!"
+          ],
+          "explanation": "Binary systems use bits to represent data. Since attendance has only two states, one bit (0 or 1) is sufficient."
+        },
+        {
+          "question": "A student response system (clicker) in an online class needs to encode answers to a multiple-choice question: A, B, C, or D. What's the minimum number of bits required?",
+          "options": [
+            "1 bit",
+            "2 bits",
+            "3 bits",
+            "4 bits"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Too few\u20141 bit only represents 2 states.",
+            "\u2713 Correct! 2 bits represent 2\u00b2=4 states, perfect for four answer choices.",
+            "That works, but we can do it with fewer bits.",
+            "That would work but is more than the minimum."
+          ],
+          "explanation": "With n bits, you can represent 2\u207f different states. For 4 answer choices, we need 2 bits (2\u00b2=4)."
+        },
+        {
+          "question": "In an automated grading system, a student's overall course status might be encoded as: 01101011 (8 bits). What does this tell us about how the system is storing information?",
+          "options": [
+            "Each bit represents a different piece of information (like pass/fail, attendance, assignment completion).",
+            "The entire 8-bit number represents a single score from 0-255.",
+            "The system can only track 8 different student statuses.",
+            "This is an invalid binary number for educational data."
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "\u2713 Correct! Multiple bits can be combined to track multiple independent attributes.",
+            "While true that 8 bits can represent 0-255, multiple attributes are more useful for tracking different student data.",
+            "Eight bits can actually represent far more than 8 different statuses.",
+            "Binary numbers like this are perfectly valid for educational data."
+          ],
+          "explanation": "Digital systems often use individual bits to represent different Boolean states (flags), allowing compact storage of multiple related pieces of information about a student."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Intermediate Challenge: Logic Gates in Automated Grading",
+      "content": "Great! Now let's test your understanding of logic gates\u2014the building blocks of any digital circuit. In modern educational platforms, logic gates are used to implement grading rules, adaptive pathways, and automated feedback. For example, an instructor might set a rule like: 'A student can access the final exam IF they passed the midterm AND completed all assignments OR they have instructor approval.' This combines multiple conditions using digital logic.",
+      "questions": [
+        {
+          "question": "Consider this grading rule for access to advanced modules: 'Grant access if (Score \u2265 80 AND Completed Lessons \u2265 90%) OR HasInstructorApproval.' Which logic gates are needed to implement this rule?",
+          "options": [
+            "Only AND gates",
+            "AND gate and OR gate",
+            "Only OR gates",
+            "AND, OR, and NOT gates"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "You need more than just AND\u2014the 'OR' between conditions is important.",
+            "\u2713 Correct! The AND gate combines the first two conditions, and OR combines that result with the approval condition.",
+            "You need to represent the compound conditions with both AND and OR.",
+            "While NOT might be useful, it's not necessary for this rule."
+          ],
+          "explanation": "Logic gates combine Boolean conditions: AND requires all inputs to be true, OR requires at least one input to be true. Complex rules often combine multiple gate types."
+        },
+        {
+          "question": "An adaptive learning system routes a student based on this logic: 'If (Quiz Score \u2265 70) AND (NOT in remedial track), show advanced content.' What is the output when Quiz Score = 75 and the student IS in remedial track?",
+          "options": [
+            "True (show advanced content)",
+            "False (don't show advanced content)",
+            "Cannot determine from the information given",
+            "Depends on previous quiz scores"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Remember: AND requires both conditions to be true. The second condition is false here.",
+            "\u2713 Correct! The score condition is true, but 'NOT in remedial track' is false, so the AND output is false.",
+            "We have all the information needed\u2014just apply the logic gates.",
+            "The logic depends only on current conditions, not history."
+          ],
+          "explanation": "When using an AND gate, if any input is false, the output is false. Here: (75 \u2265 70) = true, but (NOT in remedial) = false, so the overall result is false."
+        },
+        {
+          "question": "A student response system in a live class needs to instantly display feedback to the whole class based on majority answers. If 60% answered 'A' and 40% answered other options, what logic would determine if a question was 'answered correctly by majority'?",
+          "options": [
+            "(AnswersA > AnswersB) AND (AnswersA > AnswersC) AND (AnswersA > AnswersD)",
+            "(AnswersA > 50%) OR (AnswersA == MaxCount)",
+            "Both A and B would work, but A is more efficient",
+            "This requires more than just basic logic gates"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "\u2713 Correct! This approach directly compares A's count against all others, requiring three AND gates to verify A won all comparisons.",
+            "B would work too, but A is more precise\u2014it checks A is greater than each other option.",
+            "A is actually the more direct approach for this scenario.",
+            "Basic AND and OR gates are sufficient!"
+          ],
+          "explanation": "To determine majority voting, you need to verify that one option has more votes than all alternatives. This requires multiple AND operations."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n3",
+      "failure_target": "n4"
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Expert Application: Building Adaptive Assessment Circuits",
+      "content": "Congratulations on mastering logic gates! Now let's explore how professional EdTech systems use digital circuits to create sophisticated adaptive learning experiences. Adaptive assessment systems like ALEKS and Knewton use sequential logic circuits to maintain student state and make dynamic routing decisions. These systems track which topics a student has mastered, which need review, and which are ready to be introduced next. The circuit maintains flip-flops (memory elements) to remember a student's progress, and combinational logic gates process incoming quiz responses to update the student's knowledge state. For example, when a student answers a geometry question correctly after struggling with algebra, the system's circuits update the 'algebra_mastered' bit from 0 to 1, triggering the logic gates that decide: 'Can now unlock trigonometry module? If algebra_mastered AND no_known_prerequisites = 1, then yes.' This happens thousands of times per second across millions of students, all powered by the digital electronics you've just studied. Understanding these circuits helps you design better EdTech systems, troubleshoot assessment problems, and optimize the learning experience.",
+      "next": "n7"
+    },
+    {
+      "id": "n4",
+      "type": "practice",
+      "title": "Logic Gates Practice: Student Response Systems",
+      "content": "Let's practice applying logic gates to real EdTech scenarios. A student response system (like Mentimeter or Turning Point) helps instructors gauge class understanding in real-time. The system needs to make quick decisions based on student responses and class data.",
+      "questions": [
+        {
+          "question": "In a classroom response system, an instructor wants to identify 'confused students' as those who answered the question incorrectly AND spent more than 30 seconds on it. Which logic gate combination captures this rule?",
+          "options": [
+            "OR gate (any student matching either condition)",
+            "AND gate (student must match both conditions)",
+            "XOR gate (student matches exactly one condition)",
+            "NOT gate (student didn't match these conditions)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "OR would catch students meeting either condition alone\u2014too broad.",
+            "\u2713 Correct! AND ensures both conditions are true\u2014students must be both incorrect AND slow.",
+            "XOR would be true if they match just one\u2014we need both.",
+            "NOT gives the opposite of what we want."
+          ],
+          "explanation": "The AND gate is the right choice when all conditions must be true. A confused student must be both incorrect and thoughtful (taking time)."
+        },
+        {
+          "question": "An online assessment grants a certificate if: (Test Score \u2265 80) OR (Portfolio Accepted = Yes) OR (InstructorApproved = Yes). If a student scored 75, has no accepted portfolio, but has instructor approval, do they earn the certificate?",
+          "options": [
+            "No, because all three conditions must be true",
+            "Yes, because at least one condition is true",
+            "Maybe, depending on test weight",
+            "Not enough information"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Actually, OR only requires ONE condition to be true.",
+            "\u2713 Correct! OR gates output true when ANY input is true. The instructor approval alone satisfies the certificate requirement.",
+            "With OR gates, weights don't matter\u2014one true input makes the output true.",
+            "We have all the information we need."
+          ],
+          "explanation": "The OR gate outputs true if at least one input is true. Since InstructorApproved is true, the entire expression is true."
+        },
+        {
+          "question": "Adaptive content branching: Show 'Remedial Videos' if (QuizScore < 60) OR (StudentRequested = Yes). Show 'Advanced Problems' if (QuizScore \u2265 85) AND (NOT FlagsForHelp). A student scored 62, didn't request remedial, and flagged for help. Which path do they take?",
+          "options": [
+            "Remedial Videos",
+            "Advanced Problems",
+            "Both paths simultaneously",
+            "Neither path (default content)"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Remedial: (62 < 60) = false, (StudentRequested) = false. OR result = false.",
+            "Advanced: (62 \u2265 85) = false, so the AND is false regardless of the second condition.",
+            "Digital systems provide one exclusive path.",
+            "\u2713 Correct! Both conditions fail, so the system would show default content or ask for instructor guidance."
+          ],
+          "explanation": "Remedial path: false OR false = false. Advanced path: false AND (anything) = false. Neither condition is met, so the system defaults to standard content."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Remedial: Binary and Basic Gates Foundations",
+      "content": "No problem\u2014let's build a strong foundation! Digital electronics starts with understanding binary, the language computers and all digital devices speak. Think of binary as a light switch: it's either ON (represented as 1) or OFF (represented as 0). Every piece of information your learning platform uses\u2014from a student's name to their quiz score to whether they completed an assignment\u2014is ultimately stored and processed as sequences of these 1s and 0s. For example, the number 5 in binary is 101 (1\u00d74 + 0\u00d72 + 1\u00d71). Now, logic gates are simple electronic switches that combine binary inputs to produce outputs. The AND gate says 'output 1 only if ALL inputs are 1'\u2014like a security system that requires both your student ID AND your password to grant access. The OR gate says 'output 1 if ANY input is 1'\u2014like a fire alarm that activates if smoke OR heat is detected anywhere in the building. The NOT gate simply flips its input\u20140 becomes 1, 1 becomes 0. These simple gates are the building blocks of everything from student response systems to automated grading platforms.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Worked Example: How a Clicker System Works",
+      "content": "Let's walk through a real scenario: A professor uses a student response system (clicker) in an online course. When 150 students click their answers to 'Which is the correct formula for kinetic energy?', here's what happens digitally. Each answer (A, B, C, or D) is converted to binary: A=00, B=01, C=10, D=11 (2 bits per student). The system then uses logic gates to instantly compare each answer against the correct answer (C=10). For students who answered C, the AND gates comparing their response with '10' produce a 1. For incorrect answers, the AND gates produce 0. Finally, an OR gate across all 150 student responses produces a quick count of how many got it right. The professor sees '47% of students chose the right answer' displayed on screen in milliseconds. This entire process\u2014from 150 button clicks to instant class feedback\u2014relies on the binary encoding and logic gates you're now learning about.",
+      "next": "n8"
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "Expert Mastery: Digital Electronics in Modern EdTech",
+      "content": "Excellent work! You've achieved expert-level understanding of how digital electronics powers modern education technology. You understand how binary systems efficiently encode student data, how logic gates implement complex grading and routing rules, and how sequential circuits maintain student progress states in adaptive systems. You're now equipped to design better educational platforms, optimize assessment algorithms, and understand the digital foundation underlying every piece of EdTech you use. The circuits you've studied enable everything from instant student feedback systems to personalized learning paths that adapt in real-time. Consider exploring advanced topics like circuit optimization, error detection codes, or how machine learning integrates with these foundational digital circuits to create truly intelligent tutoring systems."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Solid Foundation: Ready to Apply Digital Electronics",
+      "content": "Great progress! You've built a solid foundation in digital electronics and how it powers education technology. You understand that binary systems and logic gates are the fundamental building blocks of all digital devices, including the educational platforms that support modern learning. You've seen practical examples of how these concepts are used in student response systems, automated grading, and adaptive learning pathways. With this knowledge, you can better understand how EdTech systems work, identify optimization opportunities, and appreciate the sophisticated digital logic running behind the scenes. To deepen your expertise, consider exploring how these basic gates combine into larger circuits, how systems handle errors and data validation, and how modern educational platforms scale these principles across millions of students worldwide."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "pass"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "fail"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n7",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "next"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n8",
+      "label": "next"
+    }
+  ],
+  "generated_at": "2026-03-27T06:42:52.663206+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,232 @@
+{
+  "id": "6f3d2a1b-4c5e-7f8a-9b0c-1d2e3f4a5b6c",
+  "title": "Operating Systems Fundamentals",
+  "description": "Learn OS fundamentals through the lens of film production. Explore process management, memory allocation, and file systems using real-world film production scenarios.",
+  "topic": "Operating Systems",
+  "theme": "film production",
+  "difficulty": "beginner",
+  "estimated_minutes": 35,
+  "tags": [
+    "operating systems",
+    "processes",
+    "memory",
+    "file systems",
+    "film production"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Operating Systems: The Director of Your Film Production",
+      "content": "An operating system is the manager of all resources in a digital system\u2014just like a film director manages actors, equipment, and crew. In film production, your operating system manages which cameras are recording (processes), how much equipment budget you have (memory), and how you organize your footage (files). Understanding OS fundamentals helps you optimize production workflows, manage rendering pipelines, and handle multiple editing stations simultaneously. This course explores three critical OS functions through the lens of modern filmmaking.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Production Focus",
+      "content": "Different films require different resource management strategies. Select the area most relevant to your production workflow.",
+      "choices": [
+        {
+          "label": "Process Management: Managing Multiple Concurrent Shoots",
+          "next": "n3"
+        },
+        {
+          "label": "Memory Management: Optimizing Equipment Resources",
+          "next": "n5"
+        },
+        {
+          "label": "File Systems: Organizing Production Assets",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Process Management: Coordinating Concurrent Shoots",
+      "content": "Process management is like coordinating multiple camera crews shooting different scenes simultaneously. Each process is a running task (like a camera rolling), and your OS allocates CPU time between processes like a production manager allocates crew time between shooting locations. Context switching occurs when the system pauses one process to run another, much like switching between A-camera and B-camera footage in post-production. Process states include running (actively filming), ready (crew assembled, waiting), and blocked (waiting for equipment). The scheduler ensures fair allocation, keeping your entire production moving efficiently.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Multi-Camera Setup: A Process Management Scenario",
+      "content": "You're filming a wedding scene with 4 synchronized cameras (4 processes). The OS scheduler gives each camera 25ms of CPU time, then context-switches to the next. Camera 1 rolls (running), its footage buffers in memory (ready state), and if a camera jams (blocked state), other cameras continue. The good scheduler ensures all cameras capture smoothly without one starving for processing power\u2014exactly how modern OS schedulers manage dozens of competing processes on a single CPU.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Memory Management: Allocating Production Resources",
+      "content": "Memory management parallels resource allocation on a film set. Just as you have limited lights and microphones, your computer has limited RAM. The OS allocates memory to each running process like a production manager assigns equipment to different sets. If memory is scarce, the OS uses virtual memory, storing less-used data on disk (like renting additional equipment only when needed). Fragmentation occurs when memory scatters across storage locations, making allocation inefficient, similar to equipment scattered across multiple storage areas.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Simultaneous Editing Stations: A Memory Scenario",
+      "content": "You're running 3 editing suites processing 4K RAW footage needing 8GB, 6GB, and 5GB respectively, but only have 16GB total. The OS allocates strategically, then uses virtual memory to page Suite 3's least-used data to disk when Suite 1 needs more. This swap slows Suite 3 briefly, but all editors continue working. Without clever memory management, one hungry process would crash your workstation.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "File Systems: Organizing Production Assets",
+      "content": "A file system organizes data hierarchically, like how a production organizes footage. Your root directory (/) is your master archive with subdirectories: /raw_footage, /edited_clips, /graphics, /sound. Each file has metadata (creation date, permissions, size) tracking which takes are usable and who can access sensitive footage. File permissions control access: editors have read/write on /edited_clips, colorists have read-only on raw footage until grading is complete. The file system tracks data locations so retrieval is instant, even if physically fragmented.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "A Feature Film Asset Library",
+      "content": "A 120-minute feature generates terabytes of assets with structure like /Project_Name/Act_1/Scene_5/Take_3_Master.mov and metadata including shot date, duration, color space, and crew credits. When the editor searches \"Scene 5 wide shots\", the file system instantly returns matches. The director's cut is marked read-only to prevent accidental overwrites and metadata reminds you of exact camera settings if reshoots are needed. Without proper file organization, finding one specific take from thousands of clips would be impossible.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "The Complete Production OS: Integration",
+      "content": "In modern film production, processes (concurrent editing/rendering), memory (equipment allocation), and file systems (asset organization) work together seamlessly. Your render farm manages dozens of concurrent jobs competing for CPU and memory while your asset management system tracks every frame. When you submit a render job, the OS allocates CPU cores (process scheduling), reserves RAM (memory management), and retrieves source files (file system access). Delays in any layer cascade: poor scheduling creates render backups, inadequate memory causes slowdowns, and disorganized files waste retrieval time. Understanding these interactions is key to optimizing your entire production pipeline.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Test Your Knowledge: Film Production OS Fundamentals",
+      "content": "Answer these questions to verify your understanding of OS fundamentals in a film production context.",
+      "questions": [
+        {
+          "question": "You're rendering 5 simultaneous video files on a 4-core CPU. What OS mechanism ensures all 5 renders progress fairly?",
+          "options": [
+            "Process scheduling",
+            "File fragmentation",
+            "Memory allocation",
+            "Disk caching"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The scheduler allocates CPU time slices to each render job.",
+            "Incorrect. File fragmentation is about storage organization, not process fairness.",
+            "Incorrect. Memory allocation is important but doesn't control CPU time.",
+            "Incorrect. Disk caching speeds up file access but doesn't schedule processes."
+          ],
+          "explanation": "With more processes than cores, a round-robin scheduler ensures each render job gets fair CPU time."
+        },
+        {
+          "question": "You're editing on a workstation with 32GB RAM but importing 40GB of 4K footage. What does the OS do?",
+          "options": [
+            "Crashes immediately",
+            "Uses virtual memory to page data to disk",
+            "Ignores the overflow",
+            "Reduces footage quality automatically"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Modern OSes don't crash; they use virtual memory.",
+            "Correct! Virtual memory lets you use disk storage as overflow.",
+            "Incorrect. The OS manages memory intelligently, not by ignoring it.",
+            "Incorrect. Quality reduction isn't automatic; the OS handles it with virtual memory."
+          ],
+          "explanation": "Virtual memory extends available RAM by using disk space, allowing you to work with footage larger than physical RAM."
+        },
+        {
+          "question": "In your film archive, 'Scene_5_Take_3.mov' has 'rw-r--r--' permissions. What can the editor (file owner) do?",
+          "options": [
+            "Read only",
+            "Read and write",
+            "Execute the file",
+            "Delete other users' files"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The 'rw' bits grant read AND write.",
+            "Correct! Owner permissions 'rw' allow full access.",
+            "Incorrect. 'x' (execute) permission is not set for this file.",
+            "Incorrect. File permissions restrict individual users to their own files."
+          ],
+          "explanation": "UNIX-style permissions 'rw-r--r--' means owner (rw), group (r), others (r)\u2014the owner can both read and write."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n11",
+      "failure_target": "n10"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Production Ready: You've Mastered OS Fundamentals",
+      "content": "Congratulations! You now understand how operating systems manage three critical layers of film production: concurrent processes (multiple shoots), resource allocation (equipment management), and asset organization (file systems). These principles apply to render farms, editing suites, color grading stations, and any production workflow. You're ready to optimize your pipeline, troubleshoot bottlenecks, and make informed decisions about hardware and software infrastructure. Explore advanced topics like disk scheduling, memory optimization, and multi-threaded rendering as your next steps."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Process Management: Managing Multiple Concurrent Shoots"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Memory Management: Optimizing Equipment Resources"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "File Systems: Organizing Production Assets"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "See example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Continue to synthesis"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "See example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Continue to synthesis"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "See example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Continue to synthesis"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Test your knowledge"
+    }
+  ],
+  "generated_at": "2026-03-27T12:00:29.930645+00:00",
+  "model": "claude-haiku-4-5"
+}

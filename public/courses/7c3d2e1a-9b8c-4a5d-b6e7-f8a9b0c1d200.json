@@ -1,0 +1,270 @@
+{
+  "id": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d200",
+  "title": "Data Visualization with Python for Journalists",
+  "description": "Learn to create impactful data visualizations for journalism using Python. Choose between statistical storytelling with Matplotlib and interactive exploration with Plotly to master the art of data-driven reporting.",
+  "topic": "Data Visualization",
+  "theme": "journalism",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "data visualization",
+    "Python",
+    "journalism",
+    "matplotlib",
+    "plotly",
+    "data storytelling"
+  ],
+  "nodes": [
+    {
+      "id": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d201",
+      "type": "content",
+      "title": "Why Data Visualization Matters in Journalism",
+      "content": "Modern journalism relies on data visualization to convey complex stories quickly and compellingly. From election results to climate trends, journalists use Python visualization libraries to help readers understand data at a glance. Visual narratives increase engagement, reduce misinterpretation, and make data accessible to broad audiences. This course teaches you to transform raw datasets into compelling visual stories that drive understanding and impact. You'll learn two powerful Python approaches: statistical storytelling with Matplotlib and interactive exploration with Plotly.",
+      "next": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d202"
+    },
+    {
+      "id": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d202",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Data visualization in journalism can be approached two ways. The statistical storytelling path starts with Matplotlib's fundamentals and builds toward publication-ready graphics. The interactive data stories path dives directly into Plotly's interactive capabilities, letting readers explore data themselves. Both paths converge at the end with a synthesis activity.",
+      "choices": [
+        {
+          "label": "Statistical Storytelling First",
+          "next": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d203"
+        },
+        {
+          "label": "Interactive Data Stories First",
+          "next": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d206"
+        }
+      ]
+    },
+    {
+      "id": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d203",
+      "type": "content",
+      "title": "Statistical Storytelling with Matplotlib",
+      "content": "Matplotlib is Python's foundational visualization library, perfect for statistical graphics in deadline-driven newsrooms. You'll master clean, publication-ready charts: bar charts for comparing election results across regions, line charts for tracking COVID case trends, histograms for analyzing income inequality, and scatter plots for investigating correlations in crime or environmental data. Matplotlib's simplicity makes it ideal when you have hours, not weeks, to produce graphics. Understanding Matplotlib also builds the conceptual foundation for advanced libraries. Its syntax is intuitive, its output is customizable, and it integrates seamlessly with Pandas dataframes.",
+      "next": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d204"
+    },
+    {
+      "id": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d204",
+      "type": "example",
+      "title": "Visualizing Election Results Across Districts",
+      "content": "Suppose your newsroom is covering local elections and needs to show voter turnout variance across 10 districts. You'd structure the data in a Pandas DataFrame with district names and turnout percentages, then create a bar chart with `plt.bar(districts, turnout_pct)`. Add labels: `plt.xlabel('District')`, `plt.ylabel('Turnout %')`, `plt.title('Voter Turnout by District, 2026')`. Apply a professional colormap, save as PNG at 300 DPI, and you have a publication-ready graphic ready for print and web. This visualization immediately shows which districts had highest engagement\u2014the story emerges from the data.",
+      "next": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d205"
+    },
+    {
+      "id": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d205",
+      "type": "assessment",
+      "title": "Statistical Storytelling Assessment",
+      "content": "Test your understanding of Matplotlib for journalism visualization. Answer 3 questions about choosing chart types, preparing data, and ensuring accessibility.",
+      "questions": [
+        {
+          "question": "A data journalist has quarterly revenue data for 5 tech companies and wants to show which quarter had the steepest growth. Which chart type is most appropriate?",
+          "options": [
+            "Pie chart",
+            "Line chart",
+            "Scatter plot",
+            "Heat map"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Pie charts don't show trends over time effectively.",
+            "Correct! Line charts excel at showing changes across periods.",
+            "Scatter plots show relationships between variables, not temporal trends.",
+            "Heat maps are better for categorical data comparisons."
+          ],
+          "explanation": "Line charts emphasize trends over time, making them ideal for comparing growth across quarters. This helps readers quickly grasp which period showed the strongest performance."
+        },
+        {
+          "question": "You're writing a story about homelessness and have raw shelter occupancy data. Before visualizing it, what should you do first?",
+          "options": [
+            "Immediately plot with plt.bar()",
+            "Interview people experiencing homelessness",
+            "Clean, aggregate, and understand the data structure",
+            "Choose the most dramatic colors"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Skipping data preparation leads to misleading visualizations and erodes reader trust.",
+            "Interviews are valuable for storytelling but don't prepare your dataset for visualization.",
+            "Correct! Data preparation is the critical first step in data journalism.",
+            "Color choice comes later, after you understand your data structure."
+          ],
+          "explanation": "Data journalism demands integrity. Always clean your data, check for missing values, understand the schema, and validate outliers before visualizing. Bad data leads to bad stories that undermine public trust."
+        },
+        {
+          "question": "Which best practice ensures your matplotlib visualization is accessible to readers with color blindness?",
+          "options": [
+            "Use bright, saturated colors",
+            "Use colorblind-friendly palettes and add patterns or text labels",
+            "Only use grayscale",
+            "Add background music describing the chart"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Bright colors can actually worsen legibility for many colorblind readers.",
+            "Correct! Accessible journalism uses colorblind-friendly palettes like viridis and reinforces meaning with patterns and labels.",
+            "Grayscale can work but is unnecessarily limiting and reduces clarity.",
+            "Background audio is not standard for web graphics and not all readers use audio."
+          ],
+          "explanation": "Inclusive journalism means ensuring all readers can understand your visuals. Use colorblind-safe palettes and reinforce data with patterns, labels, or text annotations."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d209",
+      "failure_target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d205"
+    },
+    {
+      "id": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d206",
+      "type": "content",
+      "title": "Interactive Data Stories with Plotly",
+      "content": "While Matplotlib produces static graphics, Plotly enables interactive visualizations that invite reader exploration and engagement. With Plotly, readers hover over data points to see exact values, zoom into regions of interest, toggle data series on/off, and filter by category. These interactives are essential for modern news sites. You'll create responsive dashboards and embedded charts that transform data into discoverable stories. Interactive visualization is particularly powerful for environmental reporting, where readers want to explore climate data for their local area, or for investigations where different readers care about different segments of data.",
+      "next": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d207"
+    },
+    {
+      "id": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d207",
+      "type": "example",
+      "title": "Building a Climate Data Explorer",
+      "content": "Imagine a climate reporter needs to let readers explore temperature anomalies by year and region. Using Plotly Express: `px.scatter(df, x='year', y='temp_anomaly', color='region', hover_data=['location', 'deviation'])` creates an interactive scatter plot where readers click a region to filter, hover to see exact anomalies and their locations, and export. Adding `fig.add_hline(y=0, label='Baseline')` creates a visual baseline. The result is an explorable tool where readers discover climate patterns in their own areas\u2014far more engaging and empowering than a static chart.",
+      "next": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d208"
+    },
+    {
+      "id": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d208",
+      "type": "assessment",
+      "title": "Interactive Data Stories Assessment",
+      "content": "Evaluate your ability to design interactive visualizations for journalism. Answer 3 questions about leveraging interactivity, handling many categories, and optimizing for different networks.",
+      "questions": [
+        {
+          "question": "You're covering school funding inequality and want readers to compare per-pupil spending across districts. What feature of Plotly is most valuable here?",
+          "options": [
+            "Animation over time",
+            "Click-to-filter and hover tooltips",
+            "3D surface plots",
+            "Video embedding"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Animation could show trends but doesn't help readers compare their district directly.",
+            "Correct! Interactivity lets readers filter to their district and hover for exact spending figures.",
+            "3D plots are visually impressive but confuse readers and don't aid direct comparison.",
+            "Video embedding is separate from interactive data visualization."
+          ],
+          "explanation": "Interactive journalism empowers readers. Filters and tooltips let readers ask 'how does my district compare?' and discover the story relevant to their own community."
+        },
+        {
+          "question": "An interactive election results map has 50 counties but only ~8 distinct colors available. What's the best approach for clarity?",
+          "options": [
+            "Reuse colors; readers will understand the pattern",
+            "Use rich hover tooltips showing county name, vote share, and margin",
+            "Make the map larger to fit more colors",
+            "Switch to a static bar chart"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Color reuse causes confusion and misrepresentation of electoral data.",
+            "Correct! Rich tooltips allow many items without relying solely on color distinction.",
+            "Map size doesn't increase the number of distinct colors you can meaningfully use.",
+            "A static chart loses the spatial context that makes maps powerful for election coverage."
+          ],
+          "explanation": "Don't rely on color alone to distinguish many items. Use hover tooltips to deliver precise data, reserving color for broad categories or significant patterns."
+        },
+        {
+          "question": "A reporter embeds a Plotly chart with 100,000 data points on a mobile-friendly article. What performance issue might occur?",
+          "options": [
+            "The chart will render instantly on all networks",
+            "Readers on slow connections may see a blank page until all 100k points load",
+            "The browser will automatically compress the data",
+            "Plotly will refuse to render more than 10,000 points"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Large datasets cause noticeable rendering delays, especially on mobile networks.",
+            "Correct! Unoptimized interactive graphics can freeze the browser on slow connections. Aggregate or sample data strategically.",
+            "Automatic compression isn't guaranteed and shouldn't be relied upon.",
+            "Plotly can render large datasets but performance degrades significantly."
+          ],
+          "explanation": "Responsible journalism considers your readers' network speeds and devices. Aggregate or sample large datasets before visualizing to ensure fast loading times for all readers."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d209",
+      "failure_target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d208"
+    },
+    {
+      "id": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d209",
+      "type": "end",
+      "title": "From Data to Story: Your Next Steps",
+      "content": "You've learned two complementary approaches to data visualization in journalism: statistical storytelling with Matplotlib and interactive exploration with Plotly. Strong data journalists master both. Matplotlib excels at clear, fast graphics for tight deadlines and print publications. Plotly invites reader engagement and deeper exploration for digital platforms. Your next step: identify a public dataset (election results, climate data, economic trends, crime statistics) and build both a static Matplotlib graphic and an interactive Plotly visualization. Share both with editors or on social media and observe which format resonates with your audience. Remember: the best visualization is one your readers understand, trust, and act upon."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d201",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d202",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d202",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d203",
+      "label": "Statistical Storytelling First"
+    },
+    {
+      "id": "c3",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d202",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d206",
+      "label": "Interactive Data Stories First"
+    },
+    {
+      "id": "c4",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d203",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d204",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d204",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d205",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d205",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d209",
+      "label": "Pass"
+    },
+    {
+      "id": "c7",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d205",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d205",
+      "label": "Retry"
+    },
+    {
+      "id": "c8",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d206",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d207",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d207",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d208",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d208",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d209",
+      "label": "Pass"
+    },
+    {
+      "id": "c11",
+      "source": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d208",
+      "target": "7c3d2e1a-9b8c-4a5d-b6e7-f8a9b0c1d208",
+      "label": "Retry"
+    }
+  ],
+  "generated_at": "2026-03-27T13:37:48.648714+00:00",
+  "model": "claude-haiku-4-5"
+}

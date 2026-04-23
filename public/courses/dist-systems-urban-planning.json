@@ -1,0 +1,460 @@
+{
+  "id": "dist-systems-urban-planning",
+  "title": "Distributed Systems Through Urban Planning",
+  "description": "Master distributed systems by designing resilient city infrastructure across autonomous neighborhoods",
+  "topic": "Distributed Systems",
+  "theme": "urban planning",
+  "difficulty": "intermediate",
+  "estimated_minutes": 50,
+  "tags": [
+    "distributed-systems",
+    "urban-planning",
+    "consensus",
+    "fault-tolerance",
+    "cap-theorem",
+    "replication"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Distributed Urban Systems",
+      "content": "A distributed system is like a modern city where multiple neighborhoods (nodes) work together to provide services. Just as a city has independent water departments, power grids, and transportation networks operating across different districts, a distributed system has independent computers working together. Each district can operate somewhat autonomously, but they must coordinate through communication channels to ensure the city functions smoothly. This requires handling communication delays between districts, ensuring critical services stay available 24/7, and managing what happens when parts of the city temporarily lose connection to each other.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Understanding Distributed Systems Basics",
+      "content": "Test your grasp of distributed system fundamentals using city infrastructure as the model.",
+      "questions": [
+        {
+          "question": "In the context of a city as a distributed system, what role do neighborhoods (nodes) play?",
+          "options": [
+            "Independent entities that cooperate to provide services while maintaining autonomy",
+            "Central authorities that control all other districts",
+            "Backup systems that only activate when primary services fail",
+            "Communication channels between the city council"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Each neighborhood is an independent node that provides services.",
+            "Incorrect. In true distributed systems, there is no central authority.",
+            "Incorrect. Nodes work continuously, not just as backups.",
+            "Incorrect. Districts are nodes, not communication channels."
+          ],
+          "explanation": "In a distributed city system, neighborhoods operate independently while coordinating with others. This matches the distributed systems model where nodes are autonomous but cooperative."
+        },
+        {
+          "question": "What is a key challenge when neighborhoods (nodes) communicate in a distributed city system?",
+          "options": [
+            "Ensuring all neighborhoods are identical",
+            "Handling delays and potential loss of communication between districts",
+            "Preventing neighborhoods from operating at all",
+            "Making sure only one neighborhood has authority"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Neighborhoods need not be identical.",
+            "Correct! Network latency and partition failures are core challenges.",
+            "Incorrect. Neighborhoods should operate despite communication issues.",
+            "Incorrect. Decentralization is a feature, not a flaw."
+          ],
+          "explanation": "Communication delays and temporary disconnections are fundamental challenges in distributed systems. A resilient city must handle neighborhoods losing connection without complete system failure."
+        },
+        {
+          "question": "Which is an advantage of distributed city services over one central location?",
+          "options": [
+            "Easier uniform decision-making",
+            "Resilience\u2014if one district fails, others continue serving citizens",
+            "Faster decision-making for all city policies",
+            "Less need for communication between districts"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Distributed systems make uniform decisions harder.",
+            "Correct! Distribution provides fault tolerance and resilience.",
+            "Incorrect. Distributed systems may require more communication.",
+            "Incorrect. Coordination requires extensive communication."
+          ],
+          "explanation": "The primary advantage of distributed systems is resilience. If one neighborhood's water treatment facility fails, the city routes service through other districts, preventing citywide outages."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: City Services Coordination",
+      "content": "Reinforce your understanding of how distributed city systems work.",
+      "questions": [
+        {
+          "question": "A city has three fire stations serving different neighborhoods. If one station loses power, what happens in a distributed fire response system?",
+          "options": [
+            "All neighborhoods lose protection until the station is restored",
+            "Other stations respond to emergencies in their areas while the powerless station is restored",
+            "Only the fire chief can authorize responses",
+            "All stations automatically shut down"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Distributed systems are designed to handle single node failures.",
+            "Correct! This shows fault tolerance\u2014the system continues despite failure.",
+            "Incorrect. Decisions can be made locally in distributed systems.",
+            "Incorrect. The system should continue operating."
+          ],
+          "explanation": "In a distributed fire response system, each station operates independently. When one fails, others continue serving their areas, demonstrating resilience through distribution."
+        },
+        {
+          "question": "What does 'low latency' mean for a city's traffic light system in a distributed context?",
+          "options": [
+            "Traffic lights are physically far apart",
+            "Communication between control and lights has minimal delay",
+            "Traffic lights operate without communicating with other districts",
+            "Drivers experience little congestion"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Latency measures time, not distance.",
+            "Correct! Low latency means fast communication between nodes.",
+            "Incorrect. Coordination requires some communication.",
+            "Incorrect. That is a result, not the definition."
+          ],
+          "explanation": "Latency is the time delay in communication between components. A distributed traffic system with low latency coordinates signals quickly, ensuring smooth traffic flow."
+        },
+        {
+          "question": "If a neighborhood's water pressure sensor cannot report to the city's monitoring system, what property does the system lack in that moment?",
+          "options": [
+            "Availability (the system cannot deliver water)",
+            "Consistency (not all parts have the same information)",
+            "Fault tolerance (inability to handle failure)",
+            "Autonomy (neighborhoods cannot decide independently)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Water can still be delivered without a sensor.",
+            "Correct! The city lacks consistency\u2014parts have different data.",
+            "Incorrect. The system can handle this failure.",
+            "Incorrect. Neighborhoods can still operate."
+          ],
+          "explanation": "When one node cannot communicate its state to others, the system temporarily lacks consistency. Different parts have different information. This is a consistency problem, not an availability problem."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Consistency, Availability, and Partition Tolerance",
+      "content": "The CAP theorem defines three competing properties in distributed systems, perfectly illustrated through urban planning. Consistency means all city districts follow the same building codes and regulations\u2014when downtown updates zoning rules, every neighborhood must know immediately. Availability means citizens can always access services\u2014parks, libraries, and utilities work 24/7 without exception. Partition tolerance means the city functions when districts lose communication\u2014if a natural disaster cuts the northern district's power, the rest continues operating. The CAP theorem states you cannot guarantee all three simultaneously. A city must choose its priorities: choosing consistency means sacrificing availability (if a district cannot reach others, it stops serving); choosing availability means accepting temporary inconsistency (districts might have different data briefly); choosing to handle partitions means accepting that either consistency or availability will suffer during failures.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Mastering CAP Principles",
+      "content": "Demonstrate your understanding of consistency, availability, and partition tolerance in urban systems.",
+      "questions": [
+        {
+          "question": "A city's building permit system goes offline in one district due to network failure. Citizens cannot submit permits in that district, but other districts' systems work. Which CAP property was sacrificed?",
+          "options": [
+            "Consistency\u2014different districts have different statuses",
+            "Availability\u2014the system is unavailable in the disconnected district",
+            "Partition tolerance\u2014the system cannot handle failures",
+            "All three were equally affected"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The disconnected district maintains local consistency.",
+            "Correct! The system chose consistency and partition tolerance over availability.",
+            "Incorrect. The system is handling the partition.",
+            "Incorrect. One property bears the cost."
+          ],
+          "explanation": "By prioritizing consistency and partition tolerance, the system sacrifices availability. The offline district cannot access service until connection is restored."
+        },
+        {
+          "question": "To maximize availability, a city's water department gives each neighborhood authority to make treatment decisions without central approval. What does this risk compromising?",
+          "options": [
+            "Partition tolerance\u2014the system cannot handle failures",
+            "Availability\u2014the system cannot stay available",
+            "Consistency\u2014neighborhoods might make conflicting decisions",
+            "Resilience\u2014the system becomes fragile"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. This improves partition tolerance.",
+            "Incorrect. This increases availability.",
+            "Correct! Local autonomy for availability creates consistency challenges.",
+            "Incorrect. Local backups improve resilience."
+          ],
+          "explanation": "Choosing availability through local autonomy means accepting that neighborhoods might temporarily have different policies. This is availability-over-consistency trade-off."
+        },
+        {
+          "question": "A city's traffic light system continues operating in each neighborhood even if that neighborhood loses central connection. Which CAP properties does this prioritize?",
+          "options": [
+            "Consistency and availability, sacrificing partition tolerance",
+            "Consistency and partition tolerance, sacrificing availability",
+            "Availability and partition tolerance, accepting eventual inconsistency",
+            "All three equally"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. This actually improves partition tolerance.",
+            "Incorrect. The system maintains availability during partitions.",
+            "Correct! Local operation ensures availability and handles partitions.",
+            "Incorrect. The system makes clear trade-offs."
+          ],
+          "explanation": "By allowing neighborhoods to operate independently during disconnection, the system prioritizes availability and partition tolerance, accepting that traffic patterns might be temporarily inconsistent across districts."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Handling City Service Failures",
+      "content": "Practice applying CAP principles to real urban challenges.",
+      "questions": [
+        {
+          "question": "During a major storm, a city's electrical grid loses communication between its central station and the northern district. What principle should guide the design so the northern district maintains power?",
+          "options": [
+            "Partition tolerance\u2014the district operates independently using local rules",
+            "Consistency\u2014wait until all districts have the same information",
+            "Centralization\u2014all districts report to one command center",
+            "Replication\u2014districts duplicate each other's functions"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Partition tolerance allows districts to respond despite disconnection.",
+            "Incorrect. Waiting during emergencies is harmful.",
+            "Incorrect. A single point of failure is dangerous.",
+            "Incorrect. That is not the main principle here."
+          ],
+          "explanation": "Partition tolerance allows the system to continue functioning when parts lose communication. The disconnected district needs autonomy to serve citizens while cut off."
+        },
+        {
+          "question": "Which scenario demonstrates prioritizing consistency over availability?",
+          "options": [
+            "A reservation system accepts bookings in neighborhoods even if they cannot communicate with each other",
+            "A reservation system stops accepting bookings citywide when the central system loses connection to one neighborhood",
+            "A reservation system allows neighborhoods to accept conflicting reservations during network failure",
+            "A reservation system uses multiple backup servers"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This prioritizes availability.",
+            "Correct! Stopping service maintains consistency but sacrifices availability.",
+            "Incorrect. This sacrifices consistency.",
+            "Incorrect. That is about reliability, not CAP."
+          ],
+          "explanation": "Stopping requests to ensure all parts have consistent data means choosing consistency over availability. This is valid for critical systems where consistency is paramount."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Consensus and Fault Tolerance in Cities",
+      "content": "When a city must make critical decisions affecting all districts, it needs consensus\u2014agreement across all nodes. Imagine the city council deciding to implement a new traffic light timing system: representatives from each district must agree before implementing citywide. Byzantine Fault Tolerance (BFT) handles corrupt or faulty nodes\u2014even if 1/3 of districts are untrustworthy, the system reaches the correct decision through redundant communication and voting. Replication ensures critical infrastructure is duplicated across districts; if one water treatment center fails, backups instantly take over, maintaining service. Building redundancy means no single failure point can destroy the city. A distributed city also uses consensus algorithms like Raft to manage leadership\u2014if the mayor becomes unavailable, districts agree on a successor without chaos. These mechanisms transform fragile centralized systems into resilient networks where any component failure triggers automatic failover.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Final Challenge: Building a Resilient City System",
+      "content": "Demonstrate mastery by solving complex distributed city system challenges.",
+      "questions": [
+        {
+          "question": "A city uses a 7-district voting system where all must agree on a budget. In a Byzantine Fault Tolerant design, how many districts could become faulty and the system would still reach the correct decision?",
+          "options": [
+            "Up to 2 districts (less than 1/3)",
+            "Up to 3 districts (half)",
+            "Up to 6 districts (almost all)",
+            "The system can tolerate any number of faulty districts"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! BFT tolerates up to 1/3 of nodes being faulty.",
+            "Incorrect. BFT tolerates less than that.",
+            "Incorrect. That is too many.",
+            "Incorrect. There is a mathematical limit."
+          ],
+          "explanation": "Byzantine Fault Tolerance requires fewer than 1/3 of nodes to be faulty. With 7 districts, up to 2 can be compromised while the system reaches consensus on the truth."
+        },
+        {
+          "question": "A city's water system duplicates treatment data across 5 centers. If 2 centers fail simultaneously, what ensures water service continues without interruption?",
+          "options": [
+            "The remaining 3 centers continue operating independently",
+            "All 5 centers shut down immediately",
+            "Citizens wait for 2 centers to be repaired",
+            "The system automatically elects one center as supreme authority"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Replication means service continues despite failures.",
+            "Incorrect. That would cause catastrophic outage.",
+            "Incorrect. Replication prevents this waiting.",
+            "Incorrect. The system does not need a single authority."
+          ],
+          "explanation": "Replication ensures critical data and services are available on multiple nodes. When some fail, others continue providing service, achieving fault tolerance and high availability."
+        },
+        {
+          "question": "A distributed city system uses Raft consensus for leadership. When the current mayor becomes unavailable, what happens in a well-designed system?",
+          "options": [
+            "The city government stops until the mayor is found",
+            "Districts randomly choose a new mayor, creating chaos",
+            "District representatives consensually elect a new leader",
+            "All districts become equal leaders simultaneously"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Consensus algorithms prevent such outages.",
+            "Incorrect. Random selection causes conflicts.",
+            "Correct! Raft enables coordinated leader election.",
+            "Incorrect. Most systems need a leader for efficiency."
+          ],
+          "explanation": "Consensus algorithms like Raft automate leader election. When the current leader fails, remaining nodes hold an election and agree on a successor, maintaining continuity without human intervention."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: City Crisis Management",
+      "content": "Test your ability to apply distributed systems principles to handle urban emergencies.",
+      "questions": [
+        {
+          "question": "During an earthquake, a city's emergency response system experiences network partitions where districts cannot communicate. What principle should guide design so emergency services continue?",
+          "options": [
+            "Partition tolerance\u2014each district responds independently to emergencies",
+            "Consistency\u2014wait until all districts have the same information",
+            "Centralization\u2014all districts report to one command",
+            "Replication\u2014districts duplicate each other's functions"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Partition tolerance allows response despite disconnection.",
+            "Incorrect. Waiting defeats emergency response purposes.",
+            "Incorrect. Single point of failure is dangerous.",
+            "Incorrect. That is not the main principle."
+          ],
+          "explanation": "During network partitions, partition tolerance (continued operation despite disconnection) is paramount in emergency systems. Districts need autonomy to respond to emergencies even when unable to communicate with others."
+        },
+        {
+          "question": "A city implements 3 backup power control centers. This demonstrates which distributed systems principle?",
+          "options": [
+            "Consensus\u2014all centers must agree on decisions",
+            "Replication\u2014critical services are duplicated across nodes",
+            "Latency reduction\u2014multiple centers respond faster",
+            "Partition tolerance\u2014the system tolerates district disconnections"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. This is about backups, not agreement.",
+            "Correct! Multiple copies ensure fault tolerance.",
+            "Incorrect. While speed benefits exist, the main principle is redundancy.",
+            "Incorrect. This is not about handling disconnections."
+          ],
+          "explanation": "Replication means having multiple copies of critical services. When one power center fails, others immediately take over, maintaining service continuity."
+        }
+      ],
+      "pass_threshold": 1,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Course Complete: Distributed Urban Systems Master",
+      "content": "Congratulations! You have mastered distributed systems through urban planning. You understand how cities coordinate services across neighborhoods (nodes), handle communication challenges and failures, navigate consistency-availability trade-offs via CAP theorem, and implement fault-tolerant systems through replication and consensus. These principles apply directly to real distributed systems powering the internet, cloud computing, and modern infrastructure. Just as cities need resilient systems for water, power, and emergency response, software systems need these principles for reliability and scale at planetary scope."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "next"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "next"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "next"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T06:04:44.275952+00:00",
+  "model": "claude-haiku-4-5"
+}

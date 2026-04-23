@@ -1,0 +1,157 @@
+{
+  "id": "game-theory-healthcare-course",
+  "title": "Game Theory in Healthcare: Strategic Decisions",
+  "description": "Learn how game theory shapes healthcare decisions, from hospital competition to pandemic response. Explore strategic interactions between hospitals, insurers, and nations through realistic healthcare scenarios.",
+  "topic": "Game Theory",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 25,
+  "tags": [
+    "game-theory",
+    "healthcare",
+    "strategy",
+    "decision-making",
+    "nash-equilibrium",
+    "cooperation"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Strategic Decisions in Healthcare",
+      "content": "Healthcare systems involve multiple actors\u2014hospitals, doctors, insurers, patients\u2014making strategic decisions that affect each other. Game theory helps us understand these interactions and find better outcomes. When doctors prescribe medications, hospitals allocate resources, or countries distribute vaccines, they're playing games where their decisions depend on what others do. Understanding these strategic interactions is crucial for building healthcare systems that serve patients well."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Select a Healthcare Dilemma",
+      "content": "You'll explore two critical scenarios where game theory reveals hidden dynamics. Choose the scenario that interests you most.",
+      "choices": [
+        {
+          "label": "Hospital Resource Competition",
+          "next": "n3"
+        },
+        {
+          "label": "Pandemic Vaccine Distribution",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "The Imaging Equipment Dilemma",
+      "content": "Two hospitals in the same region serve overlapping patient populations. Each is considering whether to invest $5M in a new PET scanner. If both invest, they'll have excess capacity, raising costs for everyone. If neither invests, patients needing advanced imaging must travel far. If one invests and the other doesn't, the investor gains market share but carries the cost burden. This is a classic prisoner's dilemma in healthcare resource allocation."
+    },
+    {
+      "id": "n4",
+      "type": "decision",
+      "title": "What Should Your Hospital Do?",
+      "content": "Two strategies are available. Which approach aligns with your hospital's values and strategic thinking?",
+      "choices": [
+        {
+          "label": "Cooperate with the other hospital\u2014share resources and costs",
+          "next": "n5"
+        },
+        {
+          "label": "Compete aggressively\u2014invest in your own equipment",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "The Cooperative Outcome",
+      "content": "Both hospitals sign a joint venture agreement. They build one shared imaging center between them, reducing costs by 40% and improving service through better equipment utilization. Patients benefit from timely access to advanced imaging. Operating costs are split, and both hospitals improve profitability. The payoff matrix shows: cooperation yields mutual gain (payoff of 8 for each hospital). This demonstrates a positive-sum solution where strategic coordination creates value."
+    },
+    {
+      "id": "n6",
+      "type": "end",
+      "title": "Cooperation Wins: Healthcare Improves Together",
+      "content": "By choosing cooperation, you've created a Nash Equilibrium where neither hospital wants to deviate. Patient outcomes improve, costs decrease, and both institutions thrive. This scenario mirrors successful healthcare networks like Kaiser Permanente and integrated delivery systems worldwide. Key lesson: Game theory shows how strategic cooperation can overcome the prisoner's dilemma."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "The Competitive Outcome",
+      "content": "Your hospital invests $5M in the PET scanner. So does the competing hospital. Now both cities have two PET scanners, but demand only supports one. Equipment sits idle, raising costs. To recoup investment, hospitals raise imaging prices. Patients struggle to access care, and both hospitals' profitability drops. Payoff matrix shows: mutual competition yields suboptimal payoffs (4 for each). Both hospitals are worse off than if they'd cooperated."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Trapped in the Prisoner's Dilemma",
+      "content": "You've discovered the Nash Equilibrium of competition\u2014neither hospital wants to unilaterally disarm because the other might dominate. Yet both would benefit if they cooperated. This reflects real healthcare market failures. Game theory reveals the problem but also points to solutions: regulation, incentive alignment, or contractual agreements that enable cooperation. Many healthcare reforms aim to break this competitive trap through value-based care models."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "The Global Vaccine Game",
+      "content": "Early in a pandemic, a wealthy nation can choose to hoard vaccines for its population or coordinate with international partners for equitable distribution. If most nations cooperate, vaccines reach vulnerable populations faster, global immunity builds, and the virus is contained. If nations hoard, vaccine supply chains fragment, variants emerge in under-vaccinated regions, and the pandemic persists globally. The payoff depends on both your choice and others' choices\u2014a classic coordination game where individual incentives can misalign with collective wellbeing."
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "The Stakes of Global Health Cooperation",
+      "content": "This scenario illustrates why game theory matters in healthcare policy. COVID-19 showed that when nations pursued self-interest without coordination, the pandemic lasted longer and killed more people\u2014including in wealthy nations. Game theory suggests solutions: binding international agreements, shared vaccine platforms, and incentive structures that reward cooperation. Understanding game theory helps policymakers design healthcare systems resilient to future pandemics. The enduring lesson: in interconnected health systems, individual and collective interests often align through cooperation."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Choose scenario"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Hospital Competition"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n9",
+      "label": "Pandemic Response"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Face the choice"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Cooperate"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n7",
+      "label": "Compete"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "See outcome"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "See outcome"
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": "Learn the lesson"
+    }
+  ],
+  "generated_at": "2026-03-27T16:33:09.660645+00:00",
+  "model": "claude-haiku-4-5"
+}

@@ -1,0 +1,238 @@
+{
+  "id": "cs-healthcare-001",
+  "title": "Control Systems in Healthcare",
+  "description": "Master the fundamentals of control systems through real-world healthcare applications. Learn how biological and medical systems maintain stability through feedback and regulation.",
+  "topic": "Control Systems",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "control-systems",
+    "healthcare",
+    "feedback",
+    "homeostasis",
+    "regulation"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Control Systems in Healthcare: An Introduction",
+      "content": "Control systems are everywhere in healthcare\u2014your body constantly regulates blood glucose, body temperature, and blood pressure without conscious effort. These biological systems use **feedback loops** to maintain stability. In clinical settings, medical devices like ventilators, insulin pumps, and patient-controlled analgesia (PCA) pumps are engineered control systems designed to mirror or replace biological regulation. Understanding control systems helps clinicians recognize normal physiological responses, troubleshoot device malfunctions, and optimize patient outcomes.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Control systems in healthcare involve three interconnected concepts. Select the area you'd like to explore first\u2014all paths reconverge to synthesize your learning.",
+      "choices": [
+        {
+          "label": "Feedback Control Systems",
+          "next": "n3"
+        },
+        {
+          "label": "Open vs. Closed-Loop Systems",
+          "next": "n5"
+        },
+        {
+          "label": "Stability & Disturbances",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Feedback Control Systems",
+      "content": "A feedback control system measures an output, compares it to a desired setpoint, and adjusts input to reduce error. Your pancreas monitors blood glucose levels; when glucose rises above ~100 mg/dL, beta cells release insulin to bring it back down. This **negative feedback** stabilizes the system. In the ICU, continuous pulse oximetry monitors oxygen saturation; if SpO\u2082 drops below 92%, clinicians increase FiO\u2082 (inspired oxygen). The key principle: measure \u2192 compare \u2192 adjust \u2192 measure again. Effective feedback loops have three elements: a sensor, a controller (decision-maker), and an actuator (the intervention).",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: Thermoregulation in Septic Shock",
+      "content": "A 68-year-old patient develops sepsis with a core temperature of 39.5\u00b0C. The hypothalamus (sensor & controller) detects this deviation from the 37\u00b0C setpoint and triggers sweating and vasodilation (actuators). As the patient cools, skin and core temperature sensors send updated signals. When antibiotics and fluids control the infection, the inflammatory mediators causing the fever decline, and the setpoint normalizes. The feedback loop has successfully restored homeostasis. This demonstrates how negative feedback actively maintains stability even under physiological stress.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Open vs. Closed-Loop Control Systems",
+      "content": "**Closed-loop (feedback) systems** measure output and adjust continuously: an automated insulin pump reads glucose from a continuous glucose monitor (CGM) and infuses insulin accordingly. **Open-loop systems** deliver a fixed output without feedback: administering a calculated 10-unit insulin bolus based on meal size, then hoping it works. Closed-loop systems are more robust to disturbances (illness, stress, meal miscounting) because they adapt in real-time. However, they're more complex and require reliable sensors. In clinical practice, most critical care uses hybrid approaches\u2014protocols (open-loop) guided by frequent assessments (periodic feedback rather than continuous).",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: Closed-Loop Ventilator Weaning",
+      "content": "A ventilator set to pressure support mode continuously monitors the patient's respiratory effort and lung compliance (sensors). As the patient's strength improves, the ventilator automatically reduces support pressure, encouraging spontaneous breathing (closed-loop adjustment). The clinician also performs daily spontaneous breathing trials\u2014a semi-open-loop check. If the patient's oxygen saturation drops below 88% or work of breathing exceeds safe thresholds, the system increases support again. Compare this to an older approach: manually setting fixed pressure for a week, then manually weaning in arbitrary steps. The closed-loop approach adapts moment-to-moment, reducing weaning time and complications.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "System Stability & Disturbances",
+      "content": "A stable control system returns to equilibrium after a disturbance. A patient's blood pressure is normally ~120/80 mmHg. When they stand up suddenly, gravity causes blood to pool in the legs; baroreceptors detect the drop, triggering sympathetic activation and vasoconstriction to restore pressure within seconds. This is a **stable, well-damped response**. But if the feedback is too aggressive (overshoot) or too sluggish (oscillation), the system becomes unstable. In sepsis, catecholamine-mediated vasoconstriction can swing wildly between hypotension and hypertension\u2014the control system is destabilized. Understanding stability helps clinicians recognize when interventions (vasopressors, fluids, sedatives) are helping or harming system balance.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: Glucose Control Instability in Diabetes",
+      "content": "A patient with type 1 diabetes on manual insulin injections may experience wild swings: 45 mg/dL (hypoglycemia) after a generous morning dose, then 380 mg/dL (hyperglycemia) by evening as the dose wears off and stress hormones spike. The open-loop insulin injections have a long delay and no real-time feedback. A newer closed-loop artificial pancreas (CGM + pump) senses glucose trends and makes micro-adjustments every 5 minutes, damping oscillations. Blood glucose stays in a tighter range (80\u2013180 mg/dL) because the system responds to disturbances (skipped meals, exercise, stress) within minutes rather than hours. Stability directly translates to better glycemic control and fewer emergency episodes.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: Integrating Control System Concepts",
+      "content": "Feedback, loop topology (open vs. closed), and stability are interdependent. The most reliable healthcare systems combine all three: **feedback** ensures continuous adjustment, **closed-loop architecture** automates decision-making for speed and consistency, and **stable design** prevents overshooting or oscillation. A well-designed hospital protocol follows this pattern\u2014e.g., sepsis bundles use repeated lactate measurements (feedback) and tiered vasopressor escalation (closed-loop response) with safety limits (stability guardrails). As a clinician, you'll encounter both engineered systems (pumps, monitors) and biological systems (your patient's physiology); both obey these same principles. Recognizing when feedback is absent, when loops are open rather than closed, or when stability is degrading is key to safe, effective care.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Control Systems in Healthcare: Knowledge Check",
+      "content": "Test your understanding of control systems principles applied to healthcare.",
+      "questions": [
+        {
+          "question": "A patient on continuous vasopressor infusion has blood pressure monitored every 1 minute; the nurse adjusts the infusion rate based on trending data. What type of control system is this?",
+          "options": [
+            "Open-loop (fixed output, no feedback)",
+            "Closed-loop with slow feedback (periodic, not continuous)",
+            "Closed-loop with continuous feedback",
+            "Unstable feedback system"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Feedback is being used; the nurse is adjusting based on BP trends.",
+            "Correct! The nurse is measuring output (BP), comparing to a target, and adjusting input (vasopressor rate) based on periodic measurements. This is slower than a true continuous closed-loop system (e.g., automated infusion pumps), but faster than open-loop.",
+            "Incorrect. True continuous closed-loop would involve an automated device reading pressure hundreds of times per second.",
+            "Incorrect. The system is stable if the nurse is responding appropriately to trends."
+          ],
+          "explanation": "Manual nursing adjustments based on periodic monitoring represent semi-closed-loop control. The feedback frequency (every 1 minute) is slower than automated systems but faster than open-loop (no feedback)."
+        },
+        {
+          "question": "Why is a closed-loop artificial pancreas more stable than manual insulin injections for glucose control in type 1 diabetes?",
+          "options": [
+            "It uses larger insulin doses.",
+            "It eliminates the need for carbohydrate counting.",
+            "It measures glucose frequently and adjusts infusion in real-time, responding to disturbances quickly.",
+            "It prevents all hypoglycemic episodes."
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Dose size is not the primary difference; stability comes from responsiveness.",
+            "Incorrect. Closed-loop systems still require carb counting; they just adjust for estimation errors automatically.",
+            "Correct! Frequent glucose measurement (every 5 min) and automated micro-adjustments allow the system to dampen swings from meals, exercise, and stress. This reduces both lag and overshoot, improving overall stability.",
+            "Incorrect. No system prevents all episodes, but closed-loop systems reduce their frequency and severity significantly."
+          ],
+          "explanation": "Stability in a control system depends on measurement frequency, feedback delay, and responsiveness. Continuous closed-loop systems outperform manual open-loop approaches because they detect and correct deviations faster."
+        },
+        {
+          "question": "A fever in sepsis represents a destabilized setpoint in the body's temperature control system. Which physiological mechanism is involved?",
+          "options": [
+            "Loss of baroreceptor feedback",
+            "Inflammatory cytokines (IL-1, IL-6, TNF-\u03b1) resetting the hypothalamic setpoint upward",
+            "Failure of sweating and vasodilation mechanisms",
+            "Overactive parasympathetic nervous system"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Baroreceptors regulate blood pressure, not temperature.",
+            "Correct! Septic mediators act on the hypothalamus to raise the temperature setpoint. The body then works to reach this new, higher setpoint via shivering and vasoconstriction. The feedback loop is still working\u2014it's just aimed at a wrong target.",
+            "Incorrect. These mechanisms are intact; the problem is the setpoint they're trying to achieve.",
+            "Incorrect. Parasympathetic tone would lower metabolism, not raise temperature."
+          ],
+          "explanation": "A fever in sepsis is not system failure\u2014it's system 'resetting.' Inflammatory mediators change the control system's reference point, and normal feedback mechanisms try to achieve the new, higher temperature. Understanding this distinction is crucial for interpreting vital signs in critical illness."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Course Complete: Control Systems in Healthcare",
+      "content": "Congratulations! You've mastered the core principles of control systems as applied to healthcare. You now understand how feedback loops, system topology (open vs. closed), and stability shape both biological regulation and engineered medical devices. Recognize these patterns in your clinical practice: glucose control, blood pressure regulation, ventilator management, sepsis protocols, and even medication dosing all rely on feedback, closed-loop decision-making, and stable system design. As healthcare becomes increasingly technology-driven, this knowledge will help you partner effectively with devices, troubleshoot deviations, and optimize patient safety and outcomes."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Feedback Control Systems"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Open vs. Closed-Loop"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Stability & Disturbances"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T08:53:00.425837+00:00",
+  "model": "claude-haiku-4-5"
+}

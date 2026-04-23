@@ -1,0 +1,490 @@
+{
+  "id": "course-networks-edtech",
+  "title": "Computer Networks and Protocols in Education Technology",
+  "description": "Master computer networks and protocols through the lens of education technology systems. Learn how networks and protocols power online learning platforms, from basic concepts to real-world EdTech implementations.",
+  "topic": "Computer Networks and Protocols",
+  "theme": "education technology",
+  "difficulty": "beginner",
+  "estimated_minutes": 45,
+  "tags": [
+    "networks",
+    "protocols",
+    "edtech",
+    "infrastructure",
+    "TCP/IP"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Why Networks Matter in EdTech",
+      "content": "Online learning platforms like Canvas, Google Classroom, and Zoom all depend on computer networks to function. A computer network is a system of interconnected devices that share data and resources. In education technology, networks enable teachers and students to connect across distances, share files, stream lectures, and collaborate in real-time. Understanding networks is essential to understanding how modern education technology systems work."
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Network Fundamentals Quiz",
+      "content": "Test your understanding of basic network concepts and their application in education technology.",
+      "questions": [
+        {
+          "question": "What is the primary purpose of a computer network in an online learning platform like Google Classroom?",
+          "options": [
+            "A) To store student grades in a physical location",
+            "B) To enable devices to communicate and share educational resources",
+            "C) To replace the need for internet connections",
+            "D) To prevent students from accessing learning materials"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Networks don't physically store data in one location.",
+            "Correct! Networks enable communication between devices and sharing of resources.",
+            "Incorrect. Networks require internet connections to function.",
+            "Incorrect. Networks are designed to enable access to materials."
+          ],
+          "explanation": "Computer networks in education technology are designed to connect devices and facilitate the sharing of educational resources like assignments, videos, and collaborative documents."
+        },
+        {
+          "question": "When a student submits an assignment through an LMS, what is traveling across the network?",
+          "options": [
+            "A) Only the student's username",
+            "B) Digital data representing the assignment file",
+            "C) The physical paper assignment",
+            "D) The student's login password"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The username alone isn't enough to submit an assignment.",
+            "Correct! The assignment file is converted to digital data and transmitted across the network.",
+            "Incorrect. Physical paper cannot travel through networks.",
+            "Incorrect. Passwords should never be transmitted with the assignment data."
+          ],
+          "explanation": "When a student submits work online, the assignment is converted into digital data packets that travel across the network to the server running the learning management system."
+        },
+        {
+          "question": "Which of the following is an example of a 'node' in an education technology network?",
+          "options": [
+            "A) The LMS software code",
+            "B) A student's laptop connecting to Zoom for a lecture",
+            "C) The course syllabus",
+            "D) The school's budget"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Software code is not a node; it runs on nodes.",
+            "Correct! Devices like laptops, tablets, and phones are nodes in the network.",
+            "Incorrect. A syllabus is content, not a network node.",
+            "Incorrect. Budget is administrative, not a network element."
+          ],
+          "explanation": "In network terminology, a 'node' refers to any device that connects to and communicates over the network, such as student devices, teacher devices, and servers."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Network Fundamentals Practice",
+      "content": "Build your understanding of network concepts with practical EdTech scenarios.",
+      "questions": [
+        {
+          "question": "A teacher wants to host a live video lecture for 100 students using Zoom. What happens on the network when all students connect?",
+          "options": [
+            "A) Each student's device becomes a node that connects to the Zoom server",
+            "B) The teacher's video is printed and mailed to each student",
+            "C) Only the teacher's device needs to be on a network",
+            "D) The network creates physical cables between each student"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Each student device is a node connecting to the Zoom infrastructure.",
+            "Incorrect. Videos are streamed digitally, not printed.",
+            "Incorrect. All student devices need network connectivity to receive the lecture.",
+            "Incorrect. Networks don't create new physical cables dynamically."
+          ],
+          "explanation": "When students join a Zoom lecture, their devices each become nodes in the network, connecting to Zoom's servers to receive the video and audio stream."
+        },
+        {
+          "question": "Your school's LMS experiences slow file uploads. Which of these is most likely related to the network issue?",
+          "options": [
+            "A) The internet bandwidth between the school and the LMS servers is congested",
+            "B) The student's mouse battery is low",
+            "C) The classroom whiteboard is broken",
+            "D) The teacher's coffee is cold"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Bandwidth congestion directly affects data transfer speeds.",
+            "Incorrect. Mouse battery doesn't affect upload speeds.",
+            "Incorrect. A broken whiteboard has nothing to do with network performance.",
+            "Incorrect. Teacher comfort doesn't impact network infrastructure."
+          ],
+          "explanation": "Slow uploads are typically caused by network-level issues, with bandwidth congestion being a common culprit. This is why many schools upgrade their internet connections."
+        },
+        {
+          "question": "What do nodes in a school's EdTech network represent?",
+          "options": [
+            "A) Only the learning management system computers",
+            "B) Only teacher devices",
+            "C) All connected devices: student laptops, teacher computers, tablets, printers, and servers",
+            "D) Just the servers in the data center"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Nodes include more than just the LMS computers.",
+            "Incorrect. Nodes aren't limited to teacher devices.",
+            "Correct! Every device connected to the school network is a node.",
+            "Incorrect. Servers are nodes, but there are many other types of nodes too."
+          ],
+          "explanation": "A node is any device connected to the network. In a school, this includes students' devices, teachers' devices, interactive displays, printers, servers, and more."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Protocols: The Language of Education Technology",
+      "content": "If networks are the highways for data, protocols are the rules of the road. A protocol is a set of rules that devices follow to communicate reliably. In education technology, the most important protocols are HTTP and HTTPS for web-based learning platforms, and TCP/IP for underlying data transmission. HTTPS (the 'S' means 'Secure') encrypts student data, protecting sensitive information like grades and personal details. When you log into Canvas or Google Classroom, you're using HTTPS to ensure your credentials stay private. TCP ensures that file uploads complete reliably\u2014if you submit an assignment, TCP verifies that every byte of your file arrives."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Protocol Mastery Assessment",
+      "content": "Demonstrate your understanding of network protocols and their role in education technology systems.",
+      "questions": [
+        {
+          "question": "Why is HTTPS specifically important for protecting student data in an LMS?",
+          "options": [
+            "A) It makes the website load faster",
+            "B) It encrypts data in transit, protecting login credentials and grades from being intercepted",
+            "C) It prevents students from accessing the wrong course",
+            "D) It stores data on a secure physical location"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. While optimization helps, security is the primary reason for HTTPS.",
+            "Correct! HTTPS encryption is crucial for protecting sensitive student information.",
+            "Incorrect. Access control happens at the application level, not through HTTPS.",
+            "Incorrect. HTTPS doesn't determine physical storage location."
+          ],
+          "explanation": "HTTPS uses encryption to ensure that when a student logs in or submits sensitive information, that data cannot be intercepted by malicious actors. This is why educational institutions are required to use HTTPS."
+        },
+        {
+          "question": "A student is uploading a 50MB video project to their class portal. Which protocol is responsible for ensuring all 50MB arrives safely at the server?",
+          "options": [
+            "A) HTTP",
+            "B) TCP (Transmission Control Protocol)",
+            "C) Email",
+            "D) USB cable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. HTTP is the application layer protocol; TCP works below it.",
+            "Correct! TCP ensures reliable, complete delivery of all data packets.",
+            "Incorrect. Email isn't designed for large file uploads to educational platforms.",
+            "Incorrect. USB is a physical connection, not relevant to network file uploads."
+          ],
+          "explanation": "TCP/IP is the foundational protocol that ensures data packets arrive in order and complete. If even one packet is lost, TCP detects it and resends. This is why large educational file uploads are reliable."
+        },
+        {
+          "question": "What does the 'IP' in TCP/IP refer to in the context of an education technology network?",
+          "options": [
+            "A) Internet Protocol\u2014the system for addressing and routing data between devices",
+            "B) Individual Password\u2014the login system for the LMS",
+            "C) Intellectual Property\u2014the school's educational materials",
+            "D) Instruction Processor\u2014the computer's CPU"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! IP (Internet Protocol) is how devices on a network find and communicate with each other.",
+            "Incorrect. Passwords are handled at the application layer, not by IP.",
+            "Incorrect. While schools do have IP in educational materials, that's not what IP means in TCP/IP.",
+            "Incorrect. The CPU is separate from the IP protocol."
+          ],
+          "explanation": "Internet Protocol (IP) is the addressing system that lets your device find the LMS server, and the server's response find its way back to you. Every device on a network has an IP address."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Protocol Fundamentals Practice",
+      "content": "Strengthen your grasp of protocols with practical education technology scenarios.",
+      "questions": [
+        {
+          "question": "A school switches from HTTP to HTTPS for its student portal. What security improvement does this provide?",
+          "options": [
+            "A) Students can log in faster",
+            "B) The system prevents all hacking attempts",
+            "C) Student login credentials are now encrypted during transmission",
+            "D) Students must use stronger passwords"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. HTTPS doesn't significantly affect speed.",
+            "Incorrect. No system is completely hack-proof.",
+            "Correct! HTTPS encrypts data in transit, protecting credentials.",
+            "Incorrect. Password strength is handled separately from HTTPS."
+          ],
+          "explanation": "HTTPS encrypts the connection between a student's device and the school's server. Without HTTPS, if someone intercepts the network traffic, they could read login credentials. With HTTPS, even if traffic is intercepted, it's encrypted gibberish."
+        },
+        {
+          "question": "During a live online class, a student's video stream freezes momentarily but then recovers. Which protocol is working in the background to handle this?",
+          "options": [
+            "A) TCP\u2014detecting the problem and requesting retransmission of the missing video data",
+            "B) HTTP\u2014refreshing the page automatically",
+            "C) DNS\u2014looking up the server address",
+            "D) FTP\u2014transferring the video file"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! TCP detects lost packets and requests they be resent.",
+            "Incorrect. HTTP doesn't handle real-time packet recovery.",
+            "Incorrect. DNS is for address lookup, not data recovery.",
+            "Incorrect. FTP is for file transfers, not live streaming."
+          ],
+          "explanation": "When a video stream stutters, TCP is working behind the scenes to detect missing packets and request retransmission. This is why video conferencing is reliable even over imperfect network connections."
+        },
+        {
+          "question": "Your school's learning platform has a URL that starts with 'https://' instead of 'http://'. What does the 's' indicate?",
+          "options": [
+            "A) The site is 'Secure'\u2014it uses encryption to protect data",
+            "B) The site is 'Slow' and will load gradually",
+            "C) The site is 'Synced' across multiple servers",
+            "D) The site is 'Shared' with other schools"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The 's' stands for 'Secure' and indicates encryption is in use.",
+            "Incorrect. HTTPS isn't inherently slower than HTTP.",
+            "Incorrect. Syncing is handled by application logic, not the 's' in the URL.",
+            "Incorrect. Sharing access is an administrative feature, not indicated by the 's'."
+          ],
+          "explanation": "The 's' in HTTPS stands for 'Secure' and signals that the connection uses SSL/TLS encryption. This is why you should always see 'https://' in the address bar of educational platforms."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Networking in Modern EdTech Systems",
+      "content": "Modern education technology uses advanced networking concepts to deliver seamless learning experiences. Content Delivery Networks (CDNs) cache educational videos in multiple geographic locations, so students worldwide can stream lectures without buffering. Video conferencing platforms like Zoom and Teams use specialized protocols optimized for real-time communication, with careful bandwidth management to maintain quality even on slower connections. Learning analytics systems continuously transmit student interaction data to servers, where algorithms analyze patterns to personalize learning paths. Mobile learning apps must handle network fluctuations gracefully\u2014switching between WiFi and cellular while maintaining sync. Modern EdTech architects choose protocols and network designs based on specific requirements: real-time synchronous learning needs different network optimization than asynchronous recorded content. Understanding these principles helps educators and technologists build systems that work reliably for all students."
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "EdTech Networking Systems Assessment",
+      "content": "Apply your knowledge of networks and protocols to real-world education technology scenarios.",
+      "questions": [
+        {
+          "question": "A school is building a new platform for live virtual classes with 500 simultaneous students. Which networking consideration is most critical?",
+          "options": [
+            "A) Ensuring sufficient bandwidth and low-latency connections to handle real-time video and audio",
+            "B) Making sure the classroom has nice lighting",
+            "C) Requiring all students to use the same brand of computer",
+            "D) Purchasing more desks for the classroom"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Bandwidth and latency are critical for real-time video conferencing with hundreds of participants.",
+            "Incorrect. Lighting is important for video quality but isn't a network consideration.",
+            "Incorrect. The platform should work across different device types.",
+            "Incorrect. This is a virtual class, so classroom setup isn't relevant."
+          ],
+          "explanation": "Real-time synchronous learning demands significant bandwidth and low latency. Without adequate network infrastructure, live classes experience lag, dropped connections, and poor video quality that disrupts learning."
+        },
+        {
+          "question": "An EdTech company uses a Content Delivery Network (CDN) to distribute recorded lectures. What problem does this solve for global student populations?",
+          "options": [
+            "A) It allows videos to be stored in multiple locations worldwide, reducing download times for distant students",
+            "B) It translates videos into different languages automatically",
+            "C) It prevents students from downloading videos",
+            "D) It removes the need for internet connections entirely"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! CDNs cache content geographically, reducing latency for all users.",
+            "Incorrect. Translation is a separate service, not what CDNs do.",
+            "Incorrect. CDNs don't inherently restrict or enable downloads.",
+            "Incorrect. CDNs still require internet connections; they just optimize them."
+          ],
+          "explanation": "A CDN places copies of educational content on servers around the world. When a student in Japan accesses a video, the CDN delivers it from a nearby server rather than sending it across the entire internet, dramatically improving load times."
+        },
+        {
+          "question": "A learning analytics platform needs to track student progress continuously and send that data to servers for analysis. Which protocol property is essential here?",
+          "options": [
+            "A) Real-time optimization to ensure data arrives quickly and continuously",
+            "B) The ability to pause the internet connection",
+            "C) Using only physical cables, no WiFi",
+            "D) Encryption so analytics cannot be viewed"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Continuous data streams require protocols optimized for real-time transmission.",
+            "Incorrect. The platform needs constant, uninterrupted connections.",
+            "Incorrect. Protocol doesn't dictate physical vs. wireless; both work.",
+            "Incorrect. Analytics can be encrypted, but that's separate from the streaming requirement."
+          ],
+          "explanation": "Learning analytics systems send continuous streams of data about student interactions. The underlying network protocols must be optimized to handle these streams efficiently without introducing delays that would disrupt the learning experience."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Advanced EdTech Networking Scenarios",
+      "content": "Master complex networking scenarios that arise in real education technology systems.",
+      "questions": [
+        {
+          "question": "A district deploying a mobile learning app wants students to seamlessly switch between school WiFi and cellular data while working on assignments. What networking capability is essential?",
+          "options": [
+            "A) The application should gracefully handle network transitions, re-synchronizing data when switching between WiFi and cellular",
+            "B) Students should only use WiFi, never cellular",
+            "C) The app should work on only one network type at a time",
+            "D) Mobile devices don't need network connections for learning apps"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Network resilience is critical for mobile learning\u2014the app must handle transitions gracefully.",
+            "Incorrect. Students need flexibility to learn on available networks.",
+            "Incorrect. Modern apps should seamlessly switch between networks.",
+            "Incorrect. Mobile learning apps fundamentally depend on connectivity."
+          ],
+          "explanation": "Modern education technology must handle the reality that students move between locations with different network types. Well-designed systems detect network changes, resync data, and maintain a smooth experience throughout."
+        },
+        {
+          "question": "Why might a school choose UDP (instead of TCP) for a live interactive whiteboard tool, even though UDP is less reliable?",
+          "options": [
+            "A) UDP has lower latency; slightly delayed or dropped drawing strokes are acceptable, but lag ruins real-time collaboration",
+            "B) UDP is faster because it doesn't ensure data arrives",
+            "C) TCP cannot be used for interactive applications",
+            "D) UDP is encrypted while TCP is not"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! For real-time interaction, low latency matters more than guaranteed delivery of every packet.",
+            "Incorrect. While UDP is faster, the reason is the trade-off in reliability.",
+            "Incorrect. TCP can be used, but the latency overhead makes it unsuitable for real-time drawing.",
+            "Incorrect. Encryption is independent of TCP vs. UDP."
+          ],
+          "explanation": "In interactive applications like live whiteboards, responsiveness is more important than perfect fidelity. If one drawing stroke is delayed or lost, the user notices the lag immediately. TCP's reliability comes at a latency cost that ruins the real-time experience."
+        },
+        {
+          "question": "A school's LMS experiences intermittent slowdowns during peak usage (8-9 AM when classes start). What network layer might be bottlenecked?",
+          "options": [
+            "A) The school's internet connection bandwidth to their ISP\u2014during peak hours, many simultaneous users are consuming available bandwidth",
+            "B) The application's database design",
+            "C) Students' home WiFi routers",
+            "D) The font size of the website"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Bandwidth congestion during peak usage is a classic network bottleneck.",
+            "Incorrect. Database design would cause consistent slowness, not peak-time spikes.",
+            "Incorrect. Home network issues would be random, not synchronized across all users.",
+            "Incorrect. Font size doesn't affect network performance."
+          ],
+          "explanation": "When an LMS slows down specifically during peak usage times, the bottleneck is typically insufficient bandwidth to handle all simultaneous connections. This is why schools upgrade their internet connections for EdTech rollouts."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mastery Complete: Computer Networks in EdTech",
+      "content": "Congratulations! You've mastered the fundamentals of computer networks and protocols through the lens of education technology. You now understand how networks enable online learning, why protocols like HTTPS protect student data, and how modern EdTech systems optimize networks for real-time collaboration and global reach. You can explain network concepts using real examples from learning management systems, video conferencing, and learning analytics. This foundation prepares you to understand, evaluate, and build education technology systems that serve learners reliably and securely."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "proceed"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n2",
+      "label": "retry"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "proceed"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n5",
+      "label": "retry"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "proceed"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    },
+    {
+      "id": "c12",
+      "source": "n9",
+      "target": "n8",
+      "label": "retry"
+    }
+  ],
+  "generated_at": "2026-03-27T06:54:46.417830+00:00",
+  "model": "claude-haiku-4-5"
+}

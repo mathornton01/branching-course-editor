@@ -1,0 +1,493 @@
+{
+  "id": "a1b2c3d4-e5f6-47a8-b9c0-d1e2f3a4b5c7",
+  "title": "Graph Theory and Applications in Forensic Science",
+  "description": "Master graph theory concepts through real forensic case analysis and criminal network mapping.",
+  "topic": "Graph Theory and Applications",
+  "theme": "forensic science",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "graph-theory",
+    "forensic-science",
+    "networks",
+    "criminal-investigation",
+    "algorithms"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Graph Theory in Forensic Science",
+      "content": "Graph theory provides a powerful framework for analyzing complex relationships in criminal investigations. In forensic science, investigators often map networks of suspects, witnesses, and evidence to uncover hidden connections. A graph consists of vertices (nodes representing people, locations, or objects) and edges (lines representing relationships like contact, communication, or evidence transfer). By visualizing these networks, forensic teams can identify key figures, trace evidence chains, and discover patterns that might otherwise remain hidden. For example, analyzing seized phone records as a graph can reveal communication networks used by criminal organizations.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "assessment",
+      "title": "Assessment: Graph Fundamentals",
+      "content": "Demonstrate your understanding of basic graph concepts through these questions about a typical forensic network analysis scenario.",
+      "questions": [
+        {
+          "question": "In a forensic network analysis of a drug trafficking ring, what would a vertex most likely represent?",
+          "options": [
+            "A phone call between suspects",
+            "A suspect, witness, or location",
+            "An edge connecting two entities",
+            "A timeline of events"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A phone call would represent a connection between people, not a vertex itself.",
+            "Correct! Vertices represent entities like suspects, witnesses, locations, or evidence items in forensic networks.",
+            "Incorrect. An edge represents connections; vertices are the entities being connected.",
+            "Incorrect. A timeline is a separate analytical tool; vertices represent discrete entities."
+          ],
+          "explanation": "Vertices are the fundamental units in a graph, representing distinct entities. In forensic networks, these are typically people, places, or objects of evidence."
+        },
+        {
+          "question": "What does an edge represent in a crime network graph?",
+          "options": [
+            "A suspect's identity",
+            "A relationship or connection between entities",
+            "A piece of confiscated evidence",
+            "The time when a crime occurred"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. A suspect's identity would be represented by a vertex.",
+            "Correct! Edges represent relationships like contact, transaction, communication, or evidence transfer between vertices.",
+            "Incorrect. Evidence items would be vertices themselves, not the connections between entities.",
+            "Incorrect. Time information is metadata associated with edges, not the edges themselves."
+          ],
+          "explanation": "Edges are the connections in a graph. In forensic analysis, they represent the relationships and interactions between the entities (vertices) in your network."
+        },
+        {
+          "question": "A forensic team is mapping a fraud conspiracy. They identify Person A called Person B, who then received money from Company C. How many vertices are in this graph?",
+          "options": [
+            "1 vertex",
+            "2 vertices",
+            "3 vertices",
+            "4 vertices"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. There are multiple distinct entities involved.",
+            "Incorrect. You need to count all distinct entities, including locations or organizations.",
+            "Correct! The three entities (Person A, Person B, and Company C) are represented as three vertices.",
+            "Incorrect. There are only three distinct entities, so only three vertices."
+          ],
+          "explanation": "Each distinct entity in your forensic investigation becomes a vertex. Count people, locations, organizations, and significant objects separately."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n4",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "practice",
+      "title": "Practice: Graph Fundamentals",
+      "content": "Work through these practice problems to solidify your understanding of vertices and edges in forensic contexts.",
+      "questions": [
+        {
+          "question": "A computer forensics team discovers that a hacking group consists of: Alice, Bob, Charlie, a dark web forum, and an encrypted messaging app. How many vertices should they map?",
+          "options": [
+            "2 (people and technology)",
+            "3 (people only)",
+            "5 (all distinct entities)",
+            "7 (including connections)"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. Technology like forums and apps are important entities too.",
+            "Incorrect. The technology platforms used by the group are also vertices.",
+            "Correct! Each distinct entity\u2014the three people, the forum, and the app\u2014is a vertex.",
+            "Incorrect. Vertices don't include connections; edges represent those."
+          ],
+          "explanation": "In forensic analysis, map all entities: people, locations, organizations, devices, platforms, and objects. Each is a vertex."
+        },
+        {
+          "question": "In a homicide investigation, an edge between a suspect and a location would represent:",
+          "options": [
+            "The suspect's guilt",
+            "The suspect being present at or connected to that location",
+            "The distance between them",
+            "A weapon used at the scene"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Guilt is determined through investigation; edges just show connections.",
+            "Correct! An edge represents any forensically relevant connection or relationship.",
+            "Incorrect. Graph theory edges don't measure distance; they show existence of a connection.",
+            "Incorrect. A weapon would be a vertex (entity), not an edge."
+          ],
+          "explanation": "Edges represent the existence and type of relationship. This could be: presence, communication, transaction, shared DNA, or any forensically relevant connection."
+        },
+        {
+          "question": "Which of the following would NOT be an edge in a financial crime network graph?",
+          "options": [
+            "A bank transfer from Account A to Account B",
+            "The date a transaction occurred",
+            "A business partnership between two companies",
+            "A phone call between two suspects"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Financial transfers are classic edges in crime networks.",
+            "Correct! The date is metadata about the edge, not the edge itself.",
+            "Incorrect. Business partnerships represent relationships and would be edges.",
+            "Incorrect. Communication records are relationships and would be edges."
+          ],
+          "explanation": "Edges represent relationships. Attributes like dates, amounts, or call durations are metadata about edges, not edges themselves."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "content",
+      "title": "Graph Traversal and Evidence Path Analysis",
+      "content": "Graph traversal algorithms allow investigators to explore all connections from a starting point, crucial for tracing how evidence moved through a network. Depth-First Search (DFS) explores deeply along one path before backtracking, useful for following a single suspect's connections exhaustively and discovering distant associates. Breadth-First Search (BFS) explores all immediate connections before going deeper, effective for quickly identifying all first-degree associates of a suspect and mapping close relationships. In evidence chain analysis, DFS helps trace the complete path a stolen item traveled through multiple handlers, while BFS helps identify everyone who directly handled or knew about the evidence. For example, if investigators discover that Suspect A possesses stolen jewelry, they can use BFS to find everyone A contacted, then DFS to explore each contact's network.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Traversal and Path Analysis",
+      "content": "Test your understanding of how traversal algorithms apply to real forensic investigations.",
+      "questions": [
+        {
+          "question": "A forensic team is investigating a stolen vehicle. They know Suspect A stole it and need to find everyone who subsequently handled it. Which traversal method should they use first?",
+          "options": [
+            "Depth-First Search to follow one person's entire network",
+            "Breadth-First Search to identify all immediate handlers",
+            "Random search to be thorough",
+            "Time-based search starting from theft time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. While DFS is useful, BFS is better for finding immediate connections.",
+            "Correct! BFS identifies all direct handlers of the vehicle from Suspect A, then investigators can use DFS to explore each handler's network.",
+            "Incorrect. Random search is inefficient and unscientific.",
+            "Incorrect. While timeline matters, traversal order is about network structure, not time."
+          ],
+          "explanation": "BFS is ideal for evidence chain analysis because it identifies all people who directly touched or possessed evidence. It builds outward layer by layer."
+        },
+        {
+          "question": "In a money laundering investigation, investigators want to follow how $1 million moved from the initial criminal through multiple shell companies to a final destination. Which traversal is most appropriate?",
+          "options": [
+            "Breadth-First Search to map all companies",
+            "Depth-First Search to follow one complete path from start to end",
+            "Both equally useful",
+            "Neither; use timeline analysis instead"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. While BFS shows all connections, money travels along specific paths.",
+            "Correct! DFS traces a single path from source to destination, showing how the money moved through the system.",
+            "Incorrect. While both are useful, DFS is better for following a specific flow path.",
+            "Incorrect. Traversal analysis complements timeline analysis."
+          ],
+          "explanation": "DFS excels at following a complete path through a network, crucial for understanding the flow of contraband, money, or evidence through a criminal supply chain."
+        },
+        {
+          "question": "A cybercrime team discovers a malware propagation network. The malware spread from Patient Zero through various computers. To find all computers at each 'distance' from Patient Zero, what should they use?",
+          "options": [
+            "DFS to follow one infection chain",
+            "BFS to identify infected computers layer by layer",
+            "Both in sequence",
+            "Network diameter calculation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. DFS follows one path; BFS reveals structure.",
+            "Correct! BFS naturally identifies computers that are 1 hop away, then 2 hops, then 3 hops from the source, showing the infection spread pattern.",
+            "Incorrect. While both are useful, BFS specifically answers this question.",
+            "Incorrect. Diameter is related but doesn't identify which computers are at which distance."
+          ],
+          "explanation": "BFS is fundamentally about distance from a source. It's ideal when you want to know 'how many hops' or 'how many degrees of separation' something is from a starting point."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n7",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "practice",
+      "title": "Practice: Traversal and Path Analysis",
+      "content": "Apply traversal algorithms to realistic forensic scenarios.",
+      "questions": [
+        {
+          "question": "A detective finds a written address book belonging to a suspect. To efficiently list everyone the suspect directly knows, then explore each person's contacts, which approach should they take?",
+          "options": [
+            "BFS first, then DFS on each person",
+            "DFS for the entire network",
+            "Random sampling of contacts",
+            "Interview everyone simultaneously"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! BFS identifies the suspect's direct contacts (in the address book), then DFS explores each person's network.",
+            "Incorrect. DFS alone doesn't efficiently find the direct contacts first.",
+            "Incorrect. Random sampling misses important patterns.",
+            "Incorrect. While interviewing helps, the traversal strategy guides investigation priorities."
+          ],
+          "explanation": "This is a practical combination: BFS finds immediate associates, then DFS explores deeper into each one's network."
+        },
+        {
+          "question": "In a human trafficking investigation, authorities discover a safe house. To find all victims, traffickers, and intermediaries connected to this location, starting from the house and exploring outward, what's best?",
+          "options": [
+            "Start with DFS to go deep immediately",
+            "Use BFS to find everyone directly connected, then investigate deeper",
+            "Timeline only",
+            "Interviews only"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. DFS doesn't systematically cover all direct connections.",
+            "Correct! BFS ensures you identify everyone with direct connection to the house before exploring their networks.",
+            "Incorrect. Timeline is important but doesn't identify the network structure.",
+            "Incorrect. Interviews inform investigation but don't replace systematic network analysis."
+          ],
+          "explanation": "Starting from a known location with BFS ensures you don't miss anyone directly connected before exploring secondary connections."
+        },
+        {
+          "question": "A hacking investigation shows: Attacker connected to Router A, Router A to 5 computers, each computer to 3 more computers. What does this network structure tell you?",
+          "options": [
+            "DFS is impossible",
+            "BFS would find 5 computers at distance 2 and 15 at distance 3",
+            "The network is too complex to analyze",
+            "Timeline takes precedence"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Both DFS and BFS work on all connected networks.",
+            "Correct! At distance 1 from attacker: Router A; distance 2: 5 computers; distance 3: 15 computers.",
+            "Incorrect. This is exactly the kind of structure graph traversal handles.",
+            "Incorrect. Network analysis complements timeline analysis."
+          ],
+          "explanation": "BFS reveals the layered structure of networks, showing distances and potentially bottlenecks in communication or control."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n5",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Network Centrality and Criminal Organization Structure",
+      "content": "Centrality measures identify the most important and influential figures in a criminal network, transforming raw connection data into actionable intelligence. Degree centrality counts how many direct connections someone has\u2014a suspect with high degree centrality is a hub, either a leader coordinating many people or a key witness contacted by many parties. Betweenness centrality identifies people who control information flow or serve as bridges between groups\u2014these individuals appear on the path between many other pairs and are crucial for network connectivity, often positioned as intermediaries or middlemen. Closeness centrality measures how quickly someone can reach others through the network\u2014high closeness suggests influence and awareness, and can reveal hidden leaders who maintain distance from direct operations. By analyzing these measures in confiscated communications, financial records, or DNA databases, investigators can prioritize whom to surveil, interrogate, or use as leverage, often revealing that the most vocal suspects aren't the true decision-makers.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Centrality and Applications",
+      "content": "Demonstrate your ability to apply graph theory centrality measures to forensic analysis.",
+      "questions": [
+        {
+          "question": "In a drug cartel network, Suspect A directly contacts 20 people, Suspect B directly contacts 8 people, and Suspect C directly contacts 15 people. Who likely has the highest degree centrality?",
+          "options": [
+            "Suspect A",
+            "Suspect B",
+            "Suspect C",
+            "Need more information"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Degree centrality is simply the number of direct connections. Suspect A has 20, the most.",
+            "Incorrect. Suspect B has fewer connections than both A and C.",
+            "Incorrect. Suspect C has 15, fewer than Suspect A's 20.",
+            "Incorrect. We have enough information: degree centrality = number of direct contacts."
+          ],
+          "explanation": "Degree centrality is straightforward: count direct connections. High degree centrality suggests someone is a hub or hub-like player in the network."
+        },
+        {
+          "question": "In an organized crime investigation, investigators notice that every communication between the North Side and South Side crews goes through Suspect X. This suggests Suspect X has high:",
+          "options": [
+            "Degree centrality",
+            "Betweenness centrality",
+            "Closeness centrality",
+            "Clustering coefficient"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. High degree means many direct connections, but this scenario shows control of flow.",
+            "Correct! Betweenness centrality measures who lies on paths between other vertices. Suspect X is a critical bridge.",
+            "Incorrect. While Suspect X is close to others, betweenness better describes controlling flow.",
+            "Incorrect. Clustering coefficient measures local network density, not this scenario."
+          ],
+          "explanation": "Betweenness centrality identifies bridges and gatekeepers. These are often the most valuable people for investigation because removing them would fragment the network."
+        },
+        {
+          "question": "In a financial fraud case, Suspect A is directly connected to only 3 people, but through various paths can quickly reach 50 people in the network. This indicates:",
+          "options": [
+            "Low degree centrality and low closeness centrality",
+            "High degree centrality and high closeness centrality",
+            "Low degree centrality but high closeness centrality",
+            "The network has no structure"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. If they can reach 50 people, closeness is high.",
+            "Incorrect. Direct connections are stated as only 3, so degree is low.",
+            "Correct! Only 3 direct connections = low degree centrality. Reaching 50 people quickly = high closeness centrality. This person is strategically positioned.",
+            "Incorrect. This pattern actually shows strong network structure."
+          ],
+          "explanation": "Low degree with high closeness suggests someone positioned strategically in the network\u2014possibly a hidden leader operating through intermediaries rather than controlling things directly."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n10",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "practice",
+      "title": "Practice: Centrality Analysis and Applications",
+      "content": "Apply centrality measures to realistic forensic scenarios to refine your analytical skills.",
+      "questions": [
+        {
+          "question": "A cybercrime unit analyzes a botnet command structure. The command server has degree centrality of 10,000 (connected to 10,000 infected computers). What does this tell investigators?",
+          "options": [
+            "The command server is definitely the leader",
+            "The command server is a critical hub to target for disruption",
+            "The command server has low importance",
+            "Nothing useful about network structure"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. High degree doesn't prove leadership; it shows connection count.",
+            "Correct! A node with degree centrality of 10,000 is critical infrastructure. Removing or shutting it down would fragment the botnet.",
+            "Incorrect. Having 10,000 connections means it's extremely important to the network.",
+            "Incorrect. This is highly useful information for targeting intervention."
+          ],
+          "explanation": "High degree centrality nodes are critical bottlenecks. In criminal networks, disrupting them (arrest, surveillance, seizure of infrastructure) is high-priority."
+        },
+        {
+          "question": "A terrorism task force finds that Suspect X has only 2 direct contacts but appears on the shortest path between 40 different pairs of people in the network. How should they prioritize Suspect X?",
+          "options": [
+            "Low priority due to few connections",
+            "High priority due to high betweenness centrality",
+            "No priority\u2014low degree means low importance",
+            "Need to check closeness centrality first"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Few connections are offset by critical positioning.",
+            "Correct! High betweenness centrality means Suspect X is a critical link. Removing this person would fragment the terrorist network.",
+            "Incorrect. This person is highly important despite low degree.",
+            "Incorrect. Betweenness centrality already tells us they're critically important."
+          ],
+          "explanation": "Betweenness centrality often identifies the most strategically valuable targets. These individuals, despite low visibility, keep the network operational."
+        },
+        {
+          "question": "In a human trafficking network, Suspect A has closeness centrality of 0.9 (meaning they can reach 90% of the network in 2-3 contacts) while Suspect B has closeness of 0.3. What might this mean?",
+          "options": [
+            "Suspect A is more connected than B",
+            "Suspect A is likely more aware and influential in directing operations",
+            "Suspect B is more important to the network",
+            "Closeness doesn't matter for criminal networks"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Closeness measures reach, not direct connection count.",
+            "Correct! High closeness suggests the ability to coordinate, share information, and exercise influence across the network.",
+            "Incorrect. Low closeness usually means lower influence.",
+            "Incorrect. Closeness is particularly valuable for identifying coordination hubs in criminal networks."
+          ],
+          "explanation": "High closeness centrality suggests someone who is aware of and can coordinate across the entire network\u2014often the strategic thinker or commander rather than the field operative."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n10",
+      "type": "end",
+      "title": "Mastery: Graph Theory in Forensic Science",
+      "content": "Congratulations! You've mastered graph theory concepts and their applications in forensic science. You can now construct suspect networks, analyze evidence chains using traversal algorithms, and use centrality measures to identify key targets in criminal investigations. These skills are directly applicable to financial crime analysis, cybercrime investigation, human trafficking cases, and organized crime task forces. Continue applying these concepts to real case data and you'll become an invaluable member of any investigation team."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "fail"
+    },
+    {
+      "id": "c3",
+      "source": "n3",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n4",
+      "label": "pass"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": "fail"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n7",
+      "label": "pass"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "fail"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n10",
+      "label": "pass"
+    }
+  ],
+  "generated_at": "2026-03-27T15:12:25.381432+00:00",
+  "model": "claude-haiku-4-5"
+}

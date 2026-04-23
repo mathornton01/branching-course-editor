@@ -1,0 +1,228 @@
+{
+  "id": "bayesian-healthcare-course",
+  "title": "Bayesian Statistics in Healthcare: From Diagnosis to Decision-Making",
+  "description": "Master Bayesian statistics through healthcare applications. A diagnostic assessment routes you to either advanced or fundamental path based on prior knowledge.",
+  "topic": "Bayesian Statistics",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 35,
+  "tags": [
+    "statistics",
+    "bayesian",
+    "healthcare",
+    "diagnosis",
+    "clinical-decision-making"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Do You Understand Bayesian Thinking?",
+      "content": "Let's assess your understanding of Bayesian concepts and probability in medical contexts.",
+      "questions": [
+        {
+          "question": "A COVID-19 test is 95% accurate. If 1% of the population has COVID, what is approximately the probability you have COVID given a positive test result?",
+          "options": [
+            "95%",
+            "1%",
+            "~16%",
+            "50%"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Tests don't directly give us this probability\u2014we need Bayes' Theorem to account for the base rate.",
+            "This is the prior probability (disease prevalence), not the posterior probability after testing.",
+            "Correct! This is the posterior probability calculated using Bayes' Theorem, accounting for disease prevalence and test accuracy.",
+            "This ignores both the test accuracy and the base rate of disease."
+          ],
+          "explanation": "This demonstrates the base rate fallacy. A high-accuracy test doesn't guarantee the disease is likely, especially when the disease is rare. Bayes' Theorem combines the prior (1%), sensitivity (95%), and false positive rate to yield ~16% posterior probability."
+        },
+        {
+          "question": "In Bayesian statistics, what does a 'prior' represent in disease diagnosis?",
+          "options": [
+            "The test's sensitivity and specificity",
+            "Your initial belief about disease probability before considering test results",
+            "The final probability of disease after testing",
+            "The symptoms the patient reports"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "That describes the test's operating characteristics, not the prior.",
+            "Correct! The prior is your background knowledge or belief about how likely something is before gathering new evidence.",
+            "That's the posterior probability, which is calculated after testing.",
+            "Symptoms inform the likelihood of test results, not the prior directly."
+          ],
+          "explanation": "The prior probability represents what you know before testing\u2014such as disease prevalence in the population, patient risk factors, or background clinical experience."
+        },
+        {
+          "question": "A patient presents with chest pain and has several cardiac risk factors. The prior probability of acute coronary syndrome is estimated at 10%. An ECG is performed (sensitivity 80%, specificity 90%). The ECG shows changes concerning for ischemia. How should you update your belief?",
+          "options": [
+            "The probability jumps to 80% based on test sensitivity",
+            "You should calculate the posterior probability using Bayes' Theorem with the prior, sensitivity, and specificity",
+            "The prior probability remains 10% because you can't calculate exact probabilities clinically",
+            "You need additional information not provided"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sensitivity alone doesn't give us the posterior\u2014it's only one component.",
+            "Correct! You use the prior (10%), the likelihood (sensitivity and specificity), and Bayes' Theorem to calculate the posterior probability.",
+            "In Bayesian thinking, you can and should update beliefs quantitatively using available evidence.",
+            "The sensitivity and specificity given are sufficient to apply Bayes' Theorem."
+          ],
+          "explanation": "Bayes' Theorem: P(Disease|Test+) = [P(Test+|Disease) \u00d7 P(Disease)] / P(Test+). The sensitivity (80%) is P(Test+|Disease), the prior (10%) is P(Disease), and you calculate P(Test+) from both disease and non-disease probabilities."
+        }
+      ],
+      "pass_threshold": 66.67,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Bayesian Inference in Clinical Decision-Making",
+      "content": "Bayesian statistics provides a mathematical framework for medical decision-making that systematically updates your beliefs with new evidence. In healthcare, you begin with a prior probability\u2014your initial estimate based on disease prevalence, patient risk factors, or clinical experience. You then observe evidence, such as a diagnostic test result (the likelihood), and calculate a posterior probability\u2014your updated belief given the test result. This mirrors clinical practice: a 45-year-old with chest pain and diabetes (prior MI probability 15%) receives a troponin test (95% sensitivity, 98% specificity) that's elevated, and you revise your risk estimate upward to ~85%. Bayes' Theorem: P(Disease|Test+) = [P(Test+|Disease) \u00d7 P(Disease)] / P(Test+), where P(Test+|Disease) is sensitivity and P(Disease) is your prior. Real applications include cancer screening (where a positive mammogram in low-risk women still has substantial false positive rate), prenatal testing (where abnormal results depend heavily on prevalence), and infectious disease diagnosis (where test interpretation varies by local prevalence).",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Case Study: Diagnosing Breast Cancer with Mammography",
+      "content": "A 50-year-old asymptomatic woman undergoes routine mammography. Prior probability of breast cancer in this population: 1%. Mammogram shows a suspicious lesion (sensitivity 90%, specificity 95%). Using Bayes' Theorem: P(Cancer|Positive) = [0.90 \u00d7 0.01] / [0.90 \u00d7 0.01 + 0.05 \u00d7 0.99] = 0.009 / 0.0585 \u2248 15.4%. Despite a positive result, the posterior probability is only ~15% because cancer is rare. This teaches clinicians not to anchor on test results alone\u2014the base rate is critical. Without understanding the prior, a clinician might alarm the patient unnecessarily: 85 of 100 women with positive mammograms have no cancer. Honest risk communication requires Bayesian thinking across all medical specialties.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Mastery Complete",
+      "content": "You've mastered Bayesian inference in clinical decision-making. You understand how prior probabilities (disease prevalence, risk factors), test characteristics (sensitivity and specificity), and Bayes' Theorem combine to guide diagnostic interpretation and clinical decisions. You can avoid the base rate fallacy, communicate risk appropriately to patients, and make evidence-based decisions that integrate statistical evidence with prior knowledge. These principles apply across oncology, infectious disease, cardiology, and all medical specialties."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Bayesian Thinking for Healthcare Professionals",
+      "content": "Bayesian statistics is about updating your beliefs as you learn new information. Imagine a patient arrives with fever and cough during flu season. Before testing, you estimate the probability they have flu based on community prevalence (the prior probability). If 20% of people with fever-and-cough have confirmed flu, your initial estimate is 20%. You perform a rapid flu test (your evidence). The test comes back positive. Now you update your belief\u2014is flu now likely? Bayes' Theorem tells you how much to update. The test is 90% accurate when flu is present (sensitivity 90%) but gives false positives in 10% of people without flu (false positive rate 10%). So even with a positive result, some are false positives. Bayesian thinking combines three things: your starting belief (prior), the evidence (test result), and the test's accuracy (likelihood) to give an updated belief (posterior). The key insight: no single test tells the complete story\u2014you must combine it with what you knew before testing.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Flu Testing in a Walk-In Clinic",
+      "content": "It's January, peak flu season. A 35-year-old arrives with fever, cough, and body aches. Your clinic data shows 30% of patients with these symptoms actually have confirmed influenza (prior = 30%). You perform a rapid molecular flu test: 95% sensitive, 90% specific. The test is positive. What's your updated belief? You started at 30% chance. The positive result moves your belief upward significantly\u2014probably around 77-79%\u2014because a positive test with reasonable prior probability makes flu likely. Now contrast: testing the same patient in July when flu prevalence is <1%: the same positive test would be much less reassuring because false positives are more likely when disease is rare. This is Bayesian thinking in practice: you started with 30%, observed a positive test, and moved your belief substantially upward, but the exact number depends on test accuracy and prior prevalence.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Updating Beliefs with Evidence",
+      "content": "Apply Bayesian thinking to these healthcare scenarios. For each, think about your prior belief, the evidence, and how you should update.",
+      "questions": [
+        {
+          "question": "A patient with sore throat is seen in clinic. Based on epidemiology, 40% of sore throats in your population are bacterial (Group A strep) and 60% are viral. You perform a rapid strep test: 95% sensitive and 95% specific. Result: positive. Does this positive test make it more or less likely that your patient has bacterial pharyngitis?",
+          "options": [
+            "Less likely\u2014the test is imperfect so false positives are possible",
+            "More likely\u2014the positive result should move your belief upward from 40%",
+            "No change\u2014the test doesn't actually change the underlying probability",
+            "Exactly 95%\u2014that's the test's sensitivity"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Even though false positives exist, a positive test still increases the probability compared to the prior.",
+            "Correct! Evidence updates your belief upward from the prior of 40%. With 95% specificity, the posterior probability is approximately 99%.",
+            "In Bayesian thinking, evidence absolutely changes your belief from the prior.",
+            "Sensitivity (95%) is not the posterior; you need Bayes' Theorem to combine it with the prior."
+          ],
+          "explanation": "A positive test increases your belief above the prior. Even though 5% of non-strep patients test positive, most positive tests in a 40% prevalence population are true positives."
+        },
+        {
+          "question": "A 60-year-old with fatigue is evaluated for hypothyroidism. Your prior belief, based on age and presentation, is 25%. You order TSH testing: 98% sensitive, 96% specific. TSH comes back normal (negative test). How should this affect your belief?",
+          "options": [
+            "The probability decreases below 25%",
+            "The probability stays at 25% because TSH is sensitive",
+            "The probability increases because a negative test might be falsely negative",
+            "The probability becomes 0%\u2014a normal TSH rules out hypothyroidism"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! A normal test should shift your belief downward from 25%. With 96% specificity, a normal result is reassuring. Posterior is approximately 2-3%.",
+            "Sensitivity describes detecting disease when present; a negative test in someone with the disease is rare (2% false negative rate).",
+            "With 98% sensitivity, the false negative rate is only 2%, so a negative result is quite reassuring.",
+            "No test is 100% sensitive\u2014there's always a small false negative rate, but with 98% sensitivity, it's low."
+          ],
+          "explanation": "Negative evidence decreases your belief below the prior. After a negative test with 98% sensitivity and 96% specificity, hypothyroidism becomes unlikely (posterior ~2-3%)."
+        },
+        {
+          "question": "Which statement best captures Bayesian thinking in clinical practice?",
+          "options": [
+            "Test results determine diagnoses with certainty; a positive result confirms disease",
+            "Your prior probability and test results together determine how much to update your belief; accurate tests move belief more strongly",
+            "Only disease prevalence matters; individual test results are less important",
+            "All patients with positive tests should be treated as if they definitely have disease"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Tests have limitations; positive results include false positives, especially in low-prevalence conditions.",
+            "Correct! Bayesian thinking integrates what you knew before (prior), the test evidence and accuracy (likelihood), to decide what to believe now (posterior).",
+            "Both prior prevalence and test results are essential\u2014neither alone is sufficient.",
+            "Positive tests include false positives; you must weigh test accuracy against the prior."
+          ],
+          "explanation": "Bayesian thinking integrates prior knowledge with new evidence. It acknowledges tests are imperfect tools and that disease prevalence shapes interpretation of results."
+        }
+      ],
+      "pass_threshold": 66.67,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Foundation Complete",
+      "content": "You've learned the core principle: start with a reasonable initial estimate (prior probability), observe evidence (diagnostic test results), and revise your belief upward or downward (posterior probability). This is how thoughtful clinicians practice medicine\u2014never anchoring solely on one piece of evidence, always considering disease prevalence and base rates. You understand that a positive test doesn't guarantee disease if the disease is rare, and a negative test doesn't rule out disease if you started with high prior probability. These insights prevent diagnostic errors and improve patient communication about uncertainty and risk. As you encounter complex scenarios, you can explore advanced Bayesian methods, but the fundamental principle\u2014integrating prior knowledge with evidence\u2014remains unchanged across all of medicine."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Pass diagnostic"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Needs fundamentals"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": ""
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T02:56:08.871524+00:00",
+  "model": "claude-haiku-4-5"
+}

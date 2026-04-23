@@ -1,0 +1,244 @@
+{
+  "id": "rl-marine-biology-course",
+  "title": "Reinforcement Learning Through Marine Biology",
+  "description": "Explore core RL concepts\u2014agents, environments, rewards, and exploration-exploitation tradeoffs\u2014through the lens of marine animal behavior and ocean ecology.",
+  "topic": "Reinforcement Learning",
+  "theme": "marine biology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "reinforcement learning",
+    "machine learning",
+    "marine biology",
+    "AI",
+    "adaptive learning"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction: Marine Animals as Reinforcement Learners",
+      "content": "Reinforcement Learning is how agents learn to make decisions by interacting with their environment and receiving rewards. In the ocean, marine animals are natural reinforcement learners. A fish learns to avoid predators because negative encounters teach it (punishment), while successful foraging teaches it preferred feeding grounds (reward). This course explores three core concepts of RL through the lens of marine biology: how agents interact with their environment, how rewards shape behavior, and how animals balance exploring new opportunities with exploiting known good strategies.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Which aspect of RL interests you most?",
+      "content": "Choose one of three core RL concepts to explore in depth. Each path provides content, real-world examples, and insights into how marine animals implement these principles.",
+      "choices": [
+        {
+          "label": "Agent & Environment: How marine animals sense and act",
+          "next": "n3"
+        },
+        {
+          "label": "Rewards & Actions: How consequences shape learning",
+          "next": "n5"
+        },
+        {
+          "label": "Exploration vs Exploitation: Balancing discovery and success",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Agent & Environment: The Turtle's Sensors and Ocean Currents",
+      "content": "Every RL system has an agent (the learner) and an environment (everything else). In marine contexts, consider a sea turtle hatchling. The turtle is the agent, with sensors (eyes detecting sunlight, magnetic field sensors, proprioceptors for body position) and actuators (flippers for movement). The environment is the ocean: currents, temperatures, light gradients, and distances to food sources. At each moment, the turtle observes its state (location, hunger level, nearby threats) and takes an action (swim north, dive deeper, surface). The environment responds by transitioning to a new state and providing feedback. Understanding this agent-environment boundary helps explain how marine organisms\u2014from octopuses learning tool use to whales navigating migration routes\u2014learn from interaction.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Example: A Grouper Learning to Hide from Predators",
+      "content": "Consider a juvenile grouper learning to hide from predators. Agent: the grouper fish with lateral line sensors detecting vibrations and eyes for vision. Environment: the reef with rocks, corals, predators, and currents. State: 'predator detected 5 meters away, hiding spot 2 meters left.' Actions: swim left, swim right, stay still, dive down. The grouper observes whether it survives (reward = +1) or gets caught (reward = -10). Over hundreds of encounters, the grouper's learned policy\u2014its mapping from states to optimal actions\u2014improves. Soon, detecting a predator triggers automatic shelter-seeking behavior. This agent-environment loop is closed: each action changes the state, triggering new sensory input and potentially new rewards.",
+      "next": "n9"
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Rewards & Actions: How Consequences Shape Marine Behavior",
+      "content": "Rewards are signals that guide learning. In RL, agents learn from rewards, not pre-programmed objectives. Marine animals are shaped by evolutionary rewards: food provides positive reward, pain provides negative reward. A sea lion learning to catch fish receives immediate reward each time it succeeds. A dolphin that clicks at 40 kHz receives reward (echoes from prey) if that frequency penetrates water effectively. These rewards aren't coded into the animal; they emerge from survival pressures. The beauty of RL is that you design a reward structure, and the agent discovers optimal actions through trial and error. In both nature and AI: +10 for catching prey, -0.1 per step (encouraging efficiency), +100 for successful reproduction. The agent learns which actions yield higher cumulative reward, just as a seahorse learns to grip seagrass firmly in currents because that action is rewarded with survival.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Example: The Sea Otter's Shell-Cracking Mastery",
+      "content": "A sea otter learning to crack shellfish demonstrates reward-based learning. Initial state: hungry otter, rock and shell nearby. Action 'bang shell with rock' yields reward (food energy = +50). Action 'ignore shell' yields zero reward. Over many trials, the otter's Q-function (action-value estimate) converges: 'bang shell with rock' in state 'hungry, rock+shell nearby' yields +50, vastly superior to other actions. A cuttlefish learning to change color shows similar learning. When it changes to red and a predator approaches (reward = -100, danger), the cuttlefish learns this action is poor in that state. When it changes to match the seafloor (reward = +50, safe and stealthy), the cuttlefish strengthens that state-action pair. Each reward signal is training data, updating the animal's Q-value incrementally using processes analogous to Q-learning algorithms.",
+      "next": "n9"
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Exploration vs Exploitation: Dolphins' Adaptive Echolocation",
+      "content": "RL agents face a fundamental dilemma: should they exploit (use known good actions) or explore (try new actions to find potentially better ones)? A dolphin knows clicking at 40 kHz reliably produces clear echoes from prey (exploitation). But what if 42 kHz penetrates murky water better? The dolphin must sometimes try new frequencies (exploration) to discover superior strategies. Pure exploitation: the dolphin always uses 40 kHz, missing potentially better strategies in novel environments. Pure exploration: random frequency trials waste energy on poor choices. Optimal balance: mostly use known good frequencies, occasionally try new ones. Marine animals balance this through curiosity, satiation (well-fed otters explore new areas), and environmental pressure. A hungry shark exploits known hunting grounds; a well-fed shark explores further. RL algorithms use epsilon-greedy (random action with probability \u03b5) or upper-confidence-bound strategies to balance exploration and exploitation systematically.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Example: Gray Whale's Migration Route Discovery",
+      "content": "A gray whale migrating from Arctic feeding grounds to breeding grounds in Baja California faces exploration-exploitation tradeoffs daily. Exploitation: follow the known current from previous migrations (8-week journey). Exploration: venture into unknown waters seeking faster currents or richer feeding opportunities. Evolutionary programming balances these\u2014roughly 85% of the time (exploitation) the whale follows known currents; 15% of the time (exploration) it tries different paths. One exploratory whale discovers a shortcut current, saving 2 weeks\u2014increasing lifetime reproductive fitness. Over generations, this exploratory tendency becomes reinforced. A reef fish chooses feeding grounds similarly: 80% of the time exploit the favorite coral patch (high food, zero search cost); 20% explore new areas. Sometimes exploration finds even richer grounds (+50% food); sometimes it finds nothing. RL algorithms formalize this: maintain action-value estimates and select random actions with probability \u03b5 (e.g., 0.1), otherwise select the best-valued action. This epsilon-greedy rule elegantly balances learning and performance.",
+      "next": "n9"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: The Complete RL System in Marine Life",
+      "content": "We now integrate all three concepts into unified RL. A gray whale migrating to breeding grounds embodies complete RL: Agent: the whale (sensors for light, magnetic fields, temperature, sound; actuators for tail flukes). Environment: the ocean (currents, prey density, breeding ground distance). State: location, hunger level, time until breeding season, water temperature. Actions: swim north, west, rest, dive, change speed. Rewards: food found (+10), energy expended (-1/step), reached breeding ground (+500), mating success (+1000). The whale's brain maintains a policy \u03c0(s) mapping states to optimal actions. Initially random, it improves through thousands of migrations. The whale learns to: (1) sense states accurately (agent-environment), (2) take rewarded actions (rewards & actions), and (3) balance proven strategies against discovery (exploration-exploitation). The whale's neural network approximates a value function V(s)\u2014expected future cumulative reward from state s. This enables efficient decision-making without pre-programmed behaviors. These same RL principles power AlphaGo, robotic learning, and autonomous vehicles.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Practice: RL Concepts in Marine Contexts",
+      "content": "Test your understanding of RL by answering these questions about marine animal learning.",
+      "questions": [
+        {
+          "question": "A sea turtle navigates from feeding grounds to breeding grounds using different echolocation frequencies at different depths. What RL concept does this exemplify?",
+          "options": [
+            "A) Reward shaping based on energy consumption",
+            "B) Agent adaptation to environmental states",
+            "C) Exploration of new behavioral policies",
+            "D) A fixed policy programmed at birth"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. While energy is a factor, this is not the primary concept illustrated.",
+            "Correct! The turtle tailors action selection to its environmental state (depth, water clarity), demonstrating agent adaptation.",
+            "Partially correct, but the turtle is exploiting learned good strategies, not primarily exploring.",
+            "Incorrect. The turtle learns and adapts, so its policy is dynamic."
+          ],
+          "explanation": "The turtle's behavior shows agent adaptation: observing state (depth) and selecting actions (frequency) suited to that context. This is core agent-environment interaction."
+        },
+        {
+          "question": "A sea otter has learned cracking shells with rocks yields food rewards. To discover if using coral edges might be more efficient, the otter occasionally tries coral instead. This exemplifies which principle?",
+          "options": [
+            "A) Pure exploitation of a known good strategy",
+            "B) Epsilon-greedy exploration-exploitation balance",
+            "C) Reward function design",
+            "D) Environmental state representation"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Pure exploitation means always using rocks, never trying alternatives.",
+            "Correct! The otter mostly exploits (uses rocks) but occasionally explores (tries coral), balancing both principles.",
+            "While rewards matter, this question focuses on exploration-exploitation strategy.",
+            "State representation is fixed (shell type); the issue is action selection strategy."
+          ],
+          "explanation": "The otter's occasional coral-trying is epsilon-greedy: exploit proven good actions most of the time, explore occasionally. This is how animals and AI balance learning with performance."
+        },
+        {
+          "question": "A dolphin learns to click at frequencies producing strong echoes from fish schools, increasing hunting success by 40%. What RL component drives this learning?",
+          "options": [
+            "A) The agent's sensory sensors detecting echoes",
+            "B) The reward signal from increased food intake",
+            "C) The dolphin's physical body as environment",
+            "D) The dolphin's random exploration of frequencies"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sensors are necessary but not the driving force; rewards are.",
+            "Correct! Positive reward (food from successful hunts) reinforces the effective clicking behavior.",
+            "The environment provides feedback, but reward signals drive learning.",
+            "Random exploration might discover new frequencies, but consistent learning requires rewarded actions."
+          ],
+          "explanation": "Rewards are RL's engine. The dolphin's increased food intake is positive feedback that reinforces successful clicking frequencies. Without this signal, learning stalls."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Course Complete: RL in Marine Biology",
+      "content": "Congratulations! You've explored how reinforcement learning powers marine life. Marine animals solve complex problems through trial-and-error learning shaped by evolutionary rewards\u2014principles now driving modern AI. From sea turtles navigating vast oceans using magnetic fields and celestial cues, to octopuses solving puzzles and using tools, to dolphins adapting echolocation frequencies dynamically, nature demonstrates learning through interaction is powerful and elegant. These RL principles now guide robots learning to walk, game-playing AIs defeating champions, autonomous vehicles navigating traffic, and recommendation systems. You understand agents, environments, reward signals, and exploration-exploitation tradeoffs\u2014core concepts unlocking modern AI. Ready to go deeper? Explore Q-learning algorithms, policy gradients, or deep RL to advance your expertise."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Agent & Environment"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Rewards & Actions"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Exploration vs Exploitation"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "pass"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "fail"
+    }
+  ],
+  "generated_at": "2026-03-27T09:18:36.276169+00:00",
+  "model": "claude-haiku-4-5"
+}

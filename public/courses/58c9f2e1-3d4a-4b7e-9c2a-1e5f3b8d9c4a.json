@@ -1,0 +1,263 @@
+{
+  "id": "58c9f2e1-3d4a-4b7e-9c2a-1e5f3b8d9c4a",
+  "title": "Linear Algebra for Data Science in Music Therapy",
+  "description": "Learn linear algebra fundamentals through the lens of music therapy applications. Explore vectors representing patient states, matrices transforming therapeutic sounds, and dimensionality reduction for analyzing musical features.",
+  "topic": "Linear Algebra & Music Therapy",
+  "theme": "music therapy",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "linear-algebra",
+    "data-science",
+    "music-therapy",
+    "vectors",
+    "matrices",
+    "dimensionality-reduction"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Linear Algebra & Music Therapy: An Introduction",
+      "content": "Linear Algebra is the mathematical foundation for understanding how data transforms in music therapy applications. In this course, we'll explore how vectors represent patient emotional and physiological states, matrices transform therapeutic sounds into personalized mixes, and dimensionality reduction helps identify which musical features matter most for healing outcomes. By the end, you'll understand the data science behind modern music therapy practices.",
+      "next": null
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Music therapy applies linear algebra across multiple domains. Which aspect interests you most?",
+      "choices": [
+        {
+          "label": "Patient States & Vectors",
+          "next": "n3"
+        },
+        {
+          "label": "Sound Transformation & Matrices",
+          "next": "n5"
+        },
+        {
+          "label": "Musical Features & Dimensionality Reduction",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Vectors and Vector Spaces in Patient Assessment",
+      "content": "In music therapy, vectors represent multidimensional patient states. When a therapist assesses a patient, they measure multiple attributes: relaxation level (0-100), engagement intensity (0-100), mood improvement (0-100), and emotional openness (0-100). This 4-dimensional vector [relaxation, engagement, mood, openness] captures the patient's holistic response to therapy. Vector spaces let us analyze clusters of similar patient responses, compute distances between different therapeutic states, find optimal therapeutic directions, and predict which music will work best for specific patient profiles.",
+      "next": null
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Patient State Vectors: A Worked Example",
+      "content": "Consider three patients after a 30-minute piano therapy session: Patient A: [85, 92, 78, 80], Patient B: [80, 88, 75, 82], Patient C: [45, 30, 40, 35]. Calculate the distance between Patient A and B using Euclidean norm: \u221a[(85-80)\u00b2 + (92-88)\u00b2 + (78-75)\u00b2 + (80-82)\u00b2] = \u221a54 \u2248 7.3. Patients A and B have similar responses. Patient C's vector is vastly different, suggesting they require different musical approaches. Vector distances help match patients to effective therapeutic music based on their unique state profile.",
+      "next": null
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Matrices and Sound Transformations",
+      "content": "In audio processing for music therapy, matrices transform raw instrument recordings into personalized therapeutic compositions. A mixing matrix combines 4-8 audio tracks (piano, strings, ambient soundscapes, gentle rhythms) into customized output channels. Each row represents an output blend (e.g., 'deep relaxation,' 'focus support,' 'grief processing'), and each column represents an input instrument. Matrix entries are mixing coefficients (0-1) determining how much of each instrument appears in each output. The operation is: [therapeutic mix] = [mixing matrix] \u00d7 [raw instrument tracks], enabling therapists to instantly adjust compositions based on patient emotional needs.",
+      "next": null
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Mixing Matrices for Therapeutic Sound Design",
+      "content": "A therapist creates a 3\u00d74 mixing matrix to blend 4 instruments into 3 therapeutic outcomes: [[0.3, 0.4, 0.2, 0.1], [0.2, 0.3, 0.4, 0.1], [0.4, 0.1, 0.3, 0.2]] for [piano, strings, ambient, rhythm]. Row 1 (Deep Calm): 30% piano, 40% strings, 20% ambient, 10% rhythm. Row 2 (Light Calm): 20% piano, 30% strings, 40% ambient, 10% rhythm. Row 3 (Grounded Peace): 40% piano, 10% strings, 30% ambient, 20% rhythm. For anxious patients, the therapist multiplies the matrix by input audio to produce the exact therapeutic blend, or switches matrices to emphasize rhythm for grounding. This demonstrates matrix multiplication solving practical therapy problems.",
+      "next": null
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Dimensionality Reduction: Finding Key Musical Features",
+      "content": "Music therapy research generates rich data: 80-120 musical features per song (tempo, pitch range, harmonic complexity, timbre, dynamics, instrumentation diversity). Most features are redundant\u2014highly correlated. Dimensionality reduction using Principal Component Analysis (PCA) identifies 5-10 important features explaining 90-95% of outcome variation. This simplification helps therapists quickly identify truly therapeutic musical characteristics. Instead of analyzing 100 features, they focus on 3-5 principal dimensions, reducing cognitive load while preserving crucial information for personalized treatment recommendations.",
+      "next": null
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "PCA Applied to Music Therapy Effectiveness",
+      "content": "A dataset tracks 50 musical features across 200 therapy sessions with outcome scores (0-10 improvement). PCA reveals three principal components explain 95% of variance: PC1 'Emotional Resonance' (42%): Tempo, pitch range, harmonic density\u2014moderate tempo (60-80 BPM) with wide pitch ranges score highest. PC2 'Engagement Level' (31%): Rhythm stability and dynamic variation\u2014consistent rhythms with gradual increases engage patients better. PC3 'Personal Connection' (22%): Timbre diversity and instrumentation\u2014varied instruments with personal meaning enhance outcomes. Therapists now assess 3 components instead of 50 features, recommending music high in emotional resonance for withdrawn patients and personal timbre associations for trauma survivors.",
+      "next": null
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Integration: How Vectors, Matrices, and Reduction Work Together",
+      "content": "These three linear algebra concepts interconnect in clinical practice. A patient's state is represented as a vector [relaxation, engagement, mood, openness]. Therapists consult PCA results to identify 3-5 musical dimensions that matter most for the patient's condition. They apply an appropriate mixing matrix to blend instruments, optimizing for those key dimensions. Continuously, the patient's state vector updates after each session\u2014therapeutic progress appears as vector magnitude and direction changes. Linear algebra thus enables evidence-based music therapy: measuring outcomes precisely through vectors, personalizing treatments mathematically through matrices, discovering healing features through dimensionality reduction, and tracking progress statistically.",
+      "next": null
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Applying Linear Algebra to Music Therapy",
+      "content": "Demonstrate your understanding of how linear algebra powers music therapy applications.",
+      "questions": [
+        {
+          "question": "A therapist tracks a patient's session outcome as a vector [relaxation=78, engagement=85, mood=82, openness=75]. What does this vector represent, and which formula correctly calculates the vector's magnitude?",
+          "options": [
+            "A three-dimensional measurement with magnitude = 78 + 85 + 82 = 245",
+            "A four-dimensional patient state measurement with magnitude = \u221a(78\u00b2 + 85\u00b2 + 82\u00b2 + 75\u00b2) \u2248 154.8",
+            "A list of musical notes with magnitude = (78 + 85 + 82 + 75) / 4 = 80",
+            "The volumes of four instruments with magnitude = 78 \u00d7 85 \u00d7 82 \u00d7 75"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. You've counted only three components and used addition instead of the Euclidean norm formula.",
+            "Correct! This is a four-dimensional state vector. The magnitude \u221a(\u03a3 of squared components) shows the overall intensity of the patient's therapeutic response.",
+            "Incorrect. Vectors represent multidimensional data, not musical notes. Averaging doesn't give magnitude.",
+            "Incorrect. Magnitude uses the Euclidean norm (square root of sum of squares), not multiplication."
+          ],
+          "explanation": "Patient state vectors capture multiple therapeutic measurements in one mathematical object. The Euclidean norm is calculated as \u221a(x\u2081\u00b2 + x\u2082\u00b2 + x\u2083\u00b2 + x\u2084\u00b2), the standard way to measure vector length. Magnitude indicates the overall intensity of the patient's response."
+        },
+        {
+          "question": "A music therapist's mixing matrix has dimensions 3\u00d75. What does this matrix do?",
+          "options": [
+            "It transforms 5 input audio tracks into 3 output therapeutic mixes",
+            "It transforms 3 input audio tracks into 5 output therapeutic mixes",
+            "It stores data from 3 therapy sessions with 5 patients",
+            "It measures 15 different musical features"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! In matrix multiplication, the number of rows equals output dimensions and columns equals input dimensions. A 3\u00d75 matrix has 3 output mixes from 5 instruments.",
+            "Incorrect. The dimensions work opposite to what you stated. Rows are outputs, columns are inputs.",
+            "Incorrect. Matrix dimensions describe a transformation function, not data storage for sessions.",
+            "Incorrect. The matrix stores 15 mixing coefficients, not 15 independent features."
+          ],
+          "explanation": "Matrix dimensions directly determine transformation: m\u00d7n matrix transforms n-dimensional input to m-dimensional output. A 3\u00d75 mixing matrix transforms 5 instrument tracks into 3 therapeutic blends. Therapists select which blend (row) to apply based on patient needs."
+        },
+        {
+          "question": "Why is dimensionality reduction (PCA) particularly valuable for analyzing 100+ musical features in therapy research?",
+          "options": [
+            "It removes features that therapists dislike without mathematical justification",
+            "It identifies the 5-10 key features that explain most outcome variance, reducing complexity while preserving therapeutic insights",
+            "It proves that 100 features are unnecessary and should never be measured",
+            "It converts all features to the same musical scale"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. PCA is purely data-driven and mathematical, not preference-based.",
+            "Correct! PCA finds principal components (weighted combinations of original features) that capture 90%+ of variance with far fewer dimensions. Therapists focus analysis and interpretation on these.",
+            "Incorrect. PCA doesn't eliminate the value of measurement\u2014it shows which dimensions matter most for outcomes.",
+            "Incorrect. PCA requires normalization but doesn't convert features to a single scale."
+          ],
+          "explanation": "PCA mathematically identifies which combinations of features best explain outcome variation. If PC1-PC3 explain 95% of variance, therapists focus there, dramatically reducing cognitive load without losing crucial information."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Course Complete: Linear Algebra in Music Therapy",
+      "content": "Excellent work! You've mastered how linear algebra powers evidence-based music therapy. You now understand: (1) Vectors represent multidimensional patient states and track therapeutic progress, (2) Matrices transform raw sounds into personalized therapeutic compositions, (3) Dimensionality reduction identifies which musical features produce healing. These concepts form the mathematical foundation of data-driven music therapy. Next steps: Explore implementation in therapy software, study real datasets from music therapy research, or deepen knowledge of specific techniques like SVD or eigenvalue analysis."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Continue to topic selection"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Patient States & Vectors"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Sound Transformation & Matrices"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Musical Features & Dimensionality Reduction"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Learn by example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": "Proceed to integration"
+    },
+    {
+      "id": "c6b",
+      "source": "n4",
+      "target": "n2",
+      "label": "Learn another topic"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": "Learn by example"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": "Proceed to integration"
+    },
+    {
+      "id": "c8b",
+      "source": "n6",
+      "target": "n2",
+      "label": "Learn another topic"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Learn by example"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Proceed to integration"
+    },
+    {
+      "id": "c10b",
+      "source": "n8",
+      "target": "n2",
+      "label": "Learn another topic"
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": "Test your knowledge"
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": "Pass assessment"
+    },
+    {
+      "id": "c13",
+      "source": "n10",
+      "target": "n9",
+      "label": "Fail assessment - review integration"
+    }
+  ],
+  "generated_at": "2026-03-27T14:36:44.508978+00:00",
+  "model": "claude-haiku-4-5"
+}

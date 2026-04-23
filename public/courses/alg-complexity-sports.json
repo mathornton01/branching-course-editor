@@ -1,0 +1,230 @@
+{
+  "id": "alg-complexity-sports",
+  "title": "Algorithm Design and Complexity in Sports Analytics",
+  "description": "Learn algorithm efficiency through the lens of sports analytics. Explore Big O notation, space complexity, and optimization techniques using real examples from basketball, football, and baseball statistics.",
+  "topic": "Algorithm Design and Complexity",
+  "theme": "sports analytics",
+  "difficulty": "intermediate",
+  "estimated_minutes": 60,
+  "tags": [
+    "algorithms",
+    "complexity",
+    "sports analytics",
+    "big-o",
+    "optimization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Algorithm Efficiency in Sports Analytics",
+      "content": "In sports analytics, algorithms are everywhere: ranking players, predicting game outcomes, finding trends in massive datasets. But not all algorithms are created equal. Some can process millions of player statistics instantly; others would take hours or even days. Understanding algorithm design and complexity means knowing which algorithms to use for your sports problem. Let's explore how to measure and optimize algorithmic efficiency in the context of sports analytics."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "You'll explore three key aspects of algorithm design through sports analytics. Pick the topic you'd like to learn first\u2014you'll cover all three before synthesizing them together.",
+      "choices": [
+        {
+          "label": "Time Complexity & Big O Notation",
+          "next": "n3"
+        },
+        {
+          "label": "Space Complexity & Data Structures",
+          "next": "n5"
+        },
+        {
+          "label": "Algorithmic Optimization & Trade-offs",
+          "next": "n7"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Time Complexity & Big O Notation",
+      "content": "Time complexity measures how an algorithm's runtime grows as input size increases. Big O notation describes the worst-case scenario. For sports analytics, this is critical: a search algorithm that works fine for 100 players will fail with millions of historical records. O(n) means linear time\u2014each player adds one operation. O(n\u00b2) means quadratic time\u2014each player multiplies the work. O(log n) is logarithmic, the gold standard for massive datasets like complete NBA or Premier League histories."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Time Complexity in Action: Player Ranking",
+      "content": "Imagine ranking the top 100 NBA scorers across 50 seasons (15,000+ games). A naive O(n\u00b2) approach compares every player to every other\u2014225 million comparisons. Mergesort achieves O(n log n): roughly 120,000 operations on 15,000 players. For real-time updates, a balanced binary search tree inserts each player in O(log n) time. Professional platforms use optimized structures because naive loops don't scale to millions of historical game records."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Space Complexity & Data Structures",
+      "content": "Space complexity measures memory usage. In sports analytics, memory directly impacts cost and performance. Storing 50 years of NFL play-by-play data (millions of events) requires smart choices. O(n) space scales linearly with data. O(n\u00b2) space is expensive\u2014a matrix comparing every player to every other wastes memory. Hash tables offer O(1) lookup with O(n) space; nested arrays might use O(n\u00b2) space. Choosing the right structure balances speed and memory, critical for platforms processing massive historical datasets."
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Space Complexity in Action: Historical Statistics Storage",
+      "content": "A platform storing career stats for 20,000 players can use a 20,000 \u00d7 500 matrix (10 million cells) or a dictionary of dictionaries storing only non-zero stats (~1 million entries). The latter uses 10\u00d7 less memory. Adding play-by-play data: 14.4 million plays across 50 seasons. A naive array is massive; a smart index (player_id \u2192 game list) is efficient. NBA's BigDataBall carefully chooses structures because memory impacts both cloud storage cost and query speed."
+    },
+    {
+      "id": "n7",
+      "type": "content",
+      "title": "Algorithmic Optimization & Trade-offs",
+      "content": "Real algorithm design involves trade-offs. You can't always have the fastest and smallest solution. Pre-computing weekly player rankings trades space for real-time speed. Using fast heuristics trades accuracy for latency. Parallelizing across servers trades algorithm simplicity for hardware. Understanding trade-offs means choosing the right algorithm for your specific problem: live game prediction demands speed; historical analysis affords computation; mobile apps need memory efficiency."
+    },
+    {
+      "id": "n8",
+      "type": "example",
+      "title": "Optimization Trade-offs: Real-time Injury Prediction",
+      "content": "A team predicts player injuries during games. A detailed ML model (O(n log n), accurate, 2-second latency) vs. a lightweight model (O(1), slightly less accurate, 50ms latency). For real-time coaching decisions, speed wins. Another example: storing player comparisons. Pre-computing all pairs (O(n\u00b2) space) gives instant answers; computing on-demand saves space. NBA platforms do both: pre-compute popular comparisons, compute others live. This is optimization in practice."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Synthesis: Algorithm Design in Sports Analytics",
+      "content": "You've explored three pillars: time (Big O notation), space (memory usage), and optimization (trade-offs). These are intertwined in real systems. A ranking system needs O(n log n) time, O(n) space, and careful update optimization. A predictive model must run in milliseconds, fit available memory, and balance accuracy against latency. The best algorithms solve your specific problem within your constraints. Whether building fantasy football optimizers, analyzing game film, or predicting playoffs, algorithm design and complexity analysis are essential tools."
+    },
+    {
+      "id": "n10",
+      "type": "assessment",
+      "title": "Algorithm Design & Complexity Mastery",
+      "content": "Test your understanding of algorithm design and complexity in sports analytics.",
+      "questions": [
+        {
+          "question": "You're building a system to find the top 50 scorers from 10,000 NBA players. Which approach best balances time and space efficiency?",
+          "options": [
+            "A) Bubble sort (O(n\u00b2) time, O(1) space)\u2014simple and space-efficient",
+            "B) Mergesort followed by filtering (O(n log n) time, O(n) space)\u2014efficient for large datasets",
+            "C) Compare every player to every other player (O(n\u00b2) time, O(n\u00b2) space)\u2014most accurate",
+            "D) Linear search repeated 50 times (O(n) time, O(1) space)\u2014fastest possible"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Bubble sort is too slow for 10,000 players (100 million operations).",
+            "Correct! Mergesort offers O(n log n) efficiency and is widely used for sorting sports datasets.",
+            "Slower and uses excessive space\u2014unnecessary for this problem.",
+            "Linear search repeated 50 times is O(50n), worse than a single sort."
+          ],
+          "explanation": "For ranking problems with large datasets, sorting algorithms like mergesort are standard. They offer good time complexity (O(n log n)) and reasonable space usage (O(n)), making them ideal for sports analytics."
+        },
+        {
+          "question": "Your sports analytics platform stores 20 years of play-by-play data for 30 teams and queries for a player's historical plays are slow. What's the best optimization?",
+          "options": [
+            "A) Use a hash map indexed by player_id to quickly look up all of that player's plays (O(1) lookup)",
+            "B) Store all plays in a single sorted array and binary search each query (O(log n) search)",
+            "C) Create a matrix of all players \u00d7 all plays (O(n\u00b2) space for instant lookup)",
+            "D) Keep the current structure; queries are slow but memory-efficient"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Hash maps offer O(1) lookup and are perfect for this use case.",
+            "Binary search is O(log n), slower than hash map O(1) access.",
+            "A matrix wastes space and is slower for sparse data (most players don't appear in most plays).",
+            "This ignores the performance problem without good reason."
+          ],
+          "explanation": "When you need fast lookups by a specific key (player_id), hash maps are the optimal choice. They provide O(1) average-case access time, making them ideal for sports data queries."
+        },
+        {
+          "question": "A real-time fantasy football optimizer must suggest trades within 500ms. The optimal algorithm takes 5 seconds. What's the best trade-off?",
+          "options": [
+            "A) Use the optimal algorithm and increase latency requirements to 5 seconds",
+            "B) Pre-compute rankings and use a faster heuristic for live queries, sacrificing some optimality for speed",
+            "C) Parallelize the algorithm across multiple servers to speed it up",
+            "D) Switch to a simpler dataset with fewer players to make the algorithm faster"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Changing requirements to match a slow algorithm ignores user needs.",
+            "Correct! Trading optimality for speed via precomputation and heuristics is standard in real-time systems.",
+            "Parallelization helps but doesn't solve the fundamental 5-second latency.",
+            "Reducing data scope solves latency but ruins the product."
+          ],
+          "explanation": "In real-time systems, speed often trumps perfect optimality. Precomputation and heuristics are professional techniques for meeting latency requirements while maintaining reasonable solution quality."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n11",
+      "failure_target": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "end",
+      "title": "Course Complete: Algorithm Design & Complexity Mastery",
+      "content": "Congratulations! You've mastered the fundamentals of algorithm design and complexity analysis through sports analytics. You now understand Big O notation, space-time trade-offs, and how to choose algorithms for real-world sports problems. Whether optimizing player rankings, managing massive datasets, or building real-time prediction systems, you have the tools to design efficient solutions. Continue exploring how these principles apply to your favorite sports: soccer formations, cricket bowling analysis, baseball pitch prediction, or esports matchmaking\u2014algorithm design is everywhere in sports analytics."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Time Complexity"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n5",
+      "label": "Space Complexity"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n7",
+      "label": "Optimization"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c12",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T12:09:28.433886+00:00",
+  "model": "claude-haiku-4-5"
+}

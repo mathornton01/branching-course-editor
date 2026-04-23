@@ -1,0 +1,227 @@
+{
+  "id": "rl-music-therapy",
+  "title": "Reinforcement Learning in Music Therapy",
+  "description": "A diagnostic branching course on Reinforcement Learning through the lens of music therapy interventions",
+  "topic": "Reinforcement Learning",
+  "theme": "music therapy",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "reinforcement learning",
+    "music therapy",
+    "adaptive learning",
+    "AI in healthcare"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "assessment",
+      "title": "Diagnostic: Your RL Foundation",
+      "content": "Before we explore how reinforcement learning personalizes music therapy interventions, let's assess your foundational knowledge. This will help us match the course depth to your expertise level.",
+      "questions": [
+        {
+          "question": "In reinforcement learning, what is the primary goal of an agent?",
+          "options": [
+            "To maximize cumulative reward over time",
+            "To memorize all possible states",
+            "To avoid taking any actions",
+            "To predict the next input value"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! The agent learns to maximize reward through its actions.",
+            "Incorrect. Memorization is not the goal; the agent must learn general strategies.",
+            "Incorrect. Taking actions is essential to RL learning.",
+            "Incorrect. RL is about decision-making, not simple prediction."
+          ],
+          "explanation": "Reinforcement learning is fundamentally about agents learning policies that maximize long-term cumulative reward through interaction with an environment."
+        },
+        {
+          "question": "Which component of RL defines what outcomes the agent receives after each action?",
+          "options": [
+            "The policy",
+            "The reward function",
+            "The value function",
+            "The exploration strategy"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. The policy is the agent's decision strategy.",
+            "Correct! The reward function quantifies the desirability of outcomes.",
+            "Incorrect. The value function estimates future rewards, not immediate outcomes.",
+            "Incorrect. Exploration is about discovering actions, not defining outcomes."
+          ],
+          "explanation": "The reward function is critical because it signals to the agent which actions are beneficial. In music therapy RL systems, rewards might be based on patient progress metrics."
+        },
+        {
+          "question": "What is the exploration-exploitation tradeoff in RL?",
+          "options": [
+            "Choosing between a single action repeatedly versus trying new actions to learn",
+            "Deciding whether to train on old or new data",
+            "Splitting the dataset into training and testing sets",
+            "Choosing between supervised and unsupervised learning"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Balancing trying proven strategies (exploit) with discovering better ones (explore) is key.",
+            "Incorrect. Data freshness is a separate concern from exploration-exploitation.",
+            "Incorrect. Train-test splits are for cross-validation, not exploration-exploitation.",
+            "Incorrect. This is about learning paradigms, not the exploration-exploitation tradeoff."
+          ],
+          "explanation": "In music therapy, a personalization system must balance using interventions that have worked well for a patient (exploit) versus trying new approaches that might work even better (explore)."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n2",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n2",
+      "type": "content",
+      "title": "Advanced: Deep RL for Personalized Music Therapy",
+      "content": "Advanced reinforcement learning systems use deep neural networks to model complex patient responses to music therapy. These systems can learn multi-step intervention sequences where early musical choices influence later therapeutic outcomes. In a music therapy RL system, the agent observes high-dimensional state information (patient mood, physiological markers, session history) and learns to recommend song selections, tempo adjustments, or instrument choices that maximize therapeutic benefits like emotional regulation, pain reduction, or cognitive engagement.",
+      "next": "n3"
+    },
+    {
+      "id": "n3",
+      "type": "example",
+      "title": "Advanced Example: Deep Q-Network in Dementia Care",
+      "content": "Consider a music therapist treating dementia patients. A deep Q-network learns that soft piano at 60 BPM works well for confused states but can become ineffective after 20 minutes, at which point transitioning to familiar folk songs (even at higher tempo) boosts engagement. The DQN observes multi-dimensional state: patient confusion level (via cognitive tests), heart rate variability (via sensor), and session elapsed time. Over 100+ patient sessions, the network learns that the optimal policy isn't a fixed playlist but a dynamic sequence that responds to moment-to-moment patient state. This approach has shown 40% improvement in engagement metrics compared to non-adaptive playlists.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "end",
+      "title": "Course Complete: Advanced Mastery",
+      "content": "You've explored how advanced deep reinforcement learning personalizes music therapy at scale. You understand how agents learn complex, multi-step intervention strategies from high-dimensional patient data. You can design reward functions that capture therapeutic outcomes and deploy adaptive music therapy systems. Consider how RL could enhance music therapy in stroke rehabilitation, PTSD treatment, or pediatric pain management. The principles apply wherever sequential decision-making under uncertainty optimizes patient care."
+    },
+    {
+      "id": "n5",
+      "type": "content",
+      "title": "Foundations: RL Concepts for Music Therapy",
+      "content": "Reinforcement learning helps music therapists personalize interventions by learning from patient responses. Imagine a system that observes a patient's mood (the state), tries different songs or instruments (actions), and receives feedback on whether the patient relaxed or became more engaged (rewards). Over many sessions, the system learns which interventions work best for which patients. The agent learns a policy\u2014a decision rule like 'when patient shows anxiety, play acoustic guitar at 72 BPM'\u2014that maximizes patient wellbeing. Key concepts: the agent learns through trial-and-error, rewards drive learning, and the goal is to maximize long-term therapeutic outcomes, not just immediate reactions.",
+      "next": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "example",
+      "title": "Foundation Example: Q-Learning for Anxiety Reduction",
+      "content": "A music therapy RL system helps reduce anxiety in hospital patients. The agent has four actions: play classical (Baroque), play nature sounds, play patient's favorite song (from intake survey), or play silence. After each 10-minute intervention, nurses rate anxiety on a 0-10 scale (the reward: higher scores mean lower anxiety). Using Q-learning, the system discovers that Baroque music followed by favorite songs works best for most patients, but some prefer silence after stressful procedures. After 20 patient sessions, the system learned a simple policy: 'Default to Baroque, but if patient anxiety exceeds 7/10, switch to favorite song immediately.' This personalized approach achieved 35% better anxiety reduction than a static playlist.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "practice",
+      "title": "Practice: Applying RL to Music Therapy Scenarios",
+      "content": "Apply your understanding of reinforcement learning to realistic music therapy scenarios. Test your knowledge of how agents learn, how rewards guide behavior, and how RL systems adapt to individual patient needs.",
+      "questions": [
+        {
+          "question": "A music therapy RL system is trained to reduce pain in post-operative patients using a pain-score reward. After training, the system recommends heavy metal music, which temporarily distracts patients and lowers pain scores. Why is this problematic for real deployment?",
+          "options": [
+            "The reward function doesn't capture genuine therapeutic outcomes; it only measures pain distraction, not long-term healing or patient satisfaction.",
+            "Heavy metal is objectively bad music.",
+            "The system didn't explore enough music genres.",
+            "The training data was too small."
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! This is reward misalignment. The reward function must reflect true therapeutic goals, not just measurable proxies.",
+            "Incorrect. Genre quality is subjective; the core issue is what behavior the reward incentivizes.",
+            "Incorrect. The problem isn't exploration, it's that the reward itself is misaligned with real therapeutic outcomes.",
+            "Incorrect. Even with more data, a misaligned reward would still learn harmful behavior."
+          ],
+          "explanation": "Reward alignment is critical in RL. In music therapy, rewards must capture holistic patient wellbeing\u2014not just pain scores or engagement alone, but the combination that leads to genuine therapeutic progress and patient satisfaction."
+        },
+        {
+          "question": "An RL system trained on music therapy for depression in one clinic (diverse age, cultural backgrounds, preferences) is deployed at a different clinic and performance drops 30%. What likely happened?",
+          "options": [
+            "The policy overfitted to the training environment and didn't generalize to the new patient population.",
+            "The reward function was too complex.",
+            "The new clinic is less skilled at implementing interventions.",
+            "The system wasn't given enough exploration budget."
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Overfitting means learning brittle policies tied to specific contexts. Effective music therapy RL requires diverse training populations.",
+            "Incorrect. Complexity isn't the issue; generalization across populations is.",
+            "Incorrect. We assume consistent intervention implementation.",
+            "Incorrect. Exploration budget affects learning efficiency, not population generalization."
+          ],
+          "explanation": "RL systems trained on homogeneous data learn policies too specific to that context. In music therapy, systems trained on one demographic may not work for others. Real deployment requires training diversity and continual learning as new populations arrive."
+        },
+        {
+          "question": "Which RL technique best balances using proven effective interventions (classical music, guided imagery) against discovering potentially better interventions for individual patients?",
+          "options": [
+            "Multi-armed bandit or Thompson sampling",
+            "Pure exploitation (always use the best known action)",
+            "Pure exploration (try new genres constantly)",
+            "Supervised learning on historical preference data"
+          ],
+          "correct_index": 0,
+          "feedback": [
+            "Correct! Bandits and Thompson sampling elegantly balance exploration and exploitation\u2014trying known-good interventions while intelligently exploring new options.",
+            "Incorrect. Pure exploitation ignores discovery and adaptation opportunities.",
+            "Incorrect. Pure exploration would be chaotic and frustrating for patients.",
+            "Incorrect. Supervised learning doesn't handle sequential decision-making or adaptation."
+          ],
+          "explanation": "The exploration-exploitation tradeoff is central to RL. Bandit algorithms let systems exploit known-effective interventions while statistically exploring alternatives that might be better\u2014all while minimizing patient risk."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n8",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Course Complete: Reinforcement Learning Foundations",
+      "content": "You've learned how reinforcement learning personalizes music therapy interventions. You understand how agents learn through feedback, how rewards guide behavior, and how RL systems adapt to individual patient needs. You can identify reward alignment challenges, generalization issues, and deployment considerations. These fundamentals apply across music therapy domains\u2014from anxiety reduction in hospitals to dementia care to pain management in pediatric settings. Explore actor-critic methods, inverse RL for learning from expert therapists, and continual learning systems as you advance."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Strong foundation"
+    },
+    {
+      "id": "c2",
+      "source": "n1",
+      "target": "n5",
+      "label": "Build foundation"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n3",
+      "label": "Next"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Complete"
+    },
+    {
+      "id": "c5",
+      "source": "n5",
+      "target": "n6",
+      "label": "Next"
+    },
+    {
+      "id": "c6",
+      "source": "n6",
+      "target": "n7",
+      "label": "Practice"
+    },
+    {
+      "id": "c7",
+      "source": "n7",
+      "target": "n8",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T08:35:03.042896+00:00",
+  "model": "claude-haiku-4-5"
+}

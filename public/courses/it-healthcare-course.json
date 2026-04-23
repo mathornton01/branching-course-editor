@@ -1,0 +1,393 @@
+{
+  "id": "it-healthcare-course",
+  "title": "Information Theory in Healthcare",
+  "description": "Explore information theory through three healthcare lenses: diagnostic uncertainty, medical image compression, and reliable data transmission. Choose your own learning path.",
+  "topic": "Information Theory",
+  "theme": "healthcare",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "information-theory",
+    "healthcare",
+    "data-science",
+    "diagnosis",
+    "medical-imaging",
+    "networks"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Introduction to Information Theory in Healthcare",
+      "content": "Information theory is the mathematical study of data, uncertainty, and communication. In healthcare, it helps us understand how medical data flows through systems, how much information we can extract from patient records, and how reliably we can transmit critical information between devices and systems. From diagnostic decisions to genetic sequencing to hospital networks, information theory provides the foundation for effective healthcare delivery. This course explores three core applications: measuring uncertainty in diagnosis, compressing medical images efficiently, and ensuring reliable data transmission in clinical settings.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Healthcare information theory applies across multiple domains. Which area interests you most?",
+      "choices": [
+        {
+          "label": "Diagnostic Uncertainty: How information helps doctors make better decisions",
+          "next": "n3"
+        },
+        {
+          "label": "Medical Imaging: How we compress and store massive image files efficiently",
+          "next": "n6"
+        },
+        {
+          "label": "Clinical Networks: How hospitals safely transmit patient data across systems",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Understanding Entropy: Uncertainty in Medical Diagnosis",
+      "content": "Entropy measures the amount of uncertainty in a system. In medical diagnosis, entropy quantifies how much information you gain from each test or symptom. A high-entropy situation exists when a patient presents with symptoms that could indicate many different conditions\u2014each equally likely. Each diagnostic test reduces this entropy by providing information that makes some diagnoses more probable and others less likely. Doctors instinctively practice entropy reduction: they ask targeted questions and order tests that distinguish between most likely diagnoses. Information theory formalizes this intuition, helping us understand optimal diagnostic sequences and predict information yield from different tests.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Worked Example: Diagnostic Uncertainty",
+      "content": "Consider a 45-year-old patient with chest pain. Initially, it could be a heart attack, anxiety, acid reflux, or muscle strain\u2014four equally likely diagnoses (high entropy). An EKG test provides crucial information: it shows normal ST segments, eliminating heart attack. Now chest pain likely indicates acid reflux or muscle strain\u2014uncertainty is reduced (entropy decreased). A follow-up question about recent heavy lifting makes muscle strain much more probable. Each piece of information\u2014the EKG result, the symptom characteristics, the patient history\u2014reduces diagnostic uncertainty. This stepwise reduction of uncertainty is entropy reduction, and information theory helps quantify which tests provide the most entropy reduction per dollar spent.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Assessment: Entropy Concepts in Diagnosis",
+      "content": "Test your understanding of entropy in diagnostic settings.",
+      "questions": [
+        {
+          "question": "A patient's symptoms could initially indicate 8 different conditions with equal probability. After a blood test, this narrows to 2 likely conditions. What happened to the entropy?",
+          "options": [
+            "Entropy increased",
+            "Entropy decreased",
+            "Entropy stayed the same",
+            "Entropy became undefined"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No, more information was gained, not less.",
+            "\u2713 Correct! The test narrowed possibilities, reducing uncertainty.",
+            "Incorrect\u2014the range of possibilities changed significantly.",
+            "Entropy is still well-defined for any probability distribution."
+          ],
+          "explanation": "When diagnostic tests reduce the number of likely conditions or change their probabilities, entropy decreases. Less uncertainty means less entropy."
+        },
+        {
+          "question": "In information theory, which diagnostic scenario represents the HIGHEST entropy (most uncertainty)?",
+          "options": [
+            "A test result definitively shows the patient has condition X",
+            "Symptoms clearly point to one specific disease",
+            "A patient has symptoms that could equally indicate 6 different diseases",
+            "A patient's imaging shows no abnormalities"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "No\u2014definitive results have very low entropy.",
+            "No\u2014clear indication means low uncertainty.",
+            "\u2713 Correct! Equal probability across many possibilities = maximum entropy.",
+            "No\u2014this provides fairly clear information."
+          ],
+          "explanation": "Entropy is maximized when all outcomes are equally probable. If 6 conditions are equally likely, that's higher entropy than if 1 or 2 conditions dominate."
+        },
+        {
+          "question": "A doctor can order Test A ($100, narrows diagnosis from 4 to 2 options) or Test B ($50, narrows diagnosis from 4 to 3 options). Which provides better information-theory value?",
+          "options": [
+            "Test A\u2014it costs more",
+            "Test B\u2014it costs less",
+            "Test A\u2014it reduces entropy more",
+            "Need actual probability distributions to calculate precisely"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "No\u2014cost doesn't determine information value.",
+            "No\u2014low cost doesn't mean better information gain.",
+            "Reasonable intuition, but missing nuance.",
+            "\u2713 Best answer\u2014we need actual probabilities to calculate information gain precisely."
+          ],
+          "explanation": "Information gain depends on how probabilities change, not just the count of remaining options. Test A reduces 4\u21922 (50% reduction) but Test B reduces 4\u21923 (25% reduction), yet the actual information gain requires knowing the true probability distributions to calculate using Shannon's formula."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n12",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Data Compression: Efficient Medical Imaging Storage",
+      "content": "Medical imaging generates massive amounts of data. An MRI scan can be 500 MB, a CT scan 1-2 GB, and a full hospital day's worth of imaging could reach terabytes. Transmitting, storing, and retrieving this data across hospital networks and over time is expensive. Information theory provides compression algorithms that remove redundant information without losing critical diagnostic detail. Lossless compression (like DICOM compression) preserves all original data, while lossy compression (like JPEG for medical images) removes some imperceptible variation. The key insight from information theory is that natural images contain massive redundancy\u2014adjacent pixels are similar, intensity ranges are clustered. We can exploit this redundancy mathematically to achieve 10:1 or higher compression ratios, storing a month of scans that would otherwise require multiple hard drives on a single device.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Worked Example: Medical Image Compression",
+      "content": "An MRI brain scan is 2 GB uncompressed. Using lossless DICOM compression (based on information theory), it compresses to 400 MB\u2014a 5:1 ratio. A hospital with 50 MRI scans per day would generate 100 GB of data daily (50 \u00d7 2 GB). With compression, it's only 20 GB. Over a year, that's 7.3 TB instead of 36.5 TB\u2014a massive reduction in storage costs and infrastructure. Lossy compression (like JPEG variants optimized for medical imaging) can achieve 15:1 or 20:1 ratios by removing imperceptible visual differences, but radiologists must validate that the compression doesn't hide critical diagnostic information. Information theory tells us exactly how much information is in each pixel, allowing engineers to compress intelligently: keep the diagnostically important information, remove redundancy.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Assessment: Data Compression Concepts",
+      "content": "Test your understanding of how information theory applies to medical image compression.",
+      "questions": [
+        {
+          "question": "Why is compression crucial in healthcare imaging?",
+          "options": [
+            "It makes images look prettier",
+            "It reduces storage costs and transmission time while preserving diagnostic quality",
+            "It removes most diagnostic information to speed up analysis",
+            "It's only useful for archival images, not current patient care"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No\u2014this isn't about aesthetics.",
+            "\u2713 Correct! Compression reduces storage/transmission without compromising clinical value.",
+            "No\u2014compression is designed to preserve critical information.",
+            "No\u2014hospitals use compression for all images for efficiency."
+          ],
+          "explanation": "Medical compression is essential because imaging datasets are enormous but highly redundant. Removing redundancy via compression cuts costs and speeds transmission while maintaining the diagnostic information that clinicians need."
+        },
+        {
+          "question": "A CT scan is 1.5 GB. After lossless compression, it becomes 300 MB. What is the compression ratio?",
+          "options": [
+            "0.2:1",
+            "5:1",
+            "15:1",
+            "Cannot be determined"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No\u2014that's the reciprocal.",
+            "\u2713 Correct! 1500 MB \u00f7 300 MB = 5:1 compression ratio.",
+            "No\u2014that would be 100 MB.",
+            "We have all the information needed."
+          ],
+          "explanation": "Compression ratio = original size \u00f7 compressed size = 1500 \u00f7 300 = 5. This means the original data was 5 times larger than the compressed version."
+        },
+        {
+          "question": "Why is lossy compression riskier than lossless compression for medical images?",
+          "options": [
+            "Lossy compression is absolutely forbidden in healthcare",
+            "Lossy compression removes some data\u2014radiologists must verify it doesn't hide diagnostic details",
+            "Lossy compression is more expensive",
+            "Lossy compression doesn't actually reduce file size"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No\u2014lossy compression is used, but carefully.",
+            "\u2713 Correct! Lossy compression removes imperceptible data, but medical validation is essential.",
+            "No\u2014it's typically cheaper.",
+            "No\u2014it definitely reduces file size."
+          ],
+          "explanation": "Lossy compression discards some data to achieve higher ratios. For medical images, this could theoretically hide subtle findings (like a small tumor). Each use requires careful validation that the level of loss doesn't obscure clinically important details."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n12",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Information Channels: Medical Data Transmission",
+      "content": "Healthcare systems rely on constant data transmission: EHR updates, lab results, device telemetry, imaging data, and real-time patient monitoring streams flow continuously across hospital networks and the internet. Information theory defines a 'channel' as a communication path with a specific capacity\u2014the maximum amount of information it can reliably transmit per unit time. Real channels have noise: electromagnetic interference, network congestion, packet loss, and security threats. Shannon's channel capacity formula tells us the theoretical maximum data rate given a channel's bandwidth and noise level. In healthcare, understanding channel capacity helps network engineers ensure critical data (arrhythmia alerts, infusion pump commands) arrives reliably despite noisy networks, and helps security specialists design error correction and encryption that protects patient data without exceeding channel bandwidth.",
+      "next": "n10"
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Worked Example: Hospital EMR Network",
+      "content": "A large hospital's electronic health record system must transmit patient updates across departments instantly. The main hospital-wide network channel has 1 Gbps bandwidth with some electromagnetic noise from medical equipment. Information theory calculates the channel's Shannon capacity: if signal-to-noise ratio is 100:1, capacity is approximately 700 Mbps. An urgent alert about a critical lab value (potassium level threatening heart rhythm) is a tiny message\u2014a few kilobits\u2014and easily fits with enormous headroom. But streaming real-time video of an operating room to a remote surgeon (telemedicine), capturing every vessel and anatomical detail, requires hundreds of Mbps. Information theory tells us which data can coexist on the same channel reliably, and which require dedicated, higher-capacity channels. Adding error-correction to critical alerts uses some channel capacity but ensures they arrive correctly despite noise.",
+      "next": "n11"
+    },
+    {
+      "id": "n11",
+      "type": "assessment",
+      "title": "Assessment: Information Channels",
+      "content": "Test your understanding of channel capacity and medical data transmission.",
+      "questions": [
+        {
+          "question": "In information theory, what is 'channel capacity'?",
+          "options": [
+            "The total amount of data a hospital stores",
+            "The maximum amount of information a communication channel can reliably transmit per unit time",
+            "The speed at which a doctor reads data",
+            "The number of devices connected to a network"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No\u2014that's storage capacity.",
+            "\u2713 Correct! Channel capacity depends on bandwidth and noise.",
+            "No\u2014that's not a technical definition.",
+            "No\u2014that's network size, not channel capacity."
+          ],
+          "explanation": "Channel capacity is defined by Shannon's formula as C = B \u00d7 log\u2082(1 + S/N), where B is bandwidth and S/N is signal-to-noise ratio. It sets a theoretical upper limit on reliable data transmission."
+        },
+        {
+          "question": "A telemedicine surgeon streams 4K video of an operating room (high bandwidth) while critical patient alerts transmit (low bandwidth). What does information theory tell us?",
+          "options": [
+            "Both should use the same channel without problems",
+            "The video will definitely prevent alerts from getting through",
+            "We must calculate if both fit within the channel's capacity, and possibly add error-correction for critical alerts",
+            "4K video is impossible in any healthcare setting"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "No\u2014we must check capacity.",
+            "Too definitive\u2014it depends on the actual channel capacity.",
+            "\u2713 Correct! Information theory helps us optimize what data shares which channels.",
+            "No\u2014telemedicine is increasingly common."
+          ],
+          "explanation": "Channel capacity is finite. We must calculate whether both data streams (video + alerts) fit within the channel's maximum reliable transmission rate. Critical alerts may need priority or error-correction, using some of the channel's capacity."
+        },
+        {
+          "question": "Why does noise in a medical data transmission channel present a problem?",
+          "options": [
+            "It makes the signal sound bad",
+            "It increases the theoretical and practical limit on reliable data transmission rate",
+            "It is completely unavoidable and nothing can be done",
+            "It only affects video, not text data"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "No\u2014medical data is silent.",
+            "\u2713 Correct! Noise reduces Shannon capacity, requiring more robust (but slower) transmission.",
+            "No\u2014error correction and shielding help.",
+            "No\u2014noise affects all data types."
+          ],
+          "explanation": "Noise reduces the signal-to-noise ratio, which directly decreases Shannon channel capacity. To maintain reliability despite noise, we either reduce transmission speed or add error-correction codes, both of which consume channel capacity."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n12",
+      "failure_target": "n9"
+    },
+    {
+      "id": "n12",
+      "type": "content",
+      "title": "Synthesis: Information Theory Across Healthcare",
+      "content": "Information theory unifies three critical healthcare challenges: making better diagnostic decisions by understanding what information each test provides (entropy), managing the massive data burden of modern medicine by compressing without losing critical detail (compression), and ensuring data flows reliably and securely across hospital networks and the internet (channel capacity). These three areas are deeply connected. Diagnostic entropy reduction determines what data enters the system. Data compression allows efficient storage and transmission of that information across channels. Channel capacity limits how quickly results can be shared, affecting clinical workflow and patient outcomes. A modern radiologist might perform an MRI scan (generating 2 GB of imaging data), which gets compressed lossily for archival and transmitted to the pathology department via the hospital network, where subtle findings are analyzed to reduce diagnostic entropy about a tumor's nature. Information theory provides the mathematical foundation for optimizing each step: Which tests maximize information gain per dollar? How much can we compress without losing critical diagnostic signal? How do we ensure critical data arrives despite noisy networks? Understanding these principles helps healthcare professionals\u2014clinicians, engineers, administrators\u2014make better decisions about technology investment, workflow design, and system optimization. The future of precision medicine depends on managing information efficiently at every stage.",
+      "next": "n13"
+    },
+    {
+      "id": "n13",
+      "type": "end",
+      "title": "Course Complete",
+      "content": "Congratulations! You've explored information theory through the lens of healthcare. You've learned how entropy quantifies diagnostic uncertainty, how compression makes modern medical imaging practical, and how channel capacity ensures reliable data transmission in clinical networks. Information theory might seem abstract, but it's deeply practical: it's in every diagnostic algorithm, every medical image file, and every hospital network. As healthcare becomes increasingly digital and data-driven, these concepts will become even more central to patient care, research, and innovation. Consider how these principles might apply to your own healthcare work\u2014whether you're a clinician, engineer, administrator, or student."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Begin"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Diagnostic Uncertainty"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Medical Imaging"
+    },
+    {
+      "id": "c4",
+      "source": "n2",
+      "target": "n9",
+      "label": "Clinical Networks"
+    },
+    {
+      "id": "c5",
+      "source": "n3",
+      "target": "n4",
+      "label": "Example"
+    },
+    {
+      "id": "c6",
+      "source": "n4",
+      "target": "n5",
+      "label": "Assessment"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c8",
+      "source": "n5",
+      "target": "n3",
+      "label": "Fail - Review"
+    },
+    {
+      "id": "c9",
+      "source": "n6",
+      "target": "n7",
+      "label": "Example"
+    },
+    {
+      "id": "c10",
+      "source": "n7",
+      "target": "n8",
+      "label": "Assessment"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c12",
+      "source": "n8",
+      "target": "n6",
+      "label": "Fail - Review"
+    },
+    {
+      "id": "c13",
+      "source": "n9",
+      "target": "n10",
+      "label": "Example"
+    },
+    {
+      "id": "c14",
+      "source": "n10",
+      "target": "n11",
+      "label": "Assessment"
+    },
+    {
+      "id": "c15",
+      "source": "n11",
+      "target": "n12",
+      "label": "Pass"
+    },
+    {
+      "id": "c16",
+      "source": "n11",
+      "target": "n9",
+      "label": "Fail - Review"
+    },
+    {
+      "id": "c17",
+      "source": "n12",
+      "target": "n13",
+      "label": "Complete"
+    }
+  ],
+  "generated_at": "2026-03-27T04:21:21.148526+00:00",
+  "model": "claude-haiku-4-5"
+}

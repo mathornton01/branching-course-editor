@@ -1,0 +1,269 @@
+{
+  "id": "ds-space-course",
+  "title": "Distributed Systems: Building Resilient Space Missions",
+  "description": "Master distributed systems through real space exploration scenarios. Learn consensus algorithms and network reliability through Mars rovers, Earth-to-space communication, and satellite constellations.",
+  "topic": "Distributed Systems",
+  "theme": "space exploration",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "distributed-systems",
+    "consensus",
+    "fault-tolerance",
+    "space-exploration",
+    "networks"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Distributed Systems in Space Exploration",
+      "content": "Space missions operate across vast distances where coordination failures can cost billions. From Mars rover swarms communicating across millions of kilometers to the International Space Station managing redundant systems, distributed systems solve the fundamental challenge: how do multiple independent machines work together reliably when communication is slow, unreliable, or even impossible. In this course, you'll learn the two core pillars of space-grade reliability: getting systems to agree despite failures, and ensuring messages reach their destination across the harshness of space.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "Let's tailor your learning to your interests. You can either start with how distributed systems reach agreement despite failures, or dive into building communication networks that survive in space.",
+      "choices": [
+        {
+          "label": "Consensus & Coordination",
+          "next": "n3"
+        },
+        {
+          "label": "Network Reliability",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Consensus Algorithms & Byzantine Fault Tolerance",
+      "content": "When five rovers on Mars need to agree on a waypoint, one rover's navigation computer might fail\u2014or worse, send contradictory instructions (Byzantine failure). Byzantine Fault Tolerant (BFT) consensus algorithms let systems agree on a single truth even when some nodes are faulty or adversarial. Raft and Practical Byzantine Fault Tolerance (PBFT) are the gold standards: PBFT tolerates up to (n-1)/3 Byzantine faults, while Raft is simpler but assumes crash failures only. These algorithms are critical for any multi-node system where a single wrong decision could doom a mission.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "The Red Planet Navigation Protocol",
+      "content": "Imagine five rovers exploring Jezero Crater, each with its own navigation computer. Mission control wants them to converge on waypoint coordinates for a mineral sample. One rover's CPU is damaged by radiation and sends corrupted coordinates. Using PBFT: the five rovers broadcast their proposed coordinates. Each rover receives all five proposals and picks the one with the most agreement (three out of five agree on the correct coordinates). The faulty rover is outvoted, and all four healthy rovers proceed to the correct waypoint. This single consensus round\u2014measured in seconds despite 14-minute Earth-to-Mars latency\u2014protects the mission from a single point of failure.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Consensus Mastery Check",
+      "content": "Test your understanding of consensus algorithms and Byzantine fault tolerance.",
+      "questions": [
+        {
+          "question": "You're designing a swarm of seven rovers that must agree on a landing zone. One rover's computer is faulty and produces arbitrary wrong values (Byzantine fault). Using Byzantine Fault Tolerant consensus, what is the minimum number of rovers that must agree for the swarm to make a decision?",
+          "options": [
+            "At least six rovers (any single fault is tolerated)",
+            "At least five rovers (can tolerate up to two Byzantine faults)",
+            "At least four rovers (each rover can tolerate one faulty neighbor)",
+            "Exactly three rovers (majority vote always works)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Close, but BFT can tolerate more than one fault. With seven nodes, you can tolerate two Byzantine faults.",
+            "Correct! With n=7, PBFT tolerates (n-1)/3 = 2 Byzantine faults, so you need five honest nodes to agree.",
+            "The protocol doesn't rely on pairwise voting between neighbors.",
+            "Majority vote doesn't account for Byzantine (lying) nodes\u2014you need BFT."
+          ],
+          "explanation": "PBFT can tolerate up to (n-1)/3 Byzantine faults. With seven rovers, that's two faults maximum. To guarantee agreement, you need at least n - f = 7 - 2 = five honest rovers to agree."
+        },
+        {
+          "question": "A Mars rover consensus protocol uses Raft instead of PBFT. Which assumption does Raft rely on that PBFT does not?",
+          "options": [
+            "All nodes have synchronized clocks",
+            "Nodes fail by crashing, not by sending arbitrary wrong data (Byzantine failures)",
+            "Communication is always instantaneous",
+            "The majority of nodes are always reachable"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Raft doesn't require synchronized clocks.",
+            "Correct! Raft assumes crash failures, not Byzantine failures. PBFT handles nodes that lie or behave arbitrarily.",
+            "Raft doesn't assume instantaneous communication.",
+            "Both protocols require a reachable majority."
+          ],
+          "explanation": "Raft is simpler than PBFT because it assumes nodes either work correctly or crash. If you need to tolerate nodes that send contradictory data, you must use PBFT or another Byzantine-tolerant algorithm."
+        },
+        {
+          "question": "During a consensus round for rover positioning, the communication link to Mars is degraded and only three out of five rovers receive the proposal message. The three who received it agree on the waypoint. What happens?",
+          "options": [
+            "All five rovers move to the waypoint because quorum was reached",
+            "Only the three rovers move, the other two wait until they hear about the decision",
+            "The consensus fails and rovers retry until all five receive the message",
+            "The decision is invalid because not all rovers received the proposal"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Consensus requires a quorum (majority), but the two rovers without the message must learn the outcome.",
+            "Correct! The three rovers form a quorum and decide. They then broadcast the decision to the other two.",
+            "Raft and PBFT don't guarantee all nodes receive every message\u2014they guarantee eventual consistency.",
+            "Many systems tolerate temporary inconsistency and repair via gossip or leader election."
+          ],
+          "explanation": "When a quorum agrees, consensus is achieved. Non-quorum nodes must be informed of the decision asynchronously, allowing the system to proceed even when communication is unreliable."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n3"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Network Reliability in Space",
+      "content": "Sending a signal to Mars takes 14 minutes one-way; a round-trip acknowledgment takes 28 minutes. In space, you can't resend a message if you don't hear back in 100 milliseconds. You must design systems that tolerate massive latency, radiation-induced bit flips, and brief communication blackouts. Key strategies: redundant communication paths (multiple satellites relay the same message), message acknowledgments with exponential backoff, data replication across nodes, and forward error correction. The ISS operates 16 communication windows per day, each lasting 10 minutes\u2014planning around such constraints is fundamental to space-grade reliability.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "The Deep Space Communication Network",
+      "content": "Mission Control sends critical shutdown instructions to a Mars lander: 'Retract solar panels before dust storm.' The message is encoded with redundancy (forward error correction) and sent via three independent relay satellites. One satellite's receiver is damaged by cosmic radiation and never gets the message. A second satellite receives it, decodes it correctly, and waits for acknowledgment from the lander. After 28 minutes of latency, the lander replies 'Acknowledged.' The second satellite broadcasts this acknowledgment back to Earth and to a backup ground station. Even though one relay failed and communication is slow, the critical message was delivered. This is how space systems survive: not by hoping every link works, but by designing for inevitable failures.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Network Reliability Mastery Check",
+      "content": "Test your understanding of building resilient communication in space.",
+      "questions": [
+        {
+          "question": "You're designing a communication system for a lunar base. Earth is 1.3 light-seconds away (2.6 seconds round-trip). Why can't the lunar base use the same simple request-response protocol as a typical Earth data center?",
+          "options": [
+            "Lunar computers are too slow to process messages",
+            "Every request-response round takes 2.6 seconds; synchronous protocols become extremely sluggish",
+            "The moon moves away from Earth periodically, breaking the connection",
+            "Lunar Wi-Fi doesn't support TCP/IP"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Lunar computers are capable but not the bottleneck.",
+            "Correct! A 2.6-second latency makes synchronous protocols impractical. Lunar systems must operate asynchronously.",
+            "Communication works despite lunar distance; latency is the constraint, not availability.",
+            "Lunar systems use standard protocols like TCP/IP, just adapted for latency."
+          ],
+          "explanation": "Space systems must be asynchronous: send a command, continue working, and handle the response when it arrives. Synchronous round-trips are too slow for real-time operations."
+        },
+        {
+          "question": "A Mars rover's communication system transmits data via three independent links. One link has 90% reliability, another 85%, and the third 88%. If you replicate each message across all three links, what is the probability that at least one copy arrives correctly?",
+          "options": [
+            "About 88% (average reliability)",
+            "About 100% (almost certainly at least one arrives)",
+            "About 1.2% (product of failure rates)",
+            "About 99.82% (1 - 0.10 \u00d7 0.15 \u00d7 0.12)"
+          ],
+          "correct_index": 3,
+          "feedback": [
+            "Averaging doesn't account for redundancy.",
+            "Close intuition, but let's calculate precisely.",
+            "That's the product of failure rates, but we need one minus that.",
+            "Correct! Probability all three fail = 0.10 \u00d7 0.15 \u00d7 0.12 = 0.0018. So at least one arrives with ~99.82% probability."
+          ],
+          "explanation": "Redundant channels multiply reliability. With three independent paths, the system fails only if all three fail simultaneously, which is extremely unlikely."
+        },
+        {
+          "question": "Your satellite network experiences a solar storm that disrupts all communication for four hours. The ground station has 10 GB of data to upload to an orbital satellite. When communication resumes, how should you handle the upload?",
+          "options": [
+            "Send the entire 10 GB as one large file to ensure completeness",
+            "Break the data into smaller chunks with checksums; retry only failed chunks",
+            "Wait another 24 hours to ensure the solar storm has completely passed",
+            "Send the data multiple times in parallel to maximize throughput"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "One large file risks losing everything if a bit flips mid-transmission.",
+            "Correct! Chunking with checksums allows you to detect and retry only the failed parts, vastly more efficient.",
+            "After four hours, solar conditions usually stabilize. Waiting longer reduces mission productivity.",
+            "Parallel transmission is good but chunking + checksums is the foundational pattern."
+          ],
+          "explanation": "Space-grade reliability uses chunked transfer with error detection. Each chunk is small enough to validate independently, so transmission faults are localized and efficient to recover."
+        }
+      ],
+      "pass_threshold": 2,
+      "success_target": "n9",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "Distributed Systems Across the Galaxy",
+      "content": "You've mastered the two pillars of space-grade distributed systems: consensus algorithms that let rovers and satellites agree despite failures, and network reliability strategies that deliver messages across millions of kilometers. Real missions like NASA's Mars 2020 (Perseverance rover) use both\u2014onboard consensus to coordinate rover swarms, and forward error correction plus retransmission to handle Earth-to-Mars communication. As humanity pushes toward Mars bases and beyond, these principles will scale to millions of nodes, light-minutes of latency, and radiation that degrades hardware in real time. You're now equipped to design systems that work reliably where failure means mission loss. The galaxy awaits."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Introduction"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Consensus & Coordination"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Network Reliability"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Example"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Assessment"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c7",
+      "source": "n5",
+      "target": "n3",
+      "label": "Fail"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n7",
+      "label": "Example"
+    },
+    {
+      "id": "c9",
+      "source": "n7",
+      "target": "n8",
+      "label": "Assessment"
+    },
+    {
+      "id": "c10",
+      "source": "n8",
+      "target": "n9",
+      "label": "Pass"
+    },
+    {
+      "id": "c11",
+      "source": "n8",
+      "target": "n6",
+      "label": "Fail"
+    }
+  ],
+  "generated_at": "2026-03-27T15:47:02.384809+00:00",
+  "model": "claude-haiku-4-5"
+}

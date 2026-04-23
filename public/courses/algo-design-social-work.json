@@ -1,0 +1,257 @@
+{
+  "id": "algo-design-social-work",
+  "title": "Algorithm Design and Complexity: A Social Work Perspective",
+  "description": "Learn algorithm design and complexity analysis through real-world social work scenarios, from case management to resource allocation",
+  "topic": "Algorithm Design and Complexity",
+  "theme": "social work",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "algorithms",
+    "complexity",
+    "social work",
+    "case management",
+    "optimization"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "Algorithms in Social Work: An Introduction",
+      "content": "Every day, social workers face complex decisions: Which clients need immediate crisis intervention? How should we allocate limited funding across community programs? What's the most efficient way to match families with available housing resources? These are algorithmic challenges. An algorithm is a step-by-step procedure for solving a problem, and understanding how to design efficient algorithms can transform how social services organizations operate. In this course, you'll learn to analyze the efficiency of your decision-making processes and design better solutions for the communities you serve.",
+      "next": "n2"
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Learning Path",
+      "content": "How would you prefer to learn about algorithm design and complexity? You can start with the theoretical foundations and then see how they apply to social work, or jump into real-world social work scenarios and then understand the underlying principles.",
+      "choices": [
+        {
+          "label": "Theory First: Learn foundations, then apply to social work",
+          "next": "n3"
+        },
+        {
+          "label": "Practice First: Start with social work problems, then understand principles",
+          "next": "n6"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Algorithm Design Fundamentals: Step by Step",
+      "content": "Effective algorithms share common characteristics. First, they break complex problems into discrete, manageable steps\u2014just as a social worker breaks down a client's needs assessment into individual components. Second, they specify exactly what to do with inputs and how to produce outputs consistently. Third, they consider efficiency: not just whether a solution works, but how much time and resources it requires. When processing 1,000 client intake forms, the difference between an O(n) and O(n\u00b2) algorithm can mean hours of wasted staff time. Algorithm design starts with problem clarity, proceeds through solution design, and culminates in complexity analysis\u2014measuring how the solution scales as the problem grows larger.",
+      "next": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "Case Triage: Designing an Algorithm for Crisis Prioritization",
+      "content": "Imagine your emergency response team receives 200 calls daily. You need an algorithm to prioritize who gets served first. A naive approach might check every previous case to identify patterns (O(n\u00b2)\u2014comparing each caller to all historical cases). A better algorithm creates risk categories upfront (intake questions yield a risk score in seconds\u2014O(n)), then organizes cases by category. Your social workers answer 5 questions (Is client suicidal? Homeless? Caring for children? No income? Victim of abuse?), producing a risk level instantly. This algorithm scales linearly\u2014100 callers take the same time as 1,000 callers. By using efficient design, your team moves from managing 50 cases per hour to 200 cases per hour, meaning more vulnerable people get help faster.",
+      "next": "n5"
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Theory Branch: Algorithm Design & Complexity",
+      "content": "Test your understanding of algorithm design principles and complexity analysis.",
+      "questions": [
+        {
+          "question": "A social services agency is designing an intake algorithm. Their first version reviews the client's full history (1,000 cases on file) for every new client to identify similar patterns. This takes 5 minutes per new client. What is the time complexity of this approach?",
+          "options": [
+            "O(n) - linear time",
+            "O(n\u00b2) - quadratic time",
+            "O(log n) - logarithmic time",
+            "O(1) - constant time"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. If the algorithm reviews all existing cases for each new client, it's not linear.",
+            "Correct! For each new client (n new clients), you review n existing cases. That's n \u00d7 n = O(n\u00b2). As caseloads grow from 100 to 1,000 clients, processing time grows quadratically\u2014from 100 minutes to 10,000 minutes.",
+            "Incorrect. Logarithmic time would apply to search algorithms that divide the problem in half repeatedly, like binary search.",
+            "Incorrect. Constant time would mean processing always takes 5 minutes regardless of caseload size, which isn't realistic here."
+          ],
+          "explanation": "Understanding complexity helps you predict scalability. O(n\u00b2) algorithms become unmanageable as caseloads grow. Redesigning to use pre-built categories (O(n)) makes the system sustainable."
+        },
+        {
+          "question": "When designing an algorithm for resource allocation, what is the PRIMARY reason to analyze its complexity?",
+          "options": [
+            "To make the code look more sophisticated and impressive",
+            "To understand how the solution will perform as the problem size grows (e.g., 100 vs. 10,000 clients)",
+            "To eliminate the need for social workers to make decisions",
+            "To prove the algorithm is perfect with no errors"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Complexity analysis is practical, not about appearance.",
+            "Correct! Complexity analysis reveals scalability. An O(n\u00b2) algorithm might work fine with 100 clients but become unusable at 10,000 clients. Understanding this lets you plan infrastructure and redesign early.",
+            "Incorrect. Algorithms support human decision-making; they don't replace the judgment that social workers bring to individual cases.",
+            "Incorrect. Complexity analysis focuses on efficiency, not correctness. Correctness testing is separate."
+          ],
+          "explanation": "Good algorithm design requires thinking about scale. What works for a small pilot program may collapse when deployed agency-wide. Complexity analysis helps you foresee these problems."
+        },
+        {
+          "question": "You design two algorithms for matching vulnerable youth to mentoring programs. Algorithm A: O(n), processes 1,000 youths in 10 seconds. Algorithm B: O(n log n), processes 1,000 youths in 100 seconds. How much slower does B become if the caseload grows to 10,000 youths?",
+          "options": [
+            "Algorithm B becomes 10\u00d7 slower",
+            "Algorithm B becomes 100\u00d7 slower",
+            "Algorithm B becomes approximately 13\u00d7 slower (from ~100s to ~1,300s)",
+            "Algorithm B stays the same speed because processing power doubles"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Incorrect. O(n log n) doesn't scale linearly.",
+            "Incorrect. O(n log n) is not as bad as O(n\u00b2), which would scale by 100\u00d7.",
+            "Correct! Algorithm B's time is proportional to n \u00d7 log(n). For 1,000: 1,000 \u00d7 10 = 10,000 units. For 10,000: 10,000 \u00d7 13.3 \u2248 133,000 units. That's roughly 13\u00d7 slower. This is still much better than quadratic growth.",
+            "Incorrect. Algorithm efficiency is not determined by hardware alone\u2014the algorithm's complexity matters independently of processing power."
+          ],
+          "explanation": "O(n log n) algorithms scale much better than O(n\u00b2) but worse than O(n). In social services, choosing the right complexity class can mean the difference between a system that works and one that doesn't as you grow."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n9",
+      "failure_target": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "content",
+      "title": "Real-World Algorithm Problems in Social Work",
+      "content": "Social work organizations constantly optimize complex processes. A homeless services agency must allocate 50 emergency shelter beds among 200 people seeking help tonight\u2014how do they decide who gets a bed? A child welfare department processes 100 abuse reports daily and must assign them to caseworkers with balanced caseloads. A food bank receives donations of perishables and must get them to families before spoiling. Each of these is an optimization problem with constraints. The practice-first approach recognizes that social workers already think algorithmically: they gather information, apply decision rules, and manage resources. By formalizing these processes and analyzing their efficiency, you can identify bottlenecks, automate routine decisions, and free social workers to focus on human judgment\u2014the irreplaceable heart of social work.",
+      "next": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "example",
+      "title": "Food Bank Distribution: From Inefficient to Optimized",
+      "content": "A mid-sized food bank distributes to 50 community centers. Their original process: staff manually match donations to centers by phone (2 hours daily, frequent waste). New algorithm: (1) Categorize available food by expiration date and type. (2) For each destination, check needs and available inventory in a pre-built matrix (instead of calling). (3) Match donations to destinations that need them most urgently and can use them before spoilage. The new system takes 15 minutes. Why? The old approach revisited all past decisions and called all centers\u2014O(n\u00b2). The new algorithm organizes data first, then retrieves it efficiently\u2014O(n log n). Impact: 8 hours saved per week, 25% less food waste, 10 additional centers served because staff time freed up. This is the power of recognizing inefficient algorithms and redesigning them.",
+      "next": "n8"
+    },
+    {
+      "id": "n8",
+      "type": "assessment",
+      "title": "Practice Branch: Algorithm Application & Optimization",
+      "content": "Apply algorithm design thinking to real social work scenarios.",
+      "questions": [
+        {
+          "question": "A child protective services department receives 150 reports daily. Their current process: a single intake worker reads each report, searches through the case management database for any prior involvement with the family, and then assigns to an available caseworker. This process takes 30 minutes per report. Which redesign would best improve efficiency?",
+          "options": [
+            "Hire more intake workers to handle the same process faster",
+            "Pre-build an indexed database so prior involvement can be looked up instantly (O(log n) search) instead of searching linearly through all files",
+            "Eliminate the background check to save time, even though it loses useful information",
+            "Move the process online and have families self-report, eliminating intake entirely"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. More workers help with volume but don't fix the underlying inefficient algorithm.",
+            "Correct! The bottleneck is the linear search through all prior cases (O(n)). An indexed database lookup is O(log n)\u2014for 10,000 families, this reduces search time from potentially 10,000 ms to ~13 ms. The intake worker moves from 30 minutes per report to perhaps 8 minutes. This is algorithmic optimization, not just adding resources.",
+            "Incorrect. Losing institutional knowledge of prior involvement creates child safety risks. Good optimization never sacrifices essential information.",
+            "Incorrect. Eliminating professional intake loses important context and violates mandated reporting protocols."
+          ],
+          "explanation": "Algorithm optimization in social services means finding smarter processes, not cutting corners. Pre-indexing data is a classic algorithmic technique that trades a small upfront cost (building the index) for ongoing efficiency gains."
+        },
+        {
+          "question": "A job training nonprofit assigns 500 job seekers to 20 training programs. They want to minimize program overfilling and ensure each person gets a good fit. They're considering two approaches: (A) Manually review each person's background and call programs one by one to check availability\u2014O(n\u00b2). (B) Use an automated matching algorithm that ranks each person for each program (based on skills, interests, transportation) and assigns in one pass\u2014O(n log n). The nonprofit worries that automation will make mistakes. What's the best argument for still using approach B?",
+          "options": [
+            "Automation is always better than human judgment",
+            "An O(n log n) algorithm that produces 95% good matches and saves 40 staff hours is better than an O(n\u00b2) approach that produces 98% matches but exhausts staff, leading to hiring more workers",
+            "Machines never make mistakes, so B is obviously superior",
+            "Approach A should never be abandoned because it's more thorough"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Judgment is not always better or worse depending on context. This is about choosing efficiency wisely.",
+            "Correct! This is the essence of algorithm design in social services. B produces slightly fewer perfect matches but saves enormous staff time. Those staff hours can go to direct service, counseling, and support\u2014higher-value work. The 3% difference in match quality is worth the 40-hour savings. Moreover, freed-up staff can review and manually adjust edge cases.",
+            "Incorrect. Machines absolutely make mistakes. But the right metric is overall impact, not perfection.",
+            "Incorrect. Sometimes a slower, more thorough approach doesn't scale and breaks under real-world workload."
+          ],
+          "explanation": "Algorithm design in social work isn't about pure perfection\u2014it's about optimizing limited resources (time, money, staff) to serve more people and serve them better. A good algorithm is one your organization can actually sustain."
+        },
+        {
+          "question": "A domestic violence shelter has 40 beds and receives 60 intake calls daily. They're designing an algorithm to prioritize bed allocation. The algorithm must consider: danger level (scale 1-10), whether caller has children, current shelter capacity, and whether caller has safe alternate shelter. What's the most important reason to formalize this as an algorithm rather than leaving it to individual staff judgment?",
+          "options": [
+            "Algorithms eliminate the need for human judgment and compassion",
+            "Consistency and scalability\u2014every call gets screened using the same criteria, reducing delays and unfair disparities, and the process can scale from 60 to 600 calls without proportional staff increases",
+            "Algorithms always make the objectively correct choice",
+            "Algorithms are easier to program than to teach staff protocols"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Incorrect. Algorithms should enhance human judgment, not replace it. The algorithm handles routine screening; staff provide the irreplaceable human support.",
+            "Correct! A formalized algorithm ensures that a caller in danger level 8 with two children receives consistent prioritization whether they call at 9am or 9pm, and whether staff member A or B takes the call. It also scales: you can process 600 calls with the same staff if the algorithm is efficient. This is fundamental to equitable service.",
+            "Incorrect. Algorithms are tools, not oracles. They can optimize within constraints, but no algorithm can account for every human complexity.",
+            "Incorrect. Teaching clear protocols is essential regardless of automation."
+          ],
+          "explanation": "In social work, algorithm design's greatest value is consistency and fairness. When clients' lives are at stake, arbitrary differences in service can cause real harm. A well-designed algorithm protects vulnerable people by ensuring equitable, consistent treatment."
+        }
+      ],
+      "pass_threshold": 67,
+      "success_target": "n9",
+      "failure_target": "n8"
+    },
+    {
+      "id": "n9",
+      "type": "end",
+      "title": "You've Completed: Algorithm Design and Complexity in Social Work",
+      "content": "Congratulations! You now understand how algorithm design and complexity analysis apply to social work. You can recognize inefficient processes, understand why complexity matters at scale, and appreciate how optimization creates space for the human work that defines social services. Whether you approached this through theory first or practice first, you've learned that algorithms are not abstract concepts\u2014they're tools for managing the constraints and scaling the impact of your work. As social workers and administrators, you can use algorithmic thinking to serve more people more equitably, faster, and with fewer resources. The families and communities you serve benefit when you design smarter processes. Take these insights back to your organization, identify one process that's causing bottlenecks, and redesign it with efficiency in mind."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": "Introduction \u2192 Decision"
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Theory First"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n6",
+      "label": "Practice First"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": "Foundations \u2192 Example"
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": "Example \u2192 Assessment"
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n9",
+      "label": "Assessment Pass \u2192 End"
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Real-World Problems \u2192 Example"
+    },
+    {
+      "id": "c8",
+      "source": "n7",
+      "target": "n8",
+      "label": "Example \u2192 Assessment"
+    },
+    {
+      "id": "c9",
+      "source": "n8",
+      "target": "n9",
+      "label": "Assessment Pass \u2192 End"
+    }
+  ],
+  "generated_at": "2026-03-27T08:48:31.031361+00:00",
+  "model": "claude-haiku-4-5"
+}

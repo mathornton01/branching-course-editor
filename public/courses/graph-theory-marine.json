@@ -1,0 +1,293 @@
+{
+  "id": "graph-theory-marine",
+  "title": "Graph Theory and Marine Ecosystems",
+  "description": "Explore graph theory concepts through real-world marine biology applications. Model food webs and optimize migration routes to save ocean ecosystems.",
+  "topic": "Graph Theory and Applications",
+  "theme": "marine biology",
+  "difficulty": "intermediate",
+  "estimated_minutes": 45,
+  "tags": [
+    "graph-theory",
+    "networks",
+    "algorithms",
+    "marine-biology",
+    "ecosystem",
+    "pathfinding"
+  ],
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "content",
+      "title": "The Coral Lab Discovery",
+      "content": "You're a marine researcher at a prominent oceanography institute. Your team has just discovered that coral reef ecosystems can be elegantly modeled using graph theory. Species are nodes, and feeding relationships are edges. A nearby Caribbean reef is in crisis, losing 30% of its species annually. Two research approaches could help: analyzing the food web network to understand ecosystem stability, or modeling fish migration corridors to restore population diversity. Your choice will determine which ecological mysteries you'll solve first."
+    },
+    {
+      "id": "n2",
+      "type": "decision",
+      "title": "Choose Your Research Focus",
+      "content": "The reef crisis requires expertise in different areas. Which approach will you pursue?",
+      "choices": [
+        {
+          "label": "Analyze the food web network to find critical species",
+          "next": "n3"
+        },
+        {
+          "label": "Model migration corridors to restore fish populations",
+          "next": "n9"
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "type": "content",
+      "title": "Food Webs as Directed Graphs",
+      "content": "A food web is a directed graph where each marine species is a node, and an arrow from species A to species B means A eats B. In the Caribbean reef, you have producers (algae), primary consumers (parrotfish, sea urchins), secondary consumers (grouper, snappers), and apex predators (reef sharks). This directed graph structure allows us to calculate centrality measures\u2014mathematical values that identify which species are most critical to ecosystem function. A species with high betweenness centrality acts as a 'bridge' in energy flow; removing it would fragment the food web into isolated components."
+    },
+    {
+      "id": "n4",
+      "type": "example",
+      "title": "The Caribbean Reef Network",
+      "content": "Consider a simplified Caribbean reef food web: Algae (producer) \u2192 Parrotfish (herbivore) \u2192 Grouper (omnivore/predator) \u2192 Sharks (apex predator). Additionally, Damselfish eat algae directly and are eaten by Grouper. When we calculate betweenness centrality, we find that Grouper has the highest score: it appears on 60% of paths between non-adjacent species and connects herbivores to apex predators. This makes Grouper a keystone species. Historical data shows that when Grouper populations declined due to overfishing, the reef shifted from coral dominance to algae dominance within 3 years\u2014a regime shift caused by a single node's removal."
+    },
+    {
+      "id": "n5",
+      "type": "assessment",
+      "title": "Food Web Graph Analysis",
+      "content": "Test your understanding of graphs in marine ecosystems.",
+      "questions": [
+        {
+          "question": "In a food web graph, which centrality measure best identifies species that connect different feeding pathways?",
+          "options": [
+            "Degree centrality (simple connection count)",
+            "Betweenness centrality (bridges between species)",
+            "Clustering coefficient (tightly connected groups)",
+            "Eccentricity (distance to farthest node)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Degree centrality only counts direct neighbors; it misses bridge roles.",
+            "Correct! Betweenness centrality identifies species that mediate energy flow between otherwise distant species.",
+            "Clustering coefficient measures local density, not critical pathways.",
+            "Eccentricity measures graph diameter, not network bridges."
+          ],
+          "explanation": "Betweenness centrality calculates how many shortest paths between pairs of species pass through a given species. High betweenness indicates the species is critical for connecting different parts of the food web."
+        },
+        {
+          "question": "If Grouper (high betweenness centrality) are removed from the reef food web, what occurs?",
+          "options": [
+            "Sharks simply eat more Parrotfish directly",
+            "The food web fragments into disconnected components with disrupted energy flow",
+            "Algae populations stabilize",
+            "Damselfish populations increase"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Sharks may try, but lack the behavioral and size compatibility; energy is lost.",
+            "Correct! Removing a high-betweenness node disconnects the graph, causing cascade effects.",
+            "Disconnection of herbivores actually causes algae blooms.",
+            "Damselfish lose a major predator but their algae food source becomes unpredictable."
+          ],
+          "explanation": "When a keystone species with high betweenness centrality is removed, energy pathways are severed. Herbivores lose predators they're adapted to, and secondary consumers starve, leading to trophic cascades."
+        },
+        {
+          "question": "What does a directed edge (arrow) represent in a marine food web graph?",
+          "options": [
+            "Physical proximity between species",
+            "Energy transfer from prey to predator via consumption",
+            "Genetic relatedness between species",
+            "Spatial distance in the reef"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Spatial location isn't encoded in the food web edge structure.",
+            "Correct! Directed edges show energy and nutrient flow through the ecosystem.",
+            "Phylogenetics are a different type of graph entirely.",
+            "Food webs capture trophic relationships, not spatial distribution."
+          ],
+          "explanation": "In directed graphs, edges represent relationships. In food webs, an edge from A \u2192 B means organism A consumes B, transferring energy up the food chain."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n6",
+      "failure_target": "n6"
+    },
+    {
+      "id": "n6",
+      "type": "decision",
+      "title": "Choose Your Conservation Strategy",
+      "content": "Your food web analysis is complete. Now comes the critical decision: how will you use this knowledge to save the reef?",
+      "choices": [
+        {
+          "label": "Protect keystone species like Grouper (preserve high-centrality nodes)",
+          "next": "n7"
+        },
+        {
+          "label": "Maximize fishing yields from top predators to support the local economy",
+          "next": "n8"
+        }
+      ]
+    },
+    {
+      "id": "n7",
+      "type": "end",
+      "title": "The Reef Flourishes",
+      "content": "Your team successfully advocates for a no-take marine reserve protecting Grouper and other keystone species. Using your graph analysis, you demonstrate to fisheries managers that these species are critical network bridges. Within two years, Grouper populations recover 40%, energy flow stabilizes, and the reef shifts back toward coral dominance. Algae-grazing improves, herbivore populations rebound, and apex predators have healthy prey. Five years later, the reef has recovered 85% of its original biodiversity. Your graph-based intervention saved an entire ecosystem. The Caribbean reef becomes a model for graph-theory-informed marine conservation worldwide."
+    },
+    {
+      "id": "n8",
+      "type": "end",
+      "title": "Ecosystem Collapse",
+      "content": "Ignoring the graph analysis, fishing pressure increases on Grouper, snappers, and sharks to maximize short-term economic gains. Within 18 months, Grouper populations crash 90%. The food web fragments; the graph model now shows disconnected components. Algae explosively overgrow due to reduced herbivory, starving corals of light. Parrotfish, losing their major predator, overgraze and overexploit algae species, reducing their own food supply. The reef becomes an algae-dominated barren within 3 years. Your failure to account for network connectivity caused a regime shift from coral to macroalgae dominance\u2014a transition that takes decades to reverse, if ever."
+    },
+    {
+      "id": "n9",
+      "type": "content",
+      "title": "Graph Pathfinding for Animal Migration",
+      "content": "Many ocean animals migrate thousands of kilometers annually between feeding, breeding, and rest areas. These journeys can be modeled as graph pathfinding problems. Nodes represent geographic waypoints\u2014feeding grounds, breeding areas, stopover zones, and rest locations. Edges represent possible migration routes, each with an associated 'cost' representing distance, energy expenditure, predation risk, shipping lane danger, or ocean current difficulty. Using algorithms like Dijkstra's shortest path, we can predict which routes migrating animals use and optimize corridors to minimize danger and energy loss."
+    },
+    {
+      "id": "n10",
+      "type": "example",
+      "title": "Humpback Whale Migration Case Study",
+      "content": "Humpback whales annually migrate between Antarctic summer feeding grounds (rich in krill) and tropical breeding grounds (warm water for calves). The migration graph includes nodes: Antarctic feeding ground, Drake Passage, equatorial stopover zone, breeding ground, and return route waypoints. Each edge has a cost: distance (nautical miles) and danger (shipping lanes, orca predation zones, pollution). Applying Dijkstra's algorithm, the optimal route adds 200 nautical miles but avoids 7 major shipping lanes and 3 orca predation hotspots. This increases survival by 4% and reduces ship-strike mortality by 70%."
+    },
+    {
+      "id": "n11",
+      "type": "practice",
+      "title": "Migration Route Optimization",
+      "content": "Test your understanding of pathfinding algorithms in marine migration.",
+      "questions": [
+        {
+          "question": "In a whale migration graph, what does an edge weight (cost) represent?",
+          "options": [
+            "Number of whales using the route",
+            "Distance and environmental hazard (fuel cost, danger, current resistance)",
+            "Historical success rate of that route",
+            "Water depth at that location"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Population counts don't determine optimal routing; cost does.",
+            "Correct! Edge weights encode all factors affecting route desirability.",
+            "Success rates are derived from cost; cost is fundamental.",
+            "Depth is a property of waypoints, not edges."
+          ],
+          "explanation": "In Dijkstra's algorithm, edge weights represent the cost of traversing each connection. In marine migration, cost includes distance, fuel expenditure, predation risk, and hazards like shipping lanes."
+        },
+        {
+          "question": "If a new ocean current creates a lower-cost edge between the feeding ground and breeding ground, what does Dijkstra's algorithm do?",
+          "options": [
+            "Ignore it and continue using the old route",
+            "Immediately use it (always better)",
+            "Recalculate the shortest path; may use new route if total cost decreases",
+            "Use the old route 70% of the time and the new route 30%"
+          ],
+          "correct_index": 2,
+          "feedback": [
+            "Dijkstra's algorithm doesn't ignore new lower-cost information.",
+            "Not necessarily; other routes might have lower total cost with indirect paths.",
+            "Correct! Dijkstra's recalculates shortest paths when the graph changes.",
+            "Dijkstra's finds the single globally optimal path, not probabilistic routing."
+          ],
+          "explanation": "Dijkstra's algorithm finds the path with minimum total cost. A lower-cost edge is only used if it reduces total cost from start to destination compared to existing paths."
+        },
+        {
+          "question": "Which graph property identifies migration route chokepoints\u2014narrow passages where many animals must converge?",
+          "options": [
+            "Cliques (fully connected subgraphs)",
+            "Articulation points or cut vertices (removal disconnects the graph)",
+            "Graph diameter (longest shortest path)",
+            "Node degree (connection count)"
+          ],
+          "correct_index": 1,
+          "feedback": [
+            "Cliques represent dense connections, not bottlenecks.",
+            "Correct! Articulation points are critical vulnerabilities; their removal isolates routes.",
+            "Diameter measures span, not criticality.",
+            "Degree counts connections but doesn't identify structural bottlenecks."
+          ],
+          "explanation": "Articulation points are nodes whose removal disconnects the graph. In migration networks, they represent geographic chokepoints where all animals converge, making them vulnerable to hunting, shipping, or climate change impacts."
+        }
+      ],
+      "pass_threshold": 66,
+      "success_target": "n12",
+      "failure_target": "n12"
+    },
+    {
+      "id": "n12",
+      "type": "end",
+      "title": "Safe Migration Corridors Established",
+      "content": "Using Dijkstra's algorithm and articulation point analysis, your team identifies optimal whale migration corridors that balance distance, safety, and resource availability. You publish your findings and advocate for international maritime policy changes. The International Maritime Organization adopts your recommendations, establishing seasonal shipping lane diversions during peak migration. Within two years, humpback whale populations increase 12% annually, and ship-strike mortality decreases 45%. Your graph-based pathfinding analysis has directly saved thousands of whales. Your work becomes the standard for data-driven marine conservation worldwide."
+    }
+  ],
+  "connections": [
+    {
+      "id": "c1",
+      "source": "n1",
+      "target": "n2",
+      "label": ""
+    },
+    {
+      "id": "c2",
+      "source": "n2",
+      "target": "n3",
+      "label": "Food web analysis"
+    },
+    {
+      "id": "c3",
+      "source": "n2",
+      "target": "n9",
+      "label": "Migration corridors"
+    },
+    {
+      "id": "c4",
+      "source": "n3",
+      "target": "n4",
+      "label": ""
+    },
+    {
+      "id": "c5",
+      "source": "n4",
+      "target": "n5",
+      "label": ""
+    },
+    {
+      "id": "c6",
+      "source": "n5",
+      "target": "n6",
+      "label": ""
+    },
+    {
+      "id": "c7",
+      "source": "n6",
+      "target": "n7",
+      "label": "Protect keystone species"
+    },
+    {
+      "id": "c8",
+      "source": "n6",
+      "target": "n8",
+      "label": "Maximize fishing yields"
+    },
+    {
+      "id": "c9",
+      "source": "n9",
+      "target": "n10",
+      "label": ""
+    },
+    {
+      "id": "c10",
+      "source": "n10",
+      "target": "n11",
+      "label": ""
+    },
+    {
+      "id": "c11",
+      "source": "n11",
+      "target": "n12",
+      "label": ""
+    }
+  ],
+  "generated_at": "2026-03-27T10:04:13.291740+00:00",
+  "model": "claude-haiku-4-5"
+}
