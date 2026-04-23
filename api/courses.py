@@ -1,11 +1,14 @@
 """
-/api/courses - Vercel serverless function.
+/api/courses - Vercel serverless function for course listing.
 
-HYBRID APPROACH:
-- Course JSON files are served statically from public/courses/
-- This endpoint handles database operations:
-  GET  /api/courses  -> list store metadata (prices, ratings, etc.) from Supabase
-  POST /api/courses  -> save a new course to the store catalog in Supabase
+Returns the combined catalog of:
+  1. Static seed courses (387 JSON files bundled as _catalog.json)
+  2. User-created courses saved in Supabase table course_content
+
+GET /api/courses
+    -> { courses: [...], generated: N, static_count, user_count }
+
+Individual course GET/PUT/DELETE lives in api/courses/[id].py
 """
 
 from http.server import BaseHTTPRequestHandler
@@ -13,109 +16,102 @@ import json
 import os
 import sys
 
-# Add parent dir to path for lib imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-def _cors_headers(handler):
-    handler.send_header("Access-Control-Allow-Origin", "*")
-    handler.send_header("Access-Control-Allow-Methods", "GET,POST,OPTIONS")
-    handler.send_header("Access-Control-Allow-Headers", "*")
+def _cors(h):
+    h.send_header("Access-Control-Allow-Origin", "*")
+    h.send_header("Access-Control-Allow-Methods", "GET,POST,OPTIONS")
+    h.send_header("Access-Control-Allow-Headers", "*")
 
 
-def _json_response(handler, status, data):
-    handler.send_response(status)
-    handler.send_header("Content-Type", "application/json")
-    _cors_headers(handler)
-    handler.end_headers()
-    handler.wfile.write(json.dumps(data).encode())
+def _json_response(h, status, data):
+    h.send_response(status)
+    h.send_header("Content-Type", "application/json")
+    _cors(h)
+    h.end_headers()
+    h.wfile.write(json.dumps(data).encode())
+
+
+# Load the static catalog at cold start.
+_STATIC_CATALOG = None
+
+
+def _load_static_catalog():
+    global _STATIC_CATALOG
+    if _STATIC_CATALOG is not None:
+        return _STATIC_CATALOG
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_catalog.json")
+    try:
+        with open(path, "r") as fp:
+            _STATIC_CATALOG = json.load(fp).get("courses", [])
+    except Exception:
+        _STATIC_CATALOG = []
+    return _STATIC_CATALOG
+
+
+def _load_user_courses():
+    """Fetch user-created courses from Supabase. Returns [] if not configured."""
+    try:
+        from lib.supabase_client import get_supabase
+        supabase = get_supabase()
+        result = supabase.table("course_content").select(
+            "id,title,description,topic,theme,difficulty,estimated_minutes,tags,user_id,updated_at"
+        ).order("updated_at", desc=True).execute()
+        rows = result.data or []
+        for r in rows:
+            r["source"] = "user"
+            r.setdefault("node_count", 0)
+        return rows
+    except Exception:
+        return []
 
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        """List published courses from Supabase with store metadata."""
-        try:
-            from lib.supabase_client import get_supabase
-            supabase = get_supabase()
+        static_courses = _load_static_catalog()
+        user_courses = _load_user_courses()
 
-            # Parse query params from path
-            from urllib.parse import urlparse, parse_qs
-            parsed = urlparse(self.path)
-            params = parse_qs(parsed.query)
+        # User courses override static ones with the same id.
+        user_ids = {c["id"] for c in user_courses}
+        merged = [c for c in static_courses if c["id"] not in user_ids] + user_courses
 
-            category = params.get("category", [None])[0]
-            search = params.get("search", [None])[0]
-            sort = params.get("sort", ["popular"])[0]
-            page = int(params.get("page", [1])[0])
-            per_page = int(params.get("per_page", [24])[0])
-
-            query = supabase.table("courses_store").select(
-                "*, users!courses_store_instructor_id_fkey(display_name)"
-            ).eq("is_published", True)
-
-            if category:
-                query = query.eq("category", category)
-            if search:
-                query = query.or_(f"course_id.ilike.%{search}%,category.ilike.%{search}%")
-
-            sort_map = {
-                "popular": ("total_purchases", {"ascending": False}),
-                "newest": ("published_at", {"ascending": False}),
-                "price_asc": ("price_cents", {"ascending": True}),
-                "price_desc": ("price_cents", {"ascending": False}),
-                "rating": ("avg_rating", {"ascending": False}),
-            }
-            sort_col, sort_opts = sort_map.get(sort, sort_map["popular"])
-            query = query.order(sort_col, **sort_opts)
-
-            offset = (page - 1) * per_page
-            query = query.range(offset, offset + per_page - 1)
-
-            result = query.execute()
-
-            _json_response(self, 200, {
-                "courses": result.data,
-                "page": page,
-                "per_page": per_page,
-            })
-        except RuntimeError:
-            # Supabase not configured yet - return empty list
-            _json_response(self, 200, {
-                "courses": [],
-                "page": 1,
-                "per_page": 24,
-                "note": "Supabase not configured. Course JSON files are available at /courses/"
-            })
-        except Exception as e:
-            _json_response(self, 500, {"error": str(e)})
+        _json_response(self, 200, {
+            "courses": merged,
+            "generated": len(merged),
+            "static_count": len(static_courses),
+            "user_count": len(user_courses),
+        })
 
     def do_POST(self):
-        """Create or update a course in the store catalog."""
+        """Create a new user course. Editor usually uses PUT /api/courses/<id>."""
         try:
             from lib.supabase_client import get_supabase
             supabase = get_supabase()
 
-            content_length = int(self.headers.get("Content-Length", 0))
-            body = json.loads(self.rfile.read(content_length)) if content_length else {}
+            length = int(self.headers.get("Content-Length", 0))
+            body = json.loads(self.rfile.read(length)) if length else {}
 
-            course_id = body.get("course_id")
-            if not course_id:
-                _json_response(self, 400, {"error": "course_id is required"})
+            cid = body.get("id")
+            if not cid:
+                _json_response(self, 400, {"error": "course id is required"})
                 return
 
             record = {
-                "course_id": course_id,
-                "price_cents": body.get("price_cents", 0),
-                "currency": body.get("currency", "USD"),
-                "category": body.get("category"),
-                "is_published": body.get("is_published", False),
-                "is_featured": body.get("is_featured", False),
-                "preview_nodes": body.get("preview_nodes", 3),
+                "id": cid,
+                "title": body.get("title") or cid,
+                "description": body.get("description") or "",
+                "topic": body.get("topic") or "",
+                "theme": body.get("theme") or "",
+                "difficulty": body.get("difficulty") or "beginner",
+                "estimated_minutes": body.get("estimated_minutes") or 0,
+                "tags": body.get("tags") or [],
+                "content": body,
             }
-            if body.get("instructor_id"):
-                record["instructor_id"] = body["instructor_id"]
+            if body.get("user_id"):
+                record["user_id"] = body["user_id"]
 
-            result = supabase.table("courses_store").upsert(record).execute()
+            result = supabase.table("course_content").upsert(record).execute()
             _json_response(self, 201, {"course": result.data[0] if result.data else record})
         except RuntimeError:
             _json_response(self, 503, {"error": "Supabase not configured"})
@@ -124,5 +120,5 @@ class handler(BaseHTTPRequestHandler):
 
     def do_OPTIONS(self):
         self.send_response(204)
-        _cors_headers(self)
+        _cors(self)
         self.end_headers()

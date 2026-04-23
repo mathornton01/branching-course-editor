@@ -744,14 +744,20 @@ async function showDetail(courseId) {
   const panel = document.getElementById('detailPanel');
   overlay.classList.add('show');
 
-  // Load full course data
+  // Load full course data (API first; fall back to static /courses/<id>.json)
   try {
     const [courseResp, accessResp, reviewsResp] = await Promise.all([
       fetch(API + '/api/courses/' + courseId),
       fetch(API + '/api/store/check-access/' + courseId, { headers: authToken ? {'Authorization': 'Bearer ' + authToken} : {} }),
       fetch(API + '/api/store/reviews/' + courseId)
     ]);
-    const course = await courseResp.json();
+    let course;
+    if (courseResp.ok) {
+      course = await courseResp.json();
+    } else {
+      const staticResp = await fetch('/courses/' + courseId + '.json');
+      course = staticResp.ok ? await staticResp.json() : { title: courseId, nodes: [] };
+    }
     const access = await accessResp.json();
     const reviewsData = await reviewsResp.json();
     const store = storeData[courseId] || {};

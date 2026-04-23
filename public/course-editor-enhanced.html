@@ -5608,7 +5608,10 @@ function renderLoadList(courses) {
 async function loadCourseFromServer(courseId) {
   closeLoadModal();
   try {
-    const r = await fetch(API_BASE + '/api/courses/' + courseId);
+    // Try the API first (returns user-saved courses from Supabase).
+    // Fall back to the static seed file on 404.
+    let r = await fetch(API_BASE + '/api/courses/' + courseId);
+    if (!r.ok) r = await fetch(API_BASE + '/courses/' + courseId + '.json');
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const raw = await r.json();
     // Convert to editor branching format
